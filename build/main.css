@@ -2143,7 +2143,7 @@ h6.style-overview {
   align-items: flex-start; }
 
 .filter {
-  flex-basis: 310px;
+  flex-basis: 25%;
   background: #fff; }
   .filter .production {
     overflow: hidden;
@@ -2164,16 +2164,18 @@ h6.style-overview {
   margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: start;
+  flex-direction: column; }
   .date-range span {
     color: #8C94A7;
     font-size: 14px;
-    margin: 0 8px; }
+    margin: 8px; }
   .date-range input {
     height: 40px;
     padding: 12px;
     font-size: 12px;
-    background-position: calc(100% - 10px) 12px; }
+    background-position: calc(100% - 10px) 12px;
+    width: 180px; }
 
 .see-more {
   font-size: 14px;
@@ -2185,7 +2187,7 @@ h6.style-overview {
   padding-left: 40px; }
 
 .tag-n-deadline {
-  flex-basis: 360px; }
+  flex-basis: 25%; }
   .tag-n-deadline .production {
     overflow: hidden;
     margin: 0 0 30px 0;
@@ -2216,9 +2218,11 @@ h6.style-overview {
     .tag-n-deadline .sample-deadline .list:last-child {
       border: 0;
       margin-bottom: 0; }
+    .tag-n-deadline .sample-deadline .list:first-child {
+      flex-basis: 118px; }
 
 .timeline {
-  flex-basis: 52%;
+  flex-basis: 50%;
   margin: 0 30px; }
 
 .editor {

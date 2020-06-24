@@ -83,6 +83,7 @@ body {
     font-size: 14px !important;
     padding: 12px 25px;
     margin: 0px 5px;
+    text-transform: inherit;
 }
 .btn-linkedin:hover {
     color: #fff !important;
@@ -517,7 +518,7 @@ aside.left-panel.collapsed {
     text-align: center;
     background-color: #ffffff;
     padding: 16px;
-    height: 60px;
+    height: 58px;
 }
 
 .logo img {
@@ -1486,11 +1487,11 @@ li.nav-item .dropdown-toggle {
     cursor: pointer;
 }
 .form-group.group-option .nice-select .list {
-    height: 280px;
+    max-height: 280px;
     overflow: auto;
 }
 .form-group .nice-select .list {
-    height: 200px;
+    max-height: 200px;
     overflow-y: auto;
 }
 /*input[type="date"]{*/

@@ -1664,7 +1664,7 @@ h6.style-overview{
   align-items: flex-start;
 }
 .filter{
-  flex-basis: 310px;
+  flex-basis: 25%;
   background: #fff;
   .production{
     overflow: hidden;
@@ -1688,17 +1688,19 @@ h6.style-overview{
   margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
   span{
     color: #8C94A7;
     font-size: 14px;
-    margin: 0 8px;
+    margin: 8px;
   }
   input{
     height: 40px;
     padding: 12px;
     font-size: 12px;
     background-position: calc(100% - 10px) 12px;
+    width: 180px;
   }
 }
 .see-more{
@@ -1714,7 +1716,7 @@ h6.style-overview{
   }
 }
 .tag-n-deadline{
-  flex-basis: 360px;
+  flex-basis: 25%;
   .production{
     overflow: hidden;
     margin: 0 0 30px 0;
@@ -1750,10 +1752,14 @@ h6.style-overview{
       border: 0;
       margin-bottom: 0;
     }
+    &:first-child{
+      flex-basis: 118px;
+    }
+
   }
 }
 .timeline {
-  flex-basis: 52%;
+  flex-basis: 50%;
   margin: 0 30px;
 }
 .editor {
