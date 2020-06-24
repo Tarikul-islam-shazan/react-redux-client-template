@@ -349,15 +349,6 @@ class MyRFQs extends Component {
                                       <option value="lastResponseTime,desc">Running</option>
                                   </select>
                               </div>
-                              {
-                                filterById ?
-                                <div className="col-lg-6" style={{textAlign:'right',paddingTop:10}}>
-                                  <div className="form-group">
-                                    <a href="" onClick={this.reload} style={{marginRight:10}}>Show all</a>
-                                  </div>
-                                </div>:
-                                <></>
-                              }
 
                           </div>
                              {
@@ -370,6 +361,13 @@ class MyRFQs extends Component {
                                   showStatus={rfqStatus}
                                   />
                                ))
+                             }
+                             {
+                               filterById ?
+                                 <div className="form-group" style={{margin:10}}>
+                                   <a href="" onClick={this.reload} style={{marginRight:10}}>Show all</a>
+                                 </div>:
+                               <></>
                              }
                         </nav>
 
