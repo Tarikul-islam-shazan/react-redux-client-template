@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+            <section class="collapse-side-menu-container">  
+                <!-- collapse-side-menu --> 
+                    <nav id="sidebarCollapse" class="sidebar-collapse">
+                        <div>
+                        <button class="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>   
+                           <h5>Shop By Category</h5>
+                          <ul class="list-unstyled">
+                            <li>
+                              <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens</a>
+                                <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu1">
+                                    <li><a href="#">Casual</a></li>
+                                    <li><a href="#">Football</a></li>
+                                    <li><a href="#">Jordan</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a href="#">Running</a></li>
+                                    <li><a href="#">Soccer</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </li> 
+                            <li>
+                              <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Womens</a>
+                                <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu2">
+                                    <li><a href="#">Casual</a></li>
+                                    <li><a href="#">Football</a></li>
+                                    <li><a href="#">Jordan</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a href="#">Running</a></li>
+                                    <li><a href="#">Soccer</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </li> 
+                            <li>
+                              <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Boys</a>
+                                <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu3">
+                                    <li><a href="#">Casual</a></li>
+                                    <li><a href="#">Football</a></li>
+                                    <li><a href="#">Jordan</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a href="#">Running</a></li>
+                                    <li><a href="#">Soccer</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </li> 
+                            <li>
+                              <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Girls</a>
+                                <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu4">
+                                    <li><a href="#">Casual</a></li>
+                                    <li><a href="#">Football</a></li>
+                                    <li><a href="#">Jordan</a></li>
+                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a href="#">Running</a></li>
+                                    <li><a href="#">Soccer</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </li> 
+                          </ul> 
+                        </div>
+                      </nav>
+
+                    <!-- Page Content  -->
+                    <div id="sidebar-menu-content">
+                        <div class="filter-container">
+                            <div class="search">
+                                <input type="search" placeholder="Search....">
+                            </div>
+                           <div class="short-by">
+                            <select name="" id="">
+                                <option>Sort By: <highlight>Popularity</highlight>  </option>
+                                <option value="">1</option>
+                                <option value="">1</option>
+                                <option value="">1</option>
+                                <option value="">1</option>
+                            </select>
+                           </div>
+                        </div>
+                        <div class="product-slider">
+                            <h4 class="mb-4">Popular</h2> 
+                            <div class="Product-carousel owl-carousel owl-theme">
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge in-project">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge available">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge in-project">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge available">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge in-project">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="item">
+                                    <div class="card product-card">
+                                        <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                            <span class="design-category">Men</span>
+                                            <div class="card-footer">
+                                                <span class="badge design-badge available">In Project</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg-right">
+                                                        <button class="dropdown-item" type="button">Action</button>
+                                                        <button class="dropdown-item" type="button">Another action</button>
+                                                        <button class="dropdown-item" type="button">Something else here</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>   
+                        </div>
+                        <div class="product-slider">
+                              <h4 class="mb-4">New trending</h2> 
+                                <div class="Product-carousel owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>  
+                        </div>
+                        <div class="product-slider"> 
+                              <h4 class="mb-4">Nitex suggestion</h2> 
+                                <div class="Product-carousel owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge in-project">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="item">
+                                        <div class="card product-card">
+                                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                                <span class="design-category">Men</span>
+                                                <div class="card-footer">
+                                                    <span class="badge design-badge available">In Project</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                                            <button class="dropdown-item" type="button">Action</button>
+                                                            <button class="dropdown-item" type="button">Another action</button>
+                                                            <button class="dropdown-item" type="button">Something else here</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>  
+                        </div>
+                    </div> 
+            </section> 
+        </div>
+    </div>
+
+
+        <!--Add New Modal -->
+        <div class="modal fade" id="AddNewProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <img src="assets/images/cancel.png" alt="cancel button" class="img-fluid close-btn" data-dismiss="modal" aria-label="Close">
+                        <section class="card-style-1"> 
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <div class="section-header text-center">
+                                            <h5 class="section-title">Add New Product</h5>
+                                            <p class="section-subtitle">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="add-new-product">
+                                    <ul class="nav nav-tabs nav-justified">
+                                        <li><a  class="active" data-toggle="tab" href="#FilltheForm">Fill the Form</a></li>
+                                        <li><a data-toggle="tab" href="#UploadTechPack">Upload Tech Pack</a></li>
+                                      </ul>
+                                 
+                                      <div class="tab-content"> 
+                                        <div id="FilltheForm" class="tab-pane active">
+                                            <div class="steps">
+                                                <div class="stepwizard">
+                                                    <div class="stepwizard-row setup-panel">
+                                                        <div class="stepwizard-step col-xs-3"> 
+                                                            <a href="#step-1" type="button" class="btn btn-circle btn-default done" disabled="disabled">1</a> 
+                                                        </div>
+                                                        <div class="stepwizard-step col-xs-3"> 
+                                                            <a href="#step-2" type="button" class="btn btn-default btn-circle btn-success active-line">2</a> 
+                                                        </div> 
+                                                        <div class="stepwizard-step col-xs-3"> 
+                                                            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a> 
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                          <div class="modal-form"> 
+                                               <div class="row-box">
+                                                <div class="row-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Upload Product Image</label>
+                                                                <div class="file file-style-2 btn">
+                                                                    Choose file
+                                                                    <input type="file" name="file" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <div class="row-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>Upload reference Images</label>
+                                                                <div class="file file-style-2 btn">
+                                                                    Choose file
+                                                                    <input type="file" name="file" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <div class="row-item">
+                                                    <div class="row"> 
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Print</label>
+                                                                <select> 
+                                                                    <option value="Yes">Yes</option>
+                                                                    <option value="No">No</option> 
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Upload reference product</label>
+                                                                <div class="file file-style-2 btn">
+                                                                    Choose file
+                                                                    <input type="file" name="file" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                                <div class="row-item">
+                                                    <div class="row"> 
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Print</label>
+                                                                <select> 
+                                                                    <option value="Yes">Yes</option>
+                                                                    <option value="No">No</option> 
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Upload reference product</label>
+                                                                <div class="file file-style-2 btn">
+                                                                    Choose file
+                                                                    <input type="file" name="file" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>  
+                                               </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">  
+                                                    <button class="btn-brand float-right mt-4">Next</button>
+                                                    <button class="btn-brand btn-outline-secondary float-right mt-4 mr-4">Back</button> 
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div id="UploadTechPack" class="tab-pane fade">
+                                          <h3>Menu 1</h3> 
+                                        </div> 
+                                      </div>
+                                </div> 
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add New Modal End-->
+
+        <!-- Successful -->
+        <div class="successful">
+            <article>
+                <img src="./assets/icons/successfully.png" alt="">
+                <h2>Your product has been added successfully</h2>
+                <a href="" class="btn btn-nitex-default" style="width: 160px;">Back to Home</a>
+            </article>
+        </div>
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script> 
+</body>
+
+</html>

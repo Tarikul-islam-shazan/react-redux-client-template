@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import React, { Component } from 'react';
 
 const capitalizeFirstLetter = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 
@@ -219,10 +220,16 @@ const convertToDateTimeFromMiliSeconds = (input) => {
     return new Date(input).toLocaleString('en-GB');
 };
 
-const validate = (e) => {
+const validate = (e, pass = '',passFullCheck=false) => {
+  // console.log(e.target.name,e.target.value);return;
   if(e.target.name == 'email'){
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(e.target.value)){
+    if(e.target.value==''){
+      return {
+        name: 'emailError',
+        value: 'Email is required!'
+      }
+    }else if(!re.test(e.target.value)){
       return {
         name: 'emailError',
         value: 'Invalid Email Format!'
@@ -235,24 +242,302 @@ const validate = (e) => {
     }
   }
   if(e.target.name == 'password'){
-    return {
-      name: 'passwordError',
-      value: ''
-    }
-    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(e.target.value)){
+    // if(e.target.value.length<6){
+    let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if(e.target.value==''){
       return {
-        name: 'emailError',
-        value: 'Invalid Email Format!'
+        name: 'passwordError',
+        value: 'Password is required!'
+      }
+    }else if(!re.test(e.target.value) && passFullCheck){
+      return {
+        name: 'passwordError',
+        value: 'Password must contain 6 characters, at least one number, one lowercase and one uppercase letter'
       }
     }else{
-
+      return {
+        name: 'passwordError',
+        value: ''
+      }
     }
   }
+  if(e.target.name == 'passwordRe'){
+    if(e.target.value != pass){
+      return {
+        name: 'passwordReError',
+        value: 'Passwords didn\'t match!'
+      }
+    }else{
+      return {
+        name: 'passwordReError',
+        value: ''
+      }
+    }
+  }
+  if(e.target.name == 'agreement'){
+    if(!e.target.checked){
+      return {
+        name: 'agreementError',
+        value: 'Please accept terms & conditions first!'
+      }
+    }else{
+      return {
+        name: 'agreementError',
+        value: ''
+      }
+    }
+  }
+  if(e.target.name == 'oldPassword'){
+    if(e.target.value==''){
+      return {
+        name: 'oldPasswordError',
+        value: 'Current password is required!'
+      }
+    }else{
+      return {
+        name: 'oldPasswordError',
+        value: ''
+      }
+    }
+  }
+  if(e.target.name == 'newPassword'){
+    // if(e.target.value.length<6){
+    let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if(e.target.value==''){
+      return {
+        name: 'newPasswordError',
+        value: 'Password is required!'
+      }
+    }else if(!re.test(e.target.value) && passFullCheck){
+      return {
+        name: 'newPasswordError',
+        value: 'Password must contain 6 characters, at least one number, one lowercase and one uppercase letter'
+      }
+    }else{
+      return {
+        name: 'newPasswordError',
+        value: ''
+      }
+    }
+  }
+  if(e.target.name == 'newPasswordRe'){
+    if(e.target.value != pass){
+      return {
+        name: 'newPasswordReError',
+        value: 'Passwords didn\'t match!'
+      }
+    }else{
+      return {
+        name: 'newPasswordReError',
+        value: ''
+      }
+    }
+  }
+}
+
+const encodeQueryData = data => {
+    let ret = [], temp;
+    for (let i in data) {
+        temp = data[i];
+        if (temp !== '' && temp !== null) {
+            ret.push(encodeURIComponent(i) + '=' + encodeURIComponent(temp));
+        }
+    }
+    return ret.length ? '?' + ret.join('&') : '';
+};
+
+const rfqStatus = (item) => {
+  switch(item.status) {
+    case 'PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Pending</span>
+      )
+      break;
+    case 'OFFER_PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Pending</span>
+      )
+      break;
+    case 'RUNNING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Running</span>
+      )
+      break;
+    case 'COMPLETED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Completed</span>
+      )
+      break;
+    default:
+      // code block
+  }
+}
+
+const rfqProductStatus = (item) => {
+  switch(item.status) {
+    case 'PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
+      )
+      break;
+    case 'OFFER_PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
+      )
+      break;
+    case 'PRICE_GIVEN':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Quoted</span>
+      )
+      break;
+    case 'APPROVED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
+      )
+      break;
+    default:
+      // code block
+  }
+}
+
+const projectStatus = (item) => {
+  switch(item.status) {
+    case 'PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Pending</span>
+      )
+      break;
+    case 'RUNNING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Running</span>
+      )
+      break;
+    case 'COMPLETED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Completed</span>
+      )
+      break;
+    default:
+      // code block
+  }
+}
+
+const renderPaymentStatus = (item) => {
+  switch(item.status) {
+    case 'PENDING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Pending</span>
+      )
+      break;
+    case 'PARTIALLY_PAID':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially Paid</span>
+      )
+      break;
+    case 'PAID':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
+      )
+      break;
+    default:
+      // code block
+  }
+}
+
+const deliverableStatus = (item) => {
+  switch(item.status) {
+    case 'APPROVED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
+      )
+      break;
+    case 'REJECTED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Rejected</span>
+      )
+      break;
+    case 'SUBMIT':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4EAF5', color: '#719EE6'}}>Submit</span>
+      )
+      break;
+    case 'RE_SUBMIT':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E8E4F5', color: '#7B5CDB'}}>Re-submit</span>
+      )
+      break;
+    case 'RUNNING':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Running</span>
+      )
+      break;
+    case 'SUBMITTED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Submitted</span>
+      )
+      break;
+    case 'INITIALIZED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Initialized</span>
+      )
+      break;
+    case 'COMPLETED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Completed</span>
+      );
+      break;
+    default:
+      // code block
+  }
+}
+
+const productAvailabilityStatus = (item) => {
+  switch(item.availabilityStatus) {
+    case 'AVAILABLE':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Available</span>
+      )
+      break;
+    case 'CHECKED':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Checked</span>
+      )
+      break;
+    case 'SOLD':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Sold</span>
+      )
+      break;
+    case 'AVAILABLE':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Available</span>
+      )
+      break;
+    case 'IN_RFQ':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>In RFQ</span>
+      )
+      break;
+    case 'IN_PROJECT':
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>In Project</span>
+      )
+      break;
+    default:
+      return(
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No status</span>
+      )
+      // code block
+  }
+}
+
+const _getKey = () => {
+    return Math.floor((Math.random() * 10000000)) + Math.floor((Math.random() * 10000000));
 }
 
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
-    getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate
+    getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
+    encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey
 };

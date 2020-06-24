@@ -17,7 +17,7 @@ const QuestionairreLayout = ({children, ...rest}) => {
                   </div>
                   <div className="col-md-8" style={{padding:0}}>
                       <div className="content-wrapper">
-                          <a href="#" className="back-link">
+                          <a href="https://nitex.info" className="back-link">
                               <span>
                                   <img src={ require('../assets/icons/home.png') } alt="back"/>
                               </span> Back to Home</a>

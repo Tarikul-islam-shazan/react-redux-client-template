@@ -5,137 +5,157 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { _storeData } from "./actions";
+
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
+import { QuestionnaireOption } from './components/OptionCardComponent';
 
 class Questionairre_1 extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-          profession: ''
-        };
-    }
 
     componentDidMount = async() => {
 
     }
 
     _setData = (profession) => {
-      this.setState({
-        profession
-      });
+      console.log("clicked",profession)
+      this.props._storeData("profession",profession)
     }
 
     _next = (profession) => {
       this.props.history.push('/questionairre-step-2');
     }
 
+    onChange = (e) => {
+      this.props._storeData(e.target.name,e.target.value)
+    }
+
     render() {
+        let { professionText } = this.props;
         return (
             <>
-              <div className="page-header text-center">
+              <div className="page-header text-center mt-1">
                   <h3 className="page-title">welcome to nitex</h3>
-                  <p className="page-subtitle">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                  {/*<p className="page-subtitle">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>*/}
               </div>
 
               <div className="page-content">
                   <section className="questionnaire">
                       <div className="container">
-                          <div className="section-header">
-                              <div className="row">
-                                  <div className="col-auto">
-                                      <b className="text-active pb-1" style={{borderBottom: "1px solid"}}>
-                                          About You
-                                      </b>
+                          <div className="row justify-content-center">
+                              <div className="col-lg-12">
+                                  <div className="section-header">
+                                      <div className="row">
+                                          <div className="col-auto">
+                                              <b className="text-active pb-1" style={{borderBottom: '2px solid'}}>
+                                                  About You
+                                              </b>
+                                          </div>
+                                          <div className="col text-center">
+                                              As a professional, I am a {this.props.profession ? <b className="text-active">{this.props.profession.replace(/_/gi, " ")}</b> : '_____'}
+                                          </div>
+                                          <div className="col-auto">
+                                              <b className="text-active">1</b>/3
+                                          </div>
+                                      </div>
                                   </div>
-                                  <div className="col text-center">
-                                      As a professional, I am a {this.state.profession ? <span style={{color:'blue'}}>{this.state.profession}</span> : '_____'}
-                                  </div>
-                                  <div className="col-auto">
-                                      <b className="text-active">1</b>/3
+                                  <div className="section-content">
+                                      <div className="row">
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_designer.png")}
+                                            title="Designer"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Designer"
+                                           />
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_buyer.png")}
+                                            title="Buyer"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Buyer"
+                                           />
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_product_manager.png")}
+                                            title="Product Manager"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Product_Manager"
+                                           />
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_sourcing_manager.png")}
+                                            title="Sourcing Manager"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Sourcing_Manager"
+                                           />
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_owner.png")}
+                                            title="Owner"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Owner"
+                                           />
+                                          <QuestionnaireOption
+                                            image={require("../../assets/images/questionnaire1_other.png")}
+                                            title="Other"
+                                            onClick={this._setData}
+                                            valueToBeChecked={this.props.profession}
+                                            value="Other"
+                                           />
+                                      </div>
+                                      {
+                                        this.props.profession == 'Other' ?
+                                        <div className="row justify-content-end">
+                                            <div className="col-md-4">
+                                                <div className="form-group my-2">
+                                                    <input type="text" className="form-control" name="professionText" value={professionText} onChange={this.onChange} placeholder="Enter Your Profession" />
+                                                </div>
+                                            </div>
+                                        </div> :
+                                        <div className="row justify-content-end">
+                                            <div className="col-md-4">
+                                                <div className="form-group my-2" style={{visibility:'hidden'}}>
+                                                    <input type="text" className="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                      }
+                                      {
+                                        this.props.profession ?
+                                        <div className="row justify-content-end mb-2" style={{marginTop: '40px'}}>
+                                            <div className="col-md-2">
+                                                <button className="btn btn-nitex-default btn-block" onClick={this._next}>Next</button>
+                                            </div>
+                                        </div> :
+                                        <></>
+                                      }
                                   </div>
                               </div>
-                          </div>
-                          <div className="section-content">
-                              <div className="row">
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Designer')}>
-                                          <img src={require("../../assets/images/questionnaire1_designer.png")} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">designer</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Buyer')}>
-                                          <img src={require("../../assets/images/questionnaire1_buyer.png")} alt="buyer" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">buyer</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Product Manager')}>
-                                          <img src={require("../../assets/images/questionnaire1_product_manager.png")} alt="product manager" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">product manager</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Sourcing Manager')}>
-                                          <img src={require("../../assets/images/questionnaire1_sourcing_manager.png")} alt="sourcing manager" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">sourcing manager</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Owner')}>
-                                          <img src={require("../../assets/images/questionnaire1_owner.png")} alt="owner" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">owner</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="col">
-                                      <div className="card" onClick={() => this._setData('Other')}>
-                                          <img src={require("../../assets/images/questionnaire1_other.png")} alt="other" className="card-img-top img-fluid d-block mx-auto"/>
-                                          <div className="card-body">
-                                              <p className="card-text">other</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              {this.state.profession ? <div className="row" style={{textAlign:'right',marginTop:20}}>
-                                <div className="col">
-                                  <button class="btn btn-success" onClick={this._next}> Next </button>
-                                </div>
-                              </div> : ''}
                           </div>
                       </div>
-
                   </section>
               </div>
             </>
         );
     }
 }
-
 const mapStateToProps = store => {
+  // const { profession } = store.questionnaire
+  // console.log("store",store.questionairre.profession)
 	return {
-		// resources: store.resources.resources
+		profession: store.questionairre.profession,
+    professionText: store.questionairre.professionText
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
-			// fetchResources
+			_storeData
 		},
 		dispatch
 	);
 };
 
-// export default ResourceList;
+
 export default connect(mapStateToProps, mapDispatchToProps)(Questionairre_1);

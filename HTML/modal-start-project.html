@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Instant Quotation</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#instantQuotation">Large
+        modal</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="instantQuotation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="assets/images/cancel.png" alt="cancel button" class="img-fluid close-btn"
+                        data-dismiss="modal" aria-label="Close">
+                    <section>
+                        <div class="container">
+                            <div class="section-content">
+                                <br>
+                                <form> 
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Project title</label>
+                                            <input type="text" class="form-control" name="manuName" placeholder="Project title" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Expected delivery date</label>
+                                            <input type="text" class="form-control date-picker datepicker" name="manuName" placeholder="Expected delivery date" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="note">Notes</label>
+                                            <textarea class="form-control" name="note" id="note" rows="4"
+                                            placeholder="Notes"></textarea>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-row">
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" class="btn btn-nitex-default">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/script.js"></script> -->
+</body>
+
+</html>

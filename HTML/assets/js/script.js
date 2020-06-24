@@ -47,5 +47,13 @@
 
     //exposing the sidebar module
     $.SideBar = new SideBar, $.SideBar.Constructor = SideBar
+
+
+    // Nice Select
+    $(document).ready(function() {
+        $('select').niceSelect();
+    });
     
-}(window.jQuery),
+}(window.jQuery)
+
+ 

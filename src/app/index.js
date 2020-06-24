@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+// import loadjs from 'loadjs';
+
 import DefaultLayout from './layouts/DefaultLayout';
 import AuthLayout from './layouts/AuthLayout';
 
 import  {isTokenExpired} from "./services/Util";
 
 import Login from './pages/auth/Login';
+import Logout from './pages/auth/Logout';
 import Register from './pages/auth/Register';
+import ForgetPassword from './pages/auth/ForgetPassword';
+import ResetPassword from './pages/auth/ResetPassword';
+import OAuth2RedirectHandler from './pages/auth/OAuth2RedirectHandler';
+import MyProfile from './pages/auth/MyProfile';
 
 import Dashboard from './pages/dashboard/Dashboard';
 
@@ -15,11 +22,15 @@ import Questionairre_2 from './pages/questionairre/Questionairre_2';
 import Questionairre_3 from './pages/questionairre/Questionairre_3';
 import Questionairre_final from './pages/questionairre/Questionairre_final';
 
-import AddResource from './pages/resources/AddResource';
-import ResourceList from './pages/resources/ResourceList';
-import EditResource from './pages/resources/EditResource';
+import RequestForQuotation from './pages/quotation/RequestForQuotation';
+import PickDesign from './pages/design/PickDesign';
 
-import ResourceListTest from './pages/resources/ResourceListTest';
+import OurDesignDetails from './pages/design/OurDesignDetails';
+import MyProject from './pages/project/MyProject';
+import MyProjectDetails from './pages/project/MyProjectDetails';
+import MyProduct from './pages/product/MyProduct';
+import MyRFQs from './pages/rfo/MyRFQs';
+import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
 // import Login from './components/Login';
 // import Logout from './components/Logout';
@@ -49,44 +60,77 @@ import ResourceListTest from './pages/resources/ResourceListTest';
 // };
 
 const AuthRoute = ({component: Component, ...rest}) => {
-    return (
+    // localStorage.removeItem('token');
+    const token = localStorage.getItem('token');
+    console.log("token",token);
+    return token==null ? (
         <Route { ...rest } render={ matchProps => (
             <AuthLayout>
                 <Component { ...matchProps } />
             </AuthLayout>
         ) }/>
-    );
+    ) : <Redirect to="/dashboard"/>;
+};
+
+const AuthRouteWithoutLayout = ({component: Component, ...rest}) => {
+    // localStorage.removeItem('token');
+    const token = localStorage.getItem('token');
+    console.log("token",token);
+    return token==null ? (
+        <Route { ...rest } render={ matchProps => (
+            <Component { ...matchProps } />
+        ) }/>
+    ) : <Redirect to="/dashboard"/>;
 };
 
 const PublicRoute = ({component: Component, ...rest}) => {
-    return (
+    const token = localStorage.getItem('token');
+    return token ? (
         <Route { ...rest } render={ matchProps => (
             <DefaultLayout>
                 <Component { ...matchProps } />
             </DefaultLayout>
         ) }/>
-    );
+    ) : <Redirect to="/login"/>;
+};
+
+const QuestionairreRoute = ({component: Component, ...rest}) => {
+    const token = localStorage.getItem('token');
+    return token ? (
+        <Route { ...rest } render={ matchProps => (
+            <Component { ...matchProps } />
+        ) }/>
+    ) : <Redirect to="/login"/>;
 };
 
 class Root extends Component {
+
     render() {
-        // const token = JSON.parse(localStorage.getItem('token'));
         return (
             <Router>
                 <Switch>
                   <AuthRoute exact path="/" component={ Login }/>
-                  <Route exact path="/questionairre-step-1" component={ Questionairre_1 }/>
-                  <Route exact path="/questionairre-step-2" component={ Questionairre_2 }/>
-                  <Route exact path="/questionairre-step-3" component={ Questionairre_3 }/>
-                  <Route exact path="/questionairre-final" component={ Questionairre_final }/>
+                  <QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
+                  <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
+                  <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
+                  <QuestionairreRoute exact path="/questionairre-final" component={ Questionairre_final }/>
                   <AuthRoute exact path="/login" component={ Login }/>
+                  <AuthRoute exact path="/oauth2/redirect" component={ OAuth2RedirectHandler }/>
+                  <Route exact path="/logout" component={ Logout }/>
                   <AuthRoute exact path="/register" component={ Register }/>
-                  <PublicRoute exact path="/list" component={ ResourceListTest }/>
+                  <AuthRouteWithoutLayout exact path="/forget-password" component={ ForgetPassword }/>
+                  <AuthRouteWithoutLayout exact path="/reset-password" component={ ResetPassword }/>
+                  <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
-                  {/*<PublicRoute exact path="/upload-resource" component={ AddResource }/>
-                  <PublicRoute exact path="/resource-list" component={ ResourceList }/>
-                  <PublicRoute path="/resource-list/:resourceId" component={ EditResource }/>
-                  <PublicRoute exact path="/" component={ AddResource }/>*/}
+                  <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
+                  <PublicRoute exact path="/pick-design" component={ PickDesign }/>
+                  <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
+                  <PublicRoute exact path="/my-project" component={ MyProject }/>
+                  <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
+                  <PublicRoute exact path="/my-products" component={ MyProduct }/>
+                  <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
+                  <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
+                  <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                 </Switch>
             </Router>
         );

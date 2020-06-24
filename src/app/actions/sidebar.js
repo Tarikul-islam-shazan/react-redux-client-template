@@ -8,3 +8,11 @@ export const toggle = isCollapsed => dispatch => {
         }
     });
 };
+
+export const setActiveTab = tab => dispatch => {
+  console.log("tab",tab)
+    dispatch({
+        type: 'SET_ACTIVE_TAB',
+        payload: tab
+    });
+};

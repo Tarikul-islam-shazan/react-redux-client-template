@@ -5,6 +5,14 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import Step_0 from './NewDevelopmentStep_0';
+import Step_1 from './NewDevelopmentStep_1';
+import Step_2 from './NewDevelopmentStep_2';
+import Step_3 from './NewDevelopmentStep_3';
+
+import Step_2_Supervision from './NewDevelopmentStep_2_Supervision';
+import Step_2_FullFledged from './NewDevelopmentStep_2_FullFledged';
+
 // import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 
 class NewProjectModal extends Component {
@@ -12,7 +20,7 @@ class NewProjectModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+          step : 1
         };
     }
 
@@ -20,71 +28,57 @@ class NewProjectModal extends Component {
 
     }
 
+    _goToStep = (step) => {
+      this.setState({
+        step
+      })
+    }
+
+    _renderStep = () => {
+      let {step} = this.state;
+      let type = this.props.project_type;
+      // if(step==4){
+      //   this.props.history.push('my-project')
+      // }
+      if(step==0){
+        // return <Step_2_Supervision _goToStep={this._goToStep}/>
+        return <Step_0 _goToStep={this._goToStep}/>
+      }
+      if(type=='DEVELOPMENT'){
+        if(step==1){
+          return <Step_1 _goToStep={this._goToStep}/>
+        }else if(step==2){
+          return <Step_2 _goToStep={this._goToStep}/>
+        }else if(step==3){
+          return <Step_3 _goToStep={this._goToStep}/>
+        }
+      }else if(type=='SUPERVISION'){
+        if(step==1){
+          return <Step_1 _goToStep={this._goToStep}/>
+        }else if(step==2){
+          return <Step_2_Supervision _goToStep={this._goToStep}/>
+        }else if(step==3){
+          return <Step_3 _goToStep={this._goToStep}/>
+        }
+      }else if(type=='FULL_FLEDGED_PRODUCTION'){
+        if(step==1){
+          return <Step_1 _goToStep={this._goToStep}/>
+        }else if(step==2){
+          return <Step_2_FullFledged _goToStep={this._goToStep}/>
+        }else if(step==3){
+          return <Step_3 _goToStep={this._goToStep}/>
+        }
+      }
+    }
+
     render() {
+        console.log("modal",this.props.project_type)
         return (
           <>
-            <div className="modal fade" id="newProject_1_4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-xl">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <img src={require("../../../assets/images/cancel.png")} alt="cancel button" className="img-fluid close-btn" data-dismiss="modal" aria-label="Close"/>
-                            <section className="card-style-1">
-                                <div className="container">
-                                    <div className="row justify-content-center">
-                                        <div className="col-6">
-                                            <div className="section-header text-center">
-                                                <h5 className="section-title">New Project</h5>
-                                                <p className="section-subtitle">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row justify-content-center">
-                                        <div className="col-9">
-                                            <div className="section-content">
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <div className="card text-center">
-                                                            <img src={require("../../../assets/images/development_project.png")} alt="development project" className="card-img-top img-fluid d-block mx-auto"/>
-                                                            <div className="card-body">
-                                                                <p className="card-title text-capitalize">Development Project</p>
-                                                                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadips elitr, sed diam nonumy
-                                                                    eirmod tempor invidun tinala ut mina labore et dolore magna aliquyam
-                                                                    erat sed</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="card text-center">
-                                                            <img src={require("../../../assets/images/supervision_project.png")} alt="supervision project" className="card-img-top img-fluid d-block mx-auto"/>
-                                                            <div className="card-body">
-                                                                <p className="card-title text-capitalize">Supervision Project</p>
-                                                                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadips elitr, sed diam nonumy
-                                                                    eirmod tempor invidun tinala ut mina labore et dolore magna aliquyam
-                                                                    erat sed</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col">
-                                                        <div className="card text-center">
-                                                            <img src={require("../../../assets/images/full_fledged_project.png")} alt="full fledged project" className="card-img-top img-fluid d-block mx-auto"/>
-                                                            <div className="card-body">
-                                                                <p className="card-title text-capitalize">Full-fledged Project</p>
-                                                                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadips elitr, sed diam nonumy
-                                                                    eirmod tempor invidun tinala ut mina labore et dolore magna aliquyam
-                                                                    erat sed</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
+            <div className="modal fade" id="newProject_1_4" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              {
+              this._renderStep()
+              }
             </div>
           </>
         );
@@ -92,8 +86,8 @@ class NewProjectModal extends Component {
 }
 
 const mapStateToProps = store => {
-	return {
-		// resources: store.resources.resources
+  return {
+		project_type: store.project.project_type
 	};
 };
 
@@ -106,5 +100,5 @@ const mapDispatchToProps = dispatch => {
 	);
 };
 
-// export default ResourceList;
+
 export default connect(mapStateToProps, mapDispatchToProps)(NewProjectModal);

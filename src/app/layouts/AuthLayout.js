@@ -7,22 +7,19 @@ const AuthLayout = ({children, ...rest}) => {
         <>
           <div className="auth-page container-fluid">
               <div className="row fullscreen">
-                  <div className="col-md-5" style={{padding:0}}>
+                  <div className="col-lg-5 col-sm-12 col-md-12" style={{padding:0}}>
                       <div className="bg-wrapper">
                           <div className="logo-wrapper">
                               <img src={ require('../assets/images/logo.png') } alt="logo" className="img-fluid d-block mx-auto" width="125px"/>
                           </div>
                       </div>
-
                   </div>
-                  <div className="col-md-7" style={{padding:0}}>
-                      <div className="content-wrapper">
-                          <a href="#" className="back-link">
+                  <div className="col-lg-7 col-sm-12 col-md-12" style={{padding:0}}>
+                      <div className="content-wrapper content-wrapper-override">
+                          <a href="https://nitex.info" className="back-link back-link-override">
                               <span>
                                   <img src={ require('../assets/icons/home.png') } alt="back"/>
                               </span> Back to Home</a>
-                              <br/>
-                              <br/>
                               <br/>
                               <br/>
                               {children}
