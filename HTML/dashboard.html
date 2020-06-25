@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li class="active">
+                    <a href="#">
+                        <img src="assets/icons/dashboard_active.png" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="assets/icons/document1.png" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="assets/icons/drafting_compas.png" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="assets/icons/tshirt.png" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="assets/icons/rfq.png" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <!-- <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div> -->
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <img src="assets/icons/search.png" alt="search" class="img-fluid">
+                        </span>
+                    </div>
+                    <input type="search" class="form-control border-0 small" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2"
+                    />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"
+                                />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-orange">
+                        <span style="margin-right: 3px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" style="width: 10px;" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <img src="assets/icons/notification-bell.png" alt="notification" />
+                        <span class="unread-notification"></span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownNewButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="background-image: url('assets/icons/chevron_down_colored.png')">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownProfileButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+            <section class="section">
+                <div class="row">
+                    <div class="col">
+                        <div class="dashboard-card">
+                            <div class="row align items-center">
+                                <div class="col mr-auto">
+                                    <h2 class="card-number">21</h2>
+                                    <span class="card-topics">RFQ's</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon-box icon-box-rocket">
+                                        <img src="assets/icons/rocket.png" alt="start">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="dashboard-card">
+                            <div class="row align items-center">
+                                <div class="col mr-auto">
+                                    <h2 class="card-number">33</h2>
+                                    <span class="card-topics">Developments Projects</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon-box icon-box-settings">
+                                        <img src="assets/icons/settings.png" alt="start">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="dashboard-card">
+                            <div class="row align items-center">
+                                <div class="col mr-auto">
+                                    <h2 class="card-number">134</h2>
+                                    <span class="card-topics">Buks Projects</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon-box icon-box-savings">
+                                        <img src="assets/icons/savings.png" alt="start">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="dashboard-card">
+                            <div class="row align items-center">
+                                <div class="col mr-auto">
+                                    <h2 class="card-number">35</h2>
+                                    <span class="card-topics">Supervisions Projects</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon-box icon-box-research">
+                                        <img src="assets/icons/research.png" alt="start">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section my-rfq-project">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                My RFQ's
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">You don't have any RFQ's</p>
+                                <a href="#" class="btn btn-nitex-default">Share your Design</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                My Projects
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">You don't have any Projects</p>
+                                <a href="#" class="btn btn-nitex-default">Start a Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section designs">
+                <h4 class="section-title">Browse Designs by NITEX</h4>
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                <span class="design-category">Women</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #E4F6EA; color: #00CC52;">Availabe</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_full.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design3.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">T Shirt</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design4.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">Printed Skirt</h5>
+                                <span class="design-category">Women</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #E4F6EA; color: #00CC52;">Availabe</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col ">
+                        <div class="card">
+                            <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">T Shirt</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design1.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">blue huddie long sleeve</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                <span class="design-category">Women</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #E4F6EA; color: #00CC52;">Availabe</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_full.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design3.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">T Shirt</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="assets/images/design4.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">Printed Skirt</h5>
+                                <span class="design-category">Women</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #E4F6EA; color: #00CC52;">Availabe</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col ">
+                        <div class="card">
+                            <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">T Shirt</h5>
+                                <span class="design-category">Men</span>
+                                <div class="card-footer">
+                                    <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                            aria-expanded="false" style="background-color: #F7F5E5; color: #CD930C;">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-lg-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="favourite-part">
+                                <img src="assets/icons/heart_empty.png" alt="" class="img-fluid" style="width: 20px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- necessary scripts -->
+    <script type="text/javascript " src="assets/js/jquery-3.3.1.slim.min.js "></script>
+    <script type="text/javascript " src="assets/js/bootstrap.bundle.min.js "></script>
+    <script type="text/javascript " src="assets/js/script.js "></script>
+    
+</body>
+
+</html>

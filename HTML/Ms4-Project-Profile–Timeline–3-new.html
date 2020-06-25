@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+            <section class="project-profile">
+                <a href="#" class="back">Back</a>
+                <div class="quote-tab">
+                    <ul class="nav nav-tabs justify-content-center">
+                        <li><a class="ps-ico" data-toggle="tab" href="#ProjectSummary">Project Summary</a></li>
+                        <li><a class="pu-ico active" data-toggle="tab" href="#ProjectUpdates">Project Updates</a></li>
+                        <li><a class="payment-ico" data-toggle="tab" href="#Payments">Payments</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="ProjectSummary" class="tab-pane fade">
+                            <div class="project-status-container">
+                                <div class="project-statistic">
+                                    <div class="ps-item">
+                                        <span class="project-name">Project Name</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <span class="start-date">Start Date</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <span class="end-date">End Date</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <span class="time-left">Time Left</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <span class="total-style">Total Style</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <span class="total-valuation">Total Valuation</span>
+                                        <h6>Nitex Demo- 002</h6>
+                                    </div>
+                                    <div class="ps-item">
+                                        <div class="badge table-badge" style="background-color: #F7F5E5; color: #CD930C; width: auto">Pending Project</div>
+                                    </div>
+                                </div>
+                                <div class="project-status">
+                                    <div class="head">
+                                        <label>Project Status</label>
+                                        <div class="percentage">72%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="project-team-members">
+                                    <label>Team Members</label>
+                                    <div class="members">
+                                        <div class="member">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <h6>Project Manager</h6>
+                                        </div>
+                                        <div class="member other-member">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <img src="./assets/images/user.jpg" alt="">
+                                            <div class="more-img">+15px</div>
+                                            <h6>Other Members</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="style-overview">
+                                <div class="overview">
+                                    <div class="style-info"  data-toggle="modal" data-target="#OverView" type="button">
+                                        <div class="info">
+                                            <label>Style No</label>
+                                            <h6>13XT</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Style Name</label>
+                                            <h6>Kids T-shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Product type</label>
+                                            <h6>T Shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Due Date</label>
+                                            <h6>2 Oct, 2020</h6>
+                                        </div>
+                                    </div>
+                                    <div class="project-status checklist-status">
+                                        <div class="head">
+                                            <label>Checklist Status</label>
+                                            <div class="percentage">75%</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="style-status">
+                                        <div class="badge-list">
+                                            <span class="badge table-badge" style="background-color: #fff; color: #21242B; border: 1px solid #D1D5DF">PP Sample</span>
+                                            <span class="badge table-badge" style="background-color: #E4F6EA; color: #00CC52;">Completed</span>
+                                        </div>
+                                        <div class="comment-status active"></div>
+                                    </div>
+                                </div>
+
+                                <div class="overview">
+                                    <div class="style-info">
+                                        <div class="info">
+                                            <label>Style No</label>
+                                            <h6>13XT</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Style Name</label>
+                                            <h6>Kids T-shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Product type</label>
+                                            <h6>T Shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Due Date</label>
+                                            <h6>2 Oct, 2020</h6>
+                                        </div>
+                                    </div>
+                                    <div class="project-status checklist-status">
+                                        <div class="head">
+                                            <label>Checklist Status</label>
+                                            <div class="percentage">75%</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="style-status">
+                                        <div class="badge-list">
+                                            <span class="badge table-badge" style="background-color: #fff; color: #21242B; border: 1px solid #D1D5DF">Cutting</span>
+                                            <span class="badge table-badge" style="background-color: #F8F6E6; color: #CB8E00;">Submitted</span>
+                                        </div>
+                                        <div class="comment-status active"></div>
+                                    </div>
+                                </div>
+
+                                <div class="overview">
+                                    <div class="style-info">
+                                        <div class="info">
+                                            <label>Style No</label>
+                                            <h6>13XT</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Style Name</label>
+                                            <h6>Kids T-shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Product type</label>
+                                            <h6>T Shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Due Date</label>
+                                            <h6>2 Oct, 2020</h6>
+                                        </div>
+                                    </div>
+                                    <div class="project-status checklist-status">
+                                        <div class="head">
+                                            <label>Checklist Status</label>
+                                            <div class="percentage">75%</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="style-status">
+                                        <div class="badge-list">
+                                            <span class="badge table-badge" style="background-color: #fff; color: #21242B; border: 1px solid #D1D5DF">Lab Dip</span>
+                                            <span class="badge table-badge" style="background-color: #C8CBD4; color: #707070;">Running</span>
+                                        </div>
+                                        <div class="comment-status active"></div>
+                                    </div>
+                                </div>
+
+                                <div class="overview">
+                                    <div class="style-info">
+                                        <div class="info">
+                                            <label>Style No</label>
+                                            <h6>13XT</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Style Name</label>
+                                            <h6>Kids T-shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Product type</label>
+                                            <h6>T Shirt</h6>
+                                        </div>
+                                        <div class="info">
+                                            <label>Due Date</label>
+                                            <h6>2 Oct, 2020</h6>
+                                        </div>
+                                    </div>
+                                    <div class="project-status checklist-status">
+                                        <div class="head">
+                                            <label>Checklist Status</label>
+                                            <div class="percentage">75%</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="style-status">
+                                        <div class="badge-list">
+                                            <span class="badge table-badge" style="background-color: #fff; color: #21242B; border: 1px solid #D1D5DF">PP Sample</span>
+                                            <span class="badge table-badge" style="background-color: #E4F6EA; color: #00CC52;">Completed</span>
+                                        </div>
+                                        <div class="comment-status"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ProjectUpdates" class="tab-pane active">
+                                <div class="pp-timeline">
+                                    <div class="filter">
+                                        <div class="production">
+                                            <h6 class="filter-icon">Filter</h6>
+                                            <div class="checklist-item">
+                                                <label class="mb-3">Date</label>
+                                                <div class="date-range">
+                                                    <input class="input-field date-picker" type="text" placeholder="dd.mm.yyyy">
+                                                    <span>to</span>
+                                                    <input class="input-field date-picker" type="text" placeholder="dd.mm.yyyy">
+                                                </div>
+                                                <label class="mb-3">Styles</label>
+                                                <div class="item">
+                                                    <div class="check">
+                                                        <div class="custom-chekbox">
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="1" checked>
+                                                                <label for="1">Fit sample</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="check">
+                                                        <div class="custom-chekbox">
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="4">
+                                                                <label for="4">Proforma Invoice</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="check">
+                                                        <div class="custom-chekbox">
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="5">
+                                                                <label for="5">PP Sample</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="check">
+                                                        <div class="custom-chekbox">
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="6">
+                                                                <label for="6">PP Sample</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="check">
+                                                        <div class="custom-chekbox">
+                                                            <div class="form-group">
+                                                                <input type="checkbox" id="7">
+                                                                <label for="7">PP Sample</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="#" class="see-more">See More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline">
+                                        <div class="editor">
+                                            <div class="header-tab">
+                                                <div class="query">Query</div>
+                                                <div class="note">Note</div>
+                                            </div>
+                                            <div class="write">
+                                                <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                <textarea name="" id=""   rows="5" placeholder="Write here....."></textarea>
+                                            </div>
+                                            <div class="footer-tab">
+                                                <select>
+                                                    <option value="Accept">Stage</option>
+                                                    <option value="Reject">Style</option>
+                                                </select>
+                                                
+                                                <div class="stage">Stage
+                                                    <div class="sub-stage">
+                                                        <ul class="list">
+                                                            <div class="title">Pre-Production</div>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                        </ul>
+                                                        <ul class="list">
+                                                            <div class="title">Production</div>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                        </ul>
+                                                        <ul class="list">
+                                                            <div class="title">Post-Production</div>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li>
+                                                            <li>Fit Sample</li> 
+                                                        </ul> 
+                                                    </div>
+                                                </div>
+
+                                                <div class="file btn">
+                                                    Photo/Video
+                                                    <input type="file" name="file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="post">
+                                            <div class="post-heading">
+                                                <div class="header-title">
+                                                    <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                    <div class="name-n-date">
+                                                        <h4>Square Textiles Ltd</h4>
+                                                        <span>1 August, 2019 08:35 pm</span>
+                                                    </div>
+                                                    <div class="post-type">Query</div>
+                                                </div>
+                                                <div class="post-status">
+                                                    <div class="badge table-badge" style="background-color: #E4F6EA; color: #00CC52; width: auto">Approved</div>
+                                                </div>
+                                            </div>
+                                            <div class="post-description">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscingt, ercita ullamco laboris nisi ut aliquip ex ea coconse. Lorem ipsum dolor sit amet, consectetur adipiscingt.
+                                                    ercita ullamco laboris nisi ut aliquip ex ea coconse.</p>
+                                            </div>
+                                            <div class="post-tag">
+                                                <div class="badge-list">
+                                                    <span class="badge table-badge" style="background-color: #EDE4F3; color: #9A2EE1;">Kids T-shirt</span>
+                                                    <span class="badge table-badge" style="background-color: #F8F6E6;color: #CB8E00;">Fit Sample</span>
+                                                    <span class="badge table-badge" style="background-color: #E7E9EF;color: #3E4148;">Pro-forma Invoice</span>
+                                                    <span class="badge table-badge" style="background-color: #E4F6EA;color: #00CC52;">Knitting</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="feedback">
+                                            <h5>Feedback</h5>
+                                            <div class="editor">
+                                                <div class="write">
+                                                    <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                    <div class="feedback-editor">
+                                                        <textarea name=""  rows="3" placeholder="Write your feedback here....."></textarea>
+                                                        <div class="footer-tab">
+                                                            <select>
+                                                                <option value="Accept">Note</option>
+                                                                <option value="Reject">Query</option>
+                                                            </select>
+                                                            <div class="file btn">
+                                                                Photo/Video
+                                                                <input type="file" name="file">
+                                                            </div>
+                                                            <button class="deliverable-deadline">Deliverable Deadline</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="feedback-post">
+
+                                                <div class="post">
+                                                    <div class="post-heading">
+                                                        <span class="date-time">6.45 pm <br> Aug 7,2019</span>
+                                                        <div class="header-title">
+                                                            <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                            <div class="description">
+                                                                <h4>Client Name <div class="post-type">Query</div></h4>
+                                                                <div class="comments">
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid atque commodi delectus doloribus earum ex, fugit ipsa ipsam itaque magnam, nam nulla porro quae, qui reprehenderit suscipit ut voluptates!</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="post">
+                                                    <div class="post-heading">
+                                                        <span class="date-time">6.45 pm <br> Aug 7,2019</span>
+                                                        <div class="header-title">
+                                                            <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                            <div class="description">
+                                                                <h4>Client Name <div class="post-type note">Note</div></h4>
+                                                                <div class="comments">
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid atque commodi delectus doloribus earum ex, fugit ipsa ipsam itaque magnam, nam nulla porro quae, qui reprehenderit suscipit ut voluptates!</p>
+                                                                    <img src="./assets/images/questionnaire_3_1_retailers.png" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="post">
+                                                    <div class="post-heading">
+                                                        <span class="date-time">6.45 pm <br> Aug 7,2019</span>
+                                                        <div class="header-title">
+                                                            <img src="./assets/images/user.jpg" alt="" class="user-photo">
+                                                            <div class="description">
+                                                                <h4>Client Name <div class="post-type">Query</div></h4>
+                                                                <div class="comments">
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid atque commodi delectus doloribus earum ex, fugit ipsa ipsam itaque magnam, nam nulla porro quae, qui reprehenderit suscipit ut voluptates!</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tag-n-deadline">
+                                        <div class="production">
+                                            <h6 class="hashtag-ico">Most Tagged topic</h6>
+                                            <div class="checklist-item">
+                                                <div class="sample">
+                                                    <a href="#">#Sample</a>
+                                                    <a href="#">#Double Sample</a>
+                                                    <a href="#">#Double Sample</a>
+                                                    <a href="#">#Double Sample</a>
+                                                    <a href="#">#Sample</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="production">
+                                            <h6 class="hashtag-ico upcoming-ico">Upcoming Deadlines</h6>
+                                            <div class="checklist-item">
+                                                <div class="sample-deadline">
+                                                    <div class="list">
+                                                        <span>Kids T-shirt</span>
+                                                        <a href="#">Fit sample</a>
+                                                        <span>23.08.2019</span>
+                                                    </div>
+                                                    <div class="list">
+                                                        <span>Kids T-shirt</span>
+                                                        <a href="#">Fit sample</a>
+                                                        <span>23.08.2019</span>
+                                                    </div>
+                                                    <div class="list">
+                                                        <span>Kids T-shirt</span>
+                                                        <a href="#">Fit sample</a>
+                                                        <span>23.08.2019</span>
+                                                    </div>
+                                                    <div class="list">
+                                                        <span>Kids T-shirt</span>
+                                                        <a href="#">Fit sample</a>
+                                                        <span>23.08.2019</span>
+                                                    </div>
+                                                    <div class="list">
+                                                        <span>Kids T-shirt</span>
+                                                        <a href="#">Fit sample</a>
+                                                        <span>23.08.2019</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div id="Payments" class="tab-pane fade">
+                            <table class="table mt-4 project-profile-table payment-checkout">
+                                <tbody>
+                                    <tr>    
+                                        <td>
+                                            <div class="custom-radio">
+                                                <div class="form-group">
+                                                    <input type="radio" id="card" name="chekout-payment">
+                                                    <label for="card">Credit card \Dabit card</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="right">
+                                            <img src="./assets/images/payment-getway.png" alt="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="custom-radio">
+                                                <div class="form-group">
+                                                    <input type="radio" id="bank" name="chekout-payment">
+                                                    <label for="bank">Bank Slip</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="custom-radio">
+                                                <div class="form-group">
+                                                    <input type="radio" id="paypal" name="chekout-payment">
+                                                    <label for="paypal"> <img src="./assets/images/paypal.png" alt=""></label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                    <td colspan="2">
+                                      <div class="row">
+                                          <div class="col-lg-12">
+                                              <div class="form-group">
+                                                  <label>Card Number</label>
+                                                  <div class="card-number-field">
+                                                      <input type="text" maxlength="4" placeholder="****">
+                                                      <input type="text" maxlength="4" placeholder="****">
+                                                      <input type="text" maxlength="4" placeholder="****">
+                                                      <input type="text" maxlength="4" placeholder="****">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                       <div class="row">
+                                           <div class="col-lg-8">
+                                               <div class="form-group input-default">
+                                                   <label>Card Holder</label>
+                                                   <input type="text" placeholder="NAME">
+                                               </div>
+                                           </div>
+                                           <div class="col-lg-2">
+                                               <div class="form-group input-default">
+                                                   <label>Exp. Date</label>
+                                                   <input type="text" placeholder="DD/MM">
+                                               </div>
+                                           </div>
+                                           <div class="col-lg-2">
+                                               <div class="form-group input-default">
+                                                   <label>Cvv</label>
+                                                   <input type="password" placeholder="****">
+                                               </div>
+                                           </div>
+                                       </div>
+                                        <button class="btn-brand float-right mt-4 mb-5">Payment</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!--Add New Modal -->
+    <div class="modal fade" id="OverView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <img src="assets/images/cancel.png" alt="cancel button" class="img-fluid close-btn" data-dismiss="modal" aria-label="Close">
+                    <div class="summery-popup">
+                        <div class="project-status-container">
+                            <div class="project-statistic">
+                                <div class="ps-item">
+                                    <label>Style No.</label>
+                                    <h6>13XT</h6>
+                                </div>
+                                <div class="ps-item">
+                                    <label>Style Name</label>
+                                    <h6>Kids T-shirt</h6>
+                                </div>
+                                <div class="ps-item">
+                                    <label>Product category</label>
+                                    <h6>Polo Shirt</h6>
+                                </div>
+                                <div class="ps-item">
+                                    <label>Due Date</label>
+                                    <h6>10 oct, 2019</h6>
+                                </div>
+                                <div class="ps-item">
+                                    <label>Color</label>
+                                    <h6>Blue</h6>
+                                </div>
+                            </div>
+                            <div class="project-status">
+                                <div class="head">
+                                    <label>Checklist Status</label>
+                                    <div class="percentage">72%</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checklist">
+                            <div class="production">
+                                <h6>Pre-Production</h6>
+                                <div class="checklist-item">
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="1">
+                                                    <label for="1">Fit sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="2" checked>
+                                                    <label for="2">Print strike offs</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="3" checked>
+                                                    <label for="3">Lab dips</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="4">
+                                                    <label for="4">Proforma Invoice</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="5">
+                                                    <label for="5">PP Sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="production">
+                                <h6>Pre-Production</h6>
+                                <div class="checklist-item">
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="1">
+                                                    <label for="1">Fit sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="2" checked>
+                                                    <label for="2">Print strike offs</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="3" checked>
+                                                    <label for="3">Lab dips</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="4">
+                                                    <label for="4">Proforma Invoice</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="5">
+                                                    <label for="5">PP Sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="production">
+                                <h6>Pre-Production</h6>
+                                <div class="checklist-item">
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="1">
+                                                    <label for="1">Fit sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="2" checked>
+                                                    <label for="2">Print strike offs</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="3" checked>
+                                                    <label for="3">Lab dips</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-n-action">
+                                            <div class="comment-status active"></div>
+                                            <select>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="4">
+                                                    <label for="4">Proforma Invoice</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="check">
+                                            <div class="custom-chekbox">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="5">
+                                                    <label for="5">PP Sample</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add New Modal End-->
+
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside> 
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+            <section class="request-for-quote">
+                <div class="heading">
+                    <h1>Request for Quotation</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto ut recusandae provident eaque
+                        fugit, quo rem nobis voluptate fugiat aliquam doloremque, blanditiis hic, alias nam deserunt
+                        ducimus quasi error explicabo!</p>
+                </div>
+
+                <div class="quote-tab">
+                        <div id="ShareDesignDocuments">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="email">How many style do you need?:</label>
+                                        <select> 
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3" disabled>3</option>
+                                            <option value="4">4</option>
+                                          </select>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="style-item">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="drug-n-drop">
+                                                <div class="development-step-1">
+
+                                                    <div class="form-group">
+                                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab" href="#techPack" role="tab">Upload Tech Pack</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#nitex" role="tab">Choose From Nitex</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#design" role="tab">Choose From Your Design</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content align-self-center" id="myTabContent">
+                                                            <div class="tab-pane fade show active" id="techPack" role="tabpanel">
+                                                                <h5>Drag and Drop File</h5>
+                                                                <br /> Or
+                                                                <br />
+                                                                <br /> Upload your detail Tech Pack here
+                                                                <br />
+                                                                <br />
+                                                                <div class="file btn">
+                                                                    Choose file
+                                                                    <input type="file" name="file">
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="nitex" role="tabpanel">
+                                                                <div class="uploaded-img">
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item active">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="card">
+                                                                            <img src="assets/images/design2.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title text-capitalize">Long Dress</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="design" role="tabpanel">
+                                                                3
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="email">Color</label>
+                                                        <select>
+                                                            <option>Choose Color</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3" disabled>3</option>
+                                                            <option value="4">4</option>
+                                                          </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <label for="email">Enter Quantity</label>
+                                                        <input type="text" placeholder="Enter Quantity for this color">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="add-new color">
+                                                        <span>Add New Color</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="design-upload">
+                                                 <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Upload Design Inspiration</label>
+                                                            <p class="form-text text-muted">You can upload multiple files here</p>
+                                                        </div>
+                                                      <div class="row">
+                                                          <div class="col-lg-8">
+                                                              <label class="btn btn-nitex-default">
+                                                                  Upload Design
+                                                                  <input type="file" hidden>
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <img src="assets/images/demo_product1.png" alt="Demo Product 1" class="img-fluid">
+                                                        </div>
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <img src="assets/images/demo_product1.png" alt="Demo Product 1" class="img-fluid">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="design-upload">
+                                                 <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Upload Print/Embroidery/Accessories Detail</label>
+                                                             <p class="form-text text-muted">You can upload multiple files here</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <label class="btn btn-nitex-default">
+                                                                    Upload Design
+                                                                    <input type="file" hidden>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <img src="assets/images/demo_product1.png" alt="Demo Product 1" class="img-fluid">
+                                                        </div>
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <img src="assets/images/demo_product1.png" alt="Demo Product 1" class="img-fluid">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="demo-product-card">
+                                                            <div class="row">
+                                                                <div class="col-auto mr-auto">
+                                                                    <p>Demo Product</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a href="#">
+                                                                        <img src="assets/icons/remove.png" alt="remove">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label for="email">Note</label>
+                                                        <textarea name="" id=""  rows="3" placeholder="Write some information about your product"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group"> 
+                                        <select>
+                                            <option value="Style 2">Style 2</option>
+                                            <option value="2">2</option>
+                                            <option value="3" disabled>3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"> 
+                                        <button class="btn-brand">Get Quotation</button>  
+                                </div>
+                            </div>
+                        </div>
+                </div> 
+            </section>
+        </div>
+    </div>
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+</body>
+
+</html>

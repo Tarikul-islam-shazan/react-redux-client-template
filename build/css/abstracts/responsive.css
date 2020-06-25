@@ -1,0 +1,256 @@
+@media screen and (max-width: 1440px) {
+  /* line 3, ../../sass/abstracts/responsive.scss */
+  .btn-brand {
+    width: 196px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  /* line 8, ../../sass/abstracts/responsive.scss */
+  .sidebar-collapse ul li a {
+    font-size: 15px;
+  }
+
+  /* line 11, ../../sass/abstracts/responsive.scss */
+  .sidebar-collapse h5 {
+    font-size: 14px;
+    margin-top: 40px;
+  }
+
+  /* line 15, ../../sass/abstracts/responsive.scss */
+  .sidebar-collapse {
+    padding: 36px 20px 30px 10px;
+  }
+
+  /* line 18, ../../sass/abstracts/responsive.scss */
+  #sidebar-menu-content {
+    margin-left: 228px;
+    padding: 20px 20px 0px 20px;
+  }
+
+  /* line 22, ../../sass/abstracts/responsive.scss */
+  .product-slider {
+    margin-bottom: 30px;
+    max-width: 825px;
+  }
+
+  /* line 26, ../../sass/abstracts/responsive.scss */
+  .product-slider .owl-carousel .owl-nav {
+    right: -58px;
+  }
+
+  /* line 29, ../../sass/abstracts/responsive.scss */
+  #AddNewProduct .modal-dialog {
+    max-width: 1140px;
+  }
+
+  /* line 32, ../../sass/abstracts/responsive.scss */
+  .navbar {
+    height: 60px;
+  }
+
+  /* line 35, ../../sass/abstracts/responsive.scss */
+  .request-for-quote {
+    max-width: 790px;
+    margin: 30px auto 0;
+  }
+
+  /* line 40, ../../sass/abstracts/responsive.scss */
+  .quote-tab .tab-content {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  /* line 45, ../../sass/abstracts/responsive.scss */
+  .chat {
+    width: 60px;
+    height: 60px;
+    right: 35px;
+    bottom: 35px;
+    background-size: 46%;
+  }
+
+  /* line 52, ../../sass/abstracts/responsive.scss */
+  .style-item .accordion .card .card-body {
+    padding: 14px 14px;
+  }
+
+  /* line 55, ../../sass/abstracts/responsive.scss */
+  .request-for-quote .designs .card {
+    margin: 15px 8px;
+  }
+
+  /* line 58, ../../sass/abstracts/responsive.scss */
+  table.measurement-table tr td, table.measurement-table tr th {
+    padding: 14px 40px !important;
+    font-size: 18px;
+  }
+
+  /* line 62, ../../sass/abstracts/responsive.scss */
+  table.measurement-table tr td:first-child {
+    font-size: 16px;
+    padding-left: 20px !important;
+  }
+
+  /* line 66, ../../sass/abstracts/responsive.scss */
+  table.measurement-table tr th {
+    padding: 20px !important;
+    font-size: 16px;
+  }
+
+  /* line 70, ../../sass/abstracts/responsive.scss */
+  table.measurement-table thead th:first-child {
+    width: 21%;
+  }
+
+  /* line 73, ../../sass/abstracts/responsive.scss */
+  #ninja-slider .ns-img {
+    width: 100%;
+  }
+
+  /* line 76, ../../sass/abstracts/responsive.scss */
+  #thumbnail-slider {
+    height: 430px;
+  }
+
+  /* line 79, ../../sass/abstracts/responsive.scss */
+  .other-description {
+    padding: 50px 32px 0 32px;
+  }
+
+  /* line 82, ../../sass/abstracts/responsive.scss */
+  .product-details-slider-container {
+    padding: 0;
+  }
+
+  /* line 87, ../../sass/abstracts/responsive.scss */
+  .other-description .product-slider .designs .card {
+    margin-bottom: 0px;
+  }
+
+  /* line 92, ../../sass/abstracts/responsive.scss */
+  .quote-tab ul.nav-tabs li a {
+    padding: 15px 36px;
+  }
+}
+@media screen and (max-width: 1366px) {
+  /* line 98, ../../sass/abstracts/responsive.scss */
+  aside.left-panel {
+    width: 200px;
+  }
+
+  /* line 101, ../../sass/abstracts/responsive.scss */
+  .content {
+    margin-left: 200px;
+  }
+
+  /* line 104, ../../sass/abstracts/responsive.scss */
+  .sidebar-collapse {
+    padding: 36px 20px 30px 0px;
+  }
+
+  /* line 107, ../../sass/abstracts/responsive.scss */
+  #sidebar-menu-content {
+    margin-left: 216px;
+  }
+
+  /* line 110, ../../sass/abstracts/responsive.scss */
+  .navbar {
+    padding: 10px 15px;
+    position: fixed;
+    width: calc(100% - 200px);
+    z-index: 999;
+  }
+
+  /* line 116, ../../sass/abstracts/responsive.scss */
+  .btn-brand {
+    width: 165px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  /* line 121, ../../sass/abstracts/responsive.scss */
+  .sidebar-collapse ul li a {
+    font-size: 14px;
+  }
+
+  /* line 124, ../../sass/abstracts/responsive.scss */
+  #sidebar-menu-content {
+    margin-left: 186px;
+    padding-right: 0;
+  }
+
+  /* line 128, ../../sass/abstracts/responsive.scss */
+  .product-slider {
+    max-width: 866px;
+  }
+
+  /* line 131, ../../sass/abstracts/responsive.scss */
+  .file.file-style-2 {
+    padding: 10px 30px;
+    background: #EE761F;
+    color: #fff;
+  }
+
+  /* line 136, ../../sass/abstracts/responsive.scss */
+  #AddNewProduct .modal-body .add-new-product ul li a {
+    padding: 15px 45px;
+    font-size: 18px;
+  }
+
+  /* line 140, ../../sass/abstracts/responsive.scss */
+  .request-for-quote .designs .card {
+    flex-basis: calc(90.6% / 3);
+  }
+
+  /* line 143, ../../sass/abstracts/responsive.scss */
+  .modal-form {
+    max-width: 760px;
+  }
+
+  /* line 146, ../../sass/abstracts/responsive.scss */
+  .row-item {
+    padding: 20px;
+  }
+
+  /* line 149, ../../sass/abstracts/responsive.scss */
+  .nice-select {
+    line-height: 34px;
+  }
+
+  /* line 152, ../../sass/abstracts/responsive.scss */
+  table.measurement-table thead th:first-child {
+    width: 24%;
+  }
+}
+@media screen and (max-width: 1280px) {
+  /* line 157, ../../sass/abstracts/responsive.scss */
+  .product-slider {
+    max-width: 763px;
+  }
+
+  /* line 160, ../../sass/abstracts/responsive.scss */
+  .chat {
+    width: 60px;
+    height: 60px;
+    right: 22px;
+    bottom: 40px;
+    background-size: 50%;
+  }
+
+  /* line 167, ../../sass/abstracts/responsive.scss */
+  .other-description {
+    padding: 50px 32px 0 32px;
+  }
+
+  /* line 171, ../../sass/abstracts/responsive.scss */
+  .other-description .product-slider {
+    max-width: 96%;
+  }
+  /* line 173, ../../sass/abstracts/responsive.scss */
+  .other-description .product-slider .designs .card {
+    margin-bottom: 0px;
+  }
+}
+
+/*# sourceMappingURL=responsive.css.map */
