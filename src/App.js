@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import ReactGA from 'react-ga';
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
       </header>
     </div>
   );
+}
+
+function initializeReactGA() {
+    ReactGA.initialize('UA-168122648-1');
+    ReactGA.pageview('/dashboard');
+    ReactGA.pageview('/pick-design');
+    ReactGA.pageview('/my-rfqs');
+    ReactGA.pageview('/my-project');
 }
 
 export default App;
