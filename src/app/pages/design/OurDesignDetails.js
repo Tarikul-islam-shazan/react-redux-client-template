@@ -101,7 +101,7 @@ class OurDesignDetails extends Component {
               text={LOADER_TEXT}>
               <div className="product-details-slider-container">
                   <div className="row">
-                      <div className="col-lg-5">
+                      <div className="col-lg-7">
                           <div className="product-detail-gallery">
                               <div className="thumbnail-slider">
                                   <div className="inner">
@@ -129,7 +129,7 @@ class OurDesignDetails extends Component {
                           </div>
 
                       </div>
-                      <div className="col-lg-7">
+                      <div className="col-lg-5">
                           <div className="produt-details-description">
                               <div className="head-title">
                                   <h3>{product.name}</h3>
