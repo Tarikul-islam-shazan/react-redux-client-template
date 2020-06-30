@@ -162,7 +162,7 @@ class Dashboard extends Component {
           // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let { nitexDesignList } = this.state;
             // console.log("entered like",productListByNitex)
             nitexDesignList = nitexDesignList.map((item,i) => {
@@ -207,7 +207,7 @@ class Dashboard extends Component {
           // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let { nitexDesignList } = this.state;
             nitexDesignList = nitexDesignList.map((item,i) => {
               if(item.id == id){

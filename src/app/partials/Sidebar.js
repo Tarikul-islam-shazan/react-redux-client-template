@@ -157,14 +157,14 @@ class Sidebar extends Component {
                         title="My projects"
                         onClick={this.props.setActiveTab}
                       />
-                      {/*<NavLink
+                      <NavLink
                         to="/my-products"
                         classes={this.props.activeTab == '/my-products' ? 'active' : ''}
                         activeIcon={require("../assets/icons/my-prd-active.png")}
                         inactiveIcon={require("../assets/icons/tshirt.png")}
                         title="My products"
                         onClick={this.props.setActiveTab}
-                      />*/}
+                      />
                   </ul>
               </nav>
           </aside>

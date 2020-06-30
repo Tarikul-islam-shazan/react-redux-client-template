@@ -262,7 +262,7 @@ class PickDesign extends Component {
           // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let { designList } = this.state;
             designList = designList.map((item,i) => {
               if(item.id == id){
@@ -299,7 +299,7 @@ class PickDesign extends Component {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
           // localStorage.removeItem('token');
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let { designList } = this.state;
             designList = designList.map((item,i) => {
               if(item.id == id){

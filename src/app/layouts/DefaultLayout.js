@@ -183,14 +183,14 @@ class DefaultLayout extends Component {
                                       Profile
                                   </Link>
                                   <div className="dropdown-divider"></div>
-                                  <Link
+                                  {/*<Link
                                     className="dropdown-item"
                                     to="/my-products"
                                     >
                                       <img src={require("../assets/icons/product-icon-black.png")} style={{marginRight:5,marginTop: -2}} alt=""/>
                                       My products
                                   </Link>
-                                  <div className="dropdown-divider"></div>
+                                  <div className="dropdown-divider"></div>*/}
                                   <a className="dropdown-item" href="/logout">
                                       <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                       Logout
