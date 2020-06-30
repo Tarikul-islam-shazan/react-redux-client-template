@@ -34,16 +34,26 @@ class OurDesignDetails extends Component {
       this.setState({
         loading : true
       })
+      let selectedImage = '';
+      let flag = 1;
 
       await Http.GET('getProductDetails',id)
         .then(({data}) => {
           console.log('getProductDetails SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
+            data.documentResponseList.map((doc,i) => {
+              if(doc.docType=='PRODUCT_DESIGN' && flag){
+                flag = 0;
+                selectedImage = doc.docUrl;
+              }
+              if(data.documentResponseList.length==i+1 && flag){
+                  selectedImage = data.documentResponseList[0].docUrl;
+              }
+            })
             this.setState({
               loading:false,
               product : data,
-              selectedImage : data.documentResponseList.length ? data.documentResponseList[0].docUrl : ''
+              selectedImage
             })
           }else{
             this.setState({loading:false})

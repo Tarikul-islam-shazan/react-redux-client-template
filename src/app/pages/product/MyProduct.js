@@ -185,7 +185,7 @@ class MyProduct extends Component {
           // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let productList = this.state.productList.map((item,i) => {
               if(item.id == id){
                 item.liked = true;
@@ -217,7 +217,7 @@ class MyProduct extends Component {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
           this.setState({loading:false})
           if(data.success){
-            toastSuccess(data.message);
+            // toastSuccess(data.message);
             let productList = this.state.productList.map((item,i) => {
               if(item.id == id){
                 item.liked = false;
