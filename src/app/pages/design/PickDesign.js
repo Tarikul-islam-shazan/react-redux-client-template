@@ -262,11 +262,7 @@ class PickDesign extends Component {
           // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
-<<<<<<< HEAD
-            toastSuccess(data.message);
-=======
             // toastSuccess(data.message);
->>>>>>> dtmweb
             let { designList } = this.state;
             designList = designList.map((item,i) => {
               if(item.id == id){
