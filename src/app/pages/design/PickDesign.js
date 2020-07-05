@@ -36,7 +36,7 @@ class PickDesign extends Component {
         };
     }
 
-    handleScroll = () => {
+    handleScroll = async() => {
       const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
       const body = document.body;
       const html = document.documentElement;
@@ -46,7 +46,7 @@ class PickDesign extends Component {
         let { hasNext, page, loading, designList, size } = this.state
         console.log("message",'bottom reached',hasNext, page, loading)
         if(hasNext && !loading && designList.length){
-          let data = this.renderList(page+1)
+          let data = await this.renderList(page+1)
           if(data.length>0){
             this.setState({
               designList : [ ...designList, ...data ],
