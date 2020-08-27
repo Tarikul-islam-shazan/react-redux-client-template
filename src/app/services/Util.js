@@ -478,7 +478,7 @@ const deliverableStatus = (item) => {
       break;
     case 'INITIALIZED':
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Initialized</span>
+        <span className="badge table-badge" style={{backgroundColor: '#E7E9EF', color: '#3E4148'}}>Initialized</span>
       )
       break;
     case 'COMPLETED':
@@ -535,9 +535,25 @@ const _getKey = () => {
     return Math.floor((Math.random() * 10000000)) + Math.floor((Math.random() * 10000000));
 }
 
+const getToken = () => {
+  let token = '';
+  let rememberMe = localStorage.getItem('rememberMe');
+  console.log("getToken rememberMe", rememberMe)
+  if (parseInt(rememberMe) === 1) {
+    token = localStorage.getItem('token');
+    console.log("getToken rememberMe 1", token)
+  } else {
+    token = sessionStorage.getItem('token');
+    console.log("getToken rememberMe else", token)
+  }
+  // return '';
+  return token;
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
-    encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey
+    encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
+    getToken
 };

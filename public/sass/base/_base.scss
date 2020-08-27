@@ -307,11 +307,17 @@ input.type {
     padding: 20px 30px;
     border-radius: 40px;
     height: 60px;
+    margin-top: 25px;
 }
 .date-picker{
     padding-right: 30px !important;
     background: url(./images/icons/calendar_start.png) no-repeat;
     background-position: calc(100% - 14px) 17px;
+}
+.mail{
+    padding-right: 30px !important;
+    background: url(./images/icons/mail.png) no-repeat;
+    background-position: calc(100% - 14px) 14px;
 }
 .btn {
     font-size: 16px; 
@@ -540,7 +546,7 @@ table.manage-project-table{
             border-bottom: 2px solid #FCFDFF !important;
             font-size: 18px;
             color: #6A7181;
-            padding: 16px 45px !important;
+            padding: 16px 26px !important;
             &:first-child{
                 border-radius: 5px 0 0 5px;
             }
@@ -562,7 +568,7 @@ table.manage-project-table{
                 background: #fff;
                 border-top: 1px solid #F1F2F6;
                 border-bottom: 1px solid #F1F2F6;
-                padding: 16px 45px;
+                padding: 16px 26px;
                 &:first-child{
                     border-radius: 5px 0 0 5px;
                     border-left: 1px solid #F1F2F6;
@@ -768,4 +774,14 @@ table.payment-checkout {
         padding: 6px 20px;
     }
 }
- 
+
+h4.details-title {
+    font-size: 24px;
+    text-align: center;
+    background: #F2F4F8;
+    padding: 15px;
+    border: 1px solid #C2C5CC;
+    border-radius: 3px;
+    line-height: 25px;
+    color: #21242B;
+}

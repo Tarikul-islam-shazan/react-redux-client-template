@@ -39,7 +39,9 @@ class MyRFQs extends Component {
           messages : [],
           message : '',
           userInfo : {},
-          ids : []
+          ids : [],
+          hasNextMessage: true,
+          pageMessage: 0
         };
     }
 
@@ -81,6 +83,25 @@ class MyRFQs extends Component {
       }
     }
 
+    onScrollToEndMessages = () => {
+      const wrappedElement = document.getElementById('messageList');
+      if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
+        console.log('bottom reached');
+        let { hasNextMessage, pageMessage, selectedProduct } = this.state;
+        let { loading } = this.state;
+        console.log("message",'bottom reached',hasNextMessage, pageMessage, loading)
+        if(hasNextMessage && !loading){
+          // toastWarning("No more notification found.")
+          this.loadMessages(selectedProduct, pageMessage + 1, true)
+        }else{
+          if(!hasNextMessage){
+            // toastWarning("No more rfq's found.")
+          }
+        }
+
+      }
+    }
+
     renderList = ( page = 0 , merge = true ) => {
       this.setState({loading:true})
       let { size, rfqList, search, filterBy, sort, filterById } = this.state;
@@ -97,7 +118,6 @@ class MyRFQs extends Component {
       Http.GET('getRfqList',params)
         .then(({data}) => {
           console.log('rfq LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.length>0){
             if(page==0){
               this.getRfqDetails(data[0].id)
@@ -145,7 +165,6 @@ class MyRFQs extends Component {
       Http.GET('getRfqDetails',id)
         .then(({data}) => {
           console.log('rfq DTAILS SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false,showNegotiation:false})
           if(data.success == false){
             toastWarning("RFQ Details - no data found.");
@@ -172,27 +191,48 @@ class MyRFQs extends Component {
           selectedProduct : id,
           selectedProductName : name
         })
-        this.loadMessages(id)
+        this.loadMessages(id, 0, false)
       }
     }
 
-    loadMessages = (id) => {
+    loadMessages = (id, page = 0, merge = true) => {
       this.setState({loading:true})
+      let size = 10;
+      let { messages, hasNextMessage, pageMessage } = this.state;
       let params = {
-        page : 0,
-        limit : 100
+        page,
+        size,
+        sort: 'datePosted,desc',
       }
       Http.GET_WITH_ID_PARAM('getRfqNegotiationMessages',params,id)
         .then(({data}) => {
           console.log('getRfqNegotiationMessages SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length){
-            this.setState({
-              messages : data
-            })
+            if(merge){
+              console.log("entered hasNext merge")
+              this.setState({
+                messages : [ ...messages, ...data ],
+                pageMessage : page,
+                hasNextMessage : data.length == size ? true : false,
+                loading:false
+              })
+            }else{
+              console.log("entered hasNext unmerge")
+              this.setState({
+                messages : data,
+                pageMessage : page,
+                hasNextMessage : data.length == size ? true : false,
+                loading:false
+              })
+            }
           }else{
-            toastWarning("Negotiation Messages - no data found.");
+            this.setState({
+              messages : merge ? messages : [],
+              hasNextMessage: false,
+              loading:false
+            })
+            // toastWarning("Negotiation Messages - no data found.");
           }
           // loadjs(['/js/script.js','/js/custom.js']);
         })
@@ -221,14 +261,13 @@ class MyRFQs extends Component {
         await Http.POST('sendRfqNegotiationMessage',{message},selectedRfq + '/' + selectedProduct)
           .then(({data}) => {
             console.log('COMMENT POST SUCCESS: ', data);
-            // localStorage.removeItem('token');
             if(data.success){
               this.setState({
                 loading:false,
                 message : ''
               })
               toastSuccess(data.message);
-              this.loadMessages(selectedProduct)
+              this.loadMessages(selectedProduct, 0, false)
             }else{
               this.setState({
                 loading:false
@@ -240,7 +279,7 @@ class MyRFQs extends Component {
               console.log('COMMENT ERROR: ', JSON.stringify(response));
               this.setState({loading:false})
               console.log("response",response)
-              if(response.data && response.data.message){
+              if(response && response.data && response.data.message){
                 toastError(response.data.message);
               }else{
                 toastError("Something went wrong! Please try again.");
@@ -271,7 +310,6 @@ class MyRFQs extends Component {
       await Http.POST('updateProductStatus',{status:'APPROVED'},id)
         .then(({data}) => {
           console.log('updateProductStatus POST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.success){
             this.setState({
               loading:false,
@@ -303,13 +341,17 @@ class MyRFQs extends Component {
     }
 
     render() {
-        let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById } = this.state;
+        let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext } = this.state;
         // console.log("rfqList",rfqList)
-        if(!rfqList.length){
+        if(!hasNext && !rfqList.length){
           return(
-            <section className="collapse-side-menu-container">
-              No data found...
-            </section>
+            <div className="not-found">
+                <h1 className="msg">There is no quote request from you</h1>
+                <button className="btn btn-nitex-default" onClick={() => this.props.history.push('/quote-request')}>Start now</button>
+                <div className="illustration">
+                    <img src={require("../../assets/images/not-found.png")} alt=""/>
+                </div>
+            </div>
           )
         }
         return (
@@ -340,7 +382,7 @@ class MyRFQs extends Component {
               spinner
               text={LOADER_TEXT}>
               <section className="collapse-side-menu-container">
-                      <nav id="sidebarCollapse" className="sidebar-collapse client-respons"  onScroll={this.onScrollToEnd}>
+                      <nav id="sidebarCollapse" className="sidebar-collapse client-respons" onScroll={this.onScrollToEnd}>
                              <div>
                               <div className="form-group quote-filter">
                                   <select name="sort" value={sort} onClick={(e) => this.onChange(e,true)}>
@@ -411,7 +453,7 @@ class MyRFQs extends Component {
                                               </td>
                                               <td>{'#'+i+1}</td>
                                               <td><a href="" onClick={() => this.goToProductDetails(item.id)}>{item.name ? item.name : 'N/A'}</a></td>
-                                              <td>{item.status=='PRICE_GIVEN' ? item.quotedPrice : 'N/A'}</td>
+                                              <td>{item.quotedPrice ? item.quotedPrice : 'N/A'}</td>
                                               <td>{rfqProductStatus(item)}</td>
                                               <td>
 
@@ -448,21 +490,24 @@ class MyRFQs extends Component {
                             {
                               <div className="form-row">
                                   <div className="col-md-12 text-right">
-                                      <button className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" disabled={!ids.length}>Start project</button>
+                                      <button className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.props._storeData('fromRfq', true)} disabled={!ids.length}>Start project</button>
                                   </div>
                               </div>
                             }
                         </div> :
-                        <div id="sidebar-menu-content" className="quotation-container">
+                        <div className="quotation-container">
                             <div className="back-header">
                                 <a href="#" className="back" onClick={()=>this.toggleNegotiation(0)}>Back</a>
                                 <h3>{selectedProductName}</h3>
                             </div>
-                            <div className="messenger">
+                            <input type="text" className="type" style={{marginBottom: 20}} name="message" value={message} onChange={(e) => this.onChange(e)} onKeyPress={this.keyPressed} placeholder="Type a message here..."/>
+
+                            <div className="messenger" id="messageList" onScroll={this.onScrollToEndMessages}>
                               {
+                                messages.length ?
                                 messages.map((item,i)=>{
                                   return(
-                                    <div className={item.postedBy.id==userInfo.id ? 'incoming' : 'outgoing'} key={i}>
+                                    <div className={item.postedBy.id==userInfo.id ? 'incoming' : 'outgoing'} key={item.id}>
                                         <img src={item.postedBy.imageUrl ? item.postedBy.imageUrl : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png' } alt=""/>
                                         <div className="msg" style={{width:'100%'}}>
                                             <p>{item.text}</p>
@@ -470,9 +515,9 @@ class MyRFQs extends Component {
                                         </div>
                                     </div>
                                   )
-                                })
+                                }) :
+                                <p style={{textAlign: 'center', color: '#7E8597', fontSize: 12,paddingTop: 30}}>No messages found </p>
                               }
-                                <input type="text" className="type" name="message" value={message} onChange={(e) => this.onChange(e)} onKeyPress={this.keyPressed} placeholder="Type a message here..."/>
                             </div>
                         </div>
                       }

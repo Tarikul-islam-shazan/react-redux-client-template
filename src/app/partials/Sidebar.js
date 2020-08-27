@@ -15,13 +15,14 @@ import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toas
 
 class Sidebar extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         activeTab: window.location.pathname,
-    //         parentTab: ''
-    //     };
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            // activeTab: window.location.pathname,
+            // parentTab: ''
+            permissions: []
+        };
+    }
 
     // componentDidUpdate = (prevProps,PrevState) =>{
     //   if(prevProps.activeTab!=this.props.activeTab){
@@ -49,6 +50,9 @@ class Sidebar extends Component {
         if(userInfo){
           userInfo = JSON.parse(userInfo);
         }
+        this.setState({
+          permissions: userInfo.permissions ? userInfo.permissions : []
+        })
         // console.log("sidebar notification",token,userInfo)
       	let headers = {
       		"jwt":token
@@ -108,6 +112,7 @@ class Sidebar extends Component {
       // if(this.state.activeTab=='/pick-design'){
         // return <></>
       // }
+      let { permissions } = this.state;
       return (
           <aside className="left-panel" id="side-menu">
               <div className="logo">
@@ -117,54 +122,78 @@ class Sidebar extends Component {
               </div>
               <nav className="navigation">
                   <ul className="list-unstyled">
-                      <NavLink
-                        to="/dashboard"
-                        classes={this.props.activeTab == '/dashboard' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/dashboard_active.png")}
-                        inactiveIcon={require("../assets/icons/dashboard.png")}
-                        title="Dashboard"
-                        onClick={this.props.setActiveTab}
-                      />
-                      <NavLink
-                        to="/pick-design"
-                        classes={this.props.activeTab == '/pick-design' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/pick-design-active.png")}
-                        inactiveIcon={require("../assets/icons/drafting_compas.png")}
-                        title="Select designs"
-                        onClick={this.props.setActiveTab}
-                      />
-                      <NavLink
-                        to="/quote-request"
-                        classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/document.png")}
-                        inactiveIcon={require("../assets/icons/document1.png")}
-                        title="Ask for quote"
-                        onClick={this.props.setActiveTab}
-                      />
-                      <NavLink
-                        to="/my-rfqs"
-                        classes={this.props.activeTab == '/my-rfqs' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/my-rfq-active.png")}
-                        inactiveIcon={require("../assets/icons/rfq.png")}
-                        title="My quotes"
-                        onClick={this.props.setActiveTab}
-                      />
-                      <NavLink
-                        to="/my-project"
-                        classes={this.props.activeTab == '/my-project' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/my-project-active.png")}
-                        inactiveIcon={require("../assets/icons/my-project.png")}
-                        title="My projects"
-                        onClick={this.props.setActiveTab}
-                      />
-                      <NavLink
-                        to="/my-products"
-                        classes={this.props.activeTab == '/my-products' ? 'active' : ''}
-                        activeIcon={require("../assets/icons/my-prd-active.png")}
-                        inactiveIcon={require("../assets/icons/tshirt.png")}
-                        title="My products"
-                        onClick={this.props.setActiveTab}
-                      />
+                      {
+                        permissions.includes('DASHBOARD_GET_DASHBOARD') ?
+                        <NavLink
+                          to="/dashboard"
+                          classes={this.props.activeTab == '/dashboard' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/dashboard_active.png")}
+                          inactiveIcon={require("../assets/icons/dashboard.png")}
+                          title="Dashboard"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      {
+                        permissions.includes('PRODUCT_FOR_PICK_DESIGN') ?
+                        <NavLink
+                          to="/pick-design"
+                          classes={this.props.activeTab == '/pick-design' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/pick-design-active.png")}
+                          inactiveIcon={require("../assets/icons/drafting_compas.png")}
+                          title="Select designs"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      {
+                        permissions.includes('RFQ_ADD') ?
+                        <NavLink
+                          to="/quote-request"
+                          classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/document.png")}
+                          inactiveIcon={require("../assets/icons/document1.png")}
+                          title="Ask for quote"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      {
+                        permissions.includes('RFQ_MY_RFQ') ?
+                        <NavLink
+                          to="/my-rfqs"
+                          classes={this.props.activeTab == '/my-rfqs' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/my-rfq-active.png")}
+                          inactiveIcon={require("../assets/icons/rfq.png")}
+                          title="My quotes"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      {
+                        permissions.includes('PROJECT_MY_PROJECT') ?
+                        <NavLink
+                          to="/my-project"
+                          classes={this.props.activeTab == '/my-project' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/my-project-active.png")}
+                          inactiveIcon={require("../assets/icons/my-project.png")}
+                          title="My projects"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      {
+                        permissions.includes('PRODUCT_MY_PRODUCT') ?
+                        <NavLink
+                          to="/my-products"
+                          classes={this.props.activeTab == '/my-products' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/my-prd-active.png")}
+                          inactiveIcon={require("../assets/icons/tshirt.png")}
+                          title="My products"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
                   </ul>
               </nav>
           </aside>

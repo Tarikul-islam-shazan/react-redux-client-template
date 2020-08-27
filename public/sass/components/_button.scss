@@ -38,3 +38,43 @@
 .lock img{
   width: 20px;
 }
+
+.input-group{
+  input{
+    border-radius:  5px 0  0 5px !important;
+  }
+  .input-group-btn {
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    button{
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding: 4px;
+      .social-url{
+        display: block;
+        width: 45px;
+        height: 100%;
+        &.linkedin{
+          background: url(./images/icons/linkedin-url.png) no-repeat center;
+        }
+        &.facebook{
+          background: url(./images/icons/facebook-url.png) no-repeat center;
+        }
+        &.twitter{
+          background: url(./images/icons/twitter-url.png) no-repeat center;
+        }
+      }
+    }
+  }
+}
+.sidebar-action {
+  margin-bottom: 100px;
+  button {
+    width: 115px !important;
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+}
+

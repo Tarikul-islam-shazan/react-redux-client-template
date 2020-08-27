@@ -4,6 +4,12 @@
     }
 }
 @media screen and (max-width:1440px) {
+    .messenger {
+        max-height: 500px;
+    }
+    .quotation-container {
+        padding: 0px 10px 0px 30px !important;
+    }
     .dashboard-container {
         padding-top: 88px;
     }
@@ -264,6 +270,7 @@
     }
     .back {
         font-size: 16px;
+        flex-basis: 100px;
     }
     .messenger {
         img {
@@ -281,7 +288,7 @@
     }
     input.type {
         height: 50px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
     .project-profile {
         margin: 0;
@@ -561,9 +568,7 @@
         width: 146px;
         margin-top: 7px;
     }
-    .manage-product .card {
-        flex-basis: calc(90.7% / 4);
-    }
+
 
     table.manage-project-table {
         thead {
@@ -716,11 +721,9 @@
             }
         }
     }
-}
-@media screen and (max-width:1366px){
-    .date-range {
-        flex-direction: column;
-        align-items: self-start;
+    .sidebar-action button {
+        width: 85px !important;
+        height: 40px !important;
     }
     .filter, .tag-n-deadline {
         flex-basis: 26%;
@@ -728,6 +731,17 @@
     .timeline {
         flex-basis: 45%;
     }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        width: 320px !important;
+    }
+}
+@media screen and (max-width:1366px){
+
+    .date-range {
+        flex-direction: column;
+        align-items: self-start;
+    }
+
     .date-range span {
         margin: 10px;
     }
@@ -741,7 +755,7 @@
         margin-left: 200px;
     }
     .sidebar-collapse {
-        padding: 36px 20px 30px 0px;
+        padding: 36px 20px 150px 0px;
         .form-group{
             .nice-select{
                 font-size: 14px;
@@ -845,10 +859,14 @@
         line-height: 24px;
         .span, a{
             display: block;
+            padding: 0;
         }
     }
 }
 @media screen and (max-width:1280px){
+    .add-invoice.edit-product {
+        max-width: 832px;
+    }
     .client-respons .client-list .list .client-info .info {
         width: 115px;
         h6{
@@ -863,7 +881,7 @@
         top: 13px;
     }
     .manage-product .card {
-        flex-basis: calc(89.4% / 4);
+        flex-basis: calc(91.4% / 3);
         margin: 10px;
     }
     .manage-product .card .card-body h5 {
@@ -899,6 +917,13 @@
 
 }
 @media screen and (max-width:1024px){
+    .quotation-container {
+        margin: 20px 0 0 0 !important;
+        padding: 0 !important;
+    }
+    .profile .profile-tab ul {
+        max-width: 100%;
+    }
     .successful {
         padding: 20px;
     }
@@ -1045,6 +1070,9 @@
     .sidebar-collapse .form-group .nice-select {
         margin: 10px 0 0 10px;
     }
+    .sidebar-collapse.admin-sidebar .form-group .nice-select {
+        margin: 0;
+    }
     //My Project
     .modal-dialog.modal-xl {
         max-width: calc(100% - 20px);
@@ -1189,7 +1217,15 @@
         margin-bottom: 20px;
     }
 }
+
 @media screen and (max-width:767px) {
+    a.link-invoice {
+        width: 300px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
     //user profile
     .profile {
         padding: 0;
@@ -1306,7 +1342,7 @@
     .datepicker.dropdown-menu{
         width: auto;
     }
-    ul.navbar-nav li:nth-child(3) {
+    ul.navbar-nav li.notification-bell {
         margin: 1px 15px 10px !important
     }
     ul.navbar-nav li:nth-child(2) img{
@@ -1470,7 +1506,7 @@
     }
     .editor .footer-tab {
         button.send-feed{
-            margin-top: 15px;
+            margin-top: 0;
             bottom: 0;
         }
     }
@@ -1616,5 +1652,42 @@
 
     .uploaded-img .item .card .card-body {
         padding: 10px !important;
+    }
+
+
+    //Admin Panel
+    table.manage-project-table {
+        display: block;
+        overflow: auto;
+    }
+    .add-invoice .btn-brand {
+        margin-top: -3rem!important;
+    }
+    .guide {
+        flex-direction: column;
+        ul{
+            margin-top: 15px;
+            li{
+                font-size: 14px;
+            }
+        }
+    }
+    .manage-product .card {
+        flex-basis: 100%;
+        margin: 10px;
+    }
+    .invoice-width {
+        width: 700px;
+        overflow-x: auto;
+    }
+}
+@media screen and (max-width:320px) {
+    ul.navbar-nav li.notification-bell {
+        margin: 0 !important;
+        position: absolute;
+        right: 87px;
+    }
+    .notification {
+        width: 320px;
     }
 }

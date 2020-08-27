@@ -94,7 +94,6 @@ class PostWithFeedback extends Component {
     await Http.POST('sendFeedback',body)
       .then(({data}) => {
         console.log('COMMENT POST SUCCESS: ', data);
-        // localStorage.removeItem('token');
         if(data.success){
           this.setState({
             loading:false,

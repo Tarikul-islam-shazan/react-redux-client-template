@@ -14,6 +14,7 @@
     //initilizing
     SideBar.prototype.init = function() {
         //on toggle side menu bar
+        console.log("clicked on sidebar toggle init")
         var $this = this;
         $(document).on('click', '.navbar-toggle', function () {
             $this.$sideBar.toggleClass('collapsed');
@@ -21,6 +22,7 @@
 
         //on menu item clicking
         this.$navbarItem.click(function () {
+            console.log("clicked on sidebar toggle")
             if ($this.$sideBar.hasClass('collapsed') == false || $(window).width() < 768) {
                 $("aside.left-panel nav.navigation > ul > li > ul").slideUp(300);
                 $("aside.left-panel nav.navigation > ul > li").removeClass('active');

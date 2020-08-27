@@ -169,7 +169,6 @@ class MyProfile extends Component {
         Http.POST('updateProPic',data)
           .then(({data}) => {
             console.log('updateProPic POST SUCCESS: ', data);
-            // localStorage.removeItem('token');
             if(data.success){
               this.setState({
                 loading:false
@@ -227,7 +226,6 @@ class MyProfile extends Component {
       await Http.POST('updateProfile',body)
         .then(({data}) => {
           console.log('updateProfile POST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.success){
             this.setState({
               loading:false

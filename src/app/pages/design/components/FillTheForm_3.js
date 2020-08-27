@@ -37,7 +37,6 @@ class FillTheForm_2 extends Component {
         accessoriesList.length == 0 && await Http.GET('getAccessoriesList',this.props.product.productType)
           .then(({data}) => {
             console.log('getAccessoriesList SUCCESS: ', data);
-            // localStorage.removeItem('token');
             this.setState({
               loading:false
             })
@@ -62,7 +61,6 @@ class FillTheForm_2 extends Component {
         measurementChart.length == 0 && await Http.GET('getSizeTableData',this.props.product.productType)
           .then(({data}) => {
             console.log('getSizeTableData SUCCESS: ', data);
-            // localStorage.removeItem('token');
             this.setState({
               loading:false
             })
@@ -269,7 +267,6 @@ class FillTheForm_2 extends Component {
       Http.POST('addProduct',body)
         .then(({data}) => {
           console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);

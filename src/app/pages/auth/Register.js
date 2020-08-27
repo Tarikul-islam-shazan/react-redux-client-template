@@ -63,11 +63,8 @@ class Register extends Component {
                 // Http.POST('login',body)
                 //   .then(({data}) => {
                 //     console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-                //     // localStorage.removeItem('token');
                 //     this.setState({loading:false})
                 //     if(data.accessToken){
-                //       localStorage.setItem('token',data.tokenType+' '+data.accessToken);
-                //       localStorage.setItem('email',email);
                 //       this.props.history.push('/questionairre-step-1');
                 //     }else{
                 //       this.props.history.push('/login');
@@ -199,13 +196,13 @@ class Register extends Component {
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
-                      Signup with google
+                      Signup with Google
                   </a>
                   <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin_white.png') } alt="linkedin"/>
                       </span>
-                      Signup with linkedin
+                      Signup with Linkedin
                   </a>
               </div>
               <form className="registration-form">

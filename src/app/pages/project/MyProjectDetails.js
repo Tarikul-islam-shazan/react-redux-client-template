@@ -12,6 +12,7 @@ import ProjectUpdate from './components/ProjectUpdateComponent';
 
 import PaymentList from './components/PaymentList';
 import GivePayment from './components/GivePayment';
+import ViewInvoice from './components/ViewInvoice';
 import Comments from './components/Comments';
 import { ProjectStatus } from './components/ProjectStatus';
 
@@ -77,7 +78,6 @@ class MyProjectDetails extends Component {
       await Http.GET('getProjectDetails',id)
         .then(({data}) => {
           console.log('PROJECT DETAILS SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             let result = data;
             if(result.productResponseList){
@@ -127,7 +127,6 @@ class MyProjectDetails extends Component {
       await Http.GET('getProjectProductDetails',selectedProductId)
         .then(({data}) => {
           console.log('PROJECT PRODUCT DETAILS SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               loading:false,
@@ -166,6 +165,8 @@ class MyProjectDetails extends Component {
         return (<PaymentList switchTab={this.changePaymentTab} projectId={this.props.match.params.id} />)
       }else if(this.state.paymentTab==1){
         return (<GivePayment switchTab={this.changePaymentTab} invoiceId={this.state.selectedInvoice} setModal={this.setModal} />)
+      } else if (this.state.paymentTab==3) {
+        return (<ViewInvoice switchTab={this.changePaymentTab} invoiceId={this.state.selectedInvoice} projectId={this.props.match.params.id} />)
       }
     }
 
