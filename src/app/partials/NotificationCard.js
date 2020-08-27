@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export const NotificationCard = ({item}) =>{
+export const NotificationCard = ({item, markRead}) =>{
 
 
 
   return(
     <li>
-        <a href={generateUrl(item)} className={item.isSeen ? 'active' : ''}>
+        <a href="#" onClick={() => markRead(item.id, item.isSeen, generateUrl(item))} className={!item.isSeen ? 'active' : ''}>
             <div className="notify-list">
                 {loadIcon(item)}
                 <div className="info">
@@ -33,6 +33,7 @@ const generateUrl = (item) => {
   if(
     item.notificationEvent == 'NEW_RFQ_ADDED' ||
     item.notificationEvent == 'RFQ_STATUS_UPDATED' ||
+    item.notificationEvent == 'RFQ_EXECUTIVE_ADDED' ||
     item.notificationEvent == 'RFQ_PRODUCT_MESSAGE'
   ){
     return "/my-rfqs?rfqId=" + item.rfqId;
@@ -47,17 +48,19 @@ const generateUrl = (item) => {
   }else if(
     item.notificationEvent == 'NEW_PROJECT_ADDED' ||
     item.notificationEvent == 'PROJECT_STATUS_UPDATED' ||
+    item.notificationEvent == 'PROJECT_MEMBER_ADDED' ||
     item.notificationEvent == 'PROJECT_ALERT'
   ){
     if(item.projectId){
       return "/my-project-details/" + item.projectId;
     }else{
-      return "/my-project" + item.projectId;
+      return "/my-project";
     }
   }else if(
     item.notificationEvent == 'MEMBER_MENTIONED_AT_POST' ||
     item.notificationEvent == 'DELIVERABLE_STATUS_UPDATED' ||
     item.notificationEvent == 'DELIVERABLE_ALERT' ||
+    item.notificationEvent == 'DELIVERABLE_MESSAGE' ||
     item.notificationEvent == 'NEW_POST_ON_PROJECT' ||
     item.notificationEvent == 'PROJECT_STATUS_UPDATED'
   ){

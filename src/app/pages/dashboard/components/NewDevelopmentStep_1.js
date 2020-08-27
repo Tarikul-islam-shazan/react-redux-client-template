@@ -79,7 +79,6 @@ class NewDevelopmentStep_1 extends Component {
       await Http.GET('getColorType')
         .then(({data}) => {
           console.log('COLOR LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             this.setState({
@@ -109,7 +108,6 @@ class NewDevelopmentStep_1 extends Component {
       Http.GET('getPickDesign',params)
         .then(({data}) => {
           console.log('nitexDesignList SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             if(merge){
@@ -150,7 +148,6 @@ class NewDevelopmentStep_1 extends Component {
       Http.GET('getProductList',params)
         .then(({data}) => {
           console.log('myDesignList SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             if(merge){
@@ -600,7 +597,12 @@ class NewDevelopmentStep_1 extends Component {
                                                                                   <Image selected={item.nitexDesignList == image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('nitex',i,image.id)} />
                                                                                 )
                                                                               }) :
-                                                                              <p>No design list found.</p>
+                                                                              <div className="not-found">
+                                                                                  <h1 className="msg">Oops, no designs found here</h1>
+                                                                                  <div className="illustration">
+                                                                                      <img src={require("../../../assets/images/not-found.png")} alt=""/>
+                                                                                  </div>
+                                                                              </div>
                                                                             }
                                                                           </div>
                                                                         </div>
@@ -614,7 +616,12 @@ class NewDevelopmentStep_1 extends Component {
                                                                                 <Image selected={item.myDesignList==image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('my',i,image.id)} />
                                                                               )
                                                                             }) :
-                                                                            <p>No design list found.</p>
+                                                                            <div className="not-found">
+                                                                                <h1 className="msg">Oops, no designs found here</h1>
+                                                                                <div className="illustration">
+                                                                                    <img src={require("../../../assets/images/not-found.png")} alt=""/>
+                                                                                </div>
+                                                                            </div>
                                                                           }
                                                                         </div>
                                                                       </div>

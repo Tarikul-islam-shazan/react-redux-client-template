@@ -107,6 +107,7 @@ class StartProject extends Component {
           // deliveryDate : deadline,
           paymentTerms,
           notes : note,
+          fromRfq : this.props.fromRfq,
           productDTOList : this.props.ids.map((item,index) => {
             return({
               productCreationType : 'FROM_CATALOG',
@@ -242,7 +243,8 @@ class StartProject extends Component {
 
 const mapStateToProps = store => {
   return {
-    ids : store.product.choosenIdsForQuick
+    ids : store.product.choosenIdsForQuick,
+    fromRfq: store.product.fromRfq
 	};
 };
 

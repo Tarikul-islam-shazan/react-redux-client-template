@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import loadjs from 'loadjs';
 
 import { setActiveTab } from '../../actions/sidebar';
 
@@ -62,10 +63,14 @@ class Dashboard extends Component {
     }
 
     componentDidMount = () => {
+      let { location } = this.props;
+      if (location && location.state && location.state.from) {
+        console.log("prev route", location.state.from)
+          loadjs(['/js/burger-menu.js']);
+      }
       this.props.setActiveTab('/dashboard');
       window.addEventListener("scroll", this.handleScroll);
       this.fetchDashboardData();
-      // this.renderList(0);
       this.fetchList(0)
     }
 
@@ -84,7 +89,6 @@ class Dashboard extends Component {
       await Http.GET('getDashboardDesignList',params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           // this.setState({loading:false})
           if(data.length){
               this.setState({
@@ -125,7 +129,6 @@ class Dashboard extends Component {
       await Http.GET('getDashboardData')
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data){
               this.setState({
@@ -159,7 +162,6 @@ class Dashboard extends Component {
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
@@ -179,8 +181,6 @@ class Dashboard extends Component {
           }else{
             toastError(data.message);
           }
-          // localStorage.setItem('loginID', loginID);
-          // localStorage.setItem('accountID', JSON.stringify(data.accountID));
           // this.setState({
           //     redirectTo: '/app/home'
           // });
@@ -204,7 +204,6 @@ class Dashboard extends Component {
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
@@ -222,8 +221,6 @@ class Dashboard extends Component {
           }else{
             toastError(data.message);
           }
-          // localStorage.setItem('loginID', loginID);
-          // localStorage.setItem('accountID', JSON.stringify(data.accountID));
           // this.setState({
           //     redirectTo: '/app/home'
           // });
@@ -358,7 +355,18 @@ class Dashboard extends Component {
                         })
                       }
                   </div>
-                  {!this.state.hasNext && this.state.page!=0 ? <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>No data found</p> : <></>}
+                  {!this.state.hasNext && nitexDesignList.length ? <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p> : <></>}
+                  {
+                    !this.state.hasNext && !nitexDesignList.length ?
+                    <div className="not-found">
+                        <h1 className="msg">Oops, no designs found here</h1>
+                        <div className="illustration">
+                            <img src={require("../../assets/images/not-found.png")} alt=""/>
+                        </div>
+                    </div>
+                    :
+                    <></>
+                  }
               </section>
           </LoadingOverlay>
         );

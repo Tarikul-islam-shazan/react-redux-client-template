@@ -134,7 +134,7 @@ class DefaultLayout extends Component {
                               </a>
                           </li>
 
-                          <li className="nav-item dropdown no-arrow mx-1 ml-2">
+                          <li className="nav-item notification-bell dropdown no-arrow mx-1 ml-2">
                               <button className="btn btn-outline-default nav-link" type="button" id="dropdownNotification" onClick={this.show}>
                                   <img src={require("../assets/icons/notification-bell.png")} alt="notification"/>
                                   {
@@ -183,15 +183,14 @@ class DefaultLayout extends Component {
                                       Profile
                                   </Link>
                                   <div className="dropdown-divider"></div>
-            {/*
-                                  <Link
+                                  {/*<Link
                                     className="dropdown-item"
                                     to="/my-products"
                                     >
                                       <img src={require("../assets/icons/product-icon-black.png")} style={{marginRight:5,marginTop: -2}} alt=""/>
                                       My products
                                   </Link>
-            */}
+                                  <div className="dropdown-divider"></div>*/}
                                   <a className="dropdown-item" href="/logout">
                                       <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                       Logout

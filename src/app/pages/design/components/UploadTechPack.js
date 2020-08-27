@@ -36,7 +36,6 @@ class UploadTechPack extends Component {
       await Http.GET('getColorType')
         .then(({data}) => {
           console.log('getColorType SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             this.setState({
@@ -208,7 +207,6 @@ class UploadTechPack extends Component {
         Http.POST('addProduct',body)
           .then(({data}) => {
             console.log('addProduct SUCCESS: ', JSON.stringify(data));
-            // localStorage.removeItem('token');
             this.setState({loading:false})
             if(data.success){
               toastSuccess(data.message);

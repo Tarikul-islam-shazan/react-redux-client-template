@@ -51,7 +51,6 @@ class FitSampleEdit extends Component {
         await Http.POST('sendDeliverableMessages',{message:comment},id)
           .then(({data}) => {
             console.log('COMMENT POST SUCCESS: ', data);
-            // localStorage.removeItem('token');
             if(data.success){
               this.setState({
                 loading:false,
@@ -82,7 +81,6 @@ class FitSampleEdit extends Component {
       await Http.GET('getDeliverableMessages',param)
         .then(({data}) => {
           console.log('COMMENT SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               loading:false,
@@ -122,7 +120,6 @@ class FitSampleEdit extends Component {
       await Http.POST('updateDeliverables',body,this.state.id)
         .then(({data}) => {
           console.log('updateDeliverables SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.success){
             toastSuccess(data.message);
             this.setState({
@@ -154,13 +151,11 @@ class FitSampleEdit extends Component {
                                 <label>Status</label>
                                 <select name="status" onClick={this.onChange}>
                                     <option value="">Select</option>
-                                    <option value="INITIALIZED">INITIALIZED</option>
-                                    <option value="SUBMITTED">SUBMITTED</option>
-                                    <option value="SUBMIT">SUBMIT</option>
-                                    <option value="REJECTED">REJECTED</option>
-                                    <option value="RE_SUBMIT">RE SUBMIT</option>
-                                    <option value="RUNNING">RUNNING</option>
-                                    <option value="APPROVED">APPROVED</option>
+                                    {
+                                      this.props.statusList.map((item, i) => {
+                                        return <option key={i} value={item}>{item}</option>
+                                      })
+                                    }
                                 </select>
                             </div>
                             <div>

@@ -16,7 +16,7 @@ const AuthLayout = ({children, ...rest}) => {
                   </div>
                   <div className="col-lg-7 col-sm-12 col-md-12" style={{padding:0}}>
                       <div className="content-wrapper content-wrapper-override">
-                          <a href="https://nitex.info" className="back-link back-link-override">
+                          <a href="https://nitex.com" className="back-link back-link-override">
                               <span>
                                   <img src={ require('../assets/icons/home.png') } alt="back"/>
                               </span> Back to Home</a>

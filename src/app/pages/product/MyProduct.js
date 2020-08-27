@@ -86,7 +86,6 @@ class MyProduct extends Component {
       Http.GET('getProductList',paramData+filterByText)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           // this.setState({loading:false})
           if(data.length>0){
             if(merge){
@@ -182,7 +181,6 @@ class MyProduct extends Component {
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
@@ -355,8 +353,20 @@ class MyProduct extends Component {
 
                                   </div>
                                   {
-                                    !this.state.hasNext && this.state.page!=0 ?
-                                    <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>No data found</p>
+                                    !this.state.hasNext && productList.length ?
+                                    <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p>
+                                    :
+                                    <></>
+                                  }
+                                  {
+                                    !this.state.hasNext && !productList.length ?
+                                    <div className="not-found">
+                                        <h1 className="msg">You don't have any products yet</h1>
+                                        <button className="btn btn-nitex-default" data-toggle="modal" data-target="#AddNewProduct">Add now</button>
+                                        <div className="illustration">
+                                            <img src={require("../../assets/images/not-found.png")} alt=""/>
+                                        </div>
+                                    </div>
                                     :
                                     <></>
                                   }

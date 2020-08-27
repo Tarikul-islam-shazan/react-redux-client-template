@@ -47,7 +47,6 @@ class ForgetPassword extends Component {
           Http.POST('forgetPassword',body)
             .then(({data}) => {
               console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-              // localStorage.removeItem('token');
               this.setState({loading:false})
               if(data.success){
                 toastSuccess(data.message);
@@ -58,8 +57,6 @@ class ForgetPassword extends Component {
               }else{
                 toastError(data.message);
               }
-              // localStorage.setItem('loginID', loginID);
-              // localStorage.setItem('accountID', JSON.stringify(data.accountID));
               // this.setState({
               //     redirectTo: '/app/home'
               // });

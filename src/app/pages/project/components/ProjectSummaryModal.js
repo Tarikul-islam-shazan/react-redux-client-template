@@ -88,7 +88,7 @@ class ProjectSummaryModal extends Component {
                     {
                       item2.showEdit ?
                       <div ref={this.setWrapperRef}>
-                        <FitSampleEdit deliverableId={item2.id} deliverableText={item2.deliverableText} />
+                        <FitSampleEdit deliverableId={item2.id} statusList={data.availableDeliverableStatusList ? data.availableDeliverableStatusList : []} deliverableText={item2.deliverableText} />
                       </div>
                       : <></>
                     }

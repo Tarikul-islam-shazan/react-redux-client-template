@@ -65,7 +65,7 @@ class ProjectUpdateComponent extends Component {
           this.fetchPosts(this.props.projectId,page+1,true)
         }else{
           if(!hasNext){
-            toastWarning("No more data found.")
+            // toastWarning("No more data found.")
           }
         }
       }
@@ -134,7 +134,6 @@ class ProjectUpdateComponent extends Component {
       await Http.GET_WITH_ID_PARAM('getPostsForProject',paramData+filterByProductIdText,projectId)
         .then(({data}) => {
           console.log('getPostsForProject SUCCESS calling: ', data);
-          // localStorage.removeItem('token');
           if(data.length){
             if(merge){
               this.setState({
@@ -208,7 +207,6 @@ class ProjectUpdateComponent extends Component {
       await Http.POST('sendPost',body)
         .then(({data}) => {
           console.log('COMMENT POST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.success){
             this.setState({
               loading:false,
@@ -240,7 +238,6 @@ class ProjectUpdateComponent extends Component {
       await Http.GET('getDeliverableMessages',id)
         .then(({data}) => {
           console.log('COMMENT SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               loading:false,
@@ -280,7 +277,6 @@ class ProjectUpdateComponent extends Component {
       await Http.GET('getMostTaggedTopics',projectId)
         .then(({data}) => {
           console.log('getMostTaggedTopics SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               taggedTopics : data
@@ -297,7 +293,6 @@ class ProjectUpdateComponent extends Component {
       await Http.GET('getUpcomingDeadlines',projectId)
         .then(({data}) => {
           console.log('upcomingDeadlines SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               upcomingDeadlines : data
@@ -316,7 +311,6 @@ class ProjectUpdateComponent extends Component {
       await Http.GET('getProjectProductDetails',productId)
         .then(({data}) => {
           console.log('getProjectProductDetails SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               productDetails : data

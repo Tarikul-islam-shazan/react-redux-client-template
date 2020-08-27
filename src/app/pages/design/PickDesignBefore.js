@@ -195,7 +195,6 @@ class PickDesign extends Component {
       await Http.GET('getPickDesign',params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             // if(merge){
@@ -293,7 +292,6 @@ class PickDesign extends Component {
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);
@@ -355,7 +353,6 @@ class PickDesign extends Component {
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           if(data.success){
             toastSuccess(data.message);
             let { designList, popular, trending, nitexSuggestion } = this.state;

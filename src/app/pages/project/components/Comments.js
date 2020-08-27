@@ -49,7 +49,6 @@ class Comments extends Component {
         await Http.POST('sendDeliverableMessages',{message:comment},id)
           .then(({data}) => {
             console.log('COMMENT POST SUCCESS: ', data);
-            // localStorage.removeItem('token');
             if(data.success){
               this.setState({
                 loading:false,
@@ -80,7 +79,6 @@ class Comments extends Component {
       await Http.GET('getDeliverableMessages',param)
         .then(({data}) => {
           console.log('COMMENT SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data){
             this.setState({
               loading:false,

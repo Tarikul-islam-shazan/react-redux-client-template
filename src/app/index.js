@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import DefaultLayout from './layouts/DefaultLayout';
 import AuthLayout from './layouts/AuthLayout';
 
-import  {isTokenExpired} from "./services/Util";
+import  { isTokenExpired, getToken } from "./services/Util";
 
 import Login from './pages/auth/Login';
 import Logout from './pages/auth/Logout';
@@ -60,9 +60,9 @@ import RfoNegotiation from './pages/rfo/RfoNegotiation';
 // };
 
 const AuthRoute = ({component: Component, ...rest}) => {
-    // localStorage.removeItem('token');
-    const token = localStorage.getItem('token');
-    console.log("token",token);
+    // const token = localStorage.getItem('token');
+    let token = getToken()
+    console.log("token AuthRoute",token);
     return token==null ? (
         <Route { ...rest } render={ matchProps => (
             <AuthLayout>
@@ -73,9 +73,9 @@ const AuthRoute = ({component: Component, ...rest}) => {
 };
 
 const AuthRouteWithoutLayout = ({component: Component, ...rest}) => {
-    // localStorage.removeItem('token');
-    const token = localStorage.getItem('token');
-    console.log("token",token);
+    const token = getToken();
+    // const token = localStorage.getItem('token');
+    // console.log("token",token);
     return token==null ? (
         <Route { ...rest } render={ matchProps => (
             <Component { ...matchProps } />
@@ -84,7 +84,7 @@ const AuthRouteWithoutLayout = ({component: Component, ...rest}) => {
 };
 
 const PublicRoute = ({component: Component, ...rest}) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     return token ? (
         <Route { ...rest } render={ matchProps => (
             <DefaultLayout>
@@ -95,7 +95,8 @@ const PublicRoute = ({component: Component, ...rest}) => {
 };
 
 const QuestionairreRoute = ({component: Component, ...rest}) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
+    // const token = localStorage.getItem('token');
     return token ? (
         <Route { ...rest } render={ matchProps => (
             <Component { ...matchProps } />

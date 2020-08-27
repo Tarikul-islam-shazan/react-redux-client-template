@@ -12,7 +12,33 @@
   cursor: pointer;
 }
 
-
+.guide {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .bar {
+    display: flex;
+    align-items: flex-start;
+    span {
+      line-height: 13px;
+      margin-left: 15px;
+    }
+  }
+  .progress {
+    width: 300px;
+    height: 10px;
+    .progress-bar{
+      background-color: #f47920;
+      height: 10px;
+    }
+  }
+  ul {
+    li{
+      list-style: none;
+      font-size: 14px;
+    }
+  }
+}
 
 
 .request-for-quote {
@@ -940,7 +966,7 @@ ol {
   margin-left: -20px;
   padding: 0;
   width: 100%;
-  max-width: 21%;
+  max-width: 400px;
   .client-list{
     &:last-child{
       margin-bottom: 55px;
@@ -1154,6 +1180,8 @@ ol {
 .messenger{
   position: relative;
   padding: 15px;
+  max-height: 600px;
+  overflow: auto;
   > div{
     margin-bottom: 30px;
   }
@@ -1236,11 +1264,14 @@ ol {
 .tab-head{
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   h3{
     font-size: 24px;
     color: #21242B;
     font-weight: bold;
+  }
+  .add-new{
+    margin: 0;
   }
 }
 // Profile
@@ -1664,7 +1695,7 @@ h6.style-overview{
   align-items: flex-start;
 }
 .filter{
-  flex-basis: 25%;
+  flex-basis: 20%;
   background: #fff;
   .production{
     overflow: hidden;
@@ -1716,7 +1747,7 @@ h6.style-overview{
   }
 }
 .tag-n-deadline{
-  flex-basis: 25%;
+  flex-basis: 20%;
   .production{
     overflow: hidden;
     margin: 0 0 30px 0;
@@ -1752,14 +1783,15 @@ h6.style-overview{
       border: 0;
       margin-bottom: 0;
     }
-    &:first-child{
-      flex-basis: 118px;
+    a{
+      flex-basis: 110px;
+      padding: 0 10px;
     }
 
   }
 }
 .timeline {
-  flex-basis: 50%;
+  flex-basis: 55%;
   margin: 0 30px;
 }
 .editor {
@@ -2010,6 +2042,7 @@ button.deliverable-deadline {
             background: #F6F7F8;
             border-radius: 30px;
             margin-left: 20px;
+            max-width: 550px;
             h4{
               font-size: 18px;
               font-weight: bold;
@@ -2056,7 +2089,7 @@ button.deliverable-deadline {
   flex-wrap: wrap;
   padding-bottom: 32px;
   .card{
-    flex-basis: calc(93.4% / 4);
+    flex-basis: calc(25% - 20px);
     margin: 10px;
     .card-body{
       h5{
@@ -2069,16 +2102,19 @@ button.deliverable-deadline {
   position: absolute;
   top: 10px;
   right: 8px;
-  .user-ok, .dlt{
+  .user-ok, .dlt, .edt{
     @include  square(20px);
     display: inline-block;
     cursor: pointer;
   }
   .user-ok{
-    background: url("./images/icons/user-ok.png") no-repeat center;
+    background: url("./images/icons/user-ok.png") #fff no-repeat center;
   }
   .dlt{
-    background: url("./images/icons/dlt.png") no-repeat center;
+    background: url("./images/icons/dlt.png") #fff no-repeat center;
+  }
+  .edt{
+    background: url("./images/icons/edit.png") #fff no-repeat center;
   }
 }
 .pending-project {
@@ -2390,10 +2426,20 @@ button.deliverable-deadline {
 
 .not-found {
   text-align: center;
+  h1{
+    text-transform: capitalize;
+    font-size: 35px;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+  button{
+    margin: 30px 0 70px 0;
+  }
   .illustration{
     display: block;
+    margin-top: 35px;
     img {
-      max-width: 500px;
+      max-width: 350px;
       clear: both;
       display: inline-block;
       text-align: center;
@@ -2405,6 +2451,8 @@ button.deliverable-deadline {
 .sidebar-collapse .quote-filter {
   .nice-select{
     width: auto;
+    background: #fcfdff;
+    border-radius: 0;
     .list{
       margin: 0;
       width: auto;
