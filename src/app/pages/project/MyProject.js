@@ -121,10 +121,12 @@ class MyProject extends Component {
     }
 
     onChange = async(e) => {
-      this.setState({
-        [e.target.name] : e.target.value
+      let name = e.target.name;
+      let value = e.target.value;
+      await this.setState({
+        [name] : value
       })
-      if(e.target.name=='search'){
+      if(name === 'search'){
         return;
       }
       this.renderList(0,false);
@@ -286,8 +288,20 @@ class MyProject extends Component {
                               }) : <></>
                             }
                             {
-                              !this.state.hasNext && this.state.page!=0 ?
-                              <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>No data found</p>
+                              !this.state.hasNext && projectList.length ?
+                              <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No more data...' */}</p>
+                              :
+                              <></>
+                            }
+                            {
+                              !this.state.hasNext && !projectList.length ?
+                              <div className="not-found">
+                                  <h1 className="msg">You don't have any projects yet</h1>
+                                  <button className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Start now</button>
+                                  <div className="illustration">
+                                      <img src={require("../../assets/images/not-found.png")} alt=""/>
+                                  </div>
+                              </div>
                               :
                               <></>
                             }

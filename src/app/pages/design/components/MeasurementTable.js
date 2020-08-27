@@ -33,31 +33,33 @@ export class MeasurementTable extends React.Component {
   render() {
     let { data , headers } = this.state;
     return(
-      <table className="table table-bordered table-striped table-responsive measurement-chart measurement-table">
-          <thead>
-          <tr>
-              <th>Size</th>
+      <div className="table-responsive">
+          <table className="table table-bordered table-striped table-responsive measurement-chart measurement-table">
+              <thead>
+              <tr>
+                  <th>Size</th>
+                  {
+                    headers
+                  }
+                  {/*<th>TOL. +/-</th>*/}
+              </tr>
+              </thead>
+              <tbody>
               {
-                headers
+                data.map((item,i) => {
+                  return(
+                    <tr key={i}>
+                      <td>{item.code}</td>
+                      {renderFromObject(item.measurement)}
+                      {/*<td>{item.amount}</td>*/}
+                    </tr>
+                  )
+                })
               }
-              {/*<th>TOL. +/-</th>*/}
-          </tr>
-          </thead>
-          <tbody>
-          {
-            data.map((item,i) => {
-              return(
-                <tr key={i}>
-                  <td>{item.code}</td>
-                  {renderFromObject(item.measurement)}
-                  {/*<td>{item.amount}</td>*/}
-                </tr>
-              )
-            })
-          }
 
-          </tbody>
-      </table>
+              </tbody>
+          </table>
+      </div>
     );
   }
 }

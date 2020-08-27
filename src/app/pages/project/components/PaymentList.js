@@ -39,7 +39,6 @@ class PaymentList extends Component {
       await Http.GET('getProjectInvoice',id)
         .then(({data}) => {
           console.log('getProjectInvoice SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.length){
             this.setState({
               loading:false,
@@ -74,6 +73,10 @@ class PaymentList extends Component {
       console.log("url",url)
       window.open(url);
 
+    }
+
+    viewInvoice = async(invoiceId) => {
+      this.props.switchTab(3, invoiceId)
     }
 
     render() {
@@ -111,10 +114,10 @@ class PaymentList extends Component {
                     <input type="search" placeholder="Search...."/>
                 </div>*/}
             </div>
-            <table className="table table-striped mt-4 table-responsive  project-profile-table">
+            <table className="table table-striped mt-4   project-profile-table">
                 <thead>
                     <tr>
-                        <th style={{width: '20%'}}>Document Name</th>
+                        <th style={{width: '20%'}}>Invoice Id</th>
                         <th style={{width: '25%'}}>Total Amount</th>
                         <th style={{width: '25%'}}>Due Amount</th>
                         <th style={{width: '10%'}}></th>
@@ -127,13 +130,14 @@ class PaymentList extends Component {
                   invoices.map((item,i) => {
                     return(
                       <tr key={i}>
-                          <td>{item.name}</td>
+                          <td>{`#${item.id}`}</td>
                           <td>{`$${item.amount}`}</td>
                           <td>{item.dueAmount ? `$${item.dueAmount}` : ''}</td>
                           {/*<td><a href="" className="edit">Edit</a></td>
                           <td><a href="" className="download">Download</a></td>*/}
                           <td>{renderPaymentStatus(item)}</td>
-                          <td><a href="#" className="pil invoice" onClick={() => this.downloadInvoice(item.invoiceUrl)}>Invoice</a></td>
+                          {/*<td><a href="#" className="pil invoice" onClick={() => this.downloadInvoice(item.invoiceUrl)}>Invoice</a></td>*/}
+                          <td><a href="#" className="pil invoice" onClick={() => this.viewInvoice(item.id)}>View</a></td>
                           <td><a href="#" className="pil payment" onClick={()=>this.props.switchTab(1,item.id)}>Payment</a></td>
                       </tr>
                     )

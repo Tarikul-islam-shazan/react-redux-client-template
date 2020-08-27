@@ -146,7 +146,7 @@ class Notification extends Component {
       return Object.keys(notifications).map((key, index) => {
         let vals = notifications[keys[index]].map((item,i) => {
           return(
-            <NotificationCard key={item.id} item={item} />
+            <NotificationCard key={item.id} item={item} markRead={this.markRead} />
           )
         })
         // let title = today == keys[index] ? 'Today' :
@@ -159,6 +159,35 @@ class Notification extends Component {
           </div>
         )
       })
+    }
+
+    markRead = async(id, isSeen, url) => {
+      await this.setState({
+        loading: true
+      })
+      if (isSeen) {
+        window.location.href = url;
+      } else {
+        await Http.POST('markNotificationRead', {}, id)
+          .then(({data}) => {
+            console.log('markNotificationRead SUCCESS: ', data);
+            this.setState({
+              loading : false
+            })
+            window.location.href = url;
+          })
+          .catch(({response}) => {
+              this.setState({
+                loading : false
+              })
+              if(response && response.data && response.data.message){
+                toastError(response.data.message);
+              }else{
+                toastError("Something went wrong! Please try again.");
+              }
+          });
+      }
+
     }
 
     render() {

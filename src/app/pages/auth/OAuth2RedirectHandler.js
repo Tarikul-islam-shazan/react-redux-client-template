@@ -13,6 +13,7 @@ class OAuth2RedirectHandler extends Component {
     };
 
     saveToken = async(token) => {
+      localStorage.setItem('rememberMe', 1);
       localStorage.setItem('token', 'Bearer '+token);
       let userInfo = {};
       await Http.GET('userInfo')

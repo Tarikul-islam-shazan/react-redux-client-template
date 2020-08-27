@@ -39,7 +39,6 @@ class FillTheForm_1 extends Component {
       await Http.GET('getProductTypeWithGroup')
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           let arr = [];
           if(data.length>0){
@@ -92,7 +91,6 @@ class FillTheForm_1 extends Component {
       await Http.GET('getColorType')
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             this.setState({

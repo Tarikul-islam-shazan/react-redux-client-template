@@ -33,7 +33,7 @@ class Login extends Component {
         this.state = {
           email:'',
           password:'',
-          rememberMe:'0',
+          rememberMe:true,
           emailError:'',
           passwordError:'',
           loading:false,
@@ -42,8 +42,11 @@ class Login extends Component {
         };
     }
 
-    componentDidMount = () => {
-        // console.log("GOOGLE_AUTH_URL",GOOGLE_AUTH_URL)
+    componentDidMount = async() => {
+        let { rememberMe } = this.state;
+        if (rememberMe) {
+          await localStorage.setItem('rememberMe', rememberMe ? 1 : 0);
+        }
     }
 
     login = async() => {
@@ -51,7 +54,8 @@ class Login extends Component {
       const { emailError,
         passwordError,
         email,
-        password
+        password,
+        rememberMe
         // captchaResponse
       } = this.state;
       if(!emailError && !passwordError){
@@ -66,18 +70,26 @@ class Login extends Component {
           Http.POST('login',body)
             .then(({data}) => {
               console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-              // localStorage.removeItem('token');
               this.setState({loading:false})
               if(data.accessToken){
-                localStorage.setItem('token',data.tokenType+' '+data.accessToken);
+                if (rememberMe) {
+                  console.log("entered localStorage", rememberMe)
+                  localStorage.setItem('token',data.tokenType+' '+data.accessToken);
+                } else {
+                  // console.log("entered sessionStorage", localStorage.getItem('rememberMe'))
+                  sessionStorage.setItem('token',data.tokenType+' '+data.accessToken);
+                }
                 localStorage.setItem('email',email);
                 toastSuccess("Successfully Logged In.");
                 Http.GET('userInfo')
                   .then(({data}) => {
                     console.log('userInfo SUCCESS: ', JSON.stringify(data));
-                      localStorage.setItem('userInfo',JSON.stringify(data));
+                    localStorage.setItem('userInfo',JSON.stringify(data));
                       if(data.businessInfoGiven){
-                        this.props.history.push('/dashboard');
+                        this.props.history.push({
+                          pathname: '/dashboard',
+                          state: { from: 'login' }
+                        });
                       }else{
                         this.props.history.push('/questionairre-step-1');
                       }
@@ -97,8 +109,6 @@ class Login extends Component {
                 //   captchaResponse : ''
                 // })
               }
-              // localStorage.setItem('loginID', loginID);
-              // localStorage.setItem('accountID', JSON.stringify(data.accountID));
               // this.setState({
               //     redirectTo: '/app/home'
               // });
@@ -139,6 +149,14 @@ class Login extends Component {
       this.setState({
         [e.target.name]:e.target.value,
         [err.name]:err.value
+      })
+    }
+
+    onChangeRemember = (e) => {
+      console.log("checked", e.target.checked);
+      localStorage.setItem('rememberMe', e.target.checked ? 1 : 2);
+      this.setState({
+        rememberMe: e.target.checked
       })
     }
 
@@ -188,13 +206,13 @@ class Login extends Component {
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
-                      Login with google
+                      Login with Google
                   </a>
                   <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin_white.png') } alt="linkedin"/>
                       </span>
-                      Login with linkedin
+                      Login with Linkedin
                   </a>
               </div>
               <form className="registration-form" autoComplete="off">
@@ -244,14 +262,14 @@ class Login extends Component {
                   <div className="form-group">
                       <div className="row justify-content-between">
                           <div className="col-auto">
-                              {/*<div className="form-group">
+                              <div className="form-group">
                                   <div className="custom-control custom-checkbox">
-                                      <input className="custom-control-input" name="rememberMe" value="1" type="checkbox" id="gridCheck"/>
+                                      <input className="custom-control-input" name="rememberMe" onChange={this.onChangeRemember} type="checkbox" id="gridCheck" checked={this.state.rememberMe}/>
                                       <label className="custom-control-label" htmlFor="gridCheck">
                                           Remember me
                                       </label>
                                   </div>
-                              </div>*/}
+                              </div>
                           </div>
                           <div className="col-auto">
                               <Link to="/forget-password" style={{color: 'inherit'}}>Forgot password?</Link>

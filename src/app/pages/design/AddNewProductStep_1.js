@@ -36,7 +36,6 @@ class AddNewProductStep_1 extends Component {
       await Http.GET('getColorType')
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             this.setState({

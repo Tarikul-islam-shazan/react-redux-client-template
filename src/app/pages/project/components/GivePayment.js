@@ -45,7 +45,6 @@ class GivePayment extends Component {
       await Http.POST('payForInvoice',body)
         .then(({data}) => {
           console.log('COMMENT POST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           if(data.success){
             toastSuccess(data.message);
             window.location.reload();

@@ -83,7 +83,10 @@ class PickDesign extends Component {
       window.addEventListener("scroll", this.handleScroll);
       await this.setCategories()
       let designList = await this.renderList();
-      this.setState({designList})
+      this.setState({
+        designList,
+        hasNext: designList.length === this.state.size ? true : false
+      })
     }
 
     setCategories = () => {
@@ -161,7 +164,6 @@ class PickDesign extends Component {
       await Http.GET('getPickDesign',params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.length>0){
             // if(merge){
@@ -194,12 +196,15 @@ class PickDesign extends Component {
       // let designList = [];
       this.setState({
         [e.target.name] : e.target.value,
-        page : 0
+        page : 0,
+        hasNext : true,
+        productTypeId : ''
         // size : 100
       },async(name)=>{
         let designList = await this.renderList();
         await this.setState({
-          designList
+          designList,
+          hasNext: designList.length === this.state.size ? true : false
         })
       })
       if(e.target.name=='search'){
@@ -223,13 +228,15 @@ class PickDesign extends Component {
 
     _search = async() => {
       this.setState({
-        page : 0
+        page : 0,
+        hasNext : true,
+        productTypeId : ''
         // size : 100
       })
       let designList = await this.renderList();
       await this.setState({
-        designList
-        // loading : false
+        designList,
+        hasNext : designList.length === this.state.size ? true : false
       })
     }
 
@@ -238,12 +245,14 @@ class PickDesign extends Component {
       await this.setState({
         productTypeId,
         page : 0,
+        hasNext : true,
         // size : 100,
         search : ''
       })
       let designList = await this.renderList();
       await this.setState({
-        designList
+        designList,
+        hasNext : designList.length === this.state.size ? true : false
       })
     }
 
@@ -259,7 +268,6 @@ class PickDesign extends Component {
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
@@ -297,7 +305,6 @@ class PickDesign extends Component {
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
-          // localStorage.removeItem('token');
           if(data.success){
             // toastSuccess(data.message);
             let { designList } = this.state;
@@ -423,6 +430,17 @@ class PickDesign extends Component {
                               })
                             }
                         </div>
+                        {
+                          !this.state.hasNext && !designList.length ?
+                          <div className="not-found">
+                              <h1 className="msg">No product designs found</h1>
+                              <div className="illustration">
+                                  <img src={require("../../assets/images/not-found.png")} alt=""/>
+                              </div>
+                          </div>
+                          :
+                          <></>
+                        }
                     </div>
                 </section>
             </LoadingOverlay>

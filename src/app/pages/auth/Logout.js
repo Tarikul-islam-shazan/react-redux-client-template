@@ -18,9 +18,11 @@ class Login extends Component {
 
     componentDidMount = () => {
       setTimeout(() => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('userInfo');
-          localStorage.removeItem('email');
+          // localStorage.removeItem('token');
+          // localStorage.removeItem('userInfo');
+          // localStorage.removeItem('email');
+          localStorage.clear();
+          sessionStorage.clear()
           delete axios.defaults.headers.common['Authorization'];
           this.props.history.push('/login');
       }, 1000);

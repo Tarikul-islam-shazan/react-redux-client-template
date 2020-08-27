@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API, HTTP_STATUS, BASE_URL } from '../constant';
 import store from '../store';
 import { REDIRECT_TO } from '../actions/types';
+import  { getToken } from "./Util";
 
 const {fs, central_auth} = API();
 const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
@@ -55,12 +56,14 @@ const routes = {
     authLinkedin: `${BASE_URL}/oauth2/authorize/linkedin`,
     getProjectInvoice: `${BASE_URL}/invoice/project/`,
     payForInvoice: `${BASE_URL}/invoice/pay`,
-    getNotifications: `${BASE_URL}/notification/all`
+    getInvoiceDetails: `${BASE_URL}/invoice/`,
+    getNotifications: `${BASE_URL}/notification/all`,
+    markNotificationRead: `${BASE_URL}/notification/mark-seen/`
 };
 
 // Axios request interceptor
 axios.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     // console.log("token",token)
     config.headers.Authorization =  token ? token : '';
     // console.log("config from request",config)
@@ -76,7 +79,8 @@ axios.interceptors.response.use((response) => {
 }, (error) => {
     if (HTTP_STATUS['Unauthorized'] === error.response.status && localStorage.getItem('token')) {
         setTimeout(() => {
-            localStorage.removeItem('token');
+            // localStorage.removeItem('token');
+            localStorage.clear();
             delete axios.defaults.headers.common['Authorization'];
             // store.dispatch({
             //     type: REDIRECT_TO,
