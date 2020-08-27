@@ -156,7 +156,7 @@ class Register extends Component {
     }
 
     showTC = () => {
-      window.open("https://nitex.info/terms-and-conditions", "_blank")
+      window.open("https://nitex.com/terms-and-conditions", "_blank")
     }
 
     render() {

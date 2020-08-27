@@ -61,9 +61,8 @@ const API = () => {
     return url;
 };
 
-// export const BASE_URL = "http://nitex-env.eba-bj9qc7tu.eu-central-1.elasticbeanstalk.com";
-export const BASE_URL = "http://api.nitex.info"; //Live
-
+// export const BASE_URL = "http://nitex-env.eba-bj9qc7tu.eu-central-1.elasticbeanstalk.com"; // test
+export const BASE_URL = "https://api.nitex.com"; //Live
 // export const BASE_URL_2 = "http://bb43c5f2.ngrok.io";
 
 export const OAUTH2_REDIRECT_URI = window.location.origin+'/oauth2/redirect'
