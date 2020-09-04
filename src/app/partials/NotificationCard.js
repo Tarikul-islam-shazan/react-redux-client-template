@@ -67,14 +67,15 @@ const generateUrl = (item) => {
     if(item.projectId && item.postId){
       return "/my-project-details/" + item.projectId + '?tab=2&postId='+item.postId;
     }
-    else if(
-        item.notificationEvent == 'INVOICE_PAYMENT_ADDED' ||
-        item.notificationEvent == 'NEW_INVOICE_ADDED'
-    ){
-      return "/my-project-details/" + item.projectId + "?tab=3";
-    }else{
+    else{
       return "/my-project";
     }
+  }
+  else if(
+      item.notificationEvent == 'INVOICE_PAYMENT_ADDED' ||
+      item.notificationEvent == 'NEW_INVOICE_ADDED'
+  ){
+    return "/my-project-details/" + item.projectId + '?tab=3';
   }
 }
 
