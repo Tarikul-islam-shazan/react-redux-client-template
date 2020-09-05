@@ -61,7 +61,7 @@ const API = () => {
     return url;
 };
 
-export const BASE_URL = "http://testapi.nitex.com"; // test
+export const BASE_URL = "https://testapi.nitex.com"; // test
 // export const BASE_URL = "https://api.nitex.com"; //Live
 // export const BASE_URL_2 = "http://bb43c5f2.ngrok.io";
 
