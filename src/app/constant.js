@@ -89,16 +89,16 @@ export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
 function getBaseUrl(){
     const hostName = window.location.toString();
 
-    if( hostName.indexOf( "test.nitex.com" ) > -1  ){
+    if( hostName.indexOf( "https://test.nitex.com" ) > -1  ){
         return "https://testapi.nitex.com";
     }
-    else if( hostName.indexOf( "testadmin.nitex.com" ) > -1  ){
+    else if( hostName.indexOf( "https://testadmin.nitex.com" ) > -1  ){
         return "https://testapi.nitex.com";
     }
-    else if( hostName.indexOf( "app.nitex.com" ) > -1 ){
+    else if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
         return "https://api.nitex.com";
     }
-    else if( hostName.indexOf( "admin.nitex.com" ) > -1 ){
+    else if( hostName.indexOf( "https://admin.nitex.com" ) > -1 ){
         return "https://api.nitex.com";
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
