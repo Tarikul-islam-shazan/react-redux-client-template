@@ -91,14 +91,20 @@ function getBaseUrl(){
 
     console.log( hostName );
 
-    if( hostName.indexOf( "localhost" ) > -1 ){
+    if( hostName.indexOf( "app.nitex.com" ) > -1 ){
+        return "https://api.nitex.com";
+    }
+    else if( hostName.indexOf( "admin.nitex.com" ) > -1 ){
+        return "https://api.nitex.com";
+    }
+    else if( hostName.indexOf( "localhost" ) > -1 ){
         return "https://localhost:8080";
     }
     else if( hostName.indexOf( "test.nitex.com" ) > -1  ){
         return "https://testapi.nitex.com";
     }
-    else if( hostName.indexOf( "app.nitex.com" ) > -1 ){
-        return "https://api.nitex.com";
+    else if( hostName.indexOf( "testadmin.nitex.com" ) > -1  ){
+        return "https://testapi.nitex.com";
     }
     else{
         return "https://testapi.nitex.com";
