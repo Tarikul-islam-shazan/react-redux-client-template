@@ -61,9 +61,10 @@ const API = () => {
     return url;
 };
 
-export const BASE_URL = "https://testapi.nitex.com"; // test
-// export const BASE_URL = "https://api.nitex.com"; //Live
-// export const BASE_URL_2 = "http://bb43c5f2.ngrok.io";
+//export const BASE_URL = "http://nitex-env.eba-bj9qc7tu.eu-central-1.elasticbeanstalk.com"; // test
+//export const BASE_URL = "https://api.nitex.com"; //Live
+//export const BASE_URL_2 = "http://bb43c5f2.ngrok.io";
+export const BASE_URL = getBaseUrl(); //"http://localhost:8080"; //Live
 
 export const OAUTH2_REDIRECT_URI = window.location.origin+'/oauth2/redirect'
 
@@ -84,3 +85,28 @@ export const LOADER_MARGIN_LEFT = 0;
 
 
 export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
+
+function getBaseUrl(){
+    const hostName = window.location.toString();
+
+    console.log( hostName );
+
+    if( hostName.indexOf( "app.nitex.com" ) > -1 ){
+        return "https://api.nitex.com";
+    }
+    else if( hostName.indexOf( "admin.nitex.com" ) > -1 ){
+        return "https://api.nitex.com";
+    }
+    else if( hostName.indexOf( "localhost" ) > -1 ){
+        return "http://localhost:8080";
+    }
+    else if( hostName.indexOf( "test.nitex.com" ) > -1  ){
+        return "https://testapi.nitex.com";
+    }
+    else if( hostName.indexOf( "testadmin.nitex.com" ) > -1  ){
+        return "https://testapi.nitex.com";
+    }
+    else{
+        return "https://testapi.nitex.com";
+    }
+}
