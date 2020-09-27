@@ -98,7 +98,7 @@ function getBaseUrl(){
         return "https://api.nitex.com";
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
-        return "https://localhost:8080";
+        return "http://localhost:8080";
     }
     else if( hostName.indexOf( "test.nitex.com" ) > -1  ){
         return "https://testapi.nitex.com";
