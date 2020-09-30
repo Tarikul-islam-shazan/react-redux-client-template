@@ -1,9 +1,6 @@
 /* Font */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 /* Square Size */
-p{
-  font-family: 'Open Sans', sans-serif !important;
-}
 .nice-select {
   -webkit-tap-highlight-color: transparent;
   background-color: #fff;
@@ -1189,8 +1186,5 @@ ol.order-list {
       font-size: 36px;
       color: #452D8F;
       max-width: 500px; }
-      .notification .day ul li a .notify-list .info .name
-      {
-        text-transform: initial;
-      }
+
 /*# sourceMappingURL=main.css.map */

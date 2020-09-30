@@ -36,15 +36,10 @@ class Register extends Component {
           captchaResponse : '',
           captchaError : ''
         };
-        // this._handleKeyPress = this._handleKeyPress.bind(this);
     }
 
     componentDidMount = async() => {
-      // for (let x in this.refs) {
-      //   this.refs[x].onkeypress = (e) => 
-      //     this._handleKeyPress(e, this.refs[x]);
-      // }
-      // this.refs.email.focus();
+
     }
 
     register = () => {
@@ -163,23 +158,7 @@ class Register extends Component {
     showTC = () => {
       window.open("https://nitex.com/terms-and-conditions", "_blank")
     }
-    
-    // _handleKeyPress(e, field) {
-    //   // If enter key is pressed, focus next input field.
-    //   if (e.keyCode === 13) {
-    //     e.preventDefault();
-    //     let next = this.refs[field.email].nextSibling;
-    //     if (next && next.tagName === "INPUT") {
-    //       this.refs[field.email].nextSibling.focus();
-    //     }
-    //   }
-    // }
 
-    handleKeyPress = (event) => {
-      if(event.key === 'Enter'){
-        this.register();
-      }
-    }
     render() {
         return (
             <LoadingOverlay
@@ -234,11 +213,8 @@ class Register extends Component {
                           label="Email"
                           type="email"
                           name="email"
-                          ref="email"
                           value={this.state.email}
                           onChange={this.onChange}
-                          onKeyPress={this.handleKeyPress}
-                         
                           endAdornment= {
                               <InputAdornment position="end">
                                   <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width: 18}}/>
@@ -262,9 +238,7 @@ class Register extends Component {
                                     type='password'
                                     value={this.state.password}
                                     onChange={this.onChange}
-                                    onKeyPress={this.handleKeyPress}
                                     name="password"
-                                    ref="password"
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
@@ -287,8 +261,6 @@ class Register extends Component {
                                     value={this.state.passwordRe}
                                     onChange={this.onChange}
                                     name="passwordRe"
-                                    ref="passwordRe"
-                                    onKeyPress={this.handleKeyPress}
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="confirm password" className="img-fluid"/>
@@ -310,7 +282,7 @@ class Register extends Component {
                           <div className="col-auto">
                               <div className="form-group">
                                   <div className="custom-control custom-checkbox">
-                                      <input className="custom-control-input" name="agreement" ref="agreement" value="1" onChange={this.onChange} type="checkbox" id="gridCheck"/>
+                                      <input className="custom-control-input" name="agreement" value="1" onChange={this.onChange} type="checkbox" id="gridCheck"/>
                                       <label className="custom-control-label" for="gridCheck">
                                           I agree to &nbsp;
                                           <a href="#" style={{textDecoration: "underline", color: "inherit"}} onClick={this.showTC}>Terms &amp; Conditions</a>
