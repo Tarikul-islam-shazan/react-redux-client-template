@@ -101,7 +101,7 @@ function getBaseUrl(){
     else if( hostName.indexOf( "https://admin.nitex.com" ) > -1 ){
         return "https://api.nitex.com";
     }
-    else if( hostName.indexOf( "localhost" ) > -1 ){
+    else if( hostName.indexOf( "https://testadmin.nitex.com" ) > -1 ){
         return "https://testapi.nitex.com";
     }
 }

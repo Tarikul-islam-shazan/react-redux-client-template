@@ -296,7 +296,7 @@ class MyProject extends Component {
                             {
                               !this.state.hasNext && !projectList.length ?
                               <div className="not-found">
-                                  <h1 className="msg">You don't have any projects yet</h1>
+                                  <h1 className="msg">No data found</h1>
                                   <button className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Start now</button>
                                   <div className="illustration">
                                       <img src={require("../../assets/images/not-found.png")} alt=""/>
