@@ -359,7 +359,7 @@ class Dashboard extends Component {
                   {
                     !this.state.hasNext && !nitexDesignList.length ?
                     <div className="not-found">
-                        <h1 className="msg">Oops, no designs found here</h1>
+                        <h1 className="msg">No data found</h1>
                         <div className="illustration">
                             <img src={require("../../assets/images/not-found.png")} alt=""/>
                         </div>

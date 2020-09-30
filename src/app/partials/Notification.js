@@ -232,11 +232,11 @@ class Notification extends Component {
               {
                 !this.state.hasNext && !this.state.loading ? <p style={{fontSize:20,textAlign:'center'}}>No more notifications found</p> : ''
               }
-              {/*<div className="see-all">
+              <div className="see-all">
                   <a href="">
                       See all
                   </a>
-              </div>*/}
+              </div>
           </div>
         </LoadingOverlay>
         );
