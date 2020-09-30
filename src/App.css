@@ -1,10 +1,3 @@
-/* Font */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-/* Square Size */
-p{
-  font-family: 'Open Sans', sans-serif !important;
-}
-
 .App {
   text-align: center;
 }

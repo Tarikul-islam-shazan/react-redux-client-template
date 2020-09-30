@@ -151,11 +151,11 @@ class OurDesignDetails extends Component {
                               { productAvailabilityStatus(product) }
 
                               <div className="info-item">
-                                  <label>Product type</label>
+                                  <label>Product Type</label>
                                   <h5>{product.productType ? product.productType.name : ''}</h5>
                               </div>
                               <div className="info-item">
-                                  <label>Fabric composition</label>
+                                  <label>Fabric Composition</label>
                                   <h5>{product.fabricComposition}</h5>
                               </div>
                               <div className="info-item">

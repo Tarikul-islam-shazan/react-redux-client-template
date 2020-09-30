@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
-
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
 import { Redirect,Link } from "react-router-dom";
@@ -30,9 +28,6 @@ import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOA
 
 class Login extends Component {
 
-
-  
-
     constructor(props) {
         super(props);
         this.state = {
@@ -45,10 +40,6 @@ class Login extends Component {
           captchaResponse : '',
           captchaError : ''
         };
-     
-        // this._handleKeyPress = this._handleKeyPress.bind(this);
-        // this._login = this._login.bind(this);
-       
     }
 
     componentDidMount = async() => {
@@ -56,11 +47,6 @@ class Login extends Component {
         if (rememberMe) {
           await localStorage.setItem('rememberMe', rememberMe ? 1 : 0);
         }
-        // for (let x in this.refs) {
-        //   this.refs[x].onkeypress = (e) => 
-        //     this._handleKeyPress(e, this.refs[x]);
-        // }
-        // this.refs.email.focus();
     }
 
     login = async() => {
@@ -173,21 +159,7 @@ class Login extends Component {
         rememberMe: e.target.checked
       })
     }
- 
- 
-    
-    // _handleKeyPress(e, field) {
-    //   // If enter key is pressed, focus next input field.
-    //   if (e.keyCode === 13) {
-    //     e.preventDefault();
-    //     let next = this.refs[field.email].nextSibling;
-    //     if (next && next.tagName === "INPUT") {
-    //       this.refs[field.email].nextSibling.focus();
-       
-    //     }
-    //   }
-    // }
-  
+
     // handleRecaptcha = (token) => {
     //   console.log("clicked",token)
     //   this.setState({
@@ -195,16 +167,7 @@ class Login extends Component {
     //     captchaError : ''
     //   })
     // }
-    // _login=(e)=> {
-    //   e.preventDefault();
-    //   console.log('buttonClicked!');
-    // }
-    handleKeyPress = (event) => {
-      if(event.key === 'Enter'){
-        console.log('enter press here! ')
-        this.login();
-      }
-    }
+
     render() {
         return (
             <LoadingOverlay
@@ -262,8 +225,6 @@ class Login extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChange}
-                            onKeyPress={this.handleKeyPress}
-                            ref="email"
                             endAdornment= {
                                 <InputAdornment position="end">
                                     <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/>
@@ -284,9 +245,7 @@ class Login extends Component {
                             type='password'
                             value={this.state.password}
                             onChange={this.onChange}
-                            onKeyPress={this.handleKeyPress}
                             name="password"
-                            ref="password"
                             endAdornment={
                             <InputAdornment position="end">
                                 <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
@@ -305,8 +264,7 @@ class Login extends Component {
                           <div className="col-auto">
                               <div className="form-group">
                                   <div className="custom-control custom-checkbox">
-                                    
-                                      <input className="custom-control-input" name="rememberMe"   onChange={this.onChangeRemember} type="checkbox" id="gridCheck" checked={this.state.rememberMe}/>
+                                      <input className="custom-control-input" name="rememberMe" onChange={this.onChangeRemember} type="checkbox" id="gridCheck" checked={this.state.rememberMe}/>
                                       <label className="custom-control-label" htmlFor="gridCheck">
                                           Remember me
                                       </label>
@@ -371,7 +329,6 @@ class Login extends Component {
         );
     }
 }
-
 
 const mapStateToProps = store => {
 	return {

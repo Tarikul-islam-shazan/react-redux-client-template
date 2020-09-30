@@ -433,7 +433,7 @@ class PickDesign extends Component {
                         {
                           !this.state.hasNext && !designList.length ?
                           <div className="not-found">
-                              <h1 className="msg">No data found</h1>
+                              <h1 className="msg">No product designs found</h1>
                               <div className="illustration">
                                   <img src={require("../../assets/images/not-found.png")} alt=""/>
                               </div>
