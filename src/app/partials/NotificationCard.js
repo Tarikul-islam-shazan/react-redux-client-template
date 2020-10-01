@@ -49,6 +49,7 @@ const generateUrl = (item) => {
     item.notificationEvent == 'NEW_PROJECT_ADDED' ||
     item.notificationEvent == 'PROJECT_STATUS_UPDATED' ||
     item.notificationEvent == 'PROJECT_MEMBER_ADDED' ||
+    item.notificationEvent == 'PROJECT_MANAGER_ADDED' ||
     item.notificationEvent == 'PROJECT_ALERT'
   ){
     if(item.projectId){
