@@ -102,6 +102,6 @@ function getBaseUrl(){
         return "https://api.nitex.com";
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
-        return "http://localhost:8080";
+        return "https://testapi.nitex.com";
     }
 }
