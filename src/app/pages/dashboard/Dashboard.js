@@ -311,7 +311,7 @@ class Dashboard extends Component {
                                 <RfqList data={dashboard.myTopFiveRfq} onClick={this.toggleRfq} showRfqDetails={this.showRfqDetails} />
                                  :
                                 <div className="card-body" onClick={this.toggleRfq}>
-                                    <p className="card-text mb-2">You don't have any RFQ's</p>
+                                    <p className="card-text mb-2">You don't have any quote requests yet</p>
                                     <a href="/quote-request" className="btn btn-nitex-default">Share your Design</a>
                                 </div>
                               }
