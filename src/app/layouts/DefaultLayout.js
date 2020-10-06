@@ -152,14 +152,14 @@ class DefaultLayout extends Component {
 
                           {/* Nav Item - Add New */}
                           <li className="nav-item dropdown no-arrow mx-1 mr-3">
-                              <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             {/* <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <img src={require("../assets/icons/plus_circle.png")} alt="" style={{width: '13px', marginRight: '2px'}} /> Add New
                               </button>
                               <div className="dropdown-menu dropdown-menu-override" aria-labelledby="dropdownNewButton">
                                   <a className="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
                                   <div className="dropdown-divider"></div>
                                   <a className="dropdown-item" data-toggle="modal" data-target="#AddNewProduct">New Product</a>
-                              </div>
+                              </div>*/}
                           </li>
 
                           {/* Nav Item - User Information */}

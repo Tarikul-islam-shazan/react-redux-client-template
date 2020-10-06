@@ -200,7 +200,7 @@ class MyProject extends Component {
                 <section className="collapse-side-menu-container">
                     <nav id="sidebarCollapse" className="sidebar-collapse">
                         <div>
-                            <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button>
+                            {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
                             <h5>Filter by</h5>
                             <div className="filter-by-check">
                               <ul>

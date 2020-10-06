@@ -311,8 +311,8 @@ class Dashboard extends Component {
                                 <RfqList data={dashboard.myTopFiveRfq} onClick={this.toggleRfq} showRfqDetails={this.showRfqDetails} />
                                  :
                                 <div className="card-body" onClick={this.toggleRfq}>
-                                    <p className="card-text mb-2">You don't have any RFQ's</p>
-                                    <a href="/quote-request" className="btn btn-nitex-default">Share your Design</a>
+                                    <p className="card-text mb-2">You don't have any quote requests yet</p>
+                                    <a href="/quote-request" className="btn btn-nitex-default">Share your design</a>
                                 </div>
                               }
 
@@ -328,8 +328,9 @@ class Dashboard extends Component {
                                 <ProjectList data={dashboard.myTopFiveProjects} onClick={this.toggleRfq} showProjectDetails={this.showProjectDetails} />
                                  :
                                 <div className="card-body">
-                                    <p className="card-text mb-2">You don't have any Projects</p>
-                                    <a href="#" className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Start a Project</a>
+                                    <p className="card-text mb-2">You don't have any running projects yet</p>
+                                    <a href="/pick-design" className="btn btn-nitex-default">Browse new designs</a>
+                                    {/* <a href="/pick-design" className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Browse new designs</a> */}
                                 </div>
                               }
                           </div>

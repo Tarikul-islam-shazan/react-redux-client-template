@@ -167,7 +167,13 @@ class Login extends Component {
     //     captchaError : ''
     //   })
     // }
-
+   
+    handleKeyPress = (event) => {
+      if(event.key === 'Enter'){
+        console.log('enter press here! ')
+        this.login();
+      }
+    }
     render() {
         return (
             <LoadingOverlay
