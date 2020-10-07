@@ -1462,6 +1462,7 @@ ol.order-list {
         border-radius: 40px;
         width: 100%;
         font-size: 12px !important;
+        outline :none;
     }
     
     button.border-none_btn a:hover {
