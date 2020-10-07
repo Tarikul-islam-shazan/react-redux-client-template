@@ -231,6 +231,8 @@ class Login extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChange}
+                            onKeyPress={this.handleKeyPress}
+                            ref="email"
                             endAdornment= {
                                 <InputAdornment position="end">
                                     <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/>
@@ -252,6 +254,8 @@ class Login extends Component {
                             value={this.state.password}
                             onChange={this.onChange}
                             name="password"
+                            onKeyPress={this.handleKeyPress}
+                            ref="password"
                             endAdornment={
                             <InputAdornment position="end">
                                 <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>

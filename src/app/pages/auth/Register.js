@@ -159,6 +159,13 @@ class Register extends Component {
       window.open("https://nitex.com/terms-and-conditions", "_blank")
     }
 
+    handleKeyPress = (event) => {
+      if(event.key === 'Enter'){
+        console.log('enter press here! ')
+        this.register();
+      }
+    }
+
     render() {
         return (
             <LoadingOverlay
@@ -215,6 +222,8 @@ class Register extends Component {
                           name="email"
                           value={this.state.email}
                           onChange={this.onChange}
+                          onKeyPress={this.handleKeyPress}
+                          ref="email"
                           endAdornment= {
                               <InputAdornment position="end">
                                   <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width: 18}}/>
@@ -239,6 +248,8 @@ class Register extends Component {
                                     value={this.state.password}
                                     onChange={this.onChange}
                                     name="password"
+                                    onKeyPress={this.handleKeyPress}
+                                    ref="password"
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
@@ -261,6 +272,8 @@ class Register extends Component {
                                     value={this.state.passwordRe}
                                     onChange={this.onChange}
                                     name="passwordRe"
+                                    onKeyPress={this.handleKeyPress}
+                                    ref="passwordRe"
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="confirm password" className="img-fluid"/>
@@ -282,7 +295,7 @@ class Register extends Component {
                           <div className="col-auto">
                               <div className="form-group">
                                   <div className="custom-control custom-checkbox">
-                                      <input className="custom-control-input" name="agreement" value="1" onChange={this.onChange} type="checkbox" id="gridCheck"/>
+                                      <input className="custom-control-input" name="agreement" value="1" onChange={this.onChange} onKeyPress={this.handleKeyPress} ref="agreement" type="checkbox" id="gridCheck"/>
                                       <label className="custom-control-label" for="gridCheck">
                                           I agree to &nbsp;
                                           <a href="#" style={{textDecoration: "underline", color: "inherit"}} onClick={this.showTC}>Terms &amp; Conditions</a>
