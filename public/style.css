@@ -1622,3 +1622,15 @@ button.border-none_btn a:hover
 {
     color: #fff !important;
 }
+
+@media(min-width: 768px)
+{
+.sidebar-collapse h5
+{
+    margin-top: 0 !important
+}
+.btn-brand
+{
+    margin-bottom: 40px !important;
+}
+}
