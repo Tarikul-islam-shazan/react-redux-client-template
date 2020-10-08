@@ -30,6 +30,8 @@ class MyProject extends Component {
           sortOrder : 'lastResponseTime,desc',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
+          user_info: '',
+
         };
     }
 
@@ -60,6 +62,9 @@ class MyProject extends Component {
     componentDidMount = () => {
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0);
+    const userinfo =  JSON.parse(window.localStorage.getItem('userInfo'));
+    console.log("hello teting",userinfo.profession)
+      this.setState({user_info:userinfo.profession})
     }
 
     componentWillUnmount() {
@@ -200,7 +205,10 @@ class MyProject extends Component {
                 <section className="collapse-side-menu-container">
                     <nav id="sidebarCollapse" className="sidebar-collapse">
                         <div>
-                            {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
+
+                       {(this.state.user_info=="PRODUCT_MANAGER" || this.state.user_info=="ADMIN")?
+                          <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button>
+                       :null}  
                             <h5>Filter by</h5>
                             <div className="filter-by-check">
                               <ul>
