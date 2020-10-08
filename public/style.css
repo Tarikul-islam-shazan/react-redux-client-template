@@ -5,7 +5,7 @@
 body {
     color: #21242B;
     font-size: 12px;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'open sans', sans-serif;
     font-weight: 400;
 }
 .page-header {
@@ -1603,4 +1603,22 @@ table.invoice-footer p span {
 
 .notification li a.active {
     background: #f8f5ff !important;
+}
+
+button.border-none_btn {
+    border: none;
+    background: #ee761f;
+    color: #fff;
+    border-radius: 50px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+button.border-none_btn:focus
+{
+    outline: none !important;
+}
+button.border-none_btn a:hover
+{
+    color: #fff !important;
 }
