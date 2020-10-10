@@ -96,11 +96,13 @@ class StartProject extends Component {
     }
 
     submit = async() => {
+      //alert(this.props.ids);
       let { title, note, deadline, paymentTerms } = this.state;
       if(this.validate()){
         await this.setState({loading:true})
         let dl = deadline.split('-');
         let body = {
+          rfqid:this.props.ids,
           name : title,
           projectType : 'FULL_FLEDGED_PRODUCTION',
           deliveryDate : dl.length==3 ? (dl[2]+'/'+dl[1]+'/'+dl[0]) : deadline,
@@ -242,6 +244,7 @@ class StartProject extends Component {
 }
 
 const mapStateToProps = store => {
+  //console.log('bhai respnce ',store.product.choosenIdsForQuick);
   return {
     ids : store.product.choosenIdsForQuick,
     fromRfq: store.product.fromRfq
