@@ -13,7 +13,7 @@ import Thankyou from './Thankyou';
 
 class StartProject extends Component {
 
-    constructor(props) {
+     constructor(props) {
         super(props);
         this.state = {
           title : '',
@@ -98,7 +98,7 @@ class StartProject extends Component {
     submit = async() => {
       let searchrfqId = this.props.location.search;
       let rqfarr = searchrfqId.split("?rfqId=");
-      console.log("tesingr", rqfarr)
+      console.log("tesingr", searchrfqId,rqfarr[1])
       //alert(this.props.ids);
       let { title, note, deadline, paymentTerms } = this.state;
       if(this.validate()){
