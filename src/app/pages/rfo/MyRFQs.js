@@ -344,7 +344,9 @@ class MyRFQs extends Component {
   }
   onStart = () => {
     this.props._storeData('fromRfq', true)
-    this.props.history.push('/my-rfqs'+'?rfqId='+this.state.rfqs_id);
+    localStorage.setItem('rfqs_id',this.state.rfqs_id)
+ 
+
 
   }
   render() {

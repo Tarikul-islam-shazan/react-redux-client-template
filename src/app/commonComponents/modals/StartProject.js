@@ -96,16 +96,19 @@ class StartProject extends Component {
     }
 
     submit = async() => {
-      let searchrfqId = this.props.location.search;
-      let rqfarr = searchrfqId.split("?rfqId=");
-      console.log("tesingr", searchrfqId,rqfarr[1])
+      // let searchrfqId = this.props.location.search;
+      // let rqfarr = searchrfqId.split("?rfqId=");
+      // console.log("tesingr", searchrfqId,rqfarr[1])
+      
       //alert(this.props.ids);
+      let rqfarr = localStorage.getItem('rfqs_id')
+      // console.log("tesingr", searchrfqId,rqfarr)
       let { title, note, deadline, paymentTerms } = this.state;
       if(this.validate()){
         await this.setState({loading:true})
         let dl = deadline.split('-');
         let body = {
-          rfqid: rqfarr[1],
+          rfqid: rqfarr,
           name : title,
           projectType : 'FULL_FLEDGED_PRODUCTION',
           deliveryDate : dl.length==3 ? (dl[2]+'/'+dl[1]+'/'+dl[0]) : deadline,
