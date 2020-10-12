@@ -1890,4 +1890,7 @@ a.text-color_orange
 {
     text-decoration: underline !important;
 }
-
+.notification .day ul li a .notify-list .info .name
+{
+    text-transform: initial !important;
+}
