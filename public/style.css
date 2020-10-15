@@ -1984,3 +1984,15 @@ font-size: 11px !important;
         flex-basis: calc((98.5% - 80px) /4 ) !important;
     }
 }
+
+
+@media(min-width:768px)
+{
+    
+    .static-top .dropdown-item {
+        font-size: 14px !important;
+    }
+    .quotation-table .dropdown-item {
+        font-size: 14px !important;
+    }
+}
