@@ -65,14 +65,12 @@ class ProductCard extends Component {
                   {
                     productAvailabilityStatus(item)
                   }
-                  <div className="dropdown">
-                      <button type="button" className="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style={{color: '#EE761F'}}>
-                          Action
+                  <div className="">
+                      <button type="button" class="border-none_btn">
+                      <a className="dropdown-item drop_custom_target" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Quote now</a>
+
                       </button>
-                      <div className="dropdown-menu dropdown-menu-lg-right">
-                          <a className="dropdown-item" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Ask for quote</a>
-                          <a className="dropdown-item" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.startProject([item.id])}>Start project</a>
-                      </div>
+                     
                   </div>
               </div>
           </div>

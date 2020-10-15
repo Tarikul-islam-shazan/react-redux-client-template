@@ -1454,4 +1454,23 @@ ol.order-list {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 
+      button.border-none_btn {
+        border: none;
+        background: #f6b688;
+        color: #fff;
+        /* height: 40px; */
+        border-radius: 40px;
+        width: 100%;
+        font-size: 12px !important;
+        outline :none;
+    }
+    
+    button.border-none_btn a:hover {
+        color: #fff !important;
+    }
+    .card.product-card .card-footer span.badge
+    {
+      font-size: 13px !important;
+    }
+
 /*# sourceMappingURL=main.css.map */
