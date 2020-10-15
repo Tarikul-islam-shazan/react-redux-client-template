@@ -96,13 +96,9 @@ class StartProject extends Component {
     }
 
     submit = async() => {
-      // let searchrfqId = this.props.location.search;
-      // let rqfarr = searchrfqId.split("?rfqId=");
-      // console.log("tesingr", searchrfqId,rqfarr[1])
-      
-      //alert(this.props.ids);
+   
       let rqfarr = localStorage.getItem('rfqs_id')
-      // console.log("tesingr", searchrfqId,rqfarr)
+      
       let { title, note, deadline, paymentTerms } = this.state;
       if(this.validate()){
         await this.setState({loading:true})
@@ -257,16 +253,16 @@ const mapStateToProps = store => {
   return {
     ids : store.product.choosenIdsForQuick,
     fromRfq: store.product.fromRfq
-	};
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators(
-		{
-			// fetchResources
-		},
-		dispatch
-	);
+  return bindActionCreators(
+    {
+      // fetchResources
+    },
+    dispatch
+  );
 };
 
 

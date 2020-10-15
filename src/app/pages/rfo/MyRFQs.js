@@ -52,7 +52,8 @@ class MyRFQs extends Component {
     let name = 'rfqId';
     let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     let results = regex.exec(this.props.location.search);
-    console.log('results', results)
+    
+    console.log('results',results)
     await this.setState({
       filterById: results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
     })
@@ -163,7 +164,11 @@ class MyRFQs extends Component {
     this.setState({
       selectedRfq: id,
       loading: true
+    },()=>{
+      console.log("selected",this.state.selectedRfq)
+      localStorage.setItem('rfqs_id',this.state.selectedRfq)
     });
+
     Http.GET('getRfqDetails', id)
       .then(({ data }) => {
         console.log('rfq DTAILS SUCCESS: ', data);
@@ -344,14 +349,14 @@ class MyRFQs extends Component {
   }
   onStart = () => {
     this.props._storeData('fromRfq', true)
-    localStorage.setItem('rfqs_id',this.state.rfqs_id)
+    // localStorage.setItem('rfqs_id',this.state.rfqs_id)
  
 
 
   }
   render() {
     let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext } = this.state;
-    // console.log("rfqList",rfqList)
+    console.log("searchbox",rfqList)
     if (!hasNext && !rfqList.length) {
       return (
         <div className="not-found">
