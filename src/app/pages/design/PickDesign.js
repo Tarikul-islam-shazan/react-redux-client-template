@@ -368,7 +368,7 @@ class PickDesign extends Component {
                         <div>
                             <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>
                             <h5>Filter By Category</h5>
-                            <ul className="list-unstyled">
+                            <ul className="list-unstyled custom_list">
                               {
                                 groupwiseProductList.map((item,i)=>{
                                   return (
