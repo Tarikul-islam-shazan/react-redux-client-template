@@ -89,7 +89,7 @@ class Login extends Component {
                     localStorage.setItem('userInfo',JSON.stringify(data));
                       if(data.businessInfoGiven){
                         this.props.history.push({
-                          pathname: '/dashboard',
+                          pathname: '/pick-design',
                           state: { from: 'login' }
                         });
                       }else{

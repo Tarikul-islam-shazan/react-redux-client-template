@@ -54,14 +54,14 @@ class Sidebar extends Component {
           permissions: userInfo.permissions ? userInfo.permissions : []
         })
         // console.log("sidebar notification",token,userInfo)
-      	let headers = {
-      		"jwt":token
-      	};
+        let headers = {
+          "jwt":token
+        };
           this.stompClient.connect( headers, (frame) => {
 
               // setConnected(true);
               // console.log('Connected: ' , frame,'/topic/private/'+(userInfo ? userInfo.id : null));
-      		//topic/private/1 , here 1 is logged in user's id
+          //topic/private/1 , here 1 is logged in user's id
               this.stompClient.subscribe('/topic/private/'+(userInfo ? userInfo.id : null), (response) => {
                   if(response.body){
                     let notifications = this.props.notifications;
@@ -83,13 +83,13 @@ class Sidebar extends Component {
                   // showGreeting(JSON.parse(greeting.body));
               });
           },
-      	( frame ) => {
+        ( frame ) => {
 
-      		console.log('disconnected: ', frame );
+          console.log('disconnected: ', frame );
           // this.stompClient = null;
-      		setTimeout( this.connect, 10000 );
-      		console.log('STOMP: Reconecting in 10 seconds');
-      	});
+          setTimeout( this.connect, 10000 );
+          console.log('STOMP: Reconecting in 10 seconds');
+        });
       }
       catch(err) {
         console.log("from try catch",err)
@@ -150,25 +150,12 @@ class Sidebar extends Component {
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
-                          to="/"
-                          classes={this.props.activeTab == '/my-products' ? 'active' : ''}
+                          to="/quote-request"
+                          classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
                          
                           activeIcon={require("../assets/icons/document.png")}
                           inactiveIcon={require("../assets/icons/document_new.svg")}
                           title="Share Designs"
-                          onClick={this.props.setActiveTab}
-                        />
-                        : <></>
-                      }
-
-{
-                        permissions.includes('RFQ_ADD') ?
-                        <NavLink
-                          to="/quote-request"
-                          classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
-                          activeIcon={require("../assets/icons/my-prd-active.png")}
-                          inactiveIcon={require("../assets/icons/design_new.svg")}
-                          title="Designs"
                           onClick={this.props.setActiveTab}
                         />
                         : <></>
@@ -197,6 +184,21 @@ class Sidebar extends Component {
                         />
                         : <></>
                       }
+
+                      {
+                        permissions.includes('RFQ_ADD') ?
+                        <NavLink
+                          to="/my-products"
+                          classes={this.props.activeTab == '/my-products' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/my-prd-active.png")}
+                          inactiveIcon={require("../assets/icons/design_new.svg")}
+                          title="Designs"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+                      
+                      
                       {/* {
                         permissions.includes('PRODUCT_MY_PRODUCT') ?
                         <NavLink
@@ -210,11 +212,7 @@ class Sidebar extends Component {
                         : <></>
                       } */}
                   </ul>
-                  <button className="btn_tour">
-                    <Link>
-                     Tour
-                    </Link>
-                  </button>
+                  
               </nav>
           </aside>
 
