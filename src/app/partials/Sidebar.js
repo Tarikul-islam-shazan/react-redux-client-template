@@ -121,7 +121,7 @@ class Sidebar extends Component {
                 </a>
               </div>
               <nav className="navigation">
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled list_sidebar">
                       {/* {
                         permissions.includes('DASHBOARD_GET_DASHBOARD') ?
                         <NavLink
