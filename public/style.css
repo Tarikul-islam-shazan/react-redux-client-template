@@ -2310,3 +2310,17 @@ button.btn_tour a {
 .sidebar_custom {
     margin-left: 320px !important;
 }
+@media(min-width:1366px) and (max-width: 1400px)
+{
+    nav.sidebar-collapse.client-respons {
+        width: 440px !IMPORTANT;
+    }
+    
+}
+@media(min-width:1440px) and (max-width: 1600px)
+{
+    nav.sidebar-collapse.client-respons {
+        width: 360px !IMPORTANT;
+    }
+    
+}
