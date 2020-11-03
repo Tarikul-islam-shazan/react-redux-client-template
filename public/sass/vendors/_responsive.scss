@@ -29,7 +29,7 @@
     }
 
     .card.product-card .card-img-top {
-        height: 150px;
+        height: 235px;
     }
     .notification {
         width: 475px;
@@ -1179,6 +1179,9 @@
     }
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: calc((100% - 100px) / 4);
+    }
+    .card.product-card .card-img-top {
+        height: 340px;
     }
 }
 @media screen and (max-width:991px){

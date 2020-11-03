@@ -136,6 +136,7 @@ button#sidebarToggleTop {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
+                                text-transform: initial;
                                 span{
                                     color: $brand-color;
                                 }
