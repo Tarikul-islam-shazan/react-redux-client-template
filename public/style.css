@@ -14,7 +14,6 @@ body {
 }
 
 .page-header .page-title {
-    text-transform: capitalize;
     margin-bottom: 6px;
     font-weight: bold;
     font-size: 20px;
@@ -448,6 +447,7 @@ form.registration-form.mt-5  input[type="email"]{
     border-radius: 0px;
     box-shadow: 0px 7px 35px 3px rgba(165, 162, 162, 0.5);
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .questionnaire .card .card-img-top {
@@ -1342,7 +1342,7 @@ section.my-rfq-project tr td p .notify-badge {
 
 /*Update*/
 .card.product-card .card-img-top {
-    height: 200px;
+    height: 340px;
     object-fit: cover;
     object-position: top;
     background: #eee;
@@ -1518,12 +1518,12 @@ li.nav-item .dropdown-toggle {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active
- {
+ { 
      color: #fff !important;
 }
 
 
-/* Invoice */
+/* Invoice */ 
 .invoice tr th{
     padding: 10px 0 !important;
 }
@@ -1554,7 +1554,7 @@ table.invoice-footer p span {
         padding: 10px 0 !important;
         vertical-align: top !important;
     }
-
+ 
     tbody.header-invoice tr td {
         padding: 30px 0 !important;
         vertical-align: middle !important;
@@ -1582,7 +1582,7 @@ table.invoice-footer p span {
         overflow: scroll;
         display: block;
     }
-
+ 
     .action-invoice a {
         margin: 10px 0 !important;
     }
