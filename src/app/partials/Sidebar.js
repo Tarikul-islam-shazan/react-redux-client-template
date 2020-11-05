@@ -13,6 +13,8 @@ import { NavLink } from './NavLink';
 import { BASE_URL } from '../constant';
 import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toast';
 
+import ReactGA from 'react-ga';
+
 class Sidebar extends Component {
 
     constructor(props) {
@@ -23,14 +25,6 @@ class Sidebar extends Component {
             permissions: []
         };
     }
-
-    // componentDidUpdate = (prevProps,PrevState) =>{
-    //   if(prevProps.activeTab!=this.props.activeTab){
-    //     // this.props.setActiveTab(window.location.pathname)
-    //   }
-    //   // console.log("prevProps.activeTab",prevProps)
-    //   // console.log("prevstate",PrevState)
-    // }
 
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
@@ -103,8 +97,15 @@ class Sidebar extends Component {
       if (window.location.pathname !== prevProps.activeTab) {
         loadjs(['/js/script.js','/js/custom.js']);
         console.log("loadjs called");
-        this.props.setActiveTab(window.location.pathname)
+        this.setTabToStore(window.location.pathname)
       }
+    }
+
+    setTabToStore = (path) => {
+      this.props.setActiveTab(path)
+      ReactGA.initialize('UA-168122648-1');
+      // To Report Page View
+      ReactGA.pageview(window.location.pathname + window.location.search);
     }
 
     render() {
@@ -130,7 +131,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/dashboard_active.png")}
                           inactiveIcon={require("../assets/icons/dashboard.png")}
                           title="Dashboard"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -142,7 +143,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/pick-design-active.png")}
                           inactiveIcon={require("../assets/icons/drafting_compas.png")}
                           title="Select designs"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -154,7 +155,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/document.png")}
                           inactiveIcon={require("../assets/icons/document1.png")}
                           title="Ask for quote"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -166,7 +167,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-rfq-active.png")}
                           inactiveIcon={require("../assets/icons/rfq.png")}
                           title="My quotes"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -178,7 +179,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-project-active.png")}
                           inactiveIcon={require("../assets/icons/my-project.png")}
                           title="My projects"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -190,7 +191,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-prd-active.png")}
                           inactiveIcon={require("../assets/icons/tshirt.png")}
                           title="My products"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
