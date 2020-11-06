@@ -133,7 +133,7 @@ class FillTheForm_1 extends Component {
       } = this.props.product;
       if(name == ''){
         this.setState({
-          nameError : 'Product Name is required'
+          nameError : 'Product name is required'
         })
       }else{
         this.setState({
@@ -142,7 +142,7 @@ class FillTheForm_1 extends Component {
       }
       if(productType == ''){
         this.setState({
-          typeError : 'Product Type is required'
+          typeError : 'Product type is required'
         })
       }else{
         this.setState({
@@ -151,7 +151,7 @@ class FillTheForm_1 extends Component {
       }
       if(fabricComposition == ''){
         this.setState({
-          compositionError : 'Fabric Composition is required'
+          compositionError : 'Fabric composition is required'
         })
       }else{
         this.setState({
@@ -160,7 +160,7 @@ class FillTheForm_1 extends Component {
       }
       if(fabricWeight == ''){
         this.setState({
-          weightError : 'Fabric Weight is required'
+          weightError : 'Fabric weight is required'
         })
       }else{
         this.setState({
