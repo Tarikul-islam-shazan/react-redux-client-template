@@ -16,6 +16,7 @@
     "react-bootstrap-table-next": "^3.3.3",
     "react-dom": "^16.12.0",
     "react-ga": "^3.2.0",
+    "react-hotjar": "^2.2.1",
     "react-loader-spinner": "^3.1.5",
     "react-loading-overlay": "^1.0.1",
     "react-recaptcha": "^2.3.10",

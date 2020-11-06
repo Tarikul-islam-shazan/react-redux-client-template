@@ -10,10 +10,11 @@ import { _storeData } from "./actions";
 import { toggle, setActiveTab } from '../actions/sidebar';
 import { NavLink } from './NavLink';
 
-import { BASE_URL } from '../constant';
-import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toast';
+import {BASE_URL, GA_ID, hjid, hjsv} from '../constant';
+import {toastSuccess, toastError, toastWarning} from '../commonComponents/Toast';
 
 import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 
 class Sidebar extends Component {
 
@@ -29,6 +30,7 @@ class Sidebar extends Component {
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
       this.connect()
+      this.initiateHotjarGA()
     }
 
 
@@ -92,27 +94,24 @@ class Sidebar extends Component {
     }
 
     componentDidUpdate = (prevProps,prevState)  => {
-      console.log("from sidebar component did update","entered")
-
       if (window.location.pathname !== prevProps.activeTab) {
         loadjs(['/js/script.js','/js/custom.js']);
-        console.log("loadjs called");
         this.setTabToStore(window.location.pathname)
+        this.initiateHotjarGA()
       }
     }
 
     setTabToStore = (path) => {
-      this.props.setActiveTab(path)
-      ReactGA.initialize('UA-168122648-1');
-      // To Report Page View
-      ReactGA.pageview(window.location.pathname + window.location.search);
+      this.props.setActiveTab(path);
+    }
+
+    initiateHotjarGA = () => {
+        ReactGA.initialize(GA_ID);
+        ReactGA.pageview(window.location.pathname + window.location.search);
+        hotjar.initialize(hjid, hjsv);
     }
 
     render() {
-      // console.log("this.state.activeTab",this.state.activeTab);
-      // if(this.state.activeTab=='/pick-design'){
-        // return <></>
-      // }
       let { permissions } = this.state;
       return (
           <aside className="left-panel" id="side-menu">
