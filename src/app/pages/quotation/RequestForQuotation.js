@@ -435,10 +435,8 @@ class RequestForQuotation extends Component {
           titleError : ''
         })
       }
-      
       if(!this.hasErrorColor() && flag){
         let body = {
-          rfqid: rfq.rfqid,
           name : rfq.title,
           numOfStyles : rfq.numberOfStyles,
           notes : 'test',
@@ -463,8 +461,6 @@ class RequestForQuotation extends Component {
             return temp;
           })
         }
-
-        // alert(JSON.stringify(body))
         console.log("body from submit",body);
         // return;
         this.setState({loading:true})

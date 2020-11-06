@@ -204,27 +204,26 @@ class Login extends Component {
               text={LOADER_TEXT}>
 
               <div className="page-header text-center">
-                  <h2 className="page-title custom_page">Sign in to your account!</h2>
-                  
+                  <h2 className="page-title">Welcome back!</h2>
+                  <p className="page-subtitle">Log in to visualize your production progress in real time</p>
               </div>
               <div className="text-center">
                   <a href="#" className="btn btn-google btn-social" style={{marginBottom:10}} href={GOOGLE_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
-                      Sign In with Google
+                      Login with Google
                   </a>
                   <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin_white.png') } alt="linkedin"/>
                       </span>
-                      Sign In with LinkedIn
+                      Login with Linkedin
                   </a>
-                  <p className="para_email">Or Sign in with your e-mail</p>
               </div>
               <form className="registration-form" autoComplete="off">
-                   
-                        {/* <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel> */}
+                    <FormControl>
+                        <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel>
                         <Input
                             id="standard-adornment-email"
                             label="Email Address"
@@ -232,10 +231,6 @@ class Login extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChange}
-                            onKeyPress={this.handleKeyPress}
-                            ref="email"
-                            placeholder="Email"
-                            className="form_register_input"
                             endAdornment= {
                                 <InputAdornment position="end">
                                     <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/>
@@ -247,19 +242,16 @@ class Login extends Component {
                           <p className="error">{this.state.emailError}</p>
                           : <></>
                         }
-                
+                    </FormControl>
 
-                   
-                        {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
+                    <FormControl>
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                         <Input
                             id="standard-adornment-password"
                             type='password'
                             value={this.state.password}
                             onChange={this.onChange}
                             name="password"
-                            onKeyPress={this.handleKeyPress}
-                            ref="password"
-                            placeholder="Password"
                             endAdornment={
                             <InputAdornment position="end">
                                 <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
@@ -271,7 +263,7 @@ class Login extends Component {
                           <p className="error">{this.state.passwordError}</p>
                           : <></>
                         }
-                   
+                    </FormControl>
 
                   <div className="form-group">
                       <div className="row justify-content-between">
@@ -304,11 +296,11 @@ class Login extends Component {
                           }
                       </div>*/}
                   </div>
-                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.login}>Sign in</button>
+                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.login}>Log in</button>
                 </form>
 
               <div className="row justify-content-between">
-                  {/* <div className="col-auto">
+                  <div className="col-auto">
                       <ul className="social-share">
                           <li>
                               <a href="https://www.facebook.com/officialnitex/" target="_blank">
@@ -326,8 +318,8 @@ class Login extends Component {
                               </a>
                           </li>
                       </ul>
-                  </div> */}
-                  <div className="col-auto manage_responsive">
+                  </div>
+                  <div className="col-auto">
                       <p>Don't have an account?&nbsp;
                           <Link to="/register" className="text-active" style={{textDecoration: 'underline'}}>Sign Up</Link>
                       </p>

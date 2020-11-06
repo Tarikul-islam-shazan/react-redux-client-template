@@ -159,13 +159,6 @@ class Register extends Component {
       window.open("https://nitex.com/terms-and-conditions", "_blank")
     }
 
-    handleKeyPress = (event) => {
-      if(event.key === 'Enter'){
-        console.log('enter press here! ')
-        this.register();
-      }
-    }
-
     render() {
         return (
             <LoadingOverlay
@@ -195,27 +188,26 @@ class Register extends Component {
               spinner
               text={LOADER_TEXT}>
               <div className="page-header text-center">
-                  <h1 className="page-title">Get Started with Nitex</h1>
-                  <p className="page-subtitle mobile_responsive">Create account, free forever. Build backend of your fashion label without any upfront cost.</p>
+                  <h2 className="page-title">Welcome to nitex</h2>
+                  <p className="page-subtitle">Sign up to access exclusive product designs and manage your bulk orders</p>
               </div>
               <div className="text-center">
                   <a href="#" className="btn btn-google btn-social" style={{marginBottom:10}} href={GOOGLE_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
-                      Sign up with Google
+                      Signup with Google
                   </a>
                   <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin_white.png') } alt="linkedin"/>
                       </span>
-                      Sign up with LinkedIn
+                      Signup with Linkedin
                   </a>
-                  <p className="para_email manage_mobile_register">Or Sign Up with your e-mail</p>
               </div>
               <form className="registration-form">
-              
-                      {/* <InputLabel htmlFor="standard-adornment-email">Email</InputLabel> */}
+                <FormControl>
+                      <InputLabel htmlFor="standard-adornment-email">Email</InputLabel>
                       <Input
                           id="standard-adornment-email"
                           label="Email"
@@ -223,9 +215,6 @@ class Register extends Component {
                           name="email"
                           value={this.state.email}
                           onChange={this.onChange}
-                          onKeyPress={this.handleKeyPress}
-                          ref="email"
-                          placeholder="Email"
                           endAdornment= {
                               <InputAdornment position="end">
                                   <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width: 18}}/>
@@ -237,21 +226,19 @@ class Register extends Component {
                         <p className="error">{this.state.emailError}</p>
                         : <></>
                       }
-                
-              
-                     
-                         
-                             
-                                {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
+                  </FormControl>
+
+                  <div className="form-group">
+                      <div className="row">
+                          <div className="col">
+                              <FormControl>
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
                                     id="standard-adornment-password"
                                     type='password'
                                     value={this.state.password}
                                     onChange={this.onChange}
                                     name="password"
-                                    onKeyPress={this.handleKeyPress}
-                                    ref="password"
-                                    placeholder="Password"
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
@@ -263,20 +250,17 @@ class Register extends Component {
                                   <p className="error">{this.state.passwordError}</p>
                                   : <></>
                                 }
-                         
-                          
-                         
-                             
-                                {/* <InputLabel htmlFor="standard-adornment-repassword">Confirm Password</InputLabel> */}
+                            </FormControl>
+                          </div>
+                          <div className="col">
+                              <FormControl>
+                                <InputLabel htmlFor="standard-adornment-repassword">Confirm Password</InputLabel>
                                 <Input
                                     id="standard-adornment-repassword"
                                     type='password'
                                     value={this.state.passwordRe}
                                     onChange={this.onChange}
                                     name="passwordRe"
-                                    onKeyPress={this.handleKeyPress}
-                                    ref="passwordRe"
-                                    placeholder="Confirm Password"
                                     endAdornment={
                                     <InputAdornment position="end">
                                         <img src={ require('../../assets/icons/lock.png') } alt="confirm password" className="img-fluid"/>
@@ -288,15 +272,17 @@ class Register extends Component {
                                   <p className="error">{this.state.passwordReError}</p>
                                   : <></>
                                 }
-                           
-               
+                            </FormControl>
+                          </div>
+                      </div>
+                  </div>
 
                   <div className="form-group">
                       <div className="row justify-content-between align-items-center">
-                          {/* <div className="col-auto">
+                          <div className="col-auto">
                               <div className="form-group">
                                   <div className="custom-control custom-checkbox">
-                                      <input className="custom-control-input" name="agreement" value="1" onChange={this.onChange} onKeyPress={this.handleKeyPress} ref="agreement" type="checkbox" id="gridCheck"/>
+                                      <input className="custom-control-input" name="agreement" value="1" onChange={this.onChange} type="checkbox" id="gridCheck"/>
                                       <label className="custom-control-label" for="gridCheck">
                                           I agree to &nbsp;
                                           <a href="#" style={{textDecoration: "underline", color: "inherit"}} onClick={this.showTC}>Terms &amp; Conditions</a>
@@ -308,10 +294,10 @@ class Register extends Component {
                                     : <></>
                                   }
                               </div>
-                          </div> */}
+                          </div>
                           <div className="float-right" style={{marginBottom: '20px'}}>
                               {/*<div className="g-recaptcha" data-sitekey="6LfaKewUAAAAAKeR1r8M41FVTovsWmEpUt12lNrj" onClick={this.handleRecaptcha}></div>*/}
-                              {/* <Recaptcha
+                              <Recaptcha
                                 ref={ref => this.recaptcha = ref}
                                 sitekey="6LfaKewUAAAAAKeR1r8M41FVTovsWmEpUt12lNrj"
                                 render="explicit"
@@ -322,26 +308,36 @@ class Register extends Component {
                                 this.state.captchaError ?
                                 <p className="error">{this.state.captchaError}</p>
                                 : <></>
-                              } */}
+                              }
                           </div>
                       </div>
                   </div>
-                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.register}>Sign Up</button>
+                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.register}>Sign up</button>
               </form>
               <div className="row justify-content-between">
-                 
-                  
                   <div className="col-auto">
-                     
-                      <p className="text-center size_manage_tab">
-                      By Signing up, I agree to the <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Terms& Conditions</Link> and <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Privacy policy</Link>
-                      </p>
+                      <ul className="social-share">
+                          <li>
+                              <a href="https://www.facebook.com/officialnitex/" target="_blank">
+                                  <img src={ require('../../assets/icons/facebook.png') } alt="facebook"/>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="https://twitter.com/nitexofficial" target="_blank">
+                                  <img src={ require('../../assets/icons/twitter.png') } alt="twitter"/>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="https://www.linkedin.com/company/nitexofficial/" target="_blank">
+                                  <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
+                              </a>
+                          </li>
+                      </ul>
                   </div>
-                  <div className="col-auto manage_responsive">
-                      <p className="">Already have an account?&nbsp;
+                  <div className="col-auto">
+                      <p>Already have an account?&nbsp;
                           <Link to="/login" className="text-active" style={{textDecoration: 'underline'}}>Sign In</Link>
                       </p>
-          
                   </div>
               </div>
             </LoadingOverlay>

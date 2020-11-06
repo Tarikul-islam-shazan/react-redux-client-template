@@ -13,7 +13,7 @@ import Thankyou from './Thankyou';
 
 class StartProject extends Component {
 
-     constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
           title : '',
@@ -96,15 +96,11 @@ class StartProject extends Component {
     }
 
     submit = async() => {
-   
-      let rqfarr = localStorage.getItem('rfqs_id')
-      
       let { title, note, deadline, paymentTerms } = this.state;
       if(this.validate()){
         await this.setState({loading:true})
         let dl = deadline.split('-');
         let body = {
-          rfqid: rqfarr,
           name : title,
           projectType : 'FULL_FLEDGED_PRODUCTION',
           deliveryDate : dl.length==3 ? (dl[2]+'/'+dl[1]+'/'+dl[0]) : deadline,
@@ -120,9 +116,6 @@ class StartProject extends Component {
             })
           })
         }
-      
-       
-        // console.log('bhai response', this.props.location.search)
         console.log("body",body)
         await Http.POST('addProject',body)
           .then(({data}) => {
@@ -249,20 +242,19 @@ class StartProject extends Component {
 }
 
 const mapStateToProps = store => {
-  //console.log('bhai respnce ',store.product.choosenIdsForQuick);
   return {
     ids : store.product.choosenIdsForQuick,
     fromRfq: store.product.fromRfq
-  };
+	};
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      // fetchResources
-    },
-    dispatch
-  );
+	return bindActionCreators(
+		{
+			// fetchResources
+		},
+		dispatch
+	);
 };
 
 
