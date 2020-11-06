@@ -63,33 +63,6 @@
 
   /*From Index .html*/
 
-h1,h2,h3,h4,h5,h6
-{
-  font-family: Helvetica !important;
-}
-p{
-  font-family: 'Open Sans', sans-serif !important;
-}
-a{
-  font-family: 'Open Sans', sans-serif !important;
-}
-
-label{
-  font-family: 'Open Sans', sans-serif !important;
-}
-span{
-  font-family: 'Open Sans', sans-serif !important;
-}
-input{
-  font-family: 'Open Sans', sans-serif !important;
-}
-
-input::placeholder{
-  font-family: 'Open Sans', sans-serif !important;
-}
-select::placeholder{
-  font-family: 'Open Sans', sans-serif !important;
-}
 .notification .day ul li a .notify-list .info .name {
   text-transform: initial !important;
   font-family: 'calibri', sans-serif !important;
@@ -97,10 +70,7 @@ select::placeholder{
   font-size: 14px;
   margin-bottom: 0;
 }
-.notification
-{
-  font-family: 'Open Sans', sans-serif !important;
-}
+
 .not-found h1
 {
   text-transform: inherit !important;

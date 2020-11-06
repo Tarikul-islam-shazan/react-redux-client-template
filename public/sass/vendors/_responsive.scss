@@ -575,6 +575,9 @@
             th {
                 font-size: 15px;
                 padding: 10px 15px !important;
+                &:last-child{
+                    width: 96px;
+                }
             }
         }
 
@@ -619,7 +622,7 @@
         font-size: 14px;
     }
     .heading h1 {
-        font: Bold 24px/32px "Helvetica";
+        font: Bold 24px/32px "Open Sans";
     }
     .heading p {
         font-size: 14px;
