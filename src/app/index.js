@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 // import loadjs from 'loadjs';
 
@@ -32,35 +32,8 @@ import MyProduct from './pages/product/MyProduct';
 import MyRFQs from './pages/rfo/MyRFQs';
 import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
-// import Login from './components/Login';
-// import Logout from './components/Logout';
-// import RedirectTo from './components/RedirectTo';
-// import NotFound from './components/NotFound';
-
-// const PrivateRoute = ({component: Component, ...rest}) => {
-//     const token = JSON.parse(localStorage.getItem('token'));
-//     return token ? (
-//         <Route { ...rest } render={ matchProps => (
-//             <PrivateLayout>
-//                 <RedirectTo/>
-//                 <Component { ...matchProps } />
-//             </PrivateLayout>
-//         ) }/>
-//     ) : <Redirect to="/login"/>;
-// };
-
-// const QuestionairreRoute = ({component: Component, ...rest}) => {
-//     return (
-//         <Route { ...rest } render={ matchProps => (
-//             <QuestionairreLayout>
-//                 <Component { ...matchProps } />
-//             </QuestionairreLayout>
-//         ) }/>
-//     );
-// };
 
 const AuthRoute = ({component: Component, ...rest}) => {
-    // const token = localStorage.getItem('token');
     let token = getToken()
     console.log("token AuthRoute",token);
     return token==null ? (
@@ -74,8 +47,6 @@ const AuthRoute = ({component: Component, ...rest}) => {
 
 const AuthRouteWithoutLayout = ({component: Component, ...rest}) => {
     const token = getToken();
-    // const token = localStorage.getItem('token');
-    // console.log("token",token);
     return token==null ? (
         <Route { ...rest } render={ matchProps => (
             <Component { ...matchProps } />
@@ -96,7 +67,6 @@ const PublicRoute = ({component: Component, ...rest}) => {
 
 const QuestionairreRoute = ({component: Component, ...rest}) => {
     const token = getToken();
-    // const token = localStorage.getItem('token');
     return token ? (
         <Route { ...rest } render={ matchProps => (
             <Component { ...matchProps } />
