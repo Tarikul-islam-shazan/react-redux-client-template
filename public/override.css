@@ -59,3 +59,19 @@
     background-color: #721c24 !important;
     visibility:hidden;
   }
+
+
+  /*From Index .html*/
+
+.notification .day ul li a .notify-list .info .name {
+  text-transform: initial !important;
+  font-family: 'calibri', sans-serif !important;
+  letter-spacing: 0.3 !important;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.not-found h1
+{
+  text-transform: inherit !important;
+}
