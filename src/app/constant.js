@@ -84,7 +84,8 @@ export const LOADER_MARGIN_TOP = -100;
 export const LOADER_MARGIN_LEFT = 0;
 export const hjid = 1986852;
 export const hjsv = 6;
-export const GA_ID = 'UA-168122648-1';
+//export const GA_ID = 'UA-168122648-1';
+export const GA_ID = 'G-LKBPXL8X7S';
 
 export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
 

@@ -30,6 +30,7 @@ class MyProject extends Component {
           sortOrder : 'lastResponseTime,desc',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
+          user_info: '',
         };
     }
 
@@ -60,6 +61,10 @@ class MyProject extends Component {
     componentDidMount = () => {
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0);
+      const userinfo =  JSON.parse(window.localStorage.getItem('userInfo'));
+      console.log("hello i am here for user1",userinfo.userType)
+  
+        this.setState({user_info:userinfo.userType})
     }
 
     componentWillUnmount() {
@@ -200,7 +205,9 @@ class MyProject extends Component {
                 <section className="collapse-side-menu-container">
                     <nav id="sidebarCollapse" className="sidebar-collapse">
                         <div>
-                            {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
+                        {(this.state.user_info=="ADMIN" || this.state.user_info=="MANAGER")?
+                          <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button>
+                       :null} 
                             <h5>Filter by</h5>
                             <div className="filter-by-check">
                               <ul>
@@ -289,7 +296,7 @@ class MyProject extends Component {
                             }
                             {
                               !this.state.hasNext && projectList.length ?
-                              <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No more data...' */}</p>
+                              <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No data found' */}</p>
                               :
                               <></>
                             }
@@ -314,16 +321,16 @@ class MyProject extends Component {
 }
 
 const mapStateToProps = store => {
-	return {
-	};
+  return {
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators(
-		{
-		},
-		dispatch
-	);
+  return bindActionCreators(
+    {
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProject);
