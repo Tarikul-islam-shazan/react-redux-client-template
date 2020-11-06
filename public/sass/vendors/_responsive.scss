@@ -29,7 +29,7 @@
     }
 
     .card.product-card .card-img-top {
-        height: 150px;
+        height: 235px;
     }
     .notification {
         width: 475px;
@@ -575,6 +575,9 @@
             th {
                 font-size: 15px;
                 padding: 10px 15px !important;
+                &:last-child{
+                    width: 96px;
+                }
             }
         }
 
@@ -619,7 +622,7 @@
         font-size: 14px;
     }
     .heading h1 {
-        font: Bold 24px/32px "Helvetica";
+        font: Bold 24px/32px "Open Sans";
     }
     .heading p {
         font-size: 14px;
@@ -1179,6 +1182,9 @@
     }
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: calc((100% - 100px) / 4);
+    }
+    .card.product-card .card-img-top {
+        height: 340px;
     }
 }
 @media screen and (max-width:991px){

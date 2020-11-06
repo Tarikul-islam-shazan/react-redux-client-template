@@ -68,7 +68,7 @@ button#sidebarToggleTop {
     }
     h3.title {
         text-align: left;
-        font: Bold 20px/24px Helvetica;
+        font: Bold 20px/24px Open Sans;
         letter-spacing: 0px;
         color: #21242B;
         padding: 20px;
@@ -136,6 +136,7 @@ button#sidebarToggleTop {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
+                                text-transform: initial;
                                 span{
                                     color: $brand-color;
                                 }

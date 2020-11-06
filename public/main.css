@@ -199,7 +199,6 @@
   .sidebar-collapse ul li ul {
     padding-left: 20px; }
     .sidebar-collapse ul li ul li a {
-      text-transform: capitalize;
       padding-bottom: 15px;
       cursor: pointer;
       transition: all ease-in-out .2s; }
@@ -2764,7 +2763,6 @@ button.deliverable-deadline {
 .not-found {
   text-align: center; }
   .not-found h1 {
-    text-transform: capitalize;
     font-size: 35px;
     margin: 0 auto;
     margin-top: 100px; }
@@ -2911,7 +2909,8 @@ button#sidebarToggleTop {
               width: 300px;
               text-overflow: ellipsis;
               white-space: nowrap;
-              overflow: hidden; }
+              overflow: hidden;
+              text-transform: initial; }
               .notification .day ul li a .notify-list .info .name span {
                 color: #452D8F; }
             .notification .day ul li a .notify-list .info .post-time {
@@ -3279,7 +3278,7 @@ template {
     flex-basis: 75%; }
 
   .card.product-card .card-img-top {
-    height: 150px; }
+    height: 235px; }
 
   .notification {
     width: 475px;
@@ -4281,7 +4280,10 @@ template {
     margin-right: 0; }
 
   .dashboard-designs .filter-products.designs .card.product-card {
-    flex-basis: calc((100% - 100px) / 4); } }
+    flex-basis: calc((100% - 100px) / 4); }
+
+  .card.product-card .card-img-top {
+    height: 340px; } }
 @media screen and (max-width: 991px) {
   .dashboard-designs .filter-products.designs .card.product-card {
     flex-basis: calc((100% - 60px) / 3); }

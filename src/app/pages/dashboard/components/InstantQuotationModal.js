@@ -67,7 +67,7 @@ class InstantQuotationModal extends Component {
                                                             <div id="collapseOne" className="card-body collapse show" data-parent="#accordionExample">
                                                                 <div className="form-row">
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Product Type</label>
+                                                                        <label htmlFor="productType">Product type</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select product type</option>
                                                                             <option>1</option>
@@ -78,7 +78,7 @@ class InstantQuotationModal extends Component {
                                                                         </select>
                                                                     </div>
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Fabric Composition</label>
+                                                                        <label htmlFor="productType">Fabric composition</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select fabric composition</option>
                                                                             <option>1</option>
@@ -91,7 +91,7 @@ class InstantQuotationModal extends Component {
                                                                 </div>
                                                                 <div className="form-row">
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Fabric Weight(GSM)</label>
+                                                                        <label htmlFor="productType">Fabric weight(GSM)</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select fabric weight(GSM)</option>
                                                                             <option>1</option>
@@ -114,7 +114,7 @@ class InstantQuotationModal extends Component {
                                                                     </div>
                                                                 </div>
                                                                 <div className="form-group">
-                                                                    <label htmlFor="totalQuantity">Total Quantity</label>
+                                                                    <label htmlFor="totalQuantity">Total quantity</label>
                                                                     <select className="nice-select" id="totalQuantity">
                                                                         <option>1</option>
                                                                         <option>2</option>
@@ -138,7 +138,7 @@ class InstantQuotationModal extends Component {
                                                             <div id="collapseTwo" className="card-body collapse" data-parent="#accordionExample">
                                                                 <div className="form-row">
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Product Type</label>
+                                                                        <label htmlFor="productType">fabric composition</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select product type</option>
                                                                             <option>1</option>
@@ -149,7 +149,7 @@ class InstantQuotationModal extends Component {
                                                                         </select>
                                                                     </div>
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Fabric Composition</label>
+                                                                        <label htmlFor="productType">Fabric composition</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select fabric composition</option>
                                                                             <option>1</option>
@@ -162,7 +162,7 @@ class InstantQuotationModal extends Component {
                                                                 </div>
                                                                 <div className="form-row">
                                                                     <div className="form-group col-md-6">
-                                                                        <label htmlFor="productType">Fabric Weight(GSM)</label>
+                                                                        <label htmlFor="productType">Fabric weight(GSM)</label>
                                                                         <select className="nice-select" id="productType">
                                                                             <option>Select fabric weight(GSM)</option>
                                                                             <option>1</option>
@@ -185,7 +185,7 @@ class InstantQuotationModal extends Component {
                                                                     </div>
                                                                 </div>
                                                                 <div className="form-group">
-                                                                    <label htmlFor="totalQuantity">Total Quantity</label>
+                                                                    <label htmlFor="totalQuantity">Total quantity</label>
                                                                     <select className="nice-select" id="totalQuantity">
                                                                         <option>1</option>
                                                                         <option>2</option>
