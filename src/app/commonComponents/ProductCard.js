@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { productAvailabilityStatus } from '../services/Util';
+import { productAvailabilityStatus, addImageSuffix } from '../services/Util';
 
 import { _storeData } from "../pages/design/actions";
 // export class ProductCard = ({ item , showDetails , likeProduct , unlikeProduct }) => {
@@ -46,7 +46,7 @@ class ProductCard extends Component {
               if(doc.docType=='PRODUCT_DESIGN' && flag){
                 flag = 0;
                 return (
-                  <img key={i} src={doc.docUrl} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                  <img key={i} src={addImageSuffix(doc.docUrl, '_xicon')} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                 )
               }
               if(item.designDocuments.length==i+1 && flag){

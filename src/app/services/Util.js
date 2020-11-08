@@ -550,10 +550,25 @@ const getToken = () => {
   return token;
 }
 
+const addImageSuffix = (imgUrl, suffix) => {
+  let splits = imgUrl.split('.');
+  let result = '';
+  splits.map((item, i) => {
+    if (i === splits.length - 1) {
+      result += (suffix + '.' + item);
+    } else if (i === 0) {
+      result += item;
+    } else {
+      result += ('.' + item);
+    }
+  })
+  return result;
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken
+    getToken, addImageSuffix
 };

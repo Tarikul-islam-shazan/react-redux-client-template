@@ -14,7 +14,7 @@ import { _storeData } from "../design/actions";
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import { MeasurementTable } from './components/MeasurementTable'
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
-import { productAvailabilityStatus } from '../../services/Util';
+import { productAvailabilityStatus, addImageSuffix } from '../../services/Util';
 
 class OurDesignDetails extends Component {
 
@@ -122,7 +122,7 @@ class OurDesignDetails extends Component {
                                               // if(item.docType == 'PRODUCT_DESIGN' || item.docType == 'REFERENCE_IMAGE' || item.docType == 'PRINT_DESIGN'){
                                                 return(
                                                   <li key={i} onClick={() => this.setSelectedImage(i)}>
-                                                    <img src={item.docUrl} alt=""/>
+                                                    <img src={addImageSuffix(item.docUrl, '_xthumbnail')} alt=""/>
                                                   </li>
                                                 );
                                               // }
@@ -133,7 +133,7 @@ class OurDesignDetails extends Component {
                               </div>
                               <div className="thumbnail-prev">
                                      <span className='zoom' id='zoom' style={{width:'100%'}}>
-                                           <img src={selectedImage} width="100%"/>
+                                           <img src={addImageSuffix(selectedImage, '_xlarge')} width="100%"/>
                                        </span>
                               </div>
                           </div>
