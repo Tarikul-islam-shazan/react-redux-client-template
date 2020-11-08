@@ -162,6 +162,7 @@ class MyRFQs extends Component {
         selectedRfq : id,
         loading : true
       });
+      this.props._storeData('selectedRfqId', id)
       Http.GET('getRfqDetails',id)
         .then(({data}) => {
           console.log('rfq DTAILS SUCCESS: ', data);

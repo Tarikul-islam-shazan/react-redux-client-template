@@ -33,7 +33,8 @@ const initialState = {
       }
     ],
     choosenIdsForQuick : [],
-    fromRfq: false
+    fromRfq: false,
+    selectedRfqId: ''
 };
 
 export default (state = initialState, action) => {

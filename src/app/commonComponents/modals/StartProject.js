@@ -244,7 +244,8 @@ class StartProject extends Component {
 const mapStateToProps = store => {
   return {
     ids : store.product.choosenIdsForQuick,
-    fromRfq: store.product.fromRfq
+    fromRfq: store.product.fromRfq,
+    selectedRfqId: store.product.selectedRfqId
 	};
 };
 
