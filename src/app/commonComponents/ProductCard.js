@@ -71,7 +71,7 @@ class ProductCard extends Component {
                       </button>
                       <div className="dropdown-menu dropdown-menu-lg-right">
                           <a className="dropdown-item" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Ask for quote</a>
-                          <a className="dropdown-item" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.startProject([item.id])}>Start project</a>
+                          {/*<a className="dropdown-item" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.startProject([item.id])}>Start project</a>*/}
                       </div>
                   </div>
               </div>
