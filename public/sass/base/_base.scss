@@ -785,3 +785,27 @@ h4.details-title {
     line-height: 25px;
     color: #21242B;
 }
+#sidebarCollapse
+{
+    overflow-y: auto;
+}
+
+/*
+ *  STYLE 3
+ */
+
+#sidebarCollapse::-webkit-scrollbar-track
+{
+    background-color: #DFDCE6;
+}
+
+#sidebarCollapse::-webkit-scrollbar
+{
+    width: 7px;
+    background-color: #DFDCE6;
+}
+
+#sidebarCollapse::-webkit-scrollbar-thumb
+{
+    background-color: #8B8A8E;
+}

@@ -11,7 +11,7 @@
         padding: 0px 10px 0px 30px !important;
     }
     .dashboard-container {
-        padding-top: 88px;
+        padding-top: 76px;
     }
     .client-respons .client-list:nth-child(2) .list {
         margin-top: -15px;
@@ -55,7 +55,7 @@
         margin-top: 40px;
     }
     .sidebar-collapse {
-        padding: 36px 20px 30px 10px;
+        padding: 36px 20px 130px 10px;
         width: 16%;
 
         input {
@@ -736,6 +736,9 @@
     }
     .feedback .feedback-post .post .post-heading .header-title .description {
         width: 320px !important;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 700px;
     }
 }
 @media screen and (max-width:1366px){

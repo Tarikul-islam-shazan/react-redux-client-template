@@ -152,7 +152,7 @@
   height: 100vh;
   position: fixed;
   overflow: auto;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   width: 300px; }
   .sidebar-collapse h5 {
     font-size: 15px;
@@ -286,7 +286,7 @@
 
 body {
   font-size: 14px;
-  font-family: "Helvetica";
+  font-family: "Open Sans";
   font-weight: 400;
   background: #FCFDFF; }
 
@@ -315,7 +315,7 @@ textarea {
 
 ::placeholder,
 ::-moz-placeholder {
-  font: Regular 16px/19px Helvetica;
+  font: Regular 16px/19px Open Sans;
   letter-spacing: 0.48px;
   color: #B5BBC9; }
 
@@ -866,26 +866,82 @@ h4.details-title {
   line-height: 25px;
   color: #21242B; }
 
+#sidebarCollapse {
+  overflow-y: auto; }
+
+/*
+ *  STYLE 3
+ */
+#sidebarCollapse::-webkit-scrollbar-track {
+  background-color: #DFDCE6; }
+
+#sidebarCollapse::-webkit-scrollbar {
+  width: 7px;
+  background-color: #DFDCE6; }
+
+#sidebarCollapse::-webkit-scrollbar-thumb {
+  background-color: #8B8A8E; }
+
 @font-face {
-  font-family: 'Helvetica';
-  src: url("./fonts/Helvetica-Oblique.woff2") format("woff2"), url("./fonts/Helvetica-Oblique.woff") format("woff");
-  font-weight: normal;
-  font-style: italic; }
-@font-face {
-  font-family: 'Helvetica';
-  src: url("./fonts/Helvetica.woff2") format("woff2"), url("./fonts/Helvetica.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-@font-face {
-  font-family: 'Helvetica';
-  src: url("./fonts/Helvetica-Bold.woff2") format("woff2"), url("./fonts/Helvetica-Bold.woff") format("woff");
-  font-weight: bold;
-  font-style: normal; }
-@font-face {
-  font-family: 'Helvetica';
-  src: url("./fonts/Helvetica-Light.woff2") format("woff2"), url("./fonts/Helvetica-Light.woff") format("woff");
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-Light.woff2") format("woff2"), url("./fonts/OpenSans-Light.woff") format("woff");
   font-weight: 300;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-Regular.woff2") format("woff2"), url("./fonts/OpenSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-LightItalic.woff2") format("woff2"), url("./fonts/OpenSans-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-Bold.woff2") format("woff2"), url("./fonts/OpenSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-SemiBold.woff2") format("woff2"), url("./fonts/OpenSans-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-SemiBoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-ExtraBoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-ExtraBoldItalic.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-BoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-ExtraBold.woff2") format("woff2"), url("./fonts/OpenSans-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-Italic.woff2") format("woff2"), url("./fonts/OpenSans-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap; }
 /**
  * Basic typography style for copy text
  */
@@ -945,12 +1001,12 @@ h4.details-title {
   margin: 0 auto 35px; }
   .heading h1 {
     text-align: center;
-    font: Bold 30px/36px "Helvetica";
+    font: Bold 30px/36px "Open Sans";
     letter-spacing: 0.6px;
     color: #21242B; }
   .heading p {
     text-align: center;
-    font: Light 16px/22px "Helvetica";
+    font: Light 16px/22px "Open Sans";
     letter-spacing: 0;
     color: #858C9F; }
 
@@ -960,7 +1016,7 @@ h4.details-title {
   padding: 0; }
   .quote-tab ul.nav-tabs li a {
     text-align: left;
-    font-family: "Helvetica";
+    font-family: "Open Sans";
     letter-spacing: 0.36px;
     color: #6A7181;
     background: #F8F9FB;
@@ -1433,8 +1489,19 @@ ol.order-list {
     .product-detail-gallery .thumbnail-slider ul li {
       list-style: none;
       margin-bottom: 10px; }
+      .product-detail-gallery .thumbnail-slider ul li img {
+        width: 90px;
+        height: 101px;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer; }
   .product-detail-gallery .thumbnail-prev {
-    width: 500px; }
+    width: 100%; }
+    .product-detail-gallery .thumbnail-prev img {
+      width: 100%;
+      height: 940px;
+      object-fit: cover;
+      object-position: center; }
   .product-detail-gallery img {
     width: 100%; }
 
@@ -2851,7 +2918,7 @@ button#sidebarToggleTop {
         margin-left: 20px; }
   .notification h3.title {
     text-align: left;
-    font: Bold 20px/24px Helvetica;
+    font: Bold 20px/24px Open Sans;
     letter-spacing: 0px;
     color: #21242B;
     padding: 20px;
@@ -3262,7 +3329,7 @@ template {
     padding: 0px 10px 0px 30px !important; }
 
   .dashboard-container {
-    padding-top: 88px; }
+    padding-top: 76px; }
 
   .client-respons .client-list:nth-child(2) .list {
     margin-top: -15px; }
@@ -3303,7 +3370,7 @@ template {
     margin-top: 40px; }
 
   .sidebar-collapse {
-    padding: 36px 20px 30px 10px;
+    padding: 36px 20px 130px 10px;
     width: 16%; }
     .sidebar-collapse input {
       font-size: 14px;
@@ -3734,6 +3801,8 @@ template {
   table.manage-project-table thead th {
     font-size: 15px;
     padding: 10px 15px !important; }
+    table.manage-project-table thead th:last-child {
+      width: 96px; }
   table.manage-project-table tbody tr td {
     font-size: 14px;
     padding: 10px 15px; }
@@ -3765,7 +3834,7 @@ template {
     font-size: 14px; }
 
   .heading h1 {
-    font: Bold 24px/32px "Helvetica"; }
+    font: Bold 24px/32px "Open Sans"; }
 
   .heading p {
     font-size: 14px; }
@@ -3868,7 +3937,10 @@ template {
     flex-basis: 45%; }
 
   .feedback .feedback-post .post .post-heading .header-title .description {
-    width: 320px !important; } }
+    width: 320px !important; }
+
+  .product-detail-gallery .thumbnail-prev img {
+    height: 700px; } }
 @media screen and (max-width: 1366px) {
   .date-range {
     flex-direction: column;
