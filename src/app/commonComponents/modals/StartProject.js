@@ -108,6 +108,7 @@ class StartProject extends Component {
           paymentTerms,
           notes : note,
           fromRfq : this.props.fromRfq,
+          selectedRfqId: this.props.selectedRfqId,
           productDTOList : this.props.ids.map((item,index) => {
             return({
               productCreationType : 'FROM_CATALOG',
