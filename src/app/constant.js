@@ -82,7 +82,9 @@ export const LOADER_TOP = '50%';
 export const LOADER_LEFT = '50%';
 export const LOADER_MARGIN_TOP = -100;
 export const LOADER_MARGIN_LEFT = 0;
-
+export const hjid = 1986852;
+export const hjsv = 6;
+export const GA_ID = 'UA-168122648-1';
 
 export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
 

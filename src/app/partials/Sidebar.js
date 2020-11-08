@@ -10,8 +10,11 @@ import { _storeData } from "./actions";
 import { toggle, setActiveTab } from '../actions/sidebar';
 import { NavLink } from './NavLink';
 
-import { BASE_URL } from '../constant';
-import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toast';
+import {BASE_URL, GA_ID, hjid, hjsv} from '../constant';
+import {toastSuccess, toastError, toastWarning} from '../commonComponents/Toast';
+
+import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 
 class Sidebar extends Component {
 
@@ -24,17 +27,10 @@ class Sidebar extends Component {
         };
     }
 
-    // componentDidUpdate = (prevProps,PrevState) =>{
-    //   if(prevProps.activeTab!=this.props.activeTab){
-    //     // this.props.setActiveTab(window.location.pathname)
-    //   }
-    //   // console.log("prevProps.activeTab",prevProps)
-    //   // console.log("prevstate",PrevState)
-    // }
-
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
       this.connect()
+      this.initiateHotjarGA()
     }
 
 
@@ -98,20 +94,24 @@ class Sidebar extends Component {
     }
 
     componentDidUpdate = (prevProps,prevState)  => {
-      console.log("from sidebar component did update","entered")
-
       if (window.location.pathname !== prevProps.activeTab) {
         loadjs(['/js/script.js','/js/custom.js']);
-        console.log("loadjs called");
-        this.props.setActiveTab(window.location.pathname)
+        this.setTabToStore(window.location.pathname)
+        this.initiateHotjarGA()
       }
     }
 
+    setTabToStore = (path) => {
+      this.props.setActiveTab(path);
+    }
+
+    initiateHotjarGA = () => {
+        ReactGA.initialize(GA_ID);
+        ReactGA.pageview(window.location.pathname + window.location.search);
+        hotjar.initialize(hjid, hjsv);
+    }
+
     render() {
-      // console.log("this.state.activeTab",this.state.activeTab);
-      // if(this.state.activeTab=='/pick-design'){
-        // return <></>
-      // }
       let { permissions } = this.state;
       return (
           <aside className="left-panel" id="side-menu">
@@ -130,7 +130,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/dashboard_active.png")}
                           inactiveIcon={require("../assets/icons/dashboard.png")}
                           title="Dashboard"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -142,7 +142,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/pick-design-active.png")}
                           inactiveIcon={require("../assets/icons/drafting_compas.png")}
                           title="Select designs"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -154,7 +154,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/document.png")}
                           inactiveIcon={require("../assets/icons/document1.png")}
                           title="Ask for quote"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -166,7 +166,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-rfq-active.png")}
                           inactiveIcon={require("../assets/icons/rfq.png")}
                           title="My quotes"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -178,7 +178,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-project-active.png")}
                           inactiveIcon={require("../assets/icons/my-project.png")}
                           title="My projects"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
@@ -190,7 +190,7 @@ class Sidebar extends Component {
                           activeIcon={require("../assets/icons/my-prd-active.png")}
                           inactiveIcon={require("../assets/icons/tshirt.png")}
                           title="My products"
-                          onClick={this.props.setActiveTab}
+                          onClick={this.setTabToStore}
                         />
                         : <></>
                       }
