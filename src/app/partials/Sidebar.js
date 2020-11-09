@@ -50,14 +50,14 @@ class Sidebar extends Component {
           permissions: userInfo.permissions ? userInfo.permissions : []
         })
         // console.log("sidebar notification",token,userInfo)
-      	let headers = {
-      		"jwt":token
-      	};
+        let headers = {
+          "jwt":token
+        };
           this.stompClient.connect( headers, (frame) => {
 
               // setConnected(true);
               // console.log('Connected: ' , frame,'/topic/private/'+(userInfo ? userInfo.id : null));
-      		//topic/private/1 , here 1 is logged in user's id
+          //topic/private/1 , here 1 is logged in user's id
               this.stompClient.subscribe('/topic/private/'+(userInfo ? userInfo.id : null), (response) => {
                   if(response.body){
                     let notifications = this.props.notifications;
@@ -79,13 +79,13 @@ class Sidebar extends Component {
                   // showGreeting(JSON.parse(greeting.body));
               });
           },
-      	( frame ) => {
+        ( frame ) => {
 
-      		console.log('disconnected: ', frame );
+          console.log('disconnected: ', frame );
           // this.stompClient = null;
-      		setTimeout( this.connect, 10000 );
-      		console.log('STOMP: Reconecting in 10 seconds');
-      	});
+          setTimeout( this.connect, 10000 );
+          console.log('STOMP: Reconecting in 10 seconds');
+        });
       }
       catch(err) {
         console.log("from try catch",err)
@@ -117,12 +117,12 @@ class Sidebar extends Component {
           <aside className="left-panel" id="side-menu">
               <div className="logo">
                   <a href="/dashboard" className="logo-expanded">
-                    <img src={require("../assets/images/logo.png")} alt="logo" className="img-fluid d-block mx-auto" />
+                    <img src={require("../assets/images/logo_final.png")} alt="logo" className="img-fluid d-block mx-auto img_logo_expand" />
                 </a>
               </div>
               <nav className="navigation">
-                  <ul className="list-unstyled">
-                      {
+                  <ul className="list-unstyled list_sidebar">
+                      {/* {
                         permissions.includes('DASHBOARD_GET_DASHBOARD') ?
                         <NavLink
                           to="/dashboard"
@@ -133,28 +133,30 @@ class Sidebar extends Component {
                           onClick={this.setTabToStore}
                         />
                         : <></>
-                      }
+                      } */}
                       {
                         permissions.includes('PRODUCT_FOR_PICK_DESIGN') ?
                         <NavLink
                           to="/pick-design"
                           classes={this.props.activeTab == '/pick-design' ? 'active' : ''}
                           activeIcon={require("../assets/icons/pick-design-active.png")}
-                          inactiveIcon={require("../assets/icons/drafting_compas.png")}
-                          title="Select designs"
-                          onClick={this.setTabToStore}
+                          inactiveIcon={require("../assets/icons/drafting-compass_n.png")}
+                          title="Explore Designs"
+                          onClick={this.props.setActiveTab}
                         />
                         : <></>
                       }
+
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
                           to="/quote-request"
                           classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
+
                           activeIcon={require("../assets/icons/document.png")}
-                          inactiveIcon={require("../assets/icons/document1.png")}
-                          title="Ask for quote"
-                          onClick={this.setTabToStore}
+                          inactiveIcon={require("../assets/icons/document_new.svg")}
+                          title="Share Designs"
+                          onClick={this.props.setActiveTab}
                         />
                         : <></>
                       }
@@ -164,9 +166,9 @@ class Sidebar extends Component {
                           to="/my-rfqs"
                           classes={this.props.activeTab == '/my-rfqs' ? 'active' : ''}
                           activeIcon={require("../assets/icons/my-rfq-active.png")}
-                          inactiveIcon={require("../assets/icons/rfq.png")}
-                          title="My quotes"
-                          onClick={this.setTabToStore}
+                          inactiveIcon={require("../assets/icons/quote_new.svg")}
+                          title="Quotes"
+                          onClick={this.props.setActiveTab}
                         />
                         : <></>
                       }
@@ -176,13 +178,28 @@ class Sidebar extends Component {
                           to="/my-project"
                           classes={this.props.activeTab == '/my-project' ? 'active' : ''}
                           activeIcon={require("../assets/icons/my-project-active.png")}
-                          inactiveIcon={require("../assets/icons/my-project.png")}
-                          title="My projects"
-                          onClick={this.setTabToStore}
+                          inactiveIcon={require("../assets/icons/project_new.svg")}
+                          title="Projects"
+                          onClick={this.props.setActiveTab}
                         />
                         : <></>
                       }
+
                       {
+                        permissions.includes('RFQ_ADD') ?
+                        <NavLink
+                          to="/my-products"
+                          classes={this.props.activeTab == '/my-products' ? 'active' : ''}
+                          activeIcon={require("../assets/icons/my-prd-active.png")}
+                          inactiveIcon={require("../assets/icons/design_new.svg")}
+                          title="Designs"
+                          onClick={this.props.setActiveTab}
+                        />
+                        : <></>
+                      }
+
+
+                      {/* {
                         permissions.includes('PRODUCT_MY_PRODUCT') ?
                         <NavLink
                           to="/my-products"
@@ -193,8 +210,9 @@ class Sidebar extends Component {
                           onClick={this.setTabToStore}
                         />
                         : <></>
-                      }
+                      } */}
                   </ul>
+
               </nav>
           </aside>
 

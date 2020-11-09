@@ -38,7 +38,9 @@ class Login extends Component {
           passwordError:'',
           loading:false,
           captchaResponse : '',
-          captchaError : ''
+          captchaError : '',
+          type:'password'
+
         };
     }
 
@@ -87,7 +89,7 @@ class Login extends Component {
                     localStorage.setItem('userInfo',JSON.stringify(data));
                       if(data.businessInfoGiven){
                         this.props.history.push({
-                          pathname: '/dashboard',
+                          pathname: '/pick-design',
                           state: { from: 'login' }
                         });
                       }else{
@@ -174,6 +176,12 @@ class Login extends Component {
         this.login();
       }
     }
+
+    Password_showhide=()=>{
+      this.setState({
+          type: this.state.type === 'input' ? 'password' : 'input'
+        })
+   }
     render() {
         return (
             <LoadingOverlay
@@ -204,26 +212,27 @@ class Login extends Component {
               text={LOADER_TEXT}>
 
               <div className="page-header text-center">
-                  <h2 className="page-title">Welcome back!</h2>
-                  <p className="page-subtitle">Log in to visualize your production progress in real time</p>
+                  <h2 className="page-title custom_page">Sign in to your account!</h2>
+                  
               </div>
               <div className="text-center">
-                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:10}} href={GOOGLE_AUTH_URL}>
+                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
-                      Login with Google
+                      Sign in with Google
                   </a>
                   <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
                       <span>
-                          <img src={ require('../../assets/icons/linkedin_white.png') } alt="linkedin"/>
+                          <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
                       </span>
-                      Login with Linkedin
+                      Sign in with Linkedin
                   </a>
+                  <p className="para_email">Or Sign in with your e-mail</p>
               </div>
               <form className="registration-form" autoComplete="off">
-                    <FormControl>
-                        <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel>
+                   
+                        {/* <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel> */}
                         <Input
                             id="standard-adornment-email"
                             label="Email Address"
@@ -231,9 +240,13 @@ class Login extends Component {
                             name="email"
                             value={this.state.email}
                             onChange={this.onChange}
+                            onKeyPress={this.handleKeyPress}
+                            ref="email"
+                            placeholder="Email"
+                            className="form_register_input"
                             endAdornment= {
                                 <InputAdornment position="end">
-                                    <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/>
+                                    {/* <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/> */}
                                 </InputAdornment>
                             }
                         />
@@ -242,19 +255,24 @@ class Login extends Component {
                           <p className="error">{this.state.emailError}</p>
                           : <></>
                         }
-                    </FormControl>
+                
 
-                    <FormControl>
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                   
+                        {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
                         <Input
                             id="standard-adornment-password"
-                            type='password'
+                            type={this.state.type}
+
                             value={this.state.password}
                             onChange={this.onChange}
                             name="password"
+                            onKeyPress={this.handleKeyPress}
+                            ref="password"
+                            placeholder="Password"
+                           
                             endAdornment={
-                            <InputAdornment position="end">
-                                <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/>
+                            <InputAdornment  position="end">
+                                <img src={ require('../../assets/icons/lock.png') } alt="password" onClick={this.Password_showhide} className="img-fluid"/>
                             </InputAdornment>
                             }
                         />
@@ -263,7 +281,7 @@ class Login extends Component {
                           <p className="error">{this.state.passwordError}</p>
                           : <></>
                         }
-                    </FormControl>
+                   
 
                   <div className="form-group">
                       <div className="row justify-content-between">
@@ -296,11 +314,11 @@ class Login extends Component {
                           }
                       </div>*/}
                   </div>
-                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.login}>Log in</button>
+                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.login}>Sign in</button>
                 </form>
 
               <div className="row justify-content-between">
-                  <div className="col-auto">
+                  {/* <div className="col-auto">
                       <ul className="social-share">
                           <li>
                               <a href="https://www.facebook.com/officialnitex/" target="_blank">
@@ -318,10 +336,10 @@ class Login extends Component {
                               </a>
                           </li>
                       </ul>
-                  </div>
-                  <div className="col-auto">
-                      <p>Don't have an account?&nbsp;
-                          <Link to="/register" className="text-active" style={{textDecoration: 'underline'}}>Sign Up</Link>
+                  </div> */}
+                  <div className="col-auto manage_responsive">
+                      <p>Don't have any account?&nbsp;
+                          <Link to="/register" className="text-active" style={{textDecoration: 'underline'}}>Sign up</Link>
                       </p>
                   </div>
               </div>
