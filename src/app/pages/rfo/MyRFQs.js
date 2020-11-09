@@ -164,10 +164,9 @@ class MyRFQs extends Component {
     this.setState({
       selectedRfq: id,
       loading: true
-    },()=>{
-      console.log("selected",this.state.selectedRfq)
-      localStorage.setItem('rfqs_id',this.state.selectedRfq)
     });
+
+    this.props._storeData('selectedRfqId', id);
 
     Http.GET('getRfqDetails', id)
       .then(({ data }) => {
