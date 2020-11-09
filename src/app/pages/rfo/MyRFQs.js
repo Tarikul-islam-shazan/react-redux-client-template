@@ -120,44 +120,21 @@ class MyRFQs extends Component {
 
     Http.GET('getRfqList', params)
       .then(({ data }) => {
-          console.log('rfq LIST SUCCESS: ', data);
-          if (data.length > 0) {
-            if (page == 0) {
-              this.getRfqDetails(data[0].id)
-            }
-            if (merge) {
-              // console.log("entered hasNext merge",this.state.hasNext,page,data.length)
-              this.setState({
-                rfqList: [...rfqList, ...data],
-                page: page,
-                hasNext: data.length == size ? true : false,
-                loading: false
-              })
-              // toastWarning("RFQ List - no data found.");
-            }
-            loadjs(['/js/script.js','/js/custom.js']);
+        console.log('rfq LIST SUCCESS: ', data);
+        if (data.length > 0) {
+          if (page == 0) {
+            this.getRfqDetails(data[0].id)
           }
-        })
-        .catch(response => {
-            console.log('rfq LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
-        });
-    }
-
-    getRfqDetails = (id) => {
-      this.setState({
-        selectedRfq : id,
-        loading : true
-      });
-      this.props._storeData('selectedRfqId', id)
-      Http.GET('getRfqDetails',id)
-        .then(({data}) => {
-          console.log('rfq DTAILS SUCCESS: ', data);
-          this.setState({loading:false,showNegotiation:false})
-          if(data.success == false){
-            toastWarning("RFQ Details - no data found.");
-          }else{
+          if (merge) {
+            // console.log("entered hasNext merge",this.state.hasNext,page,data.length)
+            this.setState({
+              rfqList: [...rfqList, ...data],
+              page: page,
+              hasNext: data.length == size ? true : false,
+              loading: false
+            })
+          } else {
+            // console.log("entered hasNext unmerge")
             this.setState({
               rfqList: data,
               page: page,
@@ -165,6 +142,16 @@ class MyRFQs extends Component {
               loading: false
             })
           }
+
+        } else {
+          // console.log("entered hasNext length 0")
+          this.setState({
+            hasNext: false,
+            loading: false
+          })
+          // toastWarning("RFQ List - no data found.");
+        }
+        loadjs(['/js/script.js', '/js/custom.js']);
       })
       .catch(response => {
         console.log('rfq LIST ERROR: ', JSON.stringify(response));
