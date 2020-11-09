@@ -65,15 +65,16 @@ class ProductCard extends Component {
                   {
                     productAvailabilityStatus(item)
                   }
-                  <div className="dropdown">
-                      <button type="button" className="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style={{color: '#EE761F'}}>
-                          Action
-                      </button>
-                      <div className="dropdown-menu dropdown-menu-lg-right">
-                          <a className="dropdown-item" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Ask for quote</a>
-                          {/*<a className="dropdown-item" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.startProject([item.id])}>Start project</a>*/}
-                      </div>
-                  </div>
+                  <button className="ask-quote" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Quote now</button>
+                  {/*<div className="dropdown">*/}
+                  {/*    <button type="button" className="btn btn-action dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style={{color: '#EE761F'}}>*/}
+                  {/*        Action*/}
+                  {/*    </button>*/}
+                  {/*    <div className="dropdown-menu dropdown-menu-lg-right">*/}
+                  {/*        <a className="dropdown-item" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[item.id])}>Ask for quote</a>*/}
+                  {/*        /!*<a className="dropdown-item" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.startProject([item.id])}>Start project</a>*!/*/}
+                  {/*    </div>*/}
+                  {/*</div>*/}
               </div>
           </div>
           <div className="favourite-part">

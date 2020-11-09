@@ -809,3 +809,20 @@ h4.details-title {
 {
     background-color: #8B8A8E;
 }
+.ask-quote{
+    color: #fff;
+    font-size: 11px;
+    border: 1px solid rgb(238, 118, 31);
+    border-radius: 25px;
+    padding: 8px 25px;
+    background: rgb(238, 118, 31);
+    text-align: center;
+    font-weight: 600;
+}
+.ask-quote:focus,
+.ask-quote:hover
+{
+    outline: 0;
+    background: #fff;
+    color: #ee761f;
+}
