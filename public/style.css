@@ -5,7 +5,7 @@
 body {
     color: #21242B;
     font-size: 12px;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
 }
 .page-header {
@@ -336,7 +336,7 @@ form.registration-form.mt-5  input[type="email"]{
     padding: 10px 0;
 }
 .auth-page .MuiFormLabel-root, .auth-page .MuiInputBase-root{
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 12px !important;
 }
 .forgot-pass .input-group-text{
@@ -997,6 +997,8 @@ section.my-rfq-project tr td p .notify-badge {
 .designs .card {
     margin-bottom: 15px;
     border: none;
+}
+.designs .card:hover {
     box-shadow: 0px 8px 40px #0B1C4326;
 }
 
