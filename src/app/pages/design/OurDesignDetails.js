@@ -122,7 +122,7 @@ class OurDesignDetails extends Component {
                                               // if(item.docType == 'PRODUCT_DESIGN' || item.docType == 'REFERENCE_IMAGE' || item.docType == 'PRINT_DESIGN'){
                                                 return(
                                                   <li key={i} onClick={() => this.setSelectedImage(i)}>
-                                                    <img src={addImageSuffix(item.docUrl, '_xthumbnail')} alt=""/>
+                                                    <img src={addImageSuffix(item.docUrl, '_xicon')} alt=""/>
                                                   </li>
                                                 );
                                               // }
