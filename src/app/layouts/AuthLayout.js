@@ -35,7 +35,7 @@ const AuthLayout = ({children, ...rest}) => {
                                
                                {islogin &&
                                  <p>    Don't have an Account?                          
-                                <Link to="/register" onClick={register} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign Up</Link>
+                                <Link to="/register" onClick={register} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign up</Link>
                                  </p>
                                }
                                   

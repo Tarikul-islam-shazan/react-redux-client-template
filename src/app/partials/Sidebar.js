@@ -140,7 +140,7 @@ class Sidebar extends Component {
                           to="/pick-design"
                           classes={this.props.activeTab == '/pick-design' ? 'active' : ''}
                           activeIcon={require("../assets/icons/pick-design-active.png")}
-                          inactiveIcon={require("../assets/icons/drafting-compass_n.png")}
+                          inactiveIcon={require("../assets/icons/drafting-compass.png")}
                           title="Explore Designs"
                           onClick={this.props.setActiveTab}
                         />

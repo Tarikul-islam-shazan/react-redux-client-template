@@ -923,6 +923,9 @@
 
 }
 @media screen and (max-width:1024px){
+    .product-detail-gallery .thumbnail-prev img {
+        height: 610px;
+    }
     .quotation-container {
         margin: 20px 0 0 0 !important;
         padding: 0 !important;
@@ -1228,6 +1231,19 @@
 }
 
 @media screen and (max-width:767px) {
+    .product-detail-gallery {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .product-detail-gallery .thumbnail-slider ul li {
+        display: inline-block;
+    }
+    .product-detail-gallery .thumbnail-slider {
+        width: 100%;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 418px;
+    }
     a.link-invoice {
         width: 300px;
         display: inline-block;

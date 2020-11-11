@@ -92,18 +92,18 @@ body {
 .btn-social {
     font-size: 14px !important;
     padding: 12px 25px;
-    /* margin: 0px 5px; */
     text-transform: inherit;
     width: 100%;
     height: 60px;
     line-height: 34px;
-    /* font-family: 'HELVETICA'; */
     color: #21242b;
+    font-weight: 600;
 }
 
 
 p.text-center.size_manage_tab {
-    font-size: 20px;
+    font-size: 16px;
+    color: #6A7181;
 }
 .btn-social span {
     margin-right: 8px;
@@ -292,19 +292,31 @@ label {
 }
 /* Sign Up Page */
 
-.auth-page input[type="email"], .auth-page input[type="password"] {
-    height: 1.1875em;
-    padding: 6px 0 7px;
-    border: none;
-    border-radius: 0px;
-    background-color: transparent;
-    font-size: 12px;
+.auth-page input[type="email"], .auth-page input[type="password"], .auth-page input[type="input"] {
+    background: #F9F5FC 0% 0% no-repeat padding-box;
+    border: 1px solid #D7DBE6;
+    border-radius: 5px;
+    height: 48px;
+    width: 100%;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+.auth-page input[type="password"] {
+    padding-right: 53px;
 }
 
 .auth-page input[type="email"]:focus, .auth-page input[type="password"]:focus {
     box-shadow: none !important;
+    border: 1px solid #452D8D;
 }
-
+.MuiInputAdornment-positionEnd{
+    position: absolute;
+    right: 4px;
+    top: 31px;
+    width: 30px;
+    cursor: pointer;
+}
 .auth-page .back-link {
     position: absolute;
     top: 55px;
@@ -356,6 +368,7 @@ form.registration-form.mt-5  input[type="email"]{
 .auth-page .MuiFormLabel-root, .auth-page .MuiInputBase-root{
     font-family: 'Open Sans', sans-serif;
     font-size: 12px !important;
+    width: 100%;
 }
 .forgot-pass .input-group-text{
     padding-right: 0;
@@ -577,10 +590,6 @@ vertical-align: middle;
     color: #452D8F;
     font-size: 12px;
     text-decoration: none;
-    transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
     font-weight: 400;
     outline: none !important;
     text-align: center;
@@ -649,11 +658,7 @@ aside:not(.collapsed) .navigation ul li.active ul {
     padding: 8px 25px 8px 55px;
     color: #838F9A;
     text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-    -o-transition: all 0.2s;
+    white-space: nowrap ;
     font-size: 14px;
     text-align: left;
     display: block;
@@ -1751,16 +1756,16 @@ padding-top: 50px;
 padding-bottom: 15px;
 
 }
-.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd {
-    background: #F9F5FC 0% 0% no-repeat padding-box;
-    border: 1px solid #D7DBE6;
-    border-radius: 5px;
-    height: 60px;
-    width: 100%;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-bottom: 20px;
-}
+/*.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd {*/
+/*    background: #F9F5FC 0% 0% no-repeat padding-box;*/
+/*    border: 1px solid #D7DBE6;*/
+/*    border-radius: 5px;*/
+/*    height: 60px;*/
+/*    width: 100%;*/
+/*    padding-left: 8px;*/
+/*    padding-right: 8px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
 .MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: none !important;
