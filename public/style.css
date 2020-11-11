@@ -408,7 +408,7 @@ form.registration-form.mt-5  input[type="email"]{
 .auth-page .custom-control-label {
     line-height: 25px;
     color: #21242B;
-    /* font-family: 'Helvetica'; */
+   font-size: 14px;
 }
 
 .auth-page .custom-control-label::before, .auth-page .custom-control-label::after {
@@ -432,7 +432,7 @@ form.registration-form.mt-5  input[type="email"]{
 }
 
 .auth-page a {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
@@ -1419,11 +1419,12 @@ aside.left-panel.active {
 
 .error {
     color: red !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     margin: 5px 0 0 0 !important;
     font-weight: 500;
     text-align: left !important;
     display: inline-block;
+    line-height: 15px;
 }
 .drug-n-drop span.error{
     float: left;
