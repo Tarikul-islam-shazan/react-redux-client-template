@@ -241,6 +241,19 @@ const validate = (e, pass = '',passFullCheck=false) => {
       }
     }
   }
+  if(e.target.name == 'fullName'){
+    if(!e.target.value){
+      return {
+        name: 'fullNameError',
+        value: 'Full name is required'
+      }
+    }else{
+      return {
+        name: 'fullNameError',
+        value: ''
+      }
+    }
+  }
   if(e.target.name == 'password'){
     // if(e.target.value.length<6){
     let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
