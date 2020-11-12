@@ -4178,6 +4178,9 @@ template {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 @media screen and (max-width: 1024px) {
+  .navigation > ul > li > a {
+    padding: 10px 13px; }
+
   .product-detail-gallery .thumbnail-prev img {
     height: 610px; }
 
@@ -4252,8 +4255,7 @@ template {
     flex-basis: calc(91% / 3); }
 
   .sidbar-icon {
-    width: 28px;
-    margin-top: -3px; }
+    width: 28px; }
 
   .client-respons {
     max-width: 100%;
@@ -4436,8 +4438,11 @@ template {
   .card.product-card .card-img-top {
     height: 340px; } }
 @media screen and (max-width: 991px) {
+  .filter-products.designs .card.product-card {
+    flex-basis: calc((100% - 40px) / 2); }
+
   .dashboard-designs .filter-products.designs .card.product-card {
-    flex-basis: calc((100% - 60px) / 3); }
+    flex-basis: calc((100% - 40px) / 2); }
 
   .questionnaire .card .card-img-top {
     height: 130px; }
