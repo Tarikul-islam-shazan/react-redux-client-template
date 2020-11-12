@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import moment from 'moment';
 
 import { setActiveTab } from '../../actions/sidebar';
 
@@ -72,6 +73,12 @@ class Dashboard extends Component {
       window.addEventListener("scroll", this.handleScroll);
       this.fetchDashboardData();
       this.fetchList(0)
+
+      var date = moment.utc().format();
+      console.log(date, " ===> now in UTC");
+
+      var local = moment.utc(date).local().format();
+      console.log(local, " ===> UTC now to local");
     }
 
     componentWillUnmount() {
