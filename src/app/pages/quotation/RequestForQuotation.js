@@ -573,7 +573,7 @@ class RequestForQuotation extends Component {
                                         data-parent="#accordionExample">
                                         <div className="card-body">
                                             <div className="form-group">
-                                                <label htmlFor="styleQuantity">Select product<span className="error">*</span></label>
+                                                <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                 <p>Note: Upload a tech pack or choose from product catalogs</p>
                                             </div>
 
@@ -716,7 +716,7 @@ class RequestForQuotation extends Component {
                                                  <div className="row">
                                                     <div className="col-md-4 col-lg-4">
                                                         <div className="form-group">
-                                                            <label>Product inspirations</label>
+                                                            <label>Design inspirations</label>
                                                             <p className="form-text text-muted">You can upload multiple files here</p>
                                                         </div>
                                                       <div className="row no-gutters">
