@@ -639,6 +639,8 @@ aside.left-panel.collapsed .navigation > ul > li > a .badge {
 .navigation ul li a .nav-label {
     vertical-align: middle;
     display: block;
+    line-height: 15px;
+    margin-top: 5px;
 }
 
 .collapsed .navigation ul li a i {
