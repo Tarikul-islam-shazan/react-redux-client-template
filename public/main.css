@@ -2879,6 +2879,66 @@ button.deliverable-deadline {
 .zoom img::selection {
   background-color: transparent; }
 
+body {
+  margin: 0; }
+
+.product-skeleton {
+  width: 250px;
+  height: 350px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px; }
+  .product-skeleton .action {
+    display: flex;
+    width: 100%; }
+    .product-skeleton .action .line {
+      height: 20px;
+      width: 50px;
+      margin-right: 15px; }
+      .product-skeleton .action .line + .line {
+        width: 100px; }
+  .product-skeleton .img {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+    border-radius: 100%;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-avatar 2s infinite ease-out; }
+  .product-skeleton .line {
+    float: left;
+    width: 140px;
+    height: 16px;
+    margin-top: 12px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+  .product-skeleton .img + .line {
+    margin-top: 11px;
+    width: 100%; }
+  .product-skeleton .cat {
+    background-color: #ddd;
+    height: 8px;
+    width: 76px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+
+@keyframes shine-lines {
+  0% {
+    background-position: -100px; }
+  40%, 100% {
+    background-position: 140px; } }
+@keyframes shine-avatar {
+  0% {
+    background-position: -32px; }
+  40%, 100% {
+    background-position: 208px; } }
 button#sidebarToggleTop {
   padding: 2px;
   color: #000;

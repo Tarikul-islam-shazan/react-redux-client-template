@@ -338,7 +338,7 @@ class Register extends Component {
                   </div>
                   <div className="col-auto manage_responsive">
                       <p className="">Already have an account?&nbsp;
-                          <Link to="/login" className="text-active" style={{textDecoration: 'underline'}}>Sign In</Link>
+                          <Link to="/login" className="text-active" style={{textDecoration: 'underline'}}>Sign in</Link>
                       </p>
 
                   </div>
