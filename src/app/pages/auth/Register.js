@@ -26,15 +26,16 @@ class Register extends Component {
         this.state = {
           email:'',
           password:'',
+          fullName: '',
           passwordRe:'',
           agreement:false,
           emailError:'',
           passwordError:'',
+          fullNameError: '',
           passwordReError:'',
           loading:false,
-          agreementError:''
-          // captchaResponse : '',
-          // captchaError : ''
+          agreementError:'',
+          showPassword: false
         };
     }
 
@@ -42,16 +43,24 @@ class Register extends Component {
 
     }
 
+    passwordToggle = () => {
+      this.setState({
+          showPassword: !this.state.showPassword
+        })
+   }
+
     register = () => {
-      const { emailError, passwordError, passwordReError, email, password, passwordRe, agreement, agreementError } = this.state;
-      if(!emailError && !passwordError && !passwordReError){
-        if(email && password && passwordRe && agreement){
+      const { emailError, passwordError, fullNameError, email, password, fullName, agreement, agreementError } = this.state;
+      if(!emailError && !passwordError && !fullNameError){
+        if(email && password && fullName){
           this.setState({loading:true})
           let body = {
             email,
             password,
+            name: fullName,
             // captchaResponse,
-            approveTC : agreement
+            // approveTC : agreement,
+            approveTC : true
           };
           // console.log("register body",body)
           // return;
@@ -81,7 +90,7 @@ class Register extends Component {
                 //       // this.props.history.push('/login');
                 //   });
               }
-           
+
 
             })
             .catch(({response}) => {
@@ -103,10 +112,10 @@ class Register extends Component {
             this.setState({
               passwordError : 'Password is required!'
             })
-          }else if(!passwordRe){
-            console.log("entered",passwordRe);
+          }
+          if(!fullName){
             this.setState({
-              passwordReError : 'Please enter your password again!'
+              fullNameError : 'Full name is required!'
             })
           }
           if(!agreement){
@@ -162,6 +171,7 @@ class Register extends Component {
     }
 
     render() {
+        let {showPassword, fullName, fullNameError} = this.state;
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -209,8 +219,28 @@ class Register extends Component {
                   <p className="para_email manage_mobile_register">Or Sign up with your e-mail</p>
               </div>
               <form className="registration-form">
-              
-                      {/* <InputLabel htmlFor="standard-adornment-email">Email</InputLabel> */}
+
+                      <Input
+                          id="standard-adornment-password"
+                          type="email"
+                          value={this.state.fullName}
+                          onChange={this.onChange}
+                          name="fullName"
+                          onKeyPress={this.handleKeyPress}
+                          ref="email"
+                          placeholder="Full Name"
+                          endAdornment={
+                          <InputAdornment position="end">
+                              {/* <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/> */}
+                          </InputAdornment>
+                          }
+                      />
+                      {
+                        this.state.fullNameError ?
+                        <p className="error">{this.state.fullNameError}</p>
+                        : <></>
+                      }
+
                       <Input
                           id="standard-adornment-email"
                           label="Email"
@@ -220,7 +250,7 @@ class Register extends Component {
                           onChange={this.onChange}
                           onKeyPress={this.handleKeyPress}
                           ref="email"
-                          placeholder="Full Name"
+                          placeholder="Email"
                           endAdornment= {
                               <InputAdornment position="end">
                                   {/* <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width: 18}}/> */}
@@ -232,59 +262,33 @@ class Register extends Component {
                         <p className="error">{this.state.emailError}</p>
                         : <></>
                       }
-                
-              
-                     
-                         
-                             
-                                {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-                                <Input
-                                    id="standard-adornment-password"
-                                    type='password'
-                                    value={this.state.password}
-                                    onChange={this.onChange}
-                                    name="password"
-                                    onKeyPress={this.handleKeyPress}
-                                    ref="password"
-                                    placeholder="Email"
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        {/* <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/> */}
-                                    </InputAdornment>
-                                    }
-                                />
-                                {
-                                  this.state.passwordError ?
-                                  <p className="error">{this.state.passwordError}</p>
-                                  : <></>
-                                }
-                         
-                          
-                         
-                             
-                                {/* <InputLabel htmlFor="standard-adornment-repassword">Confirm Password</InputLabel> */}
-                                <Input
-                                    id="standard-adornment-repassword"
-                                    type='password'
-                                    value={this.state.passwordRe}
-                                    onChange={this.onChange}
-                                    name="passwordRe"
-                                    onKeyPress={this.handleKeyPress}
-                                    ref="passwordRe"
-                                    placeholder="Password"
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <img src={ require('../../assets/icons/lock.png') } alt="confirm password" className="img-fluid"/>
-                                    </InputAdornment>
-                                    }
-                                />
-                                {
-                                  this.state.passwordReError ?
-                                  <p className="error">{this.state.passwordReError}</p>
-                                  : <></>
-                                }
-                           
-               
+
+                      <Input
+                          id="standard-adornment-repassword"
+                          type={showPassword ? "input" : "password"}
+                          value={this.state.password}
+                          onChange={this.onChange}
+                          name="password"
+                          onKeyPress={this.handleKeyPress}
+                          ref="password"
+                          placeholder="Password"
+                          endAdornment={
+                          <InputAdornment position="end">
+                            {
+                              !showPassword ?
+                              <img src={ require('../../assets/icons/lock.png') } alt="password" onClick={this.passwordToggle} className="img-fluid"/> :
+                              <img src={ require('../../assets/icons/eye.png') } alt="password" onClick={this.passwordToggle} className="img-fluid"/>
+                            }
+                          </InputAdornment>
+                          }
+                      />
+                      {
+                        this.state.passwordError ?
+                        <p className="error">{this.state.passwordError}</p>
+                        : <></>
+                      }
+
+
 
                   <div className="form-group" style={{display:'none'}}>
                       <div className="row justify-content-between align-items-center">
@@ -303,7 +307,7 @@ class Register extends Component {
                                     : <></>
                                   } */}
                               </div>
-                          </div> 
+                          </div>
                           <div className="float-right" style={{marginBottom: '20px',display: 'none'}}>
                               {/* <div className="g-recaptcha" data-sitekey="6LfaKewUAAAAAKeR1r8M41FVTovsWmEpUt12lNrj" onClick={this.handleRecaptcha}></div>                            */}
                                <Recaptcha
@@ -317,17 +321,17 @@ class Register extends Component {
                                 this.state.captchaError ?
                                 <p className="error">{this.state.captchaError}</p>
                                 : <></>
-                              } 
+                              }
                           </div>
                       </div>
                   </div>
                   <button type="button" className="btn btn-nitex-default btn-block" onClick={this.register}>Sign Up</button>
               </form>
               <div className="row justify-content-between">
-                 
-                  
+
+
                   <div className="col-auto">
-                     
+
                       <p className="text-center size_manage_tab">
                       By Signing up, I agree to the <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Terms & Conditions</Link> and <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Privacy policy</Link>
                       </p>
@@ -336,7 +340,7 @@ class Register extends Component {
                       <p className="">Already have an account?&nbsp;
                           <Link to="/login" className="text-active" style={{textDecoration: 'underline'}}>Sign In</Link>
                       </p>
-          
+
                   </div>
               </div>
             </LoadingOverlay>

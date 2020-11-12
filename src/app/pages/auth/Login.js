@@ -39,7 +39,7 @@ class Login extends Component {
           loading:false,
           captchaResponse : '',
           captchaError : '',
-          type:'password'
+          showPassword: false
 
         };
     }
@@ -169,7 +169,7 @@ class Login extends Component {
     //     captchaError : ''
     //   })
     // }
-   
+
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
         console.log('enter press here! ')
@@ -177,12 +177,13 @@ class Login extends Component {
       }
     }
 
-    Password_showhide=()=>{
+    passwordToggle = () => {
       this.setState({
-          type: this.state.type === 'input' ? 'password' : 'input'
+          showPassword: !this.state.showPassword
         })
    }
     render() {
+        let {showPassword} = this.state;
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -213,7 +214,7 @@ class Login extends Component {
 
               <div className="page-header text-center">
                   <h2 className="page-title custom_page">Sign in to your account!</h2>
-                  
+
               </div>
               <div className="text-center">
                   <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
@@ -231,7 +232,7 @@ class Login extends Component {
                   <p className="para_email">Or Sign in with your e-mail</p>
               </div>
               <form className="registration-form" autoComplete="off">
-                   
+
                         {/* <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel> */}
                         <Input
                             id="standard-adornment-email"
@@ -255,24 +256,27 @@ class Login extends Component {
                           <p className="error">{this.state.emailError}</p>
                           : <></>
                         }
-                
 
-                   
+
+
                         {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
                         <Input
                             id="standard-adornment-password"
-                            type={this.state.type}
-
+                            type={showPassword ? "input" : "password"}
                             value={this.state.password}
                             onChange={this.onChange}
                             name="password"
                             onKeyPress={this.handleKeyPress}
                             ref="password"
                             placeholder="Password"
-                           
+
                             endAdornment={
                             <InputAdornment  position="end">
-                                <img src={ require('../../assets/icons/lock.png') } alt="password" onClick={this.Password_showhide} className="img-fluid"/>
+                              {
+                                !showPassword ?
+                                <img src={ require('../../assets/icons/lock.png') } alt="password" onClick={this.passwordToggle} className="img-fluid"/> :
+                                <img src={ require('../../assets/icons/eye.png') } alt="password" onClick={this.passwordToggle} className="img-fluid"/>
+                              }
                             </InputAdornment>
                             }
                         />
@@ -281,7 +285,7 @@ class Login extends Component {
                           <p className="error">{this.state.passwordError}</p>
                           : <></>
                         }
-                   
+
 
                   <div className="form-group">
                       <div className="row justify-content-between">
