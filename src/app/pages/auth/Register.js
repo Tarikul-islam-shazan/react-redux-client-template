@@ -221,7 +221,7 @@ class Register extends Component {
                       </span>
                       Sign up with LinkedIn
                   </a>
-                  <p className="para_email manage_mobile_register">Or Sign up with your e-mail</p>
+                  <p className="para_email manage_mobile_register">Or sign up with your e-mail</p>
               </div>
               <form className="registration-form">
 
@@ -330,7 +330,7 @@ class Register extends Component {
                           </div>
                       </div>
                   </div>
-                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.register}>Sign Up</button>
+                  <button type="button" className="btn btn-nitex-default btn-block" onClick={this.register}>Sign up</button>
               </form>
               <div className="row justify-content-between">
 
