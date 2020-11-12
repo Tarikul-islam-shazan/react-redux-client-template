@@ -153,8 +153,8 @@ class Sidebar extends Component {
                           to="/quote-request"
                           classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
 
-                          activeIcon={require("../assets/icons/document.png")}
-                          inactiveIcon={require("../assets/icons/document_new.svg")}
+                          activeIcon={require("../assets/icons/share-design-active.png")}
+                          inactiveIcon={require("../assets/icons/share-design.png")}
                           title="Share Designs"
                           onClick={this.props.setActiveTab}
                         />
