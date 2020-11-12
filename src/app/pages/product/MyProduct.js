@@ -275,7 +275,7 @@ class MyProduct extends Component {
               text={LOADER_TEXT}>
               <section className="collapse-side-menu-container">
                       <nav id="sidebarCollapse" className="sidebar-collapse">
-                          <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>
+                          {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
                              <h5>Filter by</h5>
                              <div className="filter-by-check">
                               <ul>
@@ -328,6 +328,7 @@ class MyProduct extends Component {
                                           <input type="search" name="search" value={this.state.search} onChange={this.onChangeSearchText} onKeyPress={this.keyPressed} placeholder="Search...."/>
                                           <button className="search" onClick={this._search}></button>
                                       </div>
+                                      <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
                                      <div className="short-by">
                                         <select name="sort" id="sort" value={sort} onClick={this.onChange}>
                                           <option value=""></option>
