@@ -28,13 +28,13 @@ const AuthLayout = ({children, ...rest}) => {
                               
                                   {isShow &&
                                  <p> Already have an account?                        
-                                     <Link to="/login" onClick={login} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign In</Link>
+                                     <Link to="/login" onClick={login} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign in</Link>
                                  </p>
                                }
 
                                
                                {islogin &&
-                                 <p>    Don't have an Account?                          
+                                 <p>Don't have an account?
                                 <Link to="/register" onClick={register} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign up</Link>
                                  </p>
                                }
