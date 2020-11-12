@@ -1,7 +1,5 @@
 /* @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'); */
-*{
-    transition: all ease-in-out .2s;
-}
+
 body {
     color: #21242B;
     font-size: 12px;
