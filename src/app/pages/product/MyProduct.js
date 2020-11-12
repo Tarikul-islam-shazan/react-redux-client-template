@@ -31,6 +31,7 @@ class MyProduct extends Component {
           production : false,
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
+          showEmptyState: false
         };
     }
 
@@ -60,14 +61,14 @@ class MyProduct extends Component {
 
     componentDidMount = () => {
       window.addEventListener("scroll", this.handleScroll);
-      this.renderList(0);
+      this.renderList(0, true, true);
     }
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
     }
 
-    renderList = ( page = 0 , merge = true ) => {
+    renderList = ( page = 0 , merge = true, initialFetch = false ) => {
       this.setState({loading:true})
       let { size, productList, search, filterBy, sort } = this.state;
       let filterByText = '';
@@ -87,6 +88,11 @@ class MyProduct extends Component {
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           // this.setState({loading:false})
+          if (initialFetch && !data.length) {
+              this.setState({
+                showEmptyState: true
+              })
+          }
           if(data.length>0){
             if(merge){
               this.setState({
@@ -243,8 +249,19 @@ class MyProduct extends Component {
     }
 
     render() {
-        let { productList, sort } = this.state;
+        let { productList, sort, showEmptyState } = this.state;
         let flag = 1;
+        if (showEmptyState) {
+          return (
+            <div className="not-found">
+                <h1 className="msg">You don't have any products yet</h1>
+                <button className="btn btn-nitex-default" data-toggle="modal" data-target="#AddNewProduct">Add now</button>
+                <div className="illustration">
+                    <img src={require("../../assets/images/not-found.png")} alt=""/>
+                </div>
+            </div>
+          );
+        }
         // console.log("state",this.state)
         return (
             <LoadingOverlay
@@ -355,18 +372,6 @@ class MyProduct extends Component {
                                   {
                                     !this.state.hasNext && productList.length ?
                                     <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p>
-                                    :
-                                    <></>
-                                  }
-                                  {
-                                    !this.state.hasNext && !productList.length ?
-                                    <div className="not-found">
-                                        <h1 className="msg">You don't have any products yet</h1>
-                                        <button className="btn btn-nitex-default" data-toggle="modal" data-target="#AddNewProduct">Add now</button>
-                                        <div className="illustration">
-                                            <img src={require("../../assets/images/not-found.png")} alt=""/>
-                                        </div>
-                                    </div>
                                     :
                                     <></>
                                   }

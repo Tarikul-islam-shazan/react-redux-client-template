@@ -30,6 +30,7 @@ class MyProject extends Component {
           sortOrder : 'lastResponseTime,desc',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
+          showEmptyState: false
         };
     }
 
@@ -43,7 +44,7 @@ class MyProject extends Component {
         let { hasNext, page, loading } = this.state
         console.log("message",'bottom reached',hasNext, page, loading)
         if(hasNext && !loading){
-          this.renderList(page+1,true)
+          this.renderList(page+1, true)
         }else{
           if(!hasNext){
             // toastWarning("No more data found.")
@@ -59,14 +60,14 @@ class MyProject extends Component {
 
     componentDidMount = () => {
       window.addEventListener("scroll", this.handleScroll);
-      this.renderList(0);
+      this.renderList(0, true, true);
     }
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
     }
 
-    renderList = ( page = 0 , merge = true ) => {
+    renderList = ( page = 0 , merge = true, initialFetch = false ) => {
       this.setState({loading:true})
       let { size, projectList, search, filterBy, sort, project_type, sortOrder } = this.state;
       let statusFilter_text = '';
@@ -86,6 +87,11 @@ class MyProject extends Component {
           console.log('PROJECT LIST SUCCESS: ', data);
           // localStorage.removeItem('token');
           // this.setState({loading:false})
+          if (initialFetch && !data.length) {
+              this.setState({
+                showEmptyState: true
+              })
+          }
           if(data.length>0){
             if(merge){
               this.setState({
@@ -129,7 +135,7 @@ class MyProject extends Component {
       if(name === 'search'){
         return;
       }
-      this.renderList(0,false);
+      this.renderList(0, false);
     }
 
     keyPressed = async(e) => {
@@ -144,7 +150,7 @@ class MyProject extends Component {
         page : 0
         // size : 100
       })
-      this.renderList( 0 , false );
+      this.renderList(0, false);
     }
 
     onChangeCheckbox = async(e) => {
@@ -161,7 +167,7 @@ class MyProject extends Component {
           sort
         })
       }
-      this.renderList( 0 , false );
+      this.renderList(0, false);
     }
 
     details = (id) => {
@@ -169,7 +175,18 @@ class MyProject extends Component {
     }
 
     render() {
-      let { projectList } = this.state;
+      let { projectList, showEmptyState } = this.state;
+        if (showEmptyState) {
+            return(
+              <div className="not-found">
+                  <h1 className="msg">You don't have any projects yet</h1>
+                  {/*<button className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Start now</button>*/}
+                  <div className="illustration">
+                      <img src={require("../../assets/images/not-found.png")} alt=""/>
+                  </div>
+              </div>
+            );
+        }
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -290,18 +307,6 @@ class MyProject extends Component {
                             {
                               !this.state.hasNext && projectList.length ?
                               <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No more data...' */}</p>
-                              :
-                              <></>
-                            }
-                            {
-                              !this.state.hasNext && !projectList.length ?
-                              <div className="not-found">
-                                  <h1 className="msg">You don't have any projects yet</h1>
-                                  {/*<button className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Start now</button>*/}
-                                  <div className="illustration">
-                                      <img src={require("../../assets/images/not-found.png")} alt=""/>
-                                  </div>
-                              </div>
                               :
                               <></>
                             }
