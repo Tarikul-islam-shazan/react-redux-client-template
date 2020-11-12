@@ -618,6 +618,10 @@ aside.left-panel.collapsed .navigation > ul > li > a .badge {
 
 
 
+.navigation > ul > li > a {
+    border-left:3px solid transparent;
+    border-right:3px solid transparent;
+}
 .navigation > ul > li.active > a {
     color: #EE761F;
     background: #fff;
