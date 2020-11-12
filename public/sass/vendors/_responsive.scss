@@ -923,6 +923,9 @@
 
 }
 @media screen and (max-width:1024px){
+    .navigation > ul > li > a {
+        padding: 10px 13px;
+    }
     .product-detail-gallery .thumbnail-prev img {
         height: 610px;
     }
@@ -999,7 +1002,6 @@
     }
     .sidbar-icon {
         width: 28px;
-        margin-top: -3px;
     }
     //RFQ Details__
     .client-respons {
@@ -1194,8 +1196,12 @@
     }
 }
 @media screen and (max-width:991px){
+
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 40px) / 2);
+    }
     .dashboard-designs .filter-products.designs .card.product-card {
-        flex-basis: calc((100% - 60px) / 3);
+        flex-basis: calc((100% - 40px) / 2);
     }
     .questionnaire .card .card-img-top {
         height: 130px;
@@ -1231,6 +1237,7 @@
 }
 
 @media screen and (max-width:767px) {
+
     .product-detail-gallery {
         display: flex;
         flex-direction: column-reverse;
