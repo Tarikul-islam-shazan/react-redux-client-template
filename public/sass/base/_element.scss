@@ -192,7 +192,11 @@
     }
   }
 }
-
+.request-for-quote{
+  .style-item{
+    padding: 0;
+  }
+}
 .style-item {
   padding: 20px 0 0 0;
   .accordion {
@@ -701,12 +705,19 @@ ol {
 }
 .filter-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin-bottom: 40px;
+  button.btn-brand{
+    width: 180px;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 15px;
+  }
 }
 
 .short-by {
   position: relative;
+  margin-left: auto;
   &:before{
     content: "Sort by";
     position: absolute;

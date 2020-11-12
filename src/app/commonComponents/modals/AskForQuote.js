@@ -151,8 +151,8 @@ class AskForQuote extends Component {
                                           text={LOADER_TEXT}>
                                             <div className="form-row">
                                                 <div className="form-group col-md-12">
-                                                    <label>RFQ Title</label>
-                                                    <input type="text" className="form-control" placeholder="RFQ Title" name="title" onChange={this.onChange} value={title}/>
+                                                    <label>Give a name to your quote</label>
+                                                    <input type="text" className="form-control" placeholder="Enter here" name="title" onChange={this.onChange} value={title}/>
                                                     {
                                                       titleError ? <span className="error">{titleError}</span> : ''
                                                     }
