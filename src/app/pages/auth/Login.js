@@ -227,9 +227,9 @@ class Login extends Component {
                       <span>
                           <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
                       </span>
-                      Sign in with Linkedin
+                      Sign in with LinkedIn
                   </a>
-                  <p className="para_email">Or Sign in with your e-mail</p>
+                  <p className="para_email">Or sign in with your e-mail</p>
               </div>
               <form className="registration-form" autoComplete="off">
 

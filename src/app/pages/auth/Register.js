@@ -163,6 +163,11 @@ class Register extends Component {
       window.open("https://nitex.com/terms-and-conditions", "_blank")
     }
 
+    showPP = () => {
+        window.open("https://nitex.com/privacy-policy", "_blank")
+    }
+
+
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
         console.log('enter press here! ')
@@ -200,8 +205,8 @@ class Register extends Component {
               spinner
               text={LOADER_TEXT}>
               <div className="page-header text-center">
-                  <h1 className="page-title">Get Started with Nitex</h1>
-                  <p className="page-subtitle mobile_responsive">Create account, free forever. Build backend of your fashion label without any upfront cost.</p>
+                  <h1 className="page-title">Get started with Nitex</h1>
+                  <p className="page-subtitle mobile_responsive">Forever free account to build your clothing supply chain with $0 upfront cost</p>
               </div>
               <div className="text-center">
                   <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
@@ -333,7 +338,7 @@ class Register extends Component {
                   <div className="col-auto">
 
                       <p className="text-center size_manage_tab">
-                      By Signing up, I agree to the <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Terms & Conditions</Link> and <Link to="/" className="text-active size_manage_tab" style={{textDecoration: 'underline'}}>Privacy policy</Link>
+                          By signing up, I agree to the <Link className="text-active size_manage_tab" style={{textDecoration: 'underline'}} onClick={this.showTC}>Terms & Conditions</Link> and <Link className="text-active size_manage_tab" style={{textDecoration: 'underline'}} onClick={this.showPP}>Privacy Policy</Link>
                       </p>
                   </div>
                   <div className="col-auto manage_responsive">

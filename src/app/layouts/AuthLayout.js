@@ -24,7 +24,7 @@ const AuthLayout = ({children, ...rest}) => {
                     <a href="https://nitex.com" className="back-link back-link-override custom_l_a">
                               <span>
                                   <img src={ require('../assets/icons/home.png') } alt="back"/>
-                              </span> Back to Home</a>
+                              </span> Back to website</a>
                               
                                   {isShow &&
                                  <p> Already have an account?                        
