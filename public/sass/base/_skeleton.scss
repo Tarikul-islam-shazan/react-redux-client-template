@@ -1,0 +1,99 @@
+$base-color: #F4F4F4;
+$shine-color: rgba(229, 229, 229, 0.8);
+$animation-duration: 2s;
+$avatar-offset: 52 + 16;
+
+
+@mixin background-gradient {
+  background-image: linear-gradient(90deg, $base-color 0px, $shine-color 40px, $base-color 80px);
+  background-size: 600px;
+}
+
+body {
+  margin: 0;
+}
+
+.product-skeleton {
+  width: 250px;
+  height: 350px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px;
+
+  .action {
+    display: flex;
+    width: 100%;
+
+    .line {
+      height: 20px;
+      width: 50px;
+      margin-right: 15px;
+
+      + .line {
+        width: 100px;
+      }
+    }
+  }
+
+  .img {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+    border-radius: 100%;
+
+    @include background-gradient;
+
+    animation: shine-avatar $animation-duration infinite ease-out;
+  }
+
+  .line {
+    float: left;
+    width: 140px;
+    height: 16px;
+    margin-top: 12px;
+    border-radius: 7px;
+
+    @include background-gradient;
+
+    animation: shine-lines $animation-duration infinite ease-out;
+  }
+
+  .img + .line {
+    margin-top: 11px;
+    width: 100%;
+  }
+
+  .cat {
+    background-color: #ddd;
+    height: 8px;
+    width: 76px;
+    border-radius: 7px;
+
+    @include background-gradient;
+
+    animation: shine-lines $animation-duration infinite ease-out;
+  }
+}
+
+@keyframes shine-lines {
+  0% {
+    background-position: -100px;
+  }
+
+  40%, 100% {
+    background-position: 140px;
+  }
+}
+
+@keyframes shine-avatar {
+  0% {
+    background-position: -100px + $avatar-offset;
+  }
+
+  40%, 100% {
+    background-position: 140px + $avatar-offset;
+  }
+}
