@@ -15,7 +15,7 @@ import { RfqList } from "./components/RfqList";
 import { ProjectList } from "./components/ProjectList";
 import { DashboardTopCard } from "./components/DashboardTopCard";
 import ProductCard from '../../commonComponents/ProductCard';
-import {CreateSkeletons} from '../../commonComponents/ProductSkeleton';
+import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { columns,fixedHeaders } from '../../constants';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -334,7 +334,7 @@ class Dashboard extends Component {
                       }
                       {
                         this.state.loading &&
-                        <CreateSkeletons iterations={10}/>
+                        <CreateSkeletons iterations={10}><ProductSkeleton/></CreateSkeletons>
                       }
                   </div>
                   {!this.state.hasNext && nitexDesignList.length ? <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p> : <></>}

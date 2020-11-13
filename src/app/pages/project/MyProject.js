@@ -11,6 +11,7 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { ProjectCard } from './components/ProjectCard';
 import { encodeQueryData } from '../../services/Util';
+import {ProjectSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
@@ -188,155 +189,105 @@ class MyProject extends Component {
             );
         }
         return (
-            <LoadingOverlay
-              active={this.state.loading}
-              styles={{
-                overlay: (base) => ({
-                  ...base,
-                  background: LOADER_OVERLAY_BACKGROUND
-                }),
-                spinner: (base) => ({
-                  ...base,
-                  width: LOADER_WIDTH,
-                  position: LOADER_POSITION,
-                  top: LOADER_TOP,
-                  left: LOADER_LEFT,
-                  marginTop: LOADER_MARGIN_TOP,
-                  marginLeft: LOADER_MARGIN_LEFT,
-                  '& svg circle': {
-                    stroke: LOADER_COLOR
-                  }
-                }),
-                content: (base) => ({
-                  ...base,
-                  color: LOADER_COLOR
-                })
-              }}
-              spinner
-              text={LOADER_TEXT}>
-                <section className="collapse-side-menu-container">
-                    <nav id="sidebarCollapse" className="sidebar-collapse">
-                        <div>
-                            {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
-                            <h5>Filter by</h5>
-                            <div className="filter-by-check">
-                              <ul>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="Pending" name="Pending" value="PENDING" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label htmlFor="Pending">Pending</label>
-                                          </div>
+            <section className="collapse-side-menu-container">
+                <nav id="sidebarCollapse" className="sidebar-collapse">
+                    <div>
+                        {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
+                        <h5>Filter by</h5>
+                        <div className="filter-by-check">
+                          <ul>
+                              <li>
+                                  <div className="custom-chekbox">
+                                      <div className="form-group">
+                                          <input type="checkbox" id="Pending" name="Pending" value="PENDING" onChange={this.onChangeCheckbox} defaultChecked/>
+                                          <label htmlFor="Pending">Pending</label>
                                       </div>
-                                  </li>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="Running" name="Running" value="RUNNING" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label htmlFor="Running">Running</label>
-                                          </div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div className="custom-chekbox">
+                                      <div className="form-group">
+                                          <input type="checkbox" id="Running" name="Running" value="RUNNING" onChange={this.onChangeCheckbox} defaultChecked/>
+                                          <label htmlFor="Running">Running</label>
                                       </div>
-                                  </li>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="Completed" name="Completed" value="COMPLETED" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label htmlFor="Completed">Completed</label>
-                                          </div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div className="custom-chekbox">
+                                      <div className="form-group">
+                                          <input type="checkbox" id="Completed" name="Completed" value="COMPLETED" onChange={this.onChangeCheckbox} defaultChecked/>
+                                          <label htmlFor="Completed">Completed</label>
                                       </div>
-                                  </li>
-                                </ul>
-                             {/*<ul>
-                                 <li>
-                                     <div className="custom-chekbox">
-                                         <div className="form-group">
-                                             <input type="checkbox" id="DEVELOPMENT" name="DEVELOPMENT" value="DEVELOPMENT" onChange={this.onChangeCheckbox} defaultChecked/>
-                                             <label htmlFor="DEVELOPMENT">Development</label>
-                                         </div>
+                                  </div>
+                              </li>
+                            </ul>
+                         {/*<ul>
+                             <li>
+                                 <div className="custom-chekbox">
+                                     <div className="form-group">
+                                         <input type="checkbox" id="DEVELOPMENT" name="DEVELOPMENT" value="DEVELOPMENT" onChange={this.onChangeCheckbox} defaultChecked/>
+                                         <label htmlFor="DEVELOPMENT">Development</label>
                                      </div>
-                                 </li>
-                                 <li>
-                                     <div className="custom-chekbox">
-                                         <div className="form-group">
-                                             <input type="checkbox" id="BULK" name="BULK" value="BULK" onChange={this.onChangeCheckbox} defaultChecked/>
-                                             <label htmlFor="BULK">Full-fledged</label>
-                                         </div>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div className="custom-chekbox">
+                                     <div className="form-group">
+                                         <input type="checkbox" id="BULK" name="BULK" value="BULK" onChange={this.onChangeCheckbox} defaultChecked/>
+                                         <label htmlFor="BULK">Full-fledged</label>
                                      </div>
-                                 </li>
-                                 <li>
-                                     <div className="custom-chekbox">
-                                         <div className="form-group">
-                                             <input type="checkbox" id="SUPERVISION" name="SUPERVISION" value="SUPERVISION" onChange={this.onChangeCheckbox} defaultChecked/>
-                                             <label htmlFor="SUPERVISION">Supervision</label>
-                                         </div>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div className="custom-chekbox">
+                                     <div className="form-group">
+                                         <input type="checkbox" id="SUPERVISION" name="SUPERVISION" value="SUPERVISION" onChange={this.onChangeCheckbox} defaultChecked/>
+                                         <label htmlFor="SUPERVISION">Supervision</label>
                                      </div>
-                                 </li>
-                               </ul>*/}
+                                 </div>
+                             </li>
+                           </ul>*/}
+                        </div>
+                    </div>
+                </nav>
+                <div id="sidebar-menu-content">
+                    <section className="section my-project">
+                        <div className="filter-container">
+                            <div className="search">
+                            <input type="search" name="search" value={this.state.search} onChange={this.onChange} onKeyPress={this.keyPressed} placeholder="Search...."/>
+                            <button className="search" onClick={this._search}></button>
+                            </div>
+                            <div className="short-by">
+                                <select name="sortOrder" id="sort" value={this.state.sortOrder} onClick={this.onChange}>
+                                    <option value="lastResponseTime,desc">Urgent</option>
+                                    <option value="dateAdded,desc">Recent</option>
+                                </select>
                             </div>
                         </div>
-                    </nav>
-                    <div id="sidebar-menu-content">
-                        <section className="section my-project">
-                            <div className="filter-container">
-                                <div className="search">
-                                <input type="search" name="search" value={this.state.search} onChange={this.onChange} onKeyPress={this.keyPressed} placeholder="Search...."/>
-                                <button className="search" onClick={this._search}></button>
-                                </div>
-                                <div className="short-by">
-                                    <select name="sortOrder" id="sort" value={this.state.sortOrder} onClick={this.onChange}>
-                                        <option value="lastResponseTime,desc">Urgent</option>
-                                        <option value="dateAdded,desc">Recent</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                              <div className="skeleton project-list">
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                                  <div className="project-list-item">
-                                      <div className="cat"></div>
-                                      <div className="line"></div>
-                                  </div>
-                              </div>
-                            {
-                              projectList.length ? projectList.map((item,i) => {
-                                return(
-                                  <ProjectCard
-                                    item={item}
-                                    onClick={this.details}
-                                    key={i}
-                                    />
-                                )
-                              }) : <></>
-                            }
-                            {
-                              !this.state.hasNext && projectList.length ?
-                              <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No more data...' */}</p>
-                              :
-                              <></>
-                            }
-                        </section>
-                    </div>
-                </section>
-            </LoadingOverlay>
+                        {
+                          projectList.length ? projectList.map((item,i) => {
+                            return(
+                              <ProjectCard
+                                item={item}
+                                onClick={this.details}
+                                key={i}
+                                />
+                            )
+                          }) : <></>
+                        }
+                        {
+                          this.state.loading &&
+                          <CreateSkeletons iterations={10}><ProjectSkeleton/></CreateSkeletons>
+                        }
+                        {
+                          !this.state.hasNext && projectList.length ?
+                          <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/* 'No more data...' */}</p>
+                          :
+                          <></>
+                        }
+                    </section>
+                </div>
+            </section>
         );
     }
 }

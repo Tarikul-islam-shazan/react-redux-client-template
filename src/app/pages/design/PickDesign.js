@@ -11,7 +11,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import ProductCard from '../../commonComponents/ProductCard';
-import {CreateSkeletons} from '../../commonComponents/ProductSkeleton';
+import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { _getKey } from '../../services/Util';
@@ -405,7 +405,8 @@ class PickDesign extends Component {
                         })
                       }
                       {
-                        this.state.loading && <CreateSkeletons iterations={12}/>
+                        this.state.loading &&
+                        <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
                       }
                   </div>
                   {
