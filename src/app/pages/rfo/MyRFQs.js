@@ -406,6 +406,20 @@ class MyRFQs extends Component {
               </div>
 
             </div>
+
+            <div className="client-list">
+              <div className="skeleton quote-list-left">
+                <div className="client-info">
+                  <div className="img"></div>
+                  <div className="info">
+                    <div className="line"></div>
+                    <div className="cat"></div>
+                  </div>
+                </div>
+                <div className="button-skel"></div>
+              </div>
+            </div>
+
             {
               rfqList.map((item, i) => (
 
@@ -452,6 +466,18 @@ class MyRFQs extends Component {
                     </tr>
                   </thead>
                   <tbody>
+                 <tr>
+                   <td colspan="6">
+                     <div className="skeleton quote-list-table">
+                       <div className="cheque-skel"></div>
+                       <div className="cat"></div>
+                       <div className="line"></div>
+                       <div className="cat"></div>
+                       <div className="button-skel"></div>
+                       <div className="button-skel big"></div>
+                     </div>
+                   </td>
+                 </tr>
                     {
                       rfqDetails.rfqProductResponseList &&
                       rfqDetails.rfqProductResponseList.map((item, i) => {

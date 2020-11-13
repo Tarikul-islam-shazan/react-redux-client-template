@@ -290,9 +290,32 @@ class MyProject extends Component {
                                 </div>
                             </div>
 
-
-
-
+                              <div className="skeleton project-list">
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                                  <div className="project-list-item">
+                                      <div className="cat"></div>
+                                      <div className="line"></div>
+                                  </div>
+                              </div>
                             {
                               projectList.length ? projectList.map((item,i) => {
                                 return(

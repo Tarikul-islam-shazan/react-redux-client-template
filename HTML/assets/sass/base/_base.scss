@@ -6,7 +6,7 @@
  * Set up a decent box model on the root element
  */
  .dashboard-container{
-  padding-top: 88px;
+  padding-top: 76px;
   padding-bottom: 60px;
  }
 
@@ -60,7 +60,7 @@ textarea{
 }
 ::placeholder,
 ::-moz-placeholder{
-    font: Regular 16px/19px Helvetica;
+    font: Regular 16px/19px Open Sans;
     letter-spacing: 0.48px;
     color: #B5BBC9;
 }
@@ -307,11 +307,17 @@ input.type {
     padding: 20px 30px;
     border-radius: 40px;
     height: 60px;
+    margin-top: 25px;
 }
 .date-picker{
     padding-right: 30px !important;
     background: url(./images/icons/calendar_start.png) no-repeat;
     background-position: calc(100% - 14px) 17px;
+}
+.mail{
+    padding-right: 30px !important;
+    background: url(./images/icons/mail.png) no-repeat;
+    background-position: calc(100% - 14px) 14px;
 }
 .btn {
     font-size: 16px; 
@@ -330,6 +336,7 @@ input.type {
     background-color: #EE761F;
     color: #fff;
     cursor: pointer;
+    text-transform: initial;
     &:hover, &:active, &:focus{
         background-color: #EE761F;
         color: #fff !important;
@@ -438,6 +445,7 @@ table{
         text-align: center;
         display: block;
         overflow-x: visible;
+        margin-bottom: 0;
     }
     &.measurement-table{
         margin-bottom: 30px;
@@ -538,7 +546,7 @@ table.manage-project-table{
             border-bottom: 2px solid #FCFDFF !important;
             font-size: 18px;
             color: #6A7181;
-            padding: 16px 45px !important;
+            padding: 16px 26px !important;
             &:first-child{
                 border-radius: 5px 0 0 5px;
             }
@@ -560,7 +568,7 @@ table.manage-project-table{
                 background: #fff;
                 border-top: 1px solid #F1F2F6;
                 border-bottom: 1px solid #F1F2F6;
-                padding: 16px 45px;
+                padding: 16px 26px;
                 &:first-child{
                     border-radius: 5px 0 0 5px;
                     border-left: 1px solid #F1F2F6;
@@ -766,4 +774,55 @@ table.payment-checkout {
         padding: 6px 20px;
     }
 }
- 
+
+h4.details-title {
+    font-size: 24px;
+    text-align: center;
+    background: #F2F4F8;
+    padding: 15px;
+    border: 1px solid #C2C5CC;
+    border-radius: 3px;
+    line-height: 25px;
+    color: #21242B;
+}
+#sidebarCollapse
+{
+    overflow-y: auto;
+}
+
+/*
+ *  STYLE 3
+ */
+
+#sidebarCollapse::-webkit-scrollbar-track
+{
+    background-color: #DFDCE6;
+}
+
+#sidebarCollapse::-webkit-scrollbar
+{
+    width: 7px;
+    background-color: #DFDCE6;
+}
+
+#sidebarCollapse::-webkit-scrollbar-thumb
+{
+    background-color: #8B8A8E;
+}
+.ask-quote{
+    color: #fff;
+    font-size: 11px;
+    border: 1px solid rgb(238, 118, 31);
+    border-radius: 25px;
+    padding: 8px 25px;
+    background: rgb(238, 118, 31);
+    text-align: center;
+    font-weight: 600;
+}
+.ask-quote:focus,
+.ask-quote:hover
+{
+    outline: 0;
+    background: #fff;
+    color: #ee761f;
+}

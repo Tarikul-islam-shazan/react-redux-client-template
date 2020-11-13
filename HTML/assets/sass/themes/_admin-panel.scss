@@ -1,0 +1,27 @@
+//Add Invoice
+.add-invoice{
+  max-width: 813px;
+  margin: 0 auto;
+  border: 1px solid #ececec;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 25px -8px rgba(0,0,0,.1);
+  &.edit-product {
+  max-width: 936px;
+}
+
+  .back{
+    position: relative;
+  }
+  h4{
+    margin: 20px 0 40px 0px;
+  }
+  a.invoice-foot-logo img {
+    width: 180px;
+    margin-top: 5px;
+  }
+
+}
+table.invoice-bottom-table tr td {
+  padding: 16px 25px !important;
+}
