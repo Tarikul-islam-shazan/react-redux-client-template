@@ -4,6 +4,47 @@
     }
 }
 @media screen and (max-width:1440px) {
+    .product-skeleton {
+        height: 306px;
+        .img {
+            height: 175px;
+        }
+    }
+
+    .messenger {
+        max-height: 500px;
+    }
+    .quotation-container {
+        padding: 0px 10px 0px 30px !important;
+    }
+    .dashboard-container {
+        padding-top: 76px;
+    }
+    .client-respons .client-list:nth-child(2) .list {
+        margin-top: -15px;
+    }
+    //user profile
+    .profile {
+        padding: 0 30px;
+    }
+    .profile-info .user-photo {
+        flex-basis: 25%;
+    }
+    .profile-info .user-info {
+        padding-left: 60px;
+        flex-basis: 75%;
+    }
+
+    .card.product-card .card-img-top {
+        height: 235px;
+    }
+    .notification {
+        width: 475px;
+        height: 580px;
+    }
+    .notification.all {
+        max-width: 800px;
+    }
     .dropdown-item {
         font-size: 13px;
     }
@@ -21,7 +62,7 @@
         margin-top: 40px;
     }
     .sidebar-collapse {
-        padding: 36px 20px 30px 10px;
+        padding: 36px 20px 130px 10px;
         width: 16%;
 
         input {
@@ -34,6 +75,9 @@
             line-height: 34px;
             padding: 2px 10px;
             font-size: 14px;
+            &:after{
+                top: 49%;
+            }
         }
 
         .form-group {
@@ -151,9 +195,11 @@
     .filter-products .card {
         flex-basis: calc(106% / 6);
     }
-
+    .quotation-container {
+        margin-left: 27.5% !important;
+    }
     .client-respons {
-        max-width: 21%;
+        max-width: 24%;
         width: 100%;
         padding: 0 !important;
         margin: -28px 0 0 -20px;
@@ -171,7 +217,7 @@
                 img {
                     width: 40px;
                     height: 40px;
-                    margin-right: 4px;
+                    margin-right: 10px;
                 }
 
                 span {
@@ -184,6 +230,12 @@
                 padding: 5px 10px;
                 font-size: 12px;
             }
+        }
+    }
+    .client-respons .client-list .list .client-info .info {
+        width: 154px;
+        h6 {
+            width: 145px;
         }
     }
     table.quotation-table tr {
@@ -225,6 +277,7 @@
     }
     .back {
         font-size: 16px;
+        flex-basis: 100px;
     }
     .messenger {
         img {
@@ -242,7 +295,7 @@
     }
     input.type {
         height: 50px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
     .project-profile {
         margin: 0;
@@ -335,15 +388,16 @@
     }
     .timeline {
         margin: 0 15px;
-        flex-basis: 385px;
+        flex-basis: 446px;
     }
     .tag-n-deadline {
-        flex-basis: 32%;
+        flex-basis: 27%;
     }
     .date-range input {
         height: 35px !important;
         padding: 5px 6px;
         background-position: calc(100% - 6px) 9px;
+        width: 143px;
     }
     .tag-n-deadline .sample-deadline .list {
         font-size: 14px;
@@ -387,7 +441,7 @@
         line-height: 34px;
         height: 35px;
         font-size: 14px;
-
+        margin-right: 5px;
         &:after {
             right: 12px;
         }
@@ -521,15 +575,16 @@
         width: 146px;
         margin-top: 7px;
     }
-    .manage-product .card {
-        flex-basis: calc(90.7% / 4);
-    }
+
 
     table.manage-project-table {
         thead {
             th {
                 font-size: 15px;
                 padding: 10px 15px !important;
+                &:last-child{
+                    width: 96px;
+                }
             }
         }
 
@@ -574,7 +629,7 @@
         font-size: 14px;
     }
     .heading h1 {
-        font: Bold 24px/32px "Helvetica";
+        font: Bold 24px/32px "Open Sans";
     }
     .heading p {
         font-size: 14px;
@@ -645,12 +700,13 @@
         margin-left: 5px;
     }
     //My Project
-    .stage {
+    .stage span {
         width: auto;
         padding: 0 30px 0 10px;
         line-height: 34px;
         height: 35px;
         font-size: 14px;
+        margin-right: 5px;
         &:after{
             right: 12px;
             top: 16px
@@ -666,10 +722,42 @@
     button.send-feed {
         background-size: 16px;
     }
+    .sidebar-collapse .quote-filter {
+        .nice-select{
+            padding: 10px 30px 10px 18px !important;
+            margin-bottom: -20px;
+            .list{
+                margin: 0;
+            }
+        }
+    }
+    .sidebar-action button {
+        width: 85px !important;
+        height: 40px !important;
+    }
+    .filter, .tag-n-deadline {
+        flex-basis: 26%;
+    }
+    .timeline {
+        flex-basis: 45%;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        width: 320px !important;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 700px;
+    }
 }
 @media screen and (max-width:1366px){
 
+    .date-range {
+        flex-direction: column;
+        align-items: self-start;
+    }
 
+    .date-range span {
+        margin: 10px;
+    }
     .filter-products .card {
         flex-basis: calc(104% / 6);
     }
@@ -680,7 +768,7 @@
         margin-left: 200px;
     }
     .sidebar-collapse {
-        padding: 36px 20px 30px 0px;
+        padding: 36px 20px 150px 0px;
         .form-group{
             .nice-select{
                 font-size: 14px;
@@ -779,8 +867,25 @@
         padding: 4px 8px;
         font-size: 10px;
     }
+    .tag-n-deadline .sample-deadline .list {
+        display: block;
+        line-height: 24px;
+        .span, a{
+            display: block;
+            padding: 0;
+        }
+    }
 }
 @media screen and (max-width:1280px){
+    .add-invoice.edit-product {
+        max-width: 832px;
+    }
+    .client-respons .client-list .list .client-info .info {
+        width: 115px;
+        h6{
+            width: 100px;
+        }
+    }
     .search input {
         font-size: 14px;
     }
@@ -789,7 +894,7 @@
         top: 13px;
     }
     .manage-product .card {
-        flex-basis: calc(89.4% / 4);
+        flex-basis: calc(91.4% / 3);
         margin: 10px;
     }
     .manage-product .card .card-body h5 {
@@ -822,18 +927,43 @@
             }
         }
       }
-    .tag-n-deadline .sample-deadline .list {
-        display: block;
-        line-height: 24px;
-        .span, a{
-            display: block;
-        }
-    }
+
 }
 @media screen and (max-width:1024px){
-    .modal-dialog {
-        max-width: 90%;
+    .product-skeleton {
+        height: 392px;
+        .img {
+            height: 245px;
+        }
     }
+    .navigation > ul > li > a {
+        padding: 10px 13px;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 610px;
+    }
+    .quotation-container {
+        margin: 20px 0 0 0 !important;
+        padding: 0 !important;
+    }
+    .profile .profile-tab ul {
+        max-width: 100%;
+    }
+    .successful {
+        padding: 20px;
+    }
+    .responsive-show{display: block}
+    .responsive-off{display: none}
+
+    //User Profile
+    .profile-info .user-photo {
+        flex-basis: 35%;
+    }
+    .profile-info .user-info {
+        padding-left: 40px;
+        flex-basis: 65%;
+    }
+    //Notification
     .questionnaire .section-content .row .col {
         flex-basis: 33%;
     }
@@ -885,7 +1015,6 @@
     }
     .sidbar-icon {
         width: 28px;
-        margin-top: -3px;
     }
     //RFQ Details__
     .client-respons {
@@ -965,7 +1094,40 @@
     .sidebar-collapse .form-group .nice-select {
         margin: 10px 0 0 10px;
     }
+    .sidebar-collapse.admin-sidebar .form-group .nice-select {
+        margin: 0;
+    }
     //My Project
+    .modal-dialog.modal-xl {
+        max-width: calc(100% - 20px);
+    }
+    .checklist {
+        padding: 0 20px 20px 20px;
+        flex-wrap: wrap;
+    }
+    .production {
+        flex-basis: calc(100% / 2 - 10px);
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .item .messages-popup {
+        right: inherit;
+        transform: translateX(-50%);
+        left: 50%;
+        width: 362px;
+    }
+    .post .post-heading .header-title .name-n-date h4 {
+        font-size: 15px;
+    }
+    .post .post-description p {
+        font-size: 12px;
+    }
+    .comment-status .messages-popup {
+        right: inherit;
+        transform: translateX(-83%);
+        left: 0;
+        width: 330px;
+    }
     .filter {
         flex-basis: 25%;
     }
@@ -985,9 +1147,12 @@
     .quote-tab ul.nav-tabs li a {
         padding: 12px 25px;
         margin-bottom: 15px;
+        width: 194px;
+        text-align: center;
     }
     .project-status-container {
         padding: 20px;
+        padding-top: 64px;
     }
     .project-statistic .ps-item {
         margin-right: 15px;
@@ -1024,6 +1189,7 @@
     }
     .filter .production {
         margin-bottom: 15px;
+        min-height: auto;
     }
     .tag-n-deadline {
         flex-basis: 30%;
@@ -1038,10 +1204,25 @@
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: calc((100% - 100px) / 4);
     }
+    .card.product-card .card-img-top {
+        height: 340px;
+    }
 }
 @media screen and (max-width:991px){
+    .filter-container{
+        .search input {
+            width: 225px;
+        }
+         button.btn-brand {
+            width: 170px;
+            height: 47px;
+        }
+    }
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 40px) / 2);
+    }
     .dashboard-designs .filter-products.designs .card.product-card {
-        flex-basis: calc((100% - 60px) / 3);
+        flex-basis: calc((100% - 40px) / 2);
     }
     .questionnaire .card .card-img-top {
         height: 130px;
@@ -1063,8 +1244,79 @@
             margin-bottom: 20px !important;
         }
     }
+
+    //My Project
+    .style-overview {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .style-overview .overview {
+        flex-basis: calc(100% / 2 - 10px);
+        margin: 0;
+        margin-bottom: 20px;
+    }
 }
+
 @media screen and (max-width:767px) {
+    .filter-container button.btn-brand {
+        width: 100%;
+        height: 50px;
+        margin: 0 0 20px 0;
+    }
+    .product-detail-gallery {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .product-detail-gallery .thumbnail-slider ul li {
+        display: inline-block;
+    }
+    .product-detail-gallery .thumbnail-slider {
+        width: 100%;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 418px;
+    }
+    a.link-invoice {
+        width: 300px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    //user profile
+    .profile {
+        padding: 0;
+    }
+    .profile-info {
+        flex-direction: column;
+    }
+    .profile .profile-tab ul {
+        max-width: 100%;
+    }
+    .profile .profile-tab ul li {
+        width: 50%;
+    }
+    .profile .profile-tab ul li a {
+        font-size: 16px;
+        width: 100%;
+        margin: 0;
+        padding: 15px 0 5px 0;
+        text-align: center;
+    }
+    .profile-info .user-info {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+    .profile .change-pass {
+        max-width: 100%;
+    }
+    //user profile end
+    .client-respons .client-list .list .client-info .info {
+        width: 158px;
+        h6{
+            width: 100%;
+        }
+    }
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: 100%;
     }
@@ -1147,7 +1399,7 @@
     .datepicker.dropdown-menu{
         width: auto;
     }
-    ul.navbar-nav li:nth-child(3) {
+    ul.navbar-nav li.notification-bell {
         margin: 1px 15px 10px !important
     }
     ul.navbar-nav li:nth-child(2) img{
@@ -1165,8 +1417,9 @@
     li.nav-item {
         width: auto;
         float: left;
-        margin: 0 0 10px 0 !important;
+        margin: 0 !important;
         vertical-align: middle;
+        margin-bottom: -1px !important;
     }
     .dashboard-container {
         padding-top: 116px;
@@ -1236,7 +1489,7 @@
     //Add New Product
     #FilltheForm{
         .btn-outline-secondary{
-            margin: 24px 0 0 0 !important;
+            margin: 24px 0 0 15px !important;
             float: left !important;
             width: 125px;
         }
@@ -1261,7 +1514,7 @@
         padding-left: 0;
     }
     .development-step-1 .tab-content {
-        padding: 50px 53px;
+        padding: 50px 40px;
         outline-offset: -15px;
     }
     .project-statistic .ps-item {
@@ -1272,16 +1525,226 @@
     }
     .style-overview .overview {
         flex-basis: 100%;
+        margin: 0 0 20px 0;
     }
     .project-profile .back {
         position: relative;
         left: 0;
         top: 0;
         cursor: pointer;
-        text-align: center;
+        text-align: left;
         margin: 0 auto;
-        width: 75px;
+        width: 100%;
         display: inherit;
         margin-bottom: 20px;
+    }
+
+    //Project Update
+    .filter {
+        flex-basis: 100%;
+        .production {
+            min-height: auto;
+        }
+    }
+    .timeline {
+        flex-basis: 100%;
+        margin: 0;
+        .editor .write {
+            padding: 10px 10px 0 70px;
+        }
+        .editor .footer-tab {
+            margin: 0 10px 10px 10px;
+            padding-top: 10px;
+            flex-wrap: wrap;
+        }
+    }
+    .editor .footer-tab .file {
+        margin-top: 0px;
+    }
+    .editor .footer-tab {
+        button.send-feed{
+            margin-top: 0;
+            bottom: 0;
+        }
+    }
+    .timeline .editor .write {
+        padding: 10px;
+        padding-top: 65px;
+    }
+    .editor .write img.user-photo {
+        left: 10px;
+        top: 8px;
+    }
+    .feedback .editor .write img.user-photo {
+        top: 0;
+    }
+    .editor .write textarea {
+        padding-top: 0;
+    }
+    .style-overview {
+        flex-wrap: wrap;
+    }
+    .feedback .feedback-post .post .post-heading span.date-time {
+        width: auto;
+        text-align: left !important;
+    }
+    .post .post-heading {
+        flex-direction: column;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        padding: 13px 16px;
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+    .timeline .post .post-tag .table-badge {
+        margin-bottom: 10px;
+    }
+    .feedback .editor .feedback-editor {
+        border-radius: 20px;
+    }
+    .stage .sub-stage {
+        flex-direction: column;
+        width: 200px;
+        padding-bottom: 15px;
+    }
+    .stage .sub-stage ul .title {
+        width: 100%;
+        line-height: 20px;
+        padding: 15px 15px;
+        border-top: 1px solid #eee;
+        font-weight: 600;
+        color: #424242;
+    }
+    .stage .sub-stage ul li {
+        padding: 10px 15px 10px 15px;
+        line-height: 20px;
+    }
+    .stage .sub-stage ul {
+        padding-bottom: 0;
+    }
+    .stage span {
+        padding: 6px 25px 5px 10px;
+        height: 35px;
+        width: 125px;
+        line-height: 21px;
+        &:after {
+            margin-top: -7px;
+            right: 15px;
+        }
+    }
+    .notification {
+        width: 338px;
+        height: 400px;
+        right: -92px;
+        top: 12px;
+        ul{
+            li:last-child {
+                position: relative;
+                right: initial;
+            }
+            li:nth-child(2){
+                float: initial;
+                margin-right: 0 !important;
+                margin-bottom: 0 !important;
+                margin: 0 !important;
+            }
+            li:nth-child(3){
+                float: initial;
+                margin-right: 0 !important;
+                margin-bottom: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    }
+    .notification .day h6.timing-date, .notification .day ul li a, .notification .see-all a {
+        padding: 10px;
+    }
+    .notification .day ul li a .notify-list .info {
+        width: 188px;
+        .name{
+            width: 188px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 14px;
+        }
+         .tag {
+            font-size: 12px;
+        }
+    }
+    .notification .day ul li a .notify-list img.product {
+        width: 50px !important;
+    }
+    .notification h3.title {
+        padding: 10px 10px;
+        font-size: 16px;
+    }
+
+    .checklist {
+        padding: 10px;
+        flex-direction: column;
+    }
+    .production {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .item .messages-popup {
+        right: 0;
+        width: 100%;
+        height: auto;
+    }
+    .modal-dialog.modal-xl {
+        max-width: 100%;
+    }
+    .item .messages-popup .post {
+        margin: 10px;
+    }
+    table.payment-checkout button.btn-brand {
+        float: right !important;
+    }
+    button.btn-brand.btn-outline-secondary {
+        margin: 25px 14px 0 0 !important;
+        width: 96px;
+    }
+
+    .uploaded-img .item .card .card-body {
+        padding: 10px !important;
+    }
+
+
+    //Admin Panel
+    table.manage-project-table {
+        display: block;
+        overflow: auto;
+    }
+    .add-invoice .btn-brand {
+        margin-top: -3rem!important;
+    }
+    .guide {
+        flex-direction: column;
+        ul{
+            margin-top: 15px;
+            li{
+                font-size: 14px;
+            }
+        }
+    }
+    .manage-product .card {
+        flex-basis: 100%;
+        margin: 10px;
+    }
+    .invoice-width {
+        width: 700px;
+        overflow-x: auto;
+    }
+}
+@media screen and (max-width:320px) {
+    ul.navbar-nav li.notification-bell {
+        margin: 0 !important;
+        position: absolute;
+        right: 87px;
+    }
+    .notification {
+        width: 320px;
     }
 }

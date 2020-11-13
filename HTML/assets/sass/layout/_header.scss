@@ -37,16 +37,17 @@ button#sidebarToggleTop {
 
 
 .notification {
-    position: absolute; 
-    right: 0;
-    top: 37px;
-    background: #fff; 
+    position: absolute;
+    right: -10px;
+    top: 12px;
+    background: #fff;
     border-radius: 3px;
-    box-shadow: 0px 13px 26px #00000042; 
+    box-shadow: 0px 13px 26px #00000042;
     text-align: left;
-    width: 500px; 
+    width: 500px;
     overflow-y: auto;
     height: 800px;
+    z-index: 99;
     &.all{
         position: relative;
         top: inherit;
@@ -67,7 +68,7 @@ button#sidebarToggleTop {
     }
     h3.title {
         text-align: left;
-        font: Bold 20px/24px Helvetica;
+        font: Bold 20px/24px Open Sans;
         letter-spacing: 0px;
         color: #21242B;
         padding: 20px;
@@ -110,14 +111,14 @@ button#sidebarToggleTop {
                     background: #fff;
                     transition: all ease-in-out .2s;
                     &:hover{
-                        background: #f8f5ff;
+                        background: #f4f5f8;
                     }
                     .notify-list {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
                         img.type {
-                            width: 40px;
+                            width: 40px !important;
                             height: 40px;
                             object-fit: cover;
                             display: inline-block;
@@ -135,6 +136,7 @@ button#sidebarToggleTop {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
+                                text-transform: initial;
                                 span{
                                     color: $brand-color;
                                 }
