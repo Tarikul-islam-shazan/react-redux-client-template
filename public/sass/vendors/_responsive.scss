@@ -4,6 +4,13 @@
     }
 }
 @media screen and (max-width:1440px) {
+    .product-skeleton {
+        height: 306px;
+        .img {
+            height: 175px;
+        }
+    }
+
     .messenger {
         max-height: 500px;
     }
@@ -923,6 +930,12 @@
 
 }
 @media screen and (max-width:1024px){
+    .product-skeleton {
+        height: 392px;
+        .img {
+            height: 245px;
+        }
+    }
     .navigation > ul > li > a {
         padding: 10px 13px;
     }

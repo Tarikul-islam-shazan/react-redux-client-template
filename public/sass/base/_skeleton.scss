@@ -9,13 +9,10 @@ $avatar-offset: 52 + 16;
   background-size: 600px;
 }
 
-body {
-  margin: 0;
-}
 
 .product-skeleton {
-  width: 250px;
-  height: 350px;
+  width: 100%;
+  height: 440px;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -25,12 +22,12 @@ body {
   .action {
     display: flex;
     width: 100%;
+    margin: 0;
 
     .line {
       height: 20px;
       width: 50px;
       margin-right: 15px;
-
       + .line {
         width: 100px;
       }
@@ -39,10 +36,10 @@ body {
 
   .img {
     float: left;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 285px;
     background-color: #ccc;
-    border-radius: 100%;
+    border-radius: 10%;
 
     @include background-gradient;
 
@@ -84,7 +81,7 @@ body {
   }
 
   40%, 100% {
-    background-position: 140px;
+    background-position: 280px;
   }
 }
 
@@ -94,6 +91,6 @@ body {
   }
 
   40%, 100% {
-    background-position: 140px + $avatar-offset;
+    background-position: 280px + $avatar-offset;
   }
 }

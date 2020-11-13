@@ -13,6 +13,7 @@ import ProductCard from '../../commonComponents/ProductCard';
 import { encodeQueryData, _getKey } from '../../services/Util';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
+import {CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 
 class MyProduct extends Component {
 
@@ -355,6 +356,7 @@ class MyProduct extends Component {
                                      </div>
                                   </div>
                                   <div className="filter-products designs">
+                                      <CreateSkeletons iterations={10}/>
                                       {
                                         productList.length ? productList.map(( item , i ) => {
                                           return(
