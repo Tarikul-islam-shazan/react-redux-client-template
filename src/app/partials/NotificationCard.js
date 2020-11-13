@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addImageSuffix } from '../services/Util';
 
 export const NotificationCard = ({item, markRead}) =>{
 
@@ -19,7 +20,7 @@ export const NotificationCard = ({item, markRead}) =>{
                 </div>
                 {
                   item.notificationImagePath ?
-                  <img src={item.notificationImagePath} className="product" />
+                  <img src={addImageSuffix(item.notificationImagePath, '_xicon')} className="product" />
                   :
                   <img src={require("../assets/images/default_product.jpg")} className="product" />
                 }
