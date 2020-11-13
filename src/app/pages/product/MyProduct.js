@@ -265,122 +265,97 @@ class MyProduct extends Component {
         }
         // console.log("state",this.state)
         return (
-            <LoadingOverlay
-              active={this.state.loading}
-              styles={{
-                overlay: (base) => ({
-                  ...base,
-                  background: LOADER_OVERLAY_BACKGROUND
-                }),
-                spinner: (base) => ({
-                  ...base,
-                  width: LOADER_WIDTH,
-                  position: LOADER_POSITION,
-                  top: LOADER_TOP,
-                  left: LOADER_LEFT,
-                  marginTop: LOADER_MARGIN_TOP,
-                  marginLeft: LOADER_MARGIN_LEFT,
-                  '& svg circle': {
-                    stroke: LOADER_COLOR
-                  }
-                }),
-                content: (base) => ({
-                  ...base,
-                  color: LOADER_COLOR
-                })
-              }}
-              spinner
-              text={LOADER_TEXT}>
-              <section className="collapse-side-menu-container">
-                      <nav id="sidebarCollapse" className="sidebar-collapse">
-                          {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
-                             <h5>Filter by</h5>
-                             <div className="filter-by-check">
-                              <ul>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="ADDED_BY_ME" name="ADDED_BY_ME" value="ADDED_BY_ME" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label for="ADDED_BY_ME">Added by me</label>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="FAVED_BY_ME" name="FAVED_BY_ME" value="FAVED_BY_ME" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label for="FAVED_BY_ME">My favourites</label>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="QUOTATION" name="QUOTATION" value="QUOTATION" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label for="QUOTATION">Requested quotes</label>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  {/*<li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="DEVELOPMENT" name="DEVELOPMENT" value="DEVELOPMENT" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label for="DEVELOPMENT">In development</label>
-                                          </div>
-                                      </div>
-                                  </li>*/}
-                                  <li>
-                                      <div className="custom-chekbox">
-                                          <div className="form-group">
-                                              <input type="checkbox" id="PRODUCTION" name="BULK_PRODUCTION" value="BULK_PRODUCTION" onChange={this.onChangeCheckbox} defaultChecked/>
-                                              <label for="PRODUCTION">In production</label>
-                                          </div>
-                                      </div>
-                                  </li>
-                                </ul>
-                             </div>
-                        </nav>
-                              <div id="sidebar-menu-content">
-                                  <div className="filter-container">
-                                      <div className="search">
-                                          <input type="search" name="search" value={this.state.search} onChange={this.onChangeSearchText} onKeyPress={this.keyPressed} placeholder="Search...."/>
-                                          <button className="search" onClick={this._search}></button>
-                                      </div>
-                                      <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
-                                     <div className="short-by">
-                                        <select name="sort" id="sort" value={sort} onClick={this.onChange}>
-                                          <option value=""></option>
-                                          <option value="lastResponseTime,desc">Urgent</option>
-                                          <option value="dateAdded,desc">Recent</option>
-                                        </select>
-                                     </div>
-                                  </div>
-                                  <div className="filter-products designs">
-                                      <CreateSkeletons iterations={10}/>
-                                      {
-                                        productList.length ? productList.map(( item , i ) => {
-                                          return(
-                                            <ProductCard
-                                              item={item}
-                                              key={_getKey()}
-                                              showDetails={this.details}
-                                              likeProduct={this.likeProduct}
-                                              unlikeProduct={this.unlikeProduct}
-                                             />
-                                          )
-                                        }) : <></>
-                                      }
+          <section className="collapse-side-menu-container">
+              <nav id="sidebarCollapse" className="sidebar-collapse">
+                {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
+                   <h5>Filter by</h5>
+                   <div className="filter-by-check">
+                    <ul>
+                        <li>
+                            <div className="custom-chekbox">
+                                <div className="form-group">
+                                    <input type="checkbox" id="ADDED_BY_ME" name="ADDED_BY_ME" value="ADDED_BY_ME" onChange={this.onChangeCheckbox} defaultChecked/>
+                                    <label for="ADDED_BY_ME">Added by me</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="custom-chekbox">
+                                <div className="form-group">
+                                    <input type="checkbox" id="FAVED_BY_ME" name="FAVED_BY_ME" value="FAVED_BY_ME" onChange={this.onChangeCheckbox} defaultChecked/>
+                                    <label for="FAVED_BY_ME">My favourites</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="custom-chekbox">
+                                <div className="form-group">
+                                    <input type="checkbox" id="QUOTATION" name="QUOTATION" value="QUOTATION" onChange={this.onChangeCheckbox} defaultChecked/>
+                                    <label for="QUOTATION">Requested quotes</label>
+                                </div>
+                            </div>
+                        </li>
+                        {/*<li>
+                            <div className="custom-chekbox">
+                                <div className="form-group">
+                                    <input type="checkbox" id="DEVELOPMENT" name="DEVELOPMENT" value="DEVELOPMENT" onChange={this.onChangeCheckbox} defaultChecked/>
+                                    <label for="DEVELOPMENT">In development</label>
+                                </div>
+                            </div>
+                        </li>*/}
+                        <li>
+                            <div className="custom-chekbox">
+                                <div className="form-group">
+                                    <input type="checkbox" id="PRODUCTION" name="BULK_PRODUCTION" value="BULK_PRODUCTION" onChange={this.onChangeCheckbox} defaultChecked/>
+                                    <label for="PRODUCTION">In production</label>
+                                </div>
+                            </div>
+                        </li>
+                      </ul>
+                   </div>
+              </nav>
+              <div id="sidebar-menu-content">
+                  <div className="filter-container">
+                      <div className="search">
+                          <input type="search" name="search" value={this.state.search} onChange={this.onChangeSearchText} onKeyPress={this.keyPressed} placeholder="Search...."/>
+                          <button className="search" onClick={this._search}></button>
+                      </div>
+                      <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
+                     <div className="short-by">
+                        <select name="sort" id="sort" value={sort} onClick={this.onChange}>
+                          <option value=""></option>
+                          <option value="lastResponseTime,desc">Urgent</option>
+                          <option value="dateAdded,desc">Recent</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div className="filter-products designs">
+                      {
+                        productList.length ? productList.map(( item , i ) => {
+                          return(
+                            <ProductCard
+                              item={item}
+                              key={_getKey()}
+                              showDetails={this.details}
+                              likeProduct={this.likeProduct}
+                              unlikeProduct={this.unlikeProduct}
+                             />
+                          )
+                        }) : <></>
+                      }
+                      {
+                        this.state.loading && <CreateSkeletons iterations={12}/>
+                      }
 
-                                  </div>
-                                  {
-                                    !this.state.hasNext && productList.length ?
-                                    <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p>
-                                    :
-                                    <></>
-                                  }
-                              </div>
-              </section>
-            </LoadingOverlay>
+                  </div>
+                  {
+                    !this.state.hasNext && productList.length ?
+                    <p  style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p>
+                    :
+                    <></>
+                  }
+              </div>
+          </section>
         );
     }
 }
