@@ -80,7 +80,7 @@ class Root extends Component {
         return (
             <Router>
                 <Switch>
-                  <PublicRoute exact path="/" component={ Dashboard }/>
+                  <PublicRoute exact path="/" component={ PickDesign }/>
                   <QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
