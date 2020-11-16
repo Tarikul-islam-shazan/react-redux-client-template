@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { projectStatus } from '../../../services/Util';
+import { projectStatus, addImageSuffix } from '../../../services/Util';
 
 export const ProjectStatus = ({data}) => {
   return(
@@ -51,7 +51,7 @@ export const ProjectStatus = ({data}) => {
                 <div className="member">
                   {
                     data.projectManagerResponse && data.projectManagerResponse.profilePicDocument && data.projectManagerResponse.profilePicDocument.docUrl ?
-                    <img src={data.projectManagerResponse.profilePicDocument.docUrl} alt=""/>
+                    <img src={addImageSuffix(data.projectManagerResponse.profilePicDocument.docUrl, '_xicon')} alt=""/>
                     :
                     <img src={require("../../../assets/images/pro_pic_default.png")} alt=""/>
                   }
@@ -63,7 +63,7 @@ export const ProjectStatus = ({data}) => {
                       data.projectMemberResponseList.map((item,i)=>{
                         return(
                           item.profilePicDocument.docUrl ?
-                          <img key={i} src={item.profilePicDocument.docUrl} alt=""/> :
+                          <img key={i} src={addImageSuffix(item.profilePicDocument.docUrl, '_xicon')} alt=""/> :
                           <img src={require("../../../assets/images/pro_pic_default.png")} alt=""/>
                         )
                       })
