@@ -4622,6 +4622,9 @@ template {
     margin: 0;
     margin-bottom: 20px; } }
 @media screen and (max-width: 767px) {
+  button.add-new-design {
+    width: 100%; }
+
   .skeleton.project-list {
     height: 140px; }
 

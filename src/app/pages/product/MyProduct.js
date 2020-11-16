@@ -267,7 +267,7 @@ class MyProduct extends Component {
         return (
           <section className="collapse-side-menu-container">
               <nav id="sidebarCollapse" className="sidebar-collapse">
-                {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
+                  <button className="btn-brand d-block d-sm-none add-new-design" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
                    <h5>Filter by</h5>
                    <div className="filter-by-check">
                     <ul>
@@ -320,7 +320,7 @@ class MyProduct extends Component {
                           <input type="search" name="search" value={this.state.search} onChange={this.onChangeSearchText} onKeyPress={this.keyPressed} placeholder="Search...."/>
                           <button className="search" onClick={this._search}></button>
                       </div>
-                      <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
+                      <button className="btn-brand d-none d-sm-block" data-toggle="modal" data-target="#AddNewProduct">+ New design</button>
                      <div className="short-by">
                         <select name="sort" id="sort" value={sort} onClick={this.onChange}>
                           <option value=""></option>
