@@ -111,7 +111,7 @@ function getBaseUrl(){
 function getHotjarId(){
     const hostName = window.location.toString();
 
-    if( hostName.indexOf( "https://test.nitex.com" ) > -1  ){
+    if( hostName.indexOf( "https://app.nitex.com" ) > -1  ){
         return 2096288;
     } else {
         return 1986852;
