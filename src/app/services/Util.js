@@ -564,6 +564,10 @@ const getToken = () => {
 }
 
 const addImageSuffix = (imgUrl, suffix) => {
+  if (!imgUrl) {
+    return '';
+  }
+  console.log("addImageSuffix", imgUrl)
   let splits = imgUrl.split('.');
   let result = '';
   splits.map((item, i) => {

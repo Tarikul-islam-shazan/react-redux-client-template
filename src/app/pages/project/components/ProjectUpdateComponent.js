@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import loadjs from "loadjs";
 import ImageViewer from 'react-simple-image-viewer';
 
-import { encodeQueryData } from '../../../services/Util';
+import { encodeQueryData, addImageSuffix } from '../../../services/Util';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
@@ -529,7 +529,7 @@ class ProjectUpdateComponent extends Component {
                           <div className="write">
                               {
                                 userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
-                                <img src={userInfo.profilePicDocument.docUrl} alt="" className="user-photo"/> :
+                                <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
                                 <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
                               }
                               <textarea name="post" onChange={this.onChangeFromPost} rows="5" value={post} placeholder="Write here....."/>
