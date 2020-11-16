@@ -82,7 +82,7 @@ export const LOADER_TOP = '50%';
 export const LOADER_LEFT = '50%';
 export const LOADER_MARGIN_TOP = -100;
 export const LOADER_MARGIN_LEFT = 0;
-export const hjid = 1986852;
+export const hjid = getHotjarId();
 export const hjsv = 6;
 export const GA_ID = 'UA-168122648-1';
 
@@ -105,5 +105,15 @@ function getBaseUrl(){
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
         return "https://testapi.nitex.com";
+    }
+}
+
+function getHotjarId(){
+    const hostName = window.location.toString();
+
+    if( hostName.indexOf( "https://test.nitex.com" ) > -1  ){
+        return 2096288;
+    } else {
+        return 1986852;
     }
 }
