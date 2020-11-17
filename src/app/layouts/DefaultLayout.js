@@ -15,6 +15,7 @@ import AskForQuote from "../commonComponents/modals/AskForQuote";
 import StartProject from "../commonComponents/modals/StartProject";
 
 import { _storeData } from "../partials/actions";
+import { addImageSuffix } from '../services/Util';
 
 // var stompClient = null;
 // const DefaultLayout = ({children, ...rest}) => {
@@ -175,7 +176,7 @@ class DefaultLayout extends Component {
                               <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   {
                                     userInfo && userInfo.profilePicDocument ?
-                                    <img className="img-profile rounded-circle" src={userInfo.profilePicDocument.docUrl} />
+                                    <img className="img-profile rounded-circle" src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} />
                                     :
                                     <img className="img-profile rounded-circle" src={require("../assets/images/pro_pic_default.png")} />
                                   }
