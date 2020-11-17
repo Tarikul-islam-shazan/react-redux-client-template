@@ -35,7 +35,7 @@ class Dashboard extends Component {
           dashboard : {},
           nitexDesignList : [],
           page : 0,
-          size : 30,
+          size : 20,
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           message: 'not at bottom'
