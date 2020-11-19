@@ -3004,7 +3004,7 @@ button.deliverable-deadline {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 200px; }
+  height: 110px; }
   .quote-list-left .client-info {
     display: flex;
     align-items: center; }
@@ -3016,16 +3016,17 @@ button.deliverable-deadline {
       margin: 0 0 15px 0; }
   .quote-list-left .button-skel {
     width: 100px;
-    margin-right: 20px;
+    margin-right: 0;
     border-radius: 28px;
     height: 26px; }
 
 .quote-list-table {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   align-items: center;
-  height: 100px; }
+  height: 55px;
+  padding: 0; }
   .quote-list-table > div {
     margin: 0 !important; }
   .quote-list-table .button-skel {
@@ -3038,9 +3039,10 @@ button.deliverable-deadline {
 
 .project-list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
-  align-items: center; }
+  align-items: center;
+  height: 110px; }
   .project-list > div {
     margin: 0 !important; }
 
@@ -3264,6 +3266,62 @@ button#sidebarToggleTop {
     width: 115px !important;
     height: 50px !important;
     font-size: 16px !important; }
+
+.questionnaire {
+  max-width: 1110px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 25px -8px rgba(0, 0, 0, 0.1); }
+  .questionnaire .ques-heading {
+    text-align: center;
+    margin-bottom: 50px; }
+    .questionnaire .ques-heading h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #21242B;
+      line-height: 42px;
+      margin: 0 0 10px 0;
+      padding: 0; }
+    .questionnaire .ques-heading p {
+      font-size: 20px;
+      color: #6A7181;
+      margin: 0;
+      line-height: 24px; }
+  .questionnaire .questionnaire-form {
+    max-width: 525px;
+    margin: 60px auto; }
+    .questionnaire .questionnaire-form .form-group {
+      margin-bottom: 30px; }
+    .questionnaire .questionnaire-form button.btn-brand {
+      width: 100%;
+      height: 60px;
+      margin-top: 10px; }
+    .questionnaire .questionnaire-form span.info {
+      font-size: 16px;
+      color: #6A7181; }
+    .questionnaire .questionnaire-form label {
+      font-size: 20px;
+      font-weight: 600;
+      color: #21242B;
+      margin-bottom: 14px; }
+    .questionnaire .questionnaire-form .nice-select {
+      background: #F4F5F7;
+      border-color: #EDEFF4; }
+    .questionnaire .questionnaire-form .country-code > div {
+      width: 100%; }
+    .questionnaire .questionnaire-form .country-code #phone {
+      width: 100%;
+      background: #F4F5F7;
+      border-color: #EDEFF4;
+      padding-left: 95px; }
+    .questionnaire .questionnaire-form .country-code .intl-tel-input .selected-flag {
+      padding: 0 20px;
+      padding-right: 30px; }
+    .questionnaire .questionnaire-form .country-code .intl-tel-input .selected-flag .iti-arrow {
+      right: 14px; }
+    .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input, .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=text], .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=tel] {
+      padding-left: 130px !important; }
 
 .add-invoice {
   max-width: 813px;
@@ -3517,6 +3575,15 @@ template {
     height: 306px; }
     .product-skeleton .img {
       height: 175px; }
+
+  .quote-list-left .line {
+    width: 90px;
+    margin-bottom: 10px !important; }
+  .quote-list-left .cat {
+    width: 54px; }
+  .quote-list-left .button-skel {
+    width: 80px;
+    height: 25px; }
 
   .messenger {
     max-height: 500px; }
@@ -4252,6 +4319,11 @@ template {
       display: block;
       padding: 0; } }
 @media screen and (max-width: 1280px) {
+  .skeleton.project-list {
+    padding: 0; }
+    .skeleton.project-list .project-list-item .line {
+      width: 116px; }
+
   .add-invoice.edit-product {
     max-width: 832px; }
 
@@ -4563,6 +4635,11 @@ template {
   .card.product-card .card-img-top {
     height: 340px; } }
 @media screen and (max-width: 991px) {
+  .skeleton.project-list {
+    height: 80px; }
+    .skeleton.project-list .project-list-item .line {
+      width: 96px; }
+
   .filter-container .search input {
     width: 225px; }
   .filter-container button.btn-brand {
@@ -4601,6 +4678,12 @@ template {
     margin: 0;
     margin-bottom: 20px; } }
 @media screen and (max-width: 767px) {
+  button.add-new-design {
+    width: 100%; }
+
+  .skeleton.project-list {
+    height: 140px; }
+
   .filter-container button.btn-brand {
     width: 100%;
     height: 50px;
@@ -5030,7 +5113,14 @@ template {
 
   .invoice-width {
     width: 700px;
-    overflow-x: auto; } }
+    overflow-x: auto; }
+
+  .questionnaire {
+    margin: 0 auto;
+    padding: 20px; }
+
+  .questionnaire .questionnaire-form {
+    margin: 20px auto; } }
 @media screen and (max-width: 320px) {
   ul.navbar-nav li.notification-bell {
     margin: 0 !important;
@@ -5038,6 +5128,15 @@ template {
     right: 87px; }
 
   .notification {
-    width: 320px; } }
+    width: 320px; }
+
+  .quote-list-left {
+    height: 100px;
+    padding: 5px; }
+    .quote-list-left .img {
+      margin-right: 6px !important; }
+
+  .skeleton.project-list {
+    height: 215px; } }
 
 /*# sourceMappingURL=main.css.map */

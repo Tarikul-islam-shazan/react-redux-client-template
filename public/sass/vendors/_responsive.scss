@@ -1767,6 +1767,13 @@
         width: 700px;
         overflow-x: auto;
     }
+    .questionnaire {
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .questionnaire .questionnaire-form {
+        margin: 20px auto;
+    }
 }
 @media screen and (max-width:320px) {
     ul.navbar-nav li.notification-bell {

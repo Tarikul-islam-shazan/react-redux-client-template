@@ -10,7 +10,19 @@
             height: 175px;
         }
     }
-
+    .quote-list-left{
+        .line{
+            width: 90px;
+            margin-bottom: 10px !important;
+        }
+        .cat{
+            width: 54px;
+        }
+        .button-skel {
+            width: 80px;
+            height: 25px;
+        }
+    }
     .messenger {
         max-height: 500px;
     }
@@ -877,6 +889,12 @@
     }
 }
 @media screen and (max-width:1280px){
+    .skeleton.project-list {
+        padding: 0;
+        .project-list-item .line {
+            width: 116px;
+        }
+    }
     .add-invoice.edit-product {
         max-width: 832px;
     }
@@ -1209,6 +1227,12 @@
     }
 }
 @media screen and (max-width:991px){
+    .skeleton.project-list {
+        height: 80px;
+        .project-list-item .line {
+            width: 96px;
+        }
+    }
     .filter-container{
         .search input {
             width: 225px;
@@ -1258,6 +1282,12 @@
 }
 
 @media screen and (max-width:767px) {
+    button.add-new-design {
+        width: 100%;
+    }
+    .skeleton.project-list {
+        height: 140px;
+    }
     .filter-container button.btn-brand {
         width: 100%;
         height: 50px;
@@ -1737,6 +1767,13 @@
         width: 700px;
         overflow-x: auto;
     }
+    .questionnaire {
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .questionnaire .questionnaire-form {
+        margin: 20px auto;
+    }
 }
 @media screen and (max-width:320px) {
     ul.navbar-nav li.notification-bell {
@@ -1746,5 +1783,15 @@
     }
     .notification {
         width: 320px;
+    }
+    .quote-list-left {
+        height: 100px;
+        padding: 5px;
+        .img {
+            margin-right: 6px !important;
+        }
+    }
+    .skeleton.project-list {
+        height: 215px;
     }
 }
