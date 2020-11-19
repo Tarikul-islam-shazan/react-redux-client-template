@@ -14,6 +14,7 @@ import { rfqStatus, rfqProductStatus } from '../../services/Util';
 
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { RfqCard } from './components/RfqCard';
+import {RfqSkeleton, RfqProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { event } from 'jquery';
@@ -28,6 +29,7 @@ class MyRFQs extends Component {
       size: 10,
       hasNext: true,
       loading: false,
+      productLoading: false,
       search: '',
       filterBy: '',
       filterById: '',
@@ -55,7 +57,8 @@ class MyRFQs extends Component {
 
     console.log('results',results)
     await this.setState({
-      filterById: results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+      filterById: results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' ')),
+      productLoading: true
     })
 
     this.renderList(0);
@@ -149,21 +152,27 @@ class MyRFQs extends Component {
             hasNext: false,
             loading: false
           })
+          if (page == 0) {
+            this.setState({
+              productLoading: false
+            })
+          }
           // toastWarning("RFQ List - no data found.");
         }
         loadjs(['/js/script.js', '/js/custom.js']);
       })
       .catch(response => {
         console.log('rfq LIST ERROR: ', JSON.stringify(response));
-        this.setState({ loading: false })
+        this.setState({ loading: false, productLoading: false })
         toastError("Something went wrong! Please try again.");
       });
   }
 
-  getRfqDetails = (id) => {
-    this.setState({
+  getRfqDetails = async(id) => {
+    await this.setState({
       selectedRfq: id,
-      loading: true
+      productLoading: true
+      // rfqDetails: {}
     });
 
     this.props._storeData('selectedRfqId', id);
@@ -171,7 +180,7 @@ class MyRFQs extends Component {
     Http.GET('getRfqDetails', id)
       .then(({ data }) => {
         console.log('rfq DTAILS SUCCESS: ', data);
-        this.setState({ loading: false, showNegotiation: false })
+        this.setState({ productLoading: false, showNegotiation: false })
         if (data.success == false) {
           toastWarning("RFQ Details - no data found.");
         } else {
@@ -183,7 +192,7 @@ class MyRFQs extends Component {
       })
       .catch(response => {
         console.log('rfq DETAILS ERROR: ', JSON.stringify(response));
-        this.setState({ loading: false })
+        this.setState({ productLoading: false })
         toastError("Something went wrong! Please try again.");
       });
   }
@@ -368,32 +377,6 @@ class MyRFQs extends Component {
       )
     }
     return (
-      <LoadingOverlay
-        active={this.state.loading}
-        styles={{
-          overlay: (base) => ({
-            ...base,
-            background: LOADER_OVERLAY_BACKGROUND
-          }),
-          spinner: (base) => ({
-            ...base,
-            width: LOADER_WIDTH,
-            position: LOADER_POSITION,
-            top: LOADER_TOP,
-            left: LOADER_LEFT,
-            marginTop: LOADER_MARGIN_TOP,
-            marginLeft: LOADER_MARGIN_LEFT,
-            '& svg circle': {
-              stroke: LOADER_COLOR
-            }
-          }),
-          content: (base) => ({
-            ...base,
-            color: LOADER_COLOR
-          })
-        }}
-        spinner
-        text={LOADER_TEXT}>
         <section className="collapse-side-menu-container">
           <nav id="sidebarCollapse" className="sidebar-collapse client-respons" onScroll={this.onScrollToEnd}>
             <div>
@@ -417,6 +400,10 @@ class MyRFQs extends Component {
                   showStatus={rfqStatus}
                   />
               ))
+            }
+            {
+              this.state.loading &&
+              <CreateSkeletons iterations={6}><RfqSkeleton/></CreateSkeletons>
             }
             {
               filterById ?
@@ -453,7 +440,7 @@ class MyRFQs extends Component {
                   </thead>
                   <tbody>
                     {
-                      rfqDetails.rfqProductResponseList &&
+                      !this.state.productLoading && rfqDetails.rfqProductResponseList &&
                       rfqDetails.rfqProductResponseList.map((item, i) => {
                         return (
                           <tr key={i}>
@@ -481,23 +468,14 @@ class MyRFQs extends Component {
                                   <a className="dropdown-item" onClick={() => this.toggleNegotiation(item.id, item.name)}>Negotiation</a>
                                 </div>
                               </div>
-                              {
-                                // item.actionResponseList && item.actionResponseList.length>0 &&
-                                // item.actionResponseList.map((action,i)=> {
-                                //   if(action=='Ok'){
-                                //     return(
-                                //       <span className="pil ok" key={i}>{action}</span>
-                                //     )
-                                //   }else if(action=='Want Negotiation')
-                                //     return(
-                                //       <button className="pil negotiation-open" onClick={()=>this.toggleNegotiation(item.id)} key={i}>Negotiation Open</button>
-                                //     )
-                                // })
-                              }
                             </td>
                           </tr>
                         )
                       })
+                    }
+                    {
+                      this.state.productLoading &&
+                      <CreateSkeletons iterations={5}><RfqProductSkeleton/></CreateSkeletons>
                     }
                   </tbody>
                 </table>
@@ -537,7 +515,6 @@ class MyRFQs extends Component {
               </div>
           }
         </section>
-      </LoadingOverlay>
     );
   }
 }

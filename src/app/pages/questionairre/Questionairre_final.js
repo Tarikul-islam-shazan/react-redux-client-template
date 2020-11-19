@@ -53,7 +53,7 @@ class Questionairre_Final extends Component {
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/dashboard');
+            this.props.history.push('/pick-design');
           }else{
             toastError(data.message);
           }

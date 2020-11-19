@@ -15,6 +15,7 @@ import AskForQuote from "../commonComponents/modals/AskForQuote";
 import StartProject from "../commonComponents/modals/StartProject";
 
 import { _storeData } from "../partials/actions";
+import { addImageSuffix } from '../services/Util';
 
 // var stompClient = null;
 // const DefaultLayout = ({children, ...rest}) => {
@@ -81,14 +82,14 @@ class DefaultLayout extends Component {
 
               <div className="content">
                   <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
-                     
+
                      <button className="btn_dash_menu">
-                         <Link to="/">
+                         <Link to="/dashboard">
                          <img src={require("../assets/icons/dashboard.png")} alt="notification"/>
                          Dashboard
                          </Link>
                      </button>
-                     
+
                       {/* Sidebar Toggle (Topbar) */}
                       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                           <i className="fa fa-bars"></i>
@@ -138,7 +139,7 @@ class DefaultLayout extends Component {
                               <span style={{ marginRight: '3px' }}>
                                   <img src={require("../assets/icons/document.png")} alt="" className="img-fluid" style={{width:10}}/>
                               </span>
-                                
+
                               </a>
                           </li>
 
@@ -175,7 +176,7 @@ class DefaultLayout extends Component {
                               <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   {
                                     userInfo && userInfo.profilePicDocument ?
-                                    <img className="img-profile rounded-circle" src={userInfo.profilePicDocument.docUrl} />
+                                    <img className="img-profile rounded-circle" src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} />
                                     :
                                     <img className="img-profile rounded-circle" src={require("../assets/images/pro_pic_default.png")} />
                                   }

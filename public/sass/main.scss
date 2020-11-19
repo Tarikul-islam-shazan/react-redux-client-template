@@ -10,13 +10,15 @@
 
 
 
+
 // 3. Base stuff
 @import
   'base/base',
   'base/fonts',
   'base/typography',
   'base/helpers',
-  'base/element';
+  'base/element',
+  'base/skeleton';
 
 // 4. Layout-related sections
 @import

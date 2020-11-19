@@ -11,6 +11,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import ProductCard from '../../commonComponents/ProductCard';
+import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { _getKey } from '../../services/Util';
@@ -337,113 +338,90 @@ class PickDesign extends Component {
     render() {
         let { designList, groupwiseProductList, popular, trending, nitexSuggestion, productTypeId, sort } = this.state;
         return (
-            <LoadingOverlay
-              active={this.state.loading}
-              styles={{
-                overlay: (base) => ({
-                  ...base,
-                  background: LOADER_OVERLAY_BACKGROUND
-                }),
-                spinner: (base) => ({
-                  ...base,
-                  width: LOADER_WIDTH,
-                  position: LOADER_POSITION,
-                  top: LOADER_TOP,
-                  left: LOADER_LEFT,
-                  marginTop: LOADER_MARGIN_TOP,
-                  marginLeft: LOADER_MARGIN_LEFT,
-                  '& svg circle': {
-                    stroke: LOADER_COLOR
-                  }
-                }),
-                content: (base) => ({
-                  ...base,
-                  color: LOADER_COLOR
-                })
-              }}
-              spinner
-              text={LOADER_TEXT}>
-                <section className="collapse-side-menu-container">
-                    <nav id="sidebarCollapse" className="sidebar-collapse">
-                        <div>
-                            <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>
-                            <h5>Filter By Category</h5>
-                            <ul className="list-unstyled custom_list">
-                              {
-                                groupwiseProductList.map((item,i)=>{
-                                  return (
-                                    <li key={i}>
-                                        <a href={`#pageSubmenu${i}`} data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">{item.groupName}</a>
-                                        <ul className="collapse list-unstyled sub-collapse-menu" id={`pageSubmenu${i}`}>
-                                          {
-                                            item.types.map((item2,j) => {
-                                              if(item2.id==productTypeId){
-                                                return(
-                                                  <li key={j}><a style={{fontWeight:'bold',color:'#452D8F'}} onClick={() => this.setProductType(item2.id)}>{item2.name}</a></li>
-                                                )
-                                              }else{
-                                                return(
-                                                  <li key={j}><a onClick={() => this.setProductType(item2.id)}>{item2.name}</a></li>
-                                                )
-                                              }
-                                            })
-                                          }
-                                        </ul>
-                                    </li>
-                                  )
-
-                                })
-                              }
-
-                            </ul>
-                        </div>
-                    </nav>
-
-                    <div id="sidebar-menu-content">
-                        <div className="filter-container">
-                            <div className="search">
-                                <input type="search" placeholder="Search...." name="search" value={this.state.search} onChange={this.onChangeSrchText} onKeyPress={this.keyPressed}/>
-                                <button className="search" onClick={this._search}></button>
-                            </div>
-                            <div className="short-by">
-                               <select name="short-by" id="short-by" name="sort" value={sort} onClick={this.onChange}>
-                                   <option value=""></option>
-                                   <option value="favCount,desc">Popularity</option>
-                                   <option value="dateAdded,desc">Trending </option>
-                                   <option value="boost,desc">Suggestion</option>
-                               </select>
-                            </div>
-                        </div>
-
-                        <div className="filter-products designs">
-                            {
-                              designList.map(( item , i ) => {
-                                return(
-                                  <ProductCard
-                                    item={item}
-                                    key={_getKey()}
-                                    showDetails={this.details}
-                                    likeProduct={this.likeProduct}
-                                    unlikeProduct={this.unlikeProduct}
-                                   />
-                                )
-                              })
-                            }
-                        </div>
+          <section className="collapse-side-menu-container">
+              <nav id="sidebarCollapse" className="sidebar-collapse">
+                  <div>
+                      {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
+                      <h5>Filter By Category</h5>
+                      <ul className="list-unstyled custom_list">
                         {
-                          !this.state.hasNext && !designList.length ?
-                          <div className="not-found">
-                              <h1 className="msg">No product designs found</h1>
-                              <div className="illustration">
-                                  <img src={require("../../assets/images/not-found.png")} alt=""/>
-                              </div>
-                          </div>
-                          :
-                          <></>
+                          groupwiseProductList.map((item,i)=>{
+                            return (
+                              <li key={i}>
+                                  <a href={`#pageSubmenu${i}`} data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">{item.groupName}</a>
+                                  <ul className="collapse list-unstyled sub-collapse-menu" id={`pageSubmenu${i}`}>
+                                    {
+                                      item.types.map((item2,j) => {
+                                        if(item2.id==productTypeId){
+                                          return(
+                                            <li key={j}><a style={{fontWeight:'bold',color:'#452D8F'}} onClick={() => this.setProductType(item2.id)}>{item2.name}</a></li>
+                                          )
+                                        }else{
+                                          return(
+                                            <li key={j}><a onClick={() => this.setProductType(item2.id)}>{item2.name}</a></li>
+                                          )
+                                        }
+                                      })
+                                    }
+                                  </ul>
+                              </li>
+                            )
+
+                          })
                         }
+
+                      </ul>
+                  </div>
+              </nav>
+
+              <div id="sidebar-menu-content">
+                  <div className="filter-container">
+                      <div className="search">
+                          <input type="search" placeholder="Search...." name="search" value={this.state.search} onChange={this.onChangeSrchText} onKeyPress={this.keyPressed}/>
+                          <button className="search" onClick={this._search}></button>
+                      </div>
+                      <div className="short-by">
+                         <select name="short-by" id="short-by" name="sort" value={sort} onClick={this.onChange}>
+                             <option value=""></option>
+                             <option value="favCount,desc">Popularity</option>
+                             <option value="dateAdded,desc">Trending </option>
+                             <option value="boost,desc">Suggestion</option>
+                         </select>
+                      </div>
+                  </div>
+
+                  <div className="filter-products designs">
+                      {
+                        designList.map(( item , i ) => {
+                          return(
+                            <ProductCard
+                              item={item}
+                              key={_getKey()}
+                              showDetails={this.details}
+                              likeProduct={this.likeProduct}
+                              unlikeProduct={this.unlikeProduct}
+                             />
+                          )
+                        })
+                      }
+                      {
+                        this.state.loading &&
+                        <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                      }
+                  </div>
+                  {
+                    !this.state.hasNext && !designList.length ?
+                    <div className="not-found">
+                        <h1 className="msg">No product designs found</h1>
+                        <div className="illustration">
+                            <img src={require("../../assets/images/not-found.png")} alt=""/>
+                        </div>
                     </div>
-                </section>
-            </LoadingOverlay>
+                    :
+                    <></>
+                  }
+              </div>
+          </section>
         );
     }
 }

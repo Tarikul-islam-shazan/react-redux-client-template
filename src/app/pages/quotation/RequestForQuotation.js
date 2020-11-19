@@ -531,26 +531,18 @@ class RequestForQuotation extends Component {
             text={LOADER_TEXT}>
             <section className="request-for-quote">
                 <div className="heading">
-                    <h1>Ask for quote</h1>
-                    <p>Upload your tech pack or choose from our products to get direct quote</p>
+                    <h1>Share your designs</h1>
+                    <p>Share as many product designs as you like to get quotes in 24 hours</p>
                 </div>
 
 
                 <div className="quote-tab tech-pack">
-                  <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label for="quantity">Quote title</label>
-                        <input type="text" className="form-control" value={title} name="title" onChange={this.onChange} placeholder="Enter title"/>
-                        {
-                          titleError ? <span className="error">{titleError}</span> : ''
-                        }
-                    </div>
-                  </div>
+
                   <div id="ShareDesignDocuments" className="tab-pane">
                       <div className="row">
                           <div className="col-lg-12">
                               <div className="form-group">
-                                  <label>Number of products</label>
+                                  <label>Number of designs</label>
                                   <select className="nice-select" name="numberOfStyles" value={numberOfStyles} onClick={this.onChange}>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -573,7 +565,7 @@ class RequestForQuotation extends Component {
                                             <button className="btn" type="button" data-toggle="collapse"
                                                 data-target={`#collapse_${i}_SDC`} aria-expanded={i==0 ? "true" : "false"}
                                                 aria-controls={`collapse_${i}_SDC`}>
-                                                Product {i+1}
+                                                Designs {i+1}
                                             </button>
                                         </h2>
                                     </div>
@@ -581,7 +573,7 @@ class RequestForQuotation extends Component {
                                         data-parent="#accordionExample">
                                         <div className="card-body">
                                             <div className="form-group">
-                                                <label htmlFor="styleQuantity">Select product<span className="error">*</span></label>
+                                                <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                 <p>Note: Upload a tech pack or choose from product catalogs</p>
                                             </div>
 
@@ -724,7 +716,7 @@ class RequestForQuotation extends Component {
                                                  <div className="row">
                                                     <div className="col-md-4 col-lg-4">
                                                         <div className="form-group">
-                                                            <label>Product inspirations</label>
+                                                            <label>Design inspirations</label>
                                                             <p className="form-text text-muted">You can upload multiple files here</p>
                                                         </div>
                                                       <div className="row no-gutters">
@@ -798,6 +790,16 @@ class RequestForQuotation extends Component {
                           </div>
                       </div>
                       {this.loadJsFiles()}
+                      <div className="form-row">
+                          <div className="form-group col-md-12">
+                              <label htmlFor="quantity">Give a name to your request</label>
+                              <input type="text" className="form-control" value={title} name="title"
+                                     onChange={this.onChange} placeholder="Enter here"/>
+                              {
+                                  titleError ? <span className="error">{titleError}</span> : ''
+                              }
+                          </div>
+                      </div>
                       <div className="row mt-4">
                           <div className="col-lg-12">
                               <button className="btn-brand" onClick={this.submit}>Get quote</button>

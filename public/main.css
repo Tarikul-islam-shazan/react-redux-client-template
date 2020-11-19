@@ -1091,6 +1091,9 @@ h4.details-title {
   .quote-tab ul.nav-tabs li:last-child a {
     border-radius: 0px 4px 4px 0px; }
 
+.request-for-quote .style-item {
+  padding: 0; }
+
 .style-item {
   padding: 20px 0 0 0; }
   .style-item .accordion .card {
@@ -1455,11 +1458,17 @@ ol.order-list {
 
 .filter-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin-bottom: 40px; }
+  .filter-container button.btn-brand {
+    width: 180px;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 15px; }
 
 .short-by {
-  position: relative; }
+  position: relative;
+  margin-left: auto; }
   .short-by:before {
     content: "Sort by";
     position: absolute;
@@ -2879,6 +2888,174 @@ button.deliverable-deadline {
 .zoom img::selection {
   background-color: transparent; }
 
+.skeleton {
+  width: 500px;
+  height: 440px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px; }
+  .skeleton .action {
+    display: flex;
+    width: 100%;
+    margin: 0; }
+    .skeleton .action .line {
+      height: 20px;
+      width: 50px;
+      margin-right: 15px; }
+      .skeleton .action .line + .line {
+        width: 100px; }
+  .skeleton .button-skel {
+    height: 20px;
+    width: 50px;
+    margin-right: 15px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-avatar 2s infinite ease-out; }
+    .skeleton .button-skel.big {
+      height: 40px;
+      width: 120px; }
+  .skeleton .cheque-skel {
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-avatar 2s infinite ease-out; }
+  .skeleton .img {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 100%;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-avatar 2s infinite ease-out; }
+  .skeleton .line {
+    width: 140px;
+    height: 16px;
+    margin-top: 12px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+  .skeleton .img + .line {
+    margin-top: 11px;
+    width: 100%; }
+  .skeleton .cat {
+    background-color: #ddd;
+    height: 8px;
+    width: 76px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+
+.product-skeleton {
+  width: 100%;
+  height: 440px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px; }
+  .product-skeleton .action {
+    display: flex;
+    width: 100%;
+    margin: 0; }
+    .product-skeleton .action .line {
+      height: 20px;
+      width: 50px;
+      margin-right: 15px; }
+      .product-skeleton .action .line + .line {
+        width: 100px; }
+  .product-skeleton .img {
+    float: left;
+    width: 100%;
+    height: 285px;
+    background-color: #ccc;
+    border-radius: 10%;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-avatar 2s infinite ease-out; }
+  .product-skeleton .line {
+    float: left;
+    width: 140px;
+    height: 16px;
+    margin-top: 12px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+  .product-skeleton .img + .line {
+    margin-top: 11px;
+    width: 100%; }
+  .product-skeleton .cat {
+    background-color: #ddd;
+    height: 8px;
+    width: 76px;
+    border-radius: 7px;
+    background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px);
+    background-size: 600px;
+    animation: shine-lines 2s infinite ease-out; }
+
+.quote-list-left {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 110px; }
+  .quote-list-left .client-info {
+    display: flex;
+    align-items: center; }
+    .quote-list-left .client-info .img {
+      margin-right: 15px;
+      width: 60px;
+      height: 60px; }
+    .quote-list-left .client-info .info .line {
+      margin: 0 0 15px 0; }
+  .quote-list-left .button-skel {
+    width: 100px;
+    margin-right: 0;
+    border-radius: 28px;
+    height: 26px; }
+
+.quote-list-table {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  height: 55px;
+  padding: 0; }
+  .quote-list-table > div {
+    margin: 0 !important; }
+  .quote-list-table .button-skel {
+    width: 100px;
+    margin-right: 20px;
+    border-radius: 28px;
+    height: 26px; }
+  .quote-list-table .cat {
+    width: 58px; }
+
+.project-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  height: 110px; }
+  .project-list > div {
+    margin: 0 !important; }
+
+@keyframes shine-lines {
+  0% {
+    background-position: -100px; }
+  40%, 100% {
+    background-position: 280px; } }
+@keyframes shine-avatar {
+  0% {
+    background-position: -32px; }
+  40%, 100% {
+    background-position: 348px; } }
 button#sidebarToggleTop {
   padding: 2px;
   color: #000;
@@ -3338,6 +3515,20 @@ template {
   table.manage-project-table tbody tr td {
     padding: 16px 18px; } }
 @media screen and (max-width: 1440px) {
+  .product-skeleton {
+    height: 306px; }
+    .product-skeleton .img {
+      height: 175px; }
+
+  .quote-list-left .line {
+    width: 90px;
+    margin-bottom: 10px !important; }
+  .quote-list-left .cat {
+    width: 54px; }
+  .quote-list-left .button-skel {
+    width: 80px;
+    height: 25px; }
+
   .messenger {
     max-height: 500px; }
 
@@ -4072,6 +4263,11 @@ template {
       display: block;
       padding: 0; } }
 @media screen and (max-width: 1280px) {
+  .skeleton.project-list {
+    padding: 0; }
+    .skeleton.project-list .project-list-item .line {
+      width: 116px; }
+
   .add-invoice.edit-product {
     max-width: 832px; }
 
@@ -4118,6 +4314,14 @@ template {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 @media screen and (max-width: 1024px) {
+  .product-skeleton {
+    height: 392px; }
+    .product-skeleton .img {
+      height: 245px; }
+
+  .navigation > ul > li > a {
+    padding: 10px 13px; }
+
   .product-detail-gallery .thumbnail-prev img {
     height: 610px; }
 
@@ -4192,8 +4396,7 @@ template {
     flex-basis: calc(91% / 3); }
 
   .sidbar-icon {
-    width: 28px;
-    margin-top: -3px; }
+    width: 28px; }
 
   .client-respons {
     max-width: 100%;
@@ -4376,8 +4579,22 @@ template {
   .card.product-card .card-img-top {
     height: 340px; } }
 @media screen and (max-width: 991px) {
+  .skeleton.project-list {
+    height: 80px; }
+    .skeleton.project-list .project-list-item .line {
+      width: 96px; }
+
+  .filter-container .search input {
+    width: 225px; }
+  .filter-container button.btn-brand {
+    width: 170px;
+    height: 47px; }
+
+  .filter-products.designs .card.product-card {
+    flex-basis: calc((100% - 40px) / 2); }
+
   .dashboard-designs .filter-products.designs .card.product-card {
-    flex-basis: calc((100% - 60px) / 3); }
+    flex-basis: calc((100% - 40px) / 2); }
 
   .questionnaire .card .card-img-top {
     height: 130px; }
@@ -4405,6 +4622,17 @@ template {
     margin: 0;
     margin-bottom: 20px; } }
 @media screen and (max-width: 767px) {
+  button.add-new-design {
+    width: 100%; }
+
+  .skeleton.project-list {
+    height: 140px; }
+
+  .filter-container button.btn-brand {
+    width: 100%;
+    height: 50px;
+    margin: 0 0 20px 0; }
+
   .product-detail-gallery {
     display: flex;
     flex-direction: column-reverse; }
@@ -4837,6 +5065,15 @@ template {
     right: 87px; }
 
   .notification {
-    width: 320px; } }
+    width: 320px; }
+
+  .quote-list-left {
+    height: 100px;
+    padding: 5px; }
+    .quote-list-left .img {
+      margin-right: 6px !important; }
+
+  .skeleton.project-list {
+    height: 215px; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -438,7 +438,7 @@ class PickDesign extends Component {
                 <section className="collapse-side-menu-container">
                     <nav id="sidebarCollapse" className="sidebar-collapse">
                         <div>
-                            <button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>
+                            {/*<button className="btn-brand" data-toggle="modal" data-target="#AddNewProduct">+ Add New Product</button>*/}
                             <h5>Filter By Category</h5>
                             <ul className="list-unstyled">
                               {

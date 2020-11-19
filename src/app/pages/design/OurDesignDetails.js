@@ -187,8 +187,12 @@ class OurDesignDetails extends Component {
                               </div>
                               <div className="info-item">
                                   <div className="text-left mt-5">
-                                      <a href="" className="btn btn-outline-secondary mr-3" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Ask for quotation</a>
-                                      <a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Start Project</a>
+                                    {
+                                      (product.availabilityStatus === 'AVAILABLE' || product.availabilityStatus === 'CHECKED') ?
+                                      <a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Quote now</a>:
+                                      <button className="btn btn-outline-secondary" disabled={true}>Quote now</button>
+                                    }
+                                      {/*<a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Start Project</a>*/}
                                   </div>
                               </div>
                           </div>

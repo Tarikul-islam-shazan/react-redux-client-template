@@ -564,7 +564,26 @@ const getToken = () => {
   return token;
 }
 
+const IMAGE_SOURCE = [
+  'cloudfront.net'
+];
+
 const addImageSuffix = (imgUrl, suffix) => {
+  if (!imgUrl) {
+    return '';
+  }
+  let flag = true;
+
+  IMAGE_SOURCE.map((url) => {
+    if (imgUrl.includes(url)) {
+      flag = false;
+    }
+  })
+  
+  if (flag) {
+    return imgUrl;
+  }
+
   let splits = imgUrl.split('.');
   let result = '';
   splits.map((item, i) => {

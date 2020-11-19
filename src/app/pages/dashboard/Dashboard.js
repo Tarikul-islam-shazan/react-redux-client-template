@@ -16,6 +16,7 @@ import { RfqList } from "./components/RfqList";
 import { ProjectList } from "./components/ProjectList";
 import { DashboardTopCard } from "./components/DashboardTopCard";
 import ProductCard from '../../commonComponents/ProductCard';
+import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { columns,fixedHeaders } from '../../constants';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -35,7 +36,7 @@ class Dashboard extends Component {
           dashboard : {},
           nitexDesignList : [],
           page : 0,
-          size : 30,
+          size : 20,
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           message: 'not at bottom'
@@ -255,32 +256,7 @@ class Dashboard extends Component {
     render() {
         let { dashboard, nitexDesignList } = this.state;
         return (
-          <LoadingOverlay
-            active={this.state.loading}
-            styles={{
-              overlay: (base) => ({
-                ...base,
-                background: LOADER_OVERLAY_BACKGROUND
-              }),
-              spinner: (base) => ({
-                ...base,
-                width: LOADER_WIDTH,
-                position: LOADER_POSITION,
-                top: LOADER_TOP,
-                left: LOADER_LEFT,
-                marginTop: LOADER_MARGIN_TOP,
-                marginLeft: LOADER_MARGIN_LEFT,
-                '& svg circle': {
-                  stroke: LOADER_COLOR
-                }
-              }),
-              content: (base) => ({
-                ...base,
-                color: LOADER_COLOR
-              })
-            }}
-            spinner
-            text={LOADER_TEXT}>
+          <>
               {/*<section className="section">
                   <div className="row">
                       <DashboardTopCard
@@ -348,6 +324,7 @@ class Dashboard extends Component {
               <section className="section dashboard-designs">
                   <h4 className="section-title mb-4">Browse new designs</h4>
                   <div className="filter-products designs">
+
                       {
                         nitexDesignList.map(( item , i ) => {
                           console.log("entered loop nitexDesignList")
@@ -361,6 +338,10 @@ class Dashboard extends Component {
                              />
                           )
                         })
+                      }
+                      {
+                        this.state.loading &&
+                        <CreateSkeletons iterations={10}><ProductSkeleton/></CreateSkeletons>
                       }
                   </div>
                   {!this.state.hasNext && nitexDesignList.length ? <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>{/*'No more data...'*/}</p> : <></>}
@@ -376,7 +357,7 @@ class Dashboard extends Component {
                     <></>
                   }
               </section>
-          </LoadingOverlay>
+          </>
         );
     }
 }

@@ -31,7 +31,7 @@ class OAuth2RedirectHandler extends Component {
         console.log("checking userinfo outside fetch",userInfo)
         await localStorage.setItem('userInfo',JSON.stringify(userInfo));
         if(userInfo.businessInfoGiven){
-          this.props.history.push("/dashboard");
+          this.props.history.push("/pick-design");
         }else{
           this.props.history.push("/questionairre-step-1");
         }

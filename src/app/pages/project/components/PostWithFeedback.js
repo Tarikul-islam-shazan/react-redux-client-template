@@ -5,6 +5,7 @@ import Http from '../../../services/Http';
 import { toastSuccess, toastError } from '../../../commonComponents/Toast';
 import { CancellableImage } from '../../../commonComponents/CancellableImage';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
+import { addImageSuffix } from '../../../services/Util';
 
 class PostWithFeedback extends Component {
   constructor(props) {
@@ -169,7 +170,11 @@ class PostWithFeedback extends Component {
         <div className="post">
             <div className="post-heading">
                 <div className="header-title">
-                    <img src={post.postedBy.imageUrl} alt="" className="user-photo"/>
+                {
+                  post.postedBy.imageUrl ?
+                  <img src={addImageSuffix(post.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/>:
+                  <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                }
                     <div className="name-n-date">
                         <h4>{post.postedBy.name}</h4>
                         <span>{post.postDate}</span>
@@ -204,7 +209,7 @@ class PostWithFeedback extends Component {
                 <div className="write">
                   {
                     userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
-                    <img src={userInfo.profilePicDocument.docUrl} alt="" className="user-photo"/> :
+                    <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
                     <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
@@ -241,7 +246,11 @@ class PostWithFeedback extends Component {
                       <div className="post-heading">
                           <span className="date-time">{item.postDate}</span>
                           <div className="header-title">
-                              <img src={item.postedBy.imageUrl} alt="" className="user-photo"/>
+                          {
+                            item.postedBy.imageUrl ?
+                            <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/> :
+                            <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                          }
                               <div className="description" style={{width:'100%'}}>
                                   <h4>{item.postedBy.name}
                                     {/*<div className="post-type">Query</div>*/}
