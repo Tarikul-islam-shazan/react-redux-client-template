@@ -9,6 +9,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
 import { toastSuccess, toastError } from '../../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
+import { addImageSuffix, convertTimeToLocal } from '../../../services/Util';
 
 class Comments extends Component {
 
@@ -131,7 +132,11 @@ class Comments extends Component {
                 <div className="production">
                     <h6>Messages</h6>
                     <div className="write">
-                        <img src={userInfo && userInfo.profilePicDocument ? userInfo.profilePicDocument.docUrl : 'https://f0.pngfuel.com/png/178/595/black-profile-icon-illustration-user-profile-computer-icons-login-user-avatars-png-clip-art-thumbnail.png'} alt="" className="user-photo" />
+                      {
+                        userInfo && userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
+                        <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} className="user-photo"/> :
+                        <img src={require("../../../assets/images/pro_pic_default.png")} alt="" className="user-photo"/>
+                      }
                         <textarea
                           name="comment"
                           value={comment}
@@ -148,10 +153,14 @@ class Comments extends Component {
                           <div className="post" key={i}>
                               <div className="post-heading">
                                   <div className="header-title">
-                                      <img src={item.postedBy.imageUrl} alt="" className="user-photo" />
+                                    {
+                                      item.postedBy && item.postedBy.imageUrl ?
+                                      <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} className="user-photo"/> :
+                                      <img src={require("../../../assets/images/pro_pic_default.png")} alt="" className="user-photo"/>
+                                    }
                                       <div className="name-n-date">
                                           <h4>{item.postedBy.name}</h4>
-                                          <span>{item.date}</span>
+                                          <span>{convertTimeToLocal(item.date, item.time, 'MMM DD, YYYY hh:mm a')}</span>
                                       </div>
                                       {/*<div className="post-type">Query</div>*/}
                                   </div>
