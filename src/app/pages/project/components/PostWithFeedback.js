@@ -5,7 +5,7 @@ import Http from '../../../services/Http';
 import { toastSuccess, toastError } from '../../../commonComponents/Toast';
 import { CancellableImage } from '../../../commonComponents/CancellableImage';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
-import { addImageSuffix } from '../../../services/Util';
+import { addImageSuffix, convertTimeToLocal } from '../../../services/Util';
 
 class PostWithFeedback extends Component {
   constructor(props) {
@@ -177,7 +177,7 @@ class PostWithFeedback extends Component {
                 }
                     <div className="name-n-date">
                         <h4>{post.postedBy.name}</h4>
-                        <span>{post.postDate}</span>
+                        <span>{post.postDate ? convertTimeToLocal(post.postDate, post.postTime, 'MMM DD, YYYY hh:mm a') : 'N/A'}</span>
                     </div>
                     {/*<div className="post-type">Query</div>*/}
                 </div>
@@ -244,7 +244,7 @@ class PostWithFeedback extends Component {
                 return(
                   <div className="post" key={i}>
                       <div className="post-heading">
-                          <span className="date-time">{item.postDate}</span>
+                          <span className="date-time">{convertTimeToLocal(item.postDate, item.postTime, 'hh:mm a')}<br/>{convertTimeToLocal(item.postDate, item.postTime, 'MMM DD, YYYY')}</span>
                           <div className="header-title">
                           {
                             item.postedBy.imageUrl ?
@@ -273,21 +273,6 @@ class PostWithFeedback extends Component {
                 )
               })
             }
-                {/*<div className="post">
-                    <div className="post-heading">
-                        <span className="date-time">6.45 pm <br/> Aug 7,2019</span>
-                        <div className="header-title">
-                            <img src={require("../../../assets/images/user.jpg")} alt="" className="user-photo"/>
-                            <div className="description">
-                                <h4>Client Name <div className="post-type">Query</div></h4>
-                                <div className="comments">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid atque commodi delectus doloribus earum ex, fugit ipsa ipsam itaque magnam, nam nulla porro quae, qui reprehenderit suscipit ut voluptates!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*/}
-
             </div>
         </div>
       </LoadingOverlay>

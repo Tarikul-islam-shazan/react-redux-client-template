@@ -579,7 +579,7 @@ const addImageSuffix = (imgUrl, suffix) => {
       flag = false;
     }
   })
-  
+
   if (flag) {
     return imgUrl;
   }
@@ -598,11 +598,24 @@ const addImageSuffix = (imgUrl, suffix) => {
   return result;
 }
 
-const convertTimeToLocal = (date, time, outputFormat) => {
+const convertTimeToLocal = (date, time = '', outputFormat = 'DD.MM.YYYY') => {
     let formatForUtc = moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY') + (time ? (' ' + time) : '');
     let convertedDate = moment.utc(formatForUtc).format();
     var local = moment.utc(convertedDate).local().format(outputFormat);
     return local;
+}
+
+const getTodayTimeDifference = (startDate, endDate = moment()) => {
+    let a = moment(startDate);
+    let b = moment(endDate);
+    let res = b.diff(a, 'minutes');
+    if (res < 60) {
+        return `${res} minutes ago`;
+    } else {
+        let res = b.diff(a, 'hours');
+        return `${res} hours ago`;
+    }
+    return '';
 }
 
 export {
@@ -610,5 +623,5 @@ export {
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference
 };

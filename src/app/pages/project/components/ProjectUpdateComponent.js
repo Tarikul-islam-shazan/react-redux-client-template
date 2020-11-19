@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import loadjs from "loadjs";
 import ImageViewer from 'react-simple-image-viewer';
 
-import { encodeQueryData, addImageSuffix } from '../../../services/Util';
+import { encodeQueryData, addImageSuffix, convertTimeToLocal } from '../../../services/Util';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
@@ -609,7 +609,7 @@ class ProjectUpdateComponent extends Component {
                                     <div className="list" key={i}>
                                         <span>{item.productName}</span>
                                         <a href="#">{item.deliverableText}</a>
-                                        <span>{item.deadline}</span>
+                                        <span>{convertTimeToLocal(item.deadline, '', 'DD.MM.YYYY')}</span>
                                     </div>
                                   )
                                 })

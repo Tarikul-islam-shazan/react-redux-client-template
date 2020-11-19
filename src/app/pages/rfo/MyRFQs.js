@@ -10,7 +10,7 @@ import { _storeData } from "../design/actions";
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
-import { rfqStatus, rfqProductStatus } from '../../services/Util';
+import { rfqStatus, rfqProductStatus, convertTimeToLocal } from '../../services/Util';
 
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { RfqCard } from './components/RfqCard';
@@ -423,7 +423,7 @@ class MyRFQs extends Component {
                     <img src={rfqDetails.imageUrl ? rfqDetails.imageUrl : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png'} alt="pro pic" />
                     <div className="info">
                       <span>{rfqDetails.clientName ? rfqDetails.clientName : 'N/A'}</span>
-                      <div className="time">{rfqDetails.lastResponseTime ? rfqDetails.lastResponseTime : 'N/A'}</div>
+                      <div className="time">{rfqDetails.dateAdded ? convertTimeToLocal(rfqDetails.dateAdded, rfqDetails.dateAddedTime, 'MMM DD, YYYY hh:mm a') : 'N/A'}</div>
                     </div>
                   </div>
                 </div>

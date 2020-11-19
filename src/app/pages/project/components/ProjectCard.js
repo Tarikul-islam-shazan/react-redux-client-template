@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { convertTimeToLocal } from '../../../services/Util';
 export const ProjectCard = ({item, onClick}) => {
   return(
     <div className="row">
@@ -42,8 +43,8 @@ export const ProjectCard = ({item, onClick}) => {
                             <tr>
                                 <td className="fs-medium">{item.name}</td>
                                 <td className="fs-medium">{item.orderId}</td>
-                                <td>{item.startDate}</td>
-                                <td>{item.endDate}</td>
+                                <td>{item.startDate ? convertTimeToLocal(item.startDate, '', 'DD.MM.YYYY') : 'N/A'}</td>
+                                <td>{item.endDate ? convertTimeToLocal(item.endDate, '', 'DD.MM.YYYY') : 'N/A'}</td>
                                 <td>{item.totalStyles}</td>
                                 <td>{item.timeLeft ? Math.abs(item.timeLeft) : 'N/A'}</td>
                             </tr>

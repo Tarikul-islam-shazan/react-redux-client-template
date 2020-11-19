@@ -132,7 +132,7 @@ class Notification extends Component {
       let { notifications } = this.state;
       let today = moment().format('DD/MM/yyyy')
       let yesterday = moment().subtract(1, 'days').format('DD/MM/yyyy')
-      console.log("load today yesterday",today,yesterday);
+      console.log("load today yesterday", today, yesterday);
       let keys = Object.keys(notifications);
       keys.sort((a,b) => {
         let date = a.split("/");
@@ -146,7 +146,7 @@ class Notification extends Component {
       return Object.keys(notifications).map((key, index) => {
         let vals = notifications[keys[index]].map((item,i) => {
           return(
-            <NotificationCard key={item.id} item={item} markRead={this.markRead} />
+            <NotificationCard key={item.id} item={item} todayData={keys[index] === today ? true : false} markRead={this.markRead} />
           )
         })
         // let title = today == keys[index] ? 'Today' :

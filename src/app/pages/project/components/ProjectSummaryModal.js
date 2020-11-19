@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { deliverableStatus } from '../../../services/Util';
+import { deliverableStatus, convertTimeToLocal } from '../../../services/Util';
 import FitSampleEdit from './FitSampleEdit';
 
 class ProjectSummaryModal extends Component {
@@ -144,7 +144,7 @@ class ProjectSummaryModal extends Component {
                                     </div>
                                     <div className="ps-item">
                                         <label>Due Date</label>
-                                        <h6>{data.deliverableResponse && data.deliverableResponse.deadline}</h6>
+                                        <h6>{data.deliverableResponse && convertTimeToLocal(data.deliverableResponse.deadline, '', 'MMM DD, YYYY')}</h6>
                                     </div>
                                     {/*<div className="ps-item">
                                         <label>Color</label>

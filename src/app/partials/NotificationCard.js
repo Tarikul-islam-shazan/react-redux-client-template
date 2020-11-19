@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addImageSuffix } from '../services/Util';
+import { addImageSuffix, convertTimeToLocal, getTodayTimeDifference } from '../services/Util';
 
-export const NotificationCard = ({item, markRead}) =>{
+export const NotificationCard = ({item, markRead, todayData}) =>{
 
 
 
@@ -15,7 +15,12 @@ export const NotificationCard = ({item, markRead}) =>{
                 {loadIcon(item)}
                 <div className="info">
                     <div className="name">{item.text}</div>
-                    <div className="post-time">{item.createdTime}</div>
+                    <div className="post-time">{
+                      todayData ?
+                        getTodayTimeDifference(convertTimeToLocal(item.createdAt, item.createdTime, 'MM/DD/YYYY hh:mm a')) :
+                        convertTimeToLocal(item.createdAt, item.createdTime, 'hh:mm a')
+                      }
+                    </div>
                     {renderTag(item)}
                 </div>
                 {
@@ -111,7 +116,7 @@ const loadIcon = (item) => {
     default:
       if(item.profileImagePath){
         return (
-          <img className="type" src={item.profileImagePath}/>
+          <img className="type" src={addImageSuffix(item.profileImagePath, '_xicon')}/>
         )
       }else{
         return (

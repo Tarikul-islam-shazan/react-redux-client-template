@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { projectStatus, addImageSuffix } from '../../../services/Util';
+import { projectStatus, addImageSuffix, convertTimeToLocal } from '../../../services/Util';
 
 export const ProjectStatus = ({data}) => {
   return(
@@ -11,15 +11,15 @@ export const ProjectStatus = ({data}) => {
             </div>
             <div className="ps-item">
                 <span className="start-date">Start date</span>
-                <h6>{data.startDate ? data.startDate : 'N/A'}</h6>
+                <h6>{data.startDate ? convertTimeToLocal(data.startDate, '', 'DD.MM.YYYY') : 'N/A'}</h6>
             </div>
             <div className="ps-item">
                 <span className="end-date">End date</span>
-                <h6>{data.endDate ? data.endDate : 'N/A'}</h6>
+                <h6>{data.endDate ? convertTimeToLocal(data.endDate, '', 'DD.MM.YYYY') : 'N/A'}</h6>
             </div>
             <div className="ps-item">
                 <span className="time-left">Time left</span>
-                <h6>{data.timeLeft ? Math.abs(data.timeLeft) : 'N/A'}</h6>
+                <h6>{data.timeLeft ? (Math.abs(data.timeLeft) + ' ' + 'days') : 'N/A'}</h6>
             </div>
             <div className="ps-item">
                 <span className="total-style">Total styles</span>

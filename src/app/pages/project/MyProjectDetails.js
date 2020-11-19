@@ -21,10 +21,9 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
-import { deliverableStatus } from '../../services/Util';
+import { deliverableStatus, convertTimeToLocal } from '../../services/Util';
 
 class MyProjectDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -253,7 +252,7 @@ class MyProjectDetails extends Component {
                                           </div>
                                           <div className="due-date" data-toggle="modal" data-target="#project-common" onClick={(e) => this.setModalData(item.productNo)}>
                                               <span>Due date</span>
-                                              <strong>{item.deliverableResponse ? item.deliverableResponse.deadline : 'n/A'}</strong>
+                                              <strong>{item.deliverableResponse ? convertTimeToLocal(item.deliverableResponse.deadline, '', 'MMM DD, YYYY') : 'N/A'}</strong>
                                           </div>
                                       </div>
                                     )
