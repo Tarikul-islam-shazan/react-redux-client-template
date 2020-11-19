@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import moment from 'moment';
 import React, { Component } from 'react';
 
 const capitalizeFirstLetter = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -578,10 +579,17 @@ const addImageSuffix = (imgUrl, suffix) => {
   return result;
 }
 
+const convertTimeToLocal = (date, time, outputFormat) => {
+    let formatForUtc = moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY') + (time ? (' ' + time) : '');
+    let convertedDate = moment.utc(formatForUtc).format();
+    var local = moment.utc(convertedDate).local().format(outputFormat);
+    return local;
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix
+    getToken, addImageSuffix, convertTimeToLocal
 };
