@@ -2148,7 +2148,7 @@ aside.left-panel {
     width: calc(100% - 100px) !important;
 }
 
-button.btn_dash_menu {
+a.btn_dash_menu {
     background: #EE761F;
     height: 41px;
     border: none;
@@ -2159,17 +2159,17 @@ button.btn_dash_menu {
     line-height: 40px;
 }
 
-button.btn_dash_menu a {
+a.btn_dash_menu a {
     color: #fff;
     font-size: 14px;
     white-space: nowrap;
 }
 
-button.btn_dash_menu img {
+a.btn_dash_menu img {
     margin-right: 9px;
 }
 
-button.btn_dash_menu a:hover
+a.btn_dash_menu a:hover
 {
     color: #fff !important;
 }
@@ -2193,7 +2193,7 @@ button.btn_dash_menu a:hover
     .content {
         margin-left: 80px !important;
     }
-    button.btn_dash_menu
+    a.btn_dash_menu
     {
         width: 27%;
         display: block;
@@ -2204,7 +2204,7 @@ button.btn_dash_menu a:hover
 
 @media(max-width:767px)
 {
-    button.btn_dash_menu
+    a.btn_dash_menu
     {
         padding-left: 10px;
         padding-right: 10px;

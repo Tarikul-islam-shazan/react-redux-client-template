@@ -83,12 +83,12 @@ class DefaultLayout extends Component {
               <div className="content">
                   <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
 
-                     <button className="btn_dash_menu">
+                     <Link to="/dashboard" className="btn_dash_menu">
                          <Link to="/dashboard">
-                         <img src={require("../assets/icons/dashboard.png")} alt="notification"/>
-                         Dashboard
+                             <img src={require("../assets/icons/dashboard.png")} alt="notification"/>
+                             Dashboard
                          </Link>
-                     </button>
+                     </Link>
 
                       {/* Sidebar Toggle (Topbar) */}
                       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
