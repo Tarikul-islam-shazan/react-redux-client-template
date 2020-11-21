@@ -135,7 +135,7 @@ class Comments extends Component {
                       {
                         userInfo && userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
                         <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} className="user-photo"/> :
-                        <img src={require("../../../assets/images/pro_pic_default.png")} alt="" className="user-photo"/>
+                        <img src={require("../../../assets/images/pro_pic_default.svg")} alt="" className="user-photo"/>
                       }
                         <textarea
                           name="comment"
@@ -156,7 +156,7 @@ class Comments extends Component {
                                     {
                                       item.postedBy && item.postedBy.imageUrl ?
                                       <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} className="user-photo"/> :
-                                      <img src={require("../../../assets/images/pro_pic_default.png")} alt="" className="user-photo"/>
+                                      <img src={require("../../../assets/images/pro_pic_default.svg")} alt="" className="user-photo"/>
                                     }
                                       <div className="name-n-date">
                                           <h4>{item.postedBy.name}</h4>

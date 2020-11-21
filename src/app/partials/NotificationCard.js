@@ -27,7 +27,7 @@ export const NotificationCard = ({item, markRead, todayData}) =>{
                   item.notificationImagePath ?
                   <img src={addImageSuffix(item.notificationImagePath, '_xicon')} className="product" />
                   :
-                  <img src={require("../assets/images/default_product.jpg")} className="product" />
+                  <img src={require("../assets/images/default_product.svg")} className="product" />
                 }
             </div>
         </a>
@@ -120,7 +120,7 @@ const loadIcon = (item) => {
         )
       }else{
         return (
-          <img className="type" src={require("../assets/images/pro_pic_default.png")}/>
+          <img className="type" src={require("../assets/images/pro_pic_default.svg")}/>
         )
       }
       break;

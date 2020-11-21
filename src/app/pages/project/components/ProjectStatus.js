@@ -53,7 +53,7 @@ export const ProjectStatus = ({data}) => {
                     data.projectManagerResponse && data.projectManagerResponse.profilePicDocument && data.projectManagerResponse.profilePicDocument.docUrl ?
                     <img src={addImageSuffix(data.projectManagerResponse.profilePicDocument.docUrl, '_xicon')} alt=""/>
                     :
-                    <img src={require("../../../assets/images/pro_pic_default.png")} alt=""/>
+                    <img src={require("../../../assets/images/pro_pic_default.svg")} alt=""/>
                   }
                   <h6>Project manager</h6>
                 </div>
@@ -64,7 +64,7 @@ export const ProjectStatus = ({data}) => {
                         return(
                           item.profilePicDocument.docUrl ?
                           <img key={i} src={addImageSuffix(item.profilePicDocument.docUrl, '_xicon')} alt=""/> :
-                          <img src={require("../../../assets/images/pro_pic_default.png")} alt=""/>
+                          <img src={require("../../../assets/images/pro_pic_default.svg")} alt=""/>
                         )
                       })
                     }

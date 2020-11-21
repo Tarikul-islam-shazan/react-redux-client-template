@@ -530,7 +530,7 @@ class ProjectUpdateComponent extends Component {
                               {
                                 userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
                                 <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
-                                <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                                <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                               }
                               <textarea name="post" onChange={this.onChangeFromPost} rows="5" value={post} placeholder="Write here....."/>
                           </div>

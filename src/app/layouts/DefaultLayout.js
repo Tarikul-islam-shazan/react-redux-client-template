@@ -178,7 +178,7 @@ class DefaultLayout extends Component {
                                     userInfo && userInfo.profilePicDocument ?
                                     <img className="img-profile rounded-circle" src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} />
                                     :
-                                    <img className="img-profile rounded-circle" src={require("../assets/images/pro_pic_default.png")} />
+                                    <img className="img-profile rounded-circle" src={require("../assets/images/pro_pic_default.svg")} />
                                   }
                                   <span className="mr-2 d-none d-lg-inline">{userInfo ? userInfo.name : 'Anonymous'}</span>
                               </button>

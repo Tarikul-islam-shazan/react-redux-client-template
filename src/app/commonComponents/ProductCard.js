@@ -56,7 +56,7 @@ class ProductCard extends Component {
               }
             })
             :
-            <img src={require("../assets/images/default_product.jpg")} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+            <img src={require("../assets/images/default_product.svg")} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
           }
           <div className="card-body">
               <h5 className="card-title text-capitalize">{item.name ? item.name : 'N/A'}</h5>

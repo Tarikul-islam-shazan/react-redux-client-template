@@ -8,7 +8,7 @@ export const RfqCard = ({item, onClick, selectedId, showStatus}) => {
                   item.imageUrl ?
                   <img src={item.imageUrl} alt={item.name}/>
                   :
-                  <img src={require("../../../assets/images/default_product.jpg")} alt={item.name}/>
+                  <img src={require("../../../assets/images/default_product.svg")} alt={item.name}/>
                 }
                 <div className="info">
                  <h6>{item.name}</h6>

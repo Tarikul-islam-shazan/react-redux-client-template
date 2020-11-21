@@ -173,7 +173,7 @@ class PostWithFeedback extends Component {
                 {
                   post.postedBy.imageUrl ?
                   <img src={addImageSuffix(post.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/>:
-                  <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                  <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                 }
                     <div className="name-n-date">
                         <h4>{post.postedBy.name}</h4>
@@ -210,7 +210,7 @@ class PostWithFeedback extends Component {
                   {
                     userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
                     <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
-                    <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                    <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
                         <textarea name="feedback"  rows="3" value={feedback} onChange={this.onChange} placeholder="Write your feedback here....."></textarea>
@@ -249,7 +249,7 @@ class PostWithFeedback extends Component {
                           {
                             item.postedBy.imageUrl ?
                             <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/> :
-                            <img src={require("../../../assets/images/pro_pic_default.png")} className="user-photo" alt=""/>
+                            <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                           }
                               <div className="description" style={{width:'100%'}}>
                                   <h4>{item.postedBy.name}
