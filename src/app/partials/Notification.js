@@ -14,6 +14,8 @@ import Http from '../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../constant';
 
+import { convertTimeToLocal } from '../services/Util';
+
 class Notification extends Component {
 
     constructor(props) {
@@ -152,7 +154,7 @@ class Notification extends Component {
         // let title = today == keys[index] ? 'Today' :
         return(
           <div className="day" key={key}>
-              <h6 className="timing-date">{today === keys[index] ? 'Today' : (yesterday === keys[index] ? 'Yesterday' : keys[index])}</h6>
+              <h6 className="timing-date">{today === keys[index] ? 'Today' : (yesterday === keys[index] ? 'Yesterday' : convertTimeToLocal(keys[index], '', 'DD.MM.YYYY'))}</h6>
               <ul>
               {vals}
               </ul>
