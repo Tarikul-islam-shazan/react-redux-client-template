@@ -17,6 +17,8 @@ import MyProfile from './pages/auth/MyProfile';
 
 import Dashboard from './pages/dashboard/Dashboard';
 
+import Questionairre from './pages/questionairre/Questionairre';
+
 import Questionairre_1 from './pages/questionairre/Questionairre_1';
 import Questionairre_2 from './pages/questionairre/Questionairre_2';
 import Questionairre_3 from './pages/questionairre/Questionairre_3';
@@ -81,6 +83,7 @@ class Root extends Component {
             <Router>
                 <Switch>
                   <PublicRoute exact path="/" component={ PickDesign }/>
+                  <QuestionairreRoute exact path="/questionairre" component={ Questionairre }/>
                   <QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
