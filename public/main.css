@@ -3307,7 +3307,8 @@ button#sidebarToggleTop {
       margin-bottom: 14px; }
     .questionnaire .questionnaire-form .nice-select {
       background: #F4F5F7;
-      border-color: #EDEFF4; }
+      border-color: #EDEFF4;
+      color: #6A7181; }
     .questionnaire .questionnaire-form .country-phone-code .intl-tel-input {
       width: 100%; }
     .questionnaire .questionnaire-form .country-phone-code .allow-dropdown.intl-tel-input input {
@@ -3356,7 +3357,8 @@ button#sidebarToggleTop {
 
 .nice-select.error {
   background: #FFF5F5 !important;
-  border-color: red !important; }
+  border-color: red !important;
+  color: #6A7181 !important; }
 
 .add-invoice {
   max-width: 813px;
