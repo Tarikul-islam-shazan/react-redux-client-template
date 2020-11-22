@@ -350,7 +350,7 @@ class MyProfile extends Component {
                                         proPic ?
                                         <img src={proPic} alt=""/>
                                         :
-                                        <img src={require("../../assets/images/profile_avatar.png")} alt=""/>
+                                        <img src={require("../../assets/images/pro_pic_default.svg")} alt=""/>
                                       }
                                         <div className="file btn">
                                             Change Image
