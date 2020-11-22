@@ -48,6 +48,49 @@
       background: #F4F5F7;
       border-color: #EDEFF4;
     }
+    .country-phone-code{
+      .intl-tel-input {
+        width: 100%;
+      }
+      .allow-dropdown.intl-tel-input input {
+        background: #F4F5F7;
+        border-color: #EDEFF4;
+        padding-left: 145px !important;
+      }
+      .selected-flag {
+        outline: 0;
+      }
+      .selected-flag {
+        width: 130px !important;
+        position: relative;
+      }
+      .selected-flag .iti-flag {
+        margin: 19px 0 0 15px;
+      }
+
+      .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+        padding-left: 0;
+        padding-right: 10px;
+        font-size: 21px;
+        color: #452D8F;
+        font-family: 'Open Sans';
+        font-weight: 600;
+      }
+      .intl-tel-input .flag-container .arrow {
+        margin-left: 0;
+        padding-right: 10px;
+        background: url(./images/icons/down.png) no-repeat center;
+        width: 30px;
+        height: 20px;
+        position: absolute;
+        right: 3px;
+        top: 15px;
+      }
+      .intl-tel-input .flag-container .arrow:after {
+        display: none;
+      }
+    }
+
     .country-code{
       > div{
         width: 100%;

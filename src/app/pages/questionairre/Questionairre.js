@@ -135,16 +135,16 @@ class Questionairre_1 extends Component {
                             <div className="form-group">
                                 <span className="info">Our business evangelist will call you to cater for your needs</span>
                                 <label htmlFor="">How can we contact you?</label>
-                                <IntlTelInput
-                                  containerClassName="intl-tel-input"
-                                  inputClassName="form-control"
-                                  // value={phoneNumber}
-                                  onSelectFlag={this.onChangeNumber}
-                                  onPhoneNumberChange={this.onChangeNumber}
-                                  // onChange={(e) => this.onChangeNumber(e)}
-                                />
-                                <div className="country-code">
-                                    <input id="phone" type="tel"/>
+                                <div className="country-phone-code">
+                                    <IntlTelInput
+                                      containerClassName="intl-tel-input"
+                                      inputClassName="form-control"
+                                      // value={phoneNumber}
+                                      onSelectFlag={this.onChangeNumber}
+                                      onPhoneNumberChange={this.onChangeNumber}
+                                      // onChange={(e) => this.onChangeNumber(e)}
+                                      separateDialCode={true}
+                                    />
                                 </div>
                             </div>
                         </div>

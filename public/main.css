@@ -3308,6 +3308,37 @@ button#sidebarToggleTop {
     .questionnaire .questionnaire-form .nice-select {
       background: #F4F5F7;
       border-color: #EDEFF4; }
+    .questionnaire .questionnaire-form .country-phone-code .intl-tel-input {
+      width: 100%; }
+    .questionnaire .questionnaire-form .country-phone-code .allow-dropdown.intl-tel-input input {
+      background: #F4F5F7;
+      border-color: #EDEFF4;
+      padding-left: 145px !important; }
+    .questionnaire .questionnaire-form .country-phone-code .selected-flag {
+      outline: 0; }
+    .questionnaire .questionnaire-form .country-phone-code .selected-flag {
+      width: 130px !important;
+      position: relative; }
+    .questionnaire .questionnaire-form .country-phone-code .selected-flag .iti-flag {
+      margin: 19px 0 0 15px; }
+    .questionnaire .questionnaire-form .country-phone-code .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+      padding-left: 0;
+      padding-right: 10px;
+      font-size: 21px;
+      color: #452D8F;
+      font-family: 'Open Sans';
+      font-weight: 600; }
+    .questionnaire .questionnaire-form .country-phone-code .intl-tel-input .flag-container .arrow {
+      margin-left: 0;
+      padding-right: 10px;
+      background: url(./images/icons/down.png) no-repeat center;
+      width: 30px;
+      height: 20px;
+      position: absolute;
+      right: 3px;
+      top: 15px; }
+    .questionnaire .questionnaire-form .country-phone-code .intl-tel-input .flag-container .arrow:after {
+      display: none; }
     .questionnaire .questionnaire-form .country-code > div {
       width: 100%; }
     .questionnaire .questionnaire-form .country-code #phone {
