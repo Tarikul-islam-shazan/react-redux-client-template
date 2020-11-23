@@ -33,7 +33,7 @@ class OAuth2RedirectHandler extends Component {
         if(userInfo.businessInfoGiven){
           this.props.history.push("/pick-design");
         }else{
-          this.props.history.push("/questionairre-step-1");
+          this.props.history.push("/questionairre");
         }
     }
 

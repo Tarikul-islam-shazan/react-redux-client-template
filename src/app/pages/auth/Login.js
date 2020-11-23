@@ -93,7 +93,7 @@ class Login extends Component {
                           state: { from: 'login' }
                         });
                       }else{
-                        this.props.history.push('/questionairre-step-1');
+                        this.props.history.push('/questionairre');
                       }
                   })
                   .catch(({response}) => {
