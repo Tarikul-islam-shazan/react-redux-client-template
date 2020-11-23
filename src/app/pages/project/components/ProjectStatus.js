@@ -62,7 +62,7 @@ export const ProjectStatus = ({data}) => {
                       data.projectMemberResponseList &&
                       data.projectMemberResponseList.map((item,i)=>{
                         return(
-                          item.profilePicDocument.docUrl ?
+                          item.profilePicDocument && item.profilePicDocument.docUrl ?
                           <img key={i} src={addImageSuffix(item.profilePicDocument.docUrl, '_xicon')} alt=""/> :
                           <img src={require("../../../assets/images/pro_pic_default.svg")} alt=""/>
                         )
