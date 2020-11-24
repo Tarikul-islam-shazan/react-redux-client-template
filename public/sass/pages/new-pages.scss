@@ -115,7 +115,7 @@
     }
   }
 }
-.nice-select.error {
+.nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;
   border-color: red !important;
   color: #6A7181 !important;

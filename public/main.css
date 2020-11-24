@@ -3355,7 +3355,7 @@ button#sidebarToggleTop {
     .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input, .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=text], .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=tel] {
       padding-left: 130px !important; }
 
-.nice-select.error {
+.nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;
   border-color: red !important;
   color: #6A7181 !important; }
