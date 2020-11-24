@@ -34,7 +34,7 @@ class Questionairre_1 extends Component {
           phoneNumberError: '',
           numberValidation: false,
           countryCodeError: '',
-          userInfo: {}
+          userInfo: {},
         };
     }
 
@@ -231,6 +231,7 @@ class Questionairre_1 extends Component {
                                     <option value="BUYER">Buyer</option>
                                     <option value="OTHER">Others</option>
                                 </select>
+
                                 {
                                   roleError ?
                                   <div className="error">{roleError}</div>:<></>
@@ -268,7 +269,7 @@ class Questionairre_1 extends Component {
                                 <div className="country-phone-code">
                                     <IntlTelInput
                                       containerClassName="intl-tel-input"
-                                      inputClassName="form-control"
+                                      inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
                                       onSelectFlag={this.onChangeFlag}
                                       onPhoneNumberChange={this.onChangeNumber}
                                       separateDialCode={true}
