@@ -92,7 +92,6 @@ class ResetPassword extends Component {
           }
         }
       }
-      // this.props.history.push('/questionairre-step-1');
     }
 
     render() {

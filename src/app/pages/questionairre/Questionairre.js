@@ -22,9 +22,9 @@ class Questionairre_1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          role: '',
+          role: 'OWNER',
           roleStr: '',
-          label: '',
+          label: 'DONT_HAVE_LABEL_YET',
           phoneNumber: '',
           countryCode: '+1',
           iso2: 'us',
@@ -39,13 +39,16 @@ class Questionairre_1 extends Component {
     }
 
     componentDidMount = async() => {
-      let userInfo = localStorage.getItem('userInfo');
-      if (userInfo) {
-        userInfo = JSON.parse(userInfo)
-        this.setState({
-          userInfo
-        })
-      }
+        let userInfo = localStorage.getItem('userInfo');
+        await loadjs(['/js/script.js']);
+        if (userInfo) {
+          userInfo = JSON.parse(userInfo)
+          this.setState({
+            userInfo
+          })
+        } else {
+          userInfo = {};
+        }
     }
 
     onChange = (e) => {
@@ -151,6 +154,14 @@ class Questionairre_1 extends Component {
                 this.setState({loading:false})
                 if(data.success){
                   toastSuccess(data.message);
+                  let userInfo = localStorage.getItem('userInfo');
+                  if(userInfo) {
+                    userInfo = JSON.parse(userInfo);
+                  } else {
+                    userInfo = {};
+                  }
+                  userInfo.businessInfoGiven = true;
+                  localStorage.setItem('userInfo', JSON.stringify(userInfo));
                   this.props.history.push('/pick-design');
                 }else{
                   toastError(data.message);
@@ -213,7 +224,6 @@ class Questionairre_1 extends Component {
                             <div className="form-group">
                                 <label htmlFor="">What is your role in business (Select one)?</label>
                                 <select className={roleError ? 'error' : ''} name="role" value={role} onClick={this.onChange}>
-                                    <option value="">Please choose one…</option>
                                     <option value="OWNER">Owner</option>
                                     <option value="DIRECTOR">Director</option>
                                     <option value="DESIGNER">Designer</option>
@@ -241,7 +251,6 @@ class Questionairre_1 extends Component {
                                 <span className="info">We help private labels, wholesalers, & retailers to manufacture in bulk</span>
                                 <label htmlFor="">Do you have a private clothing label?</label>
                                 <select className={labelError ? 'error' : ''} name="label" value={label} onClick={this.onChange}>
-                                    <option value="">Please choose one…</option>
                                     <option value="DONT_HAVE_LABEL_YET">No! Don't have a label yet</option>
                                     <option value="DO_DROPSHIP_ONLY">We do drop-shipping only</option>
                                     <option value="DROPSHIP_NOW_WILL_BUILD_LABEL">We dropship now, will build label</option>

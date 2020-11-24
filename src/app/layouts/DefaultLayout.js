@@ -71,11 +71,16 @@ class DefaultLayout extends Component {
 
     render(){
       let userInfo = localStorage.getItem('userInfo');
-      if(userInfo){
+      if(userInfo) {
         userInfo = JSON.parse(userInfo);
+      } else {
+        userInfo = {};
       }
+      console.log("userInfo from layout", userInfo.businessInfoGiven)
       let { showNotification } = this.state;
-      // console.log("userInfo from layout",userInfo)
+      if (!userInfo.businessInfoGiven) {
+          return <Redirect to="questionairre" />
+      }
       return (
           <>
               <Sidebar/>
