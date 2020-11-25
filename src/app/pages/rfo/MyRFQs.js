@@ -15,6 +15,7 @@ import { rfqStatus, rfqProductStatus, convertTimeToLocal } from '../../services/
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { RfqCard } from './components/RfqCard';
 import {RfqSkeleton, RfqProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
+import { addImageSuffix } from '../../services/Util';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { event } from 'jquery';
@@ -420,7 +421,12 @@ class MyRFQs extends Component {
                 <div className="quotation-header">
                   <h3>{rfqDetails.name ? rfqDetails.name : 'N/A'}</h3>
                   <div className="client-info">
-                    <img src={rfqDetails.imageUrl ? rfqDetails.imageUrl : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png'} alt="pro pic" />
+                  {
+                    rfqDetails.imageUrl ?
+                    <img src={addImageSuffix(rfqDetails.imageUrl, '_xicon')} alt="pro pic" />
+                    :
+                    <img src={require("../../assets/images/pro_pic_default.svg")} alt="pro pic" />
+                  }
                     <div className="info">
                       <span>{rfqDetails.clientName ? rfqDetails.clientName : 'N/A'}</span>
                       <div className="time">{rfqDetails.dateAdded ? convertTimeToLocal(rfqDetails.dateAdded, rfqDetails.dateAddedTime, 'MMM DD, YYYY hh:mm a') : 'N/A'}</div>
@@ -501,7 +507,12 @@ class MyRFQs extends Component {
                       messages.map((item, i) => {
                         return (
                           <div className={item.postedBy.id == userInfo.id ? 'incoming' : 'outgoing'} key={item.id}>
-                            <img src={item.postedBy.imageUrl ? item.postedBy.imageUrl : 'https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png'} alt="" />
+                          {
+                            item.postedBy && item.postedBy.imageUrl ?
+                            <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} alt="pro pic" />
+                            :
+                            <img src={require("../../assets/images/pro_pic_default.svg")} alt="pro pic" />
+                          }
                             <div className="msg" style={{ width: '100%' }}>
                               <p>{item.text}</p>
                               <span className="msg-time">{item.date}</span>
