@@ -50,6 +50,55 @@ export const RfqProductSkeleton = () => {
     )
 }
 
+export const ProductThumbsSkeleton = () => {
+    return(
+      <div className="product-details-skl">
+          <div className="left-thumb"></div>
+          <div className="left-thumb"></div>
+          <div className="left-thumb"></div>
+          <div className="left-thumb"></div>
+      </div>
+    )
+}
+
+export const ProductHeroImageSkeleton = () => {
+    return(
+      <div className="product-details-skl">
+          <div className="thumbnail-prev"></div>
+      </div>
+    )
+}
+
+export const ProductDetailsSkeleton = () => {
+    return(
+      <div className="product-details-info-skl skeleton">
+          <div className="title">
+              <div className="line"></div>
+              <div className="cat"></div>
+          </div>
+          <div className="info">
+              <div className="line"></div>
+              <div className="cat"></div>
+          </div>
+          <div className="info">
+              <div className="line"></div>
+              <div className="cat"></div>
+          </div>
+          <div className="info">
+              <div className="line"></div>
+              <div className="cat"></div>
+          </div>
+          <div className="info">
+              <div className="line"></div>
+              <div className="img"></div>
+              <div className="img"></div>
+              <div className="img"></div>
+          </div>
+          <div className="button-skel big"></div>
+      </div>
+    )
+}
+
 export const ProjectSkeleton = () => {
     return(
         <div className="skeleton project-list">

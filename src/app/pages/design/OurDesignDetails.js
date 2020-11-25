@@ -16,6 +16,8 @@ import { MeasurementTable } from './components/MeasurementTable'
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { productAvailabilityStatus, addImageSuffix } from '../../services/Util';
 
+import {ProductThumbsSkeleton, ProductHeroImageSkeleton, ProductDetailsSkeleton} from '../../commonComponents/ProductSkeleton';
+
 class OurDesignDetails extends Component {
 
     constructor(props) {
@@ -81,106 +83,52 @@ class OurDesignDetails extends Component {
     }
 
     render() {
-        let { product , selectedImage } = this.state;
+        let { product , selectedImage, loading } = this.state;
         return (
-            <LoadingOverlay
-              active={this.state.loading}
-              styles={{
-                overlay: (base) => ({
-                  ...base,
-                  background: LOADER_OVERLAY_BACKGROUND
-                }),
-                spinner: (base) => ({
-                  ...base,
-                  width: LOADER_WIDTH,
-                  position: LOADER_POSITION,
-                  top: LOADER_TOP,
-                  left: LOADER_LEFT,
-                  marginTop: LOADER_MARGIN_TOP,
-                  marginLeft: LOADER_MARGIN_LEFT,
-                  '& svg circle': {
-                    stroke: LOADER_COLOR
-                  }
-                }),
-                content: (base) => ({
-                  ...base,
-                  color: LOADER_COLOR
-                })
-              }}
-              spinner
-              text={LOADER_TEXT}>
-              <div className="product-details-slider-container">
-                  <div className="row">
-                      <div className="col-lg-7">
-                          <div className="product-detail-gallery">
-                              <div className="thumbnail-slider">
-                                  <div className="inner">
-                                      {/*Skeleton Start*/}
-                                      <div className="product-details-skl">
-                                          <div className="left-thumb"></div>
-                                          <div className="left-thumb"></div>
-                                          <div className="left-thumb"></div>
-                                          <div className="left-thumb"></div>
-                                      </div>
-                                      {/*Skeleton End*/}
-                                      <ul>
-                                          {
-                                            product.documentResponseList &&
-                                            product.documentResponseList.map((item,i) => {
-                                              // if(item.docType == 'PRODUCT_DESIGN' || item.docType == 'REFERENCE_IMAGE' || item.docType == 'PRINT_DESIGN'){
-                                                return(
-                                                  <li key={i} onClick={() => this.setSelectedImage(i)}>
-                                                    <img src={addImageSuffix(item.docUrl, '_xicon')} alt=""/>
-                                                  </li>
-                                                );
-                                              // }
-                                            })
-                                          }
-                                      </ul>
-                                  </div>
-                              </div>
-                              <div className="thumbnail-prev">
+          <div className="product-details-slider-container">
+              <div className="row">
+                  <div className="col-lg-7">
+                      <div className="product-detail-gallery">
+                          <div className="thumbnail-slider">
+                              <div className="inner">
                                   {/*Skeleton Start*/}
-                                  <div className="product-details-skl">
-                                      <div className="thumbnail-prev"></div>
-                                  </div>
+                                  {loading && <ProductThumbsSkeleton />}
                                   {/*Skeleton End*/}
-                                     <span className='zoom' id='zoom' style={{width:'100%'}}>
-                                           <img src={addImageSuffix(selectedImage, '_xlarge')} width="100%"/>
-                                       </span>
+                                  <ul>
+                                      {
+                                        product.documentResponseList &&
+                                        product.documentResponseList.map((item,i) => {
+                                          // if(item.docType == 'PRODUCT_DESIGN' || item.docType == 'REFERENCE_IMAGE' || item.docType == 'PRINT_DESIGN'){
+                                            return(
+                                              <li key={i} onClick={() => this.setSelectedImage(i)}>
+                                                <img src={addImageSuffix(item.docUrl, '_xicon')} alt=""/>
+                                              </li>
+                                            );
+                                          // }
+                                        })
+                                      }
+                                  </ul>
                               </div>
                           </div>
-
+                          <div className="thumbnail-prev">
+                              {
+                                loading ?
+                                <ProductHeroImageSkeleton /> :
+                                <span className='zoom' id='zoom' style={{width:'100%'}}>
+                                   <img src={addImageSuffix(selectedImage, '_xlarge')} width="100%"/>
+                                </span>
+                              }
+                          </div>
                       </div>
-                      <div className="col-lg-5">
-                          <div className="produt-details-description">
-                              {/*Skeleton Start*/}
-                              <div className="product-details-info-skl skeleton">
-                                  <div className="title">
-                                      <div className="line"></div>
-                                      <div className="cat"></div>
-                                  </div>
-                                  <div className="info">
-                                      <div className="line"></div>
-                                      <div className="cat"></div>
-                                  </div>
-                                  <div className="info">
-                                      <div className="line"></div>
-                                      <div className="cat"></div>
-                                  </div>
-                                  <div className="info">
-                                      <div className="line"></div>
-                                      <div className="cat"></div>
-                                  </div>
-                                  <div className="info">
-                                      <div className="line"></div>
-                                      <div className="img"></div>
-                                      <div className="img"></div>
-                                      <div className="img"></div>
-                                  </div>
-                                  <div className="button-skel big"></div>
-                              </div>
-                              {/*Skeleton End*/}
+
+                  </div>
+                  <div className="col-lg-5">
+                      <div className="produt-details-description">
+
+                          {
+                            loading ?
+                            <ProductDetailsSkeleton />:
+                            <>
                               <div className="head-title">
                                   <h3>{product.name}</h3>
                                   {
@@ -225,41 +173,43 @@ class OurDesignDetails extends Component {
                                   }
 
                               </div>
-                              <div className="info-item">
-                                  <div className="text-left mt-5">
-                                    {
-                                      (product.availabilityStatus === 'AVAILABLE' || product.availabilityStatus === 'CHECKED') ?
-                                      <a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Quote now</a>:
-                                      <button className="btn btn-outline-secondary" disabled={true}>Quote now</button>
-                                    }
-                                      {/*<a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Start Project</a>*/}
-                                  </div>
+                            </>
+                          }
+
+                          <div className="info-item">
+                              <div className="text-left mt-5">
+                                {
+                                  (product.availabilityStatus === 'AVAILABLE' || product.availabilityStatus === 'CHECKED') ?
+                                  <a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickQuoteModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Quote now</a>:
+                                  <button className="btn btn-outline-secondary" disabled={true}>Quote now</button>
+                                }
+                                  {/*<a href="" className="btn btn-nitex-default" data-toggle="modal" data-target="#quickProjectModal" onClick={() => this.props._storeData('choosenIdsForQuick',[this.props.match.params.id])}>Start Project</a>*/}
                               </div>
                           </div>
                       </div>
                   </div>
-                  <div className="other-description">
-                    {
-                      product.sizeTable && product.sizeTable.sizeTableRows.length ?
-                      <div className="row">
-                          <div className="col-lg-12">
-                              <h4  className="mb-4">Measurement Chart</h4>
-                              {
-                                <MeasurementTable data={product.sizeTable.sizeTableRows} />
-                              }
-                          </div>
-                      </div>
-                      :
-                      <div className="row">
-                          <div className="col-lg-12">
-                            <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>Measurement table not available</p>
-                          </div>
-                      </div>
-                    }
-
-                  </div>
               </div>
-            </LoadingOverlay>
+              <div className="other-description">
+                {
+                  product.sizeTable && product.sizeTable.sizeTableRows.length ?
+                  <div className="row">
+                      <div className="col-lg-12">
+                          <h4  className="mb-4">Measurement Chart</h4>
+                          {
+                            <MeasurementTable data={product.sizeTable.sizeTableRows} />
+                          }
+                      </div>
+                  </div>
+                  :
+                  <div className="row">
+                      <div className="col-lg-12">
+                        <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>Measurement table not available</p>
+                      </div>
+                  </div>
+                }
+
+              </div>
+          </div>
         );
     }
 }
