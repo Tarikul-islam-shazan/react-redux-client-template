@@ -255,6 +255,7 @@ class Questionairre_1 extends Component {
                                 <select className={labelError ? 'error' : ''} name="label" value={label} onClick={this.onChange}>
                                     <option value="">Please choose one...</option>
                                     <option value="DONT_HAVE_LABEL_YET">No! Don't have a label yet</option>
+                                    <option value="WE_HAVE_A_PRIVATE_CLOTHING_LABEL">Yes, we have a private clothing label</option>
                                     <option value="DO_DROPSHIP_ONLY">We do drop-shipping only</option>
                                     <option value="DROPSHIP_NOW_WILL_BUILD_LABEL">We dropship now, will build label</option>
                                     <option value="SELL_WHOLESALE_TO_RETAILERS">We sell wholesale to retailers</option>
