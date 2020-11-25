@@ -115,6 +115,14 @@ class OurDesignDetails extends Component {
                           <div className="product-detail-gallery">
                               <div className="thumbnail-slider">
                                   <div className="inner">
+                                      {/*Skeleton Start*/}
+                                      <div className="product-details-skl">
+                                          <div className="left-thumb"></div>
+                                          <div className="left-thumb"></div>
+                                          <div className="left-thumb"></div>
+                                          <div className="left-thumb"></div>
+                                      </div>
+                                      {/*Skeleton End*/}
                                       <ul>
                                           {
                                             product.documentResponseList &&
@@ -132,6 +140,11 @@ class OurDesignDetails extends Component {
                                   </div>
                               </div>
                               <div className="thumbnail-prev">
+                                  {/*Skeleton Start*/}
+                                  <div className="product-details-skl">
+                                      <div className="thumbnail-prev"></div>
+                                  </div>
+                                  {/*Skeleton End*/}
                                      <span className='zoom' id='zoom' style={{width:'100%'}}>
                                            <img src={addImageSuffix(selectedImage, '_xlarge')} width="100%"/>
                                        </span>
@@ -141,6 +154,33 @@ class OurDesignDetails extends Component {
                       </div>
                       <div className="col-lg-5">
                           <div className="produt-details-description">
+                              {/*Skeleton Start*/}
+                              <div className="product-details-info-skl skeleton">
+                                  <div className="title">
+                                      <div className="line"></div>
+                                      <div className="cat"></div>
+                                  </div>
+                                  <div className="info">
+                                      <div className="line"></div>
+                                      <div className="cat"></div>
+                                  </div>
+                                  <div className="info">
+                                      <div className="line"></div>
+                                      <div className="cat"></div>
+                                  </div>
+                                  <div className="info">
+                                      <div className="line"></div>
+                                      <div className="cat"></div>
+                                  </div>
+                                  <div className="info">
+                                      <div className="line"></div>
+                                      <div className="img"></div>
+                                      <div className="img"></div>
+                                      <div className="img"></div>
+                                  </div>
+                                  <div className="button-skel big"></div>
+                              </div>
+                              {/*Skeleton End*/}
                               <div className="head-title">
                                   <h3>{product.name}</h3>
                                   {
