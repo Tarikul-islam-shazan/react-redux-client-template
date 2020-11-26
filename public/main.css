@@ -3413,6 +3413,43 @@ button#sidebarToggleTop {
   border-color: red !important;
   color: #6A7181 !important; }
 
+.project-update-modal {
+  max-width: 796px;
+  margin: 0 auto; }
+  .project-update-modal .editor .write {
+    padding: 40px 40px 40px 100px; }
+  .project-update-modal .editor .footer-tab {
+    flex-wrap: wrap;
+    padding: 40px 0 20px 0; }
+    .project-update-modal .editor .footer-tab h6 {
+      flex-basis: 100%;
+      margin-bottom: 16px;
+      padding: 0; }
+    .project-update-modal .editor .footer-tab .nice-select {
+      border-color: #EE761F; }
+
+.uploaded-photo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  margin-top: 30px; }
+  .uploaded-photo img {
+    width: 100%;
+    height: 158px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px; }
+
+.submit-option {
+  padding: 20px; }
+  .submit-option button {
+    width: 100%;
+    margin: 10px 0; }
+
+button[disabled] {
+  background: #E5E5E5;
+  color: #818181; }
+
 .add-invoice {
   max-width: 813px;
   margin: 0 auto;

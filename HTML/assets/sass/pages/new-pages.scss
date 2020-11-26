@@ -47,14 +47,51 @@
     .nice-select{
       background: #F4F5F7;
       border-color: #EDEFF4;
+      color: #6A7181;
     }
-    .intl-tel-input {
-      width: 100%;
+    .country-phone-code{
+      .intl-tel-input {
+        width: 100%;
+      }
+      .allow-dropdown.intl-tel-input input {
+        background: #F4F5F7;
+        border-color: #EDEFF4;
+        padding-left: 145px !important;
+      }
+      .selected-flag {
+        outline: 0;
+      }
+      .selected-flag {
+        width: 130px !important;
+        position: relative;
+      }
+      .selected-flag .iti-flag {
+        margin: 19px 0 0 15px;
+      }
+
+      .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+        padding-left: 0;
+        padding-right: 10px;
+        font-size: 21px;
+        color: #452D8F;
+        font-family: 'Open Sans';
+        font-weight: 600;
+      }
+      .intl-tel-input .flag-container .arrow {
+        margin-left: 0;
+        padding-right: 10px;
+        background: url(./images/icons/down.png) no-repeat center;
+        width: 30px;
+        height: 20px;
+        position: absolute;
+        right: 3px;
+        top: 15px;
+      }
+      .intl-tel-input .flag-container .arrow:after {
+        display: none;
+      }
     }
-    .allow-dropdown.intl-tel-input input {
-      background: #F4F5F7;
-      border-color: #EDEFF4;
-    }
+
     .country-code{
       > div{
         width: 100%;
@@ -78,11 +115,58 @@
     }
   }
 }
-.nice-select.error {
+.nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;
   border-color: red !important;
+  color: #6A7181 !important;
 }
 
+//Projects update modal
+.project-update-modal {
+  max-width: 796px;
+  margin: 0 auto;
+  .editor{
+    .write{
+      padding: 40px 40px 40px 100px;
+    }
+    .footer-tab{
+      flex-wrap: wrap;
+      padding: 40px 0 20px 0;
+      h6{
+        flex-basis: 100%;
+        margin-bottom: 16px;
+        padding: 0;
+      }
+      .nice-select{
+        border-color: #EE761F;
+      }
+    }
+  }
+}
+.uploaded-photo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  margin-top: 30px;
+  img{
+    width: 100%;
+    height: 158px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+  }
 
+}
+.submit-option{
+  padding: 20px;
+  button{
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+button[disabled]{
+  background: #E5E5E5;
+  color: #818181;
+}
 
 
