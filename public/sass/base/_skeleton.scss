@@ -289,8 +289,35 @@ $avatar-offset-big: -50;
     }
   }
 }
-
-
+//Notification
+.notify-list-skl{
+  .skeleton {
+    padding: 0;
+    .line{
+      width: 210px;
+      height: 12px !important;
+    }
+    .noti-info {
+      display: flex;
+      align-items: center;
+      .cat {
+        width: 45px !important;
+        margin-right: 15px;
+      }
+      .button-skel {
+        border-radius: 6px !important;
+        height: 20px !important;
+      }
+    }
+  }
+  .product-img {
+    .img {
+      border-radius: 12%;
+      width: 60px;
+      height: 70px;
+    }
+  }
+}
 
 
 

@@ -1990,10 +1990,9 @@ ol.order-list {
 
 .project-statistic {
   display: flex;
-  justify-content: space-between;
   align-items: center; }
   .project-statistic .ps-item {
-    margin-right: 30px; }
+    margin-right: 40px; }
   .project-statistic span {
     font-size: 16px;
     color: #7E8597;
@@ -2466,12 +2465,12 @@ button.deliverable-deadline {
         margin: 0 15px; }
         .post .post-heading .header-title .name-n-date h4 {
           font-size: 22px;
-          font-weight: bold;
+          font-weight: 600;
           color: #452D8F;
           margin: 0; }
         .post .post-heading .header-title .name-n-date span {
           font-size: 14px;
-          color: #9198AA;
+          color: #818795;
           margin-top: 5px;
           display: block; }
       .post .post-heading .header-title .post-type {
@@ -2659,12 +2658,17 @@ button.deliverable-deadline {
         height: 40px; }
       .comment-status .messages-popup .production .write textarea {
         font-size: 12px; }
+        .comment-status .messages-popup .production .write textarea:focus {
+          outline: 0;
+          border-color: #432B8D; }
   .comment-status .messages-popup .post {
     border: 0;
     border-bottom: 1px solid #DADDE4;
     border-radius: 0;
     padding: 0;
     margin: 20px; }
+    .comment-status .messages-popup .post:last-child {
+      border-bottom: 0; }
     .comment-status .messages-popup .post .name-n-date h4 {
       font-size: 16px; }
     .comment-status .messages-popup .post .name-n-date span {
@@ -3093,6 +3097,25 @@ button.deliverable-deadline {
     margin-right: 10px;
     float: left;
     display: inline-block; }
+
+.notify-list-skl .skeleton {
+  padding: 0; }
+  .notify-list-skl .skeleton .line {
+    width: 210px;
+    height: 12px !important; }
+  .notify-list-skl .skeleton .noti-info {
+    display: flex;
+    align-items: center; }
+    .notify-list-skl .skeleton .noti-info .cat {
+      width: 45px !important;
+      margin-right: 15px; }
+    .notify-list-skl .skeleton .noti-info .button-skel {
+      border-radius: 6px !important;
+      height: 20px !important; }
+.notify-list-skl .product-img .img {
+  border-radius: 12%;
+  width: 60px;
+  height: 70px; }
 
 @keyframes shine-lines {
   0% {
@@ -4346,9 +4369,6 @@ template {
   .filter-products .card {
     flex-basis: calc(104% / 6); }
 
-  aside.left-panel {
-    width: 200px; }
-
   .content {
     margin-left: 200px; }
 
@@ -5264,7 +5284,10 @@ template {
     padding: 20px; }
 
   .questionnaire .questionnaire-form {
-    margin: 20px auto; } }
+    margin: 20px auto; }
+
+  .notify-list-skl .skeleton .line {
+    width: 156px; } }
 @media screen and (max-width: 320px) {
   ul.navbar-nav li.notification-bell {
     margin: 0 !important;

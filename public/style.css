@@ -530,7 +530,7 @@ aside.left-panel {
     background-color: #F0EDF7;
     border-right: 1px solid #DADDE4;
     /* box-shadow: 7px 60px 12px rgba(0, 0, 0, 0.15); */
-    width: 200px;
+    width: 100px;
     position: fixed;
     height: 100%;
     top: 0px;
@@ -923,7 +923,7 @@ header .navbar-default .navbar-nav>li>a {
   CONTENT STYLE
 ----------------------------------------------------- */
 .content {
-    margin-left: 200px;
+    margin-left: 100px;
 }
 
 .content > .container-fluid {
@@ -1364,14 +1364,6 @@ section.my-rfq-project tr td p .notify-badge {
 
 /* Media Query */
 
-@media (min-width: 1367px) {
-    aside.left-panel {
-        width: 250px;
-    }
-    .content {
-        margin-left: 250px;
-    }
-}
 
 
 /*Update*/
@@ -1983,12 +1975,6 @@ a.text-color_orange
 @media(min-width: 1400px) and (max-width:1600px)
 {
 
-    aside.left-panel {
-        width: 220px;
-    }
-    .content {
-        margin-left: 220px;
-    }
     .sidebar-collapse
     {
         width: 270px !important;
@@ -1999,10 +1985,10 @@ a.text-color_orange
     }
 }
 
-@media screen and (max-width: 1300px) and (min-width: 1024px)
+@media screen and (max-width: 1300px) and (min-width: 992px)
 {
 section.section.dashboard-designs .filter-products.designs .card.product-card {
-    flex-basis: calc((98.5% - 80px) /4 ) !important;
+    flex-basis: calc((101.5% - 80px) /3 )  !important;
 }
 }
 .card.product-card .card-footer span.badge
@@ -2103,14 +2089,17 @@ a.text-color_orange:hover
 }
 
 
-@media screen and (min-width: 1366px)
+@media screen and (max-width: 1366px)
 {
-aside.left-panel {
-    width: 100px !important;
+    .content {
+        margin-left: 100px !important;
+    }
 }
-.content {
-    margin-left: 100px !important;
-}
+@media screen and (max-width: 1024px)
+{
+    .content {
+        margin-left: 0 !important;
+    }
 }
 
 
@@ -2194,7 +2183,6 @@ a.btn_dash_menu a:hover
     }
     a.btn_dash_menu
     {
-        width: 27%;
         display: block;
     }
 

@@ -1371,10 +1371,9 @@ ol {
 }
 .project-statistic {
   display: flex;
-  justify-content:space-between;
   align-items: center;
   .ps-item {
-    margin-right: 30px;
+    margin-right: 40px;
   }
   span{
     font-size: 16px;
@@ -1946,13 +1945,13 @@ button.deliverable-deadline {
         margin: 0 15px;
         h4{
           font-size: 22px;
-          font-weight: bold;
+          font-weight: 600;
           color: $brand-color;
           margin: 0;
         }
         span{
           font-size: 14px;
-          color: #9198AA;
+          color: #818795;
           margin-top: 5px;
           display: block;
         }
@@ -2207,6 +2206,10 @@ button.deliverable-deadline {
         }
         textarea{
           font-size: 12px;
+          &:focus{
+            outline: 0;
+            border-color: #432B8D;
+          }
         }
       }
     }
@@ -2216,6 +2219,9 @@ button.deliverable-deadline {
       border-radius: 0;
       padding: 0;
       margin: 20px;
+      &:last-child{
+        border-bottom: 0;
+      }
       .name-n-date{
         h4 {
           font-size: 16px;

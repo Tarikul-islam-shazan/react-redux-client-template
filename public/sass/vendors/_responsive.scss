@@ -777,9 +777,6 @@
     .filter-products .card {
         flex-basis: calc(104% / 6);
     }
-    aside.left-panel { 
-        width: 200px; 
-    }
     .content {
         margin-left: 200px;
     }
@@ -1796,6 +1793,9 @@
     }
     .questionnaire .questionnaire-form {
         margin: 20px auto;
+    }
+    .notify-list-skl .skeleton .line {
+        width: 156px;
     }
 }
 @media screen and (max-width:320px) {
