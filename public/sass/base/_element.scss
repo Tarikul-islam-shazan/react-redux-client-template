@@ -1872,8 +1872,16 @@ h6.style-overview{
     button.send-feed.main-editor{
       position: absolute;
       right: 0;
-      background: url(./images/icons/right-white.png) no-repeat center #f47920;
+      background: #f47920;
       border-color: #f47920;
+      width: 100px;
+      color: #fff;
+      &:hover,
+      &:focus,
+      &:active
+      {
+        color: #fff;
+      }
     }
     .nice-select{
       width: auto;
@@ -1978,6 +1986,12 @@ button.deliverable-deadline {
       color: #21242B;
       margin: 20px 0;
     }
+    .uploaded-photo {
+      padding: 0 0 20px 0;
+      img {
+        cursor: zoom-in;
+      }
+    }
   }
   .post-tag{
     .table-badge {
@@ -2004,12 +2018,15 @@ button.deliverable-deadline {
     border: 0;
     position: relative;
     .write{
-      padding: 20px 20px 20px 100px;
+      padding: 20px 20px 20px 85px;
     }
     .feedback-editor{
-      background: #E7E9EF;
-      border-radius: 30px;
-      padding: 12px 20px;
+      background: #f0edf7;
+      border-radius: 6px;
+      padding: 20px;
+      .uploaded-photo{
+        padding: 0;
+      }
       textarea {
         font-size: 16px;
         padding: 0;
@@ -2035,6 +2052,12 @@ button.deliverable-deadline {
           font-size: 14px;
           background: url("./images/icons/image-wide-gray.png") no-repeat;
           background-position: 11px 12px;
+          margin-right: 15px;
+        }
+        button {
+          height: 40px !important;
+          padding: 10px 20px !important;
+          width: 90px !important;
         }
         .nice-select{
           font-size: 14px;
@@ -2063,9 +2086,9 @@ button.deliverable-deadline {
           .description{
             padding: 15px 20px;
             background: #F6F7F8;
-            border-radius: 30px;
+            border-radius: 15px;
             margin-left: 20px;
-            max-width: 550px;
+            max-width: 630px;
             h4{
               font-size: 18px;
               font-weight: bold;
@@ -2092,6 +2115,12 @@ button.deliverable-deadline {
               }
               img{
                 border-radius: 20px;
+              }
+              .feedback-uploaded-img{
+                display: flex;
+                img{
+                  cursor: zoom-in;
+                }
               }
             }
           }
@@ -2341,16 +2370,6 @@ button.deliverable-deadline {
           }
         }
       }
-      button.btn.btn-brand {
-        width: 68px;
-        height: 32px;
-        margin: 0 !important;
-        padding: 0 10px;
-        font-size: 13px;
-        &:hover{
-          color: #fff;
-        }
-      }
     }
   }
 }
@@ -2362,7 +2381,7 @@ button.deliverable-deadline {
     position: relative;
     white-space: nowrap;
     overflow: hidden;
-    width: 146px;
+    width: 148px;
     display: inline-block;
     color: #21242B;
     padding: 10px 38px 10px 15px;
@@ -2417,7 +2436,7 @@ button.deliverable-deadline {
         padding: 15px 20px; 
         border-left: 1px solid #eee;
         border-bottom: 1px solid #eee;
-        width: 160px;
+        width: 170px;
       }
       li{
           list-style: none;

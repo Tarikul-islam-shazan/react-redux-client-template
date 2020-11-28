@@ -2421,8 +2421,12 @@ h6.style-overview {
     .editor .footer-tab button.send-feed.main-editor {
       position: absolute;
       right: 0;
-      background: url(./images/icons/right-white.png) no-repeat center #f47920;
-      border-color: #f47920; }
+      background: #f47920;
+      border-color: #f47920;
+      width: 100px;
+      color: #fff; }
+      .editor .footer-tab button.send-feed.main-editor:hover, .editor .footer-tab button.send-feed.main-editor:focus, .editor .footer-tab button.send-feed.main-editor:active {
+        color: #fff; }
     .editor .footer-tab .nice-select {
       width: auto;
       padding: 0 15px;
@@ -2506,6 +2510,10 @@ button.deliverable-deadline {
   .post .post-description p {
     color: #21242B;
     margin: 20px 0; }
+  .post .post-description .uploaded-photo {
+    padding: 0 0 20px 0; }
+    .post .post-description .uploaded-photo img {
+      cursor: zoom-in; }
   .post .post-tag .table-badge {
     font-size: 14px; }
 
@@ -2526,11 +2534,13 @@ button.deliverable-deadline {
     border: 0;
     position: relative; }
     .feedback .editor .write {
-      padding: 20px 20px 20px 100px; }
+      padding: 20px 20px 20px 85px; }
     .feedback .editor .feedback-editor {
-      background: #E7E9EF;
-      border-radius: 30px;
-      padding: 12px 20px; }
+      background: #f0edf7;
+      border-radius: 6px;
+      padding: 20px; }
+      .feedback .editor .feedback-editor .uploaded-photo {
+        padding: 0; }
       .feedback .editor .feedback-editor textarea {
         font-size: 16px;
         padding: 0;
@@ -2551,7 +2561,12 @@ button.deliverable-deadline {
         .feedback .editor .feedback-editor .footer-tab .file.btn {
           font-size: 14px;
           background: url("./images/icons/image-wide-gray.png") no-repeat;
-          background-position: 11px 12px; }
+          background-position: 11px 12px;
+          margin-right: 15px; }
+        .feedback .editor .feedback-editor .footer-tab button {
+          height: 40px !important;
+          padding: 10px 20px !important;
+          width: 90px !important; }
         .feedback .editor .feedback-editor .footer-tab .nice-select {
           font-size: 14px; }
   .feedback .feedback-post {
@@ -2572,9 +2587,9 @@ button.deliverable-deadline {
         .feedback .feedback-post .post .post-heading .header-title .description {
           padding: 15px 20px;
           background: #F6F7F8;
-          border-radius: 30px;
+          border-radius: 15px;
           margin-left: 20px;
-          max-width: 550px; }
+          max-width: 630px; }
           .feedback .feedback-post .post .post-heading .header-title .description h4 {
             font-size: 18px;
             font-weight: bold;
@@ -2595,6 +2610,10 @@ button.deliverable-deadline {
               margin: 0; }
             .feedback .feedback-post .post .post-heading .header-title .description .comments img {
               border-radius: 20px; }
+            .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img {
+              display: flex; }
+              .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
+                cursor: zoom-in; }
 
 .manage-poroject-filter {
   margin-top: 40px; }
@@ -2778,14 +2797,6 @@ button.deliverable-deadline {
           padding-right: 25px !important;
           background: url(./images/icons/calendar_start.png) no-repeat;
           background-position: calc(100% - 5px) 5px; }
-    .item .messages-popup .status-n-date-container button.btn.btn-brand {
-      width: 68px;
-      height: 32px;
-      margin: 0 !important;
-      padding: 0 10px;
-      font-size: 13px; }
-      .item .messages-popup .status-n-date-container button.btn.btn-brand:hover {
-        color: #fff; }
 
 .stage {
   position: relative; }
@@ -2794,7 +2805,7 @@ button.deliverable-deadline {
     position: relative;
     white-space: nowrap;
     overflow: hidden;
-    width: 146px;
+    width: 148px;
     display: inline-block;
     color: #21242B;
     padding: 10px 38px 10px 15px;
@@ -2846,7 +2857,7 @@ button.deliverable-deadline {
         padding: 15px 20px;
         border-left: 1px solid #eee;
         border-bottom: 1px solid #eee;
-        width: 160px; }
+        width: 170px; }
       .stage .sub-stage ul li {
         list-style: none;
         cursor: pointer;
@@ -3389,6 +3400,15 @@ button#sidebarToggleTop {
     height: 50px !important;
     font-size: 16px !important; }
 
+button.btn.btn-brand.small {
+  width: 68px;
+  height: 32px;
+  margin: 0 !important;
+  padding: 0 10px;
+  font-size: 13px; }
+  button.btn.btn-brand.small:hover, button.btn.btn-brand.small:focus, button.btn.btn-brand.small:active {
+    color: #fff; }
+
 .questionnaire {
   max-width: 1110px;
   margin: 50px auto;
@@ -3501,13 +3521,34 @@ button#sidebarToggleTop {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 25px;
-  margin-top: 30px; }
+  margin-top: 0;
+  position: relative;
+  padding: 20px; }
   .uploaded-photo img {
     width: 100%;
     height: 158px;
     object-fit: cover;
     object-position: center;
     border-radius: 4px; }
+  .uploaded-photo .img-item {
+    position: relative; }
+    .uploaded-photo .img-item button {
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      border: 0;
+      background: #fff;
+      border-radius: 100%;
+      background: url("./images/icons/cancel.png") no-repeat center #fff;
+      text-indent: -9999px; }
+      .uploaded-photo .img-item button:focus, .uploaded-photo .img-item button:active {
+        outline: 0; }
+    .uploaded-photo .img-item img {
+      width: 100%;
+      height: 158px;
+      object-fit: cover; }
 
 .submit-option {
   padding: 20px; }

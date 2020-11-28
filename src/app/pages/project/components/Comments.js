@@ -128,7 +128,7 @@ class Comments extends Component {
             }}
             spinner
             text={LOADER_TEXT}>
-            <div className="messages-popup">
+            <div className="messages-popup custom-scrollbar">
                 <div className="production">
                     <h6>Messages</h6>
                     <div className="write">

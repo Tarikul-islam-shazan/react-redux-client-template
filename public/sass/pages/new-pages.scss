@@ -147,7 +147,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 25px;
-  margin-top: 30px;
+  margin-top: 0;
+  position: relative;
+  padding: 20px;
   img{
     width: 100%;
     height: 158px;
@@ -155,7 +157,29 @@
     object-position: center;
     border-radius: 4px;
   }
-
+  .img-item {
+    position: relative;
+    button {
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      border: 0;
+      background: #fff;
+      border-radius: 100%;
+      background: url('./images/icons/cancel.png') no-repeat center #fff;
+      text-indent: -9999px;
+      &:focus, &:active{
+        outline: 0;
+      }
+    }
+    img {
+      width: 100%;
+      height: 158px;
+      object-fit: cover;
+    }
+  }
 }
 .submit-option{
   padding: 20px;

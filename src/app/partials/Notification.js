@@ -223,7 +223,7 @@ class Notification extends Component {
           }}
           spinner
           text={LOADER_TEXT}>
-          <div className="notification" id="notification-panel" onScroll={this.onScrollToEnd}>
+          <div className="notification custom-scrollbar" id="notification-panel" onScroll={this.onScrollToEnd}>
               <h3 className="title">Notification</h3>
               {
                 this.loadView()
