@@ -57,6 +57,10 @@ textarea{
     border-radius: 5px; 
     width: 100%;
     border: 1px solid #ccc;
+    &:focus{
+        outline: 0;
+        border-color: #452D8F;
+    }
 }
 ::placeholder,
 ::-moz-placeholder{
@@ -825,4 +829,31 @@ h4.details-title {
     outline: 0;
     background: #fff;
     color: #ee761f;
+}
+
+//Custom Scrollbar
+
+.custom-scrollbar
+{
+    overflow-y: auto;
+}
+
+/*
+ *  STYLE 3
+ */
+
+.custom-scrollbar::-webkit-scrollbar-track
+{
+    background-color: #DFDCE6;
+}
+
+.custom-scrollbar::-webkit-scrollbar
+{
+    width: 7px;
+    background-color: #DFDCE6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb
+{
+    background-color: #8B8A8E;
 }
