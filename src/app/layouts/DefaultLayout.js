@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
+import loadjs from 'loadjs';
 
 import Sidebar from '../partials/Sidebar';
 import Notification from '../partials/Notification';
@@ -62,6 +63,15 @@ class DefaultLayout extends Component {
     // }
 
     componentDidMount = () => {
+      const hostName = window.location.toString();
+      if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
+          const script = document.createElement("script");
+          script.src = "//js.hs-scripts.com/7022005.js";
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+      }
+
       window.addEventListener('mousedown', this.handleClickOutside);
     }
 
