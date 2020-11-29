@@ -2419,12 +2419,12 @@ h6.style-overview {
     padding-top: 20px;
     position: relative; }
     .editor .footer-tab button.send-feed.main-editor {
-      position: absolute;
-      right: 0;
+      position: relative;
       background: #f47920;
       border-color: #f47920;
-      width: 100px;
-      color: #fff; }
+      width: 100%;
+      color: #fff;
+      flex-basis: 100%; }
       .editor .footer-tab button.send-feed.main-editor:hover, .editor .footer-tab button.send-feed.main-editor:focus, .editor .footer-tab button.send-feed.main-editor:active {
         color: #fff; }
     .editor .footer-tab .nice-select {
@@ -2451,7 +2451,8 @@ h6.style-overview {
       padding: 3px 15px 4px 40px;
       background-position: 10px 10px;
       line-height: 34px;
-      height: 40px; }
+      height: 40px;
+      width: 235px; }
 
 img.user-photo {
   width: 60px;

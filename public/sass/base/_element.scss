@@ -1870,12 +1870,12 @@ h6.style-overview{
     padding-top: 20px;
     position: relative;
     button.send-feed.main-editor{
-      position: absolute;
-      right: 0;
+      position: relative;
       background: #f47920;
       border-color: #f47920;
-      width: 100px;
+      width: 100%;
       color: #fff;
+      flex-basis: 100%;
       &:hover,
       &:focus,
       &:active
@@ -1911,6 +1911,7 @@ h6.style-overview{
       background-position: 10px 10px;
       line-height: 34px;
       height: 40px;
+      width: 235px;
       input{
 
       }

@@ -567,8 +567,7 @@ class ProjectUpdateComponent extends Component {
                               </div>
                               {/*<button className="send-feed main-editor" onClick={()=>this.sendPost()}>
                               </button>*/}
-                              <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>
-                              </button>
+                              <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>Submit</button>
                           </div>
                           <div className="uploaded-photo">
                           {
