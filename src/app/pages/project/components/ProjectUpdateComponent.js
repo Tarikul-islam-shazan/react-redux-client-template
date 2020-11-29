@@ -185,11 +185,11 @@ class ProjectUpdateComponent extends Component {
       this.fetchPosts(this.props.projectId,0,false);
     }
 
-    sendPost = async() => {
+    sendPost = async(validate = false) => {
       let { selectedProduct, selectedDeliverable, post, documentDTOList } = this.state;
       console.log("body for post","entered");
 
-      if(!selectedProduct || !selectedDeliverable){
+      if(validate && (!selectedProduct || !selectedDeliverable)){
         toastError("Please select product and deliverable");
         return;
       }
@@ -213,13 +213,14 @@ class ProjectUpdateComponent extends Component {
             this.setState({
               loading:false,
               post : '',
-              documentDTOList : []
+              documentDTOList : [],
+              postModal: false
             })
             toastSuccess(data.message);
             this.fetchPosts(this.props.projectId,0,false);
           }else{
             this.setState({
-              loading:false
+              loading:false,
             })
             toastError(data.message);
           }
@@ -411,7 +412,7 @@ class ProjectUpdateComponent extends Component {
               project, taggedTopics, upcomingDeadlines, productDetails, posts, userInfo, post,
               documentDTOList, selectedDeliverable, selectedDeliverableText,
               deliverableFlag, imageViewerFlag, imageViewerData, imageViewerCurrentIndex,
-              fromDate, uptoDate, filterablePostId, postModal
+              fromDate, uptoDate, filterablePostId, postModal, selectedProduct
             } = this.state;
         console.log("userInfo from update",userInfo)
         return (
@@ -537,30 +538,6 @@ class ProjectUpdateComponent extends Component {
                               <textarea name="post" onChange={this.onChangeFromPost} rows="5" value={post} placeholder="Write here....."/>
                           </div>
                           <div className="footer-tab">
-                              <select name="selectedProduct" onClick={this.onChangeFromPost}>
-                                  <option value="">Style</option>
-                                  {
-                                    project.productResponseList &&
-                                    project.productResponseList.map((item,i)=>{
-                                      return(
-                                        <option value={item.productNo} key={i}>{item.name}</option>
-                                      )
-                                    })
-                                  }
-                              </select>
-                              <div className="stage"><span onClick={() => this.setState({deliverableFlag : !deliverableFlag})}>{ !selectedDeliverableText ? 'Deliverables' : selectedDeliverableText }</span>
-                                {
-                                  deliverableFlag ?
-                                  <div className="sub-stage">
-                                  {
-                                    this.loadDeliverableList()
-                                  }
-                                  </div>
-                                  :
-                                  <></>
-                                }
-
-                              </div>
                               <div className="file btn">
                                   Photo/Video
                                   <input type="file" name="documentDTOList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple/>
@@ -637,47 +614,96 @@ class ProjectUpdateComponent extends Component {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <div className="project-update-modal">
-                      <div className="editor">
-                          <div className="write">
-                            {
-                              userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
-                              <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
-                              <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
-                            }
-                                  <div className="input-text">
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
+                    <LoadingOverlay
+                      active={this.state.loading}
+                      styles={{
+                        overlay: (base) => ({
+                          ...base,
+                          background: LOADER_OVERLAY_BACKGROUND
+                        }),
+                        spinner: (base) => ({
+                          ...base,
+                          width: LOADER_WIDTH,
+                          position: LOADER_POSITION,
+                          top: LOADER_TOP,
+                          left: LOADER_LEFT,
+                          marginTop: LOADER_MARGIN_TOP,
+                          marginLeft: LOADER_MARGIN_LEFT,
+                          '& svg circle': {
+                            stroke: LOADER_COLOR
+                          }
+                        }),
+                        content: (base) => ({
+                          ...base,
+                          color: LOADER_COLOR
+                        })
+                      }}
+                      spinner
+                      text={LOADER_TEXT}>
+                      <div className="project-update-modal">
+                          <div className="editor">
+                              <div className="write">
+                                {
+                                  userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
+                                  <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
+                                  <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
+                                }
+                                      <div className="input-text">
+                                          <p>{post}</p>
+                                      </div>
+                                      <div className="uploaded-photo">
+                                      {
+                                        documentDTOList.map((item,i)=>{
+                                          return <img src={item.base64Str} alt=""/>
+                                          // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
+                                        })
+                                      }
+
+                                      </div>
+                              </div>
+                              <div className="footer-tab">
+                                  <h6>Please select the style and deliverable:</h6>
+                                  <select name="selectedProduct" onClick={this.onChangeFromPost}>
+                                      <option value="">Style</option>
+                                      {
+                                        project.productResponseList &&
+                                        project.productResponseList.map((item,i)=>{
+                                          return(
+                                            <option value={item.productNo} key={i}>{item.name}</option>
+                                          )
+                                        })
+                                      }
+                                  </select>
+                                  <div className="stage"><span onClick={() => this.setState({deliverableFlag : !deliverableFlag})}>{ !selectedDeliverableText ? 'Deliverables' : selectedDeliverableText }</span>
+                                    {
+                                      deliverableFlag ?
+                                      <div className="sub-stage">
+                                      {
+                                        this.loadDeliverableList()
+                                      }
+                                      </div>
+                                      :
+                                      <></>
+                                    }
+
                                   </div>
-                                  <div className="uploaded-photo">
+
+                              </div>
+                              <div className="submit-option">
+                                  {/*<button className="btn-brand" disabled onClick={() => this.sendPost(true)}>Post</button>*/}
                                   {
-                                    documentDTOList.map((item,i)=>{
-                                      return <img src={item.base64Str} alt=""/>
-                                      // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
-                                    })
+                                    !selectedProduct && !selectedDeliverable ?
+                                    <button className="btn-brand" onClick={() => this.sendPost()}>Skip & Post</button>:
+                                    (
+                                      !selectedProduct || !selectedDeliverable ?
+                                      <button className="btn-brand" disabled>Post</button>:
+                                      <button className="btn-brand" onClick={() => this.sendPost(1)}>Post</button>
+                                    )
                                   }
-
-                                  </div>
-                          </div>
-                          <div className="footer-tab">
-                              <h6>Please select the style and deliverable:</h6>
-                              <select style={{display: 'none'}}>
-                                  <option value="Accept">Style</option>
-                                  <option value="Reject">Stage</option>
-                              </select><div className="nice-select" tabindex="0"><span className="current">Style</span><ul className="list"><li data-value="Accept" className="option selected focus">Style</li><li data-value="Reject" className="option">Stage</li></ul></div>
-                              <select style={{display: 'none'}}>
-                                  <option value="Accept">Stage</option>
-                                  <option value="Reject">Style</option>
-                              </select><div className="nice-select" tabindex="0"><span className="current">Stage</span><ul className="list"><li data-value="Accept" className="option selected focus">Stage</li><li data-value="Reject" className="option">Style</li></ul></div>
-
-                          </div>
-                          <div className="submit-option">
-                              <button className="btn-brand" disabled>Post</button>
-                              <button className="btn-brand">Skip & Post</button>
+                              </div>
                           </div>
                       </div>
-                  </div>
+                  </LoadingOverlay>
                 </Modal.Body>
               </Modal>
           </LoadingOverlay>
