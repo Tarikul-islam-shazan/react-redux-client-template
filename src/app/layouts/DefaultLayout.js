@@ -63,10 +63,7 @@ class DefaultLayout extends Component {
     // }
 
     componentDidMount = () => {
-
-      // loadjs(['/js/hubspot-chatbot.js']);
       const hostName = window.location.toString();
-      console.log("hostName", hostName)
       if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
           const script = document.createElement("script");
           script.src = "//js.hs-scripts.com/7022005.js";
@@ -74,7 +71,6 @@ class DefaultLayout extends Component {
           script.defer = true;
           document.body.appendChild(script);
       }
-
 
       window.addEventListener('mousedown', this.handleClickOutside);
     }
