@@ -187,12 +187,14 @@ class PostWithFeedback extends Component {
             </div>
             <div className="post-description">
                 <p>{post.text}</p>
+                <div className="uploaded-photo">
                 {
                   post.docList &&
                   post.docList.map((item,i)=> {
-                    return <img key={i} src={item.docUrl} style={{height:50,width:50,margin:5,border:'solid 1px black'}} onClick={() => this.props.imageViewer(post.docList,i)} />
+                    return <img key={i} src={item.docUrl} onClick={() => this.props.imageViewer(post.docList,i)} />
                   })
                 }
+                </div>
             </div>
             <div className="post-tag">
                 <div className="badge-list">
@@ -213,8 +215,8 @@ class PostWithFeedback extends Component {
                     <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
-                        <textarea name="feedback"  rows="3" value={feedback} onChange={this.onChange} placeholder="Write your feedback here....."></textarea>
-                        <div style={{marginTop:20}}>
+                        <textarea className="custom-scrollbar" name="feedback"  rows="3" value={feedback} onChange={this.onChange} placeholder="Write your feedback here....."></textarea>
+                        <div className="uploaded-photo">
                         {
                           documentDTOList.map((item,i)=>{
                             return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
@@ -230,8 +232,7 @@ class PostWithFeedback extends Component {
                                 Photo/Video
                                 <input type="file" name="documentDTOList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple/>
                             </div>
-                            <button  className="send-feed" onClick={()=>this.sendFeedback()}>
-                            </button>
+                            <button  className="btn btn-brand small" onClick={()=>this.sendFeedback()}>Submit</button>
                             {/*<button className="deliverable-deadline">Deliverable Deadline</button>*/}
                         </div>
                     </div>
@@ -257,7 +258,7 @@ class PostWithFeedback extends Component {
                                   </h4>
                                   <div className="comments">
                                       <p>{item.text}</p>
-                                      <div style={{display:'flex'}}>
+                                      <div className="feedback-uploaded-img">
                                       {
                                         item.docList &&
                                         item.docList.map((item2,i)=>{

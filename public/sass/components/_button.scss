@@ -80,4 +80,17 @@
     font-size: 16px !important;
   }
 }
+button.btn.btn-brand.small {
+  width: 68px;
+  height: 32px;
+  margin: 0 !important;
+  padding: 0 10px;
+  font-size: 13px;
+  &:hover,
+  &:focus,
+  &:active
+  {
+    color: #fff;
+  }
+}
 

@@ -565,12 +565,16 @@ class ProjectUpdateComponent extends Component {
                                   Photo/Video
                                   <input type="file" name="documentDTOList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple/>
                               </div>
+<<<<<<< HEAD
                               {/*<button className="send-feed main-editor" onClick={()=>this.sendPost()}>
                               </button>*/}
                               <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>
                               </button>
+=======
+                              <button className="send-feed main-editor" onClick={()=>this.sendPost()}>Submit</button>
+>>>>>>> frontend
                           </div>
-                          <div style={{margin:20}}>
+                          <div className="uploaded-photo">
                           {
                             documentDTOList.map((item,i)=>{
                               return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
