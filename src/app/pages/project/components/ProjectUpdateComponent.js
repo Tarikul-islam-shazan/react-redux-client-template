@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from "loadjs";
 import ImageViewer from 'react-simple-image-viewer';
+import Modal from 'react-bootstrap/Modal'
 
 import { encodeQueryData, addImageSuffix, convertTimeToLocal } from '../../../services/Util';
 
@@ -48,7 +49,8 @@ class ProjectUpdateComponent extends Component {
           page : 0,
           size : 10,
           hasNext : true,
-          filterablePostId : this.props.filterablePostId
+          filterablePostId : this.props.filterablePostId,
+          postModal: false
         };
     }
 
@@ -409,7 +411,7 @@ class ProjectUpdateComponent extends Component {
               project, taggedTopics, upcomingDeadlines, productDetails, posts, userInfo, post,
               documentDTOList, selectedDeliverable, selectedDeliverableText,
               deliverableFlag, imageViewerFlag, imageViewerData, imageViewerCurrentIndex,
-              fromDate, uptoDate, filterablePostId
+              fromDate, uptoDate, filterablePostId, postModal
             } = this.state;
         console.log("userInfo from update",userInfo)
         return (
@@ -563,7 +565,9 @@ class ProjectUpdateComponent extends Component {
                                   Photo/Video
                                   <input type="file" name="documentDTOList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple/>
                               </div>
-                              <button className="send-feed main-editor" onClick={()=>this.sendPost()}>
+                              {/*<button className="send-feed main-editor" onClick={()=>this.sendPost()}>
+                              </button>*/}
+                              <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>
                               </button>
                           </div>
                           <div style={{margin:20}}>
@@ -622,6 +626,61 @@ class ProjectUpdateComponent extends Component {
               {
                 this.loadJsFiles()
               }
+              <Modal
+                show={postModal}
+                onHide={() => this.setState({postModal: false})}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="example-custom-modal-styling-title">
+                    Your post
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="project-update-modal">
+                      <div className="editor">
+                          <div className="write">
+                            {
+                              userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
+                              <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
+                              <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
+                            }
+                                  <div className="input-text">
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur commodi cupiditate dignissimos eos error et exercitationem laboriosam libero obcaecati, optio repellendus sunt, tenetur. Amet aperiam delectus ducimus hic natus.</p>
+                                  </div>
+                                  <div className="uploaded-photo">
+                                  {
+                                    documentDTOList.map((item,i)=>{
+                                      return <img src={item.base64Str} alt=""/>
+                                      // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
+                                    })
+                                  }
+
+                                  </div>
+                          </div>
+                          <div className="footer-tab">
+                              <h6>Please select the style and deliverable:</h6>
+                              <select style={{display: 'none'}}>
+                                  <option value="Accept">Style</option>
+                                  <option value="Reject">Stage</option>
+                              </select><div className="nice-select" tabindex="0"><span className="current">Style</span><ul className="list"><li data-value="Accept" className="option selected focus">Style</li><li data-value="Reject" className="option">Stage</li></ul></div>
+                              <select style={{display: 'none'}}>
+                                  <option value="Accept">Stage</option>
+                                  <option value="Reject">Style</option>
+                              </select><div className="nice-select" tabindex="0"><span className="current">Stage</span><ul className="list"><li data-value="Accept" className="option selected focus">Stage</li><li data-value="Reject" className="option">Style</li></ul></div>
+
+                          </div>
+                          <div className="submit-option">
+                              <button className="btn-brand" disabled>Post</button>
+                              <button className="btn-brand">Skip & Post</button>
+                          </div>
+                      </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
           </LoadingOverlay>
         );
     }
