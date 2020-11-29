@@ -159,9 +159,10 @@
 }
 .submit-option{
   padding: 20px;
+  overflow: hidden;
   button{
     width: 100%;
-    margin: 10px 0;
+    margin: 10px 0 !important;
   }
 }
 button[disabled]{

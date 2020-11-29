@@ -629,7 +629,7 @@ class ProjectUpdateComponent extends Component {
               <Modal
                 show={postModal}
                 onHide={() => this.setState({postModal: false})}
-                dialogClassName="modal-90w"
+                dialogClassName="modal-lg"
                 aria-labelledby="example-custom-modal-styling-title"
               >
                 <Modal.Header closeButton>

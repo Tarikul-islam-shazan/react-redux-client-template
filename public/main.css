@@ -3510,10 +3510,11 @@ button#sidebarToggleTop {
     border-radius: 4px; }
 
 .submit-option {
-  padding: 20px; }
+  padding: 20px;
+  overflow: hidden; }
   .submit-option button {
     width: 100%;
-    margin: 10px 0; }
+    margin: 10px 0 !important; }
 
 button[disabled] {
   background: #E5E5E5;
