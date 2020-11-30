@@ -132,6 +132,12 @@ class PostWithFeedback extends Component {
     })
   }
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter' && !event.shiftKey){
+      this.sendFeedback();
+    }
+  }
+
   remove = (index) => {
     this.setState({
       documentDTOList : this.state.documentDTOList.filter((item,i)=>i!=index)
@@ -215,7 +221,14 @@ class PostWithFeedback extends Component {
                     <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
-                        <textarea className="custom-scrollbar" name="feedback"  rows="3" value={feedback} onChange={this.onChange} placeholder="Write your feedback here....."></textarea>
+                        <textarea
+                          className="custom-scrollbar"
+                          name="feedback"  rows="3"
+                          value={feedback}
+                          onChange={this.onChange}
+                          onKeyPress={this.handleKeyPress}
+                          placeholder="Write your feedback here.....">
+                        </textarea>
                         <div className="uploaded-photo">
                         {
                           documentDTOList.map((item,i)=>{
