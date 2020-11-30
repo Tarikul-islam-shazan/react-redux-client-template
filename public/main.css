@@ -2414,6 +2414,7 @@ h6.style-overview {
         box-shadow: none; }
   .editor .footer-tab {
     display: flex;
+    justify-content: flex-end;
     margin: 0 20px 20px 20px;
     border-top: 1px solid #DADDE4;
     padding-top: 20px;
@@ -2424,7 +2425,7 @@ h6.style-overview {
       border-color: #f47920;
       width: 100%;
       color: #fff;
-      flex-basis: 100%; }
+      flex-basis: 100px; }
       .editor .footer-tab button.send-feed.main-editor:hover, .editor .footer-tab button.send-feed.main-editor:focus, .editor .footer-tab button.send-feed.main-editor:active {
         color: #fff; }
     .editor .footer-tab .nice-select {
@@ -2451,8 +2452,7 @@ h6.style-overview {
       padding: 3px 15px 4px 40px;
       background-position: 10px 10px;
       line-height: 34px;
-      height: 40px;
-      width: 235px; }
+      height: 40px; }
 
 img.user-photo {
   width: 60px;
@@ -2588,7 +2588,7 @@ button.deliverable-deadline {
         .feedback .feedback-post .post .post-heading .header-title .description {
           padding: 15px 20px;
           background: #F6F7F8;
-          border-radius: 15px;
+          border-radius: 6px;
           margin-left: 20px;
           max-width: 630px; }
           .feedback .feedback-post .post .post-heading .header-title .description h4 {
@@ -4149,7 +4149,7 @@ template {
     height: 35px !important;
     padding: 5px 6px;
     background-position: calc(100% - 6px) 9px;
-    width: 143px; }
+    width: 160px; }
 
   .tag-n-deadline .sample-deadline .list {
     font-size: 14px; }
@@ -4160,7 +4160,7 @@ template {
     font-size: 14px; }
 
   .production .checklist-item .custom-chekbox .form-group input:checked + label:after {
-    top: 2px; }
+    top: 4px; }
 
   .tag-n-deadline .production .sample a {
     font-size: 14px; }
@@ -4236,7 +4236,6 @@ template {
     padding: 0 15px 15px 85px; }
 
   .feedback .editor .feedback-editor {
-    border-radius: 25px;
     padding: 12px 15px; }
 
   .feedback .editor .feedback-editor .footer-tab button {
@@ -4301,7 +4300,7 @@ template {
     font-size: 10px;
     line-height: 16px;
     margin-right: 10px;
-    width: 146px;
+    width: 65px;
     margin-top: 7px; }
 
   table.manage-project-table thead th {
@@ -4418,13 +4417,10 @@ template {
 
   button.send-feed {
     width: auto;
-    padding: 0 30px 0 10px;
+    padding: 0;
     line-height: 34px;
-    height: 35px;
+    height: 36px;
     font-size: 14px; }
-
-  button.send-feed {
-    background-size: 16px; }
 
   .sidebar-collapse .quote-filter .nice-select {
     padding: 10px 30px 10px 18px !important;
@@ -4441,9 +4437,6 @@ template {
 
   .timeline {
     flex-basis: 45%; }
-
-  .feedback .feedback-post .post .post-heading .header-title .description {
-    width: 320px !important; }
 
   .product-detail-gallery .thumbnail-prev img {
     height: 700px; } }
@@ -4614,6 +4607,12 @@ template {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 @media screen and (max-width: 1024px) {
+  .badge {
+    margin-bottom: 10px; }
+
+  .uploaded-photo {
+    grid-template-columns: repeat(3, 1fr); }
+
   .product-skeleton {
     height: 392px; }
     .product-skeleton .img {
@@ -4819,7 +4818,7 @@ template {
   .quote-tab ul.nav-tabs li a {
     padding: 12px 25px;
     margin-bottom: 15px;
-    width: 194px;
+    width: 200px;
     text-align: center; }
 
   .project-status-container {
@@ -4841,7 +4840,8 @@ template {
     font-size: 12px; }
 
   .project-statistic {
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    align-items: flex-start; }
 
   .project-statistic .ps-item {
     margin-right: 15px;
@@ -4870,7 +4870,7 @@ template {
     flex-basis: 30%; }
 
   .timeline {
-    flex-basis: 67.9%;
+    flex-basis: 66%;
     margin-right: 0; }
 
   .dashboard-designs .filter-products.designs .card.product-card {
@@ -4879,6 +4879,16 @@ template {
   .card.product-card .card-img-top {
     height: 340px; } }
 @media screen and (max-width: 991px) {
+  .project-profile .back {
+    left: 20px;
+    top: -42px; }
+
+  .feedback .feedback-post .post .post-heading .header-title .description {
+    width: 260px !important; }
+
+  .quote-tab ul.nav-tabs {
+    margin: 40px 0; }
+
   .skeleton.project-list {
     height: 80px; }
     .skeleton.project-list .project-list-item .line {
@@ -5211,7 +5221,8 @@ template {
 
   .editor .footer-tab button.send-feed {
     margin-top: 0;
-    bottom: 0; }
+    bottom: 0;
+    padding: 0px 25px; }
 
   .timeline .editor .write {
     padding: 10px;
@@ -5244,9 +5255,6 @@ template {
 
   .timeline .post .post-tag .table-badge {
     margin-bottom: 10px; }
-
-  .feedback .editor .feedback-editor {
-    border-radius: 20px; }
 
   .stage .sub-stage {
     flex-direction: column;
@@ -5377,7 +5385,16 @@ template {
     margin: 20px auto; }
 
   .notify-list-skl .skeleton .line {
-    width: 156px; } }
+    width: 156px; }
+
+  .uploaded-photo {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .feedback .feedback-post .post .post-heading .header-title .description {
+    width: 100% !important; }
+
+  .feedback .editor .feedback-editor .footer-tab {
+    padding: 0; } }
 @media screen and (max-width: 320px) {
   ul.navbar-nav li.notification-bell {
     margin: 0 !important;
