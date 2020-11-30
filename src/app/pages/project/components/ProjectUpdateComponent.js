@@ -195,11 +195,17 @@ class ProjectUpdateComponent extends Component {
       }
       let body ={
         projectId : this.props.projectId,
-        productId : selectedProduct,
-        deliverableId : selectedDeliverable,
         text : post,
-        postType : 'QUERY',
-        documentDTOList : documentDTOList
+        postType : 'QUERY'
+      }
+      if (selectedProduct) {
+        body.productId = selectedProduct;
+      }
+      if (selectedDeliverable) {
+        body.deliverableId = selectedDeliverable;
+      }
+      if (documentDTOList.length) {
+        body.documentDTOList = documentDTOList;
       }
       this.setState({
         loading : true
