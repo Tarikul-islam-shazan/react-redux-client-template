@@ -143,7 +143,7 @@ class FitSampleEdit extends Component {
     render() {
         let { comment, comments, userInfo, id, deliverableText } = this.state;
         return (
-            <div className="messages-popup">
+            <div className="messages-popup custom-scrollbar">
                 <div className="production">
                     <h6>{`#${id}`} <span className="float-right">{deliverableText}</span></h6>
                     <div className="status-n-date-container">
@@ -159,11 +159,11 @@ class FitSampleEdit extends Component {
                                     }
                                 </select>
                             </div>
-                            <div>
+                            <div className="date-select">
                                 <label>Date</label>
                                 <input type="date" name="date" onChange={this.onChange} placeholder="dd.mm.yyyy"/>
                             </div>
-                            <button className="send-feed" onClick={this.updateDeliverable}> </button>
+                            <button className="btn btn-brand small" onClick={this.updateDeliverable}>Submit</button>
                         </div>
                     </div>
                     <h6>Messages</h6>
