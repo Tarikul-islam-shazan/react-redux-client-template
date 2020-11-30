@@ -191,7 +191,7 @@ class PostWithFeedback extends Component {
                 {
                   post.docList &&
                   post.docList.map((item,i)=> {
-                    return <img key={i} src={item.docUrl} onClick={() => this.props.imageViewer(post.docList,i)} />
+                    return <img key={i} src={addImageSuffix(item.docUrl, '_xthumbnail')} onClick={() => this.props.imageViewer(post.docList, i)} />
                   })
                 }
                 </div>

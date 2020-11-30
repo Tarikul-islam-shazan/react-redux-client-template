@@ -546,15 +546,17 @@ class ProjectUpdateComponent extends Component {
                               </button>*/}
                               <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>Submit</button>
                           </div>
-                          <div className="uploaded-photo">
                           {
-                            documentDTOList.map((item,i)=>{
-                              return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
-                              // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
-                            })
+                            documentDTOList.length > 0 &&
+                            <div className="uploaded-photo">
+                            {
+                              documentDTOList.map((item,i)=>{
+                                return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
+                                // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
+                              })
+                            }
+                            </div>
                           }
-                          </div>
-
                       </div>
                       {
                         filterablePostId ? <a href={"/my-project-details/" + this.props.projectId + '?tab=2'}><p  style={{marginTop:10,marginBottom:10,borderWidth:1,padding:10,backgroundColor:'#eeecf6',borderRadius:5}}>Reload Posts</p></a>:<></>
