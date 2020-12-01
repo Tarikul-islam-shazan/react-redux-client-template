@@ -80,8 +80,9 @@ axios.interceptors.response.use((response) => {
     if (HTTP_STATUS['Unauthorized'] === error.response.status && localStorage.getItem('token')) {
         setTimeout(() => {
             // localStorage.removeItem('token');
-            localStorage.clear();
-            delete axios.defaults.headers.common['Authorization'];
+            // localStorage.clear();
+            // delete axios.defaults.headers.common['Authorization'];
+            window.location.href = '/logout';
             // store.dispatch({
             //     type: REDIRECT_TO,
             //     payload: {
