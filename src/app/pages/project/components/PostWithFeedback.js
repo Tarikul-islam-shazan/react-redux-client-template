@@ -262,7 +262,7 @@ class PostWithFeedback extends Component {
                                       {
                                         item.docList &&
                                         item.docList.map((item2,i)=>{
-                                          return(<img key={i} src={item2.docUrl} style={{height:30,width:30}} onClick={() => this.props.imageViewer(item.docList,i)} />)
+                                          return(<img key={i} src={item2.docUrl}  onClick={() => this.props.imageViewer(item.docList,i)} />)
                                         })
                                       }
                                       </div>

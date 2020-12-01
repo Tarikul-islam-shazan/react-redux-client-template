@@ -2615,7 +2615,12 @@ button.deliverable-deadline {
               display: flex;
               overflow-y: auto; }
               .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
-                cursor: zoom-in; }
+                cursor: zoom-in;
+                width: 200px;
+                height: 225px;
+                border-radius: 6px !important;
+                margin: 5px;
+                object-fit: cover; }
 
 .manage-poroject-filter {
   margin-top: 40px; }
@@ -3528,7 +3533,7 @@ button.btn.btn-brand.small {
   padding: 20px; }
   .uploaded-photo img {
     width: 100%;
-    height: 158px;
+    height: 225px;
     object-fit: cover;
     object-position: center;
     border-radius: 4px; }

@@ -2122,6 +2122,11 @@ button.deliverable-deadline {
                 overflow-y: auto;
                 img{
                   cursor: zoom-in;
+                  width: 200px;
+                  height: 225px;
+                  border-radius: 6px !important;
+                  margin: 5px;
+                  object-fit: cover;
                 }
               }
             }
