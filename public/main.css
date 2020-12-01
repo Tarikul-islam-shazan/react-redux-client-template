@@ -2616,9 +2616,9 @@ button.deliverable-deadline {
               overflow-y: auto; }
               .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
                 cursor: zoom-in;
-                width: 200px;
-                height: 225px;
-                border-radius: 6px !important;
+                width: 80px;
+                height: 100px;
+                border-radius: 5px !important;
                 margin: 5px;
                 object-fit: cover; }
 
@@ -4940,11 +4940,7 @@ template {
     margin-bottom: 20px; }
 
   .uploaded-photo img {
-    height: 140px; }
-
-  .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
-    width: 120px;
-    height: 150px; } }
+    height: 140px; } }
 @media screen and (max-width: 767px) {
   .uploaded-photo img {
     height: 160px; }
