@@ -36,9 +36,7 @@ class ProjectUpdateComponent extends Component {
           selectedDeliverableText : '',
           deliverableFlag : false,
           sort : 'datePosted,desc',
-          filterByProductId : this.props.project.productResponseList ? this.props.project.productResponseList.map((item)=>{
-            return item.productNo
-          }) : [],
+          filterByProductId : [],
           documentDTOList : [],
           imageViewerFlag : false,
           imageViewerData : [],
@@ -482,7 +480,7 @@ class ProjectUpdateComponent extends Component {
                                         <div className="check">
                                             <div className="custom-chekbox">
                                                 <div className="form-group">
-                                                    <input type="checkbox" id={item.productNo} name={item.productNo} value={item.productNo} onChange={this.onChangeCheckbox} defaultChecked/>
+                                                    <input type="checkbox" id={item.productNo} name={item.productNo} value={item.productNo} onChange={this.onChangeCheckbox}/>
                                                     <label for={item.productNo}>{item.name}</label>
                                                 </div>
                                             </div>
