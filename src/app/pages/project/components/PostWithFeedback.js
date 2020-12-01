@@ -132,6 +132,12 @@ class PostWithFeedback extends Component {
     })
   }
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter' && !event.shiftKey){
+      this.sendFeedback();
+    }
+  }
+
   remove = (index) => {
     this.setState({
       documentDTOList : this.state.documentDTOList.filter((item,i)=>i!=index)
@@ -191,7 +197,7 @@ class PostWithFeedback extends Component {
                 {
                   post.docList &&
                   post.docList.map((item,i)=> {
-                    return <img key={i} src={item.docUrl} onClick={() => this.props.imageViewer(post.docList,i)} />
+                    return <img key={i} src={addImageSuffix(item.docUrl, '_xthumbnail')} onClick={() => this.props.imageViewer(post.docList, i)} />
                   })
                 }
                 </div>
@@ -215,7 +221,14 @@ class PostWithFeedback extends Component {
                     <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
-                        <textarea className="custom-scrollbar" name="feedback"  rows="3" value={feedback} onChange={this.onChange} placeholder="Write your feedback here....."></textarea>
+                        <textarea
+                          className="custom-scrollbar"
+                          name="feedback"  rows="3"
+                          value={feedback}
+                          onChange={this.onChange}
+                          onKeyPress={this.handleKeyPress}
+                          placeholder="Write your feedback here.....">
+                        </textarea>
                         <div className="uploaded-photo">
                         {
                           documentDTOList.map((item,i)=>{
@@ -258,11 +271,11 @@ class PostWithFeedback extends Component {
                                   </h4>
                                   <div className="comments">
                                       <p>{item.text}</p>
-                                      <div className="feedback-uploaded-img">
+                                      <div className="feedback-uploaded-img custom-scrollbar-x">
                                       {
                                         item.docList &&
                                         item.docList.map((item2,i)=>{
-                                          return(<img key={i} src={item2.docUrl} style={{height:30,width:30}} onClick={() => this.props.imageViewer(item.docList,i)} />)
+                                          return(<img key={i} src={item2.docUrl}  onClick={() => this.props.imageViewer(item.docList,i)} />)
                                         })
                                       }
                                       </div>

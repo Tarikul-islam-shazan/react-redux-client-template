@@ -125,9 +125,7 @@ class PickDesign extends Component {
                 obj.groupId = data[i].productGroup.id;
                 obj.groupName = data[i].productGroup.name;
                 obj.types[0] = data[i];
-                console.log("object inside flag==>"+i,obj)
                 arr[arr.length] = obj;
-                console.log("arr inside flag==>"+i,arr)
               }
             }
             this.setState({
@@ -348,8 +346,8 @@ class PickDesign extends Component {
                           groupwiseProductList.map((item,i)=>{
                             return (
                               <li key={i}>
-                                  <a href={`#pageSubmenu${i}`} data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">{item.groupName}</a>
-                                  <ul className="collapse list-unstyled sub-collapse-menu" id={`pageSubmenu${i}`}>
+                                  <a href={`#pageSubmenu${i}`} data-toggle="collapse" aria-expanded={i===0 ? 'true' : 'false'} className="dropdown-toggle">{item.groupName}</a>
+                                  <ul className={`collapse list-unstyled sub-collapse-menu ${i===0 ? 'show' : ''}`} id={`pageSubmenu${i}`}>
                                     {
                                       item.types.map((item2,j) => {
                                         if(item2.id==productTypeId){

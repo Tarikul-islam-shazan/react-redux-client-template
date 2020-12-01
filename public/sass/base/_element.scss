@@ -1865,17 +1865,18 @@ h6.style-overview{
   }
   .footer-tab {
     display: flex;
+    justify-content: flex-end;
     margin: 0 20px 20px 20px;
     border-top: 1px solid #DADDE4;
     padding-top: 20px;
     position: relative;
     button.send-feed.main-editor{
-      position: absolute;
-      right: 0;
+      position: relative;
       background: #f47920;
       border-color: #f47920;
-      width: 100px;
+      width: 100%;
       color: #fff;
+      flex-basis: 100px;
       &:hover,
       &:focus,
       &:active
@@ -2086,7 +2087,7 @@ button.deliverable-deadline {
           .description{
             padding: 15px 20px;
             background: #F6F7F8;
-            border-radius: 15px;
+            border-radius: 6px;
             margin-left: 20px;
             max-width: 630px;
             h4{
@@ -2118,8 +2119,14 @@ button.deliverable-deadline {
               }
               .feedback-uploaded-img{
                 display: flex;
+                overflow-y: auto;
                 img{
                   cursor: zoom-in;
+                  width: 80px;
+                  height: 100px;
+                  border-radius: 5px !important;
+                  margin: 5px;
+                  object-fit: cover;
                 }
               }
             }

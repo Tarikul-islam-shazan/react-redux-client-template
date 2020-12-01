@@ -152,7 +152,7 @@
   padding: 20px;
   img{
     width: 100%;
-    height: 158px;
+    height: 225px;
     object-fit: cover;
     object-position: center;
     border-radius: 4px;
@@ -183,9 +183,10 @@
 }
 .submit-option{
   padding: 20px;
+  overflow: hidden;
   button{
     width: 100%;
-    margin: 10px 0;
+    margin: 10px 0 !important;
   }
 }
 button[disabled]{
