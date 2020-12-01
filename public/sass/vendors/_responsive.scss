@@ -1299,9 +1299,19 @@
         margin: 0;
         margin-bottom: 20px;
     }
+    .uploaded-photo img {
+        height: 140px;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
+        width: 120px;
+        height: 150px;
+    }
 }
 
 @media screen and (max-width:767px) {
+    .uploaded-photo img {
+        height: 160px;
+    }
     .product-details-skl {
         .thumbnail-prev {
             width: 100%;
@@ -1820,6 +1830,7 @@
     .tag-n-deadline {
         display: none;
     }
+
 }
 @media screen and (max-width:375px) {
     .feedback .feedback-post .post .post-heading .header-title .description {
