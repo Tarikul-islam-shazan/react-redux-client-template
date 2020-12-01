@@ -258,7 +258,7 @@ class PostWithFeedback extends Component {
                                   </h4>
                                   <div className="comments">
                                       <p>{item.text}</p>
-                                      <div className="feedback-uploaded-img">
+                                      <div className="feedback-uploaded-img custom-scrollbar-x">
                                       {
                                         item.docList &&
                                         item.docList.map((item2,i)=>{
