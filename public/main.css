@@ -2612,7 +2612,8 @@ button.deliverable-deadline {
             .feedback .feedback-post .post .post-heading .header-title .description .comments img {
               border-radius: 20px; }
             .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img {
-              display: flex; }
+              display: flex;
+              overflow-y: auto; }
               .feedback .feedback-post .post .post-heading .header-title .description .comments .feedback-uploaded-img img {
                 cursor: zoom-in; }
 
@@ -4239,7 +4240,8 @@ template {
     padding: 12px 15px; }
 
   .feedback .editor .feedback-editor .footer-tab button {
-    font-size: 12px; }
+    font-size: 12px;
+    height: 36px !important; }
 
   button.deliverable-deadline {
     padding: 5px 8px 5px 25px;
@@ -5193,7 +5195,7 @@ template {
   .project-profile .back {
     position: relative;
     left: 0;
-    top: 0;
+    top: 15px;
     cursor: pointer;
     text-align: left;
     margin: 0 auto;
@@ -5394,7 +5396,10 @@ template {
     width: 100% !important; }
 
   .feedback .editor .feedback-editor .footer-tab {
-    padding: 0; } }
+    padding: 0; }
+
+  .tag-n-deadline {
+    display: none; } }
 @media screen and (max-width: 320px) {
   ul.navbar-nav li.notification-bell {
     margin: 0 !important;

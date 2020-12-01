@@ -521,6 +521,7 @@
     }
     .feedback .editor .feedback-editor .footer-tab button {
         font-size: 12px;
+        height: 36px !important;
     }
     button.deliverable-deadline {
         padding: 5px 8px 5px 25px;
@@ -1591,7 +1592,7 @@
     .project-profile .back {
         position: relative;
         left: 0;
-        top: 0;
+        top: 15px;
         cursor: pointer;
         text-align: left;
         margin: 0 auto;
@@ -1815,6 +1816,9 @@
     }
     .feedback .editor .feedback-editor .footer-tab {
         padding: 0;
+    }
+    .tag-n-deadline {
+        display: none;
     }
 }
 @media screen and (max-width:320px) {

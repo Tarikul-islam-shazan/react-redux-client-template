@@ -2119,6 +2119,7 @@ button.deliverable-deadline {
               }
               .feedback-uploaded-img{
                 display: flex;
+                overflow-y: auto;
                 img{
                   cursor: zoom-in;
                 }
