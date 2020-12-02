@@ -465,9 +465,8 @@ class RequestForQuotation extends Component {
                                             </div>
 
                                             <div className="drug-n-drop">
-                                                <div className="development-step-1">
                                                     <div className="form-group">
-                                                        <div className="uploaded-img" id="my-design" onScroll={() => this.onScrollToEnd(0)}>
+                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" onScroll={() => this.onScrollToEnd(0)}>
                                                           {
                                                             myDesignList.length ?
                                                             myDesignList.map((image,index) => {
@@ -482,15 +481,18 @@ class RequestForQuotation extends Component {
                                                                 </div>
                                                             </div>
                                                           }
+
+                                                            <div className="item">
+                                                                <button className="upload-more" onClick={() => this.setState({showProductAddModal: true})}></button>
+                                                            </div>
                                                         </div>
                                                         {
                                                           item.fileError ? <span className="error">{item.fileError}</span> : ''
                                                         }
+
                                                     </div>
-                                                </div>
                                             </div>
 
-                                            <button onClick={() => this.setState({showProductAddModal: true})}>test modal</button>
 
                                             <div className="row">
                                                 <div className="col-lg-12">
@@ -535,7 +537,7 @@ class RequestForQuotation extends Component {
                 <Modal
                   show={showProductAddModal}
                   onHide={() => this.setState({showProductAddModal: false})}
-                  dialogClassName="modal-90w"
+                  dialogClassName="modal-xl share-design-modal"
                   aria-labelledby="example-custom-modal-styling-title"
                 >
                 {/*<Modal.Header closeButton>

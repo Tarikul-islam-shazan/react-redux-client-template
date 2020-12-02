@@ -196,6 +196,39 @@ button[disabled]{
 
 //Share Design Update
 
+.share-design-modal .modal-content {
+  border: 0;
+}
 
+.share-design-modal h5.section-title {
+  font-size: 30px;
+}
+
+.share-design-modal p.section-subtitle {
+  font-size: 17px;
+}
+.share-design-modal img.close-btn {
+  top: -9px;
+}
+.share-design.uploaded-img {
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  height: 360px;
+  grid-template-columns: repeat(4, 1fr);
+  .item{
+    width: auto;
+    .card {
+      .card-body {
+        height: 52px;
+        border: 0;
+        text-overflow: ellipsis;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+}
 
 

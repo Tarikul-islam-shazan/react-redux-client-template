@@ -2964,6 +2964,17 @@ button.deliverable-deadline {
         width: 100px;
         display: inline-block; }
 
+button.upload-more {
+  width: 215px;
+  height: 192px;
+  border: 0;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #e4e4e4;
+  border-radius: 5px;
+  background: url("./images/icons/plus.png") no-repeat center; }
+  button.upload-more:focus {
+    outline: 0; }
+
 .skeleton {
   width: 500px;
   height: 440px;
@@ -3577,6 +3588,34 @@ button.btn.btn-brand.small {
 button[disabled] {
   background: #E5E5E5;
   color: #818181; }
+
+.share-design-modal .modal-content {
+  border: 0; }
+
+.share-design-modal h5.section-title {
+  font-size: 30px; }
+
+.share-design-modal p.section-subtitle {
+  font-size: 17px; }
+
+.share-design-modal img.close-btn {
+  top: -9px; }
+
+.share-design.uploaded-img {
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  height: 360px;
+  grid-template-columns: repeat(4, 1fr); }
+  .share-design.uploaded-img .item {
+    width: auto; }
+    .share-design.uploaded-img .item .card .card-body {
+      height: 52px;
+      border: 0;
+      text-overflow: ellipsis;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden; }
 
 .add-invoice {
   max-width: 813px;
