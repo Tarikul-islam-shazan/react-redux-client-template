@@ -565,13 +565,14 @@ class RequestForQuotation extends Component {
                                             <button className="btn" type="button" data-toggle="collapse"
                                                 data-target={`#collapse_${i}_SDC`} aria-expanded={i==0 ? "true" : "false"}
                                                 aria-controls={`collapse_${i}_SDC`}>
-                                                Designs {i+1}
+                                                Design {i+1}
                                             </button>
                                         </h2>
                                     </div>
                                     <div id={`collapse_${i}_SDC`} className={ 'collapse' + ( i == 0 ? ' show' : '' ) } aria-labelledby={`heading_${i}`}
                                         data-parent="#accordionExample">
                                         <div className="card-body">
+
                                             <div className="form-group">
                                                 <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                 <p>Note: Upload a tech pack or choose from product catalogs</p>
