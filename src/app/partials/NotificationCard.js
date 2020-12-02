@@ -4,31 +4,28 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addImageSuffix, convertTimeToLocal, getTodayTimeDifference } from '../services/Util';
 
+// <div className="notify-list-skl">
+//   <div className="skeleton quote-list-left">
+//     <div className="client-info">
+//       <div className="img"></div>
+//       <div className="info">
+//         <div className="line"></div>
+//         <div className="noti-info">
+//           <div className="cat"></div>
+//           <div className="button-skel"></div>
+//         </div>
+//       </div>
+//     </div>
+//     <div className="product-img">
+//       <div className="img"></div>
+//     </div>
+//   </div>
+// </div>
+
 export const NotificationCard = ({item, markRead, todayData}) =>{
-
-
-
   return(
-
     <li>
         <a href="#" onClick={() => markRead(item.id, item.isSeen, generateUrl(item))} className={!item.isSeen ? 'active' : ''}>
-          <div className="notify-list-skl">
-            <div className="skeleton quote-list-left">
-              <div className="client-info">
-                <div className="img"></div>
-                <div className="info">
-                  <div className="line"></div>
-                  <div className="noti-info">
-                    <div className="cat"></div>
-                    <div className="button-skel"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="product-img">
-                <div className="img"></div>
-              </div>
-            </div>
-          </div>
             <div className="notify-list">
                 {loadIcon(item)}
                 <div className="info">
