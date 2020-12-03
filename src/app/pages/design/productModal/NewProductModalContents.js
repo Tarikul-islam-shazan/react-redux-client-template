@@ -36,7 +36,7 @@ class NewProductModalContents extends Component {
       }else if(formStep==1){
         return <Step_1 _goToFormStep={this.props._goToFormStep}/>
       }else if(formStep==2){
-        return <Step_2 _goToFormStep={this.props._goToFormStep} _goToStep={this.props._goToStep}/>
+        return <Step_2 _closeModal={this.props._closeModal} _goToFormStep={this.props._goToFormStep} _goToStep={this.props._goToStep}/>
       }
     }
 
@@ -63,7 +63,11 @@ class NewProductModalContents extends Component {
             <div className="modal-dialog modal-xl">
                 <div className="modal-content">
                     <div className="modal-body p-0">
-                        <img src={require("../../../assets/images/cancel.png")} alt="cancel button" className="img-fluid close-btn" data-dismiss="modal" aria-label="Close"/>
+                        <img
+                          src={require("../../../assets/images/cancel.png")}
+                          alt="cancel button"
+                          className="img-fluid close-btn"
+                          onClick={this.props._closeModal}/>
                         <section className="card-style-1">
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 col-lg-6">

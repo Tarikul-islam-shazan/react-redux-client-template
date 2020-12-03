@@ -384,6 +384,12 @@ class RequestForQuotation extends Component {
       })
     }
 
+    _closeModal = (product) => {
+      this.setState({
+        showProductAddModal: false
+      })
+    }
+
     render() {
         let { myDesignList, nitexDesignList, titleError, showProductAddModal } = this.state;
         let { numberOfStyles, styles, colorList, title } = this.props.rfq;
@@ -545,7 +551,7 @@ class RequestForQuotation extends Component {
                       </Modal.Title>
                   </Modal.Header>*/}
                   <Modal.Body>
-                      <Contents _goToStep={this._goToStep} formStep={this.state.formStep} _goToFormStep={this._goToFormStep}/>
+                      <Contents _closeModal={this._closeModal} _goToStep={this._goToStep} formStep={this.state.formStep} _goToFormStep={this._goToFormStep}/>
                   </Modal.Body>
                 </Modal>
             </section>
