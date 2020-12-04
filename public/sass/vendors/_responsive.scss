@@ -1826,6 +1826,10 @@
     .tag-n-deadline {
         display: none;
     }
+    .design-tile ~ .add-new {
+        width: 153px;
+        text-align: right;
+    }
 
 }
 @media screen and (max-width:375px) {

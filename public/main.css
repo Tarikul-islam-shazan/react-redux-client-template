@@ -5459,7 +5459,11 @@ template {
     padding: 0; }
 
   .tag-n-deadline {
-    display: none; } }
+    display: none; }
+
+  .design-tile ~ .add-new {
+    width: 153px;
+    text-align: right; } }
 @media screen and (max-width: 375px) {
   .feedback .feedback-post .post .post-heading .header-title .description {
     max-width: 242px !important; } }
