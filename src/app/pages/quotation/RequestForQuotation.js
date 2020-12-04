@@ -470,7 +470,7 @@ class RequestForQuotation extends Component {
                                                     <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                     <p>Note: Upload a tech pack or choose from product catalogs</p>
                                                 </div>
-                                                <div className="add-new m-0">Add new</div>
+                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true})}>Add new</div>
                                             </div>
 
                                             <div className="drug-n-drop">
@@ -491,9 +491,6 @@ class RequestForQuotation extends Component {
                                                             </div>
                                                           }
 
-                                                            <div className="item">
-                                                                <button className="upload-more" onClick={() => this.setState({showProductAddModal: true})}></button>
-                                                            </div>
                                                         </div>
                                                         {
                                                           item.fileError ? <span className="error">{item.fileError}</span> : ''
