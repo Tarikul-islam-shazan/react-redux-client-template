@@ -270,7 +270,7 @@ class FillTheForm_2 extends Component {
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);
-            this.props._closeModal(data.data)
+            this.props._closeModal(data.payload)
           }else{
             toastError(data.message);
           }

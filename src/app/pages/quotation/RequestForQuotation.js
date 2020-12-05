@@ -43,7 +43,8 @@ class RequestForQuotation extends Component {
           ],
           showProductAddModal: false,
           step: 0,
-          formStep: 0
+          formStep: 0,
+          selectedStyleIndex: null
         };
     }
 
@@ -309,7 +310,7 @@ class RequestForQuotation extends Component {
           titleError : ''
         })
       }
-      if(!this.hasErrorColor() && flag){
+      if(flag){
         let body = {
           name : rfq.title,
           numOfStyles : rfq.numberOfStyles,
@@ -318,7 +319,7 @@ class RequestForQuotation extends Component {
             let temp = {};
             temp.name = "Style "+(i+1);
             temp.note = item.note;
-            temp.colorDTOList = item.colorList;
+            // temp.colorDTOList = item.colorList;
             if(item.techPackFile && item.techPackFile.name){
               temp.productCreationType = 'FROM_TECH_PACK';
               temp.techPackDto = item.techPackFile;
@@ -331,7 +332,7 @@ class RequestForQuotation extends Component {
               temp.productCreationType = 'FROM_CATALOG';
               temp.id = item.myDesignList;
             }
-            temp.documentDTOList = [...item.designInspirationsFiles, ...item.otherFiles];
+            // temp.documentDTOList = [...item.designInspirationsFiles, ...item.otherFiles];
             return temp;
           })
         }
@@ -344,8 +345,8 @@ class RequestForQuotation extends Component {
             this.setState({loading:false})
             if(data.success){
               toastSuccess(data.message);
-              window.location.reload();
-              // this.props.history.push('/quote-request');
+              // window.location.reload();
+              this.props.history.push('/my-rfqs');
             }else{
               toastError(data.message);
             }
@@ -384,10 +385,14 @@ class RequestForQuotation extends Component {
       })
     }
 
-    _closeModal = (product) => {
-      this.setState({
-        showProductAddModal: false
+    _closeModal = async(product) => {
+      let {selectedStyleIndex, myDesignList} = this.state;
+      await this.setState({
+        showProductAddModal: false,
+        myDesignList: [product, ...myDesignList]
       })
+      await this.onImageSelect('my', selectedStyleIndex, product.id)
+      this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'})
     }
 
     render() {
@@ -470,12 +475,12 @@ class RequestForQuotation extends Component {
                                                     <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                     <p>Note: Upload a tech pack or choose from product catalogs</p>
                                                 </div>
-                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true})}>Add new</div>
+                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true, selectedStyleIndex: i})}>Add new</div>
                                             </div>
 
                                             <div className="drug-n-drop">
                                                     <div className="form-group">
-                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" onScroll={() => this.onScrollToEnd(0)}>
+                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref="_myDesignList" onScroll={() => this.onScrollToEnd(0)}>
                                                           {
                                                             myDesignList.length ?
                                                             myDesignList.map((image,index) => {
