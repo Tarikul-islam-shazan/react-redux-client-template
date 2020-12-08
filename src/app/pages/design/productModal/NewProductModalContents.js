@@ -67,7 +67,7 @@ class NewProductModalContents extends Component {
                           src={require("../../../assets/images/cancel.png")}
                           alt="cancel button"
                           className="img-fluid close-btn"
-                          onClick={this.props._closeModal}/>
+                          onClick={() => this.props._closeModal()}/>
                         <section className="card-style-1">
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 col-lg-6">

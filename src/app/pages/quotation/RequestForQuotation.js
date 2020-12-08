@@ -385,14 +385,21 @@ class RequestForQuotation extends Component {
       })
     }
 
-    _closeModal = async(product) => {
-      let {selectedStyleIndex, myDesignList} = this.state;
-      await this.setState({
-        showProductAddModal: false,
-        myDesignList: [product, ...myDesignList]
-      })
-      await this.onImageSelect('my', selectedStyleIndex, product.id)
-      this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'})
+    _closeModal = async(product = null) => {
+      if (product) {
+          let {selectedStyleIndex, myDesignList} = this.state;
+          await this.setState({
+            showProductAddModal: false,
+            myDesignList: [product, ...myDesignList]
+          });
+          await this.onImageSelect('my', selectedStyleIndex, product.id);
+          this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'});
+      } else {
+          await this.setState({
+            showProductAddModal: false,
+          });
+      }
+
     }
 
     render() {
