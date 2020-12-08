@@ -49,7 +49,7 @@ class RequestForQuotation extends Component {
     }
 
     componentDidMount = async() => {
-      await this.renderNitexList()
+      // await this.renderNitexList()
       await this.renderMyList()
       await Http.GET('getColorType')
         .then(({data}) => {
@@ -487,23 +487,26 @@ class RequestForQuotation extends Component {
 
                                             <div className="drug-n-drop">
                                                     <div className="form-group">
+                                                      {
+                                                        myDesignList.length ?
                                                         <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref="_myDesignList" onScroll={() => this.onScrollToEnd(0)}>
                                                           {
-                                                            myDesignList.length ?
                                                             myDesignList.map((image,index) => {
                                                               return(
                                                                 <Image selected={item.myDesignList==image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('my',i,image.id)} />
                                                               )
-                                                            }):
-                                                            <div className="not-found">
-                                                                <h1 className="msg">Oops, no designs found here</h1>
-                                                                <div className="illustration">
-                                                                    <img src={require("../../assets/images/not-found.png")} alt=""/>
-                                                                </div>
-                                                            </div>
+                                                            })
                                                           }
-
+                                                        </div>:
+                                                        <div className="not-found" ref="_myDesignList">
+                                                            <h1 className="msg">{this.state.loading ? 'Loading...' : 'Oops, no designs found here'}</h1>
+                                                            <div className="illustration">
+                                                                <img src={require("../../assets/images/not-found.png")} alt=""/>
+                                                            </div>
                                                         </div>
+                                                      }
+
+
                                                         {
                                                           item.fileError ? <span className="error">{item.fileError}</span> : ''
                                                         }
