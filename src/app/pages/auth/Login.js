@@ -187,6 +187,7 @@ class Login extends Component {
    }
     render() {
         let {showPassword} = this.state;
+        let redirection = getUrlParameter('redirect', this.props.location.search)
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -220,13 +221,13 @@ class Login extends Component {
 
               </div>
               <div className="text-center">
-                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
+                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
                       Sign in with Google
                   </a>
-                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
+                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
                       </span>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import Http from '../../services/Http';
+import { getUrlParameter } from '../../services/Util';
 
 class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -30,10 +31,14 @@ class OAuth2RedirectHandler extends Component {
         });
         console.log("checking userinfo outside fetch",userInfo)
         await localStorage.setItem('userInfo',JSON.stringify(userInfo));
+        let redirection = getUrlParameter('redirect', this.props.location.search)
         if(userInfo.businessInfoGiven){
-          this.props.history.push("/pick-design");
+          this.props.history.push(redirection ? redirection : "/pick-design");
         }else{
-          this.props.history.push("/questionairre");
+          this.props.history.push(
+            '/questionairre' +
+            (redirection ? ('?redirect=' + redirection) : '')
+          );
         }
     }
 
