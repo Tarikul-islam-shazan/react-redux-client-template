@@ -58,13 +58,15 @@ const AuthRouteWithoutLayout = ({component: Component, ...rest}) => {
 
 const PublicRoute = ({component: Component, ...rest}) => {
     const token = getToken();
+    const redirectRoute = window.location.pathname;
+    const url = '/login' + (redirectRoute && redirectRoute !== '/' ? '?redirect=' + redirectRoute : '')
     return token ? (
         <Route { ...rest } render={ matchProps => (
             <DefaultLayout>
                 <Component { ...matchProps } />
             </DefaultLayout>
         ) }/>
-    ) : <Redirect to="/login"/>;
+    ) : <Redirect to={url}/>;
 };
 
 const QuestionairreRoute = ({component: Component, ...rest}) => {

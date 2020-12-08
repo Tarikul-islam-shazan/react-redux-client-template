@@ -10,6 +10,7 @@ import 'react-intl-tel-input/dist/main.css';
 import LoadingOverlay from 'react-loading-overlay';
 
 import { _storeData } from "./actions";
+import { getUrlParameter } from '../../services/Util';
 
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import Http from '../../services/Http';
@@ -162,7 +163,8 @@ class Questionairre_1 extends Component {
                   }
                   userInfo.businessInfoGiven = true;
                   localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                  this.props.history.push('/pick-design');
+                  let redirection = getUrlParameter('redirect', this.props.location.search)
+                  this.props.history.push(redirection ? redirection : '/pick-design');
                 }else{
                   toastError(data.message);
                 }

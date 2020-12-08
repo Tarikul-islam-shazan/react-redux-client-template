@@ -8,7 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import Recaptcha from 'react-recaptcha';
 
-import { validate } from '../../services/Util';
+import { validate, getUrlParameter } from '../../services/Util';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -68,7 +68,11 @@ class Register extends Component {
             .then(({data}) => {
               if(data.success){
                 toastSuccess(data.message+". Please login to continue.");
-                this.props.history.push('/login');
+                let redirection = getUrlParameter('redirect', this.props.location.search)
+                this.props.history.push(
+                  '/login' +
+                  (redirection ? ('?redirect=' + redirection) : '')
+                );
                 // Http.POST('login',body)
                 //   .then(({data}) => {
                 //     console.log('LOGIN SUCCESS: ', JSON.stringify(data));

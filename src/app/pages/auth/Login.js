@@ -8,7 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import Recaptcha from 'react-recaptcha';
 
-import { validate } from '../../services/Util';
+import { validate, getUrlParameter } from '../../services/Util';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -87,13 +87,17 @@ class Login extends Component {
                   .then(({data}) => {
                     console.log('userInfo SUCCESS: ', JSON.stringify(data));
                     localStorage.setItem('userInfo',JSON.stringify(data));
+                    let redirection = getUrlParameter('redirect', this.props.location.search)
                       if(data.businessInfoGiven){
                         this.props.history.push({
-                          pathname: '/pick-design',
+                          pathname: redirection ? redirection : '/pick-design',
                           state: { from: 'login' }
                         });
                       }else{
-                        this.props.history.push('/questionairre');
+                        this.props.history.push(
+                          '/questionairre' +
+                          (redirection ? ('?redirect=' + redirection) : '')
+                        );
                       }
                   })
                   .catch(({response}) => {
