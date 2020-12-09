@@ -163,9 +163,9 @@ class RequestForQuotation extends Component {
       this.setState({loading:true})
       let { size, myDesignList } = this.state;
 
-      let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
+      let params = `?page=${page}&size=${size}&availability=AVAILABLE`;
 
-      Http.GET('getProductList',params)
+      Http.GET('getAvailableProductList',params)
         .then(({data}) => {
           console.log('myDesignList SUCCESS: ', data);
           this.setState({loading:false})

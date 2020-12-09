@@ -22,6 +22,7 @@ const routes = {
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
+    getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)
     getProductDetails: `${BASE_URL}/product/`, // GET
     getProductType: `${BASE_URL}/product-type/all`, // GET
     getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
