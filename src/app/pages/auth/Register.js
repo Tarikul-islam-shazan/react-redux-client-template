@@ -62,40 +62,43 @@ class Register extends Component {
             // approveTC : agreement,
             approveTC : true
           };
-          // console.log("register body",body)
-          // return;
           Http.POST('signup',body)
             .then(({data}) => {
-              if(data.success){
-                toastSuccess(data.message+". Please login to continue.");
-                let redirection = getUrlParameter('redirect', this.props.location.search)
-                this.props.history.push(
-                  '/login' +
-                  (redirection ? ('?redirect=' + redirection) : '')
-                );
-                // Http.POST('login',body)
-                //   .then(({data}) => {
-                //     console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-                //     this.setState({loading:false})
-                //     if(data.accessToken){
-                //       this.props.history.push('/questionairre-step-1');
-                //     }else{
-                //       this.props.history.push('/login');
-                //     }
-                //   })
-                //   .catch(({response}) => {
-                //       console.log('LOGIN Error: ', JSON.stringify(response));
-                //       if(response.data && response.data.message){
-                //         toastError(response.data.message);
-                //       }else{
-                //         toastError("Request wasn't successful");
-                //       }
-                //       this.setState({loading:false})
-                //       // this.props.history.push('/login');
-                //   });
-              }
-
-
+                if (data.accessToken) {
+                    localStorage.setItem('rememberMe', 1);
+                    localStorage.setItem('token', data.tokenType + ' ' + data.accessToken);
+                    localStorage.setItem('email',email);
+                    toastSuccess("Successfully Registered.");
+                    Http.GET('userInfo')
+                      .then(({data}) => {
+                        localStorage.setItem('userInfo',JSON.stringify(data));
+                        this.setState({loading: false})
+                        let redirection = getUrlParameter('redirect', this.props.location.search)
+                          if (data.businessInfoGiven) {
+                            this.props.history.push({
+                              pathname: redirection ? redirection : '/pick-design',
+                              state: { from: 'login' }
+                            });
+                          } else {
+                            this.props.history.push(
+                              '/questionairre' +
+                              (redirection ? ('?redirect=' + redirection) : '')
+                            );
+                          }
+                      })
+                      .catch(({response}) => {
+                          this.setState({loading: false})
+                          if (response.data && response.data.message) {
+                            toastError(response.data.message);
+                          } else {
+                            toastError("Couldn't fetch user info.");
+                          }
+                          this.props.history.push('/pick-design');
+                      });
+                } else {
+                    this.setState({loading: false})
+                    toastError(data.message);
+                }
             })
             .catch(({response}) => {
                 // console.log('LOGIN Error: ', JSON.stringify(response));
