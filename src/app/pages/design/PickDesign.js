@@ -256,7 +256,7 @@ class PickDesign extends Component {
     }
 
     details = (id = 0) => {
-      this.props.history.push('/my-products/'+id);
+        window.open('/my-products/' + id, "_blank");
     }
 
     likeProduct = (id) => {
