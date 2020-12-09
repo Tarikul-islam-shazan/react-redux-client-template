@@ -618,10 +618,18 @@ const getTodayTimeDifference = (startDate, endDate = moment()) => {
     return '';
 }
 
+const getUrlParameter = (name, params) => {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+
+    var results = regex.exec(params);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter
 };

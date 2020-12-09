@@ -3,16 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setActiveTab } from '../actions/sidebar';
+import { getUrlParameter } from '../services/Util';
 
 class AuthLayout extends React.Component {
 
     componentDidMount() {
+
         this.props.setActiveTab(window.location.pathname)
         console.log("setActiveTab", this.props.activeTab)
     }
 
     render() {
         let {activeTab} = this.props;
+        let redirect = getUrlParameter('redirect', this.props.location.search)
         return (
             <>
             <div className="bg_color_custom">
@@ -25,14 +28,14 @@ class AuthLayout extends React.Component {
 
                                       {activeTab.includes('register') &&
                                      <p> Already have an account?
-                                         <Link to="/login" onClick={() => this.props.setActiveTab('/login')} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign in</Link>
+                                         <Link to={`/login${redirect ? ('?redirect=' + redirect) : ''}`} onClick={() => this.props.setActiveTab('/login')} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign in</Link>
                                      </p>
                                    }
 
 
                                    {activeTab.includes('login') &&
                                      <p>Don't have an account?
-                                         <Link to="/register" onClick={() => this.props.setActiveTab('/register')} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign up</Link>
+                                         <Link to={`/register${redirect ? ('?redirect=' + redirect) : ''}`} onClick={() => this.props.setActiveTab('/register')} className="text-active text-color_orange" style={{textDecoration: 'underline'}}>Sign up</Link>
                                      </p>
                                    }
 
