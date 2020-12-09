@@ -37,10 +37,9 @@ import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
 const AuthRoute = ({component: Component, ...rest}) => {
     let token = getToken()
-    console.log("token AuthRoute",token);
     return token==null ? (
         <Route { ...rest } render={ matchProps => (
-            <AuthLayout>
+            <AuthLayout { ...matchProps }>
                 <Component { ...matchProps } />
             </AuthLayout>
         ) }/>
