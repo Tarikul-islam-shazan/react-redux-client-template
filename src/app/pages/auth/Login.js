@@ -8,7 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import Recaptcha from 'react-recaptcha';
 
-import { validate } from '../../services/Util';
+import { validate, getUrlParameter } from '../../services/Util';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -87,13 +87,17 @@ class Login extends Component {
                   .then(({data}) => {
                     console.log('userInfo SUCCESS: ', JSON.stringify(data));
                     localStorage.setItem('userInfo',JSON.stringify(data));
+                    let redirection = getUrlParameter('redirect', this.props.location.search)
                       if(data.businessInfoGiven){
                         this.props.history.push({
-                          pathname: '/pick-design',
+                          pathname: redirection ? redirection : '/pick-design',
                           state: { from: 'login' }
                         });
                       }else{
-                        this.props.history.push('/questionairre');
+                        this.props.history.push(
+                          '/questionairre' +
+                          (redirection ? ('?redirect=' + redirection) : '')
+                        );
                       }
                   })
                   .catch(({response}) => {
@@ -183,6 +187,7 @@ class Login extends Component {
    }
     render() {
         let {showPassword} = this.state;
+        let redirection = getUrlParameter('redirect', this.props.location.search)
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -216,13 +221,13 @@ class Login extends Component {
 
               </div>
               <div className="text-center">
-                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
+                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
                       Sign in with Google
                   </a>
-                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
+                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
                       </span>

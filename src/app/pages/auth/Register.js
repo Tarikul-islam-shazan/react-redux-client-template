@@ -8,7 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import Recaptcha from 'react-recaptcha';
 
-import { validate } from '../../services/Util';
+import { validate, getUrlParameter } from '../../services/Util';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -62,36 +62,43 @@ class Register extends Component {
             // approveTC : agreement,
             approveTC : true
           };
-          // console.log("register body",body)
-          // return;
           Http.POST('signup',body)
             .then(({data}) => {
-              if(data.success){
-                toastSuccess(data.message+". Please login to continue.");
-                this.props.history.push('/login');
-                // Http.POST('login',body)
-                //   .then(({data}) => {
-                //     console.log('LOGIN SUCCESS: ', JSON.stringify(data));
-                //     this.setState({loading:false})
-                //     if(data.accessToken){
-                //       this.props.history.push('/questionairre-step-1');
-                //     }else{
-                //       this.props.history.push('/login');
-                //     }
-                //   })
-                //   .catch(({response}) => {
-                //       console.log('LOGIN Error: ', JSON.stringify(response));
-                //       if(response.data && response.data.message){
-                //         toastError(response.data.message);
-                //       }else{
-                //         toastError("Request wasn't successful");
-                //       }
-                //       this.setState({loading:false})
-                //       // this.props.history.push('/login');
-                //   });
-              }
-
-
+                if (data.accessToken) {
+                    localStorage.setItem('rememberMe', 1);
+                    localStorage.setItem('token', data.tokenType + ' ' + data.accessToken);
+                    localStorage.setItem('email',email);
+                    toastSuccess("Successfully Registered.");
+                    Http.GET('userInfo')
+                      .then(({data}) => {
+                        localStorage.setItem('userInfo',JSON.stringify(data));
+                        this.setState({loading: false})
+                        let redirection = getUrlParameter('redirect', this.props.location.search)
+                          if (data.businessInfoGiven) {
+                            this.props.history.push({
+                              pathname: redirection ? redirection : '/pick-design',
+                              state: { from: 'login' }
+                            });
+                          } else {
+                            this.props.history.push(
+                              '/questionairre' +
+                              (redirection ? ('?redirect=' + redirection) : '')
+                            );
+                          }
+                      })
+                      .catch(({response}) => {
+                          this.setState({loading: false})
+                          if (response.data && response.data.message) {
+                            toastError(response.data.message);
+                          } else {
+                            toastError("Couldn't fetch user info.");
+                          }
+                          this.props.history.push('/pick-design');
+                      });
+                } else {
+                    this.setState({loading: false})
+                    toastError(data.message);
+                }
             })
             .catch(({response}) => {
                 // console.log('LOGIN Error: ', JSON.stringify(response));
@@ -177,6 +184,7 @@ class Register extends Component {
 
     render() {
         let {showPassword, fullName, fullNameError} = this.state;
+        let redirection = getUrlParameter('redirect', this.props.location.search)
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -209,13 +217,13 @@ class Register extends Component {
                   <p className="page-subtitle mobile_responsive">Forever free account to build your clothing supply chain with $0 upfront cost</p>
               </div>
               <div className="text-center">
-                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL}>
+                  <a href="#" className="btn btn-google btn-social" style={{marginBottom:20}} href={GOOGLE_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/google.png') } alt="google"/>
                       </span>
                       Sign up with Google
                   </a>
-                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL}>
+                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
                       <span>
                           <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
                       </span>
