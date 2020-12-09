@@ -12,6 +12,7 @@ import { NotificationCard } from './NotificationCard';
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../commonComponents/Toast';
+import { NotificationSkeleton, CreateSkeletons } from '../commonComponents/ProductSkeleton';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../constant';
 
 import { convertTimeToLocal } from '../services/Util';
@@ -197,39 +198,16 @@ class Notification extends Component {
       // console.log("notifications",notifications);
 
       return (
-        <LoadingOverlay
-          active={false}
-          styles={{
-            overlay: (base) => ({
-              ...base,
-              background: LOADER_OVERLAY_BACKGROUND
-            }),
-            spinner: (base) => ({
-              ...base,
-              width: LOADER_WIDTH,
-              position: LOADER_POSITION,
-              top: LOADER_TOP,
-              left: LOADER_LEFT,
-              marginTop: LOADER_MARGIN_TOP,
-              marginLeft: LOADER_MARGIN_LEFT,
-              '& svg circle': {
-                stroke: LOADER_COLOR
-              }
-            }),
-            content: (base) => ({
-              ...base,
-              color: LOADER_COLOR
-            })
-          }}
-          spinner
-          text={LOADER_TEXT}>
+        <>
           <div className="notification custom-scrollbar" id="notification-panel" onScroll={this.onScrollToEnd}>
               <h3 className="title">Notification</h3>
               {
                 this.loadView()
               }
               {
-                this.state.loading ? <p style={{fontSize:20,textAlign:'center'}}>Loading ...</p> : ''
+                this.state.loading ?
+                <CreateSkeletons iterations={5}><NotificationSkeleton/></CreateSkeletons>
+                : ''
               }
               {
                 !this.state.hasNext && !this.state.loading ? <p style={{fontSize:20,textAlign:'center'}}>No more notifications found</p> : ''
@@ -240,7 +218,7 @@ class Notification extends Component {
                   </a>
               </div>*/}
           </div>
-        </LoadingOverlay>
+        </>
         );
     }
 }
