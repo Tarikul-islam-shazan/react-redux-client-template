@@ -61,11 +61,12 @@
     })
     $('.explore-design-carasoul').owlCarousel({
         loop:true,
-        margin:20,
+        margin:35,
         responsiveClass:true,
         autoplay:true,
         autoplayHoverPause:true,
         dots: false,
+        autoplayTimeout:1000,
         responsive:{
             0:{
                 items:1,
