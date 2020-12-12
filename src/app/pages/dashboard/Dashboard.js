@@ -159,7 +159,7 @@ class Dashboard extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/my-products/'+id);
+      window.open('/my-products/' + id, "_blank")
     }
 
     likeProduct = (id) => {
