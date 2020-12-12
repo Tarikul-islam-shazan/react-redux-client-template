@@ -854,6 +854,11 @@ h4.details-title {
     background-color: #8B8A8E;
 
 }
+.custom-scrollbar::-webkit-scrollbar
+{
+    background-color: #DFDCE6;
+    height: 7px;
+}
 
 //custom-scrollbar-x
 .custom-scrollbar-x

@@ -914,6 +914,10 @@ h4.details-title {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #8B8A8E; }
 
+.custom-scrollbar::-webkit-scrollbar {
+  background-color: #DFDCE6;
+  height: 7px; }
+
 .custom-scrollbar-x {
   overflow-x: auto; }
 
@@ -2964,6 +2968,17 @@ button.deliverable-deadline {
         width: 100px;
         display: inline-block; }
 
+button.upload-more {
+  width: 215px;
+  height: 192px;
+  border: 0;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #e4e4e4;
+  border-radius: 5px;
+  background: url("./images/icons/plus.png") no-repeat center; }
+  button.upload-more:focus {
+    outline: 0; }
+
 .skeleton {
   width: 500px;
   height: 440px;
@@ -3534,6 +3549,9 @@ button.btn.btn-brand.small {
     .project-update-modal .editor .footer-tab .nice-select {
       border-color: #EE761F; }
 
+.modal-body .uploaded-photo img {
+  height: 164px; }
+
 .uploaded-photo {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3564,7 +3582,7 @@ button.btn.btn-brand.small {
         outline: 0; }
     .uploaded-photo .img-item img {
       width: 100%;
-      height: 158px;
+      height: 224px;
       object-fit: cover; }
 
 .submit-option {
@@ -3577,6 +3595,35 @@ button.btn.btn-brand.small {
 button[disabled] {
   background: #E5E5E5;
   color: #818181; }
+
+.share-design-modal .modal-content {
+  border: 0; }
+
+.share-design-modal h5.section-title {
+  font-size: 30px; }
+
+.share-design-modal p.section-subtitle {
+  font-size: 17px; }
+
+.share-design-modal img.close-btn {
+  top: -9px; }
+
+.share-design.uploaded-img {
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  height: 278px;
+  grid-template-columns: repeat(4, 1fr);
+  overflow-x: hidden; }
+  .share-design.uploaded-img .item {
+    width: auto; }
+    .share-design.uploaded-img .item .card .card-body {
+      height: 52px;
+      border: 0;
+      text-overflow: ellipsis;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden; }
 
 .add-invoice {
   max-width: 813px;
@@ -3826,6 +3873,15 @@ template {
   table.manage-project-table tbody tr td {
     padding: 16px 18px; } }
 @media screen and (max-width: 1440px) {
+  .uploaded-photo img {
+    height: 220px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 150px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 180px !important; }
+
   .product-details-skl .thumbnail-prev {
     width: 76%;
     height: 65vh; }
@@ -4569,6 +4625,11 @@ template {
       display: block;
       padding: 0; } }
 @media screen and (max-width: 1280px) {
+  .stage .sub-stage {
+    left: inherit;
+    transform: inherit;
+    right: 0; }
+
   .product-details-skl .thumbnail-prev {
     width: 70%;
     height: 48vh; }
@@ -4624,11 +4685,15 @@ template {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 @media screen and (max-width: 1024px) {
+  .feedback .feedback-post .post .post-heading .header-title .description {
+    max-width: 422px; }
+
   .badge {
     margin-bottom: 10px; }
 
   .uploaded-photo {
-    grid-template-columns: repeat(3, 1fr); }
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px; }
 
   .product-skeleton {
     height: 392px; }
@@ -4894,8 +4959,23 @@ template {
     flex-basis: calc((100% - 100px) / 4); }
 
   .card.product-card .card-img-top {
-    height: 340px; } }
+    height: 340px; }
+
+  .project-update-modal .editor .write {
+    padding: 0 0 0 70px; }
+
+  .uploaded-photo img {
+    height: 210px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 250px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 170px !important; } }
 @media screen and (max-width: 991px) {
+  .uploaded-photo {
+    grid-gap: 15px; }
+
   .project-profile .back {
     left: 20px;
     top: -42px; }
@@ -4950,10 +5030,22 @@ template {
     margin-bottom: 20px; }
 
   .uploaded-photo img {
-    height: 140px; } }
+    height: 140px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 126px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 112px !important; } }
 @media screen and (max-width: 767px) {
   .uploaded-photo img {
-    height: 160px; }
+    height: 160px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 115px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 160px !important; }
 
   .product-details-skl .thumbnail-prev {
     width: 100%;
@@ -5156,7 +5248,17 @@ template {
     margin-top: 30px; }
 
   .modal-form {
-    padding: 20px 20px 30px 20px; }
+    padding: 20px 0px 30px 0px; }
+
+  .modal .section-subtitle {
+    padding: 0; }
+
+  .share-design-modal img.close-btn {
+    top: 0;
+    right: 0px; }
+
+  .share-design-modal .section-header {
+    margin-top: 60px; }
 
   .custom-chekbox .form-group label:before {
     margin-top: -3px; }
@@ -5281,8 +5383,9 @@ template {
 
   .stage .sub-stage {
     flex-direction: column;
-    width: 200px;
-    padding-bottom: 15px; }
+    width: 295px;
+    padding-bottom: 15px;
+    height: 250px; }
 
   .stage .sub-stage ul .title {
     width: 100%;
@@ -5417,10 +5520,23 @@ template {
     width: 100% !important; }
 
   .feedback .editor .feedback-editor .footer-tab {
-    padding: 0; }
+    padding: 20px 0 0 0; }
 
   .tag-n-deadline {
-    display: none; } }
+    display: none; }
+
+  .design-tile ~ .add-new {
+    width: 153px;
+    text-align: right; }
+
+  .share-design.uploaded-img {
+    width: 100%;
+    display: flex;
+    grid-gap: 10px;
+    height: 215px;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden; } }
 @media screen and (max-width: 375px) {
   .feedback .feedback-post .post .post-heading .header-title .description {
     max-width: 242px !important; } }
