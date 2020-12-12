@@ -914,6 +914,10 @@ h4.details-title {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #8B8A8E; }
 
+.custom-scrollbar::-webkit-scrollbar {
+  background-color: #DFDCE6;
+  height: 7px; }
+
 .custom-scrollbar-x {
   overflow-x: auto; }
 
@@ -3605,8 +3609,9 @@ button[disabled] {
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  height: 360px;
-  grid-template-columns: repeat(4, 1fr); }
+  height: 278px;
+  grid-template-columns: repeat(4, 1fr);
+  overflow-x: hidden; }
   .share-design.uploaded-img .item {
     width: auto; }
     .share-design.uploaded-img .item .card .card-body {
@@ -5195,7 +5200,17 @@ template {
     margin-top: 30px; }
 
   .modal-form {
-    padding: 20px 20px 30px 20px; }
+    padding: 20px 0px 30px 0px; }
+
+  .modal .section-subtitle {
+    padding: 0; }
+
+  .share-design-modal img.close-btn {
+    top: 0;
+    right: 0px; }
+
+  .share-design-modal .section-header {
+    margin-top: 60px; }
 
   .custom-chekbox .form-group label:before {
     margin-top: -3px; }
@@ -5463,7 +5478,16 @@ template {
 
   .design-tile ~ .add-new {
     width: 153px;
-    text-align: right; } }
+    text-align: right; }
+
+  .share-design.uploaded-img {
+    width: 100%;
+    display: flex;
+    grid-gap: 10px;
+    height: 215px;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden; } }
 @media screen and (max-width: 375px) {
   .feedback .feedback-post .post .post-heading .header-title .description {
     max-width: 242px !important; } }
