@@ -91,7 +91,7 @@ class PickDesign extends Component {
     }
 
     setCategories = () => {
-      Http.GET('getProductTypeWithGroup')
+      Http.GET('getProductTypeWithGroupWithData')
         .then(({data}) => {
           console.log('getProductTypeWithGroup SUCCESS: ', data);
           this.setState({loading:false})
