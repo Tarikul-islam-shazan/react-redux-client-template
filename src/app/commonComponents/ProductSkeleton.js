@@ -130,6 +130,30 @@ export const ProjectSkeleton = () => {
     )
 }
 
+export const NotificationSkeleton = () => {
+    return(
+        <li style={{paddingLeft: 20, paddingRight: 20}}>
+          <div className="notify-list-skl">
+            <div className="skeleton quote-list-left">
+              <div className="client-info">
+                <div className="img"></div>
+                <div className="info">
+                  <div className="line"></div>
+                  <div className="noti-info">
+                    <div className="cat"></div>
+                    <div className="button-skel"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="product-img">
+                <div className="img"></div>
+              </div>
+            </div>
+          </div>
+        </li>
+    )
+}
+
 export const CreateSkeletons = ({iterations, children}) => {
     let res = [];
     for (let i = 0; i < iterations; i++) {
