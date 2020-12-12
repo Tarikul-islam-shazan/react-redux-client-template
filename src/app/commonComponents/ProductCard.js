@@ -40,24 +40,26 @@ class ProductCard extends Component {
     // console.log("likeFlag",this.state.likeFlag)
     return(
       <div className="card product-card">
-          {
-            item.designDocuments.length > 0 ?
-            item.designDocuments.map((doc,i) => {
-              if(doc.docType=='PRODUCT_DESIGN' && flag){
-                flag = 0;
-                return (
-                  <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
-                )
-              }
-              if(item.designDocuments.length==i+1 && flag){
-                return(
-                  <img key={i} src={item.designDocuments[0].docUrl} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
-                )
-              }
-            })
-            :
-            <img src={require("../assets/images/default_product.svg")} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
-          }
+          <a href={'/my-products/' + item.id}>
+            {
+              item.designDocuments.length > 0 ?
+              item.designDocuments.map((doc,i) => {
+                if(doc.docType=='PRODUCT_DESIGN' && flag){
+                  flag = 0;
+                  return (
+                    <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                  )
+                }
+                if(item.designDocuments.length==i+1 && flag){
+                  return(
+                    <img key={i} src={item.designDocuments[0].docUrl} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                  )
+                }
+              })
+              :
+              <img src={require("../assets/images/default_product.svg")} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+            }
+          </a>
           <div className="card-body">
               <h5 className="card-title text-capitalize">{item.name ? item.name : 'N/A'}</h5>
               <span className="design-category">{item.productGroup ? item.productGroup : 'Tech pack'}</span>
