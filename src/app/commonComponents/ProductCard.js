@@ -47,17 +47,17 @@ class ProductCard extends Component {
                 if(doc.docType=='PRODUCT_DESIGN' && flag){
                   flag = 0;
                   return (
-                    <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                    <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                   )
                 }
                 if(item.designDocuments.length==i+1 && flag){
                   return(
-                    <img key={i} src={item.designDocuments[0].docUrl} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                    <img key={i} src={item.designDocuments[0].docUrl} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                   )
                 }
               })
               :
-              <img src={require("../assets/images/default_product.svg")} onClick={(e) => showDetails(item.id)} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+              <img src={require("../assets/images/default_product.svg")} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
             }
           </a>
           <div className="card-body">
