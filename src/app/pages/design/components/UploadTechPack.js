@@ -144,12 +144,9 @@ class UploadTechPack extends Component {
     }
 
     onMultipleFileSelect = async(e,docType) => {
-      let { productImageList, referenceImageList } = this.props.product;
-      let arr = [];
+      let arr = this.props.product[e.target.name];
       let files = Array.from(e.target.files);
       let key = e.target.name;
-      console.log(Array.from(e.target.files));
-      // return;
       await files.map((item) => {
         let data = {
           "name": item.name,
@@ -164,7 +161,7 @@ class UploadTechPack extends Component {
         reader.onload = () => {
           data.base64Str = reader.result;
           arr.push(data);
-          this.props._storeData(key,arr)
+          this.props._storeData(key, arr)
           // console.log(key,arr[0]);
           // console.log("base64",reader.result)
         };
@@ -177,6 +174,14 @@ class UploadTechPack extends Component {
 
     onChange = (e) => {
       this.props._storeData(e.target.name,e.target.value)
+    }
+
+    removeFromArray = (keyName,itemIndex) => {
+      let data = this.props.product[keyName]
+      data = data.filter((item,i) => {
+        return i!=itemIndex;
+      })
+      this.props._storeData(keyName,data)
     }
 
     submit = () => {
@@ -226,7 +231,6 @@ class UploadTechPack extends Component {
 
     render() {
         let { colorListTP, productImageList, referenceImageList, techPackFile, techPackName } = this.props.product;
-        // console.log("from render", productImageList[0]);
         let { colorError, techPackNameError } = this.state;
         return (
             <LoadingOverlay
@@ -295,12 +299,12 @@ class UploadTechPack extends Component {
                              <div className="col-lg-9">
                                  <div className="form-group">
                                     {
-                                      productImageList.map((item,i) => {
+                                      productImageList.map((item, i) => {
                                         return(
                                           <div className="demo-product-card" key={i}>
                                               <span>{item.name}</span>
                                               <img src={item.base64Str} alt={item.name} style={{height:50,width:80}}/>
-                                              <div className="close-demo"></div>
+                                              <div className="close-demo" onClick={() => this.removeFromArray('productImageList', i)}></div>
                                           </div>
                                         )
                                       })
@@ -323,12 +327,12 @@ class UploadTechPack extends Component {
                              <div className="col-lg-9">
                                 <div className="form-group">
                                   {
-                                    referenceImageList.map((item,i) => {
+                                    referenceImageList.map((item, i) => {
                                       return(
                                         <div className="demo-product-card" key={i}>
                                             <span>{item.name}</span>
                                             <img src={item.base64Str} alt={item.name} style={{height:50,width:80}}/>
-                                            <div className="close-demo"></div>
+                                            <div className="close-demo" onClick={() => this.removeFromArray('referenceImageList', i)}></div>
                                         </div>
                                       )
                                     })
