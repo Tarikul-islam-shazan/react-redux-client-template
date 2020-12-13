@@ -303,8 +303,8 @@ class FillTheForm_1 extends Component {
               <div className="row">
                   <div className="col-lg-12">
                       <div className="form-group">
-                          <label>Product name*</label>
-                          <input type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter product name"/>
+                          <label>Design name*</label>
+                          <input type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter design name"/>
                           {
                             nameError ? <span className="error">{nameError}</span> : ''
                           }
@@ -345,7 +345,7 @@ class FillTheForm_1 extends Component {
                   </div>
                   <div className="col-lg-6">
                       <div className="form-group">
-                          <label>Fabric weight (GSM)</label>
+                          <label>Fabric weight (GSM)*</label>
                           <input type="text" name="fabricWeight" value={fabricWeight} onChange={this.onChange} placeholder="120"/>
                           {
                             weightError ? <span className="error">{weightError}</span> : ''
