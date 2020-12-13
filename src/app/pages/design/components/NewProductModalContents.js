@@ -68,16 +68,16 @@ class NewProductModalContents extends Component {
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 col-lg-6">
                                         <div className="section-header text-center">
-                                            <h5 className="section-title">New product</h5>
-                                            <p className="section-subtitle">Add your product by giving detailed info or uploading a tech pack</p>
+                                            <h5 className="section-title">Add new design</h5>
+                                            <p className="section-subtitle">Get costing on any designs that you like to manufacture for your label</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="add-new-product">
                                     <ul className="nav nav-tabs nav-justified">
-                                        <li><a className="active" data-toggle="tab" href="#FilltheForm">Fill the Form</a></li>
-                                        <li><a data-toggle="tab" href="#UploadTechPack">Upload Tech Pack</a></li>
+                                        <li><a className="active" data-toggle="tab" href="#FilltheForm">Design details</a></li>
+                                        <li><a data-toggle="tab" href="#UploadTechPack">Upload Tech pack</a></li>
                                       </ul>
 
                                       <div className="tab-content">
