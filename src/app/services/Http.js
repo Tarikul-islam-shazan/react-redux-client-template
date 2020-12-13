@@ -22,9 +22,11 @@ const routes = {
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
+    getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)
     getProductDetails: `${BASE_URL}/product/`, // GET
     getProductType: `${BASE_URL}/product-type/all`, // GET
     getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
+    getProductTypeWithGroupWithData: `${BASE_URL}/product-type/all-with-group-having-product`, // GET
     getColorType: `${BASE_URL}/color/all`, // GET
     getAccessoriesList: `${BASE_URL}/accessories/by-product-type/`, // GET
     getSizeTableData: `${BASE_URL}/sizes/get-size-table/`, // GET

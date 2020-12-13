@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from "loadjs";
+import Modal from 'react-bootstrap/Modal'
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
@@ -15,6 +16,9 @@ import { _storeData } from "./actions";
 import { Image } from "../../commonComponents/Image";
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
+
+
+import Contents from '../design/productModal/NewProductModalContents';
 
 class RequestForQuotation extends Component {
 
@@ -36,12 +40,16 @@ class RequestForQuotation extends Component {
             //   id : 0,
             //   quantity : 0
             // }
-          ]
+          ],
+          showProductAddModal: false,
+          step: 0,
+          formStep: 0,
+          selectedStyleIndex: null
         };
     }
 
     componentDidMount = async() => {
-      await this.renderNitexList()
+      // await this.renderNitexList()
       await this.renderMyList()
       await Http.GET('getColorType')
         .then(({data}) => {
@@ -155,9 +163,9 @@ class RequestForQuotation extends Component {
       this.setState({loading:true})
       let { size, myDesignList } = this.state;
 
-      let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
+      let params = `?page=${page}&size=${size}&availability=AVAILABLE`;
 
-      Http.GET('getProductList',params)
+      Http.GET('getAvailableProductList',params)
         .then(({data}) => {
           console.log('myDesignList SUCCESS: ', data);
           this.setState({loading:false})
@@ -252,159 +260,26 @@ class RequestForQuotation extends Component {
       this.props._storeData('styles',styles);
     }
 
-    onFileUpload = (e,i,docType) => {
-      // console.log("upload",e.target.name);
-      // return;
-      let { styles } = this.props.rfq;
-      let file = e.target.files[0];
-      let key = e.target.name;
-      let data = {
-        "name": file.name,
-  			"docMimeType" : file.type,
-  			"documentType" : docType,
-  			"print": false,
-  			"base64Str":""
-      }
-      // console.log('data',data)
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        data.base64Str = reader.result;
-        console.log(key,data);
-        styles[i][key] = data;
-        styles[i].myDesignList = 0;
-        styles[i].nitexDesignList = 0;
-        this.props._storeData('styles',styles)
-        // console.log("base64",reader.result)
-      };
-      reader.onerror = function (error) {
-        console.log('Error: ', error);
-      }
-    }
-
-    onMultipleFileSelect = async(e,docType,i) => {
-      console.log("index",i)
-      let { styles } = this.props.rfq;
-      let arr = [];
-      let files = Array.from(e.target.files);
-      let key = e.target.name;
-      console.log(Array.from(e.target.files));
-      // return;
-      await files.map((item) => {
-        let data = {
-          "name": item.name,
-    			"docMimeType" : item.type,
-    			"documentType" : docType,
-    			"print": false,
-    			"base64Str":""
-        }
-        // console.log('data',data)
-        let reader = new FileReader()
-        reader.readAsDataURL(item)
-        reader.onload = () => {
-          data.base64Str = reader.result;
-          styles[i][key].push(data);
-          console.log("styles from multi",styles);
-          this.props._storeData('styles',styles)
-        };
-        reader.onerror = function (error) {
-          console.log('Error: ', error);
-        }
-      })
-      // console.log("data multiple",arr[0])
-    }
-
-    addColorObj = async(i) => {
-      let { styles } = this.props.rfq;
-      let { colorError } = this.state;
-      styles[i].colorList.push({
-        id : '',
-        quantity : ''
-      })
-      styles[i].colorError.push({
-        idError : '',
-        quantityError : ''
-      })
-      this.props._storeData('styles',styles)
-      loadjs(['/js/script.js']);
-    }
-
-    removeColorObj = async(i) => {
-      let { styles } = this.props.rfq;
-      styles[i].colorList.pop();
-      styles[i].colorError.pop();
-      this.props._storeData('styles',styles)
-      loadjs(['/js/script.js']);
-    }
-
-    onColorChange = ( e , i, j ) => {
-      console.log("indexes",i+"  "+j)
-      let { styles } = this.props.rfq;
-      styles[i].colorList[j][e.target.name] = e.target.value;
-      this.props._storeData('styles',styles)
-      console.log("styles",styles)
-      loadjs(['/js/script.js']);
-    }
-
-    hasErrorColor = () => {
-      let { styles } = this.props.rfq;
-      let colorError = [];
-      let flag = false;
-      let result = styles;
-      styles.map((item,i)=>{
-        item.colorList.map((colorObj,j)=>{
-          if(colorObj.id == ''){
-            flag = true;
-            result[i].colorError[j].idError = 'Color is required'
-          }else{
-            result[i].colorError[j].idError = ''
-          }
-          if(colorObj.quantity == ''){
-            flag = true;
-            result[i].colorError[j].quantityError = 'Quantity is required'
-          }else{
-            result[i].colorError[j].quantityError = ''
-          }
-        })
-      })
-      this.props._storeData('styles',result)
-      return flag;
-    }
-
     onImageSelect = (type,i,itemId) => {
-      let { styles } = this.props.rfq;
-      if(type=='nitex'){
-      //   if(styles[i].nitexDesignList.includes(itemId)){
-      //     styles[i].nitexDesignList = styles[i].nitexDesignList.filter((item)=>{
-      //       return item!=itemId;
-      //     })
-      //   }else{
-      //     styles[i].nitexDesignList.push(itemId)
-      //   }
-      if(styles[i].nitexDesignList==itemId){
-        styles[i].nitexDesignList = 0;
-      }else{
-        styles[i].techPackFile = {};
-        styles[i].myDesignList = 0;
-        styles[i].nitexDesignList = itemId;
-      }
-      }else if(type=='my'){
-        // if(styles[i].myDesignList.includes(itemId)){
-        //   styles[i].myDesignList = styles[i].myDesignList.map((item)=>{
-        //     return item!=itemId;
-        //   })
-        // }else{
-        //   styles[i].myDesignList.push(itemId)
-        // }
-        if(styles[i].myDesignList==itemId){
-          styles[i].myDesignList = 0;
-        }else{
-          styles[i].nitexDesignList = 0;
-          styles[i].techPackFile = {};
-          styles[i].myDesignList = itemId;
+        let { styles } = this.props.rfq;
+        if(type=='nitex'){
+            if(styles[i].nitexDesignList==itemId){
+              styles[i].nitexDesignList = 0;
+            }else{
+              styles[i].techPackFile = {};
+              styles[i].myDesignList = 0;
+              styles[i].nitexDesignList = itemId;
+            }
+        }else if(type=='my'){
+            if(styles[i].myDesignList==itemId){
+              styles[i].myDesignList = 0;
+            }else{
+              styles[i].nitexDesignList = 0;
+              styles[i].techPackFile = {};
+              styles[i].myDesignList = itemId;
+            }
         }
-      }
-      this.props._storeData('styles',styles)
+        this.props._storeData('styles',styles)
     }
 
     submit = () => {
@@ -435,7 +310,7 @@ class RequestForQuotation extends Component {
           titleError : ''
         })
       }
-      if(!this.hasErrorColor() && flag){
+      if(flag){
         let body = {
           name : rfq.title,
           numOfStyles : rfq.numberOfStyles,
@@ -444,7 +319,7 @@ class RequestForQuotation extends Component {
             let temp = {};
             temp.name = "Style "+(i+1);
             temp.note = item.note;
-            temp.colorDTOList = item.colorList;
+            // temp.colorDTOList = item.colorList;
             if(item.techPackFile && item.techPackFile.name){
               temp.productCreationType = 'FROM_TECH_PACK';
               temp.techPackDto = item.techPackFile;
@@ -457,7 +332,7 @@ class RequestForQuotation extends Component {
               temp.productCreationType = 'FROM_CATALOG';
               temp.id = item.myDesignList;
             }
-            temp.documentDTOList = [...item.designInspirationsFiles, ...item.otherFiles];
+            // temp.documentDTOList = [...item.designInspirationsFiles, ...item.otherFiles];
             return temp;
           })
         }
@@ -470,8 +345,8 @@ class RequestForQuotation extends Component {
             this.setState({loading:false})
             if(data.success){
               toastSuccess(data.message);
-              window.location.reload();
-              // this.props.history.push('/quote-request');
+              // window.location.reload();
+              this.props.history.push('/my-rfqs');
             }else{
               toastError(data.message);
             }
@@ -498,8 +373,37 @@ class RequestForQuotation extends Component {
       this.props._storeData('styles',styles)
     }
 
+    _goToStep = (step) => {
+      this.setState({
+        step
+      })
+    }
+
+    _goToFormStep = (formStep) => {
+      this.setState({
+        formStep
+      })
+    }
+
+    _closeModal = async(product = null) => {
+      if (product) {
+          let {selectedStyleIndex, myDesignList} = this.state;
+          await this.setState({
+            showProductAddModal: false,
+            myDesignList: [product, ...myDesignList]
+          });
+          await this.onImageSelect('my', selectedStyleIndex, product.id);
+          this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'});
+      } else {
+          await this.setState({
+            showProductAddModal: false,
+          });
+      }
+
+    }
+
     render() {
-        let { myDesignList, nitexDesignList, titleError } = this.state;
+        let { myDesignList, nitexDesignList, titleError, showProductAddModal } = this.state;
         let { numberOfStyles, styles, colorList, title } = this.props.rfq;
         console.log("styles",styles)
         return (
@@ -565,208 +469,51 @@ class RequestForQuotation extends Component {
                                             <button className="btn" type="button" data-toggle="collapse"
                                                 data-target={`#collapse_${i}_SDC`} aria-expanded={i==0 ? "true" : "false"}
                                                 aria-controls={`collapse_${i}_SDC`}>
-                                                Designs {i+1}
+                                                Design {i+1}
                                             </button>
                                         </h2>
                                     </div>
                                     <div id={`collapse_${i}_SDC`} className={ 'collapse' + ( i == 0 ? ' show' : '' ) } aria-labelledby={`heading_${i}`}
                                         data-parent="#accordionExample">
                                         <div className="card-body">
-                                            <div className="form-group">
-                                                <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
-                                                <p>Note: Upload a tech pack or choose from product catalogs</p>
+
+                                            <div className="form-group d-flex justify-content-between align-items-center">
+                                                <div className="design-tile">
+                                                    <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
+                                                    <p>Note: Upload a tech pack or choose from product catalogs</p>
+                                                </div>
+                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true, selectedStyleIndex: i})}>Add new</div>
                                             </div>
 
                                             <div className="drug-n-drop">
-                                                <div className="development-step-1">
                                                     <div className="form-group">
-                                                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                                            <li className="nav-item">
-                                                                <a className="nav-link active" data-toggle="tab" href={`#techpack_${i}`} role="tab">Upload tech pack</a>
-                                                            </li>
-                                                            <li className="nav-item">
-                                                                <a className="nav-link" data-toggle="tab" href={`#nitex_${i}`} role="tab">Choose From nitex</a>
-                                                            </li>
-                                                            <li className="nav-item">
-                                                                <a className="nav-link" data-toggle="tab" href={`#design_${i}`} role="tab">Choose your product</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div className="tab-content align-self-center" id="myTabContent">
-                                                            <div className="tab-pane fade show active" id={`techpack_${i}`} role="tabpanel">
-                                                                {
-
-                                                                  item.techPackFile && item.techPackFile.name ?
-                                                                  <p style={{color:'black'}}>{item.techPackFile.name}</p>
-                                                                  :
-                                                                  <>
-                                                                    <h5>Drag and Drop File</h5>
-                                                                    <br /> Or
-                                                                    <br />
-                                                                    <br /> Upload your detailed tech pack here
-                                                                    <br />
-                                                                    <br />
-                                                                  </>
-                                                                }
-
-                                                                <div className="file btn">
-                                                                    Choose file
-                                                                    <input type="file" name="techPackFile" onChange={(e) => this.onFileUpload(e,i,'TECH_PACK_DESIGN')}/>
-                                                                </div>
-                                                            </div>
-                                                            <div className="tab-pane fade" id={`nitex_${i}`} role="tabpanel">
-                                                                <div className="uploaded-img" id="nitex-design" onScroll={() => this.onScrollToEnd(1)}>
-                                                                  {
-                                                                    nitexDesignList.length ?
-                                                                    nitexDesignList.map((image,index) => {
-                                                                      return(
-                                                                        <Image selected={item.nitexDesignList == image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('nitex',i,image.id)} />
-                                                                      )
-                                                                    }):
-                                                                    <div className="not-found">
-                                                                        <h1 className="msg">Oops, no designs found here</h1>
-                                                                        <div className="illustration">
-                                                                            <img src={require("../../assets/images/not-found.png")} alt=""/>
-                                                                        </div>
-                                                                    </div>
-                                                                  }
-                                                                </div>
-                                                            </div>
-                                                            <div className="tab-pane fade" id={`design_${i}`} role="tabpanel">
-                                                                <div className="uploaded-img" id="my-design" onScroll={() => this.onScrollToEnd(0)}>
-                                                                  {
-                                                                    myDesignList.length ?
-                                                                    myDesignList.map((image,index) => {
-                                                                      return(
-                                                                        <Image selected={item.myDesignList==image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('my',i,image.id)} />
-                                                                      )
-                                                                    }):
-                                                                    <div className="not-found">
-                                                                        <h1 className="msg">Oops, no designs found here</h1>
-                                                                        <div className="illustration">
-                                                                            <img src={require("../../assets/images/not-found.png")} alt=""/>
-                                                                        </div>
-                                                                    </div>
-                                                                  }
-                                                                </div>
+                                                      {
+                                                        myDesignList.length ?
+                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref="_myDesignList" onScroll={() => this.onScrollToEnd(0)}>
+                                                          {
+                                                            myDesignList.map((image,index) => {
+                                                              return(
+                                                                <Image selected={item.myDesignList==image.id ? 'active' : ''} item={image} key={index} onClick={()=>this.onImageSelect('my',i,image.id)} />
+                                                              )
+                                                            })
+                                                          }
+                                                        </div>:
+                                                        <div className="not-found" ref="_myDesignList">
+                                                            <h1 className="msg">{this.state.loading ? 'Loading...' : 'Oops, no designs found here'}</h1>
+                                                            <div className="illustration">
+                                                                <img src={require("../../assets/images/not-found.png")} alt=""/>
                                                             </div>
                                                         </div>
+                                                      }
+
+
                                                         {
                                                           item.fileError ? <span className="error">{item.fileError}</span> : ''
                                                         }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {
-                                              item.colorList.map(( color , j ) => {
-                                                return(
-                                                  <div className="row" key={j}>
-                                                    {
-                                                      this.state.colors.length ?
-                                                      <>
-                                                        <div className="col-lg-6">
-                                                            <div className="form-group">
-                                                                <label>Color*</label>
-                                                                <select className="nice-select" name="id" value={color.id} onClick={(e) => this.onColorChange(e,i,j)}>
-                                                                    <option value="">Choose Color</option>
-                                                                    {
-                                                                      this.state.colors.map((colorObj,k) => (
-                                                                        <option key={k} value={colorObj.id}>{colorObj.name}</option>
-                                                                      ))
-                                                                    }
-                                                                </select>
-                                                                {
-                                                                  item.colorError[j].idError ? <span className="error">{item.colorError[j].idError}</span> : ''
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-lg-6">
-                                                            <div className="form-group">
-                                                                <label>Quantity*</label>
-                                                                <input type="text" placeholder="Enter Quantity" name="quantity" value={color.quantity} onChange={(e) => this.onColorChange(e,i,j)}/>
-                                                                {
-                                                                  item.colorError[j].quantityError ? <span className="error">{item.colorError[j].quantityError}</span> : ''
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                      </>:
-                                                      <div className="col-lg-12">
-                                                        <p>No color list found.</p>
-                                                      </div>
-                                                    }
-
-                                                  </div>
-                                                )
-                                              })
-                                            }
-
-                                            <div className="col-lg-12">
-                                                <div className="add-new color" onClick={() => this.addColorObj(i)}>
-                                                    <span>Add color</span>
-                                                </div>
-                                                {
-                                                  item.colorList.length > 1 ?
-                                                  <div className="add-new reduce color" onClick={() => this.removeColorObj(i)} style={{marginLeft:10,color:'red'}}>
-                                                      <span>Remove color</span>
-                                                  </div> :
-                                                  <></>
-                                                }
-                                            </div>
-
-                                            <div className="design-upload">
-                                                 <div className="row">
-                                                    <div className="col-md-4 col-lg-4">
-                                                        <div className="form-group">
-                                                            <label>Design inspirations</label>
-                                                            <p className="form-text text-muted">You can upload multiple files here</p>
-                                                        </div>
-                                                      <div className="row no-gutters">
-                                                          <div className="col-lg-8">
-                                                              <label className="btn btn-nitex-default">
-                                                                  Upload
-                                                                  <input type="file" name="designInspirationsFiles" onChange={(e) => this.onMultipleFileSelect(e,'DESIGN_INSPIRATION',i)} multiple hidden/>
-                                                              </label>
-                                                          </div>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-md-8 col-lg-8">
-                                                    {
-                                                      item.designInspirationsFiles.map((item,_key) => {
-                                                        return(
-                                                          <UploadedItem key={_key} item={item} remove={() => this.removeFromArray('designInspirationsFiles',i,_key)} />
-                                                        )
-                                                      })
-                                                    }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="design-upload">
-                                                 <div className="row">
-                                                    <div className="col-md-4 col-lg-4">
-                                                        <div className="form-group">
-                                                            <label>Accessories files</label>
-                                                             <p className="form-text text-muted">You can upload multiple files here</p>
-                                                        </div>
-                                                        <div className="row no-gutters">
-                                                            <div className="col-lg-8">
-                                                                <label className="btn btn-nitex-default">
-                                                                    Upload
-                                                                    <input type="file" name="otherFiles" onChange={(e) => this.onMultipleFileSelect(e,'ACCESSORIES_DESIGN',i)} multiple hidden/>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-8 col-lg-8">
-                                                    {
-                                                      item.otherFiles.map((item,_key) => {
-                                                        return(
-                                                          <UploadedItem key={_key} item={item} remove={() => this.removeFromArray('otherFiles',i,_key)} />
-                                                        )
-                                                      })
-                                                    }
 
                                                     </div>
-                                                </div>
                                             </div>
+
 
                                             <div className="row">
                                                 <div className="col-lg-12">
@@ -808,6 +555,20 @@ class RequestForQuotation extends Component {
                   </div>
 
                 </div>
+                <Modal
+                  show={showProductAddModal}
+                  onHide={() => this.setState({showProductAddModal: false})}
+                  dialogClassName="modal-xl share-design-modal"
+                  aria-labelledby="example-custom-modal-styling-title"
+                >
+                {/*<Modal.Header closeButton>
+                      <Modal.Title id="example-custom-modal-styling-title">
+                      </Modal.Title>
+                  </Modal.Header>*/}
+                  <Modal.Body>
+                      <Contents _closeModal={this._closeModal} _goToStep={this._goToStep} formStep={this.state.formStep} _goToFormStep={this._goToFormStep}/>
+                  </Modal.Body>
+                </Modal>
             </section>
           </LoadingOverlay>
         );
