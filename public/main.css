@@ -914,10 +914,6 @@ h4.details-title {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #8B8A8E; }
 
-.custom-scrollbar::-webkit-scrollbar {
-  background-color: #DFDCE6;
-  height: 7px; }
-
 .custom-scrollbar-x {
   overflow-x: auto; }
 
@@ -2967,17 +2963,6 @@ button.deliverable-deadline {
       .client-more-info ul li strong {
         width: 100px;
         display: inline-block; }
-
-button.upload-more {
-  width: 215px;
-  height: 192px;
-  border: 0;
-  background: #fff;
-  box-shadow: 0px 0px 10px 0px #e4e4e4;
-  border-radius: 5px;
-  background: url("./images/icons/plus.png") no-repeat center; }
-  button.upload-more:focus {
-    outline: 0; }
 
 .skeleton {
   width: 500px;
