@@ -436,7 +436,7 @@ class RequestForQuotation extends Component {
             <section className="request-for-quote">
                 <div className="heading">
                     <h1>Share your designs</h1>
-                    <p>Share as many product designs as you like to get quotes in 24 hours</p>
+                    <p>Get costing on any designs that you like to manufacture for your label</p>
                 </div>
 
 
