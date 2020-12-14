@@ -13,6 +13,7 @@ import { toastSuccess, toastError, toastWarning } from '../../commonComponents/T
 import { UploadedItem } from '../../commonComponents/UploadedItem';
 
 import { _storeData } from "./actions";
+import { _storeData as _storeProductData } from "../design/productModal/actions";
 import { Image } from "../../commonComponents/Image";
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -500,7 +501,13 @@ class RequestForQuotation extends Component {
                                                     <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                     <p>Note: Upload a tech pack or choose from product catalogs</p>
                                                 </div>
-                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true, selectedStyleIndex: i})}>Add new</div>
+                                                <div className="add-new m-0" onClick={() => {
+                                                  this.setState({showProductAddModal: true, selectedStyleIndex: i});
+                                                  this.props._storeProductData('colorList', [{
+                                                    id : '',
+                                                    quantity : ''
+                                                  }]);
+                                                }}>Add new</div>
                                             </div>
 
                                             <div className="drug-n-drop">
@@ -602,7 +609,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
-			_storeData
+			_storeData, _storeProductData
 		},
 		dispatch
 	);

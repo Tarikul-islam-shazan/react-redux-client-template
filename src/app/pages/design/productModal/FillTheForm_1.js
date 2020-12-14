@@ -10,7 +10,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../../commonComponents/Toast';
 
-import { _storeData } from "../actions";
+import { _storeData } from "./actions";
 import { LOADER_STYLE, LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
 
 class FillTheForm_1 extends Component {
@@ -421,7 +421,7 @@ class FillTheForm_1 extends Component {
 
 const mapStateToProps = store => {
   return {
-		product: store.product
+		product: store.shareDesignProduct
 	};
 };
 

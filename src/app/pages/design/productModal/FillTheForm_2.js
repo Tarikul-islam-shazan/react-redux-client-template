@@ -8,7 +8,7 @@ import loadjs from 'loadjs';
 
 import { UploadedItem } from '../../../commonComponents/UploadedItem';
 
-import { _storeData } from "../actions";
+import { _storeData } from "./actions";
 
 class FillTheForm_2 extends Component {
 
@@ -240,7 +240,7 @@ class FillTheForm_2 extends Component {
 
 const mapStateToProps = store => {
   return {
-		product: store.product
+		product: store.shareDesignProduct
 	};
 };
 
