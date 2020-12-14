@@ -436,6 +436,9 @@ input.type {
                 &.blue{
                     background-color: #48A1D0;
                 }
+                &.active{
+                    box-shadow: 0 0 0px 5px #D4D9E4;
+                }
             }
         }
     }
