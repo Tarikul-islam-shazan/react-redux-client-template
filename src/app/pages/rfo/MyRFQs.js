@@ -428,7 +428,7 @@ class MyRFQs extends Component {
                     <img src={require("../../assets/images/pro_pic_default.svg")} alt="pro pic" />
                   }
                     <div className="info">
-                      <span>{rfqDetails.clientName ? rfqDetails.clientName : 'N/A'}</span>
+                      <span>{rfqDetails.executiveName ? rfqDetails.executiveName : 'N/A'}</span>
                       <div className="time">{rfqDetails.dateAdded ? convertTimeToLocal(rfqDetails.dateAdded, rfqDetails.dateAddedTime, 'MMM DD, YYYY hh:mm a') : 'N/A'}</div>
                     </div>
                   </div>

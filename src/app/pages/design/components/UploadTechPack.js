@@ -28,7 +28,8 @@ class UploadTechPack extends Component {
           colorError : [{
             idError : '',
             quantityError : ''
-          }]
+          }],
+          productImageListError: ''
         };
     }
 
@@ -184,8 +185,8 @@ class UploadTechPack extends Component {
       this.props._storeData(keyName,data)
     }
 
-    submit = () => {
-      let { techPackName, colorListTP, productImageList, referenceImageList, techPackFile } = this.props.product;
+    submit = async() => {
+      let { techPackName, colorListTP, productImageList, referenceImageList, techPackFile, productImageListError } = this.props.product;
       if(techPackName == ''){
         this.setState({
           techPackNameError : 'Product Name is required'
@@ -195,7 +196,16 @@ class UploadTechPack extends Component {
           techPackNameError : ''
         })
       }
-      if(this.hasErrorColor() || !techPackName){
+      if (!productImageList.length) {
+        await this.setState({
+          productImageListError : 'Product image is required'
+        })
+      } else {
+        this.setState({
+          productImageListError : ''
+        })
+      }
+      if(this.hasErrorColor() || !techPackName || !productImageList.length){
 
       }else{
         let body = {
@@ -231,7 +241,7 @@ class UploadTechPack extends Component {
 
     render() {
         let { colorListTP, productImageList, referenceImageList, techPackFile, techPackName } = this.props.product;
-        let { colorError, techPackNameError } = this.state;
+        let { colorError, techPackNameError, productImageListError } = this.state;
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -289,12 +299,15 @@ class UploadTechPack extends Component {
                          <div className="row">
                              <div className="col-lg-3">
                                  <div className="form-group">
-                                     <label>Upload product image</label>
+                                     <label>Upload product image*</label>
                                      <div className="file file-style-2 btn">
                                          Choose file
                                          <input type="file" name="productImageList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
+                                 {
+                                   productImageListError ? <span style={{color:'red'}}>{productImageListError}</span> : ''
+                                 }
                              </div>
                              <div className="col-lg-9">
                                  <div className="form-group">

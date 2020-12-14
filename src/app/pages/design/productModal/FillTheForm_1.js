@@ -10,7 +10,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../../commonComponents/Toast';
 
-import { _storeData } from "../actions";
+import { _storeData } from "./actions";
 import { LOADER_STYLE, LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
 
 class FillTheForm_1 extends Component {
@@ -303,14 +303,14 @@ class FillTheForm_1 extends Component {
               <div className="row">
                   <div className="col-lg-12">
                       <div className="form-group">
-                          <label>Product name*</label>
-                          <input type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter product name"/>
+                          <label>Design name*</label>
+                          <input type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter design name"/>
                           {
                             nameError ? <span className="error">{nameError}</span> : ''
                           }
                       </div>
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-12">
                       <div className="form-group group-option">
                           <label>Product type*</label>
                           <select className="nice-select" name="productType" value={productType} onClick={this.onChange}>
@@ -337,56 +337,16 @@ class FillTheForm_1 extends Component {
                   <div className="col-lg-6">
                       <div className="form-group">
                           <label>Fabric composition*</label>
-                          <select className="nice-select" name="fabricComposition" value={fabricComposition} onClick={this.onChange}>
-                              <option value="">Select fabric composition</option>
-                              <option value="100% Cotton S/J">100% Cotton S/J</option>
-                              <option value="100% Cotton Pique">100% Cotton Pique</option>
-                              <option value="98% Cotton 2% Elastane">98% Cotton 2% Elastane</option>
-                              <option value="95% Cotton 5% Elastane">95% Cotton 5% Elastane</option>
-                              <option value="99% Cotton 1% Elastane">99% Cotton 1% Elastane</option>
-                              <option value="98% Polyester 2% Elastane">98% Polyester 2% Elastane</option>
-                              <option value="65% Cotton 35% Polyester (CVC)">65% Cotton 35% Polyester (CVC)</option>
-                              <option value="70% Cotton 30% Polyester (CVC)">70% Cotton 30% Polyester (CVC)</option>
-                              <option value="60% Cotton 40% Polyester (CVC)">60% Cotton 40% Polyester (CVC)</option>
-                              <option value="100% Cotton Poplin">100% Cotton Poplin</option>
-                              <option value="100% Linen">100% Linen</option>
-                              <option value="100% Tencel">100% Tencel</option>
-                              <option value="100% Rayon">100% Rayon</option>
-                              <option value="98% Tencel 2% Elastane">98% Tencel 2% Elastane</option>
-                              <option value="95% Tencel 5% Elastane">95% Tencel 5% Elastane</option>
-                              <option value="100% Polyester">100% Polyester</option>
-                              <option value="70% Polyester 30% Cotton">70% Polyester 30% Cotton</option>
-                              <option value="100% Viscose">100% Viscose</option>
-                              <option value="50% Cotton 50% Viscose">50% Cotton 50% Viscose</option>
-                              <option value="50% Cotton 50% Modal">50% Cotton 50% Modal</option>
-                              <option value="50% Modal 50% Viscose">50% Modal 50% Viscose</option>
-                              <option value="90% Cotton 10% Viscose">90% Cotton 10% Viscose</option>
-                              <option value="95% Cotton 15% Viscose">95% Cotton 15% Viscose</option>
-                              <option value="98% Cotton 2% Viscose">98% Cotton 2% Viscose</option>
-                              <option value="80% Cotton 18% Polyester 2% Elastane">80% Cotton 18% Polyester 2% Elastane</option>
-                              <option value="85% Cotton 13% Polyester 2% Elastane">85% Cotton 13% Polyester 2% Elastane</option>
-                              <option value="70% Cotton 28% Polyester 2% Elastane">70% Cotton 28% Polyester 2% Elastane</option>
-                              <option value="80% Cotton 15% Polyester 5% Elastane">80% Cotton 15% Polyester 5% Elastane</option>
-                              <option value="70% Cotton 25% Polyester 5% Elastane">70% Cotton 25% Polyester 5% Elastane</option>
-                              <option value="Other">Other</option>
-                          </select>
+                          <input type="text" name="fabricComposition" value={fabricComposition} onChange={this.onChange} placeholder="60% Cotton 40% Polyester (CVC)"/>
                           {
                             compositionError ? <span className="error">{compositionError}</span> : ''
                           }
                       </div>
                   </div>
-                  <div className="col-lg-12">
+                  <div className="col-lg-6">
                       <div className="form-group">
-                          <label>Fabric weight (GSM)</label>
-                          <select className="nice-select" value={fabricWeight} name="fabricWeight" onClick={this.onChange}>
-                              <option value="">Select fabric weight (GSM)</option>
-                              <option value="120">120</option>
-                              <option value="145">145</option>
-                              <option value="160">160</option>
-                              <option value="190">190</option>
-                              <option value="270">270</option>
-                              <option value="Other">Other</option>
-                          </select>
+                          <label>Fabric weight (GSM)*</label>
+                          <input type="text" name="fabricWeight" value={fabricWeight} onChange={this.onChange} placeholder="120"/>
                           {
                             weightError ? <span className="error">{weightError}</span> : ''
                           }
@@ -461,7 +421,7 @@ class FillTheForm_1 extends Component {
 
 const mapStateToProps = store => {
   return {
-		product: store.product
+		product: store.shareDesignProduct
 	};
 };
 

@@ -4,6 +4,15 @@
     }
 }
 @media screen and (max-width:1440px) {
+    .uploaded-photo  img {
+        height: 150px !important;
+    }
+    .modal-body .uploaded-photo img {
+        height: 150px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+        height: 125px !important;
+    }
     .product-details-skl .thumbnail-prev {
         width: 76%;
         height: 65vh;
@@ -760,7 +769,15 @@
     }
 }
 @media screen and (max-width:1366px){
-
+    .uploaded-photo  img {
+        height: 130px !important;
+    }
+    .modal-body .uploaded-photo img {
+        height: 150px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+        height: 105px !important;
+    }
     .date-range {
         flex-direction: column;
         align-items: self-start;
@@ -885,6 +902,11 @@
     }
 }
 @media screen and (max-width:1280px){
+    .stage .sub-stage {
+        left: inherit;
+        transform: inherit;
+        right: 0;
+    }
     .product-details-skl{
         .thumbnail-prev {
             width: 70%;
@@ -951,11 +973,15 @@
 
 }
 @media screen and (max-width:1024px){
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        max-width: 422px;
+    }
     .badge {
         margin-bottom: 10px;
     }
     .uploaded-photo {
         grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
     }
     .product-skeleton {
         height: 392px;
@@ -1235,8 +1261,25 @@
     .card.product-card .card-img-top {
         height: 340px;
     }
+    .project-update-modal .editor .write {
+        padding: 0 0 0 70px;
+    }
+    .uploaded-photo img {
+        height: 210px !important;
+    }
+    .modal-body .uploaded-photo img {
+        height: 250px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+        height: 170px !important;
+    }
+
 }
 @media screen and (max-width:991px){
+    .uploaded-photo {
+        grid-gap: 15px;
+    }
+
     .project-profile .back {
         left: 20px;
         top: -42px;
@@ -1300,13 +1343,25 @@
         margin-bottom: 20px;
     }
     .uploaded-photo img {
-        height: 140px;
+        height: 140px !important;
+    }
+    .modal-body .uploaded-photo img {
+        height: 126px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+        height: 112px !important;
     }
 }
 
 @media screen and (max-width:767px) {
     .uploaded-photo img {
-        height: 160px;
+        height: 160px !important;
+    }
+    .modal-body .uploaded-photo img {
+        height: 115px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+        height: 160px !important;
     }
     .product-details-skl {
         .thumbnail-prev {
@@ -1680,8 +1735,9 @@
     }
     .stage .sub-stage {
         flex-direction: column;
-        width: 200px;
+        width: 295px;
         padding-bottom: 15px;
+        height: 250px;
     }
     .stage .sub-stage ul .title {
         width: 100%;
@@ -1831,7 +1887,7 @@
         width: 100% !important;
     }
     .feedback .editor .feedback-editor .footer-tab {
-        padding: 0;
+        padding:20px 0 0 0
     }
     .tag-n-deadline {
         display: none;
@@ -1876,3 +1932,4 @@
         height: 215px;
     }
 }
+

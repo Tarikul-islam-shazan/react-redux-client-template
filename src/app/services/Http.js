@@ -26,6 +26,7 @@ const routes = {
     getProductDetails: `${BASE_URL}/product/`, // GET
     getProductType: `${BASE_URL}/product-type/all`, // GET
     getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
+    getProductTypeWithGroupWithData: `${BASE_URL}/product-type/all-with-group-having-product`, // GET
     getColorType: `${BASE_URL}/color/all`, // GET
     getAccessoriesList: `${BASE_URL}/accessories/by-product-type/`, // GET
     getSizeTableData: `${BASE_URL}/sizes/get-size-table/`, // GET

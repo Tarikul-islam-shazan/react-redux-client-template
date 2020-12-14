@@ -13,6 +13,7 @@ import { toastSuccess, toastError, toastWarning } from '../../commonComponents/T
 import { UploadedItem } from '../../commonComponents/UploadedItem';
 
 import { _storeData } from "./actions";
+import { _storeData as _storeProductData } from "../design/productModal/actions";
 import { Image } from "../../commonComponents/Image";
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -238,7 +239,8 @@ class RequestForQuotation extends Component {
         };
         if(numberOfStyles<e.target.value){
           for(let i=0;i<(e.target.value-numberOfStyles);i++){
-            styles.push(temp);
+            let obj = {...temp};
+            styles.push(obj);
           }
         }else{
           for(let i=0;i<(numberOfStyles-e.target.value);i++){
@@ -261,24 +263,39 @@ class RequestForQuotation extends Component {
     }
 
     onImageSelect = (type,i,itemId) => {
+        console.log(type, i, itemId);
         let { styles } = this.props.rfq;
-        if(type=='nitex'){
-            if(styles[i].nitexDesignList==itemId){
-              styles[i].nitexDesignList = 0;
-            }else{
-              styles[i].techPackFile = {};
-              styles[i].myDesignList = 0;
-              styles[i].nitexDesignList = itemId;
+        styles = styles.map((style, index) => {
+            if (i == index) {
+                if (style.myDesignList == itemId) {
+                    style.myDesignList = 0;
+                } else {
+                  style.nitexDesignList = 0;
+                  style.techPackFile = {};
+                  style.myDesignList = itemId;
+                }
             }
-        }else if(type=='my'){
-            if(styles[i].myDesignList==itemId){
-              styles[i].myDesignList = 0;
-            }else{
-              styles[i].nitexDesignList = 0;
-              styles[i].techPackFile = {};
-              styles[i].myDesignList = itemId;
-            }
-        }
+            console.log("style " + index + "_" + i, style.nitexDesignList);
+            return style;
+        });
+        // if(type=='nitex'){
+        //     if(styles[i].nitexDesignList==itemId){
+        //       styles[i].nitexDesignList = 0;
+        //     }else{
+        //       styles[i].techPackFile = {};
+        //       styles[i].myDesignList = 0;
+        //       styles[i].nitexDesignList = itemId;
+        //     }
+        // }else if(type=='my'){
+        //     if(styles[i].myDesignList==itemId){
+        //       styles[i].myDesignList = 0;
+        //     }else{
+        //       styles[i].nitexDesignList = 0;
+        //       styles[i].techPackFile = {};
+        //       styles[i].myDesignList = itemId;
+        //     }
+        // }
+        console.log("styles from on Change", styles)
         this.props._storeData('styles',styles)
     }
 
@@ -393,7 +410,9 @@ class RequestForQuotation extends Component {
             myDesignList: [product, ...myDesignList]
           });
           await this.onImageSelect('my', selectedStyleIndex, product.id);
-          this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'});
+          if (myDesignList.length > 1) {
+              this.refs['_myDesignList_' + selectedStyleIndex].scrollTo({top: 0, behavior: 'smooth'});
+          }
       } else {
           await this.setState({
             showProductAddModal: false,
@@ -436,7 +455,7 @@ class RequestForQuotation extends Component {
             <section className="request-for-quote">
                 <div className="heading">
                     <h1>Share your designs</h1>
-                    <p>Share as many product designs as you like to get quotes in 24 hours</p>
+                    <p>Get costing on any designs that you like to manufacture for your label</p>
                 </div>
 
 
@@ -482,14 +501,20 @@ class RequestForQuotation extends Component {
                                                     <label htmlFor="styleQuantity">Select design<span className="error">*</span></label>
                                                     <p>Note: Upload a tech pack or choose from product catalogs</p>
                                                 </div>
-                                                <div className="add-new m-0" onClick={() => this.setState({showProductAddModal: true, selectedStyleIndex: i})}>Add new</div>
+                                                <div className="add-new m-0" onClick={() => {
+                                                  this.setState({showProductAddModal: true, selectedStyleIndex: i});
+                                                  this.props._storeProductData('colorList', [{
+                                                    id : '',
+                                                    quantity : ''
+                                                  }]);
+                                                }}>Add new</div>
                                             </div>
 
                                             <div className="drug-n-drop">
                                                     <div className="form-group">
                                                       {
                                                         myDesignList.length ?
-                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref="_myDesignList" onScroll={() => this.onScrollToEnd(0)}>
+                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref={"_myDesignList_" + i} onScroll={() => this.onScrollToEnd(0)}>
                                                           {
                                                             myDesignList.map((image,index) => {
                                                               return(
@@ -498,7 +523,7 @@ class RequestForQuotation extends Component {
                                                             })
                                                           }
                                                         </div>:
-                                                        <div className="not-found" ref="_myDesignList">
+                                                        <div className="not-found">
                                                             <h1 className="msg">{this.state.loading ? 'Loading...' : 'Oops, no designs found here'}</h1>
                                                             <div className="illustration">
                                                                 <img src={require("../../assets/images/not-found.png")} alt=""/>
@@ -584,7 +609,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
-			_storeData
+			_storeData, _storeProductData
 		},
 		dispatch
 	);
