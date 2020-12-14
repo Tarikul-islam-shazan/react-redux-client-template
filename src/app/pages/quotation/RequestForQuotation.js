@@ -238,7 +238,8 @@ class RequestForQuotation extends Component {
         };
         if(numberOfStyles<e.target.value){
           for(let i=0;i<(e.target.value-numberOfStyles);i++){
-            styles.push(temp);
+            let obj = {...temp};
+            styles.push(obj);
           }
         }else{
           for(let i=0;i<(numberOfStyles-e.target.value);i++){
@@ -261,30 +262,47 @@ class RequestForQuotation extends Component {
     }
 
     onImageSelect = (type,i,itemId) => {
+        console.log(type, i, itemId);
         let { styles } = this.props.rfq;
-        if(type=='nitex'){
-            if(styles[i].nitexDesignList==itemId){
-              styles[i].nitexDesignList = 0;
-            }else{
-              styles[i].techPackFile = {};
-              styles[i].myDesignList = 0;
-              styles[i].nitexDesignList = itemId;
+        styles = styles.map((style, index) => {
+            if (i == index) {
+                if (style.myDesignList == itemId) {
+                    style.myDesignList = 0;
+                } else {
+                  style.nitexDesignList = 0;
+                  style.techPackFile = {};
+                  style.myDesignList = itemId;
+                }
             }
-        }else if(type=='my'){
-            if(styles[i].myDesignList==itemId){
-              styles[i].myDesignList = 0;
-            }else{
-              styles[i].nitexDesignList = 0;
-              styles[i].techPackFile = {};
-              styles[i].myDesignList = itemId;
-            }
-        }
+            console.log("style " + index + "_" + i, style.nitexDesignList);
+            return style;
+        });
+        // if(type=='nitex'){
+        //     if(styles[i].nitexDesignList==itemId){
+        //       styles[i].nitexDesignList = 0;
+        //     }else{
+        //       styles[i].techPackFile = {};
+        //       styles[i].myDesignList = 0;
+        //       styles[i].nitexDesignList = itemId;
+        //     }
+        // }else if(type=='my'){
+        //     if(styles[i].myDesignList==itemId){
+        //       styles[i].myDesignList = 0;
+        //     }else{
+        //       styles[i].nitexDesignList = 0;
+        //       styles[i].techPackFile = {};
+        //       styles[i].myDesignList = itemId;
+        //     }
+        // }
+        console.log("styles from on Change", styles)
         this.props._storeData('styles',styles)
     }
 
     submit = () => {
       let flag = true;
       let { rfq } = this.props;
+      console.log("rfq details", rfq)
+      return;
       rfq.styles.map((item,i) => {
         if(item.myDesignList==0 && item.nitexDesignList==0 && ( item.techPackFile == null || !item.techPackFile.name )){
           flag = false;
@@ -393,7 +411,9 @@ class RequestForQuotation extends Component {
             myDesignList: [product, ...myDesignList]
           });
           await this.onImageSelect('my', selectedStyleIndex, product.id);
-          this.refs._myDesignList.scrollTo({top: 0, behavior: 'smooth'});
+          if (myDesignList.length > 1) {
+              this.refs['_myDesignList_' + selectedStyleIndex].scrollTo({top: 0, behavior: 'smooth'});
+          }
       } else {
           await this.setState({
             showProductAddModal: false,
@@ -489,7 +509,7 @@ class RequestForQuotation extends Component {
                                                     <div className="form-group">
                                                       {
                                                         myDesignList.length ?
-                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref="_myDesignList" onScroll={() => this.onScrollToEnd(0)}>
+                                                        <div className="share-design uploaded-img custom-scrollbar" id="my-design" ref={"_myDesignList_" + i} onScroll={() => this.onScrollToEnd(0)}>
                                                           {
                                                             myDesignList.map((image,index) => {
                                                               return(
@@ -498,7 +518,7 @@ class RequestForQuotation extends Component {
                                                             })
                                                           }
                                                         </div>:
-                                                        <div className="not-found" ref="_myDesignList">
+                                                        <div className="not-found">
                                                             <h1 className="msg">{this.state.loading ? 'Loading...' : 'Oops, no designs found here'}</h1>
                                                             <div className="illustration">
                                                                 <img src={require("../../assets/images/not-found.png")} alt=""/>
