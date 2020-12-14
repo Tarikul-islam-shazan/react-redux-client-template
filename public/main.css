@@ -914,6 +914,10 @@ h4.details-title {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #8B8A8E; }
 
+.custom-scrollbar::-webkit-scrollbar {
+  background-color: #DFDCE6;
+  height: 7px; }
+
 .custom-scrollbar-x {
   overflow-x: auto; }
 
@@ -2964,6 +2968,17 @@ button.deliverable-deadline {
         width: 100px;
         display: inline-block; }
 
+button.upload-more {
+  width: 215px;
+  height: 192px;
+  border: 0;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #e4e4e4;
+  border-radius: 5px;
+  background: url("./images/icons/plus.png") no-repeat center; }
+  button.upload-more:focus {
+    outline: 0; }
+
 .skeleton {
   width: 500px;
   height: 440px;
@@ -3859,13 +3874,13 @@ template {
     padding: 16px 18px; } }
 @media screen and (max-width: 1440px) {
   .uploaded-photo img {
-    height: 220px !important; }
+    height: 150px !important; }
 
   .modal-body .uploaded-photo img {
     height: 150px !important; }
 
   .feedback-editor .uploaded-photo img {
-    height: 180px !important; }
+    height: 125px !important; }
 
   .product-details-skl .thumbnail-prev {
     width: 76%;
@@ -4499,6 +4514,15 @@ template {
   .product-detail-gallery .thumbnail-prev img {
     height: 700px; } }
 @media screen and (max-width: 1366px) {
+  .uploaded-photo img {
+    height: 130px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 150px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 105px !important; }
+
   .date-range {
     flex-direction: column;
     align-items: self-start; }
