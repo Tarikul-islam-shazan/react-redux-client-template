@@ -301,8 +301,6 @@ class RequestForQuotation extends Component {
     submit = () => {
       let flag = true;
       let { rfq } = this.props;
-      console.log("rfq details", rfq)
-      return;
       rfq.styles.map((item,i) => {
         if(item.myDesignList==0 && item.nitexDesignList==0 && ( item.techPackFile == null || !item.techPackFile.name )){
           flag = false;
