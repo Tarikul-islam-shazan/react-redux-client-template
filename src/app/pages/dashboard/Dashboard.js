@@ -65,6 +65,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "Dashboard on Nitex - the easiest clothing manufacturing software";
       let { location } = this.props;
       if (location && location.state && location.state.from) {
         console.log("prev route", location.state.from)

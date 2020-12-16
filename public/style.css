@@ -368,16 +368,18 @@ form.registration-form.mt-5  input[type="email"]{
     font-size: 12px !important;
     width: 100%;
 }
-.forgot-pass .input-group-text{
-    padding-right: 0;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-}
 .forgot-pass button {
     margin-top: 25px !important;
     display: inline-block;
+}
+.forgot-pass input.form-control {
+    border-radius: 5px !important;
+}
+.forgot-pass .lock {
+    position: absolute;
+    right: 0;
+    height: 48px;
+    z-index: 999;
 }
 .MuiFormLabel-root {
     color: #8C95A8 !important;
@@ -1380,22 +1382,22 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 /* Reset Pass */
-.reset-pass input[type="password"] {
-    height: 40px;
-    border-bottom: 1px solid #D7DBE6;
-    padding: 10px;
-    padding-left: 0;
-}
-.reset-pass .input-group-text{
-    background: transparent !important;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-    padding-right: 0;
-}
-.reset-pass .form-group {
-    margin-bottom: 40px;
-}
+/*.reset-pass input[type="password"] {*/
+/*    height: 40px;*/
+/*    border-bottom: 1px solid #D7DBE6;*/
+/*    padding: 10px;*/
+/*    padding-left: 0;*/
+/*}*/
+/*.reset-pass .input-group-text{*/
+/*    background: transparent !important;*/
+/*    border: 0;*/
+/*    border-bottom: 1px solid #ccc;*/
+/*    border-radius: 0;*/
+/*    padding-right: 0;*/
+/*}*/
+/*.reset-pass .form-group {*/
+/*    margin-bottom: 40px;*/
+/*}*/
 
 
 
@@ -1783,6 +1785,7 @@ padding-bottom: 15px;
     padding-bottom: 40px;
 
     }
+
 }
 @media(min-width: 1920px)
 {
@@ -1799,6 +1802,7 @@ padding-bottom: 15px;
     }
 
 }
+
 @media screen and (max-width: 991px)
 {
 .auth-page .bg-wrapper {
@@ -2042,10 +2046,10 @@ font-size: 11px !important;
         height: 50px;
         line-height: 25px;
     }
-    .registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd
-    {
-        height:50px;
-    }
+    /*.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd*/
+    /*{*/
+    /*    height:50px;*/
+    /*}*/
 }
 
 
@@ -2323,4 +2327,9 @@ button.btn_tour a {
         width: 360px !IMPORTANT;
     }
 
+}
+
+.forgot.fullscreen
+{
+    height: 100vh !important;
 }

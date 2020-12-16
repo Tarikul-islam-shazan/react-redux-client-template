@@ -44,6 +44,7 @@ class MyProfile extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "My profile on Nitex";
       document.addEventListener('mousedown', this.handleClickOutside);
       this.fetchUserData()
     }
