@@ -44,7 +44,7 @@ class MyProfile extends Component {
     }
 
     componentDidMount = () => {
-      document.title = "My profile on Nitex";
+      document.title = "My profile on Nitex - The easiest clothing manufacturing software";
       document.addEventListener('mousedown', this.handleClickOutside);
       this.fetchUserData()
     }

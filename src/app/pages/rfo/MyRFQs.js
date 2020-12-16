@@ -52,7 +52,7 @@ class MyRFQs extends Component {
 
   componentDidMount = async () => {
 
-    document.title = "Quotes with Nitex";
+    document.title = "My quote requests with Nitex - The easiest clothing manufacturing software";
     let name = 'rfqId';
     let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     let results = regex.exec(this.props.location.search);

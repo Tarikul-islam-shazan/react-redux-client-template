@@ -30,7 +30,7 @@ class OurDesignDetails extends Component {
     }
 
     componentDidMount = async() => {
-      document.title = "Product details Nitex";
+      document.title = "Product details on Nitex - The easiest clothing manufacturing software";
       let id = this.props.match.params.id;
       // loadjs(['/js/script.js','/js/custom.js']);
       // return;

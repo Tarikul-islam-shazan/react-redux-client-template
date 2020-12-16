@@ -81,7 +81,7 @@ class PickDesign extends Component {
     }
 
     componentDidMount = async() => {
-      document.title = "Explore designs - Nitex";
+      document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       await this.setCategories()
       let designList = await this.renderList();
