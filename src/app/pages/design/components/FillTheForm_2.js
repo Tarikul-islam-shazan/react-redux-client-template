@@ -135,7 +135,7 @@ class FillTheForm_2 extends Component {
                                   <label>Upload product image*</label>
                                   <div className="file file-style-2 btn">
                                       Choose file
-                                      <input type="file" name="productImage" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
+                                      <input type="file" name="productImage" accept="image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
                                   </div>
                               </div>
                               {
@@ -159,7 +159,7 @@ class FillTheForm_2 extends Component {
                                   <label>Upload reference images</label>
                                   <div className="file file-style-2 btn">
                                       Choose files
-                                      <input type="file" name="referenceImages" onChange={(e) => this.onMultipleFileSelect(e,'REFERENCE_IMAGE')} multiple/>
+                                      <input type="file" name="referenceImages" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'REFERENCE_IMAGE')} multiple/>
                                   </div>
 
                               </div>
@@ -184,7 +184,7 @@ class FillTheForm_2 extends Component {
                                   <label>Print Design Files</label>
                                   <div className="file file-style-2 btn">
                                       Choose file
-                                      <input type="file" name="referenceProduct1" onChange={(e) => this.onMultipleFileSelect(e,'PRINT_DESIGN')} multiple />
+                                      <input type="file" name="referenceProduct1" accept=".doc,.docx,.xlsx,application/pdf,image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRINT_DESIGN')} multiple />
                                   </div>
                               </div>
                           </div>
@@ -208,7 +208,7 @@ class FillTheForm_2 extends Component {
                                   <label>Embroidery Design Files</label>
                                   <div className="file file-style-2 btn">
                                       Choose file
-                                      <input type="file" name="referenceProduct2" onChange={(e) => this.onMultipleFileSelect(e,'EMBROIDERY_DESIGN')} multiple />
+                                      <input type="file" name="referenceProduct2" accept=".doc,.docx,.xlsx,application/pdf,image/*" onChange={(e) => this.onMultipleFileSelect(e,'EMBROIDERY_DESIGN')} multiple />
                                   </div>
                               </div>
                           </div>
