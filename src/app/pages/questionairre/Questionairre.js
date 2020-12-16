@@ -40,6 +40,7 @@ class Questionairre_1 extends Component {
     }
 
     componentDidMount = async() => {
+        document.title = "Getting to know you more";
         let userInfo = localStorage.getItem('userInfo');
         await loadjs(['/js/script.js']);
         if (userInfo) {

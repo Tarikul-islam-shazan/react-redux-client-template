@@ -60,6 +60,7 @@ class MyProject extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "Projects with Nitex";
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0, true, true);
     }

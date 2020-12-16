@@ -45,6 +45,7 @@ class Login extends Component {
     }
 
     componentDidMount = async() => {
+        document.title = "Get started with Nitex";
         let { rememberMe } = this.state;
         if (rememberMe) {
           await localStorage.setItem('rememberMe', rememberMe ? 1 : 0);

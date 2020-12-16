@@ -40,7 +40,7 @@ class Register extends Component {
     }
 
     componentDidMount = async() => {
-
+      document.title = "Get started with Nitex";
     }
 
     passwordToggle = () => {
