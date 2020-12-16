@@ -1382,22 +1382,22 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 /* Reset Pass */
-.reset-pass input[type="password"] {
-    height: 40px;
-    border-bottom: 1px solid #D7DBE6;
-    padding: 10px;
-    padding-left: 0;
-}
-.reset-pass .input-group-text{
-    background: transparent !important;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-    padding-right: 0;
-}
-.reset-pass .form-group {
-    margin-bottom: 40px;
-}
+/*.reset-pass input[type="password"] {*/
+/*    height: 40px;*/
+/*    border-bottom: 1px solid #D7DBE6;*/
+/*    padding: 10px;*/
+/*    padding-left: 0;*/
+/*}*/
+/*.reset-pass .input-group-text{*/
+/*    background: transparent !important;*/
+/*    border: 0;*/
+/*    border-bottom: 1px solid #ccc;*/
+/*    border-radius: 0;*/
+/*    padding-right: 0;*/
+/*}*/
+/*.reset-pass .form-group {*/
+/*    margin-bottom: 40px;*/
+/*}*/
 
 
 

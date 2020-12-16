@@ -125,17 +125,17 @@ class ResetPassword extends Component {
               text={LOADER_TEXT}>
               <section className="">
                 <div className="container auth-page">
-                    <div className="row fullscreen justify-content-center align-items-center">
-                        <div className="col-7">
+                    <div className="row forgot fullscreen justify-content-center align-items-center">
+                        <div className="col-lg-6 col-sm-12">
                             <div className="section-header text-center">
-                                <h4 className="section-title">Create new password</h4>
+                                <h3 className="section-title">Create new password</h3>
                                 <p className="section-subtitle">Your password must be different from previously used passwords.</p>
                             </div>
-                            <form className="registration-form mt-5 reset-pass">
+                            <form className="registration-form mt-5 reset-pass forgot-pass">
                                 <div className="form-group">
                                     <div className="input-group">
                                         <input type="password" className="form-control" name="password" onChange={this.onChange} value={password} placeholder="New password" />
-                                        <div className="input-group-append">
+                                        <div className="input-group-append lock">
                                             <span className="input-group-text">
                                                 <img src={require("../../assets/icons/lock.png")} alt="password" className="img-fluid"/>
                                             </span>
@@ -150,7 +150,7 @@ class ResetPassword extends Component {
                                 <div className="form-group">
                                     <div className="input-group">
                                         <input type="password" className="form-control" name="passwordRe" onChange={this.onChange} value={passwordRe} placeholder="Re-enter new password" />
-                                        <div className="input-group-append">
+                                        <div className="input-group-append lock">
                                             <span className="input-group-text">
                                                 <img src={require("../../assets/icons/lock.png")} alt="password" className="img-fluid"/>
                                             </span>
