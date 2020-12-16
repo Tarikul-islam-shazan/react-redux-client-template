@@ -61,7 +61,7 @@ class MyProduct extends Component {
     }
 
     componentDidMount = () => {
-      document.title = "My designs with Nitex";
+      document.title = "My designs on Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0, true, true);
     }

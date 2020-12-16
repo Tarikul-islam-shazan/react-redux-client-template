@@ -63,7 +63,7 @@ class MyProjectDetails extends Component {
     }
 
     componentDidMount = async() => {
-      document.title = "Project details Nitex";
+      document.title = "Project details on Nitex - The easiest clothing manufacturing software";
       document.addEventListener('mousedown', this.handleClickOutside);
       let id = this.props.match.params.id;
       let name = 'tab';

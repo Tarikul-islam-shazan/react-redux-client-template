@@ -32,7 +32,7 @@ class ResetPassword extends Component {
     }
 
     componentDidMount = () => {
-      document.title = "Get started with Nitex";
+      document.title = "Reset password on Nitex - The easiest clothing manufacturing software";
       let str = this.props.location.search;
       str = str.split("=");
       if(str.length>1){

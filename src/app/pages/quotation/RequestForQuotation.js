@@ -51,7 +51,7 @@ class RequestForQuotation extends Component {
 
     componentDidMount = async() => {
       // await this.renderNitexList()
-      document.title = "Share designs - Nitex";
+      document.title = "Share designs with Nitex - The easiest clothing manufacturing software";
       await this.renderMyList()
       await Http.GET('getColorType')
         .then(({data}) => {
