@@ -2046,10 +2046,10 @@ font-size: 11px !important;
         height: 50px;
         line-height: 25px;
     }
-    .registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd
-    {
-        height:50px;
-    }
+    /*.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd*/
+    /*{*/
+    /*    height:50px;*/
+    /*}*/
 }
 
 
