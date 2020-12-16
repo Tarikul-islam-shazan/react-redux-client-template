@@ -30,6 +30,7 @@ class OurDesignDetails extends Component {
     }
 
     componentDidMount = async() => {
+      document.title = "Product details Nitex";
       let id = this.props.match.params.id;
       // loadjs(['/js/script.js','/js/custom.js']);
       // return;
@@ -43,6 +44,7 @@ class OurDesignDetails extends Component {
         .then(({data}) => {
           console.log('getProductDetails SUCCESS: ', data);
           if(data){
+            document.title = data.name;
             data.documentResponseList.map((doc,i) => {
               if(doc.docType=='PRODUCT_DESIGN' && flag){
                 flag = 0;

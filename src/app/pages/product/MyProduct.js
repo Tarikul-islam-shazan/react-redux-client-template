@@ -61,6 +61,7 @@ class MyProduct extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "My designs with Nitex";
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0, true, true);
     }

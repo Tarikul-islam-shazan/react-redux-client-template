@@ -32,7 +32,7 @@ class ResetPassword extends Component {
     }
 
     componentDidMount = () => {
-      console.log("token from componentDidMount",this.props.location.search)
+      document.title = "Get started with Nitex";
       let str = this.props.location.search;
       str = str.split("=");
       if(str.length>1){
