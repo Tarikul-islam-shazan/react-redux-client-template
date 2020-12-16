@@ -368,16 +368,18 @@ form.registration-form.mt-5  input[type="email"]{
     font-size: 12px !important;
     width: 100%;
 }
-.forgot-pass .input-group-text{
-    padding-right: 0;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-}
 .forgot-pass button {
     margin-top: 25px !important;
     display: inline-block;
+}
+.forgot-pass input.form-control {
+    border-radius: 5px !important;
+}
+.forgot-pass .lock {
+    position: absolute;
+    right: 0;
+    height: 48px;
+    z-index: 999;
 }
 .MuiFormLabel-root {
     color: #8C95A8 !important;

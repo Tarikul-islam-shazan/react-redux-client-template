@@ -124,7 +124,7 @@ class ForgetPassword extends Component {
                                     <h3 className="section-title">Forgot your password?</h3>
                                     <p className="section-subtitle">Enter your registered email below to receive password reset instruction</p>
                                 </div>
-                                <form className="registration-form mt-5 forgot-pass">
+                                <form className="mt-5 forgot-pass">
                                     <div className="form-group">
                                         <label>Email Address</label>
                                         <div className="input-group">
@@ -133,8 +133,8 @@ class ForgetPassword extends Component {
                                                    value={this.state.email}
                                                    onChange={this.onChange}
                                                    />
-                                            <div className="input-group-append">
-                                                <span className="input-group-text lock">
+                                            <div className="input-group-append lock">
+                                                <span className="input-group-text">
                                                     <img src={require("../../assets/icons/envelope.png")} alt="email" className="img-fluid"/>
                                                 </span>
                                             </div>
