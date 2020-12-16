@@ -1785,6 +1785,7 @@ padding-bottom: 15px;
     padding-bottom: 40px;
 
     }
+
 }
 @media(min-width: 1920px)
 {
@@ -1801,6 +1802,7 @@ padding-bottom: 15px;
     }
 
 }
+
 @media screen and (max-width: 991px)
 {
 .auth-page .bg-wrapper {
@@ -2325,4 +2327,9 @@ button.btn_tour a {
         width: 360px !IMPORTANT;
     }
 
+}
+
+.forgot.fullscreen
+{
+    height: 100vh !important;
 }

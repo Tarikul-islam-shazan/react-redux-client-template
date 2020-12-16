@@ -118,8 +118,8 @@ class ForgetPassword extends Component {
                 text={LOADER_TEXT}>
                 <section className="">
                     <div className="container auth-page">
-                        <div className="row fullscreen justify-content-center align-items-center">
-                            <div className="col-8">
+                        <div className="row forgot fullscreen justify-content-center align-items-center">
+                            <div className="col-md-8 col-sm-12">
                                 <div className="section-header text-center">
                                     <h3 className="section-title">Forgot your password?</h3>
                                     <p className="section-subtitle">Enter your registered email below to receive password reset instruction</p>
