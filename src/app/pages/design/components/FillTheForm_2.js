@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
 
 import { UploadedItem } from '../../../commonComponents/UploadedItem';
+import { toastWarning } from '../../../commonComponents/Toast';
 
 import { _storeData } from "../actions";
 
@@ -35,6 +36,14 @@ class FillTheForm_2 extends Component {
   			"documentType" : docType,
   			"print": false,
   			"base64Str":""
+      }
+      let ext = file.name.split('.').pop();
+      console.log("ext", ext, file.size);
+      if ((ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') && file.size < 2000001) {
+
+      } else {
+        toastWarning('Image type or size invalid.')
+        return;
       }
       // console.log('data',data)
       let reader = new FileReader()
@@ -132,7 +141,7 @@ class FillTheForm_2 extends Component {
                       <div className="row">
                           <div className="col-lg-4">
                               <div className="form-group">
-                                  <label>Upload product image*</label>
+                                  <label>Upload product image* <br/><label style={{fontSize: 8}}>(Supported - .jgp, .jpeg, .png. Max size - 2mb)</label></label>
                                   <div className="file file-style-2 btn">
                                       Choose file
                                       <input type="file" name="productImage" accept="image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
