@@ -121,7 +121,7 @@ class FillTheForm_1 extends Component {
       }
     }
 
-    validate = () => {
+    validate = async() => {
       let flag = true;
       // return true;
       let {
@@ -132,44 +132,64 @@ class FillTheForm_1 extends Component {
         tempColorId, tempQuantity
       } = this.props.product;
       if(name == ''){
-        this.setState({
+        await this.setState({
           nameError : 'Product name is required'
         })
+        if (flag) {
+          this.nameInput.scrollIntoView();
+          this.nameInput.focus();
+        }
+        flag = false;
       }else{
-        this.setState({
+        await this.setState({
           nameError : ''
         })
       }
       if(productType == ''){
-        this.setState({
+        await this.setState({
           typeError : 'Product type is required'
         })
+        if (flag) {
+          this.nameInput.scrollIntoView(); // couldn't scroll to select component
+          // this.productTypeInput.focus();
+        }
+        flag = false;
       }else{
-        this.setState({
+        await this.setState({
           typeError : ''
         })
       }
       if(fabricComposition == ''){
-        this.setState({
+        await this.setState({
           compositionError : 'Fabric composition is required'
         })
+        if (flag) {
+          this.compositionInput.scrollIntoView();
+          this.compositionInput.focus();
+        }
+        flag = false;
       }else{
-        this.setState({
+        await this.setState({
           compositionError : ''
         })
       }
       if(fabricWeight == ''){
-        this.setState({
+        await this.setState({
           weightError : 'Fabric weight is required'
         })
+        if (flag) {
+          this.weightInput.scrollIntoView();
+          this.weightInput.focus();
+        }
+        flag = false;
       }else{
-        this.setState({
+        await this.setState({
           weightError : ''
         })
       }
-      let colorErr = this.hasErrorColor();
+      let colorErr = await this.hasErrorColor(flag);
       // console.log("colorErr",colorErr);
-      if(name && productType && fabricComposition && fabricWeight && !colorErr){
+      if(flag && !colorErr){
         return true;
       }else{
         return false;
@@ -177,9 +197,10 @@ class FillTheForm_1 extends Component {
       // return flag;
     }
 
-    next = () => {
+    next = async() => {
       // this.props._goToFormStep(1)
-      if(this.validate()){
+      let isValid = await this.validate();
+      if(isValid){
         this.props._goToFormStep(1)
       }
     }
@@ -221,7 +242,7 @@ class FillTheForm_1 extends Component {
       loadjs(['/js/script.js']);
     }
 
-    hasErrorColor = () => {
+    hasErrorColor = (validateFlag = true) => {
       let { colorList } = this.props.product;
       let colorError = [];
       let flag = false;
@@ -231,10 +252,18 @@ class FillTheForm_1 extends Component {
           quantityError : ''
         };
         if(item.id==''){
+          if (!flag && validateFlag) {
+            this['colorInput_' + i].scrollIntoView(); // couldn't scroll to select component
+            // this['colorSelect_' + i].focus();
+          }
           flag = true;
           temp.idError = 'Color is required';
         }
         if(item.quantity==''){
+          if (!flag && validateFlag) {
+            this['colorInput_' + i].scrollIntoView();
+            this['colorInput_' + i].focus();
+          }
           flag = true;
           temp.quantityError = 'Quantity is required';
         }
@@ -304,7 +333,7 @@ class FillTheForm_1 extends Component {
                   <div className="col-lg-12">
                       <div className="form-group">
                           <label>Design name*</label>
-                          <input type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter design name"/>
+                          <input ref={(input) => { this.nameInput = input; }} type="text" name="name" value={name} onChange={this.onChange} placeholder="Enter design name"/>
                           {
                             nameError ? <span className="error">{nameError}</span> : ''
                           }
@@ -313,7 +342,7 @@ class FillTheForm_1 extends Component {
                   <div className="col-lg-12">
                       <div className="form-group group-option">
                           <label>Product type*</label>
-                          <select className="nice-select" name="productType" value={productType} onClick={this.onChange}>
+                          <select ref={(input) => { this.productTypeInput = input; }} className="nice-select" name="productType" value={productType} onClick={this.onChange}>
                               <option value="">Select product type</option>
                               {
                                 this.state.productType.map((item,i) => {
@@ -337,7 +366,7 @@ class FillTheForm_1 extends Component {
                   <div className="col-lg-6">
                       <div className="form-group">
                           <label>Fabric composition*</label>
-                          <input type="text" name="fabricComposition" value={fabricComposition} onChange={this.onChange} placeholder="60% Cotton 40% Polyester (CVC)"/>
+                          <input ref={(input) => { this.compositionInput = input; }} type="text" name="fabricComposition" value={fabricComposition} onChange={this.onChange} placeholder="60% Cotton 40% Polyester (CVC)"/>
                           {
                             compositionError ? <span className="error">{compositionError}</span> : ''
                           }
@@ -346,7 +375,7 @@ class FillTheForm_1 extends Component {
                   <div className="col-lg-6">
                       <div className="form-group">
                           <label>Fabric weight (GSM)*</label>
-                          <input type="text" name="fabricWeight" value={fabricWeight} onChange={this.onChange} placeholder="120"/>
+                          <input ref={(input) => { this.weightInput = input; }} type="text" name="fabricWeight" value={fabricWeight} onChange={this.onChange} placeholder="120"/>
                           {
                             weightError ? <span className="error">{weightError}</span> : ''
                           }
@@ -362,7 +391,7 @@ class FillTheForm_1 extends Component {
                             <div className="col-lg-6">
                                 <div className="form-group">
                                     <label>Color*</label>
-                                    <select className="nice-select" name="id" value={item.id} onClick={(e) => this.onColorChange(e,i)}>
+                                    <select ref={(input) => { this['colorSelect_' + i] = input; }} className="nice-select" name="id" value={item.id} onClick={(e) => this.onColorChange(e,i)}>
                                         <option value="">Choose Color</option>
                                         {
                                           this.state.colors.map((item,i) => (
@@ -378,7 +407,7 @@ class FillTheForm_1 extends Component {
                             <div className="col-lg-6">
                                 <div className="form-group">
                                     <label>Quantity*</label>
-                                    <input type="text" placeholder="Enter Quantity" name="quantity" value={item.quantity} onChange={(e) => this.onColorChange(e,i)}/>
+                                    <input ref={(input) => { this['colorInput_' + i] = input; }} type="text" placeholder="Enter Quantity" name="quantity" value={item.quantity} onChange={(e) => this.onColorChange(e,i)}/>
                                     {
                                       colorError[i].quantityError ? <span className="error">{colorError[i].quantityError}</span> : ''
                                     }

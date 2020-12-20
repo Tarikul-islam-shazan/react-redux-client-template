@@ -100,6 +100,8 @@ class FillTheForm_2 extends Component {
       if(productImage.name){
         this.props._goToFormStep(2)
       }else{
+        this.productImageInput.scrollIntoView();
+        this.productImageInput.focus();
         this.setState({
           productImageError : 'Product image is required'
         })
@@ -135,7 +137,7 @@ class FillTheForm_2 extends Component {
                                   <label>Upload product image*</label>
                                   <div className="file file-style-2 btn">
                                       Choose file
-                                      <input type="file" name="productImage" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
+                                      <input ref={(input) => { this.productImageInput = input; }} type="file" name="productImage" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
                                   </div>
                               </div>
                               {
