@@ -39,11 +39,11 @@ class FillTheForm_2 extends Component {
       }
       let ext = file.name.split('.').pop();
       console.log("ext", ext, file.size);
-      if ((ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') && file.size < 2000001) {
-
-      } else {
+      if ((ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') && file.size > 2000000) {
         toastWarning('Image type or size invalid.')
         return;
+      } else {
+
       }
       // console.log('data',data)
       let reader = new FileReader()
