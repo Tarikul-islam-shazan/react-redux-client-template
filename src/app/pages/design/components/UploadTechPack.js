@@ -318,9 +318,9 @@ class UploadTechPack extends Component {
                              <div className="col-lg-3">
                                  <div className="form-group">
                                      <label>Upload product image*</label>
-                                     <div className="file file-style-2 btn">
+                                     <div className="file file-style-2 btn" ref={(input) => { this.productImageInput = input; }}>
                                          Choose file
-                                         <input ref={(input) => { this.productImageInput = input; }} type="file" name="productImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
+                                         <input type="file" name="productImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
                                  {

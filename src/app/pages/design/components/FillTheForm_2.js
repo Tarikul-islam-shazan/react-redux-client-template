@@ -155,9 +155,9 @@ class FillTheForm_2 extends Component {
                           <div className="col-lg-4">
                               <div className="form-group">
                                   <label>Upload product image* <br/><label style={{fontSize: 9}}>(Supported - .jgp, .jpeg, .png. Max size - 2mb)</label></label>
-                                  <div className="file file-style-2 btn">
+                                  <div className="file file-style-2 btn" ref={(input) => { this.productImageInput = input; }}>
                                       Choose file
-                                      <input ref={(input) => { this.productImageInput = input; }} type="file" name="productImage" accept="image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
+                                      <input type="file" name="productImage" accept="image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
                                   </div>
                               </div>
                               {
