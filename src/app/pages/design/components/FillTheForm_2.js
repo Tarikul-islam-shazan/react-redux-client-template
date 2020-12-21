@@ -53,16 +53,16 @@ class FillTheForm_2 extends Component {
   			"print": false,
   			"base64Str":""
       }
+
       if (!this.isValidFile(file, docType)) {
           toastWarning(`${file.name} - type or size invalid.`)
           return;
       }
-      // console.log('data',data)
+
       let reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = () => {
         data.base64Str = reader.result;
-        console.log(key,data);
         this.props._storeData(key,data)
         if(docType=='PRODUCT_DESIGN'){
           this.setState({
@@ -79,10 +79,7 @@ class FillTheForm_2 extends Component {
     onMultipleFileSelect = async(e,docType) => {
       let key = e.target.name;
       let arr = this.props.product[key];
-      // let arr = referenceImages;
       let files = Array.from(e.target.files);
-      // console.log(Array.from(e.target.files));
-      // return;
       await files.map((item) => {
         let data = {
           "name": item.name,
@@ -103,20 +100,17 @@ class FillTheForm_2 extends Component {
           data.base64Str = reader.result;
           arr.push(data);
           this.props._storeData(key,arr)
-          // console.log(key,arr[0]);
-          // console.log("base64",reader.result)
         };
         reader.onerror = function (error) {
           console.log('Error: ', error);
         }
       })
-      // console.log("data multiple",arr[0])
     }
 
     removeFromArray = (keyName,itemIndex) => {
       let data = this.props.product[keyName]
       data = data.filter((item,i) => {
-        return i!=itemIndex;
+        return i != itemIndex;
       })
       this.props._storeData(keyName,data)
     }

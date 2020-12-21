@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import { toastWarning } from '../../../commonComponents/Toast';
 
 import { UploadedItem } from '../../../commonComponents/UploadedItem';
 
@@ -23,6 +24,22 @@ class FillTheForm_2 extends Component {
       loadjs(['/js/script.js','/js/custom.js']);
     }
 
+    isValidFile = (file, type) => {
+        let ext = file.name.split('.').pop();
+        console.log("type", type)
+        if (type === 'PRODUCT_DESIGN' || type == 'REFERENCE_IMAGE') {
+            if ((ext === 'jpg' || ext === 'jpeg' || ext === 'png') && file.size < 2000001) {
+              return true;
+            }
+        } else {
+            if ((ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'pdf' || ext === 'doc' || ext === 'docx' || ext === 'xlsx') && file.size < 2000001) {
+              return true;
+            }
+        }
+
+        return false;
+    }
+
     onFileSelect = (e,docType) => {
       // console.log("upload",e.target.name);
       // return;
@@ -36,7 +53,12 @@ class FillTheForm_2 extends Component {
   			"print": false,
   			"base64Str":""
       }
-      // console.log('data',data)
+
+      if (!this.isValidFile(file, docType)) {
+          toastWarning(`${file.name} - type or size invalid.`)
+          return;
+      }
+
       let reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = () => {
@@ -58,10 +80,8 @@ class FillTheForm_2 extends Component {
     onMultipleFileSelect = async(e,docType) => {
       let key = e.target.name;
       let arr = this.props.product[key];
-      // let arr = referenceImages;
       let files = Array.from(e.target.files);
-      // console.log(Array.from(e.target.files));
-      // return;
+
       await files.map((item) => {
         let data = {
           "name": item.name,
@@ -70,7 +90,12 @@ class FillTheForm_2 extends Component {
     			"print": false,
     			"base64Str":""
         }
-        // console.log('data',data)
+
+        if (!this.isValidFile(item, docType)) {
+            toastWarning(`${item.name} - type or size invalid.`)
+            return;
+        }
+
         let reader = new FileReader()
         reader.readAsDataURL(item)
         reader.onload = () => {
@@ -132,7 +157,7 @@ class FillTheForm_2 extends Component {
                       <div className="row">
                           <div className="col-lg-4">
                               <div className="form-group">
-                                  <label>Upload product image*</label>
+                                  <label>Upload product image* <br/><label style={{fontSize: 9}}>(Supported - .jgp, .jpeg, .png. Max size - 2mb)</label></label>
                                   <div className="file file-style-2 btn">
                                       Choose file
                                       <input type="file" name="productImage" accept="image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
