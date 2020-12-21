@@ -24,6 +24,22 @@ class FillTheForm_2 extends Component {
       loadjs(['/js/script.js','/js/custom.js']);
     }
 
+    isValidFile = (file, type) => {
+        let ext = file.name.split('.').pop();
+        console.log("type", type)
+        if (type === 'PRODUCT_DESIGN' || type == 'REFERENCE_IMAGE') {
+            if ((ext === 'jpg' || ext === 'jpeg' || ext === 'png') && file.size < 2000001) {
+              return true;
+            }
+        } else {
+            if ((ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'pdf' || ext === 'doc' || ext === 'docx' || ext === 'xlsx') && file.size < 2000001) {
+              return true;
+            }
+        }
+
+        return false;
+    }
+
     onFileSelect = (e,docType) => {
       // console.log("upload",e.target.name);
       // return;
@@ -37,13 +53,9 @@ class FillTheForm_2 extends Component {
   			"print": false,
   			"base64Str":""
       }
-      let ext = file.name.split('.').pop();
-      console.log("ext", ext, file.size);
-      if ((ext !== 'jpg' || ext !== 'jpeg' || ext !== 'png') && file.size > 2000000) {
-        toastWarning('Image type or size invalid.')
-        return;
-      } else {
-
+      if (!this.isValidFile(file, docType)) {
+          toastWarning(`${file.name} - type or size invalid.`)
+          return;
       }
       // console.log('data',data)
       let reader = new FileReader()
@@ -79,7 +91,12 @@ class FillTheForm_2 extends Component {
     			"print": false,
     			"base64Str":""
         }
-        // console.log('data',data)
+
+        if (!this.isValidFile(item, docType)) {
+            toastWarning(`${item.name} - type or size invalid.`)
+            return;
+        }
+
         let reader = new FileReader()
         reader.readAsDataURL(item)
         reader.onload = () => {
