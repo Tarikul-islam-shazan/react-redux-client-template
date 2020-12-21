@@ -409,7 +409,7 @@ class FillTheForm_2 extends Component {
                                                   <label> </label>
                                                   <div className="file file-style-2 btn" style={{marginTop:10}}>
                                                       Upload
-                                                      <input type="file" name="accessoriesImages" onChange={(e) => this.onMultipleFileSelect(e,'ACCESSORIES_DESIGN')} multiple/>
+                                                      <input type="file" name="accessoriesImages" accept=".doc,.docx,.xlsx,application/pdf,image/*" onChange={(e) => this.onMultipleFileSelect(e,'ACCESSORIES_DESIGN')} multiple/>
                                                   </div>
                                               </div>
                                           </div>

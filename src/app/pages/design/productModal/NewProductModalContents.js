@@ -32,7 +32,7 @@ class NewProductModalContents extends Component {
     _renderFillTheForm = () => {
       let {formStep} = this.props
       if(formStep==0){
-        return <Step_0 _goToFormStep={this.props._goToFormStep}/>
+        return <Step_1 _goToFormStep={this.props._goToFormStep}/>
       }else if(formStep==1){
         return <Step_1 _goToFormStep={this.props._goToFormStep}/>
       }else if(formStep==2){
