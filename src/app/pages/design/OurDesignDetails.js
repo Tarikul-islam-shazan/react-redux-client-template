@@ -153,6 +153,10 @@ class OurDesignDetails extends Component {
                                   <h5>{product.fabricWeight}</h5>
                               </div>
                               <div className="info-item">
+                                  <label>Note</label>
+                                  <h5>{product.note}</h5>
+                              </div>
+                              <div className="info-item">
                                   <label>Color</label>
                                   <div className="color-picker">
                                       <ul>

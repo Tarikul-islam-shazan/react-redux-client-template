@@ -290,7 +290,7 @@ class UploadTechPack extends Component {
                         </div>
                         <div className="file btn">
                             Choose file
-                            <input type="file" name="techPackFile" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
+                            <input type="file" name="techPackFile" accept=".doc,.docx,.xlsx,application/pdf,image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
                         </div>
                         <span style={{paddingLeft:10}}>{techPackFile.name}</span>
                     </div>
@@ -302,7 +302,7 @@ class UploadTechPack extends Component {
                                      <label>Upload product image*</label>
                                      <div className="file file-style-2 btn">
                                          Choose file
-                                         <input type="file" name="productImageList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
+                                         <input type="file" name="productImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
                                  {
@@ -333,7 +333,7 @@ class UploadTechPack extends Component {
                                      <label>Upload reference Images</label>
                                      <div className="file file-style-2 btn">
                                          Choose file
-                                         <input type="file" name="referenceImageList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
+                                         <input type="file" name="referenceImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
                              </div>
