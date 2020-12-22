@@ -78,6 +78,7 @@ $util-font-sizes: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
     .cat-menu{
       flex-basis: 50px;
       cursor: pointer;
+      user-select: none;
       @media (max-width:767px) {
           &.cat-mobile-menu{
             float: left;
@@ -432,5 +433,12 @@ table{
     @media (max-width: 1024px) {
       left: calc(0% + 11px);
     }
+  }
+}
+.nothing-found{
+  @media (max-width: 767px) {
+     img{
+       width: 100%;
+     }
   }
 }

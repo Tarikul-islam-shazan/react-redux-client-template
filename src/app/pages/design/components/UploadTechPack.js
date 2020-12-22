@@ -91,7 +91,7 @@ class UploadTechPack extends Component {
       loadjs(['/js/script.js']);
     }
 
-    hasErrorColor = () => {
+    hasErrorColor = (validateFlag) => {
       let { colorListTP } = this.props.product;
       let colorError = [];
       let flag = false;
@@ -101,10 +101,17 @@ class UploadTechPack extends Component {
           quantityError : ''
         };
         if(item.id==''){
+          if (!flag && validateFlag) {
+            this['colorInput_' + i].scrollIntoView();
+          }
           flag = true;
           temp.idError = 'Color is required';
         }
         if(item.quantity==''){
+          if (!flag && validateFlag) {
+            this['colorInput_' + i].scrollIntoView();
+            this['colorInput_' + i].focus();
+          }
           flag = true;
           temp.quantityError = 'Quantity is required';
         }
@@ -187,12 +194,18 @@ class UploadTechPack extends Component {
 
     submit = async() => {
       let { techPackName, colorListTP, productImageList, referenceImageList, techPackFile, productImageListError } = this.props.product;
+      let flag = true;
       if(techPackName == ''){
-        this.setState({
+        await this.setState({
           techPackNameError : 'Product Name is required'
         })
+        if (flag) {
+          this.nameInput.scrollIntoView();
+          this.nameInput.focus();
+        }
+        flag = false;
       }else{
-        this.setState({
+        await this.setState({
           techPackNameError : ''
         })
       }
@@ -200,12 +213,17 @@ class UploadTechPack extends Component {
         await this.setState({
           productImageListError : 'Product image is required'
         })
+        if (flag) {
+          this.productImageInput.scrollIntoView();
+          this.productImageInput.focus();
+        }
+        flag = false;
       } else {
-        this.setState({
+        await this.setState({
           productImageListError : ''
         })
       }
-      if(this.hasErrorColor() || !techPackName || !productImageList.length){
+      if(this.hasErrorColor(flag) || !techPackName || !productImageList.length){
 
       }else{
         let body = {
@@ -275,7 +293,7 @@ class UploadTechPack extends Component {
                         <div className="col-lg-12">
                             <div className="form-group">
                                 <label>Product Name*</label>
-                                <input type="text" name="techPackName" value={techPackName} onChange={this.onChange} placeholder="Enter product name"/>
+                                <input ref={(input) => { this.nameInput = input; }} type="text" name="techPackName" value={techPackName} onChange={this.onChange} placeholder="Enter product name"/>
                                 {
                                   techPackNameError ? <span className="error">{techPackNameError}</span> : ''
                                 }
@@ -290,7 +308,7 @@ class UploadTechPack extends Component {
                         </div>
                         <div className="file btn">
                             Choose file
-                            <input type="file" name="techPackFile" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
+                            <input type="file" name="techPackFile" accept=".doc,.docx,.xlsx,application/pdf,image/*" onChange={(e) => this.onFileSelect(e,'PRODUCT_DESIGN')} />
                         </div>
                         <span style={{paddingLeft:10}}>{techPackFile.name}</span>
                     </div>
@@ -300,9 +318,9 @@ class UploadTechPack extends Component {
                              <div className="col-lg-3">
                                  <div className="form-group">
                                      <label>Upload product image*</label>
-                                     <div className="file file-style-2 btn">
+                                     <div className="file file-style-2 btn" ref={(input) => { this.productImageInput = input; }}>
                                          Choose file
-                                         <input type="file" name="productImageList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
+                                         <input type="file" name="productImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
                                  {
@@ -333,7 +351,7 @@ class UploadTechPack extends Component {
                                      <label>Upload reference Images</label>
                                      <div className="file file-style-2 btn">
                                          Choose file
-                                         <input type="file" name="referenceImageList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
+                                         <input type="file" name="referenceImageList" accept="image/*" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple />
                                      </div>
                                  </div>
                              </div>
@@ -389,7 +407,7 @@ class UploadTechPack extends Component {
                             <div className="col-lg-6">
                                 <div className="form-group">
                                     <label>Total Quantity*</label>
-                                    <input type="text" placeholder="Enter Quantity" name="quantity" value={item.quantity} onChange={(e) => this.onColorChange(e,i)}/>
+                                    <input ref={(input) => { this['colorInput_' + i] = input; }} type="text" placeholder="Enter Quantity" name="quantity" value={item.quantity} onChange={(e) => this.onColorChange(e,i)}/>
                                     {
                                       colorError[i].quantityError ? <span style={{color:'red'}}>{colorError[i].quantityError}</span> : ''
                                     }

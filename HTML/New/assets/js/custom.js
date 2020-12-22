@@ -95,8 +95,14 @@
 
     $(document).ready(function(){
         $('#zoom').zoom();
+
+
+
     });
 
+    $('#catItem').click(function(){
+        $('.filter-cat').toggle("slow");
+    });
 
 })(jQuery);
 

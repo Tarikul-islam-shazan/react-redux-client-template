@@ -182,7 +182,7 @@
 
                 <!--Header-->
                 <div class="filter-container explore-design-filter">
-                    <div class="cat-menu d-none d-xl-block">
+                    <div id="catItem" class="cat-menu d-none d-xl-block">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18">
                             <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
                                 <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -265,7 +265,7 @@
 
                         </ul>
                     </div>
-                    <div class="filter-cat">
+                    <div class="filter-cat" style="display: none">
                         <ul class="list">
                             <div class="title">Men</div>
                             <li>T-shirts</li>
@@ -1594,7 +1594,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="CatMenuMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal bottom fade" id="CatMenuMobile" tabindex="-1" role="dialog" aria-labelledby="bottom_modal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header border-0">
@@ -1661,7 +1661,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- necessary scripts -->
     <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>

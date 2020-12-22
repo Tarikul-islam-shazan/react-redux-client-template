@@ -461,7 +461,7 @@ class MyRFQs extends Component {
                             </td>
                             <td>{'#' + i + 1}</td>
                             <td><a href="" onClick={() => this.goToProductDetails(item.id)}>{item.name ? item.name : 'N/A'}</a></td>
-                            <td>{item.quotedPrice ? item.quotedPrice : 'N/A'}</td>
+                            <td>{item.quotedPrice ? `US$ ${item.quotedPrice}` : 'N/A'}</td>
                             <td>{rfqProductStatus(item)}</td>
                             <td>
 
