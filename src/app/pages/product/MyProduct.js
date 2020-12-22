@@ -61,6 +61,7 @@ class MyProduct extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "My designs on Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0, true, true);
     }
@@ -177,7 +178,7 @@ class MyProduct extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/my-products/'+id);
+      window.open('/my-products/' + id, "_blank");
     }
 
     likeProduct = (id) => {

@@ -40,6 +40,7 @@ class Questionairre_1 extends Component {
     }
 
     componentDidMount = async() => {
+        document.title = "Setting you up on Nitex - The easiest clothing manufacturing software";
         let userInfo = localStorage.getItem('userInfo');
         await loadjs(['/js/script.js']);
         if (userInfo) {

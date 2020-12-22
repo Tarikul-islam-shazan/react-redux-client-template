@@ -30,6 +30,7 @@ class OurDesignDetails extends Component {
     }
 
     componentDidMount = async() => {
+      document.title = "Product details on Nitex - The easiest clothing manufacturing software";
       let id = this.props.match.params.id;
       // loadjs(['/js/script.js','/js/custom.js']);
       // return;
@@ -43,6 +44,7 @@ class OurDesignDetails extends Component {
         .then(({data}) => {
           console.log('getProductDetails SUCCESS: ', data);
           if(data){
+            document.title = data.name;
             data.documentResponseList.map((doc,i) => {
               if(doc.docType=='PRODUCT_DESIGN' && flag){
                 flag = 0;
@@ -149,6 +151,10 @@ class OurDesignDetails extends Component {
                               <div className="info-item">
                                   <label>Fabric weight (GSM)</label>
                                   <h5>{product.fabricWeight}</h5>
+                              </div>
+                              <div className="info-item">
+                                  <label>Note</label>
+                                  <h5>{product.note}</h5>
                               </div>
                               <div className="info-item">
                                   <label>Color</label>

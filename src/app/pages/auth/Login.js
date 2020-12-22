@@ -45,6 +45,7 @@ class Login extends Component {
     }
 
     componentDidMount = async() => {
+        document.title = "Sing in to your account with Nitex - The easiest clothing manufacturing software";
         let { rememberMe } = this.state;
         if (rememberMe) {
           await localStorage.setItem('rememberMe', rememberMe ? 1 : 0);

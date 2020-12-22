@@ -118,13 +118,13 @@ class ForgetPassword extends Component {
                 text={LOADER_TEXT}>
                 <section className="">
                     <div className="container auth-page">
-                        <div className="row fullscreen justify-content-center align-items-center">
-                            <div className="col-8">
+                        <div className="row forgot fullscreen justify-content-center align-items-center">
+                            <div className="col-lg-6 col-sm-12">
                                 <div className="section-header text-center">
                                     <h3 className="section-title">Forgot your password?</h3>
                                     <p className="section-subtitle">Enter your registered email below to receive password reset instruction</p>
                                 </div>
-                                <form className="registration-form mt-5 forgot-pass">
+                                <form className="mt-5 forgot-pass">
                                     <div className="form-group">
                                         <label>Email Address</label>
                                         <div className="input-group">
@@ -133,8 +133,8 @@ class ForgetPassword extends Component {
                                                    value={this.state.email}
                                                    onChange={this.onChange}
                                                    />
-                                            <div className="input-group-append">
-                                                <span className="input-group-text lock">
+                                            <div className="input-group-append lock">
+                                                <span className="input-group-text">
                                                     <img src={require("../../assets/icons/envelope.png")} alt="email" className="img-fluid"/>
                                                 </span>
                                             </div>

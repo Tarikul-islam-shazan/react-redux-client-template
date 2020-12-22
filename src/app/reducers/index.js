@@ -4,6 +4,7 @@ import redirectToReducer from './redirect-to';
 import questionairreReducer from './questionairre';
 import projectReducer from './project';
 import productReducer from './product';
+import shareDesignProductReducer from './shareDesignProduct';
 import rfqReducer from './rfq';
 import notificationReducer from './notification';
 
@@ -26,6 +27,7 @@ export default combineReducers({
   questionairre: questionairreReducer,
   project: projectReducer,
   product: productReducer,
+  shareDesignProduct: shareDesignProductReducer,
   rfq: rfqReducer,
   notification: notificationReducer
 });

@@ -81,6 +81,7 @@ class PickDesign extends Component {
     }
 
     componentDidMount = async() => {
+      document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       await this.setCategories()
       let designList = await this.renderList();
@@ -91,7 +92,7 @@ class PickDesign extends Component {
     }
 
     setCategories = () => {
-      Http.GET('getProductTypeWithGroup')
+      Http.GET('getProductTypeWithGroupWithData')
         .then(({data}) => {
           console.log('getProductTypeWithGroup SUCCESS: ', data);
           this.setState({loading:false})
@@ -256,7 +257,7 @@ class PickDesign extends Component {
     }
 
     details = (id = 0) => {
-      this.props.history.push('/my-products/'+id);
+        window.open('/my-products/' + id, "_blank");
     }
 
     likeProduct = (id) => {

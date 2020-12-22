@@ -436,6 +436,9 @@ input.type {
                 &.blue{
                     background-color: #48A1D0;
                 }
+                &.active{
+                    box-shadow: 0 0 0px 5px #D4D9E4;
+                }
             }
         }
     }
@@ -853,6 +856,11 @@ h4.details-title {
 {
     background-color: #8B8A8E;
 
+}
+.custom-scrollbar::-webkit-scrollbar
+{
+    background-color: #DFDCE6;
+    height: 7px;
 }
 
 //custom-scrollbar-x

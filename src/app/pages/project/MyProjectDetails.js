@@ -63,6 +63,7 @@ class MyProjectDetails extends Component {
     }
 
     componentDidMount = async() => {
+      document.title = "Project details on Nitex - The easiest clothing manufacturing software";
       document.addEventListener('mousedown', this.handleClickOutside);
       let id = this.props.match.params.id;
       let name = 'tab';
@@ -78,6 +79,7 @@ class MyProjectDetails extends Component {
         .then(({data}) => {
           console.log('PROJECT DETAILS SUCCESS: ', data);
           if(data){
+            document.title = data.name;
             let result = data;
             if(result.productResponseList){
               result.productResponseList = result.productResponseList.map((item) => {

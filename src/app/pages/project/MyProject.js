@@ -60,6 +60,7 @@ class MyProject extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "My projects with Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       this.renderList(0, true, true);
     }

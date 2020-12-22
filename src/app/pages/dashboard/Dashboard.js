@@ -65,6 +65,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount = () => {
+      document.title = "Dashboard on Nitex - The easiest clothing manufacturing software";
       let { location } = this.props;
       if (location && location.state && location.state.from) {
         console.log("prev route", location.state.from)
@@ -159,7 +160,7 @@ class Dashboard extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/my-products/'+id);
+      window.open('/my-products/' + id, "_blank")
     }
 
     likeProduct = (id) => {

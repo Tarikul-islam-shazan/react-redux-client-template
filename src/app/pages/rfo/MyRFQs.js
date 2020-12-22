@@ -52,6 +52,7 @@ class MyRFQs extends Component {
 
   componentDidMount = async () => {
 
+    document.title = "My quote requests with Nitex - The easiest clothing manufacturing software";
     let name = 'rfqId';
     let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     let results = regex.exec(this.props.location.search);
@@ -428,7 +429,7 @@ class MyRFQs extends Component {
                     <img src={require("../../assets/images/pro_pic_default.svg")} alt="pro pic" />
                   }
                     <div className="info">
-                      <span>{rfqDetails.clientName ? rfqDetails.clientName : 'N/A'}</span>
+                      <span>{rfqDetails.executiveName ? rfqDetails.executiveName : 'N/A'}</span>
                       <div className="time">{rfqDetails.dateAdded ? convertTimeToLocal(rfqDetails.dateAdded, rfqDetails.dateAddedTime, 'MMM DD, YYYY hh:mm a') : 'N/A'}</div>
                     </div>
                   </div>
@@ -460,7 +461,7 @@ class MyRFQs extends Component {
                             </td>
                             <td>{'#' + i + 1}</td>
                             <td><a href="" onClick={() => this.goToProductDetails(item.id)}>{item.name ? item.name : 'N/A'}</a></td>
-                            <td>{item.quotedPrice ? item.quotedPrice : 'N/A'}</td>
+                            <td>{item.quotedPrice ? `US$ ${item.quotedPrice}` : 'N/A'}</td>
                             <td>{rfqProductStatus(item)}</td>
                             <td>
 

@@ -1,0 +1,1859 @@
+@media screen and (max-width:1600px){
+    table.manage-project-table tbody tr td {
+        padding: 16px 18px;
+    }
+}
+@media screen and (max-width:1440px) {
+    .product-details-skl .thumbnail-prev {
+        width: 76%;
+        height: 65vh;
+    }
+    .product-skeleton {
+        height: 306px;
+        .img {
+            height: 175px;
+        }
+    }
+    .quote-list-left{
+        .line{
+            width: 90px;
+            margin-bottom: 10px !important;
+        }
+        .cat{
+            width: 54px;
+        }
+        .button-skel {
+            width: 80px;
+            height: 25px;
+        }
+    }
+    .messenger {
+        max-height: 500px;
+    }
+    .quotation-container {
+        padding: 0px 10px 0px 30px !important;
+    }
+    .dashboard-container {
+        padding-top: 76px;
+    }
+    .client-respons .client-list:nth-child(2) .list {
+        margin-top: -15px;
+    }
+    //user profile
+    .profile {
+        padding: 0 30px;
+    }
+    .profile-info .user-photo {
+        flex-basis: 25%;
+    }
+    .profile-info .user-info {
+        padding-left: 60px;
+        flex-basis: 75%;
+    }
+
+    .card.product-card .card-img-top {
+        height: 235px;
+    }
+    .notification {
+        width: 475px;
+        height: 580px;
+    }
+    .notification.all {
+        max-width: 800px;
+    }
+    .dropdown-item {
+        font-size: 13px;
+    }
+    // Sidebar Menu
+    .btn-brand {
+        width: 196px;
+        height: 50px;
+        font-size: 16px;
+    }
+    .sidebar-collapse ul li a {
+        font-size: 15px;
+    }
+    .sidebar-collapse h5 {
+        font-size: 14px;
+        margin-top: 40px;
+    }
+    .sidebar-collapse {
+        padding: 36px 20px 130px 10px;
+        width: 16%;
+
+        input {
+            font-size: 14px;
+            padding: 10px 10px;
+            height: 40px !important;
+        }
+
+        .nice-select {
+            line-height: 34px;
+            padding: 2px 10px;
+            font-size: 14px;
+            &:after{
+                top: 49%;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .date-picker {
+            background: url(./images/icons/calendar_start.png) no-repeat;
+            background-position: calc(100% - 10px) 11px;
+        }
+    }
+    .btn-brand.btn-md {
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
+    }
+    #sidebar-menu-content {
+        margin-left: 228px;
+        padding: 20px 20px 0px 20px;
+    }
+    .product-slider {
+        margin-bottom: 30px;
+        max-width: 825px;
+    }
+    .product-slider .owl-carousel .owl-nav {
+        right: -58px;
+    }
+    #AddNewProduct .modal-dialog {
+        max-width: 1140px;
+    }
+    .navbar {
+        height: 60px;
+    }
+    .request-for-quote {
+        max-width: 892px;
+        margin: 30px auto 0;
+    }
+    .quote-tab {
+        .tab-content {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+    }
+    .uploaded-img {
+        height: 187px;
+    }
+    .uploaded-img .item {
+        width: calc(94% / 4);
+    }
+    .chat {
+        width: 60px;
+        height: 60px;
+        right: 35px;
+        bottom: 35px;
+        background-size: 46%;
+    }
+    .style-item .accordion .card .card-body {
+        padding: 14px 14px;
+    }
+    .request-for-quote .designs .card {
+        margin: 15px 8px;
+    }
+    table.measurement-table tr td, table.measurement-table tr th {
+        padding: 14px 40px !important;
+        font-size: 18px;
+    }
+    table.measurement-table tr td:first-child {
+        font-size: 16px;
+        padding-left: 20px !important;
+    }
+    table.measurement-table tr th {
+        padding: 20px !important;
+        font-size: 16px;
+    }
+    table.measurement-table thead th:first-child {
+        width: 21%;
+    }
+    #ninja-slider .ns-img {
+        width: 100%;
+    }
+    #thumbnail-slider {
+        height: 430px;
+    }
+    .other-description {
+        padding: 50px 32px 0 32px;
+    }
+    .product-details-slider-container {
+        padding: 0;
+    }
+    .other-description {
+        .product-slider {
+            .designs .card {
+                margin-bottom: 0px;
+            }
+        }
+    }
+    .quote-tab ul.nav-tabs li a {
+        padding: 15px 36px;
+        font-size: 14px;
+    }
+    .successful {
+        padding: 95px 150px;
+
+        article {
+            img {
+                width: 15%;
+            }
+
+            h2 {
+                margin: 35px 0 35px 0;
+                font-size: 28px;
+            }
+        }
+    }
+    .filter-products .card {
+        flex-basis: calc(106% / 6);
+    }
+    .quotation-container {
+        margin-left: 27.5% !important;
+    }
+    .client-respons {
+        max-width: 24%;
+        width: 100%;
+        padding: 0 !important;
+        margin: -28px 0 0 -20px;
+
+        .client-list .list {
+            padding: 15px 12px;
+
+            .client-info {
+                .info h6 {
+                    font-size: 15px;
+                    margin: 0 0 0 0;
+
+                }
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+                }
+
+                span {
+                    font-size: 12px !important;
+                    color: #7E8597 !important;
+                }
+            }
+
+            .time-respons .unresponsed {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+        }
+    }
+    .client-respons .client-list .list .client-info .info {
+        width: 154px;
+        h6 {
+            width: 145px;
+        }
+    }
+    table.quotation-table tr {
+        th {
+            padding: 15px !important;
+        }
+
+        td {
+            padding: 15px 18px !important;
+            font-size: 15px !important;
+
+            a {
+                font-size: 15px;
+            }
+
+            &:first-child {
+                padding: 15px 18px !important;
+            }
+        }
+    }
+
+    .pil {
+        padding: 6px 20px !important;
+        font-size: 12px;
+    }
+    table.quotation-table tr td .dropdown button {
+        padding: 6px 20px;
+    }
+    .quotation-header h3 {
+        font-size: 20px;
+    }
+    .back-header {
+        padding: 10px 20px;
+    }
+    .back-header {
+        h3 {
+            font-size: 16px;
+        }
+    }
+    .back {
+        font-size: 16px;
+        flex-basis: 100px;
+    }
+    .messenger {
+        img {
+            @include square(40px)
+        }
+
+        .msg {
+            padding: 20px 20px 0 20px;
+
+            p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    input.type {
+        height: 50px;
+        margin-top: 20px;
+    }
+    .project-profile {
+        margin: 0;
+
+        .tab-content {
+            max-width: 100%;
+        }
+
+        .project-profile-table
+        th {
+            padding: 12px 40px !important;
+            font-size: 15px;
+
+            &:first-child {
+                width: 52% !important;
+            }
+        }
+
+        tr td {
+            font-size: 15px;
+            padding: 12px 40px !important;
+
+            .download, .edit {
+                font-size: 15px;
+            }
+        }
+    }
+    .profile {
+        input {
+            height: 40px;
+        }
+    }
+    .profile .profile-tab ul li a {
+        font-size: 18px;
+    }
+    .product-slider h4 {
+        font-size: 20px;
+    }
+    .project-statistic span {
+        font-size: 14px;
+    }
+    .project-statistic h6 {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    .project-statistic .badge {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    .project-status .progress {
+        height: 8px;
+    }
+    .overview .style-info .info h6 {
+        font-size: 14px;
+    }
+    .overview label {
+        font-size: 14px;
+    }
+    .overview .style-info .info {
+        margin-bottom: 12px;
+    }
+    .project-status .head .percentage {
+        font-size: 17px;
+    }
+    .overview .badge {
+        font-size: 10px;
+        margin-right: 3px;
+        padding: 2px 8px;
+    }
+    .style-overview .overview {
+        padding: 18px 18px 25px;
+        margin-right: 20px;
+    }
+    .overview .style-status {
+        margin-top: 20px;
+    }
+    .card.product-card .card-footer span.badge {
+        padding: 5px 6px;
+        font-size: 10px;
+    }
+    .designs .btn-action.dropdown-toggle {
+        font-size: 10px;
+    }
+    #OverView .modal-dialog {
+        max-width: 1084px;
+        top: 10%;
+    }
+    .filter {
+        flex-basis: 30%;
+    }
+    .timeline {
+        margin: 0 15px;
+        flex-basis: 446px;
+    }
+    .tag-n-deadline {
+        flex-basis: 27%;
+    }
+    .date-range input {
+        height: 35px !important;
+        padding: 5px 6px;
+        background-position: calc(100% - 6px) 9px;
+        width: 160px;
+    }
+    .tag-n-deadline .sample-deadline .list {
+        font-size: 14px;
+
+        a {
+            font-size: 14px;
+        }
+    }
+    .production .checklist-item .custom-chekbox .form-group label {
+        font-size: 14px;
+    }
+    .production .checklist-item .custom-chekbox .form-group input:checked + label:after {
+        top: 4px;
+    }
+    .tag-n-deadline .production .sample a {
+        font-size: 14px;
+    }
+    .editor .header-tab > div {
+        padding: 8px 20px 8px 35px;
+        background-position: 12px 10px !important;
+        border-right: 1px solid #DADDE4;
+        font-size: 16px;
+    }
+    .editor .write textarea {
+        border: 0;
+        font-size: 14px;
+        padding: 0;
+        padding-top: 20px;
+
+        &::placeholder {
+            font-size: 14px;
+        }
+    }
+    img.user-photo {
+        width: 50px;
+        height: 50px;
+    }
+    .editor .footer-tab .nice-select {
+        width: auto;
+        padding: 0 30px 0 10px;
+        line-height: 34px;
+        height: 35px;
+        font-size: 14px;
+        margin-right: 5px;
+        &:after {
+            right: 12px;
+        }
+    }
+    .editor .footer-tab .file {
+        background: url(./images/icons/image-wide.png) no-repeat;
+        padding: 3px 10px 4px 36px;
+        background-position: 8px 8px;
+        line-height: 28px;
+        height: 35px;
+        font-size: 14px;
+    }
+    .post .post-heading .header-title {
+        .name-n-date {
+            h4 {
+                font-size: 18px;
+            }
+
+            span {
+                font-size: 12px;
+            }
+        }
+    }
+    .editor {
+        .write {
+            padding: 15px 15px 0 85px;
+            position: relative;
+        }
+
+        .footer-tab {
+            margin: 0 15px 15px 15px;
+            padding-top: 15px;
+        }
+    }
+    .post .post-description p {
+        margin: 15px 0;
+        font-size: 14px;
+    }
+    .post .post-status .table-badge {
+        font-size: 12px;
+        padding: 5px 11px;
+    }
+    .post {
+        margin-top: 15px;
+
+        .post-tag .table-badge {
+            font-size: 12px;
+            font-weight: normal !important;
+        }
+    }
+    .feedback h5 {
+        font-size: 16px;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+    }
+    .feedback .editor .write {
+        padding: 0 15px 15px 85px;
+    }
+    .feedback .editor .feedback-editor {
+        padding: 12px 15px;
+    }
+    .feedback .editor .feedback-editor .footer-tab button {
+        font-size: 12px;
+        height: 36px !important;
+    }
+    button.deliverable-deadline {
+        padding: 5px 8px 5px 25px;
+        margin-left: 10px;
+        background-position: 6px 9px;
+    }
+    .feedback .editor .feedback-editor .footer-tab .file.btn {
+        font-size: 12px;
+        background-position: 6px 9px;
+        padding: 3px 8px 4px 30px;
+    }
+    .feedback .editor .feedback-editor .footer-tab .nice-select {
+        font-size: 12px;
+        padding: 0 25px 0 8px;
+
+        &:after {
+            right: 10px;
+            border-bottom: 1px solid #21242B;
+            border-right: 1px solid #21242B;
+            height: 7px;
+            width: 7px;
+            top: 47%;
+        }
+
+        .option {
+            line-height: 30px;
+            min-height: 30px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description .comments {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description h4 {
+        font-size: 16px;
+    }
+    .feedback .feedback-post {
+        padding: 15px;
+    }
+    .post .post-heading .header-title .post-type {
+        font-size: 12px;
+        margin-top: 0;
+    }
+    .feedback .editor .feedback-editor textarea {
+        font-size: 14px;
+
+        &::placeholder {
+            font-size: 14px;
+        }
+    }
+    .tag-n-deadline .production {
+        margin: 0 0 15px 0;
+    }
+    table.payment-checkout {
+        max-width: 926px;
+    }
+    .short-by:before {
+        top: 13px;
+        font-size: 14px;
+    }
+    .feedback .feedback-post .post .post-heading span.date-time {
+        font-size: 10px;
+        line-height: 16px;
+        margin-right: 10px;
+        width: 65px;
+        margin-top: 7px;
+    }
+
+
+    table.manage-project-table {
+        thead {
+            th {
+                font-size: 15px;
+                padding: 10px 15px !important;
+                &:last-child{
+                    width: 96px;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    font-size: 14px;
+                    padding: 10px 15px;
+
+                    .badge {
+                        font-size: 13px;
+                        padding: 6px 15px;
+                    }
+                }
+            }
+        }
+    }
+    .action {
+        @include square(20px);
+        margin: 0 6px;
+        background-size: contain !important;
+    }
+    .pagination {
+        margin-top: 20px;
+
+        .page-item {
+            a {
+                width: 35px;
+                height: 35px;
+                line-height: 18px;
+                font-size: 15px;
+            }
+        }
+    }
+    .pending-project {
+        padding: 0px;
+    }
+    .manage-poroject-filter {
+        margin-top: 20px;
+    }
+    label {
+        font-size: 14px;
+    }
+    .heading h1 {
+        font: Bold 24px/32px "Open Sans";
+    }
+    .heading p {
+        font-size: 14px;
+    }
+    .style-item .accordion .card .card-header button {
+        font-size: 16px;
+        padding: 15px 20px;
+    }
+    .drug-n-drop .head-title h4 {
+        font-size: 18px;
+    }
+    .drug-n-drop .head-title p {
+        font-size: 16px;
+    }
+    .drug-n-drop .head-title span {
+        font-size: 18px;
+    }
+    .nice-select {
+        line-height: 34px;
+        font-size: 14px;
+    }
+    textarea, input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"] {
+
+        font-size: 14px;
+    }
+    span.view-all {
+        font-size: 14px;
+    }
+    .dropdown-menu {
+        width: 145px;
+        min-width: 145px;
+    }
+    .datepicker.dropdown-menu{
+        width: auto;
+    }
+
+    //Sign IN
+    .auth-page a {
+        font-size: 14px;
+    }
+   .forgot-pass a.text-active {
+        font-size: 13px;
+    }
+    .auth-page p {
+        font-size: 14px;
+    }
+    .navigation > ul > li > a {
+        font-size: 14px;
+        padding-left: 15px;
+    }
+    .uploaded-img .item .card img {
+        height: 110px;
+        object-fit: cover;
+        object-position: top;
+    }
+    .short-by .nice-select {
+        padding-left: 72px;
+    }
+
+    //Add New Project
+    .overview .due-date span {
+        font-size: 13px;
+        background-position: 1px 2px !important;
+        background: url(./images/icons/date_time.png) no-repeat;
+    }
+    .overview .due-date strong {
+        font-size: 15px;
+        margin-left: 5px;
+    }
+    //My Project
+    .stage span {
+        width: auto;
+        padding: 0 30px 0 10px;
+        line-height: 34px;
+        height: 35px;
+        font-size: 14px;
+        margin-right: 5px;
+        &:after{
+            right: 12px;
+            top: 16px
+        }
+    }
+    button.send-feed {
+        width: auto;
+        padding: 0;
+        line-height: 34px;
+        height: 36px;
+        font-size: 14px;
+    }
+    .sidebar-collapse .quote-filter {
+        .nice-select{
+            padding: 10px 30px 10px 18px !important;
+            margin-bottom: -20px;
+            .list{
+                margin: 0;
+            }
+        }
+    }
+    .sidebar-action button {
+        width: 85px !important;
+        height: 40px !important;
+    }
+    .filter, .tag-n-deadline {
+        flex-basis: 26%;
+    }
+    .timeline {
+        flex-basis: 45%;
+    }
+
+    .product-detail-gallery .thumbnail-prev img {
+        height: 700px;
+    }
+}
+@media screen and (max-width:1366px){
+
+    .date-range {
+        flex-direction: column;
+        align-items: self-start;
+    }
+
+    .date-range span {
+        margin: 10px;
+    }
+    .filter-products .card {
+        flex-basis: calc(104% / 6);
+    }
+    .content {
+        margin-left: 200px;
+    }
+    .sidebar-collapse {
+        padding: 36px 20px 150px 0px;
+        .form-group{
+            .nice-select{
+                font-size: 14px;
+                padding-left: 10px;
+                padding-right: 25px;
+                &:after{
+                    right: 14px;
+                }
+            }
+        }
+        input{
+            font-size: 14px;
+        }
+    }
+    #sidebar-menu-content {
+        margin-left: 216px; 
+    }
+    .navbar {
+        padding: 10px 15px;
+        position: fixed;
+        width: calc(100% - 200px);
+        z-index: 999;
+    }
+    .btn-brand {
+        width: 165px;
+        height: 50px;
+        font-size: 16px;
+    }
+    .sidebar-collapse ul li a {
+        font-size: 14px;
+    }
+    #sidebar-menu-content {
+        margin-left: 218px;
+        padding-right: 0;
+    }
+    .product-slider { 
+        max-width: 825px;
+    }
+    .file.file-style-2 {
+        padding: 10px 30px;
+        background: #EE761F;
+        color: #fff;
+    }
+    #AddNewProduct .modal-body .add-new-product ul li a {
+        padding: 15px 45px;
+        font-size: 18px; 
+    }
+    .request-for-quote .designs .card {
+        flex-basis: calc(90.6% / 3); 
+    }
+    .modal-form {
+        max-width: 760px; 
+    }
+    .row-item {
+        padding: 20px; 
+    }
+    .nice-select{
+        line-height: 34px;
+    }
+    table.measurement-table thead th:first-child {
+        width: 24%;
+    }
+    .custom-chekbox .form-group label {
+        position: relative;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .custom-chekbox .form-group label:before { 
+        padding: 7px; 
+    }
+    .custom-chekbox .form-group input:checked + label:after { 
+        top: 3px;
+        left: 6px; 
+        height: 10px; 
+    }
+    .custom-chekbox{ 
+        .form-group { 
+            margin-bottom: 5px;
+        }
+    }
+    .filter-products .card {
+        flex-basis: calc(116% / 5);
+    }
+    input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"] {
+        height: 46px;
+    }
+    .sidbar-icon {
+        width: 35px;
+    }
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((98.5% - 80px) / 4);
+    }
+
+    //My Rfq
+    .client-respons .client-list .list .time-respons .unresponsed {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    .tag-n-deadline .sample-deadline .list {
+        display: block;
+        line-height: 24px;
+        .span, a{
+            display: block;
+            padding: 0;
+        }
+    }
+}
+@media screen and (max-width:1280px){
+    .product-details-skl{
+        .thumbnail-prev {
+            width: 70%;
+            height: 48vh;
+        }
+    }
+
+    .skeleton.project-list {
+        padding: 0;
+        .project-list-item .line {
+            width: 116px;
+        }
+    }
+    .add-invoice.edit-product {
+        max-width: 832px;
+    }
+    .client-respons .client-list .list .client-info .info {
+        width: 115px;
+        h6{
+            width: 100px;
+        }
+    }
+    .search input {
+        font-size: 14px;
+    }
+    .short-by:before {
+        font-size: 14px;
+        top: 13px;
+    }
+    .manage-product .card {
+        flex-basis: calc(91.4% / 3);
+        margin: 10px;
+    }
+    .manage-product .card .card-body h5 {
+        max-width: 70%;
+    }
+    .custom-chekbox .form-group label { 
+        font-size: 11px;
+    }
+    #sidebar-menu-content {
+        margin-left: 200px; 
+    }
+    .product-slider {
+        max-width: 745px;
+    }
+    .chat {
+        width: 60px;
+        height: 60px; 
+        right: 22px;
+        bottom: 40px; 
+        background-size: 50%;
+    }
+    .other-description {
+        padding: 50px 32px 0 32px;
+    }
+    .other-description { 
+        .product-slider{ 
+            max-width: 96%;
+            .designs .card {
+                margin-bottom: 0px; 
+            }
+        }
+      }
+
+}
+@media screen and (max-width:1024px){
+    .badge {
+        margin-bottom: 10px;
+    }
+    .uploaded-photo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .product-skeleton {
+        height: 392px;
+        .img {
+            height: 245px;
+        }
+    }
+    .navigation > ul > li > a {
+        padding: 10px 13px;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 610px;
+    }
+    .quotation-container {
+        margin: 20px 0 0 0 !important;
+        padding: 0 !important;
+    }
+    .profile .profile-tab ul {
+        max-width: 100%;
+    }
+    .successful {
+        padding: 20px;
+    }
+    .responsive-show{display: block}
+    .responsive-off{display: none}
+
+    //User Profile
+    .profile-info .user-photo {
+        flex-basis: 35%;
+    }
+    .profile-info .user-info {
+        padding-left: 40px;
+        flex-basis: 65%;
+    }
+    //Notification
+    .questionnaire .section-content .row .col {
+        flex-basis: 33%;
+    }
+    .questionnaire .card .card-img-top {
+        height: 190px;
+    }
+    .drug-n-drop .tab-pane {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    //Dashboard
+    aside.left-panel.active {
+        margin-left: 0;
+        padding-top: 60px;
+    }
+    .icon-box {
+        width: 40px;
+        height: 40px;
+    }
+    .dashboard-card .card-topics {
+        line-height: 15px !important;
+        display: inline-block;
+        max-width: 50px;
+    }
+    .designs .design-category {
+        line-height: 15px !important;
+        display: inline-block;
+        max-width: 100%;
+    }
+    .dashboard-card .card-number {
+        font-size: 30px;
+    }
+    .dashboard-card {
+        min-height: 113px;
+    }
+     .navbar {
+        width: 100%;
+    }
+    aside.left-panel{
+        margin-left: -200px;
+    }
+    .content{
+        margin-left: 0;
+    }
+    .filter-products .card {
+        flex-basis: calc(91% / 3);
+    }
+    .sidbar-icon {
+        width: 28px;
+    }
+    //RFQ Details__
+    .client-respons {
+        max-width: 100%;
+        width: 100%;
+        padding: 0 !important;
+        margin: 0;
+        position: relative;
+        height: auto;
+        min-height: 196px;
+    }
+    div#sidebar-menu-content {
+        margin: 20px 0 0 0 !important;
+        padding: 0 !important;
+    }
+
+    //quote-request
+    .demo-product-card {
+        width: 47.8%;
+    }
+    .uploaded-img .item {
+        width: calc(95% / 3);
+    }
+    //Pick design
+    .sidebar-collapse {
+        padding: 36px 20px 30px 0px;
+        width: 100%;
+        position: relative;
+        height: auto;
+        border: 0;
+        border: 1px solid #ccc;
+        padding: 30px;
+        margin-top: 0;
+    }
+    .product-slider {
+        max-width: 100%;
+    }
+    .product-slider .owl-carousel .owl-nav .owl-next {
+        position: absolute;
+        right: 53px;
+        z-index: 999999;
+        margin-top: -60px;
+    }
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 60px) / 3);
+    }
+    table.measurement-chart {
+        overflow-x: auto;
+        min-height: 165px;
+    }
+
+    //My Product
+    table.measurement-table thead th:first-child {
+        width: 5%;
+    }
+    .produt-details-description {
+        margin-top: 30px;
+    }
+    .other-description {
+        padding: 50px 0px 0 0px;
+    }
+    table.measurement-table tr th {
+        font-size: 14px;
+    }
+    table.measurement-table tr td{
+        font-size: 16px;
+    }
+    table.measurement-table tr td:first-child {
+        font-size: 14px;
+    }
+    //Add New Product
+    .modal-form {
+        max-width: 900px;
+    }
+
+    //My RFQ
+    .sidebar-collapse .form-group .nice-select {
+        margin: 10px 0 0 10px;
+    }
+    .sidebar-collapse.admin-sidebar .form-group .nice-select {
+        margin: 0;
+    }
+    //My Project
+    .modal-dialog.modal-xl {
+        max-width: calc(100% - 20px);
+    }
+    .checklist {
+        padding: 0 20px 20px 20px;
+        flex-wrap: wrap;
+    }
+    .production {
+        flex-basis: calc(100% / 2 - 10px);
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .item .messages-popup {
+        right: inherit;
+        transform: translateX(-50%);
+        left: 61%;
+        width: 420px;
+    }
+    .post .post-heading .header-title .name-n-date h4 {
+        font-size: 15px;
+    }
+    .post .post-description p {
+        font-size: 12px;
+    }
+    .comment-status .messages-popup {
+        right: inherit;
+        transform: translateX(-83%);
+        left: 0;
+        width: 330px;
+    }
+    .filter {
+        flex-basis: 25%;
+    }
+    .timeline {
+        flex-basis: 50%;
+    }
+    .tag-n-deadline {
+        flex-basis: 25%;
+    }
+    .date-range {
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+    .quote-tab ul.nav-tabs li a {
+        padding: 12px 25px;
+        margin-bottom: 15px;
+        width: 200px;
+        text-align: center;
+    }
+    .project-status-container {
+        padding: 20px;
+        padding-top: 64px;
+    }
+    .project-statistic .ps-item {
+        margin-right: 15px;
+    }
+    .project-statistic span {
+        font-size: 12px;
+        line-height: 25px;
+    }
+    .project-statistic h6 {
+        margin-top: 5px;
+    }
+    .project-statistic .badge {
+        padding: 2px 10px;
+        font-size: 12px;
+    }
+    .project-statistic {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    .project-statistic .ps-item {
+        margin-right: 15px;
+        width: 20%;
+        margin-bottom: 20px;
+    }
+    .style-overview .overview {
+        flex-basis: calc(100% / 3);
+    }
+    .pp-timeline {
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        flex-direction: row;
+    }
+    .filter .production {
+        margin-bottom: 15px;
+        min-height: auto;
+    }
+    .tag-n-deadline {
+        flex-basis: 30%;
+    }
+    .filter {
+        flex-basis: 30%;
+    }
+    .timeline {
+        flex-basis: 66%;
+        margin-right: 0;
+    }
+    .dashboard-designs .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 100px) / 4);
+    }
+    .card.product-card .card-img-top {
+        height: 340px;
+    }
+}
+@media screen and (max-width:991px){
+    .project-profile .back {
+        left: 20px;
+        top: -42px;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        width: 260px !important;
+    }
+    .quote-tab ul.nav-tabs {
+        margin: 40px 0;
+    }
+    .skeleton.project-list {
+        height: 80px;
+        .project-list-item .line {
+            width: 96px;
+        }
+    }
+    .filter-container{
+        .search input {
+            width: 225px;
+        }
+         button.btn-brand {
+            width: 170px;
+            height: 47px;
+        }
+    }
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 40px) / 2);
+    }
+    .dashboard-designs .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 40px) / 2);
+    }
+    .questionnaire .card .card-img-top {
+        height: 130px;
+    }
+    .auth-page .bg-wrapper {
+        background-size: cover;
+        background-position: top center;
+        height: 205px;
+    }
+    .auth-page .content-wrapper-override {
+        padding: 0 80px 80px 80px
+    }
+//Add New Product
+    .modal-form {
+        max-width: 595px;
+    }
+    #FilltheForm{
+        .row-item .form-group {
+            margin-bottom: 20px !important;
+        }
+    }
+
+    //My Project
+    .style-overview {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .style-overview .overview {
+        flex-basis: calc(100% / 2 - 10px);
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .uploaded-photo img {
+        height: 140px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .uploaded-photo img {
+        height: 160px;
+    }
+    .product-details-skl {
+        .thumbnail-prev {
+            width: 100%;
+            height: 40vh;
+            margin-top: 20px;
+        }
+        .left-thumb {
+            width: 80px;
+            height: 100px;
+            margin: 15px 15px 0 0;
+        }
+    }
+    button.add-new-design {
+        width: 100%;
+    }
+    .skeleton.project-list {
+        height: 140px;
+    }
+    .filter-container button.btn-brand {
+        width: 100%;
+        height: 50px;
+        margin: 0 0 20px 0;
+    }
+    .product-detail-gallery {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .product-detail-gallery .thumbnail-slider ul li {
+        display: inline-block;
+    }
+    .product-detail-gallery .thumbnail-slider {
+        width: 100%;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+        height: 418px;
+    }
+    a.link-invoice {
+        width: 300px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    //user profile
+    .profile {
+        padding: 0;
+    }
+    .profile-info {
+        flex-direction: column;
+    }
+    .profile .profile-tab ul {
+        max-width: 100%;
+    }
+    .profile .profile-tab ul li {
+        width: 50%;
+    }
+    .profile .profile-tab ul li a {
+        font-size: 16px;
+        width: 100%;
+        margin: 0;
+        padding: 15px 0 5px 0;
+        text-align: center;
+    }
+    .profile-info .user-info {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+    .profile .change-pass {
+        max-width: 100%;
+    }
+    //user profile end
+    .client-respons .client-list .list .client-info .info {
+        width: 158px;
+        h6{
+            width: 100%;
+        }
+    }
+    .dashboard-designs .filter-products.designs .card.product-card {
+        flex-basis: 100%;
+    }
+    //Sign In
+    .auth-page .bg-wrapper {
+        height: 172px;
+    }
+    .auth-page .bg-wrapper .logo-wrapper {
+        top: 60px;
+    }
+    .auth-page .content-wrapper-override {
+        padding: 20px !important;
+    }
+    .questionnaire .section-content .row .col {
+        flex-basis: 100%;
+    }
+    .questionnaire .card .card-img-top {
+        height: auto;
+    }
+    .questionnaire .section-header .row > div {
+        flex: auto;
+        text-align: center;
+        margin: 0 0 20px 0;
+    }
+    .questionnaire  button.btn-outline-default{
+        margin-bottom: 20px;
+    }
+    section.questionnaire {
+        padding-bottom: 30px;
+    }
+    .page-header {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    //Dashboard
+    aside.left-panel.active {
+        margin-left: 0;
+        padding-top: 96px;
+    }
+    .filter-products.designs .card.product-card {
+        flex-basis: 100%;
+    }
+    .dashboard-container .section .row  .dc{
+        flex-basis: 100%;
+        margin-bottom: 30px;
+    }
+    .dashboard-card .card-topics, .designs .design-category {
+        max-width: 100%;
+    }
+    .myrfqproject{
+        margin-bottom: 30px;
+    }
+    .filter-products .card {
+        flex-basis: 100%;
+        margin-bottom: 30px;
+    }
+    button#sidebarToggleTop {
+        margin: 0 !important;
+        padding: 6px 6px;
+        vertical-align: top;
+        align-self: start;
+    }
+    .navbar {
+        height: auto;
+        width: calc(100%);
+    }
+    .navbar-expand .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        display: block;
+    }
+    ul.navbar-nav li:first-child {
+        .dropdown-menu {
+            position: absolute;
+            left: 0;
+            width: 290px;
+            padding: 10px !important;
+        }
+    }
+    .datepicker.dropdown-menu{
+        width: auto;
+    }
+    ul.navbar-nav li.notification-bell {
+        margin: 1px 15px 10px !important
+    }
+    ul.navbar-nav li:nth-child(2) img{
+        margin-top: -4px !important;
+    }
+    ul.navbar-nav li:nth-last-child(2) {
+        float: right;
+        margin-right: 5px !important;
+        margin-bottom: 0 !important;
+    }
+    ul.navbar-nav li:last-child {
+        position: absolute;
+        right: 20px;
+    }
+    li.nav-item {
+        width: auto;
+        float: left;
+        margin: 0 !important;
+        vertical-align: middle;
+        margin-bottom: -1px !important;
+    }
+    .dashboard-container {
+        padding-top: 116px;
+    }
+
+    //quote-request
+    .demo-product-card {
+        width: 100%;
+    }
+    .drug-n-drop .development-step-1 ul.nav-tabs li {
+        margin-bottom: 0;
+        width: 100%;
+    }
+    .uploaded-img .item {
+        width: 100%;
+    }
+
+    //Pick design
+    .filter-container {
+        flex-direction: column;
+        .search input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    .product-slider .owl-carousel .owl-nav .owl-next {
+        position: absolute;
+        right: 53px;
+        z-index: 999999;
+        margin-top: -30px;
+    }
+    #AddNewProduct h5.section-title {
+        font-size: 28px;
+        margin-top: 30px;
+    }
+    .modal-form {
+        padding: 20px 20px 30px 20px;
+    }
+
+    //My Product
+    .custom-chekbox .form-group label:before {
+        margin-top: -3px;
+    }
+    .custom-chekbox .form-group label {
+        font-size: 12px;
+    }
+    .produt-details-description {
+        margin-top: 20px;
+        .btn-nitex-default {
+            margin-top: 15px;
+        }
+    }
+
+    table.measurement-table tr th {
+        padding: 10px !important;
+        font-size: 12px;
+    }
+    table.measurement-table tr td:first-child {
+        font-size: 12px;
+        padding-left: 10px !important;
+    }
+    table.measurement-table tr td{
+        padding: 10px 41px !important;
+        font-size: 14px;
+    }
+
+    //Add New Product
+    #FilltheForm{
+        .btn-outline-secondary{
+            margin: 24px 0 0 15px !important;
+            float: left !important;
+            width: 125px;
+        }
+        .row-item .form-group {
+            margin-bottom: 20px !important;
+        }
+    }
+
+    //.Add New Product
+    .my-project-card {
+        padding: 15px 15px;
+        .table-responsive {
+            width: 700px;
+        }
+    }
+
+    //Add new Project
+    #newProject_1_4.modal .modal-body {
+        padding: 70px 0 50px;
+    }
+    .nav-tabs {
+        padding-left: 0;
+    }
+    .development-step-1 .tab-content {
+        padding: 50px 40px;
+        outline-offset: -15px;
+    }
+    .project-statistic .ps-item {
+        padding-right: 15px;
+        width: 50%;
+        margin-bottom: 18px;
+        margin-right: 0;
+    }
+    .style-overview .overview {
+        flex-basis: 100%;
+        margin: 0 0 20px 0;
+    }
+    .project-profile .back {
+        position: relative;
+        left: 0;
+        top: 15px;
+        cursor: pointer;
+        text-align: left;
+        margin: 0 auto;
+        width: 100%;
+        display: inherit;
+        margin-bottom: 20px;
+    }
+
+    //Project Update
+    .filter {
+        flex-basis: 100%;
+        .production {
+            min-height: auto;
+        }
+    }
+    .timeline {
+        flex-basis: 100%;
+        margin: 0;
+        .editor .write {
+            padding: 10px 10px 0 70px;
+        }
+        .editor .footer-tab {
+            margin: 0 10px 10px 10px;
+            padding-top: 10px;
+            flex-wrap: wrap;
+        }
+    }
+    .editor .footer-tab .file {
+        margin-top: 0px;
+    }
+    .editor .footer-tab {
+        button.send-feed{
+            margin-top: 0;
+            bottom: 0;
+            padding: 0px 25px;
+        }
+    }
+    .timeline .editor .write {
+        padding: 10px;
+        padding-top: 65px;
+    }
+    .editor .write img.user-photo {
+        left: 10px;
+        top: 8px;
+    }
+    .feedback .editor .write img.user-photo {
+        top: 0;
+    }
+    .editor .write textarea {
+        padding-top: 0;
+    }
+    .style-overview {
+        flex-wrap: wrap;
+    }
+    .feedback .feedback-post .post .post-heading span.date-time {
+        width: auto;
+        text-align: left !important;
+    }
+    .post .post-heading {
+        flex-direction: column;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        padding: 13px 16px;
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+    .timeline .post .post-tag .table-badge {
+        margin-bottom: 10px;
+    }
+    .stage .sub-stage {
+        flex-direction: column;
+        width: 200px;
+        padding-bottom: 15px;
+    }
+    .stage .sub-stage ul .title {
+        width: 100%;
+        line-height: 20px;
+        padding: 15px 15px;
+        border-top: 1px solid #eee;
+        font-weight: 600;
+        color: #424242;
+    }
+    .stage .sub-stage ul li {
+        padding: 10px 15px 10px 15px;
+        line-height: 20px;
+    }
+    .stage .sub-stage ul {
+        padding-bottom: 0;
+    }
+    .stage span {
+        padding: 6px 25px 5px 10px;
+        height: 35px;
+        width: 125px;
+        line-height: 21px;
+        &:after {
+            margin-top: -7px;
+            right: 15px;
+        }
+    }
+    .notification {
+        width: 338px;
+        height: 400px;
+        right: -92px;
+        top: 12px;
+        ul{
+            li:last-child {
+                position: relative;
+                right: initial;
+            }
+            li:nth-child(2){
+                float: initial;
+                margin-right: 0 !important;
+                margin-bottom: 0 !important;
+                margin: 0 !important;
+            }
+            li:nth-child(3){
+                float: initial;
+                margin-right: 0 !important;
+                margin-bottom: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    }
+    .notification .day h6.timing-date, .notification .day ul li a, .notification .see-all a {
+        padding: 10px;
+    }
+    .notification .day ul li a .notify-list .info {
+        width: 188px;
+        .name{
+            width: 188px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 14px;
+        }
+         .tag {
+            font-size: 12px;
+        }
+    }
+    .notification .day ul li a .notify-list img.product {
+        width: 50px !important;
+    }
+    .notification h3.title {
+        padding: 10px 10px;
+        font-size: 16px;
+    }
+
+    .checklist {
+        padding: 10px;
+        flex-direction: column;
+    }
+    .production {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .item .messages-popup {
+        right: 0;
+        width: 100%;
+        height: auto;
+        left: 50%;
+    }
+    .modal-dialog.modal-xl {
+        max-width: 100%;
+    }
+    .item .messages-popup .post {
+        margin: 10px;
+    }
+    table.payment-checkout button.btn-brand {
+        float: right !important;
+    }
+    button.btn-brand.btn-outline-secondary {
+        margin: 25px 14px 0 0 !important;
+        width: 96px;
+    }
+
+    .uploaded-img .item .card .card-body {
+        padding: 10px !important;
+    }
+
+
+    //Admin Panel
+    table.manage-project-table {
+        display: block;
+        overflow: auto;
+    }
+    .add-invoice .btn-brand {
+        margin-top: -3rem!important;
+    }
+    .guide {
+        flex-direction: column;
+        ul{
+            margin-top: 15px;
+            li{
+                font-size: 14px;
+            }
+        }
+    }
+    .manage-product .card {
+        flex-basis: 100%;
+        margin: 10px;
+    }
+    .invoice-width {
+        width: 700px;
+        overflow-x: auto;
+    }
+    .questionnaire {
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .questionnaire .questionnaire-form {
+        margin: 20px auto;
+    }
+    .notify-list-skl .skeleton .line {
+        width: 156px;
+    }
+    .uploaded-photo {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        width: 100% !important;
+    }
+    .feedback .editor .feedback-editor .footer-tab {
+        padding: 0;
+    }
+    .tag-n-deadline {
+        display: none;
+    }
+    .design-tile ~ .add-new {
+        width: 153px;
+        text-align: right;
+    }
+
+}
+@media screen and (max-width:375px) {
+    .feedback .feedback-post .post .post-heading .header-title .description {
+        max-width: 242px!important;
+    }
+}
+@media screen and (max-width:320px) {
+    ul.navbar-nav li.notification-bell {
+        margin: 0 !important;
+        position: absolute;
+        right: 87px;
+    }
+    .notification {
+        width: 320px;
+    }
+    .quote-list-left {
+        height: 100px;
+        padding: 5px;
+        .img {
+            margin-right: 6px !important;
+        }
+    }
+    .skeleton.project-list {
+        height: 215px;
+    }
+}
