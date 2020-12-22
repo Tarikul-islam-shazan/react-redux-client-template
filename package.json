@@ -1,7 +1,7 @@
 {
-  "name": "boomershub-test",
+  "name": "nitex-buyer-panel",
   "version": "0.1.0",
-  "buildDate": "",
+  "buildDate": 1608650194601,
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.5",
