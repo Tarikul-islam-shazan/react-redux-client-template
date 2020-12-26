@@ -106,6 +106,12 @@
     $('.close').click(function(){
         $('.selected-item-popup').addClass('hide');
     });
+    $('.add-more-design').click(function(){
+        $('.add-more').addClass('open');
+    });
+    $('#closeRPop').click(function(){
+        $('.add-more').removeClass('open');
+    });
 })(jQuery);
 
 

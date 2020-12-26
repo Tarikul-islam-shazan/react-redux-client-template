@@ -11,6 +11,10 @@
   @media (max-width: 1280px) {
       width: calc(100% - 360px);
   }
+  @media (max-width: 1024px) {
+      width: calc(100% - 0px);
+      padding: 0;
+  }
 }
 .add-more {
   max-width: 560px;
@@ -77,6 +81,13 @@
       font-size: 18px;
     }
   }
+  @media (max-width: 1024px) {
+    right: -390px !important;
+    transition: all ease-in-out .2s;
+    &.open{
+      right: 0px !important;
+    }
+  }
 }
 
 .quote-list {
@@ -86,6 +97,9 @@
     border-radius: 5px;
     padding: 10px;
   position: relative;
+  .quote-info{
+    width: 100%;
+  }
   .dlt {
     position: absolute;
     right: 20px;
@@ -159,6 +173,55 @@
     .quote-info{
       img{
         height: 110px;
+      }
+    }
+  }
+  @media (max-width: 1024px) {
+    .sizes{
+      .size {
+        width: 45px;
+        margin-right: 15px;
+        input {
+          height: 35px;
+        }
+        &.total {
+          width: 100px;
+        }
+      }
+    }
+    .info-item {
+      width: 160px;
+    }
+    .quote-info{
+      img{
+        height: 176px;
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    flex-direction: column;
+    .features {
+      float: left !important;
+    }
+    .info-item {
+      width: auto;
+      margin-right: 30px !important;
+    }
+    .quote-info img {
+      height: 144px;
+    }
+    .sizes{
+      margin-left: 80px;
+      margin-bottom: 15px;
+      .size {
+        width: 50px;
+        margin-right: 20px;
+        input {
+          height: 40px;
+        }
+        &.total {
+          width: 130px;
+        }
       }
     }
   }
