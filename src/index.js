@@ -1,18 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './App';
 import Root from './app/index.js';
 import store from './app/store';
 import { toast } from 'react-toastify';
+import withClearCache from "./ClearCache";
 
 import * as serviceWorker from './serviceWorker';
 
 toast.configure()
 
+const ClearCacheComponent = withClearCache(Root);
+
+function App() {
+  return <ClearCacheComponent />;
+}
+
 ReactDOM.render(
     <Provider store={ store }>
-        <Root/>
+        <App/>
     </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
