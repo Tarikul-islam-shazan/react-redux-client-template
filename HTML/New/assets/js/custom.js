@@ -103,7 +103,9 @@
     $('#catItem').click(function(){
         $('.filter-cat').toggle("slow");
     });
-
+    $('.close').click(function(){
+        $('.selected-item-popup').addClass('hide');
+    });
 })(jQuery);
 
 
