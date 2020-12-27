@@ -4310,6 +4310,16 @@ table {
     .confirm-quote-request {
       width: calc(100% - 0px);
       padding: 0; } }
+  @media (max-width: 767px) {
+    .confirm-quote-request .header-title h3 {
+      font-size: 16px;
+      margin: 0; }
+      .confirm-quote-request .header-title h3 svg {
+        margin-right: 10px !important;
+        width: 10px;
+        margin-top: -2px; }
+    .confirm-quote-request .add-more-design {
+      font-size: 12px !important; } }
 
 .add-more {
   max-width: 560px;
@@ -4362,10 +4372,16 @@ table {
         font-size: 18px; } }
   @media (max-width: 1024px) {
     .add-more {
-      right: -390px !important;
+      max-width: 445px;
+      right: -500px !important;
       transition: all ease-in-out .2s; }
+      .add-more .added-item .quote-list img {
+        height: 95px; }
       .add-more.open {
-        right: 0px !important; } }
+        top: 75px;
+        right: 0px !important; }
+      .add-more .info-right {
+        width: 76%; } }
 
 .quote-list {
   width: 100%;
@@ -4457,6 +4473,29 @@ table {
             height: 40px; }
           .quote-list .sizes .size.total {
             width: 130px; } }
+  @media (max-width: 767px) {
+    .quote-list .info-item {
+      width: auto !important;
+      margin-right: 0px !important; }
+    .quote-list .quote-info .info-right h4 {
+      font-size: 18px;
+      font-weight: 600 !important;
+      color: #21242B;
+      max-width: 170px;
+      line-height: 24px; }
+    .quote-list .quote-info img {
+      height: 92px; }
+    .quote-list .sizes {
+      margin-left: 0px;
+      margin-top: 30px;
+      margin-bottom: 10px; }
+      .quote-list .sizes .size {
+        width: 40px;
+        margin-right: 5px; }
+        .quote-list .sizes .size input {
+          height: 38px; }
+        .quote-list .sizes .size.total {
+          width: 70px; } }
 
 .added-item .quote-list {
   box-shadow: 0px 0px 2px 0px #ddd;
