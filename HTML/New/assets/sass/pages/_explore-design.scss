@@ -116,8 +116,10 @@ ul.filter-tag {
 .new-card{
   margin-bottom: 35px !important;
   &.active{
-    border: 2px solid rgba(69,44,142,.4);
+    border: 2px solid rgba(69, 44, 142, 0.4);
     background: #F5F5FB;
+    box-shadow: inset 0px 0px 0px 4px #ffffff;
+    padding: 4px;
     .favourite-part, .favourite-part, button.btn-brand {
       display: block !important;
     }

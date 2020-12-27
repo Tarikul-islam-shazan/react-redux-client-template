@@ -1050,6 +1050,12 @@ h4.details-title {
 .text-underline {
   text-decoration: underline !important; }
 
+.center-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
 .font-10 {
   font-size: 10px !important; }
 
@@ -4054,7 +4060,9 @@ ul.filter-tag {
   margin-bottom: 35px !important; }
   .new-card.active {
     border: 2px solid rgba(69, 44, 142, 0.4);
-    background: #F5F5FB; }
+    background: #F5F5FB;
+    box-shadow: inset 0px 0px 0px 4px #ffffff;
+    padding: 4px; }
     .new-card.active .favourite-part, .new-card.active .favourite-part, .new-card.active button.btn-brand {
       display: block !important; }
     .new-card.active .card-body {
@@ -6515,9 +6523,9 @@ template {
       width: 100%; } }
 
 .slider-nav .slick-slide.thumbnail-image .thumbImg {
-  height: 130px;
-  width: 93px;
-  margin: 0 0 20px 0; }
+  height: 117px;
+  width: 105px;
+  margin: 0 0 14px 0; }
 
 .slider-banner-image img,
 .slider-nav .slick-slide.thumbnail-image .thumbImg img {
