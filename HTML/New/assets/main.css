@@ -4020,13 +4020,13 @@ span.result {
         display: none !important; } }
 
 ul.filter-tag {
-  margin: 35px 0 40px 0;
+  margin: 35px 0 40px -50px;
   padding: 0;
   display: flex;
   overflow-x: auto; }
   @media (max-width: 767px) {
     ul.filter-tag {
-      margin: 0 0 40px 0; } }
+      margin: 0 0 40px -50px; } }
   ul.filter-tag li {
     list-style: none;
     display: inline-block;
@@ -4400,6 +4400,8 @@ table {
   position: relative; }
   .quote-list .quote-info {
     width: 100%; }
+    .quote-list .quote-info a {
+      color: #21242B; }
   .quote-list .dlt {
     position: absolute;
     right: 20px;
