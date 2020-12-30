@@ -111,52 +111,52 @@ class DefaultLayout extends Component {
                       </button>
 
                       {/* Topbar Search */}
-                      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                          <div className="input-group">
-                              {/* <div className="input-group-prepend">
-                                  <button className="btn p-1">
-                                      <i className="fas fa-search fa-sm"></i>
-                                  </button>
-                              </div> */}
-                              <div className="input-group-prepend">
-                                  <span className="input-group-text">
-                                      <img src={require("../assets/icons/search.png")} alt="search" className="img-fluid" style={{width: '14px'}} />
-                                  </span>
-                              </div>
-                              <input type="text" className="form-control border-0 small" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" />
-                          </div>
-                      </form>
+                      {/*<form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">*/}
+                      {/*    <div className="input-group">*/}
+                      {/*        /!* <div className="input-group-prepend">*/}
+                      {/*            <button className="btn p-1">*/}
+                      {/*                <i className="fas fa-search fa-sm"></i>*/}
+                      {/*            </button>*/}
+                      {/*        </div> *!/*/}
+                      {/*        <div className="input-group-prepend">*/}
+                      {/*            <span className="input-group-text">*/}
+                      {/*                <img src={require("../assets/icons/search.png")} alt="search" className="img-fluid" style={{width: '14px'}} />*/}
+                      {/*            </span>*/}
+                      {/*        </div>*/}
+                      {/*        <input type="text" className="form-control border-0 small" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" />*/}
+                      {/*    </div>*/}
+                      {/*</form>*/}
                       {/* Topbar Navbar */}
                       <ul className="navbar-nav ml-auto align-items-center">
 
                           {/* Nav Item - Search Dropdown (Visible Only XS) */}
-                          <li className="nav-item dropdown no-arrow d-sm-none mobile-search">
-                              <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i className="fas fa-search fa-fw"></i>
-                              </a>
-                              {/* Dropdown - Messages */}
-                              <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                  <form className="form-inline mr-auto w-100 navbar-search">
-                                      <div className="input-group">
-                                          <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                                          <div className="input-group-append">
-                                          <button className="btn btn-primary" type="button">
-                                              <i className="fas fa-search fa-sm"></i>
-                                          </button>
-                                          </div>
-                                      </div>
-                                  </form>
-                              </div>
-                          </li>
+                          {/*<li className="nav-item dropdown no-arrow d-sm-none mobile-search">*/}
+                          {/*    <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*/}
+                          {/*        <i className="fas fa-search fa-fw"></i>*/}
+                          {/*    </a>*/}
+                          {/*    /!* Dropdown - Messages *!/*/}
+                          {/*    <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">*/}
+                          {/*        <form className="form-inline mr-auto w-100 navbar-search">*/}
+                          {/*            <div className="input-group">*/}
+                          {/*                <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />*/}
+                          {/*                <div className="input-group-append">*/}
+                          {/*                <button className="btn btn-primary" type="button">*/}
+                          {/*                    <i className="fas fa-search fa-sm"></i>*/}
+                          {/*                </button>*/}
+                          {/*                </div>*/}
+                          {/*            </div>*/}
+                          {/*        </form>*/}
+                          {/*    </div>*/}
+                          {/*</li>*/}
 
-                          <li className="nav-item instantQuotation">
-                              <a href="#" className="nav-link text-orange"  data-toggle="modal" data-target="#instantQuotation">
-                              <span style={{ marginRight: '3px' }}>
-                                  <img src={require("../assets/icons/document.png")} alt="" className="img-fluid" style={{width:10}}/>
-                              </span>
+                          {/*<li className="nav-item instantQuotation">*/}
+                          {/*    <a href="#" className="nav-link text-orange"  data-toggle="modal" data-target="#instantQuotation">*/}
+                          {/*    <span style={{ marginRight: '3px' }}>*/}
+                          {/*        <img src={require("../assets/icons/document.png")} alt="" className="img-fluid" style={{width:10}}/>*/}
+                          {/*    </span>*/}
 
-                              </a>
-                          </li>
+                          {/*    </a>*/}
+                          {/*</li>*/}
 
                           <li className="nav-item notification-bell dropdown no-arrow mx-1 ml-2">
                               <button className="btn btn-outline-default nav-link" type="button" id="dropdownNotification" onClick={this.show}>
@@ -175,16 +175,16 @@ class DefaultLayout extends Component {
                           </li>
 
                           {/* Nav Item - Add New */}
-                          <li className="nav-item dropdown no-arrow mx-1 mr-3">
-                             {/* <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <img src={require("../assets/icons/plus_circle.png")} alt="" style={{width: '13px', marginRight: '2px'}} /> Add New
-                              </button>
-                              <div className="dropdown-menu dropdown-menu-override" aria-labelledby="dropdownNewButton">
-                                  <a className="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
-                                  <div className="dropdown-divider"></div>
-                                  <a className="dropdown-item" data-toggle="modal" data-target="#AddNewProduct">New Product</a>
-                              </div>*/}
-                          </li>
+                          {/*<li className="nav-item dropdown no-arrow mx-1 mr-3">*/}
+                          {/*     <button className="btn btn-outline-default nav-link dropdown-toggle" type="button" id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*/}
+                          {/*        <img src={require("../assets/icons/plus_circle.png")} alt="" style={{width: '13px', marginRight: '2px'}} /> Add New*/}
+                          {/*    </button>*/}
+                          {/*    <div className="dropdown-menu dropdown-menu-override" aria-labelledby="dropdownNewButton">*/}
+                          {/*        <a className="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>*/}
+                          {/*        <div className="dropdown-divider"></div>*/}
+                          {/*        <a className="dropdown-item" data-toggle="modal" data-target="#AddNewProduct">New Product</a>*/}
+                          {/*    </div> */}
+                          {/*</li>*/}
 
                           {/* Nav Item - User Information */}
                           <li className="nav-item dropdown no-arrow">

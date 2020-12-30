@@ -608,6 +608,8 @@ input.type {
         background-color: #74BE66; }
       .color-picker ul li span.blue {
         background-color: #48A1D0; }
+      .color-picker ul li span.active {
+        box-shadow: 0 0 0px 5px #D4D9E4; }
 
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #FBFBFB !important; }
@@ -995,7 +997,7 @@ h4.details-title {
  * Basic typography style for copy text
  */
 .navigation > ul > li > a {
-  padding: 12px 20px;
+  padding: 12px 8px;
   font-size: 16px; }
 
 .navbar-expand .navbar-nav .nav-link {
@@ -3223,7 +3225,8 @@ button#sidebarToggleTop {
   padding: 2px;
   color: #000;
   width: 34px;
-  height: 36px; }
+  height: 36px;
+  display: none; }
   button#sidebarToggleTop svg {
     color: #7f7f7f; }
 
@@ -3625,6 +3628,9 @@ button[disabled] {
       white-space: nowrap;
       overflow: hidden; }
 
+div#sidebar-menu-content.quotation-container {
+  margin-left: 400px !important; }
+
 .add-invoice {
   max-width: 813px;
   margin: 0 auto;
@@ -3871,7 +3877,10 @@ template {
 
 @media screen and (max-width: 1600px) {
   table.manage-project-table tbody tr td {
-    padding: 16px 18px; } }
+    padding: 16px 18px; }
+
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 356px !important; } }
 @media screen and (max-width: 1440px) {
   .uploaded-photo img {
     height: 150px !important; }
@@ -4514,6 +4523,9 @@ template {
   .product-detail-gallery .thumbnail-prev img {
     height: 700px; } }
 @media screen and (max-width: 1366px) {
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 320px !important; }
+
   .uploaded-photo img {
     height: 130px !important; }
 
@@ -4634,6 +4646,9 @@ template {
       display: block;
       padding: 0; } }
 @media screen and (max-width: 1280px) {
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 290px !important; }
+
   .stage .sub-stage {
     left: inherit;
     transform: inherit;
@@ -5191,11 +5206,6 @@ template {
     height: auto;
     width: calc(100%); }
 
-  .navbar-expand .navbar-nav {
-    flex-direction: column;
-    width: 100%;
-    display: block; }
-
   ul.navbar-nav li:first-child .dropdown-menu {
     position: absolute;
     left: 0;
@@ -5205,27 +5215,10 @@ template {
   .datepicker.dropdown-menu {
     width: auto; }
 
-  ul.navbar-nav li.notification-bell {
-    margin: 1px 15px 10px !important; }
-
-  ul.navbar-nav li:nth-child(2) img {
-    margin-top: -4px !important; }
-
-  ul.navbar-nav li:nth-last-child(2) {
-    float: right;
-    margin-right: 5px !important;
-    margin-bottom: 0 !important; }
-
-  ul.navbar-nav li:last-child {
-    position: absolute;
-    right: 20px; }
-
   li.nav-item {
     width: auto;
     float: left;
-    margin: 0 !important;
-    vertical-align: middle;
-    margin-bottom: -1px !important; }
+    vertical-align: middle; }
 
   .dashboard-container {
     padding-top: 116px; }

@@ -2,6 +2,9 @@
     table.manage-project-table tbody tr td {
         padding: 16px 18px;
     }
+    div#sidebar-menu-content.quotation-container {
+        margin-left: 356px !important;
+    }
 }
 @media screen and (max-width:1440px) {
     .uploaded-photo  img {
@@ -769,6 +772,9 @@
     }
 }
 @media screen and (max-width:1366px){
+    div#sidebar-menu-content.quotation-container {
+        margin-left: 320px !important;
+    }
     .uploaded-photo  img {
         height: 130px !important;
     }
@@ -902,6 +908,9 @@
     }
 }
 @media screen and (max-width:1280px){
+    div#sidebar-menu-content.quotation-container {
+        margin-left: 290px !important;
+    }
     .stage .sub-stage {
         left: inherit;
         transform: inherit;
@@ -1506,11 +1515,11 @@
         height: auto;
         width: calc(100%);
     }
-    .navbar-expand .navbar-nav {
-        flex-direction: column;
-        width: 100%;
-        display: block;
-    }
+    //.navbar-expand .navbar-nav {
+    //    flex-direction: column;
+    //    width: 100%;
+    //    display: block;
+    //}
     ul.navbar-nav li:first-child {
         .dropdown-menu {
             position: absolute;
@@ -1522,27 +1531,25 @@
     .datepicker.dropdown-menu{
         width: auto;
     }
-    ul.navbar-nav li.notification-bell {
-        margin: 1px 15px 10px !important
-    }
-    ul.navbar-nav li:nth-child(2) img{
-        margin-top: -4px !important;
-    }
-    ul.navbar-nav li:nth-last-child(2) {
-        float: right;
-        margin-right: 5px !important;
-        margin-bottom: 0 !important;
-    }
-    ul.navbar-nav li:last-child {
-        position: absolute;
-        right: 20px;
-    }
+    //ul.navbar-nav li.notification-bell {
+    //    margin: 1px 15px 10px !important
+    //}
+    //ul.navbar-nav li:nth-child(2) img{
+    //    margin-top: -4px !important;
+    //}
+    //ul.navbar-nav li:nth-last-child(2) {
+    //    float: right;
+    //    margin-right: 5px !important;
+    //    margin-bottom: 0 !important;
+    //}
+    //ul.navbar-nav li:last-child {
+    //    position: absolute;
+    //    right: 20px;
+    //}
     li.nav-item {
         width: auto;
         float: left;
-        margin: 0 !important;
         vertical-align: middle;
-        margin-bottom: -1px !important;
     }
     .dashboard-container {
         padding-top: 116px;
