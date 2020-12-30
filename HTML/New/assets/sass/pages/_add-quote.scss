@@ -3,12 +3,12 @@
   padding-right: 80px;
   width: calc(100% - 540px);
   float: left;
-  @media (max-width: 1440px) {
+  @media (max-width: 1790px) {
       padding-right: 30px;
       width: calc(100% - 380px);
       float: left;
   }
-  @media (max-width: 1280px) {
+  @media (max-width: 1365px) {
       width: calc(100% - 360px);
   }
   @media (max-width: 1024px) {
@@ -51,19 +51,19 @@
   .added-item{
     padding: 0 35px 20px;
   }
-  @media (max-width: 1440px) {
+  @media (max-width: 1790px) {
     max-width: 400px;
     .header{
       padding: 15px;
     }
-    h4{
+    a{
       font-size: 20px;
     }
 
     .added-item{
       padding: 0 15px 20px;
       .quote-info{
-        h4{
+        a{
           font-size: 17px !important;
         }
         .info-item label {
@@ -89,9 +89,9 @@
       }
     }
   }
-  @media (max-width: 1280px) {
+  @media (max-width: 1365px) {
       max-width: 380px;
-    h4{
+    a{
       font-size: 18px;
     }
   }
@@ -159,10 +159,10 @@
       }
     }
   }
-  @media (max-width: 1440px) {
+  @media (max-width: 1790px) {
     .quote-info{
-      h4{
-        font-size: 20px;
+      a{
+        font-size: 20px !important;
       }
       img{
         height: 120px;
@@ -191,7 +191,7 @@
       }
     }
   }
-  @media (max-width: 1280px) {
+  @media (max-width: 1365px) {
     .info-item {
       width: 116px;
     }
@@ -257,7 +257,7 @@
     }
     .quote-info{
       .info-right{
-        h4{
+        a{
           font-size: 18px;
           font-weight: 600 !important;
           color: #21242B;
