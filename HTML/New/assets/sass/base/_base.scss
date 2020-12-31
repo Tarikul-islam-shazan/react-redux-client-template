@@ -333,7 +333,9 @@ input.type {
     &:hover, &:active, &:focus{
         color: #6c757d !important;
         border-color: #6c757d;
-        background: transparent;
+        background: transparent !important;
+        outline: 0 !important;
+        box-shadow: none !important;
     }
 }
 .btn-nitex-default {
