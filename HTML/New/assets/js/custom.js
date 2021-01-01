@@ -63,22 +63,22 @@
         loop:true,
         margin:35,
         responsiveClass:true,
-        autoplay:true,
+        autoplay:false,
         autoplayHoverPause:true,
         dots: false,
         autoplayTimeout:2500,
         responsive:{
             0:{
                 items:1,
-                nav:true
+                nav:false
             },
             768:{
                 items:2,
-                nav:false
+                nav:true
             },
             1024:{
                 items:3,
-                nav:false
+                nav:true
             },
             1280:{
                 items:4,
