@@ -1,0 +1,50 @@
+.header-sorting{
+  .sort-filter{
+    .product-name {
+      max-width: 415px;
+      width: 100%;
+    }
+    .date {
+      max-width: 284px;
+      width: 100%;
+    }
+    .status {
+      max-width: 210px;
+      width: 100%;
+    }
+    .search{
+      button{
+        margin: 0 !important;
+        height: 52px;
+        width: 170px;
+        font-size: 16px;
+      }
+    }
+  }
+  .sort{
+    flex-basis: 30%;
+    .status {
+      max-width: 210px;
+      width: 100%;
+    }
+  }
+}
+.all-select{
+  .all-checkbox{
+    overflow: hidden;
+    width: 86px;
+    border-radius: 9px;
+  }
+}
+.quotes-list-item{
+  .quote-list {
+    .info-item {
+      margin-top: 20px;
+      width: 300px;
+    }
+    .quote-info img {
+      height: 260px;
+    }
+  }
+
+}
