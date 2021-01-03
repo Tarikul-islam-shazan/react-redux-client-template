@@ -1128,6 +1128,33 @@ h4.details-title {
 .font-30 {
   font-size: 30px !important; }
 
+.font-31 {
+  font-size: 31px !important; }
+
+.font-32 {
+  font-size: 32px !important; }
+
+.font-33 {
+  font-size: 33px !important; }
+
+.font-34 {
+  font-size: 34px !important; }
+
+.font-35 {
+  font-size: 35px !important; }
+
+.font-36 {
+  font-size: 36px !important; }
+
+.font-37 {
+  font-size: 37px !important; }
+
+.font-38 {
+  font-size: 38px !important; }
+
+.font-39 {
+  font-size: 39px !important; }
+
 .font-40 {
   font-size: 40px !important; }
 
@@ -4577,6 +4604,132 @@ table {
   .added-item .quote-list img {
     width: auto;
     height: 110px; }
+
+.header-sorting .sort-filter .product-name {
+  max-width: 415px;
+  width: 100%; }
+.header-sorting .sort-filter .date {
+  max-width: 284px;
+  width: 100%; }
+.header-sorting .sort-filter .status {
+  max-width: 210px;
+  width: 100%; }
+.header-sorting .sort-filter .search button {
+  margin: 0 !important;
+  height: 52px;
+  width: 170px;
+  font-size: 16px; }
+.header-sorting .sort {
+  flex-basis: 30%; }
+  .header-sorting .sort .status {
+    max-width: 210px;
+    width: 100%; }
+
+.all-select .all-checkbox {
+  overflow: hidden;
+  width: 86px;
+  border-radius: 9px; }
+
+.quotes-list-item .quote-list {
+  box-shadow: 0px 0px 3px 0px #ddd; }
+  .quotes-list-item .quote-list.active {
+    background: #F8F7FB;
+    border: 2px solid #B2A6D7; }
+  .quotes-list-item .quote-list .info-item {
+    margin-top: 20px;
+    width: 300px; }
+  .quotes-list-item .quote-list .select-quote {
+    position: absolute;
+    left: 12px;
+    top: 22px; }
+  .quotes-list-item .quote-list .quote-info {
+    border-right: 1px solid #C3C3C3; }
+    .quotes-list-item .quote-list .quote-info img {
+      height: 260px; }
+  .quotes-list-item .quote-list .sizes .size input {
+    padding: 5px;
+    text-align: center;
+    height: 40px;
+    border-color: #e4e4e4;
+    border-radius: 10px; }
+.quotes-list-item .quote-price {
+  flex-basis: 486px; }
+  .quotes-list-item .quote-price .btn-brand {
+    height: 60px;
+    width: 211px;
+    font-size: 18px;
+    margin: 0 !important; }
+  .quotes-list-item .quote-price button[disabled] {
+    background: #F2F2F2;
+    color: #ABAFB8;
+    box-shadow: none !important; }
+  .quotes-list-item .quote-price .option {
+    position: absolute;
+    right: -45px;
+    top: 5px; }
+
+.admin-price {
+  width: 448px;
+  padding-left: 20px; }
+  .admin-price .price {
+    width: 200px;
+    margin-right: 16px; }
+    .admin-price .price input {
+      border-radius: 10px; }
+  .admin-price .currency {
+    width: 144px; }
+    .admin-price .currency .nice-select {
+      border-radius: 10px; }
+  .admin-price .quote-price {
+    flex-basis: auto; }
+
+.types-select .type {
+  width: 80px;
+  height: 42px;
+  text-align: center;
+  line-height: 41px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  user-select: none; }
+  .types-select .type.active {
+    background: #452D8F;
+    border-color: #452D8F;
+    color: #fff; }
+
+.option .dropdown-toggle {
+  background-image: none; }
+  .option .dropdown-toggle:after, .option .dropdown-toggle:before {
+    display: none; }
+  .option .dropdown-toggle .dropdown-menu:before {
+    position: absolute;
+    content: "";
+    border-style: solid;
+    border-width: 10px 10px;
+    border-color: transparent transparent #ffffff transparent;
+    top: -20px;
+    right: 19px; }
+
+.delivery-in-days input {
+  width: 110px;
+  height: 44px;
+  text-align: center;
+  border-radius: 10px; }
+
+.option ul[x-placement="top-end"]:before {
+  content: none !important; }
+
+.option ul[x-placement="top-end"]:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white;
+  bottom: -8px;
+  right: 19px; }
 
 .add-invoice {
   max-width: 813px;

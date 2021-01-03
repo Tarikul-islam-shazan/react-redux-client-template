@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div class="all-select d-flex align-items-center mt-3">
-                <div class="flex-grow-1">
+                <div class="flex-grow-1 d-flex align-items-center">
                     <div class="all-checkbox bg-gray-light p-3">
                         <div class="custom-chekbox">
                             <div class="form-group m-0">
@@ -219,6 +219,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="ml-3">Collection Name</span>
                 </div>
                 <span class="color-333">21 designs</span>
             </div>
@@ -228,7 +229,7 @@
                 <!--Info-->
                 <div class="quote-req-list-container mt-3">
 
-                    <div class="quote-list mb-3 p-4 pl-5 d-flex justify-content-between align-items-center">
+                    <div class="quote-list mb-3 p-4 pl-5 d-flex justify-content-between">
 
                         <div class="select-quote">
                             <div class="custom-chekbox">
@@ -273,25 +274,27 @@
                                         </div>
                                     </div>
                                     <div class="info-item pr-2 d-flex">
-                                        <div class="mr-3">
-                                            <label class="font-16 text-muted">XS</label>
-                                            <h5 class="font-20 color-333">20</h5>
-                                        </div>
-                                        <div class="mr-3">
-                                            <label class="font-16 text-muted">S</label>
-                                            <h5 class="font-20 color-333">20</h5>
-                                        </div>
-                                        <div class="mr-3">
-                                            <label class="font-16 text-muted">M</label>
-                                            <h5 class="font-20 color-333">20</h5>
-                                        </div>
-                                        <div class="mr-3">
-                                            <label class="font-16 text-muted">L</label>
-                                            <h5 class="font-20 color-333">20</h5>
-                                        </div>
-                                        <div class="mr-3">
-                                            <label class="font-16 text-muted">XL</label>
-                                            <h5 class="font-20 color-333">20</h5>
+                                        <div class="sizes d-flex  align-items-center">
+                                            <div class="size">
+                                                <label class="text-center">XS</label>
+                                                <input type="text" placeholder="00">
+                                            </div>
+                                            <div class="size">
+                                                <label class="text-center">S</label>
+                                                <input type="text" placeholder="00">
+                                            </div>
+                                            <div class="size">
+                                                <label class="text-center">M</label>
+                                                <input type="text" placeholder="00">
+                                            </div>
+                                            <div class="size">
+                                                <label class="text-center">L</label>
+                                                <input type="text" placeholder="00">
+                                            </div>
+                                            <div class="size">
+                                                <label class="text-center">XL</label>
+                                                <input type="text" placeholder="00">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -306,35 +309,46 @@
                                     </div>
 
                                     <div class="info-item pr-2">
-                                        <label class="font-16 text-muted">Delivery in</label>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="103" height="27" viewBox="0 0 103 27">
-                                            <text id="_-----------" data-name="-----------" transform="translate(0 21)" fill="#21242b" font-size="20" font-family="OpenSans, Open Sans" letter-spacing="0.03em"><tspan x="0" y="0">—————</tspan></text>
-                                        </svg>
-                                        <h5 class="font-20 color-333 d-none">16 Days </h5>
+                                        <div class="size delivery-in-days">
+                                            <label>Delivery in</label>
+                                            <div class="d-flex align-items-center">
+                                                <input type="text" placeholder="00">
+                                                <span class="ml-2 font-16 text-muted">Days</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="quote-price d-flex flex-column justify-content-center align-items-center">
-                            <div class="text-center">
-                                <span class="font-16">
-                                    Price will be updated <br>
-                                    within <span class="font-italic font-weight-bold">24 hours</span>
-                                </span>
-                                <div class="pricewillbeupdated pt-2 pb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="211" height="54" viewBox="0 0 211 54">
-                                        <g id="Group_11081" data-name="Group 11081" transform="translate(-1549 -407)">
-                                            <g id="Rectangle_6056" data-name="Rectangle 6056" transform="translate(1549 407)" fill="#f4f5f7">
-                                                <path d="M 204 53.5 L 7 53.5 C 3.415894746780396 53.5 0.5 50.5841064453125 0.5 47 L 0.5 7 C 0.5 3.415894746780396 3.415894746780396 0.5 7 0.5 L 204 0.5 C 207.5841064453125 0.5 210.5 3.415894746780396 210.5 7 L 210.5 47 C 210.5 50.5841064453125 207.5841064453125 53.5 204 53.5 Z" stroke="none"/>
-                                                <path d="M 7 1 C 3.69158935546875 1 1 3.691581726074219 1 7 L 1 47 C 1 50.30841827392578 3.69158935546875 53 7 53 L 204 53 C 207.3084106445313 53 210 50.30841827392578 210 47 L 210 7 C 210 3.691581726074219 207.3084106445313 1 204 1 L 7 1 M 7 0 L 204 0 C 207.8659973144531 0 211 3.133998870849609 211 7 L 211 47 C 211 50.86600112915039 207.8659973144531 54 204 54 L 7 54 C 3.134002685546875 54 0 50.86600112915039 0 47 L 0 7 C 0 3.133998870849609 3.134002685546875 0 7 0 Z" stroke="none" fill="#edeff4"/>
-                                            </g>
-                                            <text id="_-----------" data-name="-----------" transform="translate(1604 441)" fill="#aaacaf" font-size="20" font-family="OpenSans, Open Sans" letter-spacing="0.03em"><tspan x="0" y="0">—————</tspan></text>
-                                        </g>
-                                    </svg>
+                        <div class="admin-price d-flex justify-content-between flex-column">
+                            <div class="d-flex">
+                                <div class="price">
+                                    <label>Price</label>
+                                    <input type="text" placeholder="Type Amount" class="w-100 bg-gray-light border-0">
                                 </div>
+                                <div class="currency">
+                                    <label>&nbsp;</label>
+                                    <select class="bg-gray-light border-0">
+                                        <option>Currency</option>
+                                        <option value="2">2</option>
+                                        <option value="3" disabled>3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="price">
+                                    <label>Type (Select one)</label>
+                                    <div class="types-select d-flex">
+                                        <span class="type font-18 active">FOB</span>
+                                        <span class="type">CIF</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-price d-flex flex-column justify-content-center align-items-center">
                                 <div class="position-relative">
-                                    <button class="m-0 btn-brand m-0 shadow float-right" disabled>Place your order</button>
+                                    <button class="m-0 btn-brand m-0 shadow float-right" disabled>Send Offer</button>
                                     <div class="option">
                                         <div class="dropdown">
                                             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -349,6 +363,7 @@
                                                 <li role="presentation"  class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Discuss</a></li>
                                                 <li role="presentation"  class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Remove</a></li>
                                             </ul>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +372,7 @@
 
                     </div>
 
-                    <div class="quote-list active mb-3 p-4 pl-5 d-flex justify-content-between align-items-center">
+                    <div class="quote-list active mb-3 p-4 pl-5 d-flex justify-content-between">
 
                         <div class="select-quote">
                             <div class="custom-chekbox">
@@ -482,6 +497,7 @@
                                                 <li role="presentation"  class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Discuss</a></li>
                                                 <li role="presentation"  class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Remove</a></li>
                                             </ul>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -490,7 +506,8 @@
 
                     </div>
 
-                    <div class="quote-list active mb-3 p-4 pl-5 d-flex justify-content-between align-items-center">
+
+                    <div class="quote-list active mb-3 p-4 pl-5 d-flex justify-content-between">
 
                         <div class="select-quote">
                             <div class="custom-chekbox">
@@ -600,7 +617,7 @@
                                    </div>
                                 </div>
                                 <div class="position-relative">
-                                    <button class="m-0 btn-brand m-0 shadow float-right">Place your order</button>
+                                    <span class="product-badge my-3 px-4" style="color: #0E8313; background: #C9EBCB">Project Started</span>
                                     <div class="option">
                                         <div class="dropdown">
                                             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -611,10 +628,11 @@
                                                         <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"/>
                                                     </g>
                                                 </svg>
-                                            <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1">
-                                                <li role="presentation"  class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Discuss</a></li>
-                                                <li role="presentation"  class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Remove</a></li>
-                                            </ul>
+                                                <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation"  class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Discuss</a></li>
+                                                    <li role="presentation"  class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Remove</a></li>
+                                                </ul>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
