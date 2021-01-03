@@ -52,7 +52,6 @@ body {
 .btn {
     font-size: 12px;
     padding: 11px 25px;
-    text-transform: capitalize;
 }
 
 .btn-nitex-default, .btn-nitex-default:hover {
