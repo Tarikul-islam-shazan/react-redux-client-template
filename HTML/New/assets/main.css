@@ -4637,7 +4637,7 @@ table {
     border: 2px solid #B2A6D7; }
   .quotes-list-item .quote-list .info-item {
     margin-top: 20px;
-    width: 300px; }
+    flex: auto; }
   .quotes-list-item .quote-list .select-quote {
     position: absolute;
     left: 12px;
@@ -4646,6 +4646,9 @@ table {
     border-right: 1px solid #C3C3C3; }
     .quotes-list-item .quote-list .quote-info img {
       height: 280px; }
+      @media (max-width: 1440px) {
+        .quotes-list-item .quote-list .quote-info img {
+          height: 225px; } }
   .quotes-list-item .quote-list .sizes .size input {
     padding: 5px;
     text-align: center;
@@ -4668,8 +4671,15 @@ table {
     right: -45px;
     top: 5px; }
 
+.features .info-item:first-child {
+  flex: 2; }
+.features .info-item:nth-child(2) {
+  flex: 2; }
+.features .info-item:last-child {
+  flex: 3; }
+
 .admin-price {
-  width: 448px;
+  flex-basis: 448px;
   padding-left: 20px; }
   .admin-price .price {
     width: 200px;
