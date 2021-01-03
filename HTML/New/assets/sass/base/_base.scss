@@ -333,9 +333,7 @@ input.type {
     &:hover, &:active, &:focus{
         color: #6c757d !important;
         border-color: #6c757d;
-        background: transparent !important;
-        outline: 0 !important;
-        box-shadow: none !important;
+        background: transparent;
     }
 }
 .btn-nitex-default {
@@ -858,6 +856,11 @@ h4.details-title {
 {
     background-color: #8B8A8E;
 
+}
+.custom-scrollbar::-webkit-scrollbar
+{
+    background-color: #DFDCE6;
+    height: 7px;
 }
 
 //custom-scrollbar-x

@@ -2,50 +2,51 @@
 
 // 1. Configuration and helpers
 @import
-  'abstracts/variables',
-  'abstracts/functions',
-  'abstracts/mixins',
-  'abstracts/nice-select',
-  'abstracts/side-collapse-menu';
+'abstracts/variables',
+'abstracts/functions',
+'abstracts/mixins',
+'abstracts/nice-select',
+'abstracts/side-collapse-menu';
 
 
 
 
 // 3. Base stuff
 @import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers',
-  'base/element',
-  'base/skeleton';
+'base/base',
+'base/fonts',
+'base/typography',
+'base/helpers',
+'base/element',
+'base/skeleton';
 
 // 4. Layout-related sections
 @import
-  'layout/header',
-  'layout/footer';
+'layout/header',
+'layout/footer';
 
 // 5. Components
 @import
-  'components/button',
-  'components/modal-positions';
+'components/button',
+'components/modal-positions';
 
 // 6. Page-specific styles
 @import
-  'pages/home',
-  'pages/new-pages',
-  'pages/explore-design',
-  'pages/add-quote',
-  'pages/quotes';
+'pages/home',
+'pages/new-pages',
+'pages/explore-design',
+'pages/add-quote',
+'pages/quotes';
 
 // 7. Themes
 @import
-  'themes/default',
-  'themes/admin-panel';
+'themes/default',
+'themes/admin-panel';
 
 // 2. Vendors
 @import
-  'vendors/normalize',
-  'vendors/responsive',
-  'vendors/slick',
-  'vendors/_product-details-slider';
+'vendors/normalize',
+'vendors/responsive',
+'vendors/slick',
+'vendors/_product-details-slider';
+

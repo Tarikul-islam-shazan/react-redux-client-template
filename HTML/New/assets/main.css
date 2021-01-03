@@ -246,22 +246,27 @@
     font-weight: normal; }
   .product-slider .product-card {
     display: block; }
-
-.owl-carousel .owl-nav {
-  position: absolute;
-  right: -78px;
-  top: 50%;
-  transform: translateY(-50%); }
-  .owl-carousel .owl-nav button.owl-prev {
-    opacity: 0 !important;
-    display: none; }
-  .owl-carousel .owl-nav .owl-next {
-    width: 40px;
-    height: 40px;
-    background: url("./images/icons/left.png") no-repeat center #E8E6F1 !important;
-    display: block;
-    border-radius: 100%;
-    text-indent: -999999999999px; }
+  .product-slider .owl-carousel .owl-nav {
+    position: absolute;
+    right: -78px;
+    top: 50%;
+    transform: translateY(-50%); }
+    .product-slider .owl-carousel .owl-nav button.owl-prev {
+      opacity: 0 !important;
+      display: none; }
+    .product-slider .owl-carousel .owl-nav .owl-next {
+      width: 40px;
+      height: 40px;
+      background: url("./images/icons/left.png") no-repeat center #E8E6F1 !important;
+      display: block;
+      border-radius: 100%;
+      text-indent: -999999999999px; }
+  .product-slider .owl-carousel .owl-stage-outer {
+    overflow: initial; }
+  .product-slider .owl-carousel .owl-item {
+    opacity: 0; }
+  .product-slider .owl-carousel .owl-item.active {
+    opacity: 1; }
 
 /**
  * Set up a decent box model on the root element
@@ -512,9 +517,7 @@ input.type {
 .btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:focus {
   color: #6c757d !important;
   border-color: #6c757d;
-  background: transparent !important;
-  outline: 0 !important;
-  box-shadow: none !important; }
+  background: transparent; }
 
 .btn-nitex-default {
   background-color: #EE761F;
@@ -913,6 +916,10 @@ h4.details-title {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #8B8A8E; }
 
+.custom-scrollbar::-webkit-scrollbar {
+  background-color: #DFDCE6;
+  height: 7px; }
+
 .custom-scrollbar-x {
   overflow-x: auto; }
 
@@ -1230,7 +1237,7 @@ h4.details-title {
   top: 0px; }
 
 .navigation > ul > li > a {
-  padding: 12px 20px;
+  padding: 12px 8px;
   font-size: 16px; }
 
 .navbar-expand .navbar-nav .nav-link {
@@ -1645,7 +1652,7 @@ ol.order-list {
   display: flex;
   align-items: center; }
   .card.product-card .card-footer span.badge {
-    padding: 7px 14px;
+    padding: 5px 14px;
     border-radius: 50px;
     display: inline-block;
     font-size: 12px; }
@@ -3458,14 +3465,15 @@ button#sidebarToggleTop {
   padding: 2px;
   color: #000;
   width: 34px;
-  height: 36px; }
+  height: 36px;
+  display: none; }
   button#sidebarToggleTop svg {
     color: #7f7f7f; }
 
 .navbar {
   padding: 10px 15px;
   position: fixed;
-  width: calc(100% - 100px);
+  width: calc(100% - 248px);
   z-index: 999; }
   .navbar .navbar-search input {
     height: 38px;
@@ -4019,12 +4027,6 @@ button[disabled] {
       white-space: nowrap;
       overflow: hidden; }
 
-@media screen and (max-width: 1024px) {
-  aside.left-panel {
-    display: none !important; }
-
-  .content {
-    margin: 0 !important; } }
 .explore-design {
   padding: 25px 25px 0 20px;
   position: relative; }
@@ -4975,8 +4977,20 @@ template {
 
 @media screen and (max-width: 1600px) {
   table.manage-project-table tbody tr td {
-    padding: 16px 18px; } }
+    padding: 16px 18px; }
+
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 356px !important; } }
 @media screen and (max-width: 1440px) {
+  .uploaded-photo img {
+    height: 150px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 150px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 125px !important; }
+
   .product-details-skl .thumbnail-prev {
     width: 76%;
     height: 65vh; }
@@ -5609,6 +5623,18 @@ template {
   .product-detail-gallery .thumbnail-prev img {
     height: 700px; } }
 @media screen and (max-width: 1366px) {
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 320px !important; }
+
+  .uploaded-photo img {
+    height: 130px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 150px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 105px !important; }
+
   .date-range {
     flex-direction: column;
     align-items: self-start; }
@@ -5720,6 +5746,14 @@ template {
       display: block;
       padding: 0; } }
 @media screen and (max-width: 1280px) {
+  div#sidebar-menu-content.quotation-container {
+    margin-left: 290px !important; }
+
+  .stage .sub-stage {
+    left: inherit;
+    transform: inherit;
+    right: 0; }
+
   .product-details-skl .thumbnail-prev {
     width: 70%;
     height: 48vh; }
@@ -5775,11 +5809,15 @@ template {
     .other-description .product-slider .designs .card {
       margin-bottom: 0px; } }
 @media screen and (max-width: 1024px) {
+  .feedback .feedback-post .post .post-heading .header-title .description {
+    max-width: 422px; }
+
   .badge {
     margin-bottom: 10px; }
 
   .uploaded-photo {
-    grid-template-columns: repeat(3, 1fr); }
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px; }
 
   .product-skeleton {
     height: 392px; }
@@ -6045,8 +6083,23 @@ template {
     flex-basis: calc((100% - 100px) / 4); }
 
   .card.product-card .card-img-top {
-    height: 340px; } }
+    height: 340px; }
+
+  .project-update-modal .editor .write {
+    padding: 0 0 0 70px; }
+
+  .uploaded-photo img {
+    height: 210px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 250px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 170px !important; } }
 @media screen and (max-width: 991px) {
+  .uploaded-photo {
+    grid-gap: 15px; }
+
   .project-profile .back {
     left: 20px;
     top: -42px; }
@@ -6101,10 +6154,22 @@ template {
     margin-bottom: 20px; }
 
   .uploaded-photo img {
-    height: 140px; } }
+    height: 140px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 126px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 112px !important; } }
 @media screen and (max-width: 767px) {
   .uploaded-photo img {
-    height: 160px; }
+    height: 160px !important; }
+
+  .modal-body .uploaded-photo img {
+    height: 115px !important; }
+
+  .feedback-editor .uploaded-photo img {
+    height: 160px !important; }
 
   .product-details-skl .thumbnail-prev {
     width: 100%;
@@ -6241,11 +6306,6 @@ template {
     height: auto;
     width: calc(100%); }
 
-  .navbar-expand .navbar-nav {
-    flex-direction: column;
-    width: 100%;
-    display: block; }
-
   ul.navbar-nav li:first-child .dropdown-menu {
     position: absolute;
     left: 0;
@@ -6255,27 +6315,10 @@ template {
   .datepicker.dropdown-menu {
     width: auto; }
 
-  ul.navbar-nav li.notification-bell {
-    margin: 1px 15px 10px !important; }
-
-  ul.navbar-nav li:nth-child(2) img {
-    margin-top: -4px !important; }
-
-  ul.navbar-nav li:nth-last-child(2) {
-    float: right;
-    margin-right: 5px !important;
-    margin-bottom: 0 !important; }
-
-  ul.navbar-nav li:last-child {
-    position: absolute;
-    right: 20px; }
-
   li.nav-item {
     width: auto;
     float: left;
-    margin: 0 !important;
-    vertical-align: middle;
-    margin-bottom: -1px !important; }
+    vertical-align: middle; }
 
   .dashboard-container {
     padding-top: 116px; }
@@ -6307,7 +6350,17 @@ template {
     margin-top: 30px; }
 
   .modal-form {
-    padding: 20px 20px 30px 20px; }
+    padding: 20px 0px 30px 0px; }
+
+  .modal .section-subtitle {
+    padding: 0; }
+
+  .share-design-modal img.close-btn {
+    top: 0;
+    right: 0px; }
+
+  .share-design-modal .section-header {
+    margin-top: 60px; }
 
   .custom-chekbox .form-group label:before {
     margin-top: -3px; }
@@ -6432,8 +6485,9 @@ template {
 
   .stage .sub-stage {
     flex-direction: column;
-    width: 200px;
-    padding-bottom: 15px; }
+    width: 295px;
+    padding-bottom: 15px;
+    height: 250px; }
 
   .stage .sub-stage ul .title {
     width: 100%;
@@ -6568,14 +6622,23 @@ template {
     width: 100% !important; }
 
   .feedback .editor .feedback-editor .footer-tab {
-    padding: 0; }
+    padding: 20px 0 0 0; }
 
   .tag-n-deadline {
     display: none; }
 
   .design-tile ~ .add-new {
     width: 153px;
-    text-align: right; } }
+    text-align: right; }
+
+  .share-design.uploaded-img {
+    width: 100%;
+    display: flex;
+    grid-gap: 10px;
+    height: 215px;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden; } }
 @media screen and (max-width: 375px) {
   .feedback .feedback-post .post .post-heading .header-title .description {
     max-width: 242px !important; } }
