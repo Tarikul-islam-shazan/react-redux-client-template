@@ -35,6 +35,7 @@ const routes = {
     updateProductStatus: `${BASE_URL}/product/update-product-status/`, //post
     getDashboardData: `${BASE_URL}/dashboard/`, // GET
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
+    getExploreDesignLanding: `${BASE_URL}/product/explore-design`, // GET called initially for landing data
     getPickDesign: `${BASE_URL}/product/for-pick-design`, // GET
     getProjectList: `${BASE_URL}/project/my-project`, // GET
     getProjectDetails: `${BASE_URL}/project/`, // GET

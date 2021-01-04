@@ -26,8 +26,10 @@ import Questionairre_final from './pages/questionairre/Questionairre_final';
 
 import RequestForQuotation from './pages/quotation/RequestForQuotation';
 import PickDesign from './pages/design/PickDesign';
+import PickDesignV2 from './pages/design/PickDesignV2';
 
 import OurDesignDetails from './pages/design/OurDesignDetails';
+import OurDesignDetailsV2 from './pages/design/OurDesignDetailsV2';
 import MyProject from './pages/project/MyProject';
 import MyProjectDetails from './pages/project/MyProjectDetails';
 import MyProduct from './pages/product/MyProduct';
@@ -99,11 +101,13 @@ class Root extends Component {
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
                   <PublicRoute exact path="/pick-design" component={ PickDesign }/>
+                  <PublicRoute exact path="/v2/pick-design" component={ PickDesignV2 }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/my-project" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
+                  <PublicRoute exact path="/v2/my-products/:id" component={ OurDesignDetailsV2 }/>
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                 </Switch>

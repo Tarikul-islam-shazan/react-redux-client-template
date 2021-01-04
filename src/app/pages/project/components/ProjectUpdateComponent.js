@@ -446,9 +446,10 @@ class ProjectUpdateComponent extends Component {
             }}
             spinner
             text={LOADER_TEXT}>
-              {imageViewerFlag && (
+              {
+                imageViewerFlag && (
                   <ImageViewer
-                    backgroundStyle={{backgroundColor:'rgba(0,0,0,.5)',zIndex:999}}
+                    backgroundStyle={{backgroundColor:'rgba(0,0,0,.5)', zIndex:999}}
                     src={ imageViewerData }
                     currentIndex={ imageViewerCurrentIndex }
                     onClose={ () => {
