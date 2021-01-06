@@ -72,6 +72,7 @@
     box-shadow: 0px 0px 3px 0px #ddd;
     @media (max-width: 991px) {
       flex-direction: row;
+      padding: 15px 15px 15px 40px !important;
     }
     &.active{
       background: #F8F7FB;
@@ -85,9 +86,16 @@
       position: absolute;
       left: 12px;
       top: 22px;
+      @media (max-width: 991px) {
+        left: 10px;
+        top: 9px;
+      }
     }
     .quote-info{
       border-right: 1px solid #C3C3C3;
+      @media (max-width: 991px) {
+        width: 70%;
+      }
       img {
         height: 280px;
         @media (max-width: 1440px) {
@@ -98,6 +106,12 @@
         }
         @media (max-width: 1280px) {
           height: 150px;
+        }
+        @media (max-width: 1024px) {
+          height: 250px;
+        }
+        @media (max-width: 991px) {
+          height: 188px;
         }
       }
       .info-right{
@@ -128,6 +142,11 @@
       width: 211px;
       font-size: 18px;
       margin: 0 !important;
+      @media (max-width: 991px) {
+        height: 42px;
+        width: 148px;
+        font-size: 16px;
+      }
     }
     button[disabled] {
       background: #F2F2F2;
@@ -138,6 +157,13 @@
       position: absolute;
       right: -45px;
       top: 5px;
+      @media (max-width: 1440px) {
+        right: -40px;
+        top: -5px;
+        svg{
+          width: 5px;
+        }
+      }
     }
   }
   .color-picker {
@@ -168,6 +194,11 @@
       flex-basis: 44%;
     }
   }
+  &:nth-child(3), &:nth-child(4){
+    @media (max-width: 1024px) {
+      margin-top: 40px;
+    }
+  }
   .product-title{
     width: 100%;
   }
@@ -182,6 +213,11 @@
   @media (max-width: 1024px) {
     justify-content: start !important;
     align-items: start !important;
+  }
+  .price-n-currency{
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
   }
   .price{
     width: 200px;

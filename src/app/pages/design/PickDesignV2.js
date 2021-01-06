@@ -370,7 +370,7 @@ class PickDesignV2 extends Component {
                       }
                       </ul>
                   </div>
-                  <div className="filter-cat" style={{display: showFilters ? 'unset' : 'none'}}>
+                  <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}}>
                       <ul className="list">
                           <div className="title">Categories</div>
                           {

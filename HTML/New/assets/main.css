@@ -4662,7 +4662,8 @@ table {
   box-shadow: 0px 0px 3px 0px #ddd; }
   @media (max-width: 991px) {
     .quotes-list-item .quote-list {
-      flex-direction: row; } }
+      flex-direction: row;
+      padding: 15px 15px 15px 40px !important; } }
   .quotes-list-item .quote-list.active {
     background: #F8F7FB;
     border: 2px solid #B2A6D7; }
@@ -4673,8 +4674,15 @@ table {
     position: absolute;
     left: 12px;
     top: 22px; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-list .select-quote {
+        left: 10px;
+        top: 9px; } }
   .quotes-list-item .quote-list .quote-info {
     border-right: 1px solid #C3C3C3; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-list .quote-info {
+        width: 70%; } }
     .quotes-list-item .quote-list .quote-info img {
       height: 280px; }
       @media (max-width: 1440px) {
@@ -4686,6 +4694,12 @@ table {
       @media (max-width: 1280px) {
         .quotes-list-item .quote-list .quote-info img {
           height: 150px; } }
+      @media (max-width: 1024px) {
+        .quotes-list-item .quote-list .quote-info img {
+          height: 250px; } }
+      @media (max-width: 991px) {
+        .quotes-list-item .quote-list .quote-info img {
+          height: 188px; } }
     .quotes-list-item .quote-list .quote-info .info-right {
       margin-left: 0 !important; }
       @media (max-width: 1024px) {
@@ -4710,6 +4724,11 @@ table {
     width: 211px;
     font-size: 18px;
     margin: 0 !important; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-price .btn-brand {
+        height: 42px;
+        width: 148px;
+        font-size: 16px; } }
   .quotes-list-item .quote-price button[disabled] {
     background: #F2F2F2;
     color: #ABAFB8;
@@ -4718,6 +4737,12 @@ table {
     position: absolute;
     right: -45px;
     top: 5px; }
+    @media (max-width: 1440px) {
+      .quotes-list-item .quote-price .option {
+        right: -40px;
+        top: -5px; }
+        .quotes-list-item .quote-price .option svg {
+          width: 5px; } }
 @media (max-width: 1440px) {
   .quotes-list-item .color-picker ul li div {
     font-size: 16px !important; } }
@@ -4738,6 +4763,9 @@ table {
     @media (max-width: 1024px) {
       .features:nth-child(2) {
         flex-basis: 44%; } }
+  @media (max-width: 1024px) {
+    .features:nth-child(3), .features:nth-child(4) {
+      margin-top: 40px; } }
   .features .product-title {
     width: 100%; }
   .features .info-item {
@@ -4751,6 +4779,9 @@ table {
     .admin-price {
       justify-content: start !important;
       align-items: start !important; } }
+  @media (max-width: 991px) {
+    .admin-price .price-n-currency {
+      flex-direction: column; } }
   .admin-price .price {
     width: 200px;
     margin-right: 16px; }
