@@ -399,9 +399,9 @@ class OurDesignDetails extends Component {
               <div className="other-description p-0 pt-5 mt-4">
 
 
-                  <div className="product-slider designs">
+                  <div className="designs">
                       <h4 className="mb-4">Similar Designs</h4>
-                      <div className="explore-design-carasoul owl-carousel owl-theme">
+                      <div className="show-products">
 
                           <div className="item">
                               <div className="card product-card new-card active">
