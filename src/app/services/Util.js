@@ -626,10 +626,45 @@ const getUrlParameter = (name, params) => {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
+const formatProductTypeWithGroup = (data) => {
+  let arr = [];
+  if (data.length>0) {
+    for (let i = 0 ; i < data.length ; i++) {
+      let obj = {
+        groupId : 0,
+        groupName : '',
+        types : []
+      };
+      if (i==0) {
+        obj.groupId = data[i].productGroup.id;
+        obj.groupName = data[i].productGroup.name;
+        obj.types[0] = data[i];
+        arr[0] = obj;
+        continue;
+      }
+      let flag = true;
+      for (let j = 0 ; j < arr.length ; j++) {
+        if(data[i].productGroup.id == arr[j].groupId){
+          arr[j].types[arr[j].types.length] = data[i];
+          flag = false;
+          break;
+        }
+      }
+      if (flag) {
+        obj.groupId = data[i].productGroup.id;
+        obj.groupName = data[i].productGroup.name;
+        obj.types[0] = data[i];
+        arr[arr.length] = obj;
+      }
+    }
+  }
+  return arr;
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup
 };

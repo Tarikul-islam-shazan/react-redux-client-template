@@ -36,6 +36,7 @@ const routes = {
     getDashboardData: `${BASE_URL}/dashboard/`, // GET
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
     getExploreDesignLanding: `${BASE_URL}/product/explore-design`, // GET called initially for landing data
+    getExploreDesignFilterOptions: `${BASE_URL}/product/search/filter-options`,
     getPickDesign: `${BASE_URL}/product/for-pick-design`, // GET
     getProjectList: `${BASE_URL}/project/my-project`, // GET
     getProjectDetails: `${BASE_URL}/project/`, // GET
