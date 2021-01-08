@@ -23,7 +23,6 @@ const isSelected = (filters, type, id) => {
   let flag = false;
   filters.map((filter) => {
     if (filter.type === type && filter.id === id) {
-      console.log("isSelected called true!")
       flag = true;
     }
   })
@@ -51,7 +50,8 @@ class PickDesignV2 extends Component {
           landingData: [],
           showFilters: false,
           filterOptions: {},
-          filters: []
+          filters: [],
+          searching: false
         };
     }
 
@@ -115,7 +115,16 @@ class PickDesignV2 extends Component {
     initialDataFetch = async() => {
       Http.GET('getExploreDesignLanding')
         .then(({data}) => {
-          this.setState({loading:false, landingData: data.collections})
+              let result = data.collections.map((collection) => {
+                  if (collection.collectionViewType === 'PRODUCT_LIST') {
+                      collection.productResponseList = collection.productResponseList.map((product) => {
+                        product.isSelected = false;
+                        return product;
+                      })
+                  }
+                  return collection;
+              })
+              this.setState({loading:false, landingData: result})
         })
         .catch(({response}) => {
             this.setState({loading:false})
@@ -150,17 +159,22 @@ class PickDesignV2 extends Component {
     }
 
     renderList = async(page = 0) => {
-      this.setState({loading:true})
-      let { size, designList, search, sort, productTypeId } = this.state;
-      // let params = `?page=${page}&size=${size}`;
-      let params = {
-        page : page,
-        size : size,
-        search : search,
-        // filterBy : filterBy,
-        productTypeId : productTypeId,
-        sort : sort
-      };
+      this.setState({loading:true, searching: true})
+      let { size, designList, search, sort, productTypeId, filters } = this.state;
+      let params = `?page=${page}&size=${size}&searchText=${search}`;
+      filters.map((filter) => {
+        let key = '';
+        if (filter.type === 'CATEGORY') {
+          key = 'category';
+        } else if (filter.type === 'PRODUCT_TYPE') {
+          key = 'productType';
+        } else if (filter.type === 'COLOR') {
+          key = 'color';
+        } else if (filter.type === 'FABRIC_TYPE') {
+          key = 'fabricType';
+        }
+        params += `&${key}=${filter.id}`
+      });
       let result = [];
       await Http.GET('getPickDesign',params)
         .then(({data}) => {
@@ -208,10 +222,6 @@ class PickDesignV2 extends Component {
           hasNext: designList.length === this.state.size ? true : false
         })
       })
-      if(e.target.name=='search'){
-        return;
-      }
-
     }
 
     onChangeSrchText = (e) => {
@@ -256,7 +266,7 @@ class PickDesignV2 extends Component {
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
-            let { designList } = this.state;
+            let { designList, landingData } = this.state;
             designList = designList.map((item,i) => {
               if(item.id == id){
                 item.liked = true;
@@ -264,8 +274,22 @@ class PickDesignV2 extends Component {
               }
               return item;
             })
+
+            let result = landingData.map((collection) => {
+                if (collection.collectionViewType === 'PRODUCT_LIST') {
+                    collection.productResponseList = collection.productResponseList.map((product) => {
+                      if (product.id === id) {
+                        product.liked = true;
+                      }
+                      return product;
+                    })
+                }
+                return collection;
+            })
+
             this.setState({
-              designList
+              designList,
+              landingData: result
             })
           }else{
             toastError(data.message);
@@ -292,7 +316,7 @@ class PickDesignV2 extends Component {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
           if(data.success){
             // toastSuccess(data.message);
-            let { designList } = this.state;
+            let { designList, landingData } = this.state;
             designList = designList.map((item,i) => {
               if(item.id == id){
                 item.liked = false;
@@ -300,8 +324,22 @@ class PickDesignV2 extends Component {
               }
               return item;
             })
+
+            let result = landingData.map((collection) => {
+                if (collection.collectionViewType === 'PRODUCT_LIST') {
+                    collection.productResponseList = collection.productResponseList.map((product) => {
+                      if (product.id === id) {
+                        product.liked = false;
+                      }
+                      return product;
+                    })
+                }
+                return collection;
+            })
+
             this.setState({
-              designList
+              designList,
+              landingData: result
             })
           }else{
             toastError(data.message);
@@ -319,9 +357,22 @@ class PickDesignV2 extends Component {
         });
     }
 
+    updateProductCard = (i, j) => {
+      let {selectedProductIds} = this.props;
+      let {landingData} = this.state;
+      let id = landingData[i].productResponseList[j].id;
+      if (selectedProductIds.includes(id)) {
+        console.log("setting true")
+        landingData[i].productResponseList[j].isSelected = true;
+      } else {
+        console.log("setting false")
+        landingData[i].productResponseList[j].isSelected = false;
+      }
+      this.setState({landingData});
+    }
+
     render() {
-        let { designList, groupwiseProductList, popular, trending, nitexSuggestion, productTypeId, sort, showFilters, landingData, filterOptions, filters } = this.state;
-        console.log("from pickdesign v2")
+        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching } = this.state;
         return (
 
           <div className="explore-design">
@@ -348,7 +399,7 @@ class PickDesignV2 extends Component {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
                           <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"/>
                       </svg>
-                      <input type="search" placeholder="Product name, collection name" className="w-100"/>
+                      <input type="search" placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange}/>
 
                       <ul className="filter-tag">
                       {
@@ -403,7 +454,7 @@ class PickDesignV2 extends Component {
                           {
                             filterOptions.colorResponseList &&
                             filterOptions.colorResponseList.map((item, i) => {
-                              return <li key={i} onClick={() => this.setFilters('COLOR', item.id, item.name)}>{item.name}</li>
+                              return <li style={{color: (isSelected(filters, 'COLOR', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('COLOR', item.id, item.name)}>{item.name}</li>
                             })
                           }
                       </ul>
@@ -412,22 +463,48 @@ class PickDesignV2 extends Component {
                           {
                             filterOptions.fabricTypeResponseList &&
                             filterOptions.fabricTypeResponseList.map((item, i) => {
-                              return <li key={i} onClick={() => this.setFilters('FABRIC_TYPE', item.id, item.name)}>{item.name}</li>
+                              return <li style={{color: (isSelected(filters, 'FABRIC_TYPE', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('FABRIC_TYPE', item.id, item.name)}>{item.name}</li>
                             })
                           }
                       </ul>
                   </div>
               </div>
               {
+                searching ?
+                <div className="filter-products designs">
+                    {
+                      designList.map(( item , i ) => {
+                        return(
+                          <ProductCard
+                            item={item}
+                            key={_getKey()}
+                            showDetails={this.details}
+                            likeProduct={this.likeProduct}
+                            unlikeProduct={this.unlikeProduct}
+                           />
+                        )
+                      })
+                    }
+                    {
+                      this.state.loading &&
+                      <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                    }
+                </div> :
                 landingData.map((data, i) => {
                   if (data.collectionViewType === 'PRODUCT_LIST') {
                     return (
                       <div className="designs" key={i}>
                           <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
-                          <Carousel itemsToShow={4} pagination={false} key={_getKey()}>
+                          <Carousel itemsToShow={4} pagination={false}>
                           {
                             data.productResponseList ? data.productResponseList.map((product, j) => {
-                              return (<ProductCardWithTick key={j} product={product}/>)
+                              return (
+                                <ProductCardWithTick
+                                  key={j}
+                                  product={product}
+                                  updateProductCard={() => this.updateProductCard(i, j)}
+                                  likeProduct={this.likeProduct}
+                                  unlikeProduct={this.unlikeProduct}/>)
                             }) : <></>
                           }
                           </Carousel>
