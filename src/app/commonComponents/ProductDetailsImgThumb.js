@@ -13,7 +13,7 @@ export const ProductDetailsImgThumb = ({item, index, showGallery, docs}) => {
   }
   return(
     <div className="ref-file mr-2 download-file text-center d-flex align-items-center justify-content-center">
-        <a href="#" className="ellipsis">
+        <a href={item.docUrl} className="ellipsis" target="_blank" download>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.596" height="18.769" viewBox="0 0 17.596 18.769">
                     <g id="noun_downlaod_3318602" transform="translate(0 0)" opacity="0.5">
