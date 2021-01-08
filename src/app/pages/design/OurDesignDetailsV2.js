@@ -20,7 +20,7 @@ import { MeasurementTable } from './components/MeasurementTable'
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { productAvailabilityStatus, addImageSuffix } from '../../services/Util';
 
-import {ProductThumbsSkeleton, ProductHeroImageSkeleton, ProductDetailsSkeleton} from '../../commonComponents/ProductSkeleton';
+import {ProductThumbsSkeleton, ProductHeroImageSkeleton, ProductDetailsSkeleton, ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {ProductDetailsImgThumb} from '../../commonComponents/ProductDetailsImgThumb'
 
 import "slick-carousel/slick/slick.css";
@@ -39,8 +39,30 @@ class OurDesignDetails extends Component {
           imageViewerCurrentIndex : 0,
           similarDesigns: [],
           similarDesignLoading: false,
-          measurementModal: false
+          measurementModal: false,
+          page: 0
         };
+    }
+
+    handleScroll = async() => {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight) {
+            let { hasNext, page, similarDesignLoading, similarDesigns, size } = this.state
+            console.log("message",'bottom reached',hasNext, page, similarDesignLoading)
+            if (hasNext && !similarDesignLoading && similarDesigns.length) {
+              let data = await this.getSimilarDesign(page+1)
+            } else if (similarDesigns.length) {
+                if(!hasNext){
+                  // toastWarning("No more data found.")
+                }
+            }
+        } else {
+
+        }
     }
 
     likeProduct = (id) => {
@@ -53,7 +75,12 @@ class OurDesignDetails extends Component {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
           this.setState({loading:false})
           if(data.success){
-            let { similarDesigns } = this.state;
+            let { similarDesigns, product } = this.state;
+            let productId = this.props.match.params.id;
+            if (productId === id) {
+              product.liked = true;
+              this.setState({product});
+            }
             similarDesigns = similarDesigns.map((item,i) => {
               if(item.id == id){
                 item.liked = true;
@@ -89,7 +116,12 @@ class OurDesignDetails extends Component {
         .then(({data}) => {
           console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
           if(data.success){
-            let { similarDesigns } = this.state;
+            let { similarDesigns, product } = this.state;
+            let productId = this.props.match.params.id;
+            if (productId === id) {
+              product.liked = false;
+              this.setState({product});
+            }
             similarDesigns = similarDesigns.map((item,i) => {
               if(item.id == id){
                 item.liked = false;
@@ -117,6 +149,16 @@ class OurDesignDetails extends Component {
         });
     }
 
+    toggleLike = () => {
+      let {product} = this.state;
+      let id = this.props.match.params.id;
+      if (product.liked) {
+        this.unlikeProduct(id);
+      } else {
+        this.likeProduct(id);
+      }
+    }
+
     updateProductCard = (i) => {
       let {selectedProductIds} = this.props;
       let {similarDesigns} = this.state;
@@ -129,29 +171,43 @@ class OurDesignDetails extends Component {
       this.setState({similarDesigns});
     }
 
-    getSimilarDesign = async(page = 1) => {
+    getSimilarDesign = async(page = 0) => {
         await this.setState({similarDesignLoading: true})
         let id = this.props.match.params.id;
-        await Http.GET('getSimilarDesign', `${id}`)
+        await Http.GET('getSimilarDesign', `${id}?page=${page}&size=20`)
           .then(({data}) => {
               console.log("getSimilarDesign success", data)
-              let result = data.products.map((product) => {
-                product.isSelected = false;
-                return product;
-              })
-              this.setState({
-                similarDesigns: result
-              })
+              if (data.length) {
+                let result = data.map((product) => {
+                  product.isSelected = false;
+                  return product;
+                })
+                this.setState({
+                  similarDesigns: result,
+                  page,
+                  similarDesignLoading: false,
+                  hasNext: data.length === 20 ? true : false
+                })
+              } else {
+                this.setState({
+                  hasNext: false,
+                  similarDesignLoading: false
+                })
+              }
           })
           .catch(({response}) => {
 
           });
     }
 
+    componentWillUnmount() {
+      window.removeEventListener("scroll", this.handleScroll);
+    }
+
     componentDidMount = async() => {
       document.title = "Product details on Nitex - The easiest clothing manufacturing software";
+      window.addEventListener("scroll", this.handleScroll);
       let id = this.props.match.params.id;
-      // loadjs(['/js/design-details.js']);
       this.setState({
         loading : true,
       })
@@ -460,7 +516,7 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <label className="font-14 text-muted mb-3">Minimum order quantity</label>
-                              <h5 className="font-16 font-weight-bold">Starts from 50 pcs (up to 12000)
+                              <h5 className="font-16 font-weight-bold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'} (up to 12000)
                                   <span className="ml-2" title="info.........">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
                                         <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
@@ -470,7 +526,7 @@ class OurDesignDetails extends Component {
                           </div>
                           <div className="info-item">
                               <label className="font-14 text-muted mb-3">Turn around time</label>
-                              <h5 className="font-16 font-weight-bold">As fast as 12 days
+                              <h5 className="font-16 font-weight-bold">As fast as {product.turnAroundTime ? `${product.turnAroundTime} Days` : 'N/A'}
                                   <span className="ml-2" title="info.........">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
                                         <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
@@ -493,7 +549,7 @@ class OurDesignDetails extends Component {
                                           </g>
                                       </svg>
                                   </a>
-                                  <a href="" className="btn btn-outline-secondary mr-3 border-gray-light favourite favourite-active">
+                                  <a className={`btn btn-outline-secondary mr-3 border-gray-light favourite ${product.liked ? 'favourite-active' : ''}`} onClick={this.toggleLike}>
                                       <svg xmlns="http://www.w3.org/2000/svg" width="26.474" height="24.783" viewBox="0 0 26.474 24.783">
                                           <path id="like_1_" data-name="like (1)" d="M26.43,9.216c-.386-4.283-3.4-7.39-7.165-7.39a7.113,7.113,0,0,0-6.1,3.54,6.856,6.856,0,0,0-5.955-3.54C3.441,1.826.43,4.933.044,9.216a7.67,7.67,0,0,0,.225,2.808,12.061,12.061,0,0,0,3.665,6.158l9.223,8.427,9.382-8.427A12.062,12.062,0,0,0,26.2,12.024,7.688,7.688,0,0,0,26.43,9.216Z" transform="translate(0 -1.826)" fill="#8f95a2"/>
                                       </svg>
@@ -524,6 +580,10 @@ class OurDesignDetails extends Component {
                               unlikeProduct={this.unlikeProduct}/>
                           )
                         })
+                      }
+                      {
+                        this.state.similarDesignLoading &&
+                        <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
                       }
                       </div>
                   </div>

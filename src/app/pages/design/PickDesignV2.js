@@ -51,7 +51,8 @@ class PickDesignV2 extends Component {
           showFilters: false,
           filterOptions: {},
           filters: [],
-          searching: false
+          searching: false,
+          initialLoading: false
         };
     }
 
@@ -113,7 +114,8 @@ class PickDesignV2 extends Component {
     }
 
     initialDataFetch = async() => {
-      Http.GET('getExploreDesignLanding')
+      await this.setState({initialLoading: true});
+      await Http.GET('getExploreDesignLanding')
         .then(({data}) => {
               let result = data.collections.map((collection) => {
                   if (collection.collectionViewType === 'PRODUCT_LIST') {
@@ -124,11 +126,12 @@ class PickDesignV2 extends Component {
                   }
                   return collection;
               })
-              this.setState({loading:false, landingData: result})
+              this.setState({landingData: result})
         })
         .catch(({response}) => {
-            this.setState({loading:false})
         });
+        await this.setState({initialLoading: false});
+
     }
 
     setFilters = (type, id, name) => {
@@ -490,50 +493,58 @@ class PickDesignV2 extends Component {
                       <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
                     }
                 </div> :
-                landingData.map((data, i) => {
-                  if (data.collectionViewType === 'PRODUCT_LIST') {
-                    return (
-                      <div className="designs" key={i}>
-                          <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
-                          <Carousel itemsToShow={4} pagination={false}>
-                          {
-                            data.productResponseList ? data.productResponseList.map((product, j) => {
-                              return (
-                                <ProductCardWithTick
-                                  key={j}
-                                  product={product}
-                                  updateProductCard={() => this.updateProductCard(i, j)}
-                                  likeProduct={this.likeProduct}
-                                  unlikeProduct={this.unlikeProduct}/>)
-                            }) : <></>
-                          }
-                          </Carousel>
-                      </div>
-                    )
-                  } else if (data.collectionViewType === 'BANNER') {
-                    return (
-                      <div className="banner-section mb-4 overflow-hidden">
-                          <div className="row">
-                          {
-                            data.collections ? data.collections.map((banner, j) => {
-                              if (banner.banners && banner.banners.length) {
-                                return (
-                                  <div className="col-md-6">
-                                      <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100"/></a>
-                                  </div>
-                                )
-                              } else {
-                                return <></>
+                <>
+                  {
+                    landingData.map((data, i) => {
+                      if (data.collectionViewType === 'PRODUCT_LIST') {
+                        return (
+                          <div className="designs" key={i}>
+                              <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
+                              <Carousel itemsToShow={4} pagination={false}>
+                              {
+                                data.productResponseList ? data.productResponseList.map((product, j) => {
+                                  return (
+                                    <ProductCardWithTick
+                                      key={j}
+                                      product={product}
+                                      updateProductCard={() => this.updateProductCard(i, j)}
+                                      likeProduct={this.likeProduct}
+                                      unlikeProduct={this.unlikeProduct}/>)
+                                }) : <></>
                               }
-
-                            }) : <></>
-                          }
+                              </Carousel>
                           </div>
-                      </div>
-                    )
-                  }
+                        )
+                      } else if (data.collectionViewType === 'BANNER') {
+                        return (
+                          <div className="banner-section mb-4 overflow-hidden">
+                              <div className="row">
+                              {
+                                data.collections ? data.collections.map((banner, j) => {
+                                  if (banner.banners && banner.banners.length) {
+                                    return (
+                                      <div className="col-md-6">
+                                          <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100"/></a>
+                                      </div>
+                                    )
+                                  } else {
+                                    return <></>
+                                  }
 
-                })
+                                }) : <></>
+                              }
+                              </div>
+                          </div>
+                        )
+                      }
+
+                    })
+                  }
+                  {
+                    this.state.initialLoading &&
+                    <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                  }
+                </>
               }
           </div>
         );
