@@ -130,7 +130,7 @@ class PickDesignV2 extends Component {
         })
         .catch(({response}) => {
         });
-        await this.setState({initialLoading: true});
+        await this.setState({initialLoading: false});
 
     }
 
