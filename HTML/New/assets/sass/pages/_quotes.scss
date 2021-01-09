@@ -188,13 +188,13 @@ aside{
     .admin-quote-price{
       @media (max-width: 1024px) {
         flex-basis: auto;
-        justify-content: start !important;
         flex-basis: 448px;
         padding-left: 20px;
       }
       @media (max-width: 991px) {
         flex-basis: 188px;
         padding: 0;
+        width: 100%;
         .valid-till{
           font-size: 12px !important;
         }

@@ -4653,6 +4653,10 @@ button.rec-arrow-right {
     width: auto;
     height: 110px; }
 
+@media (max-width: 991px) {
+  .pricewillbeupdated > svg {
+    width: 148px; } }
+
 @media (max-width: 767px) {
   aside {
     display: none; } }
@@ -4810,13 +4814,13 @@ button.rec-arrow-right {
   @media (max-width: 1024px) {
     .quotes-list-item .quote-list .admin-quote-price {
       flex-basis: auto;
-      justify-content: start !important;
       flex-basis: 448px;
       padding-left: 20px; } }
   @media (max-width: 991px) {
     .quotes-list-item .quote-list .admin-quote-price {
       flex-basis: 188px;
-      padding: 0; }
+      padding: 0;
+      width: 100%; }
       .quotes-list-item .quote-list .admin-quote-price .valid-till {
         font-size: 12px !important; } }
   @media (max-width: 767px) {
