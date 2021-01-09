@@ -4176,8 +4176,6 @@ ul.filter-tag {
     display: block; }
     .new-card:hover .thumb .favourite-part.choose {
       display: block; }
-  .new-card:hover .thumb .btn-brand {
-    display: block; }
 
 .show-products {
   display: grid;
@@ -4297,7 +4295,14 @@ table {
   border-radius: 5px;
   z-index: 9;
   top: 90px;
-  width: auto; }
+  width: auto;
+  max-height: 470px;
+  padding: 50px 50px 100px 50px; }
+  .filter-cat button {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    margin: 0 !important; }
   @media (max-width: 1024px) {
     .filter-cat {
       top: 68px;
@@ -4310,19 +4315,22 @@ table {
     margin: 0;
     flex-grow: 1;
     width: 200px;
-    padding: 15px 20px 50px 20px; }
+    margin: 0 20px 0 0; }
     @media (max-width: 1024px) {
       .filter-cat ul {
-        width: auto; } }
+        width: 160px;
+        margin: 0px 30px 0 0; }
+        .filter-cat ul li {
+          width: 160px; } }
     .filter-cat ul .title {
-      padding: 15px 20px 0 20px;
+      padding: 0;
       color: #333333;
       font-size: 20px;
       font-weight: 600; }
     .filter-cat ul li {
       list-style: none;
       cursor: pointer;
-      padding: 15px 20px 0 20px; }
+      padding: 15px 0px 0 0; }
   .filter-cat::before {
     content: "";
     width: 15px;
@@ -4392,6 +4400,46 @@ table {
       .explore-product-details-info .info-item .btn svg {
         width: 16px;
         margin-top: -2px; } }
+
+.search-suggestions {
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(32, 33, 36, 0.28);
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 0 0 24px 24px;
+  padding-bottom: 4px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 99; }
+  .search-suggestions ul {
+    margin: 0;
+    padding: 0; }
+    .search-suggestions ul li {
+      list-style: none;
+      margin-bottom: 6px;
+      cursor: pointer; }
+
+.rec-carousel {
+  position: relative; }
+
+button.rec-arrow-left, button.rec-arrow-right {
+  position: absolute;
+  z-index: 9;
+  transform: translateY(-50%);
+  box-shadow: none; }
+  button.rec-arrow-left:focus, button.rec-arrow-right:focus {
+    outline: 0; }
+
+button.rec-arrow-left {
+  left: -14px; }
+
+button.rec-arrow-right {
+  right: -14px; }
 
 .confirm-quote-request {
   padding-right: 80px;

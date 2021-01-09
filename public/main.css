@@ -4176,8 +4176,6 @@ ul.filter-tag {
     display: block; }
     .new-card:hover .thumb .favourite-part.choose {
       display: block; }
-  .new-card:hover .thumb .btn-brand {
-    display: block; }
 
 .show-products {
   display: grid;
@@ -4297,7 +4295,14 @@ table {
   border-radius: 5px;
   z-index: 9;
   top: 90px;
-  width: auto; }
+  width: auto;
+  max-height: 470px;
+  padding: 50px 50px 100px 50px; }
+  .filter-cat button {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    margin: 0 !important; }
   @media (max-width: 1024px) {
     .filter-cat {
       top: 68px;
@@ -4310,19 +4315,22 @@ table {
     margin: 0;
     flex-grow: 1;
     width: 200px;
-    padding: 15px 20px 50px 20px; }
+    margin: 0 20px 0 0; }
     @media (max-width: 1024px) {
       .filter-cat ul {
-        width: auto; } }
+        width: 160px;
+        margin: 0px 30px 0 0; }
+        .filter-cat ul li {
+          width: 160px; } }
     .filter-cat ul .title {
-      padding: 15px 20px 0 20px;
+      padding: 0;
       color: #333333;
       font-size: 20px;
       font-weight: 600; }
     .filter-cat ul li {
       list-style: none;
       cursor: pointer;
-      padding: 15px 20px 0 20px; }
+      padding: 15px 0px 0 0; }
   .filter-cat::before {
     content: "";
     width: 15px;
@@ -4392,6 +4400,46 @@ table {
       .explore-product-details-info .info-item .btn svg {
         width: 16px;
         margin-top: -2px; } }
+
+.search-suggestions {
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(32, 33, 36, 0.28);
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 0 0 24px 24px;
+  padding-bottom: 4px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 99; }
+  .search-suggestions ul {
+    margin: 0;
+    padding: 0; }
+    .search-suggestions ul li {
+      list-style: none;
+      margin-bottom: 6px;
+      cursor: pointer; }
+
+.rec-carousel {
+  position: relative; }
+
+button.rec-arrow-left, button.rec-arrow-right {
+  position: absolute;
+  z-index: 9;
+  transform: translateY(-50%);
+  box-shadow: none; }
+  button.rec-arrow-left:focus, button.rec-arrow-right:focus {
+    outline: 0; }
+
+button.rec-arrow-left {
+  left: -14px; }
+
+button.rec-arrow-right {
+  right: -14px; }
 
 .confirm-quote-request {
   padding-right: 80px;
@@ -4605,6 +4653,11 @@ table {
     width: auto;
     height: 110px; }
 
+@media (max-width: 767px) {
+  .header-sorting {
+    flex-direction: column; }
+    .header-sorting .sort, .header-sorting .date, .header-sorting .status, .header-sorting .search {
+      display: none; } }
 .header-sorting .sort-filter .product-name {
   max-width: 415px;
   width: 100%;
@@ -4622,11 +4675,17 @@ table {
 .header-sorting .sort-filter .status {
   max-width: 210px;
   width: 100%; }
+  @media (max-width: 991px) {
+    .header-sorting .sort-filter .status {
+      max-width: 130px; } }
 .header-sorting .sort-filter .search button {
   margin: 0 !important;
   height: 52px;
   width: 170px;
   font-size: 16px; }
+  @media (max-width: 991px) {
+    .header-sorting .sort-filter .search button {
+      width: 130px; } }
 @media (max-width: 1024px) {
   .header-sorting .sort-filter {
     flex-wrap: wrap; } }
@@ -4635,6 +4694,9 @@ table {
   @media (max-width: 1440px) {
     .header-sorting .sort {
       flex-basis: 25%; } }
+  @media (max-width: 991px) {
+    .header-sorting .sort {
+      flex-basis: 30%; } }
   .header-sorting .sort .status {
     max-width: 210px;
     width: 100%; }
@@ -4657,12 +4719,22 @@ table {
       border-radius: 8px;
       padding: 10px !important;
       line-height: 12px; } }
+@media (max-width: 1024px) {
+  .all-select {
+    margin-top: 40px !important; } }
+@media (max-width: 767px) {
+  .all-select {
+    margin-top: 0px !important; } }
 
 .quotes-list-item .quote-list {
   box-shadow: 0px 0px 3px 0px #ddd; }
   @media (max-width: 991px) {
     .quotes-list-item .quote-list {
-      flex-direction: row; } }
+      flex-direction: row;
+      padding: 15px 15px 15px 40px !important; } }
+  @media (max-width: 767px) {
+    .quotes-list-item .quote-list {
+      flex-direction: column; } }
   .quotes-list-item .quote-list.active {
     background: #F8F7FB;
     border: 2px solid #B2A6D7; }
@@ -4673,8 +4745,19 @@ table {
     position: absolute;
     left: 12px;
     top: 22px; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-list .select-quote {
+        left: 10px;
+        top: 9px; } }
   .quotes-list-item .quote-list .quote-info {
     border-right: 1px solid #C3C3C3; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-list .quote-info {
+        width: 70%; } }
+    @media (max-width: 767px) {
+      .quotes-list-item .quote-list .quote-info {
+        border: 0;
+        width: 100%; } }
     .quotes-list-item .quote-list .quote-info img {
       height: 280px; }
       @media (max-width: 1440px) {
@@ -4686,11 +4769,28 @@ table {
       @media (max-width: 1280px) {
         .quotes-list-item .quote-list .quote-info img {
           height: 150px; } }
+      @media (max-width: 1024px) {
+        .quotes-list-item .quote-list .quote-info img {
+          height: 250px; } }
+      @media (max-width: 991px) {
+        .quotes-list-item .quote-list .quote-info img {
+          height: 188px; } }
     .quotes-list-item .quote-list .quote-info .info-right {
       margin-left: 0 !important; }
       @media (max-width: 1024px) {
         .quotes-list-item .quote-list .quote-info .info-right {
           flex-wrap: wrap; } }
+  @media (max-width: 1280px) {
+    .quotes-list-item .quote-list .sizes {
+      margin-left: 0px;
+      margin-bottom: 0px; } }
+  @media (max-width: 767px) {
+    .quotes-list-item .quote-list .sizes {
+      margin-top: 0; } }
+  @media (max-width: 991px) {
+    .quotes-list-item .quote-list .sizes .size {
+      width: 32px;
+      margin-right: 10px; } }
   .quotes-list-item .quote-list .sizes .size input {
     padding: 5px;
     text-align: center;
@@ -4700,6 +4800,21 @@ table {
     @media (max-width: 1280px) {
       .quotes-list-item .quote-list .sizes .size input {
         height: 34px !important; } }
+    @media (max-width: 1280px) {
+      .quotes-list-item .quote-list .sizes .size input {
+        height: 30px !important; } }
+  @media (max-width: 1024px) {
+    .quotes-list-item .quote-list .admin-quote-price {
+      flex-basis: auto;
+      justify-content: start !important;
+      flex-basis: 448px;
+      padding-left: 20px; } }
+  @media (max-width: 991px) {
+    .quotes-list-item .quote-list .admin-quote-price {
+      flex-basis: 188px;
+      padding: 0; }
+      .quotes-list-item .quote-list .admin-quote-price .valid-till {
+        font-size: 12px !important; } }
 .quotes-list-item .quote-price {
   flex-basis: 486px; }
   @media (max-width: 1440px) {
@@ -4710,6 +4825,11 @@ table {
     width: 211px;
     font-size: 18px;
     margin: 0 !important; }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-price .btn-brand {
+        height: 42px;
+        width: 148px;
+        font-size: 15px; } }
   .quotes-list-item .quote-price button[disabled] {
     background: #F2F2F2;
     color: #ABAFB8;
@@ -4718,6 +4838,21 @@ table {
     position: absolute;
     right: -45px;
     top: 5px; }
+    @media (max-width: 1440px) {
+      .quotes-list-item .quote-price .option {
+        right: -40px;
+        top: -5px; }
+        .quotes-list-item .quote-price .option svg {
+          width: 5px; } }
+    @media (max-width: 1024px) {
+      .quotes-list-item .quote-price .option {
+        top: 4px; } }
+    @media (max-width: 991px) {
+      .quotes-list-item .quote-price .option {
+        top: 0px;
+        right: -30px; }
+        .quotes-list-item .quote-price .option button {
+          padding: 7px 12px; } }
 @media (max-width: 1440px) {
   .quotes-list-item .color-picker ul li div {
     font-size: 16px !important; } }
@@ -4728,8 +4863,20 @@ table {
 .features {
   flex: 1 1 auto;
   padding-right: 20px; }
+  @media (max-width: 767px) {
+    .features {
+      flex-direction: column;
+      padding: 0 0 20px 0; }
+      .features a {
+        max-width: 100% !important; }
+        .features a img {
+          width: 100% !important;
+          height: auto !important; } }
   .features:first-child {
     flex: 1; }
+    @media (max-width: 767px) {
+      .features:first-child {
+        flex: inherit; } }
   .features:nth-child(2) {
     flex-basis: 30%; }
     @media (max-width: 1366px) {
@@ -4738,8 +4885,27 @@ table {
     @media (max-width: 1024px) {
       .features:nth-child(2) {
         flex-basis: 44%; } }
+    @media (max-width: 767px) {
+      .features:nth-child(2) {
+        flex-basis: 100%; } }
+  @media (max-width: 1024px) {
+    .features:nth-child(3), .features:nth-child(4) {
+      margin-top: 40px; } }
+  @media (max-width: 767px) {
+    .features:nth-child(3), .features:nth-child(4) {
+      margin-top: 0px; } }
+  @media (max-width: 1024px) {
+    .features:nth-child(4) {
+      width: 54%; } }
+  @media (max-width: 767px) {
+    .features:nth-child(4) {
+      width: 100%; } }
   .features .product-title {
     width: 100%; }
+    @media (max-width: 1024px) {
+      .features .product-title a {
+        width: 100%;
+        max-width: 100% !important; } }
   .features .info-item {
     width: auto; }
 
@@ -4751,6 +4917,16 @@ table {
     .admin-price {
       justify-content: start !important;
       align-items: start !important; } }
+  @media (max-width: 767px) {
+    .admin-price {
+      flex-basis: 100%;
+      padding-left: 0; } }
+  @media (max-width: 991px) {
+    .admin-price .price-n-currency {
+      flex-direction: column; } }
+  @media (max-width: 767px) {
+    .admin-price .price-n-currency {
+      flex-direction: row; } }
   .admin-price .price {
     width: 200px;
     margin-right: 16px; }
@@ -4808,6 +4984,9 @@ table {
     border-color: transparent transparent #ffffff transparent;
     top: -20px;
     right: 19px; }
+    @media (max-width: 991px) {
+      .option .dropdown-toggle .dropdown-menu:before {
+        right: 5px; } }
 
 .delivery-in-days input {
   width: 110px;

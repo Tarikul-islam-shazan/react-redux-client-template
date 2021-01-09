@@ -403,7 +403,34 @@ class PickDesignV2 extends Component {
                           <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"/>
                       </svg>
                       <input type="search" placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange}/>
-
+                      <div className="search-suggestions">
+                          <ul>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                              <li>
+                                  sdfdsfsdfdsf sdf sdf sdf dsf d
+                              </li>
+                          </ul>
+                      </div>
                       <ul className="filter-tag">
                       {
                         filters.map((filter, i) => {
@@ -425,7 +452,8 @@ class PickDesignV2 extends Component {
                       </ul>
                   </div>
                   <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}}>
-                      <ul className="list">
+                      <div className="d-flex">
+                      <ul className="list custom-scrollbar">
                           <div className="title">Categories</div>
                           {
                             filterOptions.categories &&
@@ -439,7 +467,7 @@ class PickDesignV2 extends Component {
                         filterOptions.productTypeResponseList &&
                         filterOptions.productTypeResponseList.map((group) => {
                           return (
-                            <ul className="list">
+                            <ul className="list custom-scrollbar">
                               <div className="title">{group.groupName}</div>
                               {
                                 group.types.map((type, j) => {
@@ -452,7 +480,7 @@ class PickDesignV2 extends Component {
                           )
                         })
                       }
-                      <ul className="list">
+                      <ul className="list custom-scrollbar">
                           <div className="title">Color</div>
                           {
                             filterOptions.colorResponseList &&
@@ -461,7 +489,7 @@ class PickDesignV2 extends Component {
                             })
                           }
                       </ul>
-                      <ul className="list">
+                      <ul className="list custom-scrollbar">
                           <div className="title">Fabrications</div>
                           {
                             filterOptions.fabricTypeResponseList &&
@@ -470,6 +498,8 @@ class PickDesignV2 extends Component {
                             })
                           }
                       </ul>
+                      </div>
+                      <button className="m-0 btn-brand m-0 shadow float-right">Submit</button>
                   </div>
               </div>
               {
