@@ -4819,11 +4819,19 @@ button.rec-arrow-right {
       padding: 0; }
       .quotes-list-item .quote-list .admin-quote-price .valid-till {
         font-size: 12px !important; } }
+  @media (max-width: 767px) {
+    .quotes-list-item .quote-list .admin-quote-price {
+      border-top: 1px solid #ccc;
+      padding-top: 12px;
+      margin-top: 5px; } }
 .quotes-list-item .quote-price {
   flex-basis: 486px; }
   @media (max-width: 1440px) {
     .quotes-list-item .quote-price {
       flex-basis: 395px; } }
+  @media (max-width: 991px) {
+    .quotes-list-item .quote-price .product-badge {
+      margin: 8px 0 0 0 !important; } }
   .quotes-list-item .quote-price .btn-brand {
     height: 60px;
     width: 211px;

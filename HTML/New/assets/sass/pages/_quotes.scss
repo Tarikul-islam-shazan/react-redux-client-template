@@ -199,12 +199,22 @@ aside{
           font-size: 12px !important;
         }
       }
+      @media (max-width: 767px) {
+        border-top: 1px solid #ccc;
+        padding-top: 12px;
+        margin-top: 5px;
+      }
     }
   }
   .quote-price{
     flex-basis: 486px;
     @media (max-width: 1440px) {
       flex-basis: 395px;
+    }
+    @media (max-width: 991px) {
+      .product-badge {
+        margin: 8px 0 0 0 !important;
+      }
     }
     .btn-brand {
       height: 60px;
