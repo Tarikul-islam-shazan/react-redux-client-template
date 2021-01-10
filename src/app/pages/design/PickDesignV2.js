@@ -51,8 +51,10 @@ class PickDesignV2 extends Component {
           showFilters: false,
           filterOptions: {},
           filters: [],
+          suggestions: [],
           searching: false,
-          initialLoading: false
+          initialLoading: false,
+          showSuggestions: false
         };
     }
 
@@ -68,12 +70,13 @@ class PickDesignV2 extends Component {
         if(hasNext && !loading && designList.length){
           let data = await this.renderList(page+1)
           if(data.length>0){
-            this.setState({
+            await this.setState({
               designList : [ ...designList, ...data ],
               page : page+1,
               hasNext : data.length === size ? true : false,
               loading:false
             })
+            this.updateProductCard()
           }else{
             this.setState({
               // designList : [],
@@ -95,22 +98,28 @@ class PickDesignV2 extends Component {
         }
     }
 
+    handleClickOutside = (event) => {
+      if ((this.searchSuggestions && !this.searchSuggestions.contains(event.target)) || (this.searchFilters && !this.searchFilters.contains(event.target))) {
+        this.setState({
+          showSuggestions: false,
+          showFilters: false
+        })
+      }
+    }
+
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     componentDidMount = async() => {
       document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
+      document.addEventListener('mousedown', this.handleClickOutside);
       window.addEventListener("scroll", this.handleScroll);
-      // loadjs(['/js/custom.js']);
-      this.setState({loading: true})
-      await this.initialDataFetch()
-      await this.setFilterOptions()
-      // let designList = await this.renderList();
-      // this.setState({
-      //   designList,
-      //   hasNext: designList.length === this.state.size ? true : false
-      // })
+      this.setState({loading: true});
+      this.initialDataFetch();
+      this.setFilterOptions();
+      this.fetchSuggestions();
     }
 
     initialDataFetch = async() => {
@@ -134,7 +143,30 @@ class PickDesignV2 extends Component {
 
     }
 
-    setFilters = (type, id, name) => {
+    setFilterOptions = async() => {
+      Http.GET('getExploreDesignFilterOptions')
+        .then(({data}) => {
+          let response = {...data};
+          response.productTypeResponseList = formatProductTypeWithGroup(response.productTypeResponseList);
+          this.setState({filterOptions: response});
+        })
+        .catch(({response}) => {
+        });
+    }
+
+    fetchSuggestions = () => {
+      let {search, suggestions} = this.state;
+      Http.GET('getSearchSuggestions', `${search ? `/${search}` : ``}`)
+        .then(({data}) => {
+          if (data.length) {
+            this.setState({suggestions: data});
+          }
+        })
+        .catch(({response}) => {
+        });
+    }
+
+    setFilters = async(type, id, name) => {
       let {filters} = this.state;
       let flag = true;
       filters.map((filter) => {
@@ -147,18 +179,10 @@ class PickDesignV2 extends Component {
       } else {
         filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
       }
-      this.setState({filters});
-    }
-
-    setFilterOptions = async() => {
-      Http.GET('getExploreDesignFilterOptions')
-        .then(({data}) => {
-          let response = {...data};
-          response.productTypeResponseList = formatProductTypeWithGroup(response.productTypeResponseList);
-          this.setState({filterOptions: response});
-        })
-        .catch(({response}) => {
-        });
+      await this.setState({filters});
+      if (!flag) {
+        this._search()
+      }
     }
 
     renderList = async(page = 0) => {
@@ -210,20 +234,14 @@ class PickDesignV2 extends Component {
     }
 
     onChange = async(e) => {
-      // console.log(this.state.sort);
-      // let designList = [];
       this.setState({
         [e.target.name] : e.target.value,
         page : 0,
         hasNext : true,
-        productTypeId : ''
+        productTypeId : '',
         // size : 100
       },async(name)=>{
-        let designList = await this.renderList();
-        await this.setState({
-          designList,
-          hasNext: designList.length === this.state.size ? true : false
-        })
+        this.fetchSuggestions();
       })
     }
 
@@ -241,17 +259,22 @@ class PickDesignV2 extends Component {
     }
 
     _search = async() => {
-      this.setState({
+      await this.setState({
         page : 0,
         hasNext : true,
-        productTypeId : ''
-        // size : 100
+        productTypeId : '',
+        showFilters: false,
+        showSuggestions: false,
+        designList: [],
+        loading: true
       })
       let designList = await this.renderList();
       await this.setState({
         designList,
-        hasNext : designList.length === this.state.size ? true : false
+        hasNext : designList.length === this.state.size ? true : false,
+        loading: false
       })
+      this.updateProductCard()
     }
 
     details = (id = 0) => {
@@ -360,22 +383,45 @@ class PickDesignV2 extends Component {
         });
     }
 
-    updateProductCard = (i, j) => {
+    updateProductCard = () => {
       let {selectedProductIds} = this.props;
-      let {landingData} = this.state;
-      let id = landingData[i].productResponseList[j].id;
-      if (selectedProductIds.includes(id)) {
-        console.log("setting true")
-        landingData[i].productResponseList[j].isSelected = true;
-      } else {
-        console.log("setting false")
-        landingData[i].productResponseList[j].isSelected = false;
-      }
-      this.setState({landingData});
+      let {landingData, designList} = this.state;
+      landingData = landingData.map((collection) => {
+          if (collection.productResponseList) {
+            collection.productResponseList = collection.productResponseList.map((product) => {
+                if (selectedProductIds.includes(product.id)) {
+                  product.isSelected = true;
+                } else {
+                  product.isSelected = false;
+                }
+                if (selectedProductIds.length) {
+                  product.isAddedToList = true;
+                } else {
+                  product.isAddedToList = false;
+                }
+                return product;
+            })
+          }
+          return collection;
+      })
+      designList = designList.map((product) => {
+        if (selectedProductIds.includes(product.id)) {
+          product.isSelected = true;
+        } else {
+          product.isSelected = false;
+        }
+        if (selectedProductIds.length) {
+          product.isAddedToList = true;
+        } else {
+          product.isAddedToList = false;
+        }
+        return product;
+      })
+      this.setState({landingData, designList});
     }
 
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching } = this.state;
+        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions } = this.state;
         return (
 
           <div className="explore-design">
@@ -402,35 +448,23 @@ class PickDesignV2 extends Component {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
                           <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"/>
                       </svg>
-                      <input type="search" placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange}/>
-                      <div className="search-suggestions">
-                          <ul>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                              <li>
-                                  sdfdsfsdfdsf sdf sdf sdf dsf d
-                              </li>
-                          </ul>
-                      </div>
+                      <input type="search" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
+                        {
+                          showSuggestions &&
+                          <div className="search-suggestions" ref={(node) => this.searchSuggestions = node}>
+                            <ul>
+                            {
+                              suggestions.map((suggestion, i) => {
+                                return(
+                                  <li key={i}>
+                                      {suggestion.title}
+                                  </li>
+                                )
+                              })
+                            }
+                            </ul>
+                          </div>
+                      }
                       <ul className="filter-tag">
                       {
                         filters.map((filter, i) => {
@@ -451,7 +485,7 @@ class PickDesignV2 extends Component {
                       }
                       </ul>
                   </div>
-                  <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}}>
+                  <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}} ref={(node) => this.searchFilters = node}>
                       <div className="d-flex">
                       <ul className="list custom-scrollbar">
                           <div className="title">Categories</div>
@@ -499,22 +533,22 @@ class PickDesignV2 extends Component {
                           }
                       </ul>
                       </div>
-                      <button className="m-0 btn-brand m-0 shadow float-right">Submit</button>
+                      <button className="m-0 btn-brand m-0 shadow float-right" onClick={() => this._search()}>Submit</button>
                   </div>
               </div>
               {
                 searching ?
                 <div className="filter-products designs">
+                    <div className="show-products">
                     {
-                      designList.map(( item , i ) => {
+                      designList.map(( product , i ) => {
                         return(
-                          <ProductCard
-                            item={item}
-                            key={_getKey()}
-                            showDetails={this.details}
-                            likeProduct={this.likeProduct}
-                            unlikeProduct={this.unlikeProduct}
-                           />
+                           <ProductCardWithTick
+                             key={i}
+                             product={product}
+                             updateProductCard={() => this.updateProductCard()}
+                             likeProduct={this.likeProduct}
+                             unlikeProduct={this.unlikeProduct}/>
                         )
                       })
                     }
@@ -522,6 +556,7 @@ class PickDesignV2 extends Component {
                       this.state.loading &&
                       <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
                     }
+                    </div>
                 </div> :
                 <>
                   {
@@ -537,7 +572,7 @@ class PickDesignV2 extends Component {
                                     <ProductCardWithTick
                                       key={j}
                                       product={product}
-                                      updateProductCard={() => this.updateProductCard(i, j)}
+                                      updateProductCard={() => this.updateProductCard()}
                                       likeProduct={this.likeProduct}
                                       unlikeProduct={this.unlikeProduct}/>)
                                 }) : <></>
@@ -575,6 +610,20 @@ class PickDesignV2 extends Component {
                     <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
                   }
                 </>
+              }
+              {
+                this.props.selectedProductIds.length ?
+                <div className="selected-item-popup d-flex justify-content-between">
+                    <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+                        <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
+                        <button className="m-0 btn-brand brand-bg-color shadow">Add to quote</button>
+                    </div>
+                    <div className="close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">
+                            <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
+                        </svg>
+                    </div>
+                </div> : <></>
               }
           </div>
         );

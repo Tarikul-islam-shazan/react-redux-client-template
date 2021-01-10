@@ -59,7 +59,7 @@ class ProductCard extends Component {
     let { product , showDetails , likeProduct , unlikeProduct } = this.props;
     return(
       <div className="item">
-          <div className={`card product-card new-card ${product.isSelected ? 'active' : ''}`}>
+          <div className={`card product-card new-card ${product.isAddedToList ? 'active' : ''}`}>
               <div className="thumb">
                   <div className={`favourite-part choose ${product.isSelected ? 'active' : ''}`} onClick={() => this.toggleSelect(product.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
