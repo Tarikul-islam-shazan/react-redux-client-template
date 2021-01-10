@@ -17,7 +17,7 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
-const TIME_LIMIT = 30;
+const TIME_LIMIT = 180;
 const TIME_INTERVAL = 1000;
 
 class Questionairre_1 extends Component {
@@ -188,7 +188,7 @@ class Questionairre_1 extends Component {
                     <button class="btn-brand m-0" disabled={!(code.length === 5)} onClick={this._submit}>Verify</button>
                     {
                       timeLimit ?
-                      <button class="btn-brand font-16 brand-color bg-gray-light font-weight-bold m-0" disabled>Resend OTP after {`${Math.floor(timeLimit/60)} : ${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} Min</button> :
+                      <button class="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend code after {`${Math.floor(timeLimit/60)}:${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} mins</button> :
                       <button class="btn-brand m-0" onClick={this.setTimer}>Resend code</button>
                     }
                 </div>

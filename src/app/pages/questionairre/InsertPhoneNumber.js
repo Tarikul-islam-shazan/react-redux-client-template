@@ -213,7 +213,7 @@ class InsertPhoneNumber extends Component {
                             </div>
                         </div>
                     </div>
-                    <button className="btn-brand" onClick={this._submit}>Enter</button>
+                    <button className="btn-brand" onClick={this._submit}>Submit for code</button>
                 </div>
             </div>
           </LoadingOverlay>
