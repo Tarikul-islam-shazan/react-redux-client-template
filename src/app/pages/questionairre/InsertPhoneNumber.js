@@ -121,15 +121,7 @@ class InsertPhoneNumber extends Component {
                 this.setState({loading:false})
                 if(data.success){
                   toastSuccess(data.message);
-                  let userInfo = localStorage.getItem('userInfo');
-                  if(userInfo) {
-                    userInfo = JSON.parse(userInfo);
-                  } else {
-                    userInfo = {};
-                  }
-                  userInfo.businessInfoGiven = true;
-                  localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                  localStorage.setItem('nitex@phoneInfo', JSON.stringify({phoneNumber}));
+                  localStorage.setItem('nitex@phoneInfo', JSON.stringify({phoneNumber: countryCode + phoneNumber}));
                   let redirection = getUrlParameter('redirect', this.props.location.search);
                   if (redirection) {
                     this.props.history.push('/verify-otp?redirect=' + redirection);

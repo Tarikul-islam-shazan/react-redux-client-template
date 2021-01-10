@@ -17,7 +17,7 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
-const TIME_LIMIT = 180;
+const TIME_LIMIT = 3;
 const TIME_INTERVAL = 1000;
 
 class Questionairre_1 extends Component {
@@ -43,6 +43,22 @@ class Questionairre_1 extends Component {
           timeLimit: timeLimit - 1
         })
       }
+    }
+
+    renderNumber = () => {
+      let {phoneInfo} = this.state;
+      let result = '';
+      if (phoneInfo.phoneNumber) {
+        let n = phoneInfo.phoneNumber;
+        for(let i = 0; i < n.length; i++) {
+          if (i > 1 && i < n.length - 2) {
+            result += '*';
+          } else {
+            result += n[i];
+          }
+        }
+      }
+      return result;
     }
 
     componentWillUnmount = () => {
@@ -101,6 +117,24 @@ class Questionairre_1 extends Component {
         return flag;
     }
 
+    resend = async() => {
+      await this.setState({loading: true})
+      Http.GET('sendOtpRe')
+        .then(({data}) => {
+          console.log('sendOtpRe SUCCESS: ', data);
+          if (data.success) {
+            this.setTimer()
+            toastSuccess(data.message);
+          }
+          this.setState({loading: false})
+        })
+        .catch(response => {
+            console.log('sendOtpRe ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            toastError("Something went wrong! Please try again.");
+        });
+    }
+
     _submit = async() => {
         let validation = await this.validateData();
         if (validation) {
@@ -114,6 +148,15 @@ class Questionairre_1 extends Component {
                 if(data.success){
                   localStorage.setItem('nitex@phoneInfo', "");
                   toastSuccess(data.message);
+
+                  let userInfo = localStorage.getItem('userInfo');
+                  if(userInfo) {
+                    userInfo = JSON.parse(userInfo);
+                  } else {
+                    userInfo = {};
+                  }
+                  userInfo.phoneVerified = true;
+                  localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
                   let redirection = getUrlParameter('redirect', this.props.location.search)
                   if (redirection) {
@@ -169,7 +212,7 @@ class Questionairre_1 extends Component {
                 <div class="questionnaire-form">
                     <div class="ques-heading">
                         <h2>Verify</h2>
-                        <p class="font-20">A code has been sent to +88017120000. Please verify. </p>
+                        <p class="font-20">A code has been sent to {this.renderNumber()}. Please verify. </p>
                         <a href="#" class="text-underline color-333 font-13" onClick={this.back}>Wrong number?</a>
                     </div>
                     <div class="row">
@@ -189,7 +232,7 @@ class Questionairre_1 extends Component {
                     {
                       timeLimit ?
                       <button class="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend code after {`${Math.floor(timeLimit/60)}:${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} mins</button> :
-                      <button class="btn-brand m-0" onClick={this.setTimer}>Resend code</button>
+                      <button class="btn-brand m-0" onClick={this.resend}>Resend code</button>
                     }
                 </div>
             </div>
