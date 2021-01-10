@@ -99,13 +99,17 @@ class PickDesignV2 extends Component {
     }
 
     handleClickOutside = (event) => {
-      if ((this.searchSuggestions && !this.searchSuggestions.contains(event.target)) || (this.searchFilters && !this.searchFilters.contains(event.target))) {
+      if (this.searchSuggestions && !this.searchSuggestions.contains(event.target)) {
         this.setState({
           showSuggestions: false,
+        })
+      }
+      if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+        this.setState({
           showFilters: false
         })
       }
-    }
+     }
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
@@ -448,7 +452,7 @@ class PickDesignV2 extends Component {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
                           <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"/>
                       </svg>
-                      <input type="search" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
+                      <input type="search" autocomplete="chrome-off" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
                         {
                           showSuggestions &&
                           <div className="search-suggestions" ref={(node) => this.searchSuggestions = node}>
@@ -456,8 +460,14 @@ class PickDesignV2 extends Component {
                             {
                               suggestions.map((suggestion, i) => {
                                 return(
-                                  <li key={i}>
-                                      {suggestion.title}
+                                  <li key={i} onClick={async() => {
+                                    await this.setState({
+                                      showSuggestions: false,
+                                      search: suggestion.text
+                                    })
+                                    this._search();
+                                  }}>
+                                      {suggestion.text}
                                   </li>
                                 )
                               })
@@ -565,7 +575,7 @@ class PickDesignV2 extends Component {
                         return (
                           <div className="designs" key={i}>
                               <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
-                              <Carousel itemsToShow={4} pagination={false}>
+                              <Carousel itemsToShow={5} pagination={false}>
                               {
                                 data.productResponseList ? data.productResponseList.map((product, j) => {
                                   return (
@@ -616,7 +626,7 @@ class PickDesignV2 extends Component {
                 <div className="selected-item-popup d-flex justify-content-between">
                     <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
-                        <button className="m-0 btn-brand brand-bg-color shadow">Add to quote</button>
+                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.props.history.push('/v2/quote-now')}>Add to quote</button>
                     </div>
                     <div className="close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">

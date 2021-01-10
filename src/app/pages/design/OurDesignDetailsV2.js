@@ -159,15 +159,22 @@ class OurDesignDetails extends Component {
       }
     }
 
-    updateProductCard = (i) => {
+    updateProductCard = () => {
       let {selectedProductIds} = this.props;
       let {similarDesigns} = this.state;
-      let id = similarDesigns[i].id;
-      if (selectedProductIds.includes(id)) {
-        similarDesigns[i].isSelected = true;
-      } else {
-        similarDesigns[i].isSelected = false;
-      }
+      similarDesigns = similarDesigns.map((product) => {
+        if (selectedProductIds.includes(product.id)) {
+          product.isSelected = true;
+        } else {
+          product.isSelected = false;
+        }
+        if (selectedProductIds.length) {
+          product.isAddedToList = true;
+        } else {
+          product.isAddedToList = false;
+        }
+        return product;
+      })
       this.setState({similarDesigns});
     }
 
@@ -621,6 +628,20 @@ class OurDesignDetails extends Component {
                     </div>
                 </Modal.Body>
               </Modal>
+              {
+                this.props.selectedProductIds.length ?
+                <div className="selected-item-popup d-flex justify-content-between">
+                    <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+                        <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
+                        <button className="m-0 btn-brand brand-bg-color shadow">Add to quote</button>
+                    </div>
+                    <div className="close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">
+                            <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
+                        </svg>
+                    </div>
+                </div> : <></>
+              }
           </div>
         );
     }

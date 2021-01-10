@@ -30,6 +30,8 @@ import PickDesignV2 from './pages/design/PickDesignV2';
 
 import OurDesignDetails from './pages/design/OurDesignDetails';
 import OurDesignDetailsV2 from './pages/design/OurDesignDetailsV2';
+import QuoteNowCart from './pages/design/QuoteNowCart';
+
 import MyProject from './pages/project/MyProject';
 import MyProjectDetails from './pages/project/MyProjectDetails';
 import MyProduct from './pages/product/MyProduct';
@@ -102,6 +104,7 @@ class Root extends Component {
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
                   <PublicRoute exact path="/pick-design" component={ PickDesign }/>
                   <PublicRoute exact path="/v2/pick-design" component={ PickDesignV2 }/>
+                  <PublicRoute exact path="/v2/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/my-project" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
