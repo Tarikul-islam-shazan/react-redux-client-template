@@ -17,7 +17,7 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
-const TIME_LIMIT = 3;
+const TIME_LIMIT = 180;
 const TIME_INTERVAL = 1000;
 
 class Questionairre_1 extends Component {
