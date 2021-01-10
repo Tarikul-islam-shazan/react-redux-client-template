@@ -81,37 +81,7 @@ class Questionairre_1 extends Component {
 
     validateData = async() => {
         let flag = true;
-        let { role, roleStr, label, phoneNumber, numberValidation, countryCode } = this.state;
-        if (!role) {
-            flag = false;
-            await this.setState({
-                roleError: 'Please fill out this information'
-            })
-        } else {
-            await this.setState({
-                roleError: ''
-            })
-        }
-        if (role === 'OTHER' && roleStr === '') {
-            flag = false;
-            await this.setState({
-                roleStrError: 'Please fill out this information'
-            })
-        } else {
-            await this.setState({
-                roleStrError: ''
-            })
-        }
-        if (!label) {
-            flag = false;
-            await this.setState({
-                labelError: 'Please fill out this information'
-            })
-        } else {
-            await this.setState({
-                labelError: ''
-            })
-        }
+        let { phoneNumber, numberValidation, countryCode } = this.state;
         if (!phoneNumber) {
             flag = false;
             await this.setState({
@@ -135,24 +105,19 @@ class Questionairre_1 extends Component {
         let validation = await this.validateData();
         if (validation) {
             await this.setState({loading: true})
-            let { role, roleStr, label, phoneNumber, countryCode, iso2, roleError, labelError, phoneNumberError, countryCodeError } = this.state;
+            let { phoneNumber, countryCode, iso2, phoneNumberError, countryCodeError } = this.state;
             const email = localStorage.getItem('email');
             console.log("email",email)
             let body = {
                 email: email,
-                roleInBusiness: role,
-                clothingLabelStatus: label,
                 phoneNumber: countryCode + phoneNumber,
                 countryCode,
                 iso2
               };
-              if(role === 'OTHER'){
-                body.roleInBusinessStr = roleStr;
-              }
 
             Http.POST('updateBusinessInfo', body)
               .then(({data}) => {
-                console.log('LOGIN SUCCESS: ', JSON.stringify(data));
+                console.log('updateBusinessInfo SUCCESS: ', JSON.stringify(data));
                 this.setState({loading:false})
                 if(data.success){
                   toastSuccess(data.message);
@@ -165,7 +130,7 @@ class Questionairre_1 extends Component {
                   userInfo.businessInfoGiven = true;
                   localStorage.setItem('userInfo', JSON.stringify(userInfo));
                   let redirection = getUrlParameter('redirect', this.props.location.search)
-                  this.props.history.push(redirection ? redirection : '/pick-design');
+                  this.props.history.push('/verify-otp?redirect=' + redirection);
                 }else{
                   toastError(data.message);
                 }
@@ -212,83 +177,23 @@ class Questionairre_1 extends Component {
             spinner
             text={LOADER_TEXT}>
             <div className="questionnaire">
-                <div className="questionnaire-form">
-                    <div className="ques-heading">
-                        {
-                          userInfo.name ?
-                          <h2>Hey, {userInfo.name}!</h2>
-                          :
-                          <h2>Hey!</h2>
-                        }
-                        <p>Kindly tell us a little about yourself so we can optimize your experience with us</p>
+                <div class="questionnaire-form">
+                    <div class="ques-heading">
+                        <h2>Verify</h2>
+                        <p class="font-20">A code has been sent to +88017120000. Please verify. </p>
+                        <a href="#" class="text-underline color-333 font-13">Wrong number?</a>
                     </div>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="form-group">
-                                <label htmlFor="">What is your role in business?</label>
-                                <select className={roleError ? 'error' : ''} name="role" value={role} onClick={this.onChange}>
-                                    <option value="">Please choose one...</option>
-                                    <option value="OWNER">Owner</option>
-                                    <option value="DIRECTOR">Director</option>
-                                    <option value="DESIGNER">Designer</option>
-                                    <option value="MANAGER">Manager</option>
-                                    <option value="BUYER">Buyer</option>
-                                    <option value="OTHER">Others</option>
-                                </select>
-
-                                {
-                                  roleError ?
-                                  <div className="error">{roleError}</div>:<></>
-                                }
-                            </div>
-                            {
-                              role === 'OTHER' ?
-                              <div className="form-group">
-                                  <input type="text" className="form-control" name="roleStr" value={roleStr} onChange={this.onChange} placeholder="Role name" />
-                                  {
-                                    roleStrError ?
-                                    <div className="error">{roleStrError}</div>:<></>
-                                  }
-                              </div> : <></>
-                            }
-
-                            <div className="form-group">
-                                <span className="info">We help private labels, wholesalers, & retailers to manufacture in bulk</span>
-                                <label htmlFor="">Do you have a private clothing label?</label>
-                                <select className={labelError ? 'error' : ''} name="label" value={label} onClick={this.onChange}>
-                                    <option value="">Please choose one...</option>
-                                    <option value="DONT_HAVE_LABEL_YET">No! Don't have a label yet</option>
-                                    <option value="WE_HAVE_A_PRIVATE_CLOTHING_LABEL">Yes, we have a private clothing label</option>
-                                    <option value="DO_DROPSHIP_ONLY">We do drop-shipping only</option>
-                                    <option value="DROPSHIP_NOW_WILL_BUILD_LABEL">We dropship now, will build label</option>
-                                    <option value="SELL_WHOLESALE_TO_RETAILERS">We sell wholesale to retailers</option>
-                                    <option value="MAKE_PROMOTIONAL_GOODS">We make promotional goods</option>
-                                </select>
-                                {
-                                  labelError ?
-                                  <div className="error">{labelError}</div>:<></>
-                                }
-                            </div>
-                            <div className="form-group">
-                                <span className="info">Our business evangelist will call you to cater for your needs</span>
-                                <label htmlFor="">How can we contact you?</label>
-                                <div className="country-phone-code">
-                                    <IntlTelInput
-                                      containerClassName="intl-tel-input"
-                                      inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
-                                      onSelectFlag={this.onChangeFlag}
-                                      onPhoneNumberChange={this.onChangeNumber}
-                                      separateDialCode={true}
-                                    />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="country-code">
+                                    <input type="text" class="text-center font-weight-bold"/>
                                 </div>
-                                {
-                                  phoneNumberError ?
-                                  <div className="error">{phoneNumberError}</div>:<></>
-                                }
                             </div>
                         </div>
                     </div>
-                    <button className="btn-brand" onClick={this._submit}>Enter</button>
+                    <button class="btn-brand m-0" disabled>Verify</button>
+                    <button class="btn-brand m-0">Resend code</button>
                 </div>
             </div>
           </LoadingOverlay>
