@@ -20,6 +20,7 @@ const routes = {
     forgetPassword: `${BASE_URL}/user/request-forgot-password`, // POST
     completeForgotPassword: `${BASE_URL}/user/complete-forgot-password`, // POST
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
+    verifyOtp: `${BASE_URL}/user/validate-otp/`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
     getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)

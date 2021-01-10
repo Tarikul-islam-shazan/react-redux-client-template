@@ -17,87 +17,87 @@ import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
+const TIME_LIMIT = 30;
+const TIME_INTERVAL = 1000;
+
 class Questionairre_1 extends Component {
 
 
     constructor(props) {
         super(props);
         this.state = {
-          role: '',
-          roleStr: '',
-          label: '',
-          phoneNumber: '',
-          countryCode: '+1',
-          iso2: 'us',
-          roleError: '',
-          roleStrError: '',
-          labelError: '',
-          phoneNumberError: '',
-          numberValidation: false,
-          countryCodeError: '',
-          userInfo: {},
+          code: '',
+          loading: false,
+          phoneInfo: {},
+          codeError: '',
+          timeLimit: TIME_LIMIT
         };
+    }
+
+    timerJob = () => {
+      let {timeLimit} = this.state;
+      if (timeLimit === 0) {
+        clearInterval(this.timer);
+      } else {
+        this.setState({
+          timeLimit: timeLimit - 1
+        })
+      }
+    }
+
+    componentWillUnmount = () => {
+      clearInterval(this.timer);
     }
 
     componentDidMount = async() => {
         document.title = "Setting you up on Nitex - The easiest clothing manufacturing software";
-        let userInfo = localStorage.getItem('userInfo');
+        let phoneInfo = localStorage.getItem('nitex@phoneInfo');
         await loadjs(['/js/script.js']);
-        if (userInfo) {
-          userInfo = JSON.parse(userInfo)
+        if (phoneInfo) {
+          phoneInfo = JSON.parse(phoneInfo)
           this.setState({
-            userInfo
+            phoneInfo
           })
         } else {
-          userInfo = {};
+          phoneInfo = {};
         }
+        console.log("phoneInfo", phoneInfo);
+        this.setTimer()
+    }
+
+    setTimer = async() => {
+      await this.setState({timeLimit: TIME_LIMIT});
+      this.timer = setInterval(this.timerJob, TIME_INTERVAL);
     }
 
     onChange = (e) => {
+        if (e.target.value.length > 5) {
+          return;
+        }
         this.setState({
           [e.target.name]: e.target.value
         })
-        if (e.target.value) {
-          this.setState({
-            [e.target.name + 'Error']: ''
-          })
-          loadjs(['/js/script.js']);
-        }
     }
 
-    onChangeNumber = (numberValidation, phoneNumber) => {
-      this.setState({
-        numberValidation,
-        phoneNumber
-      })
-    }
-
-    onChangeFlag = (e, f) => {
-      this.setState({
-        iso2: f.iso2,
-        countryCode: f.dialCode
-      })
+    back = () => {
+      localStorage.setItem('nitex@phoneInfo', "");
+      let redirection = getUrlParameter('redirect', this.props.location.search)
+      if (redirection) {
+        this.props.history.push('/info?redirect=' + redirection);
+      } else {
+        this.props.history.push('/info');
+      }
     }
 
     validateData = async() => {
         let flag = true;
-        let { phoneNumber, numberValidation, countryCode } = this.state;
-        if (!phoneNumber) {
+        let { code } = this.state;
+        if (!code) {
             flag = false;
             await this.setState({
-                phoneNumberError: 'Please fill out this information'
-            })
-        } else if (!numberValidation) {
-            flag = false;
-            await this.setState({
-                phoneNumberError: 'Invalid phone number format!'
-            })
-        } else {
-            await this.setState({
-                phoneNumberError: ''
+                codeError: 'Please fill out this information'
             })
         }
-        await loadjs(['/js/script.js']);
         return flag;
     }
 
@@ -105,50 +105,39 @@ class Questionairre_1 extends Component {
         let validation = await this.validateData();
         if (validation) {
             await this.setState({loading: true})
-            let { phoneNumber, countryCode, iso2, phoneNumberError, countryCodeError } = this.state;
-            const email = localStorage.getItem('email');
-            console.log("email",email)
-            let body = {
-                email: email,
-                phoneNumber: countryCode + phoneNumber,
-                countryCode,
-                iso2
-              };
+            let { code } = this.state;
 
-            Http.POST('updateBusinessInfo', body)
+            Http.POST('verifyOtp', {} ,code)
               .then(({data}) => {
                 console.log('updateBusinessInfo SUCCESS: ', JSON.stringify(data));
                 this.setState({loading:false})
                 if(data.success){
+                  localStorage.setItem('nitex@phoneInfo', "");
                   toastSuccess(data.message);
-                  let userInfo = localStorage.getItem('userInfo');
-                  if(userInfo) {
-                    userInfo = JSON.parse(userInfo);
-                  } else {
-                    userInfo = {};
-                  }
-                  userInfo.businessInfoGiven = true;
-                  localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
                   let redirection = getUrlParameter('redirect', this.props.location.search)
-                  this.props.history.push('/verify-otp?redirect=' + redirection);
+                  if (redirection) {
+                    this.props.history.push('/pick-design?redirect=' + redirection);
+                  } else {
+                    this.props.history.push('/pick-design');
+                  }
                 }else{
                   toastError(data.message);
                 }
               })
               .catch(({response}) => {
                   this.setState({loading:false})
-                  if(response.data && response.data.message){
+                  if(response && response.data && response.data.message){
                     toastError(response.data.message);
                   }else{
                     toastError("Request wasn't successful.");
                   }
               });
         }
-
     }
 
     render() {
-        let { userInfo, role, roleStr, label, phoneNumber, countryCode, roleError, roleStrError, labelError, phoneNumberError, countryCodeError } = this.state;
+        let { code, codeError, phoneInfo, timeLimit } = this.state;
         return (
           <LoadingOverlay
             active={this.state.loading}
@@ -181,19 +170,27 @@ class Questionairre_1 extends Component {
                     <div class="ques-heading">
                         <h2>Verify</h2>
                         <p class="font-20">A code has been sent to +88017120000. Please verify. </p>
-                        <a href="#" class="text-underline color-333 font-13">Wrong number?</a>
+                        <a href="#" class="text-underline color-333 font-13" onClick={this.back}>Wrong number?</a>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="country-code">
-                                    <input type="text" class="text-center font-weight-bold"/>
+                                    <input onChange={this.onChange} value={code} name="code" type="text" class="text-center font-weight-bold"/>
                                 </div>
+                                {
+                                  codeError ?
+                                  <div className="error">{codeError}</div>:<></>
+                                }
                             </div>
                         </div>
                     </div>
-                    <button class="btn-brand m-0" disabled>Verify</button>
-                    <button class="btn-brand m-0">Resend code</button>
+                    <button class="btn-brand m-0" disabled={!(code.length === 5)} onClick={this._submit}>Verify</button>
+                    {
+                      timeLimit ?
+                      <button class="btn-brand font-16 brand-color bg-gray-light font-weight-bold m-0" disabled>Resend OTP after {`${Math.floor(timeLimit/60)} : ${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} Min</button> :
+                      <button class="btn-brand m-0" onClick={this.setTimer}>Resend code</button>
+                    }
                 </div>
             </div>
           </LoadingOverlay>
