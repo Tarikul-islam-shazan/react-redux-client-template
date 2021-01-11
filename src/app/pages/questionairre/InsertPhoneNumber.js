@@ -134,7 +134,7 @@ class InsertPhoneNumber extends Component {
               })
               .catch(({response}) => {
                   this.setState({loading:false})
-                  if(response.data && response.data.message){
+                  if(response && response.data && response.data.message){
                     toastError(response.data.message);
                   }else{
                     toastError("Request wasn't successful.");
