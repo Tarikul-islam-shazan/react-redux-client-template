@@ -102,7 +102,7 @@ class Login extends Component {
                       }
                   })
                   .catch(({response}) => {
-                    if(response.data && response.data.message){
+                    if(response && response.data && response.data.message){
                       toastError(response.data.message);
                     }else{
                       toastError("Couldn't fetch user info.");
@@ -123,7 +123,7 @@ class Login extends Component {
             .catch(({response}) => {
                 console.log('LOGIN Error: ', JSON.stringify(response));
                 this.setState({loading:false})
-                if(response.data && response.data.message){
+                if(response && response.data && response.data.message){
                   toastError(response.data.message);
                 }else{
                   toastError("Request wasn't successful");

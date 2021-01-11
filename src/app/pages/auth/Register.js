@@ -88,7 +88,7 @@ class Register extends Component {
                       })
                       .catch(({response}) => {
                           this.setState({loading: false})
-                          if (response.data && response.data.message) {
+                          if (response && response.data && response.data.message) {
                             toastError(response.data.message);
                           } else {
                             toastError("Couldn't fetch user info.");
