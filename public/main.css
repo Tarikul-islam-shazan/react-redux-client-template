@@ -4100,14 +4100,15 @@ ul.filter-tag {
     ul.filter-tag li.active .close-tag {
       display: block;
       position: absolute;
-      right: 15px;
-      top: 9px; }
+      right: 18px;
+      top: 5px;
+      cursor: pointer; }
     ul.filter-tag li.active a {
       padding-right: 40px;
       background: #452C8E;
       color: white; }
     ul.filter-tag li a {
-      padding: 10px 20px;
+      padding: 6px 20px;
       background: #F2F4F8;
       font-family: "Open Sans";
       font-size: 16px;
@@ -4180,7 +4181,7 @@ ul.filter-tag {
 .show-products {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-gap: 0 35px; }
+  grid-gap: 0 15px; }
   @media (max-width: 1280px) {
     .show-products {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4424,8 +4425,14 @@ table {
       margin-bottom: 6px;
       cursor: pointer; }
 
-.rec-carousel {
-  position: relative; }
+.rec-slider-container {
+  overflow: visible !important; }
+  .rec-slider-container .rec-item-wrapper {
+    overflow: visible !important; }
+    .rec-slider-container .rec-item-wrapper .item {
+      padding: 15px; }
+  .rec-slider-container .rec-carousel {
+    position: relative; }
 
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
@@ -4653,6 +4660,14 @@ button.rec-arrow-right {
     width: auto;
     height: 110px; }
 
+@media (max-width: 991px) {
+  .pricewillbeupdated > svg {
+    width: 148px; } }
+
+@media (max-width: 767px) {
+  aside {
+    display: none; } }
+
 @media (max-width: 767px) {
   .header-sorting {
     flex-direction: column; }
@@ -4806,20 +4821,28 @@ button.rec-arrow-right {
   @media (max-width: 1024px) {
     .quotes-list-item .quote-list .admin-quote-price {
       flex-basis: auto;
-      justify-content: start !important;
       flex-basis: 448px;
       padding-left: 20px; } }
   @media (max-width: 991px) {
     .quotes-list-item .quote-list .admin-quote-price {
       flex-basis: 188px;
-      padding: 0; }
+      padding: 0;
+      width: 100%; }
       .quotes-list-item .quote-list .admin-quote-price .valid-till {
         font-size: 12px !important; } }
+  @media (max-width: 767px) {
+    .quotes-list-item .quote-list .admin-quote-price {
+      border-top: 1px solid #ccc;
+      padding-top: 12px;
+      margin-top: 5px; } }
 .quotes-list-item .quote-price {
   flex-basis: 486px; }
   @media (max-width: 1440px) {
     .quotes-list-item .quote-price {
       flex-basis: 395px; } }
+  @media (max-width: 991px) {
+    .quotes-list-item .quote-price .product-badge {
+      margin: 8px 0 0 0 !important; } }
   .quotes-list-item .quote-price .btn-brand {
     height: 60px;
     width: 211px;

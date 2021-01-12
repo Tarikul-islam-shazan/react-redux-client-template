@@ -296,3 +296,10 @@
     }
   }
 }
+.pricewillbeupdated {
+  @media (max-width: 991px) {
+    > svg {
+      width: 148px;
+    }
+  }
+}

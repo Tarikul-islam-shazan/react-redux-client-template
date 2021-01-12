@@ -1,9 +1,9 @@
 //need to delete after merge
-//aside{
-//  @media (max-width: 767px) {
-//    display: none;
-//  }
-//}
+aside{
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
 
 
 .header-sorting{
@@ -188,16 +188,21 @@
     .admin-quote-price{
       @media (max-width: 1024px) {
         flex-basis: auto;
-        justify-content: start !important;
         flex-basis: 448px;
         padding-left: 20px;
       }
       @media (max-width: 991px) {
         flex-basis: 188px;
         padding: 0;
+        width: 100%;
         .valid-till{
           font-size: 12px !important;
         }
+      }
+      @media (max-width: 767px) {
+        border-top: 1px solid #ccc;
+        padding-top: 12px;
+        margin-top: 5px;
       }
     }
   }
@@ -205,6 +210,11 @@
     flex-basis: 486px;
     @media (max-width: 1440px) {
       flex-basis: 395px;
+    }
+    @media (max-width: 991px) {
+      .product-badge {
+        margin: 8px 0 0 0 !important;
+      }
     }
     .btn-brand {
       height: 60px;

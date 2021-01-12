@@ -15,7 +15,7 @@
   padding: 25px 25px 0 20px;
   position: relative;
   @media (max-width:1024px) {
-      padding:  0;
+    padding:  0;
   }
   .explore-design-filter{
     @media (max-width: 767px) {
@@ -42,10 +42,10 @@
       cursor: pointer;
       user-select: none;
       @media (max-width:767px) {
-          &.cat-mobile-menu{
-            float: left;
-            width: 50px;
-          }
+        &.cat-mobile-menu{
+          float: left;
+          width: 50px;
+        }
       }
       svg{
         margin: 16px 0 0 0;
@@ -99,8 +99,9 @@ ul.filter-tag {
       .close-tag{
         display: block;
         position: absolute;
-        right: 15px;
-        top: 9px;
+        right: 18px;
+        top: 5px;
+        cursor: pointer;
       }
       a{
         padding-right: 40px;
@@ -109,7 +110,7 @@ ul.filter-tag {
       }
     }
     a{
-      padding: 10px 20px;
+      padding: 6px 20px;
       background: #F2F4F8;
       font-family: "Open Sans";
       font-size: 16px;
@@ -178,23 +179,23 @@ ul.filter-tag {
       color: #21242B;
     }
   }
-   .card-footer {
-     justify-content: space-between;
-     background: transparent !important;
-     .quantity{
-       font-size: 12px;
-       color: #7E8597;
-       text-transform: uppercase;
-       font-family: Open Sans;
-       > svg{
-         margin: 0 10px;
-       }
-       strong{
-         color: #21242B;
-         text-transform: initial;
-         font-weight: normal;
-       }
-     }
+  .card-footer {
+    justify-content: space-between;
+    background: transparent !important;
+    .quantity{
+      font-size: 12px;
+      color: #7E8597;
+      text-transform: uppercase;
+      font-family: Open Sans;
+      > svg{
+        margin: 0 10px;
+      }
+      strong{
+        color: #21242B;
+        text-transform: initial;
+        font-weight: normal;
+      }
+    }
   }
   &:hover{
     .thumb{
@@ -213,7 +214,7 @@ ul.filter-tag {
 .show-products {
   display: grid;
   grid-template-columns: repeat(5,minmax(0,1fr));
-  grid-gap: 0 35px;
+  grid-gap: 0 15px;
   @media (max-width:1280px) {
     grid-template-columns: repeat(4,minmax(0,1fr));
     grid-gap: 0 25px;
@@ -242,11 +243,11 @@ ul.filter-tag {
       }
     }
   }
-    &:focus, &:active{
-      background: #fff !important;
-      outline: 0 !important;
-      box-shadow: none !important;
-    }
+  &:focus, &:active{
+    background: #fff !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
 }
 .quote-now{
   &:focus, &:active, &:hover{
@@ -426,9 +427,9 @@ table{
 }
 .nothing-found{
   @media (max-width: 767px) {
-     img{
-       width: 100%;
-     }
+    img{
+      width: 100%;
+    }
   }
 }
 
@@ -516,9 +517,22 @@ table{
   }
 }
 
-.rec-carousel {
-  position: relative;
+
+
+//REC Carousel
+.rec-slider-container{
+  overflow: visible !important;
+  .rec-item-wrapper {
+    overflow: visible !important;
+    .item {
+      padding: 15px;
+    }
+  }
+  .rec-carousel {
+    position: relative;
+  }
 }
+
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
   z-index: 9;
