@@ -212,14 +212,14 @@ class Questionairre_1 extends Component {
                 <div class="questionnaire-form">
                     <div class="ques-heading">
                         <h2>Verify</h2>
-                        <p class="font-20">A code has been sent to {this.renderNumber()}. Please verify. </p>
+                        <p class="font-20 my-2">A code has been sent to {this.renderNumber()}. Please verify. </p>
                         <a href="#" class="text-underline color-333 font-13" onClick={this.back}>Wrong number?</a>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="country-code">
-                                    <input onChange={this.onChange} value={code} name="code" type="text" class="text-center font-weight-bold"/>
+                                    <input onChange={this.onChange} value={code} name="code" type="text" class="text-center bg-gray-light border-0 font-weight-bold"/>
                                 </div>
                                 {
                                   codeError ?

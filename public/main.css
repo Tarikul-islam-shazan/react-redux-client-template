@@ -3930,6 +3930,10 @@ a.has-sub[aria-expanded="true"]:after {
       right: 14px; }
     .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input, .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=text], .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=tel] {
       padding-left: 130px !important; }
+  .questionnaire button[disabled] {
+    background: #F4F5F7; }
+  .questionnaire button.btn-brand {
+    margin-bottom: 30px !important; }
 
 .nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;
