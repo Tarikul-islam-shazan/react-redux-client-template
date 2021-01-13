@@ -441,7 +441,7 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <div className="d-flex align-items-center mb-3">
-                                  <label className="w-auto m-0">Default sizes</label>
+                                  <label className="w-auto m-0 font-14">Default sizes</label>
                                   <a href="javascript:void(0)">
                                       <span className="font-14 brand-color ml-3" onClick={() => this.setState({measurementModal: true})}>Measurement Guide</span>
                                   </a>
@@ -455,7 +455,7 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <div className="d-flex align-items-center mb-3">
-                                  <label className="w-auto m-0">Color</label>
+                                  <label className="w-auto m-0 font-14">Color</label>
                               </div>
                               <div className="color-picker">
                                   <ul>
@@ -606,21 +606,23 @@ class OurDesignDetails extends Component {
                     <Modal.Title id="example-custom-modal-styling-title">
                     </Modal.Title>
                 </Modal.Header>*/}
-                <Modal.Body>
-                    <div className="other-description">
+                <Modal.Body className="p-0">
+                    <div >
                       {
                         product.sizeTable && product.sizeTable.sizeTableRows.length ?
                         <div className="row">
                             <div className="col-lg-12">
-                                <h4  className="mb-4">Measurement Chart</h4>
+                                <div className="modal-header border-0">
+                                    <h4 className="font-weight-normal m-0">Measurement chart</h4>
+                                </div>
                                 {
-                                  <MeasurementTable data={product.sizeTable.sizeTableRows} />
+                                  <MeasurementTable data={product.sizeTable.sizeTableRows} className={"measurement-table"}/>
                                 }
                             </div>
                         </div>
                         :
                         <div className="row">
-                            <div className="col-lg-12">
+                            <div className="col-lg-12 p-0">
                               <p style={{textAlign:'center',fontWeight:'bold',color:'#452D8D'}}>Measurement table not available</p>
                             </div>
                         </div>
