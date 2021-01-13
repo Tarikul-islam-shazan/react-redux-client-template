@@ -115,9 +115,6 @@
       }
     }
   }
-  button[disabled] {
-    background: #F4F5F7;
-  }
   button.btn-brand {
     margin-bottom: 30px !important;
   }
@@ -203,8 +200,9 @@
   }
 }
 button[disabled]{
-  background: #E5E5E5;
+  background: #F2F2F2 ;
   color: #818181;
+  border-color: #EDEFF4;;
 }
 
 //Share Design Update

@@ -183,13 +183,13 @@ class InsertPhoneNumber extends Component {
                           <h2>Congratulations!</h2>
                         }
                         <p class="font-20">We’re almost done. Kindly share your cell number so that a dedicated business
-                            strategist can call you to later for your needs.
+                            strategist can call you to cater for your needs.
                         </p>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <div className="country-phone-code">
+                                <div className="country-phone-code mt-4">
                                     <IntlTelInput
                                       containerClassName="intl-tel-input"
                                       inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
@@ -205,7 +205,7 @@ class InsertPhoneNumber extends Component {
                             </div>
                         </div>
                     </div>
-                    <button className="btn-brand" onClick={this._submit}>Submit for code</button>
+                    <button className="btn-brand m-0" onClick={this._submit}>Submit for code</button>
                 </div>
             </div>
           </LoadingOverlay>

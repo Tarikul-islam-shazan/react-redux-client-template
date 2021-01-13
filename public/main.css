@@ -539,7 +539,8 @@ input.type {
   vertical-align: middle;
   text-align: center;
   border: 0;
-  font-size: 20px; }
+  font-size: 20px;
+  border: 1px solid transparent; }
   .btn-brand:focus, .btn-brand:active {
     outline: 0; }
   .btn-brand.btn-outline-secondary {
@@ -3931,8 +3932,6 @@ a.has-sub[aria-expanded="true"]:after {
       right: 14px; }
     .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input, .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=text], .questionnaire .questionnaire-form .country-code .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-4 input[type=tel] {
       padding-left: 130px !important; }
-  .questionnaire button[disabled] {
-    background: #F4F5F7; }
   .questionnaire button.btn-brand {
     margin-bottom: 30px !important; }
   .questionnaire.otp {
@@ -4002,8 +4001,9 @@ a.has-sub[aria-expanded="true"]:after {
     margin: 10px 0 !important; }
 
 button[disabled] {
-  background: #E5E5E5;
-  color: #818181; }
+  background: #F2F2F2;
+  color: #818181;
+  border-color: #EDEFF4; }
 
 .share-design-modal .modal-content {
   border: 0; }
