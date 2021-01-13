@@ -3863,7 +3863,7 @@ a.has-sub[aria-expanded="true"]:after {
       font-size: 20px;
       color: #6A7181;
       margin: 0;
-      line-height: 24px; }
+      line-height: 32px; }
   .questionnaire .questionnaire-form {
     max-width: 525px;
     margin: 60px auto; }
@@ -3934,6 +3934,8 @@ a.has-sub[aria-expanded="true"]:after {
     background: #F4F5F7; }
   .questionnaire button.btn-brand {
     margin-bottom: 30px !important; }
+  .questionnaire.otp {
+    max-width: 770px; }
 
 .nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;

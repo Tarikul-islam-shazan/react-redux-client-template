@@ -20,7 +20,7 @@
       font-size: 20px;
       color: #6A7181;
       margin: 0;
-      line-height: 24px;
+      line-height: 32px;
     }
   }
   .questionnaire-form {
@@ -119,6 +119,9 @@
   }
   button.btn-brand {
     margin-bottom: 30px !important;
+  }
+  &.otp{
+    max-width: 770px;
   }
 }
 .nice-select.error, .country-phone-code input.error {

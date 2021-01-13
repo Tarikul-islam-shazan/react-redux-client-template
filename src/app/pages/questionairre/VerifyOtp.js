@@ -208,7 +208,7 @@ class Questionairre_1 extends Component {
             }}
             spinner
             text={LOADER_TEXT}>
-            <div className="questionnaire">
+            <div className="questionnaire otp">
                 <div class="questionnaire-form">
                     <div class="ques-heading">
                         <h2>Verify</h2>

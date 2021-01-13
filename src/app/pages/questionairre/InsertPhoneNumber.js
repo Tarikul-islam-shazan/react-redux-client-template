@@ -173,7 +173,7 @@ class InsertPhoneNumber extends Component {
             }}
             spinner
             text={LOADER_TEXT}>
-            <div className="questionnaire">
+            <div className="questionnaire otp">
                 <div className="questionnaire-form">
                     <div className="ques-heading">
                         {
@@ -182,7 +182,7 @@ class InsertPhoneNumber extends Component {
                           :
                           <h2>Congratulations!</h2>
                         }
-                        <p class="font-15">We’re almost done. Kindly share your cell number so that a dedicated business
+                        <p class="font-20">We’re almost done. Kindly share your cell number so that a dedicated business
                             strategist can call you to later for your needs.
                         </p>
                     </div>
