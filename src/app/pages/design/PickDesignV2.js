@@ -29,6 +29,21 @@ const isSelected = (filters, type, id) => {
   return flag;
 }
 
+// const breakPoints = [
+//   { width: 767, itemsToShow: 1 },
+//   { width: 768, itemsToShow: 2 },
+//   { width: 1024, itemsToShow: 3 },
+//   { width: 1366, itemsToShow: 4 },
+//   { width: 1920, itemsToShow: 5 }
+// ];
+
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 550, itemsToShow: 2},
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 5 }
+];
+
 class PickDesignV2 extends Component {
 
     constructor(props) {
@@ -575,7 +590,10 @@ class PickDesignV2 extends Component {
                         return (
                           <div className="designs" key={i}>
                               <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
-                              <Carousel itemsToShow={5} pagination={false}>
+                              <Carousel
+                                breakPoints={breakPoints}
+                                // itemsToShow={5} 
+                                pagination={false}>
                               {
                                 data.productResponseList ? data.productResponseList.map((product, j) => {
                                   return (
@@ -617,7 +635,9 @@ class PickDesignV2 extends Component {
                   }
                   {
                     this.state.initialLoading &&
-                    <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                    <div className="show-products">
+                        <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                    </div>
                   }
                 </>
               }
