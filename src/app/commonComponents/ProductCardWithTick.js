@@ -89,7 +89,7 @@ class ProductCard extends Component {
                     :
                     <img src={require("../assets/images/default_product.svg")} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                   }
-                  <button className="btn-brand">Quote Now</button>
+                  {/*<button className="btn-brand">Quote Now</button>*/}
               </div>
               <div className="card-body">
                   <h5 className="card-title text-capitalize">{product.name}</h5>

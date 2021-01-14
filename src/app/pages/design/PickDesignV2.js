@@ -490,25 +490,29 @@ class PickDesignV2 extends Component {
                             </ul>
                           </div>
                       }
-                      <ul className="filter-tag">
                       {
-                        filters.map((filter, i) => {
-                          return (
-                            <li className="active" key={i}>
-                                <a>{filter.name}</a>
-                                <div className="close-tag" onClick={() => this.setFilters(filter.type, filter.id, filter.name)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888" viewBox="0 0 10.888 10.888">
-                                        <g id="Group_10684" data-name="Group 10684" transform="translate(50.699 -260.002) rotate(45)">
-                                            <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" stroke-width="1"/>
-                                            <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" stroke-width="1"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </li>
-                          )
-                        })
+                        filters.length ?
+                        <ul className="filter-tag">
+                        {
+                          filters.map((filter, i) => {
+                            return (
+                              <li className="active" key={i}>
+                                  <a>{filter.name}</a>
+                                  <div className="close-tag" onClick={() => this.setFilters(filter.type, filter.id, filter.name)}>
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888" viewBox="0 0 10.888 10.888">
+                                          <g id="Group_10684" data-name="Group 10684" transform="translate(50.699 -260.002) rotate(45)">
+                                              <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" stroke-width="1"/>
+                                              <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" stroke-width="1"/>
+                                          </g>
+                                      </svg>
+                                  </div>
+                              </li>
+                            )
+                          })
+                        }
+                        </ul> : <></>
                       }
-                      </ul>
+
                   </div>
                   <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}} ref={(node) => this.searchFilters = node}>
                       <div className="d-flex">
@@ -592,7 +596,7 @@ class PickDesignV2 extends Component {
                               <h4 className="mb-4 font-weight-normal">{data.name} <a href="#"><span className="view-all">VIEW ALL</span></a></h4>
                               <Carousel
                                 breakPoints={breakPoints}
-                                // itemsToShow={5} 
+                                // itemsToShow={5}
                                 pagination={false}>
                               {
                                 data.productResponseList ? data.productResponseList.map((product, j) => {
