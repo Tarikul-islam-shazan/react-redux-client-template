@@ -234,7 +234,7 @@ ul.filter-tag {
 .show-products {
   display: grid;
   grid-template-columns: repeat(5,minmax(0,1fr));
-  grid-gap: 0 15px;
+  grid-gap: 0 30px;
   @media (max-width:1280px) {
     grid-template-columns: repeat(4,minmax(0,1fr));
     grid-gap: 0 25px;

@@ -4194,7 +4194,7 @@ ul.filter-tag {
 .show-products {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-gap: 0 15px; }
+  grid-gap: 0 30px; }
   @media (max-width: 1280px) {
     .show-products {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -7079,11 +7079,14 @@ template {
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
   cursor: pointer; }
 
+.slider-nav .thumbImg {
+  margin-bottom: 25px; }
+
 .product-detail-gallery .thumbnail-prev img {
-  height: auto; }
+  height: 89px; }
 
 .slider-for img {
-  height: 800px !important; }
+  height: 632px !important; }
 
 /*USE CSS for Slider*/
 .vehicle-detail-banner .car-slider-desc {
@@ -7092,7 +7095,7 @@ template {
 
 .banner-slider .slider.slider-for {
   max-width: calc(100% - 120px);
-  padding-right: 35px; }
+  padding-left: 30px; }
   @media (max-width: 1024px) {
     .banner-slider .slider.slider-for {
       padding-right: 0px; } }
