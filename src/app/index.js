@@ -27,6 +27,7 @@ import Questionairre_final from './pages/questionairre/Questionairre_final';
 import RequestForQuotation from './pages/quotation/RequestForQuotation';
 import PickDesign from './pages/design/PickDesign';
 import PickDesignV2 from './pages/design/PickDesignV2';
+import ShowCollection from './pages/design/ShowCollection';
 
 import OurDesignDetails from './pages/design/OurDesignDetails';
 import OurDesignDetailsV2 from './pages/design/OurDesignDetailsV2';
@@ -103,8 +104,9 @@ class Root extends Component {
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
                   <PublicRoute exact path="/pick-design" component={ PickDesign }/>
-                  <PublicRoute exact path="/v2/pick-design" component={ PickDesignV2 }/>
-                  <PublicRoute exact path="/v2/quote-now" component={ QuoteNowCart }/>
+                  <PublicRoute exact path="/explore-design" component={ PickDesignV2 }/>
+                  <PublicRoute exact path="/product/collections/:id" component={ ShowCollection }/>
+                  <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/my-project" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
