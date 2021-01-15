@@ -606,15 +606,20 @@ class OurDesignDetails extends Component {
                     <Modal.Title id="example-custom-modal-styling-title">
                     </Modal.Title>
                 </Modal.Header>*/}
+
+                  <div className="modal-header border-0">
+                      <h4 className="font-weight-normal m-0">Measurement chart</h4>
+                      <button type="button" className="close pt-3 pb-2" data-dismiss="modal"
+                              aria-label="Close">
+                          <i className="material-icons">close</i>
+                      </button>
+                  </div>
                 <Modal.Body className="p-0">
-                    <div >
+                    <div>
                       {
                         product.sizeTable && product.sizeTable.sizeTableRows.length ?
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="modal-header border-0">
-                                    <h4 className="font-weight-normal m-0">Measurement chart</h4>
-                                </div>
                                 {
                                   <MeasurementTable data={product.sizeTable.sizeTableRows} className={"measurement-table"}/>
                                 }
