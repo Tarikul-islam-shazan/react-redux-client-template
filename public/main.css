@@ -447,7 +447,7 @@ a {
   border-radius: 100%;
   margin-top: -4px; }
 .custom-radio .form-group input:checked + label:before {
-  border: 9px solid #452D8F;
+  border: 8px solid #452D8F;
   background: #fff;
   padding: 4px; }
 

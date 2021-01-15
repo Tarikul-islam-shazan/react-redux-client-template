@@ -342,6 +342,7 @@ class MyProfile extends Component {
                         <ul className="nav nav-tabs">
                             <li><a className="active" data-toggle="tab" href="#PersonalInformation">Personal Information</a></li>
                             <li><a data-toggle="tab" href="#ChangePassword">Change Password</a></li>
+                            <li><a data-toggle="tab" href="#EmailPreferences">Preferences</a></li>
                         </ul>
                         <div className="tab-content">
                             <div id="PersonalInformation" className="tab-pane active">
@@ -484,6 +485,37 @@ class MyProfile extends Component {
                                     <div className="row mt-4">
                                         <div className="col-lg-12 text-right">
                                             <button className="btn-brand" onClick={this.updatePassword}>Save Changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="EmailPreferences" className="tab-pane fade">
+                                <div className="email-preferences">
+                                    <h4 className="mb-5">Project emails</h4>
+                                    <div className="row">
+                                        <div className="col-lg-2">
+                                            <div className="custom-radio">
+                                                <div className="form-group">
+                                                    <input type="radio" id="card" name="chekout-payment" />
+                                                        <label htmlFor="card">Don't send any emails</label>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div className="custom-radio">
+                                                <div className="form-group">
+                                                    <input type="radio" id="card1" name="chekout-payment" />
+                                                        <label htmlFor="card1">Email important updates</label>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div className="custom-radio">
+                                                <div className="form-group">
+                                                    <input type="radio" id="card2" name="chekout-payment" />
+                                                        <label htmlFor="card2">Email on all updates</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
