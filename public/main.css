@@ -4121,7 +4121,7 @@ ul.filter-tag {
         color: white !important; }
 
 .new-card {
-  margin-bottom: 35px !important; }
+  margin: 0px !important; }
   .new-card.active {
     border: 2px solid rgba(69, 44, 142, 0.4);
     background: #F5F5FB;
@@ -4194,7 +4194,7 @@ ul.filter-tag {
 .show-products {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-gap: 0 30px; }
+  grid-gap: 30px; }
   @media (max-width: 1280px) {
     .show-products {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4438,14 +4438,12 @@ table {
       margin-bottom: 6px;
       cursor: pointer; }
 
-.rec-slider-container {
+.rec-slider-container .rec-item-wrapper {
   overflow: visible !important; }
-  .rec-slider-container .rec-item-wrapper {
-    overflow: visible !important; }
-    .rec-slider-container .rec-item-wrapper .item {
-      padding: 15px; }
-  .rec-slider-container .rec-carousel {
-    position: relative; }
+  .rec-slider-container .rec-item-wrapper .item {
+    padding: 15px; }
+.rec-slider-container .rec-carousel {
+  position: relative; }
 
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
