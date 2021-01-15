@@ -138,6 +138,10 @@
 
 .slider-nav .thumbImg {
   margin-bottom: 25px;
+  border: 1px solid transparent;
+}
+.slick-current .thumbImg {
+  border: 1px solid #ffbe8f;
 }
 .product-detail-gallery .thumbnail-prev img {
   height: 89px;

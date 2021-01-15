@@ -197,15 +197,21 @@
 
 //Product Slider Custom
 .slick-arrow {
-  position: absolute;
-  width: 40px;
-  height: 80px;
+  position: absolute !important;
+  width: 40px !important;
+  height: 80px !important;
   z-index: 999;
   &.slick-prev{
     left: 30px;
     top: 50%;
     transform: translateY(-50%);
     background: url("./images/icons/left-slide.png") no-repeat center;
+    &:before{
+      display: none;
+    }
+    &:hover{
+      background: url("./images/icons/left-slide.png") no-repeat center !important;
+    }
   }
   &.slick-next{
     right: 65px;
@@ -215,6 +221,12 @@
     background: url("./images/icons/right-slide.png") no-repeat center;
     @media (max-width: 1024px) {
       right: 30px;
+    }
+    &:before{
+      display: none;
+    }
+    &:hover{
+      background: url("./images/icons/right-slide.png") no-repeat center !important;
     }
   }
 }

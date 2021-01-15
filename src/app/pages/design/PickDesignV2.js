@@ -614,7 +614,7 @@ class PickDesignV2 extends Component {
                         )
                       } else if (data.collectionViewType === 'BANNER') {
                         return (
-                          <div className="banner-section mb-4 overflow-hidden">
+                          <div className="banner-section mt-5 mb-4 overflow-hidden">
                               <div className="row">
                               {
                                 data.collections ? data.collections.map((banner, j) => {

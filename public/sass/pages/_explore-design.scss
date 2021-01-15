@@ -14,6 +14,9 @@
 .explore-design{
   padding: 25px 25px 0 20px;
   position: relative;
+  .designs{
+    margin-top: 30px;
+  }
   @media (max-width:1024px) {
     padding:  0;
   }
@@ -218,6 +221,7 @@ ul.filter-tag {
       //  display: block;
       //}
     }
+    box-shadow: 0px 0px 30px rgba(0,0,0,.05) !important;
   }
   &.hovered{
     box-shadow: 0px 8px 40px #0B1C4326;
@@ -555,17 +559,22 @@ table{
 
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
-  z-index: 9;
+  z-index: 99;
   transform: translateY(-50%);
-  box-shadow: none;
-  &:focus{
+  text-indent: -9999999999px;
+  box-shadow: 0 0 25px 1px #eee;
+  &:focus, &:hover{
     outline: 0;
+    box-shadow: none;
   }
 }
 button.rec-arrow-left {
-  left: -14px;
+  left: 20px;
+  background: url("./images/icons/nav-left.png") no-repeat center #fff;
+
 }
 
 button.rec-arrow-right {
-  right: -14px;
+  right: 20px;
+  background: url("./images/icons/nav-right.png") no-repeat center #fff;
 }
