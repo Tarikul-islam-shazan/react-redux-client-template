@@ -111,7 +111,7 @@ class Questionairre_1 extends Component {
         if (!code) {
             flag = false;
             await this.setState({
-                codeError: 'Please fill out this information'
+                codeError: 'Please enter 5 digit code'
             })
         }
         return flag;
@@ -228,7 +228,7 @@ class Questionairre_1 extends Component {
                             </div>
                         </div>
                     </div>
-                    <button class="btn-brand m-0" disabled={!(code.length === 5)} onClick={this._submit}>Verify</button>
+                    <button class="btn-brand m-0" onClick={this._submit}>Verify</button>
                     {
                       timeLimit ?
                       <button class="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend code after {`${Math.floor(timeLimit/60)}:${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} mins</button> :
