@@ -687,8 +687,7 @@
         font-size: 14px;
     }
     .dropdown-menu {
-        width: 145px;
-        min-width: 145px;
+        width: auto;
     }
     .datepicker.dropdown-menu{
         width: auto;
@@ -1524,7 +1523,6 @@
         .dropdown-menu {
             position: absolute;
             left: 0;
-            width: 290px;
             padding: 10px !important;
         }
     }
