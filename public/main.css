@@ -4519,6 +4519,16 @@ button.rec-arrow-right {
   height: 25px;
   color: #fff; }
 
+.sidebar-collapse.filter-cat-mobile-menu {
+  border: 0;
+  border-top: 1px solid #eee;
+  height: 360px; }
+  .sidebar-collapse.filter-cat-mobile-menu ul li {
+    margin: 10px 0;
+    cursor: pointer; }
+  .sidebar-collapse.filter-cat-mobile-menu button.btn-brand {
+    float: right !important; }
+
 .confirm-quote-request {
   padding-right: 80px;
   width: calc(100% - 540px);

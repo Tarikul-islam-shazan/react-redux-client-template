@@ -638,3 +638,15 @@ button.rec-arrow-right {
     color: #fff;
   }
 }
+.sidebar-collapse.filter-cat-mobile-menu{
+  border: 0;
+  border-top: 1px solid #eee;
+  height: 360px;
+  ul li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  button.btn-brand{
+    float: right !important;
+  }
+}

@@ -737,6 +737,7 @@ class PickDesignV2 extends Component {
                                     </ul>
                                 </li>
                             </ul>
+                            <button className="m-0 btn-brand m-0 shadow">Submit</button>
                         </div>
                     </nav>
                 </Modal.Body>
