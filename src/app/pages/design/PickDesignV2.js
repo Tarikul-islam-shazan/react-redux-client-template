@@ -8,6 +8,7 @@ import $ from "jquery";
 import loadjs from "loadjs";
 import Carousel from 'react-elastic-carousel';
 import LoadingOverlay from 'react-loading-overlay';
+import Modal from 'react-bootstrap/Modal'
 
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
@@ -69,7 +70,8 @@ class PickDesignV2 extends Component {
           suggestions: [],
           searching: false,
           initialLoading: false,
-          showSuggestions: false
+          showSuggestions: false,
+          responsiveFilterModal: false
         };
     }
 
@@ -440,7 +442,7 @@ class PickDesignV2 extends Component {
     }
 
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions } = this.state;
+        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal } = this.state;
 
         return (
           <div className="explore-design">
@@ -455,7 +457,7 @@ class PickDesignV2 extends Component {
                       </svg>
                   </div>
                   <div className="cat-menu cat-mobile-menu d-block d-xl-none" data-toggle="modal" data-target="#CatMenuMobile">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18" onClick={() => this.setState({responsiveFilterModal: true})}>
                           <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
                               <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                               <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -659,6 +661,80 @@ class PickDesignV2 extends Component {
                     </div>
                 </div> : <></>
               }
+
+              <Modal
+                show={responsiveFilterModal}
+                onHide={() => this.setState({responsiveFilterModal: false})}
+                dialogClassName="modal-xl share-design-modal"
+                aria-labelledby="example-custom-modal-styling-title"
+              >
+              {/*<Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                    </Modal.Title>
+                </Modal.Header>*/}
+
+                  <div className="modal-header border-0">
+                      <button type="button" class="close pt-3 pb-2" onClick={() => this.setState({responsiveFilterModal: false})} aria-label="Close">
+                          <i class="material-icons">close</i>
+                      </button>
+                  </div>
+                <Modal.Body className="p-0">
+                    <nav class="sidebar-collapse filter-cat-mobile-menu d-block d-xl-none">
+                        <div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens</a>
+                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu1">
+                                        <li><a href="#">Casual</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Jordan</a></li>
+                                        <li><a href="#">Lifestyle</a></li>
+                                        <li><a href="#">Running</a></li>
+                                        <li><a href="#">Soccer</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Womens</a>
+                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu2">
+                                        <li><a href="#">Casual</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Jordan</a></li>
+                                        <li><a href="#">Lifestyle</a></li>
+                                        <li><a href="#">Running</a></li>
+                                        <li><a href="#">Soccer</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Boys</a>
+                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu3">
+                                        <li><a href="#">Casual</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Jordan</a></li>
+                                        <li><a href="#">Lifestyle</a></li>
+                                        <li><a href="#">Running</a></li>
+                                        <li><a href="#">Soccer</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Girls</a>
+                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu4">
+                                        <li><a href="#">Casual</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Jordan</a></li>
+                                        <li><a href="#">Lifestyle</a></li>
+                                        <li><a href="#">Running</a></li>
+                                        <li><a href="#">Soccer</a></li>
+                                        <li><a href="#">Sports</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </Modal.Body>
+              </Modal>
           </div>
         );
     }

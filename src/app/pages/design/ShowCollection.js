@@ -116,21 +116,8 @@ class ShowCollection extends Component {
       this.setState({loading:true, searching: true})
       let { size, designList, search, sort, productTypeId, filters } = this.state;
       let params = `?page=${page}&size=${size}&searchText=${search}`;
-      filters.map((filter) => {
-        let key = '';
-        if (filter.type === 'CATEGORY') {
-          key = 'category';
-        } else if (filter.type === 'PRODUCT_TYPE') {
-          key = 'productType';
-        } else if (filter.type === 'COLOR') {
-          key = 'color';
-        } else if (filter.type === 'FABRIC_TYPE') {
-          key = 'fabricType';
-        }
-        params += `&${key}=${filter.id}`
-      });
       let result = [];
-      await Http.GET('getPickDesign',params)
+      await Http.GET('getProductCollectionList',params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading:false})

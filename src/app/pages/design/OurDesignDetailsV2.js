@@ -313,7 +313,7 @@ class OurDesignDetails extends Component {
 
     render() {
         let { product , selectedImage, loading, imageViewerFlag, imageViewerData, imageViewerCurrentIndex, similarDesigns, similarDesignLoading, measurementModal } = this.state;
-
+        // console.log("this.getImageByType()", this.getImageByType())
         const settingsSliderMain = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -323,7 +323,7 @@ class OurDesignDetails extends Component {
             beforeChange: (prev, next) => {this.sliderNav.slickGoTo(next);}
         };
         const settingsSliderNav = {
-            slidesToShow: 6,
+            slidesToShow: this.getImageByType().length > 6 ? 6 : this.getImageByType().length,
             slidesToScroll: 1,
             vertical:true,
             // asNavFor: '.slider-for',
@@ -609,7 +609,7 @@ class OurDesignDetails extends Component {
 
                   <div className="modal-header border-0">
                       <h4 className="font-weight-normal m-0">Measurement chart</h4>
-                      <button type="button" className="close pt-3 pb-2" data-dismiss="modal"
+                      <button type="button" className="close pt-3 pb-2" onClick={() => this.setState({measurementModal: false})}
                               aria-label="Close">
                           <i className="material-icons">close</i>
                       </button>
