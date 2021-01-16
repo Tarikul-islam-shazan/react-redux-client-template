@@ -616,3 +616,25 @@ button.rec-arrow-right {
   right: 20px;
   background: url("./images/icons/nav-right.png") no-repeat center #fff;
 }
+
+.quote-cart{
+  button{
+    padding: 4px 10px !important;
+  }
+  .quote-cart-count{
+    background: #ee761f;
+    border: 2px solid #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 100%;
+    top: -6px;
+    right: -5px;
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+  }
+}
