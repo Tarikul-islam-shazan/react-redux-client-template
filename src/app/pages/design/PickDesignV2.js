@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -18,7 +17,7 @@ import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSk
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
-import {_storeData} from './actions';
+import {_storeData, _getProductForQuote} from './actions';
 
 const isSelected = (filters, type, id) => {
   let flag = false;
@@ -170,6 +169,7 @@ class PickDesignV2 extends Component {
         .then(({data}) => {
           let response = {...data};
           response.productTypeResponseList = formatProductTypeWithGroup(response.productTypeResponseList);
+          console.log("response.productTypeResponseList", response.productTypeResponseList)
           this.setState({filterOptions: response});
         })
         .catch(({response}) => {
@@ -442,6 +442,11 @@ class PickDesignV2 extends Component {
       this.setState({landingData, designList});
     }
 
+    addToQuote = async(ids) => {
+      let products = await _getProductForQuote(ids);
+      console.log("products addToQuote", products)
+    }
+
     render() {
         let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal } = this.state;
 
@@ -537,7 +542,7 @@ class PickDesignV2 extends Component {
                                   {
                                     group.types.map((type, j) => {
                                       return (
-                                        <li style={{color: (isSelected(filters, 'PRODUCT_TYPE', type.id) ? 'rgb(238 118 31)' : 'black')}} key={j} onClick={() => this.setFilters('PRODUCT_TYPE', type.id, type.name)}>{type.name}</li>
+                                        <li style={{color: (isSelected(filters, 'PRODUCT_TYPE', type.id) ? 'rgb(238 118 31)' : 'black')}} key={j} onClick={() => this.setFilters('PRODUCT_TYPE', type.id, `${type.productGroup.name} - ${type.name}`)}>{type.name}</li>
                                       )
                                     })
                                   }
@@ -652,10 +657,13 @@ class PickDesignV2 extends Component {
                 <div className="selected-item-popup d-flex justify-content-between">
                     <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
-                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.props.history.push('/quote-now')}>Add to quote</button>
+                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
                     </div>
                     <div className="close">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436" onClick={async() => {
+                          await this.props._storeData('selectedProductIds', []);
+                          this.updateProductCard();
+                        }}>
                             <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
                         </svg>
                     </div>

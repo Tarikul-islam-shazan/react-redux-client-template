@@ -29,22 +29,7 @@ const isSelected = (filters, type, id) => {
   return flag;
 }
 
-// const breakPoints = [
-//   { width: 767, itemsToShow: 1 },
-//   { width: 768, itemsToShow: 2 },
-//   { width: 1024, itemsToShow: 3 },
-//   { width: 1366, itemsToShow: 4 },
-//   { width: 1920, itemsToShow: 5 }
-// ];
-
-const breakPoints = [
-  { width: 1, itemsToShow: 1 },
-  { width: 550, itemsToShow: 2},
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 5 }
-];
-
-class ShowCollection extends Component {
+class ShowProductCollection extends Component {
 
     constructor(props) {
         super(props);
@@ -110,6 +95,14 @@ class ShowCollection extends Component {
       document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       this.setState({loading: true});
+      let designList = await this.renderList(0);
+      await this.setState({
+        designList,
+        hasNext : designList.length === this.state.size ? true : false,
+        loading: false
+      })
+      await this.updateProductCard()
+      this.setState({loading: false});
     }
 
     renderList = async(page = 0) => {
@@ -117,7 +110,8 @@ class ShowCollection extends Component {
       let { size, designList, search, sort, productTypeId, filters } = this.state;
       let params = `?page=${page}&size=${size}&searchText=${search}`;
       let result = [];
-      await Http.GET('getProductCollectionList',params)
+      let id = this.props.match.params.id;
+      await Http.GET('getProductCollectionList', (id + params))
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading:false})
@@ -137,7 +131,6 @@ class ShowCollection extends Component {
           }else{
             // toastWarning("Product List - no data found.");
           }
-          loadjs(['/js/script.js','/js/custom.js']);
         })
         .catch(response => {
             console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
@@ -155,7 +148,7 @@ class ShowCollection extends Component {
         productTypeId : '',
         // size : 100
       },async(name)=>{
-        this.fetchSuggestions();
+        //this.fetchSuggestions();
       })
     }
 
@@ -214,22 +207,8 @@ class ShowCollection extends Component {
               }
               return item;
             })
-
-            let result = landingData.map((collection) => {
-                if (collection.collectionViewType === 'PRODUCT_LIST') {
-                    collection.productResponseList = collection.productResponseList.map((product) => {
-                      if (product.id === id) {
-                        product.liked = true;
-                      }
-                      return product;
-                    })
-                }
-                return collection;
-            })
-
             this.setState({
-              designList,
-              landingData: result
+              designList
             })
           }else{
             toastError(data.message);
@@ -264,22 +243,8 @@ class ShowCollection extends Component {
               }
               return item;
             })
-
-            let result = landingData.map((collection) => {
-                if (collection.collectionViewType === 'PRODUCT_LIST') {
-                    collection.productResponseList = collection.productResponseList.map((product) => {
-                      if (product.id === id) {
-                        product.liked = false;
-                      }
-                      return product;
-                    })
-                }
-                return collection;
-            })
-
             this.setState({
-              designList,
-              landingData: result
+              designList
             })
           }else{
             toastError(data.message);
@@ -299,25 +264,7 @@ class ShowCollection extends Component {
 
     updateProductCard = () => {
       let {selectedProductIds} = this.props;
-      let {landingData, designList} = this.state;
-      landingData = landingData.map((collection) => {
-          if (collection.productResponseList) {
-            collection.productResponseList = collection.productResponseList.map((product) => {
-                if (selectedProductIds.includes(product.id)) {
-                  product.isSelected = true;
-                } else {
-                  product.isSelected = false;
-                }
-                if (selectedProductIds.length) {
-                  product.isAddedToList = true;
-                } else {
-                  product.isAddedToList = false;
-                }
-                return product;
-            })
-          }
-          return collection;
-      })
+      let {designList} = this.state;
       designList = designList.map((product) => {
         if (selectedProductIds.includes(product.id)) {
           product.isSelected = true;
@@ -331,7 +278,7 @@ class ShowCollection extends Component {
         }
         return product;
       })
-      this.setState({landingData, designList});
+      this.setState({designList});
     }
 
     render() {
@@ -397,7 +344,8 @@ class ShowCollection extends Component {
                            product={product}
                            updateProductCard={() => this.updateProductCard()}
                            likeProduct={this.likeProduct}
-                           unlikeProduct={this.unlikeProduct}/>
+                           unlikeProduct={this.unlikeProduct}
+                           details={this.details}/>
                       )
                     })
                   }
@@ -427,4 +375,4 @@ const mapDispatchToProps = dispatch => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowCollection);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowProductCollection);

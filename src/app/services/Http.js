@@ -66,7 +66,8 @@ const routes = {
     markNotificationRead: `${BASE_URL}/notification/mark-seen/`,
     getSimilarDesign: `${BASE_URL}/product/similar/`,
 
-    getProductCollectionList: `${BASE_URL}/collection/products/`
+    getProductCollectionList: `${BASE_URL}/collection/products/`,
+    getProductsForRfq: `${BASE_URL}/product/for-rfq`
 };
 
 // Axios request interceptor
@@ -135,6 +136,11 @@ const Http = {
         // updateTokenInHeader();
         params = typeof params === 'object' ? encodeQueryData(params) : params;
         return axios.get(routes[key] + params, headers);
+    },
+    GET_WITH_BODY: (key, params = {}) => {
+        // updateTokenInHeader();
+        // params = typeof params === 'object' ? encodeQueryData(params) : params;
+        return axios.get(routes[key], params, headers);
     },
     GET_WITH_ID_PARAM: (key, params = '', id = '') => {
         // updateTokenInHeader();

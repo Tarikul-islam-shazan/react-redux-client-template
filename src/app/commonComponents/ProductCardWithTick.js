@@ -59,7 +59,7 @@ class ProductCard extends Component {
     let { product , showDetails , likeProduct , unlikeProduct } = this.props;
     return(
       <div className="item">
-          <div className={`card product-card new-card ${product.isAddedToList ? 'active' : ''}`}>
+          <div className={`card product-card new-card ${product.isSelected ? 'active' : (product.isAddedToList ? 'hovered' : '')}`}>
               <div className="thumb">
                   <div className={`favourite-part choose ${product.isSelected ? 'active' : ''}`} onClick={() => this.toggleSelect(product.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
@@ -83,14 +83,14 @@ class ProductCard extends Component {
                           <ul className="dropdown-menu dropdown-menu-right shadow-lg mt-3" role="menu"
                               aria-labelledby="menu1">
                               <li role="presentation" className="px-4 pb-3 pt-3">
-                                  <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Like this design</a>
+                                  <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to favourites</a>
                               </li>
                               <li role="presentation" className="px-4 pb-3">
                                   <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to quote</a>
                               </li>
-                              <li role="presentation" className="px-4 pb-3">
+                              {/*<li role="presentation" className="px-4 pb-3">
                                   <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to collection</a>
-                              </li>
+                              </li>*/}
                           </ul>
                       </div>
                   </div>
