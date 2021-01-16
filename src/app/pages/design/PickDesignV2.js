@@ -519,51 +519,50 @@ class PickDesignV2 extends Component {
                   </div>
                   <div className="filter-cat" style={{display: showFilters ? 'flex' : 'none'}} ref={(node) => this.searchFilters = node}>
                       <div className="d-flex">
-                      <ul className="list custom-scrollbar">
-                          <div className="title">Categories</div>
-                          {
-                            filterOptions.categories &&
-                            filterOptions.categories.map((item, i) => {
-                              return <li key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
-                            })
-                          }
-                      </ul>
-
-                      {
-                        filterOptions.productTypeResponseList &&
-                        filterOptions.productTypeResponseList.map((group) => {
-                          return (
-                            <ul className="list custom-scrollbar">
-                              <div className="title">{group.groupName}</div>
+                          <ul className="list custom-scrollbar">
+                              <div className="title">Categories</div>
                               {
-                                group.types.map((type, j) => {
-                                  return (
-                                    <li style={{color: (isSelected(filters, 'PRODUCT_TYPE', type.id) ? 'rgb(238 118 31)' : 'black')}} key={j} onClick={() => this.setFilters('PRODUCT_TYPE', type.id, type.name)}>{type.name}</li>
-                                  )
+                                filterOptions.categories &&
+                                filterOptions.categories.map((item, i) => {
+                                  return <li key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
                                 })
                               }
-                            </ul>
-                          )
-                        })
-                      }
-                      <ul className="list custom-scrollbar">
-                          <div className="title">Color</div>
+                          </ul>
                           {
-                            filterOptions.colorResponseList &&
-                            filterOptions.colorResponseList.map((item, i) => {
-                              return <li style={{color: (isSelected(filters, 'COLOR', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('COLOR', item.id, item.name)}>{item.name}</li>
+                            filterOptions.productTypeResponseList &&
+                            filterOptions.productTypeResponseList.map((group) => {
+                              return (
+                                <ul className="list custom-scrollbar">
+                                  <div className="title">{group.groupName}</div>
+                                  {
+                                    group.types.map((type, j) => {
+                                      return (
+                                        <li style={{color: (isSelected(filters, 'PRODUCT_TYPE', type.id) ? 'rgb(238 118 31)' : 'black')}} key={j} onClick={() => this.setFilters('PRODUCT_TYPE', type.id, type.name)}>{type.name}</li>
+                                      )
+                                    })
+                                  }
+                                </ul>
+                              )
                             })
                           }
-                      </ul>
-                      <ul className="list custom-scrollbar">
-                          <div className="title">Fabrications</div>
-                          {
-                            filterOptions.fabricTypeResponseList &&
-                            filterOptions.fabricTypeResponseList.map((item, i) => {
-                              return <li style={{color: (isSelected(filters, 'FABRIC_TYPE', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('FABRIC_TYPE', item.id, item.name)}>{item.name}</li>
-                            })
-                          }
-                      </ul>
+                          <ul className="list custom-scrollbar">
+                              <div className="title">Color</div>
+                              {
+                                filterOptions.colorResponseList &&
+                                filterOptions.colorResponseList.map((item, i) => {
+                                  return <li style={{color: (isSelected(filters, 'COLOR', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('COLOR', item.id, item.name)}>{item.name}</li>
+                                })
+                              }
+                          </ul>
+                          <ul className="list custom-scrollbar">
+                              <div className="title">Fabrications</div>
+                              {
+                                filterOptions.fabricTypeResponseList &&
+                                filterOptions.fabricTypeResponseList.map((item, i) => {
+                                  return <li style={{color: (isSelected(filters, 'FABRIC_TYPE', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('FABRIC_TYPE', item.id, item.name)}>{item.name}</li>
+                                })
+                              }
+                          </ul>
                       </div>
                       <button className="m-0 btn-brand m-0 shadow float-right" onClick={() => this._search()}>Submit</button>
                   </div>
@@ -669,6 +668,7 @@ class PickDesignV2 extends Component {
                 dialogClassName="modal-xl share-design-modal"
                 role="dialog"
                 aria-labelledby="bottom_modal"
+                className="bottom"
               >
               {/*<Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
@@ -676,60 +676,64 @@ class PickDesignV2 extends Component {
                 </Modal.Header>*/}
 
                   <div className="modal-header border-0">
-                      <button type="button" class="close pt-3 pb-2" onClick={() => this.setState({responsiveFilterModal: false})} aria-label="Close">
-                          <i class="material-icons">close</i>
+                      <button type="button" className="close pt-3 pb-2" onClick={() => this.setState({responsiveFilterModal: false})} aria-label="Close">
+                          <i className="material-icons">close</i>
                       </button>
                   </div>
                 <Modal.Body className="p-0">
-                    <nav class="sidebar-collapse filter-cat-mobile-menu d-block d-xl-none">
+                    <nav className="sidebar-collapse filter-cat-mobile-menu d-block d-xl-none">
                         <div>
-                            <ul class="list-unstyled">
+                            <ul className="list-unstyled">
                                 <li>
-                                    <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens</a>
-                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu1">
-                                        <li><a href="#">Casual</a></li>
-                                        <li><a href="#">Football</a></li>
-                                        <li><a href="#">Jordan</a></li>
-                                        <li><a href="#">Lifestyle</a></li>
-                                        <li><a href="#">Running</a></li>
-                                        <li><a href="#">Soccer</a></li>
-                                        <li><a href="#">Sports</a></li>
+                                    <a href="#pageSubmenuCategory" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Category</a>
+                                    <ul className="collapse list-unstyled sub-collapse-menu" id="pageSubmenuCategory">
+                                    {
+                                      filterOptions.categories &&
+                                      filterOptions.categories.map((item, i) => {
+                                        return <li key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
+                                      })
+                                    }
+                                    </ul>
+                                </li>
+                                {
+                                  filterOptions.productTypeResponseList &&
+                                  filterOptions.productTypeResponseList.map((group, groupIndex) => {
+                                    return (
+                                      <li>
+                                          <a href={`#pageSubmenuGroupId_${groupIndex}`} data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">{group.groupName}</a>
+                                          <ul className="collapse list-unstyled sub-collapse-menu" id={`pageSubmenuGroupId_${groupIndex}`}>
+                                          {
+                                            group.types.map((type, j) => {
+                                              return (
+                                                <li style={{color: (isSelected(filters, 'PRODUCT_TYPE', type.id) ? 'rgb(238 118 31)' : 'black')}} key={j} onClick={() => this.setFilters('PRODUCT_TYPE', type.id, type.name)}>{type.name}</li>
+                                              )
+                                            })
+                                          }
+                                          </ul>
+                                      </li>
+                                    )
+                                  })
+                                }
+                                <li>
+                                    <a href="#pageSubmenuColor" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Color</a>
+                                    <ul className="collapse list-unstyled sub-collapse-menu" id="pageSubmenuColor">
+                                    {
+                                      filterOptions.colorResponseList &&
+                                      filterOptions.colorResponseList.map((item, i) => {
+                                        return <li style={{color: (isSelected(filters, 'COLOR', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('COLOR', item.id, item.name)}>{item.name}</li>
+                                      })
+                                    }
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Womens</a>
-                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu2">
-                                        <li><a href="#">Casual</a></li>
-                                        <li><a href="#">Football</a></li>
-                                        <li><a href="#">Jordan</a></li>
-                                        <li><a href="#">Lifestyle</a></li>
-                                        <li><a href="#">Running</a></li>
-                                        <li><a href="#">Soccer</a></li>
-                                        <li><a href="#">Sports</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Boys</a>
-                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu3">
-                                        <li><a href="#">Casual</a></li>
-                                        <li><a href="#">Football</a></li>
-                                        <li><a href="#">Jordan</a></li>
-                                        <li><a href="#">Lifestyle</a></li>
-                                        <li><a href="#">Running</a></li>
-                                        <li><a href="#">Soccer</a></li>
-                                        <li><a href="#">Sports</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Girls</a>
-                                    <ul class="collapse list-unstyled sub-collapse-menu" id="pageSubmenu4">
-                                        <li><a href="#">Casual</a></li>
-                                        <li><a href="#">Football</a></li>
-                                        <li><a href="#">Jordan</a></li>
-                                        <li><a href="#">Lifestyle</a></li>
-                                        <li><a href="#">Running</a></li>
-                                        <li><a href="#">Soccer</a></li>
-                                        <li><a href="#">Sports</a></li>
+                                    <a href="#pageSubmenuFabrics" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Fabrications</a>
+                                    <ul className="collapse list-unstyled sub-collapse-menu" id="pageSubmenuFabrics">
+                                    {
+                                      filterOptions.fabricTypeResponseList &&
+                                      filterOptions.fabricTypeResponseList.map((item, i) => {
+                                        return <li style={{color: (isSelected(filters, 'FABRIC_TYPE', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('FABRIC_TYPE', item.id, item.name)}>{item.name}</li>
+                                      })
+                                    }
                                     </ul>
                                 </li>
                             </ul>
