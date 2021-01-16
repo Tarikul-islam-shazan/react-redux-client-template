@@ -4688,10 +4688,6 @@ button.rec-arrow-right {
     width: 148px; } }
 
 @media (max-width: 767px) {
-  aside {
-    display: none; } }
-
-@media (max-width: 767px) {
   .header-sorting {
     flex-direction: column; }
     .header-sorting .sort, .header-sorting .date, .header-sorting .status, .header-sorting .search {

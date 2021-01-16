@@ -42,7 +42,8 @@ const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2},
   { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 5 }
+  { width: 1025, itemsToShow: 4 },
+  { width: 1440, itemsToShow: 5 }
 ];
 
 class PickDesignV2 extends Component {
@@ -666,7 +667,8 @@ class PickDesignV2 extends Component {
                 show={responsiveFilterModal}
                 onHide={() => this.setState({responsiveFilterModal: false})}
                 dialogClassName="modal-xl share-design-modal"
-                aria-labelledby="example-custom-modal-styling-title"
+                role="dialog"
+                aria-labelledby="bottom_modal"
               >
               {/*<Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
