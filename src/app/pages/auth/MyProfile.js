@@ -518,6 +518,11 @@ class MyProfile extends Component {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="row mt-5">
+                                        <div className="col-lg-4 text-left">
+                                            <button className="btn-brand">Save Changes</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
