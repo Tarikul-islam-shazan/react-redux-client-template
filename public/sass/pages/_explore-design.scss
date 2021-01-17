@@ -159,6 +159,9 @@ ul.filter-tag {
         left: 10px;
         display: none;
         cursor: pointer;
+        @media (max-width: 1024px) {
+          display: block;
+        }
         &.active{
           svg path{
             fill: none;
@@ -182,16 +185,23 @@ ul.filter-tag {
       top: 10px;
       right: 10px;
       background: #fff;
-      display: flex;
       height: 25px;
       padding: 10px;
       border-radius: 30px;
       cursor: pointer;
       display: none;
-      &.dropdown-toggle:after{
-        display: none !important;
+      @media (max-width: 1024px) {
+        display: block;
       }
-      ul.dropdown-menu:before{
+      .dropdown-toggle {
+        background: none;
+        padding: 0;
+        display: flex;
+        &:after{
+            display: none !important;
+          }
+      }
+      .dropdown-menu:before{
         position: absolute;
         content: "";
         border-style: solid;

@@ -73,19 +73,25 @@ class ProductCard extends Component {
                   {/*    </svg>*/}
                   {/*</div>*/}
 
-                  <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                      Dropdown Button
+                  <Dropdown className="card-options">
+                    <Dropdown.Toggle variant="default" id="dropdown-basic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="6" viewBox="0 0 27 6">
+                            <g id="Group_10" data-name="Group 10" transform="translate(-4045 -1237) rotate(-90)">
+                                <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                                <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                                <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                            </g>
+                        </svg>
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
+                    <Dropdown.Menu className="dropdown-menu dropdown-menu-right shadow-lg mt-3">
                     {
                       product.liked ?
-                      <Dropdown.Item href="#" onClick={(e) => this.props.unlikeProduct(product.id)}>Add to favourites</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.unlikeProduct(product.id)}>Add to favourites</Dropdown.Item>
                       :
-                      <Dropdown.Item href="#" onClick={(e) => this.props.likeProduct(product.id)}>Remove from favourites</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.likeProduct(product.id)}>Remove from favourites</Dropdown.Item>
                     }
-                      <Dropdown.Item href="#" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pb-3 font-weight-normal text-black font-15" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
 
