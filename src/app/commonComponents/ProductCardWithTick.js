@@ -91,7 +91,7 @@ class ProductCard extends Component {
                       :
                       <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.likeProduct(product.id)}>Remove from favourites</Dropdown.Item>
                     }
-                      <Dropdown.Item href="#" className="px-4 pb-3 font-weight-normal text-black font-15" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pt-0 pb-3 font-weight-normal text-black font-15" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
 

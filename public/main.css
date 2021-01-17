@@ -4132,16 +4132,14 @@ ul.filter-tag {
 .new-card {
   margin: 0px !important; }
   .new-card.active {
-    border: 2px solid rgba(69, 44, 142, 0.4);
     background: #F5F5FB;
-    box-shadow: inset 0px 0px 0px 4px #ffffff;
-    padding: 4px; }
+    box-shadow: 0px 0px 0px 2px rgba(69, 44, 142, 0.4); }
+    .new-card.active:hover {
+      box-shadow: 0px 0px 0px 2px rgba(69, 44, 142, 0.4) !important; }
     .new-card.active .favourite-part, .new-card.active .favourite-part, .new-card.active button.btn-brand {
       display: block !important; }
     .new-card.active .card-options {
       display: flex !important; }
-    .new-card.active .card-body {
-      border-radius: 0 0 5px 5px; }
   .new-card .thumb {
     position: relative; }
     .new-card .thumb .favourite-part {
@@ -4194,7 +4192,7 @@ ul.filter-tag {
         border-width: 10px 10px;
         border-color: transparent transparent #ffffff transparent;
         top: -20px;
-        right: 12px; }
+        right: 3px; }
   .new-card .card-body {
     padding: 14px 15px 20px; }
     .new-card .card-body h5.card-title {
@@ -4230,7 +4228,7 @@ ul.filter-tag {
     .new-card:hover .thumb .card-options {
       display: flex !important; }
   .new-card.hovered {
-    box-shadow: 0px 8px 40px #0B1C4326; }
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.05) !important; }
     .new-card.hovered .thumb .favourite-part {
       display: block; }
       .new-card.hovered .thumb .favourite-part.choose {
