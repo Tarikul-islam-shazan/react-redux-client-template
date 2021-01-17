@@ -145,6 +145,9 @@
 }
 .product-detail-gallery .thumbnail-prev img {
   height: 89px;
+  @media (max-width: 575px) {
+    height: 112px;
+  }
 }
 .slider-for img {
   height: 632px !important;
