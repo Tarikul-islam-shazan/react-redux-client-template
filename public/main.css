@@ -4194,7 +4194,7 @@ ul.filter-tag {
         border-width: 10px 10px;
         border-color: transparent transparent #ffffff transparent;
         top: -20px;
-        left: 12px; }
+        right: 12px; }
   .new-card .card-body {
     padding: 14px 15px 20px; }
     .new-card .card-body h5.card-title {
