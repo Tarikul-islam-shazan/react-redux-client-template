@@ -84,7 +84,7 @@ class ProductCard extends Component {
                         </svg>
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu className="dropdown-menu dropdown-menu-right shadow-lg mt-3">
+                    <Dropdown.Menu alignRight className="dropdown-menu dropdown-menu-right shadow-lg mt-3">
                     {
                       product.liked ?
                       <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.unlikeProduct(product.id)}>Add to favourites</Dropdown.Item>
