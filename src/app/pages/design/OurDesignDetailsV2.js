@@ -562,7 +562,7 @@ class OurDesignDetails extends Component {
                                       </svg>
                                   </a>
                                   <a href="" className="btn btn-outline-secondary mr-3  border-gray-light">Add to collection</a>
-                                  <a href="" className="btn btn-outline-secondary mr-3  border-0 brand-bg-color-secondary text-white quote-now">Quote Now</a>
+                                  <a href="" className="btn mr-3  border-0 brand-bg-color-secondary text-white quote-now">Quote Now</a>
                               </div>
                           </div>
 

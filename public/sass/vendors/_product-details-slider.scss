@@ -147,6 +147,12 @@
   }
   .slider.slider-nav.thumb-image {
     white-space: nowrap;
+    @media (max-width: 991px) {
+      width: 50%;
+    }
+    @media (max-width: 575px) {
+      width: 100%;
+    }
   }
   .thumbnail-image.slick-slide {
     padding: 0px 5px;
