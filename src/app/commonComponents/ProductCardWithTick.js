@@ -94,6 +94,7 @@ class ProductCard extends Component {
                           </ul>
                       </div>
                   </div>
+                  <a href={"/my-products/" + product.id}>
                   {
                     product.designDocuments.length > 0 ?
                     product.designDocuments.map((doc,i) => {
@@ -112,6 +113,7 @@ class ProductCard extends Component {
                     :
                     <img src={require("../assets/images/default_product.svg")} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                   }
+                  </a>
                   {/*<button className="btn-brand">Quote Now</button>*/}
               </div>
               <div className="card-body">

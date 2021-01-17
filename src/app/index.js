@@ -66,7 +66,7 @@ const PublicRoute = ({component: Component, ...rest}) => {
     const url = '/login' + (redirectRoute && redirectRoute !== '/' ? '?redirect=' + redirectRoute : '')
     return token ? (
         <Route { ...rest } render={ matchProps => (
-            <DefaultLayout>
+            <DefaultLayout { ...matchProps }>
                 <Component { ...matchProps } />
             </DefaultLayout>
         ) }/>

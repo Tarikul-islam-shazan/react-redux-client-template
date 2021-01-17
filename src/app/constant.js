@@ -85,6 +85,7 @@ export const LOADER_MARGIN_LEFT = 0;
 export const hjid = getHotjarId();
 export const hjsv = 6;
 export const GA_ID = 'UA-168122648-1';
+export const LOCAL_QUOTE_NOW_KEY = 'nitex@quoteNowObj';
 
 export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
 

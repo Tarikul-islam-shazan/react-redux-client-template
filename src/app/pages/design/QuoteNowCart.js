@@ -14,8 +14,9 @@ import { toastSuccess, toastError, toastWarning } from '../../commonComponents/T
 import ProductCard from '../../commonComponents/ProductCard';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
+import {QuoteNowProduct} from './components/QuoteNowProduct';
 
-import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
+import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
 import {_storeData} from './actions';
 
@@ -31,6 +32,8 @@ class QuoteNowCart extends Component {
           search : '',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
+          cart: [],
+          title: ''
         };
     }
 
@@ -77,6 +80,23 @@ class QuoteNowCart extends Component {
     componentDidMount = async() => {
       // document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
+      let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+      if (quote) {
+        quote = JSON.parse(quote);
+        if (quote && quote.products) {
+          this.setState({
+            cart: quote.products,
+          })
+        }
+        if (quote && quote.title) {
+          this.setState({
+            title: quote.title,
+          })
+        }
+        if (quote) {
+          this.props._storeData('quoteNowObj', quote);
+        }
+      }
       // this.setState({loading: true});
       // this.renderList();
     }
@@ -103,24 +123,54 @@ class QuoteNowCart extends Component {
     }
 
     onChange = async(e) => {
-      this.setState({
-        [e.target.name] : e.target.value,
+      await this.setState({
+        [e.target.name]: e.target.value
       })
+      await this.updateCartGlobally();
     }
 
-    updateProductCard = () => {
+    onChangeQuantity = async(index, name, value) => {
+      let {cart} = this.state;
+      cart[index].sizeQuantityPairList = cart[index].sizeQuantityPairList.map((pair) => {
+          if (pair.code === name) {
+            pair.quantity = value;
+          }
+          return pair;
+      })
+      await this.setState({cart});
+      await this.updateCartGlobally();
+    }
+
+    removeFromCart = async(index) => {
+      let {cart} = this.state;
+      cart = cart.filter((product, i) => i !== index);
+      await this.setState({cart});
+      await this.updateCartGlobally();
+    }
+
+    updateCartGlobally = async() => {
+      let {title, cart} = this.state;
+      let quote = {
+        title,
+        products: cart
+      }
+      await this.props._storeData('quoteNowObj', quote);
+      localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
+    }
+
+    submit = () => {
 
     }
 
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions } = this.state;
+        let { designList, cart, title } = this.state;
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request">
                   <div className="header-title d-flex justify-content-between align-items-center">
                       <a href="#">
                           <h3 className="text-black">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="13.903" height="25.806" viewBox="0 0 13.903 25.806" className="mr-4">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="13.903" height="25.806" viewBox="0 0 13.903 25.806" className="mr-4" onClick={() => this.props.history.goBack()}>
                                   <path id="Path_27864" data-name="Path 27864" d="M3768.991,1419.1l-11.489-11.489,11.489-11.489" transform="translate(-3756.502 -1394.708)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                               </svg>
                               Confirm quote request
@@ -129,221 +179,17 @@ class QuoteNowCart extends Component {
                       <div className="add-more-design font-14 brand-color text-underline d-block d-xl-none cursor-pointer">Add more designs</div>
                   </div>
                   <div className="mt-3">
-                      <input type="text" placeholder="Demo Collection name" className="w-100 bg-gray-light"/>
+                      <input type="text" placeholder="Demo Collection name" name="title" value={title} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
                   <div className="quote-req-list-container mt-3">
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-
-                          <div className="dlt">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                  <g id="Group_11204" data-name="Group 11204" transform="translate(-1233 -282)">
-                                      <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(1265 282) rotate(90)" fill="rgba(253,39,39,0.05)"/>
-                                      <g id="delete" transform="translate(1242.358 289.001)">
-                                          <path id="Path_27867" data-name="Path 27867" d="M222.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,222.791,154.7Zm0,0" transform="translate(-213.682 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27868" data-name="Path 27868" d="M104.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,104.791,154.7Zm0,0" transform="translate(-100.308 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27869" data-name="Path 27869" d="M1.11,4.983v9.66a2.163,2.163,0,0,0,.575,1.492,1.931,1.931,0,0,0,1.4.606H10.5a1.93,1.93,0,0,0,1.4-.606,2.163,2.163,0,0,0,.575-1.492V4.983A1.5,1.5,0,0,0,12.1,2.038H10.089v-.49A1.54,1.54,0,0,0,8.536,0H5.055A1.54,1.54,0,0,0,3.5,1.547v.49H1.495A1.5,1.5,0,0,0,1.11,4.983ZM10.5,15.956H3.086a1.242,1.242,0,0,1-1.192-1.313V5.017h9.8v9.625A1.242,1.242,0,0,1,10.5,15.956ZM4.286,1.547A.755.755,0,0,1,5.055.783H8.536a.755.755,0,0,1,.769.765v.49H4.286ZM1.495,2.822H12.1a.706.706,0,0,1,0,1.411H1.495a.706.706,0,0,1,0-1.411Zm0,0" transform="translate(0 0)" fill="#fd2727"/>
-                                          <path id="Path_27870" data-name="Path 27870" d="M163.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,163.791,154.7Zm0,0" transform="translate(-156.995 -148.639)" fill="#fd2727"/>
-                                      </g>
-                                  </g>
-                              </svg>
-                          </div>
-
-                          <div className="quote-info d-flex">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-4">
-                                  <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">Blue Huddie Long Sleeve</a>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="sizes d-flex  align-items-center">
-                              <div className="size">
-                                  <label className="text-center">XS</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">S</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">M</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">L</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">XL</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size total">
-                                  <label className="text-right">Total</label>
-                                  <input type="text" placeholder="00" className="bg-blue-light"/>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-
-                          <div className="dlt">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                  <g id="Group_11204" data-name="Group 11204" transform="translate(-1233 -282)">
-                                      <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(1265 282) rotate(90)" fill="rgba(253,39,39,0.05)"/>
-                                      <g id="delete" transform="translate(1242.358 289.001)">
-                                          <path id="Path_27867" data-name="Path 27867" d="M222.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,222.791,154.7Zm0,0" transform="translate(-213.682 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27868" data-name="Path 27868" d="M104.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,104.791,154.7Zm0,0" transform="translate(-100.308 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27869" data-name="Path 27869" d="M1.11,4.983v9.66a2.163,2.163,0,0,0,.575,1.492,1.931,1.931,0,0,0,1.4.606H10.5a1.93,1.93,0,0,0,1.4-.606,2.163,2.163,0,0,0,.575-1.492V4.983A1.5,1.5,0,0,0,12.1,2.038H10.089v-.49A1.54,1.54,0,0,0,8.536,0H5.055A1.54,1.54,0,0,0,3.5,1.547v.49H1.495A1.5,1.5,0,0,0,1.11,4.983ZM10.5,15.956H3.086a1.242,1.242,0,0,1-1.192-1.313V5.017h9.8v9.625A1.242,1.242,0,0,1,10.5,15.956ZM4.286,1.547A.755.755,0,0,1,5.055.783H8.536a.755.755,0,0,1,.769.765v.49H4.286ZM1.495,2.822H12.1a.706.706,0,0,1,0,1.411H1.495a.706.706,0,0,1,0-1.411Zm0,0" transform="translate(0 0)" fill="#fd2727"/>
-                                          <path id="Path_27870" data-name="Path 27870" d="M163.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,163.791,154.7Zm0,0" transform="translate(-156.995 -148.639)" fill="#fd2727"/>
-                                      </g>
-                                  </g>
-                              </svg>
-                          </div>
-
-                          <div className="quote-info d-flex">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-4">
-                                  <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">Blue Huddie Long Sleeve</a>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="sizes d-flex  align-items-center">
-                              <div className="size">
-                                  <label className="text-center">XS</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">S</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">M</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">L</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">XL</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size total">
-                                  <label className="text-right">Total</label>
-                                  <input type="text" placeholder="00" className="bg-blue-light"/>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-
-                          <div className="dlt">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                  <g id="Group_11204" data-name="Group 11204" transform="translate(-1233 -282)">
-                                      <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(1265 282) rotate(90)" fill="rgba(253,39,39,0.05)"/>
-                                      <g id="delete" transform="translate(1242.358 289.001)">
-                                          <path id="Path_27867" data-name="Path 27867" d="M222.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,222.791,154.7Zm0,0" transform="translate(-213.682 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27868" data-name="Path 27868" d="M104.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,104.791,154.7Zm0,0" transform="translate(-100.308 -148.639)" fill="#fd2727"/>
-                                          <path id="Path_27869" data-name="Path 27869" d="M1.11,4.983v9.66a2.163,2.163,0,0,0,.575,1.492,1.931,1.931,0,0,0,1.4.606H10.5a1.93,1.93,0,0,0,1.4-.606,2.163,2.163,0,0,0,.575-1.492V4.983A1.5,1.5,0,0,0,12.1,2.038H10.089v-.49A1.54,1.54,0,0,0,8.536,0H5.055A1.54,1.54,0,0,0,3.5,1.547v.49H1.495A1.5,1.5,0,0,0,1.11,4.983ZM10.5,15.956H3.086a1.242,1.242,0,0,1-1.192-1.313V5.017h9.8v9.625A1.242,1.242,0,0,1,10.5,15.956ZM4.286,1.547A.755.755,0,0,1,5.055.783H8.536a.755.755,0,0,1,.769.765v.49H4.286ZM1.495,2.822H12.1a.706.706,0,0,1,0,1.411H1.495a.706.706,0,0,1,0-1.411Zm0,0" transform="translate(0 0)" fill="#fd2727"/>
-                                          <path id="Path_27870" data-name="Path 27870" d="M163.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,163.791,154.7Zm0,0" transform="translate(-156.995 -148.639)" fill="#fd2727"/>
-                                      </g>
-                                  </g>
-                              </svg>
-                          </div>
-
-                          <div className="quote-info d-flex">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-4">
-                                  <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">Blue Huddie Long Sleeve</a>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="features d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="sizes d-flex  align-items-center">
-                              <div className="size">
-                                  <label className="text-center">XS</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">S</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">M</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">L</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size">
-                                  <label className="text-center">XL</label>
-                                  <input type="text" placeholder="00" className="bg-gray-light"/>
-                              </div>
-                              <div className="size total">
-                                  <label className="text-right">Total</label>
-                                  <input type="text" placeholder="00" className="bg-blue-light"/>
-                              </div>
-                          </div>
-                      </div>
-
-                      <button className="m-0 btn-brand  shadow float-right">Submit to quote</button>
+                  {
+                    cart.map((product, i) => {
+                      return(
+                        <QuoteNowProduct i={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
+                      )
+                    })
+                  }
+                      <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
                   </div>
               </div>
 

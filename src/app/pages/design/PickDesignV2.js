@@ -15,7 +15,7 @@ import ProductCard from '../../commonComponents/ProductCard';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
-import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
+import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
 import {_storeData, _getProductForQuote} from './actions';
 
@@ -444,7 +444,24 @@ class PickDesignV2 extends Component {
 
     addToQuote = async(ids) => {
       let products = await _getProductForQuote(ids);
-      console.log("products addToQuote", products)
+      let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+      console.log("products from addToQuote", products, "quote from addToQuote", quote);
+      if (quote) {
+        quote = JSON.parse(quote);
+      }
+      if (quote && quote.products && quote.products.length) {
+        quote.products = [...quote.products, ...products];
+      } else if (quote) {
+        quote.products = products;
+      } else {
+        quote = {
+          products
+        }
+      }
+      console.log("quote from addToQuote after update", quote);
+      localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
+      this.props._storeData('quoteObj', quote);
+      this.props._storeData('selectedProductIds', []);
     }
 
     render() {
@@ -535,9 +552,9 @@ class PickDesignV2 extends Component {
                           </ul>
                           {
                             filterOptions.productTypeResponseList &&
-                            filterOptions.productTypeResponseList.map((group) => {
+                            filterOptions.productTypeResponseList.map((group, i) => {
                               return (
-                                <ul className="list custom-scrollbar">
+                                <ul className="list custom-scrollbar" key={i}>
                                   <div className="title">{group.groupName}</div>
                                   {
                                     group.types.map((type, j) => {
@@ -745,7 +762,7 @@ class PickDesignV2 extends Component {
                                     </ul>
                                 </li>
                             </ul>
-                            <button className="m-0 btn-brand m-0 shadow">Submit</button>
+                            <button className="m-0 btn-brand m-0 shadow" onClick={() => this._search()}>Submit</button>
                         </div>
                     </nav>
                 </Modal.Body>

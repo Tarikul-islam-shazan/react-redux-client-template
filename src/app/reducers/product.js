@@ -35,7 +35,8 @@ const initialState = {
     choosenIdsForQuick : [],
     fromRfq: false,
     selectedRfqId: '',
-    selectedProductIds: []
+    selectedProductIds: [],
+    quoteObj: {}
 };
 
 export default (state = initialState, action) => {
