@@ -448,7 +448,6 @@ class PickDesignV2 extends Component {
     addToQuote = async(ids) => {
       let products = await _getProductForQuote(ids);
       let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
-      console.log("products from addToQuote", products, "quote from addToQuote", quote);
       if (quote) {
         quote = JSON.parse(quote);
       }
@@ -633,6 +632,7 @@ class PickDesignV2 extends Component {
                                       key={j}
                                       product={product}
                                       updateProductCard={() => this.updateProductCard()}
+                                      addToQuote={this.addToQuote}
                                       likeProduct={this.likeProduct}
                                       unlikeProduct={this.unlikeProduct}/>)
                                 }) : <></>
