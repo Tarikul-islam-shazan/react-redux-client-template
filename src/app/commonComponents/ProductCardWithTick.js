@@ -83,10 +83,15 @@ class ProductCard extends Component {
                           <ul className="dropdown-menu dropdown-menu-right shadow-lg mt-3" role="menu"
                               aria-labelledby="menu1">
                               <li role="presentation" className="px-4 pb-3 pt-3">
-                                  <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to favourites</a>
+                              {
+                                product.liked ?
+                                <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black" onClick={(e) => this.props.unlikeProduct(product.id)}>Remove from favourites</a>
+                                :
+                                <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black" onClick={(e) => this.props.likeProduct(product.id)}>Add to favourites</a>
+                              }
                               </li>
-                              <li role="presentation" className="px-4 pb-3">
-                                  <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to quote</a>
+                              <li role="presentation" className="px-4 pb-3" onClick={() => console.log("presentation called")}>
+                                  <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black" onClick={() => this.props.addToQuote([product.id])}>Add to quote</a>
                               </li>
                               {/*<li role="presentation" className="px-4 pb-3">
                                   <a role="menuitem" tabIndex="-1" href="#" className="font-weight-normal  text-black">Add to collection</a>

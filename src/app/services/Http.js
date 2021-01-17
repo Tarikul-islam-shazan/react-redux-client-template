@@ -137,11 +137,6 @@ const Http = {
         params = typeof params === 'object' ? encodeQueryData(params) : params;
         return axios.get(routes[key] + params, headers);
     },
-    GET_WITH_BODY: (key, params = {}) => {
-        // updateTokenInHeader();
-        // params = typeof params === 'object' ? encodeQueryData(params) : params;
-        return axios.get(routes[key], params, headers);
-    },
     GET_WITH_ID_PARAM: (key, params = '', id = '') => {
         // updateTokenInHeader();
         // console.log("id",id)

@@ -81,6 +81,7 @@ class QuoteNowCart extends Component {
       // document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+
       if (quote) {
         quote = JSON.parse(quote);
         if (quote && quote.products) {
@@ -94,7 +95,7 @@ class QuoteNowCart extends Component {
           })
         }
         if (quote) {
-          this.props._storeData('quoteNowObj', quote);
+          this.props._storeData('quoteObj', quote);
         }
       }
       // this.setState({loading: true});
@@ -109,7 +110,7 @@ class QuoteNowCart extends Component {
       await Http.GET('getPickDesign',params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
-          this.setState({loading:false})
+          this.setState({loading: false});
           if(data.length>0){
             result = data;
           }
@@ -150,16 +151,77 @@ class QuoteNowCart extends Component {
 
     updateCartGlobally = async() => {
       let {title, cart} = this.state;
+      cart = cart.map((product) => {product.error = ''; return product;});
       let quote = {
         title,
         products: cart
       }
-      await this.props._storeData('quoteNowObj', quote);
+      await this.props._storeData('quoteObj', quote);
       localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
     }
 
-    submit = () => {
+    validate = () => {
+      let {cart, title} = this.state;
+      let flag = true;
+      cart = cart.map((product, i) => {
+        let tempFlag = true;
+        product.sizeQuantityPairList.map((pair) => {
+          if (!pair.quantity) {
+            flag = false;
+            tempFlag = false;
+            product.error = 'Please insert all values'
+          }
+        })
+        if (tempFlag) {
+          product.error = ''
+        }
+        return product;
+      })
+      this.setState({cart});
+      return flag;
+    }
 
+    submit = async() => {
+        let {title, cart} = this.state;
+        await this.setState({loading: true});
+        if (this.validate()) {
+          let body = {
+            name: title,
+            rfqRequestDTOList: cart.map((product) => {
+              let total = 0;
+              product.sizeQuantityPairList.map((pair) => {
+                if (pair.quantity) {
+                  total += parseInt(pair.quantity);
+                }
+              })
+              return (
+                {
+                  id: product.id,
+                  total,
+                  sizeQuantityPairList: product.sizeQuantityPairList
+                }
+              )
+            })
+          }
+          await Http.POST('addRfq',body)
+            .then(({data}) => {
+              console.log('addRfq SUCCESS: ', JSON.stringify(data));
+              this.setState({loading: false})
+              if(data.success){
+                localStorage.setItem(LOCAL_QUOTE_NOW_KEY, '')
+                toastSuccess(data.message);
+                this.props.history.push('/my-rfqs');
+              }else{
+                toastError(data.message);
+              }
+
+            })
+            .catch(response => {
+                console.log('LOGIN Error: ', JSON.stringify(response));
+                this.setState({loading:false})
+                toastError("Something went wrong! Please try again.");
+            });
+        }
     }
 
     render() {

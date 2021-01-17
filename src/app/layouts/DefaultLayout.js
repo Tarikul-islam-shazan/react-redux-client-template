@@ -16,7 +16,10 @@ import AskForQuote from "../commonComponents/modals/AskForQuote";
 import StartProject from "../commonComponents/modals/StartProject";
 
 import { _storeData } from "../partials/actions";
+import { _storeData as _storeQuoteData } from "../pages/design/actions";
 import { addImageSuffix } from '../services/Util';
+
+import {LOCAL_QUOTE_NOW_KEY} from '../constant';
 
 // var stompClient = null;
 // const DefaultLayout = ({children, ...rest}) => {
@@ -73,6 +76,12 @@ class DefaultLayout extends Component {
       }
 
       window.addEventListener('mousedown', this.handleClickOutside);
+
+      let quoteObj = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+      if (quoteObj) {
+        quoteObj = JSON.parse(quoteObj);
+      }
+      this.props._storeQuoteData('quoteObj', quoteObj)
     }
 
     componentWillUnmount = () => {
@@ -183,7 +192,7 @@ class DefaultLayout extends Component {
                                           <path id="Path_27864" data-name="Path 27864" d="M42.864,39.978c-3.207-.245-6.422.018-9.63-.209-1.543-.109-.958-1.6-1.008-2.814-.006-.158-.024-.315-.035-.472a24.241,24.241,0,0,0,8.837-.683c.859-.23,1.422-2.431,1.74-3.149A12.44,12.44,0,0,0,43.881,28.2a.3.3,0,0,0-.292-.353c-4.327-.115-8.836.975-13.063-.294a7.13,7.13,0,0,0-.647-1.262c-.941-1.435-2.7-1.106-4.072-.629-.443.154-.693,1.127-.08.914,1.121-.389,2.242-.694,3.2.2a3.184,3.184,0,0,1,.733,1.147c-.088.2-.07.414.154.485l.021.006a21.583,21.583,0,0,1,.492,2.347c.588,3.109,1.331,6.261.914,9.44a.3.3,0,0,0,.292.353c.083.011.167.015.25.025-.049.065-.1.13-.144.2a1.856,1.856,0,0,0-.255.2c-.17.157-.351.43-.221.668,0,.005.007.008.01.013a2.079,2.079,0,0,0-.131.724c.011.791.669,1.181,1.364,1.348a.613.613,0,0,0,.672-.455,3.273,3.273,0,0,0-.155-2.337.8.8,0,0,0-.237-.262c2.854.239,5.719.064,8.58.177-.014.012-.03.023-.043.036-.341-.191-.925.414-.7.767.026.04.054.079.08.118A4.034,4.034,0,0,0,40.3,43.6a.3.3,0,0,0,.4.227c.638-.216,1.291-.561,1.379-1.3a1.585,1.585,0,0,0-.384-1.037,1.412,1.412,0,0,1,.426-.279.571.571,0,0,0,.295-.3c.051,0,.1,0,.153.008C43.027,40.958,43.462,40.023,42.864,39.978ZM30.905,28.7a20.367,20.367,0,0,0,4.938.387c.7-.016,7.148-.588,7.12-.03a12.612,12.612,0,0,1-1.447,4.495c-.6,1.28-.716,1.372-2.062,1.567a24.729,24.729,0,0,1-7.024.412.417.417,0,0,0-.313.1c-.113-1-.289-2-.467-2.984C31.424,31.385,31.26,30,30.905,28.7ZM31.922,42.04a1.145,1.145,0,0,1,.119-.492c.2.09.248.6.245,1.043A.635.635,0,0,1,31.922,42.04Zm9.253.723c0-.014,0-.027,0-.041a.262.262,0,0,1,.008.047S41.18,42.764,41.175,42.763Z" transform="translate(-75 55)" fill="#21242b" stroke="#21242b" stroke-width="0.5"/>
                                       </g>
                                   </svg>
-                                  <span className="quote-cart-count">22</span>
+                                  <span className="quote-cart-count">{(this.props.quoteObj && this.props.quoteObj.products) ? this.props.quoteObj.products.length : 0}</span>
                               </button>
                           </li>
 
@@ -255,13 +264,14 @@ class DefaultLayout extends Component {
 
 };
 const mapStateToProps = store => ({
-    notificationIconActive : store.notification.notificationIconActive
+    notificationIconActive : store.notification.notificationIconActive,
+    quoteObj: store.product.quoteObj
 });
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
-      _storeData
+      _storeData, _storeQuoteData
 		},
 		dispatch
 	);

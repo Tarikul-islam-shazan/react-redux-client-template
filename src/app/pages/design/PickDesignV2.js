@@ -308,6 +308,8 @@ class PickDesignV2 extends Component {
         loading:true
       })
 
+      console.log("likeProduct called")
+
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
@@ -358,6 +360,7 @@ class PickDesignV2 extends Component {
       this.setState({
         loading:true
       })
+      console.log("unlikeProduct called")
 
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
@@ -458,10 +461,10 @@ class PickDesignV2 extends Component {
           products
         }
       }
-      console.log("quote from addToQuote after update", quote);
       localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
-      this.props._storeData('quoteObj', quote);
-      this.props._storeData('selectedProductIds', []);
+      await this.props._storeData('quoteObj', quote);
+      await this.props._storeData('selectedProductIds', []);
+      this.updateProductCard();
     }
 
     render() {
@@ -600,6 +603,7 @@ class PickDesignV2 extends Component {
                              key={i}
                              product={product}
                              updateProductCard={() => this.updateProductCard()}
+                             addToQuote={this.addToQuote}
                              likeProduct={this.likeProduct}
                              unlikeProduct={this.unlikeProduct}/>
                         )

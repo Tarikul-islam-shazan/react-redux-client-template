@@ -43,7 +43,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
             <a href="#"><img src={require("../../../assets/images/default_product.svg")} alt="" className="radius-3"/></a>
           }
             <div className="info-right ml-4">
-                <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">Blue Huddie Long Sleeve</a>
+                <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">{product.name ? product.name : 'N/A'}</a>
                 <div className="features d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Product category</label>
@@ -51,7 +51,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-16 color-333">500 pcs</h5>
+                        <h5 className="font-16 color-333">{product.moq} pcs</h5>
                     </div>
                 </div>
                 <div className="features d-flex flex-column flex-sm-row">
@@ -61,7 +61,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
-                        <h5 className="font-16 color-333">16 Days</h5>
+                        <h5 className="font-16 color-333">{product.turnAroundTime} Days</h5>
                     </div>
                 </div>
             </div>
@@ -82,6 +82,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                 <input type="text" placeholder="00" value={total} className="bg-blue-light" disabled/>
             </div>
         </div>
+        <p className="error">{product.error}</p>
     </div>
   )
 }

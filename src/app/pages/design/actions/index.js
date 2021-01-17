@@ -82,8 +82,8 @@ export const _storeData = (key,value) => {
 export const _getProductForQuote = async(productIds) => {
 		let params = '';
 		let result = [];
-		productIds.map((id) => params += ('ids=' + id + '&'))
-		await Http.GET_WITH_BODY('getProductsForRfq', '?' + params)
+		productIds.map((id, index) => params += ('id=' + id + (productIds.length - 1 === index ? '' : '&')))
+		await Http.GET('getProductsForRfq', '?' + params)
 			.then(({data}) => {
 						if (DUMMY.length) {
 								DUMMY.map((product) => {
