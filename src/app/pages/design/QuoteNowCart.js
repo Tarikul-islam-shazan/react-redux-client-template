@@ -15,6 +15,8 @@ import ProductCard from '../../commonComponents/ProductCard';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {QuoteNowProduct} from './components/QuoteNowProduct';
+import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
+
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
@@ -38,15 +40,12 @@ class QuoteNowCart extends Component {
     }
 
     handleScroll = async() => {
-      const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-      const body = document.body;
-      const html = document.documentElement;
-      const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-      const windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        let { hasNext, page, loading, designList, size } = this.state
-        console.log("message",'bottom reached',hasNext, page, loading)
-        if(hasNext && !loading && designList.length){
+      const wrappedElement = document.getElementById('sidebarCollapse');
+      if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
+        console.log('bottom reached');
+        let { hasNext, page, loading, designList, size } = this.state;
+        console.log("message", 'bottom reached', hasNext, page, loading)
+        if (hasNext && !loading && designList.length) {
           let data = await this.renderList(page+1)
           if(data.length>0){
             await this.setState({
@@ -55,7 +54,6 @@ class QuoteNowCart extends Component {
               hasNext : data.length === size ? true : false,
               loading:false
             })
-            this.updateProductCard()
           }else{
             this.setState({
               // designList : [],
@@ -64,22 +62,18 @@ class QuoteNowCart extends Component {
             })
             // toastWarning("Product List - no data found.");
           }
-        }else if(designList.length){
-          if(!hasNext){
-            // toastWarning("No more data found.")
+        } else {
+          if (!hasNext) {
+            // toastWarning("No more rfq's found.")
           }
         }
-        // this.setState({
-        //     message: 'bottom reached'
-        // });
-      } else {
 
-        }
+      }
     }
 
     componentDidMount = async() => {
       // document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
-      window.addEventListener("scroll", this.handleScroll);
+      // window.addEventListener("scroll", this.handleScroll);
       let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
 
       if (quote) {
@@ -99,19 +93,20 @@ class QuoteNowCart extends Component {
         }
       }
       // this.setState({loading: true});
-      // this.renderList();
+      let designList = await this.renderList();
+      this.setState({designList})
     }
 
     renderList = async(page = 0) => {
       this.setState({loading:true, searching: true})
       let { size, designList, search, sort, productTypeId, filters } = this.state;
-      let params = `?page=${page}&size=${size}&searchText=${search}`;
+      let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
       let result = [];
-      await Http.GET('getPickDesign',params)
+      await Http.GET('getProductList', params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading: false});
-          if(data.length>0){
+          if(data && data.length>0){
             result = data;
           }
         })
@@ -256,7 +251,7 @@ class QuoteNowCart extends Component {
               </div>
 
 
-              <div className="add-more ml-auto custom-scrollbar">
+              <div className="add-more ml-auto custom-scrollbar" id="sidebarCollapse" onScroll={this.handleScroll}>
                   <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941">
                           <g id="Group_11190" data-name="Group 11190" transform="translate(1110.29 4909.059)">
@@ -290,127 +285,13 @@ class QuoteNowCart extends Component {
                   </div>
 
                   <div className="added-item">
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-                          <div className="quote-info d-flex justify-content-between w-100">
-                              <a href="#"><a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a></a>
-                              <div className="info-right ml-3">
-                                  <a href="#" className="semibold m-0 mt-1 font-18">Blue Huddie Long Sleeve</a>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                                  <button className="btn-border mt-4">Add to quote</button>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-                          <div className="quote-info d-flex justify-content-between w-100">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-3">
-                                  <a href="#" className="semibold m-0 mt-1 font-18">Blue Huddie Long Sleeve</a>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                                  <button className="btn-border mt-4">Add to quote</button>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-                          <div className="quote-info d-flex justify-content-between w-100">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-3">
-                                  <a href="#" className="semibold m-0 mt-1 font-18">Blue Huddie Long Sleeve</a>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                                  <button className="btn-border mt-4">Add to quote</button>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
-                          <div className="quote-info d-flex justify-content-between w-100">
-                              <a href="#"><img src={require('../../assets/images/product.jpg')} alt="" className="radius-3"/></a>
-                              <div className="info-right ml-3">
-                                  <a href="#" className="semibold m-0 mt-1 font-18">Blue Huddie Long Sleeve</a>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Product category</label>
-                                          <h5 className="font-16 color-333">Top, Men</h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">MOQ</label>
-                                          <h5 className="font-16 color-333">500 pcs</h5>
-                                      </div>
-                                  </div>
-                                  <div className="d-flex flex-column flex-sm-row">
-                                      <div className="info-item mr-5">
-                                          <label className="font-14 text-muted">Fabric details</label>
-                                          <h5 className="font-16 color-333">Cotton <span className="brand-color ml-3">100 GSM</span></h5>
-                                      </div>
-                                      <div className="info-item">
-                                          <label className="font-14 text-muted">Delivery in</label>
-                                          <h5 className="font-16 color-333">16 Days</h5>
-                                      </div>
-                                  </div>
-                                  <button className="btn-border mt-4">Add to quote</button>
-                              </div>
-                          </div>
-                      </div>
-
+                  {
+                    designList.map((product, i) => {
+                      return(
+                        <QuoteNowMyProductCard key={i} product={product} />
+                      )
+                    })
+                  }
                   </div>
               </div>
 
