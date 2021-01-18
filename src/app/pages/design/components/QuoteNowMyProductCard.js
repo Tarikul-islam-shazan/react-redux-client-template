@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { addImageSuffix } from '../../../services/Util';
-export const QuoteNowMyProductCard = ({product, index, onChange, remove}) => {
+export const QuoteNowMyProductCard = ({product, index, onChange, addToQuote}) => {
   let flag = 1;
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
@@ -45,7 +45,7 @@ export const QuoteNowMyProductCard = ({product, index, onChange, remove}) => {
                         <h5 className="font-16 color-333">{product.turnAroundTime} Days</h5>
                     </div>
                 </div>
-                <button className="btn-border mt-4">Add to quote</button>
+                <button className="btn-border mt-4" onClick={() => addToQuote([product.id])}>Add to quote</button>
             </div>
         </div>
     </div>

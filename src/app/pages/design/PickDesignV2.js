@@ -71,7 +71,8 @@ class PickDesignV2 extends Component {
           searching: false,
           initialLoading: false,
           showSuggestions: false,
-          responsiveFilterModal: false
+          responsiveFilterModal: false,
+          pagination: {}
         };
     }
 
@@ -225,11 +226,11 @@ class PickDesignV2 extends Component {
         params += `&${key}=${filter.id}`
       });
       let result = [];
-      await Http.GET('getPickDesign',params)
+      await Http.GET('searchProduct',params) //previous url -> getPickDesign
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading:false})
-          if(data.length>0){
+          if(data.productResponseList){
             // if(merge){
             //   this.setState({
             //     designList : [ ...designList, ...data ],
@@ -241,7 +242,8 @@ class PickDesignV2 extends Component {
             //     page : page+1
             //   })
             // }
-            result = data;
+            this.setState({pagination: data.totalHits});
+            result = data.productResponseList;
           }else{
             // toastWarning("Product List - no data found.");
           }
@@ -467,7 +469,7 @@ class PickDesignV2 extends Component {
     }
 
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal } = this.state;
+        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal, pagination } = this.state;
 
         return (
           <div className="explore-design">
@@ -475,26 +477,26 @@ class PickDesignV2 extends Component {
                   <div className="cat-menu d-none d-xl-block">
                       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18" onClick={() => this.setState({showFilters: !showFilters})}>
                           <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
-                              <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_55" data-name="Line 55" x2="9" transform="translate(11.5 22)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                              <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                              <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                              <line id="Line_55" data-name="Line 55" x2="9" transform="translate(11.5 22)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
                           </g>
                       </svg>
                   </div>
                   <div className="cat-menu cat-mobile-menu d-block d-xl-none" data-toggle="modal" data-target="#CatMenuMobile">
                       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18" onClick={() => this.setState({responsiveFilterModal: true})}>
                           <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
-                              <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_55" data-name="Line 55" x2="9" transform="translate(11.5 22)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                              <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                              <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
+                              <line id="Line_55" data-name="Line 55" x2="9" transform="translate(11.5 22)" fill="none" stroke="#818ba0" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
                           </g>
                       </svg>
                   </div>
                   <div className="search flex-grow-1">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
-                          <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"/>
+                          <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" strokeWidth="0.5"/>
                       </svg>
-                      <input type="search" autocomplete="chrome-off" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
+                      <input type="search" autoComplete="chrome-off" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
                         {
                           showSuggestions &&
                           <div className="search-suggestions" ref={(node) => this.searchSuggestions = node}>
@@ -528,8 +530,8 @@ class PickDesignV2 extends Component {
                                   <div className="close-tag" onClick={() => this.setFilters(filter.type, filter.id, filter.name)}>
                                       <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888" viewBox="0 0 10.888 10.888">
                                           <g id="Group_10684" data-name="Group 10684" transform="translate(50.699 -260.002) rotate(45)">
-                                              <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" stroke-width="1"/>
-                                              <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" stroke-width="1"/>
+                                              <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" strokeWidth="1"/>
+                                              <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" strokeWidth="1"/>
                                           </g>
                                       </svg>
                                   </div>
@@ -593,7 +595,8 @@ class PickDesignV2 extends Component {
               </div>
               {
                 searching ?
-                <div className="filter-products designs">
+                <div className="designs">
+                    <h4 className="mb-4 font-weight-normal">Designer’s Choice <span class="result">{`${pagination.value ? pagination.value : '--'}${(pagination.relation && pagination.relation === 'GREATER_THAN_OR_EQUAL_TO') ? '+' : ''}`} Designs</span></h4>
                     <div className="show-products">
                     {
                       designList.map(( product , i ) => {
@@ -648,7 +651,7 @@ class PickDesignV2 extends Component {
                                 data.collections ? data.collections.map((banner, j) => {
                                   if (banner.banners && banner.banners.length) {
                                     return (
-                                      <div className="col-md-6">
+                                      <div className="col-md-6" key={j}>
                                           <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100"/></a>
                                       </div>
                                     )

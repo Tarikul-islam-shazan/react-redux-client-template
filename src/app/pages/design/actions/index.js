@@ -85,8 +85,8 @@ export const _getProductForQuote = async(productIds) => {
 		productIds.map((id, index) => params += ('id=' + id + (productIds.length - 1 === index ? '' : '&')))
 		await Http.GET('getProductsForRfq', '?' + params)
 			.then(({data}) => {
-						if (DUMMY.length) {
-								DUMMY.map((product) => {
+						if (data.length) {
+								data.map((product) => {
 									if (!product.sizeQuantityPairList) {
 										product.sizeQuantityPairList = SAMPLE_SIZE_DATA;
 									}
