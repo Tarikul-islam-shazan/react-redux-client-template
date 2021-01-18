@@ -1,0 +1,28 @@
+.placing-order{
+  padding-right: 0px;
+}
+.invoice-summary{
+  max-width: 465px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  margin-top: 20px;
+  .title{
+    padding: 30px;
+    background: #E7EBF4;
+    font-size: 22px;
+  }
+  .details{
+    padding: 20px 30px;
+    .submit-for-payment{
+      button{
+        max-width: 268px;
+        width: 100%;
+        padding: 10px 40px;
+        margin-bottom: 15px !important;
+      }
+    }
+  }
+}
