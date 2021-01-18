@@ -330,10 +330,13 @@ input.type {
     }
 }
 .btn-outline-secondary {
+    cursor: pointer;
     &:hover, &:active, &:focus{
         color: #6c757d !important;
-        border-color: #6c757d;
-        background: transparent;
+        border-color: #6c757d !important;
+        background: transparent !important;
+        outline: 0;
+        box-shadow: none !important;
     }
 }
 .btn-nitex-default {
