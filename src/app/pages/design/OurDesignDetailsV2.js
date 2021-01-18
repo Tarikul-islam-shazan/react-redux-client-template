@@ -12,12 +12,12 @@ import Modal from 'react-bootstrap/Modal'
 
 import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
-import { _storeData } from "../design/actions";
+import {_storeData, _getProductForQuote} from "../design/actions";
 
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import { MeasurementTable } from './components/MeasurementTable'
-import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
+import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { productAvailabilityStatus, addImageSuffix } from '../../services/Util';
 
 import {ProductThumbsSkeleton, ProductHeroImageSkeleton, ProductDetailsSkeleton, ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
@@ -157,6 +157,27 @@ class OurDesignDetails extends Component {
       } else {
         this.likeProduct(id);
       }
+    }
+
+    addToQuote = async(ids) => {
+      let products = await _getProductForQuote(ids);
+      let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+      if (quote) {
+        quote = JSON.parse(quote);
+      }
+      if (quote && quote.products && quote.products.length) {
+        quote.products = [...quote.products, ...products];
+      } else if (quote) {
+        quote.products = products;
+      } else {
+        quote = {
+          products
+        }
+      }
+      localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
+      await this.props._storeData('quoteObj', quote);
+      await this.props._storeData('selectedProductIds', []);
+      this.updateProductCard();
     }
 
     updateProductCard = () => {
@@ -584,7 +605,8 @@ class OurDesignDetails extends Component {
                               product={product}
                               updateProductCard={() => this.updateProductCard(i)}
                               likeProduct={this.likeProduct}
-                              unlikeProduct={this.unlikeProduct}/>
+                              unlikeProduct={this.unlikeProduct}
+                              addToQuote={this.addToQuote}/>
                           )
                         })
                       }
@@ -640,7 +662,7 @@ class OurDesignDetails extends Component {
                 <div className="selected-item-popup d-flex justify-content-between">
                     <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
-                        <button className="m-0 btn-brand brand-bg-color shadow">Add to quote</button>
+                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
                     </div>
                     <div className="close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">
