@@ -130,20 +130,24 @@ ul.filter-tag {
 }
 .new-card{
   margin: 0px !important;
+  //border: 2px solid #eee !important;
   &.active{
-    border: 2px solid rgba(69, 44, 142, 0.4);
+    //border: 2px solid rgba(69, 44, 142, 0.4) !important;
     background: #F5F5FB;
-    box-shadow: inset 0px 0px 0px 4px #ffffff;
-    padding: 4px;
+    box-shadow: 0px 0px 0px 2px rgba(69, 44, 142, 0.4);
+    &:hover{
+      box-shadow: 0px 0px 0px 2px rgba(69, 44, 142, 0.4) !important;
+    }
+    //padding: 4px;
     .favourite-part, .favourite-part, button.btn-brand {
       display: block !important;
     }
     .card-options{
       display: flex !important;
     }
-    .card-body{
-      border-radius: 0 0 5px 5px;
-    }
+    //.card-body{
+    //  border-radius: 0 0 5px 5px;
+    //}
   }
   .thumb{
     .favourite-part{
@@ -208,7 +212,7 @@ ul.filter-tag {
         border-width: 10px 10px;
         border-color: transparent transparent #ffffff transparent;
         top: -20px;
-        right: 12px;
+        right: 3px;
       }
     }
   }
@@ -261,7 +265,7 @@ ul.filter-tag {
     box-shadow: 0px 0px 30px rgba(0,0,0,.05) !important;
   }
   &.hovered{
-    box-shadow: 0px 8px 40px #0B1C4326;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.05) !important;
     .thumb{
       .favourite-part{
         display: block;
