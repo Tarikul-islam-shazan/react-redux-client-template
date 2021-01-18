@@ -64,7 +64,7 @@ class ProductCard extends Component {
               <div className="thumb">
                   <div className={`favourite-part choose ${product.isSelected ? 'active' : ''}`} onClick={() => this.toggleSelect(product.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
-                          <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                          <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
                       </svg>
                   </div>
                   {/*<div className={`favourite-part ${product.liked ? 'active' : ''}`} onClick={() => this.toggleLike(product.id)}>*/}
@@ -153,7 +153,7 @@ class ProductCard extends Component {
                       <div className="quantity">
                           <span>MOQ <strong>{product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'}</strong></span>
                           <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
-                              <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                              <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" strokeWidth="1"/>
                           </svg>
                           <span>
                               <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">

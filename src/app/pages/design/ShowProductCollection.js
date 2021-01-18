@@ -286,16 +286,7 @@ class ShowProductCollection extends Component {
 
         return (
           <div className="explore-design">
-              <div className="filter-container explore-design-filter">
-                  <div className="cat-menu d-none d-xl-block">
-                      {/*<svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18" onClick={() => this.setState({showFilters: !showFilters})}>
-                          <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
-                              <line id="Line_53" data-name="Line 53" x2="18" transform="translate(6.5 14)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_54" data-name="Line 54" x2="24" transform="translate(3.5 6)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              <line id="Line_55" data-name="Line 55" x2="9" transform="translate(11.5 22)" fill="none" stroke="#818ba0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                          </g>
-                      </svg>*/}
-                  </div>
+              {/*<div className="filter-container explore-design-filter">
                   <div className="cat-menu cat-mobile-menu d-block d-xl-none" data-toggle="modal" data-target="#CatMenuMobile">
                       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18">
                           <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
@@ -333,8 +324,9 @@ class ShowProductCollection extends Component {
                           </div>
                       }
                   </div>
-              </div>
-              <div className="filter-products designs">
+              </div>*/}
+              <div className="designs">
+                  <h4 className="mb-4 font-weight-normal">Collection name</h4>
                   <div className="show-products">
                   {
                     designList.map(( product , i ) => {

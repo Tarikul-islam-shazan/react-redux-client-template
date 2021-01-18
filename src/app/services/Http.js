@@ -67,7 +67,8 @@ const routes = {
     getSimilarDesign: `${BASE_URL}/product/similar/`,
 
     getProductCollectionList: `${BASE_URL}/collection/products/`,
-    getProductsForRfq: `${BASE_URL}/product/for-rfq`
+    getProductsForRfq: `${BASE_URL}/product/for-rfq`,
+    searchProduct: `${BASE_URL}/product/search` // integrated in explore design
 };
 
 // Axios request interceptor

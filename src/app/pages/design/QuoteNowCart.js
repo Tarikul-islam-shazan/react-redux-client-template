@@ -20,7 +20,7 @@ import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
-import {_storeData} from './actions';
+import {_storeData, _getProductForQuote} from './actions';
 
 class QuoteNowCart extends Component {
 
@@ -30,7 +30,7 @@ class QuoteNowCart extends Component {
           loading : false,
           designList : [],
           page : 0,
-          size : 20,
+          size : 10,
           search : '',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
@@ -155,6 +155,27 @@ class QuoteNowCart extends Component {
       localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
     }
 
+    addToQuote = async(ids) => {
+      let products = await _getProductForQuote(ids);
+      let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
+      if (quote) {
+        quote = JSON.parse(quote);
+      }
+      if (quote && quote.products && quote.products.length) {
+        quote.products = [...quote.products, ...products];
+      } else if (quote) {
+        quote.products = products;
+      } else {
+        quote = {
+          products
+        }
+      }
+      this.setState({cart: quote.products});
+      localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
+      await this.props._storeData('quoteObj', quote);
+      await this.props._storeData('selectedProductIds', []);
+    }
+
     validate = () => {
       let {cart, title} = this.state;
       let flag = true;
@@ -264,7 +285,10 @@ class QuoteNowCart extends Component {
                       <h4>Add more designs to quote</h4>
                       <div>
                           <div className="cursor-pointer d-inline-block mr-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">
+                              <svg onClick={async() => {
+                                let designList = await this.renderList(0);
+                                this.setState({designList})
+                              }} xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">
                                   <g id="reload" transform="translate(-20.982 0)">
                                       <g id="Group_11184" data-name="Group 11184" transform="translate(20.982 0)">
                                           <path id="Path_27871" data-name="Path 27871" d="M26.048,5.4a10.847,10.847,0,0,1,14.1-.372l-3.228.122a.75.75,0,0,0,.028,1.5h.028l4.956-.183a.749.749,0,0,0,.722-.75V5.623h0l-.183-4.9a.751.751,0,0,0-1.5.056l.117,3.073a12.337,12.337,0,0,0-16.046.433,12.341,12.341,0,0,0-3.712,12.062.747.747,0,0,0,.728.572.65.65,0,0,0,.178-.022.751.751,0,0,0,.55-.906A10.84,10.84,0,0,1,26.048,5.4Z" transform="translate(-20.982 0)" fill="#41487c"/>
@@ -274,7 +298,7 @@ class QuoteNowCart extends Component {
                               </svg>
                           </div>
                           <div className="cursor-pointer d-inline-block">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="27.615" height="27.615" viewBox="0 0 27.615 27.615">
+                              <svg onClick={() => window.open('/quote-request')} xmlns="http://www.w3.org/2000/svg" width="27.615" height="27.615" viewBox="0 0 27.615 27.615">
                                   <g id="Group_11190" data-name="Group 11190" transform="translate(-2672.328 4255.322) rotate(45)">
                                       <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-1108.875 -4907.645) rotate(45)" fill="none" stroke="#41487c" stroke-linecap="round" stroke-width="2"/>
                                       <line id="Line_154" data-name="Line 154" x2="25.615" transform="translate(-1090.763 -4907.645) rotate(135)" fill="none" stroke="#41487c" stroke-linecap="round" stroke-width="2"/>
@@ -288,7 +312,7 @@ class QuoteNowCart extends Component {
                   {
                     designList.map((product, i) => {
                       return(
-                        <QuoteNowMyProductCard key={i} product={product} />
+                        <QuoteNowMyProductCard key={i} product={product} addToQuote={this.addToQuote} />
                       )
                     })
                   }
