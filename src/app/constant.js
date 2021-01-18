@@ -92,12 +92,10 @@ function getBaseUrl(){
     const hostName = window.location.toString();
 
     if( hostName.indexOf( "https://test.nitex.com" ) > -1  ){
-        return "http://testapi-v2.nitex.com";
-        // return "https://testapi.nitex.com";
+        return "https://testapi.nitex.com";
     }
     else if( hostName.indexOf( "https://testadmin.nitex.com" ) > -1  ){
-        return "http://testapi-v2.nitex.com";
-        // return "https://testapi.nitex.com";
+        return "https://testapi.nitex.com";
     }
     else if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
         return "https://api.nitex.com";
@@ -106,8 +104,7 @@ function getBaseUrl(){
         return "https://api.nitex.com";
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
-        return "http://testapi-v2.nitex.com";
-        // return "https://testapi.nitex.com";
+        return "https://testapi.nitex.com";
     }
 }
 

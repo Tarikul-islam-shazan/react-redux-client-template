@@ -95,6 +95,12 @@ class Questionairre_1 extends Component {
         })
     }
 
+    handleKeyPress = (event) => {
+      if(event.key === 'Enter'){
+        this._submit();
+      }
+    }
+
     back = () => {
       localStorage.setItem('nitex@phoneInfo', "");
       let redirection = getUrlParameter('redirect', this.props.location.search)
@@ -219,7 +225,7 @@ class Questionairre_1 extends Component {
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="country-code">
-                                    <input onChange={this.onChange} value={code} name="code" type="text" class="text-center bg-gray-light border-0 font-weight-bold"/>
+                                    <input onChange={this.onChange} value={code} onKeyPress={this.handleKeyPress} name="code" type="text" class="text-center bg-gray-light border-0 font-weight-bold"/>
                                 </div>
                                 {
                                   codeError ?
