@@ -1,5 +1,38 @@
 .placing-order{
+  .header-title h3 {
+    @media (max-width: 1790px) {
+      font-size: 24px;
+    }
+  }
   padding-right: 0px;
+  @media (max-width: 1790px) {
+    width: calc(100% - 400px);
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+  .quote-list .quote-info .info-right {
+    margin-left: 0px !important;
+    @media (max-width: 1024px) {
+      flex-wrap: wrap;
+      .features:nth-child(3), .features:nth-child(4) {
+        margin-top: 20px;
+      }
+    }
+  }
+  .pc-step, .order-id{
+    font-size: 20px !important;
+    @media (max-width: 767px) {
+      display: inline-block;
+      font-size: 18px !important;
+      span.result {
+        font-size: 16px !important;
+        float: left;
+        text-align: left;
+        margin-top: 10px;
+      }
+    }
+  }
 }
 .invoice-summary{
   max-width: 465px;
@@ -9,19 +42,96 @@
   right: 50px;
   transform: translateY(-50%);
   margin-top: 20px;
+  @media (max-width: 1790px) {
+    max-width: 380px;
+    right: 15px;
+  }
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    bottom: 0;
+    top: inherit;
+    transform: inherit;
+    height: 70px;
+    overflow: auto;
+    box-shadow: 0px 0px 30px 4px rgba(0,0,0,.2);
+    transition: height cubic-bezier(0.35, 0.43, 0.3, 1.25) .3s;
+    .toggle-up-down{
+      svg{
+        transform: rotate(0deg);
+        transition: all ease-in-out .3s;
+      }
+    }
+    &.show{
+      height: 300px;
+      .toggle-up-down{
+        svg{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
   .title{
     padding: 30px;
     background: #E7EBF4;
     font-size: 22px;
+    position: sticky;
+    top: 0;
+    @media (max-width: 1790px) {
+      padding: 20px 30px;
+    }
+    .toggle-up-down{
+      display: block;
+      position: absolute;
+      right: 30px;
+      top: 16px;
+      width: 36px;
+      text-align: center;
+      @media (max-width: 1024px) {
+        display: block;
+      }
+    }
   }
   .details{
+    h4{
+      @media (max-width: 1366px) {
+        font-size: 20px !important;
+      }
+    }
     padding: 20px 30px;
+    .shipping-info{
+      margin-top: 20px !important;
+      .info-text{
+        width: 75%;
+        @media (max-width: 1366px) {
+          width: 100%;
+          margin-top: 10px !important;
+          font-size: 14px !important;
+        }
+      }
+    }
     .submit-for-payment{
       button{
         max-width: 268px;
         width: 100%;
         padding: 10px 40px;
         margin-bottom: 15px !important;
+      }
+    }
+    .ordered-container > div {
+      @media (max-width: 1790px) {
+        font-size: 17px !important;
+        strong{
+          font-size: 20px !important;
+        }
+      }
+      @media (max-width: 1366px) {
+        font-size: 15px !important;
+        strong{
+          font-size: 18px !important;
+        }
       }
     }
   }

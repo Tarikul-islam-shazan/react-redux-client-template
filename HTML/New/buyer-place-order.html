@@ -198,8 +198,8 @@
                         <input type="text" placeholder="Order title" class="w-100 bg-gray-light">
                     </div>
 
-                    <h4 class="mb-4 mt-4 font-weight-normal color-333">Order ID: <strong>ID234567</strong> <span class="result d-flex font-18">Delivery date <div class="text-black ml-2 semibold"> Jan 27, 2020</div></span></h4>
-                    <h4 class="mb-4 font-weight-normal">Product confirmation(Step 1 of 2) <span class="result font-18">You have 3 items in your order</h4>
+                    <h4 class="mb-4 mt-4 font-weight-normal color-333 order-id">Order ID: <strong>ID234567</strong> <span class="result d-flex font-18">Delivery date <div class="text-black ml-2 semibold"> Jan 27, 2020</div></span></h4>
+                    <h4 class="mb-4 font-weight-normal pc-step">Product confirmation(Step 1 of 2) <span class="result font-18">You have 3 items in your order</h4>
 
                     <!--Info-->
                     <div class="quote-req-list-container mt-3">
@@ -715,7 +715,16 @@
                 </div>
 
                 <div class="invoice-summary">
-                    <div class="title">Invoice Summary</div>
+                    <div class="title">
+                        Invoice Summary
+                        <div class="toggle-up-down">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.721" height="31.057" viewBox="0 0 21.721 31.057">
+                                <g id="noun_Arrow_Down_858195" data-name="noun_Arrow Down_858195" transform="translate(51.521 51.957) rotate(180)">
+                                    <path id="Path_27892" data-name="Path 27892" d="M41,51.243l9.808-9.808a.519.519,0,0,0-.734-.734l-8.864,8.864V21.924a.524.524,0,1,0-1.049,0V49.669L31.192,40.7a.507.507,0,0,0-.734,0,.507.507,0,0,0,0,.734l9.808,9.808A.507.507,0,0,0,41,51.243Z" transform="translate(0)" stroke="#000" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
                     <div class="details">
                         <h4 class="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>IVN234567</strong></h4>
                         <div class="ordered-container">
@@ -739,10 +748,10 @@
                                 </div>
                             </div>
 
-                            <div class="mt-5">
+                            <div class="mt-5 shipping-info">
                                 <div class="mb-2 font-weight-normal color-333 font-18">
                                     Shipping <br>
-                                    <div class="mt-4 w-75 color-gray font-16">Shipping charges and duties might be extra
+                                    <div class="mt-4 color-gray font-16 info-text">Shipping charges and duties might be extra
                                     and will be confirmed before your order is
                                     processed.</div>
                                 </div>
@@ -776,6 +785,9 @@
     <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script>
+
+    </script>
 </body>
 
 </html>
