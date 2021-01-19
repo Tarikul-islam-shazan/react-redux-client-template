@@ -38,7 +38,8 @@ class MyProfile extends Component {
           newPasswordError : '',
           newPasswordReError : '',
           showSuggestion : false,
-          suggestions : []
+          suggestions : [],
+          emailSettings: 'ALL'
         };
         this.setWrapperRef = this.setWrapperRef.bind(this);
     }
@@ -102,6 +103,28 @@ class MyProfile extends Component {
               toastError("Something went wrong! Please try again.");
             }
         });
+      Http.GET('getEmailPreference', 'MAIL_FREQUENCY')
+        .then(({data}) => {
+          if(data && data.value) {
+            this.setState({
+              emailSettings: data.value
+            })
+          }else{
+            this.setState({
+              loading : false
+            })
+          }
+        })
+        .catch(({response}) => {
+            console.log('COMMENT ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            if(response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Something went wrong! Please try again.");
+            }
+        });
+
     }
 
     fetchSuggestions = async() => {
@@ -300,6 +323,41 @@ class MyProfile extends Component {
       }
     }
 
+    updateEmailPreference = async() => {
+      let { emailSettings } = this.state;
+      if(emailSettings){
+        await this.setState({loading:true});
+        let body = {
+          key: 'MAIL_FREQUENCY',
+          value: emailSettings
+        }
+        await Http.POST('updateEmailPreference',body)
+          .then(({data}) => {
+            console.log('updateEmailPreference POST SUCCESS: ', data);
+            if(data.success){
+              this.setState({
+                loading:false
+              })
+              toastSuccess(data.message);
+            }else{
+              this.setState({
+                loading:false
+              })
+              toastError(data.message);
+            }
+          })
+          .catch(({response}) => {
+              console.log('updateEmailPreference ERROR: ', JSON.stringify(response));
+              this.setState({loading:false})
+              if(response.data && response.data.message){
+                toastError(response.data.message);
+              }else{
+                toastError("Something went wrong! Please try again.");
+              }
+          });
+      }
+    }
+
     setCompany = (item) => {
       this.setState({
         company : item.name,
@@ -309,7 +367,7 @@ class MyProfile extends Component {
     }
 
     render() {
-        let { email, name, proPic, company, companyId, designation, department, phone, address, linkedin, facebook, twitter, showSuggestion, suggestions, oldPassword, newPassword, newPasswordRe, oldPasswordError, newPasswordError, newPasswordReError } = this.state;
+        let { email, name, proPic, company, companyId, designation, department, phone, address, linkedin, facebook, twitter, showSuggestion, suggestions, oldPassword, newPassword, newPasswordRe, oldPasswordError, newPasswordError, newPasswordReError, emailSettings } = this.state;
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -496,7 +554,7 @@ class MyProfile extends Component {
                                         <div className="col-lg-2">
                                             <div className="custom-radio">
                                                 <div className="form-group">
-                                                    <input type="radio" id="card" name="chekout-payment" />
+                                                    <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
                                                         <label htmlFor="card">Don't send any emails</label>
                                                 </div>
                                             </div>
@@ -504,7 +562,7 @@ class MyProfile extends Component {
                                             <br/>
                                             <div className="custom-radio">
                                                 <div className="form-group">
-                                                    <input type="radio" id="card1" name="chekout-payment" />
+                                                    <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
                                                         <label htmlFor="card1">Email important updates</label>
                                                 </div>
                                             </div>
@@ -512,7 +570,7 @@ class MyProfile extends Component {
                                             <br/>
                                             <div className="custom-radio">
                                                 <div className="form-group">
-                                                    <input type="radio" id="card2" name="chekout-payment" />
+                                                    <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />
                                                         <label htmlFor="card2">Email on all updates</label>
                                                 </div>
                                             </div>
@@ -520,7 +578,7 @@ class MyProfile extends Component {
                                     </div>
                                     <div className="row mt-5">
                                         <div className="col-lg-4 text-left">
-                                            <button className="btn-brand">Save Changes</button>
+                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save Changes</button>
                                         </div>
                                     </div>
                                 </div>

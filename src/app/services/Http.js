@@ -60,7 +60,9 @@ const routes = {
     payForInvoice: `${BASE_URL}/invoice/pay`,
     getInvoiceDetails: `${BASE_URL}/invoice/`,
     getNotifications: `${BASE_URL}/notification/all`,
-    markNotificationRead: `${BASE_URL}/notification/mark-seen/`
+    markNotificationRead: `${BASE_URL}/notification/mark-seen/`,
+    getEmailPreference: `${BASE_URL}/personal-setting/get/`,
+    updateEmailPreference: `${BASE_URL}/personal-setting/set`
 };
 
 // Axios request interceptor
