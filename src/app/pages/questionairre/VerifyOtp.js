@@ -67,8 +67,8 @@ class Questionairre_1 extends Component {
 
     componentDidMount = async() => {
         document.title = "Setting you up on Nitex - The easiest clothing manufacturing software";
+        // await loadjs(['/js/script.js']);
         let phoneInfo = localStorage.getItem('nitex@phoneInfo');
-        await loadjs(['/js/script.js']);
         if (phoneInfo) {
           phoneInfo = JSON.parse(phoneInfo)
           this.setState({
@@ -102,7 +102,7 @@ class Questionairre_1 extends Component {
     }
 
     back = () => {
-      localStorage.setItem('nitex@phoneInfo', "");
+      // localStorage.setItem('nitex@phoneInfo', "");
       let redirection = getUrlParameter('redirect', this.props.location.search)
       if (redirection) {
         this.props.history.push('/info?redirect=' + redirection);
@@ -215,17 +215,17 @@ class Questionairre_1 extends Component {
             spinner
             text={LOADER_TEXT}>
             <div className="questionnaire otp">
-                <div class="questionnaire-form">
-                    <div class="ques-heading">
+                <div className="questionnaire-form">
+                    <div className="ques-heading">
                         <h2>Verify</h2>
-                        <p class="font-20 my-2">A code has been sent to {this.renderNumber()}. Please verify. </p>
-                        <a href="#" class="text-underline color-333 font-13" onClick={this.back}>Wrong number?</a>
+                        <p className="font-20 my-2">A code has been sent to {this.renderNumber()}. Please verify. </p>
+                        <a href="#" className="text-underline color-333 font-13" onClick={this.back}>Wrong number?</a>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <div class="country-code">
-                                    <input onChange={this.onChange} value={code} onKeyPress={this.handleKeyPress} name="code" type="text" class="text-center bg-gray-light border-0 font-weight-bold"/>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="form-group">
+                                <div className="country-code">
+                                    <input onChange={this.onChange} value={code} onKeyPress={this.handleKeyPress} name="code" type="text" className="text-center bg-gray-light border-0 font-weight-bold"/>
                                 </div>
                                 {
                                   codeError ?
@@ -234,11 +234,11 @@ class Questionairre_1 extends Component {
                             </div>
                         </div>
                     </div>
-                    <button class="btn-brand m-0" onClick={this._submit}>Verify</button>
+                    <button className="btn-brand m-0" onClick={this._submit}>Verify</button>
                     {
                       timeLimit ?
-                      <button class="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend code after {`${Math.floor(timeLimit/60)}:${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} mins</button> :
-                      <button class="btn-brand m-0" onClick={this.resend}>Resend code</button>
+                      <button className="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend code after {`${Math.floor(timeLimit/60)}:${(timeLimit - (Math.floor(timeLimit/60) * 60))}`} mins</button> :
+                      <button className="btn-brand m-0" onClick={this.resend}>Resend code</button>
                     }
                 </div>
             </div>

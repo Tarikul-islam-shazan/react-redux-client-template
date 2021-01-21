@@ -22,6 +22,15 @@ class InsertPhoneNumber extends Component {
 
     constructor(props) {
         super(props);
+        let phoneInfo = localStorage.getItem('nitex@phoneInfo');
+        if (phoneInfo) {
+          phoneInfo = JSON.parse(phoneInfo);
+          console.log("phoneInfo", phoneInfo)
+          // this.setState({
+          //   defaultCountry: phoneInfo.iso2 ? phoneInfo.iso2 : '',
+          //   telInputValue: phoneInfo.number ? phoneInfo.number : ''
+          // })
+        }
         this.state = {
           role: '',
           roleStr: '',
@@ -36,13 +45,15 @@ class InsertPhoneNumber extends Component {
           numberValidation: false,
           countryCodeError: '',
           userInfo: {},
+          telInputValue: phoneInfo && phoneInfo.number ? phoneInfo.number : '',
+          defaultCountry: phoneInfo && phoneInfo.iso2 ? phoneInfo.iso2 : ''
+          // phoneNumberValue: '+8801758339722'
         };
     }
 
     componentDidMount = async() => {
         document.title = "Setting you up on Nitex - The easiest clothing manufacturing software";
         let userInfo = localStorage.getItem('userInfo');
-        await loadjs(['/js/script.js']);
         if (userInfo) {
           userInfo = JSON.parse(userInfo)
           this.setState({
@@ -121,7 +132,7 @@ class InsertPhoneNumber extends Component {
                 this.setState({loading:false})
                 if(data.success){
                   toastSuccess(data.message);
-                  localStorage.setItem('nitex@phoneInfo', JSON.stringify({phoneNumber: countryCode + phoneNumber}));
+                  localStorage.setItem('nitex@phoneInfo', JSON.stringify({phoneNumber: countryCode + phoneNumber, countryCode, number: phoneNumber, iso2}));
                   let redirection = getUrlParameter('redirect', this.props.location.search);
                   if (redirection) {
                     this.props.history.push('/verify-otp?redirect=' + redirection);
@@ -145,7 +156,7 @@ class InsertPhoneNumber extends Component {
     }
 
     render() {
-        let { userInfo, role, roleStr, label, phoneNumber, countryCode, roleError, roleStrError, labelError, phoneNumberError, countryCodeError } = this.state;
+        let { userInfo, role, roleStr, label, phoneNumber, countryCode, defaultCountry, roleError, roleStrError, labelError, phoneNumberError, countryCodeError, telInputValue } = this.state;
         return (
           <LoadingOverlay
             active={this.state.loading}
@@ -182,7 +193,7 @@ class InsertPhoneNumber extends Component {
                           :
                           <h2>Congratulations!</h2>
                         }
-                        <p class="font-20">We’re almost done. Kindly share your cell number so that a dedicated business
+                        <p className="font-20">We’re almost done. Kindly share your cell number so that a dedicated business
                             strategist can call you to cater for your needs.
                         </p>
                     </div>
@@ -196,6 +207,8 @@ class InsertPhoneNumber extends Component {
                                       onSelectFlag={this.onChangeFlag}
                                       onPhoneNumberChange={this.onChangeNumber}
                                       separateDialCode={true}
+                                      defaultValue={telInputValue}
+                                      defaultCountry={defaultCountry}
                                     />
                                 </div>
                                 {

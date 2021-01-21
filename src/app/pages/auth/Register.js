@@ -81,7 +81,7 @@ class Register extends Component {
                             });
                           } else {
                             this.props.history.push(
-                              '/questionairre' +
+                              '/info' +
                               (redirection ? ('?redirect=' + redirection) : '')
                             );
                           }

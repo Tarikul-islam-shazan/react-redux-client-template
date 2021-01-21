@@ -36,7 +36,7 @@ class OAuth2RedirectHandler extends Component {
           this.props.history.push(redirection ? redirection : "/pick-design");
         }else{
           this.props.history.push(
-            '/questionairre' +
+            '/info' +
             (redirection ? ('?redirect=' + redirection) : '')
           );
         }
