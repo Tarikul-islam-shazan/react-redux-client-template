@@ -131,6 +131,10 @@
     top: 20px;
     cursor: pointer;
     user-select: none;
+    @media (max-width: 767px) {
+      right: 0px;
+      top: 0px;
+    }
   }
   .quote-info{
     img{
