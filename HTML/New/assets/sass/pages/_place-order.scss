@@ -1,4 +1,38 @@
 .placing-order{
+  @media (max-width: 1024px) and (min-width: 992px) {
+    .features:nth-child(2) {
+      flex-basis: 25%;
+    }
+    .features:nth-child(4) {
+      width: 10%;
+    }
+  }
+  @media (max-width: 991px) and (min-width: 768px) {
+    .features:nth-child(2) {
+      flex-basis: 36%;
+    }
+    .features:nth-child(3) {
+      order: 4;
+      margin-left: 150px;
+      margin-top: 5px !important;
+    }
+    .features:nth-child(4) {
+      order: 3;
+      width: 15%;
+      padding-left: 30px;
+      border-left: 1px solid #C3C3C3;
+      padding-right: 0;
+      justify-content: center;
+      > .mt-2{
+        margin-top: 0 !important;
+      }
+      .info-item{
+        h5{
+          font-size: 22px !important;
+        }
+      }
+    }
+  }
   .header-title h3 {
     @media (max-width: 1790px) {
       font-size: 24px;
@@ -10,6 +44,10 @@
   }
   @media (max-width: 1024px) {
     width: 100%;
+    padding-bottom: 60px;
+    @media (max-width: 1024px) {
+      padding-bottom: 110px;
+    }
   }
   .quote-list .quote-info .info-right {
     margin-left: 0px !important;
@@ -17,6 +55,9 @@
       flex-wrap: wrap;
       .features:nth-child(3), .features:nth-child(4) {
         margin-top: 20px;
+        @media (max-width: 767px) {
+          margin-top: 0px;
+        }
       }
     }
   }
@@ -54,7 +95,7 @@
     bottom: 0;
     top: inherit;
     transform: inherit;
-    height: 70px;
+    height: 120px;
     overflow: auto;
     box-shadow: 0px 0px 30px 4px rgba(0,0,0,.2);
     transition: height cubic-bezier(0.35, 0.43, 0.3, 1.25) .3s;
@@ -65,32 +106,48 @@
       }
     }
     &.show{
-      height: 300px;
+      height: calc(100% - 150px);
       .toggle-up-down{
         svg{
           transform: rotate(180deg);
         }
       }
+      .title{
+        background: #E7EBF4;
+      }
     }
+  }
+  @media (max-width: 767px) {
+    height: 170px;
   }
   .title{
     padding: 30px;
     background: #E7EBF4;
     font-size: 22px;
-    position: sticky;
-    top: 0;
+    .tab-price {
+      display: none;
+      @media (max-width: 1024px) {
+        display: block;
+      }
+    }
     @media (max-width: 1790px) {
       padding: 20px 30px;
     }
+    @media (max-width: 1024px) {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 27px 30px;
+    }
+    @media (max-width: 767px) {
+      padding: 15px;
+    }
     .toggle-up-down{
-      display: block;
-      position: absolute;
-      right: 30px;
-      top: 16px;
       width: 36px;
       text-align: center;
+      display: none;
       @media (max-width: 1024px) {
-        display: block;
+        display: inline-block;
       }
     }
   }
@@ -118,6 +175,31 @@
         width: 100%;
         padding: 10px 40px;
         margin-bottom: 15px !important;
+      }
+      @media (max-width: 1024px) {
+        position: fixed;
+        right: 30px;
+        bottom: 15px;
+        align-items: flex-end !important;
+        background: #fff;
+        button{
+          margin: 0 0 10px 0 !important;
+        }
+      }
+      @media (max-width: 767px) {
+        flex-direction: row-reverse !important;
+        justify-content: space-between !important;
+        right: 0;
+        left: 0;
+        align-items: center !important;
+        background: #fff;
+        bottom: 0;
+        padding: 15px;
+        button{
+          margin: 0 !important;
+          max-width: 200px;
+          padding: 10px 15px;
+        }
       }
     }
     .ordered-container > div {

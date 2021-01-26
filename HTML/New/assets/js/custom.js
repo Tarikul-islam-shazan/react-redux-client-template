@@ -116,7 +116,7 @@
     });
 
     // Order invoice popup
-    $('.toggle-up-down').click(function(){
+    $('.invoice-summary .title').click(function(){
         $('.invoice-summary').toggleClass('show');
     });
 
