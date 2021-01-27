@@ -223,7 +223,7 @@ a {
           margin-top: -4px;
       }
       .form-group input:checked + label:before {
-        border: 9px solid $brand-color;
+        border: 8px solid $brand-color;
         background: #fff;
           padding: 4px;
       }
@@ -361,6 +361,7 @@ input.type {
     text-align: center;
     border: 0;
     font-size: 20px;
+    border: 1px solid transparent;
     &:focus, &:active{
         outline: 0;
     }

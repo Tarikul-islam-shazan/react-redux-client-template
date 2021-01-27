@@ -146,9 +146,9 @@ class Questionairre_1 extends Component {
                 countryCode,
                 iso2
               };
-              if(role === 'OTHER'){
-                body.roleInBusinessStr = roleStr;
-              }
+            if(role === 'OTHER'){
+              body.roleInBusinessStr = roleStr;
+            }
 
             Http.POST('updateBusinessInfo', body)
               .then(({data}) => {

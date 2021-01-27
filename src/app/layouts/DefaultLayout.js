@@ -97,8 +97,8 @@ class DefaultLayout extends Component {
       }
       console.log("userInfo from layout", userInfo.businessInfoGiven)
       let { showNotification } = this.state;
-      if (!userInfo.businessInfoGiven) {
-          return <Redirect to="questionairre" />
+      if (!userInfo.phoneVerified) {
+          return <Redirect to="info" />
       }
       return (
           <>
