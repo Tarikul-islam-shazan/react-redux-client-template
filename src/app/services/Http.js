@@ -68,7 +68,8 @@ const routes = {
 
     getProductCollectionList: `${BASE_URL}/collection/products/`,
     getProductsForRfq: `${BASE_URL}/product/for-rfq`,
-    searchProduct: `${BASE_URL}/product/search` // integrated in explore design
+    searchProduct: `${BASE_URL}/product/search`, // integrated in explore design
+    getRfqListV2: `${BASE_URL}/rfq/my-quotes`
 };
 
 // Axios request interceptor

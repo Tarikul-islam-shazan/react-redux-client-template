@@ -37,6 +37,7 @@ import MyProject from './pages/project/MyProject';
 import MyProjectDetails from './pages/project/MyProjectDetails';
 import MyProduct from './pages/product/MyProduct';
 import MyRFQs from './pages/rfo/MyRFQs';
+import MyRFQsV2 from './pages/rfo/MyRFQsV2';
 import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
 
@@ -114,6 +115,7 @@ class Root extends Component {
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
+                  <PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                 </Switch>
             </Router>

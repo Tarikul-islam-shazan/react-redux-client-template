@@ -66,6 +66,7 @@ class PickDesignV2 extends Component {
           landingData: [],
           showFilters: false,
           filterOptions: {},
+          showSelectedFilters: false,
           filters: [],
           suggestions: [],
           searching: false,
@@ -202,7 +203,10 @@ class PickDesignV2 extends Component {
       } else {
         filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
       }
-      await this.setState({filters});
+      await this.setState({
+        filters,
+        showSelectedFilters: filters.length === 0 ? false : this.state.showSelectedFilters
+      });
       if (!flag) {
         this._search()
       }
@@ -469,7 +473,7 @@ class PickDesignV2 extends Component {
     }
 
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal, pagination } = this.state;
+        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal, pagination, showSelectedFilters } = this.state;
 
         return (
           <div className="explore-design">
@@ -520,7 +524,7 @@ class PickDesignV2 extends Component {
                           </div>
                       }
                       {
-                        filters.length ?
+                        showSelectedFilters && filters.length ?
                         <ul className="filter-tag">
                         {
                           filters.map((filter, i) => {
@@ -590,7 +594,10 @@ class PickDesignV2 extends Component {
                               }
                           </ul>
                       </div>
-                      <button className="m-0 btn-brand m-0 shadow float-right" onClick={() => this._search()}>Submit</button>
+                      <button className="m-0 btn-brand m-0 shadow float-right" onClick={async() => {
+                        await this.setState({showSelectedFilters: true});
+                        this._search()
+                      }}>Submit</button>
                   </div>
               </div>
               {
@@ -769,7 +776,10 @@ class PickDesignV2 extends Component {
                                     </ul>
                                 </li>
                             </ul>
-                            <button className="m-0 btn-brand m-0 shadow" onClick={() => this._search()}>Submit</button>
+                            <button className="m-0 btn-brand m-0 shadow" onClick={async() => {
+                              await this.setState({showSelectedFilters: true, responsiveFilterModal: false});
+                              this._search();
+                            }}>Submit</button>
                         </div>
                     </nav>
                 </Modal.Body>

@@ -151,7 +151,7 @@ class ProductCard extends Component {
                   <span className="design-category">{product.productGroup}</span>
                   <div className="card-footer">
                       <div className="quantity">
-                          <span>MOQ <strong>{product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'}</strong></span>
+                          <span>MOQ <strong>{product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : `-- Pcs`}</strong></span>
                           <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
                               <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" strokeWidth="1"/>
                           </svg>
@@ -181,7 +181,7 @@ class ProductCard extends Component {
                                 </g>
                               </svg>
 
-                              <strong> {product.turnAroundTime ? `${product.turnAroundTime} Days` : 'N/A'}</strong>
+                              <strong> {product.turnAroundTime ? `${product.turnAroundTime} Days` : `-- Days`}</strong>
                           </span>
                       </div>
                       {productAvailabilityStatus(product)}
