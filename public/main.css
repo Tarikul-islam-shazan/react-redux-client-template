@@ -1057,6 +1057,9 @@ h4.details-title {
 .text-black {
   color: #000 !important; }
 
+.color-gray {
+  color: #898989 !important; }
+
 .semibold {
   font-weight: 600 !important; }
 
@@ -4649,6 +4652,10 @@ button.rec-arrow-right {
     top: 20px;
     cursor: pointer;
     user-select: none; }
+    @media (max-width: 767px) {
+      .quote-list .dlt {
+        right: 0px;
+        top: 0px; } }
   .quote-list .quote-info img {
     width: auto;
     height: 202px;
@@ -5125,6 +5132,186 @@ button.rec-arrow-right {
   border-top: 10px solid white;
   bottom: -8px;
   right: 19px; }
+
+.placing-order {
+  padding-right: 0px; }
+  @media (max-width: 1024px) and (min-width: 992px) {
+    .placing-order .features:nth-child(2) {
+      flex-basis: 25%; }
+    .placing-order .features:nth-child(4) {
+      width: 10%; } }
+  @media (max-width: 991px) and (min-width: 768px) {
+    .placing-order .features:nth-child(2) {
+      flex-basis: 36%; }
+    .placing-order .features:nth-child(3) {
+      order: 4;
+      margin-left: 150px;
+      margin-top: 5px !important; }
+    .placing-order .features:nth-child(4) {
+      order: 3;
+      width: 15%;
+      padding-left: 30px;
+      border-left: 1px solid #C3C3C3;
+      padding-right: 0;
+      justify-content: center; }
+      .placing-order .features:nth-child(4) > .mt-2 {
+        margin-top: 0 !important; }
+      .placing-order .features:nth-child(4) .info-item h5 {
+        font-size: 22px !important; } }
+  @media (max-width: 1790px) {
+    .placing-order .header-title h3 {
+      font-size: 24px; } }
+  @media (max-width: 1790px) {
+    .placing-order {
+      width: calc(100% - 400px); } }
+  @media (max-width: 1024px) {
+    .placing-order {
+      width: 100%;
+      padding-bottom: 60px; } }
+  @media (max-width: 1024px) and (max-width: 1024px) {
+    .placing-order {
+      padding-bottom: 110px; } }
+
+  .placing-order .quote-list .quote-info .info-right {
+    margin-left: 0px !important; }
+    @media (max-width: 1024px) {
+      .placing-order .quote-list .quote-info .info-right {
+        flex-wrap: wrap; }
+        .placing-order .quote-list .quote-info .info-right .features:nth-child(3), .placing-order .quote-list .quote-info .info-right .features:nth-child(4) {
+          margin-top: 20px; } }
+    @media (max-width: 1024px) and (max-width: 767px) {
+      .placing-order .quote-list .quote-info .info-right .features:nth-child(3), .placing-order .quote-list .quote-info .info-right .features:nth-child(4) {
+        margin-top: 0px; } }
+
+  .placing-order .pc-step, .placing-order .order-id {
+    font-size: 20px !important; }
+    @media (max-width: 767px) {
+      .placing-order .pc-step, .placing-order .order-id {
+        display: inline-block;
+        font-size: 18px !important; }
+        .placing-order .pc-step span.result, .placing-order .order-id span.result {
+          font-size: 16px !important;
+          float: left;
+          text-align: left;
+          margin-top: 10px; } }
+
+.invoice-summary {
+  max-width: 465px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  margin-top: 20px; }
+  @media (max-width: 1790px) {
+    .invoice-summary {
+      max-width: 380px;
+      right: 15px; } }
+  @media (max-width: 1024px) {
+    .invoice-summary {
+      max-width: 100%;
+      right: 0;
+      left: 0;
+      z-index: 999;
+      bottom: 0;
+      top: inherit;
+      transform: inherit;
+      height: 120px;
+      overflow: auto;
+      box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.2);
+      transition: height cubic-bezier(0.35, 0.43, 0.3, 1.25) 0.3s; }
+      .invoice-summary .toggle-up-down svg {
+        transform: rotate(0deg);
+        transition: all ease-in-out .3s; }
+      .invoice-summary.show {
+        height: calc(100% - 150px); }
+        .invoice-summary.show .toggle-up-down svg {
+          transform: rotate(180deg); }
+        .invoice-summary.show .title {
+          background: #E7EBF4; } }
+  @media (max-width: 767px) {
+    .invoice-summary {
+      height: 170px; } }
+  .invoice-summary .title {
+    padding: 30px;
+    background: #E7EBF4;
+    font-size: 22px; }
+    .invoice-summary .title .tab-price {
+      display: none; }
+      @media (max-width: 1024px) {
+        .invoice-summary .title .tab-price {
+          display: block; } }
+    @media (max-width: 1790px) {
+      .invoice-summary .title {
+        padding: 20px 30px; } }
+    @media (max-width: 1024px) {
+      .invoice-summary .title {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        padding: 27px 30px; } }
+    @media (max-width: 767px) {
+      .invoice-summary .title {
+        padding: 15px; } }
+    .invoice-summary .title .toggle-up-down {
+      width: 36px;
+      text-align: center;
+      display: none; }
+      @media (max-width: 1024px) {
+        .invoice-summary .title .toggle-up-down {
+          display: inline-block; } }
+  .invoice-summary .details {
+    padding: 20px 30px; }
+    @media (max-width: 1366px) {
+      .invoice-summary .details h4 {
+        font-size: 20px !important; } }
+    .invoice-summary .details .shipping-info {
+      margin-top: 20px !important; }
+      .invoice-summary .details .shipping-info .info-text {
+        width: 75%; }
+        @media (max-width: 1366px) {
+          .invoice-summary .details .shipping-info .info-text {
+            width: 100%;
+            margin-top: 10px !important;
+            font-size: 14px !important; } }
+    .invoice-summary .details .submit-for-payment button {
+      max-width: 268px;
+      width: 100%;
+      padding: 10px 40px;
+      margin-bottom: 15px !important; }
+    @media (max-width: 1024px) {
+      .invoice-summary .details .submit-for-payment {
+        position: fixed;
+        right: 30px;
+        bottom: 15px;
+        align-items: flex-end !important;
+        background: #fff; }
+        .invoice-summary .details .submit-for-payment button {
+          margin: 0 0 10px 0 !important; } }
+    @media (max-width: 767px) {
+      .invoice-summary .details .submit-for-payment {
+        flex-direction: row-reverse !important;
+        justify-content: space-between !important;
+        right: 0;
+        left: 0;
+        align-items: center !important;
+        background: #fff;
+        bottom: 0;
+        padding: 15px; }
+        .invoice-summary .details .submit-for-payment button {
+          margin: 0 !important;
+          max-width: 200px;
+          padding: 10px 15px; } }
+    @media (max-width: 1790px) {
+      .invoice-summary .details .ordered-container > div {
+        font-size: 17px !important; }
+        .invoice-summary .details .ordered-container > div strong {
+          font-size: 20px !important; } }
+    @media (max-width: 1366px) {
+      .invoice-summary .details .ordered-container > div {
+        font-size: 15px !important; }
+        .invoice-summary .details .ordered-container > div strong {
+          font-size: 18px !important; } }
 
 .add-invoice {
   max-width: 813px;
