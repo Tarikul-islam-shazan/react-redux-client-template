@@ -17,7 +17,8 @@ import MyProfile from './pages/auth/MyProfile';
 
 import Dashboard from './pages/dashboard/Dashboard';
 
-import Questionairre from './pages/questionairre/Questionairre';
+import InsertPhoneNumber from './pages/questionairre/InsertPhoneNumber';
+import VerifyOtp from './pages/questionairre/VerifyOtp';
 
 import Questionairre_1 from './pages/questionairre/Questionairre_1';
 import Questionairre_2 from './pages/questionairre/Questionairre_2';
@@ -90,11 +91,12 @@ class Root extends Component {
             <Router>
                 <Switch>
                   <PublicRoute exact path="/" component={ PickDesign }/>
-                  <QuestionairreRoute exact path="/questionairre" component={ Questionairre }/>
-                  <QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
+                  <QuestionairreRoute exact path="/info" component={ InsertPhoneNumber }/>
+                  <QuestionairreRoute exact path="/verify-otp" component={ VerifyOtp }/>
+                  {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
-                  <QuestionairreRoute exact path="/questionairre-final" component={ Questionairre_final }/>
+                  <QuestionairreRoute exact path="/questionairre-final" component={ Questionairre_final }/>*/}
                   <AuthRoute exact path="/login" component={ Login }/>
                   <AuthRoute exact path="/oauth2/redirect" component={ OAuth2RedirectHandler }/>
                   <Route exact path="/logout" component={ Logout }/>

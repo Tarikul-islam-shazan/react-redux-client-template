@@ -20,6 +20,8 @@ const routes = {
     forgetPassword: `${BASE_URL}/user/request-forgot-password`, // POST
     completeForgotPassword: `${BASE_URL}/user/complete-forgot-password`, // POST
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
+    sendOtpRe: `${BASE_URL}/user/send-otp`, // GET
+    verifyOtp: `${BASE_URL}/user/validate-otp/`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
     getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)
@@ -69,7 +71,9 @@ const routes = {
     getProductCollectionList: `${BASE_URL}/collection/products/`,
     getProductsForRfq: `${BASE_URL}/product/for-rfq`,
     searchProduct: `${BASE_URL}/product/search`, // integrated in explore design
-    getRfqListV2: `${BASE_URL}/rfq/my-quotes`
+    getRfqListV2: `${BASE_URL}/rfq/my-quotes`,
+    getEmailPreference: `${BASE_URL}/personal-setting/get/`,
+    updateEmailPreference: `${BASE_URL}/personal-setting/set`
 };
 
 // Axios request interceptor
