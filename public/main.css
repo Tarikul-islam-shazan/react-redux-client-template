@@ -4175,7 +4175,6 @@ ul.filter-tag {
       right: 10px;
       background: #fff;
       height: 25px;
-      padding: 10px;
       border-radius: 30px;
       cursor: pointer;
       display: none; }
@@ -4184,7 +4183,7 @@ ul.filter-tag {
           display: block; } }
       .new-card .thumb .card-options .dropdown-toggle {
         background: none;
-        padding: 0;
+        padding: 9px 12px;
         display: flex; }
         .new-card .thumb .card-options .dropdown-toggle:after {
           display: none !important; }
@@ -4254,11 +4253,11 @@ ul.filter-tag {
   @media (max-width: 991px) {
     .show-products {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-gap: 0 25px; } }
+      grid-gap: 25px; } }
   @media (max-width: 767px) {
     .show-products {
       grid-template-columns: repeat(1, minmax(0, 1fr));
-      grid-gap: 0 20px; } }
+      grid-gap: 20px; } }
 
 .product-detail-gallery .thumbnail-slider ul li {
   margin-bottom: 20px; }
@@ -4490,32 +4489,38 @@ table {
       margin-bottom: 6px;
       cursor: pointer; }
 
-.rec-slider-container .rec-item-wrapper {
-  overflow: visible !important; }
-  .rec-slider-container .rec-item-wrapper .item {
-    padding: 15px; }
-    @media (max-width: 767px) {
-      .rec-slider-container .rec-item-wrapper .item {
-        padding: 0px; } }
-.rec-slider-container .rec-carousel {
+.rec-slider-container {
+  margin: 0 !important; }
+  .rec-slider-container .rec-item-wrapper {
+    overflow: visible !important; }
+    .rec-slider-container .rec-item-wrapper .item {
+      padding: 15px; }
+      @media (max-width: 767px) {
+        .rec-slider-container .rec-item-wrapper .item {
+          padding: 0px; } }
+
+.rec-carousel {
   position: relative; }
+  .rec-carousel button[disabled] {
+    display: none !important; }
 
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
   z-index: 99;
   transform: translateY(-50%);
   text-indent: -9999999999px;
-  box-shadow: 0 0 25px 1px #eee; }
+  box-shadow: none !important; }
   button.rec-arrow-left:focus, button.rec-arrow-left:hover, button.rec-arrow-right:focus, button.rec-arrow-right:hover {
     outline: 0;
-    box-shadow: none; }
+    box-shadow: 0 0 25px 1px #eee !important;
+    background-color: #E8E6F1 !important; }
 
 button.rec-arrow-left {
-  left: 20px;
+  left: -10px;
   background: url("./images/icons/nav-left.png") no-repeat center #fff; }
 
 button.rec-arrow-right {
-  right: 20px;
+  right: -10px;
   background: url("./images/icons/nav-right.png") no-repeat center #fff; }
 
 .quote-cart button {

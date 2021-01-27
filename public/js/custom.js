@@ -97,6 +97,7 @@
         $('#zoom').zoom();
     });
 
+    // Add More Popup
     $('#catItem').click(function(){
         $('.filter-cat').toggle("slow");
     });
@@ -108,6 +109,11 @@
     });
     $('#closeRPop').click(function(){
         $('.add-more').removeClass('open');
+    });
+
+    // Order invoice popup
+    $('.invoice-summary .title').click(function(){
+        $('.invoice-summary').toggleClass('show');
     });
 })(jQuery);
 
