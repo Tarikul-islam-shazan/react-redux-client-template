@@ -39,7 +39,7 @@ export const QuotedItem = ({quote, index, toggleSelect}) => {
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-1 ellipse-2-line product-title">
                         <a href="#" className="font-weight-bold m-0 font-24 ellipse-2-line">{quote.name}</a>
-                        <a href="#" className="text-underline">Collection name</a>
+                        <a href="#" className="text-underline font-16 color-brand">Collection name</a>
                     </div>
                     <div className="info-item">
                         <label className="font-16 text-muted">Date</label>

@@ -4778,6 +4778,9 @@ button.rec-arrow-right {
   .pricewillbeupdated > svg {
     width: 148px; } }
 
+.color-brand {
+  color: #452D8F !important; }
+
 @media (max-width: 767px) {
   .header-sorting {
     flex-direction: column; }
