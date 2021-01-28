@@ -7,7 +7,7 @@
 }
 .banner-slider .slider.slider-for {
   max-width: calc(100% - 120px);
-  padding-right: 35px;
+  padding-left: 30px;
   @media (max-width: 1024px) {
     padding-right: 0px;
   }
@@ -105,7 +105,7 @@
     float: none;
   }
   .banner-slider .slider.slider-for {
-    padding-right: 0;
+    padding: 0;
   }
   .banner-slider .slider.slider-nav {
     height: auto;
@@ -147,6 +147,12 @@
   }
   .slider.slider-nav.thumb-image {
     white-space: nowrap;
+    @media (max-width: 991px) {
+      width: 50%;
+    }
+    @media (max-width: 575px) {
+      width: 100%;
+    }
   }
   .thumbnail-image.slick-slide {
     padding: 0px 5px;
@@ -197,15 +203,24 @@
 
 //Product Slider Custom
 .slick-arrow {
-  position: absolute;
-  width: 40px;
-  height: 80px;
+  position: absolute !important;
+  width: 40px !important;
+  height: 80px !important;
   z-index: 999;
   &.slick-prev{
     left: 30px;
     top: 50%;
     transform: translateY(-50%);
     background: url("./images/icons/left-slide.png") no-repeat center;
+    @media (max-width: 991px) {
+      left: 0px;
+    }
+    &:before{
+      display: none;
+    }
+    &:hover, &:focus{
+      background: url("./images/icons/left-slide.png") no-repeat center !important;
+    }
   }
   &.slick-next{
     right: 65px;
@@ -215,6 +230,16 @@
     background: url("./images/icons/right-slide.png") no-repeat center;
     @media (max-width: 1024px) {
       right: 30px;
+    }
+
+    @media (max-width: 991px) {
+      right: 0px;
+    }
+    &:before{
+      display: none;
+    }
+    &:hover, &:focus{
+      background: url("./images/icons/right-slide.png") no-repeat center !important;
     }
   }
 }
@@ -231,7 +256,7 @@
 .slider-for{
   @media  (max-width: 1024px){
      img {
-      height: 588px !important;
+      height: auto !important;
     }
   }
 }

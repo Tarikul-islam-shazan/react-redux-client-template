@@ -131,6 +131,10 @@
     top: 20px;
     cursor: pointer;
     user-select: none;
+    @media (max-width: 767px) {
+      right: 0px;
+      top: 0px;
+    }
   }
   .quote-info{
     img{
@@ -293,6 +297,13 @@
     img{
       width: auto;
       height: 110px;
+    }
+  }
+}
+.pricewillbeupdated {
+  @media (max-width: 991px) {
+    > svg {
+      width: 148px;
     }
   }
 }
