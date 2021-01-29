@@ -142,7 +142,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                     <button className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
                     <div className="option">
                         <div className="dropdown">
-                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"/>
+                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
                                     <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
                                         <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"/>
@@ -154,6 +154,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                                 <li role="presentation"  className="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" className="font-weight-normal  text-black">Discuss</a></li>
                                 <li role="presentation"  className="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" className="font-weight-normal  text-black">Remove</a></li>
                             </ul>
+                        </button>
                         </div>
                     </div>
                 </div>
