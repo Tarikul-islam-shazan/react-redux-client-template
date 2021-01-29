@@ -197,7 +197,7 @@ class MyRFQs extends Component {
   }
 
   _search = () => {
-    this.renderList(0);
+    this.renderList(0, false);
   }
 
   searchByCollection = async(collection) => {
@@ -234,7 +234,7 @@ class MyRFQs extends Component {
   }
 
   render() {
-    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems } = this.state;
+    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection } = this.state;
     if (!hasNext && !rfqList.length) {
       return (
         <div className="not-found">
@@ -289,37 +289,29 @@ class MyRFQs extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="collection-name-heading font-24 ml-0 mt-3  mt-sm-0 ml-sm-4">
-                    <ul className="filter-tag m-0 overflow-inherit">
-                        <li className="active"><a>Men - Sweatshirt</a>
-                            <div className="close-tag">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888"
-                                     viewBox="0 0 10.888 10.888">
-                                    <g id="Group_10684" data-name="Group 10684"
-                                       transform="translate(50.699 -260.002) rotate(45)">
-                                        <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4"
-                                              transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff"
-                                              stroke-width="1"></path>
-                                        <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4"
-                                              transform="translate(162.898 219.699) rotate(90)" fill="none"
-                                              stroke="#fff" stroke-width="1"></path>
-                                    </g>
-                                </svg>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                {/*<div className="collection-name-heading font-24 ml-0 mt-3  mt-sm-0 ml-sm-4">*/}
-                {/*    <span>Collection Name</span>*/}
-                {/*    <svg xmlns="http://www.w3.org/2000/svg" width="17.799" height="17.798" viewBox="0 0 17.799 17.798" className="cursor-pointer ml-4">*/}
-                {/*        <g id="Group_10716" data-name="Group 10716" transform="translate(54.154 -263.457) rotate(45)">*/}
-                {/*            <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v24.17" transform="translate(-1974.688 -2138.497)" fill="none" stroke="#1c1f26" stroke-width="1"/>*/}
-                {/*            <path id="Path_27711" data-name="Path 27711" d="M0,0V24.17" transform="translate(172.67 224.585) rotate(90)" fill="none" stroke="#1c1f26" stroke-width="1"/>*/}
-                {/*        </g>*/}
-                {/*    </svg>*/}
-                {/*</div>*/}
-
+                {
+                  collection && collection.id ?
+                  <div className="collection-name-heading font-24 ml-0 mt-3  mt-sm-0 ml-sm-4">
+                      <ul className="filter-tag m-0 overflow-inherit">
+                          <li className="active"><a>{collection.name}</a>
+                              <div className="close-tag" onClick={() => this.searchByCollection({})}>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888"
+                                       viewBox="0 0 10.888 10.888">
+                                      <g id="Group_10684" data-name="Group 10684"
+                                         transform="translate(50.699 -260.002) rotate(45)">
+                                          <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4"
+                                                transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff"
+                                                stroke-width="1"></path>
+                                          <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4"
+                                                transform="translate(162.898 219.699) rotate(90)" fill="none"
+                                                stroke="#fff" stroke-width="1"></path>
+                                      </g>
+                                  </svg>
+                              </div>
+                          </li>
+                      </ul>
+                  </div> : <></>
+                }
             </div>
             <span className="color-333">{total} designs</span>
         </div>
