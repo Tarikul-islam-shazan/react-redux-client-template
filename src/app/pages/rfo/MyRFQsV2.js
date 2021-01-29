@@ -51,7 +51,9 @@ class MyRFQs extends Component {
       allCheck: false,
       search: '',
       status: '',
-      date: ''
+      date: '',
+      collection: null,
+      totalSelectedItems: 0
     };
   }
 
@@ -98,7 +100,7 @@ class MyRFQs extends Component {
 
   renderList = (page = 0, merge = true) => {
     this.setState({ loading: true })
-    let { size, rfqList, search, filterBy, sort, filterById, status, date } = this.state;
+    let { size, rfqList, search, filterBy, sort, filterById, status, date, collection } = this.state;
     // let params = `?page=${page}&size=${size}`;
     let params = {
       page: page,
@@ -110,6 +112,10 @@ class MyRFQs extends Component {
       status,
       date
     };
+    if (collection && collection.id) {
+      params.collectionId = collection.id;
+    }
+
 
     Http.GET('getRfqListV2', params)
       .then(({ data }) => {
@@ -172,7 +178,7 @@ class MyRFQs extends Component {
     }
   }
 
-  toggleSelect = (e) => {
+  toggleSelect = async(e) => {
     let {rfqList, allCheck} = this.state;
     rfqList = rfqList.map((rfq, i) => {
       if (i == e.target.value) {
@@ -183,18 +189,52 @@ class MyRFQs extends Component {
       }
       return rfq;
     })
-    this.setState({
+    await this.setState({
       rfqList,
       allCheck: e.target.name === 'all' ? e.target.checked : allCheck
     });
+    this.setTotalSelectedItems()
   }
 
   _search = () => {
     this.renderList(0);
   }
 
+  searchByCollection = async(collection) => {
+    await this.setState({
+      collection
+    });
+    this._search();
+  }
+
+  setTotalSelectedItems = () => {
+    let {rfqList} = this.state;
+    let totalSelectedItems = 0;
+    rfqList.map((quote) => {
+      if (quote.isSelected) {
+        totalSelectedItems++;
+      }
+    })
+    this.setState({totalSelectedItems});
+  }
+
+  removeTotalSelectedItems = () => {
+    let e = {
+      target: {
+        name: 'all',
+        value: false
+      }
+    };
+    this.toggleSelect(e);
+    this.setState({totalSelectedItems: 0})
+  }
+
+  order = () => {
+
+  }
+
   render() {
-    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date } = this.state;
+    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems } = this.state;
     if (!hasNext && !rfqList.length) {
       return (
         <div className="not-found">
@@ -259,12 +299,26 @@ class MyRFQs extends Component {
             {
               rfqList.map((quote, i) =>{
                 return(
-                  <QuotedItem quote={quote} key={i} index={i} toggleSelect={this.toggleSelect}/>
+                  <QuotedItem quote={quote} key={i} index={i} toggleSelect={this.toggleSelect} search={this.searchByCollection}/>
                 )
               })
             }
             </div>
         </div>
+        {
+          totalSelectedItems ?
+          <div className="selected-item-popup d-flex justify-content-between">
+              <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+                  <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({totalSelectedItems})</h4>
+                  <button className="m-0 btn-brand brand-bg-color shadow" onClick={this.order}>Place your order</button>
+              </div>
+              <div className="close">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436" onClick={this.removeTotalSelectedItems}>
+                      <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
+                  </svg>
+              </div>
+          </div> : <></>
+        }
       </>
     );
   }
