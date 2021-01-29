@@ -5,7 +5,9 @@
 //  }
 //}
 
-
+.color-brand{
+  color: $brand-color !important;
+}
 .header-sorting{
   @media (max-width: 767px) {
     flex-direction: column;

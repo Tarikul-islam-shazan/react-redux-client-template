@@ -5,6 +5,7 @@
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0px 0px 25px -8px rgba(0, 0, 0, 0.1);
+  background: #fff;
   .ques-heading{
     text-align: center;
     margin-bottom: 50px;
@@ -20,7 +21,7 @@
       font-size: 20px;
       color: #6A7181;
       margin: 0;
-      line-height: 24px;
+      line-height: 32px;
     }
   }
   .questionnaire-form {
@@ -114,6 +115,12 @@
       }
     }
   }
+  button.btn-brand {
+    margin-bottom: 30px !important;
+  }
+  &.otp{
+    max-width: 770px;
+  }
 }
 .nice-select.error, .country-phone-code input.error {
   background: #FFF5F5 !important;
@@ -193,8 +200,9 @@
   }
 }
 button[disabled]{
-  background: #E5E5E5;
+  background: #F2F2F2 ;
   color: #818181;
+  border-color: #EDEFF4;;
 }
 
 //Share Design Update
