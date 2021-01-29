@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+
+</head>
+
+<body>
+<!-- Side Bar -->
+<aside class="left-panel">
+    <div class="logo">
+        <a href="#" class="logo-expanded">
+            <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+        </a>
+    </div>
+    <nav class="navigation">
+        <ul class="list-unstyled">
+            <li>
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">Request for Quotes</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">Pick Designs</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">My Products</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">My RFQ's</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="#">
+                    <img src="" alt="">
+                    <span class="nav-label">My Projects</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<div class="content">
+    <!-- Top Nav -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn p-1">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+                <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                       aria-describedby="basic-addon2" />
+            </div>
+        </form>
+
+        <ul class="navbar-nav ml-auto align-items-center">
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                     aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                   placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                    Instant Quotation
+                </a>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+                <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                </button>
+            </li>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-plus-circle"></i> Add New
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">New Product</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown no-arrow">
+                <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                    <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                     aria-labelledby="dropdownProfileButton">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
+
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                    </a>
+
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                    </a>
+
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="wraper container-fluid dashboard-container">
+        <!-- Page Content  -->
+        <div class="product-details-slider-container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="product-detail-gallery">
+                        <div class="thumbnail-slider">
+<!--                            <div class="inner slider-nav">-->
+<!--                                <ul class="">-->
+<!--                                    <li>-->
+<!--                                        <div class="item-slick"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt"></div>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <div class="item-slick"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"></div>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <div class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></div>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <div class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></div>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="thumbnail-prev">
+                            <div class="slider-for">
+                                <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt"></a>
+                                <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"></a>
+                                <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></a>
+                                <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" alt="Alt"></a>
+                            </div>
+                            <div class="slider-nav">
+                                <div class="item-slick"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt"></div>
+                                <div class="item-slick"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"></div>
+                                <div class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></div>
+                                <div class="item-slick"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" alt="Alt"></div>
+                            </div>
+                        </div>
+                        <!--end-->
+                    </div>
+
+                </div>
+                <div class="col-lg-5">
+                    <div class="produt-details-description">
+                        <div class="head-title">
+                            <h3 class="text-uppercase font-26">RELAXED FIT ORGANIC COTTON VARSITY T-SHIRT </h3>
+                        </div>
+                        <span class="product-badge bg-green-light color-green">Available</span>
+                        <div class="d-flex flex-column flex-sm-row">
+                            <div class="info-item mr-5">
+                                <label class="font-14 text-muted">Product Type</label>
+                                <h5 class="font-16 color-333">T-shirt</h5>
+                            </div>
+                            <div class="info-item">
+                                <label class="font-14 text-muted">Fabric Composition</label>
+                                <h5 class="font-16 color-333">98% Cotton / 2% Elastane</h5>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <p class="font-16 color-333">A first generation design, restyled for today merges contemporary fits and fabrics with iconic detailing, such as Ithaca stripe trim, the kelly green button hole, and our heritage flag and crest. Made from a weave of cotton and nylon, our lightweight jacket features the classic Hilfiger flag.</p>
+                        </div>
+                        <div class="info-item">
+                                <ul class="font-16 color-333 ml-3">
+                                    <li class="mb-2">Modern Fit - A roomy, comfortable fit with a relaxed shoulder.</li>
+                                    <li class="mb-2">54% nylon, 46% cotton.</li>
+                                    <li class="mb-2">Zip closure, side pockets, snap throat latch.</li>
+                                    <li class="mb-2">For fit references, this unisex collection has been cut in traditional men’s sizes.</li>
+                                </ul>
+                        </div>
+                        <div class="info-item">
+                            <div class="d-flex align-items-center mb-3">
+                                <label class="w-auto m-0">Color</label>
+                                <span class="font-13 color-333 ml-3">Dark Blue</span>
+                            </div>
+                            <div class="color-picker">
+                                <ul>
+                                    <li><span class="ash active"></span></li>
+                                    <li><span class="violate"></span></span></li>
+                                    <li><span class="red"></span></span></li>
+                                    <li><span class="green"></span></span></li>
+                                    <li><span class="blue"></span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="d-flex align-items-center mb-3">
+                                <label class="w-auto m-0">Default sizes</label>
+                                <a href="javascript:void(0)">
+                                    <span class="font-14 brand-color ml-3" data-toggle="modal" data-target="#Mchart">Measurement Guide</span>
+                                </a>
+                            </div>
+                            <span class="font-16 color-333 text-uppercase">XS  /  S  /  M  /  L /  XL  /  XXL  /  XXXL</span>
+                        </div>
+                        <div class="info-item">
+                            <label class="font-14 text-muted mb-3">Minimum order quantity</label>
+                            <h5 class="font-16 font-weight-bold">Starts from 50 pcs (up to 12000)
+                                <span class="ml-2" title="info.........">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
+                                      <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
+                                    </svg>
+                                </span>
+                            </h5>
+                        </div>
+                        <div class="info-item">
+                            <label class="font-14 text-muted mb-3">Turn around time</label>
+                            <h5 class="font-16 font-weight-bold">As fast as 12 days
+                                <span class="ml-2" title="info.........">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
+                                      <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
+                                    </svg>
+                                </span>
+                            </h5>
+                        </div>
+                        <div class="info-item">
+                            <div class="text-left mt-5 mr-5">
+                                <a href="" class="btn btn-outline-secondary mr-3 border-gray-light favourite favourite-active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26.474" height="24.783" viewBox="0 0 26.474 24.783">
+                                        <path id="like_1_" data-name="like (1)" d="M26.43,9.216c-.386-4.283-3.4-7.39-7.165-7.39a7.113,7.113,0,0,0-6.1,3.54,6.856,6.856,0,0,0-5.955-3.54C3.441,1.826.43,4.933.044,9.216a7.67,7.67,0,0,0,.225,2.808,12.061,12.061,0,0,0,3.665,6.158l9.223,8.427,9.382-8.427A12.062,12.062,0,0,0,26.2,12.024,7.688,7.688,0,0,0,26.43,9.216Z" transform="translate(0 -1.826)" fill="#8f95a2"/>
+                                    </svg>
+                                </a>
+                                <a href="" class="btn btn-outline-secondary mr-3 border-gray-light">Customize</a>
+                                <a href="" class="btn btn-outline-secondary mr-3 border-0 brand-bg-color-secondary text-white quote-now">Quote Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="other-description p-0 pt-5 mt-4">
+
+
+                <div class="product-slider designs">
+                    <h4 class="mb-4">Similar Designs</h4>
+                    <div class="Product-carousel-related owl-carousel owl-theme">
+
+                        <div class="item">
+                            <div class="card product-card new-card active">
+                                <div class="thumb">
+                                    <div class="favourite-part choose active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
+                                            <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="favourite-part active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.521" height="13.594" viewBox="0 0 14.521 13.594">
+                                            <path id="like_1_" data-name="like (1)" d="M14.5,5.88a4.13,4.13,0,0,0-3.93-4.053A3.9,3.9,0,0,0,7.221,3.768,3.761,3.761,0,0,0,3.954,1.826,4.13,4.13,0,0,0,.024,5.879,4.207,4.207,0,0,0,.148,7.42,6.615,6.615,0,0,0,2.158,10.8L7.217,15.42,12.363,10.8a6.616,6.616,0,0,0,2.01-3.378A4.217,4.217,0,0,0,14.5,5.88Z" transform="translate(0 -1.826)" fill="#9098ac"/>
+                                        </svg>
+                                    </div>
+                                    <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                    <button class="btn-brand">Quote Now</button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize">Blue Huddie Long Sleeve</h5>
+                                    <span class="design-category">Men</span>
+                                    <div class="card-footer">
+                                        <div class="quantity">
+                                            <span>MOQ <strong>500 Pcs</strong></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
+                                                <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                                            </svg>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">
+                                                  <g id="delivery-truck" transform="translate(0 -68.867)">
+                                                    <g id="Group_10719" data-name="Group 10719" transform="translate(0 68.867)">
+                                                      <g id="Group_10718" data-name="Group 10718" transform="translate(0 0)">
+                                                        <path id="Path_27717" data-name="Path 27717" d="M14.5,73.053H13.373l.34-3.9c0-.007,0-.014,0-.021v0h0a.262.262,0,0,0-.158-.24h0l-.018-.007-.007,0-.015,0-.011,0-.014,0-.013,0H8.082a.262.262,0,1,0,0,.525h5.084l-.522,6h0L12.511,76.9H3.394l.152-1.574H5.283a.262.262,0,0,0,0-.525H3.6l.322-3.323H6.682a.262.262,0,0,0,0-.525H3.97l.151-1.562h2.91a.262.262,0,1,0,0-.525H3.883a.262.262,0,0,0-.256.207v0c0,.007,0,.013,0,.02V69.1h0l-.179,1.85H.262a.262.262,0,0,0,0,.525h3.13L3.07,74.8H2.134a.262.262,0,0,0,0,.525h.885l-.175,1.809h0l-.271,2.8h0s0,.007,0,.011,0,.01,0,.014h0c0,.007,0,.013,0,.02s0,0,0,.006,0,.013,0,.02v.006c0,.005,0,.01,0,.015l0,.01v0a.262.262,0,0,0,.062.1v0l.009.008a.26.26,0,0,0,.061.042l.014.007,0,0,.02.007h0l.024.006h0l.023,0H4a2,2,0,0,0,3.96,0h4.209a2,2,0,0,0,3.96,0h1.2l.02,0,.008,0,.015,0,.01,0,.013,0,.011,0,.011-.006.01-.006.011-.007.01-.006.01-.008.009-.007.01-.009.007-.007.011-.012.006-.006.011-.015,0-.005.012-.02h0l.011-.022,0-.007.006-.016,0-.011,0-.013s0-.008,0-.012l0-.011c.011-.089.217-1.738.308-2.8v0c.026-.307.043-.566.043-.724A3.415,3.415,0,0,0,14.5,73.053Zm-1.173.525H14.4l-.137,1.574H13.191ZM5.983,81.436a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,5.983,81.436Zm8.169,0a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,14.151,81.436ZM17.068,79.7h-.936a2,2,0,0,0-3.96,0H7.963A2,2,0,0,0,4,79.7h-.88l.22-2.274h9.44l.02,0,.009,0,.016,0,.01,0,.013,0,.011,0,.012-.006.011-.006.011-.006.01-.007.01-.008.009-.007.01-.009.008-.008.009-.01.007-.008.008-.011.006-.009.007-.012.005-.009.006-.013,0-.01,0-.013,0-.011,0-.012,0-.013s0-.008,0-.013,0-.009,0-.013v0l.132-1.51H14.5a1.879,1.879,0,0,1,1.55.858,2.153,2.153,0,0,0,1.271.869C17.246,78.21,17.123,79.246,17.068,79.7Zm.3-2.823a1.717,1.717,0,0,1-.92-.687,2.464,2.464,0,0,0-1.658-1.022l.136-1.558a2.891,2.891,0,0,1,2.462,2.855C17.387,76.563,17.38,76.705,17.368,76.877Z" transform="translate(0 -68.867)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10721" data-name="Group 10721" transform="translate(5.021 79.001)">
+                                                      <g id="Group_10720" data-name="Group 10720" transform="translate(0 0)">
+                                                        <path id="Path_27718" data-name="Path 27718" d="M144.47,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,144.47,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,144.47,359.923Z" transform="translate(-143.508 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10723" data-name="Group 10723" transform="translate(13.189 79.001)">
+                                                      <g id="Group_10722" data-name="Group 10722" transform="translate(0 0)">
+                                                        <path id="Path_27719" data-name="Path 27719" d="M377.958,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,377.958,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,377.958,359.923Z" transform="translate(-376.996 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10725" data-name="Group 10725" transform="translate(0.939 73.053)">
+                                                      <g id="Group_10724" data-name="Group 10724">
+                                                        <path id="Path_27720" data-name="Path 27720" d="M28.379,188.527H27.1a.262.262,0,0,0,0,.525h1.283a.262.262,0,1,0,0-.525Z" transform="translate(-26.834 -188.527)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                  </g>
+                                                </svg>
+
+                                                <strong>15 Days</strong>
+                                            </span>
+                                        </div>
+                                        <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="card product-card new-card">
+                                <div class="thumb">
+                                    <div class="favourite-part choose">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
+                                            <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="favourite-part">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.521" height="13.594" viewBox="0 0 14.521 13.594">
+                                            <path id="like_1_" data-name="like (1)" d="M14.5,5.88a4.13,4.13,0,0,0-3.93-4.053A3.9,3.9,0,0,0,7.221,3.768,3.761,3.761,0,0,0,3.954,1.826,4.13,4.13,0,0,0,.024,5.879,4.207,4.207,0,0,0,.148,7.42,6.615,6.615,0,0,0,2.158,10.8L7.217,15.42,12.363,10.8a6.616,6.616,0,0,0,2.01-3.378A4.217,4.217,0,0,0,14.5,5.88Z" transform="translate(0 -1.826)" fill="#9098ac"/>
+                                        </svg>
+                                    </div>
+                                    <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                    <button class="btn-brand">Quote Now</button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize">Blue Huddie Long Sleeve</h5>
+                                    <span class="design-category">Men</span>
+                                    <div class="card-footer">
+                                        <div class="quantity">
+                                            <span>MOQ <strong>500 Pcs</strong></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
+                                                <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                                            </svg>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">
+                                                  <g id="delivery-truck" transform="translate(0 -68.867)">
+                                                    <g id="Group_10719" data-name="Group 10719" transform="translate(0 68.867)">
+                                                      <g id="Group_10718" data-name="Group 10718" transform="translate(0 0)">
+                                                        <path id="Path_27717" data-name="Path 27717" d="M14.5,73.053H13.373l.34-3.9c0-.007,0-.014,0-.021v0h0a.262.262,0,0,0-.158-.24h0l-.018-.007-.007,0-.015,0-.011,0-.014,0-.013,0H8.082a.262.262,0,1,0,0,.525h5.084l-.522,6h0L12.511,76.9H3.394l.152-1.574H5.283a.262.262,0,0,0,0-.525H3.6l.322-3.323H6.682a.262.262,0,0,0,0-.525H3.97l.151-1.562h2.91a.262.262,0,1,0,0-.525H3.883a.262.262,0,0,0-.256.207v0c0,.007,0,.013,0,.02V69.1h0l-.179,1.85H.262a.262.262,0,0,0,0,.525h3.13L3.07,74.8H2.134a.262.262,0,0,0,0,.525h.885l-.175,1.809h0l-.271,2.8h0s0,.007,0,.011,0,.01,0,.014h0c0,.007,0,.013,0,.02s0,0,0,.006,0,.013,0,.02v.006c0,.005,0,.01,0,.015l0,.01v0a.262.262,0,0,0,.062.1v0l.009.008a.26.26,0,0,0,.061.042l.014.007,0,0,.02.007h0l.024.006h0l.023,0H4a2,2,0,0,0,3.96,0h4.209a2,2,0,0,0,3.96,0h1.2l.02,0,.008,0,.015,0,.01,0,.013,0,.011,0,.011-.006.01-.006.011-.007.01-.006.01-.008.009-.007.01-.009.007-.007.011-.012.006-.006.011-.015,0-.005.012-.02h0l.011-.022,0-.007.006-.016,0-.011,0-.013s0-.008,0-.012l0-.011c.011-.089.217-1.738.308-2.8v0c.026-.307.043-.566.043-.724A3.415,3.415,0,0,0,14.5,73.053Zm-1.173.525H14.4l-.137,1.574H13.191ZM5.983,81.436a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,5.983,81.436Zm8.169,0a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,14.151,81.436ZM17.068,79.7h-.936a2,2,0,0,0-3.96,0H7.963A2,2,0,0,0,4,79.7h-.88l.22-2.274h9.44l.02,0,.009,0,.016,0,.01,0,.013,0,.011,0,.012-.006.011-.006.011-.006.01-.007.01-.008.009-.007.01-.009.008-.008.009-.01.007-.008.008-.011.006-.009.007-.012.005-.009.006-.013,0-.01,0-.013,0-.011,0-.012,0-.013s0-.008,0-.013,0-.009,0-.013v0l.132-1.51H14.5a1.879,1.879,0,0,1,1.55.858,2.153,2.153,0,0,0,1.271.869C17.246,78.21,17.123,79.246,17.068,79.7Zm.3-2.823a1.717,1.717,0,0,1-.92-.687,2.464,2.464,0,0,0-1.658-1.022l.136-1.558a2.891,2.891,0,0,1,2.462,2.855C17.387,76.563,17.38,76.705,17.368,76.877Z" transform="translate(0 -68.867)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10721" data-name="Group 10721" transform="translate(5.021 79.001)">
+                                                      <g id="Group_10720" data-name="Group 10720" transform="translate(0 0)">
+                                                        <path id="Path_27718" data-name="Path 27718" d="M144.47,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,144.47,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,144.47,359.923Z" transform="translate(-143.508 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10723" data-name="Group 10723" transform="translate(13.189 79.001)">
+                                                      <g id="Group_10722" data-name="Group 10722" transform="translate(0 0)">
+                                                        <path id="Path_27719" data-name="Path 27719" d="M377.958,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,377.958,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,377.958,359.923Z" transform="translate(-376.996 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10725" data-name="Group 10725" transform="translate(0.939 73.053)">
+                                                      <g id="Group_10724" data-name="Group 10724">
+                                                        <path id="Path_27720" data-name="Path 27720" d="M28.379,188.527H27.1a.262.262,0,0,0,0,.525h1.283a.262.262,0,1,0,0-.525Z" transform="translate(-26.834 -188.527)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                  </g>
+                                                </svg>
+
+                                                <strong>15 Days</strong>
+                                            </span>
+                                        </div>
+                                        <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="card product-card new-card">
+                                <div class="thumb">
+                                    <div class="favourite-part choose">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
+                                            <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="favourite-part">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.521" height="13.594" viewBox="0 0 14.521 13.594">
+                                            <path id="like_1_" data-name="like (1)" d="M14.5,5.88a4.13,4.13,0,0,0-3.93-4.053A3.9,3.9,0,0,0,7.221,3.768,3.761,3.761,0,0,0,3.954,1.826,4.13,4.13,0,0,0,.024,5.879,4.207,4.207,0,0,0,.148,7.42,6.615,6.615,0,0,0,2.158,10.8L7.217,15.42,12.363,10.8a6.616,6.616,0,0,0,2.01-3.378A4.217,4.217,0,0,0,14.5,5.88Z" transform="translate(0 -1.826)" fill="#9098ac"/>
+                                        </svg>
+                                    </div>
+                                    <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                    <button class="btn-brand">Quote Now</button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize">Blue Huddie Long Sleeve</h5>
+                                    <span class="design-category">Men</span>
+                                    <div class="card-footer">
+                                        <div class="quantity">
+                                            <span>MOQ <strong>500 Pcs</strong></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
+                                                <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                                            </svg>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">
+                                                  <g id="delivery-truck" transform="translate(0 -68.867)">
+                                                    <g id="Group_10719" data-name="Group 10719" transform="translate(0 68.867)">
+                                                      <g id="Group_10718" data-name="Group 10718" transform="translate(0 0)">
+                                                        <path id="Path_27717" data-name="Path 27717" d="M14.5,73.053H13.373l.34-3.9c0-.007,0-.014,0-.021v0h0a.262.262,0,0,0-.158-.24h0l-.018-.007-.007,0-.015,0-.011,0-.014,0-.013,0H8.082a.262.262,0,1,0,0,.525h5.084l-.522,6h0L12.511,76.9H3.394l.152-1.574H5.283a.262.262,0,0,0,0-.525H3.6l.322-3.323H6.682a.262.262,0,0,0,0-.525H3.97l.151-1.562h2.91a.262.262,0,1,0,0-.525H3.883a.262.262,0,0,0-.256.207v0c0,.007,0,.013,0,.02V69.1h0l-.179,1.85H.262a.262.262,0,0,0,0,.525h3.13L3.07,74.8H2.134a.262.262,0,0,0,0,.525h.885l-.175,1.809h0l-.271,2.8h0s0,.007,0,.011,0,.01,0,.014h0c0,.007,0,.013,0,.02s0,0,0,.006,0,.013,0,.02v.006c0,.005,0,.01,0,.015l0,.01v0a.262.262,0,0,0,.062.1v0l.009.008a.26.26,0,0,0,.061.042l.014.007,0,0,.02.007h0l.024.006h0l.023,0H4a2,2,0,0,0,3.96,0h4.209a2,2,0,0,0,3.96,0h1.2l.02,0,.008,0,.015,0,.01,0,.013,0,.011,0,.011-.006.01-.006.011-.007.01-.006.01-.008.009-.007.01-.009.007-.007.011-.012.006-.006.011-.015,0-.005.012-.02h0l.011-.022,0-.007.006-.016,0-.011,0-.013s0-.008,0-.012l0-.011c.011-.089.217-1.738.308-2.8v0c.026-.307.043-.566.043-.724A3.415,3.415,0,0,0,14.5,73.053Zm-1.173.525H14.4l-.137,1.574H13.191ZM5.983,81.436a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,5.983,81.436Zm8.169,0a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,14.151,81.436ZM17.068,79.7h-.936a2,2,0,0,0-3.96,0H7.963A2,2,0,0,0,4,79.7h-.88l.22-2.274h9.44l.02,0,.009,0,.016,0,.01,0,.013,0,.011,0,.012-.006.011-.006.011-.006.01-.007.01-.008.009-.007.01-.009.008-.008.009-.01.007-.008.008-.011.006-.009.007-.012.005-.009.006-.013,0-.01,0-.013,0-.011,0-.012,0-.013s0-.008,0-.013,0-.009,0-.013v0l.132-1.51H14.5a1.879,1.879,0,0,1,1.55.858,2.153,2.153,0,0,0,1.271.869C17.246,78.21,17.123,79.246,17.068,79.7Zm.3-2.823a1.717,1.717,0,0,1-.92-.687,2.464,2.464,0,0,0-1.658-1.022l.136-1.558a2.891,2.891,0,0,1,2.462,2.855C17.387,76.563,17.38,76.705,17.368,76.877Z" transform="translate(0 -68.867)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10721" data-name="Group 10721" transform="translate(5.021 79.001)">
+                                                      <g id="Group_10720" data-name="Group 10720" transform="translate(0 0)">
+                                                        <path id="Path_27718" data-name="Path 27718" d="M144.47,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,144.47,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,144.47,359.923Z" transform="translate(-143.508 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10723" data-name="Group 10723" transform="translate(13.189 79.001)">
+                                                      <g id="Group_10722" data-name="Group 10722" transform="translate(0 0)">
+                                                        <path id="Path_27719" data-name="Path 27719" d="M377.958,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,377.958,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,377.958,359.923Z" transform="translate(-376.996 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10725" data-name="Group 10725" transform="translate(0.939 73.053)">
+                                                      <g id="Group_10724" data-name="Group 10724">
+                                                        <path id="Path_27720" data-name="Path 27720" d="M28.379,188.527H27.1a.262.262,0,0,0,0,.525h1.283a.262.262,0,1,0,0-.525Z" transform="translate(-26.834 -188.527)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                  </g>
+                                                </svg>
+
+                                                <strong>15 Days</strong>
+                                            </span>
+                                        </div>
+                                        <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="card product-card new-card">
+                                <div class="thumb">
+                                    <div class="favourite-part choose">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
+                                            <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="favourite-part">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.521" height="13.594" viewBox="0 0 14.521 13.594">
+                                            <path id="like_1_" data-name="like (1)" d="M14.5,5.88a4.13,4.13,0,0,0-3.93-4.053A3.9,3.9,0,0,0,7.221,3.768,3.761,3.761,0,0,0,3.954,1.826,4.13,4.13,0,0,0,.024,5.879,4.207,4.207,0,0,0,.148,7.42,6.615,6.615,0,0,0,2.158,10.8L7.217,15.42,12.363,10.8a6.616,6.616,0,0,0,2.01-3.378A4.217,4.217,0,0,0,14.5,5.88Z" transform="translate(0 -1.826)" fill="#9098ac"/>
+                                        </svg>
+                                    </div>
+                                    <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                    <button class="btn-brand">Quote Now</button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize">Blue Huddie Long Sleeve</h5>
+                                    <span class="design-category">Men</span>
+                                    <div class="card-footer">
+                                        <div class="quantity">
+                                            <span>MOQ <strong>500 Pcs</strong></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
+                                                <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                                            </svg>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">
+                                                  <g id="delivery-truck" transform="translate(0 -68.867)">
+                                                    <g id="Group_10719" data-name="Group 10719" transform="translate(0 68.867)">
+                                                      <g id="Group_10718" data-name="Group 10718" transform="translate(0 0)">
+                                                        <path id="Path_27717" data-name="Path 27717" d="M14.5,73.053H13.373l.34-3.9c0-.007,0-.014,0-.021v0h0a.262.262,0,0,0-.158-.24h0l-.018-.007-.007,0-.015,0-.011,0-.014,0-.013,0H8.082a.262.262,0,1,0,0,.525h5.084l-.522,6h0L12.511,76.9H3.394l.152-1.574H5.283a.262.262,0,0,0,0-.525H3.6l.322-3.323H6.682a.262.262,0,0,0,0-.525H3.97l.151-1.562h2.91a.262.262,0,1,0,0-.525H3.883a.262.262,0,0,0-.256.207v0c0,.007,0,.013,0,.02V69.1h0l-.179,1.85H.262a.262.262,0,0,0,0,.525h3.13L3.07,74.8H2.134a.262.262,0,0,0,0,.525h.885l-.175,1.809h0l-.271,2.8h0s0,.007,0,.011,0,.01,0,.014h0c0,.007,0,.013,0,.02s0,0,0,.006,0,.013,0,.02v.006c0,.005,0,.01,0,.015l0,.01v0a.262.262,0,0,0,.062.1v0l.009.008a.26.26,0,0,0,.061.042l.014.007,0,0,.02.007h0l.024.006h0l.023,0H4a2,2,0,0,0,3.96,0h4.209a2,2,0,0,0,3.96,0h1.2l.02,0,.008,0,.015,0,.01,0,.013,0,.011,0,.011-.006.01-.006.011-.007.01-.006.01-.008.009-.007.01-.009.007-.007.011-.012.006-.006.011-.015,0-.005.012-.02h0l.011-.022,0-.007.006-.016,0-.011,0-.013s0-.008,0-.012l0-.011c.011-.089.217-1.738.308-2.8v0c.026-.307.043-.566.043-.724A3.415,3.415,0,0,0,14.5,73.053Zm-1.173.525H14.4l-.137,1.574H13.191ZM5.983,81.436a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,5.983,81.436Zm8.169,0a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,14.151,81.436ZM17.068,79.7h-.936a2,2,0,0,0-3.96,0H7.963A2,2,0,0,0,4,79.7h-.88l.22-2.274h9.44l.02,0,.009,0,.016,0,.01,0,.013,0,.011,0,.012-.006.011-.006.011-.006.01-.007.01-.008.009-.007.01-.009.008-.008.009-.01.007-.008.008-.011.006-.009.007-.012.005-.009.006-.013,0-.01,0-.013,0-.011,0-.012,0-.013s0-.008,0-.013,0-.009,0-.013v0l.132-1.51H14.5a1.879,1.879,0,0,1,1.55.858,2.153,2.153,0,0,0,1.271.869C17.246,78.21,17.123,79.246,17.068,79.7Zm.3-2.823a1.717,1.717,0,0,1-.92-.687,2.464,2.464,0,0,0-1.658-1.022l.136-1.558a2.891,2.891,0,0,1,2.462,2.855C17.387,76.563,17.38,76.705,17.368,76.877Z" transform="translate(0 -68.867)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10721" data-name="Group 10721" transform="translate(5.021 79.001)">
+                                                      <g id="Group_10720" data-name="Group 10720" transform="translate(0 0)">
+                                                        <path id="Path_27718" data-name="Path 27718" d="M144.47,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,144.47,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,144.47,359.923Z" transform="translate(-143.508 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10723" data-name="Group 10723" transform="translate(13.189 79.001)">
+                                                      <g id="Group_10722" data-name="Group 10722" transform="translate(0 0)">
+                                                        <path id="Path_27719" data-name="Path 27719" d="M377.958,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,377.958,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,377.958,359.923Z" transform="translate(-376.996 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10725" data-name="Group 10725" transform="translate(0.939 73.053)">
+                                                      <g id="Group_10724" data-name="Group 10724">
+                                                        <path id="Path_27720" data-name="Path 27720" d="M28.379,188.527H27.1a.262.262,0,0,0,0,.525h1.283a.262.262,0,1,0,0-.525Z" transform="translate(-26.834 -188.527)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                  </g>
+                                                </svg>
+
+                                                <strong>15 Days</strong>
+                                            </span>
+                                        </div>
+                                        <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="card product-card new-card">
+                                <div class="thumb">
+                                    <div class="favourite-part choose">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
+                                            <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="favourite-part">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14.521" height="13.594" viewBox="0 0 14.521 13.594">
+                                            <path id="like_1_" data-name="like (1)" d="M14.5,5.88a4.13,4.13,0,0,0-3.93-4.053A3.9,3.9,0,0,0,7.221,3.768,3.761,3.761,0,0,0,3.954,1.826,4.13,4.13,0,0,0,.024,5.879,4.207,4.207,0,0,0,.148,7.42,6.615,6.615,0,0,0,2.158,10.8L7.217,15.42,12.363,10.8a6.616,6.616,0,0,0,2.01-3.378A4.217,4.217,0,0,0,14.5,5.88Z" transform="translate(0 -1.826)" fill="#9098ac"/>
+                                        </svg>
+                                    </div>
+                                    <img src="assets/images/design5.png" alt="designer" class="card-img-top img-fluid d-block mx-auto">
+                                    <button class="btn-brand">Quote Now</button>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize">Blue Huddie Long Sleeve</h5>
+                                    <span class="design-category">Men</span>
+                                    <div class="card-footer">
+                                        <div class="quantity">
+                                            <span>MOQ <strong>500 Pcs</strong></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">
+                                                <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" stroke-width="1"/>
+                                            </svg>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17.912" height="13.094" viewBox="0 0 17.912 13.094">
+                                                  <g id="delivery-truck" transform="translate(0 -68.867)">
+                                                    <g id="Group_10719" data-name="Group 10719" transform="translate(0 68.867)">
+                                                      <g id="Group_10718" data-name="Group 10718" transform="translate(0 0)">
+                                                        <path id="Path_27717" data-name="Path 27717" d="M14.5,73.053H13.373l.34-3.9c0-.007,0-.014,0-.021v0h0a.262.262,0,0,0-.158-.24h0l-.018-.007-.007,0-.015,0-.011,0-.014,0-.013,0H8.082a.262.262,0,1,0,0,.525h5.084l-.522,6h0L12.511,76.9H3.394l.152-1.574H5.283a.262.262,0,0,0,0-.525H3.6l.322-3.323H6.682a.262.262,0,0,0,0-.525H3.97l.151-1.562h2.91a.262.262,0,1,0,0-.525H3.883a.262.262,0,0,0-.256.207v0c0,.007,0,.013,0,.02V69.1h0l-.179,1.85H.262a.262.262,0,0,0,0,.525h3.13L3.07,74.8H2.134a.262.262,0,0,0,0,.525h.885l-.175,1.809h0l-.271,2.8h0s0,.007,0,.011,0,.01,0,.014h0c0,.007,0,.013,0,.02s0,0,0,.006,0,.013,0,.02v.006c0,.005,0,.01,0,.015l0,.01v0a.262.262,0,0,0,.062.1v0l.009.008a.26.26,0,0,0,.061.042l.014.007,0,0,.02.007h0l.024.006h0l.023,0H4a2,2,0,0,0,3.96,0h4.209a2,2,0,0,0,3.96,0h1.2l.02,0,.008,0,.015,0,.01,0,.013,0,.011,0,.011-.006.01-.006.011-.007.01-.006.01-.008.009-.007.01-.009.007-.007.011-.012.006-.006.011-.015,0-.005.012-.02h0l.011-.022,0-.007.006-.016,0-.011,0-.013s0-.008,0-.012l0-.011c.011-.089.217-1.738.308-2.8v0c.026-.307.043-.566.043-.724A3.415,3.415,0,0,0,14.5,73.053Zm-1.173.525H14.4l-.137,1.574H13.191ZM5.983,81.436a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,5.983,81.436Zm8.169,0a1.473,1.473,0,1,1,1.473-1.473A1.475,1.475,0,0,1,14.151,81.436ZM17.068,79.7h-.936a2,2,0,0,0-3.96,0H7.963A2,2,0,0,0,4,79.7h-.88l.22-2.274h9.44l.02,0,.009,0,.016,0,.01,0,.013,0,.011,0,.012-.006.011-.006.011-.006.01-.007.01-.008.009-.007.01-.009.008-.008.009-.01.007-.008.008-.011.006-.009.007-.012.005-.009.006-.013,0-.01,0-.013,0-.011,0-.012,0-.013s0-.008,0-.013,0-.009,0-.013v0l.132-1.51H14.5a1.879,1.879,0,0,1,1.55.858,2.153,2.153,0,0,0,1.271.869C17.246,78.21,17.123,79.246,17.068,79.7Zm.3-2.823a1.717,1.717,0,0,1-.92-.687,2.464,2.464,0,0,0-1.658-1.022l.136-1.558a2.891,2.891,0,0,1,2.462,2.855C17.387,76.563,17.38,76.705,17.368,76.877Z" transform="translate(0 -68.867)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10721" data-name="Group 10721" transform="translate(5.021 79.001)">
+                                                      <g id="Group_10720" data-name="Group 10720" transform="translate(0 0)">
+                                                        <path id="Path_27718" data-name="Path 27718" d="M144.47,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,144.47,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,144.47,359.923Z" transform="translate(-143.508 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10723" data-name="Group 10723" transform="translate(13.189 79.001)">
+                                                      <g id="Group_10722" data-name="Group 10722" transform="translate(0 0)">
+                                                        <path id="Path_27719" data-name="Path 27719" d="M377.958,358.524a.962.962,0,1,0,.962.962A.963.963,0,0,0,377.958,358.524Zm0,1.4a.437.437,0,1,1,.437-.437A.438.438,0,0,1,377.958,359.923Z" transform="translate(-376.996 -358.524)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                    <g id="Group_10725" data-name="Group 10725" transform="translate(0.939 73.053)">
+                                                      <g id="Group_10724" data-name="Group 10724">
+                                                        <path id="Path_27720" data-name="Path 27720" d="M28.379,188.527H27.1a.262.262,0,0,0,0,.525h1.283a.262.262,0,1,0,0-.525Z" transform="translate(-26.834 -188.527)" fill="#7e8597"/>
+                                                      </g>
+                                                    </g>
+                                                  </g>
+                                                </svg>
+
+                                                <strong>15 Days</strong>
+                                            </span>
+                                        </div>
+                                        <span class="badge design-badge" style="background-color: #F7F5E5; color: #CD930C;">In Project</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Mchart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h4  class="font-weight-normal m-0">Measurement Chart</h4>
+                <button type="button" class="close pt-3 pb-2" data-dismiss="modal" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+
+            <div class="modal-body p-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered table-striped table-responsive measurement-chart measurement-table">
+                            <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th></th>
+                                <th>XS</th>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>L</th>
+                                <th>XL</th>
+                                <th>TOL. +/-</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>WAIST</td>
+                                <th>A</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            <tr>
+                                <td>FROM WAIST TO HIPS</td>
+                                <th>B</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            <tr>
+                                <td>HIPS</td>
+                                <th>C</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            <tr>
+                                <td>BOTTOM</td>
+                                <th>D</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            <tr>
+                                <td>BODY LENGTH</td>
+                                <th>D</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            <tr>
+                                <td>BACK LENGTH</td>
+                                <th>D</th>
+                                <td>33</td>
+                                <td>34</td>
+                                <td>27</td>
+                                <td>39</td>
+                                <td>41</td>
+                                <td>1,0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-6 col-md-offset-3">-->
+
+<!--            <div class="slider-for">-->
+<!--                <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt"></a>-->
+<!--                <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"></a>-->
+<!--                <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></a>-->
+<!--                <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" class="item-slick"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" alt="Alt"></a>-->
+<!--            </div>-->
+<!--            <div class="slider-nav">-->
+<!--                <div class="item-slick"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt"></div>-->
+<!--                <div class="item-slick"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt"></div>-->
+<!--                <div class="item-slick"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt"></div>-->
+<!--                <div class="item-slick"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" alt="Alt"></div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- necessary scripts -->
+<script type="text/javascript " src="assets/js/jquery.min.js"></script>
+<script type="text/javascript " src="assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/custom.js"></script>
+
+<script>
+    $(function() {
+// Card's slider
+        var $carousel = $('.slider-for');
+
+        $carousel
+            .slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                adaptiveHeight: true,
+                asNavFor: '.slider-nav'
+            })
+            .magnificPopup({
+                type: 'image',
+                delegate: 'a:not(.slick-cloned)',
+                closeOnContentClick: false,
+                tLoading: 'Загрузка...',
+                mainClass: 'mfp-zoom-in mfp-img-mobile',
+                image: {
+                    verticalFit: true,
+                    tError: '<a href="%url%">Фото #%curr%</a> не загрузилось.'
+                },
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    tCounter: '<span class="mfp-counter">%curr% из %total%</span>', // markup of counte
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300
+                },
+                removalDelay: 300, //delay removal by X to allow out-animation
+                callbacks: {
+                    open: function() {
+                        //overwrite default prev + next function. Add timeout for css3 crossfade animation
+                        $.magnificPopup.instance.next = function() {
+                            var self = this;
+                            self.wrap.removeClass('mfp-image-loaded');
+                            setTimeout(function() { $.magnificPopup.proto.next.call(self); }, 120);
+                        };
+                        $.magnificPopup.instance.prev = function() {
+                            var self = this;
+                            self.wrap.removeClass('mfp-image-loaded');
+                            setTimeout(function() { $.magnificPopup.proto.prev.call(self); }, 120);
+                        };
+                        var current = $carousel.slick('slickCurrentSlide');
+                        $carousel.magnificPopup('goTo', current);
+                    },
+                    imageLoadComplete: function() {
+                        var self = this;
+                        setTimeout(function() { self.wrap.addClass('mfp-image-loaded'); }, 16);
+                    },
+                    beforeClose: function() {
+                        $carousel.slick('slickGoTo', parseInt(this.index));
+                    }
+                }
+            });
+        $('.slider-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: false,
+            centerMode: true,
+            focusOnSelect: false,
+            arrows: false,
+        });
+
+
+    });
+</script>
+
+</body>
+
+</html>

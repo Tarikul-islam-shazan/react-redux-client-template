@@ -64,13 +64,17 @@
   .pc-step, .order-id{
     font-size: 20px !important;
     @media (max-width: 767px) {
-      display: inline-block;
       font-size: 18px !important;
+      display: flex;
+      flex-wrap: wrap;
       span.result {
         font-size: 16px !important;
         float: left;
         text-align: left;
         margin-top: 10px;
+      }
+      span{
+        width: 100%;
       }
     }
   }
@@ -171,7 +175,7 @@
     }
     .submit-for-payment{
       button{
-        max-width: 268px;
+        max-width: 270px;
         width: 100%;
         padding: 10px 40px;
         margin-bottom: 15px !important;
@@ -215,6 +219,73 @@
           font-size: 18px !important;
         }
       }
+    }
+  }
+}
+.stepper {
+  padding: 20px 30px;
+  background: #fff;
+  margin-bottom: 20px;
+  @media (max-width: 575px) {
+    padding: 15px 20px;
+  }
+  h3{
+    color: #21242B;
+  }
+  label{
+    color: #21242B;
+    font-size: 20px;
+    font-weight: 600;
+    @media (max-width: 1280px) {
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 1366px) {
+    .custom-chekbox .form-group input:checked + label:after {
+      top: 5px;
+      left: 9px;
+      height: 14px;
+    }
+    .custom-chekbox .form-group label:before {
+      padding: 10px;
+    }
+  }
+}
+.payment-method-type{
+  display: flex;
+  margin-bottom: 30px;
+  @media (max-width: 575px) {
+    overflow: auto;
+  }
+  .type{
+    color: $brand-color;
+    font-size: 13px;
+    font-weight: 600;
+    max-width: 157px;
+    text-align: center;
+    padding: 20px;
+    background: #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    filter: grayscale(1);
+    opacity: .4;
+    width: 100%;
+    @media (max-width: 991px) {
+      width: 120px !important;
+      white-space: nowrap;
+      display: table;
+      padding: 15px;
+    }
+    + .type{
+      margin-left: 25px;
+      @media (max-width: 575px) {
+        margin-left: 15px;
+      }
+    }
+    &.active{
+      filter: grayscale(0);
+      opacity: 1;
+      background: #ECE9F4;
     }
   }
 }

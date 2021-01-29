@@ -407,7 +407,7 @@ a {
   content: '';
   display: block;
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: 9px;
   width: 6px;
   height: 14px;
@@ -5202,13 +5202,16 @@ button.rec-arrow-right {
     font-size: 20px !important; }
     @media (max-width: 767px) {
       .placing-order .pc-step, .placing-order .order-id {
-        display: inline-block;
-        font-size: 18px !important; }
+        font-size: 18px !important;
+        display: flex;
+        flex-wrap: wrap; }
         .placing-order .pc-step span.result, .placing-order .order-id span.result {
           font-size: 16px !important;
           float: left;
           text-align: left;
-          margin-top: 10px; } }
+          margin-top: 10px; }
+        .placing-order .pc-step span, .placing-order .order-id span {
+          width: 100%; } }
 
 .invoice-summary {
   max-width: 465px;
@@ -5290,7 +5293,7 @@ button.rec-arrow-right {
             margin-top: 10px !important;
             font-size: 14px !important; } }
     .invoice-summary .details .submit-for-payment button {
-      max-width: 268px;
+      max-width: 270px;
       width: 100%;
       padding: 10px 40px;
       margin-bottom: 15px !important; }
@@ -5327,6 +5330,65 @@ button.rec-arrow-right {
         font-size: 15px !important; }
         .invoice-summary .details .ordered-container > div strong {
           font-size: 18px !important; } }
+
+.stepper {
+  padding: 20px 30px;
+  background: #fff;
+  margin-bottom: 20px; }
+  @media (max-width: 575px) {
+    .stepper {
+      padding: 15px 20px; } }
+  .stepper h3 {
+    color: #21242B; }
+  .stepper label {
+    color: #21242B;
+    font-size: 20px;
+    font-weight: 600; }
+    @media (max-width: 1280px) {
+      .stepper label {
+        font-size: 18px; } }
+  @media (max-width: 1366px) {
+    .stepper .custom-chekbox .form-group input:checked + label:after {
+      top: 5px;
+      left: 9px;
+      height: 14px; }
+    .stepper .custom-chekbox .form-group label:before {
+      padding: 10px; } }
+
+.payment-method-type {
+  display: flex;
+  margin-bottom: 30px; }
+  @media (max-width: 575px) {
+    .payment-method-type {
+      overflow: auto; } }
+  .payment-method-type .type {
+    color: #452D8F;
+    font-size: 13px;
+    font-weight: 600;
+    max-width: 157px;
+    text-align: center;
+    padding: 20px;
+    background: #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    filter: grayscale(1);
+    opacity: .4;
+    width: 100%; }
+    @media (max-width: 991px) {
+      .payment-method-type .type {
+        width: 120px !important;
+        white-space: nowrap;
+        display: table;
+        padding: 15px; } }
+    .payment-method-type .type + .type {
+      margin-left: 25px; }
+      @media (max-width: 575px) {
+        .payment-method-type .type + .type {
+          margin-left: 15px; } }
+    .payment-method-type .type.active {
+      filter: grayscale(0);
+      opacity: 1;
+      background: #ECE9F4; }
 
 .add-invoice {
   max-width: 813px;
