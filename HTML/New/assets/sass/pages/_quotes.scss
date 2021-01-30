@@ -331,6 +331,23 @@
     width: auto;
   }
 }
+.add-quote-list{
+  .info-item{
+    width: 140px;
+    @media (max-width: 1366px) {
+      width: 118px;
+    }
+    @media (max-width: 1280px) {
+      width: auto;
+      &:first-child{
+        margin-right: 16px !important;
+      }
+    }
+  }
+  &:nth-child(3), &:nth-child(4) {
+    margin-top: 0;
+  }
+}
 .admin-price{
   flex-basis: 448px;
   padding-left: 20px;
@@ -450,4 +467,9 @@
   border-top: 10px solid white;
   bottom: -8px;
   right: 19px;
+}
+.collection-name-heading{
+  .close-tag{
+      top: 2px !important;
+  }
 }

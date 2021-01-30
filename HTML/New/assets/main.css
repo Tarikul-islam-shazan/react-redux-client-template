@@ -1244,6 +1244,9 @@ h4.details-title {
   position: sticky;
   top: 0px; }
 
+.overflow-inherit {
+  overflow: inherit !important; }
+
 .navigation > ul > li > a {
   padding: 12px 8px;
   font-size: 16px; }
@@ -4602,6 +4605,9 @@ button.rec-arrow-right {
     background: #fff;
     padding: 20px 35px;
     margin-bottom: 1px; }
+    @media (max-width: 1440px) {
+      .add-more .header h4 {
+        font-size: 20px !important; } }
   .add-more .added-item {
     padding: 0 35px 20px; }
   @media (max-width: 1790px) {
@@ -4660,8 +4666,8 @@ button.rec-arrow-right {
       color: #21242B; }
   .quote-list .dlt {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 10px;
+    top: 10px;
     cursor: pointer;
     user-select: none; }
     @media (max-width: 767px) {
@@ -4681,7 +4687,7 @@ button.rec-arrow-right {
     .quote-list .sizes .size input {
       padding: 5px;
       text-align: center;
-      height: 40px;
+      height: 38px;
       border-color: #e4e4e4; }
     .quote-list .sizes .size.total {
       width: 130px; }
@@ -4734,7 +4740,7 @@ button.rec-arrow-right {
       .quote-list .quote-info img {
         height: 144px; }
       .quote-list .sizes {
-        margin-left: 80px;
+        margin-left: 48px;
         margin-bottom: 15px; }
         .quote-list .sizes .size {
           width: 50px;
@@ -4757,15 +4763,27 @@ button.rec-arrow-right {
       height: 92px; }
     .quote-list .sizes {
       margin-left: 0px;
-      margin-top: 30px;
+      margin-top: 0px;
       margin-bottom: 10px; }
       .quote-list .sizes .size {
-        width: 40px;
-        margin-right: 5px; }
+        width: 35px;
+        margin-right: 5px; } }
+    @media (max-width: 767px) and (max-width: 320px) {
+      .quote-list .sizes .size {
+        width: 31px; } }
+  @media (max-width: 767px) {
         .quote-list .sizes .size input {
-          height: 38px; }
+          height: 34px; } }
+      @media (max-width: 767px) and (max-width: 320px) {
+        .quote-list .sizes .size input {
+          height: 25px;
+          padding: 2px; } }
+  @media (max-width: 767px) {
         .quote-list .sizes .size.total {
           width: 70px; } }
+      @media (max-width: 767px) and (max-width: 320px) {
+        .quote-list .sizes .size.total {
+          width: 44px; } }
 
 .added-item .quote-list {
   box-shadow: 0px 0px 2px 0px #ddd;
@@ -4777,6 +4795,30 @@ button.rec-arrow-right {
 @media (max-width: 991px) {
   .pricewillbeupdated > svg {
     width: 148px; } }
+
+.size-n-color {
+  min-height: 204px;
+  padding: 30px 50px 20px 0; }
+  @media (max-width: 1366px) {
+    .size-n-color {
+      padding: 30px 25px 20px 0; } }
+  @media (max-width: 991px) {
+    .size-n-color {
+      min-height: auto; } }
+  .size-n-color .size-n-color .sizes:only-child {
+    padding-top: 70px; }
+  .size-n-color .sizes {
+    margin-bottom: 16px; }
+
+.product-color {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  margin: 0 auto; }
+  @media (max-width: 1440px) {
+    .product-color {
+      width: 20px;
+      height: 20px; } }
 
 .color-brand {
   color: #452D8F !important; }
@@ -5045,6 +5087,19 @@ button.rec-arrow-right {
   .features .info-item {
     width: auto; }
 
+.add-quote-list .info-item {
+  width: 140px; }
+  @media (max-width: 1366px) {
+    .add-quote-list .info-item {
+      width: 118px; } }
+  @media (max-width: 1280px) {
+    .add-quote-list .info-item {
+      width: auto; }
+      .add-quote-list .info-item:first-child {
+        margin-right: 16px !important; } }
+.add-quote-list:nth-child(3), .add-quote-list:nth-child(4) {
+  margin-top: 0; }
+
 .admin-price {
   flex-basis: 448px;
   padding-left: 20px;
@@ -5147,6 +5202,9 @@ button.rec-arrow-right {
   border-top: 10px solid white;
   bottom: -8px;
   right: 19px; }
+
+.collection-name-heading .close-tag {
+  top: 2px !important; }
 
 .placing-order {
   padding-right: 0px; }
