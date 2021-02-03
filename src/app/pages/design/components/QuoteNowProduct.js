@@ -66,7 +66,63 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                 </div>
             </div>
         </div>
-        <div className="sizes d-flex  align-items-center">
+
+        <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
+           <div class="sizes d-flex  align-items-center">
+               <div class="size">
+                   <label class="text-center">&nbsp;</label>
+                   <div class="product-color" style={{background: 'yellowgreen'}}></div>
+               </div>
+               <div class="size">
+                   <label class="text-center">XS</label>
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <label class="text-center">S</label>
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <label class="text-center">M</label>
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <label class="text-center">L</label>
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <label class="text-center">XL</label>
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size total">
+                   <label class="text-right">Total</label>
+                   <input type="text" placeholder="00" class="bg-blue-light"/>
+               </div>
+           </div>
+           <div class="sizes d-flex  align-items-center">
+               <div class="size">
+                   <div class="product-color" style={{background: '#e0a800'}}></div>
+               </div>
+               <div class="size">
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size">
+                   <input type="text" placeholder="00" class="bg-gray-light"/>
+               </div>
+               <div class="size total">
+                   <input type="text" placeholder="00" class="bg-blue-light"/>
+               </div>
+           </div>
+        </div>
+        {/*<div className="sizes d-flex  align-items-center">
         {
           product.sizeQuantityPairList.map((pair, key) => {
             return(
@@ -83,6 +139,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
             </div>
         </div>
         <p className="error">{product.error}</p>
+        */}
     </div>
   )
 }
