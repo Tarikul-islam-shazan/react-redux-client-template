@@ -3,11 +3,20 @@ import { addImageSuffix } from '../../../services/Util';
 export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   let flag = 1;
   let total = 0;
-  product.sizeQuantityPairList.map((pair, key) => {
-    if (pair.quantity) {
-      total += parseInt(pair.quantity);
-    }
-  })
+  console.log("QuoteNowProduct", product);
+  // product.sizeQuantityPairList.map((pair, key) => {
+  //   if (pair.quantity) {
+  //     total += parseInt(pair.quantity);
+  //   }
+  // })
+  const getTotal = (sizeQuantityPairList) => {
+    sizeQuantityPairList.map((pair, key) => {
+      if (pair.quantity) {
+        total += parseInt(pair.quantity);
+      }
+    })
+    return total;
+  }
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
         <div className="dlt" onClick={() => remove(index)}>
@@ -68,78 +77,34 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
         </div>
 
         <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
-           <div class="sizes d-flex  align-items-center">
-               <div class="size">
-                   <label class="text-center">&nbsp;</label>
-                   <div class="product-color" style={{background: 'yellowgreen'}}></div>
-               </div>
-               <div class="size">
-                   <label class="text-center">XS</label>
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <label class="text-center">S</label>
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <label class="text-center">M</label>
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <label class="text-center">L</label>
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <label class="text-center">XL</label>
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size total">
-                   <label class="text-right">Total</label>
-                   <input type="text" placeholder="00" class="bg-blue-light"/>
-               </div>
-           </div>
-           <div class="sizes d-flex  align-items-center">
-               <div class="size">
-                   <div class="product-color" style={{background: '#e0a800'}}></div>
-               </div>
-               <div class="size">
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size">
-                   <input type="text" placeholder="00" class="bg-gray-light"/>
-               </div>
-               <div class="size total">
-                   <input type="text" placeholder="00" class="bg-blue-light"/>
-               </div>
-           </div>
-        </div>
-        {/*<div className="sizes d-flex  align-items-center">
         {
-          product.sizeQuantityPairList.map((pair, key) => {
+          product.colorWiseSizeQuantityPairList.map((colorWithSize, colorIndex) => {
             return(
-              <div className="size">
-                  <label className="text-center">{pair.code}</label>
-                  <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, pair.code, e.target.value)} className="bg-gray-light"/>
+              <div class="sizes d-flex  align-items-center">
+                  <div class="size">
+                      <label class="text-center">&nbsp;</label>
+                      <div class="product-color" style={{background: colorWithSize.hexCode}}></div>
+                  </div>
+                  {
+                    colorWithSize.sizeQuantityPairList.map((pair, key) => {
+                      return(
+                        <div className="size">
+                            <label className="text-center">{pair.code}</label>
+                            <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} className="bg-gray-light"/>
+                        </div>
+                      )
+                    })
+                  }
+                  <div className="size total">
+                      <label className="text-right">Total</label>
+                      <input type="text" placeholder="00" value={getTotal(colorWithSize.sizeQuantityPairList)} className="bg-blue-light" disabled/>
+                  </div>
               </div>
             )
           })
         }
-            <div className="size total">
-                <label className="text-right">Total</label>
-                <input type="text" placeholder="00" value={total} className="bg-blue-light" disabled/>
-            </div>
-        </div>
         <p className="error">{product.error}</p>
-        */}
+        </div>
     </div>
   )
 }

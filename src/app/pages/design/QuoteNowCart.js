@@ -125,9 +125,10 @@ class QuoteNowCart extends Component {
       await this.updateCartGlobally();
     }
 
-    onChangeQuantity = async(index, name, value) => {
+    onChangeQuantity = async(productIndex, colorIndex, name, value) => {
       let {cart} = this.state;
-      cart[index].sizeQuantityPairList = cart[index].sizeQuantityPairList.map((pair) => {
+      cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList =
+      cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
           if (pair.code === name) {
             pair.quantity = value;
           }
@@ -151,6 +152,7 @@ class QuoteNowCart extends Component {
         title,
         products: cart
       }
+      await this.setState({cart});
       await this.props._storeData('quoteObj', quote);
       localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
     }
@@ -181,12 +183,14 @@ class QuoteNowCart extends Component {
       let flag = true;
       cart = cart.map((product, i) => {
         let tempFlag = true;
-        product.sizeQuantityPairList.map((pair) => {
-          if (!pair.quantity) {
-            flag = false;
-            tempFlag = false;
-            product.error = 'Please insert all values'
-          }
+        product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
+          colorWithSize.sizeQuantityPairList.map((pair) => {
+            if (!pair.quantity) {
+              flag = false;
+              tempFlag = false;
+              product.error = 'Please insert all values'
+            }
+          })
         })
         if (tempFlag) {
           product.error = ''
@@ -205,16 +209,18 @@ class QuoteNowCart extends Component {
             name: title,
             rfqRequestDTOList: cart.map((product) => {
               let total = 0;
-              product.sizeQuantityPairList.map((pair) => {
-                if (pair.quantity) {
-                  total += parseInt(pair.quantity);
-                }
+              product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
+                colorWithSize.sizeQuantityPairList.map((pair) => {
+                  if (pair.quantity) {
+                    total += parseInt(pair.quantity);
+                  }
+                })
               })
               return (
                 {
                   id: product.id,
                   total,
-                  sizeQuantityPairList: product.sizeQuantityPairList
+                  colorWiseSizeQuantityPairList: product.colorWiseSizeQuantityPairList
                 }
               )
             })
@@ -263,7 +269,7 @@ class QuoteNowCart extends Component {
                   {
                     cart.map((product, i) => {
                       return(
-                        <QuoteNowProduct i={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
+                        <QuoteNowProduct key={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
                       )
                     })
                   }
