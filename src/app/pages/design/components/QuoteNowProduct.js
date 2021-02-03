@@ -9,7 +9,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
     }
   })
   return(
-    <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
+    <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
         <div className="dlt" onClick={() => remove(index)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                 <g id="Group_11204" data-name="Group 11204" transform="translate(-1233 -282)">
@@ -44,7 +44,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
           }
             <div className="info-right ml-4">
                 <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">{product.name ? product.name : 'N/A'}</a>
-                <div className="features d-flex flex-column flex-sm-row">
+                <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Product category</label>
                         <h5 className="font-16 color-333">{product.productType}, {product.productGroup}</h5>
@@ -54,10 +54,10 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                         <h5 className="font-16 color-333">{product.moq} pcs</h5>
                     </div>
                 </div>
-                <div className="features d-flex flex-column flex-sm-row">
+                <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-16 color-333">{product.fabricComposition} <span className="brand-color ml-3">{product.fabricWeight} GSM</span></h5>
+                        <h5 className="font-16 color-333">{product.fabricComposition} <br/> <br/> <span className="brand-color mt-2">{product.fabricWeight} GSM</span></h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
