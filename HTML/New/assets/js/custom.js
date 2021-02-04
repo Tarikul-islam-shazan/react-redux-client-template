@@ -111,8 +111,12 @@
     $('.add-more-design').click(function(){
         $('.add-more').addClass('open');
     });
+
     $('#closeRPop').click(function(){
         $('.add-more').removeClass('open');
+    });
+    $('#CreateCollection').click(function(){
+        $('.add-more').addClass('open');
     });
 
     // Order invoice popup
