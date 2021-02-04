@@ -549,36 +549,155 @@ class MyProfile extends Component {
                             </div>
                             <div id="EmailPreferences" className="tab-pane fade">
                                 <div className="email-preferences">
-                                    <h4 className="mb-5">Project emails</h4>
-                                    <div className="row">
-                                        <div className="col-lg-2">
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Project emails</h4>
+                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save</button>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
                                                         <label htmlFor="card">Don't send any emails</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <br/>
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
                                                         <label htmlFor="card1">Email important updates</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <br/>
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />
                                                         <label htmlFor="card2">Email on all updates</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row mt-5">
-                                        <div className="col-lg-4 text-left">
-                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save Changes</button>
+
+                                </div>
+                                <div className="address-setting">
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Billing Address</h4>
+                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save</button>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Full name</label>
+                                                    <input type="text" placeholder="Full name"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" placeholder="Address"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>State/Province</label>
+                                                    <input type="text" placeholder="State/Province"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" placeholder="City"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Postal code</label>
+                                                    <input type="text" placeholder="Postal code"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Phone number</label>
+                                                    <input type="text" placeholder="Phone number"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Shipping address</h4>
+                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save</button>
+                                        </div>
+                                        {/*<div className="row mb-3">*/}
+                                        {/*    <div className="col-md-6 col-lg-5">*/}
+                                        {/*        <div className="custom-chekbox">*/}
+                                        {/*            <div className="form-group">*/}
+                                        {/*                <input type="checkbox" id="1">*/}
+                                        {/*                    <label htmlFor="1" className="font-16 color-gray font-weight-normal">Same as Billing address</label>*/}
+                                        {/*            </div>*/}
+                                        {/*        </div>*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Full name</label>
+                                                    <input type="text" placeholder="Full name"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" placeholder="Address"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>State/Province</label>
+                                                    <input type="text" placeholder="State/Province"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" placeholder="City"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Postal code</label>
+                                                    <input type="text" placeholder="Postal code"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Phone number</label>
+                                                    <input type="text" placeholder="Phone number"
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
