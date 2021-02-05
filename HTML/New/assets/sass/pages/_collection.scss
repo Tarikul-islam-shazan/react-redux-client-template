@@ -161,6 +161,12 @@ ul.existing-item{
       position: absolute;
       left: -45px;
       cursor: pointer;
+      transform: rotate( 0deg );
+      transition: all ease-in-out .2s;
+      user-select: none;
+      &.show{
+        transform: rotate( 45deg );
+      }
     }
     img{
       width: 38px;
@@ -173,6 +179,8 @@ ul.existing-item{
   button.btn-brand{
     margin: 0 0 0 20px!important;
     height: 52px;
+    @media (max-width: 767px) {
+    }
   }
 }
 .add-people-popup {
@@ -183,6 +191,19 @@ ul.existing-item{
   z-index: 9;
   background: #fff;
   width: 445px;
+  display: none;
+  &.show{
+    display: block;
+  }
+  @media (max-width: 767px) {
+    z-index: 999;
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+  }
   label{
     color: #21242B;
   }
@@ -228,6 +249,10 @@ ul.existing-item{
     opacity: 0;
     visibility: hidden;
     transition: all ease-in-out .3s;
+    @media (max-width: 767px) {
+      z-index: 9999;
+      top: 80px;
+    }
     &.open{
       margin-right: 0 !important;
       opacity: 1;
@@ -301,6 +326,14 @@ table.manage-project-table.collection-list-table{
    thead th:last-child {
     @media (max-width: 1440px) {
       width: 145px;
+    }
+  }
+}
+
+.buyer-add-customer{
+  h4{
+    @media (max-width: 991px) {
+      font-size: 22px !important;
     }
   }
 }

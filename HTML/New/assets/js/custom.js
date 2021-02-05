@@ -124,6 +124,12 @@
         $('.invoice-summary').toggleClass('show');
     });
 
+    // Add People popup
+    $('#AddNewMember').click(function(){
+        $(this).toggleClass('show');
+        $('.add-people-popup').toggleClass('show');
+    });
+
 })(jQuery);
 
 

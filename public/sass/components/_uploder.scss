@@ -27,6 +27,9 @@
       border: 2px dashed #D9D9D9;
       box-sizing: border-box;
       border-radius: 5px;
+      @media (max-width: 767px) {
+        background-size: 25%;
+      }
 
       &:before {
         content: "Upload cover photo";
@@ -44,6 +47,9 @@
         text-align: center;
         font-weight: 600;
         font-family: 'Open Sans';
+        @media (max-width: 767px) {
+          font-size: 20px;
+        }
       }
 
       &:after {
@@ -64,6 +70,10 @@
         text-align: center;
         color: #6A6A6A;
         font-family: 'Open Sans';
+        @media (max-width: 767px) {
+          line-height: 22px;
+          font-size: 15px;
+        }
       }
     }
 
