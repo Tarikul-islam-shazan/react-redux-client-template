@@ -17,8 +17,8 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
         <div className="select-quote">
             <div className="custom-chekbox">
                 <div className="form-group m-0">
-                    <input type="checkbox" id="check" name={`toggleSelect_${index}`} onClick={toggleSelect} value={index} checked={quote.isSelected ? true : false}/>
-                    <label for="check" className="m-0"></label>
+                    <input type="checkbox" id={`check_${quote.id}`} name={`toggleSelect_${quote.id}`} onClick={toggleSelect} value={quote.id} checked={quote.isSelected ? true : false}/>
+                    <label for={`check_${quote.id}`} className="m-0"></label>
                 </div>
             </div>
         </div>
@@ -69,10 +69,10 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                         <div className="color-picker">
                             <ul>
                             {
-                              quote.colors.map((color, i) => {
+                              quote.colorWiseSizeQuantityPairList.map((color, i) => {
                                 return(
                                   <li className="d-flex align-items-center" key={i}>
-                                      <span style={{background: color.hexCode}}></span>
+                                      <span style={{background: '#000'}}></span>
                                       <div className="font-20 color-333 ml-2">{color.name}</div>
                                   </li>
                                 )
@@ -94,16 +94,43 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                         <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
                     </div>
 
-                    <div className="info-item pr-2 d-flex">
-                    {
-                      quote.sizeQuantityPairList.map((pair, i) => (
-                      <div className="mr-3" key={i}>
-                          <label className="font-16 text-muted">{pair.code}</label>
-                          <h5 className="font-20 color-333">{pair.quantity}</h5>
-                      </div>))
-                    }
+                    <div class="info-item pr-2 d-flex flex-column">
+                        <table class="text-center p-size-table">
+                            <thead>
+                            {
+                              quote.colorWiseSizeQuantityPairList.length ? quote.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map((pair, j) => {
+                                  return(
+                                    <th>{pair.code}</th>
+                                  )
+                                }) :
+                                <>
+                                  <th>XS</th>
+                                  <th>S</th>
+                                  <th>M</th>
+                                  <th>L</th>
+                                  <th>XL</th>
+                                </>
+                              }
+                            </thead>
+                            <tbody class="text-center">
+                                {
+                                  quote.colorWiseSizeQuantityPairList.map((colorWithSize, i) => {
+                                    return(
+                                      <tr>
+                                      {
+                                        colorWithSize.sizeQuantityPairList.map((pair, j) => {
+                                          return(
+                                            <td>{pair.quantity}</td>
+                                          )
+                                        })
+                                      }
+                                      </tr>
+                                    )
+                                  })
+                                }
+                            </tbody>
+                        </table>
                     </div>
-
                     <div className="info-item">
                         <div className="size delivery-in-days">
                             <label>Delivery in</label>

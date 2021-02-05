@@ -15,7 +15,7 @@ import { encodeQueryData, _getKey } from '../../services/Util';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 
-class CreateOrder extends Component {
+class UpdateOrder extends Component {
 
     constructor(props) {
         super(props);
@@ -27,10 +27,22 @@ class CreateOrder extends Component {
     componentDidMount = () => {
       document.title = "My designs on Nitex - The easiest clothing manufacturing software";
       // this.renderList(0, true, true);
+      let id = this.props.match.params.id;
+      this.getOrderDetails(id);
     }
 
-    renderList = ( page = 0 , merge = true, initialFetch = false ) => {
-
+    getOrderDetails = async(id) => {
+      await this.setState({loading: true})
+      await Http.GET('order')
+        .then(({data}) => {
+          console.log('order details SUCCESS: ', data);
+          this.setState({loading: false})
+        })
+        .catch(response => {
+            console.log('order details ERROR: ', JSON.stringify(response));
+            this.setState({loading: false})
+            toastError("Something went wrong! Please try again.");
+        });
     }
 
     render() {
@@ -472,4 +484,4 @@ const mapDispatchToProps = dispatch => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateOrder);

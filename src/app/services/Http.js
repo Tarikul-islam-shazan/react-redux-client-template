@@ -73,7 +73,9 @@ const routes = {
     searchProduct: `${BASE_URL}/product/search`, // integrated in explore design
     getRfqListV2: `${BASE_URL}/rfq/my-quotes`,
     getEmailPreference: `${BASE_URL}/personal-setting/get/`,
-    updateEmailPreference: `${BASE_URL}/personal-setting/set`
+    updateEmailPreference: `${BASE_URL}/personal-setting/set`,
+
+    order: `${BASE_URL}/project/place-order`
 };
 
 // Axios request interceptor
