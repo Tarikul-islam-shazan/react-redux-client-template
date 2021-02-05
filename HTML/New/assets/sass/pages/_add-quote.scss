@@ -87,6 +87,7 @@
         padding: 10px;
         img{
           height: 80px;
+          width: auto;
         }
         .info-item {
           margin-top: 15px;
@@ -144,10 +145,9 @@
   }
   .quote-info{
     img{
-      max-width: 180px;
-      height: 202px;
+      max-height: 202px;
       object-fit: cover;
-      width: 100%;
+      width: auto;
     }
   }
   .info-item {
@@ -174,9 +174,6 @@
     .quote-info{
       a{
         font-size: 20px !important;
-      }
-      img{
-        height: 120px;
       }
       .info-right {
         margin-left: 15px !important;
@@ -349,5 +346,18 @@
   @media (max-width: 1440px) {
     width: 20px;
     height: 20px;
+  }
+}
+
+.add-quote .confirm-quote-request .quote-req-list-container{
+  .quote-list .quote-info img {
+    max-width: 180px;
+    height: 202px;
+    object-fit: cover;
+    width: 100%;
+    @media (max-width: 1790px) {
+          height: 120px;
+      width: auto;
+    }
   }
 }

@@ -242,3 +242,62 @@ ul.existing-item{
   top: 25px;
   cursor: pointer;
 }
+.admin-collection-list-sidebar {
+  .form-group{
+    margin-bottom: 20px;
+    label {
+      color: #21242B;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .bottom-action {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 10px !important;
+    @media (max-width: 1024px) {
+      justify-content: flex-end;
+      button.btn-brand{
+        margin-left: 15px !important;
+      }
+    }
+    button {
+      width: 120px !important;
+      margin: 0 !important;
+      float: left !important;
+      height: 55px !important;
+      @media (max-width: 1440px) {
+        width: 95px !important;
+        height: 44px !important;
+      }
+    }
+  }
+  .nice-select{
+    @media (max-width: 1024px) {
+      margin: 0 !important;
+    }
+  }
+}
+.collection-list-filter{
+  .type{
+    width: 154px;
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  .search button.btn-brand {
+    height: 49px;
+    @media (max-width: 1024px) {
+      height: 44px;
+      width: 162px;
+    }
+  }
+}
+table.manage-project-table.collection-list-table{
+   thead th:last-child {
+    @media (max-width: 1440px) {
+      width: 145px;
+    }
+  }
+}

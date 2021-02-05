@@ -908,6 +908,13 @@ h4.details-title {
   background: #fff;
   color: #ee761f; }
 
+.save-setting button.btn-brand {
+  width: 85px;
+  height: 36px;
+  font-size: 16px;
+  margin: 0 0 0 15px !important;
+  border-radius: 45px; }
+
 .custom-scrollbar {
   overflow-y: auto; }
 
@@ -3729,6 +3736,9 @@ button.btn-border {
   border: 2px dashed #D9D9D9;
   box-sizing: border-box;
   border-radius: 5px; }
+  @media (max-width: 767px) {
+    .uploader label[for="et_pb_contact_brand_file_request_0"] {
+      background-size: 25%; } }
   .uploader label[for="et_pb_contact_brand_file_request_0"]:before {
     content: "Upload cover photo";
     display: block;
@@ -3745,6 +3755,9 @@ button.btn-border {
     text-align: center;
     font-weight: 600;
     font-family: 'Open Sans'; }
+    @media (max-width: 767px) {
+      .uploader label[for="et_pb_contact_brand_file_request_0"]:before {
+        font-size: 20px; } }
   .uploader label[for="et_pb_contact_brand_file_request_0"]:after {
     display: block;
     content: 'Drag and drop or browse your files (png,jpeg, jpg)';
@@ -3763,6 +3776,10 @@ button.btn-border {
     text-align: center;
     color: #6A6A6A;
     font-family: 'Open Sans'; }
+    @media (max-width: 767px) {
+      .uploader label[for="et_pb_contact_brand_file_request_0"]:after {
+        line-height: 22px;
+        font-size: 15px; } }
 .uploader label[for="et_pb_contact_brand_request_0"]:after {
   content: " (Provide link or Upload files if you already have guidelines)";
   font-size: 12px;
@@ -4716,7 +4733,8 @@ button.rec-arrow-right {
         .add-more .added-item .quote-list {
           padding: 10px; }
           .add-more .added-item .quote-list img {
-            height: 80px; }
+            height: 80px;
+            width: auto; }
           .add-more .added-item .quote-list .info-item {
             margin-top: 15px;
             width: 50%; } }
@@ -4760,10 +4778,9 @@ button.rec-arrow-right {
         right: 0px;
         top: 0px; } }
   .quote-list .quote-info img {
-    max-width: 180px;
-    height: 202px;
+    max-height: 202px;
     object-fit: cover;
-    width: 100%; }
+    width: auto; }
   .quote-list .info-item {
     margin-top: 20px;
     width: 140px; }
@@ -4782,8 +4799,6 @@ button.rec-arrow-right {
   @media (max-width: 1790px) {
     .quote-list .quote-info a {
       font-size: 20px !important; }
-    .quote-list .quote-info img {
-      height: 120px; }
     .quote-list .quote-info .info-right {
       margin-left: 15px !important; }
     .quote-list .sizes .size {
@@ -4906,6 +4921,16 @@ button.rec-arrow-right {
     .product-color {
       width: 20px;
       height: 20px; } }
+
+.add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+  max-width: 180px;
+  height: 202px;
+  object-fit: cover;
+  width: 100%; }
+  @media (max-width: 1790px) {
+    .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+      height: 120px;
+      width: auto; } }
 
 .color-brand {
   color: #452D8F !important; }
@@ -5549,6 +5574,9 @@ button.rec-arrow-right {
     font-weight: 600; }
   .new-collection .new-collection-form {
     padding: 20px 60px; }
+    @media (max-width: 1024px) {
+      .new-collection .new-collection-form {
+        padding: 10px 0; } }
 
 .create-new-collection {
   padding: 30px 40px;
@@ -5731,6 +5759,51 @@ ul.existing-item li {
   right: 40px;
   top: 25px;
   cursor: pointer; }
+
+.admin-collection-list-sidebar .form-group {
+  margin-bottom: 20px; }
+  .admin-collection-list-sidebar .form-group label {
+    color: #21242B;
+    font-size: 20px;
+    font-weight: 600; }
+.admin-collection-list-sidebar .bottom-action {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 10px !important; }
+  @media (max-width: 1024px) {
+    .admin-collection-list-sidebar .bottom-action {
+      justify-content: flex-end; }
+      .admin-collection-list-sidebar .bottom-action button.btn-brand {
+        margin-left: 15px !important; } }
+  .admin-collection-list-sidebar .bottom-action button {
+    width: 120px !important;
+    margin: 0 !important;
+    float: left !important;
+    height: 55px !important; }
+    @media (max-width: 1440px) {
+      .admin-collection-list-sidebar .bottom-action button {
+        width: 95px !important;
+        height: 44px !important; } }
+@media (max-width: 1024px) {
+  .admin-collection-list-sidebar .nice-select {
+    margin: 0 !important; } }
+
+.collection-list-filter .type {
+  width: 154px; }
+  @media (max-width: 767px) {
+    .collection-list-filter .type {
+      display: none; } }
+.collection-list-filter .search button.btn-brand {
+  height: 49px; }
+  @media (max-width: 1024px) {
+    .collection-list-filter .search button.btn-brand {
+      height: 44px;
+      width: 162px; } }
+
+@media (max-width: 1440px) {
+  table.manage-project-table.collection-list-table thead th:last-child {
+    width: 145px; } }
 
 .add-invoice {
   max-width: 813px;
