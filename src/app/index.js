@@ -41,7 +41,8 @@ import MyRFQs from './pages/rfo/MyRFQs';
 import MyRFQsV2 from './pages/rfo/MyRFQsV2';
 import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
-import UpdateOrder from './pages/order/UpdateOrder';
+import ConfirmOrder from './pages/order/ConfirmOrder';
+import ConfirmPayment from './pages/order/ConfirmPayment';
 
 
 const AuthRoute = ({component: Component, ...rest}) => {
@@ -121,7 +122,8 @@ class Root extends Component {
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
                   <PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
-                  <PublicRoute exact path="/order/:id" component={ UpdateOrder }/>
+                  <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
+                  <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
                 </Switch>
             </Router>
         );
