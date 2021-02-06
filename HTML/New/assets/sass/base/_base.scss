@@ -552,12 +552,13 @@ table.manage-project-table{
     border-spacing: 0 2px;
     thead{
         th{
-            background: #F6F5F9;
+            background: #E7EBF4;
             border: 0;
             border-bottom: 2px solid #FCFDFF !important;
             font-size: 18px;
             color: #6A7181;
-            padding: 16px 26px !important;
+            padding: 20px 26px !important;
+            white-space: nowrap;
             &:first-child{
                 border-radius: 5px 0 0 5px;
             }
@@ -580,6 +581,7 @@ table.manage-project-table{
                 border-top: 1px solid #F1F2F6;
                 border-bottom: 1px solid #F1F2F6;
                 padding: 16px 26px;
+                white-space: nowrap;
                 &:first-child{
                     border-radius: 5px 0 0 5px;
                     border-left: 1px solid #F1F2F6;

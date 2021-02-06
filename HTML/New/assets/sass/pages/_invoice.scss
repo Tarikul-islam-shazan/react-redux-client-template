@@ -1,0 +1,131 @@
+.add-an-invoice {
+  max-width: 1396px;
+  margin: 0px auto;
+  .header-title{
+    font-size: 24px;
+    color: #57585C;
+  }
+}
+
+.invoice-table{
+  tbody{
+    tr{
+      td{
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid #DADDE4;
+        padding: 15px 10px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #21242B;
+        text-align: center;
+        vertical-align: middle;
+        width: 15%;
+        white-space: nowrap;
+        @media (max-width: 1024px) {
+          font-size: 16px;
+        }
+        span{
+          color: #6A7181;
+          font-size: 18px;
+          font-weight: normal;
+          @media (max-width: 1024px) {
+            font-size: 14px;
+          }
+        }
+        strong{
+          font-weight: bold;
+        }
+        input{
+          height: 55px;
+          text-align: left;
+          padding: 20px;
+          @media (max-width: 1024px) {
+            height: 42px;
+            padding: 10px;
+          }
+        }
+        &:first-child{
+            text-align: left;
+            padding-left: 0;
+          width: 50%;
+        }
+        &:last-child{
+          width: 5%;
+          padding-right: 0;
+        }
+      }
+      &:last-child{
+        td{
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  &.sub-total{
+    tbody{
+      tr td{
+        padding: 8px 0;
+      }
+    }
+  }
+}
+
+.admin-view-invoice{
+  max-width: 1396px;
+  margin: 0px auto;
+  background: #fff;
+  .stepper{
+    padding: 30px 50px;
+  }
+  .header-sec{
+    border-bottom: 1px solid #eee;
+    padding: 30px 50px;
+  }
+}
+.invoice-note{
+  p{
+    font-size: 16px;
+    color: #707070;
+    margin-bottom: 20px;
+  }
+}
+ul.attachment{
+  li{
+    list-style: none;
+    margin-bottom: 10px;
+    a{
+      font-size: 16px;
+      color: #1F2229;
+      span{
+        margin-right: 30px;
+        img{
+          width: 50px;
+          height: 50px;
+          border-radius: 11px;
+        }
+      }
+      span.title{
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.recipient-from{
+  margin-bottom: 60px;
+  address{
+    .name{
+      color: #1F2229;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    span.vat{
+      margin-top: 10px;
+    }
+    span{
+      font-size: 18px;
+      color: #1F2229;
+      display: block;
+    }
+  }
+}

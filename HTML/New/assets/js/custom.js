@@ -130,6 +130,10 @@
         $('.add-people-popup').toggleClass('show');
     });
 
+    $('.close-add-people').click(function(){
+        $('.add-people-popup').removeClass('show');
+    });
+
 })(jQuery);
 
 
