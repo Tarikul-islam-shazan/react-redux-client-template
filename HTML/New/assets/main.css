@@ -696,12 +696,13 @@ table.manage-project-table {
   border-collapse: separate;
   border-spacing: 0 2px; }
   table.manage-project-table thead th {
-    background: #F6F5F9;
+    background: #E7EBF4;
     border: 0;
     border-bottom: 2px solid #FCFDFF !important;
     font-size: 18px;
     color: #6A7181;
-    padding: 16px 26px !important; }
+    padding: 20px 26px !important;
+    white-space: nowrap; }
     table.manage-project-table thead th:first-child {
       border-radius: 5px 0 0 5px; }
     table.manage-project-table thead th:last-child {
@@ -715,7 +716,8 @@ table.manage-project-table {
     background: #fff;
     border-top: 1px solid #F1F2F6;
     border-bottom: 1px solid #F1F2F6;
-    padding: 16px 26px; }
+    padding: 16px 26px;
+    white-space: nowrap; }
     table.manage-project-table tbody tr td:first-child {
       border-radius: 5px 0 0 5px;
       border-left: 1px solid #F1F2F6; }
@@ -1067,6 +1069,13 @@ h4.details-title {
 
 .color-gray {
   color: #898989 !important; }
+
+span.badge-custom {
+  border-radius: 40px;
+  padding: 6px 20px; }
+
+.white-space-nowrap {
+  white-space: nowrap !important; }
 
 .semibold {
   font-weight: 600 !important; }
@@ -5560,6 +5569,100 @@ button.rec-arrow-right {
       opacity: 1;
       background: #ECE9F4; }
 
+.add-an-invoice {
+  max-width: 1396px;
+  margin: 0px auto; }
+  .add-an-invoice .header-title {
+    font-size: 24px;
+    color: #57585C; }
+
+.invoice-table tbody tr td {
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #DADDE4;
+  padding: 15px 10px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #21242B;
+  text-align: center;
+  vertical-align: middle;
+  width: 15%;
+  white-space: nowrap; }
+  @media (max-width: 1024px) {
+    .invoice-table tbody tr td {
+      font-size: 16px; } }
+  .invoice-table tbody tr td span {
+    color: #6A7181;
+    font-size: 18px;
+    font-weight: normal; }
+    @media (max-width: 1024px) {
+      .invoice-table tbody tr td span {
+        font-size: 14px; } }
+  .invoice-table tbody tr td strong {
+    font-weight: bold; }
+  .invoice-table tbody tr td input {
+    height: 55px;
+    text-align: left;
+    padding: 20px; }
+    @media (max-width: 1024px) {
+      .invoice-table tbody tr td input {
+        height: 42px;
+        padding: 10px; } }
+  .invoice-table tbody tr td:first-child {
+    text-align: left;
+    padding-left: 0;
+    width: 50%; }
+  .invoice-table tbody tr td:last-child {
+    width: 5%;
+    padding-right: 0; }
+.invoice-table tbody tr:last-child td {
+  border-bottom: 0;
+  padding-bottom: 0; }
+.invoice-table.sub-total tbody tr td {
+  padding: 8px 0; }
+
+.admin-view-invoice {
+  max-width: 1396px;
+  margin: 0px auto;
+  background: #fff; }
+  .admin-view-invoice .stepper {
+    padding: 30px 50px; }
+  .admin-view-invoice .header-sec {
+    border-bottom: 1px solid #eee;
+    padding: 30px 50px; }
+
+.invoice-note p {
+  font-size: 16px;
+  color: #707070;
+  margin-bottom: 20px; }
+
+ul.attachment li {
+  list-style: none;
+  margin-bottom: 10px; }
+  ul.attachment li a {
+    font-size: 16px;
+    color: #1F2229; }
+    ul.attachment li a span {
+      margin-right: 30px; }
+      ul.attachment li a span img {
+        width: 50px;
+        height: 50px;
+        border-radius: 11px; }
+    ul.attachment li a span.title {
+      text-decoration: underline; }
+
+.recipient-from {
+  margin-bottom: 60px; }
+  .recipient-from address .name {
+    color: #1F2229;
+    font-size: 24px;
+    font-weight: 600; }
+  .recipient-from address span.vat {
+    margin-top: 10px; }
+  .recipient-from address span {
+    font-size: 18px;
+    color: #1F2229;
+    display: block; }
+
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
@@ -5616,11 +5719,18 @@ button.rec-arrow-right {
         .create-new-collection .pop-container .create-new input:focus, .create-new-collection .pop-container .create-new input:active {
           box-shadow: none !important;
           border-bottom: 1px solid #707070 !important; }
+        @media (max-width: 767px) {
+          .create-new-collection .pop-container .create-new input {
+            font-size: 18px; } }
       .create-new-collection .pop-container .create-new button {
         width: 240px;
         height: 50px;
         font-size: 16px;
         margin: 0 !important; }
+        @media (max-width: 767px) {
+          .create-new-collection .pop-container .create-new button {
+            width: 140px;
+            height: 45px; } }
     .create-new-collection .pop-container .all-collection {
       margin-top: 40px; }
       .create-new-collection .pop-container .all-collection > span {
@@ -5641,6 +5751,9 @@ ul.existing-item li {
     color: #21242B;
     font-size: 26px;
     font-weight: 600; }
+    @media (max-width: 767px) {
+      ul.existing-item li span {
+        font-size: 18px; } }
   ul.existing-item li button {
     width: 160px;
     height: 50px;
@@ -5648,6 +5761,12 @@ ul.existing-item li {
     margin: 0 !important;
     visibility: hidden;
     opacity: 0; }
+    @media (max-width: 767px) {
+      ul.existing-item li button {
+        width: 120px;
+        height: 42px;
+        visibility: visible;
+        opacity: 1; } }
   ul.existing-item li:hover, ul.existing-item li:active {
     background: #F5F5F5; }
     ul.existing-item li:hover button, ul.existing-item li:active button {
@@ -5666,6 +5785,9 @@ ul.existing-item li {
     flex-basis: calc((100% / 4)); }
     .collection-type-container .collection-type-item + .collection-type-item {
       margin-left: 30px; }
+      @media (max-width: 991px) {
+        .collection-type-container .collection-type-item + .collection-type-item {
+          margin-left: 0px; } }
     .collection-type-container .collection-type-item img {
       width: 100%; }
     .collection-type-container .collection-type-item .product-img-container {
@@ -5684,6 +5806,21 @@ ul.existing-item li {
           object-fit: cover; }
         .collection-type-container .collection-type-item .product-img-container .prev-img-thumb img + img {
           margin-top: 5px; }
+    @media (max-width: 991px) {
+      .collection-type-container .collection-type-item {
+        flex-basis: calc((100% / 2) - 15px);
+        margin-bottom: 20px; }
+        .collection-type-container .collection-type-item:nth-child(even) {
+          margin-left: 20px; } }
+    @media (max-width: 991px) {
+      .collection-type-container .collection-type-item {
+        flex-basis: calc((100%));
+        margin-bottom: 20px; }
+        .collection-type-container .collection-type-item:nth-child(even) {
+          margin-left: 0px; } }
+  @media (max-width: 991px) {
+    .collection-type-container {
+      flex-wrap: wrap; } }
 
 .add-buyer .added-members {
   position: relative; }
@@ -5773,13 +5910,19 @@ ul.existing-item li {
 
 .uploaded-img-banner img {
   border-radius: 5px;
-  border: 2px dashed #D9D9D9; }
+  border: 2px dashed #D9D9D9;
+  width: 100%; }
 
 .banner-close {
   position: absolute;
   right: 40px;
   top: 25px;
   cursor: pointer; }
+  @media (max-width: 1366px) {
+    .banner-close {
+      right: 24px;
+      top: 10px;
+      transform: scale(0.6); } }
 
 .admin-collection-list-sidebar .form-group {
   margin-bottom: 20px; }
@@ -5829,6 +5972,15 @@ ul.existing-item li {
 @media (max-width: 991px) {
   .buyer-add-customer h4 {
     font-size: 22px !important; } }
+
+.search > svg {
+  position: absolute;
+  top: 17px;
+  left: 20px; }
+.search input {
+  padding: 12px 12px 12px  45px;
+  border-radius: 5px;
+  border: 1px solid #ccc; }
 
 .add-invoice {
   max-width: 813px;
