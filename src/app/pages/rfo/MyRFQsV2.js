@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import Modal from 'react-bootstrap/Modal'
 
 import { _storeData } from "../design/actions";
 
@@ -53,8 +54,22 @@ class MyRFQs extends Component {
       status: '',
       date: '',
       collection: null,
-      totalSelectedItems: 0
+      totalSelectedItems: 0,
+      orderTitle: '',
+      orderFlag: false
     };
+  }
+
+  setWrapperRef = (node) => {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside = (event) => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({
+        orderFlag : false
+      })
+    }
   }
 
   componentDidMount = async () => {
@@ -76,7 +91,11 @@ class MyRFQs extends Component {
     this.setState({
       userInfo: JSON.parse(userInfo)
     })
+    window.addEventListener('mousedown', this.handleClickOutside);
+  }
 
+  componentWillUnmount = () => {
+    window.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   onScrollToEnd = () => {
@@ -154,7 +173,7 @@ class MyRFQs extends Component {
           }
           // toastWarning("RFQ List - no data found.");
         }
-        loadjs(['/js/script.js', '/js/custom.js']);
+        // loadjs(['/js/script.js', '/js/custom.js']);
       })
       .catch(response => {
         console.log('rfq LIST ERROR: ', JSON.stringify(response));
@@ -180,8 +199,9 @@ class MyRFQs extends Component {
 
   toggleSelect = async(e) => {
     let {rfqList, allCheck} = this.state;
+    console.log("e.target", e.target.value)
     rfqList = rfqList.map((rfq, i) => {
-      if (i == e.target.value) {
+      if (rfq.id == e.target.value) {
         rfq.isSelected = e.target.checked;
       }
       if (e.target.name === 'all') {
@@ -230,11 +250,45 @@ class MyRFQs extends Component {
   }
 
   order = () => {
+    this.setState({
+      orderFlag: true
+    })
+  }
 
+  createOrder = async() => {
+    await this.setState({loading: true});
+    let {rfqList, orderTitle} = this.state;
+    let productInfoForRfqIds = [];
+    rfqList.map((rfq) => {
+      if (rfq.isSelected) {
+        productInfoForRfqIds.push(rfq.id);
+      }
+    })
+    let body = {
+      name: orderTitle,
+      productInfoForRfqIds
+    }
+    await Http.POST('order', body)
+      .then(({data}) => {
+        console.log('createOrder SUCCESS: ', JSON.stringify(data));
+        this.setState({loading: false})
+        if(data.success){
+          toastSuccess(data.message);
+          this.props.history.push('/order/' + data.id);
+        }else{
+          toastError(data.message);
+        }
+
+      })
+      .catch(response => {
+          console.log('submitOrder Error: ', JSON.stringify(response));
+          this.setState({loading:false})
+          toastError("Something went wrong! Please try again.");
+      });
   }
 
   render() {
-    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection } = this.state;
+    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection, orderTitle, orderFlag } = this.state;
     if (!hasNext && !rfqList.length) {
       return (
         <div className="not-found">
@@ -342,6 +396,47 @@ class MyRFQs extends Component {
               </div>
           </div> : <></>
         }
+        {
+          orderFlag ?
+          <LoadingOverlay
+            active={this.state.loading}
+            styles={{
+              zIndex: 10000,
+              overlay: (base) => ({
+                ...base,
+                background: LOADER_OVERLAY_BACKGROUND
+              }),
+              spinner: (base) => ({
+                ...base,
+                width: LOADER_WIDTH,
+                position: LOADER_POSITION,
+                top: LOADER_TOP,
+                left: LOADER_LEFT,
+                marginTop: LOADER_MARGIN_TOP,
+                marginLeft: LOADER_MARGIN_LEFT,
+                '& svg circle': {
+                  stroke: LOADER_COLOR
+                }
+              }),
+              content: (base) => ({
+                ...base,
+                color: LOADER_COLOR
+              })
+            }}
+            spinner
+            text={LOADER_TEXT}>
+              <div className="create-new-collection">
+                <div className="pop-container" ref={this.setWrapperRef}>
+                    <span className="create-newbutton cursor-pointer">Create order</span>
+                    <div className="create-new d-flex">
+                        <input type="text" placeholder="Order title" className="bg-gray-light border-0" value={orderTitle} name="orderTitle" onChange={this.onChange}/>
+                        <button className="btn-brand m-0 brand-bg-color" onClick={this.createOrder}>Create</button>
+                    </div>
+                </div>
+              </div>
+          </LoadingOverlay> :
+          <></>
+      }
       </>
     );
   }
