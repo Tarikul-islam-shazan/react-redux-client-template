@@ -278,12 +278,18 @@ class ConfirmPayment extends Component {
                                   <div className="form-group">
                                       <label>Full name</label>
                                       <input type="text" placeholder="Full name" id="billing" name="Name" value={billingName} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingNameError ? <span className="error">{billingNameError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-md-6">
                                   <div className="form-group">
                                       <label>Address</label>
                                       <input type="text" placeholder="Address" id="billing" name="Address" value={billingAddress} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingAddressError ? <span className="error">{billingAddressError}</span> : ''
+                                      }
                                   </div>
                               </div>
                           </div>
@@ -292,24 +298,36 @@ class ConfirmPayment extends Component {
                                   <div className="form-group">
                                       <label>State/Province</label>
                                       <input type="text" placeholder="State/Province" id="billing" name="State" value={billingState} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingStateError ? <span className="error">{billingStateError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>City</label>
                                       <input type="text" placeholder="City" id="billing" name="City" value={billingCity} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingCityError ? <span className="error">{billingCityError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>Postal code</label>
                                       <input type="text" placeholder="Postal code" id="billing" name="PostCode" value={billingPostCode} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingPostCodeError ? <span className="error">{billingPostCodeError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>Phone number</label>
                                       <input type="text" placeholder="Phone number" id="billing" name="PhoneNumber" value={billingPhoneNumber} onChange={this.onChange} className="w-100 bg-gray-light border-0"/>
+                                      {
+                                        billingPhoneNumberError ? <span className="error">{billingPhoneNumberError}</span> : ''
+                                      }
                                   </div>
                               </div>
                           </div>
@@ -333,12 +351,18 @@ class ConfirmPayment extends Component {
                                   <div className="form-group">
                                       <label>Full name</label>
                                       <input type="text" placeholder="Full name" id="shipping" name="Name" value={shippingName} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingNameError ? <span className="error">{shippingNameError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-md-6">
                                   <div className="form-group">
                                       <label>Address</label>
                                       <input type="text" placeholder="Address" id="shipping" name="Address" value={shippingAddress} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingAddressError ? <span className="error">{shippingAddressError}</span> : ''
+                                      }
                                   </div>
                               </div>
                           </div>
@@ -348,24 +372,36 @@ class ConfirmPayment extends Component {
                                   <div className="form-group">
                                       <label>State/Province</label>
                                       <input type="text" placeholder="State/Province" id="shipping" name="State" value={shippingState} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingStateError ? <span className="error">{shippingStateError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>City</label>
                                       <input type="text" placeholder="City" id="shipping" name="City" value={shippingCity} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingCityError ? <span className="error">{shippingCityError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>Postal code</label>
                                       <input type="text" placeholder="Postal code" id="shipping" name="PostCode" value={shippingPostCode} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingPostCodeError ? <span className="error">{shippingPostCodeError}</span> : ''
+                                      }
                                   </div>
                               </div>
                               <div className="col-sm-6 col-md-6 col-lg-3">
                                   <div className="form-group">
                                       <label>Phone number</label>
                                       <input type="text" placeholder="Phone number" id="shipping" name="PhoneNumber" value={shippingPhoneNumber} onChange={this.onChange} className="w-100 bg-gray-light border-0" disabled={sameAsBilling}/>
+                                      {
+                                        shippingPhoneNumberError ? <span className="error">{shippingPhoneNumberError}</span> : ''
+                                      }
                                   </div>
                               </div>
                           </div>
@@ -423,6 +459,9 @@ class ConfirmPayment extends Component {
                                   Bank Slipt
                               </div>
                           </div>
+                          {
+                            paymentMethodError ? <span className="error">{paymentMethodError}</span> : ''
+                          }
                           {
                             paymentMethod === 'BANK_SLIP' ?
                             <div className="credit-card-container">
