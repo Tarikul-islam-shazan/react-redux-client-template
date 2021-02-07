@@ -110,7 +110,7 @@ class Root extends Component {
                   <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
-                  <PublicRoute exact path="/pick-design" component={ PickDesign }/>
+                  {/*<PublicRoute exact path="/explore-design" component={ PickDesign }/>*/}
                   <PublicRoute exact path="/explore-design" component={ PickDesignV2 }/>
                   <PublicRoute exact path="/product/collections/:id" component={ ShowProductCollection }/>
                   <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
@@ -120,8 +120,8 @@ class Root extends Component {
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
-                  <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
-                  <PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>
+                  <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
+                  {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                   <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
                   <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>

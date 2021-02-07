@@ -116,7 +116,7 @@ class Sidebar extends Component {
       return (
           <aside className="left-panel" id="side-menu">
               <div className="logo">
-                  <a href="/pick-design" className="logo-expanded">
+                  <a href="/explore-design" className="logo-expanded">
                     <img src={require("../assets/images/logo_final.png")} alt="logo" className="img-fluid d-block mx-auto img_logo_expand" />
                 </a>
               </div>
@@ -137,8 +137,8 @@ class Sidebar extends Component {
                       {
                         permissions.includes('PRODUCT_FOR_PICK_DESIGN') ?
                         <NavLink
-                          to="/pick-design"
-                          classes={this.props.activeTab == '/pick-design' || this.props.activeTab == '/' ? 'active' : ''}
+                          to="/explore-design"
+                          classes={this.props.activeTab == '/explore-design' || this.props.activeTab == '/' ? 'active' : ''}
                           activeIcon={require("../assets/icons/pick-design-active.png")}
                           inactiveIcon={require("../assets/icons/drafting-compass.png")}
                           title="Explore Designs"

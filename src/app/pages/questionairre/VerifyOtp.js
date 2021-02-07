@@ -166,9 +166,9 @@ class Questionairre_1 extends Component {
 
                   let redirection = getUrlParameter('redirect', this.props.location.search)
                   if (redirection) {
-                    this.props.history.push('/pick-design?redirect=' + redirection);
+                    this.props.history.push('/explore-design?redirect=' + redirection);
                   } else {
-                    this.props.history.push('/pick-design');
+                    this.props.history.push('/explore-design');
                   }
                 }else{
                   toastError(data.message);
