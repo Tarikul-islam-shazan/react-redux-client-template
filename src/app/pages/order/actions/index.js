@@ -78,6 +78,12 @@ export const validate = (state, projectId) => {
   } else {
     errors.shippingPhoneNumberError = '';
   }
+  if (!paymentMethod) {
+    errors.paymentMethodError = 'Payment method is required.';
+    isValid = false;
+  } else {
+    errors.paymentMethodError = '';
+  }
 
   if (isValid) {
     reqBody = {

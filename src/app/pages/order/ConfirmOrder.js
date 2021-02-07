@@ -40,10 +40,14 @@ class ConfirmOrder extends Component {
           console.log('order details SUCCESS: ', data);
           this.setState({loading: false, order: data})
         })
-        .catch(response => {
-            console.log('order details ERROR: ', JSON.stringify(response));
+        .catch(({response}) => {
+            console.log('order details ERROR: ', response);
             this.setState({loading: false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -88,7 +92,7 @@ class ConfirmOrder extends Component {
 
     cancel = async() => {
       let orderId = this.props.match.params.id;
-      await Http.POST('cancelOrder', {} , orderId)
+      await Http.DELETE('cancelOrder', {} , orderId)
         .then(({data}) => {
           console.log('cancelOrder SUCCESS: ', JSON.stringify(data));
           this.setState({loading:false});

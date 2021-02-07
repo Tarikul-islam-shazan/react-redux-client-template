@@ -43,6 +43,7 @@ import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
 import ConfirmOrder from './pages/order/ConfirmOrder';
 import ConfirmPayment from './pages/order/ConfirmPayment';
+import PaymentSuccess from './pages/order/PaymentSuccess';
 
 
 const AuthRoute = ({component: Component, ...rest}) => {
@@ -124,6 +125,7 @@ class Root extends Component {
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                   <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
                   <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
+                  <PublicRoute exact path="/payment/confirm" component={ PaymentSuccess }/>
                 </Switch>
             </Router>
         );

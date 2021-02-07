@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import { loadStripe } from "@stripe/stripe-js";
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
@@ -16,6 +17,8 @@ import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOA
 import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 
 import {validate} from './actions';
+
+const stripePromise = loadStripe("pk_test_Os37uKWRds5fdZBl7CM95re700gVT1xOKC");
 
 class ConfirmPayment extends Component {
 
@@ -72,10 +75,14 @@ class ConfirmPayment extends Component {
           console.log('order details SUCCESS: ', data);
           this.setState({loading: false, order: data})
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('order details ERROR: ', JSON.stringify(response));
             this.setState({loading: false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -175,12 +182,61 @@ class ConfirmPayment extends Component {
       }
     }
 
-    initiatePayment = () => {
+    initiatePayment = async() => {
+      const stripe = await stripePromise;
+      let {paymentMethod, order} = this.state;
+      let invoice = order.invoiceResponse;
       this.setState({loading: false})
+      let body = {
+        invoiceId: invoice.id,
+        paymentTerms: 'GATEWAY',
+        paymentGateway: paymentMethod,
+        amount: invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : 0
+      }
+      await Http.POST('getPaymentSession', body)
+        .then(({data}) => {
+          console.log('getPaymentSession SUCCESS: ', JSON.stringify(data));
+          if(data.id){
+            stripe.redirectToCheckout({
+              sessionId: data.id,
+            });
+          }else{
+            toastError(data.message);
+          }
+        })
+        .catch(({response}) => {
+            console.log('getPaymentSession Error: ', JSON.stringify(response));
+            this.setState({loading: false});
+            if(response!==undefined && response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Request wasn't successful.");
+            }
+        });
     }
 
-    cancel = () => {
-
+    cancel = async() => {
+      let orderId = this.props.match.params.id;
+      await Http.DELETE('cancelOrder', {} , orderId)
+        .then(({data}) => {
+          console.log('cancelOrder SUCCESS: ', JSON.stringify(data));
+          this.setState({loading:false});
+          if(data.success){
+            toastSuccess(data.message);
+            this.props.history.push('/my-project')
+          }else{
+            toastError(data.message);
+          }
+        })
+        .catch(({response}) => {
+            console.log('cancelOrder Error: ', JSON.stringify(response));
+            this.setState({loading: false});
+            if(response!==undefined && response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Request wasn't successful.");
+            }
+        });
     }
 
     render() {
@@ -395,7 +451,7 @@ class ConfirmPayment extends Component {
                               <path id="Icon_ionic-md-arrow-dropdown" data-name="Icon ionic-md-arrow-dropdown" d="M9,22.5l9-9,9,9Z" transform="translate(-9 -13.5)" fill="#21242b"/>
                           </svg>
                       </div>
-                      <div className="tab-price font-weight-bold">$14285</div>
+                      <div className="tab-price font-weight-bold">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</div>
                   </div>
                   <div className="details">
                       <h4 className="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>{invoice.invoiceNo}</strong></h4>
@@ -438,7 +494,7 @@ class ConfirmPayment extends Component {
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                               <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={this.confirm}>Confirm payment</button>
-                              <a href="#" className="text-underline font-16">Cancel order</a>
+                              <a href="#" className="text-underline font-16" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>
                   </div>

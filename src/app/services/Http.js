@@ -78,7 +78,9 @@ const routes = {
     order: `${BASE_URL}/project/place-order`,
     updateOrderAddress: `${BASE_URL}/project/update-address`,
     removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
-    cancelOrder: `${BASE_URL}/project/cancel-order/`
+    cancelOrder: `${BASE_URL}/project/cancel-order/`,
+    getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
+    updatePaymentStatus: `${BASE_URL}/payment/confirm`
 };
 
 // Axios request interceptor
@@ -175,9 +177,9 @@ const Http = {
         // updateTokenInHeader();
         return axios.put(routes[key], params, headers);
     },
-    DELETE: (key, data) => {
+    DELETE: (key, data, id = '') => {
         // updateTokenInHeader();
-        return axios.delete(routes[key], {data, headers});
+        return axios.delete(routes[key] + id, {data, headers});
     },
     UPLOAD: (key, {name, file}) => {
         // updateTokenInHeader();
