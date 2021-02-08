@@ -180,21 +180,22 @@
 
             <div class="admin-view-invoice mt-4">
 
-                <div class="d-flex align-items-center justify-content-between header-sec">
+                <div class="d-flex flex-column flex-xl-row align-items-center justify-content-between header-sec">
                     <div>
                         <div class="header-title mb-4">Invoice No: <strong class="text-black">IVN234567</strong></div>
-                        <div class="d-flex">
-                            <span class="color-gray mr-5">Payment terms: <strong class="semibold text-black"> PayPal</strong></span>
-                            <span class="color-gray mr-5">Invoice Date: <strong class="semibold text-black"> January 1, 2018</strong></span>
-                            <span class="color-gray mr-5">Due date: <strong class="semibold text-black"> January 1, 2018</strong></span>
+                        <div class="d-flex terms">
+                            <span class="color-gray term"><span>Payment terms:</span> <strong class="semibold text-black"> PayPal</strong></span>
+                            <span class="color-gray term"><span>Invoice Date:</span> <strong class="semibold text-black"> January 1, 2018</strong></span>
+                            <span class="color-gray term"><span>Due date:</span> <strong class="semibold text-black"> January 1, 2018</strong></span>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="text-center mr-5">
+                    <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">
+                        <div class="text-center mr-0 mr-sm-5">
                             <span class="white-space-nowrap">Payment status</span> <br>
                             <span class="badge-custom mt-2 d-inline-block" style="background-color: #ECFAEB; color: #47CB3C;">Paid</span>
                         </div>
-                        <button class="btn-border">Download</button>
+                        <button class="btn-border my-3">Download</button>
+                        <button class="btn-border brand-bg-color text-white border-0 px-5 ml-0 ml-sm-3">Pay</button>
                     </div>
                 </div>
 

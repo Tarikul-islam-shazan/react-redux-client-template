@@ -5432,7 +5432,8 @@ button.rec-arrow-right {
   .invoice-summary .title {
     padding: 30px;
     background: #E7EBF4;
-    font-size: 22px; }
+    font-size: 22px;
+    font-weight: 600; }
     .invoice-summary .title .tab-price {
       display: none; }
       @media (max-width: 1024px) {
@@ -5624,11 +5625,39 @@ button.rec-arrow-right {
   max-width: 1396px;
   margin: 0px auto;
   background: #fff; }
+  .admin-view-invoice .header-title {
+    font-size: 24px; }
   .admin-view-invoice .stepper {
     padding: 30px 50px; }
+    @media (max-width: 1024px) {
+      .admin-view-invoice .stepper {
+        padding: 30px; } }
   .admin-view-invoice .header-sec {
     border-bottom: 1px solid #eee;
     padding: 30px 50px; }
+    @media (max-width: 1024px) {
+      .admin-view-invoice .header-sec {
+        padding: 30px;
+        text-align: center; } }
+    @media (max-width: 767px) {
+      .admin-view-invoice .header-sec {
+        padding: 15px; } }
+  .admin-view-invoice .terms .term {
+    margin-right: 35px; }
+    @media (max-width: 1366px) {
+      .admin-view-invoice .terms .term {
+        display: flex;
+        flex-direction: column; } }
+    @media (max-width: 767px) {
+      .admin-view-invoice .terms .term {
+        margin-right: 10px;
+        font-size: 14px; } }
+  @media (max-width: 1024px) {
+    .admin-view-invoice .terms {
+      margin: 35px 0; } }
+  @media (max-width: 1024px) {
+    .admin-view-invoice .terms {
+      margin: 25px 0; } }
 
 .invoice-note p {
   font-size: 16px;
@@ -5656,12 +5685,58 @@ ul.attachment li {
     color: #1F2229;
     font-size: 24px;
     font-weight: 600; }
+    @media (max-width: 1024px) {
+      .recipient-from address .name {
+        font-size: 20px !important; } }
   .recipient-from address span.vat {
     margin-top: 10px; }
   .recipient-from address span {
     font-size: 18px;
     color: #1F2229;
     display: block; }
+    @media (max-width: 1024px) {
+      .recipient-from address span {
+        font-size: 14px !important; } }
+
+.buyer-payment-methods {
+  max-width: 1100px;
+  margin: 8px 110px;
+  width: 100%; }
+  @media (max-width: 1790px) {
+    .buyer-payment-methods {
+      max-width: 1200px;
+      margin: 20px 7px; } }
+  @media (max-width: 1600px) {
+    .buyer-payment-methods {
+      max-width: 1040px; } }
+  @media (max-width: 1440px) {
+    .buyer-payment-methods {
+      max-width: 870px; } }
+  @media (max-width: 1366px) {
+    .buyer-payment-methods {
+      max-width: 800px; } }
+  @media (max-width: 1280px) {
+    .buyer-payment-methods {
+      max-width: 718px; } }
+  @media (max-width: 1024px) {
+    .buyer-payment-methods {
+      max-width: 100%; } }
+  .buyer-payment-methods .title {
+    padding: 20px 30px;
+    background: #E7EBF4;
+    font-size: 22px;
+    font-weight: 600; }
+  .buyer-payment-methods .stepper {
+    padding: 30px; }
+    @media (max-width: 767px) {
+      .buyer-payment-methods .stepper {
+        margin-bottom: 75px; } }
+
+.pay {
+  width: 80px;
+  height: 37px;
+  border-radius: 50px;
+  border: 0; }
 
 .new-collection {
   max-width: 1000px;
