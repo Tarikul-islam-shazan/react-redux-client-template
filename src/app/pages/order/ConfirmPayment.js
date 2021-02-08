@@ -247,7 +247,7 @@ class ConfirmPayment extends Component {
       let {order, paymentMethod, bankSlipDoc} = this.state;
       let body = {
         invoiceId: order.invoiceResponse.id,
-        paymentTerms: paymentMethod,
+        paymentTerms: 'WIRE_TRANSFER',
         documentDTOList : [bankSlipDoc]
       }
       await Http.POST('payForInvoice',body)
