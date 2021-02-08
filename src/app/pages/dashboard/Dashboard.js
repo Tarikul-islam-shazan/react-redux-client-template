@@ -313,8 +313,8 @@ class Dashboard extends Component {
                                  :
                                 <div className="card-body">
                                     <p className="card-text mb-2">You don't have any running projects yet</p>
-                                    <a href="/pick-design" className="btn btn-nitex-default">Browse new designs</a>
-                                    {/* <a href="/pick-design" className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Browse new designs</a> */}
+                                    <a href="/explore-design" className="btn btn-nitex-default">Browse new designs</a>
+                                    {/* <a href="/explore-design" className="btn btn-nitex-default" data-toggle="modal" data-target="#newProject_1_4">Browse new designs</a> */}
                                 </div>
                               }
                           </div>

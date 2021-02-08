@@ -41,7 +41,9 @@ import MyRFQs from './pages/rfo/MyRFQs';
 import MyRFQsV2 from './pages/rfo/MyRFQsV2';
 import RfoNegotiation from './pages/rfo/RfoNegotiation';
 
-import UpdateOrder from './pages/order/UpdateOrder';
+import ConfirmOrder from './pages/order/ConfirmOrder';
+import ConfirmPayment from './pages/order/ConfirmPayment';
+import PaymentSuccess from './pages/order/PaymentSuccess';
 
 
 const AuthRoute = ({component: Component, ...rest}) => {
@@ -108,7 +110,7 @@ class Root extends Component {
                   <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
-                  <PublicRoute exact path="/pick-design" component={ PickDesign }/>
+                  {/*<PublicRoute exact path="/explore-design" component={ PickDesign }/>*/}
                   <PublicRoute exact path="/explore-design" component={ PickDesignV2 }/>
                   <PublicRoute exact path="/product/collections/:id" component={ ShowProductCollection }/>
                   <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
@@ -118,10 +120,12 @@ class Root extends Component {
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
-                  <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
-                  <PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>
+                  <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
+                  {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
-                  <PublicRoute exact path="/order/:id" component={ UpdateOrder }/>
+                  <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
+                  <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
+                  <PublicRoute exact path="/payment/confirm" component={ PaymentSuccess }/>
                 </Switch>
             </Router>
         );

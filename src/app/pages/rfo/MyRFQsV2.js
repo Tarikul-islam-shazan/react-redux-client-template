@@ -274,7 +274,7 @@ class MyRFQs extends Component {
         this.setState({loading: false})
         if(data.success){
           toastSuccess(data.message);
-          this.props.history.push('/order/' + data.id);
+          this.props.history.push('/confirm-order/' + data.id);
         }else{
           toastError(data.message);
         }

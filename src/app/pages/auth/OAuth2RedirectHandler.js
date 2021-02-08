@@ -33,7 +33,7 @@ class OAuth2RedirectHandler extends Component {
         await localStorage.setItem('userInfo',JSON.stringify(userInfo));
         let redirection = getUrlParameter('redirect', this.props.location.search)
         if(userInfo.businessInfoGiven){
-          this.props.history.push(redirection ? redirection : "/pick-design");
+          this.props.history.push(redirection ? redirection : "/explore-design");
         }else{
           this.props.history.push(
             '/info' +

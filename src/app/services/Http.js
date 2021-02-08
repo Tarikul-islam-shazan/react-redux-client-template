@@ -72,10 +72,15 @@ const routes = {
     getProductsForRfq: `${BASE_URL}/product/for-rfq`,
     searchProduct: `${BASE_URL}/product/search`, // integrated in explore design
     getRfqListV2: `${BASE_URL}/rfq/my-quotes`,
-    getEmailPreference: `${BASE_URL}/personal-setting/get/`,
-    updateEmailPreference: `${BASE_URL}/personal-setting/set`,
+    getSettingsData: `${BASE_URL}/personal-setting/get/`,
+    updatePersonalSettings: `${BASE_URL}/personal-setting/set`,
 
-    order: `${BASE_URL}/project/place-order`
+    order: `${BASE_URL}/project/place-order`,
+    updateOrderAddress: `${BASE_URL}/project/update-address`,
+    removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
+    cancelOrder: `${BASE_URL}/project/cancel-order/`,
+    getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
+    updatePaymentStatus: `${BASE_URL}/payment/confirm`
 };
 
 // Axios request interceptor
@@ -171,6 +176,10 @@ const Http = {
     PUT: (key, params) => {
         // updateTokenInHeader();
         return axios.put(routes[key], params, headers);
+    },
+    DELETE: (key, data, id = '') => {
+        // updateTokenInHeader();
+        return axios.delete(routes[key] + id, {data, headers});
     },
     UPLOAD: (key, {name, file}) => {
         // updateTokenInHeader();
