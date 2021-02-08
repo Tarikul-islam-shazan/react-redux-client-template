@@ -1,7 +1,7 @@
 export const validate = (state, projectId) => {
   let {
     sameAsBilling, billingName, billingAddress, billingState, billingCity, billingPostCode, billingPhoneNumber,
-    shippingName, shippingAddress, shippingState, shippingCity, shippingPostCode, shippingPhoneNumber, paymentMethod, file
+    shippingName, shippingAddress, shippingState, shippingCity, shippingPostCode, shippingPhoneNumber, paymentMethod, bankSlipDoc
   } = state;
   let errors = {};
   let reqBody = [];
@@ -83,6 +83,12 @@ export const validate = (state, projectId) => {
     isValid = false;
   } else {
     errors.paymentMethodError = '';
+    if (paymentMethod === 'BANK_SLIP' && !bankSlipDoc.name) {
+      isValid = false;
+      errors.bankSlipDocError = 'File is required';
+    } else {
+      errors.bankSlipDocError = '';
+    }
   }
 
   if (isValid) {

@@ -42,6 +42,7 @@ class ConfirmPayment extends Component {
           sameAsBilling: false,
           paymentMethod: '',
           file: null,
+          bankSlipDoc: {},
           errors: {
             billingNameError: '',
             billingAddressError: '',
@@ -56,6 +57,7 @@ class ConfirmPayment extends Component {
             shippingPostCodeError: '',
             shippingPhoneNumberError: '',
             paymentMethodError: '',
+            bankSlipDocError: ''
           }
         };
     }
@@ -129,6 +131,27 @@ class ConfirmPayment extends Component {
       }
     }
 
+    onFileUpload = (e,docType) => {
+      let file = e.target.files[0];
+      let key = e.target.name;
+      let data = {
+        "name": file.name,
+  			"docMimeType" : file.type,
+  			"documentType" : docType,
+  			"print": false,
+  			"base64Str":""
+      }
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        data.base64Str = reader.result;
+        this.setState({[key]:data})
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      }
+    }
+
     setPaymentMethod = (paymentMethod) => {
       this.setState({paymentMethod});
     }
@@ -153,6 +176,7 @@ class ConfirmPayment extends Component {
     confirm = async() => {
       let id = this.props.match.params.id;
       let result = validate(this.state, id);
+      let {paymentMethod} = this.state;
       if (result.isValid) {
         console.log("result", result.reqBody)
         this.setState({loading: true});
@@ -161,7 +185,11 @@ class ConfirmPayment extends Component {
             console.log('removeOrderItem SUCCESS: ', JSON.stringify(data));
             if(data.success){
               toastSuccess(data.message);
-              this.initiatePayment()
+              if (paymentMethod === 'STRIPE' || paymentMethod === 'CARD') {
+                this.initiatePayment()
+              } else {
+                this.uploadBankSlip()
+              }
             }else{
               toastError(data.message);
             }
@@ -215,6 +243,37 @@ class ConfirmPayment extends Component {
         });
     }
 
+    uploadBankSlip = async() => {
+      let {order, paymentMethod, bankSlipDoc} = this.state;
+      let body = {
+        invoiceId: order.invoiceResponse.id,
+        paymentTerms: paymentMethod,
+        documentDTOList : [bankSlipDoc]
+      }
+      await Http.POST('payForInvoice',body)
+        .then(({data}) => {
+          console.log('payForInvoice SUCCESS: ', data);
+          if(data.success){
+            toastSuccess(data.message);
+            this.props.history.push('/my-project')
+          }else{
+            this.setState({
+              loading:false
+            })
+            toastError(data.message);
+          }
+        })
+        .catch(({response}) => {
+            console.log('payForInvoice ERROR: ',response);
+            this.setState({loading:false})
+            if(response && response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Something went wrong! Please try again.");
+            }
+        });
+    }
+
     cancel = async() => {
       let orderId = this.props.match.params.id;
       await Http.DELETE('cancelOrder', {} , orderId)
@@ -250,7 +309,7 @@ class ConfirmPayment extends Component {
         let {
           billingNameError, billingAddressError, billingStateError, billingCityError, billingPostCodeError, billingPhoneNumberError,
           shippingNameError, shippingAddressError, shippingStateError, shippingCityError, shippingPostCodeError, shippingPhoneNumberError,
-          paymentMethodError
+          paymentMethodError, bankSlipDocError
         } = this.state.errors;
         return (
           <div className="add-quote d-flex">
@@ -469,7 +528,10 @@ class ConfirmPayment extends Component {
                                     <div className="col-md-6">
                                         <div className="form-group">
                                             <label>Upload bank slip</label>
-                                            <input type="file" placeholder="Full name" className="w-100 bg-gray-light border-0"/>
+                                            <input type="file" placeholder="Full name" name="bankSlipDoc" onChange={(e) => this.onFileUpload(e,'BANK_SLIP')} className="w-100 bg-gray-light border-0"/>
+                                            {
+                                              bankSlipDocError ? <span className="error">{bankSlipDocError}</span> : ''
+                                            }
                                         </div>
                                     </div>
                                 </div>
