@@ -5616,6 +5616,9 @@ button.rec-arrow-right {
     text-align: left;
     padding-left: 0;
     width: 50%; }
+    @media (max-width: 1199px) {
+      .invoice-table tbody tr td:first-child {
+        width: 52%; } }
   .invoice-table tbody tr td:last-child {
     width: 5%;
     padding-right: 0; }
@@ -5636,6 +5639,9 @@ button.rec-arrow-right {
     @media (max-width: 1024px) {
       .admin-view-invoice .stepper {
         padding: 30px; } }
+    @media (max-width: 767px) {
+      .admin-view-invoice .stepper {
+        padding: 15px; } }
   .admin-view-invoice .header-sec {
     border-bottom: 1px solid #eee;
     padding: 30px 50px; }
@@ -5645,13 +5651,18 @@ button.rec-arrow-right {
         text-align: center; } }
     @media (max-width: 767px) {
       .admin-view-invoice .header-sec {
-        padding: 15px; } }
+        padding: 15px;
+        padding-bottom: 25px;
+        margin-bottom: 10px; } }
   .admin-view-invoice .terms .term {
     margin-right: 35px; }
     @media (max-width: 1366px) {
       .admin-view-invoice .terms .term {
         display: flex;
         flex-direction: column; } }
+    @media (max-width: 1024px) {
+      .admin-view-invoice .terms .term:last-child {
+        margin-right: 0; } }
     @media (max-width: 767px) {
       .admin-view-invoice .terms .term {
         margin-right: 10px;
@@ -5676,15 +5687,28 @@ ul.attachment li {
     color: #1F2229; }
     ul.attachment li a span {
       margin-right: 30px; }
+      @media (max-width: 767px) {
+        ul.attachment li a span {
+          margin-right: 16px; } }
       ul.attachment li a span img {
         width: 50px;
         height: 50px;
         border-radius: 11px; }
     ul.attachment li a span.title {
-      text-decoration: underline; }
+      text-decoration: underline;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100% - 115px);
+      display: inline-block; }
 
 .recipient-from {
   margin-bottom: 60px; }
+  @media (max-width: 767px) {
+    .recipient-from {
+      margin-bottom: 35px; }
+      .recipient-from div + div {
+        margin-top: 20px; } }
   .recipient-from address .name {
     color: #1F2229;
     font-size: 24px;
