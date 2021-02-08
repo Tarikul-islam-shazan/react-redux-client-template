@@ -37,6 +37,9 @@ const routes = {
     updateProductStatus: `${BASE_URL}/product/update-product-status/`, //post
     getDashboardData: `${BASE_URL}/dashboard/`, // GET
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
+    getExploreDesignLanding: `${BASE_URL}/product/explore-design`, // GET called initially for landing data
+    getExploreDesignFilterOptions: `${BASE_URL}/product/search/filter-options`,
+    getSearchSuggestions: `${BASE_URL}/product/search/suggestion`,
     getPickDesign: `${BASE_URL}/product/for-pick-design`, // GET
     getProjectList: `${BASE_URL}/project/my-project`, // GET
     getProjectDetails: `${BASE_URL}/project/`, // GET
@@ -63,8 +66,21 @@ const routes = {
     getInvoiceDetails: `${BASE_URL}/invoice/`,
     getNotifications: `${BASE_URL}/notification/all`,
     markNotificationRead: `${BASE_URL}/notification/mark-seen/`,
-    getEmailPreference: `${BASE_URL}/personal-setting/get/`,
-    updateEmailPreference: `${BASE_URL}/personal-setting/set`
+    getSimilarDesign: `${BASE_URL}/product/similar/`,
+
+    getProductCollectionList: `${BASE_URL}/collection/products/`,
+    getProductsForRfq: `${BASE_URL}/product/for-rfq`,
+    searchProduct: `${BASE_URL}/product/search`, // integrated in explore design
+    getRfqListV2: `${BASE_URL}/rfq/my-quotes`,
+    getSettingsData: `${BASE_URL}/personal-setting/get/`,
+    updatePersonalSettings: `${BASE_URL}/personal-setting/set`,
+
+    order: `${BASE_URL}/project/place-order`,
+    updateOrderAddress: `${BASE_URL}/project/update-address`,
+    removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
+    cancelOrder: `${BASE_URL}/project/cancel-order/`,
+    getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
+    updatePaymentStatus: `${BASE_URL}/payment/confirm`
 };
 
 // Axios request interceptor
@@ -160,6 +176,10 @@ const Http = {
     PUT: (key, params) => {
         // updateTokenInHeader();
         return axios.put(routes[key], params, headers);
+    },
+    DELETE: (key, data, id = '') => {
+        // updateTokenInHeader();
+        return axios.delete(routes[key] + id, {data, headers});
     },
     UPLOAD: (key, {name, file}) => {
         // updateTokenInHeader();

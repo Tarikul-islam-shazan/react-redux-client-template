@@ -85,6 +85,7 @@ export const LOADER_MARGIN_LEFT = 0;
 export const hjid = getHotjarId();
 export const hjsv = 6;
 export const GA_ID = 'UA-168122648-1';
+export const LOCAL_QUOTE_NOW_KEY = 'nitex@quoteNowObj';
 
 export { APPLICATION_ID, SERVICES, RULE_NAMES, HTTP_STATUS, API };
 
@@ -92,10 +93,10 @@ function getBaseUrl(){
     const hostName = window.location.toString();
 
     if( hostName.indexOf( "https://test.nitex.com" ) > -1  ){
-        return "https://testapi.nitex.com";
+        return "http://testapi-v2.nitex.com";
     }
     else if( hostName.indexOf( "https://testadmin.nitex.com" ) > -1  ){
-        return "https://testapi.nitex.com";
+        return "http://testapi-v2.nitex.com";
     }
     else if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
         return "https://api.nitex.com";
@@ -104,7 +105,7 @@ function getBaseUrl(){
         return "https://api.nitex.com";
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
-        return "https://testapi.nitex.com";
+        return "http://testapi-v2.nitex.com";
     }
 }
 

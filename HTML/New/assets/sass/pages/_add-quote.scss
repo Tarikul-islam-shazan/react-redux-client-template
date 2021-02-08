@@ -47,6 +47,11 @@
     background: #fff;
     padding: 20px 35px;
     margin-bottom: 1px;
+    @media (max-width: 1440px) {
+      h4{
+        font-size: 20px !important;
+      }
+    }
   }
   .added-item{
     padding: 0 35px 20px;
@@ -75,12 +80,14 @@
 
         .info-right {
           margin-left: 10px !important;
+          flex-basis: 74%;
         }
       }
       .quote-list  {
         padding: 10px;
         img{
           height: 80px;
+          width: auto;
         }
         .info-item {
           margin-top: 15px;
@@ -127,8 +134,8 @@
   }
   .dlt {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 10px;
+    top: 10px;
     cursor: pointer;
     user-select: none;
     @media (max-width: 767px) {
@@ -138,9 +145,9 @@
   }
   .quote-info{
     img{
-      width: auto;
-      height: 202px;
+      max-height: 202px;
       object-fit: cover;
+      width: auto;
     }
   }
   .info-item {
@@ -153,7 +160,7 @@
     input{
       padding: 5px;
       text-align: center;
-      height:  40px;
+      height:  38px;
       border-color: #e4e4e4;
     }
     &.total{
@@ -167,9 +174,6 @@
     .quote-info{
       a{
         font-size: 20px !important;
-      }
-      img{
-        height: 120px;
       }
       .info-right {
         margin-left: 15px !important;
@@ -240,7 +244,7 @@
       height: 144px;
     }
     .sizes{
-      margin-left: 80px;
+      margin-left: 48px;
       margin-bottom: 15px;
       .size {
         width: 50px;
@@ -275,16 +279,26 @@
     }
     .sizes{
       margin-left: 0px;
-      margin-top: 30px;
+      margin-top: 0px;
       margin-bottom: 10px;
       .size {
-        width: 40px;
+        width: 35px;
         margin-right: 5px;
+        @media (max-width: 320px) {
+          width: 31px;
+        }
         input {
-          height: 38px;
+          height: 34px;
+          @media (max-width: 320px) {
+            height: 25px;
+            padding: 2px;
+          }
         }
         &.total {
           width: 70px;
+          @media (max-width: 320px) {
+            width: 44px;
+          }
         }
       }
     }
@@ -295,7 +309,8 @@
     box-shadow: 0px 0px 2px 0px #ddd;
     padding: 15px;
     img{
-      width: auto;
+      max-width: 98px;
+      width: 100%;
       height: 110px;
     }
   }
@@ -304,6 +319,45 @@
   @media (max-width: 991px) {
     > svg {
       width: 148px;
+    }
+  }
+}
+.size-n-color {
+  min-height: 204px;
+  padding: 30px 50px 20px 0;
+  @media (max-width: 1366px) {
+    padding: 30px 25px 20px 0;
+  }
+  @media (max-width: 991px) {
+    min-height: auto;
+  }
+  .size-n-color .sizes:only-child{
+    padding-top: 70px;
+  }
+  .sizes{
+    margin-bottom: 16px;
+  }
+}
+.product-color {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  margin: 0 auto;
+  @media (max-width: 1440px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.add-quote .confirm-quote-request .quote-req-list-container{
+  .quote-list .quote-info img {
+    max-width: 180px;
+    height: 202px;
+    object-fit: cover;
+    width: 100%;
+    @media (max-width: 1790px) {
+          height: 120px;
+      width: auto;
     }
   }
 }

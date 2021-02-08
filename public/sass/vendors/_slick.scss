@@ -136,9 +136,19 @@
 
 
 
-.product-detail-gallery .thumbnail-prev img {
-  height: auto;
+.slider-nav .thumbImg {
+  margin-bottom: 25px;
+  border: 1px solid transparent;
+}
+.slick-current .thumbImg {
+  border: 1px solid #ffbe8f;
+}
+.banner-slider .slider-nav .thumbImg img {
+  height: 89px;
+  @media (max-width: 575px) {
+    height: 112px;
+  }
 }
 .slider-for img {
-  height: 800px !important;
+  height: 632px !important;
 }

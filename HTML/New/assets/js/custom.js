@@ -111,13 +111,27 @@
     $('.add-more-design').click(function(){
         $('.add-more').addClass('open');
     });
+
     $('#closeRPop').click(function(){
         $('.add-more').removeClass('open');
+    });
+    $('#CreateCollection').click(function(){
+        $('.add-more').addClass('open');
     });
 
     // Order invoice popup
     $('.invoice-summary .title').click(function(){
         $('.invoice-summary').toggleClass('show');
+    });
+
+    // Add People popup
+    $('#AddNewMember').click(function(){
+        $(this).toggleClass('show');
+        $('.add-people-popup').toggleClass('show');
+    });
+
+    $('.close-add-people').click(function(){
+        $('.add-people-popup').removeClass('show');
     });
 
 })(jQuery);

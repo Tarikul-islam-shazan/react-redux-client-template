@@ -28,6 +28,7 @@
 // 5. Components
 @import
 'components/button',
+'components/uploder',
 'components/modal-positions';
 
 // 6. Page-specific styles
@@ -36,7 +37,9 @@
 'pages/new-pages',
 'pages/explore-design',
 'pages/add-quote',
-'pages/quotes';
+'pages/quotes',
+'pages/place-order',
+'pages/collection';
 
 // 7. Themes
 @import

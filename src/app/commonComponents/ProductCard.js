@@ -52,7 +52,7 @@ class ProductCard extends Component {
                 }
                 if(item.designDocuments.length==i+1 && flag){
                   return(
-                    <img key={i} src={item.designDocuments[0].docUrl} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
+                    <img key={i} src={addImageSuffix(item.designDocuments[0].docUrl, '_xthumbnail')} alt="designer" className="card-img-top img-fluid d-block mx-auto"/>
                   )
                 }
               })

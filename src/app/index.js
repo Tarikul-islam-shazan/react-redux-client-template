@@ -27,13 +27,23 @@ import Questionairre_final from './pages/questionairre/Questionairre_final';
 
 import RequestForQuotation from './pages/quotation/RequestForQuotation';
 import PickDesign from './pages/design/PickDesign';
+import PickDesignV2 from './pages/design/PickDesignV2';
+import ShowProductCollection from './pages/design/ShowProductCollection';
 
 import OurDesignDetails from './pages/design/OurDesignDetails';
+import OurDesignDetailsV2 from './pages/design/OurDesignDetailsV2';
+import QuoteNowCart from './pages/design/QuoteNowCart';
+
 import MyProject from './pages/project/MyProject';
 import MyProjectDetails from './pages/project/MyProjectDetails';
 import MyProduct from './pages/product/MyProduct';
 import MyRFQs from './pages/rfo/MyRFQs';
+import MyRFQsV2 from './pages/rfo/MyRFQsV2';
 import RfoNegotiation from './pages/rfo/RfoNegotiation';
+
+import ConfirmOrder from './pages/order/ConfirmOrder';
+import ConfirmPayment from './pages/order/ConfirmPayment';
+import PaymentSuccess from './pages/order/PaymentSuccess';
 
 
 const AuthRoute = ({component: Component, ...rest}) => {
@@ -62,7 +72,7 @@ const PublicRoute = ({component: Component, ...rest}) => {
     const url = '/login' + (redirectRoute && redirectRoute !== '/' ? '?redirect=' + redirectRoute : '')
     return token ? (
         <Route { ...rest } render={ matchProps => (
-            <DefaultLayout>
+            <DefaultLayout { ...matchProps }>
                 <Component { ...matchProps } />
             </DefaultLayout>
         ) }/>
@@ -100,14 +110,22 @@ class Root extends Component {
                   <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
-                  <PublicRoute exact path="/pick-design" component={ PickDesign }/>
+                  {/*<PublicRoute exact path="/explore-design" component={ PickDesign }/>*/}
+                  <PublicRoute exact path="/explore-design" component={ PickDesignV2 }/>
+                  <PublicRoute exact path="/product/collections/:id" component={ ShowProductCollection }/>
+                  <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/my-project" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
-                  <PublicRoute exact path="/my-rfqs" component={ MyRFQs }/>
+                  <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
+                  <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
+                  {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
+                  <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
+                  <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
+                  <PublicRoute exact path="/payment/confirm" component={ PaymentSuccess }/>
                 </Switch>
             </Router>
         );

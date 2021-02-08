@@ -53,6 +53,9 @@
 .text-black{
   color: #000 !important;
 }
+.color-gray{
+  color: #898989 !important;
+}
 
 
 .semibold{
@@ -105,4 +108,7 @@ $util-font-sizes: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
 .sticky-0{
   position: sticky;
   top: 0px;
+}
+.overflow-inherit{
+  overflow: inherit !important;
 }

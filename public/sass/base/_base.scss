@@ -170,7 +170,7 @@ a {
         content: '';
         display: block;
         position: absolute;
-        top: 4px;
+        top: 5px;
         left: 9px;
         width: 6px;
         height: 14px;
@@ -330,10 +330,13 @@ input.type {
     }
 }
 .btn-outline-secondary {
+    cursor: pointer;
     &:hover, &:active, &:focus{
         color: #6c757d !important;
-        border-color: #6c757d;
-        background: transparent;
+        border-color: #6c757d !important;
+        background: transparent !important;
+        outline: 0;
+        box-shadow: none !important;
     }
 }
 .btn-nitex-default {
@@ -833,6 +836,16 @@ h4.details-title {
     outline: 0;
     background: #fff;
     color: #ee761f;
+}
+
+.save-setting {
+    button.btn-brand {
+        width: 85px;
+        height: 36px;
+        font-size: 16px;
+        margin: 0 0 0 15px !important;
+        border-radius: 45px;
+    }
 }
 
 //Custom Scrollbar

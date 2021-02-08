@@ -39,7 +39,23 @@ class MyProfile extends Component {
           newPasswordReError : '',
           showSuggestion : false,
           suggestions : [],
-          emailSettings: 'ALL'
+          emailSettings: 'ALL',
+          billing: {
+            fullname: '',
+            address: '',
+            stateOrProvince: '',
+            city: '',
+            postCode: '',
+            phoneNo: ''
+          },
+          shipping: {
+            fullname: '',
+            address: '',
+            stateOrProvince: '',
+            city: '',
+            postCode: '',
+            phoneNo: ''
+          }
         };
         this.setWrapperRef = this.setWrapperRef.bind(this);
     }
@@ -103,27 +119,32 @@ class MyProfile extends Component {
               toastError("Something went wrong! Please try again.");
             }
         });
-      Http.GET('getEmailPreference', 'MAIL_FREQUENCY')
+      Http.GET('getSettingsData', 'MAIL_FREQUENCY')
         .then(({data}) => {
           if(data && data.value) {
             this.setState({
               emailSettings: data.value
             })
-          }else{
-            this.setState({
-              loading : false
-            })
           }
         })
         .catch(({response}) => {
-            console.log('COMMENT ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            if(response.data && response.data.message){
-              toastError(response.data.message);
-            }else{
-              toastError("Something went wrong! Please try again.");
-            }
         });
+
+        let {billing, shipping} = this.state;
+
+        Http.GET('getSettingsData', 'BILLING_AND_SHIPPING_ADDRESS')
+          .then(({data}) => {
+            if(data && data.value) {
+              let val = JSON.parse(data.value);
+              console.log("val from BILLING_AND_SHIPPING_ADDRESS", val)
+              this.setState({
+                billing: val.billing ? {...billing, ...val.billing} : billing,
+                shipping: val.shipping ? {...shipping, ...val.shipping} : shipping
+              })
+            }
+          })
+          .catch(({response}) => {
+          });
 
     }
 
@@ -170,6 +191,15 @@ class MyProfile extends Component {
       }
       this.setState({
         [e.target.name] : e.target.value,
+      })
+    }
+
+    onChangeAddress = (e) => {
+      let data = this.state[e.target.id];
+      console.log("e", e.target.id, e.target.name, e.target.value, data)
+      data[e.target.name] = e.target.value;
+      this.setState({
+        [e.target.id]: {...data}
       })
     }
 
@@ -331,7 +361,7 @@ class MyProfile extends Component {
           key: 'MAIL_FREQUENCY',
           value: emailSettings
         }
-        await Http.POST('updateEmailPreference',body)
+        await Http.POST('updatePersonalSettings',body)
           .then(({data}) => {
             console.log('updateEmailPreference POST SUCCESS: ', data);
             if(data.success){
@@ -358,6 +388,41 @@ class MyProfile extends Component {
       }
     }
 
+    updateAddress = async() => {
+      let { billing, shipping } = this.state;
+      if(billing && shipping){
+        await this.setState({loading:true});
+        let body = {
+          key: 'BILLING_AND_SHIPPING_ADDRESS',
+          value: JSON.stringify({billing, shipping})
+        }
+        await Http.POST('updatePersonalSettings',body)
+          .then(({data}) => {
+            console.log('updateAddress POST SUCCESS: ', data);
+            if(data.success){
+              this.setState({
+                loading:false
+              })
+              toastSuccess(data.message);
+            }else{
+              this.setState({
+                loading:false
+              })
+              toastError(data.message);
+            }
+          })
+          .catch(({response}) => {
+              console.log('updateAddress ERROR: ', JSON.stringify(response));
+              this.setState({loading:false})
+              if(response.data && response.data.message){
+                toastError(response.data.message);
+              }else{
+                toastError("Something went wrong! Please try again.");
+              }
+          });
+      }
+    }
+
     setCompany = (item) => {
       this.setState({
         company : item.name,
@@ -367,7 +432,11 @@ class MyProfile extends Component {
     }
 
     render() {
-        let { email, name, proPic, company, companyId, designation, department, phone, address, linkedin, facebook, twitter, showSuggestion, suggestions, oldPassword, newPassword, newPasswordRe, oldPasswordError, newPasswordError, newPasswordReError, emailSettings } = this.state;
+        let { email, name, proPic, company, companyId, designation, department, phone, address,
+          linkedin, facebook, twitter, showSuggestion, suggestions, oldPassword, newPassword, newPasswordRe,
+          oldPasswordError, newPasswordError, newPasswordReError,
+          emailSettings, billing, shipping
+        } = this.state;
         return (
             <LoadingOverlay
               active={this.state.loading}
@@ -549,36 +618,145 @@ class MyProfile extends Component {
                             </div>
                             <div id="EmailPreferences" className="tab-pane fade">
                                 <div className="email-preferences">
-                                    <h4 className="mb-5">Project emails</h4>
-                                    <div className="row">
-                                        <div className="col-lg-2">
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Project emails</h4>
+                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save</button>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
                                                         <label htmlFor="card">Don't send any emails</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <br/>
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
                                                         <label htmlFor="card1">Email important updates</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <br/>
-                                            <div className="custom-radio">
-                                                <div className="form-group">
-                                                    <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />
+                                            <div className="col-lg-3">
+                                                <div className="custom-radio">
+                                                    <div className="form-group">
+                                                        <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />
                                                         <label htmlFor="card2">Email on all updates</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row mt-5">
-                                        <div className="col-lg-4 text-left">
-                                            <button className="btn-brand" onClick={this.updateEmailPreference}>Save Changes</button>
+
+                                </div>
+                                <div className="address-setting">
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Billing Address</h4>
+                                            <button className="btn-brand" onClick={this.updateAddress}>Save</button>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Full name</label>
+                                                    <input type="text" placeholder="Full name" id="billing" name="fullname" value={billing.fullname} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" placeholder="Address" id="billing" name="address" value={billing.address} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>State/Province</label>
+                                                    <input type="text" placeholder="State/Province" id="billing" name="stateOrProvince" value={billing.stateOrProvince} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" placeholder="City" id="billing" name="city" value={billing.city} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Postal code</label>
+                                                    <input type="text" placeholder="Postal code" id="billing" name="postCode" value={billing.postCode} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Phone number</label>
+                                                    <input type="text" placeholder="Phone number" id="billing" name="phoneNo" value={billing.phoneNo} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="stepper">
+                                        <div className="save-setting d-flex align-items-center mb-4">
+                                            <h4>Shipping address</h4>
+                                            <button className="btn-brand" onClick={this.updateAddress}>Save</button>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Full name</label>
+                                                    <input type="text" placeholder="Full name" id="shipping" name="fullname" value={shipping.fullname} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" placeholder="Address" id="shipping" name="address" value={shipping.address} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>State/Province</label>
+                                                    <input type="text" placeholder="State/Province" id="shipping" name="stateOrProvince" value={shipping.stateOrProvince} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" placeholder="City" id="shipping" name="city" value={shipping.city} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Postal code</label>
+                                                    <input type="text" placeholder="Postal code" id="shipping" name="postCode" value={shipping.postCode} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
+                                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                                <div className="form-group">
+                                                    <label>Phone number</label>
+                                                    <input type="text" placeholder="Phone number" id="shipping" name="phoneNo" value={shipping.phoneNo} onChange={this.onChangeAddress}
+                                                           className="w-100 bg-gray-light border-0" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

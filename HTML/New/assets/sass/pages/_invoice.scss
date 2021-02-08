@@ -1,0 +1,211 @@
+.add-an-invoice {
+  max-width: 1396px;
+  margin: 0px auto;
+  .header-title{
+    font-size: 24px;
+    color: #57585C;
+  }
+}
+
+.invoice-table{
+  tbody{
+    tr{
+      td{
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid #DADDE4;
+        padding: 15px 10px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #21242B;
+        text-align: center;
+        vertical-align: middle;
+        width: 15%;
+        white-space: nowrap;
+        @media (max-width: 1024px) {
+          font-size: 16px;
+        }
+        span{
+          color: #6A7181;
+          font-size: 18px;
+          font-weight: normal;
+          @media (max-width: 1024px) {
+            font-size: 14px;
+          }
+        }
+        strong{
+          font-weight: bold;
+        }
+        input{
+          height: 55px;
+          text-align: left;
+          padding: 20px;
+          @media (max-width: 1024px) {
+            height: 42px;
+            padding: 10px;
+          }
+        }
+        &:first-child{
+            text-align: left;
+            padding-left: 0;
+          width: 50%;
+        }
+        &:last-child{
+          width: 5%;
+          padding-right: 0;
+        }
+      }
+      &:last-child{
+        td{
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  &.sub-total{
+    tbody{
+      tr td{
+        padding: 8px 0;
+      }
+    }
+  }
+}
+
+.admin-view-invoice{
+  max-width: 1396px;
+  margin: 0px auto;
+  background: #fff;
+  .header-title{
+    font-size: 24px;
+  }
+  .stepper{
+    padding: 30px 50px;
+    @media (max-width: 1024px) {
+      padding: 30px;
+    }
+  }
+  .header-sec{
+    border-bottom: 1px solid #eee;
+    padding: 30px 50px;
+    @media (max-width: 1024px) {
+      padding: 30px;
+      text-align: center;
+    }
+    @media (max-width: 767px) {
+      padding: 15px;
+    }
+  }
+  .terms{
+    .term{
+      margin-right: 35px;
+      @media (max-width: 1366px) {
+        display: flex;
+        flex-direction: column;
+      }
+      @media (max-width: 767px) {
+        margin-right: 10px;
+        font-size: 14px;
+      }
+    }
+    @media (max-width: 1024px) {
+      margin: 35px 0;
+    }
+    @media (max-width: 1024px) {
+      margin: 25px 0;
+    }
+  }
+}
+.invoice-note{
+  p{
+    font-size: 16px;
+    color: #707070;
+    margin-bottom: 20px;
+  }
+}
+ul.attachment{
+  li{
+    list-style: none;
+    margin-bottom: 10px;
+    a{
+      font-size: 16px;
+      color: #1F2229;
+      span{
+        margin-right: 30px;
+        img{
+          width: 50px;
+          height: 50px;
+          border-radius: 11px;
+        }
+      }
+      span.title{
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.recipient-from{
+  margin-bottom: 60px;
+  address{
+    .name{
+      color: #1F2229;
+      font-size: 24px;
+      font-weight: 600;
+      @media (max-width: 1024px) {
+        font-size: 20px !important;
+      }
+    }
+    span.vat{
+      margin-top: 10px;
+    }
+    span{
+      font-size: 18px;
+      color: #1F2229;
+      display: block;
+      @media (max-width: 1024px) {
+        font-size: 14px !important;
+      }
+    }
+  }
+}
+.buyer-payment-methods {
+  max-width: 1100px;
+  margin: 8px 110px;
+  width: 100%;
+  @media (max-width: 1790px) {
+    max-width: 1200px;
+    margin: 20px 7px;
+  }
+  @media (max-width: 1600px){
+        max-width: 1040px;
+    }
+  @media (max-width: 1440px){
+        max-width: 870px;
+    }
+  @media (max-width: 1366px){
+        max-width: 800px;
+    }
+  @media (max-width: 1280px){
+        max-width: 718px;
+    }
+  @media (max-width: 1024px){
+        max-width: 100%;
+    }
+  .title {
+    padding: 20px 30px;
+    background: #E7EBF4;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .stepper{
+    padding: 30px;
+    @media (max-width: 767px){
+      margin-bottom: 75px;
+    }
+  }
+}
+.pay{
+  width: 80px;
+  height: 37px;
+  border-radius: 50px;
+  border: 0;
+}
