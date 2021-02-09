@@ -28,7 +28,8 @@
       box-sizing: border-box;
       border-radius: 5px;
       @media (max-width: 767px) {
-        background-size: 25%;
+        background-size: 65px;
+        height: 295px;
       }
 
       &:before {
@@ -49,6 +50,7 @@
         font-family: 'Open Sans';
         @media (max-width: 767px) {
           font-size: 20px;
+          top: 54%;
         }
       }
 
@@ -71,8 +73,9 @@
         color: #6A6A6A;
         font-family: 'Open Sans';
         @media (max-width: 767px) {
-          line-height: 22px;
-          font-size: 15px;
+          line-height: 18px;
+          font-size: 13px;
+          height: 100px;
         }
       }
     }

@@ -3747,7 +3747,8 @@ button.btn-border {
   border-radius: 5px; }
   @media (max-width: 767px) {
     .uploader label[for="et_pb_contact_brand_file_request_0"] {
-      background-size: 25%; } }
+      background-size: 65px;
+      height: 295px; } }
   .uploader label[for="et_pb_contact_brand_file_request_0"]:before {
     content: "Upload cover photo";
     display: block;
@@ -3766,7 +3767,8 @@ button.btn-border {
     font-family: 'Open Sans'; }
     @media (max-width: 767px) {
       .uploader label[for="et_pb_contact_brand_file_request_0"]:before {
-        font-size: 20px; } }
+        font-size: 20px;
+        top: 54%; } }
   .uploader label[for="et_pb_contact_brand_file_request_0"]:after {
     display: block;
     content: 'Drag and drop or browse your files (png,jpeg, jpg)';
@@ -3787,8 +3789,9 @@ button.btn-border {
     font-family: 'Open Sans'; }
     @media (max-width: 767px) {
       .uploader label[for="et_pb_contact_brand_file_request_0"]:after {
-        line-height: 22px;
-        font-size: 15px; } }
+        line-height: 18px;
+        font-size: 13px;
+        height: 100px; } }
 .uploader label[for="et_pb_contact_brand_request_0"]:after {
   content: " (Provide link or Upload files if you already have guidelines)";
   font-size: 12px;
@@ -5915,7 +5918,7 @@ ul.existing-item li {
         margin-bottom: 20px; }
         .collection-type-container .collection-type-item:nth-child(even) {
           margin-left: 20px; } }
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
       .collection-type-container .collection-type-item {
         flex-basis: calc((100%));
         margin-bottom: 20px; }
@@ -5993,7 +5996,7 @@ ul.existing-item li {
         height: 30px;
         margin: 0; }
 
-.create-collection .add-more {
+.add-more-designs .add-more {
   z-index: 99;
   top: 57px;
   bottom: 0;
@@ -6003,10 +6006,10 @@ ul.existing-item li {
   visibility: hidden;
   transition: all ease-in-out .3s; }
   @media (max-width: 767px) {
-    .create-collection .add-more {
+    .add-more-designs .add-more {
       z-index: 9999;
       top: 80px; } }
-  .create-collection .add-more.open {
+  .add-more-designs .add-more.open {
     margin-right: 0 !important;
     opacity: 1;
     visibility: visible; }
@@ -6084,6 +6087,21 @@ ul.existing-item li {
   padding: 12px 12px 12px  45px;
   border-radius: 5px;
   border: 1px solid #ccc; }
+
+.people-suggestions {
+  box-shadow: 0 0 36px 2px rgba(0, 0, 0, 0.16);
+  position: absolute;
+  width: 100%; }
+  .people-suggestions .item {
+    padding: 16px 20px;
+    border-radius: 2px;
+    background: #F5F5F5;
+    cursor: pointer;
+    user-select: none; }
+    .people-suggestions .item:hover {
+      background: #eee; }
+    .people-suggestions .item svg {
+      margin-right: 10px; }
 
 .add-invoice {
   max-width: 813px;

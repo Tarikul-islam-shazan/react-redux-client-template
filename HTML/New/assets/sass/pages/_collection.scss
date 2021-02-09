@@ -177,7 +177,7 @@ ul.existing-item{
       &:nth-child(even){
         margin-left: 20px;
       }
-    } @media (max-width: 991px) {
+    } @media (max-width: 767px) {
       flex-basis: calc((100%));
       margin-bottom: 20px;
       &:nth-child(even){
@@ -274,7 +274,7 @@ ul.existing-item{
     }
   }
 }
-.create-collection{
+.add-more-designs{
   .add-more {
     z-index: 99;
     top: 57px;
@@ -390,4 +390,21 @@ table.manage-project-table.collection-list-table{
     border: 1px solid #ccc;
   }
 }
-
+.people-suggestions {
+  box-shadow: 0 0 36px 2px rgba(0,0,0,.16);
+  position: absolute;
+  width: 100%;
+  .item{
+    padding: 16px 20px;
+    border-radius: 2px;
+    background: #F5F5F5;
+    cursor: pointer;
+    user-select: none;
+    &:hover{
+      background: #eee;
+    }
+    svg{
+      margin-right: 10px;
+    }
+  }
+}
