@@ -1,24 +1,24 @@
 .uploader{
-  .et_pb_contact_form_label {
-    display: block;
-    color: black;
-    font-weight: bold;
-    letter-spacing: 1.2px;
-    font-size: 18px;
-    padding-bottom: 5px;
-  }
+  //.et_pb_contact_form_label {
+  //  display: block;
+  //  color: black;
+  //  font-weight: bold;
+  //  letter-spacing: 1.2px;
+  //  font-size: 18px;
+  //  padding-bottom: 5px;
+  //}
 
-  input[id="et_pb_contact_brand_file_request_0"] {
+  input[class="file-upload"] {
     display: none;
   }
 
   label {
-    &[for="et_pb_contact_brand_file_request_0"] {
+    &[for="drag-upload"] {
       background: #FAFBFD;
       height: 368px;
-      background-image: url('./images/icons/upload.svg');
+      background-image: url(./images/icons/upload.svg);
       background-repeat: no-repeat;
-      background-position: top 84px center;
+      background-position: 50% calc(50% - 50px);
       background-size: 10%;
       color: transparent;
       margin: auto;
@@ -58,10 +58,8 @@
         display: block;
         content: 'Drag and drop or browse your files (png,jpeg, jpg)';
         width: calc(100% - 40px);
-        height: 130px;
         line-height: 27px;
         position: absolute;
-        bottom: 19px;
         font-size: 18px;
         color: white;
         font-weight: 500;
@@ -72,6 +70,8 @@
         text-align: center;
         color: #6A6A6A;
         font-family: 'Open Sans';
+        top: 50%;
+        transform: translateY(32px);
         @media (max-width: 767px) {
           line-height: 18px;
           font-size: 13px;
@@ -96,9 +96,9 @@
       font-weight: normal;
     }
 
-    &[for="et_pb_contact_brand_file_request_0"] {
+    &[for="drag-upload"] {
       &.changed, &:hover {
-        background-color: #f5f8fd;
+        background-color: #eaeaea;
       }
 
       cursor: pointer;
