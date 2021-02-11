@@ -533,8 +533,8 @@ input.type {
     color: #fff !important; }
 
 .btn-brand {
-  width: 240px;
-  height: 70px;
+  width: 210px;
+  height: 60px;
   background: #EE761F 0% 0% no-repeat padding-box;
   border-radius: 5px;
   box-shadow: 0px 3px 0px 6px rgba(238, 118, 31, 0.002);
@@ -543,7 +543,7 @@ input.type {
   vertical-align: middle;
   text-align: center;
   border: 0;
-  font-size: 20px;
+  font-size: 18px;
   border: 1px solid transparent; }
   .btn-brand:focus, .btn-brand:active {
     outline: 0; }
@@ -5765,6 +5765,41 @@ ul.attachment li {
 .share-your-design-form {
   max-width: 1270px; }
 
+.pick-color-table th {
+  padding: 0 !important;
+  background: transparent;
+  text-align: left;
+  border-bottom: 0 !important;
+  width: 33.33%; }
+.pick-color-table tr td {
+  padding-right: 12px;
+  padding-bottom: 12px;
+  break-inside: 5px; }
+  .pick-color-table tr td:last-child {
+    padding-right: 0; }
+  .pick-color-table tr td input {
+    height: 52px;
+    width: 100%;
+    text-align: left;
+    padding: 15px; }
+
+.pick-color {
+  position: relative; }
+  .pick-color span {
+    background: royalblue;
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    cursor: pointer; }
+  .pick-color input {
+    padding-left: 55px !important;
+    border: 1px solid #452C8E !important; }
+
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
@@ -6098,6 +6133,9 @@ ul.existing-item li {
       background: #eee; }
     .people-suggestions .item svg {
       margin-right: 10px; }
+
+.stepper .form-group {
+  margin-bottom: 25px; }
 
 .add-invoice {
   max-width: 813px;
