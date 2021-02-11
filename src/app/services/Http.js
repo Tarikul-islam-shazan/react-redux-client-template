@@ -80,7 +80,9 @@ const routes = {
     removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
     cancelOrder: `${BASE_URL}/project/cancel-order/`,
     getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
-    updatePaymentStatus: `${BASE_URL}/payment/confirm`
+    updatePaymentStatus: `${BASE_URL}/payment/confirm`,
+
+    invoiceList: `${BASE_URL}/invoice/user/`
 };
 
 // Axios request interceptor
