@@ -5764,6 +5764,8 @@ ul.attachment li {
 
 .share-your-design-form {
   max-width: 1270px; }
+  .share-your-design-form .uploader label[for="drag-upload"] {
+    height: 686px; }
 
 .pick-color-table th {
   padding: 0 !important;
@@ -5799,6 +5801,176 @@ ul.attachment li {
   .pick-color input {
     padding-left: 55px !important;
     border: 1px solid #452C8E !important; }
+
+.desgin-name-header {
+  margin-bottom: 32px; }
+  .desgin-name-header .name {
+    flex-basis: calc(100% / 5 - 12px); }
+
+.product-images {
+  margin-bottom: 15px; }
+  .product-images .item {
+    flex-basis: calc(100% / 5 - 12px); }
+    .product-images .item .type-of-img-name {
+      margin-bottom: 18px; }
+      .product-images .item .type-of-img-name .add-more-img {
+        padding-right: 20px;
+        cursor: pointer; }
+    .product-images .item .p-img {
+      position: relative; }
+      .product-images .item .p-img img {
+        width: 100%;
+        max-height: 340px;
+        object-fit: cover; }
+      .product-images .item .p-img .dlt {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 999;
+        cursor: pointer; }
+    .product-images .item .uploader label[for="drag-upload"] {
+      background-size: 70px;
+      height: 340px; }
+      .product-images .item .uploader label[for="drag-upload"]:after {
+        content: 'Drag and drop or browse your files  upto 2 MB  (png, jpeg, jpg)';
+        line-height: 24px;
+        font-size: 16px;
+        font-weight: normal;
+        transform: translateY(24px); }
+      .product-images .item .uploader label[for="drag-upload"]:before {
+        font-size: 20px; }
+    .product-images .item .files {
+      position: relative;
+      height: 100%; }
+      .product-images .item .files .uplded-file {
+        max-height: 340px;
+        background: #F4F6FC;
+        height: 100%; }
+      .product-images .item .files .dlt {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 999;
+        cursor: pointer; }
+
+.product-info .product-type {
+  flex-basis: calc(100% / 5 - 12px);
+  background: #F1F1F1;
+  padding: 20px;
+  position: relative; }
+  .product-info .product-type label, .product-info .product-type span {
+    font-size: 18px; }
+  .product-info .product-type .p-edit {
+    position: absolute;
+    top: 20px;
+    right: 20px; }
+  .product-info .product-type input {
+    height: 46px;
+    background: #F4F5F7 !important;
+    border-radius: 5px;
+    padding: 10px 12px;
+    border: 1px solid #CACDD5 !important; }
+  .product-info .product-type table.pick-color-table thead tr th:last-child {
+    width: 1%; }
+  .product-info .product-type table.pick-color-table .pick-color span {
+    width: 20px;
+    height: 20px; }
+  .product-info .product-type table.pick-color-table .pick-color input {
+    padding-left: 36px !important;
+    border: 1px solid #CACDD5 !important; }
+.product-info .product-notes {
+  padding: 30px 0px 30px 20px;
+  box-sizing: content-box;
+  flex-basis: calc(100% / 5 - 12px);
+  position: relative; }
+  .product-info .product-notes .p-edit {
+    position: absolute;
+    top: 0;
+    right: 0; }
+  .product-info .product-notes label {
+    font-size: 20px;
+    color: #21242B; }
+  .product-info .product-notes p {
+    font-size: 18px;
+    color: #6A7181;
+    margin-bottom: 20px; }
+  .product-info .product-notes table.measurement-table {
+    box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.1);
+    border: 0;
+    overflow: auto; }
+    .product-info .product-notes table.measurement-table thead th {
+      white-space: nowrap; }
+      .product-info .product-notes table.measurement-table thead th:first-child {
+        width: auto;
+        border-left: 0; }
+    .product-info .product-notes table.measurement-table tbody tr td {
+      white-space: nowrap; }
+    .product-info .product-notes table.measurement-table tbody tr th:last-child, .product-info .product-notes table.measurement-table thead th:last-child {
+      border-right: 0; }
+    .product-info .product-notes table.measurement-table tbody tr th:first-child, .product-info .product-notes table.measurement-table tbody tr td:first-child {
+      border-left: 0; }
+    .product-info .product-notes table.measurement-table tbody tr td:last-child {
+      border-right: 0; }
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -2px; }
+
+.submit-action {
+  margin-top: 50px; }
+  .submit-action button {
+    width: 210px;
+    height: 60px; }
+    .submit-action button + button {
+      margin-left: 20px; }
+
+.chart-table {
+  display: flex; }
+  .chart-table .adjust-property {
+    flex-basis: 200px;
+    white-space: nowrap;
+    margin-left: 30px; }
+
+.edit-design-name {
+  position: relative; }
+  .edit-design-name input {
+    padding-right: 40px;
+    font-size: 23px; }
+  .edit-design-name .done {
+    position: absolute;
+    right: 12px;
+    top: 12px; }
+
+.more-item {
+  position: relative; }
+  .more-item.open::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 30px 30px;
+    border-color: transparent transparent #ffffff transparent;
+    top: 12px;
+    left: 26px;
+    z-index: 77; }
+
+.more-files {
+  padding: 10px 10px 15px 30px;
+  box-shadow: 0 -13px 28px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 35px; }
+  .more-files .product-images {
+    display: flex; }
+    .more-files .product-images .item {
+      flex-basis: calc(100% / 4); }
+      .more-files .product-images .item + .item {
+        margin-left: 20px; }
+
+.measurement-chart-table-container {
+  width: 100%;
+  float: left; }
 
 .new-collection {
   max-width: 1000px;
