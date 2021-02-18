@@ -5804,7 +5804,7 @@ ul.attachment li {
     width: 100%;
     text-align: left;
     padding: 15px; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .pick-color-table tr td input {
         height: 46px !important;
         padding: 10px; } }
@@ -5822,16 +5822,17 @@ ul.attachment li {
     transform: translateY(-50%);
     left: 10px;
     cursor: pointer; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .pick-color span {
         width: 25px;
         height: 25px; } }
   .pick-color input {
     padding-left: 55px !important;
     border: 1px solid #452C8E !important; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .pick-color input {
-        padding-left: 40px !important; } }
+        padding-left: 40px !important;
+        height: 44px; } }
 
 .desgin-name-header {
   margin-bottom: 32px; }
@@ -6057,12 +6058,12 @@ ul.attachment li {
 .chart-table {
   display: flex; }
   .chart-table .adjust-property {
-    flex-basis: 200px;
+    flex-basis: 100px;
     white-space: nowrap;
     margin-left: 30px; }
     @media (max-width: 1366px) {
       .chart-table .adjust-property {
-        flex-basis: 110px; } }
+        flex-basis: 100px; } }
 
 .edit-design-name {
   position: relative; }
@@ -6106,7 +6107,8 @@ ul.attachment li {
       background: #fff;
       left: 50%;
       width: calc(100% - 40px);
-      transform: translateX(-50%); }
+      transform: translateX(-50%);
+      display: none; }
       .more-files .product-images {
         margin: 0; }
         .more-files .product-images .item {
