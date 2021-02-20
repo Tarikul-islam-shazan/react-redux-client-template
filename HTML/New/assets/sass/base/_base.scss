@@ -349,9 +349,9 @@ input.type {
         color: #fff !important;
     }
 }
-.btn-brand{
-    width: 240px;
-    height: 70px;
+.btn-brand{ 
+    width: 210px;
+    height: 60px; 
     background: #EE761F 0% 0% no-repeat padding-box;
     border-radius: 5px;
     box-shadow: 0px 3px 0px 6px rgba(238, 118, 31, .20%);
@@ -360,7 +360,7 @@ input.type {
     vertical-align: middle;
     text-align: center;
     border: 0;
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid transparent;
     &:focus, &:active{
         outline: 0;
