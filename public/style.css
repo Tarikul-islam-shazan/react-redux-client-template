@@ -2242,6 +2242,7 @@ a.btn_dash_menu a:hover
         background: transparent;
         border-bottom: 2px solid #EE761F;
         border-left: transparent;
+        border-right: 0;
     }
     button.btn_tour
     {

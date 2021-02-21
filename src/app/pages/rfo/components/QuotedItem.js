@@ -85,7 +85,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                         <label className="font-16 text-muted">Fabric details</label>
                         <h5 className="font-20 color-333">
                         {/*'Cotton'*/}
-                        <span className="brand-color ml-3">{quote.fabricComposition}</span></h5>
+                        <span className="brand-color">{quote.fabricComposition}</span></h5>
                     </div>
                 </div>
                 <div className="features d-flex flex-md-column">

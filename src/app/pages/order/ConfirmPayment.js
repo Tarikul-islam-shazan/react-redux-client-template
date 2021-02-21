@@ -503,7 +503,7 @@ class ConfirmPayment extends Component {
                                           </g>
                                       </g>
                                   </svg>
-                                  Credit Card
+                                 &nbsp; Credit Card
                               </div>
                               <div className={`type bank-slipt ${paymentMethod === 'BANK_SLIP' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('BANK_SLIP')}>
                                   <svg id="bank" xmlns="http://www.w3.org/2000/svg" width="14.998" height="14.881" viewBox="0 0 14.998 14.881">
@@ -515,7 +515,7 @@ class ConfirmPayment extends Component {
                                           </g>
                                       </g>
                                   </svg>
-                                  Bank Slipt
+                                  &nbsp; Bank Slipt
                               </div>
                           </div>
                           {
