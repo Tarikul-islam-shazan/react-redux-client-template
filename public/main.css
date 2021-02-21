@@ -5757,10 +5757,14 @@ ul.attachment li {
         margin-bottom: 75px; } }
 
 .pay {
-  width: 80px;
+  width: 80px !important;
   height: 37px;
   border-radius: 50px;
   border: 0; }
+  @media (max-width: 1366px) {
+    .pay {
+      width: 62px !important;
+      height: 32px; } }
 
 .button-with-filed {
   height: 52px;
