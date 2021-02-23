@@ -142,6 +142,36 @@
         .add-more-img{
           padding-right: 20px;
           cursor: pointer;
+          height: 30px;
+          .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+          }
+
+          button {
+            border: 0;
+            color: gray;
+            background-color: white;
+            padding: 0;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            vertical-align: bottom;
+            line-height: 1;
+            cursor: pointer;
+          }
+
+          .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+          }
+          @media (max-width: 1024px) {
+            padding-right: 0;
+          }
         }
         @media (max-width: 1440px) {
           span{
@@ -437,10 +467,10 @@
       top: 12px;
       left: 26px;   
       z-index: 77;
-      @media (max-width: 1024px) {
-        display: none;
-      }
     }
+  }
+  @media (max-width: 1024px) {
+    display: none;
   }
 }
 .more-files { 
@@ -542,8 +572,6 @@
 
 
 ul.p-img-container {
-  margin: 35px;
-  padding: 0;
   display: flex;
   overflow-x: auto;
   li{
@@ -552,13 +580,26 @@ ul.p-img-container {
     margin-right: 12px;
     position: relative;
     .p-img {
-      width: 300px;
-      &:not(:first-child) {
-        display: none;
-        @media (max-width: 1024px) {
-          display: block;
-        }
+      @media (max-width: 1024px) {
+        width: 350px;
+        height: 385px;
+      }
+      @media (max-width: 991px) {
+        width: 270px;
+        height: 300px;
+      }
+      @media (max-width: 575px) {
+        width: 270px;
+        height: 300px;
+      }
+    }
+    &:not(:first-child) {
+      display: none;
+      @media (max-width: 1024px) {
+        display: block;
       }
     }
   }
 }
+
+
