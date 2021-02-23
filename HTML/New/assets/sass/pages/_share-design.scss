@@ -127,6 +127,10 @@
       @media (max-width: 1024px) {
         flex-basis: calc(100% / 2 - 12px);
         margin-bottom: 30px;
+        overflow-x: auto;
+        &:nth-child(n+3){
+          flex-basis: 100%;
+        }
       }
       @media (max-width: 767px) {
         flex-basis: 100%;
@@ -532,5 +536,29 @@
   }
   @media (max-width: 1024px) {
     margin-top: 48px;
+  }
+}
+
+
+
+ul.p-img-container {
+  margin: 35px;
+  padding: 0;
+  display: flex;
+  overflow-x: auto;
+  li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 12px;
+    position: relative;
+    .p-img {
+      width: 300px;
+      &:not(:first-child) {
+        display: none;
+        @media (max-width: 1024px) {
+          display: block;
+        }
+      }
+    }
   }
 }
