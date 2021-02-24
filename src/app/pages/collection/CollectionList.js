@@ -14,7 +14,7 @@ import { encodeQueryData, clothingLabelStatus } from '../../services/Util';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
-import {CollectionCard} from './components/CollectionCard';
+// import {CollectionCard} from './components/CollectionCard';
 
 class CollectionList extends Component {
 
@@ -94,7 +94,7 @@ class CollectionList extends Component {
                 page : page,
                 hasNext : (data.currentPage + 1 >= data.totalPages) ? false : true,
                 loading:false,
-                totalCount: data.totalCount
+                totalCount: data.totalElements
               })
             } else {
               this.setState({
@@ -102,7 +102,7 @@ class CollectionList extends Component {
                 page : page,
                 hasNext : (data.currentPage + 1 >= data.totalPages) ? false : true,
                 loading:false,
-                totalCount: data.totalCount
+                totalCount: data.totalElements
               })
             }
 
@@ -111,7 +111,7 @@ class CollectionList extends Component {
               collectionList : merge ? collectionList : [],
               hasNext : false,
               loading:false,
-              totalCount: data.totalCount
+              totalCount: data.totalElements
             })
             // toastWarning("Project List - no data found.");
           }
@@ -170,7 +170,7 @@ class CollectionList extends Component {
                   </div>
 
 
-                  <h4 class="mb-4 font-weight-normal">Designer’s Choice</h4>
+                  {/*<h4 class="mb-4 font-weight-normal">Designer’s Choice</h4>
                   <div class="collection-type-container mb-5">
                       <div class="collection-type-item">
                           <div class="product-img-container">
@@ -216,54 +216,31 @@ class CollectionList extends Component {
                               </div>
                           </div>
                       </div>
-                  </div>
+                  </div>*/}
 
                   <h4 class="mb-4 font-weight-normal">Custom collections</h4>
                   <div class="collection-type-container">
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
+                  {
+                    collectionList.map((collection, i) => {
+                      let docs = collection.documentResponseList && collection.documentResponseList.length ? collection.documentResponseList : [];
+                      let img1 = docs.length > 0 ? docs[0].docUrl : '';
+                      let img2 = docs.length > 1 ? docs[1].docUrl : '';
+                      let img3 = docs.length > 2 ? docs[2].docUrl : '';
+                      return(
+                        <div class="collection-type-item" key={i} onClick={() => this.props.history.push('/collection/details/' + collection.id)}>
+                            <div class="product-img-container">
+                                <div class="prev-img">
+                                    <img src={img1 ? img1 : require('../../assets/images/default_product.svg')} alt=""/>
+                                </div>
+                                <div class="prev-img-thumb">
+                                    <img src={img2 ? img2 : require('../../assets/images/default_product.svg')} alt=""/>
+                                    <img src={img3 ? img3 : require('../../assets/images/default_product.svg')} alt=""/>
+                                </div>
+                            </div>
+                        </div>
+                      )
+                    })
+                  }
                   </div>
               </div>
 

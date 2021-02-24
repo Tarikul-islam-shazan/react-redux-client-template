@@ -190,6 +190,11 @@ const Http = {
         // updateTokenInHeader();
         return axios.delete(routes[key] + id, {data, headers});
     },
+    DELETE_WITH_BODY: (key, body, params = '') => {
+        // updateTokenInHeader();
+        params = typeof params === 'object' ? encodeQueryData(params) : params;
+        return axios.delete(routes[key] + params, {headers, data: body});
+    },
     UPLOAD: (key, {name, file}) => {
         // updateTokenInHeader();
         const formData = new FormData();

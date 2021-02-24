@@ -43,7 +43,7 @@ class ProductCard extends Component {
       selectedProductIds.push(productId)
     }
     await this.props._storeData('selectedProductIds', selectedProductIds);
-    this.props.updateProductCard()
+    this.props.updateProductCard();
   }
 
   toggleLike = (productId) => {

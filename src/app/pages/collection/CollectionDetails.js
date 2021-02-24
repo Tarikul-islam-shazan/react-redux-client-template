@@ -419,7 +419,29 @@ class CollectionDetails extends Component {
     }
 
     delete = async(id) => {
-
+      let body = {
+        id
+      }
+      await Http.DELETE_WITH_BODY('deleteCollection', body)
+        .then(({data}) => {
+          console.log('addCollection SUCCESS: ', JSON.stringify(data));
+          this.setState({loading:false})
+          if(data.success){
+            toastSuccess(data.message);
+            this.props.history.push('/collection/list');
+          }else{
+            toastError(data.message);
+          }
+        })
+        .catch(({response}) => {
+            console.log('addCollection Error: ', JSON.stringify(response));
+            this.setState({loading:false})
+            if(response && response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Something went wrong! Please try again.");
+            }
+        });
     }
 
     render() {
