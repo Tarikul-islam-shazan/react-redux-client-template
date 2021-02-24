@@ -80,7 +80,16 @@ const routes = {
     removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
     cancelOrder: `${BASE_URL}/project/cancel-order/`,
     getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
-    updatePaymentStatus: `${BASE_URL}/payment/confirm`
+    updatePaymentStatus: `${BASE_URL}/payment/confirm`,
+
+    addCollection: `${BASE_URL}/collection/add`,
+    addProductToCollection: `${BASE_URL}/collection/product/add`,
+    getUserCollectionList: `${BASE_URL}/collection/search/user/`,
+    getCollectionDetails: `${BASE_URL}/collection/`,
+    getCollectionProducts: `${BASE_URL}/collection/products/`,
+    getUsersByTypes: `${BASE_URL}/user/by-user-types`,
+    shareCollection: `${BASE_URL}/collection/share`,
+    getUserSuggestions: `${BASE_URL}/user/find-list-by-email-and-user-type`
 };
 
 // Axios request interceptor

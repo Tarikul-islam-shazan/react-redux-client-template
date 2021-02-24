@@ -45,6 +45,9 @@ import ConfirmOrder from './pages/order/ConfirmOrder';
 import ConfirmPayment from './pages/order/ConfirmPayment';
 import PaymentSuccess from './pages/order/PaymentSuccess';
 
+import CollectionList from './pages/collection/CollectionList';
+import CollectionDetails from './pages/collection/CollectionDetails';
+
 
 const AuthRoute = ({component: Component, ...rest}) => {
     let token = getToken()
@@ -126,6 +129,8 @@ class Root extends Component {
                   <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
                   <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
                   <PublicRoute exact path="/payment/confirm" component={ PaymentSuccess }/>
+                  <PublicRoute exact path="/collection/list" component={ CollectionList }/>
+                  <PublicRoute exact path="/collection/details/:id" component={ CollectionDetails }/>
                 </Switch>
             </Router>
         );

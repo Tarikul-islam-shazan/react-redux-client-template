@@ -73,7 +73,10 @@ class PickDesignV2 extends Component {
           initialLoading: false,
           showSuggestions: false,
           responsiveFilterModal: false,
-          pagination: {}
+          pagination: {},
+          collectionList: [],
+          collectionName: '',
+          showAddCollectionPopup: false
         };
     }
 
@@ -143,6 +146,7 @@ class PickDesignV2 extends Component {
       this.initialDataFetch();
       this.setFilterOptions();
       this.fetchSuggestions();
+      this.fetchCollectionList();
     }
 
     initialDataFetch = async() => {
@@ -184,6 +188,23 @@ class PickDesignV2 extends Component {
         .then(({data}) => {
           if (data.length) {
             this.setState({suggestions: data});
+          }
+        })
+        .catch(({response}) => {
+        });
+    }
+
+    fetchCollectionList = () => {
+      let userInfo = localStorage.getItem('userInfo');
+      if (userInfo) {
+        userInfo = JSON.parse(userInfo);
+      } else {
+        userInfo = {};
+      }
+      Http.GET('getUserCollectionList', userInfo.id)
+        .then(({data}) => {
+          if (data.data) {
+            this.setState({collectionList: data.data});
           }
         })
         .catch(({response}) => {
@@ -273,7 +294,7 @@ class PickDesignV2 extends Component {
       })
     }
 
-    onChangeSrchText = (e) => {
+    onChangeText = (e) => {
       this.setState({
         [e.target.name] : e.target.value,
       })
@@ -472,8 +493,69 @@ class PickDesignV2 extends Component {
       this.updateProductCard();
     }
 
+    createNewCollection = () => {
+      let {collectionName} = this.state;
+      if (!collectionName) {
+        this.setState({
+          collectionNameError: 'Collection name required'
+        })
+        return;
+      } else {
+        this.setState({
+          collectionNameError: ''
+        })
+      }
+      let body = {
+        name: collectionName,
+        privacy: 'ONLY_ME',
+        viewType: 'PRODUCT_LIST'
+      };
+      Http.POST('addCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.addToExistingCollection(data.id);
+            // this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+
+    }
+
+    addToExistingCollection = (collectionId) => {
+      let body = {
+        id: collectionId,
+        productIds: this.props.selectedProductIds
+      };
+      Http.POST('addProductToCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.props._storeData('selectedProductIds', []);
+            this.updateProductCard();
+            this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+    }
+
     render() {
-        let { designList, groupwiseProductList, search, productTypeId, sort, showFilters, landingData, filterOptions, filters, searching, showSuggestions, suggestions, responsiveFilterModal, pagination, showSelectedFilters } = this.state;
+        let {
+          designList, groupwiseProductList, search, productTypeId, sort, showFilters,
+          landingData, filterOptions, filters, searching, showSuggestions, suggestions,
+          responsiveFilterModal, pagination, showSelectedFilters,
+          collectionList, showAddCollectionPopup, collectionName, collectionNameError
+        } = this.state;
 
         return (
           <div className="explore-design">
@@ -689,6 +771,7 @@ class PickDesignV2 extends Component {
                     <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
                         <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
+                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.setState({showAddCollectionPopup: true})}>Add to collection</button>
                     </div>
                     <div className="close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436" onClick={async() => {
@@ -697,6 +780,41 @@ class PickDesignV2 extends Component {
                         }}>
                             <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
                         </svg>
+                    </div>
+                </div> : <></>
+              }
+
+              {
+                showAddCollectionPopup ?
+                <div class="create-new-collection">
+                    <div class="pop-container">
+                        <span class="create-newbutton cursor-pointer">+ Create new collection</span>
+                        <div class="create-new d-flex">
+                            <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
+                            <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
+                        </div>
+                        {
+                          collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                        }
+                        {
+                          collectionList.length ?
+                          <div class="all-collection">
+                              <span>All collection</span>
+                              <ul class="p-0 m-0 existing-item">
+                              {
+                                collectionList.map((collection, i) => {
+                                  return(
+                                    <li key={i}>
+                                        <span>{collection.collectionName}</span>
+                                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addToExistingCollection(collection.id)}>Add</button>
+                                    </li>
+                                  )
+                                })
+                              }
+                              </ul>
+                          </div> : <></>
+                        }
+
                     </div>
                 </div> : <></>
               }

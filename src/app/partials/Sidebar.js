@@ -29,7 +29,7 @@ class Sidebar extends Component {
 
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
-      this.connect()
+      // this.connect()
       this.initiateHotjarGA()
     }
 
@@ -146,7 +146,6 @@ class Sidebar extends Component {
                         />
                         : <></>
                       }
-
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
@@ -171,6 +170,17 @@ class Sidebar extends Component {
                           onClick={this.props.setActiveTab}
                         />
                         : <></>
+                      }
+                      {
+                        <NavLink
+                          to="/collection/list"
+                          classes={this.props.activeTab.includes('collection') ? 'active' : ''}
+
+                          activeIcon={require("../assets/icons/share-design-active.png")}
+                          inactiveIcon={require("../assets/icons/share-design.png")}
+                          title="Collections"
+                          onClick={this.props.setActiveTab}
+                        />
                       }
                       {
                         permissions.includes('PROJECT_MY_PROJECT') ?
