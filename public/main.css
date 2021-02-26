@@ -4358,7 +4358,7 @@ ul.filter-tag {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-gap: 30px; }
-  @media (max-width: 1280px) {
+  @media (max-width: 1366px) {
     .show-products {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-gap: 25px; } }
@@ -5010,6 +5010,15 @@ button.rec-arrow-right {
       border-radius: 8px;
       padding: 10px !important;
       line-height: 12px; } }
+  @media (max-width: 767px) {
+    .all-select .all-checkbox {
+      width: 80px; }
+      .all-select .all-checkbox .custom-chekbox .form-group label::before {
+        padding: 10px; }
+      .all-select .all-checkbox .custom-chekbox .form-group input:checked + label::after {
+        top: 2px;
+        left: 9px;
+        height: 12px; } }
 @media (max-width: 1024px) {
   .all-select {
     margin-top: 40px !important; } }
@@ -6299,14 +6308,18 @@ ul.existing-item li {
   height: 52px; }
 
 .collection-type-container {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
   .collection-type-container .collection-type-item {
-    flex-basis: calc((100% / 4)); }
+    flex-basis: calc((100% / 4 - 23px)); }
     .collection-type-container .collection-type-item + .collection-type-item {
-      margin-left: 30px; }
+      margin-left: 30px;
+      margin-bottom: 30px; }
       @media (max-width: 991px) {
         .collection-type-container .collection-type-item + .collection-type-item {
           margin-left: 0px; } }
+    .collection-type-container .collection-type-item:nth-child(5n+5) {
+      margin-left: 0; }
     .collection-type-container .collection-type-item img {
       width: 100%; }
     .collection-type-container .collection-type-item .product-img-container {
@@ -6315,16 +6328,19 @@ ul.existing-item li {
         width: 70%; }
         .collection-type-container .collection-type-item .product-img-container .prev-img img {
           max-height: 312px;
-          object-fit: cover; }
+          object-fit: cover;
+          background: #F2F2F2; }
       .collection-type-container .collection-type-item .product-img-container .prev-img-thumb {
         width: 30%;
         margin-left: 5px;
         max-height: 312px; }
         .collection-type-container .collection-type-item .product-img-container .prev-img-thumb img {
           height: calc(50% - 3px);
-          object-fit: cover; }
+          object-fit: cover;
+          background: #F2F2F2; }
         .collection-type-container .collection-type-item .product-img-container .prev-img-thumb img + img {
-          margin-top: 5px; }
+          margin-top: 5px;
+          background: #F2F2F2; }
     @media (max-width: 991px) {
       .collection-type-container .collection-type-item {
         flex-basis: calc((100% / 2) - 15px);
@@ -6361,6 +6377,9 @@ ul.existing-item li {
 .add-buyer button.btn-brand {
   margin: 0 0 0 20px !important;
   height: 52px; }
+  @media (max-width: 1366px) {
+    .add-buyer button.btn-brand {
+      width: 208px; } }
 
 .add-people-popup {
   position: absolute;
@@ -6421,7 +6440,7 @@ ul.existing-item li {
   @media (max-width: 767px) {
     .add-more-designs .add-more {
       z-index: 9999;
-      top: 80px; } }
+      top: 62px; } }
   .add-more-designs .add-more.open {
     margin-right: 0 !important;
     opacity: 1;

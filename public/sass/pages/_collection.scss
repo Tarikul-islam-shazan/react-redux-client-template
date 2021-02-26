@@ -138,13 +138,18 @@ ul.existing-item{
 
 .collection-type-container{
   display: flex;
+  flex-wrap: wrap;
   .collection-type-item {
-    flex-basis: calc((100% / 4));
+    flex-basis: calc((100% / 4 - 23px));
     + .collection-type-item{
       margin-left: 30px;
+      margin-bottom: 30px;
       @media (max-width: 991px) {
         margin-left: 0px;
       }
+    }
+    &:nth-child(5n+5){
+      margin-left: 0;
     }
     img{
       width: 100%;
@@ -156,6 +161,7 @@ ul.existing-item{
         img{
           max-height: 312px;
           object-fit: cover;
+          background: #F2F2F2;
         }
       }
       .prev-img-thumb {
@@ -165,9 +171,11 @@ ul.existing-item{
         img{
           height: calc(50% - 3px);
           object-fit: cover;
+          background: #F2F2F2;
         }
         img + img{
           margin-top: 5px;
+          background: #F2F2F2;
         }
       }
     }
@@ -214,7 +222,8 @@ ul.existing-item{
   button.btn-brand{
     margin: 0 0 0 20px!important;
     height: 52px;
-    @media (max-width: 767px) {
+    @media (max-width: 1366px) {
+      width: 208px;
     }
   }
 }
@@ -286,7 +295,7 @@ ul.existing-item{
     transition: all ease-in-out .3s;
     @media (max-width: 767px) {
       z-index: 9999;
-      top: 80px;
+      top: 62px;
     }
     &.open{
       margin-right: 0 !important;

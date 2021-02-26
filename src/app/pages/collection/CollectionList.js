@@ -152,7 +152,6 @@ class CollectionList extends Component {
     render() {
       let { name, collectionList } = this.state;
         return (
-          <div class="wraper container-fluid dashboard-container">
 
               <div class="explore-design collection-list">
                   <div class="d-flex justify-content-between">
@@ -244,7 +243,6 @@ class CollectionList extends Component {
                   </div>
               </div>
 
-          </div>
         );
     }
 }
