@@ -4277,6 +4277,11 @@ ul.filter-tag {
         .new-card .thumb .favourite-part.choose.active svg path {
           fill: none;
           stroke: #452c8e; }
+      .new-card .thumb .favourite-part.disabled {
+        background: #c4c4c4; }
+        .new-card .thumb .favourite-part.disabled svg path {
+          fill: none;
+          stroke: #c4c4c4; }
     .new-card .thumb .btn-brand {
       width: 93px;
       height: 34px;

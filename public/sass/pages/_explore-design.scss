@@ -173,6 +173,13 @@ ul.filter-tag {
           }
         }
       }
+      &.disabled{
+        background: #c4c4c4;
+        svg path{
+          fill: none;
+          stroke:#c4c4c4
+        }
+      }
     }
     position: relative;
     .btn-brand{
