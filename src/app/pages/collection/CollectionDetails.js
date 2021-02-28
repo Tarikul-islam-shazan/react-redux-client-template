@@ -42,7 +42,11 @@ class CollectionDetails extends Component {
           allCheckBox: false,
           searchUserText: '',
           searchUserSuggestions: [],
-          searchUserLoading: false
+          searchUserLoading: false,
+          collectionList: [],
+          collectionName: '',
+          collectionNameError: '',
+          showAddCollectionPopup: false
         };
     }
 
@@ -445,7 +449,10 @@ class CollectionDetails extends Component {
     }
 
     render() {
-      let { name, collection, collectionList, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions } = this.state;
+      let {
+        name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
+        collectionList, collectionName, collectionNameError, showAddCollectionPopup
+       } = this.state;
         return (
           <>
               <div class="explore-design">
@@ -595,6 +602,7 @@ class CollectionDetails extends Component {
                         <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                             <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
                             <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
+                            <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.setState({showAddCollectionPopup: true})}>Add to collection</button>
                         </div>
                         <div className="close">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436" onClick={async() => {
@@ -603,6 +611,41 @@ class CollectionDetails extends Component {
                             }}>
                                 <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
                             </svg>
+                        </div>
+                    </div> : <></>
+                  }
+
+                  {
+                    showAddCollectionPopup ?
+                    <div class="create-new-collection">
+                        <div class="pop-container">
+                            <span class="create-newbutton cursor-pointer">+ Create new collection</span>
+                            <div class="create-new d-flex">
+                                <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
+                                <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
+                            </div>
+                            {
+                              collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                            }
+                            {
+                              collectionList.length ?
+                              <div class="all-collection">
+                                  <span>All collection</span>
+                                  <ul class="p-0 m-0 existing-item">
+                                  {
+                                    collectionList.map((collection, i) => {
+                                      return(
+                                        <li key={i}>
+                                            <span>{collection.collectionName}</span>
+                                            <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addToExistingCollection(collection.id)}>Add</button>
+                                        </li>
+                                      )
+                                    })
+                                  }
+                                  </ul>
+                              </div> : <></>
+                            }
+
                         </div>
                     </div> : <></>
                   }

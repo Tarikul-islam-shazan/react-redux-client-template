@@ -29,7 +29,7 @@ class Sidebar extends Component {
 
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
-      // this.connect()
+      this.connect()
       this.initiateHotjarGA()
     }
 

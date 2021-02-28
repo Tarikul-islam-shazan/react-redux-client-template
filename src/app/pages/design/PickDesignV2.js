@@ -76,6 +76,7 @@ class PickDesignV2 extends Component {
           pagination: {},
           collectionList: [],
           collectionName: '',
+          collectionNameError: '',
           showAddCollectionPopup: false
         };
     }
