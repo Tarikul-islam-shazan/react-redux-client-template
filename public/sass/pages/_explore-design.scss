@@ -226,8 +226,9 @@ ul.filter-tag {
     .card-footer{
       margin: 0;
       span.badge {
-        padding: 2px 14px;
+        padding: 2px 14px !important;
         font-size: 12px !important;
+        margin: 0 !important;
       }
     }
   }
@@ -582,6 +583,7 @@ table{
   position: absolute;
   width: 100%;
   z-index: 99;
+  top: 47px;
   ul{
     margin: 0;
     padding: 0;
@@ -672,4 +674,12 @@ button.rec-arrow-right {
   button.btn-brand{
     float: right !important;
   }
+}
+//Gallery popup
+.react-simple-image-viewer__modal {
+  background: #fff !important;
+}
+.react-simple-image-viewer__close,
+.react-simple-image-viewer__previous, .react-simple-image-viewer__next{
+  color: #000 !important
 }

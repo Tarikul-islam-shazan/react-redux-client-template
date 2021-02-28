@@ -231,10 +231,14 @@ ul.attachment{
   }
 }
 .pay{
-  width: 80px;
+  width: 80px !important;
   height: 37px;
   border-radius: 50px;
   border: 0;
+  @media (max-width: 1366px) {
+    width: 62px !important;
+    height: 32px;
+  }
 }
 //Correction
 .button-with-filed{

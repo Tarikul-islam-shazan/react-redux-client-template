@@ -145,8 +145,11 @@
 }
 .banner-slider .slider-nav .thumbImg img {
   height: 89px;
+  @media (max-width: 991px) {
+    height: 115px;
+  }
   @media (max-width: 575px) {
-    height: 112px;
+    height: 98px;
   }
 }
 .slider-for img {

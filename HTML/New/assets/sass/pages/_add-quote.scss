@@ -351,13 +351,19 @@
 
 .add-quote .confirm-quote-request .quote-req-list-container{
   .quote-list .quote-info img {
-    max-width: 180px;
-    height: 202px;
+    max-width: 195px;
+    height: 160px;
     object-fit: cover;
-    width: 100%;
     @media (max-width: 1790px) {
-          height: 120px;
+      height: 138px;
       width: auto;
+    }
+    @media (max-width: 1280px) {
+      height: 112px;
+    }
+    @media (max-width: 767px) {
+      height: auto;
+      max-width: 100%;
     }
   }
 }

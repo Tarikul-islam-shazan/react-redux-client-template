@@ -742,7 +742,7 @@ class PickDesignV2 extends Component {
                                   if (banner.banners && banner.banners.length) {
                                     return (
                                       <div className="col-md-6" key={j}>
-                                          <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100"/></a>
+                                          <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100 mb-4 mb-sm-0"/></a>
                                       </div>
                                     )
                                   } else {

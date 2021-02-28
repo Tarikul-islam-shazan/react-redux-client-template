@@ -545,6 +545,33 @@ const productAvailabilityStatus = (item) => {
   }
 }
 
+const invoiceStatus = (invoice) => {
+  switch(invoice.status) {
+    case 'PENDING':
+      return(
+        <span class="badge design-badge" style={{backgroundColor: '#ECE9F4', color: '#472F91'}}>Pending</span>
+      )
+      break;
+    case 'PARTIALLY_PAID':
+      return(
+        <span className="badge design-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially paid</span>
+      )
+      break;
+    case 'APPROVED':
+      return(
+        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
+      )
+      break;
+    case 'PAID':
+      return(
+        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
+      )
+      break;
+    default:
+      // code block
+  }
+}
+
 const _getKey = () => {
     return Math.floor((Math.random() * 10000000)) + Math.floor((Math.random() * 10000000));
 }
@@ -666,5 +693,5 @@ export {
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus
 };
