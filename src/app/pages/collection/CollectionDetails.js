@@ -47,7 +47,9 @@ class CollectionDetails extends Component {
           collectionName: '',
           collectionNameError: '',
           showAddCollectionPopup: false,
-          showCollectionAddOption: false
+          showCollectionAddOption: false,
+          collectionType: '',
+          collectionViewType: ''
         };
     }
 
@@ -95,8 +97,17 @@ class CollectionDetails extends Component {
       window.addEventListener("scroll", this.handleWindowScroll);
       document.addEventListener('mousedown', this.handleClickOutside);
       let id = this.props.match.params.id;
-      await this.getCollectionDetails(id);
+      console.log("componentDidMount", id)
+      if (id !== 'private-collection') {
+        await this.getCollectionDetails(id);
+      }
       await this.getCollectionProducts(0);
+      if (id === 'private-collection') {
+        this.setState({
+          collectionType: 'private-collection'
+        })
+        return;
+      }
       await this.myProducts();
       await this.getUsersByTypes();
       await this.fetchCollectionList();
@@ -120,6 +131,17 @@ class CollectionDetails extends Component {
     }
 
     getCollectionProducts = ( page = 0 ) => {
+      let paramName = 'viewType';
+      let regex = new RegExp('[\\?&]' + paramName + '=([^&#]*)');
+      let results = regex.exec(this.props.location.search);
+      if (results !== null) {
+        this.setState({
+          collectionViewType: results[1]
+        })
+        this.getViewTypeCollectionList(page, results[1]);
+        return;
+      }
+
       let collectionId = this.props.match.params.id;
       this.setState({loading: true})
       let { size, name, productList } = this.state;
@@ -129,9 +151,30 @@ class CollectionDetails extends Component {
           this.setState({loading: false})
           if (data) {
             this.setState({
-              productList: [...productList, ...data],
+              productList: [...productList, ...data.data],
               page,
-              hasNext: data.length === size ? true : false
+              hasNext: (data.currentPage + 1) < data.totalPages ? true : false
+            })
+          }
+        })
+        .catch(response => {
+            console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            toastError("Something went wrong! Please try again.");
+        });
+    }
+
+    getViewTypeCollectionList = async(page, viewType) => {
+      let { size, productList } = this.state;
+      Http.GET('getCollectionProductsByCollectionType', `${viewType}?page=${page}&size=${size}`)
+        .then(({data}) => {
+          console.log('getclients SUCCESS: ', data);
+          this.setState({loading: false})
+          if (data) {
+            this.setState({
+              productList: [...productList, ...data.data],
+              page,
+              hasNext: (data.currentPage + 1) < data.totalPages ? true : false
             })
           }
         })
@@ -529,7 +572,8 @@ class CollectionDetails extends Component {
     render() {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
-        collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption
+        collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption,
+        collectionType, collectionViewType
        } = this.state;
         return (
           <>
@@ -538,94 +582,97 @@ class CollectionDetails extends Component {
                       <div class="">
                           <h4 class="font-26 semibold mb-4 mb-sm-0">Collection of designs</h4>
                       </div>
-                      <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
-                          <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
-                              <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" onClick={() => this.setState({showAddMemberModal: !showAddMemberModal})}>
-                                      <g id="Group_22785" data-name="Group 22785" transform="translate(-1471 -119)">
-                                          <circle id="Ellipse_122" data-name="Ellipse 122" cx="18.5" cy="18.5" r="18.5" transform="translate(1472 120)" fill="#ebe8e8" stroke="#fff" stroke-width="2"/>
-                                          <text id="_" data-name="+" transform="translate(1484 148)" fill="#21242b" font-size="24" font-family="OpenSans-Semibold, Open Sans" font-weight="600"><tspan x="0" y="0">+</tspan></text>
-                                      </g>
-                                  </svg>
-                              </div>
+                      {
+                        !collectionType && !collectionViewType ?
+                        <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
+                            <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
+                                <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" onClick={() => this.setState({showAddMemberModal: !showAddMemberModal})}>
+                                        <g id="Group_22785" data-name="Group 22785" transform="translate(-1471 -119)">
+                                            <circle id="Ellipse_122" data-name="Ellipse 122" cx="18.5" cy="18.5" r="18.5" transform="translate(1472 120)" fill="#ebe8e8" stroke="#fff" stroke-width="2"/>
+                                            <text id="_" data-name="+" transform="translate(1484 148)" fill="#21242b" font-size="24" font-family="OpenSans-Semibold, Open Sans" font-weight="600"><tspan x="0" y="0">+</tspan></text>
+                                        </g>
+                                    </svg>
+                                </div>
 
-                              <div class={`add-people-popup shadow ${showAddMemberModal ? `show` : ``}`}>
-                                  <div class="close-add-people mb-3 d-block d-sm-none">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941">
-                                          <g id="Group_22803" data-name="Group 22803" transform="translate(2489.29 -478.941)">
-                                              <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-2487.875 480.355) rotate(45)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
-                                              <line id="Line_154" data-name="Line 154" x2="25.615" transform="translate(-2469.763 480.355) rotate(135)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
-                                          </g>
-                                      </svg>
-                                  </div>
+                                <div class={`add-people-popup shadow ${showAddMemberModal ? `show` : ``}`}>
+                                    <div class="close-add-people mb-3 d-block d-sm-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941">
+                                            <g id="Group_22803" data-name="Group 22803" transform="translate(2489.29 -478.941)">
+                                                <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-2487.875 480.355) rotate(45)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
+                                                <line id="Line_154" data-name="Line 154" x2="25.615" transform="translate(-2469.763 480.355) rotate(135)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
 
-                                 <div class="form-group position-relative">
-                                     <label class="title">Add people</label>
-                                     <input type="text" placeholder="demo@gamil.com" name="searchUserText" value={searchUserText} onChange={this.onChange}/>
-                                     <div class="people-suggestions">
-                                     {
-                                       searchUserSuggestions.map((user, i) => {
-                                         return (
-                                           <div class="item d-flex" key={i} onClick={async() => {
-                                             await this.addUserToCollection(user.id);
-                                             this.setState({searchUserText: '', searchUserSuggestions: []})
-                                           }}>
-                                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                   <g id="Group_22796" data-name="Group 22796" transform="translate(-18733 -6319)">
-                                                       <circle id="Ellipse_171" data-name="Ellipse 171" cx="12" cy="12" r="12" transform="translate(18733 6319)" fill="#fff"/>
-                                                       <path id="Icon_awesome-user" data-name="Icon awesome-user" d="M6.186,7.07A3.535,3.535,0,1,0,2.651,3.535,3.535,3.535,0,0,0,6.186,7.07Zm2.475.884H8.2a4.808,4.808,0,0,1-4.027,0H3.712A3.713,3.713,0,0,0,0,11.666v1.149A1.326,1.326,0,0,0,1.326,14.14h9.721a1.326,1.326,0,0,0,1.326-1.326V11.666A3.713,3.713,0,0,0,8.661,7.954Z" transform="translate(18739 6323.8)" fill="#aeaeae"/>
-                                                   </g>
-                                               </svg>
-                                               {user.email}
-                                           </div>
-                                         )
-                                       })
-                                     }
-                                     </div>
-                                 </div>
-                                 {
-                                   this.formatUserTypeList()
-                                 }
-                              </div>
-                              {
-                                collection && collection.userResponseList ?
-                                collection.userResponseList.map((user, i) => {
-                                  if (user.profilePicDocument && user.profilePicDocument.docUrl) {
+                                   <div class="form-group position-relative">
+                                       <label class="title">Add people</label>
+                                       <input type="text" placeholder="demo@gamil.com" name="searchUserText" value={searchUserText} onChange={this.onChange}/>
+                                       <div class="people-suggestions">
+                                       {
+                                         searchUserSuggestions.map((user, i) => {
+                                           return (
+                                             <div class="item d-flex" key={i} onClick={async() => {
+                                               await this.addUserToCollection(user.id);
+                                               this.setState({searchUserText: '', searchUserSuggestions: []})
+                                             }}>
+                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                     <g id="Group_22796" data-name="Group 22796" transform="translate(-18733 -6319)">
+                                                         <circle id="Ellipse_171" data-name="Ellipse 171" cx="12" cy="12" r="12" transform="translate(18733 6319)" fill="#fff"/>
+                                                         <path id="Icon_awesome-user" data-name="Icon awesome-user" d="M6.186,7.07A3.535,3.535,0,1,0,2.651,3.535,3.535,3.535,0,0,0,6.186,7.07Zm2.475.884H8.2a4.808,4.808,0,0,1-4.027,0H3.712A3.713,3.713,0,0,0,0,11.666v1.149A1.326,1.326,0,0,0,1.326,14.14h9.721a1.326,1.326,0,0,0,1.326-1.326V11.666A3.713,3.713,0,0,0,8.661,7.954Z" transform="translate(18739 6323.8)" fill="#aeaeae"/>
+                                                     </g>
+                                                 </svg>
+                                                 {user.email}
+                                             </div>
+                                           )
+                                         })
+                                       }
+                                       </div>
+                                   </div>
+                                   {
+                                     this.formatUserTypeList()
+                                   }
+                                </div>
+                                {
+                                  collection && collection.userResponseList ?
+                                  collection.userResponseList.map((user, i) => {
+                                    if (user.profilePicDocument && user.profilePicDocument.docUrl) {
+                                      return(
+                                        <img src={user.profilePicDocument.docUrl} alt=""/>
+                                      )
+                                    }
                                     return(
-                                      <img src={user.profilePicDocument.docUrl} alt=""/>
+                                      <img src={require('../../assets/images/pro_pic_default.svg')} alt=""/>
                                     )
-                                  }
-                                  return(
-                                    <img src={require('../../assets/images/pro_pic_default.svg')} alt=""/>
-                                  )
-                                }) : <></>
-                              }
+                                  }) : <></>
+                                }
 
-                          </div>
+                            </div>
 
-                          <div class="d-flex mt-4 mt-sm-0">
-                              <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
+                            <div class="d-flex mt-4 mt-sm-0">
+                                <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
 
-                              {/*<div class="option">
-                                  <div class="dropdown">
-                                      <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
-                                              <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
-                                                  <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                                  <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                                  <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                              </g>
-                                          </svg>
-                                          <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
-                                              <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
-                                              <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
-                                          </ul>
-                                      </button>
-                                  </div>
-                              </div>*/}
-                          </div>
+                                {/*<div class="option">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
+                                                <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
+                                                    <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                                                    <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                                                    <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                                                </g>
+                                            </svg>
+                                            <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
+                                                <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
+                                                <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
+                                            </ul>
+                                        </button>
+                                    </div>
+                                </div>*/}
+                            </div>
 
-                      </div>
+                        </div> : <></>
+                      }
                   </div>
 
                   <div class="add-more-designs">

@@ -201,7 +201,7 @@ class CollectionList extends Component {
                         <div
                           class="collection-type-item" key={i}
                           onClick={() => {
-                            //this.props.history.push('/collection/details/' + collection.id)
+                            this.props.history.push('/collection/details/private-collection?viewType=' + collection.collectionViewType)
                           }}>
                             <div class="product-img-container">
                                 <div class="prev-img">

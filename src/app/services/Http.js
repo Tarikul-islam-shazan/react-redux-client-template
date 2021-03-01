@@ -87,6 +87,7 @@ const routes = {
     getUserCollectionList: `${BASE_URL}/collection/search/user/`,
     getCollectionDetails: `${BASE_URL}/collection/`,
     getCollectionProducts: `${BASE_URL}/collection/products/`,
+    getCollectionProductsByCollectionType: `${BASE_URL}/collection/products/collection-type/`,
     getUsersByTypes: `${BASE_URL}/user/by-user-types`,
     shareCollection: `${BASE_URL}/collection/share`,
     getFixedCollection: `${BASE_URL}/collection/fixed-collection`,
