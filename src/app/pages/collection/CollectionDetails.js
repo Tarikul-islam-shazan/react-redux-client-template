@@ -46,7 +46,8 @@ class CollectionDetails extends Component {
           collectionList: [],
           collectionName: '',
           collectionNameError: '',
-          showAddCollectionPopup: false
+          showAddCollectionPopup: false,
+          showCollectionAddOption: false
         };
     }
 
@@ -98,6 +99,7 @@ class CollectionDetails extends Component {
       await this.getCollectionProducts(0);
       await this.myProducts();
       await this.getUsersByTypes();
+      await this.fetchCollectionList();
     }
 
     getCollectionDetails = ( collectionId ) => {
@@ -150,7 +152,7 @@ class CollectionDetails extends Component {
           this.setState({myDesignLoading: false});
           if(data){
             this.setState({
-              myDesignList: [...myDesignList, ...data],
+              myDesignList: page === 0 ? data : [...myDesignList, ...data],
               page,
               myDesignHasNext: data.length === myDesignSize ? true : false
             });
@@ -180,6 +182,23 @@ class CollectionDetails extends Component {
             console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             toastError("Something went wrong! Please try again.");
+        });
+    }
+
+    fetchCollectionList = () => {
+      let userInfo = localStorage.getItem('userInfo');
+      if (userInfo) {
+        userInfo = JSON.parse(userInfo);
+      } else {
+        userInfo = {};
+      }
+      Http.GET('getUserCollectionList', userInfo.id)
+        .then(({data}) => {
+          if (data.data) {
+            this.setState({collectionList: data.data});
+          }
+        })
+        .catch(({response}) => {
         });
     }
 
@@ -324,16 +343,19 @@ class CollectionDetails extends Component {
       this.updateProductCard();
     }
 
-    addToCollection = (productIds) => {
+    addToCollection = (product) => {
       let collectionId = this.props.match.params.id;
 
       let body = {
         id: collectionId,
-        productIds
+        productIds: [product.id]
       };
       Http.POST('addProductToCollection', body)
         .then(({data}) => {
-          if (data) {
+          if (data.success) {
+            this.setState({
+              productList: [product, ...this.state.productList]
+            })
           }
         })
         .catch(({response}) => {
@@ -448,10 +470,66 @@ class CollectionDetails extends Component {
         });
     }
 
+    createNewCollection = () => {
+      let {collectionName} = this.state;
+      if (!collectionName) {
+        this.setState({
+          collectionNameError: 'Collection name required'
+        })
+        return;
+      } else {
+        this.setState({
+          collectionNameError: ''
+        })
+      }
+      let body = {
+        name: collectionName,
+        privacy: 'ONLY_ME',
+        viewType: 'PRODUCT_LIST'
+      };
+      Http.POST('addCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.addToExistingCollection(data.id);
+            // this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+
+    }
+
+    addToExistingCollection = (collectionId) => {
+      let body = {
+        id: collectionId,
+        productIds: this.props.selectedProductIds
+      };
+      Http.POST('addProductToCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.props._storeData('selectedProductIds', []);
+            this.updateProductCard();
+            this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+    }
+
     render() {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
-        collectionList, collectionName, collectionNameError, showAddCollectionPopup
+        collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption
        } = this.state;
         return (
           <>
@@ -528,7 +606,7 @@ class CollectionDetails extends Component {
                           <div class="d-flex mt-4 mt-sm-0">
                               <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
 
-                              <div class="option">
+                              {/*<div class="option">
                                   <div class="dropdown">
                                       <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
@@ -544,7 +622,7 @@ class CollectionDetails extends Component {
                                           </ul>
                                       </button>
                                   </div>
-                              </div>
+                              </div>*/}
                           </div>
 
                       </div>
@@ -602,6 +680,7 @@ class CollectionDetails extends Component {
                         <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                             <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
                             <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
+                            <div style={{width: 20}}></div>
                             <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.setState({showAddCollectionPopup: true})}>Add to collection</button>
                         </div>
                         <div className="close">
@@ -619,14 +698,20 @@ class CollectionDetails extends Component {
                     showAddCollectionPopup ?
                     <div class="create-new-collection">
                         <div class="pop-container">
-                            <span class="create-newbutton cursor-pointer">+ Create new collection</span>
-                            <div class="create-new d-flex">
-                                <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
-                                <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
-                            </div>
+                            <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: !showCollectionAddOption})}>+ Create new collection</span>
                             {
-                              collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                              showCollectionAddOption ?
+                              <>
+                                <div class="create-new d-flex">
+                                    <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
+                                    <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
+                                </div>
+                                {
+                                  collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                                }
+                              </> : <></>
                             }
+
                             {
                               collectionList.length ?
                               <div class="all-collection">
