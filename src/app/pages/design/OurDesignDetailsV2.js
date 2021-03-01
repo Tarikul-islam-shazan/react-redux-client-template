@@ -663,6 +663,7 @@ class OurDesignDetails extends Component {
                     <div className="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
                         <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
+                        <div style={{width: 20}}></div>
                     </div>
                     <div className="close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">

@@ -22,6 +22,7 @@ class CollectionList extends Component {
         super(props);
         this.state = {
           collectionList: [],
+          fixedCollections: [],
           page: 0,
           size: 15,
           loading:false,
@@ -59,12 +60,31 @@ class CollectionList extends Component {
 
     componentDidMount = async() => {
       window.addEventListener("scroll", this.handleScroll);
+      this.getFixedCollections();
       await this.renderList(0);
       // await this.setData();
     }
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
+    }
+
+    getFixedCollections = async() => {
+      await Http.GET('getFixedCollection')
+        .then(({data}) => {
+          console.log('PRODUCT LIST SUCCESS: ', data);
+          this.setState({loading: false});
+          if(data){
+            this.setState({
+              fixedCollections: data
+            });
+          }
+        })
+        .catch(response => {
+            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            toastError("Something went wrong! Please try again.");
+        });
     }
 
     renderList = ( page = 0 , merge = true ) => {
@@ -150,7 +170,7 @@ class CollectionList extends Component {
     }
 
     render() {
-      let { name, collectionList } = this.state;
+      let { name, collectionList, fixedCollections } = this.state;
         return (
 
               <div class="explore-design collection-list">
@@ -169,53 +189,34 @@ class CollectionList extends Component {
                   </div>
 
 
-                  {/*<h4 class="mb-4 font-weight-normal">Designer’s Choice</h4>
+                  <h4 class="mb-4 font-weight-normal">Designer’s Choice</h4>
                   <div class="collection-type-container mb-5">
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="collection-type-item">
-                          <div class="product-img-container">
-                              <div class="prev-img">
-                                  <img src={require('../../assets/images/c1.png')} alt=""/>
-                              </div>
-                              <div class="prev-img-thumb">
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                                  <img src={require('../../assets/images/c2.jpg')} alt=""/>
-                              </div>
-                          </div>
-                      </div>
-                  </div>*/}
+                  {
+                    fixedCollections.map((collection, i) => {
+                      let docs = collection.documentResponseList && collection.documentResponseList.length ? collection.documentResponseList : [];
+                      let img1 = docs.length > 0 ? docs[0].docUrl : '';
+                      let img2 = docs.length > 1 ? docs[1].docUrl : '';
+                      let img3 = docs.length > 2 ? docs[2].docUrl : '';
+                      return(
+                        <div
+                          class="collection-type-item" key={i}
+                          onClick={() => {
+                            //this.props.history.push('/collection/details/' + collection.id)
+                          }}>
+                            <div class="product-img-container">
+                                <div class="prev-img">
+                                    <img src={img1 ? img1 : require('../../assets/images/default_product.svg')} alt=""/>
+                                </div>
+                                <div class="prev-img-thumb">
+                                    <img src={img2 ? img2 : require('../../assets/images/default_product.svg')} alt=""/>
+                                    <img src={img3 ? img3 : require('../../assets/images/default_product.svg')} alt=""/>
+                                </div>
+                            </div>
+                        </div>
+                      )
+                    })
+                  }
+                  </div>
 
                   <h4 class="mb-4 font-weight-normal">Custom collections</h4>
                   <div class="collection-type-container">

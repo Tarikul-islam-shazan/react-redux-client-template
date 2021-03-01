@@ -45,7 +45,7 @@ export const ModalMyProductCard = ({product, index, onChange, buttonAction, butt
                         <h5 className="font-16 color-333">{product.turnAroundTime} Days</h5>
                     </div>
                 </div>
-                <button className="btn-border mt-4" onClick={() => buttonAction([product.id])}>{buttonTitle}</button>
+                <button className="btn-border mt-4" onClick={() => buttonAction(product)}>{buttonTitle}</button>
             </div>
         </div>
     </div>
