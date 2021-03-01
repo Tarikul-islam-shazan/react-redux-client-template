@@ -7628,7 +7628,7 @@ template {
     padding: 7px; }
 
   .custom-chekbox .form-group input:checked + label:after {
-    top: 3px;
+    top: 7px;
     left: 6px;
     height: 10px; }
 
