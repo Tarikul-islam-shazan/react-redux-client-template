@@ -186,12 +186,12 @@ ul.existing-item{
         margin-left: 20px;
       }
     } @media (max-width: 767px) {
-    flex-basis: calc((100%));
-    margin-bottom: 20px;
-    &:nth-child(even){
-      margin-left: 0px;
+      flex-basis: calc((100%));
+      margin-bottom: 20px;
+      &:nth-child(even){
+        margin-left: 0px;
+      }
     }
-  }
   }
   @media (max-width: 991px) {
     flex-wrap: wrap;
@@ -373,7 +373,7 @@ ul.existing-item{
   }
 }
 table.manage-project-table.collection-list-table{
-  thead th:last-child {
+   thead th:last-child {
     @media (max-width: 1440px) {
       width: 145px;
     }

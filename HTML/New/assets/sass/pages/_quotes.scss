@@ -89,6 +89,17 @@
       padding: 10px !important;
       line-height: 12px;
     }
+    @media (max-width: 767px) {
+      width: 80px;
+      .custom-chekbox .form-group label::before {
+        padding: 10px;
+      }
+      .custom-chekbox .form-group input:checked + label::after {
+        top: 2px;
+        left: 9px;
+        height: 12px;
+      }
+    }
   }
   @media (max-width: 1024px) {
     margin-top: 40px !important;
