@@ -417,3 +417,25 @@ table.manage-project-table.collection-list-table{
     }
   }
 }
+
+//Collection Settigs
+.bar-container{
+  .bar{
+    margin-right: 30px;
+    max-width: 416px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #EEEEEE;
+    height: calc(100vh - 96px);
+    .item{
+      box-shadow: 3px 2px 10px -4px rgba(0, 0, 0, 0.12);
+      padding: 18px 25px;
+      border-left: 4px solid #472F91;
+      span{
+        color: #EE761F;
+      }
+    }
+  }
+}
