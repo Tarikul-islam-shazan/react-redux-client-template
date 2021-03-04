@@ -38,7 +38,7 @@ class Sidebar extends Component {
       this.setState({
         permissions: userInfo.permissions ? userInfo.permissions : []
       })
-      // this.connect(userInfo)
+      this.connect(userInfo)
       this.initiateHotjarGA()
     }
 
