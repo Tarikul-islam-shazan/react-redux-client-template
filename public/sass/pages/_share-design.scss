@@ -601,5 +601,25 @@ ul.p-img-container {
     }
   }
 }
+.min-max-table{
+  width: 100% !important;
+  tr{
+    td{
+      padding: 10px !important;
+    }
+  }
+  @media (max-width: 991px) {
+    max-width: 648px !important
+  }
 
+  @media (max-width: 575px) {
+    max-width: 390px !important;
+  }
+  @media (max-width: 375px) {
+    max-width: 335px !important;
+  }
+  @media (max-width: 320px) {
+    max-width: 300px !important;
+  }
+}
 

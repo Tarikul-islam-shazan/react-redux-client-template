@@ -6340,6 +6340,23 @@ ul.p-img-container {
         ul.p-img-container li:not(:first-child) {
           display: block; } }
 
+.min-max-table {
+  width: 100% !important; }
+  .min-max-table tr td {
+    padding: 10px !important; }
+  @media (max-width: 991px) {
+    .min-max-table {
+      max-width: 648px !important; } }
+  @media (max-width: 575px) {
+    .min-max-table {
+      max-width: 390px !important; } }
+  @media (max-width: 375px) {
+    .min-max-table {
+      max-width: 335px !important; } }
+  @media (max-width: 320px) {
+    .min-max-table {
+      max-width: 300px !important; } }
+
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
