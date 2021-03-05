@@ -49,6 +49,8 @@ import InvoiceList from './pages/invoice/InvoiceList';
 import InvoiceDetails from './pages/invoice/InvoiceDetails';
 import PayInvoice from './pages/invoice/PayInvoice';
 
+import ShareDesign from './pages/design/ShareDesign';
+
 const AuthRoute = ({component: Component, ...rest}) => {
     let token = getToken()
     return token==null ? (
@@ -124,6 +126,9 @@ class Root extends Component {
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
+
+                  <PublicRoute exact path="/share-design" component={ ShareDesign }/>
+
                   {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
                   <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>

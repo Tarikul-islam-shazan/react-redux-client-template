@@ -82,7 +82,9 @@ const routes = {
     getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
     updatePaymentStatus: `${BASE_URL}/payment/confirm`,
 
-    invoiceList: `${BASE_URL}/invoice/user/`
+    invoiceList: `${BASE_URL}/invoice/user/`,
+
+    uploadDocument: `${BASE_URL}/doc/add`
 };
 
 // Axios request interceptor
@@ -202,7 +204,21 @@ const Http = {
             responseType: 'blob', // Force to receive data in a Blob Format
             header: JSON.parse(localStorage.getItem('token'))
         });
-    }
+    },
+    UPLOAD_WITH_PROGRESS: (key, params, id = '', progressCallback) => {
+        // if(key!=='signup' || key!=='login'){
+          // console.log("token header called",key);
+        // updateTokenInHeader();
+        // }
+        // console.log("from post",routes[key] + id, params)
+        return axios.post(routes[key] + id, params, {
+          headers,
+          onUploadProgress: data => {
+            //Set the progress value to show the progress bar
+            progressCallback(data)
+          }
+        });
+    },
 };
 
 export default Http;
