@@ -55,20 +55,20 @@ class ShareDesign extends Component {
           this.setState({
             productDesignDoc: data
           })
-          // Http.UPLOAD_WITH_PROGRESS('uploadDocument', data, '', this.showUploadProgress)
-          // .then(({data}) => {
-          //   console.log('uploadDocument POST SUCCESS: ', data);
-          // })
-          // .catch(({response}) => {
-          //     console.log('uploadDocument ERROR: ', JSON.stringify(response));
-          // });
-          axios.post('http://testapi-v2.nitex.com/doc/add', data, {
-            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-            onUploadProgress: data => {
-              //Set the progress value to show the progress bar
-              this.showUploadProgress(data)
-            }
+          Http.UPLOAD_WITH_PROGRESS('uploadDocument', data, '', this.showUploadProgress)
+          .then(({data}) => {
+            console.log('uploadDocument POST SUCCESS: ', data);
           })
+          .catch(({response}) => {
+              console.log('uploadDocument ERROR: ', JSON.stringify(response));
+          });
+          // axios.post('http://testapi-v2.nitex.com/doc/add', data, {
+          //   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          //   onUploadProgress: data => {
+          //     //Set the progress value to show the progress bar
+          //     this.showUploadProgress(data)
+          //   }
+          // })
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);
@@ -77,6 +77,7 @@ class ShareDesign extends Component {
 
     showUploadProgress = (data) => {
       console.log("data from showUploadProgress", data)
+      console.log('uploadDocument POST SUCCESS: ', (data.loaded / data.total) * 100);
     }
 
     render() {
