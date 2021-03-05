@@ -5946,6 +5946,8 @@ ul.attachment li {
       .pick-color input {
         padding-left: 40px !important;
         height: 44px; } }
+  .pick-color.pick-color-edit .color-picker-popup {
+    bottom: 32px; }
 
 .desgin-name-header {
   margin-bottom: 32px; }
@@ -6357,6 +6359,38 @@ ul.p-img-container {
     .min-max-table {
       max-width: 300px !important; } }
 
+.color-picker-popup {
+  position: absolute;
+  background: #fff;
+  z-index: 99;
+  padding: 15px;
+  width: 280px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+  bottom: 52px;
+  border-radius: 5px;
+  left: 0; }
+
+.uploader {
+  position: relative; }
+
+#loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #EE761F;
+  border-radius: 50%;
+  border-top-color: #452C8E;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  background: #fff;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1); }
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg); } }
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
