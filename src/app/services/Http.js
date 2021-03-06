@@ -84,7 +84,8 @@ const routes = {
 
     invoiceList: `${BASE_URL}/invoice/user/`,
 
-    uploadDocument: `${BASE_URL}/doc/add`
+    uploadDocument: `${BASE_URL}/doc/add`,
+    shareDesign: `${BASE_URL}/product/share-design`
 };
 
 // Axios request interceptor

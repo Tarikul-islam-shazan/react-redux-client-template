@@ -28,60 +28,148 @@ class ShareDesign extends Component {
         	productTypeId: '',
         	tableJson: null,
         	note: '',
-        	colors:[],
+        	colors:[{
+            hexCode: '',
+            name: ''
+          }],
         	documentIds:[],
-          productDesignDoc: {}
+          productDesignDoc: {},
+          productTypeList: [],
         };
     }
 
     componentDidMount = async() => {
-      document.title = "Share Design - Nitex";
+        document.title = "Share Design - Nitex";
+        this.getProductTypes()
+    }
+
+    getProductTypes = async() => {
+        await Http.GET('getProductTypeWithGroup')
+        .then(({data}) => {
+          let arr = [];
+          if(data.length>0){
+            for(let i = 0 ; i < data.length ; i++){
+              let obj = {
+                groupId : 0,
+                groupName : '',
+                types : []
+              };
+              if(i==0){
+                obj.groupId = data[i].productGroup.id;
+                obj.groupName = data[i].productGroup.name;
+                obj.types[0] = data[i];
+                arr[0] = obj;
+                continue;
+              }
+              let flag = true;
+              for(let j = 0 ; j < arr.length ; j++){
+                if(data[i].productGroup.id == arr[j].groupId){
+                  arr[j].types[arr[j].types.length] = data[i];
+                  flag = false;
+                  break;
+                }
+              }
+              if(flag){
+                obj.groupId = data[i].productGroup.id;
+                obj.groupName = data[i].productGroup.name;
+                obj.types[0] = data[i];
+                arr[arr.length] = obj;
+              }
+            }
+            this.setState({
+              productTypeList : arr
+            })
+          }
+          loadjs(['/js/script.js']);
+        })
+        .catch(response => {
+        });
+    }
+
+    onChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value
+        })
     }
 
     onFileUpload = (e, docType) => {
-      let file = e.target.files[0];
-      let key = e.target.name;
-      let data = {
-        "name": file.name,
-  			"docMimeType" : file.type,
-  			"documentType" : docType,
-  			"base64Str":""
-      }
-      // console.log('data',data)
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-          data.base64Str = reader.result;
-          this.setState({
-            productDesignDoc: data
-          })
-          Http.UPLOAD_WITH_PROGRESS('uploadDocument', data, '', this.showUploadProgress)
-          .then(({data}) => {
-            console.log('uploadDocument POST SUCCESS: ', data);
-          })
-          .catch(({response}) => {
-              console.log('uploadDocument ERROR: ', JSON.stringify(response));
-          });
-          // axios.post('http://testapi-v2.nitex.com/doc/add', data, {
-          //   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-          //   onUploadProgress: data => {
-          //     //Set the progress value to show the progress bar
-          //     this.showUploadProgress(data)
-          //   }
-          // })
-      };
-      reader.onerror = function (error) {
-        console.log('Error: ', error);
-      }
+        let file = e.target.files[0];
+        let key = e.target.name;
+        let data = {
+          "name": file.name,
+    			"docMimeType" : file.type,
+    			"documentType" : docType,
+    			"base64Str":""
+        }
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            data.base64Str = reader.result;
+            this.setState({
+              productDesignDoc: data
+            })
+            Http.UPLOAD_WITH_PROGRESS('uploadDocument', data, '', this.showUploadProgress)
+            .then(({data}) => {
+              console.log('uploadDocument POST SUCCESS: ', data);
+            })
+            .catch(({response}) => {
+                console.log('uploadDocument ERROR: ', JSON.stringify(response));
+            });
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        }
     }
 
     showUploadProgress = (data) => {
-      console.log("data from showUploadProgress", data)
-      console.log('uploadDocument POST SUCCESS: ', (data.loaded / data.total) * 100);
+        console.log("data from showUploadProgress", data)
+        console.log('uploadDocument POST SUCCESS: ', (data.loaded / data.total) * 100);
+    }
+
+    addColor = () => {
+        let {colors} = this.state;
+        colors.push({
+          hexCode: '',
+          name: ''
+        })
+        this.setState({colors});
+    }
+
+    removeColor = (index) => {
+        let {colors} = this.state;
+        colors = colors.filter((color, i) => i != index);
+        this.setState({colors});
+    }
+
+    submit = () => {
+        let {
+          name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc
+        } = this.state;
+        let body = {
+          	name,
+          	fabricType,
+          	fabricTypeId: 2, //need to make dynamic
+          	fabricDetails,
+          	productTypeId,
+          	// tableJson, //need details
+          	note,
+          	colors,
+          	// documentIds:[]
+        }
+        Http.POST('shareDesign', body)
+        .then(({data}) => {
+          console.log('shareDesign POST SUCCESS: ', data);
+        })
+        .catch(({response}) => {
+            console.log('shareDesign ERROR: ', JSON.stringify(response));
+        });
     }
 
     render() {
-        let {name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc} = this.state;
+        let {
+          name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc,
+          productTypeList, typeError
+        } = this.state;
         return (
           <>
             <div>
@@ -116,36 +204,44 @@ class ShareDesign extends Component {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="">Design name*</label>
-                                        <input type="text" placeholder="Enter design name" class="bg-gray-light border-0"/>
+                                        <input type="text" placeholder="Enter design name" class="bg-gray-light border-0" name="name" value={name} onChange={this.onChange}/>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="">Product type*</label>
-                                        <select class="w-100 bg-gray-light border-0">
-                                            <option>Select product types </option>
-                                            <option value="2">2</option>
-                                            <option value="3" disabled>3</option>
-                                            <option value="4">4</option>
+                                        <select className="w-100 bg-gray-light border-0" name="productTypeId" value={productTypeId} onClick={this.onChange}>
+                                            <option value="">Select product type</option>
+                                            {
+                                              productTypeList.map((item,i) => {
+                                                let res = [];
+                                                res.push(<option key={i} value="" disabled>{item.groupName}</option>)
+                                                item.types.map((item2,j)=>{
+                                                  res.push(
+                                                    <option key={j+1000} value={item2.id}>{item2.name}</option>
+                                                  )
+                                                })
+                                                return res;
+                                              })
+                                            }
+
                                         </select>
+                                        {
+                                          typeError ? <span className="error">{typeError}</span> : ''
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="">Fabric type</label>
-                                        <select class="w-100 bg-gray-light border-0">
-                                            <option>Select fabric types </option>
-                                            <option value="2">2</option>
-                                            <option value="3" disabled>3</option>
-                                            <option value="4">4</option>
-                                        </select>
+                                        <input type="text" placeholder="Fabric type" class="bg-gray-light border-0" name="fabricType" value={fabricType} onChange={this.onChange}/>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="">Fabric details</label>
-                                        <input type="text" placeholder="Enter fabric details" class="bg-gray-light border-0"/>
+                                        <input type="text" placeholder="Enter fabric details" class="bg-gray-light border-0" name="fabricDetails" value={fabricDetails} onChange={this.onChange}/>
                                     </div>
                                 </div>
 
@@ -157,12 +253,18 @@ class ShareDesign extends Component {
                                                     <th><label>Color</label></th>
                                                     <th><label>Color name</label></th>
                                                     <th class="text-right">
-                                                        <span class="brand-color font-18 semibold cursor-pointer">+Add color</span>
+                                                        <span class="brand-color font-18 semibold cursor-pointer" onClick={this.addColor}>+Add color</span>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <ColorRowWithPicker />
+                                            {
+                                              colors.map((item, i) => {
+                                                return(
+                                                  <ColorRowWithPicker item={item} key={i} index={i} data={colors} onChangeColor={this.onChange} remove={this.removeColor} />
+                                                )
+                                              })
+                                            }
                                             </tbody>
                                         </table>
                                     </div>
@@ -171,14 +273,14 @@ class ShareDesign extends Component {
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="">Note</label>
-                                        <textarea name="" id="" rows="4" placeholder="Additional note" class="bg-gray-light border-0"></textarea>
+                                        <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" class="bg-gray-light border-0"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-right">
-                                        <button class="btn-brand m-0 brand-bg-color">Submit</button>
+                                        <button class="btn-brand m-0 brand-bg-color" onClick={this.submit}>Submit</button>
                                     </div>
                                 </div>
                             </div>
