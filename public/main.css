@@ -5912,13 +5912,13 @@ ul.attachment li {
   padding-bottom: 12px; }
   .pick-color-table tr td:last-child {
     padding-right: 0; }
-  .pick-color-table tr td input {
+  .pick-color-table tr td input.bg-gray-light {
     height: 52px;
     width: 100%;
     text-align: left;
     padding: 15px; }
     @media (max-width: 991px) {
-      .pick-color-table tr td input {
+      .pick-color-table tr td input.bg-gray-light {
         height: 46px !important;
         padding: 10px; } }
 
@@ -5939,11 +5939,11 @@ ul.attachment li {
       .pick-color span {
         width: 25px;
         height: 25px; } }
-  .pick-color input {
+  .pick-color input.bg-gray-light {
     padding-left: 55px !important;
     border: 1px solid #452C8E !important; }
     @media (max-width: 991px) {
-      .pick-color input {
+      .pick-color input.bg-gray-light {
         padding-left: 40px !important;
         height: 44px; } }
   .pick-color.pick-color-edit .color-picker-popup {
@@ -6363,15 +6363,14 @@ ul.p-img-container {
   position: absolute;
   background: #fff;
   z-index: 99;
-  padding: 15px;
-  width: 280px;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
   bottom: 52px;
   border-radius: 5px;
   left: 0; }
 
 .uploader {
   position: relative; }
+  .uploader img {
+    width: 100%; }
 
 #loading-spinner {
   display: inline-block;
