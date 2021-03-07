@@ -50,6 +50,7 @@ import InvoiceDetails from './pages/invoice/InvoiceDetails';
 import PayInvoice from './pages/invoice/PayInvoice';
 
 import ShareDesign from './pages/design/ShareDesign';
+import EditShareDesign from './pages/design/EditShareDesign';
 
 const AuthRoute = ({component: Component, ...rest}) => {
     let token = getToken()
@@ -127,7 +128,8 @@ class Root extends Component {
                   <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
 
-                  <PublicRoute exact path="/share-design" component={ ShareDesign }/>
+                  <PublicRoute exact path="/design/share" component={ ShareDesign }/>
+                  <PublicRoute exact path="/design/edit/:id" component={ EditShareDesign }/>
 
                   {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>

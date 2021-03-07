@@ -85,7 +85,13 @@ const routes = {
     invoiceList: `${BASE_URL}/invoice/user/`,
 
     uploadDocument: `${BASE_URL}/doc/add`,
-    shareDesign: `${BASE_URL}/product/share-design`
+    uploadDocumentInProduct: `${BASE_URL}/product/doc/add/`,
+    removeProductDocument: `${BASE_URL}/product/doc/`,
+    shareDesign: `${BASE_URL}/product/share-design`,
+    getShareDesignDetails: `${BASE_URL}/product/share-design/`,
+    updateDesignDetails: `${BASE_URL}/product/color-and-fabrication/`,
+    updateSizeTable: `${BASE_URL}/product/size/`,
+    getDesignImages: `${BASE_URL}/product/doc/`
 };
 
 // Axios request interceptor
@@ -178,9 +184,9 @@ const Http = {
         // console.log("from post",params)
         return axios.post(routes[key] + id, params, {'Content-Type': 'text/html', 'Accept': 'application/json'});
     },
-    PUT: (key, params) => {
+    PUT: (key, params, id = '') => {
         // updateTokenInHeader();
-        return axios.put(routes[key], params, headers);
+        return axios.put(routes[key] + id, params, headers);
     },
     DELETE: (key, data, id = '') => {
         // updateTokenInHeader();
@@ -216,7 +222,7 @@ const Http = {
           headers,
           onUploadProgress: data => {
             //Set the progress value to show the progress bar
-            progressCallback(data)
+            progressCallback(data, params)
           }
         });
     },

@@ -111,6 +111,9 @@ class ShareDesign extends Component {
             Http.UPLOAD_WITH_PROGRESS('uploadDocument', data, '', this.showUploadProgress)
             .then(({data}) => {
               console.log('uploadDocument POST SUCCESS: ', data);
+              this.setState({
+                documentIds: [data.id]
+              })
             })
             .catch(({response}) => {
                 console.log('uploadDocument ERROR: ', JSON.stringify(response));
@@ -121,9 +124,9 @@ class ShareDesign extends Component {
         }
     }
 
-    showUploadProgress = (data) => {
-        console.log("data from showUploadProgress", data)
-        console.log('uploadDocument POST SUCCESS: ', (data.loaded / data.total) * 100);
+    showUploadProgress = (data, doc) => {
+        // console.log("data from showUploadProgress", data)
+        console.log('uploadDocument progress amount: ', (data.loaded / data.total) * 100, doc);
     }
 
     addColor = () => {
@@ -148,17 +151,18 @@ class ShareDesign extends Component {
         let body = {
           	name,
           	fabricType,
-          	fabricTypeId: 2, //need to make dynamic
+          	// fabricTypeId: 2, //need to make dynamic
           	fabricDetails,
           	productTypeId,
           	// tableJson, //need details
           	note,
           	colors,
-          	// documentIds:[]
+          	documentIds
         }
         Http.POST('shareDesign', body)
         .then(({data}) => {
           console.log('shareDesign POST SUCCESS: ', data);
+          this.props.history.push('/design/edit/' + data.id)
         })
         .catch(({response}) => {
             console.log('shareDesign ERROR: ', JSON.stringify(response));
@@ -196,13 +200,13 @@ class ShareDesign extends Component {
                                                               <path id="Path_27710" data-name="Path 27710"
                                                                     d="M2135.273,2351v38.108"
                                                                     transform="translate(-1967.718 -2138.497)"
-                                                                    fill="none" stroke="#fff" stroke-linecap="round"
-                                                                    stroke-width="4"></path>
+                                                                    fill="none" stroke="#fff" strokeLinecap="round"
+                                                                    strokeWidth="4"></path>
                                                               <path id="Path_27711" data-name="Path 27711"
                                                                     d="M0,0V38.109"
                                                                     transform="translate(186.609 231.555) rotate(90)"
-                                                                    fill="none" stroke="#fff" stroke-linecap="round"
-                                                                    stroke-width="4"></path>
+                                                                    fill="none" stroke="#fff" strokeLinecap="round"
+                                                                    strokeWidth="4"></path>
                                                           </g>
                                                       </svg>
                                                   </div>
