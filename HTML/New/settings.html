@@ -177,85 +177,40 @@
         <div class="wraper container-fluid dashboard-container">
 
             <!-- Page Content  -->
-            <div class="email-preferences">
-                <div class="stepper">
-                    <div class="save-setting d-flex align-items-center mb-4">
-                        <h4>Project emails</h4>
-                        <button class="btn-brand">Save</button>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="custom-radio">
-                                <div class="form-group"><input type="radio" id="card" name="emailSettings" value="NONE"><label for="card">Don't send any emails</label></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stepper">
+                        <div class="save-setting d-flex align-items-center mb-5">
+                            <h3>Settings</h3>
+                            <button class="btn-brand">Save</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Default MOQ</label>
+                                    <input type="text"  class="w-100 bg-gray-light border-0">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="custom-radio">
-                                <div class="form-group"><input type="radio" id="card1" name="emailSettings" value="LIMITED"><label for="card1">Email important updates</label></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Turnaround time</label>
+                                    <input type="text"  class="w-100 bg-gray-light border-0">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="custom-radio">
-                                <div class="form-group"><input type="radio" id="card2" name="emailSettings" value="ALL" checked=""><label for="card2">Email on all updates</label></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="m-0">FOB</label>
+                                    <span class="text-muted font-14 mb-2 d-inline-block">Explanation text</span>
+                                    <input type="text"   class="w-100 bg-gray-light border-0">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="address-setting">
-                <div class="stepper">
-                    <div class="save-setting d-flex align-items-center mb-4">
-                        <h4>Billing Address</h4>
-                        <button class="btn-brand">Save</button>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group"><label>Full name</label><input type="text" placeholder="Full name" id="billing" name="fullname" class="w-100 bg-gray-light border-0" value="shazid"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group"><label>Address</label><input type="text" placeholder="Address" id="billing" name="address" class="w-100 bg-gray-light border-0" value="shyamoly"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>State/Province</label><input type="text" placeholder="State/Province" id="billing" name="stateOrProvince" class="w-100 bg-gray-light border-0" value="dhaka"></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>City</label><input type="text" placeholder="City" id="billing" name="city" class="w-100 bg-gray-light border-0" value="dhaka"></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>Postal code</label><input type="text" placeholder="Postal code" id="billing" name="postCode" class="w-100 bg-gray-light border-0" value="1207"></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>Phone number</label><input type="text" placeholder="Phone number" id="billing" name="phoneNo" class="w-100 bg-gray-light border-0" value="01758339722"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="stepper">
-                    <div class="save-setting d-flex align-items-center mb-4">
-                        <h4>Shipping address</h4>
-                        <button class="btn-brand">Save</button>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group"><label>Full name</label><input type="text" placeholder="Full name" id="shipping" name="fullname" class="w-100 bg-gray-light border-0" value="name ship"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group"><label>Address</label><input type="text" placeholder="Address" id="shipping" name="address" class="w-100 bg-gray-light border-0" value="add ship"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>State/Province</label><input type="text" placeholder="State/Province" id="shipping" name="stateOrProvince" class="w-100 bg-gray-light border-0" value=""></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>City</label><input type="text" placeholder="City" id="shipping" name="city" class="w-100 bg-gray-light border-0" value="citry ship"></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>Postal code</label><input type="text" placeholder="Postal code" id="shipping" name="postCode" class="w-100 bg-gray-light border-0" value="post ship"></div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="form-group"><label>Phone number</label><input type="text" placeholder="Phone number" id="shipping" name="phoneNo" class="w-100 bg-gray-light border-0" value="5655656"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="m-0">CIF</label>
+                                    <span class="text-muted font-14 mb-2 d-inline-block">Explanation text</span>
+                                    <input type="text"  class="w-100 bg-gray-light border-0">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
