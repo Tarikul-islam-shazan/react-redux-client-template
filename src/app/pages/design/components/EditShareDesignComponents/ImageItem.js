@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { addImageSuffix } from '../../../../services/Util';
 
 export const ImageItem = ({doc, remove}) => {
   return (
     <div class="item">
         <div class="p-img">
-            <img src={doc.docUrl} alt=""/>
+            <img src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt=""/>
             <div class="dlt" onClick={() => remove(doc)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                     <g id="Group_11045" data-name="Group 11045" transform="translate(-396 -260)">
