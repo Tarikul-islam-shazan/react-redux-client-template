@@ -64,7 +64,7 @@ export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagNa
           </div>
           <div className="form-group">
               <label>Fabric details</label>
-              <input type="text" className={errors.fabricDetailsError ? 'error2' : ''} placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              <input type="text" className={errors.fabricDetailsError ? 'error2' : ''} placeholder="Enter fabric details" className="bg-gray-light" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
               {
                 errors.fabricDetailsError ? <label className="error">{errors.fabricDetailsError}</label> : <></>
               }

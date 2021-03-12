@@ -6045,7 +6045,7 @@ ul.attachment li {
         position: absolute;
         top: 12px;
         right: 12px;
-        z-index: 999;
+        z-index: 9;
         cursor: pointer; }
     .product-images .item .uploader label[for="drag-upload"] {
       background-size: 70px;
@@ -6100,14 +6100,14 @@ ul.attachment li {
     @media (max-width: 1440px) {
       .product-info .product-type label, .product-info .product-type span {
         font-size: 16px; } }
-  .product-info .product-type input {
+  .product-info .product-type input.bg-gray-light {
     height: 46px;
     background: #F4F5F7 !important;
     border-radius: 5px;
     padding: 10px 12px;
     border: 1px solid #CACDD5 !important; }
     @media (max-width: 1440px) {
-      .product-info .product-type input {
+      .product-info .product-type input.bg-gray-light {
         height: 38px;
         border-radius: 4px;
         padding: 6px 10px; } }
@@ -6131,13 +6131,13 @@ ul.attachment li {
       .product-info .product-type table.pick-color-table .pick-color span {
         width: 14px;
         height: 14px; } }
-  .product-info .product-type table.pick-color-table .pick-color input {
+  .product-info .product-type table.pick-color-table .pick-color input.bg-gray-light {
     padding-left: 36px !important;
     border: 1px solid #CACDD5 !important; }
     @media (max-width: 1440px) {
-      .product-info .product-type table.pick-color-table .pick-color input {
+      .product-info .product-type table.pick-color-table .pick-color input.bg-gray-light {
         padding-left: 27px !important; } }
-  .product-info .product-type table.pick-color-table tbody tr td input {
+  .product-info .product-type table.pick-color-table tbody tr td input.bg-gray-light {
     height: 32px; }
   .product-info .product-type table.pick-color-table tbody tr td .dlt svg {
     width: 20px;
