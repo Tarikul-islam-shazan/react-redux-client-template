@@ -6394,6 +6394,10 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
   border: 1px solid red !important;
   background: #fee !important; }
 
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important; }
+
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
