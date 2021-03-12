@@ -6086,7 +6086,7 @@ ul.attachment li {
         cursor: pointer; }
 
 .product-info .product-type {
-  flex-basis: calc(100% / 5 - 12px);
+  width: 341px;
   background: #F1F1F1;
   padding: 20px;
   position: relative; }
@@ -6136,7 +6136,7 @@ ul.attachment li {
 .product-info .product-notes {
   padding: 30px 0px 30px 20px;
   box-sizing: content-box;
-  flex-basis: calc(100% / 5 - 12px);
+  width: 79%;
   position: relative; }
   @media (max-width: 1024px) {
     .product-info .product-notes {
@@ -6167,6 +6167,8 @@ ul.attachment li {
         border-left: 0; }
     .product-info .product-notes table.measurement-table tbody tr td {
       white-space: nowrap; }
+      .product-info .product-notes table.measurement-table tbody tr td input {
+        background: #f4f5f7; }
     .product-info .product-notes table.measurement-table tbody tr th:last-child, .product-info .product-notes table.measurement-table thead th:last-child {
       border-right: 0; }
     .product-info .product-notes table.measurement-table tbody tr th:first-child, .product-info .product-notes table.measurement-table tbody tr td:first-child {

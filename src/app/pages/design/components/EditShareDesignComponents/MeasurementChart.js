@@ -281,7 +281,7 @@ export class MeasurementChart extends Component {
                         <table className="table table-bordered table-responsive table-striped measurement-chart measurement-table flex-grow-1">
                             <thead>
                                 <tr>
-                                    <th>Size</th>
+                                    <th className="text-center">Size</th>
                                     {
                                       measurementChart.length > 0 ? this.renderHeader(measurementChart[0].measurement) : <></>
                                     }
@@ -334,7 +334,7 @@ export class MeasurementChart extends Component {
           <div class="form-group">
               <label  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="cursor-pointer">
                   Measurement Chart
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188" className="ml-2">
                       <path id="Path_27707" data-name="Path 27707" d="M0,0,6.819,6.774,13.637,0" transform="translate(1.414 1.414)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                   </svg>
               </label>
@@ -370,11 +370,11 @@ export class MeasurementChart extends Component {
                       <table className="table table-bordered table-responsive table-striped measurement-chart measurement-table flex-grow-1">
                           <thead>
                               <tr>
-                                  <th>Size</th>
+                                  <th className="text-center">Size</th>
                                   {
                                     measurementChart.length > 0 ? this.renderEditableHeader(measurementChart[0].measurement) : <></>
                                   }
-                                  <th>Quantity</th>
+                                  <th className="text-center">Quantity</th>
                               </tr>
                           </thead>
                           <DragDropContext onDragEnd={this.handleOnDragEnd}>

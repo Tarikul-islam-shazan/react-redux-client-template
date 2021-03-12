@@ -277,7 +277,7 @@
 }
 .product-info{
   .product-type{
-    flex-basis: calc(100% / 5 - 12px);
+    width: 341px;
     background: #F1F1F1;
     padding: 20px;
     position: relative;
@@ -354,7 +354,7 @@
   .product-notes{
     padding: 30px 0px 30px 20px;
     box-sizing: content-box;
-    flex-basis: calc(100% / 5 - 12px);
+    width: 79%;
     position: relative;
     @media (max-width: 1024px) {
       padding: 0;
@@ -392,6 +392,9 @@
       }
       tbody tr td {
         white-space: nowrap;
+        input{
+          background: #f4f5f7;
+        }
       }
       tbody tr th:last-child, thead th:last-child {
         border-right: 0;
