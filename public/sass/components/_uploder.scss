@@ -105,6 +105,20 @@
       transition: 400ms ease;
     }
   }
+  &.upload-a-file{
+    label{
+      &:before {
+        content: "Upload a file";
+      }
+    }
+  }
+  &.upload-design-image{
+    label{
+      &:before {
+        content: "Upload design image";
+      }
+    }
+  }
 
   .file_names {
     display: block;
