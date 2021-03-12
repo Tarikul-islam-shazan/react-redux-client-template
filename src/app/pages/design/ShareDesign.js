@@ -9,7 +9,7 @@ import loadjs from 'loadjs';
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
-import { _storeData } from "../design/actions";
+import { _storeData, validateShareDesign } from "./actions";
 
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import { MeasurementTable } from './components/MeasurementTable'
@@ -35,6 +35,13 @@ class ShareDesign extends Component {
         	documentIds:[],
           productDesignDoc: {},
           productTypeList: [],
+          errors: {
+              nameError: '',
+            	fabricTypeError: '',
+            	fabricTypeIdError: '',
+            	fabricDetailsError: '',
+            	productTypeIdError: '',
+          }
         };
     }
 
@@ -145,35 +152,29 @@ class ShareDesign extends Component {
     }
 
     submit = () => {
-        let {
-          name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc
-        } = this.state;
-        let body = {
-          	name,
-          	fabricType,
-          	// fabricTypeId: 2, //need to make dynamic
-          	fabricDetails,
-          	productTypeId,
-          	// tableJson, //need details
-          	note,
-          	colors,
-          	documentIds
-        }
-        Http.POST('shareDesign', body)
-        .then(({data}) => {
-          console.log('shareDesign POST SUCCESS: ', data);
-          this.props.history.push('/design/edit/' + data.id)
-        })
-        .catch(({response}) => {
-            console.log('shareDesign ERROR: ', JSON.stringify(response));
+        let validated = validateShareDesign(this.state);
+        this.setState({
+          errors: {...this.state.errors, ...validated.errors},
+          colors: validated.errors.colors ? validated.errors.colors : this.state.colors
         });
+        if (validated.isValid) {
+            Http.POST('shareDesign', validated.reqBody)
+            .then(({data}) => {
+              console.log('shareDesign POST SUCCESS: ', data);
+              this.props.history.push('/design/edit/' + data.id)
+            })
+            .catch(({response}) => {
+                console.log('shareDesign ERROR: ', JSON.stringify(response));
+            });
+        }
     }
 
     render() {
         let {
           name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc,
-          productTypeList, typeError
+          productTypeList
         } = this.state;
+        let {nameError, fabricTypeError, fabricDetailsError, productTypeIdError} = this.state.errors;
         return (
           <>
             <div>
@@ -229,6 +230,9 @@ class ShareDesign extends Component {
                                     <div class="form-group">
                                         <label for="">Design name*</label>
                                         <input type="text" placeholder="Enter design name" class="bg-gray-light border-0" name="name" value={name} onChange={this.onChange}/>
+                                        {
+                                          nameError ? <label className="error">{nameError}</label> : <></>
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -251,7 +255,7 @@ class ShareDesign extends Component {
 
                                         </select>
                                         {
-                                          typeError ? <span className="error">{typeError}</span> : ''
+                                          productTypeIdError ? <label className="error">{productTypeIdError}</label> : ''
                                         }
                                     </div>
                                 </div>
@@ -259,6 +263,9 @@ class ShareDesign extends Component {
                                     <div class="form-group">
                                         <label for="">Fabric type</label>
                                         <input type="text" placeholder="Fabric type" class="bg-gray-light border-0" name="fabricType" value={fabricType} onChange={this.onChange}/>
+                                        {
+                                          fabricTypeError ? <label className="error">{fabricTypeError}</label> : <></>
+                                        }
                                     </div>
                                 </div>
 
@@ -266,6 +273,9 @@ class ShareDesign extends Component {
                                     <div class="form-group">
                                         <label for="">Fabric details</label>
                                         <input type="text" placeholder="Enter fabric details" class="bg-gray-light border-0" name="fabricDetails" value={fabricDetails} onChange={this.onChange}/>
+                                        {
+                                          fabricDetailsError ? <label className="error">{fabricDetailsError}</label> : <></>
+                                        }
                                     </div>
                                 </div>
 

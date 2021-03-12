@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ColorRowWithPicker from "../ColorRowWithPicker";
 
-export const ColorAndFabrication = ({data, productTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
+export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
 
   productTypeList.map((item) => {
@@ -36,7 +36,7 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
           </span>
           <div className="form-group">
               <label>Product type*</label>
-              <select className="w-100 bg-gray-light border-0" name="productTypeId" value={data.productTypeId} onChange={(e) => onChange(e.target.name, e.target.value)}>
+              <select className={`w-100 bg-gray-light border-0 ${errors.productTypeIdError ? `error2` : ``}`} name="productTypeId" value={data.productTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select product type</option>
                   {
                     productTypeList.map((item,i) => {
@@ -50,16 +50,24 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
                       return res;
                     })
                   }
-
               </select>
+              {
+                errors.productTypeIdError ? <label className="error">{errors.productTypeIdError}</label> : <></>
+              }
           </div>
           <div className="form-group">
               <label>Fabric type</label>
-              <input type="text" placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              <input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              {
+                errors.fabricTypeError ? <label className="error">{errors.fabricTypeError}</label> : <></>
+              }
           </div>
           <div className="form-group">
               <label>Fabric details</label>
-              <input type="text" placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              <input type="text" className={errors.fabricDetailsError ? 'error2' : ''} placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              {
+                errors.fabricDetailsError ? <label className="error">{errors.fabricDetailsError}</label> : <></>
+              }
           </div>
           <div className="form-group">
                   <table className="w-100 pick-color-table">

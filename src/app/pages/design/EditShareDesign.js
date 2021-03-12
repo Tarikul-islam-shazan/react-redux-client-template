@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import { _storeData } from "../design/actions";
+import { _storeData, validateShareDesign } from "./actions";
 
 import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import { MeasurementTable } from './components/MeasurementTable'
@@ -39,7 +39,14 @@ class EditShareDesign extends Component {
           showProgressModal: false,
 
           uploadInProgressDocs: {},
-          visibleDocType: ''
+          visibleDocType: '',
+          errors: {
+              nameError: '',
+            	fabricTypeError: '',
+            	fabricTypeIdError: '',
+            	fabricDetailsError: '',
+            	productTypeIdError: '',
+          }
         };
     }
 
@@ -134,11 +141,14 @@ class EditShareDesign extends Component {
         });
     }
 
-    toggleFlag = (sectionName) => {
+    toggleFlag = async(sectionName) => {
       let temp = this.state[sectionName];
-      this.setState({
+      await this.setState({
         [sectionName]: !temp
       })
+      if (sectionName === 'editColorAndFabrication') {
+        loadjs(['/js/script.js']);
+      }
     }
 
     onChange = (name, value) => {
@@ -181,12 +191,6 @@ class EditShareDesign extends Component {
     			"print": false,
     			"base64Str":""
         }
-
-        // if (!this.isValidFile(item, docType)) {
-        //     toastWarning(`${item.name} - type or size invalid.`)
-        //     return;
-        // }
-
         let reader = new FileReader()
         reader.readAsDataURL(item)
         reader.onload = () => {
@@ -294,34 +298,46 @@ class EditShareDesign extends Component {
     updateDetails = (sectionName) => {
       let productId = this.props.match.params.id;
       let {designDetails} = this.state;
-      let body = {};
-
+      let validated = null;
+      
       if (sectionName === 'editTitle') {
-        body.name = designDetails.name;
+        validated = validateShareDesign(designDetails);
       } else if (sectionName === 'editColorAndFabrication') {
-        body.productTypeId = designDetails.productTypeId;
-        body.fabricType = designDetails.fabricType;
-        body.fabricDetails = designDetails.fabricDetails;
-        body.colors = designDetails.colors.map((colorObj) => {
-          return ({
-            hexCode: colorObj.hexCode,
-            name: colorObj.name
-          })
-        });
+        validated = validateShareDesign(designDetails, false);
       }
 
-      Http.PUT('updateDesignDetails', body, productId)
-      .then(({data}) => {
-        console.log('uploadDocument POST SUCCESS: ', data);
-        if (data.success) {
-          toastSuccess("Updated successfully.")
-          this.toggleFlag(sectionName);
-        }
-      })
-      .catch(({response}) => {
-          console.log('uploadDocument ERROR: ', response);
-          toastError("Error occured.")
+      designDetails.colors = validated.errors.colors ? validated.errors.colors : designDetails.colors;
+      this.setState({
+          errors: {...this.state.errors, ...validated.errors},
+          designDetails
       });
+      // if (sectionName === 'editTitle') {
+      //   body.name = designDetails.name;
+      // } else if (sectionName === 'editColorAndFabrication') {
+      //   body.productTypeId = designDetails.productTypeId;
+      //   body.fabricType = designDetails.fabricType;
+      //   body.fabricDetails = designDetails.fabricDetails;
+      //   body.colors = designDetails.colors.map((colorObj) => {
+      //     return ({
+      //       hexCode: colorObj.hexCode,
+      //       name: colorObj.name
+      //     })
+      //   });
+      // }
+      if (validated.isValid) {
+        Http.PUT('updateDesignDetails', validated.reqBody, productId)
+        .then(({data}) => {
+          console.log('uploadDocument POST SUCCESS: ', data);
+          if (data.success) {
+            toastSuccess("Updated successfully.")
+            this.toggleFlag(sectionName);
+          }
+        })
+        .catch(({response}) => {
+            console.log('uploadDocument ERROR: ', response);
+            toastError("Error occured.")
+        });
+      }
     }
 
     updateNoteAndSize = (sectionName, measurementChart = null) => {
@@ -343,8 +359,6 @@ class EditShareDesign extends Component {
       //       })
       //     }
       // }
-
-
 
       Http.PUT('updateSizeTable', body, productId)
       .then(({data}) => {
@@ -368,12 +382,12 @@ class EditShareDesign extends Component {
     }
 
     render() {
-        let {designDetails, designDocuments, productTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType} = this.state;
+        let {designDetails, designDocuments, productTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
         return (
           <>
             <div class="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
 
-                <Title data={designDetails} flag={editTitle} flagName='editTitle' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateDetails}/>
+                <Title data={designDetails} errors={errors} flag={editTitle} flagName='editTitle' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateDetails}/>
 
                 <div class="flex-grow-1 text-right add-another-product" >
                     <span class="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
@@ -422,6 +436,7 @@ class EditShareDesign extends Component {
 
                     <ColorAndFabrication
                       data={designDetails}
+                      errors={errors}
                       productTypeList={productTypeList}
                       flag={editColorAndFabrication}
                       flagName='editColorAndFabrication'
@@ -473,6 +488,7 @@ class EditShareDesign extends Component {
 
                     <ColorAndFabrication
                       data={designDetails}
+                      errors={errors}
                       productTypeList={productTypeList}
                       flag={editColorAndFabrication}
                       flagName='editColorAndFabrication'

@@ -33,10 +33,10 @@ const ColorRowWithPicker = ({item, index, data, onChangeColor, remove}) => {
       <>
         <tr>
             <td>
-                <div class="pick-color">
+                <div className="pick-color">
                     {
                       showColorPickerModal ?
-                      <div class="color-picker-popup">
+                      <div className="color-picker-popup">
                         <SketchPicker
                           color={item.hexCode}
                           onChangeComplete={handleChangeComplete}/>
@@ -44,14 +44,20 @@ const ColorRowWithPicker = ({item, index, data, onChangeColor, remove}) => {
                     }
 
                     <span style={{background: item.hexCode ? item.hexCode : '#fff'}} onClick={() => onChange({target: {name: 'showColorPickerModal', value: !showColorPickerModal}})}></span>
-                    <input type="text" placeholder="Pick color" name="hexCode" onChange={onChange} value={item.hexCode} class="bg-gray-light border-0"/>
+                    <input type="text" placeholder="Pick color" name="hexCode" onChange={onChange} value={item.hexCode} className={`bg-gray-light border-0 ${item.nameError ? `error2` : ``}`}/>
                 </div>
+                {
+                  item.hexCodeError ? <label className="error">{item.hexCodeError}</label> : <></>
+                }
             </td>
             <td>
-                <input type="text" placeholder="Enter color name" name="name" onChange={onChange} value={item.name} class="bg-gray-light border-0 pick-color"/>
+                <input type="text" placeholder="Enter color name" name="name" onChange={onChange} value={item.name} className={`bg-gray-light border-0 pick-color ${item.nameError ? `error2` : ``}`}/>
+                {
+                  item.nameError ? <label className="error">{item.nameError}</label> : <></>
+                }
             </td>
             <td align="right">
-                <div class="dlt cursor-pointer" onClick={() => remove(index)}>
+                <div className="dlt cursor-pointer" onClick={() => remove(index)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                         <g id="Group_11117" data-name="Group 11117" transform="translate(-396 -260)">
                           <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(428 260) rotate(90)" fill="rgba(253,39,39,0.05)"/>

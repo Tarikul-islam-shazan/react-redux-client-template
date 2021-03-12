@@ -26,7 +26,6 @@ const SAMPLE_SIZE_DATA = [
 
 
 export const _storeData = (key,value) => {
-	console.log(key,value)
 	return dispatch => {
 		dispatch({ type: "SET_PRODUCT_DATA", payload: {key:key,data:value} });
 	};
@@ -58,6 +57,78 @@ export const _getProductForQuote = async(productIds) => {
 			});
       return result;
 };
+
+export const validateShareDesign = (state, withName = true) => {
+    let {
+      name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc
+    } = state;
+    let errors = {};
+    let reqBody = {};
+    let isValid = true;
+    if (withName) {
+      if (!name) {
+          errors.nameError = 'Name is required.';
+          isValid = false;
+      } else {
+          errors.nameError = '';
+      }
+    }
+
+    if (!fabricType) {
+        errors.fabricTypeError = 'Fabric type is required.';
+        isValid = false;
+    } else {
+        errors.fabricTypeError = '';
+    }
+    if (!fabricDetails) {
+        errors.fabricDetailsError = 'Fabric details is required.';
+        isValid = false;
+    } else {
+        errors.fabricDetailsError = '';
+    }
+    if (!productTypeId) {
+        errors.productTypeIdError = 'Product type is required.';
+        isValid = false;
+    } else {
+        errors.productTypeIdError = '';
+    }
+
+    if (colors.length) {
+        errors.colors = colors.map((color) => {
+            if (!color.hexCode) {
+                isValid = false;
+                color.hexCodeError = 'Required!';
+            }
+            if (!color.name) {
+                isValid = false;
+                color.nameError = 'Required!';
+            }
+            return color;
+        })
+    }
+
+    if (isValid) {
+        reqBody = {
+            fabricType,
+            // fabricTypeId: 2, //need to make dynamic
+            fabricDetails,
+            productTypeId,
+            // tableJson, //need details
+            note,
+            colors,
+            documentIds
+        };
+        if (withName) {
+          reqBody.name = name;
+        }
+    }
+
+    return {
+      isValid,
+      errors,
+      reqBody
+    }
+}
 
 
 // export const _storeData = (key,value) => {

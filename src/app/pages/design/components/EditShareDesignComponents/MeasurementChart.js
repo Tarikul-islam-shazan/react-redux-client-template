@@ -123,9 +123,9 @@ export class MeasurementChart extends Component {
                       </g>
                   </svg>
               </span> :
-              <span class="cursor-pointer" onClick={() => this.submitHeaderEdit(flagIndex)}>
-                   edit
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="19.452" height="14.162" viewBox="0 0 19.452 14.162" onClick={() => this.submitHeaderEdit(flagIndex)}>
+                  <path id="Path_27878" data-name="Path 27878" d="M2444.531-5030.171l4.091,4.335,12.533-11.748" transform="translate(-2443.117 5038.998)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+              </svg>
             }
 
                 <div class="cursor-pointer dlt" onClick={() => this.deleteHeader(flagIndex, key)}>
