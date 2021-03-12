@@ -32,6 +32,7 @@ class EditShareDesign extends Component {
           designDetails: {},
           designDocuments: {},
           productTypeList: [],
+          fabricTypeList: [],
           editTitle: false,
           editColorAndFabrication: false,
           editNotes: false,
@@ -56,6 +57,7 @@ class EditShareDesign extends Component {
         this.getDesignDetails(id);
         this.getDesignDocuments(id);
         this.getProductTypes();
+        this.getFabricTypes();
     }
 
     getDesignDetails = async(id) => {
@@ -136,6 +138,20 @@ class EditShareDesign extends Component {
             })
           }
           loadjs(['/js/script.js']);
+        })
+        .catch(response => {
+        });
+    }
+
+    getFabricTypes = async() => {
+        await Http.GET('getFabricTypes')
+        .then(({data}) => {
+          if (data) {
+            this.setState({
+              fabricTypeList: data
+            })
+            loadjs(['/js/script.js']);
+          }
         })
         .catch(response => {
         });
@@ -301,9 +317,9 @@ class EditShareDesign extends Component {
       let validated = null;
 
       if (sectionName === 'editTitle') {
-        validated = validateShareDesign(designDetails);
+        validated = validateShareDesign(designDetails, true, false);
       } else if (sectionName === 'editColorAndFabrication') {
-        validated = validateShareDesign(designDetails, false);
+        validated = validateShareDesign(designDetails, false, false);
       }
 
       designDetails.colors = validated.errors.colors ? validated.errors.colors : designDetails.colors;
@@ -337,6 +353,8 @@ class EditShareDesign extends Component {
             console.log('uploadDocument ERROR: ', response);
             toastError("Error occured.")
         });
+      } else {
+        loadjs(['/js/script.js']);
       }
     }
 
@@ -382,7 +400,7 @@ class EditShareDesign extends Component {
     }
 
     render() {
-        let {designDetails, designDocuments, productTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
+        let {designDetails, designDocuments, productTypeList, fabricTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
         return (
           <>
             <div class="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
@@ -433,6 +451,7 @@ class EditShareDesign extends Component {
                       data={designDetails}
                       errors={errors}
                       productTypeList={productTypeList}
+                      fabricTypeList={fabricTypeList}
                       flag={editColorAndFabrication}
                       flagName='editColorAndFabrication'
                       toggleFlag={this.toggleFlag}
@@ -485,6 +504,7 @@ class EditShareDesign extends Component {
                       data={designDetails}
                       errors={errors}
                       productTypeList={productTypeList}
+                      fabricTypeList={fabricTypeList}
                       flag={editColorAndFabrication}
                       flagName='editColorAndFabrication'
                       toggleFlag={this.toggleFlag}

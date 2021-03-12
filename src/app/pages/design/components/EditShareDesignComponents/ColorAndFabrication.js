@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ColorRowWithPicker from "../ColorRowWithPicker";
 
-export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
+export const ColorAndFabrication = ({data, errors, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
 
   productTypeList.map((item) => {
@@ -57,9 +57,17 @@ export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagNa
           </div>
           <div className="form-group">
               <label>Fabric type</label>
-              <input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              <select className={`w-100 bg-gray-light border-0 ${errors.fabricTypeIdError ? `error2` : ``}`} name="fabricTypeId" value={data.fabricTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
+                  <option value="">Select fabric type</option>
+                  {
+                    fabricTypeList.map((item,i) => {
+                      return <option key={i} value={item.id}>{item.name}</option>
+                    })
+                  }
+              </select>
+              {/*<input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>*/}
               {
-                errors.fabricTypeError ? <label className="error">{errors.fabricTypeError}</label> : <></>
+                errors.fabricTypeIdError ? <label className="error">{errors.fabricTypeIdError}</label> : <></>
               }
           </div>
           <div className="form-group">

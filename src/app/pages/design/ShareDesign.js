@@ -35,6 +35,7 @@ class ShareDesign extends Component {
         	documentIds:[],
           productDesignDoc: {},
           productTypeList: [],
+          fabricTypeList: [],
           errors: {
               nameError: '',
             	fabricTypeError: '',
@@ -47,7 +48,9 @@ class ShareDesign extends Component {
 
     componentDidMount = async() => {
         document.title = "Share Design - Nitex";
-        this.getProductTypes()
+        await this.getProductTypes();
+        await this.getFabricTypes();
+        loadjs(['/js/script.js']);
     }
 
     getProductTypes = async() => {
@@ -87,7 +90,19 @@ class ShareDesign extends Component {
               productTypeList : arr
             })
           }
-          loadjs(['/js/script.js']);
+        })
+        .catch(response => {
+        });
+    }
+
+    getFabricTypes = async() => {
+        await Http.GET('getFabricTypes')
+        .then(({data}) => {
+          if (data) {
+            this.setState({
+              fabricTypeList: data
+            })
+          }
         })
         .catch(response => {
         });
@@ -166,29 +181,31 @@ class ShareDesign extends Component {
             .catch(({response}) => {
                 console.log('shareDesign ERROR: ', JSON.stringify(response));
             });
+        } else {
+          loadjs(['/js/script.js']);
         }
     }
 
     render() {
         let {
           name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc,
-          productTypeList
+          productTypeList, fabricTypeList
         } = this.state;
-        let {nameError, fabricTypeError, fabricDetailsError, productTypeIdError} = this.state.errors;
+        let {nameError, fabricTypeError, fabricTypeIdError, fabricDetailsError, productTypeIdError, documentIdsError} = this.state.errors;
         return (
           <>
             <div>
                 <h4>Share your design</h4>
-                <p class="color-gray">Get costing on any designs you like to manufacture for your label</p>
+                <p className="color-gray">Get costing on any designs you like to manufacture for your label</p>
             </div>
 
-            <div class="share-your-design-form">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="uploader mt-3 mb-4">
+            <div className="share-your-design-form">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="form-group">
+                                    <div className={`uploader mt-3 mb-4 ${documentIdsError ? `error2` : ``}`}>
                                     {
                                       productDesignDoc && productDesignDoc.name ?
                                           <div className="uploaded-img-banner">
@@ -214,31 +231,34 @@ class ShareDesign extends Component {
                                           </div>
                                       :
                                       <>
-                                        <label for="drag-upload" class="drag-upload">&nbsp;</label>
-                                        <input type="file" id="drag-upload" class="file-upload"  name="productDesignDoc" onChange={(e) => this.onFileUpload(e,'PRODUCT_DESIGN')}/>
+                                        <label for="drag-upload" className="drag-upload">&nbsp;</label>
+                                        <input type="file" id="drag-upload" className="file-upload"  name="productDesignDoc" onChange={(e) => this.onFileUpload(e,'PRODUCT_DESIGN')}/>
                                       </>
                                     }
                                     </div>
+                                    {
+                                      documentIdsError ? <label className="error">{documentIdsError}</label> : <></>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="stepper m-0">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                    <div className="col-lg-6">
+                        <div className="stepper m-0">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
                                         <label for="">Design name*</label>
-                                        <input type="text" placeholder="Enter design name" class="bg-gray-light border-0" name="name" value={name} onChange={this.onChange}/>
+                                        <input type="text" placeholder="Enter design name" className={`bg-gray-light border-0 ${nameError ? `error2` : ``}`} name="name" value={name} onChange={this.onChange}/>
                                         {
                                           nameError ? <label className="error">{nameError}</label> : <></>
                                         }
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
                                         <label for="">Product type*</label>
-                                        <select className="w-100 bg-gray-light border-0" name="productTypeId" value={productTypeId} onClick={this.onChange}>
+                                        <select className={`w-100 bg-gray-light border-0 ${productTypeIdError ? `error2` : ``}`} name="productTypeId" value={productTypeId} onClick={this.onChange}>
                                             <option value="">Select product type</option>
                                             {
                                               productTypeList.map((item,i) => {
@@ -259,35 +279,43 @@ class ShareDesign extends Component {
                                         }
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
                                         <label for="">Fabric type</label>
-                                        <input type="text" placeholder="Fabric type" class="bg-gray-light border-0" name="fabricType" value={fabricType} onChange={this.onChange}/>
+                                        <select className={`w-100 bg-gray-light border-0 ${fabricTypeIdError ? `error2` : ``}`} name="fabricTypeId" value={fabricTypeId} onClick={this.onChange}>
+                                            <option value="">Select fabric type</option>
+                                            {
+                                              fabricTypeList.map((item,i) => {
+                                                return <option key={i} value={item.id}>{item.name}</option>
+                                              })
+                                            }
+                                        </select>
+                                        {/*<input type="text" placeholder="Fabric type" className="bg-gray-light border-0" name="fabricType" value={fabricType} onChange={this.onChange}/>*/}
                                         {
-                                          fabricTypeError ? <label className="error">{fabricTypeError}</label> : <></>
+                                          fabricTypeIdError ? <label className="error">{fabricTypeIdError}</label> : <></>
                                         }
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
                                         <label for="">Fabric details</label>
-                                        <input type="text" placeholder="Enter fabric details" class="bg-gray-light border-0" name="fabricDetails" value={fabricDetails} onChange={this.onChange}/>
+                                        <input type="text" placeholder="Enter fabric details" className={`bg-gray-light border-0 ${fabricDetailsError ? `error2` : ``}`} name="fabricDetails" value={fabricDetails} onChange={this.onChange}/>
                                         {
                                           fabricDetailsError ? <label className="error">{fabricDetailsError}</label> : <></>
                                         }
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <table class="w-100 pick-color-table">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <table className="w-100 pick-color-table">
                                             <thead>
                                                 <tr>
                                                     <th><label>Color</label></th>
                                                     <th><label>Color name</label></th>
-                                                    <th class="text-right">
-                                                        <span class="brand-color font-18 semibold cursor-pointer" onClick={this.addColor}>+Add color</span>
+                                                    <th className="text-right">
+                                                        <span className="brand-color font-18 semibold cursor-pointer" onClick={this.addColor}>+Add color</span>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -304,17 +332,17 @@ class ShareDesign extends Component {
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form-group">
+                                <div className="col-lg-12">
+                                    <div className="form-group">
                                         <label for="">Note</label>
-                                        <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" class="bg-gray-light border-0"></textarea>
+                                        <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" className="bg-gray-light border-0"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-right">
-                                        <button class="btn-brand m-0 brand-bg-color" onClick={this.submit}>Submit</button>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="text-right">
+                                        <button className="btn-brand m-0 brand-bg-color" onClick={this.submit}>Submit</button>
                                     </div>
                                 </div>
                             </div>
