@@ -133,7 +133,7 @@ export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagNa
                 return (
                   <div className="mb-2">
                       <span>
-                          <span className="color-circle" style={{background: colorObj.hexCode}}></span>
+                          <span className="color-circle mr-2" style={{background: colorObj.hexCode}}></span>
                           {colorObj.hexCode} - {colorObj.name}
                       </span>
                   </div>

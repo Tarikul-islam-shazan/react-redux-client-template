@@ -6141,7 +6141,7 @@ ul.attachment li {
   @media (max-width: 1024px) {
     .product-info .product-notes {
       padding: 0;
-      flex-basis: 100%; } }
+      width: 100%; } }
   .product-info .product-notes .p-edit {
     position: absolute;
     top: 0;

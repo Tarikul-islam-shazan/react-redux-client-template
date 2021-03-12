@@ -497,7 +497,7 @@ class EditShareDesign extends Component {
                       removeColor={this.removeColor}
                       onChange={this.onChange}
                       onSubmit={this.updateDetails}
-                      classes="product-type item d-block"/>
+                      classes="product-type item d-none d-xl-block"/>
 
                     <div class="product-notes flex-grow-1">
                         {
