@@ -299,7 +299,7 @@ class EditShareDesign extends Component {
       let productId = this.props.match.params.id;
       let {designDetails} = this.state;
       let validated = null;
-      
+
       if (sectionName === 'editTitle') {
         validated = validateShareDesign(designDetails);
       } else if (sectionName === 'editColorAndFabrication') {
@@ -401,7 +401,7 @@ class EditShareDesign extends Component {
                       designDocuments.PRODUCT_DESIGN && designDocuments.PRODUCT_DESIGN.length ?
                       <div class="item">
                           <div class="type-of-img-name d-flex justify-content-between align-items-center">
-                              <span class="font-20">Feature Image</span>
+                              <span class="font-20">Feature image</span>
                           </div>
                           <div class="p-img">
                               <img src={designDocuments.PRODUCT_DESIGN[0].docUrl} alt=""/>
@@ -422,7 +422,7 @@ class EditShareDesign extends Component {
                       </div> :
                       <div class="item">
                           <div class="type-of-img-name">
-                              <span class="font-20">Feature Image</span>
+                              <span class="font-20">Feature image</span>
                           </div>
                           <div class="uploader">
                               <label for="drag-upload" class="drag-upload">&nbsp;</label>
@@ -449,7 +449,7 @@ class EditShareDesign extends Component {
 
                     <DocumentHandler
                       data={designDocuments.REFERENCE_IMAGE ? designDocuments.REFERENCE_IMAGE : []}
-                      title='Reference Image'
+                      title='Reference images'
                       name='REFERENCE_IMAGE'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
@@ -458,7 +458,7 @@ class EditShareDesign extends Component {
 
                     <DocumentHandler
                       data={designDocuments.EMBELLISHMENT ? designDocuments.EMBELLISHMENT : []}
-                      title='Embellishment file'
+                      title='Embellishment'
                       name='EMBELLISHMENT'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
@@ -467,7 +467,7 @@ class EditShareDesign extends Component {
 
                     <DocumentHandler
                       data={designDocuments.ACCESSORIES_DESIGN ? designDocuments.ACCESSORIES_DESIGN : []}
-                      title='Accesories'
+                      title='Accessories'
                       name='ACCESSORIES_DESIGN'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
@@ -476,7 +476,7 @@ class EditShareDesign extends Component {
 
                     <DocumentHandler
                       data={designDocuments.OTHER ? designDocuments.OTHER : []}
-                      title='Other'
+                      title='Other files'
                       name='OTHER'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}

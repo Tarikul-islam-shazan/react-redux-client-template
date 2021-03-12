@@ -428,7 +428,7 @@ export class MeasurementChart extends Component {
                                       <path id="close_3_" data-name="close (3)" d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z" transform="translate(3842.869 -6456.6) rotate(45)" fill="#472f91" stroke="#452c8e" stroke-width="0.25"/>
                                       </g>
                                   </svg>
-                                  Add Size
+                                  Size
                               </span>
                               {
                                 measurementChart.length > 1 ?
@@ -442,7 +442,7 @@ export class MeasurementChart extends Component {
                                         <path id="close_3_" data-name="close (3)" d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z" transform="translate(3842.869 -6456.6) rotate(45)" fill="#fc3c43" stroke="#fc3c43" stroke-width="0.25"/>
                                         </g>
                                     </svg>
-                                    Remove Size
+                                    Size
                                 </span> : <></>
                               }
                           </div>
@@ -465,7 +465,7 @@ export class MeasurementChart extends Component {
                                                 stroke="#452c8e" stroke-width="0.25"/>
                                           </g>
                                       </svg>
-                                      Add Property
+                                      Property
                                   </span>
                               </div>
                           </div>
