@@ -420,6 +420,18 @@ class EditShareDesign extends Component {
                       </div>
                     }
 
+                    <ColorAndFabrication
+                      data={designDetails}
+                      productTypeList={productTypeList}
+                      flag={editColorAndFabrication}
+                      flagName='editColorAndFabrication'
+                      toggleFlag={this.toggleFlag}
+                      addColor={this.addColor}
+                      removeColor={this.removeColor}
+                      onChange={this.onChange}
+                      onSubmit={this.updateDetails}
+                      classes="product-type item d-block d-xl-none"/>
+
                     <DocumentHandler
                       data={designDocuments.REFERENCE_IMAGE ? designDocuments.REFERENCE_IMAGE : []}
                       title='Reference Image'
@@ -468,7 +480,8 @@ class EditShareDesign extends Component {
                       addColor={this.addColor}
                       removeColor={this.removeColor}
                       onChange={this.onChange}
-                      onSubmit={this.updateDetails}/>
+                      onSubmit={this.updateDetails}
+                      classes="product-type item d-block"/>
 
                     <div class="product-notes flex-grow-1">
                         {

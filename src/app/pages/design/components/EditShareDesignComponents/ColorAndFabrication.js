@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ColorRowWithPicker from "../ColorRowWithPicker";
 
-export const ColorAndFabrication = ({data, productTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit}) => {
+export const ColorAndFabrication = ({data, productTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
 
   productTypeList.map((item) => {
@@ -18,9 +18,9 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
 
   if (flag) {
     return (
-      <div class="product-type d-none d-xl-block">
-          <span class="p-edit cursor-pointer" onClick={() => onSubmit(flagName)}>
-               <span class="d-none">
+      <div className={classes}>
+          <span className="p-edit cursor-pointer" onClick={() => onSubmit(flagName)}>
+               <span className="d-none">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16.576" height="15.841" viewBox="0 0 16.576 15.841">
                       <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(0.75 0.75)">
                         <path id="Path_29430" data-name="Path 29430" d="M18,30h7.538" transform="translate(-10.462 -15.659)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
@@ -28,13 +28,13 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
                       </g>
                     </svg>
                </span>
-                <div class="done">
+                <div className="done">
                   <svg xmlns="http://www.w3.org/2000/svg" width="19.452" height="14.162" viewBox="0 0 19.452 14.162">
                       <path id="Path_27878" data-name="Path 27878" d="M2444.531-5030.171l4.091,4.335,12.533-11.748" transform="translate(-2443.117 5038.998)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                     </svg>
                 </div>
           </span>
-          <div class="form-group">
+          <div className="form-group">
               <label>Product type*</label>
               <select className="w-100 bg-gray-light border-0" name="productTypeId" value={data.productTypeId} onChange={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select product type</option>
@@ -53,22 +53,22 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
 
               </select>
           </div>
-          <div class="form-group">
+          <div className="form-group">
               <label>Fabric type</label>
               <input type="text" placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>
           </div>
-          <div class="form-group">
+          <div className="form-group">
               <label>Fabric details</label>
               <input type="text" placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
           </div>
-          <div class="form-group">
-                  <table class="w-100 pick-color-table">
+          <div className="form-group">
+                  <table className="w-100 pick-color-table">
                       <thead>
                           <tr>
                               <th><label>Color</label></th>
                               <th><label>Color name</label></th>
-                              <th class="text-right">
-                                  <span class="cursor-pointer" onClick={addColor}>
+                              <th className="text-right">
+                                  <span className="cursor-pointer" onClick={addColor}>
                                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
                                           <g id="Group_11133" data-name="Group 11133" transform="translate(-421 -880)">
                                               <g id="Rectangle_6032" data-name="Rectangle 6032" transform="translate(451 880) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#21242b" stroke-width="1" opacity="0.623">
@@ -97,8 +97,8 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
     )
   }
   return(
-    <div class="product-type d-none d-xl-block">
-        <span class="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
+    <div className={classes}>
+        <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16.576" height="15.841" viewBox="0 0 16.576 15.841">
                 <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(0.75 0.75)">
                   <path id="Path_29430" data-name="Path 29430" d="M18,30h7.538" transform="translate(-10.462 -15.659)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
@@ -106,26 +106,26 @@ export const ColorAndFabrication = ({data, productTypeList, flag, flagName, togg
                 </g>
               </svg>
         </span>
-        <div class="form-group">
+        <div className="form-group">
             <label>Product type*</label>
             <span>{productTypeName}</span>
         </div>
-        <div class="form-group">
+        <div className="form-group">
             <label>Fabric type</label>
             <span>{data.fabricType}</span>
         </div>
-        <div class="form-group">
+        <div className="form-group">
             <label>Fabric details</label>
             <span>{data.fabricDetails}</span>
         </div>
-        <div class="form-group">
+        <div className="form-group">
             <label>Color</label>
             {
               data.colors && data.colors.map((colorObj, i) => {
                 return (
-                  <div class="mb-2">
+                  <div className="mb-2">
                       <span>
-                          <span class="color-circle" style={{background: colorObj.hexCode}}></span>
+                          <span className="color-circle" style={{background: colorObj.hexCode}}></span>
                           {colorObj.hexCode} - {colorObj.name}
                       </span>
                   </div>
