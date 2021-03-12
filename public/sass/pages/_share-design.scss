@@ -662,3 +662,9 @@ ul.p-img-container {
 @-webkit-keyframes spin {
   to { -webkit-transform: rotate(360deg); }
 }
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"]{
+  &.error2{
+    border: 1px solid red !important;
+    background: #fee !important;
+  }
+}

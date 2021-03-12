@@ -6390,6 +6390,10 @@ ul.p-img-container {
 @-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg); } }
+input[type="text"].error2, input[type="email"].error2, input[type="url"].error2, input[type="password"].error2, input[type="number"].error2, input[type="tel"].error2, input[type="range"].error2, input[type="date"].error2, input[type="month"].error2, input[type="week"].error2, input[type="time"].error2, input[type="datetime"].error2, input[type="datetime-local"].error2, input[type="color"].error2 {
+  border: 1px solid red !important;
+  background: #fee !important; }
+
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;
