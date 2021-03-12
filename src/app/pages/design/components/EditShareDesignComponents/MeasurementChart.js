@@ -270,11 +270,11 @@ export class MeasurementChart extends Component {
             <div class="form-group">
                 <label  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="cursor-pointer">
                     Measurement Chart
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188" className="ml-2">
                         <path id="Path_27707" data-name="Path 27707" d="M0,0,6.819,6.774,13.637,0" transform="translate(1.414 1.414)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                     </svg>
                 </label>
-                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                <p className="font-16">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
                 <div class="collapse" id="collapseExample">
 
                     <div class="chart-table">
@@ -285,7 +285,7 @@ export class MeasurementChart extends Component {
                                     {
                                       measurementChart.length > 0 ? this.renderHeader(measurementChart[0].measurement) : <></>
                                     }
-                                    <th>Quantity</th>
+                                    <th className="text-center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -338,7 +338,32 @@ export class MeasurementChart extends Component {
                       <path id="Path_27707" data-name="Path 27707" d="M0,0,6.819,6.774,13.637,0" transform="translate(1.414 1.414)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                   </svg>
               </label>
-              <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+            <div className="d-flex justify-content-between">
+                <p className="pr-0 pr-sm-5 font-16">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+
+                <div className="adjust-property text-nowrap">
+                    <div className="d-flex align-items-start flex-column">
+                              <span className="add-size cursor-pointer" onClick={() => this.addNewProperty()}>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="mr-2 align-middle">
+                                      <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
+                                      <g id="Rectangle_6065" data-name="Rectangle 6065"
+                                         transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)"
+                                         stroke="#472f91" stroke-width="1">
+                                          <rect width="24" height="24" rx="12" stroke="none"/>
+                                          <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="none"/>
+                                      </g>
+                                      <path id="close_3_" data-name="close (3)"
+                                            d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z"
+                                            transform="translate(3842.869 -6456.6) rotate(45)" fill="#472f91"
+                                            stroke="#452c8e" stroke-width="0.25"/>
+                                      </g>
+                                  </svg>
+                                  Add Property
+                              </span>
+                    </div>
+                </div>
+
+            </div>
               <div class="collapse" id="collapseExample">
 
                   <div class="chart-table">
@@ -388,29 +413,13 @@ export class MeasurementChart extends Component {
                             </Droppable>
                           </DragDropContext>
                       </table>
-                      <div class="adjust-property">
-                          <div class="d-flex align-items-start flex-column">
-                              <span class="add-size cursor-pointer mb-4" onClick={() => this.addNewProperty()}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                      <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
-                                      <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#472f91" stroke-width="1">
-                                          <rect width="24" height="24" rx="12" stroke="none"/>
-                                          <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="none"/>
-                                      </g>
-                                      <path id="close_3_" data-name="close (3)" d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z" transform="translate(3842.869 -6456.6) rotate(45)" fill="#472f91" stroke="#452c8e" stroke-width="0.25"/>
-                                      </g>
-                                  </svg>
-                                  Add Property
-                              </span>
-                          </div>
-                      </div>
                   </div>
 
                   <div class="row mt-4">
-                      <div class="col-lg-12">
+                      <div class="col-lg-6">
                           <div class="d-flex align-items-start">
                               <span class="add-size cursor-pointer mr-4" onClick={() => this.addSize()}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="mr-2 align-middle">
                                       <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
                                       <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#472f91" stroke-width="1">
                                           <rect width="24" height="24" rx="12" stroke="none"/>
@@ -424,7 +433,7 @@ export class MeasurementChart extends Component {
                               {
                                 measurementChart.length > 1 ?
                                 <span class="remove-size cursor-pointer" onClick={() => this.removeSize()}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="mr-2 align-middle">
                                         <g id="Group_11104" data-name="Group 11104" transform="translate(-3831 6463)">
                                         <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3855 -6463) rotate(90)" fill="rgba(252,60,67,0.05)" stroke="#fc3c43" stroke-width="1">
                                             <rect width="24" height="24" rx="12" stroke="none"/>
@@ -436,6 +445,29 @@ export class MeasurementChart extends Component {
                                     Remove Size
                                 </span> : <></>
                               }
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="d-flex align-items-start justify-content-end">
+                              <div className="adjust-property text-nowrap">
+                                  <span className="add-size cursor-pointer" onClick={() => this.addNewProperty()}>
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="mr-2 align-middle">
+                                          <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
+                                          <g id="Rectangle_6065" data-name="Rectangle 6065"
+                                             transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)"
+                                             stroke="#472f91" stroke-width="1">
+                                              <rect width="24" height="24" rx="12" stroke="none"/>
+                                              <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="none"/>
+                                          </g>
+                                          <path id="close_3_" data-name="close (3)"
+                                                d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z"
+                                                transform="translate(3842.869 -6456.6) rotate(45)" fill="#472f91"
+                                                stroke="#452c8e" stroke-width="0.25"/>
+                                          </g>
+                                      </svg>
+                                      Add Property
+                                  </span>
+                              </div>
                           </div>
                       </div>
                   </div>
