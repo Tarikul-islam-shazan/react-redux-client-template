@@ -36,7 +36,7 @@ export const ColorAndFabrication = ({data, errors, productTypeList, flag, flagNa
           </span>
           <div className="form-group">
               <label>Product type*</label>
-              <select className={`w-100 bg-gray-light border-0 ${errors.productTypeIdError ? `error2` : ``}`} name="productTypeId" value={data.productTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
+              <select className={`w-100 bg-gray-light ${errors.productTypeIdError ? `error2` : ``}`} name="productTypeId" value={data.productTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select product type</option>
                   {
                     productTypeList.map((item,i) => {

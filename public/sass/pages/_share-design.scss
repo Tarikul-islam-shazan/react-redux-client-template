@@ -194,6 +194,7 @@
       img{
         width: 100%;
         max-height: 340px;
+        min-height: 340px;
         object-fit: cover;
         @media (max-width: 1440px) {
           height: 270px;
@@ -298,6 +299,11 @@
         border-radius: 4px;
         padding: 6px 10px;
       }
+    }
+    .nice-select{
+      height: 46px;
+      line-height: 34px;
+      padding-left: 10px;
     }
     table.pick-color-table{
       thead{
@@ -674,4 +680,15 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
 .nice-select.error2 {
   border: 1px solid red !important;
   background: #fee !important;
+}
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important;
+}
+.uploader.error2 .drag-upload {
+  border: 2px dashed red !important;
+  background: #fee;
+  background-image: url(./images/icons/upload.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(50% - 50px);
 }
