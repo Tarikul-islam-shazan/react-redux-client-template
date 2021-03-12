@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { addImageSuffix } from '../../../../services/Util';
 
-export const DocumentHandler = ({data, title, name, visibleDocType, setVisibleDocType, onFileSelect, onFileRemove}) => {
+export const DocumentHandler = ({data, title, name, classes, visibleDocType, setVisibleDocType, onFileSelect, onFileRemove}) => {
   if (!data.length) {
     return (
       <div class="item">
           <div class="type-of-img-name">
               <span class="font-20">{title}</span>
           </div>
-          <div class="uploader">
+          <div class={`uploader ${classes}`}>
               <label for="drag-upload" class="drag-upload">&nbsp;</label>
               <input type="file" class="file-upload" id="drag-upload" name={name} onChange={(e) => onFileSelect(e, e.target.name)} multiple/>
               {/*<div class="center-center">

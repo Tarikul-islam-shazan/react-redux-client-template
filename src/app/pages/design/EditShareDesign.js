@@ -233,7 +233,12 @@ class EditShareDesign extends Component {
           let images = [];
           if (designDocuments[doc.documentType]) {
             images = designDocuments[doc.documentType];
+            if (doc.documentType === 'PRODUCT_DESIGN' && designDocuments.PRODUCT_DESIGN.length) {
+              this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
+              images = [];
+            }
           }
+
           images = [data.payload, ...images];
 
           designDocuments[doc.documentType] = images;
@@ -423,7 +428,8 @@ class EditShareDesign extends Component {
                           </div>
                           <div class="p-img">
                               <img src={designDocuments.PRODUCT_DESIGN[0].docUrl} alt=""/>
-                              <div class="dlt" onClick={() => this.onFileRemove(designDocuments.PRODUCT_DESIGN[0])}>
+                              <input type="file" style={{display: 'none'}} ref={input => this.inputElement = input} name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
+                              <div class="dlt" onClick={() => this.inputElement.click()}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                       <g id="Group_11134" data-name="Group 11134" transform="translate(-389 -180)">
                                           <path id="Path_27873" data-name="Path 27873" d="M17.528,82.973H12.715V78.109h1.591a.5.5,0,0,0,.4-.788L11.615,73.04a.493.493,0,0,0-.8,0L7.719,77.321a.5.5,0,0,0,.4.788H9.713v4.863H4.323A4.821,4.821,0,0,1,0,78.151a4.566,4.566,0,0,1,2.264-3.942,3.061,3.061,0,0,1-.188-1.068,3.1,3.1,0,0,1,3.108-3.108,3.055,3.055,0,0,1,1.063.188,6.222,6.222,0,0,1,11.822,2.054,5.412,5.412,0,0,1-.541,10.7Z" transform="translate(394 121.35)" fill="#472f91"/>
@@ -465,6 +471,7 @@ class EditShareDesign extends Component {
                       data={designDocuments.REFERENCE_IMAGE ? designDocuments.REFERENCE_IMAGE : []}
                       title='Reference images'
                       name='REFERENCE_IMAGE'
+                      classes='upload-a-file'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
                       onFileSelect={this.onFileSelect}
@@ -474,6 +481,7 @@ class EditShareDesign extends Component {
                       data={designDocuments.EMBELLISHMENT ? designDocuments.EMBELLISHMENT : []}
                       title='Embellishment'
                       name='EMBELLISHMENT'
+                      classes='upload-a-file'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
                       onFileSelect={this.onFileSelect}
@@ -483,6 +491,7 @@ class EditShareDesign extends Component {
                       data={designDocuments.ACCESSORIES_DESIGN ? designDocuments.ACCESSORIES_DESIGN : []}
                       title='Accessories'
                       name='ACCESSORIES_DESIGN'
+                      classes='upload-a-file'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
                       onFileSelect={this.onFileSelect}
@@ -492,6 +501,7 @@ class EditShareDesign extends Component {
                       data={designDocuments.OTHER ? designDocuments.OTHER : []}
                       title='Other files'
                       name='OTHER'
+                      classes='upload-a-file'
                       visibleDocType={visibleDocType}
                       setVisibleDocType={this.setVisibleDocType}
                       onFileSelect={this.onFileSelect}
