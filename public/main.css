@@ -3544,7 +3544,7 @@ button#sidebarToggleTop {
     color: #7f7f7f; }
 
 .navbar {
-  padding: 10px 15px;
+  padding: 19px 15px;
   position: fixed;
   width: calc(100% - 248px);
   z-index: 999; }
