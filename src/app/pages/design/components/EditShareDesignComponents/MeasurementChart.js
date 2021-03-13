@@ -8,7 +8,7 @@ export class MeasurementChart extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        measurementChart: this.props.data && this.props.data.sizeTable ? this.props.data.sizeTable.sizeTableRows : [],
+        measurementChart: this.props.data && this.props.data.sizeText ? JSON.parse( this.props.data.sizeText ) : [],
         flag: false,
         headerEditFlags: {},
         tempHeaderVal: '',
@@ -21,9 +21,9 @@ export class MeasurementChart extends Component {
   // }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.data.sizeTable !== this.props.data.sizeTable) {
+    if (prevProps.data.sizeText !== this.props.data.sizeText) {
       this.setState({
-        measurementChart: this.props.data && this.props.data.sizeTable ? this.props.data.sizeTable.sizeTableRows : [],
+        measurementChart: this.props.data && this.props.data.sizeText ? JSON.parse( this.props.data.sizeText ) : [],
       })
     }
   }

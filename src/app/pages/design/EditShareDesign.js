@@ -368,6 +368,7 @@ class EditShareDesign extends Component {
       let {designDetails} = this.state;
       let body = {};
       body.note = designDetails.note;
+      body.sizeText = JSON.stringify( measurementChart );
       body.sizeDTO = {
         sizeText: JSON.stringify({
           sizeTableRows : measurementChart
