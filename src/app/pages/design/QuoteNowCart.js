@@ -94,7 +94,7 @@ class QuoteNowCart extends Component {
       }
       // this.setState({loading: true});
       let designList = await this.renderList();
-      this.setState({designList})
+      this.setState({designList});
     }
 
     renderList = async(page = 0) => {
