@@ -1422,6 +1422,7 @@ aside.left-panel.active {
     text-align: left !important;
     display: inline-block;
     line-height: 15px;
+    font-weight: normal !important;
 }
 .drug-n-drop span.error{
     float: left;
