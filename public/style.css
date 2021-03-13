@@ -1422,6 +1422,7 @@ aside.left-panel.active {
     text-align: left !important;
     display: inline-block;
     line-height: 15px;
+    font-weight: normal !important;
 }
 .drug-n-drop span.error{
     float: left;
@@ -1931,25 +1932,13 @@ a.text-color_orange
 {
     text-transform: initial !important;
 }
-
-@media(min-width:1024px)
+@media(max-width:1440px)
 {
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: calc((100% - 100px) / 4);
     }
 }
-@media(min-width:1366px)
-{
-    .dashboard-designs .filter-products.designs .card.product-card {
-        flex-basis: calc((100% - 100px) / 5);
-    }
-}
-@media(min-width:1024px)
-{
-    .filter-products.designs .card.product-card {
-        flex-basis: calc((100% - 100px) / 5);
-    }
-}
+
 
 @media screen and (min-width: 1024px) and (max-width: 1300px)
 {
