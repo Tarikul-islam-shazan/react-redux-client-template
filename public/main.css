@@ -4411,7 +4411,7 @@ ul.filter-tag {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-gap: 30px; }
-  @media (max-width: 1366px) {
+  @media (max-width: 1440px) {
     .show-products {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-gap: 25px; } }
@@ -5879,6 +5879,25 @@ ul.attachment li {
 .list-of-item .add-list-item-filed {
   padding-right: 0 !Important; }
 
+input[type="text"].error2, input[type="email"].error2, input[type="url"].error2, input[type="password"].error2, input[type="number"].error2, input[type="tel"].error2, input[type="range"].error2, input[type="date"].error2, input[type="month"].error2, input[type="week"].error2, input[type="time"].error2, input[type="datetime"].error2, input[type="datetime-local"].error2, input[type="color"].error2 {
+  border: 1px solid red !important;
+  background: #fee !important; }
+
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important; }
+
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important; }
+
+.uploader.error2 .drag-upload {
+  border: 2px dashed red !important;
+  background: #fee;
+  background-image: url(./images/icons/upload.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(50% - 50px); }
+
 .share-your-design-form {
   max-width: 1270px; }
   .share-your-design-form .uploader label[for="drag-upload"] {
@@ -6030,7 +6049,8 @@ ul.attachment li {
         object-fit: cover; }
         @media (max-width: 1440px) {
           .product-images .item .p-img img {
-            height: 270px; } }
+            height: 250px;
+            min-height: 266px; } }
         @media (max-width: 1366px) {
           .product-images .item .p-img img {
             height: 220px; } }
@@ -6102,10 +6122,10 @@ ul.attachment li {
         font-size: 16px; } }
   .product-info .product-type input.bg-gray-light {
     height: 46px;
-    background: #F4F5F7 !important;
+    background: #F4F5F7;
     border-radius: 5px;
     padding: 10px 12px;
-    border: 1px solid #CACDD5 !important; }
+    border: 1px solid #CACDD5; }
     @media (max-width: 1440px) {
       .product-info .product-type input.bg-gray-light {
         height: 38px;
@@ -6138,7 +6158,7 @@ ul.attachment li {
       .product-info .product-type table.pick-color-table .pick-color input.bg-gray-light {
         padding-left: 27px !important; } }
   .product-info .product-type table.pick-color-table tbody tr td input.bg-gray-light {
-    height: 32px; }
+    height: 48px; }
   .product-info .product-type table.pick-color-table tbody tr td .dlt svg {
     width: 20px;
     height: 20px; }
@@ -6334,7 +6354,8 @@ ul.p-img-container {
     list-style: none;
     display: inline-block;
     margin-right: 12px;
-    position: relative; }
+    position: relative;
+    width: 100%; }
     @media (max-width: 1024px) {
       ul.p-img-container li .p-img {
         width: 350px;
@@ -6401,25 +6422,6 @@ ul.p-img-container {
 @-webkit-keyframes spin {
   to {
     -webkit-transform: rotate(360deg); } }
-input[type="text"].error2, input[type="email"].error2, input[type="url"].error2, input[type="password"].error2, input[type="number"].error2, input[type="tel"].error2, input[type="range"].error2, input[type="date"].error2, input[type="month"].error2, input[type="week"].error2, input[type="time"].error2, input[type="datetime"].error2, input[type="datetime-local"].error2, input[type="color"].error2 {
-  border: 1px solid red !important;
-  background: #fee !important; }
-
-.nice-select.error2 {
-  border: 1px solid red !important;
-  background: #fee !important; }
-
-.nice-select.error2 {
-  border: 1px solid red !important;
-  background: #fee !important; }
-
-.uploader.error2 .drag-upload {
-  border: 2px dashed red !important;
-  background: #fee;
-  background-image: url(./images/icons/upload.svg);
-  background-repeat: no-repeat;
-  background-position: 50% calc(50% - 50px); }
-
 .new-collection {
   max-width: 1000px;
   margin: 0px auto;

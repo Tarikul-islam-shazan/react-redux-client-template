@@ -1,3 +1,28 @@
+
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"]{
+  &.error2{
+    border: 1px solid red !important;
+    background: #fee !important;
+  }
+}
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important;
+}
+.nice-select.error2 {
+  border: 1px solid red !important;
+  background: #fee !important;
+}
+.uploader.error2 .drag-upload {
+  border: 2px dashed red !important;
+  background: #fee;
+  background-image: url(./images/icons/upload.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(50% - 50px);
+}
+
+
+
 .share-your-design-form {
   max-width: 1270px;
   .uploader label[for="drag-upload"]{
@@ -197,7 +222,8 @@
         min-height: 340px;
         object-fit: cover;
         @media (max-width: 1440px) {
-          height: 270px;
+          height: 250px;
+          min-height: 266px;
         }
         @media (max-width: 1366px) {
           height: 220px;
@@ -290,10 +316,10 @@
     }
     input.bg-gray-light {
       height: 46px;
-      background: #F4F5F7 !important;
+      background: #F4F5F7;
       border-radius: 5px;
       padding: 10px 12px;
-      border: 1px solid #CACDD5 !important;
+      border: 1px solid #CACDD5;
       @media (max-width: 1440px) {
         height: 38px;
         border-radius: 4px;
@@ -345,7 +371,7 @@
       tbody{
         tr td{
           input.bg-gray-light{
-            height: 32px;
+            height: 48px;
           }
           .dlt{
             svg{
@@ -593,6 +619,7 @@ ul.p-img-container {
     display: inline-block;
     margin-right: 12px;
     position: relative;
+    width: 100%;
     .p-img {
       @media (max-width: 1024px) {
         width: 350px;
@@ -670,25 +697,4 @@ ul.p-img-container {
 }
 @-webkit-keyframes spin {
   to { -webkit-transform: rotate(360deg); }
-}
-input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"]{
-  &.error2{
-    border: 1px solid red !important;
-    background: #fee !important;
-  }
-}
-.nice-select.error2 {
-  border: 1px solid red !important;
-  background: #fee !important;
-}
-.nice-select.error2 {
-  border: 1px solid red !important;
-  background: #fee !important;
-}
-.uploader.error2 .drag-upload {
-  border: 2px dashed red !important;
-  background: #fee;
-  background-image: url(./images/icons/upload.svg);
-  background-repeat: no-repeat;
-  background-position: 50% calc(50% - 50px);
 }

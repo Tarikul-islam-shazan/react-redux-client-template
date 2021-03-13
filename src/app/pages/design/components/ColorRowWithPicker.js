@@ -51,7 +51,7 @@ const ColorRowWithPicker = ({item, index, data, onChangeColor, remove}) => {
                 }
             </td>
             <td>
-                <input type="text" placeholder="Enter color name" name="name" onChange={onChange} value={item.name} className={`bg-gray-light border-0 pick-color ${item.nameError ? `error2` : ``}`}/>
+                <input type="text" placeholder="Enter color name" name="name" onChange={onChange} value={item.name} className={`bg-gray-light pick-color ${item.nameError ? `error2` : ``}`}/>
                 {
                   item.nameError ? <label className="error">{item.nameError}</label> : <></>
                 }

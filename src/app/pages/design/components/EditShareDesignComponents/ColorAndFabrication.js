@@ -57,7 +57,7 @@ export const ColorAndFabrication = ({data, errors, productTypeList, fabricTypeLi
           </div>
           <div className="form-group">
               <label>Fabric type</label>
-              <select className={`w-100 bg-gray-light border-0 ${errors.fabricTypeIdError ? `error2` : ``}`} name="fabricTypeId" value={data.fabricTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
+              <select className={`w-100 bg-gray-light ${errors.fabricTypeIdError ? `error2` : ``}`} name="fabricTypeId" value={data.fabricTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select fabric type</option>
                   {
                     fabricTypeList.map((item,i) => {
@@ -72,7 +72,7 @@ export const ColorAndFabrication = ({data, errors, productTypeList, fabricTypeLi
           </div>
           <div className="form-group">
               <label>Fabric details</label>
-              <input type="text" className={`${errors.fabricDetailsError ? `error2` : ``}`} placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
+              <input type="text" className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`} placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
               {
                 errors.fabricDetailsError ? <label className="error">{errors.fabricDetailsError}</label> : <></>
               }
