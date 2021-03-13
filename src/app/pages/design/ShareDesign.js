@@ -334,7 +334,7 @@ class ShareDesign extends Component {
 
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <label for="">Note</label>
+                                        <label for="">Notes</label>
                                         <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" className="bg-gray-light border-0"></textarea>
                                     </div>
                                 </div>
