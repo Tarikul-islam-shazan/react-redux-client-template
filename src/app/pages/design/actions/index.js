@@ -2,27 +2,27 @@ import axios from "axios";
 import Http from '../../../services/Http';
 
 const SAMPLE_SIZE_DATA = [
-                {
-                    "code": "XS", //size code
-                    "quantity": null //quantity
-                },
-                {
-                    "code": "S",
-                    "quantity": null
-                },
-								{
-                    "code": "M", //size code
-                    "quantity": null //quantity
-                },
-                {
-                    "code": "L",
-                    "quantity": null
-                },
-								{
-                    "code": "XL", //size code
-                    "quantity": null //quantity
-                }
-            ];
+    {
+        "code": "XS", //size code
+        "quantity": null //quantity
+    },
+    {
+        "code": "S",
+        "quantity": null
+    },
+		{
+        "code": "M", //size code
+        "quantity": null //quantity
+    },
+    {
+        "code": "L",
+        "quantity": null
+    },
+		{
+        "code": "XL", //size code
+        "quantity": null //quantity
+    }
+];
 
 
 export const _storeData = (key,value) => {
