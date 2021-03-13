@@ -315,7 +315,7 @@
  * Set up a decent box model on the root element
  */
 .dashboard-container {
-  padding-top: 76px;
+  padding-top: 100px;
   padding-bottom: 60px; }
 
 *,
