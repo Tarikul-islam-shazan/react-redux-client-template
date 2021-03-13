@@ -6050,10 +6050,15 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
         @media (max-width: 1440px) {
           .product-images .item .p-img img {
             height: 250px;
-            min-height: 266px; } }
+            min-height: 250px; } }
         @media (max-width: 1366px) {
           .product-images .item .p-img img {
-            height: 220px; } }
+            height: 236px;
+            min-height: 236px; } }
+        @media (max-width: 1280px) {
+          .product-images .item .p-img img {
+            height: 200px;
+            min-height: 200px; } }
         @media (max-width: 1024px) {
           .product-images .item .p-img img {
             height: 480px;
@@ -6128,7 +6133,6 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
     border: 1px solid #CACDD5; }
     @media (max-width: 1440px) {
       .product-info .product-type input.bg-gray-light {
-        height: 38px;
         border-radius: 4px;
         padding: 6px 10px; } }
   .product-info .product-type .nice-select {
