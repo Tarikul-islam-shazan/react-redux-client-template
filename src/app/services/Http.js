@@ -80,6 +80,18 @@ const routes = {
     removeOrderItem: `${BASE_URL}/project/place-order/remove-item`,
     cancelOrder: `${BASE_URL}/project/cancel-order/`,
     getPaymentSession: `${BASE_URL}/invoice/pay-via-gateway`,
+    //updatePaymentStatus: `${BASE_URL}/payment/confirm`,
+
+    addCollection: `${BASE_URL}/collection/add`,
+    addProductToCollection: `${BASE_URL}/collection/product/add`,
+    getUserCollectionList: `${BASE_URL}/collection/search/user/`,
+    getCollectionDetails: `${BASE_URL}/collection/`,
+    getCollectionProducts: `${BASE_URL}/collection/products/`,
+    getCollectionProductsByCollectionType: `${BASE_URL}/collection/products/collection-type/`,
+    getUsersByTypes: `${BASE_URL}/user/by-user-types`,
+    shareCollection: `${BASE_URL}/collection/share`,
+    getFixedCollection: `${BASE_URL}/collection/fixed-collection`,
+    getUserSuggestions: `${BASE_URL}/user/find-list-by-email-and-user-type`,
     updatePaymentStatus: `${BASE_URL}/payment/confirm`,
 
     invoiceList: `${BASE_URL}/invoice/user/`,
@@ -185,6 +197,11 @@ const Http = {
     DELETE: (key, data, id = '') => {
         // updateTokenInHeader();
         return axios.delete(routes[key] + id, {data, headers});
+    },
+    DELETE_WITH_BODY: (key, body, params = '') => {
+        // updateTokenInHeader();
+        params = typeof params === 'object' ? encodeQueryData(params) : params;
+        return axios.delete(routes[key] + params, {headers, data: body});
     },
     UPLOAD: (key, {name, file}) => {
         // updateTokenInHeader();

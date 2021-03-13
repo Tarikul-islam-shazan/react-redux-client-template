@@ -29,12 +29,21 @@ class Sidebar extends Component {
 
     componentDidMount = () => {
       loadjs(['/js/script.js','/js/custom.js']);
-      this.connect()
+      let userInfo = localStorage.getItem('userInfo')
+      if(userInfo){
+        userInfo = JSON.parse(userInfo);
+      } else {
+        userInfo = {};
+      }
+      this.setState({
+        permissions: userInfo.permissions ? userInfo.permissions : []
+      })
+      this.connect(userInfo)
       this.initiateHotjarGA()
     }
 
 
-    connect = async() => {
+    connect = async(userInfo) => {
       // var socket = new SockJS( 'http://nitex-env.eba-bj9qc7tu.eu-central-1.elasticbeanstalk.com/ws' );
       try {
         let socket = await new SockJS( BASE_URL+'/ws', undefined);
@@ -42,13 +51,7 @@ class Sidebar extends Component {
 
 
         let token = localStorage.getItem('token').split(' ')[1];
-        let userInfo = localStorage.getItem('userInfo')
-        if(userInfo){
-          userInfo = JSON.parse(userInfo);
-        }
-        this.setState({
-          permissions: userInfo.permissions ? userInfo.permissions : []
-        })
+
         // console.log("sidebar notification",token,userInfo)
         let headers = {
           "jwt":token
@@ -146,7 +149,6 @@ class Sidebar extends Component {
                         />
                         : <></>
                       }
-
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
@@ -171,6 +173,17 @@ class Sidebar extends Component {
                           onClick={this.props.setActiveTab}
                         />
                         : <></>
+                      }
+                      {
+                        <NavLink
+                          to="/collection/list"
+                          classes={this.props.activeTab.includes('collection') ? 'active' : ''}
+
+                          activeIcon={require("../assets/icons/share-design-active.png")}
+                          inactiveIcon={require("../assets/icons/share-design.png")}
+                          title="Collections"
+                          onClick={this.props.setActiveTab}
+                        />
                       }
                       {
                         permissions.includes('PROJECT_MY_PROJECT') ?
