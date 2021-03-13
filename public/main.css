@@ -9008,7 +9008,7 @@ template {
   height: 80px !important;
   z-index: 999; }
   .slick-arrow.slick-prev {
-    left: 30px;
+    left: 60px;
     top: 50%;
     transform: translateY(-50%);
     background: url("./images/icons/left-slide.png") no-repeat center; }
@@ -9020,7 +9020,7 @@ template {
     .slick-arrow.slick-prev:hover, .slick-arrow.slick-prev:focus {
       background: url("./images/icons/left-slide.png") no-repeat center !important; }
   .slick-arrow.slick-next {
-    right: 65px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
     left: auto;
