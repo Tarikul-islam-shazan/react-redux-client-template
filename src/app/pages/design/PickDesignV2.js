@@ -237,13 +237,13 @@ class PickDesignV2 extends Component {
     renderList = async(page = 0) => {
       this.setState({loading:true, searching: true})
       let { size, designList, search, sort, productTypeId, filters } = this.state;
-      let params = `?page=${page}&size=${size}&searchText=${search}`;
+      let params = `?page=${page}&size=${size}&search=${search}`;
       filters.map((filter) => {
         let key = '';
         if (filter.type === 'CATEGORY') {
           key = 'category';
         } else if (filter.type === 'PRODUCT_TYPE') {
-          key = 'productType';
+          key = 'productTypeId';
         } else if (filter.type === 'COLOR') {
           key = 'color';
         } else if (filter.type === 'FABRIC_TYPE') {
