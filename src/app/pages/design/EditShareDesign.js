@@ -51,13 +51,39 @@ class EditShareDesign extends Component {
         };
     }
 
+    setPickerRef = (node, i) => {
+        this['colorRef_' + i] = node;
+        console.log("setPickerRef", node, i)
+    }
+
+    handleClickOutside = (event) => {
+        let {designDetails} = this.state;
+        console.log("clicked outside", designDetails.colors)
+        if (designDetails.colors) {
+          designDetails.colors = designDetails.colors.map((color, i) => {
+              if ((this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) || (this['colorRef_mbl_' + i] && !this['colorRef_mbl_' + i].contains(event.target))) {
+                  color.showColorPickerModal = false;
+              }
+              return color;
+          })
+          this.setState({
+              designDetails
+          })
+        }
+    }
+
     componentDidMount = async() => {
         document.title = "Share Design Edit - Nitex";
         let id = this.props.match.params.id;
+        window.addEventListener('mousedown', this.handleClickOutside);
         this.getDesignDetails(id);
         this.getDesignDocuments(id);
         this.getProductTypes();
         this.getFabricTypes();
+    }
+
+    componentWillUnmount = () => {
+      window.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     getDesignDetails = async(id) => {
@@ -182,6 +208,11 @@ class EditShareDesign extends Component {
             hexCode: '',
             name: ''
           })
+        } else {
+          designDetails.colors = [{
+            hexCode: '',
+            name: ''
+          }];
         }
         this.setState({designDetails});
     }
@@ -456,6 +487,7 @@ class EditShareDesign extends Component {
 
                     <ColorAndFabrication
                       data={designDetails}
+                      setPickerRef={this.setPickerRef}
                       errors={errors}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
@@ -513,6 +545,7 @@ class EditShareDesign extends Component {
 
                     <ColorAndFabrication
                       data={designDetails}
+                      setPickerRef={this.setPickerRef}
                       errors={errors}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
@@ -558,44 +591,48 @@ class EditShareDesign extends Component {
 
                         <MeasurementChart data={designDetails} onChange={this.onChange} onSubmit={this.updateNoteAndSize}/>
 
-                        <div className="advanced-settings position-relative">
-                           <span className="p-edit cursor-pointer">
-                               <div className="done">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.452" height="14.162" viewBox="0 0 19.452 14.162">
-                                         <path id="Path_27878" data-name="Path 27878" d="M2444.531-5030.171l4.091,4.335,12.533-11.748" transform="translate(-2443.117 5038.998)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                               </div>
-                           </span>
-                             <div className="form-group">
-                              <label  data-toggle="collapse" href="#Advancedsettings" role="button" aria-expanded="false" aria-controls="Advancedsettings" className="cursor-pointer">
+                        <div class="advanced-settings w-100 float-left position-relative">
+                            <span class="p-edit cursor-pointer">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="19.452" height="14.162" viewBox="0 0 19.452 14.162">
+                                   <path id="Path_27878" data-name="Path 27878" d="M2444.531-5030.171l4.091,4.335,12.533-11.748" transform="translate(-2443.117 5038.998)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                              </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16.576" height="15.841" viewBox="0 0 16.576 15.841">
+                                    <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(0.75 0.75)">
+                                      <path id="Path_29430" data-name="Path 29430" d="M18,30h7.538" transform="translate(-10.462 -15.659)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                                      <path id="Path_29431" data-name="Path 29431" d="M15.808,4.838A1.777,1.777,0,1,1,18.32,7.351L7.85,17.821l-3.35.838.838-3.35Z" transform="translate(-4.5 -4.318)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <div class="form-group">
+                              <label  data-toggle="collapse" href="#Advancedsettings" role="button" aria-expanded="false" aria-controls="Advancedsettings" class="cursor-pointer">
                                   Advanced settings
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188">
                                       <path id="Path_27707" data-name="Path 27707" d="M0,0,6.819,6.774,13.637,0" transform="translate(1.414 1.414)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                   </svg>
                               </label>
-                              <div className="collapse" id="Advancedsettings">
+                              <div class="collapse" id="Advancedsettings">
 
-                                  <div className="d-flex flex-column  mt-4">
+                                  <div class="d-flex flex-column  mt-4">
 
-                                      <div className="mr-0 mr-sm-5">
-                                          <div className="row">
-                                              <div className="col-md-6">
-                                                  <div className="form-group">
-                                                      <label className="font-16">Minimum order quantity (in pcs)</label>
-                                                      <input type="text" className="bg-gray-light" placeholder="(in pcs)"/>
+                                      <div class="">
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="font-16">Minimum order quantity (in pcs)</label>
+                                                      <input type="text" class="bg-gray-light" placeholder="(in pcs)"/>
                                                   </div>
                                               </div>
-                                              <div className="col-md-6">
-                                                  <div className="form-group">
-                                                      <label className="font-16">Turnaround time</label>
-                                                      <input type="text" className="bg-gray-light" placeholder="(in days)"/>
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="font-16">Turnaround time</label>
+                                                      <input type="text" class="bg-gray-light" placeholder="(in days)"/>
                                                   </div>
                                               </div>
                                           </div>
                                       </div>
 
                                       <div>
-                                          <table className="table table-bordered table-responsive-xl table-striped  measurement-table  min-max-table flex-grow-1">
+                                          <table class="table table-bordered table-responsive-xl table-striped  measurement-table  min-max-table flex-grow-1">
                                               <thead>
                                               <tr>
                                                   <th>Min</th>
@@ -603,6 +640,7 @@ class EditShareDesign extends Component {
                                                   <th>Price</th>
                                                   <th>Currency</th>
                                                   <th>Price type</th>
+                                                  <th></th>
                                               </tr>
                                               </thead>
                                               <tbody>
@@ -629,14 +667,29 @@ class EditShareDesign extends Component {
                                                           <option value="CIF">CIF</option>
                                                       </select>
                                                   </td>
+                                                  <td class="text-center">
+                                                      <div class="dlt cursor-pointer">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                              <g id="Group_11045" data-name="Group 11045" transform="translate(-396 -260)">
+                                                                  <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(428 260) rotate(90)" fill="rgba(253,39,39,0.05)"></rect>
+                                                                  <g id="delete" transform="translate(405.358 267.001)">
+                                                                      <path id="Path_27867" data-name="Path 27867" d="M222.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,222.791,154.7Zm0,0" transform="translate(-213.682 -148.639)" fill="#fd2727"></path>
+                                                                      <path id="Path_27868" data-name="Path 27868" d="M104.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,104.791,154.7Zm0,0" transform="translate(-100.308 -148.639)" fill="#fd2727"></path>
+                                                                      <path id="Path_27869" data-name="Path 27869" d="M1.11,4.983v9.66a2.163,2.163,0,0,0,.575,1.492,1.931,1.931,0,0,0,1.4.606H10.5a1.93,1.93,0,0,0,1.4-.606,2.163,2.163,0,0,0,.575-1.492V4.983A1.5,1.5,0,0,0,12.1,2.038H10.089v-.49A1.54,1.54,0,0,0,8.536,0H5.055A1.54,1.54,0,0,0,3.5,1.547v.49H1.495A1.5,1.5,0,0,0,1.11,4.983ZM10.5,15.956H3.086a1.242,1.242,0,0,1-1.192-1.313V5.017h9.8v9.625A1.242,1.242,0,0,1,10.5,15.956ZM4.286,1.547A.755.755,0,0,1,5.055.783H8.536a.755.755,0,0,1,.769.765v.49H4.286ZM1.495,2.822H12.1a.706.706,0,0,1,0,1.411H1.495a.706.706,0,0,1,0-1.411Zm0,0" transform="translate(0 0)" fill="#fd2727"></path>
+                                                                      <path id="Path_27870" data-name="Path 27870" d="M163.791,154.7a.392.392,0,0,0-.392.392v7.41a.392.392,0,0,0,.784,0V155.1A.392.392,0,0,0,163.791,154.7Zm0,0" transform="translate(-156.995 -148.639)" fill="#fd2727"></path>
+                                                                  </g>
+                                                              </g>
+                                                          </svg>
+                                                      </div>
+                                                  </td>
                                               </tr>
                                               </tbody>
                                           </table>
 
-                                          <div className="row mt-4">
-                                              <div className="col-lg-12">
-                                                  <div className="d-flex justify-content-end">
-                                             <span className="add-size cursor-pointer mr-4 mb-3 mb-sm-0">
+                                          <div class="row mt-4">
+                                              <div class="col-lg-12">
+                                                  <div class="d-flex justify-content-end">
+                                             <span class="add-size cursor-pointer mr-4 mb-3 mb-sm-0">
                                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                       <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
                                                       <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#472f91" stroke-width="1">
@@ -655,8 +708,8 @@ class EditShareDesign extends Component {
 
                                   </div>
                               </div>
-                            </div>
-                        </div>
+                          </div>
+                      </div>
 
 
                     </div>

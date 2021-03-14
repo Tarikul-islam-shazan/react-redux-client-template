@@ -42,9 +42,9 @@ export const DocumentHandler = ({data, title, name, classes, visibleDocType, set
 
         <ul class="p-img-container">
         {
-          data.map((item) => {
+          data.map((item, i) => {
             return(
-              <li>
+              <li key={`responsive_${i}`}>
                   <div class="p-img">
                       <img src={addImageSuffix(item.docUrl, '_xthumbnail')} alt=""/>
                       <div class="dlt" onClick={() => onFileRemove(item)}>

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { SketchPicker } from 'react-color';
 import Modal from 'react-bootstrap/Modal';
 
-const ColorRowWithPicker = ({item, index, data, onChangeColor, remove}) => {
+const ColorRowWithPicker = ({item, setPickerRef, index, data, onChangeColor, remove}) => {
 
     let showColorPickerModal = item.showColorPickerModal ? item.showColorPickerModal : false;
 
@@ -36,7 +36,7 @@ const ColorRowWithPicker = ({item, index, data, onChangeColor, remove}) => {
                 <div className="pick-color">
                     {
                       showColorPickerModal ?
-                      <div className="color-picker-popup">
+                      <div className="color-picker-popup" ref={setPickerRef}>
                         <SketchPicker
                           color={item.hexCode}
                           onChangeComplete={handleChangeComplete}/>

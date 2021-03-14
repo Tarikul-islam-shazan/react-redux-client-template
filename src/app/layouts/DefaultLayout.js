@@ -38,9 +38,7 @@ class DefaultLayout extends Component {
     }
 
     handleClickOutside = (event) => {
-      console.log("entered outside")
       if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-        console.log("entered inside")
         this.setState({
           showNotification : false
         })

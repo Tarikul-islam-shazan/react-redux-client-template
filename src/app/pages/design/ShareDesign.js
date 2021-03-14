@@ -46,11 +46,33 @@ class ShareDesign extends Component {
         };
     }
 
+    setPickerRef = (node, i) => {
+        this['colorRef_' + i] = node;
+    }
+
+    handleClickOutside = (event) => {
+        let {colors} = this.state;
+        colors = colors.map((color, i) => {
+            if (this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) {
+                color.showColorPickerModal = false;
+            }
+            return color;
+        })
+        this.setState({
+            colors
+        })
+    }
+
     componentDidMount = async() => {
         document.title = "Share Design - Nitex";
+        window.addEventListener('mousedown', this.handleClickOutside);
         await this.getProductTypes();
         await this.getFabricTypes();
         loadjs(['/js/script.js']);
+    }
+
+    componentWillUnmount = () => {
+      window.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     getProductTypes = async() => {
@@ -331,7 +353,7 @@ class ShareDesign extends Component {
                                             {
                                               colors.map((item, i) => {
                                                 return(
-                                                  <ColorRowWithPicker item={item} key={i} index={i} data={colors} onChangeColor={this.onChange} remove={this.removeColor} />
+                                                  <ColorRowWithPicker setPickerRef={(node) => this.setPickerRef(node, i)} item={item} key={i} index={i} data={colors} onChangeColor={this.onChange} remove={this.removeColor} />
                                                 )
                                               })
                                             }
