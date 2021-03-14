@@ -109,6 +109,14 @@ class ShareDesign extends Component {
     }
 
     onChange = (e) => {
+        // let {errors} = this.state;
+        // if (errors[e.target.name]) {
+        //     let validated = validateShareDesign(this.state);
+        //     this.setState({
+        //       errors: {...this.state.errors, ...validated.errors},
+        //       colors: validated.errors.colors ? validated.errors.colors : this.state.colors
+        //     });
+        // }
         this.setState({
           [e.target.name]: e.target.value
         })
