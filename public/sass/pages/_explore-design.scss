@@ -654,20 +654,19 @@ button.rec-arrow-right {
     padding: 4px 10px !important;
   }
   .quote-cart-count{
-    background: #ee761f;
-    border: 2px solid #fff;
-    font-size: 10px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 20px;
-    border-radius: 100%;
-    top: -6px;
-    right: -5px;
-    display: block;
+    width: 20px;
+    height: 20px;
     position: absolute;
-    width: 25px;
-    height: 25px;
+    display: block;
+    background: $secondary-color;
+    font-size: 10px;
     color: #fff;
+    font-weight: 600;
+    border-radius: 100%;
+    top: 3px;
+    right: 8px;
+    line-height: 20px;
+    text-align: center;
   }
 }
 .sidebar-collapse.filter-cat-mobile-menu{
