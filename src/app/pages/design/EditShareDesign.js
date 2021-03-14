@@ -306,8 +306,8 @@ class EditShareDesign extends Component {
               <p style={{wordBreak: 'break-all'}}>{key}</p>
             </div>
             <div className="col-md-8">
-              <div class="progress">
-                  <div class={`progress-bar ${data.status === `SUCCESS` ? `bg-success` : (data.status === 'FAILED' ? `bg-danger` : ``)}`} role="progressbar" style={{width: `${data.progress}%`}} aria-valuenow={data.progress} aria-valuemin="0" aria-valuemax="100">{data.status}</div>
+              <div className="progress">
+                  <div className={`progress-bar ${data.status === `SUCCESS` ? `bg-success` : (data.status === 'FAILED' ? `bg-danger` : ``)}`} role="progressbar" style={{width: `${data.progress}%`}} aria-valuenow={data.progress} aria-valuemin="0" aria-valuemax="100">{data.status}</div>
               </div>
             </div>
           </div>
@@ -409,28 +409,28 @@ class EditShareDesign extends Component {
         let {designDetails, designDocuments, productTypeList, fabricTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
         return (
           <>
-            <div class="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
+            <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
 
                 <Title data={designDetails} errors={errors} flag={editTitle} flagName='editTitle' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateDetails}/>
 
-                <div class="flex-grow-1 text-right add-another-product" >
-                    <span class="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
+                <div className="flex-grow-1 text-right add-another-product" >
+                    <span className="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
                 </div>
 
             </div>
 
-            <section class="product-img-and-info">
-                <div class="product-images d-flex justify-content-between">
+            <section className="product-img-and-info">
+                <div className="product-images d-flex justify-content-between">
                     {
                       designDocuments.PRODUCT_DESIGN && designDocuments.PRODUCT_DESIGN.length ?
-                      <div class="item">
-                          <div class="type-of-img-name d-flex justify-content-between align-items-center">
-                              <span class="font-20">Feature image</span>
+                      <div className="item">
+                          <div className="type-of-img-name d-flex justify-content-between align-items-center">
+                              <span className="font-20">Feature image</span>
                           </div>
-                          <div class="p-img">
+                          <div className="p-img">
                               <img src={designDocuments.PRODUCT_DESIGN[0].docUrl} alt=""/>
                               <input type="file" style={{display: 'none'}} ref={input => this.inputElement = input} name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
-                              <div class="dlt" onClick={() => this.inputElement.click()}>
+                              <div className="dlt" onClick={() => this.inputElement.click()}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                       <g id="Group_11134" data-name="Group 11134" transform="translate(-389 -180)">
                                           <path id="Path_27873" data-name="Path 27873" d="M17.528,82.973H12.715V78.109h1.591a.5.5,0,0,0,.4-.788L11.615,73.04a.493.493,0,0,0-.8,0L7.719,77.321a.5.5,0,0,0,.4.788H9.713v4.863H4.323A4.821,4.821,0,0,1,0,78.151a4.566,4.566,0,0,1,2.264-3.942,3.061,3.061,0,0,1-.188-1.068,3.1,3.1,0,0,1,3.108-3.108,3.055,3.055,0,0,1,1.063.188,6.222,6.222,0,0,1,11.822,2.054,5.412,5.412,0,0,1-.541,10.7Z" transform="translate(394 121.35)" fill="#472f91"/>
@@ -440,14 +440,14 @@ class EditShareDesign extends Component {
                               </div>
                           </div>
                       </div> :
-                      <div class="item">
-                          <div class="type-of-img-name">
-                              <span class="font-20">Feature image</span>
+                      <div className="item">
+                          <div className="type-of-img-name">
+                              <span className="font-20">Feature image</span>
                           </div>
-                          <div class="uploader">
-                              <label for="drag-upload" class="drag-upload">&nbsp;</label>
-                              <input type="file" class="file-upload" id="drag-upload" name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
-                              {/*<div class="center-center">
+                          <div className="uploader">
+                              <label for="drag-upload" className="drag-upload">&nbsp;</label>
+                              <input type="file" className="file-upload" id="drag-upload" name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
+                              {/*<div className="center-center">
                                   <div id="loading-spinner"></div>
                               </div>*/}
                           </div>
@@ -509,7 +509,7 @@ class EditShareDesign extends Component {
                       onFileRemove={this.onFileRemove}/>
                 </div>
 
-                <div class="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
+                <div className="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
 
                     <ColorAndFabrication
                       data={designDetails}
@@ -525,13 +525,13 @@ class EditShareDesign extends Component {
                       onSubmit={this.updateDetails}
                       classes="product-type item d-none d-xl-block"/>
 
-                    <div class="product-notes flex-grow-1">
+                    <div className="product-notes flex-grow-1">
                         {
                             visibleDocType ?
-                            <div class="more-files">
-                                <div class="type-of-img-name d-flex justify-content-between align-items-center">
-                                    <span class="font-20">{visibleDocType.replace(/_/g, ' ')}</span>
-                                    <span class="close-pop cursor-pointer" onClick={() => this.setState({visibleDocType: ''})}>
+                            <div className="more-files">
+                                <div className="type-of-img-name d-flex justify-content-between align-items-center">
+                                    <span className="font-20">{visibleDocType.replace(/_/g, ' ')}</span>
+                                    <span className="close-pop cursor-pointer" onClick={() => this.setState({visibleDocType: ''})}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="51.282" height="51.282" viewBox="0 0 51.282 51.282">
                                             <g id="Group_11113" data-name="Group 11113" transform="translate(-7253.316 1861.454) rotate(45)">
                                               <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3867.015 -6463.247) rotate(90)" fill="#f2f2f2" stroke="#21242b" stroke-width="1">
@@ -543,7 +543,7 @@ class EditShareDesign extends Component {
                                           </svg>
                                     </span>
                                 </div>
-                                <div class="product-images">
+                                <div className="product-images">
                                 {
                                   designDocuments[visibleDocType] && designDocuments[visibleDocType].map((doc, i) => {
                                     return (
@@ -557,6 +557,107 @@ class EditShareDesign extends Component {
                         <Notes data={designDetails} flag={editNotes} flagName='editNotes' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateNoteAndSize}/>
 
                         <MeasurementChart data={designDetails} onChange={this.onChange} onSubmit={this.updateNoteAndSize}/>
+
+                        <div className="advanced-settings position-relative">
+                           <span className="p-edit cursor-pointer">
+                               <div className="done">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.452" height="14.162" viewBox="0 0 19.452 14.162">
+                                         <path id="Path_27878" data-name="Path 27878" d="M2444.531-5030.171l4.091,4.335,12.533-11.748" transform="translate(-2443.117 5038.998)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                    </svg>
+                               </div>
+                           </span>
+                             <div className="form-group">
+                              <label  data-toggle="collapse" href="#Advancedsettings" role="button" aria-expanded="false" aria-controls="Advancedsettings" className="cursor-pointer">
+                                  Advanced settings
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16.466" height="9.188" viewBox="0 0 16.466 9.188">
+                                      <path id="Path_27707" data-name="Path 27707" d="M0,0,6.819,6.774,13.637,0" transform="translate(1.414 1.414)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                  </svg>
+                              </label>
+                              <div className="collapse" id="Advancedsettings">
+
+                                  <div className="d-flex flex-column  mt-4">
+
+                                      <div className="mr-0 mr-sm-5">
+                                          <div className="row">
+                                              <div className="col-md-6">
+                                                  <div className="form-group">
+                                                      <label className="font-16">Minimum order quantity (in pcs)</label>
+                                                      <input type="text" className="bg-gray-light" placeholder="(in pcs)"/>
+                                                  </div>
+                                              </div>
+                                              <div className="col-md-6">
+                                                  <div className="form-group">
+                                                      <label className="font-16">Turnaround time</label>
+                                                      <input type="text" className="bg-gray-light" placeholder="(in days)"/>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <div>
+                                          <table className="table table-bordered table-responsive-xl table-striped  measurement-table  min-max-table flex-grow-1">
+                                              <thead>
+                                              <tr>
+                                                  <th>Min</th>
+                                                  <th>Max</th>
+                                                  <th>Price</th>
+                                                  <th>Currency</th>
+                                                  <th>Price type</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>
+                                              <tr>
+                                                  <td>
+                                                      <input type="text" placeholder="Enter product type"/>
+                                                  </td>
+                                                  <td>
+                                                      <input type="text" placeholder="Enter product type"/>
+                                                  </td>
+                                                  <td>
+                                                      <input type="text" placeholder="Enter product type"/>
+                                                  </td>
+                                                  <td>
+                                                      <select>
+                                                          <option value="bdt">BDT</option>
+                                                          <option value="bdt">USD</option>
+                                                          <option value="bdt">INR</option>
+                                                      </select>
+                                                  </td>
+                                                  <td>
+                                                      <select>
+                                                          <option value="FOB">FOB</option>
+                                                          <option value="CIF">CIF</option>
+                                                      </select>
+                                                  </td>
+                                              </tr>
+                                              </tbody>
+                                          </table>
+
+                                          <div className="row mt-4">
+                                              <div className="col-lg-12">
+                                                  <div className="d-flex justify-content-end">
+                                             <span className="add-size cursor-pointer mr-4 mb-3 mb-sm-0">
+                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                      <g id="Group_11105" data-name="Group 11105" transform="translate(-3831 6463)">
+                                                      <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3855 -6463) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#472f91" stroke-width="1">
+                                                          <rect width="24" height="24" rx="12" stroke="none"></rect>
+                                                          <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="none"></rect>
+                                                      </g>
+                                                      <path id="close_3_" data-name="close (3)" d="M3.867,3.32,7.074.113A.387.387,0,0,1,7.621.66L4.414,3.867,7.621,7.074a.387.387,0,0,1-.547.547L3.867,4.414.66,7.621a.387.387,0,0,1-.547-.547L3.32,3.867.113.66A.387.387,0,0,1,.66.113Z" transform="translate(3842.869 -6456.6) rotate(45)" fill="#472f91" stroke="#452c8e" stroke-width="0.25"></path>
+                                                      </g>
+                                                  </svg>
+                                                  Add New
+                                              </span>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
