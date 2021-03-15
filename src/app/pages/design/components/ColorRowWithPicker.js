@@ -47,13 +47,13 @@ const ColorRowWithPicker = ({item, setPickerRef, index, data, onChangeColor, rem
                     <input type="text" placeholder="Pick color" name="hexCode" onChange={onChange} value={item.hexCode} className={`bg-gray-light border-0 ${item.nameError ? `error2` : ``}`}/>
                 </div>
                 {
-                  item.hexCodeError ? <label className="error">{item.hexCodeError}</label> : <></>
+                  item.hexCodeError ? <label className="error">{item.hexCodeError}</label> : <label className="error"></label>
                 }
             </td>
             <td>
                 <input type="text" placeholder="Enter color name" name="name" onChange={onChange} value={item.name} className={`bg-gray-light pick-color ${item.nameError ? `error2` : ``}`}/>
                 {
-                  item.nameError ? <label className="error">{item.nameError}</label> : <></>
+                  item.nameError ? <label className="error">{item.nameError}</label> : <label className="error"></label>
                 }
             </td>
             <td align="right">
@@ -70,6 +70,7 @@ const ColorRowWithPicker = ({item, setPickerRef, index, data, onChangeColor, rem
                         </g>
                       </svg>
                 </div>
+                <label className="error"></label>
             </td>
         </tr>
 
