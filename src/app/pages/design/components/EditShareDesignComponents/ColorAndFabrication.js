@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ColorRowWithPicker from "../ColorRowWithPicker";
 
-export const ColorAndFabrication = ({data, errors, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
+export const ColorAndFabrication = ({data, setPickerRef, errors, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
 
   productTypeList.map((item) => {
@@ -101,8 +101,12 @@ export const ColorAndFabrication = ({data, errors, productTypeList, fabricTypeLi
                       <tbody>
                       {
                         data.colors && data.colors.map((colorObj, i) => {
+                          let index = i;
                           return (
-                            <ColorRowWithPicker item={colorObj} key={i} index={i} data={data.colors} onChangeColor={onChangeColor} remove={removeColor} />
+                            <ColorRowWithPicker
+                              item={colorObj}
+                              setPickerRef={(node, i) => setPickerRef(node, classes.includes('d-xl-none') ? `mbl_${index}` : index)} 
+                              key={i} index={i} data={data.colors} onChangeColor={onChangeColor} remove={removeColor} />
                           )
                         })
                       }

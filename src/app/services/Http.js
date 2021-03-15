@@ -101,7 +101,7 @@ const routes = {
     removeProductDocument: `${BASE_URL}/product/doc/`,
     shareDesign: `${BASE_URL}/product/share-design`,
     getShareDesignDetails: `${BASE_URL}/product/share-design/`,
-    updateDesignDetails: `${BASE_URL}/product/color-and-fabrication/`,
+    updateDesignDetails: `${BASE_URL}/product/share-design/`,
     updateSizeTable: `${BASE_URL}/product/size/`,
     getDesignImages: `${BASE_URL}/product/doc/`,
     getFabricTypes: `${BASE_URL}/fabric-type/all`

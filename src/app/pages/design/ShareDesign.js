@@ -46,11 +46,33 @@ class ShareDesign extends Component {
         };
     }
 
+    setPickerRef = (node, i) => {
+        this['colorRef_' + i] = node;
+    }
+
+    handleClickOutside = (event) => {
+        let {colors} = this.state;
+        colors = colors.map((color, i) => {
+            if (this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) {
+                color.showColorPickerModal = false;
+            }
+            return color;
+        })
+        this.setState({
+            colors
+        })
+    }
+
     componentDidMount = async() => {
         document.title = "Share Design - Nitex";
+        window.addEventListener('mousedown', this.handleClickOutside);
         await this.getProductTypes();
         await this.getFabricTypes();
         loadjs(['/js/script.js']);
+    }
+
+    componentWillUnmount = () => {
+      window.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     getProductTypes = async() => {
@@ -109,6 +131,14 @@ class ShareDesign extends Component {
     }
 
     onChange = (e) => {
+        // let {errors} = this.state;
+        // if (errors[e.target.name]) {
+        //     let validated = validateShareDesign(this.state);
+        //     this.setState({
+        //       errors: {...this.state.errors, ...validated.errors},
+        //       colors: validated.errors.colors ? validated.errors.colors : this.state.colors
+        //     });
+        // }
         this.setState({
           [e.target.name]: e.target.value
         })
@@ -323,7 +353,7 @@ class ShareDesign extends Component {
                                             {
                                               colors.map((item, i) => {
                                                 return(
-                                                  <ColorRowWithPicker item={item} key={i} index={i} data={colors} onChangeColor={this.onChange} remove={this.removeColor} />
+                                                  <ColorRowWithPicker setPickerRef={(node) => this.setPickerRef(node, i)} item={item} key={i} index={i} data={colors} onChangeColor={this.onChange} remove={this.removeColor} />
                                                 )
                                               })
                                             }
@@ -334,7 +364,7 @@ class ShareDesign extends Component {
 
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <label for="">Note</label>
+                                        <label for="">Notes</label>
                                         <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" className="bg-gray-light border-0"></textarea>
                                     </div>
                                 </div>

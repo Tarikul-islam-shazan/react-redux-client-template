@@ -51,13 +51,39 @@ class EditShareDesign extends Component {
         };
     }
 
+    setPickerRef = (node, i) => {
+        this['colorRef_' + i] = node;
+        console.log("setPickerRef", node, i)
+    }
+
+    handleClickOutside = (event) => {
+        let {designDetails} = this.state;
+        console.log("clicked outside", designDetails.colors)
+        if (designDetails.colors) {
+          designDetails.colors = designDetails.colors.map((color, i) => {
+              if ((this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) || (this['colorRef_mbl_' + i] && !this['colorRef_mbl_' + i].contains(event.target))) {
+                  color.showColorPickerModal = false;
+              }
+              return color;
+          })
+          this.setState({
+              designDetails
+          })
+        }
+    }
+
     componentDidMount = async() => {
         document.title = "Share Design Edit - Nitex";
         let id = this.props.match.params.id;
+        window.addEventListener('mousedown', this.handleClickOutside);
         this.getDesignDetails(id);
         this.getDesignDocuments(id);
         this.getProductTypes();
         this.getFabricTypes();
+    }
+
+    componentWillUnmount = () => {
+      window.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     getDesignDetails = async(id) => {
@@ -182,6 +208,11 @@ class EditShareDesign extends Component {
             hexCode: '',
             name: ''
           })
+        } else {
+          designDetails.colors = [{
+            hexCode: '',
+            name: ''
+          }];
         }
         this.setState({designDetails});
     }
@@ -306,8 +337,8 @@ class EditShareDesign extends Component {
               <p style={{wordBreak: 'break-all'}}>{key}</p>
             </div>
             <div className="col-md-8">
-              <div class="progress">
-                  <div class={`progress-bar ${data.status === `SUCCESS` ? `bg-success` : (data.status === 'FAILED' ? `bg-danger` : ``)}`} role="progressbar" style={{width: `${data.progress}%`}} aria-valuenow={data.progress} aria-valuemin="0" aria-valuemax="100">{data.status}</div>
+              <div className="progress">
+                  <div className={`progress-bar ${data.status === `SUCCESS` ? `bg-success` : (data.status === 'FAILED' ? `bg-danger` : ``)}`} role="progressbar" style={{width: `${data.progress}%`}} aria-valuenow={data.progress} aria-valuemin="0" aria-valuemax="100">{data.status}</div>
               </div>
             </div>
           </div>
@@ -368,6 +399,7 @@ class EditShareDesign extends Component {
       let {designDetails} = this.state;
       let body = {};
       body.note = designDetails.note;
+      body.sizeText = JSON.stringify( measurementChart );
       body.sizeDTO = {
         sizeText: JSON.stringify({
           sizeTableRows : measurementChart
@@ -408,28 +440,28 @@ class EditShareDesign extends Component {
         let {designDetails, designDocuments, productTypeList, fabricTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
         return (
           <>
-            <div class="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
+            <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
 
                 <Title data={designDetails} errors={errors} flag={editTitle} flagName='editTitle' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateDetails}/>
 
-                <div class="flex-grow-1 text-right add-another-product" >
-                    <span class="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
+                <div className="flex-grow-1 text-right add-another-product" >
+                    <span className="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
                 </div>
 
             </div>
 
-            <section class="product-img-and-info">
-                <div class="product-images d-flex justify-content-between">
+            <section className="product-img-and-info">
+                <div className="product-images d-flex justify-content-between">
                     {
                       designDocuments.PRODUCT_DESIGN && designDocuments.PRODUCT_DESIGN.length ?
-                      <div class="item">
-                          <div class="type-of-img-name d-flex justify-content-between align-items-center">
-                              <span class="font-20">Feature image</span>
+                      <div className="item">
+                          <div className="type-of-img-name d-flex justify-content-between align-items-center">
+                              <span className="font-20">Feature image</span>
                           </div>
-                          <div class="p-img">
+                          <div className="p-img">
                               <img src={designDocuments.PRODUCT_DESIGN[0].docUrl} alt=""/>
                               <input type="file" style={{display: 'none'}} ref={input => this.inputElement = input} name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
-                              <div class="dlt" onClick={() => this.inputElement.click()}>
+                              <div className="dlt" onClick={() => this.inputElement.click()}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                       <g id="Group_11134" data-name="Group 11134" transform="translate(-389 -180)">
                                           <path id="Path_27873" data-name="Path 27873" d="M17.528,82.973H12.715V78.109h1.591a.5.5,0,0,0,.4-.788L11.615,73.04a.493.493,0,0,0-.8,0L7.719,77.321a.5.5,0,0,0,.4.788H9.713v4.863H4.323A4.821,4.821,0,0,1,0,78.151a4.566,4.566,0,0,1,2.264-3.942,3.061,3.061,0,0,1-.188-1.068,3.1,3.1,0,0,1,3.108-3.108,3.055,3.055,0,0,1,1.063.188,6.222,6.222,0,0,1,11.822,2.054,5.412,5.412,0,0,1-.541,10.7Z" transform="translate(394 121.35)" fill="#472f91"/>
@@ -439,14 +471,14 @@ class EditShareDesign extends Component {
                               </div>
                           </div>
                       </div> :
-                      <div class="item">
-                          <div class="type-of-img-name">
-                              <span class="font-20">Feature image</span>
+                      <div className="item">
+                          <div className="type-of-img-name">
+                              <span className="font-20">Feature image</span>
                           </div>
-                          <div class="uploader">
-                              <label for="drag-upload" class="drag-upload">&nbsp;</label>
-                              <input type="file" class="file-upload" id="drag-upload" name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
-                              {/*<div class="center-center">
+                          <div className="uploader">
+                              <label for="drag-upload" className="drag-upload">&nbsp;</label>
+                              <input type="file" className="file-upload" id="drag-upload" name="PRODUCT_DESIGN" onChange={(e) => this.onFileSelect(e, e.target.name)}/>
+                              {/*<div className="center-center">
                                   <div id="loading-spinner"></div>
                               </div>*/}
                           </div>
@@ -455,6 +487,7 @@ class EditShareDesign extends Component {
 
                     <ColorAndFabrication
                       data={designDetails}
+                      setPickerRef={this.setPickerRef}
                       errors={errors}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
@@ -508,10 +541,11 @@ class EditShareDesign extends Component {
                       onFileRemove={this.onFileRemove}/>
                 </div>
 
-                <div class="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
+                <div className="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
 
                     <ColorAndFabrication
                       data={designDetails}
+                      setPickerRef={this.setPickerRef}
                       errors={errors}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
@@ -524,13 +558,13 @@ class EditShareDesign extends Component {
                       onSubmit={this.updateDetails}
                       classes="product-type item d-none d-xl-block"/>
 
-                    <div class="product-notes flex-grow-1">
+                    <div className="product-notes flex-grow-1">
                         {
                             visibleDocType ?
-                            <div class="more-files">
-                                <div class="type-of-img-name d-flex justify-content-between align-items-center">
-                                    <span class="font-20">{visibleDocType.replace(/_/g, ' ')}</span>
-                                    <span class="close-pop cursor-pointer" onClick={() => this.setState({visibleDocType: ''})}>
+                            <div className="more-files">
+                                <div className="type-of-img-name d-flex justify-content-between align-items-center">
+                                    <span className="font-20">{visibleDocType.replace(/_/g, ' ')}</span>
+                                    <span className="close-pop cursor-pointer" onClick={() => this.setState({visibleDocType: ''})}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="51.282" height="51.282" viewBox="0 0 51.282 51.282">
                                             <g id="Group_11113" data-name="Group 11113" transform="translate(-7253.316 1861.454) rotate(45)">
                                               <g id="Rectangle_6065" data-name="Rectangle 6065" transform="translate(3867.015 -6463.247) rotate(90)" fill="#f2f2f2" stroke="#21242b" stroke-width="1">
@@ -542,7 +576,7 @@ class EditShareDesign extends Component {
                                           </svg>
                                     </span>
                                 </div>
-                                <div class="product-images">
+                                <div className="product-images">
                                 {
                                   designDocuments[visibleDocType] && designDocuments[visibleDocType].map((doc, i) => {
                                     return (
