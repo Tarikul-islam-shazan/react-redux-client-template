@@ -21,7 +21,6 @@ export class MeasurementTable extends React.Component {
   componentDidMount = () => {
     const { data } = this.state;
     let headers = [];
-    console.log("from table",data);
     if(data.length && data[0].measurement){
       for (const [key, value] of Object.entries(data[0].measurement)) {
           headers.push(<th key={Math.random() * 10000}>{key}</th>)

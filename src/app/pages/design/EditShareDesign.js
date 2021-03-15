@@ -395,45 +395,37 @@ class EditShareDesign extends Component {
     }
 
     updateNoteAndSize = (sectionName, measurementChart = null) => {
-      let productId = this.props.match.params.id;
-      let {designDetails} = this.state;
-      let body = {};
-      body.note = designDetails.note;
-      body.sizeText = JSON.stringify( measurementChart );
-      body.sizeDTO = {
-        sizeText: JSON.stringify({
-          sizeTableRows : measurementChart
-        })
-      }
-      // if (sectionName === 'editNotes') {
-      //   body.note = designDetails.note;
-      // } else if (sectionName === 'editMeasurementChart') {
-      //   body.sizeDTO = {
-      //       sizeText: JSON.stringify({
-      //         sizeTableRows : measurementChart
-      //       })
-      //     }
-      // }
+        let productId = this.props.match.params.id;
+        let {designDetails} = this.state;
+        let body = {};
+        body.note = designDetails.note;
+        body.sizeText = JSON.stringify(measurementChart);
 
-      Http.PUT('updateSizeTable', body, productId)
-      .then(({data}) => {
-        console.log('uploadDocument POST SUCCESS: ', data);
-        if (data.success) {
-          toastSuccess("Updated successfully.");
-          if (sectionName === 'editMeasurementChart' && designDetails.sizeTable) {
-              designDetails.sizeTable.sizeTableRows = measurementChart;
-              this.setState({
-                designDetails
-              })
-          } else {
-            this.toggleFlag(sectionName);
-          }
+        if (sectionName === 'editNotes') {
+            body.note = designDetails.note;
+        } else if (sectionName === 'editMeasurementChart') {
+            body.sizeText = JSON.stringify(measurementChart);
         }
-      })
-      .catch(({response}) => {
-          console.log('uploadDocument ERROR: ', response);
-          toastError("Error occured.")
-      });
+        
+        Http.PUT('updateSizeTable', body, productId)
+        .then(({data}) => {
+          console.log('uploadDocument POST SUCCESS: ', data);
+          if (data.success) {
+            toastSuccess("Updated successfully.");
+            if (sectionName === 'editMeasurementChart' && designDetails.sizeTable) {
+                designDetails.sizeText = JSON.stringify(measurementChart);
+                this.setState({
+                  designDetails
+                })
+            } else {
+              this.toggleFlag(sectionName);
+            }
+          }
+        })
+        .catch(({response}) => {
+            console.log('uploadDocument ERROR: ', response);
+            toastError("Error occured.")
+        });
     }
 
     render() {

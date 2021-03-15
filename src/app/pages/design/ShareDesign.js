@@ -240,24 +240,24 @@ class ShareDesign extends Component {
                                       productDesignDoc && productDesignDoc.name ?
                                           <div className="uploaded-img-banner">
                                               <img className="border-0" src={productDesignDoc.base64Str} alt=""/>
-                                              <div className="banner-close">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="32.604"
-                                                           height="32.604" viewBox="0 0 32.604 32.604">
-                                                          <g id="Group_11390" data-name="Group 11390"
-                                                             transform="translate(61.557 -265.911) rotate(45)">
-                                                              <path id="Path_27710" data-name="Path 27710"
-                                                                    d="M2135.273,2351v38.108"
-                                                                    transform="translate(-1967.718 -2138.497)"
-                                                                    fill="none" stroke="#fff" strokeLinecap="round"
-                                                                    strokeWidth="4"></path>
-                                                              <path id="Path_27711" data-name="Path 27711"
-                                                                    d="M0,0V38.109"
-                                                                    transform="translate(186.609 231.555) rotate(90)"
-                                                                    fill="none" stroke="#fff" strokeLinecap="round"
-                                                                    strokeWidth="4"></path>
-                                                          </g>
-                                                      </svg>
-                                                  </div>
+                                              <div className="banner-close" onClick={() => this.setState({productDesignDoc: {}, documentIds: []})}>
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="32.604"
+                                                       height="32.604" viewBox="0 0 32.604 32.604">
+                                                      <g id="Group_11390" data-name="Group 11390"
+                                                         transform="translate(61.557 -265.911) rotate(45)">
+                                                          <path id="Path_27710" data-name="Path 27710"
+                                                                d="M2135.273,2351v38.108"
+                                                                transform="translate(-1967.718 -2138.497)"
+                                                                fill="none" stroke="#fff" strokeLinecap="round"
+                                                                strokeWidth="4"></path>
+                                                          <path id="Path_27711" data-name="Path 27711"
+                                                                d="M0,0V38.109"
+                                                                transform="translate(186.609 231.555) rotate(90)"
+                                                                fill="none" stroke="#fff" strokeLinecap="round"
+                                                                strokeWidth="4"></path>
+                                                      </g>
+                                                  </svg>
+                                              </div>
                                           </div>
                                       :
                                       <>

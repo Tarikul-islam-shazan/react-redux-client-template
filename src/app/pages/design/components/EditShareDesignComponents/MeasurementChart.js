@@ -8,7 +8,7 @@ export class MeasurementChart extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        measurementChart: this.props.data && this.props.data.sizeText ? JSON.parse( this.props.data.sizeText ) : [],
+        measurementChart: this.props.data && this.props.data.sizeText && JSON.parse(this.props.data.sizeText) ? JSON.parse(this.props.data.sizeText) : [],
         flag: false,
         headerEditFlags: {},
         tempHeaderVal: '',
@@ -16,14 +16,10 @@ export class MeasurementChart extends Component {
       };
   }
 
-  // if (data.sizeTable && data.sizeTable.sizeTableRows) {
-  //   measurementChart = data.sizeTable.sizeTableRows;
-  // }
-
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.data.sizeText !== this.props.data.sizeText) {
       this.setState({
-        measurementChart: this.props.data && this.props.data.sizeText ? JSON.parse( this.props.data.sizeText ) : [],
+        measurementChart: this.props.data && this.props.data.sizeText && JSON.parse(this.props.data.sizeText) ? JSON.parse( this.props.data.sizeText ) : [],
       })
     }
   }
@@ -48,7 +44,6 @@ export class MeasurementChart extends Component {
       selectedKey: key,
       tempHeaderVal: key
     })
-    console.log("makeHeaderEditable", i, key, headerEditFlags)
   }
 
   submitHeaderEdit = (i) => {
@@ -161,7 +156,6 @@ export class MeasurementChart extends Component {
 
   onMeasurementChange = (e, index = null, type = 'ROW') => {
     let {measurementChart} = this.state;
-    console.log("onMeasurementChange", e.target.name, e.target.value);
     if (type === 'HEADER') {
       measurementChart = measurementChart.map((chart) => {
         let val = chart.measurement[e.target.name];
@@ -172,7 +166,7 @@ export class MeasurementChart extends Component {
     } else {
       if(e.target.name == 'code' || e.target.name == 'amount'){
         measurementChart[index][e.target.name] = e.target.value;
-      }else{
+      } else {
         measurementChart[index].measurement[e.target.name] = e.target.value;
       }
     }
@@ -228,7 +222,6 @@ export class MeasurementChart extends Component {
   }
 
   handleOnDragEnd = (result) => {
-    console.log("result handleOnDragEnd ===>", result);
     if (!result.destination) return;
     let {measurementChart} = this.state;
     const [reorderedItem] = measurementChart.splice(result.source.index, 1);
@@ -387,20 +380,20 @@ export class MeasurementChart extends Component {
                                   for (const [key, value] of Object.entries(item.measurement)) {
                                       arr.push(
                                         <td key={key}>
-                                          <input type="text" name={key} value={value} onChange={(e) => this.onMeasurementChange(e,i)} placeholder="Enter Size"/>
+                                          <input type="text" name={key} value={value} onChange={(e) => this.onMeasurementChange(e, i)} placeholder="Enter Size"/>
                                         </td>
                                         )
                                   }
                                   return (
-                                    <Draggable key={`sizeRowId_${item.code ? item.code : i}`} draggableId={`sizeRowId_${item.code ? item.code : i}`} index={i}>
+                                    <Draggable key={`sizeRowId_${i}`} draggableId={`sizeRowId_${i}`} index={i}>
                                       {(provided) => (
                                         <tr key={i} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                             <td>
-                                              <input type="text" name="code" value={item.code} onChange={(e) => this.onMeasurementChange(e,i)} placeholder="Enter Code"/>
+                                              <input type="text" name="code" value={item.code} onChange={(e) => this.onMeasurementChange(e, i)} placeholder="Enter Code"/>
                                             </td>
                                             {arr}
                                             <td>
-                                              <input type="text" name="amount" value={item.amount} onChange={(e) => this.onMeasurementChange(e,i)} placeholder="Enter Quantity"/>
+                                              <input type="text" name="amount" value={item.amount} onChange={(e) => this.onMeasurementChange(e, i)} placeholder="Enter Quantity"/>
                                             </td>
                                         </tr>
                                       )}

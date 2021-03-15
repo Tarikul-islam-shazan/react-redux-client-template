@@ -104,11 +104,16 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         errors.colors = colors.map((color) => {
             if (!color.hexCode) {
                 isValid = false;
-                color.hexCodeError = 'Required!';
+                color.hexCodeError = 'Required.';
+            } else {
+                color.hexCodeError = '';
             }
+
             if (!color.name) {
                 isValid = false;
-                color.nameError = 'Required!';
+                color.nameError = 'Required.';
+            } else {
+                color.nameError = '';
             }
             return color;
         })

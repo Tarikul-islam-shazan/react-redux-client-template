@@ -44,7 +44,7 @@ const ColorRowWithPicker = ({item, setPickerRef, index, data, onChangeColor, rem
                     }
 
                     <span style={{background: item.hexCode ? item.hexCode : '#fff'}} onClick={() => onChange({target: {name: 'showColorPickerModal', value: !showColorPickerModal}})}></span>
-                    <input type="text" placeholder="Pick color" name="hexCode" onChange={onChange} value={item.hexCode} className={`bg-gray-light border-0 ${item.nameError ? `error2` : ``}`}/>
+                    <input type="text" placeholder="Pick color" name="hexCode" onChange={onChange} value={item.hexCode} className={`bg-gray-light border-0 ${item.hexCodeError ? `error2` : ``}`}/>
                 </div>
                 {
                   item.hexCodeError ? <label className="error">{item.hexCodeError}</label> : <label className="error"></label>
