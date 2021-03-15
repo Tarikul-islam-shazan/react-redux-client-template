@@ -390,8 +390,8 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
   .product-notes{
     padding: 30px 0px 30px 20px;
     box-sizing: content-box;
-    width: 79%;
     position: relative;
+    flex: 1;
     @media (max-width: 1024px) {
       padding: 0;
       width: 100%;
@@ -416,6 +416,7 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       box-shadow: 0 0 30px -5px rgba($color: #000000, $alpha: 0.1);
       border: 0;
       overflow: auto;
+      min-height: auto !Important;
       @media (max-width: 1440px) {
         width: 10px;
       }
@@ -646,27 +647,23 @@ ul.p-img-container {
     }
   }
 }
-.min-max-table{
-  width: 100% !important;
-  tr{
-    td{
-      padding: 10px !important;
+.min-max-table-container{
+  @media (max-width: 1199px) {
+    overflow: auto;
+  }
+  .min-max-table{
+    width: 100% !important;
+    thead tr th {
+      width: auto;
+    }
+    tr{
+      td{
+        padding: 10px !important;
+      }
     }
   }
-  @media (max-width: 991px) {
-    max-width: 648px !important
-  }
-
-  @media (max-width: 575px) {
-    max-width: 390px !important;
-  }
-  @media (max-width: 375px) {
-    max-width: 335px !important;
-  }
-  @media (max-width: 320px) {
-    max-width: 300px !important;
-  }
 }
+
 .color-picker-popup {
   position: absolute;
   background: #fff;
@@ -682,15 +679,6 @@ ul.p-img-container {
     width: 100%;
   }
 }
-
-
-table.min-max-table tr td {
-  padding: 10px !important;
-  &:first-child{
-    padding-left: 10px !important;
-  }
-}
-
 
 #loading-spinner {
   display: inline-block;
@@ -710,4 +698,16 @@ table.min-max-table tr td {
 }
 @-webkit-keyframes spin {
   to { -webkit-transform: rotate(360deg); }
+}
+label[aria-expanded="false"]{
+  > svg{
+    transform: rotate(0deg);
+    transition: all ease-in-out .2s;
+  }
+}
+label[aria-expanded="true"]{
+  > svg {
+    transform: rotate(180deg);
+    transition: all ease-in-out .2s;
+  }
 }
