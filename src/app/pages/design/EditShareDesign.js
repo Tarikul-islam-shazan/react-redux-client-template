@@ -398,15 +398,13 @@ class EditShareDesign extends Component {
         let productId = this.props.match.params.id;
         let {designDetails} = this.state;
         let body = {};
-        body.note = designDetails.note;
-        body.sizeText = JSON.stringify(measurementChart);
 
         if (sectionName === 'editNotes') {
             body.note = designDetails.note;
         } else if (sectionName === 'editMeasurementChart') {
             body.sizeText = JSON.stringify(measurementChart);
         }
-        
+
         Http.PUT('updateSizeTable', body, productId)
         .then(({data}) => {
           console.log('uploadDocument POST SUCCESS: ', data);

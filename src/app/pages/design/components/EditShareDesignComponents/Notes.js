@@ -41,7 +41,7 @@ export const Notes = ({data, flag, flagName, toggleFlag, onChange, onSubmit}) =>
       </span>
       <div class="form-group">
           <label>Notes</label>
-          <p>{data.notes}</p>
+          <p>{data.note}</p>
       </div>
     </>
   )
