@@ -639,11 +639,11 @@ class OurDesignDetails extends Component {
                 <Modal.Body className="p-0">
                     <div>
                       {
-                        product.sizeTable && product.sizeTable.sizeTableRows.length ?
+                        product.sizeText && JSON.parse(product.sizeText) ?
                         <div className="row">
                             <div className="col-lg-12">
                                 {
-                                  <MeasurementTable data={product.sizeTable.sizeTableRows} className={"measurement-table"}/>
+                                  <MeasurementTable data={JSON.parse(product.sizeText)} className={"measurement-table"}/>
                                 }
                             </div>
                         </div>

@@ -103,7 +103,7 @@ class Root extends Component {
         return (
             <Router>
                 <Switch>
-                  <PublicRoute exact path="/" component={ PickDesign }/>
+                  <PublicRoute exact path="/" component={ PickDesignV2 }/>
                   <QuestionairreRoute exact path="/info" component={ InsertPhoneNumber }/>
                   <QuestionairreRoute exact path="/verify-otp" component={ VerifyOtp }/>
                   {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>

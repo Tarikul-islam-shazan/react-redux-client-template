@@ -40,7 +40,7 @@ export class MeasurementTable extends React.Component {
                   {
                     headers
                   }
-                  {/*<th>TOL. +/-</th>*/}
+                  <th>Quantity</th>
               </tr>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@ export class MeasurementTable extends React.Component {
                     <tr key={i}>
                       <td>{item.code}</td>
                       {renderFromObject(item.measurement)}
-                      {/*<td>{item.amount}</td>*/}
+                      <td>{item.amount}</td>
                     </tr>
                   )
                 })
