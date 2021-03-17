@@ -119,8 +119,8 @@ class Root extends Component {
                   <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
                   <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
-                  {/*<PublicRoute exact path="/explore-design" component={ PickDesign }/>*/}
-                  <PublicRoute exact path="/explore-design" component={ PickDesignV2 }/>
+                  {/*<PublicRoute exact path="/designs/explore" component={ PickDesign }/>*/}
+                  <PublicRoute exact path="/designs/explore" component={ PickDesignV2 }/>
                   <PublicRoute exact path="/product/collections/:id" component={ ShowProductCollection }/>
                   <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>

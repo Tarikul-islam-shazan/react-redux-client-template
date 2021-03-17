@@ -76,7 +76,7 @@ class Register extends Component {
                         let redirection = getUrlParameter('redirect', this.props.location.search)
                           if (data.businessInfoGiven) {
                             this.props.history.push({
-                              pathname: redirection ? redirection : '/explore-design',
+                              pathname: redirection ? redirection : '/designs/explore',
                               state: { from: 'login' }
                             });
                           } else {
@@ -93,7 +93,7 @@ class Register extends Component {
                           } else {
                             toastError("Couldn't fetch user info.");
                           }
-                          this.props.history.push('/explore-design');
+                          this.props.history.push('/designs/explore');
                       });
                 } else {
                     this.setState({loading: false})
