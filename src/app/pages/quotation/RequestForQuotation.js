@@ -364,7 +364,7 @@ class RequestForQuotation extends Component {
             if(data.success){
               toastSuccess(data.message);
               // window.location.reload();
-              this.props.history.push('/my-rfqs');
+              this.props.history.push('/quotes/list');
             }else{
               toastError(data.message);
             }

@@ -165,8 +165,8 @@ class Sidebar extends Component {
                       {
                         permissions.includes('RFQ_MY_RFQ') ?
                         <NavLink
-                          to="/my-rfqs"
-                          classes={this.props.activeTab == '/my-rfqs' ? 'active' : ''}
+                          to="/quotes/list"
+                          classes={this.props.activeTab == '/quotes/list' ? 'active' : ''}
                           activeIcon={require("../assets/icons/my-rfq-active.png")}
                           inactiveIcon={require("../assets/icons/quote_new.svg")}
                           title="Quotes"

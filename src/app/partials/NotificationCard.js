@@ -39,7 +39,7 @@ const generateUrl = (item) => {
     item.notificationEvent == 'RFQ_EXECUTIVE_ADDED' ||
     item.notificationEvent == 'RFQ_PRODUCT_MESSAGE'
   ){
-    return "/my-rfqs?rfqId=" + item.rfqId;
+    return "/quotes/list?rfqId=" + item.rfqId;
   }else if(
     item.notificationEvent == 'NEW_PRODUCT_ARRIVED'
   ){

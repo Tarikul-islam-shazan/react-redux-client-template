@@ -32,7 +32,7 @@ class Thankyou extends Component {
                                       this.props.goto == 'project' ?
                                       <a href="/my-project" className="btn btn-nitex-default">Check your projects</a>
                                       :
-                                      <a href="/my-rfqs" className="btn btn-nitex-default">Check your Quotes</a>
+                                      <a href="/quotes/list" className="btn btn-nitex-default">Check your Quotes</a>
                                     }
                                 </div>
                             </div>

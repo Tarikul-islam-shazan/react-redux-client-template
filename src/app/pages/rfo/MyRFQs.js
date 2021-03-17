@@ -355,7 +355,7 @@ class MyRFQs extends Component {
   }
 
   reload = () => {
-    this.props.history.push('/my-rfqs');
+    this.props.history.push('/quotes/list');
   }
   onStart = () => {
     this.props._storeData('fromRfq', true)

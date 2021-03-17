@@ -232,7 +232,7 @@ class QuoteNowCart extends Component {
               if(data.success){
                 localStorage.setItem(LOCAL_QUOTE_NOW_KEY, '')
                 toastSuccess(data.message);
-                this.props.history.push('/my-rfqs');
+                this.props.history.push('/quotes/list');
               }else{
                 toastError(data.message);
               }

@@ -251,7 +251,7 @@ class Dashboard extends Component {
     }
 
     showRfqDetails = (id) => {
-      this.props.history.push('/my-rfqs'+'?rfqId='+id);
+      this.props.history.push('/quotes/list'+'?rfqId='+id);
     }
 
     render() {
