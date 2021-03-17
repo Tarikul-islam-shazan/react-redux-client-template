@@ -111,6 +111,14 @@ class InvoiceList extends Component {
       }
     }
 
+    details = (id) => {
+      this.props.history.push('/invoices/view/' + id)
+    }
+
+    payInvoice = (id) => {
+      this.props.history.push('/invoices/pay/' + id)
+    }
+
     remove = () => {
 
     }
@@ -164,7 +172,7 @@ class InvoiceList extends Component {
                           </thead>
                           <tbody>
                           {
-                            invoiceList.map((invoice, i) => <InvoiceItem key={i} invoice={invoice} remove={this.remove} />)
+                            invoiceList.map((invoice, i) => <InvoiceItem key={i} invoice={invoice} details={this.details} remove={this.remove} payInvoice={this.payInvoice} />)
                           }
                           </tbody>
                       </table>

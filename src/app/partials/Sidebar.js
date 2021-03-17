@@ -175,29 +175,17 @@ class Sidebar extends Component {
                         : <></>
                       }
                       {
-                        <NavLink
-                          to="/collections/list"
-                          classes={this.props.activeTab.includes('collection') ? 'active' : ''}
-
-                          activeIcon={require("../assets/icons/share-design-active.png")}
-                          inactiveIcon={require("../assets/icons/share-design.png")}
-                          title="Collections"
-                          onClick={this.props.setActiveTab}
-                        />
-                      }
-                      {
                         permissions.includes('PROJECT_MY_PROJECT') ?
                         <NavLink
                           to="/orders/my-orders"
                           classes={this.props.activeTab == '/orders/my-orders' ? 'active' : ''}
                           activeIcon={require("../assets/icons/my-project-active.png")}
                           inactiveIcon={require("../assets/icons/project_new.svg")}
-                          title="Projects"
+                          title="Orders"
                           onClick={this.props.setActiveTab}
                         />
                         : <></>
                       }
-
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
@@ -210,7 +198,28 @@ class Sidebar extends Component {
                         />
                         : <></>
                       }
+                      {
+                        <NavLink
+                          to="/invoices/list"
+                          classes={this.props.activeTab.includes('invoices') ? 'active' : ''}
 
+                          activeIcon={require("../assets/icons/share-design-active.png")}
+                          inactiveIcon={require("../assets/icons/share-design.png")}
+                          title="Payments"
+                          onClick={this.props.setActiveTab}
+                        />
+                      }
+                      {
+                        <NavLink
+                          to="/collections/list"
+                          classes={this.props.activeTab.includes('collection') ? 'active' : ''}
+
+                          activeIcon={require("../assets/icons/share-design-active.png")}
+                          inactiveIcon={require("../assets/icons/share-design.png")}
+                          title="Collections"
+                          onClick={this.props.setActiveTab}
+                        />
+                      }
 
                       {/* {
                         permissions.includes('PRODUCT_MY_PRODUCT') ?

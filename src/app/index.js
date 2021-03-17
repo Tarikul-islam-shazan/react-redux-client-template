@@ -143,9 +143,9 @@ class Root extends Component {
                   <PublicRoute exact path="/collections/list" component={ CollectionList }/>
                   <PublicRoute exact path="/collections/view/:id" component={ CollectionDetails }/>
 
-                  <PublicRoute exact path="/invoice/me" component={ InvoiceList }/>
-                  <PublicRoute exact path="/invoice/details/:id" component={ InvoiceDetails }/>
-                  <PublicRoute exact path="/invoice/pay/:id" component={ PayInvoice }/>
+                  <PublicRoute exact path="/invoices/list" component={ InvoiceList }/>
+                  <PublicRoute exact path="/invoices/view/:id" component={ InvoiceDetails }/>
+                  <PublicRoute exact path="/invoices/pay/:id" component={ PayInvoice }/>
                 </Switch>
             </Router>
         );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { invoiceStatus } from '../../../services/Util';
 import moment from 'moment';
 
-export const InvoiceItem = ({invoice, remove}) => {
+export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
   return (
       <tr>
           <td>{invoice.invoiceNo}</td>
@@ -58,7 +58,7 @@ export const InvoiceItem = ({invoice, remove}) => {
           </td>
           <td colspan="2">
               <div class="d-flex align-items-center">
-                  <button type="button" class="pay brand-bg-color text-white w-50 m-0">Pay</button>
+                  <button type="button" class="pay brand-bg-color text-white w-50 m-0" onClick={() => payInvoice(invoice.id)}>Pay</button>
                   <div class="option">
                       <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
