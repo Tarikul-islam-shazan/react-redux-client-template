@@ -133,7 +133,7 @@ class ProductCard extends Component {
                           </ul>
                       </div>
                   </div>*/}
-                  <a href={"/products/" + product.id}>
+                  <a href={"/designs/view/" + product.id}>
                   {
                     product.designDocuments.length > 0 ?
                     product.designDocuments.map((doc,i) => {

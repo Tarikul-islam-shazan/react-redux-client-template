@@ -296,7 +296,7 @@ class Dashboard extends Component {
                                  :
                                 <div className="card-body" onClick={this.toggleRfq}>
                                     <p className="card-text mb-2">You don't have any quote requests yet</p>
-                                    <a href="/quote-request" className="btn btn-nitex-default">Share your design</a>
+                                    <a href="/designs/add" className="btn btn-nitex-default">Share your design</a>
                                 </div>
                               }
 

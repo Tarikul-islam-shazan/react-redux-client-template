@@ -371,7 +371,7 @@ class MyRFQs extends Component {
       return (
         <div className="not-found">
           <h1 className="msg">There is no quote request from you</h1>
-          <button className="btn btn-nitex-default" onClick={() => this.props.history.push('/quote-request')}>Start now</button>
+          <button className="btn btn-nitex-default" onClick={() => this.props.history.push('/designs/add')}>Start now</button>
           <div className="illustration">
             <img src={require("../../assets/images/not-found.png")} alt="" />
           </div>

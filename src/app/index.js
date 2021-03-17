@@ -118,20 +118,19 @@ class Root extends Component {
                   <AuthRouteWithoutLayout exact path="/reset-password" component={ ResetPassword }/>
                   <PublicRoute exact path="/my-profile" component={ MyProfile }/>
                   <PublicRoute exact path="/dashboard" component={ Dashboard }/>
-                  <PublicRoute exact path="/quote-request" component={ RequestForQuotation }/>
+                  <PublicRoute exact path="/designs/add" component={ ShareDesign }/>
                   {/*<PublicRoute exact path="/designs/explore" component={ PickDesign }/>*/}
                   <PublicRoute exact path="/designs/explore" component={ PickDesignV2 }/>
-                  <PublicRoute exact path="/product/collections/:id" component={ ShowProductCollection }/>
+                  <PublicRoute exact path="/designs/view/:id" component={ OurDesignDetailsV2 }/>
+                  <PublicRoute exact path="/designs/collections/view/:id" component={ ShowProductCollection }/>
                   <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/my-project" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
-                  <PublicRoute exact path="/products/:id" component={ OurDesignDetailsV2 }/>
                   <PublicRoute exact path="/my-rfqs" component={ MyRFQsV2 }/>
 
-                  <PublicRoute exact path="/design/share" component={ ShareDesign }/>
                   <PublicRoute exact path="/design/edit/:id" component={ EditShareDesign }/>
 
                   {/*<PublicRoute exact path="/v2/my-rfqs" component={ MyRFQsV2 }/>*/}

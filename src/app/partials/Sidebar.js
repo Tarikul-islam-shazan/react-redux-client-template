@@ -152,8 +152,8 @@ class Sidebar extends Component {
                       {
                         permissions.includes('RFQ_ADD') ?
                         <NavLink
-                          to="/quote-request"
-                          classes={this.props.activeTab == '/quote-request' ? 'active' : ''}
+                          to="/designs/add"
+                          classes={this.props.activeTab == '/designs/add' ? 'active' : ''}
 
                           activeIcon={require("../assets/icons/share-design-active.png")}
                           inactiveIcon={require("../assets/icons/share-design.png")}

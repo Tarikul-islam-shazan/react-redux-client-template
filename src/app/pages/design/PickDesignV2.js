@@ -713,7 +713,7 @@ class PickDesignV2 extends Component {
                       if (data.collectionViewType === 'PRODUCT_LIST') {
                         return (
                           <div className="designs" key={i}>
-                              <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/product/collections/' + data.id}><span className="view-all">VIEW ALL</span></a></h4>
+                              <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/designs/collections/view/' + data.id}><span className="view-all">VIEW ALL</span></a></h4>
                               <Carousel
                                 breakPoints={breakPoints}
                                 // itemsToShow={5}
