@@ -56,7 +56,7 @@ const generateUrl = (item) => {
     item.notificationEvent == 'PROJECT_ALERT'
   ){
     if(item.projectId){
-      return "/my-project-details/" + item.projectId;
+      return "/orders/view/" + item.projectId;
     }else{
       return "/orders/my-orders";
     }
@@ -69,7 +69,7 @@ const generateUrl = (item) => {
     item.notificationEvent == 'PROJECT_STATUS_UPDATED'
   ){
     if(item.projectId && item.postId){
-      return "/my-project-details/" + item.projectId + '?tab=2&postId='+item.postId;
+      return "/orders/view/" + item.projectId + '?tab=2&postId='+item.postId;
     }
     else{
       return "/orders/my-orders";
@@ -79,7 +79,7 @@ const generateUrl = (item) => {
       item.notificationEvent == 'INVOICE_PAYMENT_ADDED' ||
       item.notificationEvent == 'NEW_INVOICE_ADDED'
   ){
-    return "/my-project-details/" + item.projectId + '?tab=3';
+    return "/orders/view/" + item.projectId + '?tab=3';
   }
 }
 

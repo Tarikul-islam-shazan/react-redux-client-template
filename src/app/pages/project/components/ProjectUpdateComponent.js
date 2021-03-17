@@ -564,7 +564,7 @@ class ProjectUpdateComponent extends Component {
                           }
                       </div>
                       {
-                        filterablePostId ? <a href={"/my-project-details/" + this.props.projectId + '?tab=2'}><p  style={{marginTop:10,marginBottom:10,borderWidth:1,padding:10,backgroundColor:'#eeecf6',borderRadius:5}}>Reload Posts</p></a>:<></>
+                        filterablePostId ? <a href={"/orders/view/" + this.props.projectId + '?tab=2'}><p  style={{marginTop:10,marginBottom:10,borderWidth:1,padding:10,backgroundColor:'#eeecf6',borderRadius:5}}>Reload Posts</p></a>:<></>
                       }
                       {
                         posts.map((item,i)=><PostWithFeedback key={item.id} post={item} userInfo={userInfo} imageViewer={this.showImageViewer} />)

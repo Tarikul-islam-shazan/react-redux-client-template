@@ -247,7 +247,7 @@ class Dashboard extends Component {
     }
 
     showProjectDetails = (id) => {
-      this.props.history.push('/my-project-details/'+id);
+      this.props.history.push('/orders/view/'+id);
     }
 
     showRfqDetails = (id) => {

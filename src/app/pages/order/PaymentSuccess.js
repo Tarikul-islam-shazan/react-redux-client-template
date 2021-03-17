@@ -46,7 +46,7 @@ class PaymentSuccess extends Component {
           console.log('updatePaymentStatus SUCCESS: ', JSON.stringify(data));
           if (data.status === 'APPROVED') {
             toastSuccess('Payment is successfully done.');
-            this.props.history.push('/my-project-details/' + data.id)
+            this.props.history.push('/orders/view/' + data.id)
           }
         })
         .catch(({response}) => {

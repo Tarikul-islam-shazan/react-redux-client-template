@@ -173,7 +173,7 @@ class MyProject extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/my-project-details/'+id);
+      this.props.history.push('/orders/view/'+id);
     }
 
     render() {
