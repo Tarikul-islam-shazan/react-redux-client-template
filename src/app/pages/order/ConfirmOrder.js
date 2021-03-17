@@ -191,7 +191,7 @@ class ConfirmOrder extends Component {
                           </div>
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
-                              <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={() => this.props.history.push('/confirm-payment/' + this.props.match.params.id)}>Confirm order</button>
+                              <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={() => this.props.history.push('/orders/confirm-payment/' + this.props.match.params.id)}>Confirm order</button>
                               <a href="#" className="text-underline font-16" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>

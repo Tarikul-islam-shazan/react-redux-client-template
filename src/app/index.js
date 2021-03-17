@@ -137,8 +137,8 @@ class Root extends Component {
                   <PublicRoute exact path="/orders/my-orders" component={ MyProject }/>
                   <PublicRoute exact path="/orders/view/:id" component={ MyProjectDetails }/>
 
-                  <PublicRoute exact path="/confirm-order/:id" component={ ConfirmOrder }/>
-                  <PublicRoute exact path="/confirm-payment/:id" component={ ConfirmPayment }/>
+                  <PublicRoute exact path="/orders/confirm-order/:id" component={ ConfirmOrder }/>
+                  <PublicRoute exact path="/orders/confirm-payment/:id" component={ ConfirmPayment }/>
                   <PublicRoute exact path="/payment/confirm" component={ PaymentSuccess }/>
                   <PublicRoute exact path="/collection/list" component={ CollectionList }/>
                   <PublicRoute exact path="/collection/details/:id" component={ CollectionDetails }/>
