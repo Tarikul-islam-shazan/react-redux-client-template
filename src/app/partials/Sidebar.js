@@ -176,7 +176,7 @@ class Sidebar extends Component {
                       }
                       {
                         <NavLink
-                          to="/collection/list"
+                          to="/collections/list"
                           classes={this.props.activeTab.includes('collection') ? 'active' : ''}
 
                           activeIcon={require("../assets/icons/share-design-active.png")}

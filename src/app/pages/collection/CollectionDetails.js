@@ -480,7 +480,7 @@ class CollectionDetails extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/collection/details/' + id);
+      this.props.history.push('/collections/view/' + id);
     }
 
     goToEdit = (id) => {
@@ -497,7 +497,7 @@ class CollectionDetails extends Component {
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/collection/list');
+            this.props.history.push('/collections/list');
           }else{
             toastError(data.message);
           }

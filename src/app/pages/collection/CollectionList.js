@@ -158,7 +158,7 @@ class CollectionList extends Component {
     }
 
     details = (id) => {
-      this.props.history.push('/collection/details/' + id);
+      this.props.history.push('/collections/view/' + id);
     }
 
     goToEdit = (id) => {
@@ -201,7 +201,7 @@ class CollectionList extends Component {
                         <div
                           class="collection-type-item" key={i}
                           onClick={() => {
-                            this.props.history.push('/collection/details/private-collection?viewType=' + collection.collectionViewType)
+                            this.props.history.push('/collections/view/private-collection?viewType=' + collection.collectionViewType)
                           }}>
                             <div class="product-img-container">
                                 <div class="prev-img">
@@ -227,7 +227,7 @@ class CollectionList extends Component {
                       let img2 = docs.length > 1 ? docs[1].docUrl : '';
                       let img3 = docs.length > 2 ? docs[2].docUrl : '';
                       return(
-                        <div class="collection-type-item" key={i} onClick={() => this.props.history.push('/collection/details/' + collection.id)}>
+                        <div class="collection-type-item" key={i} onClick={() => this.props.history.push('/collections/view/' + collection.id)}>
                             <div class="product-img-container">
                                 <div class="prev-img">
                                     <img src={img1 ? img1 : require('../../assets/images/default_product.svg')} alt=""/>
