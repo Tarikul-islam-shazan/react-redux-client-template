@@ -129,7 +129,7 @@ class PayInvoice extends Component {
           console.log('payForInvoice SUCCESS: ', data);
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/my-project')
+            this.props.history.push('/orders/my-orders')
           }else{
             this.setState({
               loading:false

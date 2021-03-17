@@ -58,7 +58,7 @@ const generateUrl = (item) => {
     if(item.projectId){
       return "/my-project-details/" + item.projectId;
     }else{
-      return "/my-project";
+      return "/orders/my-orders";
     }
   }else if(
     item.notificationEvent == 'MEMBER_MENTIONED_AT_POST' ||
@@ -72,7 +72,7 @@ const generateUrl = (item) => {
       return "/my-project-details/" + item.projectId + '?tab=2&postId='+item.postId;
     }
     else{
-      return "/my-project";
+      return "/orders/my-orders";
     }
   }
   else if(

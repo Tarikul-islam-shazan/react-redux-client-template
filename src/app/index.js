@@ -125,7 +125,7 @@ class Root extends Component {
                   <PublicRoute exact path="/designs/collections/view/:id" component={ ShowProductCollection }/>
                   <PublicRoute exact path="/quote-now" component={ QuoteNowCart }/>
                   <PublicRoute exact path="/our-design-details" component={ OurDesignDetails }/>
-                  <PublicRoute exact path="/my-project" component={ MyProject }/>
+                  <PublicRoute exact path="/orders/my-orders" component={ MyProject }/>
                   <PublicRoute exact path="/my-project-details/:id" component={ MyProjectDetails }/>
                   <PublicRoute exact path="/my-products" component={ MyProduct }/>
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>

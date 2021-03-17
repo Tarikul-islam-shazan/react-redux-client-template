@@ -98,7 +98,7 @@ class ConfirmOrder extends Component {
           this.setState({loading:false});
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/my-project')
+            this.props.history.push('/orders/my-orders')
           }else{
             toastError(data.message);
           }

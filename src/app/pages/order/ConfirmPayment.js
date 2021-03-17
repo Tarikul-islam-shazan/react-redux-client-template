@@ -255,7 +255,7 @@ class ConfirmPayment extends Component {
           console.log('payForInvoice SUCCESS: ', data);
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/my-project')
+            this.props.history.push('/orders/my-orders')
           }else{
             this.setState({
               loading:false
@@ -282,7 +282,7 @@ class ConfirmPayment extends Component {
           this.setState({loading:false});
           if(data.success){
             toastSuccess(data.message);
-            this.props.history.push('/my-project')
+            this.props.history.push('/orders/my-orders')
           }else{
             toastError(data.message);
           }

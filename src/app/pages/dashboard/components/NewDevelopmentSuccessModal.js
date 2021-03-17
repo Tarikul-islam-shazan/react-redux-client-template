@@ -21,7 +21,7 @@ class NewDevelopmentSuccessModal extends Component {
     }
 
     goToMyProjects = () => {
-      this.props.history.push('/my-project');
+      this.props.history.push('/orders/my-orders');
     }
 
     render() {

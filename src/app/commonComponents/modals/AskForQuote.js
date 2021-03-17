@@ -93,7 +93,7 @@ class AskForQuote extends Component {
             if(data.success){
               toastSuccess(data.message);
               this.setState({thankyou:true})
-              // this.props.history.push('/my-project');
+              // this.props.history.push('/orders/my-orders');
             }else{
               toastError(data.message);
             }

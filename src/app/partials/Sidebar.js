@@ -188,8 +188,8 @@ class Sidebar extends Component {
                       {
                         permissions.includes('PROJECT_MY_PROJECT') ?
                         <NavLink
-                          to="/my-project"
-                          classes={this.props.activeTab == '/my-project' ? 'active' : ''}
+                          to="/orders/my-orders"
+                          classes={this.props.activeTab == '/orders/my-orders' ? 'active' : ''}
                           activeIcon={require("../assets/icons/my-project-active.png")}
                           inactiveIcon={require("../assets/icons/project_new.svg")}
                           title="Projects"

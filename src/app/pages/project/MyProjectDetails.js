@@ -116,7 +116,7 @@ class MyProjectDetails extends Component {
     }
 
     back = () => {
-      this.props.history.push('/my-project');
+      this.props.history.push('/orders/my-orders');
     }
 
     setModalData = async(selectedProductId) => {
