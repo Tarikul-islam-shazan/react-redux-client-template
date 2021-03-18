@@ -58,41 +58,27 @@ export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
           }
           </td>
           <td colspan="2">
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center justify-content-center">
                   <button type="button" class="pay brand-bg-color text-white w-50 m-0" onClick={() => payInvoice(invoice.id)}>Pay</button>
-                  <Dropdown className="card-options">
-                    <Dropdown.Toggle variant="default" id="dropdown-basic">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="6" viewBox="0 0 27 6">
-                            <g id="Group_10" data-name="Group 10" transform="translate(-4045 -1237) rotate(-90)">
-                                <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
-                                <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
-                                <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
-                            </g>
-                        </svg>
-                    </Dropdown.Toggle>
+                  <div className="option">
+                      <div className="dropdown">
+                          <Dropdown className="card-options">
+                              <Dropdown.Toggle variant="default" id="dropdown-basic">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
+                                      <g id="Group_11227" data-name="Group 11227" transform="translate(-1811.5 -564.5)">
+                                          <path id="Path_29420" data-name="Path 29420" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                          <path id="Path_29421" data-name="Path 29421" d="M19.5,7.5A1.5,1.5,0,1,1,18,6,1.5,1.5,0,0,1,19.5,7.5Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                          <path id="Path_29422" data-name="Path 29422" d="M19.5,28.5A1.5,1.5,0,1,1,18,27,1.5,1.5,0,0,1,19.5,28.5Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                      </g>
+                                  </svg>
+                              </Dropdown.Toggle>
 
-                    <Dropdown.Menu alignRight className="dropdown-menu dropdown-menu-right shadow-lg mt-2">
-                      <Dropdown.Item href="#" className="px-4 pt-0 pb-3 font-weight-normal text-black font-15" onClick={() => details(invoice.id)}>Details</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  {/*<div class="option">
-                      <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
-                                  <g id="Group_11227" data-name="Group 11227" transform="translate(-1811.5 -564.5)">
-                                      <path id="Path_29420" data-name="Path 29420" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                      <path id="Path_29421" data-name="Path 29421" d="M19.5,7.5A1.5,1.5,0,1,1,18,6,1.5,1.5,0,0,1,19.5,7.5Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                      <path id="Path_29422" data-name="Path 29422" d="M19.5,28.5A1.5,1.5,0,1,1,18,27,1.5,1.5,0,0,1,19.5,28.5Z" transform="translate(1796.5 560)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                  </g>
-                              </svg>
-
-                              <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
-                                  <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
-                                  <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
-                              </ul>
-                          </button>
+                              <Dropdown.Menu alignRight className="dropdown-menu dropdown-menu-right shadow-lg">
+                                  <Dropdown.Item href="#" className="px-4 py-3 font-weight-normal text-black font-15" onClick={() => details(invoice.id)}>Details</Dropdown.Item>
+                              </Dropdown.Menu>
+                          </Dropdown>
                       </div>
-                  </div>*/}
+                  </div>
               </div>
           </td>
       </tr>

@@ -5401,17 +5401,17 @@ button.rec-arrow-right {
   background-image: none; }
   .option .dropdown-toggle:after, .option .dropdown-toggle:before {
     display: none; }
-  .option .dropdown-toggle .dropdown-menu:before {
-    position: absolute;
-    content: "";
-    border-style: solid;
-    border-width: 10px 10px;
-    border-color: transparent transparent #ffffff transparent;
-    top: -20px;
-    right: 19px; }
-    @media (max-width: 991px) {
-      .option .dropdown-toggle .dropdown-menu:before {
-        right: 5px; } }
+.option .dropdown-menu:before {
+  position: absolute;
+  content: "";
+  border-style: solid;
+  border-width: 10px 10px;
+  border-color: transparent transparent #ffffff transparent;
+  top: -20px;
+  right: 19px; }
+  @media (max-width: 991px) {
+    .option .dropdown-menu:before {
+      right: 5px; } }
 
 .delivery-in-days input {
   width: 110px;
@@ -6589,9 +6589,18 @@ ul.existing-item li {
       .collection-type-container .collection-type-item .product-img-container .prev-img {
         width: 70%; }
         .collection-type-container .collection-type-item .product-img-container .prev-img img {
-          max-height: 312px;
+          height: 280px;
           object-fit: cover;
           background: #F2F2F2; }
+          @media (max-width: 1440px) {
+            .collection-type-container .collection-type-item .product-img-container .prev-img img {
+              height: 200px; } }
+          @media (max-width: 1366px) {
+            .collection-type-container .collection-type-item .product-img-container .prev-img img {
+              height: 180px; } }
+          @media (max-width: 1280px) {
+            .collection-type-container .collection-type-item .product-img-container .prev-img img {
+              height: 160px; } }
       .collection-type-container .collection-type-item .product-img-container .prev-img-thumb {
         width: 30%;
         margin-left: 5px;
@@ -6692,7 +6701,7 @@ ul.existing-item li {
 
 .add-more-designs .add-more {
   z-index: 99;
-  top: 57px;
+  top: 80px;
   bottom: 0;
   margin: 0;
   margin-right: -596px;

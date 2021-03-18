@@ -159,9 +159,18 @@ ul.existing-item{
       .prev-img {
         width: 70%;
         img{
-          max-height: 312px;
+          height: 280px;
           object-fit: cover;
           background: #F2F2F2;
+          @media (max-width: 1440px) {
+            height: 200px;
+          }
+          @media (max-width: 1366px) {
+            height: 180px;
+          }
+          @media (max-width: 1280px) {
+            height: 160px;
+          }
         }
       }
       .prev-img-thumb {
@@ -286,7 +295,7 @@ ul.existing-item{
 .add-more-designs{
   .add-more {
     z-index: 99;
-    top: 57px;
+    top: 80px;
     bottom: 0;
     margin: 0;
     margin-right: -596px;
