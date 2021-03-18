@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { invoiceStatus } from '../../../services/Util';
 import moment from 'moment';
+import {Dropdown} from 'react-bootstrap';
 
 export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
   return (
@@ -59,7 +60,22 @@ export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
           <td colspan="2">
               <div class="d-flex align-items-center">
                   <button type="button" class="pay brand-bg-color text-white w-50 m-0" onClick={() => payInvoice(invoice.id)}>Pay</button>
-                  <div class="option">
+                  <Dropdown className="card-options">
+                    <Dropdown.Toggle variant="default" id="dropdown-basic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="6" viewBox="0 0 27 6">
+                            <g id="Group_10" data-name="Group 10" transform="translate(-4045 -1237) rotate(-90)">
+                                <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                                <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                                <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#cbcbcb"/>
+                            </g>
+                        </svg>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu alignRight className="dropdown-menu dropdown-menu-right shadow-lg mt-2">
+                      <Dropdown.Item href="#" className="px-4 pt-0 pb-3 font-weight-normal text-black font-15" onClick={() => details(invoice.id)}>Details</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  {/*<div class="option">
                       <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
                               <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
@@ -76,7 +92,7 @@ export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
                               </ul>
                           </button>
                       </div>
-                  </div>
+                  </div>*/}
               </div>
           </td>
       </tr>

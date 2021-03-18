@@ -187,7 +187,7 @@ class Sidebar extends Component {
                         : <></>
                       }
                       {
-                        permissions.includes('RFQ_ADD') ?
+                        /*permissions.includes('RFQ_ADD') ?
                         <NavLink
                           to="/my-products"
                           classes={this.props.activeTab == '/my-products' ? 'active' : ''}
@@ -196,7 +196,7 @@ class Sidebar extends Component {
                           title="Designs"
                           onClick={this.props.setActiveTab}
                         />
-                        : <></>
+                        : <></>*/
                       }
                       {
                         <NavLink
