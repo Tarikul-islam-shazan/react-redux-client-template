@@ -5957,7 +5957,12 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
         white-space: nowrap; } }
 .pick-color-table tr td {
   padding-right: 12px;
-  padding-bottom: 12px; }
+  padding-bottom: 12px;
+  position: relative; }
+  .pick-color-table tr td label.error {
+    position: absolute;
+    bottom: -6px;
+    left: 0; }
   .pick-color-table tr td:last-child {
     padding-right: 0; }
   .pick-color-table tr td input.bg-gray-light {
@@ -6102,7 +6107,14 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
       height: 340px; }
       @media (max-width: 1440px) {
         .product-images .item .uploader label[for="drag-upload"] {
-          height: 270px; } }
+          height: 258px; } }
+      @media (max-width: 1366px) {
+        .product-images .item .uploader label[for="drag-upload"] {
+          height: 244px; } }
+      @media (max-width: 1366px) {
+        .product-images .item .uploader label[for="drag-upload"] {
+          background-size: 60px;
+          height: 208px; } }
       @media (max-width: 1024px) {
         .product-images .item .uploader label[for="drag-upload"] {
           height: 430px; } }
@@ -6115,8 +6127,16 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
         font-size: 16px;
         font-weight: normal;
         transform: translateY(24px); }
+        @media (max-width: 1280px) {
+          .product-images .item .uploader label[for="drag-upload"]:after {
+            line-height: 18px;
+            font-size: 12px;
+            transform: translateY(18px); } }
       .product-images .item .uploader label[for="drag-upload"]:before {
         font-size: 20px; }
+        @media (max-width: 1280px) {
+          .product-images .item .uploader label[for="drag-upload"]:before {
+            font-size: 18px; } }
     .product-images .item .files {
       position: relative;
       height: 100%; }
@@ -6176,16 +6196,9 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
   .product-info .product-type table.pick-color-table .pick-color span {
     width: 20px;
     height: 20px; }
-    @media (max-width: 1440px) {
-      .product-info .product-type table.pick-color-table .pick-color span {
-        width: 14px;
-        height: 14px; } }
   .product-info .product-type table.pick-color-table .pick-color input.bg-gray-light {
     padding-left: 36px !important;
     border: 1px solid #CACDD5 !important; }
-    @media (max-width: 1440px) {
-      .product-info .product-type table.pick-color-table .pick-color input.bg-gray-light {
-        padding-left: 27px !important; } }
   .product-info .product-type table.pick-color-table tbody tr td input.bg-gray-light {
     height: 48px; }
   .product-info .product-type table.pick-color-table tbody tr td .dlt svg {
@@ -6413,6 +6426,8 @@ ul.p-img-container {
     width: auto; }
   .min-max-table-container .min-max-table tr td {
     padding: 10px !important; }
+    .min-max-table-container .min-max-table tr td input {
+      width: 100%; }
 
 .color-picker-popup {
   position: absolute;

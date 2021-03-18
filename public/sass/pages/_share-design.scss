@@ -76,6 +76,12 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
     td{
       padding-right: 12px;
       padding-bottom: 12px;
+      position: relative;
+      label.error{
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+      }
       &:last-child{
         padding-right: 0;
       }
@@ -253,7 +259,14 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       background-size: 70px;
       height: 340px;
       @media (max-width: 1440px) {
-        height: 270px;
+        height: 258px;
+      }
+      @media (max-width: 1366px) {
+        height: 244px;
+      }
+      @media (max-width: 1366px) {
+        background-size: 60px;
+        height: 208px;
       }
       @media (max-width: 1024px) {
         height: 430px;
@@ -261,15 +274,24 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       @media (max-width: 991px) {
         height: 310px;
       }
+
       &:after {
         content: 'Drag and drop or browse your files  upto 2 MB  (png, jpeg, jpg)';
         line-height: 24px;
         font-size: 16px;
         font-weight: normal;
         transform: translateY(24px);
+        @media (max-width: 1280px) {
+          line-height: 18px;
+          font-size: 12px;
+          transform: translateY(18px);
+        }
       }
       &:before {
         font-size: 20px;
+        @media (max-width: 1280px) {
+          font-size: 18px;
+        }
       }
     }
 
@@ -359,17 +381,14 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
         span{
           width: 20px;
           height: 20px;
-          @media (max-width: 1440px) {
-            width: 14px;
-            height: 14px;
-          }
+          //@media (max-width: 1440px) {
+          //  width: 14px;
+          //  height: 14px;
+          //}
         }
         input.bg-gray-light {
           padding-left: 36px !important;
           border: 1px solid#CACDD5 !important;
-          @media (max-width: 1440px) {
-            padding-left: 27px !important;
-          }
         }
       }
       tbody{
@@ -659,6 +678,9 @@ ul.p-img-container {
     tr{
       td{
         padding: 10px !important;
+        input{
+          width: 100%;
+        }
       }
     }
   }
