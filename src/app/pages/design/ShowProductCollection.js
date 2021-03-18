@@ -115,21 +115,8 @@ class ShowProductCollection extends Component {
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading:false})
-          if(data.length>0){
-            // if(merge){
-            //   this.setState({
-            //     designList : [ ...designList, ...data ],
-            //     page : page+1
-            //   })
-            // }else{
-            //   this.setState({
-            //     designList : data,
-            //     page : page+1
-            //   })
-            // }
-            result = data;
-          }else{
-            // toastWarning("Product List - no data found.");
+          if (data.data) {
+            result = data.data;
           }
         })
         .catch(response => {

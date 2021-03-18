@@ -212,7 +212,14 @@ class CollectionList extends Component {
                                     <img src={img3 ? img3 : require('../../assets/images/default_product.svg')} alt=""/>
                                 </div>
                             </div>
-                            <h4 class="font-16 font-weight-normal mt-3">{collection.collectionViewType}</h4>
+                            {
+                              collection.collectionViewType === 'MY_PRODUCTS' ?
+                              <h4 class="font-16 font-weight-normal mt-3">My designs</h4> : <></>
+                            }
+                            {
+                              collection.collectionViewType === 'LIKED_PRODUCTS' ?
+                              <h4 class="font-16 font-weight-normal mt-3">My favourites</h4> : <></>
+                            }
                         </div>
                       )
                     })

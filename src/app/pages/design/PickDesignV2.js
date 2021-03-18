@@ -807,7 +807,7 @@ class PickDesignV2 extends Component {
                                 collectionList.map((collection, i) => {
                                   return(
                                     <li key={i}>
-                                        <span>{collection.collectionName}</span>
+                                        <span>{collection.name}</span>
                                         <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addToExistingCollection(collection.id)}>Add</button>
                                     </li>
                                   )
