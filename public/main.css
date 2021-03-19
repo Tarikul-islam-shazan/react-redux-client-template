@@ -4908,7 +4908,8 @@ button.rec-arrow-right {
       margin-top: 15px;
       width: 148px; }
       .quote-list .info-item h5 {
-        font-size: 14px !important; } }
+        font-size: 14px !important;
+        line-height: 20px; } }
   @media (max-width: 1365px) {
     .quote-list .info-item {
       width: 116px; }
@@ -4997,6 +4998,9 @@ button.rec-arrow-right {
 .size-n-color {
   min-height: 204px;
   padding: 30px 50px 20px 0; }
+  @media (max-width: 1440px) {
+    .size-n-color {
+      padding: 30px 28px 20px 0; } }
   @media (max-width: 1366px) {
     .size-n-color {
       padding: 30px 25px 20px 0; } }
@@ -5024,9 +5028,12 @@ button.rec-arrow-right {
   object-fit: cover; }
   @media (max-width: 1790px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
-      height: 138px;
+      height: 132px;
       width: auto; } }
   @media (max-width: 1280px) {
+    .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+      height: 110px; } }
+  @media (max-width: 1366px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: 112px; } }
   @media (max-width: 767px) {
@@ -5271,6 +5278,9 @@ button.rec-arrow-right {
 .features {
   flex: 1 1 auto;
   padding-right: 20px; }
+  @media (max-width: 1440px) {
+    .features {
+      padding-right: 10px; } }
   @media (max-width: 767px) {
     .features {
       flex-direction: column;
@@ -5324,6 +5334,10 @@ button.rec-arrow-right {
 
 .add-quote-list .info-item {
   width: 140px; }
+  .add-quote-list .info-item label {
+    margin-bottom: 5px; }
+  .add-quote-list .info-item h5 {
+    line-height: 20px; }
   @media (max-width: 1366px) {
     .add-quote-list .info-item {
       width: 118px; } }

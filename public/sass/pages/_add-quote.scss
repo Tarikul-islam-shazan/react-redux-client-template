@@ -196,6 +196,7 @@
       width: 148px;
       h5{
         font-size: 14px !important;
+        line-height: 20px;
       }
     }
   }
@@ -325,6 +326,9 @@
 .size-n-color {
   min-height: 204px;
   padding: 30px 50px 20px 0;
+  @media (max-width: 1440px) {
+    padding: 30px 28px 20px 0;
+  }
   @media (max-width: 1366px) {
     padding: 30px 25px 20px 0;
   }
@@ -355,10 +359,13 @@
     height: 160px;
     object-fit: cover;
     @media (max-width: 1790px) {
-      height: 138px;
+      height: 132px;
       width: auto;
     }
     @media (max-width: 1280px) {
+      height: 110px;
+    }
+    @media (max-width: 1366px) {
       height: 112px;
     }
     @media (max-width: 767px) {

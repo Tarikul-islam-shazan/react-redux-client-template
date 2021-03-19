@@ -291,6 +291,9 @@
 .features{
   flex: 1 1 auto;
   padding-right: 20px;
+  @media (max-width: 1440px) {
+    padding-right: 10px;
+  }
   @media (max-width: 767px) {
     flex-direction: column;
     padding: 0 0 20px 0;
@@ -364,6 +367,12 @@
 .add-quote-list{
   .info-item{
     width: 140px;
+    label{
+      margin-bottom: 5px;
+    }
+    h5{
+      line-height: 20px;
+    }
     @media (max-width: 1366px) {
       width: 118px;
     }
