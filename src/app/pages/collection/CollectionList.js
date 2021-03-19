@@ -189,7 +189,7 @@ class CollectionList extends Component {
                   </div>
 
 
-                  <h4 class="mb-4 font-weight-normal">Designer’s Choice</h4>
+                  <h4 class="mb-4 font-weight-normal">Default collections</h4>
                   <div class="collection-type-container mb-5">
                   {
                     fixedCollections.map((collection, i) => {
