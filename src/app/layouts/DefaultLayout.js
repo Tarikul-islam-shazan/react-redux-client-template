@@ -120,7 +120,7 @@ class DefaultLayout extends Component {
 
                       <ul className="navbar-nav ml-auto align-items-center">
 
-                          <li className="nav-item quote-cart dropdown no-arrow">
+                          <li className="nav-item quote-cart dropdown no-arrow" data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
                               <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 19.021 19.082">
                                       <g id="noun_shopping-cart_web_icon_854336" data-name="noun_shopping-cart web icon_854336" transform="translate(49.889 -80.016)">
@@ -135,7 +135,7 @@ class DefaultLayout extends Component {
                               </button>
                           </li>
 
-                          <li className="nav-item notification-bell dropdown no-arrow mx-3">
+                          <li className="nav-item notification-bell dropdown no-arrow mx-3" data-toggle="tooltip" data-placement="top" title="" data-original-title="Notification">
                               <button className="btn btn-outline-default nav-link" type="button" id="dropdownNotification" onClick={this.show}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="14.187" height="18.302" viewBox="0 0 14.187 18.302">
                                       <path id="bell" d="M14.829,19a3,3,0,0,1-5.658,0H7.578a2.5,2.5,0,0,1-2.285-3.515L6,13.894V11a6,6,0,0,1,4-5.659V5a2,2,0,1,1,4,0v.341A6,6,0,0,1,18,11v2.894l.707,1.591A2.5,2.5,0,0,1,16.423,19Zm-1.1,0H10.267a2,2,0,0,0,3.466,0ZM13,5.083V5a1,1,0,0,0-2,0v.083A6.068,6.068,0,0,1,13,5.083ZM12,6a5,5,0,0,0-5,5v3l-.043.2-.75,1.688A1.5,1.5,0,0,0,7.578,18h8.845a1.5,1.5,0,0,0,1.371-2.109l-.75-1.688L17,14V11A5,5,0,0,0,12,6Z" transform="translate(-4.907 -2.85)" fill="#21242b" stroke="#21242b" strokeWidth="0.3"/>
