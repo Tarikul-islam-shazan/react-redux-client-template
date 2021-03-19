@@ -6107,6 +6107,9 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
       @media (max-width: 1366px) {
         .product-images .item .uploader label[for="drag-upload"] {
           height: 240px; } }
+      @media (max-width: 1280px) {
+        .product-images .item .uploader label[for="drag-upload"] {
+          height: 206px; } }
       @media (max-width: 1024px) {
         .product-images .item .uploader label[for="drag-upload"] {
           height: 430px; } }
