@@ -133,10 +133,6 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
 .desgin-name-header{
   margin-bottom: 32px;
   .name{
-    flex-basis: calc(100% / 5 - 12px);
-    @media (max-width: 1024px) {
-      flex-basis: calc(100% / 2);
-    }
     @media (max-width: 575px) {
       .name-display{
         h4{
@@ -370,8 +366,8 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
             }
             @media (max-width: 1440px) {
               label{
-                font-size: 12px !important;
-                margin-bottom: 0;
+                //font-size: 12px !important;
+                //margin-bottom: 0;
               }
             }
           }
