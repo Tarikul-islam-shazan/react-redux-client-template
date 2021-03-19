@@ -677,10 +677,13 @@ class PickDesignV2 extends Component {
                               }
                           </ul>
                       </div>
-                      <button className="m-0 btn-brand m-0 shadow float-right" onClick={async() => {
-                        await this.setState({showSelectedFilters: true});
-                        this._search()
-                      }}>Submit</button>
+                      <div className="filter-actions d-flex align-items-center">
+                          <a href="javascript:void(0)" className="text-underline mr-3">Reset</a>
+                          <button className="m-0 btn-brand m-0 shadow float-right" onClick={async() => {
+                              await this.setState({showSelectedFilters: true});
+                              this._search()
+                          }}>Apply</button>
+                      </div>
                   </div>
               </div>
               {

@@ -454,11 +454,13 @@ table{
   width: auto;
   max-height: 470px;
   padding: 50px 50px 100px 50px;
-  button{
+  .filter-actions{
     position: absolute;
     right: 30px;
     bottom: 30px;
-    margin: 0 !important;
+    button{
+      margin: 0 !important;
+    }
   }
   @media (max-width: 1024px) {
     top: 68px;
