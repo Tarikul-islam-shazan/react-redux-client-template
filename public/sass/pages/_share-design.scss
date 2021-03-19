@@ -75,11 +75,11 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
   tr{
     td{
       padding-right: 12px;
-      padding-bottom: 12px;
+      padding-bottom: 20px;
       position: relative;
       label.error{
         position: absolute;
-        bottom: -6px;
+        bottom: 3px;
         left: 0;
       }
       &:last-child{
@@ -397,10 +397,10 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
             height: 48px;
           }
           .dlt{
-            svg{
-              width: 20px;
-              height: 20px;
-            }
+            //svg{
+            //  width: 20px;
+            //  height: 20px;
+            //}
           }
         }
       }
@@ -441,6 +441,9 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       }
       thead th{
         white-space: nowrap;
+        width: auto;
+        font-size: 18px;
+        font-weight: 600;
         &:first-child {
           width: auto;
           border-left: 0;

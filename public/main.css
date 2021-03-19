@@ -5957,11 +5957,11 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
         white-space: nowrap; } }
 .pick-color-table tr td {
   padding-right: 12px;
-  padding-bottom: 12px;
+  padding-bottom: 20px;
   position: relative; }
   .pick-color-table tr td label.error {
     position: absolute;
-    bottom: -6px;
+    bottom: 3px;
     left: 0; }
   .pick-color-table tr td:last-child {
     padding-right: 0; }
@@ -6201,9 +6201,6 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
     border: 1px solid #CACDD5 !important; }
   .product-info .product-type table.pick-color-table tbody tr td input.bg-gray-light {
     height: 48px; }
-  .product-info .product-type table.pick-color-table tbody tr td .dlt svg {
-    width: 20px;
-    height: 20px; }
 .product-info .product-notes {
   padding: 30px 0px 30px 20px;
   box-sizing: content-box;
@@ -6233,7 +6230,10 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
       .product-info .product-notes table.measurement-table {
         width: 10px; } }
     .product-info .product-notes table.measurement-table thead th {
-      white-space: nowrap; }
+      white-space: nowrap;
+      width: auto;
+      font-size: 18px;
+      font-weight: 600; }
       .product-info .product-notes table.measurement-table thead th:first-child {
         width: auto;
         border-left: 0; }
