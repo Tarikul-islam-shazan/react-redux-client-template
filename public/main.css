@@ -6853,6 +6853,21 @@ ul.existing-item li {
 .stepper .form-group {
   margin-bottom: 25px; }
 
+.empty-state {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  height: calc(100vh - 80px); }
+  .empty-state img {
+    width: 100%; }
+  .empty-state h2 {
+    color: #452D8F;
+    font-size: 39px;
+    margin-bottom: 20px;
+    margin-top: -40px; }
+  .empty-state p {
+    color: #6A7181; }
+
 .add-invoice {
   max-width: 813px;
   margin: 0 auto;
