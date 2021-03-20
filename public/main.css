@@ -4874,7 +4874,6 @@ button.rec-arrow-right {
         right: 0px;
         top: 0px; } }
   .quote-list .quote-info img {
-    max-height: 202px;
     object-fit: cover;
     width: auto; }
   .quote-list .info-item {
@@ -4894,7 +4893,11 @@ button.rec-arrow-right {
         border-color: #C4C9D8; }
   @media (max-width: 1790px) {
     .quote-list .quote-info a {
-      font-size: 20px !important; }
+      font-size: 20px !important; } }
+  @media (max-width: 1790px) and (max-width: 1790px) {
+    .quote-list .quote-info a ~ a {
+      font-size: 15px !important; } }
+  @media (max-width: 1790px) {
     .quote-list .quote-info .info-right {
       margin-left: 15px !important; }
     .quote-list .sizes .size {
@@ -4917,12 +4920,12 @@ button.rec-arrow-right {
       height: 110px; } }
   @media (max-width: 1024px) {
     .quote-list .sizes .size {
-      width: 45px;
+      width: 36px;
       margin-right: 15px; }
       .quote-list .sizes .size input {
-        height: 35px; }
+        height: 30px; }
       .quote-list .sizes .size.total {
-        width: 100px; }
+        width: 80px; }
     .quote-list .info-item {
       width: 160px; }
     .quote-list .quote-info img {
@@ -5024,7 +5027,6 @@ button.rec-arrow-right {
 
 .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
   max-width: 195px;
-  height: 160px;
   object-fit: cover; }
   @media (max-width: 1790px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
@@ -5036,6 +5038,9 @@ button.rec-arrow-right {
   @media (max-width: 1366px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: 112px; } }
+  @media (max-width: 991px) {
+    .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+      height: auto; } }
   @media (max-width: 767px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: auto;
@@ -5174,13 +5179,12 @@ button.rec-arrow-right {
           height: 150px; } }
       @media (max-width: 1024px) {
         .quotes-list-item .quote-list .quote-info img {
-          height: 250px; } }
+          height: 178px; } }
       @media (max-width: 991px) {
         .quotes-list-item .quote-list .quote-info img {
           height: 188px; } }
       @media (max-width: 991px) {
         .quotes-list-item .quote-list .quote-info img {
-          max-width: 100%;
           height: auto; } }
     .quotes-list-item .quote-list .quote-info .info-right {
       margin-left: 0 !important; }
@@ -5281,6 +5285,9 @@ button.rec-arrow-right {
   @media (max-width: 1440px) {
     .features {
       padding-right: 10px; } }
+  @media (max-width: 1024px) {
+    .features {
+      padding-right: 15px; } }
   @media (max-width: 767px) {
     .features {
       flex-direction: column;
@@ -5296,10 +5303,7 @@ button.rec-arrow-right {
       .features:first-child {
         flex: inherit; } }
   .features:nth-child(2) {
-    flex-basis: 30%; }
-    @media (max-width: 1366px) {
-      .features:nth-child(2) {
-        flex-basis: 25%; } }
+    flex-basis: 25%; }
     @media (max-width: 1024px) {
       .features:nth-child(2) {
         flex-basis: 44%; } }
@@ -5341,11 +5345,15 @@ button.rec-arrow-right {
   @media (max-width: 1366px) {
     .add-quote-list .info-item {
       width: 118px; } }
-  @media (max-width: 1280px) {
+  @media (max-width: 1024px) {
     .add-quote-list .info-item {
-      width: auto; }
-      .add-quote-list .info-item:first-child {
-        margin-right: 16px !important; } }
+      width: 160px; } }
+  @media (max-width: 991px) {
+    .add-quote-list .info-item {
+      width: 190px; } }
+  @media (max-width: 1280px) {
+    .add-quote-list .info-item:first-child {
+      margin-right: 16px !important; } }
 .add-quote-list:nth-child(3), .add-quote-list:nth-child(4) {
   margin-top: 0; }
 
