@@ -678,7 +678,6 @@ class PickDesignV2 extends Component {
                           </ul>
                       </div>
                       <div className="filter-actions d-flex align-items-center">
-                          <a href="javascript:void(0)" className="text-underline mr-3">Reset</a>
                           <button className="m-0 btn-brand m-0 shadow float-right" onClick={async() => {
                               await this.setState({showSelectedFilters: true});
                               this._search()
@@ -689,7 +688,9 @@ class PickDesignV2 extends Component {
               {
                 searching ?
                 <div className="designs">
-                    <h4 className="mb-4 font-weight-normal">Designer’s Choice <span class="result">{`${pagination.value ? pagination.value : '--'}${(pagination.relation && pagination.relation === 'GREATER_THAN_OR_EQUAL_TO') ? '+' : ''}`} Designs</span></h4>
+                    <h4 className="mb-4 font-weight-normal">
+                        <span>Search results <a href="javascript:void(0);" className="text-underline ml-3 font-18">Clear</a></span>
+                        <span class="result">{`${pagination.value ? pagination.value : '--'}${(pagination.relation && pagination.relation === 'GREATER_THAN_OR_EQUAL_TO') ? '+' : ''}`} Designs</span></h4>
                     <div className="show-products">
                     {
                       designList.map(( product , i ) => {
