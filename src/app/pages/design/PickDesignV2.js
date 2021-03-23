@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
+import EmptyState from '../../commonComponents/EmptyState';
 import ProductCard from '../../commonComponents/ProductCard';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
@@ -257,17 +258,6 @@ class PickDesignV2 extends Component {
           console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading:false})
           if(data.productResponseList){
-            // if(merge){
-            //   this.setState({
-            //     designList : [ ...designList, ...data ],
-            //     page : page+1
-            //   })
-            // }else{
-            //   this.setState({
-            //     designList : data,
-            //     page : page+1
-            //   })
-            // }
             this.setState({pagination: data.totalHits});
             result = data.productResponseList;
           }else{
@@ -302,7 +292,6 @@ class PickDesignV2 extends Component {
     }
 
     keyPressed = async(e) => {
-      // console.log("entered")
       if(e.key==='Enter'){
         this._search()
       }
@@ -325,6 +314,15 @@ class PickDesignV2 extends Component {
         loading: false
       })
       this.updateProductCard()
+    }
+
+    resetFilter = () => {
+      this.setState({
+        filters: [],
+        search: '',
+        page: 0,
+        searching: false
+      })
     }
 
     details = (id = 0) => {
@@ -689,8 +687,15 @@ class PickDesignV2 extends Component {
                 searching ?
                 <div className="designs">
                     <h4 className="mb-4 font-weight-normal">
-                        <span>Search results <a href="javascript:void(0);" className="text-underline ml-3 font-18">Clear</a></span>
+                        <span>Search results <a href="#" onClick={this.resetFilter} className="text-underline ml-3 font-18">Clear</a></span>
                         <span class="result">{`${pagination.value ? pagination.value : '--'}${(pagination.relation && pagination.relation === 'GREATER_THAN_OR_EQUAL_TO') ? '+' : ''}`} Designs</span></h4>
+                        {
+                          !this.state.loading && !designList.length ?
+                          <EmptyState
+                           title="Sorry no designs found"
+                           subTitle="You may want to try using different keywords, checking for typos, or adjusting your filters"
+                           /> : <></>
+                        }
                     <div className="show-products">
                     {
                       designList.map(( product , i ) => {
