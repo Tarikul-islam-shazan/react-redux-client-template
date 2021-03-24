@@ -24,22 +24,7 @@
     @media (max-width: 767px) {
       display: block;
     }
-    .search{
-      width: calc(100% - 50px);
-      @media (max-width: 767px) {
-        float: left;
-      }
-      > svg{
-        position: absolute;
-        top: 17px;
-        left: 20px;
-      }
-      input{
-        background: #F4F5F7 !important;
-        border-color: #EDEFF4 !important;
-        padding-left: 48px;
-      }
-    }
+
     .cat-menu{
       flex-basis: 50px;
       cursor: pointer;
@@ -54,6 +39,22 @@
         margin: 16px 0 0 0;
       }
     }
+  }
+}
+.search{
+  width: calc(100% - 50px);
+  @media (max-width: 767px) {
+    float: left;
+  }
+  > svg{
+    position: absolute;
+    top: 17px;
+    left: 20px;
+  }
+  input{
+    background: #F4F5F7 !important;
+    border-color: #EDEFF4 !important;
+    padding-left: 48px;
   }
 }
 span.result {

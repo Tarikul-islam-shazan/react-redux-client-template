@@ -105,12 +105,7 @@ class DefaultLayout extends Component {
               <div className="content">
                   <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
 
-                     <Link to="/dashboard" className="btn_dash_menu">
-                         <Link to="/dashboard">
-                             <img src={require("../assets/icons/dashboard.png")} alt="notification"/>
-                             Dashboard
-                         </Link>
-                     </Link>
+
 
                       {/* Sidebar Toggle (Topbar) */}
                       <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
@@ -122,11 +117,28 @@ class DefaultLayout extends Component {
 
                           <li className="nav-item quote-cart dropdown no-arrow" data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
                               <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 19.021 19.082">
-                                      <g id="noun_shopping-cart_web_icon_854336" data-name="noun_shopping-cart web icon_854336" transform="translate(49.889 -80.016)">
-                                          <path id="Path_27864" data-name="Path 27864" d="M42.864,39.978c-3.207-.245-6.422.018-9.63-.209-1.543-.109-.958-1.6-1.008-2.814-.006-.158-.024-.315-.035-.472a24.241,24.241,0,0,0,8.837-.683c.859-.23,1.422-2.431,1.74-3.149A12.44,12.44,0,0,0,43.881,28.2a.3.3,0,0,0-.292-.353c-4.327-.115-8.836.975-13.063-.294a7.13,7.13,0,0,0-.647-1.262c-.941-1.435-2.7-1.106-4.072-.629-.443.154-.693,1.127-.08.914,1.121-.389,2.242-.694,3.2.2a3.184,3.184,0,0,1,.733,1.147c-.088.2-.07.414.154.485l.021.006a21.583,21.583,0,0,1,.492,2.347c.588,3.109,1.331,6.261.914,9.44a.3.3,0,0,0,.292.353c.083.011.167.015.25.025-.049.065-.1.13-.144.2a1.856,1.856,0,0,0-.255.2c-.17.157-.351.43-.221.668,0,.005.007.008.01.013a2.079,2.079,0,0,0-.131.724c.011.791.669,1.181,1.364,1.348a.613.613,0,0,0,.672-.455,3.273,3.273,0,0,0-.155-2.337.8.8,0,0,0-.237-.262c2.854.239,5.719.064,8.58.177-.014.012-.03.023-.043.036-.341-.191-.925.414-.7.767.026.04.054.079.08.118A4.034,4.034,0,0,0,40.3,43.6a.3.3,0,0,0,.4.227c.638-.216,1.291-.561,1.379-1.3a1.585,1.585,0,0,0-.384-1.037,1.412,1.412,0,0,1,.426-.279.571.571,0,0,0,.295-.3c.051,0,.1,0,.153.008C43.027,40.958,43.462,40.023,42.864,39.978ZM30.905,28.7a20.367,20.367,0,0,0,4.938.387c.7-.016,7.148-.588,7.12-.03a12.612,12.612,0,0,1-1.447,4.495c-.6,1.28-.716,1.372-2.062,1.567a24.729,24.729,0,0,1-7.024.412.417.417,0,0,0-.313.1c-.113-1-.289-2-.467-2.984C31.424,31.385,31.26,30,30.905,28.7ZM31.922,42.04a1.145,1.145,0,0,1,.119-.492c.2.09.248.6.245,1.043A.635.635,0,0,1,31.922,42.04Zm9.253.723c0-.014,0-.027,0-.041a.262.262,0,0,1,.008.047S41.18,42.764,41.175,42.763Z" transform="translate(-75 55)" fill="#21242b" stroke="#21242b" strokeWidth="0.5"/>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="19.372" height="19.372" viewBox="0 0 19.372 19.372">
+                                      <g id="Group_11425" data-name="Group 11425" transform="translate(-1580.925 -30.129)">
+                                          <g id="search_1_" data-name="search (1)" transform="translate(1580.925 30.129)">
+                                              <g id="Group_11422" data-name="Group 11422">
+                                                  <g id="Group_11421" data-name="Group 11421">
+                                                      <path id="Path_29570" data-name="Path 29570" d="M8.183,0a8.183,8.183,0,1,0,8.183,8.183A8.192,8.192,0,0,0,8.183,0Zm0,14.935a6.752,6.752,0,1,1,6.752-6.752A6.759,6.759,0,0,1,8.183,14.935Z" fill="#21242b"/>
+                                                  </g>
+                                              </g>
+                                              <g id="Group_11424" data-name="Group 11424" transform="translate(12.74 12.74)">
+                                                  <g id="Group_11423" data-name="Group 11423">
+                                                      <path id="Path_29571" data-name="Path 29571" d="M343.131,342.12l-5.2-5.2a.716.716,0,0,0-1.012,1.012l5.2,5.2a.716.716,0,0,0,1.012-1.012Z" transform="translate(-336.708 -336.709)" fill="#21242b"/>
+                                                  </g>
+                                              </g>
+                                          </g>
+                                          <g id="dollar" transform="translate(1586.549 33.297)">
+                                              <g id="Group_11395" data-name="Group 11395" transform="translate(0 0)">
+                                                  <path id="Path_29558" data-name="Path 29558" d="M112.695,4.116V2.026a2.787,2.787,0,0,1,1.229.534.44.44,0,0,0,.244.077.511.511,0,0,0,.511-.5.453.453,0,0,0-.131-.321,3.134,3.134,0,0,0-1.859-.748v-.7A.362.362,0,0,0,112.327,0h-.012a.368.368,0,0,0-.374.363V1.04A2.152,2.152,0,0,0,109.7,3.059c0,1.348,1.146,1.722,2.245,2.019V7.454a3.083,3.083,0,0,1-1.574-.695.494.494,0,0,0-.3-.107.517.517,0,0,0-.481.523.453.453,0,0,0,.131.321,3.5,3.5,0,0,0,2.227.9v.653s0,.008,0,.012a.368.368,0,0,0,.385.35.362.362,0,0,0,.362-.362V8.38a2.126,2.126,0,0,0,2.275-2.138C114.969,4.841,113.793,4.413,112.695,4.116Zm-.748-.19c-.647-.19-1.152-.386-1.152-.938s.457-.95,1.152-1Zm.748,3.54V5.3c.671.19,1.194.445,1.188,1.069C113.883,6.824,113.574,7.359,112.695,7.466Z" transform="translate(-109.589 0)" fill="#21242b"/>
+                                              </g>
+                                          </g>
                                       </g>
                                   </svg>
+
                                   {
                                     (this.props.quoteObj && this.props.quoteObj.products && this.props.quoteObj.products.length) ?
                                     <span className="quote-cart-count">{this.props.quoteObj.products.length}</span>
@@ -167,6 +179,13 @@ class DefaultLayout extends Component {
                               </button>
                               {/* Dropdown - User Information */}
                               <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="dropdownProfileButton">
+                                  <Link
+                                    className="dropdown-item"
+                                    to="/dashboard"
+                                    >
+                                      <i className="fas fa-tachometer-alt mr-2 text-gray-400 font-12"></i>
+                                      Dashboard
+                                  </Link>
                                   <Link
                                     className="dropdown-item"
                                     to="/my-profile"
