@@ -380,7 +380,7 @@ class EditShareDesign extends Component {
           errors: {...this.state.errors, ...validated.errors},
           designDetails
       });
-      
+
       if (validated.isValid) {
         Http.PUT('updateDesignDetails', validated.reqBody, productId)
         .then(({data}) => {
@@ -440,7 +440,7 @@ class EditShareDesign extends Component {
                 <Title data={designDetails} errors={errors} flag={editTitle} flagName='editTitle' toggleFlag={this.toggleFlag} onChange={this.onChange} onSubmit={this.updateDetails}/>
 
                 <div className="flex-grow-1 text-right add-another-product" >
-                    <span className="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/design/share')}>+Add another product</span>
+                    <span className="font-18 text-underline cursor-pointer brand-color" onClick={() => this.props.history.push('/designs/add')}>+Add another product</span>
                 </div>
 
             </div>
