@@ -332,6 +332,11 @@ class OurDesignDetails extends Component {
       this.sliderNav.slickGoTo(index);
     }
 
+    edit = () => {
+      let id = this.props.match.params.id;
+      this.props.history.push('/designs/edit/' + id);
+    }
+
     render() {
         let { product , selectedImage, loading, imageViewerFlag, imageViewerData, imageViewerCurrentIndex, similarDesigns, similarDesignLoading, measurementModal } = this.state;
         // console.log("this.getImageByType()", this.getImageByType())
@@ -569,14 +574,17 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <div className="text-left mt-4">
-                                  <a href="" className="btn btn-outline-secondary mr-3 border-gray-light">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="23.677" height="23.396" viewBox="0 0 23.677 23.396">
-                                          <g id="edit" transform="translate(0.1 -0.161)">
-                                              <path id="Path_23189" data-name="Path 23189" d="M21.517,51.47a.581.581,0,0,0-.581.581v5.155a1.744,1.744,0,0,1-1.742,1.742H2.9a1.744,1.744,0,0,1-1.742-1.742V42.075A1.744,1.744,0,0,1,2.9,40.333H8.058a.581.581,0,1,0,0-1.161H2.9a2.906,2.906,0,0,0-2.9,2.9v15.13a2.906,2.906,0,0,0,2.9,2.9H19.194a2.906,2.906,0,0,0,2.9-2.9V52.05a.581.581,0,0,0-.581-.581Zm0,0" transform="translate(0 -36.652)" fill="#707a8b" stroke="#707a8b" stroke-width="0.2"/>
-                                              <path id="Path_23190" data-name="Path 23190" d="M123.776,1.026a2.613,2.613,0,0,0-3.7,0L109.723,11.385a.58.58,0,0,0-.149.256l-1.362,4.918a.581.581,0,0,0,.714.715l4.918-1.362a.58.58,0,0,0,.256-.149L124.457,5.4a2.616,2.616,0,0,0,0-3.7ZM110.988,11.762l8.478-8.478L122.2,6.018,113.721,14.5Zm-.546,1.1,2.184,2.185-3.021.837Zm13.195-8.276-.616.616-2.734-2.734.616-.616a1.451,1.451,0,0,1,2.053,0l.682.681A1.454,1.454,0,0,1,123.636,4.581Zm0,0" transform="translate(-101.909)" fill="#707a8b" stroke="#707a8b" stroke-width="0.2"/>
-                                          </g>
-                                      </svg>
-                                  </a>
+                              {
+                                product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'AVAILABLE' ?
+                                <a onClick={this.edit} className="btn btn-outline-secondary mr-3 border-gray-light">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23.677" height="23.396" viewBox="0 0 23.677 23.396">
+                                        <g id="edit" transform="translate(0.1 -0.161)">
+                                            <path id="Path_23189" data-name="Path 23189" d="M21.517,51.47a.581.581,0,0,0-.581.581v5.155a1.744,1.744,0,0,1-1.742,1.742H2.9a1.744,1.744,0,0,1-1.742-1.742V42.075A1.744,1.744,0,0,1,2.9,40.333H8.058a.581.581,0,1,0,0-1.161H2.9a2.906,2.906,0,0,0-2.9,2.9v15.13a2.906,2.906,0,0,0,2.9,2.9H19.194a2.906,2.906,0,0,0,2.9-2.9V52.05a.581.581,0,0,0-.581-.581Zm0,0" transform="translate(0 -36.652)" fill="#707a8b" stroke="#707a8b" stroke-width="0.2"/>
+                                            <path id="Path_23190" data-name="Path 23190" d="M123.776,1.026a2.613,2.613,0,0,0-3.7,0L109.723,11.385a.58.58,0,0,0-.149.256l-1.362,4.918a.581.581,0,0,0,.714.715l4.918-1.362a.58.58,0,0,0,.256-.149L124.457,5.4a2.616,2.616,0,0,0,0-3.7ZM110.988,11.762l8.478-8.478L122.2,6.018,113.721,14.5Zm-.546,1.1,2.184,2.185-3.021.837Zm13.195-8.276-.616.616-2.734-2.734.616-.616a1.451,1.451,0,0,1,2.053,0l.682.681A1.454,1.454,0,0,1,123.636,4.581Zm0,0" transform="translate(-101.909)" fill="#707a8b" stroke="#707a8b" stroke-width="0.2"/>
+                                        </g>
+                                    </svg>
+                                </a> : <></>
+                              }
                                   <a className={`btn btn-outline-secondary mr-3 border-gray-light favourite ${product.liked ? 'favourite-active' : ''}`} onClick={this.toggleLike}>
                                       <svg xmlns="http://www.w3.org/2000/svg" width="26.474" height="24.783" viewBox="0 0 26.474 24.783">
                                           <path id="like_1_" data-name="like (1)" d="M26.43,9.216c-.386-4.283-3.4-7.39-7.165-7.39a7.113,7.113,0,0,0-6.1,3.54,6.856,6.856,0,0,0-5.955-3.54C3.441,1.826.43,4.933.044,9.216a7.67,7.67,0,0,0,.225,2.808,12.061,12.061,0,0,0,3.665,6.158l9.223,8.427,9.382-8.427A12.062,12.062,0,0,0,26.2,12.024,7.688,7.688,0,0,0,26.43,9.216Z" transform="translate(0 -1.826)" fill="#8f95a2"/>

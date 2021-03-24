@@ -129,7 +129,7 @@ class Root extends Component {
                   <PublicRoute exact path="/my-products/:id" component={ OurDesignDetails }/>
                   <PublicRoute exact path="/quotes/list" component={ MyRFQsV2 }/>
 
-                  <PublicRoute exact path="/design/edit/:id" component={ EditShareDesign }/>
+                  <PublicRoute exact path="/designs/edit/:id" component={ EditShareDesign }/>
 
                   {/*<PublicRoute exact path="/v2/quotes/list" component={ MyRFQsV2 }/>*/}
                   <PublicRoute exact path="/negotiation/:id" component={ RfoNegotiation }/>
