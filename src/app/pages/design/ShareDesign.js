@@ -222,7 +222,7 @@ class ShareDesign extends Component {
             .then(({data}) => {
               console.log('shareDesign POST SUCCESS: ', data);
               if (data.success) {
-                this.props.history.push('/design/edit/' + data.id)
+                this.props.history.push('/designs/edit/' + data.id)
               } else {
                 toastError(data.message)
               }

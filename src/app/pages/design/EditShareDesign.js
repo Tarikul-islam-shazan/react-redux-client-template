@@ -205,7 +205,7 @@ class EditShareDesign extends Component {
         [sectionName]: !temp
       }, () => {
         if (sectionName === 'editColorAndFabrication') {
-          loadjs(['/js/script.js']);
+          loadjs(['/js/reload-niceselect.js']);
         }
       })
     }

@@ -2,7 +2,7 @@
     "use strict";
     // Nice Select
     $(document).ready(function() {
-        $('select').niceSelect('destroy');
-        console.log("destroy called nice")
+        $('select').niceSelect();
+        $('select').niceSelect('update');
     });
 }(window.jQuery)
