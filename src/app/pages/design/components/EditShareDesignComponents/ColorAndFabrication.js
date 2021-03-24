@@ -3,6 +3,14 @@ import ColorRowWithPicker from "../ColorRowWithPicker";
 
 export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryList, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
+  let categoryName = '';
+  let fabricTypeName = '';
+
+  designCategoryList.map((item) => {
+    if (item.id == data.categoryId) {
+      categoryName = item.name;
+    }
+  })
 
   productTypeList.map((item) => {
     item.types.map((item2)=>{
@@ -10,6 +18,12 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryL
         productTypeName = item2.name;
       }
     })
+  })
+
+  fabricTypeList.map((item) => {
+    if (item.id == data.fabricTypeId) {
+      fabricTypeName = item.name;
+    }
   })
 
   const onChangeColor = (e) => {
@@ -35,7 +49,7 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryL
                 </div>
           </span>
           <div className="form-group">
-              <label>Design category</label>
+              <label>Design category*</label>
               <select className={`w-100 bg-gray-light ${errors.categoryIdError ? `error2` : ``}`} name="categoryId" value={data.categoryId} onClick={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select design category</option>
                   {
@@ -70,7 +84,7 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryL
               }
           </div>
           <div className="form-group">
-              <label>Fabric type</label>
+              <label>Fabric type*</label>
               <select className={`w-100 bg-gray-light ${errors.fabricTypeIdError ? `error2` : ``}`} name="fabricTypeId" value={data.fabricTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
                   <option value="">Select fabric type</option>
                   {
@@ -85,7 +99,7 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryL
               }
           </div>
           <div className="form-group">
-              <label>Fabric details</label>
+              <label>Fabric details*</label>
               <input type="text" className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`} placeholder="Enter fabric details" name="fabricDetails" value={data.fabricDetails} onChange={(e) => onChange(e.target.name, e.target.value)}/>
               {
                 errors.fabricDetailsError ? <label className="error">{errors.fabricDetailsError}</label> : <></>
@@ -141,12 +155,16 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryL
               </svg>
         </span>
         <div className="form-group">
+            <label>Design category*</label>
+            <span>{categoryName}</span>
+        </div>
+        <div className="form-group">
             <label>Product type*</label>
             <span>{productTypeName}</span>
         </div>
         <div className="form-group">
             <label>Fabric type</label>
-            <span>{data.fabricType}</span>
+            <span>{fabricTypeName}</span>
         </div>
         <div className="form-group">
             <label>Fabric details</label>
