@@ -6845,7 +6845,12 @@ ul.existing-item li {
   .bar-container .bar .item {
     box-shadow: 3px 2px 10px -4px rgba(0, 0, 0, 0.12);
     padding: 18px 25px;
-    border-left: 4px solid #472F91; }
+    border-left: 4px solid #472F91;
+    position: relative; }
+    .bar-container .bar .item .dlt {
+      position: absolute;
+      right: 10px;
+      top: 10px; }
     .bar-container .bar .item span {
       color: #EE761F; }
 
