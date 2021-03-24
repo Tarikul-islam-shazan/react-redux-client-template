@@ -200,12 +200,14 @@ class EditShareDesign extends Component {
 
     toggleFlag = async(sectionName) => {
       let temp = this.state[sectionName];
+      console.log("from toggleFlag", temp, !temp, sectionName)
       await this.setState({
         [sectionName]: !temp
+      }, () => {
+        if (sectionName === 'editColorAndFabrication') {
+          loadjs(['/js/script.js']);
+        }
       })
-      if (sectionName === 'editColorAndFabrication') {
-        loadjs(['/js/script.js']);
-      }
     }
 
     onChange = (name, value) => {
@@ -397,6 +399,10 @@ class EditShareDesign extends Component {
           console.log('uploadDocument POST SUCCESS: ', data);
           if (data.success) {
             toastSuccess("Updated successfully.")
+            // this.setState({
+            //   [sectionName]: false
+            // })
+            // loadjs(['/js/destroy-niceselect.js']);
             this.toggleFlag(sectionName);
           }
         })

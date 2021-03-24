@@ -221,10 +221,19 @@ class ShareDesign extends Component {
             Http.POST('shareDesign', validated.reqBody)
             .then(({data}) => {
               console.log('shareDesign POST SUCCESS: ', data);
-              this.props.history.push('/design/edit/' + data.id)
+              if (data.success) {
+                this.props.history.push('/design/edit/' + data.id)
+              } else {
+                toastError(data.message)
+              }
             })
             .catch(({response}) => {
                 console.log('shareDesign ERROR: ', JSON.stringify(response));
+                if (response && response.data && response.data.message) {
+                  toastError(response.data.message)
+                } else {
+                  toastError('Request was not successful')
+                }
             });
         } else {
           loadjs(['/js/script.js']);
