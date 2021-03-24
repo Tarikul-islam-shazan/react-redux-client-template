@@ -205,7 +205,7 @@ class EditShareDesign extends Component {
         [sectionName]: !temp
       }, () => {
         if (sectionName === 'editColorAndFabrication') {
-          loadjs(['/js/reload-niceselect.js']);
+          loadjs(['/js/reloda-niceSelect.js']);
         }
       })
     }
@@ -373,36 +373,20 @@ class EditShareDesign extends Component {
         validated = validateShareDesign(designDetails, true, false);
       } else if (sectionName === 'editColorAndFabrication') {
         validated = validateShareDesign(designDetails, false, false);
+        designDetails.colors = validated.errors.colors ? validated.errors.colors : designDetails.colors;
       }
 
-      designDetails.colors = validated.errors.colors ? validated.errors.colors : designDetails.colors;
       this.setState({
           errors: {...this.state.errors, ...validated.errors},
           designDetails
       });
-      // if (sectionName === 'editTitle') {
-      //   body.name = designDetails.name;
-      // } else if (sectionName === 'editColorAndFabrication') {
-      //   body.productTypeId = designDetails.productTypeId;
-      //   body.fabricType = designDetails.fabricType;
-      //   body.fabricDetails = designDetails.fabricDetails;
-      //   body.colors = designDetails.colors.map((colorObj) => {
-      //     return ({
-      //       hexCode: colorObj.hexCode,
-      //       name: colorObj.name
-      //     })
-      //   });
-      // }
+      
       if (validated.isValid) {
         Http.PUT('updateDesignDetails', validated.reqBody, productId)
         .then(({data}) => {
           console.log('uploadDocument POST SUCCESS: ', data);
           if (data.success) {
             toastSuccess("Updated successfully.")
-            // this.setState({
-            //   [sectionName]: false
-            // })
-            // loadjs(['/js/destroy-niceselect.js']);
             this.toggleFlag(sectionName);
           }
         })
