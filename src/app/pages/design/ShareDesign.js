@@ -36,6 +36,7 @@ class ShareDesign extends Component {
           productDesignDoc: {},
           productTypeList: [],
           fabricTypeList: [],
+          designCategoryList: [],
           errors: {
               nameError: '',
             	fabricTypeError: '',
@@ -68,6 +69,7 @@ class ShareDesign extends Component {
         window.addEventListener('mousedown', this.handleClickOutside);
         await this.getProductTypes();
         await this.getFabricTypes();
+        await this.getDesignCategories();
         loadjs(['/js/script.js']);
     }
 
@@ -123,6 +125,19 @@ class ShareDesign extends Component {
           if (data) {
             this.setState({
               fabricTypeList: data
+            })
+          }
+        })
+        .catch(response => {
+        });
+    }
+
+    getDesignCategories = async() => {
+        await Http.GET('getDesignCategories')
+        .then(({data}) => {
+          if (data) {
+            this.setState({
+              designCategoryList: data
             })
           }
         })
@@ -218,10 +233,10 @@ class ShareDesign extends Component {
 
     render() {
         let {
-          name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc,
-          productTypeList, fabricTypeList
+          name, categoryId, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc,
+          productTypeList, fabricTypeList, designCategoryList
         } = this.state;
-        let {nameError, fabricTypeError, fabricTypeIdError, fabricDetailsError, productTypeIdError, documentIdsError} = this.state.errors;
+        let {nameError, categoryIdError, fabricTypeError, fabricTypeIdError, fabricDetailsError, productTypeIdError, documentIdsError} = this.state.errors;
         return (
           <>
             <div>
@@ -282,6 +297,22 @@ class ShareDesign extends Component {
                                         <input type="text" placeholder="Enter design name" className={`bg-gray-light border-0 ${nameError ? `error2` : ``}`} name="name" value={name} onChange={this.onChange}/>
                                         {
                                           nameError ? <label className="error">{nameError}</label> : <></>
+                                        }
+                                    </div>
+                                </div>
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <label for="">Design Category*</label>
+                                        <select className={`w-100 bg-gray-light border-0 ${categoryIdError ? `error2` : ``}`} name="categoryId" value={categoryId} onClick={this.onChange}>
+                                            <option value="">Select category</option>
+                                            {
+                                              designCategoryList.map((item,i) => {
+                                                return <option key={i} value={item.id}>{item.name}</option>
+                                              })
+                                            }
+                                        </select>
+                                        {
+                                          categoryIdError ? <label className="error">{categoryIdError}</label> : <></>
                                         }
                                     </div>
                                 </div>

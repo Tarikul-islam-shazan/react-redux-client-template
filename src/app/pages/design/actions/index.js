@@ -60,7 +60,7 @@ export const _getProductForQuote = async(productIds) => {
 
 export const validateShareDesign = (state, withName = true, withProductDesign = true) => {
     let {
-      name, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc
+      name, categoryId, fabricType, fabricTypeId, fabricDetails, productTypeId, tableJson, note, colors, documentIds, productDesignDoc
     } = state;
     let errors = {};
     let reqBody = {};
@@ -72,6 +72,13 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
       } else {
           errors.nameError = '';
       }
+    }
+
+    if (!categoryId) {
+        errors.categoryIdError = 'Category is required.';
+        isValid = false;
+    } else {
+        errors.categoryIdError = '';
     }
 
     if (!fabricTypeId) {
@@ -122,6 +129,7 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
     if (isValid) {
         reqBody = {
             // fabricType,
+            categoryId,
             fabricTypeId, //need to make dynamic
             fabricDetails,
             productTypeId,

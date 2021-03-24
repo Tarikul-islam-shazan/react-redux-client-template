@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ColorRowWithPicker from "../ColorRowWithPicker";
 
-export const ColorAndFabrication = ({data, setPickerRef, errors, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
+export const ColorAndFabrication = ({data, setPickerRef, errors, designCategoryList, productTypeList, fabricTypeList, flag, flagName, toggleFlag, addColor, removeColor, onChange, onSubmit, classes}) => {
   let productTypeName = '';
 
   productTypeList.map((item) => {
@@ -34,6 +34,20 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, productTypeList
                     </svg>
                 </div>
           </span>
+          <div className="form-group">
+              <label>Design category</label>
+              <select className={`w-100 bg-gray-light ${errors.categoryIdError ? `error2` : ``}`} name="categoryId" value={data.categoryId} onClick={(e) => onChange(e.target.name, e.target.value)}>
+                  <option value="">Select design category</option>
+                  {
+                    designCategoryList.map((item,i) => {
+                      return <option key={i} value={item.id}>{item.name}</option>
+                    })
+                  }
+              </select>
+              {
+                errors.categoryIdError ? <label className="error">{errors.categoryIdError}</label> : <></>
+              }
+          </div>
           <div className="form-group">
               <label>Product type*</label>
               <select className={`w-100 bg-gray-light ${errors.productTypeIdError ? `error2` : ``}`} name="productTypeId" value={data.productTypeId} onClick={(e) => onChange(e.target.name, e.target.value)}>
@@ -105,7 +119,7 @@ export const ColorAndFabrication = ({data, setPickerRef, errors, productTypeList
                           return (
                             <ColorRowWithPicker
                               item={colorObj}
-                              setPickerRef={(node, i) => setPickerRef(node, classes.includes('d-xl-none') ? `mbl_${index}` : index)} 
+                              setPickerRef={(node, i) => setPickerRef(node, classes.includes('d-xl-none') ? `mbl_${index}` : index)}
                               key={i} index={i} data={data.colors} onChangeColor={onChangeColor} remove={removeColor} />
                           )
                         })

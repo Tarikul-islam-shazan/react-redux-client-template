@@ -31,6 +31,7 @@ class EditShareDesign extends Component {
         this.state = {
           designDetails: {},
           designDocuments: {},
+          designCategoryList: [],
           productTypeList: [],
           fabricTypeList: [],
           editTitle: false,
@@ -80,6 +81,7 @@ class EditShareDesign extends Component {
         this.getDesignDocuments(id);
         this.getProductTypes();
         this.getFabricTypes();
+        this.getDesignCategories();
     }
 
     componentWillUnmount = () => {
@@ -177,6 +179,19 @@ class EditShareDesign extends Component {
               fabricTypeList: data
             })
             loadjs(['/js/script.js']);
+          }
+        })
+        .catch(response => {
+        });
+    }
+
+    getDesignCategories = async() => {
+        await Http.GET('getDesignCategories')
+        .then(({data}) => {
+          if (data) {
+            this.setState({
+              designCategoryList: data
+            })
           }
         })
         .catch(response => {
@@ -427,7 +442,7 @@ class EditShareDesign extends Component {
     }
 
     render() {
-        let {designDetails, designDocuments, productTypeList, fabricTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
+        let {designDetails, designDocuments, designCategoryList, productTypeList, fabricTypeList, editTitle, editColorAndFabrication, editNotes, showProgressModal, visibleDocType, errors} = this.state;
         return (
           <>
             <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
@@ -479,6 +494,7 @@ class EditShareDesign extends Component {
                       data={designDetails}
                       setPickerRef={this.setPickerRef}
                       errors={errors}
+                      designCategoryList={designCategoryList}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
                       flag={editColorAndFabrication}
@@ -537,6 +553,7 @@ class EditShareDesign extends Component {
                       data={designDetails}
                       setPickerRef={this.setPickerRef}
                       errors={errors}
+                      designCategoryList={designCategoryList}
                       productTypeList={productTypeList}
                       fabricTypeList={fabricTypeList}
                       flag={editColorAndFabrication}
