@@ -1,0 +1,300 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+            <section class="admin-invoice-list">
+                <!-- Page Content -->
+                <div class="header-sorting d-flex flex-column flex-xl-row justify-content-between align-items-center mb-3">
+                    <div>
+                        <h4 class="font-24 semibold">All roles</h4>
+                    </div>
+                    <div class="sort-filter collection-list-filter d-flex mt-3 mt-xl-0">
+                        <div class="search ml-3">
+                            <button class="m-0 btn-brand border-0">+Add role</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table manage-project-table text-center table-responsive-xl">
+                            <thead class="bg-blue-light">
+                                <tr>
+                                    <th scope="col" class="text-left">Role name</th>
+                                    <th scope="col" class="text-left">Description</th>
+                                    <th scope="col" class="text-left">Created by</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td class="text-left">Super Admin</td>
+                                <td class="text-left">Lorem ipsum dolor sit amet, conse…</td>
+                                <td class="text-left">Mahadi Hassan</td>
+                                <td>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22.311" height="22.121" viewBox="0 0 22.311 22.121">
+                                            <g id="edit" transform="translate(1 1)">
+                                                <path id="Path_29453" data-name="Path 29453" d="M11,4H4A2,2,0,0,0,2,6V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V13" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29454" data-name="Path 29454" d="M18.5,2.5a2.121,2.121,0,0,1,3,3L12,15,8,16l1-4Z" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                            </g>
+                                        </svg>
+
+                                    </button>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
+                                            <g id="trash-2" transform="translate(1 1)">
+                                                <path id="Path_29455" data-name="Path 29455" d="M3,6H21" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29456" data-name="Path 29456" d="M19,6V20a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <line id="Line_346" data-name="Line 346" y2="6" transform="translate(7.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                                <line id="Line_347" data-name="Line 347" y2="6" transform="translate(11.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left">Super Admin</td>
+                                <td class="text-left">Lorem ipsum dolor sit amet, conse…</td>
+                                <td class="text-left">Mahadi Hassan</td>
+                                <td>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22.311" height="22.121" viewBox="0 0 22.311 22.121">
+                                            <g id="edit" transform="translate(1 1)">
+                                                <path id="Path_29453" data-name="Path 29453" d="M11,4H4A2,2,0,0,0,2,6V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V13" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29454" data-name="Path 29454" d="M18.5,2.5a2.121,2.121,0,0,1,3,3L12,15,8,16l1-4Z" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                            </g>
+                                        </svg>
+
+                                    </button>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
+                                            <g id="trash-2" transform="translate(1 1)">
+                                                <path id="Path_29455" data-name="Path 29455" d="M3,6H21" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29456" data-name="Path 29456" d="M19,6V20a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <line id="Line_346" data-name="Line 346" y2="6" transform="translate(7.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                                <line id="Line_347" data-name="Line 347" y2="6" transform="translate(11.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left">Super Admin</td>
+                                <td class="text-left">Lorem ipsum dolor sit amet, conse…</td>
+                                <td class="text-left">Mahadi Hassan</td>
+                                <td>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22.311" height="22.121" viewBox="0 0 22.311 22.121">
+                                            <g id="edit" transform="translate(1 1)">
+                                                <path id="Path_29453" data-name="Path 29453" d="M11,4H4A2,2,0,0,0,2,6V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V13" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29454" data-name="Path 29454" d="M18.5,2.5a2.121,2.121,0,0,1,3,3L12,15,8,16l1-4Z" transform="translate(-2 -1.879)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                            </g>
+                                        </svg>
+
+                                    </button>
+                                    <button type="button" class="action bg-transparent">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22">
+                                            <g id="trash-2" transform="translate(1 1)">
+                                                <path id="Path_29455" data-name="Path 29455" d="M3,6H21" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <path id="Path_29456" data-name="Path 29456" d="M19,6V20a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6" transform="translate(-3 -2)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                                <line id="Line_346" data-name="Line 346" y2="6" transform="translate(7.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                                <line id="Line_347" data-name="Line 347" y2="6" transform="translate(11.288 9)" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></line>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section> 
+        </div>
+    </div>
+
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript " src="assets/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+</body>
+
+</html>

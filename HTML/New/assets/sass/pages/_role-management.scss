@@ -1,0 +1,18 @@
+.all-cat-select .all-checkbox {
+  overflow: hidden;
+  width: 106px;
+  border-radius: 8px;
+}
+.role-check-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px 32px;
+  > div {
+    flex-basis: calc(100% / 2);
+  }
+}
+.role-action{
+  button.btn-brand{
+    margin: 0 !important;
+  }
+}
