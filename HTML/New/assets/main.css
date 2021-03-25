@@ -6400,6 +6400,9 @@ ul.p-img-container {
   display: flex;
   flex-wrap: wrap;
   padding: 12px 32px; }
+  @media (max-width: 575px) {
+    .role-check-container {
+      padding: 0 18px; } }
   .role-check-container > div {
     flex-basis: calc(100% / 2); }
 
