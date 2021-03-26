@@ -38,7 +38,7 @@ export const ModalMyProductCard = ({product, index, onChange, buttonAction, butt
                 <div className="d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-16 color-333">{product.fabricComposition} <span className="brand-color ml-3">{product.fabricWeight} GSM</span></h5>
+                        <h5 className="font-16 color-333">{product.fabricComposition} {product.fabricWeight} GSM</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
