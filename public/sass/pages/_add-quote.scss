@@ -126,6 +126,10 @@
     border-radius: 5px;
     padding: 10px;
   position: relative;
+  transition: all ease-in-out .2s;
+  &:hover{
+    box-shadow: 0 0.125rem 1.25rem rgba(0,0,0,.075) !important;
+  }
   .quote-info{
     width: 100%;
     a{
