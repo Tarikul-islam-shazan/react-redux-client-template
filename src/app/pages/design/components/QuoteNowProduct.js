@@ -77,26 +77,46 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
         </div>
 
         <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
+            <div className="sizes d-flex  align-items-center mb-2">
+                <div className="size">
+                    <label className="text-center">&nbsp;</label>
+                </div>
+                <div className="size">
+                    <label className="text-center">XS</label>
+                </div>
+                <div className="size">
+                    <label className="text-center">S</label>
+                </div>
+                <div className="size">
+                    <label className="text-center">M</label>
+                </div>
+                <div className="size">
+                    <label className="text-center">L</label>
+                </div>
+                <div className="size">
+                    <label className="text-center">XL</label>
+                </div>
+                <div className="size total">
+                    <label className="text-right">Total</label>
+                </div>
+            </div>
         {
           product.colorWiseSizeQuantityPairList.map((colorWithSize, colorIndex) => {
             return(
               <div class="sizes d-flex  align-items-center">
                   <div class="size">
-                      <label class="text-center">&nbsp;</label>
                       <div class="product-color" style={{background: colorWithSize.hexCode}}></div>
                   </div>
                   {
                     colorWithSize.sizeQuantityPairList.map((pair, key) => {
                       return(
                         <div className="size">
-                            <label className="text-center">{pair.code}</label>
                             <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} className="bg-gray-light"/>
                         </div>
                       )
                     })
                   }
                   <div className="size total">
-                      <label className="text-right">Total</label>
                       <input type="text" placeholder="00" value={getTotal(colorWithSize.sizeQuantityPairList)} className="bg-blue-light" disabled/>
                   </div>
               </div>

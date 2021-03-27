@@ -100,5 +100,15 @@ button.btn-border{
   padding: 10px 20px;
   width: 100%;
   border-radius: 5px;
+  &.added {
+    border: 1px solid #00C334;
+    color: #00C334;
+    background: #F0FFF4;
+    font-weight: 500;
+    svg{
+      margin-right: 2px;
+      margin-top: -2px;
+    }
+  }
 }
 

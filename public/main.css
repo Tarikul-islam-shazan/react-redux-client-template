@@ -3790,6 +3790,14 @@ button.btn-border {
   padding: 10px 20px;
   width: 100%;
   border-radius: 5px; }
+  button.btn-border.added {
+    border: 1px solid #00C334;
+    color: #00C334;
+    background: #F0FFF4;
+    font-weight: 500; }
+    button.btn-border.added svg {
+      margin-right: 2px;
+      margin-top: -2px; }
 
 .uploader input[class="file-upload"] {
   display: none; }
