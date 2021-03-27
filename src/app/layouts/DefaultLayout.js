@@ -65,7 +65,7 @@ class DefaultLayout extends Component {
 
     componentDidMount = () => {
       const hostName = window.location.toString();
-      if( hostName.indexOf( "https://app.nitex.com" ) > -1 ){
+      if (hostName.indexOf( "https://app.nitex.com" ) > -1) {
           const script = document.createElement("script");
           script.src = "//js.hs-scripts.com/9310837.js";
           script.async = true;
