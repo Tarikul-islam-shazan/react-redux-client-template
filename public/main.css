@@ -5044,12 +5044,18 @@ button.rec-arrow-right {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: 132px;
       width: auto; } }
-  @media (max-width: 1280px) {
+  @media (max-width: 1440px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
-      height: 110px; } }
+      width: 118px; } }
   @media (max-width: 1366px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: 112px; } }
+  @media (max-width: 1280px) {
+    .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+      height: 110px; } }
+  @media (max-width: 1024px) {
+    .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
+      width: auto; } }
   @media (max-width: 991px) {
     .add-quote .confirm-quote-request .quote-req-list-container .quote-list .quote-info img {
       height: auto; } }
