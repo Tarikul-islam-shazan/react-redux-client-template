@@ -6489,7 +6489,7 @@ ul.p-img-container {
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
   background: #fff;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.11); }
 
 @keyframes spin {
   to {

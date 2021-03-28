@@ -537,7 +537,7 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
 }
 .more-files {
   padding: 10px 10px 15px 30px;
-  box-shadow: 0 -13px 28px 16px rgba(0, 0, 0, .06);
+  box-shadow: 0 -13px 28px 16px rgba(0, 0, 0, 0.06);
   margin-bottom: 35px;
   @media (max-width: 1024px) {
     padding: 15px 25px;
@@ -710,7 +710,7 @@ ul.p-img-container {
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
   background: #fff;
-  box-shadow: 0 0 20px 0px rgba(0,0,0,.1);
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0.11);
 }
 
 @keyframes spin {
@@ -731,3 +731,4 @@ label[aria-expanded="true"]{
     transition: all ease-in-out .2s;
   }
 }
+
