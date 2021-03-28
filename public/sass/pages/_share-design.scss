@@ -410,11 +410,7 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       padding: 0;
       width: 100%;
     }
-    .p-edit{
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
+
     .p-note{
     }
     label{
@@ -462,7 +458,11 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
     }
   }
 }
-
+.p-edit{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .color-circle{
   width: 20px;
   height: 20px;

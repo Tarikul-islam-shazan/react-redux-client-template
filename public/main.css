@@ -5229,6 +5229,11 @@ button.rec-arrow-right {
     @media (max-width: 1280px) {
       .quotes-list-item .quote-list .sizes .size input {
         height: 34px !important; } }
+    @media (max-width: 1440px) {
+      .quotes-list-item .quote-list .sizes .size input {
+        padding: 3px;
+        height: 32px;
+        border-radius: 6px; } }
     @media (max-width: 1280px) {
       .quotes-list-item .quote-list .sizes .size input {
         height: 30px !important; } }
@@ -6241,10 +6246,6 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
     .product-info .product-notes {
       padding: 0;
       width: 100%; } }
-  .product-info .product-notes .p-edit {
-    position: absolute;
-    top: 0;
-    right: 0; }
   .product-info .product-notes label {
     font-size: 20px;
     color: #21242B; }
@@ -6278,6 +6279,11 @@ input[type="text"].error2, input[type="email"].error2, input[type="url"].error2,
       border-left: 0; }
     .product-info .product-notes table.measurement-table tbody tr td:last-child {
       border-right: 0; }
+
+.p-edit {
+  position: absolute;
+  top: 0;
+  right: 0; }
 
 .color-circle {
   width: 20px;

@@ -198,6 +198,11 @@
           @media (max-width: 1280px) {
             height: 34px !important;
           }
+          @media (max-width: 1440px) {
+            padding: 3px;
+            height: 32px;
+            border-radius: 6px;
+          }
           @media (max-width: 1280px) {
             height: 30px !important;
           }
