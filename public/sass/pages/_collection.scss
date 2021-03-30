@@ -205,9 +205,8 @@ ul.existing-item{
 .add-buyer{
   .added-members{
     position: relative;
+    display: flex;
     .add-new-member{
-      position: absolute;
-      left: -45px;
       cursor: pointer;
       transform: rotate( 0deg );
       transition: all ease-in-out .2s;

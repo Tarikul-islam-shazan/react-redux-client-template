@@ -980,6 +980,8 @@ ol {
     padding: 0;
     li{
       list-style: none;
+      display: inline-block;
+      margin-right: 20px;
     }
   }
 }
@@ -2425,11 +2427,11 @@ button.deliverable-deadline {
   .sub-stage {
     position: absolute;
     display: flex;
-    background: #fff; 
+    background: #fff;
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0px 0px 18px 0px #ccc;
-    border-radius: 5px; 
+    border-radius: 5px;
     z-index: 9;
     top: 45px;
     width: auto;
@@ -2437,19 +2439,19 @@ button.deliverable-deadline {
     ul{
       padding: 0;
       padding-bottom: 20px;
-      margin: 0; 
+      margin: 0;
       flex-grow: 1;
       .title{
-        padding: 15px 20px; 
+        padding: 15px 20px;
         border-left: 1px solid #eee;
         border-bottom: 1px solid #eee;
         width: 170px;
       }
       li{
-          list-style: none;
-          cursor: pointer;
-          padding: 15px 20px 0 20px;
-      
+        list-style: none;
+        cursor: pointer;
+        padding: 15px 20px 0 20px;
+
       }
     }
     &::before{
@@ -2464,7 +2466,7 @@ button.deliverable-deadline {
       transform: translateX(-50%);
       top: -10px;
     }
-}
+  }
 }
 
 .suggest-filed {
