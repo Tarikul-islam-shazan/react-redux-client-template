@@ -364,9 +364,6 @@ ul.existing-item{
 .collection-list-filter{
   .type{
     width: 154px;
-    @media (max-width: 767px) {
-      display: none;
-    }
   }
   .search button.btn-brand {
     height: 49px;
@@ -374,6 +371,9 @@ ul.existing-item{
       height: 44px;
       width: 162px;
     }
+  }
+  @media (max-width: 767px) {
+    margin-top: 15px;
   }
 }
 table.manage-project-table.collection-list-table{
@@ -447,6 +447,11 @@ table.manage-project-table.collection-list-table{
         color: #EE761F;
       }
     }
+  }
+}
+.new-collection{
+  @media (max-width: 767px) {
+    display: block !important;
   }
 }
 
