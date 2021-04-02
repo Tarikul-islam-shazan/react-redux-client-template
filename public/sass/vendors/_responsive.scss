@@ -7,6 +7,10 @@
     }
 }
 @media screen and (max-width:1440px) {
+    button.action svg {
+        width: 20px;
+        height: 17px;
+    }
     .uploaded-photo  img {
         height: 150px !important;
     }
@@ -92,6 +96,7 @@
     .sidebar-collapse {
         padding: 36px 20px 130px 10px;
         width: 16%;
+        margin-top: -40px;
 
         input {
             font-size: 14px;
@@ -697,7 +702,7 @@
     .auth-page a {
         font-size: 14px;
     }
-   .forgot-pass a.text-active {
+    .forgot-pass a.text-active {
         font-size: 13px;
     }
     .auth-page p {
@@ -814,7 +819,7 @@
         }
     }
     #sidebar-menu-content {
-        margin-left: 216px; 
+        margin-left: 216px;
     }
     .navbar {
         padding: 10px 15px;
@@ -834,7 +839,7 @@
         margin-left: 218px;
         padding-right: 0;
     }
-    .product-slider { 
+    .product-slider {
         max-width: 825px;
     }
     .file.file-style-2 {
@@ -844,16 +849,16 @@
     }
     #AddNewProduct .modal-body .add-new-product ul li a {
         padding: 15px 45px;
-        font-size: 18px; 
+        font-size: 18px;
     }
     .request-for-quote .designs .card {
-        flex-basis: calc(90.6% / 3); 
+        flex-basis: calc(90.6% / 3);
     }
     .modal-form {
-        max-width: 760px; 
+        max-width: 760px;
     }
     .row-item {
-        padding: 20px; 
+        padding: 20px;
     }
     .nice-select{
         line-height: 34px;
@@ -866,16 +871,16 @@
         cursor: pointer;
         font-size: 12px;
     }
-    .custom-chekbox .form-group label:before { 
-        padding: 7px; 
+    .custom-chekbox .form-group label:before {
+        padding: 7px;
     }
-    .custom-chekbox .form-group input:checked + label:after { 
+    .custom-chekbox .form-group input:checked + label:after {
         top: 7px;
-        left: 6px; 
-        height: 10px; 
+        left: 6px;
+        height: 10px;
     }
-    .custom-chekbox{ 
-        .form-group { 
+    .custom-chekbox{
+        .form-group {
             margin-bottom: 5px;
         }
     }
@@ -951,33 +956,33 @@
     .manage-product .card .card-body h5 {
         max-width: 70%;
     }
-    .custom-chekbox .form-group label { 
+    .custom-chekbox .form-group label {
         font-size: 11px;
     }
     #sidebar-menu-content {
-        margin-left: 200px; 
+        margin-left: 200px;
     }
     .product-slider {
         max-width: 745px;
     }
     .chat {
         width: 60px;
-        height: 60px; 
+        height: 60px;
         right: 22px;
-        bottom: 40px; 
+        bottom: 40px;
         background-size: 50%;
     }
     .other-description {
         padding: 50px 32px 0 32px;
     }
-    .other-description { 
-        .product-slider{ 
+    .other-description {
+        .product-slider{
             max-width: 96%;
             .designs .card {
-                margin-bottom: 0px; 
+                margin-bottom: 0px;
             }
         }
-      }
+    }
 
 }
 @media screen and (max-width:1024px){
@@ -1062,7 +1067,7 @@
     .dashboard-card {
         min-height: 113px;
     }
-     .navbar {
+    .navbar {
         width: 100%;
     }
     aside.left-panel{
@@ -1308,7 +1313,7 @@
         .search input {
             width: 225px;
         }
-         button.btn-brand {
+        button.btn-brand {
             width: 170px;
             height: 47px;
         }
@@ -1330,7 +1335,7 @@
     .auth-page .content-wrapper-override {
         padding: 0 80px 80px 80px
     }
-//Add New Product
+    //Add New Product
     .modal-form {
         max-width: 595px;
     }
@@ -1805,7 +1810,7 @@
             overflow: hidden;
             font-size: 14px;
         }
-         .tag {
+        .tag {
             font-size: 12px;
         }
     }
