@@ -875,7 +875,7 @@
         padding: 7px;
     }
     .custom-chekbox .form-group input:checked + label:after {
-        top: 7px;
+        top: 4px;
         left: 6px;
         height: 10px;
     }
@@ -1367,6 +1367,9 @@
 }
 
 @media screen and (max-width:767px) {
+    .custom-chekbox .form-group input:checked + label:after {
+        top: 2px;
+    }
     .uploaded-photo img {
         height: 160px !important;
     }
