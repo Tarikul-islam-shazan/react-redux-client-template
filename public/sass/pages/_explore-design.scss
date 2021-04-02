@@ -153,7 +153,8 @@ ul.filter-tag {
   .thumb{
     .favourite-part{
       top: 10px;
-      display: none;
+      transform: scale(0);
+      transition: all ease-in-out .2s;
       &.active{
         svg path{
           fill: #F05B5B;
@@ -162,8 +163,9 @@ ul.filter-tag {
       &.choose {
         right: inherit;
         left: 10px;
-        display: none;
         cursor: pointer;
+        transform: scale(0);
+        transition: all ease-in-out .2s;
         @media (max-width: 1024px) {
           display: block;
         }
@@ -209,8 +211,8 @@ ul.filter-tag {
         padding: 9px 12px;
         display: flex;
         &:after{
-            display: none !important;
-          }
+          display: none !important;
+        }
       }
       .dropdown-menu:before{
         position: absolute;
@@ -261,14 +263,18 @@ ul.filter-tag {
   &:hover{
     .thumb{
       .favourite-part{
-        display: block;
+        transform: scale(0);
+        transition: all ease-in-out .2s;
         &.choose {
-          display: block;
+          transform: scale(1);
         }
       }
       .card-options{
         display: flex !important;
       }
+    }
+    .product-option{
+      transform: scale(1);
     }
     box-shadow: 0px 0px 30px rgba(0,0,0,.05) !important;
   }
