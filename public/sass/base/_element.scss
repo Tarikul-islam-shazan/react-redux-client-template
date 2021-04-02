@@ -2146,9 +2146,19 @@ button.deliverable-deadline {
   }
 }
 .manage-product{
-  display: flex;
-  flex-wrap: wrap;
   padding-bottom: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 30px;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 575px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
   .card{
     flex-basis: calc(25% - 20px);
     margin: 10px;

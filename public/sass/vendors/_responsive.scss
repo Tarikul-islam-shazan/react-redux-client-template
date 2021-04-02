@@ -1367,6 +1367,9 @@
 }
 
 @media screen and (max-width:767px) {
+    .sidebar-action {
+        margin-bottom: 50px;
+    }
     .custom-chekbox .form-group input:checked + label:after {
         top: 2px;
     }
