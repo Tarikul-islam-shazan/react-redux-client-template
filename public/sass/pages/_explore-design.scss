@@ -131,7 +131,7 @@ ul.filter-tag {
 }
 .new-card{
   margin: 0px !important;
-  //border: 2px solid #eee !important;
+  box-shadow: 0px 0px 3px 0px #ddd;
   &.active{
     //border: 2px solid rgba(69, 44, 142, 0.4) !important;
     background: #F5F5FB;
@@ -144,7 +144,7 @@ ul.filter-tag {
       display: block !important;
     }
     .card-options{
-      display: flex !important;
+      transform: scale(1) !important;
     }
     //.card-body{
     //  border-radius: 0 0 5px 5px;
@@ -156,6 +156,8 @@ ul.filter-tag {
       transform: scale(0);
       transition: all ease-in-out .2s;
       &.active{
+        transform: scale(1) !important;
+        box-shadow: 0 0 12px 2px rgba(0,0,0,.1);
         svg path{
           fill: #F05B5B;
         }
@@ -202,7 +204,9 @@ ul.filter-tag {
       height: 25px;
       border-radius: 30px;
       cursor: pointer;
-      display: none;
+      transform: scale(0);
+      transition: all ease-in-out .2s;
+      box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.10);
       @media (max-width: 1024px) {
         display: block;
       }
@@ -232,6 +236,17 @@ ul.filter-tag {
       font-weight: bold;
       color: #21242B;
       margin: 0;
+      object-fit: contain;
+      object-position: top;
+      background: #fff;
+      cursor: pointer;
+      min-height: 30px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 25px;
     }
     .card-footer{
       margin: 0;
@@ -267,10 +282,11 @@ ul.filter-tag {
         transition: all ease-in-out .2s;
         &.choose {
           transform: scale(1);
+          box-shadow: 0 0 12px 2px rgba(0,0,0,.1);
         }
       }
       .card-options{
-        display: flex !important;
+        transform: scale(1);
       }
     }
     .product-option{
@@ -282,13 +298,18 @@ ul.filter-tag {
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.05) !important;
     .thumb{
       .favourite-part{
-        display: block;
         &.choose {
-          display: block;
-        }
+          transform: scale(1) !important;
+          box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.10);
+      }
       }
       .card-options{
-        display: flex !important;
+        transform: scale(1);
+      }
+    }
+    .card-body{
+      .product-option{
+        transform: scale(1)  !important;
       }
     }
   }
@@ -369,7 +390,6 @@ table{
           width: 31%;
         }
         &:last-child{
-          text-align: left;
           width: 105px;
         }
       }
@@ -540,7 +560,7 @@ table{
     padding: 30px 20px 60px;
   }
   button{
-    margin: 0!important;
+    margin: 0 15px 0 0 !important;
     @media (max-width: 575px) {
       margin-top: 30px !important;
     }
@@ -562,13 +582,17 @@ table{
   &.download-file {
     border: 1px dashed #E3E3E3;
     padding: 5px;
+    background: #fff;
+    &:hover{
+      border: 1px dashed #EE761F;
+    }
   }
 }
 .explore-product-details-info{
   .info-item .btn {
     padding: 10px 15px;
     font-size: 13px;
-    margin-right: 5px !important;
+    margin-right: 15px !important;
     height: 40px;
     svg {
       width: 18px;

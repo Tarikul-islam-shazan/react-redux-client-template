@@ -9,7 +9,7 @@
   max-width: 1000px;
   margin: 0px auto;
   border-radius: 5px;
-  box-shadow: 0px 0px 18px -12px rgba(0, 0, 0, .10);
+  box-shadow: 0px 0px 3px 0px #ddd;
   background: #fff;
   .new-collection-form{
     padding: 20px 60px;
@@ -37,6 +37,9 @@
     background: #fff;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media (max-width: 767px) {
+      padding: 25px 15px;
+    }
     .create-newbutton{
       color: #21242B;
       font-size: 18px;
@@ -84,6 +87,9 @@
       }
     }
   }
+}
+.pop-list-item{
+  max-height: 300px;
 }
 ul.existing-item{
   li{
@@ -332,7 +338,7 @@ ul.existing-item{
     label {
       color: #21242B;
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 400;
     }
   }
   .bottom-action {
@@ -433,7 +439,7 @@ table.manage-project-table.collection-list-table{
     border-radius: 5px;
     background: #fff;
     border: 1px solid #EEEEEE;
-    height: calc(100vh - 96px);
+    height: calc(100vh - 220px);
     .item{
       box-shadow: 3px 2px 10px -4px rgba(0, 0, 0, 0.12);
       padding: 18px 25px;

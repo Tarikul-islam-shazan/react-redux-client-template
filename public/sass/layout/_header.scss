@@ -13,7 +13,7 @@ button#sidebarToggleTop {
 }
 .navbar {
     padding: 19px 15px;
-    position: fixed;
+    position: fixed; 
     width: calc(100% - 248px);
     z-index: 999;
     .navbar-search{
@@ -73,13 +73,13 @@ button#sidebarToggleTop {
         max-width: 970px;
         box-shadow: none;
         border: 1px solid #eff0f5;
-        .notify-list {
-            justify-content: flex-start;
-            .info {
+        .notify-list { 
+            justify-content: flex-start; 
+            .info { 
                 flex-basis: 90%;
                 margin-left: 20px;
             }
-        }
+        } 
     }
     h3.title {
         text-align: left;
@@ -145,7 +145,7 @@ button#sidebarToggleTop {
                         .info{
                             width: 300px;
                             .name{
-                                font-size: 16px;;
+                                font-size: 16px;; 
                                 color: #21242B;
                                 width: 300px;
                                 text-overflow: ellipsis;
@@ -156,7 +156,7 @@ button#sidebarToggleTop {
                                     color: $brand-color;
                                 }
                             }
-
+                            
                             .post-time {
                                 color: #818795;
                                 font-size: 12px;
@@ -198,18 +198,11 @@ button#sidebarToggleTop {
                             }
                         }
                         img.product {
-                            width: 70px !important;
+                            width: 70px !important; 
                         }
                     }
                 }
             }
         }
-    }
-}
-.quote-cart{
-    button{
-        width: 55px;
-        height: 40px;
-        padding: 4px 3px 4px 5px !important;
     }
 }

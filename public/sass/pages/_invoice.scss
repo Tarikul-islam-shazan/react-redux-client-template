@@ -1,6 +1,8 @@
 .add-an-invoice {
-  max-width: 1396px;
+  max-width: 1200px;
   margin: 0px auto;
+  background: #fff;
+  box-shadow: 0px 0px 3px 0px #ddd;
   .header-title{
     font-size: 24px;
     color: #57585C;
@@ -75,9 +77,13 @@
 }
 
 .admin-view-invoice{
-  max-width: 1396px;
+  max-width: 1200px;
   margin: 0px auto;
   background: #fff;
+  box-shadow: 0px 0px 3px 0px #ddd;
+  @media (max-width: 1440px) {
+    max-width: 1100px;
+  }
   .header-title{
     font-size: 24px;
   }

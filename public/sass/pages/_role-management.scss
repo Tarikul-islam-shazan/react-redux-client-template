@@ -7,11 +7,21 @@
   display: flex;
   flex-wrap: wrap;
   padding: 12px 32px;
+  width: 100%;
   @media (max-width: 575px) {
     padding: 0 18px;
   }
   > div {
     flex-basis: calc(100% / 2);
+    padding-right: 25px;
+  }
+  .custom-chekbox .form-group label {
+    display: flex;
+    align-items: start;
+    span{
+      display: inline-block;
+      line-height: 28px;
+    }
   }
 }
 .role-action{

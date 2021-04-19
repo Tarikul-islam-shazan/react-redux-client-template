@@ -11,9 +11,9 @@
 .header-sorting{
   @media (max-width: 767px) {
     flex-direction: column;
-    .sort, .date, .status, .search{
-      display: none;
-    }
+    //.sort, .date, .status, .search{
+    //  display: none;
+    //}
   }
   .sort-filter{
     .product-name {

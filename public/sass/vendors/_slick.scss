@@ -137,21 +137,33 @@
 
 
 .slider-nav .thumbImg {
-  margin-bottom: 25px;
-  border: 1px solid transparent;
+  margin-bottom: 15px;
+  border: 2px solid transparent;
+  @media (max-width: 1440px) {
+    margin-bottom: 10px;
+  }
 }
 .slick-current .thumbImg {
-  border: 1px solid #ffbe8f;
+  border: 2px solid #ee761f;
+  &:focus{
+    outline: 0;
+  }
 }
 .banner-slider .slider-nav .thumbImg img {
-  height: 89px;
+  height: 120px;
   @media (max-width: 991px) {
-    height: 115px;
+    height: 160px;
   }
   @media (max-width: 575px) {
-    height: 98px;
+    height: 150px;
   }
 }
 .slider-for img {
-  height: 632px !important;
+  height: 900px !important;
+  @media (max-width: 1440px) {
+    height: 780px !important;
+  }
+  @media (max-width: 1366px) {
+    height: 670px !important;
+  }
 }

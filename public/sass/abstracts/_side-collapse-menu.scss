@@ -3,10 +3,10 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-
-.sidebar-collapse{
-  padding: 36px 30px 30px 10px;
+ */ 
+ 
+.sidebar-collapse{ 
+  padding: 36px 30px 30px 10px; 
   border-right: 1px solid #eee;
   margin-top: -20px;
   height: 100vh;
@@ -60,9 +60,9 @@
             vertical-align: 0;
             border-left: 0;
           }
-        }
-      }
-      ul {
+        } 
+      } 
+      ul {  
         padding-left: 20px;
         li{
           a{
@@ -129,7 +129,7 @@
     font-size: 26px;
     font-weight: normal;
   }
-  .product-card{
+  .product-card{ 
     display: block;
   }
   .owl-carousel{
@@ -147,18 +147,18 @@
         height: 40px;
         background: url('./images/icons/left.png') no-repeat center #E8E6F1 !important;
         display: block;
-        border-radius: 100%;
+        border-radius: 100%; 
         text-indent: -999999999999px;
       }
-    }
+    } 
     .owl-stage-outer{
       overflow: initial;
     }
     .owl-item {
       opacity: 0;
-    }
+  }
     .owl-item.active {
-      opacity: 1;
+    opacity: 1;
     }
   }
 }

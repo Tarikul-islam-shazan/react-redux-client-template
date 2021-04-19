@@ -68,7 +68,7 @@
     }
 
     .card.product-card .card-img-top {
-        height: 235px;
+        height: 280px;
     }
     .notification {
         width: 475px;
@@ -198,7 +198,7 @@
         padding: 50px 32px 0 32px;
     }
     .product-details-slider-container {
-        padding: 0;
+        padding: 5px 0 0 0 ;
     }
     .other-description {
         .product-slider {
@@ -635,11 +635,6 @@
             }
         }
     }
-    .action {
-        @include square(20px);
-        margin: 0 6px;
-        background-size: contain !important;
-    }
     .pagination {
         margin-top: 20px;
 
@@ -657,6 +652,9 @@
     }
     .manage-poroject-filter {
         margin-top: 20px;
+        label{
+            font-size: 20px !important;
+        }
     }
     label {
         font-size: 14px;
@@ -702,7 +700,7 @@
     .auth-page a {
         font-size: 14px;
     }
-    .forgot-pass a.text-active {
+   .forgot-pass a.text-active {
         font-size: 13px;
     }
     .auth-page p {
@@ -771,9 +769,6 @@
         flex-basis: 45%;
     }
 
-    .product-detail-gallery .thumbnail-prev img {
-        height: 700px;
-    }
 }
 @media screen and (max-width:1366px){
     div#sidebar-menu-content.quotation-container {
@@ -819,7 +814,7 @@
         }
     }
     #sidebar-menu-content {
-        margin-left: 216px;
+        margin-left: 216px; 
     }
     .navbar {
         padding: 10px 15px;
@@ -839,7 +834,7 @@
         margin-left: 218px;
         padding-right: 0;
     }
-    .product-slider {
+    .product-slider { 
         max-width: 825px;
     }
     .file.file-style-2 {
@@ -849,16 +844,16 @@
     }
     #AddNewProduct .modal-body .add-new-product ul li a {
         padding: 15px 45px;
-        font-size: 18px;
+        font-size: 18px; 
     }
     .request-for-quote .designs .card {
-        flex-basis: calc(90.6% / 3);
+        flex-basis: calc(90.6% / 3); 
     }
     .modal-form {
-        max-width: 760px;
+        max-width: 760px; 
     }
     .row-item {
-        padding: 20px;
+        padding: 20px; 
     }
     .nice-select{
         line-height: 34px;
@@ -871,16 +866,16 @@
         cursor: pointer;
         font-size: 12px;
     }
-    .custom-chekbox .form-group label:before {
-        padding: 7px;
+    .custom-chekbox .form-group label:before { 
+        padding: 7px; 
     }
-    .custom-chekbox .form-group input:checked + label:after {
+    .custom-chekbox .form-group input:checked + label:after { 
         top: 4px;
-        left: 6px;
-        height: 10px;
+        left: 6px; 
+        height: 10px; 
     }
-    .custom-chekbox{
-        .form-group {
+    .custom-chekbox{ 
+        .form-group { 
             margin-bottom: 5px;
         }
     }
@@ -956,33 +951,33 @@
     .manage-product .card .card-body h5 {
         max-width: 70%;
     }
-    .custom-chekbox .form-group label {
+    .custom-chekbox .form-group label { 
         font-size: 11px;
     }
     #sidebar-menu-content {
-        margin-left: 200px;
+        margin-left: 200px; 
     }
     .product-slider {
         max-width: 745px;
     }
     .chat {
         width: 60px;
-        height: 60px;
+        height: 60px; 
         right: 22px;
-        bottom: 40px;
+        bottom: 40px; 
         background-size: 50%;
     }
     .other-description {
         padding: 50px 32px 0 32px;
     }
-    .other-description {
-        .product-slider{
+    .other-description { 
+        .product-slider{ 
             max-width: 96%;
             .designs .card {
-                margin-bottom: 0px;
+                margin-bottom: 0px; 
             }
         }
-    }
+      }
 
 }
 @media screen and (max-width:1024px){
@@ -1067,7 +1062,7 @@
     .dashboard-card {
         min-height: 113px;
     }
-    .navbar {
+     .navbar {
         width: 100%;
     }
     aside.left-panel{
@@ -1292,7 +1287,9 @@
     .uploaded-photo {
         grid-gap: 15px;
     }
-
+    #sidebar-menu-content {
+        overflow: auto;
+    }
     .project-profile .back {
         left: 20px;
         top: -42px;
@@ -1313,7 +1310,7 @@
         .search input {
             width: 225px;
         }
-        button.btn-brand {
+         button.btn-brand {
             width: 170px;
             height: 47px;
         }
@@ -1335,7 +1332,7 @@
     .auth-page .content-wrapper-override {
         padding: 0 80px 80px 80px
     }
-    //Add New Product
+//Add New Product
     .modal-form {
         max-width: 595px;
     }
@@ -1367,6 +1364,16 @@
 }
 
 @media screen and (max-width:767px) {
+    .details-action {
+        position: fixed;
+        bottom: 0;
+        z-index: 99;
+        background: #fff;
+        width: 100%;
+        left: 0;
+        padding: 0 20px 22px 20px;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, .1);
+    }
     .sidebar-action {
         margin-bottom: 50px;
     }
@@ -1816,7 +1823,7 @@
             overflow: hidden;
             font-size: 14px;
         }
-        .tag {
+         .tag {
             font-size: 12px;
         }
     }
@@ -1946,6 +1953,9 @@
     }
     .skeleton.project-list {
         height: 215px;
+    }
+    .btn-brand {
+        width: 147px;
     }
 }
 
