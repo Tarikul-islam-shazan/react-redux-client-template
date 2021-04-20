@@ -160,8 +160,15 @@ class ProductCard extends Component {
                   <div className="card-footer">
                       <div className="quantity">
 
-                          <span className="design-category">{product.productGroup}</span>
-                          <span><strong className="dot">{product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : `-- Pcs`}</strong></span>
+                          <span className="design-category">{product.productGroup}, {product.productType}</span>
+                          <span>
+                          {
+                              product.minimumOrderQuantity > 0  ?
+                                  <strong className="dot">{product.minimumOrderQuantity}+ pcs </strong>
+                                  :
+                                  <strong></strong>
+                          }
+                          </span>
                           {/*<svg xmlns="http://www.w3.org/2000/svg" width="10.814" height="14.581" viewBox="0 0 10.814 14.581">*/}
                           {/*    <line id="Line_116" data-name="Line 116" y1="14" x2="10" transform="translate(0.407 0.291)" fill="none" stroke="#c1c7d5" strokeWidth="1"/>*/}
                           {/*</svg>*/}
@@ -190,8 +197,12 @@ class ProductCard extends Component {
                               {/*    </g>*/}
                               {/*  </g>*/}
                               {/*</svg>*/}
-
-                              <strong className="dot"> {product.turnAroundTime ? `${product.turnAroundTime} Days` : `-- Days`}</strong>
+                              {
+                                  product.turnAroundTime ?
+                                      <strong className="dot">{product.turnAroundTime} days</strong>
+                                      :
+                                      <strong></strong>
+                              }
                           </span>
                       </div>
                       {/*{productAvailabilityStatus(product)}*/}
