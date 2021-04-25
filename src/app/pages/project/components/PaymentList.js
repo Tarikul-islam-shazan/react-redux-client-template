@@ -114,7 +114,7 @@ class PaymentList extends Component {
                     <input type="search" placeholder="Search...."/>
                 </div>*/}
             </div>
-            <table className="table table-striped mt-4   project-profile-table">
+            <table className="table table-striped mt-4 project-profile-table table-responsive-xl">
                 <thead>
                     <tr>
                         <th style={{width: '20%'}}>Invoice Id</th>

@@ -6,7 +6,7 @@ export const ProjectStatus = ({data}) => {
     <div className="project-status-container">
         <div className="project-statistic">
             <div className="ps-item">
-                <span className="project-name">Project name</span>
+                <span className="project-name">Order title</span>
                 <h6>{data.name ? data.name : 'N/A'}</h6>
             </div>
             <div className="ps-item">
@@ -18,15 +18,15 @@ export const ProjectStatus = ({data}) => {
                 <h6>{data.endDate ? convertTimeToLocal(data.endDate, '', 'DD.MM.YYYY') : 'N/A'}</h6>
             </div>
             <div className="ps-item">
-                <span className="time-left">Time left</span>
+                <span className="time-left">Days left</span>
                 <h6>{data.timeLeft ? (Math.abs(data.timeLeft) + ' ' + 'days') : 'N/A'}</h6>
             </div>
             <div className="ps-item">
-                <span className="total-style">Total styles</span>
+                <span className="total-style">Total designs</span>
                 <h6>{data.totalStyles ? data.totalStyles : 'N/A'}</h6>
             </div>
             <div className="ps-item">
-                <span className="total-valuation">Total valuation</span>
+                <span className="total-valuation">Total value</span>
                 <h6>{data.totalValuation ? data.totalValuation : 'N/A'}</h6>
             </div>
             <div className="ps-item">
@@ -38,7 +38,7 @@ export const ProjectStatus = ({data}) => {
         </div>
         <div className="project-status">
             <div className="head">
-                <label>Project status</label>
+                <label>Progress bar</label>
                 <div className="percentage">{`${data.percentageComplete}%`}</div>
             </div>
             <div className="progress">

@@ -103,7 +103,7 @@
         color: #6A7181;
         background: #F8F9FB;
         padding: 15px 70px;
-        border: 1px solid #C4C9D8;
+        border: 1px solid $default-border-color;
         margin-right: -1px;
         display: block;
         text-decoration: none;
@@ -385,10 +385,11 @@
 
 // Add New
 .add-new {
-  color: $brand-color;
-  font-size: 13px;
+  color: $secondary-color;
+  font-size: 15px;
   cursor: pointer;
   display: inline-block;
+  font-weight: 600;
   margin-bottom: 30px;
 
   &:before {
@@ -733,10 +734,11 @@ ol {
     top: 14px;
   }
   .nice-select {
-    border-radius: 40px;
     padding-left: 80px;
     padding-right: 40px;
+    background: $filed-bg-color;
     color: $secondary-color;
+    border-color: transparent;
 
     &::after {
       right: 30px;
@@ -1300,9 +1302,9 @@ ol {
   justify-content: space-between;
   align-items: center;
   h3{
-    font-size: 24px;
+    font-size: 26px;
     color: #21242B;
-    font-weight: bold;
+    font-weight: 600;
   }
   .add-new{
     margin: 0;
@@ -1376,7 +1378,7 @@ ol {
 .project-status-container{
   padding: 40px;
   background: #fff;
-  border: 1px solid #DADDE4;
+  box-shadow: $default-border-shadow;
   border-radius: 5px;
 }
 .project-statistic {
@@ -1413,9 +1415,8 @@ ol {
   }
   h6{
     margin-top: 13px;
-    font-size: 18px;
-    color: $brand-color;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: normal;
   }
   .badge {
     padding: 8px 15px;
@@ -1459,8 +1460,8 @@ ol {
       border-radius: 100%;
     }
     h6{
-      font-size: 14px;
-      color: #21242B;
+      font-size: 16px;
+      color: #6c757d;
       font-weight: normal;
       margin-top: 15px;
     }
@@ -1491,15 +1492,15 @@ ol {
 }
 h6.style-overview{
   margin-top: 35px;
-  font-size: 18px;
+  font-size: 22px;
   color: #21242B;
   margin-bottom: 15px;
+  font-weight: 600;
 }
 .style-overview {
   display: flex;
   .overview{
     background: #fff;
-    border: 1px solid #DADDE4;
     padding: 20px 25px 35px;
     flex-basis: calc(100% / 4);
     margin-right: 25px;
@@ -1511,7 +1512,7 @@ h6.style-overview{
 }
 .overview {
   background: #fff;
-  border: 1px solid #DADDE4;
+  box-shadow: $default-border-shadow;
   padding: 20px 25px 35px;
   border-radius: 5px;
   transition: all ease-in-out .2s;
@@ -1523,8 +1524,8 @@ h6.style-overview{
       flex-basis: 50%;
       margin-bottom: 20px;
       h6{
-        font-size: 18px;
-        font-weight: bold;
+        font-size: 20px;
+        font-weight: normal;
       }
     }
   }
@@ -1558,13 +1559,13 @@ h6.style-overview{
       background: url(./images/icons/date_time.png) no-repeat;
     }
     strong{
-      font-size: 18px;
+      font-size: 16px;
       margin-left: 10px;
+      font-weight: 600;
     }
   }
   &:hover, &:active, &:focus{
     box-shadow: 0px 0px 30px -2px rgba(11, 28, 67, .2);
-    border: 1px solid transparent;
   }
 }
 .comment-status{
@@ -1594,7 +1595,7 @@ h6.style-overview{
 
 .production{
   flex-basis: calc(100% / 3);
-  border: 1px solid #C0C5CF;
+  box-shadow: $default-border-shadow;
   border-radius: 4px;
   margin-right: 30px;
   &:last-child{
@@ -1793,7 +1794,7 @@ h6.style-overview{
       color: #21242B;
       font-weight: normal;
       font-size: 18px;
-      border-color: #DADDE4;
+      border-color: $default-border-color;
       &.upcoming-ico{
         background: url(./images/icons/calendar.svg) no-repeat;
         background-position: 15px 16px;
@@ -1828,7 +1829,7 @@ h6.style-overview{
   margin: 0 30px;
 }
 .editor {
-  border: 1px solid #DADDE4;
+  box-shadow: $default-border-shadow;
   border-radius: 5px;
   background: #fff;
   .header-tab {
@@ -1877,8 +1878,8 @@ h6.style-overview{
     display: flex;
     justify-content: flex-end;
     margin: 0 20px 20px 20px;
-    border-top: 1px solid #DADDE4;
-    padding-top: 20px;
+    border-top: 1px solid #e8e8e8;
+    padding: 20px 0;
     position: relative;
     button.send-feed.main-editor{
       position: relative;
@@ -1948,7 +1949,7 @@ button.deliverable-deadline {
   }
 }
 .post{
-  border: 1px solid #DADDE4;
+  box-shadow: $default-border-shadow;
   border-radius: 5px 5px 0 0;
   background: #fff;
   padding: 20px;
@@ -1965,7 +1966,6 @@ button.deliverable-deadline {
         h4{
           font-size: 22px;
           font-weight: 600;
-          color: $brand-color;
           margin: 0;
         }
         span{
@@ -2006,12 +2006,12 @@ button.deliverable-deadline {
   }
   .post-tag{
     .table-badge {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 }
 .feedback {
-  border: 1px solid #DADDE4;
+  box-shadow: $default-border-shadow;
   border-radius:  0 0 5px 5px;
   background: #fff;
   margin-top: -1px;
@@ -2022,17 +2022,18 @@ button.deliverable-deadline {
   h5{
     font-size: 18px;
     padding:  16px 20px;
-    border-bottom: 1px solid #DADDE4;
+    box-shadow: 0px 1px 4px 0px #ddd;
     margin-bottom: 20px;
   }
   .editor{
     border: 0;
     position: relative;
+    box-shadow: none;
     .write{
       padding: 20px 20px 20px 85px;
     }
     .feedback-editor{
-      background: #f0edf7;
+      background: $filed-bg-color;
       border-radius: 6px;
       padding: 20px;
       .uploaded-photo{
@@ -2066,7 +2067,7 @@ button.deliverable-deadline {
           margin-right: 15px;
         }
         button {
-          height: 40px !important;
+          height: 42px !important;
           padding: 10px 20px !important;
           width: 90px !important;
         }
@@ -2082,6 +2083,7 @@ button.deliverable-deadline {
       border: 0;
       padding: 0;
       margin: 0 0 20px 0;
+      box-shadow: none;
       .post-heading{
         span.date-time{
           font-size: 12px;

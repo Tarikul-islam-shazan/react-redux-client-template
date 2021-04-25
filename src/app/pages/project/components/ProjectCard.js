@@ -10,7 +10,7 @@ export const ProjectCard = ({item, onClick}) => {
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    Project name
+                                    Order title
                                 </th>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">
@@ -21,32 +21,50 @@ export const ProjectCard = ({item, onClick}) => {
                                 </th>
                                 <th scope="col">
                                     <span>
-                                        <img src={require('../../../assets/icons/calendar_end.png')} alt="calendar end" />
-                                    </span>
-                                    End date
-                                </th>
-                                <th scope="col">
-                                    <span>
-                                        <img src={require('../../../assets/icons/cloth_style.png')} alt="cloth style" />
-                                    </span>
-                                    Total styles
-                                </th>
-                                <th scope="col">
-                                    <span>
                                         <img src={require('../../../assets/icons/date_time.png')} alt="date and time" />
                                     </span>
                                     Days left
                                 </th>
+                                {/*<th scope="col">*/}
+                                {/*    <span>*/}
+                                {/*        <img src={require('../../../assets/icons/calendar_end.png')} alt="calendar end" />*/}
+                                {/*    </span>*/}
+                                {/*    End date*/}
+                                {/*</th>*/}
+                                <th scope="col">
+                                    <span>
+                                        <img src={require('../../../assets/icons/cloth_style.png')} alt="cloth style" />
+                                    </span>
+                                    Total designs
+                                </th>
+                                {/*<th scope="col">*/}
+                                {/*    Order value*/}
+                                {/*</th>*/}
+                                {/*<th scope="col">*/}
+                                {/*    Progress*/}
+                                {/*</th>*/}
                             </tr>
                         </thead>
-                        <tbody className="text-focus">
+                        <tbody>
                             <tr>
                                 <td className="fs-medium">{item.name}</td>
                                 <td className="fs-medium">{item.orderId}</td>
                                 <td>{item.startDate ? convertTimeToLocal(item.startDate, '', 'DD.MM.YYYY') : 'N/A'}</td>
-                                <td>{item.endDate ? convertTimeToLocal(item.endDate, '', 'DD.MM.YYYY') : 'N/A'}</td>
-                                <td>{item.totalStyles}</td>
                                 <td>{item.timeLeft ? Math.abs(item.timeLeft) : 'N/A'}</td>
+                                {/*<td>{item.endDate ? convertTimeToLocal(item.endDate, '', 'DD.MM.YYYY') : 'N/A'}</td>*/}
+                                <td>{item.totalStyles}</td>
+                                {/*<td>Value added here</td>*/}
+                                {/*<td>*/}
+                                {/*    <div className="project-status checklist-status">*/}
+                                {/*        <div className="head"> */}
+                                {/*            <div className="percentage">75%</div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className="progress">*/}
+                                {/*            <div className="progress-bar" role="progressbar" style="width: 75%"*/}
+                                {/*                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*</td>*/}
                             </tr>
                         </tbody>
                     </table>

@@ -52,7 +52,6 @@ body {
 .btn {
     font-size: 12px;
     padding: 11px 25px;
-    text-transform: capitalize;
 }
 
 .btn-nitex-default, .btn-nitex-default:hover {
@@ -61,7 +60,7 @@ body {
 }
 .btn-nitex-default
 {
-    height: 60px;
+    height: 50px;
 }
 
 .btn-outline-default, .btn-outline-default:hover {
@@ -177,7 +176,7 @@ label {
     background-image: url(chevron_down.png);
     background-repeat: no-repeat;
     background-position: calc(100% - 13px) center;
-    background-size: 8px;
+    background-size: 10px;
 }
 .card.product-card .dropdown-toggle {
     background-image: url(chevron_down.png);
@@ -285,35 +284,28 @@ label {
     padding: 0px 60px;
 }
 
-.modal .form-control {
-    font-size: 12px;
-}
 /* Sign Up Page */
 
 .auth-page input[type="email"], .auth-page input[type="password"], .auth-page input[type="input"] {
-    background: #F9F5FC 0% 0% no-repeat padding-box;
-    border: 1px solid #D7DBE6;
-    border-radius: 5px;
-    height: 48px;
-    width: 100%;
-    padding: 5px 15px;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-.auth-page input[type="password"] {
+    height: 1.1875em;
+    padding: 6px 0 7px;
+    border: none;
+    border-radius: 0px;
+    background-color: transparent;
+    font-size: 12px;
+    border-bottom: 1px solid #452D8D;
     padding-right: 53px;
 }
 
+
 .auth-page input[type="email"]:focus, .auth-page input[type="password"]:focus {
     box-shadow: none !important;
-    border: 1px solid #452D8D;
+    border-bottom: 1px solid #452D8D;
 }
 .MuiInputAdornment-positionEnd{
     position: absolute;
-    right: 4px;
-    top: 31px;
-    width: 30px;
-    cursor: pointer;
+    right: -6px;
+    top: 12px;
 }
 .auth-page .back-link {
     position: absolute;
@@ -361,7 +353,6 @@ form.registration-form {
 form.registration-form.mt-5  input[type="email"]{
     height: 40px;
     border-bottom: 1px solid #ccc;
-    padding: 10px 0;
 }
 .auth-page .MuiFormLabel-root, .auth-page .MuiInputBase-root{
     font-family: 'Open Sans', sans-serif;
@@ -373,13 +364,20 @@ form.registration-form.mt-5  input[type="email"]{
     display: inline-block;
 }
 .forgot-pass input.form-control {
-    border-radius: 5px !important;
+    border-radius: 0px !important;
+    padding-right: 34px;
+}
+.forgot-pass input.form-control:focus {
+    border-bottom: 1px solid #452D8D !important;
 }
 .forgot-pass .lock {
     position: absolute;
     right: 0;
-    height: 48px;
     z-index: 999;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    top: 14px;
 }
 .MuiFormLabel-root {
     color: #8C95A8 !important;
@@ -707,15 +705,16 @@ aside:not(.collapsed) .navigation ul li.active ul {
     padding: 4px 15px !important;
     margin-bottom: 0px;
 }
-#dropdownNotification {
-    width: 55px;
-    height: 40px;
-}
+
 #dropdownNotification {
     position: relative;
     padding: 4px 3px 4px 5px !important;
 }
 
+#dropdownNotification {
+    width: 55px;
+    height: 40px;
+}
 #dropdownNotification img {
     width: 14px;
 }
@@ -746,7 +745,9 @@ button#dropdownNewButton .svg-inline--fa {
 button#dropdownProfileButton {
     padding: 5px 10px !important;
 }
+#dropdownProfileButton:after{
 
+}
 .navbar-search .btn {
     color: #A1A6B2;
 }
@@ -756,7 +757,7 @@ button#dropdownProfileButton {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-    font-size: 14px;
+    font-size: 11px;
 }
 
 a.nav-link.text-orange:hover {
@@ -1103,9 +1104,11 @@ section.my-rfq-project tr td p .notify-badge {
 
 .my-project-card {
     padding: 15px 30px;
-    border: 1px solid #DADDE4;
+    box-shadow: 0px 0px 3px 0px #ddd;
     width: 100%;
     overflow-x: auto;
+    border: 0;
+    transition:  all ease-in-out .2s;
 }
 
 .my-project-card .table {
@@ -1118,7 +1121,7 @@ section.my-rfq-project tr td p .notify-badge {
 
 .my-project-card .table th {
     color: #7E8597;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: normal;
     background: none;
     border-bottom: none !important;
@@ -1130,8 +1133,8 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 .my-project-card .table td {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: normal;
     vertical-align: baseline;
 }
 .my-project-card table tr td:first-child {
@@ -1139,8 +1142,7 @@ section.my-rfq-project tr td p .notify-badge {
 }
 .card.my-project-card:hover, .card.my-project-card:focus {
     outline: none;
-    border: 1px solid transparent;
-    box-shadow: 0 0 24px 0 rgba(165, 162, 162, 0.4);
+    box-shadow: 0 0 18px 0 rgba(165, 162, 162, 0.2);
     cursor: pointer;
 }
 
@@ -1216,7 +1218,7 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 .MuiInputAdornment-root img {
-    width: 24px;
+    width: 18px;
 }
 
 /* New Development Project */
@@ -1357,15 +1359,15 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 .table-badge {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.5px;
     width: auto;
     height: auto;
     line-height: 22px;
-    border-radius: 15px;
+    border-radius: 20px;
     margin-right: 10px;
-    padding: 3px 10px;
+    padding: 6px 20px;
 }
 
 /* Media Query */
@@ -1375,9 +1377,9 @@ section.my-rfq-project tr td p .notify-badge {
 /*Update*/
 .card.product-card .card-img-top {
     height: 340px;
-    object-fit: cover;
-    object-position: top;
-    background: #eee;
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
     cursor: pointer;
 }
 .quote-tab.tech-pack .drug-n-drop {
@@ -1426,7 +1428,7 @@ aside.left-panel.active {
     text-align: left !important;
     display: inline-block;
     line-height: 15px;
-    font-weight: 600 !important;
+    font-weight: 600;
 }
 .drug-n-drop span.error{
     float: left;
@@ -1662,10 +1664,6 @@ button.border-none_btn a:hover
 {
     margin-top: 0 !important
 }
-.btn-brand
-{
-    margin-bottom: 40px !important;
-}
 }
 
 .bg_color_custom {
@@ -1716,9 +1714,7 @@ p.para_email {
 }
 
 
-.content-wrapper.content-wrapper-override {
-    padding-top: 0 !important;
-}
+
 
 .bg_color_custom h1.page-title
 {
@@ -1739,11 +1735,11 @@ p.para_email {
     border-bottom: none !important;
 }
 
-.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedEnd {
-    height: 60px !important;
-    padding-left: 8px;
-    padding-right: 8px;
-}
+/*.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedEnd {*/
+/*    height: 60px !important;*/
+/*    padding-left: 8px;*/
+/*    padding-right: 8px;*/
+/*}*/
 .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedEnd:hover
 {
     border: none !important;
@@ -1780,13 +1776,6 @@ padding-bottom: 15px;
     .bg_white_auth
     {
         height: auto;
-    }
-    .fullscreen
-    {
-        height: auto;
-
-    padding-bottom: 40px;
-
     }
 
 }
@@ -1839,9 +1828,7 @@ padding-bottom: 15px;
         display: block;
         margin: 15px auto;
     }
-    .fullscreen {
-        height: auto;
-    }
+
     .bg_color_custom {
 
         height: 100vh;
@@ -1934,13 +1921,25 @@ a.text-color_orange
 {
     text-transform: initial !important;
 }
-@media(max-width:1440px)
+
+@media(min-width:1024px)
 {
     .dashboard-designs .filter-products.designs .card.product-card {
         flex-basis: calc((100% - 100px) / 4);
     }
 }
-
+@media(min-width:1366px)
+{
+    .dashboard-designs .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 100px) / 5);
+    }
+}
+@media(min-width:1024px)
+{
+    .filter-products.designs .card.product-card {
+        flex-basis: calc((100% - 100px) / 5);
+    }
+}
 
 @media screen and (min-width: 1024px) and (max-width: 1300px)
 {
@@ -1964,7 +1963,7 @@ a.text-color_orange
 {
     #sidebar-menu-content
     {
-        margin-left: 310px !important;
+        margin-left: 400px !important;
     }
 }
 @media(min-width: 1400px) and (max-width:1600px)
@@ -2044,10 +2043,7 @@ font-size: 11px !important;
 }
 
 
-p.error {
-    position: relative;
-    top: -13px;
-}
+
 
 @media(min-width:1024px) and (max-width:1100px)
 {
@@ -2105,7 +2101,7 @@ a.text-color_orange:hover
 
 .btn-nitex-default
 {
-    line-height: 35px !important;
+    line-height: 27px !important;
 }
 
 @media screen and (max-width: 1366px)
@@ -2121,7 +2117,7 @@ a.text-color_orange:hover
 }
 
 #sidebar-menu-content {
-    padding-left: 11px !important;
+    padding-left: 23px !important;
     padding-right: 11px !important;
     /* margin-left: 0 !important; */
 }
@@ -2233,7 +2229,6 @@ a.btn_dash_menu a:hover
         background: transparent;
         border-bottom: 2px solid #EE761F;
         border-left: transparent;
-        border-right: 0;
     }
     button.btn_tour
     {

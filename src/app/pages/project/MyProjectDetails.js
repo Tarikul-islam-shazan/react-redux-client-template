@@ -205,14 +205,14 @@ class MyProjectDetails extends Component {
                     <a className="back" onClick={this.back}>Back</a>
                     <div className="quote-tab">
                         <ul className="nav nav-tabs justify-content-center">
-                            <li><a className={"ps-ico "+(tabFlag==1 ? 'active':'')} data-toggle="tab" href="#ProjectSummary" onClick={()=>this.setState({tabFlag:1})}>Project summary</a></li>
-                            <li><a className={"pu-ico "+(tabFlag==2 ? 'active':'')} data-toggle="tab" href="#ProjectUpdates" onClick={()=>this.setState({tabFlag:2})}>Project updates</a></li>
+                            <li><a className={"ps-ico "+(tabFlag==1 ? 'active':'')} data-toggle="tab" href="#ProjectSummary" onClick={()=>this.setState({tabFlag:1})}>Order summary</a></li>
+                            <li><a className={"pu-ico "+(tabFlag==2 ? 'active':'')} data-toggle="tab" href="#ProjectUpdates" onClick={()=>this.setState({tabFlag:2})}>Order updates</a></li>
                             <li><a className={"payment-ico "+(tabFlag==3 ? 'active':'')} data-toggle="tab" href="#Payments" onClick={()=>this.setState({tabFlag:3})}>Payments</a></li>
                         </ul>
                         <div className="tab-content">
                             <div id="ProjectSummary" className={"tab-pane "+(tabFlag==1 ? 'active':'fade')}>
                                 <ProjectStatus data={data}/>
-                                <h6 className="style-overview">Style Overview</h6>
+                                <h6 className="style-overview">Design overview</h6>
                                 <div className="style-overview">
                                 {
                                   data.productResponseList &&
@@ -221,17 +221,17 @@ class MyProjectDetails extends Component {
                                       <div className="overview" key={i}>
                                           <div className="style-info" data-toggle="modal" data-target="#project-common" onClick={(e) => this.setModalData(item.productNo)}>
                                               <div className="info">
-                                                  <label>Style No</label>
+                                                  <label className="font-16 text-muted">Design No</label>
                                                   <h6>{item.productNo}</h6>
                                               </div>
                                               <div className="info">
-                                                  <label>Style name</label>
+                                                  <label className="font-16 text-muted">Design title</label>
                                                   <h6>{item.name}</h6>
                                               </div>
                                           </div>
                                           <div className="project-status checklist-status" data-toggle="modal" data-target="#project-common" onClick={(e) => this.setModalData(item.productNo)}>
                                               <div className="head">
-                                                  <label>Checklist Status</label>
+                                                  <label className="font-16 text-muted">Checklist Status</label>
                                                   <div className="percentage">{`${item.percentageComplete}%`}</div>
                                               </div>
                                               <div className="progress">
