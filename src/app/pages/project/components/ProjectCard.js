@@ -47,8 +47,8 @@ export const ProjectCard = ({item, onClick}) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="fs-medium">{item.name}</td>
-                                <td className="fs-medium">{item.orderId}</td>
+                                <td>{item.name}</td>
+                                <td>{item.orderId}</td>
                                 <td>{item.startDate ? convertTimeToLocal(item.startDate, '', 'DD.MM.YYYY') : 'N/A'}</td>
                                 <td>{item.timeLeft ? Math.abs(item.timeLeft) : 'N/A'}</td>
                                 {/*<td>{item.endDate ? convertTimeToLocal(item.endDate, '', 'DD.MM.YYYY') : 'N/A'}</td>*/}

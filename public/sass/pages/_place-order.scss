@@ -295,3 +295,26 @@
     }
   }
 }
+
+.order-top-filter{
+  button.add-new-order{
+    @media (max-width: 991px) {
+      font-size: 14px;
+      width: 275px;
+    }
+    @media (max-width: 767px) {
+      margin: 0 !important;
+      width: 100%;
+    }
+  }
+  @media (max-width: 767px) {
+    .short-by {
+      margin: 20px 0;
+      width: 100%;
+    }
+    input{
+      width: 100%;
+      margin: 0 !important;
+    }
+  }
+}

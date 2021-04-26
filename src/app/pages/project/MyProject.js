@@ -191,77 +191,17 @@ class MyProject extends Component {
         }
         return (
             <section className="collapse-side-menu-container">
-                <nav id="sidebarCollapse" className="sidebar-collapse">
-                    <div>
-                        {/* <button className="btn-brand" data-toggle="modal" data-target="#newProject_1_4">+Add New Project</button> */}
-                        <h5>Filter by</h5>
-                        <div className="filter-by-check">
-                          <ul>
-                              <li>
-                                  <div className="custom-chekbox">
-                                      <div className="form-group">
-                                          <input type="checkbox" id="Pending" name="Pending" value="PENDING" onChange={this.onChangeCheckbox} defaultChecked/>
-                                          <label htmlFor="Pending">Pending</label>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div className="custom-chekbox">
-                                      <div className="form-group">
-                                          <input type="checkbox" id="Running" name="Running" value="RUNNING" onChange={this.onChangeCheckbox} defaultChecked/>
-                                          <label htmlFor="Running">Running</label>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div className="custom-chekbox">
-                                      <div className="form-group">
-                                          <input type="checkbox" id="Completed" name="Completed" value="COMPLETED" onChange={this.onChangeCheckbox} defaultChecked/>
-                                          <label htmlFor="Completed">Completed</label>
-                                      </div>
-                                  </div>
-                              </li>
-                            </ul>
-                         {/*<ul>
-                             <li>
-                                 <div className="custom-chekbox">
-                                     <div className="form-group">
-                                         <input type="checkbox" id="DEVELOPMENT" name="DEVELOPMENT" value="DEVELOPMENT" onChange={this.onChangeCheckbox} defaultChecked/>
-                                         <label htmlFor="DEVELOPMENT">Development</label>
-                                     </div>
-                                 </div>
-                             </li>
-                             <li>
-                                 <div className="custom-chekbox">
-                                     <div className="form-group">
-                                         <input type="checkbox" id="BULK" name="BULK" value="BULK" onChange={this.onChangeCheckbox} defaultChecked/>
-                                         <label htmlFor="BULK">Full-fledged</label>
-                                     </div>
-                                 </div>
-                             </li>
-                             <li>
-                                 <div className="custom-chekbox">
-                                     <div className="form-group">
-                                         <input type="checkbox" id="SUPERVISION" name="SUPERVISION" value="SUPERVISION" onChange={this.onChangeCheckbox} defaultChecked/>
-                                         <label htmlFor="SUPERVISION">Supervision</label>
-                                     </div>
-                                 </div>
-                             </li>
-                           </ul>*/}
-                        </div>
-                    </div>
-                </nav>
-                <div id="sidebar-menu-content">
-                    <section className="section my-project">
+                <section className="section my-project">
+                    <div className="order-top-filter">
                         <div className="filter-container">
                             <div className="search">
-                                    <svg onClick={this._search} className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
-                                        <path id="Path_23797" data-name="Path 23797"
-                                              d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z"
-                                              transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2"
-                                              stroke-width="0.5">
-                                        </path>
-                                    </svg>
+                                <svg onClick={this._search} className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
+                                    <path id="Path_23797" data-name="Path 23797"
+                                          d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z"
+                                          transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2"
+                                          stroke-width="0.5">
+                                    </path>
+                                </svg>
                                 <input type="search" name="search" value={this.state.search} onChange={this.onChange} onKeyPress={this.keyPressed} placeholder="Search...."/>
                             </div>
                             <div className="short-by">
@@ -271,6 +211,41 @@ class MyProject extends Component {
                                 </select>
                             </div>
                         </div>
+
+                        <div className="d-flex flex-column flex-sm-row">
+                            <h5 className="mr-3">Filter by</h5>
+                            <div className="filter-by-check">
+                                <ul>
+                                    <li>
+                                        <div className="custom-chekbox">
+                                            <div className="form-group">
+                                                <input type="checkbox" id="Pending" name="Pending" value="PENDING" onChange={this.onChangeCheckbox} defaultChecked/>
+                                                <label htmlFor="Pending">Pending</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="custom-chekbox">
+                                            <div className="form-group">
+                                                <input type="checkbox" id="Running" name="Running" value="RUNNING" onChange={this.onChangeCheckbox} defaultChecked/>
+                                                <label htmlFor="Running">Running</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="custom-chekbox">
+                                            <div className="form-group">
+                                                <input type="checkbox" id="Completed" name="Completed" value="COMPLETED" onChange={this.onChangeCheckbox} defaultChecked/>
+                                                <label htmlFor="Completed">Completed</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
                         {
                           projectList.length ? projectList.map((item,i) => {
                             return(
@@ -293,7 +268,6 @@ class MyProject extends Component {
                           <></>
                         }
                     </section>
-                </div>
             </section>
         );
     }
