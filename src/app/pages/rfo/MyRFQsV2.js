@@ -310,7 +310,7 @@ class MyRFQs extends Component {
                 <div className="date mr-3">
                     <input type="date" placeholder="Date" className="bg-gray-light border-0" name="date" value={date} onChange={this.onChange}/>
                 </div>
-                <div className="status mr-3">
+                <div className="status mr-3 mt-3 mt-sm-0">
                     <select className="w-100 bg-gray-light border-0" name="status" value={status} onClick={(e) => this.onChange(e)}>
                         <option>Status </option>
                         <option value="PENDING">Pending</option>

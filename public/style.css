@@ -358,6 +358,7 @@ form.registration-form.mt-5  input[type="email"]{
     font-family: 'Open Sans', sans-serif;
     font-size: 12px !important;
     width: 100%;
+    margin-bottom: 20px;
 }
 .forgot-pass button {
     margin-top: 25px !important;
@@ -366,6 +367,7 @@ form.registration-form.mt-5  input[type="email"]{
 .forgot-pass input.form-control {
     border-radius: 0px !important;
     padding-right: 34px;
+    height: 30px;
 }
 .forgot-pass input.form-control:focus {
     border-bottom: 1px solid #452D8D !important;
@@ -377,7 +379,7 @@ form.registration-form.mt-5  input[type="email"]{
     background: transparent;
     border: 0;
     padding: 0;
-    top: 14px;
+    bottom: 4px;
 }
 .MuiFormLabel-root {
     color: #8C95A8 !important;
@@ -1121,7 +1123,7 @@ section.my-rfq-project tr td p .notify-badge {
 
 .my-project-card .table th {
     color: #7E8597;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     background: none;
     border-bottom: none !important;
@@ -1133,8 +1135,8 @@ section.my-rfq-project tr td p .notify-badge {
 }
 
 .my-project-card .table td {
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 18px;
+    font-weight: 600;
     vertical-align: baseline;
 }
 .my-project-card table tr td:first-child {
@@ -1367,7 +1369,7 @@ section.my-rfq-project tr td p .notify-badge {
     line-height: 22px;
     border-radius: 20px;
     margin-right: 10px;
-    padding: 6px 20px;
+    padding: 4px 10px;
 }
 
 /* Media Query */
@@ -1460,9 +1462,6 @@ button.send-feed:focus {
 
 .nice-select .option.disabled {
     font-weight: 600;
-}
-.timeline .post-tag {
-    margin-top: 10px;
 }
 .responsive-show{display: none}
 
@@ -2096,7 +2095,7 @@ a.text-color_orange:hover
 
 .navigation > ul > li > a
 {
-    font-size: 13px !important;
+    font-size: 14px !important;
 }
 
 .btn-nitex-default

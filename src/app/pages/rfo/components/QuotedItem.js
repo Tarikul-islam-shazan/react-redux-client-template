@@ -47,25 +47,25 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                 </div>
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-1 ellipse-2-line product-title">
-                        <a href="#" className="font-weight-bold m-0 font-24 ellipse-2-line">{quote.name}</a>
-                        <a href="#" className="text-underline font-16 color-brand" onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}</a>
+                        <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{quote.name}</a>
+                        <a href="#" className="text-underline font-14 color-brand" onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}</a>
                     </div>
                     <div className="info-item">
-                        <label className="font-16 text-muted">Date</label>
-                        <h5 className="font-20 color-333">{quote.date}</h5>
+                        <label className="font-14 text-muted">Date</label>
+                        <h5 className="color-333">{quote.date}</h5>
                     </div>
                     <div className="info-item">
-                        <label className="font-16 text-muted">Status</label>
+                        <label className="font-14 text-muted">Status</label>
                         {rfqProductStatus(quote)}
                     </div>
                 </div>
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-2">
-                        <label className="font-16 text-muted">Product category</label>
-                        <h5 className="font-20 color-333">{quote.productCategory}, {quote.productGroup}</h5>
+                        <label className="font-14 text-muted">Product category</label>
+                        <h5 className="color-333">{quote.productCategory}, {quote.productGroup}</h5>
                     </div>
                     <div className="info-item">
-                        <label className="font-16 text-muted">Color</label>
+                        <label className="font-14 text-muted">Color</label>
                         <div className="color-picker">
                             <ul>
                             {
@@ -73,7 +73,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                                 return(
                                   <li className="d-flex align-items-center" key={i}>
                                       <span style={{background: '#000'}}></span>
-                                      <div className="font-20 color-333 ml-2">{color.name}</div>
+                                      <div className="color-333 ml-2">{color.name}</div>
                                   </li>
                                 )
                               })
@@ -82,16 +82,16 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                         </div>
                     </div>
                     <div className="info-item">
-                        <label className="font-16 text-muted">Fabric details</label>
-                        <h5 className="font-20 color-333">
+                        <label className="font-14 text-muted">Fabric details</label>
+                        <h5 className="color-333">
                         {/*'Cotton'*/}
                         <span>{quote.fabricComposition}</span></h5>
                     </div>
                 </div>
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-2">
-                        <label className="font-16 text-muted">Quantity</label>
-                        <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
+                        <label className="font-14 text-muted">Quantity</label>
+                        <h5 className="color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
                     </div>
 
                     <div className="info-item pr-2 d-flex flex-column">
@@ -133,8 +133,8 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                     </div>
                     <div className="info-item">
                         <div className="size delivery-in-days">
-                            <label>Delivery in</label>
-                            <h5 className="font-20 color-333">{quote.deliveryTime ? quote.deliveryTime : '--'} Days</h5>
+                            <label className="font-14 text-muted">Delivery in</label>
+                            <h5 className="color-333">{quote.deliveryTime ? quote.deliveryTime : '--'} Days</h5>
                         </div>
                     </div>
                 </div>
@@ -144,14 +144,14 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
           quote.status === 'PRICE_GIVEN' ?
           <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
               <div className="text-center">
-                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold"> {quote.priceValidUpto}</span> </span>
+                  <span className="font-14 valid-till">Price valid till <span className="font-weight-bold"> {quote.priceValidUpto}</span> </span>
                   <div className="pricewillbeupdated pt-2 pb-3">
                       <div>
-                          <strong className="font-36">
+                          <strong className="font-30">
                               ${quote.price ? quote.price : `—————`}
                           </strong>
                           <br/>
-                          <span className="cursor-pointer">
+                          <span className="cursor-pointer font-14">
                           /Piece
                               <svg className="ml-2" xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" title={quote.priceInfoText} data-toggle="tooltip" data-placement="top">
                                 <g id="Group_13" data-name="Group 13" transform="translate(1445 -3504)">
@@ -188,11 +188,11 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
               <div className="text-center">
               {
                 quote.status !== 'PRICE_GIVEN' ?
-                <span className="font-16">
+                <span className="font-14">
                     Price will be updated <br/>
                     within <span className="font-italic font-weight-bold">{timeDifference > 0 ? timeDifference : 0} hours</span>
                 </span> :
-                <span className="font-16">
+                <span className="font-14">
                     Price will be valid till <span className="font-italic font-weight-bold">{quote.priceValidUpto}</span>
                 </span>
               }

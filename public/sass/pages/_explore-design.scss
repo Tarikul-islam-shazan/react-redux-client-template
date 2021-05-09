@@ -43,7 +43,7 @@
 }
 .search{
   width: calc(100% - 50px);
-  @media (max-width: 991px) {
+  @media (max-width: 1024px) {
       width: auto;
   }
   @media (max-width: 767px) {
@@ -61,10 +61,13 @@
   }
 }
 span.result {
-  color: #858B96;
+  color: #333;
   font-size: 20px;
   float: right;
   text-align: right;
+  @media (max-width:1024px) {
+    float: left;
+  }
 }
 .explore-design-carasoul{
   width: calc(100% - 50px);
@@ -74,6 +77,7 @@ span.result {
       right: -97px !important;
     }
   }
+
   @media (max-width:991px) {
     .owl-nav {
       right: -85px !important;
@@ -676,12 +680,14 @@ button.rec-arrow-left, button.rec-arrow-right {
 button.rec-arrow-left {
   left: -10px;
   background: url("./images/icons/nav-left.png") no-repeat center #fff;
+  box-shadow: 0 0 12px 0px rgba(0,0,0,.1) !important;
 
 }
 
 button.rec-arrow-right {
   right: -10px;
   background: url("./images/icons/nav-right.png") no-repeat center #fff;
+  box-shadow: 0 0 12px 0px rgba(0,0,0,.1) !important;
 }
 
 .quote-cart{

@@ -43,11 +43,11 @@ export const OrderItem = ({product, remove}) => {
                     </div>
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
-                            <a href="#" className="font-weight-bold m-0 font-24 ellipse-2-line">{product.name}</a>
+                            <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{product.name}</a>
                             <span className="cat">{product.productGroup}</span>
                         </div>
                         <div className="info-item">
-                            <label className="font-16 text-muted">Color</label>
+                            <label className="font-14 text-muted">Color</label>
                             <div className="color-picker">
                                 <ul>
                                 {
@@ -63,15 +63,15 @@ export const OrderItem = ({product, remove}) => {
                             </div>
                         </div>
                         <div className="info-item">
-                            <label className="font-16 text-muted">Fabric composition</label>
-                            <h5 className="font-20 color-333 font-weight-normal">{product.fabricComposition}</h5>
+                            <label className="font-14 text-muted">Fabric details</label>
+                            <h5 className="color-333 font-weight-normal">{product.fabricComposition}</h5>
                         </div>
                     </div>
 
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-2">
-                            <label className="font-16 text-muted">Quantity</label>
-                            <h5 className="font-20 color-333 font-weight-bold">{product.quantity ? product.quantity : '--'} pc</h5>
+                            <label className="font-14 text-muted">Quantity</label>
+                            <h5 className="color-333 font-weight-bold">{product.quantity ? product.quantity : '--'} pc</h5>
                         </div>
 
                         <div class="info-item pr-2 d-flex flex-column">
@@ -114,13 +114,13 @@ export const OrderItem = ({product, remove}) => {
                     </div>
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-2">
-                            <label className="font-16 text-muted">(Per Piece)</label>
-                            <h5 className="font-20 color-333 font-weight-bold">${product.price}</h5>
+                            <label className="font-14 text-muted">(Per Piece)</label>
+                            <h5 className="color-333 font-weight-bold">${product.price}</h5>
 
                         </div>
                         <div className="info-item">
-                            <label className="font-16 text-muted">Total price</label>
-                            <h5 className="font-20 color-333 font-weight-bold">${(product.price * product.quantity)}</h5>
+                            <label className="font-14 text-muted">Total price</label>
+                            <h5 className="color-333 font-weight-bold">${(product.price * product.quantity)}</h5>
                         </div>
                     </div>
                 </div>

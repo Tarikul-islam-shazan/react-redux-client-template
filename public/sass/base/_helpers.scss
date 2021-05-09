@@ -56,7 +56,9 @@
 .color-gray{
   color: #898989 !important;
 }
-
+.red{
+  color: #FF0000  !important;
+}
 span.badge-custom {
   border-radius: 40px;
   padding: 6px 20px;
@@ -115,6 +117,9 @@ $util-font-sizes: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.card-error {
+  border-color: #ff8686 !important;
+}
 .sticky-120{
   position: sticky;
   top: 120px;
@@ -169,7 +174,9 @@ $util-font-sizes: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
 .flex-1{
   flex: 1 !important;
 }
-
+.opacity-0{
+  opacity: 0 !important;
+}
 .dot {
   width: 10px;
   padding-left: 20px;
