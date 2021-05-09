@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { addImageSuffix, rfqProductStatus } from '../../../services/Util';
 import moment from 'moment';
+import { Link } from 'react-router-dom'
 
 export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   let flag = 1;
@@ -47,8 +48,25 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                 </div>
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-1 ellipse-2-line product-title">
-                        <a href="#" className="font-weight-bold m-0 font-24 ellipse-2-line">{quote.name}</a>
-                        <a href="#" className="text-underline font-16 color-brand" onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}</a>
+                        <Link
+                            to={`/designs/view/${quote.productId}`}
+                            className="font-weight-bold m-0 font-20 ellipse-2-line">
+                            {quote.name ? quote.name : 'N/A'}
+                        </Link>
+
+                        { quote.collectionName &&
+                            <>
+                              <span className="pr-2 font-12">in</span>
+                                <Link 
+                                    className="text-underline font-16 color-brand" 
+                                    onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}
+                                </Link>
+                            </>
+                        }
+              <div>
+                <span className="pr-2 font-12">by</span>
+                <span className="font-14">{quote.clientName}</span>
+              </div>
                     </div>
                     <div className="info-item">
                         <label className="font-16 text-muted">Date</label>
@@ -70,9 +88,16 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                             <ul>
                             {
                               quote.colorWiseSizeQuantityPairList.map((color, i) => {
+                                console.log('~~~~',color);
                                 return(
                                   <li className="d-flex align-items-center" key={i}>
-                                      <span style={{background: '#000'}}></span>
+                                      <span
+                                        className="circle-color mr-3"
+                                        style={{background: color.hexCode}}
+                                        data-placement="top"
+                                        data-toggle="tooltip"
+                                        data-original-title={color.name}>
+                                      </span>
                                       <div className="font-20 color-333 ml-2">{color.name}</div>
                                   </li>
                                 )

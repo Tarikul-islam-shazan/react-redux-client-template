@@ -11,12 +11,11 @@ import { _storeData } from "../design/actions";
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
-import { rfqStatus, rfqProductStatus, convertTimeToLocal } from '../../services/Util';
+import { rfqStatus, rfqProductStatus, convertTimeToLocal, changeDateFormat } from '../../services/Util';
 
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { RfqCard } from './components/RfqCard';
 import {RfqSkeleton, RfqProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
-import { addImageSuffix } from '../../services/Util';
 import {QuotedItem} from './components/QuotedItem';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -35,7 +34,7 @@ class MyRFQs extends Component {
       productLoading: false,
       filterBy: '',
       filterById: '',
-      sort: 'lastResponseTime,desc',
+      sort: 'dateAdded,desc',
       selectedRfq: 0,
       selectedProduct: 0,
       selectedProductName: '',
@@ -117,60 +116,73 @@ class MyRFQs extends Component {
     }
   }
 
-  renderList = (page = 0, merge = true) => {
+  renderList = async (page = 0, merge = false) => {
     this.setState({ loading: true })
     let { size, rfqList, search, filterBy, sort, filterById, status, date, collection } = this.state;
     // let params = `?page=${page}&size=${size}`;
     let params = {
-      page: page,
-      size: size,
-      search: search,
+      page,
+      size,
+      search,
       // filterBy : filterBy,
-      sort: sort,
+      sort,
       // id: filterById,
       status,
-      date
+      date: date
+        ? changeDateFormat(date, "YYYY/MM/DD", "DD/MM/YYYY")
+        : "",
     };
     if (collection && collection.id) {
       params.collectionId = collection.id;
     }
 
 
-    Http.GET('getRfqListV2', params)
+    await Http.GET('getRfqListV2', params)
       .then(({ data }) => {
         console.log('rfq LIST SUCCESS: ', data);
         if (data.myQuotesProductResponses.length > 0) {
           if (merge) {
             // console.log("entered hasNext merge",this.state.hasNext,page,data.length)
             this.setState({
-              rfqList: [...rfqList, ...data.myQuotesProductResponses],
+              rfqList: merge
+                  ? [...rfqList, ...data.myQuotesProductResponses]
+                  : data.myQuotesProductResponses,
               page: page,
-              hasNext: data.myQuotesProductResponses.length == size ? true : false,
+              hasNext:
+                  data.myQuotesProductResponses.length == size
+                      ? true
+                      : false,
               loading: false,
-              total: data.total
-            })
+              total: data.total,
+          });
           } else {
             // console.log("entered hasNext unmerge")
             this.setState({
               rfqList: data.myQuotesProductResponses,
               page: page,
-              hasNext: data.myQuotesProductResponses.length == size ? true : false,
+              hasNext:
+                  data.myQuotesProductResponses.length == size
+                      ? true
+                      : false,
               loading: false,
-              total: data.total
-            })
+              total: data.total,
+          });
           }
 
         } else {
           // console.log("entered hasNext length 0")
           this.setState({
+            rfqList: !merge
+                ? data.myQuotesProductResponses
+                : rfqList,
             hasNext: false,
-            loading: false
-          })
-          if (page == 0) {
+            loading: false,
+        });
+        if (page == 0) {
             this.setState({
-              productLoading: false
-            })
-          }
+                productLoading: false,
+            });
+        }
           // toastWarning("RFQ List - no data found.");
         }
         // loadjs(['/js/script.js', '/js/custom.js']);
@@ -183,9 +195,16 @@ class MyRFQs extends Component {
   }
 
   onChange = async (e) => {
+    let { name, value } = e.target;
     await this.setState({
-      [e.target.name]: e.target.value
+      [name]: value
     })
+    if (name === "sort") {
+      await this.setState({
+          sort: value,
+      });
+      this.renderList();
+  }
   }
 
   keyPressed = async (e) => {
@@ -324,12 +343,16 @@ class MyRFQs extends Component {
             </div>
             <div className="sort">
                 <div className="status float-right">
-                    <select className="w-100 bg-gray-light border-0">
-                        <option>Oldest First</option>
-                        <option value="2">2</option>
-                        <option value="3" disabled>3</option>
-                        <option value="4">4</option>
-                    </select>
+                  <select
+                      className="w-100 bg-gray-light border-0"
+                      name="sort"
+                      id="sort"
+                      value={sort}
+                      onClick={(e) => this.onChange(e)}
+                  >
+                      <option value="dateAdded,asc">Oldest First</option>
+                      <option value="dateAdded,desc">Newest First</option>
+                </select>
                 </div>
             </div>
         </div>
