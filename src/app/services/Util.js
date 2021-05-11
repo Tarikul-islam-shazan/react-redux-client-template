@@ -579,15 +579,11 @@ const _getKey = () => {
 const getToken = () => {
   let token = '';
   let rememberMe = localStorage.getItem('rememberMe');
-  console.log("getToken rememberMe", rememberMe)
   if (parseInt(rememberMe) === 1) {
     token = localStorage.getItem('token');
-    console.log("getToken rememberMe 1", token)
   } else {
     token = sessionStorage.getItem('token');
-    console.log("getToken rememberMe else", token)
   }
-  // return '';
   return token;
 }
 
@@ -688,10 +684,14 @@ const formatProductTypeWithGroup = (data) => {
   return arr;
 }
 
+const changeDateFormat = ((date, currentFormat = 'DD/MM/YYYY', newFormat = 'Do MMM, YY') => (
+  moment(date, currentFormat).format(newFormat))
+)
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat
 };

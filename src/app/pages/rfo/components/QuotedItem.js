@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
-import { addImageSuffix, rfqProductStatus } from '../../../services/Util';
+import React from 'react';
+import { addImageSuffix, rfqProductStatus, convertTimeToLocal } from '../../../services/Util';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   let flag = 1;
   let timeDifference = 0;
+  
   if (quote.status !== 'PRICE_GIVEN') {
-    let a = moment(quote.date + ' ' + quote.time, 'DD/MM/YYYY HH:mm A');
-    let b = moment();
-    timeDifference = 24 - b.diff(a, 'hours');
+    let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY hh:mm A');
+    formattedQuoteDate = moment(formattedQuoteDate);
+    const currentDate = moment().format('DD/MM/YYYY hh:mm A');
+    const formattedCurrentDate = moment(currentDate);
+    timeDifference = 24 - formattedCurrentDate.diff(formattedQuoteDate, 'hours');
+  }
+
+  const getValidDateTill = (date, time) => {
+    let formattedDate = convertTimeToLocal(date, time, 'MMM D, YYYY hh:mm A');
+    formattedDate = moment(formattedDate);
+    return formattedDate.add(1, 'months').format('MMM D, YYYY');
   }
 
   return(
     <div className={`quote-list mb-3 p-4 pl-5 d-flex justify-content-between align-items-center ${quote.isSelected ? `active` : ``}`}>
-
         <div className="select-quote">
             <div className="custom-chekbox">
                 <div className="form-group m-0">
@@ -47,8 +56,25 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                 </div>
                 <div className="features d-flex flex-md-column">
                     <div className="info-item mt-1 ellipse-2-line product-title">
-                        <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{quote.name}</a>
-                        <a href="#" className="text-underline font-14 color-brand" onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}</a>
+                        <Link
+                            to={`/designs/view/${quote.productId}`}
+                            className="font-weight-bold m-0 font-20 ellipse-2-line">
+                            {quote.name ? quote.name : 'N/A'}
+                        </Link>
+
+                        { quote.collectionName &&
+                            <>
+                              <span className="pr-2 font-12">in</span>
+                                <Link 
+                                    className="text-underline font-16 color-brand" 
+                                    onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}
+                                </Link>
+                            </>
+                        }
+              <div>
+                <span className="pr-2 font-12">by</span>
+                <span className="font-14">{quote.clientName}</span>
+              </div>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Date</label>
@@ -72,8 +98,14 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                               quote.colorWiseSizeQuantityPairList.map((color, i) => {
                                 return(
                                   <li className="d-flex align-items-center" key={i}>
-                                      <span style={{background: '#000'}}></span>
-                                      <div className="color-333 ml-2">{color.name}</div>
+                                      <span
+                                        className="circle-color mr-3"
+                                        style={{background: color.hexCode}}
+                                        data-placement="top"
+                                        data-toggle="tooltip"
+                                        data-original-title={color.name}>
+                                      </span>
+                                      <div className="font-20 color-333 ml-2">{color.name}</div>
                                   </li>
                                 )
                               })
@@ -144,7 +176,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
           quote.status === 'PRICE_GIVEN' ?
           <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
               <div className="text-center">
-                  <span className="font-14 valid-till">Price valid till <span className="font-weight-bold"> {quote.priceValidUpto}</span> </span>
+                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold"> {getValidDateTill(quote.date, quote.time)}</span> </span>
                   <div className="pricewillbeupdated pt-2 pb-3">
                       <div>
                           <strong className="font-30">
@@ -192,8 +224,8 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                     Price will be updated <br/>
                     within <span className="font-italic font-weight-bold">{timeDifference > 0 ? timeDifference : 0} hours</span>
                 </span> :
-                <span className="font-14">
-                    Price will be valid till <span className="font-italic font-weight-bold">{quote.priceValidUpto}</span>
+                <span className="font-16">
+                    Price will be valid till <span className="font-italic font-weight-bold">{getValidDateTill(quote.date, quote.time)}</span>
                 </span>
               }
 
