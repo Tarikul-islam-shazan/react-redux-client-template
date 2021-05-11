@@ -134,7 +134,7 @@ class ForgetPassword extends Component {
                                                    onChange={this.onChange}
                                                    />
                                             <div className="input-group-append lock">
-                                                <span className="input-group-text">
+                                                <span>
                                                     <img src={require("../../assets/icons/envelope.png")} alt="email" className="img-fluid"/>
                                                 </span>
                                             </div>

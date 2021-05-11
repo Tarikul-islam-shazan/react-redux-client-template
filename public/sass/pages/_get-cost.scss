@@ -160,6 +160,13 @@
           margin-top: 30px;
           @media (max-width: 991px) {
             padding-left: 0px !important;
+            flex-direction: row !important;
+            .info-item + .info-item{
+              margin-top: 12px;
+            }
+            @media (max-width: 767px) {
+              flex-direction: column !important;
+            }
           }
         }
       }
@@ -175,16 +182,19 @@
   }
 }
 .p-size-table{
-  margin-left: -25px;
+  margin-left: -20px;
   @media (max-width: 1440px) {
-    margin-left: -16px;
+    margin-left: -13px;
+  }
+  @media (max-width: 767px) {
+    margin-left: -4px;
   }
   tr{
     th{
       text-align: left;
     }
     td{
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       color: #21242B;
       text-align: left;

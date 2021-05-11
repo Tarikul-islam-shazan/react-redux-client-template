@@ -136,7 +136,7 @@ class ResetPassword extends Component {
                                     <div className="input-group">
                                         <input type="password" className="form-control" name="password" onChange={this.onChange} value={password} placeholder="New password" />
                                         <div className="input-group-append lock">
-                                            <span className="input-group-text">
+                                            <span>
                                                 <img src={require("../../assets/icons/lock.png")} alt="password" className="img-fluid"/>
                                             </span>
                                         </div>

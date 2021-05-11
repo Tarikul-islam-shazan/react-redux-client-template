@@ -12,11 +12,11 @@
   }
   @media (max-width: 991px) and (min-width: 768px) {
     .features:nth-child(2) {
-      flex-basis: 36%;
+      flex-basis: 19%;
     }
     .features:nth-child(3) {
       order: 4;
-      margin-left: 177px;
+      margin-left: 0;
       margin-top: 5px !important;
     }
     .features:nth-child(4) {
@@ -64,7 +64,10 @@
       }
     }
   }
-  .pc-step, .order-id{
+  .pc-step{
+    font-size: 16px;
+  }
+  .order-id{
     font-size: 20px !important;
     @media (max-width: 767px) {
       font-size: 18px !important;
@@ -82,6 +85,9 @@
     }
   }
 }
+span.cat {
+  font-size: 14px;
+}
 .invoice-summary{
   max-width: 465px;
   background: #fff;
@@ -89,12 +95,15 @@
   top: 50%;
   right: 50px;
   transform: translateY(-50%);
+  box-shadow: $default-border-shadow;
   @media (max-width: 1790px) {
     max-width: 380px;
     right: 15px;
   }
   @media (max-width: 1440px) {
     margin-top: 16px;
+    top: 151px;
+    transform: translateX(0);
   }
   @media (max-width: 1024px) {
     max-width: 100%;
@@ -130,9 +139,9 @@
     height: 170px;
   }
   .title{
-    padding: 30px;
+    padding: 20px 30px;
     background: #E7EBF4;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     .tab-price {
       display: none;
@@ -211,6 +220,31 @@
           padding: 10px 15px;
         }
       }
+      &.confirm-payment-submit{
+        @media (max-width: 1024px) {
+          align-items: center !important;
+          button{
+            margin: 0 15px 10px 0 !important;
+            width: 170px;
+            padding: 0;
+          }
+        }
+        @media (max-width: 767px) {
+          button{
+            margin: 0 0px 10px 10px !important;
+            padding: 0 13px;
+            font-size: 13px;
+          }
+        }
+        @media (max-width: 320px) {
+          a.red{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
     }
     .ordered-container > div {
       @media (max-width: 1790px) {
@@ -232,6 +266,7 @@
   padding: 20px 30px;
   background: #fff;
   margin-bottom: 20px;
+  box-shadow: $default-border-shadow;
   @media (max-width: 575px) {
     padding: 15px 20px;
   }
@@ -239,9 +274,10 @@
     color: #21242B;
   }
   label{
-    color: #21242B;
-    font-size: 20px;
-    font-weight: 600;
+    color: #21242b;
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
     @media (max-width: 1280px) {
       font-size: 18px;
     }
@@ -295,7 +331,6 @@
     }
   }
 }
-
 .order-top-filter{
   button.add-new-order{
     @media (max-width: 991px) {

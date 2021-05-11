@@ -259,7 +259,7 @@ class ShareDesign extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="form-group">
-                                    <div className={`uploader upload-design-image mt-3 mb-4 mb-sm-0 ${documentIdsError ? `error2` : ``}`}>
+                                    <div className={`uploader upload-design-image  mb-4 mb-sm-0 ${documentIdsError ? `error2` : ``}`}>
                                     {
                                       productDesignDoc && productDesignDoc.name ?
                                           <div className="uploaded-img-banner">

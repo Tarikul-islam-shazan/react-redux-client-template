@@ -123,7 +123,7 @@
 .quote-list {
   width: 100%;
   background: #fff;
-  box-shadow: 0px 0px 2px 1px #ddd;
+  box-shadow: $default-border-shadow;
   border-radius: 5px;
   padding: 10px;
   position: relative;
@@ -203,10 +203,6 @@
     .info-item {
       margin-top: 15px;
       width: 148px;
-      h5{
-        font-size: 14px !important;
-        line-height: 20px;
-      }
     }
   }
   @media (max-width: 1365px) {

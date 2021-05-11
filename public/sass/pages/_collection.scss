@@ -404,6 +404,9 @@ table.manage-project-table.collection-list-table{
     position: absolute;
     top: 17px;
     left: 20px;
+    @media (max-width: 767px) {
+      top: 14px;
+    }
   }
   input{
     padding: 12px 12px 12px  45px;
@@ -471,7 +474,6 @@ table.manage-project-table.collection-list-table{
     max-width: calc(100% - 15px);
   }
   .quote-list{
-    padding-left: 20px !important;
     .admin-price {
       width: 475px;
       @media (max-width: 767px) {
@@ -537,4 +539,25 @@ table.manage-project-table.collection-list-table{
       height: 7px;
     }
   }
+}
+
+
+.create-modal {
+  .modal-content{
+    z-index: 9999;
+  }
+  &:after {
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    width: 100%;
+    z-index: 77;
+  }
+}
+table.w-100.p-size-table input {
+  width: 70px;
 }
