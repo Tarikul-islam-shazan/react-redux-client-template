@@ -6,17 +6,17 @@ import { Link } from 'react-router-dom';
 export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   let flag = 1;
   let timeDifference = 0;
-
+  
   if (quote.status !== 'PRICE_GIVEN') {
-    let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY HH:mm');
+    let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY hh:mm a');
     formattedQuoteDate = moment(formattedQuoteDate);
-    const currentDate = moment().format('DD/MM/YYYY HH:mm');
+    const currentDate = moment().format('DD/MM/YYYY hh:mm a');
     const formattedCurrentDate = moment(currentDate);
     timeDifference = 24 - formattedCurrentDate.diff(formattedQuoteDate, 'hours');
   }
 
   const getValidDateTill = (date, time) => {
-    let formattedDate = convertTimeToLocal(date, time, 'MMM D, YYYY HH:mm');
+    let formattedDate = convertTimeToLocal(date, time, 'MMM D, YYYY hh:mm a');
     formattedDate = moment(formattedDate);
     return formattedDate.add(1, 'months').format('MMM D, YYYY');
   }

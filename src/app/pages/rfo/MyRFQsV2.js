@@ -78,7 +78,6 @@ class MyRFQs extends Component {
     let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     let results = regex.exec(this.props.location.search);
 
-    console.log('results',results)
     await this.setState({
       filterById: results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' ')),
       productLoading: true
@@ -86,7 +85,6 @@ class MyRFQs extends Component {
 
     this.renderList(0);
     const userInfo = await localStorage.getItem('userInfo');
-    console.log("userInfo", JSON.parse(userInfo))
     this.setState({
       userInfo: JSON.parse(userInfo)
     })
@@ -100,10 +98,8 @@ class MyRFQs extends Component {
   onScrollToEnd = () => {
     const wrappedElement = document.getElementById('sidebarCollapse');
     if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
-      console.log('bottom reached');
       let { hasNext, page } = this.state;
       let { loading } = this.state;
-      console.log("message", 'bottom reached', hasNext, page, loading)
       if (hasNext && !loading) {
         // toastWarning("No more notification found.")
         this.renderList(page + 1, true)
@@ -139,10 +135,8 @@ class MyRFQs extends Component {
 
     await Http.GET('getRfqListV2', params)
       .then(({ data }) => {
-        console.log('rfq LIST SUCCESS: ', data);
         if (data.myQuotesProductResponses.length > 0) {
           if (merge) {
-            // console.log("entered hasNext merge",this.state.hasNext,page,data.length)
             this.setState({
               rfqList: merge
                   ? [...rfqList, ...data.myQuotesProductResponses]
@@ -156,7 +150,6 @@ class MyRFQs extends Component {
               total: data.total,
           });
           } else {
-            // console.log("entered hasNext unmerge")
             this.setState({
               rfqList: data.myQuotesProductResponses,
               page: page,
@@ -170,7 +163,6 @@ class MyRFQs extends Component {
           }
 
         } else {
-          // console.log("entered hasNext length 0")
           this.setState({
             rfqList: !merge
                 ? data.myQuotesProductResponses
@@ -188,7 +180,6 @@ class MyRFQs extends Component {
         // loadjs(['/js/script.js', '/js/custom.js']);
       })
       .catch(response => {
-        console.log('rfq LIST ERROR: ', JSON.stringify(response));
         this.setState({ loading: false, productLoading: false })
         toastError("Something went wrong! Please try again.");
       });
@@ -218,7 +209,6 @@ class MyRFQs extends Component {
 
   toggleSelect = async(e) => {
     let {rfqList, allCheck} = this.state;
-    console.log("e.target", e.target.value)
     rfqList = rfqList.map((rfq, i) => {
       if (rfq.id == e.target.value) {
         rfq.isSelected = e.target.checked;
@@ -289,7 +279,6 @@ class MyRFQs extends Component {
     }
     await Http.POST('order', body)
       .then(({data}) => {
-        console.log('createOrder SUCCESS: ', JSON.stringify(data));
         this.setState({loading: false})
         if(data.success){
           toastSuccess(data.message);
@@ -300,7 +289,6 @@ class MyRFQs extends Component {
 
       })
       .catch(response => {
-          console.log('submitOrder Error: ', JSON.stringify(response));
           this.setState({loading:false})
           toastError("Something went wrong! Please try again.");
       });
