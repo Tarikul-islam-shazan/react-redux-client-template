@@ -3,7 +3,7 @@ import { addImageSuffix } from '../../../services/Util';
 export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   let flag = 1;
   let total = 0;
-  console.log("QuoteNowProduct", product);
+  console.log("~~~~~~++++++-----", product);
   // product.sizeQuantityPairList.map((pair, key) => {
   //   if (pair.quantity) {
   //     total += parseInt(pair.quantity);
@@ -60,7 +60,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-16 color-333">{product.moq} pcs</h5>
+                        <h5 className="font-16 color-333">{product.minimumOrderQuantity} pcs</h5>
                     </div>
                 </div>
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">

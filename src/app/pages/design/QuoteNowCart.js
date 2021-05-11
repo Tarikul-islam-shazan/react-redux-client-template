@@ -102,21 +102,36 @@ class QuoteNowCart extends Component {
       let { size, designList, search, sort, productTypeId, filters } = this.state;
       let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
       let result = [];
-      await Http.GET('getProductList', params)
+      // await Http.GET('getProductList', params)
+      //   .then(({data}) => {
+      //     console.log('PRODUCT LIST SUCCESS: ', data);
+      //     this.setState({loading: false});
+      //     if(data && data.length>0){
+      //       result = data;
+      //     }
+      //   })
+      //   .catch(response => {
+      //       console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
+      //       this.setState({loading:false})
+      //       toastError("Something went wrong! Please try again.");
+      //   });
+
+        await Http.GET('getPickDesign')
         .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
-          this.setState({loading: false});
-          if(data && data.length>0){
-            result = data;
-          }
+          console.log('``SSSSSSSSSSS``~~~~~~~~~~', data);
+             data.filter((design) => design.availabilityStatus === 'AVAILABLE')
+              result = data
+              console.log('``POSTTTTTT``~~~~~~~~~~', result);
         })
-        .catch(response => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+        .catch(({response}) => {
+          console.log('EXPLORE DESIGN PRODUCT LIST ERROR: ', JSON.stringify(response));
+          this.setState({loading:false})
+          toastError("Something went wrong! Please try again.");
         });
+
         return result;
     }
+    
 
     onChange = async(e) => {
       await this.setState({
