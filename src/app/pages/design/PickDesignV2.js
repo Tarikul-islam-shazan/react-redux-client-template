@@ -490,6 +490,7 @@ class PickDesignV2 extends Component {
       await this.props._storeData('quoteObj', quote);
       await this.props._storeData('selectedProductIds', []);
       this.updateProductCard();
+      this.props.history.push('/quote-now');
     }
 
     createNewCollection = () => {
