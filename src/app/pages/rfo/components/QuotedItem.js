@@ -1,20 +1,28 @@
-import React, { Component } from 'react';
-import { addImageSuffix, rfqProductStatus } from '../../../services/Util';
+import React from 'react';
+import { addImageSuffix, rfqProductStatus, convertTimeToLocal } from '../../../services/Util';
 import moment from 'moment';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   let flag = 1;
   let timeDifference = 0;
+
   if (quote.status !== 'PRICE_GIVEN') {
-    let a = moment(quote.date + ' ' + quote.time, 'DD/MM/YYYY HH:mm A');
-    let b = moment();
-    timeDifference = 24 - b.diff(a, 'hours');
+    let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY HH:mm');
+    formattedQuoteDate = moment(formattedQuoteDate);
+    const currentDate = moment().format('DD/MM/YYYY HH:mm');
+    const formattedCurrentDate = moment(currentDate);
+    timeDifference = 24 - formattedCurrentDate.diff(formattedQuoteDate, 'hours');
+  }
+
+  const getValidDateTill = (date, time) => {
+    let formattedDate = convertTimeToLocal(date, time, 'MMM D, YYYY HH:mm');
+    formattedDate = moment(formattedDate);
+    return formattedDate.add(1, 'months').format('MMM D, YYYY');
   }
 
   return(
     <div className={`quote-list mb-3 p-4 pl-5 d-flex justify-content-between align-items-center ${quote.isSelected ? `active` : ``}`}>
-
         <div className="select-quote">
             <div className="custom-chekbox">
                 <div className="form-group m-0">
@@ -88,7 +96,6 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                             <ul>
                             {
                               quote.colorWiseSizeQuantityPairList.map((color, i) => {
-                                console.log('~~~~',color);
                                 return(
                                   <li className="d-flex align-items-center" key={i}>
                                       <span
@@ -169,7 +176,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
           quote.status === 'PRICE_GIVEN' ?
           <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
               <div className="text-center">
-                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold"> {quote.priceValidUpto}</span> </span>
+                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold"> {getValidDateTill(quote.date, quote.time)}</span> </span>
                   <div className="pricewillbeupdated pt-2 pb-3">
                       <div>
                           <strong className="font-36">
@@ -218,7 +225,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                     within <span className="font-italic font-weight-bold">{timeDifference > 0 ? timeDifference : 0} hours</span>
                 </span> :
                 <span className="font-16">
-                    Price will be valid till <span className="font-italic font-weight-bold">{quote.priceValidUpto}</span>
+                    Price will be valid till <span className="font-italic font-weight-bold">{getValidDateTill(quote.date, quote.time)}</span>
                 </span>
               }
 
