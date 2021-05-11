@@ -308,7 +308,34 @@ class MyRFQs extends Component {
       )
     }
     return (
-      <>
+      <LoadingOverlay
+          active={this.state.loading}
+          styles={{
+              zIndex: 10000,
+              overlay: (base) => ({
+                  ...base,
+                  background: LOADER_OVERLAY_BACKGROUND,
+              }),
+              spinner: (base) => ({
+                  ...base,
+                  width: LOADER_WIDTH,
+                  position: LOADER_POSITION,
+                  top: LOADER_TOP,
+                  left: LOADER_LEFT,
+                  marginTop: LOADER_MARGIN_TOP,
+                  marginLeft: LOADER_MARGIN_LEFT,
+                  "& svg circle": {
+                      stroke: LOADER_COLOR,
+                  },
+              }),
+              content: (base) => ({
+                  ...base,
+                  color: LOADER_COLOR,
+              }),
+          }}
+          spinner
+          text={LOADER_TEXT}
+      >
         <div className="header-sorting d-flex justify-content-between">
             <div className="sort-filter d-flex flex-grow-1">
                 <div className="product-name mr-3">
@@ -448,7 +475,7 @@ class MyRFQs extends Component {
           </LoadingOverlay> :
           <></>
       }
-      </>
+    </LoadingOverlay>
     );
   }
 }

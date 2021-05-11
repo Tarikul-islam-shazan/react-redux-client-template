@@ -579,15 +579,11 @@ const _getKey = () => {
 const getToken = () => {
   let token = '';
   let rememberMe = localStorage.getItem('rememberMe');
-  console.log("getToken rememberMe", rememberMe)
   if (parseInt(rememberMe) === 1) {
     token = localStorage.getItem('token');
-    console.log("getToken rememberMe 1", token)
   } else {
     token = sessionStorage.getItem('token');
-    console.log("getToken rememberMe else", token)
   }
-  // return '';
   return token;
 }
 
