@@ -685,7 +685,7 @@ class CollectionDetails extends Component {
                               </svg>
                           </div>
                           <div class="header d-flex justify-content-between align-items-center">
-                              <h4>Add more designs to quote</h4>
+                              <h4 className="semibold">Add more designs to quote</h4>
                               <div>
                                   <div class="cursor-pointer d-inline-block mr-2 mr-sm-4">
                                       <svg onClick={() => this.myProducts(0)} xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">

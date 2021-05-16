@@ -665,9 +665,11 @@ span.view-all {
   font-size: 16px;
   text-align: right;
   float: right;
-  text-decoration: underline;
-  color: $secondary-color;
+  color: #696969;
   cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 table.quotation-table {
   margin-top: 20px;

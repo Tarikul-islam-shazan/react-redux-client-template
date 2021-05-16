@@ -489,7 +489,7 @@ class PickDesign extends Component {
                         {
                           (designList.length == 0 && popular.length) ?
                           <div className="product-slider designs">
-                              <h4 className="mb-4">Popular <a onClick={()=>this.viewAll('favCount')}><span className="view-all">VIEW ALL</span></a></h4>
+                              <h4 className="mb-4">Popular <a onClick={()=>this.viewAll('favCount')}><span className="view-all">View all</span></a></h4>
                               <div className="Product-carousel owl-carousel owl-theme">
                               {
                                 popular.map(( item , i ) => {
@@ -512,7 +512,7 @@ class PickDesign extends Component {
                         {
                           (designList.length == 0 && trending.length) ?
                           <div className="product-slider designs">
-                              <h4 className="mb-4">New trending <a onClick={()=>this.viewAll('dateAdded')}><span className="view-all">VIEW ALL</span></a></h4>
+                              <h4 className="mb-4">New trending <a onClick={()=>this.viewAll('dateAdded')}><span className="view-all">View all</span></a></h4>
                               <div className="Product-carousel owl-carousel owl-theme">
                               {
                                 trending.map(( item , i ) => {
@@ -534,7 +534,7 @@ class PickDesign extends Component {
                         {
                           (designList.length == 0 && nitexSuggestion.length) ?
                           <div className="product-slider designs">
-                              <h4 className="mb-4">NITEX Picks <a onClick={()=>this.viewAll('boost')}><span className="view-all">VIEW ALL</span></a></h4>
+                              <h4 className="mb-4">NITEX Picks <a onClick={()=>this.viewAll('boost')}><span className="view-all">View all</span></a></h4>
                               <div className="Product-carousel owl-carousel owl-theme">
                               {
                                 nitexSuggestion.map(( item , i ) => {

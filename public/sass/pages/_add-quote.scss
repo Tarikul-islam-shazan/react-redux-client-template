@@ -1,6 +1,6 @@
 
 .confirm-quote-request {
-  padding-right: 80px;
+  padding-right: 20px;
   width: calc(100% - 540px);
   float: left;
   @media (max-width: 1790px) {
@@ -161,11 +161,17 @@
   .sizes .size {
     width: 50px;
     margin-right: 16px;
+    label{
+      font-size: 14px;
+      color: #6c757d;
+    }
     input{
       padding: 5px;
       text-align: center;
       height:  38px;
       border-color: #e4e4e4;
+      font-size: 16px;
+      font-weight: 600;
     }
     &.total{
       width: 130px;
@@ -386,6 +392,9 @@
       height: auto;
       max-width: 100%;
     }
+  }
+  .features:nth-child(2) {
+    width: auto;
   }
 }
 div#closeRPop {
