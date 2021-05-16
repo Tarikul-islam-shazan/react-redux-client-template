@@ -452,6 +452,9 @@
     }
     h5 {
       line-height: 20px;
+      @media (max-width: 1440px) {
+        font-size: 16px !important;
+      }
     }
     @media (max-width: 1366px) {
       width: 118px;

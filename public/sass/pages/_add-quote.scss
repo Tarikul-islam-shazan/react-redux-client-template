@@ -58,7 +58,7 @@
     height: calc(100vh - 158px);
   }
   @media (max-width: 1790px) {
-    max-width: 400px;
+    max-width: 415px;
     .header{
       padding: 15px;
     }
@@ -69,16 +69,15 @@
     .added-item{
       padding: 0 15px 20px;
       .quote-info{
-        a{
-          font-size: 17px !important;
-        }
         .info-item label {
           margin-bottom: 5px;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
         }
-
+        h5{
+          font-size: 16px !important;
+        }
         .info-right {
           margin-left: 10px !important;
           flex-basis: 74%;
