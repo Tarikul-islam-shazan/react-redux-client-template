@@ -43,7 +43,8 @@ class ShowProductCollection extends Component {
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           suggestions: [],
-          showSuggestions: false
+          showSuggestions: false,
+          collection: {}
         };
     }
 
@@ -95,6 +96,10 @@ class ShowProductCollection extends Component {
       document.title = "Explore designs - Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
       this.setState({loading: true});
+      let id = this.props.match.params.id;
+
+      await this.getCollectionDetails(id)
+
       let designList = await this.renderList(0);
       await this.setState({
         designList,
@@ -103,6 +108,27 @@ class ShowProductCollection extends Component {
       })
       await this.updateProductCard()
       this.setState({loading: false});
+    }
+
+    getCollectionDetails = ( collectionId ) => {
+      this.setState({loading:true})
+      let { size, name } = this.state;
+      Http.GET('getCollectionDetails', collectionId)
+        .then(({data}) => {
+          console.log('getCollectionDetails SUCCESS: ', data);
+          if (data) {
+            this.setState({collection: data})
+          }
+        })
+        .catch(({response}) => {
+            console.log('getCollectionDetails ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
+        });
     }
 
     renderList = async(page = 0) => {
@@ -119,10 +145,14 @@ class ShowProductCollection extends Component {
             result = data.data;
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
         return result;
     }
@@ -269,7 +299,7 @@ class ShowProductCollection extends Component {
     }
 
     render() {
-        let { designList, showSuggestions, suggestions, search } = this.state;
+        let { designList, showSuggestions, suggestions, search, collection } = this.state;
 
         return (
           <div className="explore-design">
@@ -313,7 +343,7 @@ class ShowProductCollection extends Component {
                   </div>
               </div>*/}
               <div className="designs">
-                  <h4 className="mb-4 font-weight-normal">Collection name</h4>
+                  <h4 className="mb-4 font-weight-normal">{collection.name}</h4>
                   <div className="show-products">
                   {
                     designList.map(( product , i ) => {

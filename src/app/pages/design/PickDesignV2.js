@@ -548,6 +548,10 @@ class PickDesignV2 extends Component {
         });
     }
 
+    getAllAvailableProducts = (data) => {
+      return data.filter((product) => (product.availabilityStatus !== 'SOLD'));
+    }
+
     render() {
         let {
           designList, groupwiseProductList, search, productTypeId, sort, showFilters,
@@ -728,7 +732,7 @@ class PickDesignV2 extends Component {
                                 // itemsToShow={5}
                                 pagination={false}>
                               {
-                                data.productResponseList ? data.productResponseList.map((product, j) => {
+                                data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
                                   return (
                                     <ProductCardWithTick
                                       key={j}

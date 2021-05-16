@@ -97,13 +97,12 @@ class CollectionDetails extends Component {
       window.addEventListener("scroll", this.handleWindowScroll);
       document.addEventListener('mousedown', this.handleClickOutside);
       let id = this.props.match.params.id;
-      console.log("componentDidMount", id)
       if (id !== 'private-collection') {
         await this.getCollectionDetails(id);
       }
       await this.getCollectionProducts(0);
       if (id === 'private-collection') {
-        this.setState({
+        await this.setState({
           collectionType: 'private-collection'
         })
         return;
@@ -118,13 +117,13 @@ class CollectionDetails extends Component {
       let { size, name } = this.state;
       Http.GET('getCollectionDetails', collectionId)
         .then(({data}) => {
-          console.log('getclients SUCCESS: ', data);
+          console.log('getCollectionDetails SUCCESS: ', data);
           if (data) {
             this.setState({collection: data})
           }
         })
         .catch(response => {
-            console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
+            console.log('getCollectionDetails ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             toastError("Something went wrong! Please try again.");
         });
@@ -580,7 +579,7 @@ class CollectionDetails extends Component {
               <div class="explore-design">
                   <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
                       <div class="">
-                          <h4 class="font-26 semibold mb-4 mb-sm-0">Collection of designs</h4>
+                          <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
                       </div>
                       {
                         !collectionType && !collectionViewType ?
