@@ -172,8 +172,12 @@ class MyProject extends Component {
       this.renderList( 0 , false );
     }
 
-    details = (id) => {
-      this.props.history.push('/orders/view/'+id);
+    details = (item) => {
+      if (item.status === 'PENDING') {
+        toastWarning('This order is still in pending state!')
+      } else {
+        this.props.history.push('/orders/view/' + item.orderId);
+      }
     }
 
     render() {

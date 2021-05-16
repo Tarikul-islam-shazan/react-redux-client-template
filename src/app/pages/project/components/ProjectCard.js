@@ -7,7 +7,7 @@ export const ProjectCard = ({item, onClick}) => {
         <div className="col">
             <div className="card my-project-card mb-3">
                 <div className="table-responsive">
-                    <table className="table table-borderless" onClick={() => onClick(item.orderId)}>
+                    <table className="table table-borderless" onClick={() => onClick(item)}>
                         <thead>
                             <tr>
                                 <th scope="col">
