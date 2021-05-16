@@ -548,6 +548,10 @@ class PickDesignV2 extends Component {
         });
     }
 
+    getAllAvailableProducts = (data) => {
+      return data.filter((product) => (product.availabilityStatus !== 'SOLD'));
+    }
+
     render() {
         let {
           designList, groupwiseProductList, search, productTypeId, sort, showFilters,
@@ -635,7 +639,7 @@ class PickDesignV2 extends Component {
                               {
                                 filterOptions.categories &&
                                 filterOptions.categories.map((item, i) => {
-                                  return <li key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
+                                  return <li style={{color: (isSelected(filters, 'CATEGORY', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
                                 })
                               }
                           </ul>
@@ -728,7 +732,7 @@ class PickDesignV2 extends Component {
                                 // itemsToShow={5}
                                 pagination={false}>
                               {
-                                data.productResponseList ? data.productResponseList.map((product, j) => {
+                                data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
                                   return (
                                     <ProductCardWithTick
                                       key={j}
@@ -858,7 +862,7 @@ class PickDesignV2 extends Component {
                                     {
                                       filterOptions.categories &&
                                       filterOptions.categories.map((item, i) => {
-                                        return <li key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
+                                        return <li style={{color: (isSelected(filters, 'CATEGORY', item.id) ? 'rgb(238 118 31)' : 'black')}} key={i} onClick={() => this.setFilters('CATEGORY', item.id, item.name)}>{item.name}</li>
                                       })
                                     }
                                     </ul>
