@@ -109,12 +109,6 @@
       }
     }
   }
-  input,
-  .search button.btn-brand {
-    @media (max-width: 1440px) {
-      height: 44px;
-    }
-  }
 }
 .my-quotes-items{
   .features:nth-child(3){
@@ -145,12 +139,15 @@
     padding-left: 50px !important;
     padding-top: 25px !important;
     border: 2px solid transparent;
-
+    @media (max-width: 1440px) {
+      padding-left: 35px !important;
+      padding-top: 20px !important;
+    }
     .info-item h5 {
       font-size: 18px !important;
       line-height: 25px;
       font-weight: 600;
-      @media (max-width: 1024px) {
+      @media (max-width: 1440px) {
         font-size: 16px !important;
       }
     }
@@ -159,6 +156,7 @@
       flex-direction: row;
       padding: 15px 15px 15px 40px !important;
     }
+
     @media (max-width: 767px) {
       flex-direction: column;
     }
@@ -174,9 +172,13 @@
       position: absolute;
       left: 12px;
       top: 22px;
+      @media (max-width: 1440px) {
+        left: 6px;
+        top: 6px;
+      }
       @media (max-width: 991px) {
-        left: 10px;
-        top: 9px;
+        left: 8px;
+        top: 14px;
       }
       .custom-chekbox .form-group input:checked+label:after{
         border: solid #fff;
@@ -307,6 +309,10 @@
       width: 211px;
       font-size: 16px;
       margin: 0 !important;
+      @media (max-width: 1440px) {
+        height: 52px;
+        width: 160px;
+      }
       @media (max-width: 991px) {
         height: 42px;
         width: 148px;
@@ -446,6 +452,9 @@
     }
     h5 {
       line-height: 20px;
+      @media (max-width: 1440px) {
+        font-size: 16px !important;
+      }
     }
     @media (max-width: 1366px) {
       width: 118px;
@@ -495,9 +504,6 @@
     }
     input {
       border-radius: 10px;
-      @media (max-width: 1440px) {
-        height: 44px;
-      }
     }
   }
   > .type {
@@ -508,7 +514,7 @@
   .currency {
     width: 144px;
     @media (max-width: 1440px) {
-      width: 115px;
+      width: 120px;
     }
     .nice-select {
       border-radius: 10px;
@@ -528,6 +534,7 @@
   margin-right: 10px;
   cursor: pointer;
   user-select: none;
+  font-size: 16px;
   &.active {
     background: $brand-color;
     border-color: $brand-color;

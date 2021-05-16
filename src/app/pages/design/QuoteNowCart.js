@@ -288,7 +288,7 @@ class QuoteNowCart extends Component {
                       </svg>
                   </div>
                   <div className="header d-flex justify-content-between align-items-center">
-                      <h4>Add more designs to quote</h4>
+                      <h4 className="semibold">Add more designs to quote</h4>
                       <div>
                           <div className="cursor-pointer d-inline-block mr-4">
                               <svg onClick={async() => {
