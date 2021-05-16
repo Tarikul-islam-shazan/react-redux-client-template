@@ -174,7 +174,7 @@ class MyProject extends Component {
 
     details = (item) => {
       if (item.status === 'PENDING') {
-        toastWarning('This order is still in pending state!')
+        toastWarning('Your order is under review. Please wait till it gets to running!')
       } else {
         this.props.history.push('/orders/view/' + item.orderId);
       }
