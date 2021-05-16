@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { convertTimeToLocal } from '../../../services/Util';
 export const ProjectCard = ({item, onClick}) => {
+  let percentage = item.percentageComplete ? item.percentageComplete : 0;
   return(
     <div className="row">
         <div className="col">
-            <div className="card my-project-card mb-2">
+            <div className="card my-project-card mb-3">
                 <div className="table-responsive">
                     <table className="table table-borderless" onClick={() => onClick(item.orderId)}>
                         <thead>
@@ -19,6 +20,7 @@ export const ProjectCard = ({item, onClick}) => {
                                     </span>
                                     Start date
                                 </th>
+
                                 <th scope="col">
                                     <span>
                                         <img src={require('../../../assets/icons/date_time.png')} alt="date and time" />
@@ -37,12 +39,12 @@ export const ProjectCard = ({item, onClick}) => {
                                     </span>
                                     Total designs
                                 </th>
-                                {/*<th scope="col">*/}
-                                {/*    Order value*/}
-                                {/*</th>*/}
-                                {/*<th scope="col">*/}
-                                {/*    Progress*/}
-                                {/*</th>*/}
+                                <th scope="col">
+                                    Order value
+                                </th>
+                                <th scope="col">
+                                    Progress
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,18 +55,18 @@ export const ProjectCard = ({item, onClick}) => {
                                 <td>{item.timeLeft ? Math.abs(item.timeLeft) : 'N/A'}</td>
                                 {/*<td>{item.endDate ? convertTimeToLocal(item.endDate, '', 'DD.MM.YYYY') : 'N/A'}</td>*/}
                                 <td>{item.totalStyles}</td>
-                                {/*<td>Value added here</td>*/}
-                                {/*<td>*/}
-                                {/*    <div className="project-status checklist-status">*/}
-                                {/*        <div className="head"> */}
-                                {/*            <div className="percentage">75%</div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className="progress">*/}
-                                {/*            <div className="progress-bar" role="progressbar" style="width: 75%"*/}
-                                {/*                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>*/}
-                                {/*        </div>*/}
-                                {/*    </div>*/}
-                                {/*</td>*/}
+                                <td>{item.orderValue}</td>
+                                <td>
+                                <div className="project-status checklist-status mt-2">
+                                        <div className="head m-0">
+                                            <div className="percentage">{percentage}%</div>
+                                        </div>
+                                        <div className="progress">
+                                            <div className="progress-bar" role="progressbar" style={{width: `${percentage}%`}}
+                                                 aria-valuenow='50' aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
