@@ -1,14 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import { addImageSuffix } from '../../../services/Util';
+import Http from "../../../services/Http";
+
 export const QuoteNowProduct = ({product, index, onChange, remove}) => {
+  const [defaultValue, setDefaultValue] = useState({
+    TURN_AROUND_TIME: "",
+    MOQ: "",
+  });
+
+  const fetchData = async () => {
+    const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
+    await Http.GET("getSettings", params)
+      .then(({ data }) => {
+        if (data) {
+          setDefaultValue({
+            TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+              ? data["TURN_AROUND_TIME"].value
+              : "",
+            MOQ: data["MOQ"] ? data["MOQ"].value : "",
+          });
+        }
+      })
+      .catch(({ response }) => {});
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   let flag = 1;
   let total = 0;
-  console.log("~~~~~~++++++-----", product);
-  // product.sizeQuantityPairList.map((pair, key) => {
-  //   if (pair.quantity) {
-  //     total += parseInt(pair.quantity);
-  //   }
-  // })
+ 
   const getTotal = (sizeQuantityPairList) => {
     sizeQuantityPairList.map((pair, key) => {
       if (pair.quantity) {
@@ -60,7 +82,9 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-16 color-333">{product.minimumOrderQuantity} pcs</h5>
+                        <h5 className="font-16 color-333">
+                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : defaultValue.MOQ} pcs
+                        </h5>
                     </div>
                 </div>
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
@@ -70,7 +94,9 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
-                        <h5 className="font-16 color-333">{product.turnAroundTime} Days</h5>
+                        <h5 className="font-16 color-333">
+                          {product.turnAroundTime ? product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days
+                        </h5>
                     </div>
                 </div>
             </div>

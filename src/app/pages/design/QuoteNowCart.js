@@ -119,28 +119,32 @@ class QuoteNowCart extends Component {
     this.setState({ loading: true, searching: true });
     let { size, designList, search, sort, productTypeId, filters } = this.state;
     let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
+    let designParams = `?page=${page}&size=${size}`;
     let result = [];
-    // await Http.GET('getProductList', params)
-    //   .then(({data}) => {
-    //     console.log('PRODUCT LIST SUCCESS: ', data);
-    //     this.setState({loading: false});
-    //     if(data && data.length>0){
-    //       result = data;
-    //     }
-    //   })
-    //   .catch(response => {
-    //       console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-    //       this.setState({loading:false})
-    //       toastError("Something went wrong! Please try again.");
-    //   });
 
-    await Http.GET("getPickDesign")
+    await Http.GET("getProductList", params)
       .then(({ data }) => {
-        console.log("``SSSSSSSSSSS``~~~~~~~~~~", data);
-        const designList = data.filter(
-          (design) => design.availabilityStatus === "AVAILABLE"
+        console.log("PRODUCT LIST SUCCESS: ", data);
+        this.setState({ loading: false });
+        if (data && data.length > 0) {
+          result = data;
+        }
+      })
+      .catch((response) => {
+        console.log("PRODUCT LIST ERROR: ", JSON.stringify(response));
+        this.setState({ loading: false });
+        toastError("Something went wrong! Please try again.");
+      });
+
+    await Http.GET("getPickDesign", designParams)
+      .then(({ data }) => {
+        const pickDesignList = data.filter(
+          (design) =>
+            design.availabilityStatus === "AVAILABLE" ||
+            design.availabilityStatus === "CHECKED" ||
+            design.availabilityStatus === "IN_RFQ"
         );
-        result = [...result, designList];
+        result = [...result, ...pickDesignList];
       })
       .catch(({ response }) => {
         console.log(
@@ -150,7 +154,6 @@ class QuoteNowCart extends Component {
         this.setState({ loading: false });
         toastError("Something went wrong! Please try again.");
       });
-    console.log("``POSTTTTTT``~~~~~~~~~~", result);
     return result;
   };
 
