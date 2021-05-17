@@ -472,7 +472,7 @@ class OurDesignDetails extends Component {
                                       <span className="font-14 brand-color ml-3" onClick={() => this.setState({measurementModal: true})}>Measurement Guide</span>
                                   </a>
                               </div>
-                              <span className="font-16 color-333 text-uppercase">
+                              <span className="font-18 semibold text-uppercase">
                               {
                                 this.renderSizes()
                               }

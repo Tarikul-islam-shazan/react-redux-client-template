@@ -122,17 +122,18 @@ class ConfirmOrder extends Component {
               <div className="confirm-quote-request placing-order">
                   <div className="header-title d-flex justify-content-between align-items-center">
                       <a href="#">
-                          <h3 className="text-black">
+                          <h3 className="text-black font-26 semibold">
                               Placing order
                           </h3>
                       </a>
                   </div>
                   <div className="mt-3">
+                      <label htmlFor="">Order title</label>
                       <input type="text" placeholder="Order title" name="name" value={order.name} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
 
-                  <h4 className="mb-4 mt-4 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex font-18">Delivery date <div className="text-black ml-2 semibold"> {order.deliveryDate}</div></span></h4>
-                  <h4 className="mb-4 font-weight-normal pc-step">Product confirmation(Step 1 of 2) <span className="result font-18">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
+                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {order.deliveryDate}</div></span></h4>
+                  <h4 className="mb-3 font-weight-normal pc-step">Product confirmation (Step 1 of 2) <span className="result font-16 mr-3 mt-2 mt-sm-0">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
                   {
                     order.productResponseList ?
                     order.productResponseList.map((product, i) => {
@@ -152,7 +153,7 @@ class ConfirmOrder extends Component {
                       <div className="tab-price font-weight-bold">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</div>
                   </div>
                   <div className="details">
-                      <h4 className="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>{invoice.invoiceNo}</strong></h4>
+                      <h4 className="mb-4 color-333 font-20">Invoice No:  <strong className="semibold">{invoice.invoiceNo}</strong></h4>
                       <div className="ordered-container">
                       {
                         invoice.priceBreakDown && invoice.priceBreakDown.itemWisePriceList ?
@@ -160,7 +161,7 @@ class ConfirmOrder extends Component {
                           return(
                             <div key={i} className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                 {item.itemName}
-                                <strong className="font-weight-bold font-24">${item.price}</strong>
+                                <strong className="semibold font-18">${item.price}</strong>
                             </div>
                           )
                         }) : <></>
@@ -170,14 +171,14 @@ class ConfirmOrder extends Component {
                           <div className="sub-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Sub total
-                                  <strong className="font-weight-bold font-24">${invoice.priceBreakDown ? invoice.priceBreakDown.subTotal : ''}</strong>
+                                  <strong className="semibold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.subTotal : ''}</strong>
                               </div>
                           </div>
 
                           <div className="mt-5 shipping-info">
                               <div className="mb-2 font-weight-normal color-333 font-18">
                                   Shipping <br/>
-                                  <div className="mt-4 color-gray font-16 info-text">Shipping charges and duties might be extra
+                                  <div className="mt-4 color-gray font-12 info-text">Shipping charges and duties might be extra
                                   and will be confirmed before your order is
                                   processed.</div>
                               </div>
@@ -186,13 +187,13 @@ class ConfirmOrder extends Component {
                           <div className="grand-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Grand total
-                                  <strong className="font-weight-bold font-24">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</strong>
+                                  <strong className="semibold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</strong>
                               </div>
                           </div>
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                               <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={() => this.props.history.push('/orders/confirm-payment/' + this.props.match.params.id)}>Confirm order</button>
-                              <a href="#" className="text-underline font-16" onClick={this.cancel}>Cancel order</a>
+                              <a href="#" className="text-underline font-16 red" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>
                   </div>

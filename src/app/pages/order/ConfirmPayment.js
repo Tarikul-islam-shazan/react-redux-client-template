@@ -316,7 +316,7 @@ class ConfirmPayment extends Component {
               <div className="confirm-quote-request placing-order">
                   <div className="header-title d-flex justify-content-between align-items-center">
                       <a href="#">
-                          <h3 className="text-black">
+                          <h3 className="text-black font-26 semibold">
                               Placing order
                           </h3>
                       </a>
@@ -325,13 +325,15 @@ class ConfirmPayment extends Component {
                       <input type="text" placeholder="Order title" name="name" value={order.name} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
 
-                  <h4 className="mb-4 mt-4 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex font-18">Delivery date <div className="text-black ml-2 semibold"> {order.deliveryDate}</div></span></h4>
-                  <h4 className="mb-4 font-weight-normal pc-step">Product confirmation(Step 1 of 2) <span className="result font-18">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
+                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {order.deliveryDate}</div></span></h4>
+                  <h4 className="mb-3 font-weight-normal pc-step">
+                      <span>Payment (Step 2 of 2)</span>
+                      {/*<span className="result font-18">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span>*/}
+                  </h4>
 
                   <div className="order-step2">
-
                       <div className="stepper">
-                          <h3 className="font-22 semibold mb-4">Billing Address</h3>
+                          <h3 className="font-20 semibold mb-4">Billing Address</h3>
                           <div className="row">
                               <div className="col-md-6">
                                   <div className="form-group">
@@ -392,7 +394,7 @@ class ConfirmPayment extends Component {
                           </div>
                       </div>
                       <div className="stepper">
-                          <h3 className="font-22 semibold mb-3">Shipping address</h3>
+                          <h3 className="font-20 semibold mb-3">Shipping address</h3>
 
                           <div className="row mb-3">
                               <div className="col-md-6 col-lg-5">
@@ -466,7 +468,7 @@ class ConfirmPayment extends Component {
                           </div>
                       </div>
                       <div className="stepper">
-                          <h3 className="font-22 semibold mb-4">Select payment method</h3>
+                          <h3 className="font-20 semibold mb-4">Select payment method</h3>
                           <div className="payment-method-type">
                               <div className={`type strip ${paymentMethod === 'STRIPE' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('STRIPE')}>
                                   <svg id="stripe-seeklogo.com" xmlns="http://www.w3.org/2000/svg" width="50" height="20.806" viewBox="0 0 50 20.806">
@@ -555,7 +557,7 @@ class ConfirmPayment extends Component {
                       <div className="tab-price font-weight-bold">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</div>
                   </div>
                   <div className="details">
-                      <h4 className="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>{invoice.invoiceNo}</strong></h4>
+                      <h4 className="mb-4 color-333 font-20">Invoice No:  <strong className="semibold">{invoice.invoiceNo}</strong></h4>
                       <div className="ordered-container">
                       {
                         invoice.priceBreakDown && invoice.priceBreakDown.itemWisePriceList ?
@@ -563,7 +565,7 @@ class ConfirmPayment extends Component {
                           return(
                             <div key={i} className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                 {item.itemName}
-                                <strong className="font-weight-bold font-24">${item.price}</strong>
+                                <strong className="font-weight-bold font-18">${item.price}</strong>
                             </div>
                           )
                         }) : <></>
@@ -573,14 +575,14 @@ class ConfirmPayment extends Component {
                           <div className="sub-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Sub total
-                                  <strong className="font-weight-bold font-24">${invoice.priceBreakDown ? invoice.priceBreakDown.subTotal : ''}</strong>
+                                  <strong className="font-weight-bold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.subTotal : ''}</strong>
                               </div>
                           </div>
 
                           <div className="mt-5 shipping-info">
                               <div className="mb-2 font-weight-normal color-333 font-18">
                                   Shipping <br/>
-                                  <div className="mt-4 color-gray font-16 info-text">Shipping charges and duties might be extra
+                                  <div className="mt-4 color-gray font-12 info-text">Shipping charges and duties might be extra
                                   and will be confirmed before your order is
                                   processed.</div>
                               </div>
@@ -589,13 +591,13 @@ class ConfirmPayment extends Component {
                           <div className="grand-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Grand total
-                                  <strong className="font-weight-bold font-24">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</strong>
+                                  <strong className="font-weight-bold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</strong>
                               </div>
                           </div>
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                               <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={this.confirm}>Confirm payment</button>
-                              <a href="#" className="text-underline font-16" onClick={this.cancel}>Cancel order</a>
+                              <a href="#" className="text-underline font-16 red" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>
                   </div>
