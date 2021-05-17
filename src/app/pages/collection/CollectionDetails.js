@@ -122,10 +122,14 @@ class CollectionDetails extends Component {
             this.setState({collection: data})
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('getCollectionDetails ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -156,10 +160,14 @@ class CollectionDetails extends Component {
             })
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -177,10 +185,14 @@ class CollectionDetails extends Component {
             })
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -200,10 +212,14 @@ class CollectionDetails extends Component {
             });
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({myDesignLoading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -220,10 +236,14 @@ class CollectionDetails extends Component {
             });
           }
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
     }
 
@@ -582,7 +602,7 @@ class CollectionDetails extends Component {
                           <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
                       </div>
                       {
-                        !collectionType && !collectionViewType ?
+                        !collectionType && !collectionViewType && collection.privacy !== 'PUBLIC' ?
                         <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
                             <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
                                 <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
@@ -647,9 +667,12 @@ class CollectionDetails extends Component {
                                 }
 
                             </div>
-
                             <div class="d-flex mt-4 mt-sm-0">
-                                <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
+                            {
+                              collection.privacy === 'ONLY_ME' ?
+                              <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
+                              : <></>
+                            }
 
                                 {/*<div class="option">
                                     <div class="dropdown">

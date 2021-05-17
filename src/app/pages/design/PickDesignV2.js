@@ -334,8 +334,6 @@ class PickDesignV2 extends Component {
         loading:true
       })
 
-      console.log("likeProduct called")
-
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
           console.log('likeProduct SUCCESS: ', JSON.stringify(data));
@@ -386,7 +384,6 @@ class PickDesignV2 extends Component {
       this.setState({
         loading:true
       })
-      console.log("unlikeProduct called")
 
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
@@ -726,7 +723,7 @@ class PickDesignV2 extends Component {
                       if (data.collectionViewType === 'PRODUCT_LIST') {
                         return (
                           <div className="designs" key={i}>
-                              <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/designs/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
+                              <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
                               <Carousel
                                 breakPoints={breakPoints}
                                 // itemsToShow={5}
@@ -752,10 +749,13 @@ class PickDesignV2 extends Component {
                               <div className="row">
                               {
                                 data.collections ? data.collections.map((banner, j) => {
+                                  if (j > 1) {
+                                    return (<></>);
+                                  }
                                   if (banner.banners && banner.banners.length) {
                                     return (
                                       <div className="col-md-6" key={j}>
-                                          <a href="#"><img src={banner.banners[0].docUrl} alt="" className="w-100 mb-4 mb-sm-0"/></a>
+                                          <a href={'/collections/view/' + banner.id}><img src={banner.banners[0].docUrl} alt="" className="w-100 mb-4 mb-sm-0"/></a>
                                       </div>
                                     )
                                   } else {
