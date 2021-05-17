@@ -182,13 +182,6 @@
   }
 }
 .p-size-table{
-  margin-left: -20px;
-  @media (max-width: 1440px) {
-    margin-left: -13px;
-  }
-  @media (max-width: 767px) {
-    margin-left: -4px;
-  }
   tr{
     th{
       text-align: left;
@@ -210,5 +203,23 @@
   padding: 0 40px 30px 40px;
   @media (max-width: 767px) {
     padding: 0;
+  }
+}
+.get-costing-list{
+  .features{
+    width: auto;
+    @media (max-width: 1440px) {
+      width: 100%;
+      flex-wrap: wrap;
+      .info-item {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+}
+@media (max-width: 767px) {
+  .modal-dialog.collection-list-modal .quotes-list-item {
+    padding: 0 20px;
   }
 }

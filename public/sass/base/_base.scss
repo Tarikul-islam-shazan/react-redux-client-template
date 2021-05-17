@@ -665,7 +665,6 @@ span.view-all {
   font-size: 16px;
   text-align: right;
   float: right;
-  text-decoration: underline;
   color: $secondary-color;
   cursor: pointer;
 }
@@ -949,10 +948,16 @@ h4.details-title {
     grid-gap: 25px;
   }
 }
-table.manage-project-table.collection-list-table.invoice-list-table
-  thead
+table.manage-project-table.collection-list-table.invoice-list-table thead{
+  th:first-child {
+    @media (max-width: 1024px) {
+      width: 170px;
+    }
+  }
   th:last-child {
-  @media (max-width: 1440px) {
-    width: 170px;
+    @media (max-width: 1440px) {
+      width: 170px;
+    }
   }
 }
+

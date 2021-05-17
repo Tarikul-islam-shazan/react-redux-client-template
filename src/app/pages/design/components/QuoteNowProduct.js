@@ -74,27 +74,27 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
             <a href="#"><img src={require("../../../assets/images/default_product.svg")} alt="" className="radius-3"/></a>
           }
             <div className="info-right ml-4">
-                <a href="#" className="font-weight-bold m-0 mt-2 font-24 ellipse-2-line">{product.name ? product.name : 'N/A'}</a>
+                <a href="#" className="font-weight-bold m-0 mt-2 font-20 ellipse-2-line">{product.name ? product.name : 'N/A'}</a>
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Product category</label>
-                        <h5 className="font-16 color-333">{product.productType}, {product.productGroup}</h5>
+                        <h5 className="font-18 semibold">{product.productType}, {product.productGroup}</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-16 color-333">
-                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : defaultValue.MOQ} pcs
+                        <h5 className="font-18 semibold">
+                          {product.moq ? product.moqv : defaultValue.MOQ} pcs
                         </h5>
                     </div>
                 </div>
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-16 color-333">{product.fabricComposition} {product.fabricWeight} GSM</h5>
+                        <h5 className="font-18 semibold">{product.fabricComposition} {product.fabricWeight} GSM</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
-                        <h5 className="font-16 color-333">
+                        <h5 className="font-18 semibold">
                           {product.turnAroundTime ? product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days
                         </h5>
                     </div>

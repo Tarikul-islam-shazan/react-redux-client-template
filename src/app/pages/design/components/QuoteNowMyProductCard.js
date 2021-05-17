@@ -59,58 +59,39 @@ export const QuoteNowMyProductCard = ({ product,index,onChange,addToQuote }) => 
               );
             }
           })
-        ) : (
-          <a href="#">
-            <img
-              src={require("../../../assets/images/default_product.svg")}
-              alt=""
-              className="radius-3"
-            />
-          </a>
-        )}
-        <div className="info-right ml-3">
-          <a href="#" className="semibold m-0 mt-1 font-18">
-            {product.name}
-          </a>
-          <div className="d-flex flex-column flex-sm-row">
-            <div className="info-item mr-5">
-              <label className="font-14 text-muted">Product category</label>
-              <h5 className="font-16 color-333">
-                {product.productType}, {product.productGroup}
-              </h5>
-            </div>
-            <div className="info-item">
-              <label className="font-14 text-muted">MOQ</label>
-              <h5 className="font-16 color-333">
-                {product.moq ? product.moq : defaultValue.MOQ} pcs
-              </h5>
-            </div>
-          </div>
-          <div className="d-flex flex-column flex-sm-row">
-            <div className="info-item mr-5">
-              <label className="font-14 text-muted">Fabric details</label>
-              <h5 className="font-16 color-333">
-                {product.fabricComposition} {product.fabricWeight} GSM
-              </h5>
-            </div>
-            <div className="info-item">
-              <label className="font-14 text-muted">Delivery in</label>
-              <h5 className="font-16 color-333">
-                {product.turnAroundTime
-                  ? product.turnAroundTime
-                  : defaultValue.TURN_AROUND_TIME}{" "}
-                Days
-              </h5>
+          )
+          :
+          <a href="#"><img src={require("../../../assets/images/default_product.svg")} alt="" className="radius-3"/></a>
+        }
+            <div className="info-right ml-3">
+                <a href="#" className="semibold m-0 mt-1 font-20">{product.name}</a>
+                <div className="d-flex flex-column flex-sm-row">
+                    <div className="info-item mr-5">
+                        <label className="font-14 text-muted">Product category</label>
+                        <h5 className="font-18 semibold">{product.productType}, {product.productGroup}</h5>
+                    </div>
+                    <div className="info-item">
+                        <label className="font-14 text-muted">MOQ</label>
+                        <h5 className="font-18 semibold">{product.moq? product.moq : defaultValue.MOQ} pcs</h5>
+                    </div>
+                </div>
+                <div className="d-flex flex-column flex-sm-row">
+                    <div className="info-item mr-5">
+                        <label className="font-14 text-muted">Fabric details</label>
+                        <h5 className="font-18 semibold">{product.fabricComposition} {product.fabricWeight} GSM</h5>
+                    </div>
+                    <div className="info-item">
+                        <label className="font-14 text-muted">Delivery in</label>
+                        <h5 className="font-18 semibold">{product.turnAroundTime ? 
+                        product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days</h5>
+                    </div>
+                </div>
+                <button 
+                  className="btn-border mt-4" 
+                  onClick={() => addToQuote([product.id])}>Add to quote
+                </button>
             </div>
           </div>
-          <button
-            className="btn-border mt-4"
-            onClick={() => addToQuote([product.id])}
-          >
-            Add to quote
-          </button>
         </div>
-      </div>
-    </div>
   );
 };

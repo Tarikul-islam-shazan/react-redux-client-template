@@ -18,7 +18,7 @@ import { ProjectStatus } from './components/ProjectStatus';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
-import { toastSuccess, toastError } from '../../commonComponents/Toast';
+import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { deliverableStatus, convertTimeToLocal } from '../../services/Util';
@@ -79,6 +79,10 @@ class MyProjectDetails extends Component {
         .then(({data}) => {
           console.log('PROJECT DETAILS SUCCESS: ', data);
           if(data){
+            if (data.status === 'PENDING') {
+              toastWarning('Your order is under review. Please wait till it gets to running!')
+              this.props.history.push('/orders/my-orders');
+            }
             document.title = data.name;
             let result = data;
             if(result.productResponseList){
@@ -100,10 +104,14 @@ class MyProjectDetails extends Component {
           }
           loadjs(['/js/script.js','/js/custom.js']);
         })
-        .catch(response => {
+        .catch(({response}) => {
             console.log('PRODUCT DETAILS ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            this.setState({loading:false});
+            if (response && response.data && response.data.message) {
+              toastError(response.data.message);
+            } else {
+              toastError("Something went wrong! Please try again.");
+            }
         });
 
 

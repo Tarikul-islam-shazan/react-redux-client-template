@@ -124,7 +124,7 @@ ul.filter-tag {
       padding: 6px 20px;
       background: #F2F4F8;
       font-family: "Open Sans";
-      font-size: 16px;
+      font-size: 14px;
       color: #21242B;
       border-radius: 20px;
       width: max-content;
@@ -680,14 +680,12 @@ button.rec-arrow-left, button.rec-arrow-right {
 button.rec-arrow-left {
   left: -10px;
   background: url("./images/icons/nav-left.png") no-repeat center #fff;
-  box-shadow: 0 0 12px 0px rgba(0,0,0,.1) !important;
 
 }
 
 button.rec-arrow-right {
   right: -10px;
   background: url("./images/icons/nav-right.png") no-repeat center #fff;
-  box-shadow: 0 0 12px 0px rgba(0,0,0,.1) !important;
 }
 
 .quote-cart{

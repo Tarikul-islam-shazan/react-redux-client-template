@@ -172,8 +172,12 @@ class MyProject extends Component {
       this.renderList( 0 , false );
     }
 
-    details = (id) => {
-      this.props.history.push('/orders/view/'+id);
+    details = (item) => {
+      if (item.status === 'PENDING') {
+        toastWarning('Your order is under review. Please wait till it gets to running!')
+      } else {
+        this.props.history.push('/orders/view/' + item.orderId);
+      }
     }
 
     render() {
