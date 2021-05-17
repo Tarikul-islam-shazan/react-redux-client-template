@@ -338,7 +338,7 @@ class QuoteNowCart extends Component {
                   {
                     designList.map((product, i) => {
                       return(
-                        <QuoteNowMyProductCard key={i} product={product} addToQuote={this.addToQuote} />
+                        <QuoteNowMyProductCard key={i}  cart={cart} product={product} addToQuote={this.addToQuote} />
                       )
                     })
                   }

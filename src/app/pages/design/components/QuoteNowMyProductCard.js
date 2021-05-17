@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { addImageSuffix } from "../../../services/Util";
 import Http from "../../../services/Http";
 
-export const QuoteNowMyProductCard = ({ product,index,onChange,addToQuote }) => {
+export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote }) => {
   const [defaultValue, setDefaultValue] = useState({
     TURN_AROUND_TIME: "",
     MOQ: "",
   });
-
   const fetchData = async () => {
     const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
     await Http.GET("getSettings", params)
@@ -29,6 +28,11 @@ export const QuoteNowMyProductCard = ({ product,index,onChange,addToQuote }) => 
   }, []);
 
   let flag = 1;
+
+  const isAddedToCart = (productId) => {
+    const addedProductIds = cart.map(item => item.id)
+    return addedProductIds.includes(productId)
+  }
 
   return (
     <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
@@ -86,10 +90,16 @@ export const QuoteNowMyProductCard = ({ product,index,onChange,addToQuote }) => 
                         product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days</h5>
                     </div>
                 </div>
-                <button 
-                  className="btn-border mt-4" 
-                  onClick={() => addToQuote([product.id])}>Add to quote
-                </button>
+                  {isAddedToCart(product.id) ? 
+                      <button
+                        className="btn-border mt-4">Added
+                      </button> :
+
+                      <button 
+                        className="btn-border mt-4" 
+                        onClick={() => addToQuote([product.id])}>Add to quote
+                      </button>
+                  }
             </div>
           </div>
         </div>
