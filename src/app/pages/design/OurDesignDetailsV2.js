@@ -451,22 +451,22 @@ class OurDesignDetails extends Component {
                   <div className="col-lg-5">
                       <div className="produt-details-description explore-product-details-info">
                           <div className="head-title">
-                              <h3 className="text-uppercase font-26">{product.name}</h3>
+                              <h3 className="font-26 semibold">{product.name}</h3>
                           </div>
                           {productAvailabilityStatus(product)}
                           <div className="d-flex flex-column flex-sm-row">
                               <div className="info-item mr-5">
                                   <label className="font-14 text-muted">Product type</label>
-                                  <h5 className="font-16 color-333">{product.productType ? product.productType.name : ''}</h5>
+                                  <h5 className="font-18 semibold">{product.productType ? product.productType.name : ''}</h5>
                               </div>
                               <div className="info-item">
                                   <label className="font-14 text-muted">Fabric details</label>
-                                  <h5 className="font-16 color-333">{product.fabricComposition}</h5>
+                                  <h5 className="font-18 semibold">{product.fabricComposition}</h5>
                               </div>
                           </div>
 
                           <div className="info-item">
-                              <div className="d-flex align-items-center mb-3">
+                              <div className="d-flex align-items-center mb-2">
                                   <label className="w-auto m-0 font-14">Default sizes</label>
                                   <a href="javascript:void(0)">
                                       <span className="font-14 brand-color ml-3" onClick={() => this.setState({measurementModal: true})}>Measurement Guide</span>
@@ -480,7 +480,7 @@ class OurDesignDetails extends Component {
                           </div>
 
                           <div className="info-item">
-                              <div className="d-flex align-items-center mb-3">
+                              <div className="d-flex align-items-center mb-2">
                                   <label className="w-auto m-0 font-14">Color</label>
                               </div>
                               <div className="color-picker">
@@ -491,7 +491,7 @@ class OurDesignDetails extends Component {
                                       return(
                                         <li className="d-flex align-items-center">
                                             <span style={{backgroundColor: color.hexCode}}></span>
-                                            <div className="font-18 color-333 ml-2">{color.name}</div>
+                                            <div className="font-18 semibold ml-2">{color.name}</div>
                                         </li>
                                       )
                                     }) : <></>
@@ -502,7 +502,7 @@ class OurDesignDetails extends Component {
                           {
                             this.getImageByType(['EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).length ?
                             <div className="info-item">
-                                <label className="font-14 text-muted mb-3">Embellishment</label>
+                                <label className="font-14 text-muted mb-2">Embellishment</label>
                                 <div className="d-flex">
                                 {
                                   this.getImageByType(['EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).map((item, i) => {
@@ -518,7 +518,7 @@ class OurDesignDetails extends Component {
                           {
                             this.getImageByType(['ACCESSORIES_DESIGN']).length ?
                             <div className="info-item">
-                                <label className="font-14 text-muted mb-3">Accessories</label>
+                                <label className="font-14 text-muted mb-2">Accessories</label>
                                 <div className="d-flex">
                                 {
                                   this.getImageByType(['ACCESSORIES_DESIGN']).map((item, i) => {
@@ -534,7 +534,7 @@ class OurDesignDetails extends Component {
                           {
                             this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'], false).length ?
                             <div className="info-item">
-                                <label className="font-14 text-muted mb-3">Other</label>
+                                <label className="font-14 text-muted mb-2">Other</label>
                                 <div className="d-flex">
                                 {
                                   this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN', 'ACCESSORIES_DESIGN'], false).map((item, i) => {
@@ -548,28 +548,40 @@ class OurDesignDetails extends Component {
                           }
 
                           <div className="info-item">
-                              <label className="font-14 text-muted mb-3">Minimum order quantity</label>
-                              <h5 className="font-16 font-weight-bold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'} (up to 12000)
-                                  <span className="ml-2" title="info.........">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
-                                        <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
-                                      </svg>
-                                  </span>
+                              <label className="font-14 text-muted mb-2">Minimum order quantity</label>
+                              <h5 className="font-18 semibold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'} (up to 12000)
+                                  <span className="ml-2" data-toggle="tooltip" data-placement="top"
+                                        data-original-title="Minimum order quantity"><svg
+                                      xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g
+                                      id="Group_13" data-name="Group 13" transform="translate(1445 -3505)"><circle
+                                      id="Ellipse_1" data-name="Ellipse 1" cx="9" cy="9" r="9"
+                                      transform="translate(-1445 3505)" fill="#ddd"></circle><text
+                                      id="Price_will_be_updated_within_24_hours"
+                                      data-name="Price will be updated within 24 hours"
+                                      transform="translate(-1436 3518)" fill="#21242b" font-size="11"
+                                      font-family="SegoeUI, Segoe UI"><tspan x="-1.332" y="0">i</tspan></text></g></svg></span>
                               </h5>
                           </div>
                           <div className="info-item">
-                              <label className="font-14 text-muted mb-3">Turn around time</label>
-                              <h5 className="font-16 font-weight-bold">As fast as {product.turnAroundTime ? `${product.turnAroundTime} Days` : 'N/A'}
-                                  <span className="ml-2" title="info.........">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16.091" height="16.091" viewBox="0 0 16.091 16.091">
-                                        <path id="information" d="M8.045,0a8.045,8.045,0,1,0,8.045,8.045A8.055,8.055,0,0,0,8.045,0Zm.523,12.819c-.382.064-1.143.223-1.529.255a.941.941,0,0,1-.823-.429,1,1,0,0,1-.122-.921L7.615,7.543H6.034A1.89,1.89,0,0,1,7.522,5.785a5.822,5.822,0,0,1,1.529-.253,1.213,1.213,0,0,1,.823.429A1,1,0,0,1,10,6.881L8.476,11.062h1.581a1.78,1.78,0,0,1-1.488,1.756Zm.482-7.791a1.006,1.006,0,1,1,1.006-1.006A1.006,1.006,0,0,1,9.051,5.028Z" fill="#8f95a2"/>
-                                      </svg>
-                                  </span>
+                              <label className="font-14 text-muted mb-2">Turn around time</label>
+                              <h5 className="font-18 semibold">As fast as {product.turnAroundTime ? `${product.turnAroundTime} Days` : 'N/A'}
+                                  <span className="ml-2" data-toggle="tooltip" data-placement="top"
+                                        data-original-title="Turn around time">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                          <g id="Group_13" data-name="Group 13" transform="translate(1445 -3505)">
+                                              <circle
+                                      id="Ellipse_1" data-name="Ellipse 1" cx="9" cy="9" r="9"
+                                      transform="translate(-1445 3505)" fill="#ddd"></circle>
+                                              <text
+                                      id="Price_will_be_updated_within_24_hours"
+                                      data-name="Price will be updated within 24 hours"
+                                      transform="translate(-1436 3518)" fill="#21242b" font-size="11"
+                                      font-family="SegoeUI, Segoe UI"><tspan x="-1.332" y="0">i</tspan></text></g></svg></span>
                               </h5>
                           </div>
                           <div className="info-item">
-                              <label className="font-14 text-muted mb-3">Notes</label>
-                              <p className="font-16 color-333">{product.note}</p>
+                              <label className="font-14 text-muted mb-2">Notes</label>
+                              <p className="font-16">{product.note}</p>
                           </div>
 
                           <div className="info-item">
