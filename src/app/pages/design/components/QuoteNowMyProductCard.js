@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { addImageSuffix } from "../../../services/Util";
-import Http from "../../../services/Http";
+import {fetchGeneralSettingsData} from '../../../actions';
 
 export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote }) => {
   const [defaultValue, setDefaultValue] = useState({
     TURN_AROUND_TIME: "",
     MOQ: "",
   });
+
   const fetchData = async () => {
     const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
-    await Http.GET("getSettings", params)
-      .then(({ data }) => {
-        if (data) {
-          setDefaultValue({
-            TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
-              ? data["TURN_AROUND_TIME"].value
-              : "",
-            MOQ: data["MOQ"] ? data["MOQ"].value : "",
-          });
-        }
-      })
-      .catch(({ response }) => {});
-  };
+    const data = await fetchGeneralSettingsData(params);
+    if (data) {
+    setDefaultValue({
+        TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+          ? data["TURN_AROUND_TIME"].value
+          : "",
+        MOQ: data["MOQ"] ? data["MOQ"].value : "",
+      });
+    }
+  }
 
   useEffect(() => {
     fetchData();
@@ -90,11 +88,11 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
                         product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days</h5>
                     </div>
                 </div>
-                  {isAddedToCart(product.id) ? 
+                  { 
+                    isAddedToCart(product.id) ? 
                       <button
                         className="btn-border mt-4">Added
                       </button> :
-
                       <button 
                         className="btn-border mt-4" 
                         onClick={() => addToQuote([product.id])}>Add to quote

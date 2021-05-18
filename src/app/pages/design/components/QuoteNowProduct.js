@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { addImageSuffix } from '../../../services/Util';
-import Http from "../../../services/Http";
+import {fetchGeneralSettingsData} from '../../../actions';
 
 export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   const [defaultValue, setDefaultValue] = useState({
@@ -10,19 +10,16 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
 
   const fetchData = async () => {
     const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
-    await Http.GET("getSettings", params)
-      .then(({ data }) => {
-        if (data) {
-          setDefaultValue({
-            TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
-              ? data["TURN_AROUND_TIME"].value
-              : "",
-            MOQ: data["MOQ"] ? data["MOQ"].value : "",
-          });
-        }
-      })
-      .catch(({ response }) => {});
-  };
+    const data = await fetchGeneralSettingsData(params);
+    if (data) {
+    setDefaultValue({
+        TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+          ? data["TURN_AROUND_TIME"].value
+          : "",
+        MOQ: data["MOQ"] ? data["MOQ"].value : "",
+      });
+    }
+  }
 
   useEffect(() => {
     fetchData();
