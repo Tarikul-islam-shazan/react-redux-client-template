@@ -9,8 +9,8 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
   });
 
   const fetchData = async () => {
-    const params = ['MOQ', 'TURN_AROUND_TIME']
-    const data = await fetchGeneralSettingsData(params);
+    const keys = ['MOQ', 'TURN_AROUND_TIME']
+    const data = await fetchGeneralSettingsData(keys);
     if (data) {
     setDefaultValue({
         TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
@@ -69,7 +69,7 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-18 semibold">{product.moq? product.moq : defaultValue.MOQ} pcs</h5>
+                        <h5 className="font-18 semibold">{product.minimumOrderQuantity? product.minimumOrderQuantity : defaultValue.MOQ} pcs</h5>
                     </div>
                 </div>
                 <div className="d-flex flex-column flex-sm-row">

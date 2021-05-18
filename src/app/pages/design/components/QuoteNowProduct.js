@@ -9,8 +9,8 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   });
 
   const fetchData = async () => {
-    const params = ['MOQ', 'TURN_AROUND_TIME']
-    const data = await fetchGeneralSettingsData(params);
+    const keys = ['MOQ', 'TURN_AROUND_TIME']
+    const data = await fetchGeneralSettingsData(keys);
     if (data) {
     setDefaultValue({
         TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
@@ -80,7 +80,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
                         <h5 className="font-18 semibold">
-                          {product.moq ? product.moqv : defaultValue.MOQ} pcs
+                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : defaultValue.MOQ} pcs
                         </h5>
                     </div>
                 </div>

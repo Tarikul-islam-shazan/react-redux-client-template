@@ -2,14 +2,14 @@ import Http from "../services/Http";
 import { toastError } from '../commonComponents/Toast';
 
 
-export const fetchGeneralSettingsData = async (params) => {
+export const fetchGeneralSettingsData = async (keys) => {
     try{
-       let url = "keys?";
-       params.forEach(function(param){
-          url += "key=" + param + "&";
+       let params = 'keys?';
+       keys.forEach(function(key){
+          params += ('key=' + key + '&');
         });
-        url = url.trim("&");
-        const { data } = await Http.GET("getSettings", url)
+        params = params.trim('&');
+        const { data } = await Http.GET('getSettings', params)
         return data;
     }
       catch ({ response }) {
