@@ -4,7 +4,12 @@ import { toastError } from '../commonComponents/Toast';
 
 export const fetchGeneralSettingsData = async (params) => {
     try{
-        const { data } = await Http.GET("getSettings", params)
+       let url = "keys?";
+       params.forEach(function(param){
+          url += "key=" + param + "&";
+        });
+        url = url.trim("&");
+        const { data } = await Http.GET("getSettings", url)
         return data;
     }
       catch ({ response }) {

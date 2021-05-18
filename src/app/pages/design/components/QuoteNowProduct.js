@@ -9,7 +9,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   });
 
   const fetchData = async () => {
-    const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
+    const params = ['MOQ', 'TURN_AROUND_TIME']
     const data = await fetchGeneralSettingsData(params);
     if (data) {
     setDefaultValue({

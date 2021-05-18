@@ -9,7 +9,7 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
   });
 
   const fetchData = async () => {
-    const params = `keys?key=TURN_AROUND_TIME&key=MOQ`;
+    const params = ['MOQ', 'TURN_AROUND_TIME']
     const data = await fetchGeneralSettingsData(params);
     if (data) {
     setDefaultValue({
@@ -26,11 +26,6 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
   }, []);
 
   let flag = 1;
-
-  const isAddedToCart = (productId) => {
-    const addedProductIds = cart.map(item => item.id)
-    return addedProductIds.includes(productId)
-  }
 
   return (
     <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
@@ -88,16 +83,10 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
                         product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days</h5>
                     </div>
                 </div>
-                  { 
-                    isAddedToCart(product.id) ? 
-                      <button
-                        className="btn-border mt-4">Added
-                      </button> :
-                      <button 
-                        className="btn-border mt-4" 
-                        onClick={() => addToQuote([product.id])}>Add to quote
-                      </button>
-                  }
+                <button 
+                  className="btn-border mt-4" 
+                  onClick={() => addToQuote([product.id])}>Add to quote
+                </button>
             </div>
           </div>
         </div>
