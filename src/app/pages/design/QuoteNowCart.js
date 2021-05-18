@@ -128,10 +128,6 @@ class QuoteNowCart extends Component {
           result = [...result, ...pickDesignList];
         })
         .catch(({ response }) => {
-          console.log(
-            "EXPLORE DESIGN PRODUCT LIST ERROR: ",
-            JSON.stringify(response)
-          );
           this.setState({ loading: false });
           toastError("Something went wrong! Please try again.");
         });
