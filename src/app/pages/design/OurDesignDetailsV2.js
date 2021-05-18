@@ -549,7 +549,7 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <label className="font-14 text-muted mb-2">Minimum order quantity</label>
-                              <h5 className="font-18 semibold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'} (up to 12000)
+                              <h5 className="font-18 semibold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'}
                                   <span className="ml-2" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Minimum order quantity"><svg
                                       xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g

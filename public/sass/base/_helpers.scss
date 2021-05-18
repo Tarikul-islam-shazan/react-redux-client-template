@@ -17,6 +17,12 @@
 .brand-color{
   color: $brand-color !important;
 }
+.brand-color-secondary{
+  color: $secondary-color !important;
+}
+.brand-bgcolor-secondary{
+  background: $secondary-color !important;
+}
 .brand-bg-color{
   background: $brand-color !important;
 }
