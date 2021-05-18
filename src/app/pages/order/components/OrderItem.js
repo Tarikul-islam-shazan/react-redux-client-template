@@ -47,7 +47,7 @@ export const OrderItem = ({product, remove}) => {
                             <span className="cat">{product.productGroup}</span>
                         </div>
                         <div className="info-item">
-                            <label className="font-14 text-muted">Color</label>
+                            <label className="">Color</label>
                             <div className="color-picker">
                                 <ul>
                                 {
@@ -64,14 +64,14 @@ export const OrderItem = ({product, remove}) => {
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Fabric details</label>
-                            <h5 className="color-333 font-weight-normal">{product.fabricComposition}</h5>
+                            <h5 className="font-18 semibold">{product.fabricComposition}</h5>
                         </div>
                     </div>
 
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-2">
                             <label className="font-14 text-muted">Quantity</label>
-                            <h5 className="color-333 font-weight-bold">{product.quantity ? product.quantity : '--'} pc</h5>
+                            <h5 className="font-18 semibold">{product.quantity ? product.quantity : '--'} pc</h5>
                         </div>
 
                         <div class="info-item pr-2 d-flex flex-column">
@@ -114,13 +114,13 @@ export const OrderItem = ({product, remove}) => {
                     </div>
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-2">
-                            <label className="font-14 text-muted">(Per Piece)</label>
-                            <h5 className="color-333 font-weight-bold">${product.price}</h5>
+                            <label className="">(Per Piece)</label>
+                            <h5 className="font-18 semibold">${product.price}</h5>
 
                         </div>
                         <div className="info-item">
-                            <label className="font-14 text-muted">Total price</label>
-                            <h5 className="color-333 font-weight-bold">${(product.price * product.quantity)}</h5>
+                            <label className="">Total price</label>
+                            <h5 className="font-18 semibold">${(product.price * product.quantity)}</h5>
                         </div>
                     </div>
                 </div>

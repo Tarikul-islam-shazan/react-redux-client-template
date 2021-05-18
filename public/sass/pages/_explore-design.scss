@@ -597,9 +597,7 @@ table{
 .explore-product-details-info{
   .info-item .btn {
     padding: 10px 15px;
-    font-size: 13px;
     margin-right: 15px !important;
-    height: 40px;
     svg {
       width: 18px;
       margin-top: -2px;
@@ -670,7 +668,7 @@ button.rec-arrow-left, button.rec-arrow-right {
   z-index: 99;
   transform: translateY(-50%);
   text-indent: -9999999999px;
-  box-shadow: none !important;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, .1) !important;
   &:focus, &:hover{
     outline: 0;
     box-shadow: 0 0 25px 1px #eee !important;
@@ -690,7 +688,7 @@ button.rec-arrow-right {
 
 .quote-cart{
   button{
-    padding: 4px 10px !important;
+    padding: 8px 16px !important;
   }
   .quote-cart-count{
     width: 20px;
