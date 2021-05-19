@@ -193,6 +193,16 @@ class QuoteNowCart extends Component {
       await this.props._storeData('quoteObj', quote);
       await this.props._storeData('selectedProductIds', []);
     }
+    
+     getTotal = (sizeQuantityPairList) => {
+       let total = 0;
+      sizeQuantityPairList.map((pair, key) => {
+        if (pair.quantity) {
+          total += parseInt(pair.quantity);
+        }
+      })
+      return total;
+    }
 
     validate = () => {
       let {cart, title} = this.state;
@@ -201,11 +211,12 @@ class QuoteNowCart extends Component {
         let tempFlag = true;
         product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
           colorWithSize.sizeQuantityPairList.map((pair) => {
-            if (!pair.quantity) {
+            if(this.getTotal(colorWithSize.sizeQuantityPairList) < parseInt(product.minimumOrderQuantity)){
               flag = false;
               tempFlag = false;
-              product.error = 'Please insert all values'
-            }
+              product.error = 'Please insert values greater or equal to MOQ'
+           }
+      
           })
         })
         if (tempFlag) {
@@ -215,6 +226,13 @@ class QuoteNowCart extends Component {
       })
       this.setState({cart});
       return flag;
+    }
+
+    removeAllFromCart = async() => {
+      let {cart} = this.state;
+      cart = [];
+      await this.setState({cart});
+      await this.updateCartGlobally();
     }
 
     submit = async() => {
@@ -227,6 +245,9 @@ class QuoteNowCart extends Component {
               let total = 0;
               product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
                 colorWithSize.sizeQuantityPairList.map((pair) => {
+                  if (pair.quantity === '' || pair.quantity === null) {
+                      pair.quantity = '0'
+                  }
                   if (pair.quantity) {
                     total += parseInt(pair.quantity);
                   }
@@ -248,6 +269,7 @@ class QuoteNowCart extends Component {
               if(data.success){
                 localStorage.setItem(LOCAL_QUOTE_NOW_KEY, '')
                 toastSuccess(data.message);
+                this.removeAllFromCart()
                 this.props.history.push('/quotes/list');
               }else{
                 toastError(data.message);

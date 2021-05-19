@@ -80,7 +80,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
                         <h5 className="font-18 semibold">
-                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : defaultValue.MOQ} pcs
+                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : product.minimumOrderQuantity=defaultValue.MOQ} pcs
                         </h5>
                     </div>
                 </div>
