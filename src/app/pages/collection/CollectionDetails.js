@@ -403,6 +403,7 @@ class CollectionDetails extends Component {
       await this.props._storeData('quoteObj', quote);
       await this.props._storeData('selectedProductIds', []);
       this.updateProductCard();
+      this.props.history.push('/quote-now');
     }
 
     addToCollection = (product) => {
@@ -588,13 +589,15 @@ class CollectionDetails extends Component {
         });
     }
 
+
     render() {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
         collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption,
         collectionType, collectionViewType
        } = this.state;
-        return (
+
+       return (
           <>
               <div class="explore-design">
                   <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">

@@ -101,6 +101,7 @@ class QuoteNowCart extends Component {
       this.setState({loading:true, searching: true})
       let { size, designList, search, sort, productTypeId, filters } = this.state;
       let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
+      let designParams = `?page=${page}&size=${size}`;
       let result = [];
       await Http.GET('getProductList', params)
         .then(({data}) => {
@@ -115,7 +116,22 @@ class QuoteNowCart extends Component {
             this.setState({loading:false})
             toastError("Something went wrong! Please try again.");
         });
-        return result;
+
+        await Http.GET("getPickDesign", designParams)
+        .then(({ data }) => {
+          const pickDesignList = data.filter(
+            (design) =>
+              design.availabilityStatus === "AVAILABLE" ||
+              design.availabilityStatus === "CHECKED" ||
+              design.availabilityStatus === "IN_RFQ"
+          );
+          result = [...result, ...pickDesignList];
+        })
+        .catch(({ response }) => {
+          this.setState({ loading: false });
+          toastError("Something went wrong! Please try again.");
+        });
+      return result;
     }
 
     onChange = async(e) => {
@@ -251,32 +267,41 @@ class QuoteNowCart extends Component {
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request">
-                  <div className="header-title d-flex justify-content-between align-items-center">
-                      <a href="#">
-                          <h3 className="text-black">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="13.903" height="25.806" viewBox="0 0 13.903 25.806" className="mr-4" onClick={() => this.props.history.goBack()}>
-                                  <path id="Path_27864" data-name="Path 27864" d="M3768.991,1419.1l-11.489-11.489,11.489-11.489" transform="translate(-3756.502 -1394.708)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                              </svg>
-                              Confirm quote request
-                          </h3>
-                      </a>
-                      <div className="add-more-design font-14 brand-color text-underline d-block d-xl-none cursor-pointer">Add more designs</div>
+                { cart.length !== 0 ?
+                    <>
+                      <div className="header-title d-flex justify-content-between align-items-center">
+                          <a href="#">
+                              <h3 className="text-black">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="13.903" height="25.806" viewBox="0 0 13.903 25.806" className="mr-4" onClick={() => this.props.history.goBack()}>
+                                      <path id="Path_27864" data-name="Path 27864" d="M3768.991,1419.1l-11.489-11.489,11.489-11.489" transform="translate(-3756.502 -1394.708)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                  </svg>
+                                  Confirm quote request
+                              </h3>
+                          </a>
+                          <div className="add-more-design font-14 brand-color text-underline d-block d-xl-none cursor-pointer">Add more designs</div>
+                      </div>
+                      <div className="mt-3">
+                          <input type="text" placeholder="Demo Collection name" name="title" value={title} onChange={this.onChange} className="w-100 bg-gray-light"/>
+                      </div>
+                      <div className="quote-req-list-container mt-3">
+                      {
+                        cart.map((product, i) => {
+                          return(
+                            <QuoteNowProduct key={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
+                          )
+                        })
+                      }
+                          <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
+                      </div>
+                    </> : 
+                  <div className="not-found">    
+                    <h1 className="msg">There is no quote added from you yet</h1>
+                    <div className="illustration">
+                      <img src={require("../../assets/images/not-found.png")} alt="" />
+                    </div>
                   </div>
-                  <div className="mt-3">
-                      <input type="text" placeholder="Demo Collection name" name="title" value={title} onChange={this.onChange} className="w-100 bg-gray-light"/>
-                  </div>
-                  <div className="quote-req-list-container mt-3">
-                  {
-                    cart.map((product, i) => {
-                      return(
-                        <QuoteNowProduct key={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
-                      )
-                    })
-                  }
-                      <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
-                  </div>
+              }
               </div>
-
 
               <div className="add-more ml-auto custom-scrollbar" id="sidebarCollapse" onScroll={this.handleScroll}>
                   <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
@@ -318,7 +343,7 @@ class QuoteNowCart extends Component {
                   {
                     designList.map((product, i) => {
                       return(
-                        <QuoteNowMyProductCard key={i} product={product} addToQuote={this.addToQuote} />
+                        <QuoteNowMyProductCard key={i}  cart={cart} product={product} addToQuote={this.addToQuote} />
                       )
                     })
                   }

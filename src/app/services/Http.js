@@ -105,7 +105,9 @@ const routes = {
     updateSizeTable: `${BASE_URL}/product/size/`,
     getDesignImages: `${BASE_URL}/product/doc/`,
     getFabricTypes: `${BASE_URL}/fabric-type/all`,
-    getDesignCategories: `${BASE_URL}/category/all`
+    getDesignCategories: `${BASE_URL}/category/all`,
+
+    getSettings: `${BASE_URL}/setting/get/`,
 };
 
 // Axios request interceptor
