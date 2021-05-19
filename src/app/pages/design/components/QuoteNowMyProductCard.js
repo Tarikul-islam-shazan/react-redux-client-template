@@ -48,7 +48,7 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
               return (
                 <a href="#">
                   <img
-                    src={product.designDocuments[0].docUrl}
+                    src={addImageSuffix(doc.docUrl, "_xthumbnail")}
                     alt=""
                     className="radius-3"
                   />
