@@ -153,6 +153,9 @@
   height: 120px;
   @media (max-width: 991px) {
     height: 160px;
+    width: auto;
+    text-align: center;
+    display: inline-block;
   }
   @media (max-width: 575px) {
     height: 150px;

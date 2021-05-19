@@ -32,8 +32,8 @@ export class MeasurementTable extends React.Component {
   render() {
     let { data , headers } = this.state;
     return(
-      <div className="table-responsive">
-          <table className="table table-bordered table-striped table-responsive measurement-chart measurement-table">
+      <div>
+          <table className="table table-bordered table-striped measurement-table table-responsive-xl">
               <thead>
               <tr>
                   <th>Size</th>
