@@ -666,6 +666,7 @@ table{
 button.rec-arrow-left, button.rec-arrow-right {
   position: absolute;
   z-index: 99;
+  top: 50%;
   transform: translateY(-50%);
   text-indent: -9999999999px;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, .1) !important;
