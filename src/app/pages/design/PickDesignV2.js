@@ -559,7 +559,12 @@ class PickDesignV2 extends Component {
     }
 
     getAllAvailableProducts = (data) => {
-      return data.filter((product) => (product.availabilityStatus !== 'SOLD'));
+        return data.filter((product) => (
+            product.availabilityStatus !== 'SOLD' &&
+            product.availabilityStatus !== 'UNAVAILABLE' &&
+            product.availabilityStatus !== 'IN_PROJECT' &&
+            product.availabilityStatus !== 'LOCKED'
+        ));
     }
 
     render() {
