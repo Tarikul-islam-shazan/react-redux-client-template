@@ -302,16 +302,16 @@ class QuoteNowCart extends Component {
                   </div>
               }
               </div>
-
-              <div className="add-more ml-auto custom-scrollbar" id="sidebarCollapse" onScroll={this.handleScroll}>
-                  <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941">
-                          <g id="Group_11190" data-name="Group 11190" transform="translate(1110.29 4909.059)">
-                              <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-1108.875 -4907.645) rotate(45)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
-                              <line id="Line_154" data-name="Line 154" x2="25.615" transform="translate(-1090.763 -4907.645) rotate(135)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"/>
-                          </g>
-                      </svg>
-                  </div>
+              <div className="">
+                  <div className="add-more ml-auto" onScroll={this.handleScroll}>
+                      <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22.84" height="12.32" viewBox="0 0 22.84 12.32">
+                              <g id="Group_5016" data-name="Group 5016" transform="translate(-1582.964 -1119.323)">
+                                  <path id="Path_2339" data-name="Path 2339" d="M6734.325,696h21.625" transform="translate(-5151.361 429.59)" fill="none" stroke="#000" stroke-width="1.5"/>
+                                  <path id="Path_2340" data-name="Path 2340" d="M6766.935,684.293l5.8,5.8-5.46,5.46" transform="translate(-5167.99 435.56)" fill="none" stroke="#000" stroke-width="1.5"/>
+                              </g>
+                          </svg>
+                      </div>
                   <div className="header d-flex justify-content-between align-items-center">
                       <h4 className="semibold">Add more designs to quote</h4>
                       <div>
@@ -339,7 +339,7 @@ class QuoteNowCart extends Component {
                       </div>
                   </div>
 
-                  <div className="added-item">
+                  <div className="added-item  custom-scrollbar">
                   {
                     designList.map((product, i) => {
                       return(
@@ -349,7 +349,7 @@ class QuoteNowCart extends Component {
                   }
                   </div>
               </div>
-
+              </div>
 
           </div>
         );

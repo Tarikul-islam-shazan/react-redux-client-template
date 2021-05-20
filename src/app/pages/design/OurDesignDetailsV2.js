@@ -465,15 +465,11 @@ class OurDesignDetails extends Component {
             arrows: false,
             responsive: [
                 {
-                    breakpoint: 992,
+                    breakpoint: 991,
                     settings: {
                         vertical: false,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        vertical: false,
+                        slidesToShow: 4,
+                        arrows: true,
                     }
                 },
                 {
@@ -481,6 +477,7 @@ class OurDesignDetails extends Component {
                     settings: {
                         vertical: false,
                         slidesToShow: 3,
+                        arrows: true,
                     }
                 },
                 {
@@ -488,6 +485,7 @@ class OurDesignDetails extends Component {
                     settings: {
                         vertical: false,
                         slidesToShow: 2,
+                        arrows: true,
                     }
                 }
             ]
@@ -511,7 +509,7 @@ class OurDesignDetails extends Component {
           }
               <div className="row">
                   <div className="col-lg-7">
-                      <div className="product-detail-gallery sticky-96">
+                      <div className="product-detail-gallery sticky-120">
                           <div className="thumbnail-prev">
                               <section className="banner-section">
                                       <div className="vehicle-detail-banner banner-content clearfix">
