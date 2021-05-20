@@ -135,38 +135,3 @@
 
 
 
-
-.slider-nav .thumbImg {
-  margin-bottom: 15px;
-  border: 2px solid transparent;
-  @media (max-width: 1440px) {
-    margin-bottom: 10px;
-  }
-}
-.slick-current .thumbImg {
-  border: 2px solid #ee761f;
-  &:focus{
-    outline: 0;
-  }
-}
-.banner-slider .slider-nav .thumbImg img {
-  height: 120px;
-  @media (max-width: 991px) {
-    height: 160px;
-    width: auto;
-    text-align: center;
-    display: inline-block;
-  }
-  @media (max-width: 575px) {
-    height: 150px;
-  }
-}
-.slider-for img {
-  height: 900px !important;
-  @media (max-width: 1440px) {
-    height: 780px !important;
-  }
-  @media (max-width: 1366px) {
-    height: 670px !important;
-  }
-}
