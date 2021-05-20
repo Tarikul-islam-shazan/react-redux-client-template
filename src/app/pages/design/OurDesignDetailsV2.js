@@ -340,10 +340,13 @@ class OurDesignDetails extends Component {
     renderSizes = () => {
       let {product} = this.state;
       let result = '';
-      if (product.sizeTable && product.sizeTable.sizeTableRows && product.sizeTable.sizeTableRows.length) {
-        product.sizeTable.sizeTableRows.map((sizeObj, i) => {
-          result += sizeObj.code + ((i !== product.sizeTable.sizeTableRows.length - 1) ? ' / ' : '');
-        })
+      if (product.sizeText && JSON.parse(product.sizeText)) {
+        let data = JSON.parse(product.sizeText);
+        if (data && data.length) {
+          data.map((sizeObj, i) => {
+            result += sizeObj.code + ((i !== data.length - 1) ? ' / ' : '');
+          })
+        }
       }
       return result;
     }
