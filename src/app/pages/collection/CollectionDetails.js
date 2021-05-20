@@ -53,6 +53,10 @@ class CollectionDetails extends Component {
         };
     }
 
+    setWrapperRef = (node) => {
+      this.wrapperRef = node;
+    }
+
     handleWindowScroll = async() => {
       const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
       const body = document.body;
@@ -81,11 +85,16 @@ class CollectionDetails extends Component {
     }
 
     handleClickOutside = (event) => {
-      if (this.AddNewMemberModal && !this.AddNewMemberModal.contains(event.target)) {
-        this.setState({
-          showAddMemberModal: false,
-        })
-      }
+        if (this.AddNewMemberModal && !this.AddNewMemberModal.contains(event.target)) {
+            this.setState({
+              showAddMemberModal: false,
+            })
+        }
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+              showAddCollectionPopup: false
+            })
+        }
      }
 
     componentWillUnmount() {
@@ -101,6 +110,7 @@ class CollectionDetails extends Component {
         await this.getCollectionDetails(id);
       }
       await this.getCollectionProducts(0);
+      await this.fetchCollectionList();
       if (id === 'private-collection') {
         await this.setState({
           collectionType: 'private-collection'
@@ -109,7 +119,6 @@ class CollectionDetails extends Component {
       }
       await this.myProducts();
       await this.getUsersByTypes();
-      await this.fetchCollectionList();
     }
 
     getCollectionDetails = ( collectionId ) => {
@@ -533,6 +542,12 @@ class CollectionDetails extends Component {
         });
     }
 
+    onChangeText = (e) => {
+      this.setState({
+        [e.target.name] : e.target.value,
+      })
+    }
+
     createNewCollection = () => {
       let {collectionName} = this.state;
       if (!collectionName) {
@@ -547,7 +562,7 @@ class CollectionDetails extends Component {
       }
       let body = {
         name: collectionName,
-        privacy: 'ONLY_ME',
+        privacy: 'CUSTOM',
         viewType: 'PRODUCT_LIST'
       };
       Http.POST('addCollection', body)
@@ -578,6 +593,7 @@ class CollectionDetails extends Component {
             this.props._storeData('selectedProductIds', []);
             this.updateProductCard();
             this.setState({showAddCollectionPopup: false});
+            toastSuccess(data.message);
           }
         })
         .catch(({response}) => {
@@ -769,7 +785,7 @@ class CollectionDetails extends Component {
                   {
                     showAddCollectionPopup ?
                     <div class="create-new-collection">
-                        <div class="pop-container">
+                        <div class="pop-container" ref={this.setWrapperRef}>
                             <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: !showCollectionAddOption})}>+ Create new collection</span>
                             {
                               showCollectionAddOption ?
@@ -793,7 +809,7 @@ class CollectionDetails extends Component {
                                     collectionList.map((collection, i) => {
                                       return(
                                         <li key={i}>
-                                            <span>{collection.collectionName}</span>
+                                            <span>{collection.name}</span>
                                             <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addToExistingCollection(collection.id)}>Add</button>
                                         </li>
                                       )

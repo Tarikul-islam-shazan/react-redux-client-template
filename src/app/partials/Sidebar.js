@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import loadjs from 'loadjs';
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
+import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 
 import { _storeData } from "./actions";
 import { toggle, setActiveTab } from '../actions/sidebar';
@@ -12,9 +14,8 @@ import { NavLink } from './NavLink';
 
 import {BASE_URL, GA_ID, hjid, hjsv} from '../constant';
 import {toastSuccess, toastError, toastWarning} from '../commonComponents/Toast';
+import {_storeData as _storeDesignData} from '../pages/design/actions';
 
-import ReactGA from 'react-ga';
-import { hotjar } from 'react-hotjar';
 
 class Sidebar extends Component {
 
@@ -99,9 +100,10 @@ class Sidebar extends Component {
     componentDidUpdate = (prevProps,prevState)  => {
       if (window.location.pathname !== prevProps.activeTab) {
         loadjs(['/js/script.js','/js/custom.js']);
+        this.props._storeDesignData('selectedProductIds', [])
         this.setTabToStore(window.location.pathname)
         this.initiateHotjarGA()
-      }
+}
     }
 
     setTabToStore = (path) => {
@@ -254,4 +256,4 @@ const mapStateToProps = store => ({
     notifications: store.notification.notifications
 });
 
-export default connect(mapStateToProps, {toggle,setActiveTab,_storeData})(Sidebar);
+export default connect(mapStateToProps, {toggle,setActiveTab,_storeData, _storeDesignData})(Sidebar);

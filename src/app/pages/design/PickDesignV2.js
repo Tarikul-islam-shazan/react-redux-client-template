@@ -82,6 +82,10 @@ class PickDesignV2 extends Component {
         };
     }
 
+    setWrapperRef = (node) => {
+      this.wrapperRef = node;
+    }
+
     handleScroll = async() => {
       const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
       const body = document.body;
@@ -123,16 +127,23 @@ class PickDesignV2 extends Component {
     }
 
     handleClickOutside = (event) => {
-      if (this.searchSuggestions && !this.searchSuggestions.contains(event.target)) {
-        this.setState({
-          showSuggestions: false,
-        })
-      }
-      if (this.searchFilters && !this.searchFilters.contains(event.target)) {
-        this.setState({
-          showFilters: false
-        })
-      }
+        if (this.searchSuggestions && !this.searchSuggestions.contains(event.target)) {
+            this.setState({
+              showSuggestions: false,
+            })
+        }
+
+        if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+            this.setState({
+              showFilters: false
+            })
+        }
+
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+              showAddCollectionPopup: false
+            })
+        }
      }
 
     componentWillUnmount() {
@@ -504,7 +515,7 @@ class PickDesignV2 extends Component {
       }
       let body = {
         name: collectionName,
-        privacy: 'ONLY_ME',
+        privacy: 'CUSTOM',
         viewType: 'PRODUCT_LIST'
       };
       Http.POST('addCollection', body)
@@ -535,6 +546,7 @@ class PickDesignV2 extends Component {
             this.props._storeData('selectedProductIds', []);
             this.updateProductCard();
             this.setState({showAddCollectionPopup: false});
+            toastSuccess(data.message);
           }
         })
         .catch(({response}) => {
@@ -803,7 +815,7 @@ class PickDesignV2 extends Component {
               {
                 showAddCollectionPopup ?
                 <div class="create-new-collection">
-                    <div class="pop-container">
+                    <div class="pop-container" ref={this.setWrapperRef}>
                         <span class="create-newbutton cursor-pointer">+ Create new collection</span>
                         <div class="create-new d-flex">
                             <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
