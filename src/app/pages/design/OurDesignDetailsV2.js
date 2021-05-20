@@ -397,7 +397,7 @@ class OurDesignDetails extends Component {
       }
       let body = {
         name: collectionName,
-        privacy: 'ONLY_ME',
+        privacy: 'CUSTOM',
         viewType: 'PRODUCT_LIST'
       };
       Http.POST('addCollection', body)

@@ -110,6 +110,7 @@ class CollectionDetails extends Component {
         await this.getCollectionDetails(id);
       }
       await this.getCollectionProducts(0);
+      await this.fetchCollectionList();
       if (id === 'private-collection') {
         await this.setState({
           collectionType: 'private-collection'
@@ -118,7 +119,6 @@ class CollectionDetails extends Component {
       }
       await this.myProducts();
       await this.getUsersByTypes();
-      await this.fetchCollectionList();
     }
 
     getCollectionDetails = ( collectionId ) => {
@@ -562,7 +562,7 @@ class CollectionDetails extends Component {
       }
       let body = {
         name: collectionName,
-        privacy: 'ONLY_ME',
+        privacy: 'CUSTOM',
         viewType: 'PRODUCT_LIST'
       };
       Http.POST('addCollection', body)
@@ -593,6 +593,7 @@ class CollectionDetails extends Component {
             this.props._storeData('selectedProductIds', []);
             this.updateProductCard();
             this.setState({showAddCollectionPopup: false});
+            toastSuccess(data.message);
           }
         })
         .catch(({response}) => {

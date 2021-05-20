@@ -515,7 +515,7 @@ class PickDesignV2 extends Component {
       }
       let body = {
         name: collectionName,
-        privacy: 'ONLY_ME',
+        privacy: 'CUSTOM',
         viewType: 'PRODUCT_LIST'
       };
       Http.POST('addCollection', body)
@@ -546,6 +546,7 @@ class PickDesignV2 extends Component {
             this.props._storeData('selectedProductIds', []);
             this.updateProductCard();
             this.setState({showAddCollectionPopup: false});
+            toastSuccess(data.message);
           }
         })
         .catch(({response}) => {
