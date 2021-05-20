@@ -40,9 +40,26 @@ class OurDesignDetails extends Component {
           similarDesigns: [],
           similarDesignLoading: false,
           measurementModal: false,
-          page: 0
+          page: 0,
+          collectionList: [],
+          showAddCollectionPopup: false,
+          showCollectionAddOption: false,
+          collectionName: '',
+          collectionNameError: '',
         };
     }
+
+    setWrapperRef = (node) => {
+      this.wrapperRef = node;
+    }
+
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+              showAddCollectionPopup: false
+            })
+        }
+     }
 
     handleScroll = async() => {
         const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -230,11 +247,13 @@ class OurDesignDetails extends Component {
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     componentDidMount = async() => {
       document.title = "Product details on Nitex - The easiest clothing manufacturing software";
       window.addEventListener("scroll", this.handleScroll);
+      document.addEventListener('mousedown', this.handleClickOutside);
       let id = this.props.match.params.id;
       this.setState({
         loading : true,
@@ -277,6 +296,24 @@ class OurDesignDetails extends Component {
             }
         });
         this.getSimilarDesign()
+        this.fetchCollectionList()
+    }
+
+    fetchCollectionList = () => {
+      let userInfo = localStorage.getItem('userInfo');
+      if (userInfo) {
+        userInfo = JSON.parse(userInfo);
+      } else {
+        userInfo = {};
+      }
+      Http.GET('getUserCollectionList', userInfo.id)
+        .then(({data}) => {
+          if (data.data) {
+            this.setState({collectionList: data.data});
+          }
+        })
+        .catch(({response}) => {
+        });
     }
 
     getImageByType = (typeList = ['PRODUCT_DESIGN', 'REFERENCE_IMAGE'], included = true) => {
@@ -303,10 +340,13 @@ class OurDesignDetails extends Component {
     renderSizes = () => {
       let {product} = this.state;
       let result = '';
-      if (product.sizeTable && product.sizeTable.sizeTableRows && product.sizeTable.sizeTableRows.length) {
-        product.sizeTable.sizeTableRows.map((sizeObj, i) => {
-          result += sizeObj.code + ((i !== product.sizeTable.sizeTableRows.length - 1) ? ' / ' : '');
-        })
+      if (product.sizeText && JSON.parse(product.sizeText)) {
+        let data = JSON.parse(product.sizeText);
+        if (data && data.length) {
+          data.map((sizeObj, i) => {
+            result += sizeObj.code + ((i !== data.length - 1) ? ' / ' : '');
+          })
+        }
       }
       return result;
     }
@@ -337,8 +377,74 @@ class OurDesignDetails extends Component {
       this.props.history.push('/designs/edit/' + id);
     }
 
+    onChangeText = (e) => {
+      this.setState({
+        [e.target.name] : e.target.value,
+      })
+    }
+
+    createNewCollection = () => {
+      let {collectionName} = this.state;
+      if (!collectionName) {
+        this.setState({
+          collectionNameError: 'Collection name required'
+        })
+        return;
+      } else {
+        this.setState({
+          collectionNameError: ''
+        })
+      }
+      let body = {
+        name: collectionName,
+        privacy: 'CUSTOM',
+        viewType: 'PRODUCT_LIST'
+      };
+      Http.POST('addCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.addToExistingCollection(data.id);
+            // this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+
+    }
+
+    addToExistingCollection = (collectionId) => {
+      let body = {
+        id: collectionId,
+        productIds: this.props.selectedProductIds
+      };
+      Http.POST('addProductToCollection', body)
+        .then(({data}) => {
+          if (data) {
+            this.props._storeData('selectedProductIds', []);
+            this.updateProductCard();
+            this.setState({showAddCollectionPopup: false});
+            toastSuccess(data.message)
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+    }
+
     render() {
-        let { product , selectedImage, loading, imageViewerFlag, imageViewerData, imageViewerCurrentIndex, similarDesigns, similarDesignLoading, measurementModal } = this.state;
+        let {
+          product , selectedImage, loading, imageViewerFlag, imageViewerData, imageViewerCurrentIndex, similarDesigns, similarDesignLoading, measurementModal,
+          collectionList, showAddCollectionPopup, showCollectionAddOption, collectionName, collectionNameError,
+         } = this.state;
         // console.log("this.getImageByType()", this.getImageByType())
         const settingsSliderMain = {
             slidesToShow: 1,
@@ -682,11 +788,57 @@ class OurDesignDetails extends Component {
                         <h4 className="mr-0 mr-sm-5 font-24 font-weight-bold mb-0">Selected ({this.props.selectedProductIds.length})</h4>
                         <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.addToQuote(this.props.selectedProductIds)}>Add to quote</button>
                         <div style={{width: 20}}></div>
+                        <button className="m-0 btn-brand brand-bg-color shadow" onClick={() => this.setState({showAddCollectionPopup: true})}>Add to collection</button>
+                        <div style={{width: 20}}></div>
                     </div>
                     <div className="close">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16.436" height="16.436" viewBox="0 0 16.436 16.436" onClick={async() => {
+                          await this.props._storeData('selectedProductIds', []);
+                          this.updateProductCard();
+                        }}>
                             <path id="close_3_" data-name="close (3)" d="M15.218,14.056l6.815-6.815A.822.822,0,0,1,23.2,8.4L16.38,15.218,23.2,22.033A.822.822,0,0,1,22.033,23.2L15.218,16.38,8.4,23.2a.822.822,0,0,1-1.162-1.162l6.815-6.815L7.241,8.4A.822.822,0,0,1,8.4,7.241Z" transform="translate(-7 -7)"/>
                         </svg>
+                    </div>
+                </div> : <></>
+              }
+
+              {
+                showAddCollectionPopup ?
+                <div class="create-new-collection">
+                    <div class="pop-container" ref={this.setWrapperRef}>
+                        <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: !showCollectionAddOption})}>+ Create new collection</span>
+                        {
+                          showCollectionAddOption ?
+                          <>
+                            <div class="create-new d-flex">
+                                <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChangeText}/>
+                                <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
+                            </div>
+                            {
+                              collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                            }
+                          </> : <></>
+                        }
+
+                        {
+                          collectionList.length ?
+                          <div class="all-collection">
+                              <span>All collection</span>
+                              <ul class="p-0 m-0 existing-item">
+                              {
+                                collectionList.map((collection, i) => {
+                                  return(
+                                    <li key={i}>
+                                        <span>{collection.name}</span>
+                                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addToExistingCollection(collection.id)}>Add</button>
+                                    </li>
+                                  )
+                                })
+                              }
+                              </ul>
+                          </div> : <></>
+                        }
+
                     </div>
                 </div> : <></>
               }

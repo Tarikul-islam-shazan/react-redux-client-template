@@ -214,12 +214,11 @@ class CollectionList extends Component {
                             </div>
                             {
                               collection.collectionViewType === 'MY_PRODUCTS' ?
-                              <h4 class="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>My designs</span> <span  className="semibold brand-color-secondary">99</span></h4> : <></>
+                              <h4 class="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>My designs</span></h4> : <></>
                             }
                             {
                               collection.collectionViewType === 'LIKED_PRODUCTS' ?
-                                  <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>My favourites</span>
-                                      <span className="semibold brand-color-secondary">99</span></h4> : <></>
+                                  <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>My favourites</span> </h4> : <></>
                             }
                         </div>
                       )
@@ -247,7 +246,7 @@ class CollectionList extends Component {
                                 </div>
                             </div>
                             <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>{collection.name}</span>
-                                <span className="semibold brand-color-secondary">99</span></h4>
+                                <span className="semibold brand-color-secondary">{collection.numOfDesign ? collection.numOfDesign : 0}</span></h4>
                         </div>
                       )
                     })
