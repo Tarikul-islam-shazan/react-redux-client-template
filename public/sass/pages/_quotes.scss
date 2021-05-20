@@ -20,12 +20,16 @@
       max-width: 415px;
       width: 100%;
       margin-bottom: 15px;
-      @media (max-width: 1024px) {
-        flex-basis: 100%;
-        max-width: inherit;
+      @media (max-width: 1440px) {
+        //width: 180%;
+      }
+      @media (max-width: 1280px) {
+        input{
+          font-size: 14px;
+        }
       }
       @media (max-width: 1024px) {
-        flex-basis: 47%;
+        max-width: inherit;
       }
     }
     .date {
@@ -34,6 +38,9 @@
       @media (max-width: 1024px) {
         max-width: max-content;
       }
+      @media (max-width: 1024px) {
+        max-width: 100%;
+      }
       @media (max-width: 767px) {
         max-width: 100%;
       }
@@ -41,8 +48,9 @@
     .status {
       max-width: 210px;
       width: 100%;
-      @media (max-width: 991px) {
-        max-width: 155px;
+      @media (max-width: 1024px) {
+        max-width: 100%;
+        margin: 15px 15px 15px 0px !important;
       }
       @media (max-width: 767px) {
         max-width: 100%;
@@ -54,10 +62,20 @@
         height: 52px;
         width: 170px;
         font-size: 16px;
+        @media (max-width: 1366px) {
+          height: 45px;
+        }
         @media (max-width: 991px) {
           width: 130px;
         }
         @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        width: 100%;
+        button{
           width: 100%;
         }
       }
@@ -74,7 +92,7 @@
       }
       .search{
         width: 100%;
-        margin: 15px 15px 15px 0 !important;
+        margin: 0px 15px 15px 0 !important;
       }
     }
     &.my-quotes{
@@ -311,7 +329,6 @@
       margin: 0 !important;
       @media (max-width: 1440px) {
         height: 52px;
-        width: 160px;
       }
       @media (max-width: 991px) {
         height: 42px;
