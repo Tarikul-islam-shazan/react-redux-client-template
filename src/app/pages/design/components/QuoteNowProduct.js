@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { addImageSuffix } from '../../../services/Util';
 import {fetchGeneralSettingsData} from '../../../actions';
+import {getTotal} from '../actions';
+
 
 export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   const [defaultValue, setDefaultValue] = useState({
@@ -28,14 +30,6 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
   let flag = 1;
   let total = 0;
  
-  const getTotal = (sizeQuantityPairList) => {
-    sizeQuantityPairList.map((pair, key) => {
-      if (pair.quantity) {
-        total += parseInt(pair.quantity);
-      }
-    })
-    return total;
-  }
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
         <div className="dlt" onClick={() => remove(index)}>

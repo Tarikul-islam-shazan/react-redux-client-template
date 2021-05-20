@@ -20,7 +20,7 @@ import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
-import {_storeData, _getProductForQuote} from './actions';
+import {_storeData, _getProductForQuote, getTotal} from './actions';
 
 class QuoteNowCart extends Component {
 
@@ -157,8 +157,7 @@ class QuoteNowCart extends Component {
     removeFromCart = async(index) => {
       let {cart} = this.state;
       cart = cart.filter((product, i) => i !== index);
-      await this.setState({cart});
-      await this.updateCartGlobally();
+      this.updateCart(cart)
     }
 
     updateCartGlobally = async() => {
@@ -194,16 +193,6 @@ class QuoteNowCart extends Component {
       await this.props._storeData('selectedProductIds', []);
     }
     
-     getTotal = (sizeQuantityPairList) => {
-       let total = 0;
-      sizeQuantityPairList.map((pair, key) => {
-        if (pair.quantity) {
-          total += parseInt(pair.quantity);
-        }
-      })
-      return total;
-    }
-
     validate = () => {
       let {cart, title} = this.state;
       let flag = true;
@@ -211,10 +200,10 @@ class QuoteNowCart extends Component {
         let tempFlag = true;
         product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
           colorWithSize.sizeQuantityPairList.map((pair) => {
-            if(this.getTotal(colorWithSize.sizeQuantityPairList) < parseInt(product.minimumOrderQuantity)){
+            if(getTotal(colorWithSize.sizeQuantityPairList) < parseInt(product.minimumOrderQuantity)){
               flag = false;
               tempFlag = false;
-              product.error = 'Please insert values greater or equal to MOQ'
+              product.error = 'Please insert values greater than or equal to MOQ'
            }
       
           })
@@ -231,6 +220,10 @@ class QuoteNowCart extends Component {
     removeAllFromCart = async() => {
       let {cart} = this.state;
       cart = [];
+      this.updateCart(cart)
+    }
+
+    updateCart = async (cart) => {
       await this.setState({cart});
       await this.updateCartGlobally();
     }
@@ -246,7 +239,7 @@ class QuoteNowCart extends Component {
               product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
                 colorWithSize.sizeQuantityPairList.map((pair) => {
                   if (pair.quantity === '' || pair.quantity === null) {
-                      pair.quantity = '0'
+                      pair.quantity = 0
                   }
                   if (pair.quantity) {
                     total += parseInt(pair.quantity);
@@ -371,8 +364,6 @@ class QuoteNowCart extends Component {
                   }
                   </div>
               </div>
-
-
           </div>
         );
     }
