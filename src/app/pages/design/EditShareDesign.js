@@ -59,10 +59,12 @@ class EditShareDesign extends Component {
 
     handleClickOutside = (event) => {
         let {designDetails} = this.state;
-        console.log("clicked outside", designDetails.colors)
         if (designDetails.colors) {
           designDetails.colors = designDetails.colors.map((color, i) => {
-              if ((this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) || (this['colorRef_mbl_' + i] && !this['colorRef_mbl_' + i].contains(event.target))) {
+              if (
+                (this['colorRef_' + i] && !this['colorRef_' + i].contains(event.target)) &&
+                (this['colorRef_mbl_' + i] && !this['colorRef_mbl_' + i].contains(event.target))
+              ) {
                   color.showColorPickerModal = false;
               }
               return color;
