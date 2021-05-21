@@ -621,7 +621,7 @@ class CollectionDetails extends Component {
                           <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
                       </div>
                       {
-                        !collectionType && !collectionViewType && collection.privacy !== 'PUBLIC' ?
+                        !collectionType && !collectionViewType && collection.privacy === 'CUSTOM' ?
                         <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
                             <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
                                 <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
@@ -688,7 +688,7 @@ class CollectionDetails extends Component {
                             </div>
                             <div class="d-flex mt-4 mt-sm-0">
                             {
-                              collection.privacy === 'ONLY_ME' ?
+                              collection.privacy === 'CUSTOM' ?
                               <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
                               : <></>
                             }

@@ -225,24 +225,28 @@ class PickDesignV2 extends Component {
     }
 
     setFilters = async(type, id, name) => {
-      let {filters} = this.state;
-      let flag = true;
-      filters.map((filter) => {
-        if (filter.type === type && filter.id === id) {
-          flag = false;
+        let {filters, search} = this.state;
+        let flag = true;
+        filters.map((filter) => {
+            if (filter.type === type && filter.id === id) {
+                flag = false;
+            }
+        })
+        if (flag) {
+            filters.push({type, id, name});
+        } else {
+            filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
+            if (!filters.length && search === '') {
+                await this.resetFilter();
+                return;
+            }
         }
-      })
-      if (flag) {
-        filters.push({type, id, name});
-      } else {
-        filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
-      }
-      await this.setState({
-        filters,
-        showSelectedFilters: filters.length === 0 ? false : this.state.showSelectedFilters
-      });
-      if (!flag) {
-        this._search()
+        await this.setState({
+            filters,
+            showSelectedFilters: filters.length === 0 ? false : this.state.showSelectedFilters
+        });
+        if (!flag) {
+            this._search();
       }
     }
 
@@ -559,7 +563,12 @@ class PickDesignV2 extends Component {
     }
 
     getAllAvailableProducts = (data) => {
-      return data.filter((product) => (product.availabilityStatus !== 'SOLD'));
+        return data.filter((product) => (
+            product.availabilityStatus !== 'SOLD' &&
+            product.availabilityStatus !== 'UNAVAILABLE' &&
+            product.availabilityStatus !== 'IN_PROJECT' &&
+            product.availabilityStatus !== 'LOCKED'
+        ));
     }
 
     render() {
