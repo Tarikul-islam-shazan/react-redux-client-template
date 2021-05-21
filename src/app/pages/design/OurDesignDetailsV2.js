@@ -455,7 +455,7 @@ class OurDesignDetails extends Component {
             beforeChange: (prev, next) => {this.sliderNav.slickGoTo(next);}
         };
         const settingsSliderNav = {
-            slidesToShow: this.getImageByType().length > 6 ? 6 : this.getImageByType().length,
+            slidesToShow: this.getImageByType().length > 4 ? 4 : this.getImageByType().length,
             slidesToScroll: 1,
             vertical:true,
             // asNavFor: '.slider-for',
@@ -688,7 +688,7 @@ class OurDesignDetails extends Component {
                               <p className="font-16">{product.note}</p>
                           </div>
 
-                          <div className="info-item">
+                          <div className="info-item details-action">
                               <div className="text-left mt-4">
                               {
                                 product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'AVAILABLE' ?

@@ -815,6 +815,9 @@ ol {
       object-fit: cover;
       object-position: center;
       background: #fff;
+      @media (max-width: 1024px) {
+        object-fit: contain;
+      }
     }
   }
   img{
