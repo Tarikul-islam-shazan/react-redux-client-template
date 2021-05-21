@@ -9,11 +9,16 @@
     float: left;
   }
   @media (max-width: 1365px) {
-    width: calc(100% - 360px);
+    width: calc(100% - 470px);
   }
   @media (max-width: 1024px) {
     width: calc(100% - 0px);
     padding: 0;
+  }
+  @media (max-width: 991px) {
+    .features:nth-child(3) .info-item+.info-item {
+      margin-top: 30px !important;
+    }
   }
   @media (max-width: 767px) {
     .header-title h3 {
@@ -97,7 +102,7 @@
     }
   }
   @media (max-width: 1365px) {
-    max-width: 380px;
+    max-width: 500px;
     a{
       font-size: 18px;
     }
@@ -243,7 +248,7 @@
       }
     }
   }
-  @media (max-width: 991px) {
+  @media (max-width: 1280px) {
     flex-direction: column;
     .features {
       float: left !important;
