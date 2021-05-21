@@ -691,7 +691,7 @@ class OurDesignDetails extends Component {
                           <div className="info-item">
                               <div className="text-left mt-4">
                               {
-                                product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'AVAILABLE' ?
+                                product.isEditable ?
                                 <a onClick={this.edit} className="btn btn-outline-secondary mr-3 border-gray-light">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23.677" height="23.396" viewBox="0 0 23.677 23.396">
                                         <g id="edit" transform="translate(0.1 -0.161)">
