@@ -621,7 +621,7 @@ class CollectionDetails extends Component {
                           <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
                       </div>
                       {
-                        !collectionType && !collectionViewType && collection.privacy !== 'PUBLIC' ?
+                        !collectionType && !collectionViewType && collection.privacy === 'CUSTOM' ?
                         <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
                             <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
                                 <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
@@ -688,7 +688,7 @@ class CollectionDetails extends Component {
                             </div>
                             <div class="d-flex mt-4 mt-sm-0">
                             {
-                              collection.privacy === 'ONLY_ME' ?
+                              collection.privacy === 'CUSTOM' ?
                               <button id="CreateCollection" class="m-0 btn-brand" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>+Add more products</button>
                               : <></>
                             }
@@ -719,10 +719,10 @@ class CollectionDetails extends Component {
                   <div class="add-more-designs">
                       <div class={`add-more ml-auto custom-scrollbar ${showAddProductModal ? `open`:``}`} id="myProductList" onScroll={this.handleMyProductScroll}>
                           <div id="closeRPop" class="p-3 cursor-pointer">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941" onClick={() => this.setState({showAddProductModal: !showAddProductModal})}>
-                                  <g id="Group_11190" data-name="Group 11190" transform="translate(1110.29 4909.059)">
-                                      <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-1108.875 -4907.645) rotate(45)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"></line>
-                                      <line id="Line_154" data-name="Line 154" x2="25.615" transform="translate(-1090.763 -4907.645) rotate(135)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-width="2"></line>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22.84" height="12.32" viewBox="0 0 22.84 12.32">
+                                  <g id="Group_5016" data-name="Group 5016" transform="translate(-1582.964 -1119.323)">
+                                      <path id="Path_2339" data-name="Path 2339" d="M6734.325,696h21.625" transform="translate(-5151.361 429.59)" fill="none" stroke="#000" stroke-width="1.5"/>
+                                      <path id="Path_2340" data-name="Path 2340" d="M6766.935,684.293l5.8,5.8-5.46,5.46" transform="translate(-5167.99 435.56)" fill="none" stroke="#000" stroke-width="1.5"/>
                                   </g>
                               </svg>
                           </div>

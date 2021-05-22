@@ -58,18 +58,19 @@ class ProductCard extends Component {
   render() {
     let flag = 1;
     let { product , showDetails , likeProduct , unlikeProduct } = this.props;
+    let disabled = (product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'IN_PROJECT' || product.availabilityStatus === 'LOCKED');
     return(
       <div className="item">
           <div className={`card product-card new-card ${product.isSelected ? 'active' : (product.isAddedToList ? 'hovered' : '')}`}>
               <div className="thumb">
               {
-                (product.availabilityStatus === 'AVAILABLE' || product.availabilityStatus === 'IN_RFQ') ?
-                <div className={`favourite-part choose ${product.isSelected ? 'active' : ''}`} onClick={() => this.toggleSelect(product.id)}>
+                disabled ?
+                <div className="favourite-part choose disabled" data-toggle="tooltip" data-placement="top" title="Design not available">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
                         <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
                     </svg>
                 </div> :
-                <div className="favourite-part choose disabled" data-toggle="tooltip" data-placement="top" title="Design not available">
+                <div className={`favourite-part choose ${product.isSelected ? 'active' : ''}`} onClick={() => this.toggleSelect(product.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="21.137" height="17.04" viewBox="0 0 21.137 17.04">
                         <path id="Path_27721" data-name="Path 27721" d="M164.573,353.29l3.281,3.949,12.212-12.212" transform="translate(-161.757 -342.198)" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
                     </svg>
@@ -96,11 +97,15 @@ class ProductCard extends Component {
                     <Dropdown.Menu alignRight className="dropdown-menu dropdown-menu-right shadow-lg mt-2">
                     {
                       product.liked ?
-                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.unlikeProduct(product.id)}>Add to favourites</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.unlikeProduct(product.id)}>Remove from favourites</Dropdown.Item>
                       :
-                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.likeProduct(product.id)}>Remove from favourites</Dropdown.Item>
+                      <Dropdown.Item href="#" className="px-4 pb-3 pt-3 font-weight-normal text-black font-15" onClick={(e) => this.props.likeProduct(product.id)}>Add to favourites</Dropdown.Item>
                     }
+                    {
+                      disabled ?
+                      <></> :
                       <Dropdown.Item href="#" className="px-4 pt-0 pb-3 font-weight-normal text-black font-15" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
+                    }
                     </Dropdown.Menu>
                   </Dropdown>
 

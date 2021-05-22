@@ -455,7 +455,7 @@ class OurDesignDetails extends Component {
             beforeChange: (prev, next) => {this.sliderNav.slickGoTo(next);}
         };
         const settingsSliderNav = {
-            slidesToShow: this.getImageByType().length > 6 ? 6 : this.getImageByType().length,
+            slidesToShow: this.getImageByType().length > 4 ? 4 : this.getImageByType().length,
             slidesToScroll: 1,
             vertical:true,
             // asNavFor: '.slider-for',
@@ -465,15 +465,11 @@ class OurDesignDetails extends Component {
             arrows: false,
             responsive: [
                 {
-                    breakpoint: 992,
+                    breakpoint: 991,
                     settings: {
                         vertical: false,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        vertical: false,
+                        slidesToShow: 4,
+                        arrows: true,
                     }
                 },
                 {
@@ -481,6 +477,7 @@ class OurDesignDetails extends Component {
                     settings: {
                         vertical: false,
                         slidesToShow: 3,
+                        arrows: true,
                     }
                 },
                 {
@@ -488,6 +485,7 @@ class OurDesignDetails extends Component {
                     settings: {
                         vertical: false,
                         slidesToShow: 2,
+                        arrows: true,
                     }
                 }
             ]
@@ -511,7 +509,7 @@ class OurDesignDetails extends Component {
           }
               <div className="row">
                   <div className="col-lg-7">
-                      <div className="product-detail-gallery sticky-96">
+                      <div className="product-detail-gallery sticky-120">
                           <div className="thumbnail-prev">
                               <section className="banner-section">
                                       <div className="vehicle-detail-banner banner-content clearfix">
@@ -690,10 +688,10 @@ class OurDesignDetails extends Component {
                               <p className="font-16">{product.note}</p>
                           </div>
 
-                          <div className="info-item">
+                          <div className="info-item details-action">
                               <div className="text-left mt-4">
                               {
-                                product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'AVAILABLE' ?
+                                product.isEditable ?
                                 <a onClick={this.edit} className="btn btn-outline-secondary mr-3 border-gray-light">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23.677" height="23.396" viewBox="0 0 23.677 23.396">
                                         <g id="edit" transform="translate(0.1 -0.161)">
