@@ -20,6 +20,7 @@ import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
+import {fetchGeneralSettingsData} from '../../actions';
 import {_storeData, _getProductForQuote, getTotal} from './actions';
 
 class QuoteNowCart extends Component {
@@ -35,7 +36,9 @@ class QuoteNowCart extends Component {
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           cart: [],
-          title: ''
+          title: '',
+          TURN_AROUND_TIME: "",
+          MOQ: "",
         };
     }
 
@@ -91,6 +94,17 @@ class QuoteNowCart extends Component {
         if (quote) {
           this.props._storeData('quoteObj', quote);
         }
+      }
+
+      const keys = ['MOQ', 'TURN_AROUND_TIME']
+      const data = await fetchGeneralSettingsData(keys);
+      if(data){
+        this.setState({
+          TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+          ? data["TURN_AROUND_TIME"].value
+          : "",
+        MOQ: data["MOQ"] ? data["MOQ"].value : "",
+        })
       }
       // this.setState({loading: true});
       let designList = await this.renderList();
@@ -278,7 +292,7 @@ class QuoteNowCart extends Component {
     }
 
     render() {
-        let { designList, cart, title } = this.state;
+        let { designList, cart, title, TURN_AROUND_TIME, MOQ} = this.state;
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request">
@@ -302,7 +316,15 @@ class QuoteNowCart extends Component {
                       {
                         cart.map((product, i) => {
                           return(
-                            <QuoteNowProduct key={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
+                            <QuoteNowProduct 
+                              key={i} 
+                              product={product} 
+                              index={i} 
+                              onChange={this.onChangeQuantity} 
+                              remove={this.removeFromCart}
+                              defaultTurnAroundTime={TURN_AROUND_TIME}
+                              defaultMoq={MOQ} 
+                            />
                           )
                         })
                       }
@@ -358,7 +380,14 @@ class QuoteNowCart extends Component {
                   {
                     designList.map((product, i) => {
                       return(
-                        <QuoteNowMyProductCard key={i}  cart={cart} product={product} addToQuote={this.addToQuote} />
+                        <QuoteNowMyProductCard 
+                          key={i}  
+                          cart={cart} 
+                          product={product} 
+                          addToQuote={this.addToQuote} 
+                          defaultTurnAroundTime={TURN_AROUND_TIME}
+                          defaultMoq={MOQ}
+                          />
                       )
                     })
                   }

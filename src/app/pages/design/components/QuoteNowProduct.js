@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { addImageSuffix } from '../../../services/Util';
-import {fetchGeneralSettingsData} from '../../../actions';
 import {getTotal} from '../actions';
 
 
-export const QuoteNowProduct = ({product, index, onChange, remove}) => {
-  const [defaultValue, setDefaultValue] = useState({
-    TURN_AROUND_TIME: "",
-    MOQ: "",
-  });
-
-  const fetchData = async () => {
-    const keys = ['MOQ', 'TURN_AROUND_TIME']
-    const data = await fetchGeneralSettingsData(keys);
-    if (data) {
-    setDefaultValue({
-        TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
-          ? data["TURN_AROUND_TIME"].value
-          : "",
-        MOQ: data["MOQ"] ? data["MOQ"].value : "",
-      });
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnAroundTime, defaultMoq }) => {
 
   let flag = 1;
-  let total = 0;
- 
+  
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
         <div className="dlt" onClick={() => remove(index)}>
@@ -74,7 +51,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
                         <h5 className="font-18 semibold">
-                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : product.minimumOrderQuantity=defaultValue.MOQ} pcs
+                          {product.minimumOrderQuantity ? product.minimumOrderQuantity : product.minimumOrderQuantity=defaultMoq} pcs
                         </h5>
                     </div>
                 </div>
@@ -86,7 +63,7 @@ export const QuoteNowProduct = ({product, index, onChange, remove}) => {
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
                         <h5 className="font-18 semibold">
-                          {product.turnAroundTime ? product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days
+                          {product.turnAroundTime ? product.turnAroundTime : defaultTurnAroundTime} Days
                         </h5>
                     </div>
                 </div>

@@ -347,7 +347,7 @@ class MyRFQs extends Component {
                 <div className="status mr-3 mt-3 mt-sm-0">
                     <select className="w-100 bg-gray-light border-0" name="status" value={status} onClick={(e) => this.onChange(e)}>
                         <option>Status </option>
-                        <option value="PENDING">Pending</option>
+                        <option value="OFFER_PENDING">Offer Pending</option>
                         <option value="PRICE_GIVEN">Price Given</option>
                         <option value="APPROVED">Approved</option>
                     </select>

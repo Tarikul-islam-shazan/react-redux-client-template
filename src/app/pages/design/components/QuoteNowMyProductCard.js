@@ -1,32 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { addImageSuffix } from "../../../services/Util";
-import {fetchGeneralSettingsData} from '../../../actions';
 
-export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote }) => {
-  const [defaultValue, setDefaultValue] = useState({
-    TURN_AROUND_TIME: "",
-    MOQ: "",
-  });
-
-  const fetchData = async () => {
-    const keys = ['MOQ', 'TURN_AROUND_TIME']
-    const data = await fetchGeneralSettingsData(keys);
-    if (data) {
-    setDefaultValue({
-        TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
-          ? data["TURN_AROUND_TIME"].value
-          : "",
-        MOQ: data["MOQ"] ? data["MOQ"].value : "",
-      });
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+export const QuoteNowMyProductCard = ({ product, index, onChange, addToQuote, defaultTurnAroundTime, defaultMoq }) => {
+ 
   let flag = 1;
-
+  // console.log('!^!^!^!^!^!^!^!^!~~~',product);
   return (
     <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
       <div className="quote-info d-flex justify-content-between w-100">
@@ -69,7 +47,7 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-18 semibold">{product.minimumOrderQuantity? product.minimumOrderQuantity : defaultValue.MOQ} pcs</h5>
+                        <h5 className="font-18 semibold">{product.minimumOrderQuantity? product.minimumOrderQuantity : defaultMoq} pcs</h5>
                     </div>
                 </div>
                 <div className="d-flex flex-column flex-sm-row">
@@ -80,7 +58,7 @@ export const QuoteNowMyProductCard = ({ cart, product,index,onChange,addToQuote 
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
                         <h5 className="font-18 semibold">{product.turnAroundTime ? 
-                        product.turnAroundTime : defaultValue.TURN_AROUND_TIME} Days</h5>
+                        product.turnAroundTime : defaultTurnAroundTime} Days</h5>
                     </div>
                 </div>
                 <button 
