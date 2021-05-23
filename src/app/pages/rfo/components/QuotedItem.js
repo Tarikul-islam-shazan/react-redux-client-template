@@ -22,7 +22,12 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   }
 
   const onDiscuss = () => {
+<<<<<<< HEAD
     document.getElementsByClassName('IconLauncher__BaseLauncher-m649nu-0 IconLauncher__CircleLauncher-m649nu-2 eFiccJ reagan--widget-loaded undefined')[0].click()
+=======
+    window.history.pushState({}, 'hs_bot', '?hs_bot=true'); 
+    window.HubSpotConversations.widget.refresh({openToNewThread: true});
+>>>>>>> 893cc6bfdf0555a2062969edd8930d315a698640
   }
 
   return(
