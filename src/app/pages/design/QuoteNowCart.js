@@ -155,12 +155,14 @@ class QuoteNowCart extends Component {
       await this.updateCartGlobally();
     }
 
+    validateNum = (value) => parseInt(value) | 0
+
     onChangeQuantity = async(productIndex, colorIndex, name, value) => {
       let {cart} = this.state;
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList =
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
           if (pair.code === name) {
-            pair.quantity = value;
+            pair.quantity = this.validateNum(value);
           }
           return pair;
       })
@@ -255,7 +257,7 @@ class QuoteNowCart extends Component {
                   if (pair.quantity === '' || pair.quantity === null) {
                       pair.quantity = 0
                   }
-                  if (pair.quantity) {
+                  else {
                     total += parseInt(pair.quantity);
                   }
                 })

@@ -4,7 +4,7 @@ import { addImageSuffix } from "../../../services/Util";
 export const QuoteNowMyProductCard = ({ product, index, onChange, addToQuote, defaultTurnAroundTime, defaultMoq }) => {
  
   let flag = 1;
-  // console.log('!^!^!^!^!^!^!^!^!~~~',product);
+  
   return (
     <div className="quote-list mb-3 d-flex justify-content-between align-items-center">
       <div className="quote-info d-flex justify-content-between w-100">
@@ -53,7 +53,7 @@ export const QuoteNowMyProductCard = ({ product, index, onChange, addToQuote, de
                 <div className="d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-18 semibold">{product.fabricComposition} {product.fabricWeight} GSM</h5>
+                        <h5 className="font-18 semibold">{product.fabricDetails}</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
