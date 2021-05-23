@@ -4,23 +4,26 @@ import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import RichTextEditor from 'react-rte';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
 import { toastSuccess, toastError } from '../../../commonComponents/Toast';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
-import { addImageSuffix, convertTimeToLocal } from '../../../services/Util';
+import { addImageSuffix, convertTimeToLocal, parseHtml } from '../../../services/Util';
+
+let toolbarConfig = {display: []};
 
 class Comments extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          id : this.props.deliverableId,
-          comments : [],
-          comment : '',
-          loading : false,
-          userInfo : {}
+          id: this.props.deliverableId,
+          comments: [],
+          comment: RichTextEditor.createEmptyValue(),
+          loading: false,
+          userInfo: {}
         };
     }
 
@@ -41,19 +44,26 @@ class Comments extends Component {
       })
     }
 
-    keyPressed = async(e) => {
-      if(e.key==='Enter'){
+    onChangeRT = (val, key) => {
+      this.setState({
+        [key]: val
+      })
+    }
+
+    handleReturn = async(event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
         this.setState({
           loading : true
         })
         let { id, comment } = this.state;
-        await Http.POST('sendDeliverableMessages',{message:comment},id)
+        await Http.POST('sendDeliverableMessages', {message: comment.toString('html')}, id)
           .then(({data}) => {
             console.log('COMMENT POST SUCCESS: ', data);
+            // localStorage.removeItem('token');
             if(data.success){
               this.setState({
-                loading:false,
-                comment : ''
+                loading: false,
+                comment: RichTextEditor.createEmptyValue()
               })
               toastSuccess(data.message);
               this.loadComments(id)
@@ -80,6 +90,7 @@ class Comments extends Component {
       await Http.GET('getDeliverableMessages',param)
         .then(({data}) => {
           console.log('COMMENT SUCCESS: ', data);
+          // localStorage.removeItem('token');
           if(data){
             this.setState({
               loading:false,
@@ -130,23 +141,23 @@ class Comments extends Component {
             text={LOADER_TEXT}>
             <div className="messages-popup custom-scrollbar">
                 <div className="production">
-                    <h6>Messages</h6>
+                    <h6>Feedback</h6>
                     <div className="write">
-                      {
-                        userInfo && userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
-                        <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} className="user-photo"/> :
-                        <img src={require("../../../assets/images/pro_pic_default.svg")} alt="" className="user-photo"/>
-                      }
-                        <textarea
-                          name="comment"
+                        {
+                          userInfo && userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
+                          <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} className="user-photo"/> :
+                          <img src={require("../../../assets/images/pro_pic_default.svg")} alt="" className="user-photo"/>
+                        }
+                        <RichTextEditor
+                          className="rich-text"
+                          toolbarConfig={toolbarConfig}
                           value={comment}
-                          onChange={this.onChange}
-                          onKeyPress={this.keyPressed}
-                          rows="4"
-                          placeholder="Write here.....">
-                        </textarea>
+                          placeholder="Write here....."
+                          onChange={(val) => this.onChangeRT(val, 'comment')}
+                          handleReturn={this.handleReturn}
+                          toolbarStyle={{display: 'none'}}
+                        />
                     </div>
-                    <h6>Feedbacks</h6>
                     {
                       comments.map((item,i) => {
                         return(
@@ -160,13 +171,14 @@ class Comments extends Component {
                                     }
                                       <div className="name-n-date">
                                           <h4>{item.postedBy.name}</h4>
-                                          <span>{convertTimeToLocal(item.date, item.time, 'MMM DD, YYYY hh:mm a')}</span>
+                                          <span className="dot">{convertTimeToLocal(item.date, item.time, 'MMM DD, YYYY hh:mm a')}</span>
                                       </div>
                                       {/*<div className="post-type">Query</div>*/}
                                   </div>
                               </div>
                               <div className="post-description">
-                                  <p>{item.text}</p>
+                                  <div dangerouslySetInnerHTML={{ __html: parseHtml(item.text) }}/>
+                                  {/*<p>{item.text}</p>*/}
                               </div>
                           </div>
                         )

@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-
+import RichTextEditor from 'react-rte';
 import LoadingOverlay from 'react-loading-overlay';
+
 import Http from '../../../services/Http';
 import { toastSuccess, toastError } from '../../../commonComponents/Toast';
 import { CancellableImage } from '../../../commonComponents/CancellableImage';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
-import { addImageSuffix, convertTimeToLocal } from '../../../services/Util';
+import { addImageSuffix, convertTimeToLocal, parseHtml } from '../../../services/Util';
+
+let toolbarConfig = {display: []};
 
 class PostWithFeedback extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        loading : false,
-        post : this.props.post,
-        feedbacks : [],
-        userInfo : this.props.userInfo,
-        feedback : '',
-        documentDTOList : []
+        loading: false,
+        post: this.props.post,
+        feedbacks: [],
+        userInfo: this.props.userInfo,
+        feedback: RichTextEditor.createEmptyValue(),
+        documentDTOList: []
       };
   }
 
@@ -58,7 +61,7 @@ class PostWithFeedback extends Component {
   }
 
   loadFeedbacks = () => {
-    Http.GET('getFeedbackForPost',this.props.post.id)
+    Http.GET('getFeedbackForPost', `${this.props.post.id}?sort=id,desc`)
       .then(({data}) => {
         console.log('getFeedbackForPost SUCCESS: ', data);
         if(data){
@@ -78,28 +81,26 @@ class PostWithFeedback extends Component {
 
   sendFeedback = async() => {
     let { post, feedback, documentDTOList } = this.state;
-    if(feedback==''){
+    if(!feedback.getEditorState().getCurrentContent().hasText()){
       toastError("Feedback text required.");
       return;
     }
     let body ={
       postId : post.id,
-      text : feedback,
+      text : feedback.toString('html'),
       documentDTOList : documentDTOList
     }
     this.setState({
       loading : true
     })
-    console.log("body",body)
-    // return;
     await Http.POST('sendFeedback',body)
       .then(({data}) => {
         console.log('COMMENT POST SUCCESS: ', data);
         if(data.success){
           this.setState({
-            loading:false,
-            feedback : '',
-            documentDTOList : []
+            loading: false,
+            feedback: RichTextEditor.createEmptyValue(),
+            documentDTOList: []
           })
           toastSuccess(data.message);
           this.loadFeedbacks();
@@ -120,7 +121,6 @@ class PostWithFeedback extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.userInfo!=this.props.userInfo){
-      console.log("userInfo from feedback",this.props.userInfo)
       this.setState({userInfo: this.props.userInfo});
     }
 
@@ -132,8 +132,18 @@ class PostWithFeedback extends Component {
     })
   }
 
+  onChangeRT = (val, key) => {
+    this.setState({
+      [key]: val
+    })
+  }
+
   handleKeyPress = (event) => {
-    if(event.key === 'Enter' && !event.shiftKey){
+    console.log("event.handleKeyPress", event.key)
+  }
+
+  handleReturn = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
       this.sendFeedback();
     }
   }
@@ -192,7 +202,8 @@ class PostWithFeedback extends Component {
                 </div>*/}
             </div>
             <div className="post-description">
-                <p>{post.text}</p>
+                <div dangerouslySetInnerHTML={{ __html: parseHtml(post.text) }}/>
+                {/*<p>{post.text}</p>*/}
                 <div className="uploaded-photo">
                 {
                   post.docList &&
@@ -204,15 +215,12 @@ class PostWithFeedback extends Component {
             </div>
             <div className="post-tag">
                 <div className="badge-list">
-                    <span className="badge table-badge" style={{backgroundColor: '#EDE4F3', color: '#9A2EE1'}}>{post.projectName}</span>
                     <span className="badge table-badge" style={{backgroundColor: '#F8F6E6',color: '#CB8E00'}}>{post.productName}</span>
-                    <span className="badge table-badge" style={{backgroundColor: '#E7E9EF',color: '#3E4148'}}>{post.deliverableName}</span>
-                    {/*<span className="badge table-badge" style={{backgroundColor: '#E4F6EA',color: '#00CC52'}}>Knitting</span>*/}
+                    <span className="badge table-badge" style={{backgroundColor: '#F8F6E6',color: '#CB8E00'}}>{post.deliverableName}</span>
                 </div>
             </div>
         </div>
         <div className="feedback">
-            <h5>Feedback</h5>
             <div className="editor">
                 <div className="write">
                   {
@@ -221,14 +229,16 @@ class PostWithFeedback extends Component {
                     <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                   }
                     <div className="feedback-editor">
-                        <textarea
-                          className="custom-scrollbar"
-                          name="feedback"  rows="3"
+                        <RichTextEditor
+                          className="rich-text"
+                          toolbarConfig={toolbarConfig}
                           value={feedback}
-                          onChange={this.onChange}
-                          onKeyPress={this.handleKeyPress}
-                          placeholder="Write your feedback here.....">
-                        </textarea>
+                          placeholder="Write your feedback here....."
+                          onChange={(val) => this.onChangeRT(val, 'feedback')}
+                          handleReturn={this.handleReturn}
+                          keyBindingFn={this.handleKeyPress}
+                          toolbarStyle={{display: 'none'}}
+                        />
                         <div className="uploaded-photo">
                         {
                           documentDTOList.map((item,i)=>{
@@ -242,10 +252,9 @@ class PostWithFeedback extends Component {
                                 <option value="Reject">Query</option>
                             </select>*/}
                             <div className="file btn">
-                                Photo/Video
                                 <input type="file" name="documentDTOList" onChange={(e) => this.onMultipleFileSelect(e,'PRODUCT_DESIGN')} multiple/>
                             </div>
-                            <button  className="btn btn-brand small" onClick={()=>this.sendFeedback()}>Submit</button>
+                            {/*<button  className="btn btn-brand small" onClick={()=>this.sendFeedback()}>Submit</button>*/}
                             {/*<button className="deliverable-deadline">Deliverable Deadline</button>*/}
                         </div>
                     </div>
@@ -254,38 +263,40 @@ class PostWithFeedback extends Component {
 
             <div className="feedback-post">
             {
-              feedbacks.map((item,i) => {
+              feedbacks && feedbacks.length ? feedbacks.map((item,i) => {
                 return(
-                  <div className="post" key={i}>
+                  <div className="post d-flex" key={i}>
                       <div className="post-heading">
-                          <span className="date-time">{convertTimeToLocal(item.postDate, item.postTime, 'hh:mm a')}<br/>{convertTimeToLocal(item.postDate, item.postTime, 'MMM DD, YYYY')}</span>
                           <div className="header-title">
-                          {
-                            item.postedBy.imageUrl ?
-                            <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/> :
-                            <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
-                          }
-                              <div className="description" style={{width:'100%'}}>
-                                  <h4>{item.postedBy.name}
-                                    {/*<div className="post-type">Query</div>*/}
-                                  </h4>
-                                  <div className="comments">
-                                      <p>{item.text}</p>
-                                      <div className="feedback-uploaded-img custom-scrollbar-x">
-                                      {
-                                        item.docList &&
-                                        item.docList.map((item2,i)=>{
+                              {
+                                item.postedBy.imageUrl ?
+                                <img src={addImageSuffix(item.postedBy.imageUrl, '_xicon')} alt="" className="user-photo"/> :
+                                <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
+                              }
+                          </div>
+                      </div>
+                      <div className="description" style={{width:'100%'}}>
+
+                          <div className="name-n-date">
+                              <h4>{item.postedBy.name}</h4>
+                              <span className="dot">{convertTimeToLocal(item.postDate, item.postTime, 'hh:mm a')} {convertTimeToLocal(item.postDate, item.postTime, 'MMM DD, YYYY')}</span>
+                          </div>
+
+                          <div className="comments">
+                              <div dangerouslySetInnerHTML={{ __html: parseHtml(item.text) }}/>
+                              <div className="feedback-uploaded-img custom-scrollbar-x">
+                                  {
+                                      item.docList &&
+                                      item.docList.map((item2,i)=>{
                                           return(<img key={i} src={item2.docUrl}  onClick={() => this.props.imageViewer(item.docList,i)} />)
-                                        })
-                                      }
-                                      </div>
-                                  </div>
+                                      })
+                                  }
                               </div>
                           </div>
                       </div>
                   </div>
                 )
-              })
+              }) : <></>
             }
             </div>
         </div>

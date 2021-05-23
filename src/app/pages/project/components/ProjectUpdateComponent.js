@@ -6,9 +6,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from "loadjs";
 import ImageViewer from 'react-simple-image-viewer';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
+import RichTextEditor from 'react-rte';
 
-import { encodeQueryData, addImageSuffix, convertTimeToLocal } from '../../../services/Util';
+import { encodeQueryData, addImageSuffix, convertTimeToLocal, parseHtml } from '../../../services/Util';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../../services/Http';
@@ -17,37 +18,39 @@ import { CancellableImage } from '../../../commonComponents/CancellableImage';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../../constant';
 
 import PostWithFeedback from './PostWithFeedback';
+let toolbarConfig = {display: []};
 
 class ProjectUpdateComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          project : this.props.project,
-          comments : [],
-          comment : '',
-          taggedTopics : [],
-          upcomingDeadlines : [],
-          productDetails : {},
-          posts : [],
-          userInfo : this.props.userInfo,
-          selectedProduct : '',
-          selectedDeliverable : '',
-          selectedDeliverableText : '',
-          deliverableFlag : false,
-          sort : 'datePosted,desc',
-          filterByProductId : [],
-          documentDTOList : [],
-          imageViewerFlag : false,
-          imageViewerData : [],
-          imageViewerCurrentIndex : 0,
-          fromDate : '',
-          uptoDate : '',
-          loading : false,
-          page : 0,
-          size : 10,
-          hasNext : true,
-          filterablePostId : this.props.filterablePostId,
+          project: this.props.project,
+          comments: [],
+          comment: '',
+          taggedTopics: [],
+          upcomingDeadlines: [],
+          productDetails: {},
+          post: RichTextEditor.createEmptyValue(),
+          posts: [],
+          userInfo: this.props.userInfo,
+          selectedProduct: '',
+          selectedDeliverable: '',
+          selectedDeliverableText: '',
+          deliverableFlag: false,
+          sort: 'datePosted,desc',
+          filterByProductId: [],
+          documentDTOList: [],
+          imageViewerFlag: false,
+          imageViewerData: [],
+          imageViewerCurrentIndex: 0,
+          fromDate: '',
+          uptoDate: '',
+          loading: false,
+          page: 0,
+          size: 10,
+          hasNext: true,
+          filterablePostId: this.props.filterablePostId,
           postModal: false
         };
     }
@@ -185,15 +188,15 @@ class ProjectUpdateComponent extends Component {
 
     sendPost = async(validate = false) => {
       let { selectedProduct, selectedDeliverable, post, documentDTOList } = this.state;
-      console.log("body for post","entered");
 
       if(validate && (!selectedProduct || !selectedDeliverable)){
         toastError("Please select product and deliverable");
         return;
       }
+
       let body ={
         projectId : this.props.projectId,
-        text : post,
+        text : post.toString('html'),
         postType : 'QUERY'
       }
       if (selectedProduct) {
@@ -216,7 +219,7 @@ class ProjectUpdateComponent extends Component {
           if(data.success){
             this.setState({
               loading:false,
-              post : '',
+              post : RichTextEditor.createEmptyValue(),
               documentDTOList : [],
               postModal: false
             })
@@ -358,7 +361,6 @@ class ProjectUpdateComponent extends Component {
       let { productDetails, selectedDeliverable } = this.state;
       let result = [];
       productDetails.phaseResponseList && productDetails.phaseResponseList.map((item,i)=>{
-        // console.log("loadDeliverableList",item.phaseName)
         let temp = item.deliverableResponseList.map((item2,j)=> {
           if(item2.id==selectedDeliverable){
             return(
@@ -378,16 +380,22 @@ class ProjectUpdateComponent extends Component {
       })
       return result;
     }
+
     loadJsFiles = () => {
       loadjs(['/js/script.js','/js/custom.js','/js/datepicker.js']);
     }
 
     showImageViewer = (docs,index) => {
-      console.log("docs",docs)
       this.setState({
         imageViewerFlag : true,
         imageViewerCurrentIndex : index,
         imageViewerData : docs.map((item)=>(item.docUrl))
+      })
+    }
+
+    onChangeRT = (val, key) => {
+      this.setState({
+        [key]: val
       })
     }
 
@@ -418,7 +426,6 @@ class ProjectUpdateComponent extends Component {
               deliverableFlag, imageViewerFlag, imageViewerData, imageViewerCurrentIndex,
               fromDate, uptoDate, filterablePostId, postModal, selectedProduct
             } = this.state;
-        console.log("userInfo from update",userInfo)
         return (
           <LoadingOverlay
             active={this.state.loading}
@@ -446,10 +453,9 @@ class ProjectUpdateComponent extends Component {
             }}
             spinner
             text={LOADER_TEXT}>
-              {
-                imageViewerFlag && (
+              {imageViewerFlag && (
                   <ImageViewer
-                    backgroundStyle={{backgroundColor:'rgba(0,0,0,.5)', zIndex:999}}
+                    backgroundStyle={{backgroundColor:'rgba(0,0,0,.5)',zIndex:999}}
                     src={ imageViewerData }
                     currentIndex={ imageViewerCurrentIndex }
                     onClose={ () => {
@@ -466,7 +472,6 @@ class ProjectUpdateComponent extends Component {
                       <div className="production">
                           <h6 className="filter-icon">Filter</h6>
                           <div className="checklist-item">
-                              <label className="mb-3">Date</label>
                               <div className="date-range">
                                   <input className="input-field" type="date" name="fromDate" onChange={this.onChange} placeholder="dd.mm.yyyy"/>
                                   <span>to</span>
@@ -493,40 +498,6 @@ class ProjectUpdateComponent extends Component {
 
                           </div>
                       </div>
-                      <div className="tag-n-deadline responsive-show">
-                          <div className="production">
-                              <h6 className="hashtag-ico">Topics</h6>
-                              <div className="checklist-item">
-                                  <div className="sample">
-                                      {
-                                          taggedTopics.map((item,i)=>{
-                                              return(
-                                                  <a href="#" key={i}>#{item.name}</a>
-                                              )
-                                          })
-                                      }
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="production">
-                              <h6 className="hashtag-ico upcoming-ico">Upcoming deadlines</h6>
-                              <div className="checklist-item">
-                                  <div className="sample-deadline">
-                                      {
-                                          upcomingDeadlines.map((item,i)=>{
-                                              return(
-                                                  <div className="list" key={i}>
-                                                      <span>{item.productName}</span>
-                                                      <a href="#">{item.deliverableText}</a>
-                                                      <span>{item.deadline}</span>
-                                                  </div>
-                                              )
-                                          })
-                                      }
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
                   </div>
                   <div className="timeline">
                       <div className="editor">
@@ -540,8 +511,29 @@ class ProjectUpdateComponent extends Component {
                                 <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
                                 <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                               }
-                              <textarea name="post" onChange={this.onChangeFromPost} rows="5" value={post} placeholder="Write here....."/>
+                              <RichTextEditor
+                                className="rich-text"
+                                toolbarConfig={toolbarConfig}
+                                value={post}
+                                placeholder="Write here....."
+                                onChange={(val) => this.onChangeRT(val, 'post')}
+                                toolbarStyle={{display: 'none'}}
+                              />
+                              {/*<textarea name="post" onChange={this.onChangeFromPost} rows="1" value={post} placeholder="Write here....."/>*/}
                           </div>
+
+                          {
+                              documentDTOList.length > 0 &&
+                              <div className="uploaded-photo">
+                                  {
+                                      documentDTOList.map((item,i)=>{
+                                          return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
+                                          // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
+                                      })
+                                  }
+                              </div>
+                          }
+
                           <div className="footer-tab">
                               <div className="file btn">
                                   Photo/Video
@@ -551,20 +543,9 @@ class ProjectUpdateComponent extends Component {
                               </button>*/}
                               <button className="send-feed main-editor" onClick={()=>this.setState({postModal: true})}>Submit</button>
                           </div>
-                          {
-                            documentDTOList.length > 0 &&
-                            <div className="uploaded-photo">
-                            {
-                              documentDTOList.map((item,i)=>{
-                                return <CancellableImage key={i} src={item.base64Str} close={() => this.remove(i)} />
-                                // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
-                              })
-                            }
-                            </div>
-                          }
                       </div>
                       {
-                        filterablePostId ? <a href={"/orders/view/" + this.props.projectId + '?tab=2'}><p  style={{marginTop:10,marginBottom:10,borderWidth:1,padding:10,backgroundColor:'#eeecf6',borderRadius:5}}>Reload Posts</p></a>:<></>
+                        filterablePostId ? <a href={"/my-project-details/" + this.props.projectId + '?tab=2'}><p  style={{marginTop:10,marginBottom:10,borderWidth:1,padding:10,backgroundColor:'#eeecf6',borderRadius:5}}>Reload Posts</p></a>:<></>
                       }
                       {
                         posts.map((item,i)=><PostWithFeedback key={item.id} post={item} userInfo={userInfo} imageViewer={this.showImageViewer} />)
@@ -572,25 +553,26 @@ class ProjectUpdateComponent extends Component {
 
                   </div>
                   <div className="tag-n-deadline responsive-off">
-                      <div className="production">
-                          <h6 className="hashtag-ico">Topics</h6>
-                          <div className="checklist-item">
-                              <div className="sample">
-                                {
-                                  taggedTopics.map((item,i)=>{
-                                    return(
-                                      <a href="#" key={i}>#{item.name}</a>
-                                    )
-                                  })
-                                }
-                              </div>
-                          </div>
-                      </div>
+                      {/*<div className="production">*/}
+                      {/*    <h6 className="hashtag-ico">Topics</h6>*/}
+                      {/*    <div className="checklist-item">*/}
+                      {/*        <div className="sample">*/}
+                      {/*          {*/}
+                      {/*            taggedTopics.map((item,i)=>{*/}
+                      {/*              return(*/}
+                      {/*                <a href="#" key={i}>#{item.name}</a>*/}
+                      {/*              )*/}
+                      {/*            })*/}
+                      {/*          }*/}
+                      {/*        </div>*/}
+                      {/*    </div>*/}
+                      {/*</div>*/}
                       <div className="production">
                           <h6 className="hashtag-ico upcoming-ico">Upcoming deadlines</h6>
                           <div className="checklist-item">
                               <div className="sample-deadline">
                               {
+                                upcomingDeadlines && upcomingDeadlines.length ?
                                 upcomingDeadlines.map((item,i)=>{
                                   return(
                                     <div className="list" key={i}>
@@ -599,7 +581,7 @@ class ProjectUpdateComponent extends Component {
                                         <span>{convertTimeToLocal(item.deadline, '', 'DD.MM.YYYY')}</span>
                                     </div>
                                   )
-                                })
+                                }) : <></>
                               }
                               </div>
                           </div>
@@ -656,13 +638,13 @@ class ProjectUpdateComponent extends Component {
                                   <img src={require("../../../assets/images/pro_pic_default.svg")} className="user-photo" alt=""/>
                                 }
                                       <div className="input-text">
-                                          <p>{post}</p>
+                                          <div dangerouslySetInnerHTML={{ __html: parseHtml(post.toString('html')) }}/>
+                                          {/*<p>{post}</p>*/}
                                       </div>
                                       <div className="uploaded-photo">
                                       {
                                         documentDTOList.map((item,i)=>{
                                           return <img src={item.base64Str} alt=""/>
-                                          // return(<img key={i} src={item.base64Str} style={{height:50,width:50,margin:5,border:'solid 1px black'}} />)
                                         })
                                       }
 
