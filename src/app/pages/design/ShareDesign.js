@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import RichTextEditor from 'react-rte';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
@@ -15,6 +16,9 @@ import { columns,fixedHeaders, LOADER_STYLE } from '../../constants';
 import { MeasurementTable } from './components/MeasurementTable'
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import ColorRowWithPicker from "./components/ColorRowWithPicker";
+import { parseHtml } from '../../services/Util';
+
+let toolbarConfig = {display: []};
 
 class ShareDesign extends Component {
 
@@ -27,7 +31,7 @@ class ShareDesign extends Component {
         	fabricDetails: '',
         	productTypeId: '',
         	tableJson: null,
-        	note: '',
+        	note: RichTextEditor.createEmptyValue(),
         	colors:[{
             hexCode: '',
             name: ''
@@ -146,17 +150,15 @@ class ShareDesign extends Component {
     }
 
     onChange = (e) => {
-        // let {errors} = this.state;
-        // if (errors[e.target.name]) {
-        //     let validated = validateShareDesign(this.state);
-        //     this.setState({
-        //       errors: {...this.state.errors, ...validated.errors},
-        //       colors: validated.errors.colors ? validated.errors.colors : this.state.colors
-        //     });
-        // }
         this.setState({
           [e.target.name]: e.target.value
         })
+    }
+
+    onChangeRT = (val, key) => {
+      this.setState({
+        [key]: val
+      })
     }
 
     onFileUpload = (e, docType) => {
@@ -405,7 +407,14 @@ class ShareDesign extends Component {
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label for="">Notes</label>
-                                        <textarea name="note" value={note} onChange={this.onChange} rows="4" placeholder="Additional note" className="bg-gray-light border-0"></textarea>
+                                        <RichTextEditor
+                                          className="rich-text"
+                                          toolbarConfig={toolbarConfig}
+                                          value={note}
+                                          placeholder="Additional note....."
+                                          onChange={(val) => this.onChangeRT(val, 'note')}
+                                          toolbarStyle={{display: 'none'}}
+                                        />
                                     </div>
                                 </div>
                             </div>

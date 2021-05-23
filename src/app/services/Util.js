@@ -688,10 +688,24 @@ const changeDateFormat = ((date, currentFormat = 'DD/MM/YYYY', newFormat = 'Do M
   moment(date, currentFormat).format(newFormat))
 )
 
+const parseHtml = (text) => {
+    let urlRegex =/(\b((https?|ftp|file):\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?)/ig;
+
+    return text.replace(urlRegex, function(url) {
+        let newUrl = url.indexOf("http") === -1 ? "http://" + url : url;
+        return '<a href="' + newUrl + '">' + url + '</a>';
+    });
+    // let exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    // let text1=text.replace(exp, "<a href='$1'>$1</a>");
+    // let exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    // return text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
-    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat
+    getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
+    parseHtml
 };

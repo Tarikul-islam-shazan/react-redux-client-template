@@ -134,7 +134,7 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
             fabricDetails,
             productTypeId,
             // tableJson, //need details
-            note,
+            note: note.toString('html'),
             colors,
             documentIds
         };
