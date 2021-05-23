@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
 import Modal from 'react-bootstrap/Modal'
+import RichTextEditor from 'react-rte';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
@@ -95,6 +96,7 @@ class EditShareDesign extends Component {
         .then(({data}) => {
           console.log('getShareDesignDetails SUCCESS: ', data);
           if(data){
+            data.note = data.note ? RichTextEditor.createValueFromString(data.note, 'html') : RichTextEditor.createEmptyValue();
             this.setState({designDetails: data})
           }
         })
@@ -407,7 +409,7 @@ class EditShareDesign extends Component {
         let body = {};
 
         if (sectionName === 'editNotes') {
-            body.note = designDetails.note;
+            body.note = designDetails.note.toString('html');
         } else if (sectionName === 'editMeasurementChart') {
             body.sizeText = JSON.stringify(measurementChart);
         }

@@ -42,8 +42,8 @@ class QuoteNowCart extends Component {
     handleScroll = async() => {
       const wrappedElement = document.getElementById('sidebarCollapse');
       if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
-        console.log('bottom reached');
         let { hasNext, page, loading, designList, size } = this.state;
+        console.log('bottom reached');
         console.log("message", 'bottom reached', hasNext, page, loading)
         if (hasNext && !loading && designList.length) {
           let data = await this.renderList(page+1)
@@ -293,8 +293,8 @@ class QuoteNowCart extends Component {
                       }
                           <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
                       </div>
-                    </> : 
-                  <div className="not-found">    
+                    </> :
+                  <div className="not-found">
                     <h1 className="msg">There is no quote added from you yet</h1>
                     <div className="illustration">
                       <img src={require("../../assets/images/not-found.png")} alt="" />
@@ -339,7 +339,7 @@ class QuoteNowCart extends Component {
                       </div>
                   </div>
 
-                  <div className="added-item  custom-scrollbar">
+                  <div className="added-item  custom-scrollbar" id="sidebarCollapse">
                   {
                     designList.map((product, i) => {
                       return(

@@ -55,6 +55,11 @@ class OurDesignDetails extends Component {
 
     handleClickOutside = (event) => {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            let id = this.props.match.params.id;
+            let {selectedProductIds} = this.props;
+            if (selectedProductIds.length === 1 && selectedProductIds[0] == id) {
+              this.props._storeData('selectedProductIds', []);
+            }
             this.setState({
               showAddCollectionPopup: false
             })
@@ -176,7 +181,7 @@ class OurDesignDetails extends Component {
       }
     }
 
-    addToQuote = async(ids) => {
+    addToQuote = async(ids, heroProduct = false) => {
       let products = await _getProductForQuote(ids);
       let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
       if (quote) {
@@ -194,6 +199,9 @@ class OurDesignDetails extends Component {
       localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
       await this.props._storeData('quoteObj', quote);
       await this.props._storeData('selectedProductIds', []);
+      if (heroProduct) {
+        toastSuccess('Quote added successfully.');
+      }
       this.updateProductCard();
     }
 
@@ -438,6 +446,20 @@ class OurDesignDetails extends Component {
             toastError("Request was unsuccessful.");
           }
         });
+    }
+
+    addShowingProductToCollection = () => {
+      let id = this.props.match.params.id;
+      this.props._storeData('selectedProductIds', [id]);
+      this.updateProductCard();
+      this.setState({
+        showAddCollectionPopup: true
+      })
+    }
+
+    addShowingProductToQuote = async() => {
+      let id = this.props.match.params.id;
+      this.addToQuote([id], true)
     }
 
     render() {
@@ -706,8 +728,8 @@ class OurDesignDetails extends Component {
                                           <path id="like_1_" data-name="like (1)" d="M26.43,9.216c-.386-4.283-3.4-7.39-7.165-7.39a7.113,7.113,0,0,0-6.1,3.54,6.856,6.856,0,0,0-5.955-3.54C3.441,1.826.43,4.933.044,9.216a7.67,7.67,0,0,0,.225,2.808,12.061,12.061,0,0,0,3.665,6.158l9.223,8.427,9.382-8.427A12.062,12.062,0,0,0,26.2,12.024,7.688,7.688,0,0,0,26.43,9.216Z" transform="translate(0 -1.826)" fill="#8f95a2"/>
                                       </svg>
                                   </a>
-                                  <a href="" className="btn btn-outline-secondary mr-3  border-gray-light">Add to collection</a>
-                                  <a href="" className="btn mr-3  border-0 brand-bg-color-secondary text-white quote-now">Quote Now</a>
+                                  <a href="#" onClick={() => this.addShowingProductToCollection()} className="btn btn-outline-secondary mr-3  border-gray-light">Add to collection</a>
+                                  <a href="#" onClick={() => this.addShowingProductToQuote()} className="btn mr-3  border-0 brand-bg-color-secondary text-white quote-now">Quote Now</a>
                               </div>
                           </div>
 
