@@ -21,6 +21,10 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
     return formattedDate.add(1, 'months').format('MMM D, YYYY');
   }
 
+  const onDiscuss = () => {
+    document.getElementsByClassName('IconLauncher__BaseLauncher-m649nu-0 IconLauncher__CircleLauncher-m649nu-2 eFiccJ reagan--widget-loaded undefined')[0].click()
+  }
+
   return(
     <div className={`quote-list mb-3 p-4 pl-5 d-flex justify-content-between align-items-center ${quote.isSelected ? `active` : ``}`}>
         <div className="select-quote">
@@ -195,7 +199,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                       </div>
                   </div>
                   <div className="position-relative">
-                      <button className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
+                      <button onClick={onDiscuss} className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
                       {/*<div className="option">
                           <div className="dropdown">
                               <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -241,7 +245,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                       </svg>
                   </div>
                   <div className="position-relative">
-                      <button className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
+                      <button onClick={onDiscuss} className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
                       {/*<div className="option">
                           <div className="dropdown">
                               <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
