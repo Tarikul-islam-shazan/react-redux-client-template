@@ -88,29 +88,46 @@ class MyRFQs extends Component {
     this.setState({
       userInfo: JSON.parse(userInfo)
     })
+    window.addEventListener("scroll", this.onScrollToEnd);
     window.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScrollToEnd);
     window.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   onScrollToEnd = () => {
-    const wrappedElement = document.getElementById('sidebarCollapse');
-    if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
-      let { hasNext, page } = this.state;
-      let { loading } = this.state;
-      if (hasNext && !loading) {
-        // toastWarning("No more notification found.")
-        this.renderList(page + 1, true)
+      const windowHeight =
+          "innerHeight" in window
+              ? window.innerHeight
+              : document.documentElement.offsetHeight;
+      const body = document.body;
+      const html = document.documentElement;
+      const docHeight = Math.max(
+          body.scrollHeight,
+          body.offsetHeight,
+          html.clientHeight,
+          html.scrollHeight,
+          html.offsetHeight
+      );
+      const windowBottom = windowHeight + window.pageYOffset;
+      if (windowBottom >= docHeight) {
+          let { hasNext, page, loading } = this.state;
+          console.log("message", "bottom reached", hasNext, page, loading);
+          if (hasNext && !loading) {
+              this.renderList(page + 1, true);
+          } else {
+              if (!hasNext) {
+                  // toastWarning("No more data found.")
+              }
+          }
+          // this.setState({
+          //     message: 'bottom reached'
+          // });
       } else {
-        if (!hasNext) {
-          // toastWarning("No more rfq's found.")
-        }
       }
-
-    }
-  }
+  };
 
   renderList = async (page = 0, merge = false) => {
     this.setState({ loading: true })
