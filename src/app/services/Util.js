@@ -389,14 +389,9 @@ const rfqStatus = (item) => {
 
 const rfqProductStatus = (item) => {
   switch(item.status) {
-    case 'PENDING':
-      return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
-      )
-      break;
     case 'OFFER_PENDING':
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
+        <span className="badge table-badge" style={{backgroundColor: '#F0EDF7', color: '#452D8F'}}>Offer Pending</span>
       )
       break;
     case 'PRICE_GIVEN':

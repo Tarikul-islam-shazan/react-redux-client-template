@@ -58,7 +58,7 @@ export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnA
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-18 semibold">{product.fabricComposition} {product.fabricWeight} GSM</h5>
+                        <h5 className="font-18 semibold">{product.fabricDetails? product.fabricDetails : product.fabricComposition + product.fabricWeight}GSM</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
