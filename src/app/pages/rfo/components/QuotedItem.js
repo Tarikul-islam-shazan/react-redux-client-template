@@ -9,9 +9,9 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   
   if (quote.status !== 'PRICE_GIVEN') {
     let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY hh:mm A');
-    formattedQuoteDate = moment(formattedQuoteDate);
+    formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
     const currentDate = moment().format('DD/MM/YYYY hh:mm A');
-    const formattedCurrentDate = moment(currentDate);
+    const formattedCurrentDate = moment(currentDate, 'DD/MM/YYYY hh:mm A');
     timeDifference = 24 - formattedCurrentDate.diff(formattedQuoteDate, 'hours');
   }
 
