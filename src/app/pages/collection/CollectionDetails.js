@@ -804,7 +804,7 @@ class CollectionDetails extends Component {
                               collectionList.length ?
                               <div class="all-collection">
                                   <span>All collection</span>
-                                  <ul class="p-0 m-0 existing-item">
+                                  <ul class="p-0 m-0 existing-item pop-list-item custom-scrollbar">
                                   {
                                     collectionList.map((collection, i) => {
                                       return(
