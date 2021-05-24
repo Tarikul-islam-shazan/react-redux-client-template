@@ -155,7 +155,13 @@ class QuoteNowCart extends Component {
       await this.updateCartGlobally();
     }
 
-    validateNum = (value) => parseInt(value) | 0
+    validateNum = (value) => {
+      if(isNaN(Number(value))) {
+        return ""
+     } else {
+         return value
+     }
+    }
 
     onChangeQuantity = async(productIndex, colorIndex, name, value) => {
       let {cart} = this.state;
