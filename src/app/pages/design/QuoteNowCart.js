@@ -334,7 +334,7 @@ class QuoteNowCart extends Component {
                               defaultMoq={MOQ} 
                             />
                           )
-                        })
+                        }).reverse()
                       }
                           <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
                       </div>
