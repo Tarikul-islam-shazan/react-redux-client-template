@@ -1,19 +1,12 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { addImageSuffix } from '../../../services/Util';
+import { addImageSuffix, validateNumber } from '../../../services/Util';
 import {getTotal} from '../actions';
 
 
 export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnAroundTime, defaultMoq }) => {
 
   let flag = 1;
-
-  const validateNum = (e) => {
-    const valuesAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    if (!valuesAllowed.includes(e.key)) {
-      e.preventDefault()
-    }
-  }
 
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
@@ -116,7 +109,7 @@ export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnA
                     colorWithSize.sizeQuantityPairList.map((pair, key) => {
                       return(
                         <div className="size">
-                            <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} onKeyPress = {validateNum}  className="bg-gray-light"/>
+                            <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} onKeyPress = {validateNumber}  className="bg-gray-light"/>
                         </div>
                       )
                     })

@@ -696,11 +696,18 @@ const parseHtml = (text) => {
     // return text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
 }
 
+const validateNumber = (e) => {
+  const valuesAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  if (!valuesAllowed.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml
+    parseHtml, validateNumber
 };

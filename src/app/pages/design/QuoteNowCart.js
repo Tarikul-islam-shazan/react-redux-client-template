@@ -16,7 +16,7 @@ import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {QuoteNowProduct} from './components/QuoteNowProduct';
 import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
-
+import EmptyState from '../../commonComponents/EmptyState';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
@@ -331,11 +331,10 @@ class QuoteNowCart extends Component {
                           <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
                       </div>
                     </> :
-                  <div className="not-found">
-                    <h1 className="msg">There is no quote added from you yet</h1>
-                    <div className="illustration">
-                      <img src={require("../../assets/images/not-found.png")} alt="" />
-                    </div>
+                  <div className="mt-5 not-found">
+                    <EmptyState
+                      title="Sorry no quote added yet"
+                    />
                   </div>
               }
               </div>
