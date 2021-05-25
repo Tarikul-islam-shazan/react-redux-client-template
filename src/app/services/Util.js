@@ -539,7 +539,7 @@ const productAvailabilityStatus = (item) => {
       break;
     default:
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No status</span>
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Private</span>
       )
       // code block
   }
