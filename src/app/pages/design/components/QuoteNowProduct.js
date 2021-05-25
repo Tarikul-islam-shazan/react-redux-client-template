@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import { addImageSuffix } from '../../../services/Util';
 import {getTotal} from '../actions';
 
@@ -36,20 +37,20 @@ export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnA
               if(doc.docType=='PRODUCT_DESIGN' && flag){
                 flag = 0;
                 return (
-                  <a href="#"><img src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="" className="radius-3"/></a>
+                  <Link to={`/designs/view/${product.id}`}> <img src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="" className="radius-3"/></Link>
                 )
               }
               if(product.documentResponseList.length==i+1 && flag){
                 return(
-                  <a href="#"><img src={product.documentResponseList[0].docUrl} alt="" className="radius-3"/></a>
+                  <Link to={`/designs/view/${product.id}`}> <img src={product.documentResponseList[0].docUrl} alt="" className="radius-3"/></Link>
                 )
               }
             })
             :
-            <a href="#"><img src={require("../../../assets/images/default_product.svg")} alt="" className="radius-3"/></a>
+            <Link to={`/designs/view/${product.id}`}><img src={require("../../../assets/images/default_product.svg")} alt="" className="radius-3"/></Link>
           }
             <div className="info-right ml-4">
-                <a href="#" className="font-weight-bold m-0 mt-2 font-20 ellipse-2-line">{product.name ? product.name : 'N/A'}</a>
+                <Link  to={`/designs/view/${product.id}`} className="font-weight-bold m-0 mt-2 font-20 ellipse-2-line">{product.name ? product.name : 'N/A'}</Link>
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Product category</label>
