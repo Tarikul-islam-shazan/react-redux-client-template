@@ -6,7 +6,14 @@ import {getTotal} from '../actions';
 export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnAroundTime, defaultMoq }) => {
 
   let flag = 1;
-  
+
+  const validateNum = (e) => {
+    const valuesAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    if (!valuesAllowed.includes(e.key)) {
+      e.preventDefault()
+    }
+  }
+
   return(
     <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
         <div className="dlt" onClick={() => remove(index)}>
@@ -58,7 +65,10 @@ export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnA
                 <div className="features add-quote-list d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-18 semibold">{product.fabricDetails? product.fabricDetails : product.fabricComposition + product.fabricWeight}GSM</h5>
+                        <h5 className="font-18 semibold">{
+                            product.fabricDetails ? product.fabricDetails : 
+                            product.fabricComposition ?  product.fabricComposition + product.fabricWeight : ''
+                          } GSM</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
@@ -105,7 +115,7 @@ export const QuoteNowProduct = ({ product, index, onChange, remove, defaultTurnA
                     colorWithSize.sizeQuantityPairList.map((pair, key) => {
                       return(
                         <div className="size">
-                            <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} className="bg-gray-light"/>
+                            <input type="text" placeholder="00" value={pair.quantity} onChange={(e) => onChange(index, colorIndex, pair.code, e.target.value)} onKeyPress = {validateNum}  className="bg-gray-light"/>
                         </div>
                       )
                     })

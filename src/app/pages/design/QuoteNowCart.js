@@ -155,20 +155,12 @@ class QuoteNowCart extends Component {
       await this.updateCartGlobally();
     }
 
-    validateNum = (value) => {
-      if(isNaN(Number(value))) {
-        return ""
-     } else {
-         return value
-     }
-    }
-
     onChangeQuantity = async(productIndex, colorIndex, name, value) => {
       let {cart} = this.state;
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList =
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
-          if (pair.code === name) {
-            pair.quantity = this.validateNum(value);
+          if (pair.code === name){
+              pair.quantity = value
           }
           return pair;
       })

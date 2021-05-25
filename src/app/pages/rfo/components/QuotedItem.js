@@ -9,9 +9,9 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   
   if (quote.status !== 'PRICE_GIVEN') {
     let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY hh:mm A');
-    formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
+    formattedQuoteDate = moment(formattedQuoteDate);
     const currentDate = moment().format('DD/MM/YYYY hh:mm A');
-    const formattedCurrentDate = moment(currentDate, 'DD/MM/YYYY hh:mm A');
+    const formattedCurrentDate = moment(currentDate);
     timeDifference = 24 - formattedCurrentDate.diff(formattedQuoteDate, 'hours');
   }
 
@@ -19,10 +19,6 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
     let formattedDate = convertTimeToLocal(date, time, 'MMM D, YYYY hh:mm A');
     formattedDate = moment(formattedDate);
     return formattedDate.add(1, 'months').format('MMM D, YYYY');
-  }
-
-  const onDiscuss = () => {
-    document.getElementsByClassName('IconLauncher__BaseLauncher-m649nu-0 IconLauncher__CircleLauncher-m649nu-2 eFiccJ reagan--widget-loaded undefined')[0].click()
   }
 
   return(
@@ -199,7 +195,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                       </div>
                   </div>
                   <div className="position-relative">
-                      <button onClick={onDiscuss} className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
+                      <button className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
                       {/*<div className="option">
                           <div className="dropdown">
                               <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -245,7 +241,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                       </svg>
                   </div>
                   <div className="position-relative">
-                      <button onClick={onDiscuss} className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
+                      <button className="m-0 btn-brand m-0 shadow float-right">Discuss</button>
                       {/*<div className="option">
                           <div className="dropdown">
                               <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
