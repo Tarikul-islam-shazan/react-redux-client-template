@@ -161,3 +161,14 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
 // 				}
 //     });
 // };
+
+export const  getTotal = (sizeQuantityPairList) => {
+    let total = 0;
+   sizeQuantityPairList.map((pair, key) => {
+     if (pair.quantity) {
+       total += parseInt(pair.quantity);
+     }
+   })
+   return total;
+ }
+

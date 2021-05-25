@@ -16,11 +16,12 @@ import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {QuoteNowProduct} from './components/QuoteNowProduct';
 import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
-
+import EmptyState from '../../commonComponents/EmptyState';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
-import {_storeData, _getProductForQuote} from './actions';
+import {fetchGeneralSettingsData} from '../../actions';
+import {_storeData, _getProductForQuote, getTotal} from './actions';
 
 class QuoteNowCart extends Component {
 
@@ -35,7 +36,9 @@ class QuoteNowCart extends Component {
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           cart: [],
-          title: ''
+          title: '',
+          TURN_AROUND_TIME: "",
+          MOQ: "",
         };
     }
 
@@ -92,6 +95,17 @@ class QuoteNowCart extends Component {
           this.props._storeData('quoteObj', quote);
         }
       }
+
+      const keys = ['MOQ', 'TURN_AROUND_TIME']
+      const data = await fetchGeneralSettingsData(keys);
+      if(data){
+        this.setState({
+          TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+          ? data["TURN_AROUND_TIME"].value
+          : "",
+        MOQ: data["MOQ"] ? data["MOQ"].value : "",
+        })
+      }
       // this.setState({loading: true});
       let designList = await this.renderList();
       this.setState({designList});
@@ -145,8 +159,8 @@ class QuoteNowCart extends Component {
       let {cart} = this.state;
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList =
       cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
-          if (pair.code === name) {
-            pair.quantity = value;
+          if (pair.code === name){
+              pair.quantity = value
           }
           return pair;
       })
@@ -157,8 +171,7 @@ class QuoteNowCart extends Component {
     removeFromCart = async(index) => {
       let {cart} = this.state;
       cart = cart.filter((product, i) => i !== index);
-      await this.setState({cart});
-      await this.updateCartGlobally();
+      this.updateCart(cart)
     }
 
     updateCartGlobally = async() => {
@@ -193,7 +206,7 @@ class QuoteNowCart extends Component {
       await this.props._storeData('quoteObj', quote);
       await this.props._storeData('selectedProductIds', []);
     }
-
+    
     validate = () => {
       let {cart, title} = this.state;
       let flag = true;
@@ -201,11 +214,12 @@ class QuoteNowCart extends Component {
         let tempFlag = true;
         product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
           colorWithSize.sizeQuantityPairList.map((pair) => {
-            if (!pair.quantity) {
+            if(getTotal(colorWithSize.sizeQuantityPairList) < parseInt(product.minimumOrderQuantity)){
               flag = false;
               tempFlag = false;
-              product.error = 'Please insert all values'
-            }
+              product.error = 'Please insert values greater than or equal to MOQ'
+           }
+      
           })
         })
         if (tempFlag) {
@@ -215,6 +229,17 @@ class QuoteNowCart extends Component {
       })
       this.setState({cart});
       return flag;
+    }
+
+    removeAllFromCart = async() => {
+      let {cart} = this.state;
+      cart = [];
+      this.updateCart(cart)
+    }
+
+    updateCart = async (cart) => {
+      await this.setState({cart});
+      await this.updateCartGlobally();
     }
 
     submit = async() => {
@@ -227,7 +252,10 @@ class QuoteNowCart extends Component {
               let total = 0;
               product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
                 colorWithSize.sizeQuantityPairList.map((pair) => {
-                  if (pair.quantity) {
+                  if (pair.quantity === '' || pair.quantity === null) {
+                      pair.quantity = 0
+                  }
+                  else {
                     total += parseInt(pair.quantity);
                   }
                 })
@@ -248,6 +276,7 @@ class QuoteNowCart extends Component {
               if(data.success){
                 localStorage.setItem(LOCAL_QUOTE_NOW_KEY, '')
                 toastSuccess(data.message);
+                this.removeAllFromCart()
                 this.props.history.push('/quotes/list');
               }else{
                 toastError(data.message);
@@ -263,7 +292,7 @@ class QuoteNowCart extends Component {
     }
 
     render() {
-        let { designList, cart, title } = this.state;
+        let { designList, cart, title, TURN_AROUND_TIME, MOQ} = this.state;
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request">
@@ -287,18 +316,25 @@ class QuoteNowCart extends Component {
                       {
                         cart.map((product, i) => {
                           return(
-                            <QuoteNowProduct key={i} product={product} index={i} onChange={this.onChangeQuantity} remove={this.removeFromCart} />
+                            <QuoteNowProduct 
+                              key={i} 
+                              product={product} 
+                              index={i} 
+                              onChange={this.onChangeQuantity} 
+                              remove={this.removeFromCart}
+                              defaultTurnAroundTime={TURN_AROUND_TIME}
+                              defaultMoq={MOQ} 
+                            />
                           )
-                        })
+                        }).reverse()
                       }
                           <button className="m-0 btn-brand  shadow float-right" onClick={this.submit}>Submit to quote</button>
                       </div>
                     </> :
-                  <div className="not-found">
-                    <h1 className="msg">There is no quote added from you yet</h1>
-                    <div className="illustration">
-                      <img src={require("../../assets/images/not-found.png")} alt="" />
-                    </div>
+                  <div className="mt-5 not-found">
+                    <EmptyState
+                      title="Sorry no quote added yet"
+                    />
                   </div>
               }
               </div>
@@ -343,7 +379,14 @@ class QuoteNowCart extends Component {
                   {
                     designList.map((product, i) => {
                       return(
-                        <QuoteNowMyProductCard key={i}  cart={cart} product={product} addToQuote={this.addToQuote} />
+                        <QuoteNowMyProductCard 
+                          key={i}  
+                          cart={cart} 
+                          product={product} 
+                          addToQuote={this.addToQuote} 
+                          defaultTurnAroundTime={TURN_AROUND_TIME}
+                          defaultMoq={MOQ}
+                          />
                       )
                     })
                   }

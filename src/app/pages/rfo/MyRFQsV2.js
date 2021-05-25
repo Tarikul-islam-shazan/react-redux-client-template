@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import axios from 'axios';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
@@ -19,7 +19,7 @@ import {RfqSkeleton, RfqProductSkeleton, CreateSkeletons} from '../../commonComp
 import {QuotedItem} from './components/QuotedItem';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
-import { event } from 'jquery';
+import EmptyState from '../../commonComponents/EmptyState';
 
 class MyRFQs extends Component {
 
@@ -316,11 +316,9 @@ class MyRFQs extends Component {
     if (!hasNext && !rfqList.length) {
       return (
         <div className="not-found">
-          <h1 className="msg">There is no quote request from you</h1>
-          <button className="btn btn-nitex-default" onClick={() => this.props.history.push('/designs/add')}>Start now</button>
-          <div className="illustration">
-            <img src={require("../../assets/images/not-found.png")} alt="" />
-          </div>
+          <h1 className="mb-2 msg">There is no quote request from you</h1>
+          <EmptyState/>
+          <Link className='font-18' to='/quotes/list'>Go back</Link>
         </div>
       )
     }
@@ -364,7 +362,7 @@ class MyRFQs extends Component {
                 <div className="status mr-3 mt-3 mt-sm-0">
                     <select className="w-100 bg-gray-light border-0" name="status" value={status} onClick={(e) => this.onChange(e)}>
                         <option>Status </option>
-                        <option value="PENDING">Pending</option>
+                        <option value="OFFER_PENDING">Offer Pending</option>
                         <option value="PRICE_GIVEN">Price Given</option>
                         <option value="APPROVED">Approved</option>
                     </select>
