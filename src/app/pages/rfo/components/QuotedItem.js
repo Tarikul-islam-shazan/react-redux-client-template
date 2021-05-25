@@ -1,5 +1,5 @@
 import React from 'react';
-import { addImageSuffix, rfqProductStatus, convertTimeToLocal } from '../../../services/Util';
+import { addImageSuffix, rfqProductStatus, convertTimeToLocal, changeDateFormat } from '../../../services/Util';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
@@ -82,7 +82,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Date</label>
-                        <h5 className="color-333">{quote.date}</h5>
+                        <h5 className="color-333">{changeDateFormat(quote.date, "DD/MM/YYYY", "DD-MM-YYYY")}</h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Status</label>
