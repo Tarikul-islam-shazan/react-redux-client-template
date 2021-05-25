@@ -703,11 +703,13 @@ const validateNumber = (e) => {
   }
 }
 
+const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber
+    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION
 };
