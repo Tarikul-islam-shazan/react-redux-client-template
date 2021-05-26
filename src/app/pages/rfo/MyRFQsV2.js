@@ -365,6 +365,8 @@ class MyRFQs extends Component {
                         <option value="OFFER_PENDING">Offer Pending</option>
                         <option value="PRICE_GIVEN">Price Given</option>
                         <option value="APPROVED">Approved</option>
+                        <option value="PRODUCT_SOLD">Design Sold</option>
+                        <option value="ORDER_PLACED">Order Placed</option>
                     </select>
                 </div>
                 <div className="search mr-3">
