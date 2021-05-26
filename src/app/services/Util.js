@@ -389,14 +389,9 @@ const rfqStatus = (item) => {
 
 const rfqProductStatus = (item) => {
   switch(item.status) {
-    case 'PENDING':
-      return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
-      )
-      break;
     case 'OFFER_PENDING':
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No Offer</span>
+        <span className="badge table-badge" style={{backgroundColor: '#F0EDF7', color: '#452D8F'}}>Offer Pending</span>
       )
       break;
     case 'PRICE_GIVEN':
@@ -539,7 +534,7 @@ const productAvailabilityStatus = (item) => {
       break;
     default:
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No status</span>
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Private</span>
       )
       // code block
   }
@@ -701,11 +696,20 @@ const parseHtml = (text) => {
     // return text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
 }
 
+const validateNumber = (e) => {
+  const valuesAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  if (!valuesAllowed.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+
+const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml
+    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION
 };
