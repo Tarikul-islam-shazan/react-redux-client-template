@@ -180,6 +180,7 @@ class FitSampleEdit extends Component {
                     </div>
                     <h6 className="font-14 py-2 border-0">Feedback</h6>
                     <div className="write">
+                        <div className="rich-text-editor">
                         {
                           userInfo && userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
                           <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} className="user-photo"/> :
@@ -194,6 +195,7 @@ class FitSampleEdit extends Component {
                           handleReturn={this.handleReturn}
                           toolbarStyle={{display: 'none'}}
                         />
+                    </div>
                     </div>
                     {
                       comments.map((item,i)=>{
