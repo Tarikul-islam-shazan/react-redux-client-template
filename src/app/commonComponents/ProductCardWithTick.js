@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {Dropdown} from 'react-bootstrap';
 
-import { productAvailabilityStatus, addImageSuffix } from '../services/Util';
+import { productAvailabilityStatus, addImageSuffix, STATUS_NOT_ALLOWED_FOR_SELECTION } from '../services/Util';
 
 import { _storeData } from "../pages/design/actions";
 // export class ProductCard = ({ item , showDetails , likeProduct , unlikeProduct }) => {
@@ -58,7 +58,7 @@ class ProductCard extends Component {
   render() {
     let flag = 1;
     let { product , showDetails , likeProduct , unlikeProduct } = this.props;
-    let disabled = (product.availabilityStatus === 'SOLD' || product.availabilityStatus === 'IN_PROJECT' || product.availabilityStatus === 'LOCKED');
+    let disabled = STATUS_NOT_ALLOWED_FOR_SELECTION.includes(product.availabilityStatus);
     return(
       <div className="item">
           <div className={`card product-card new-card ${product.isSelected ? 'active' : (product.isAddedToList ? 'hovered' : '')}`}>

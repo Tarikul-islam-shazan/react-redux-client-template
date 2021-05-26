@@ -534,7 +534,7 @@ const productAvailabilityStatus = (item) => {
       break;
     default:
       return(
-        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>No status</span>
+        <span className="badge table-badge" style={{backgroundColor: '#FFF1F1', color: '#D53939'}}>Private</span>
       )
       // code block
   }
@@ -712,6 +712,7 @@ const authUser = () => {
      }
    return userInfo;
 }
+const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
 
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
@@ -719,5 +720,5 @@ export {
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, authUser
+    parseHtml, validateNumber, authUser, STATUS_NOT_ALLOWED_FOR_SELECTION
 };

@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import { encodeQueryData, clothingLabelStatus } from '../../services/Util';
+import { encodeQueryData, clothingLabelStatus, STATUS_NOT_ALLOWED_FOR_SELECTION } from '../../services/Util';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ModalMyProductCard} from '../../commonComponents/ModalMyProductCard';
 
@@ -468,7 +468,13 @@ class CollectionDetails extends Component {
       })
       if (name === 'allCheckBox') {
         if (checked === true) {
-          await this.props._storeData('selectedProductIds', productList.map((product) => product.id));
+          let list = [];
+          productList.map((product) => {
+            if (!STATUS_NOT_ALLOWED_FOR_SELECTION.includes(product.availabilityStatus)) {
+              list.push(product.id)
+            }
+          })
+          await this.props._storeData('selectedProductIds', list);
           this.updateProductCard();
         } else {
           await this.props._storeData('selectedProductIds', []);
