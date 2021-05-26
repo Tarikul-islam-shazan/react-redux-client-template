@@ -501,7 +501,7 @@
   }
   .post {
     margin-top: 15px;
-
+    overflow: auto;
     .post-tag .table-badge {
       font-size: 12px;
       font-weight: normal !important;
@@ -871,6 +871,9 @@
   }
 }
 @media screen and (max-width: 1024px) {
+  .filter-container.explore-design-filter{
+    flex-direction: row !important;
+  }
   .project-statistic h6 {
     font-size: 14px;
   }
@@ -1249,7 +1252,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .details-action {
     position: fixed;
     bottom: 0;
@@ -1259,6 +1262,7 @@
     left: 0;
     padding: 0 20px 22px 20px;
     box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+    z-index: 999;
   }
   .sidebar-action {
     margin-bottom: 50px;
@@ -1455,7 +1459,7 @@
     vertical-align: middle;
   }
   .dashboard-container {
-    padding-top: 136px;
+    padding-top: 90px;
   }
 
   //quote-request
