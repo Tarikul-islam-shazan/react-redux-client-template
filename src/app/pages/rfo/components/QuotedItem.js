@@ -1,9 +1,11 @@
 import React from 'react';
-import { addImageSuffix, rfqProductStatus, convertTimeToLocal, changeDateFormat } from '../../../services/Util';
+import {addImageSuffix, rfqProductStatus, convertTimeToLocal, changeDateFormat} from '../../../services/Util';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-export const QuotedItem = ({quote, index, toggleSelect, search}) => {
+export const QuotedItem = ({quote, index, toggleSelect, search, authUserInfo
+}) => {
+  
   let flag = 1;
   let timeDifference = 0;
   

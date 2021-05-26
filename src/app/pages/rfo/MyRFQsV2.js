@@ -11,7 +11,7 @@ import { _storeData } from "../design/actions";
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
-import { rfqStatus, rfqProductStatus, convertTimeToLocal, changeDateFormat } from '../../services/Util';
+import { rfqStatus, rfqProductStatus, convertTimeToLocal, changeDateFormat, authUser } from '../../services/Util';
 
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { RfqCard } from './components/RfqCard';
@@ -84,9 +84,8 @@ class MyRFQs extends Component {
     })
 
     this.renderList(0);
-    const userInfo = await localStorage.getItem('userInfo');
     this.setState({
-      userInfo: JSON.parse(userInfo)
+      userInfo: authUser()
     })
     window.addEventListener("scroll", this.onScrollToEnd);
     window.addEventListener('mousedown', this.handleClickOutside);
@@ -315,10 +314,11 @@ class MyRFQs extends Component {
     let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection, orderTitle, orderFlag } = this.state;
     if (!hasNext && !rfqList.length) {
       return (
-        <div className="not-found">
-          <h1 className="mb-2 msg">There is no quote request from you</h1>
-          <EmptyState/>
-          <Link className='font-18' to='/quotes/list'>Go back</Link>
+        <div className="mt-5 not-found">
+          <EmptyState
+            title="Requested quotes not found"
+          />
+          <Link className="font-18" to='/quotes/list'>Go back</Link>
         </div>
       )
     }
@@ -429,7 +429,7 @@ class MyRFQs extends Component {
             {
               rfqList.map((quote, i) =>{
                 return(
-                  <QuotedItem quote={quote} key={i} index={i} toggleSelect={this.toggleSelect} search={this.searchByCollection}/>
+                  <QuotedItem quote={quote} key={i} index={i} toggleSelect={this.toggleSelect} search={this.searchByCollection} authUserInfo={userInfo}/>
                 )
               })
             }

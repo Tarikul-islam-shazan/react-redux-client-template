@@ -703,11 +703,21 @@ const validateNumber = (e) => {
   }
 }
 
+const authUser = () => {
+  let userInfo = localStorage.getItem('userInfo');
+     if(userInfo) {
+       userInfo = JSON.parse(userInfo);
+     } else {
+       userInfo = {};
+     }
+   return userInfo;
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber
+    parseHtml, validateNumber, authUser
 };
