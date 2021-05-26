@@ -181,7 +181,7 @@ class GivePayment extends Component {
                           <div className="form-row">
                               <div className="col-lg-12">
                                   <button className="btn-brand float-right mt-4" onClick={this.pay}>Payment</button>
-                                  <button className="btn-brand btn-outline-secondary float-right mt-4 mr-4" onClick={() => this.props.switchTab(0)}>Back</button>
+                                  <button className="btn-brand btn-outline-secondary float-right mt-0 mt-sm-4 mr-0 mr-sm-4" onClick={() => this.props.switchTab(0)}>Back</button>
                               </div>
                           </div>
                         </td>
