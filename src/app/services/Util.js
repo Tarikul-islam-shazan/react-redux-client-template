@@ -544,22 +544,22 @@ const invoiceStatus = (invoice) => {
   switch(invoice.status) {
     case 'PENDING':
       return(
-        <span class="badge design-badge" style={{backgroundColor: '#ECE9F4', color: '#472F91'}}>Pending</span>
+        <span class="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#ECE9F4', color: '#472F91'}}>Pending</span>
       )
       break;
     case 'PARTIALLY_PAID':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially paid</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially paid</span>
       )
       break;
     case 'APPROVED':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
       )
       break;
     case 'PAID':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
       )
       break;
     default:
@@ -705,11 +705,20 @@ const validateNumber = (e) => {
 
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
 
+const isValidJSON = str => {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION
+    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON
 };
