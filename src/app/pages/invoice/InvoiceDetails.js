@@ -20,7 +20,7 @@ class InvoiceDetails extends Component {
 
     componentDidMount = async() => {
       document.title = "Invoice Details - Nitex";
-      window.addEventListener('afterprint', this.onAfterPrint)
+      window.addEventListener('afterprint', this.onAfterPrint);
       let id = this.props.match.params.id;
       await this.setState({ loading: true });
       await getDetails(id)
@@ -29,22 +29,22 @@ class InvoiceDetails extends Component {
     }
 
     componentWillUnmount = () => {
-      window.removeEventListener('afterprint', this.onAfterPrint)
+      window.removeEventListener('afterprint', this.onAfterPrint);
     }
 
     onAfterPrint = () => {
-      this.setState({ isDownload: false })
+      this.setState({ isDownload: false });
     }
 
     onPayInvoice = (id) => {
-      this.props.history.push('/invoices/pay/' + id)
+      this.props.history.push('/invoices/pay/' + id);
     }
 
     render() {
         let {invoice, isDownload} = this.state;
         let toAddress = invoice.toAddress ? invoice.toAddress.address : {};
         let fromAddress = invoice.fromAddress ? invoice.fromAddress : {};
-        console.log('NOTES--SSSSSS', invoice);
+        
         const onDownload = (id) => {
           return (
             this.setState({
