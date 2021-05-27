@@ -6,6 +6,7 @@ import LoadingOverlay from 'react-loading-overlay';
 import { invoiceStatus, changeDateFormat } from '../../services/Util';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import { getDetails } from './actions';
+import InvoiceDownload from './components/InvoiceDownload'
 
 class InvoiceDetails extends Component {
 
@@ -79,6 +80,9 @@ class InvoiceDetails extends Component {
           }}
           spinner
           text={LOADER_TEXT}>
+       { !isDownload ?
+
+          <>
             <div class="back cursor-pointer" onClick={() => this.props.history.push('/invoices/list')}></div>
 
             <div class="admin-view-invoice mt-4">
@@ -199,6 +203,8 @@ class InvoiceDetails extends Component {
                 </div>
             </div>
            
+            </> : <InvoiceDownload invoiceData={invoice} />
+          }
             </LoadingOverlay>
         );
     }
