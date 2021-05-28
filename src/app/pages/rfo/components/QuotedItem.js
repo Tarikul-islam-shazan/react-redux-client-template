@@ -26,7 +26,7 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
     document.getElementsByClassName('IconLauncher__BaseLauncher-m649nu-0 IconLauncher__CircleLauncher-m649nu-2 eFiccJ reagan--widget-loaded undefined')[0].click()
   }
 
-  const renderTollTip = (message) => {
+  const renderTooltip = (message) => {
       return(
           <svg className="ml-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16" title={message} data-toggle="tooltip" data-placement="top">
           <g id="Group_13" data-name="Group 13" transform="translate(1445 -3504)">
@@ -70,9 +70,9 @@ const renderDisscussButton = () => {
                 <div className="form-group m-0">
                     <input type="checkbox" id={`check_${quote.id}`} name={`toggleSelect_${quote.id}`} onClick={toggleSelect} value={quote.id} checked={quote.isSelected ? true : false}/>
                     { quote.status ===  "ORDER_PLACED" ? 
-                        renderTollTip("Order placed for this design") :
+                        renderTooltip("Order placed for this design") :
                       quote.status ===  "PRODUCT_SOLD" ?
-                        renderTollTip("Design is already sold") :
+                        renderTooltip("Design is already sold") :
                       <label for={`check_${quote.id}`} className="m-0"></label>
                     }
                     
@@ -232,7 +232,7 @@ const renderDisscussButton = () => {
                           <br/>
                           <span className="cursor-pointer font-14">
                           /Piece
-                          {renderTollTip(quote.priceInfoText)}
+                          {renderTooltip(quote.priceInfoText)}
                           </span>
                       </div>
                   </div>
@@ -261,7 +261,7 @@ const renderDisscussButton = () => {
                           <br/>
                           <span className="cursor-pointer font-14">
                           /Piece
-                          {renderTollTip(quote.priceInfoText)}
+                          {renderTooltip(quote.priceInfoText)}
                           </span>
                       </div>
                   </div>
@@ -279,7 +279,7 @@ const renderDisscussButton = () => {
                 <br/>
                 <span className="cursor-pointer font-14">
                 /Piece
-                  {renderTollTip(quote.priceInfoText)}
+                  {renderTooltip(quote.priceInfoText)}
                 </span>
                 <div className="pt-3">{renderDisscussButton()}</div>
             </div>

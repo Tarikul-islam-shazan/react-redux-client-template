@@ -6,7 +6,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import { _storeData } from "../design/actions";
 import Http from '../../services/Http';
-import { changeDateFormat, authUser } from '../../services/Util';
+import { changeDateFormat, authUserInfo } from '../../services/Util';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import {QuotedItem} from './components/QuotedItem';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
@@ -76,7 +76,7 @@ class MyRFQs extends Component {
 
     this.renderList(0);
     this.setState({
-      userInfo: authUser()
+      userInfo: authUserInfo()
     })
     window.addEventListener("scroll", this.onScrollToEnd);
     window.addEventListener('mousedown', this.handleClickOutside);

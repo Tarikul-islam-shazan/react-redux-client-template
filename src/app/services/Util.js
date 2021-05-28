@@ -713,7 +713,7 @@ const validateNumber = (e) => {
   }
 }
 
-const authUser = () => {
+const authUserInfo = () => {
   let userInfo = localStorage.getItem('userInfo');
      if(userInfo) {
        userInfo = JSON.parse(userInfo);
@@ -730,5 +730,5 @@ export {
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, authUser, STATUS_NOT_ALLOWED_FOR_SELECTION
+    parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION
 };
