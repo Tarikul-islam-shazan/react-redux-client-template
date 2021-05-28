@@ -251,7 +251,7 @@ class ShareDesign extends Component {
         return (
           <>
             <div>
-                <h4>Share your design</h4>
+                <h4 className="semibold">Share your design</h4>
                 <p className="color-gray">Get costing on any designs you like to manufacture for your label</p>
             </div>
 

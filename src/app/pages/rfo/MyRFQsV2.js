@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import axios from 'axios';
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import loadjs from 'loadjs';
-import Modal from 'react-bootstrap/Modal'
+import LoadingOverlay from 'react-loading-overlay';
 
 import { _storeData } from "../design/actions";
-
-import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
-import { rfqStatus, rfqProductStatus, convertTimeToLocal, changeDateFormat } from '../../services/Util';
-
+import { changeDateFormat, authUserInfo } from '../../services/Util';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import { RfqCard } from './components/RfqCard';
-import {RfqSkeleton, RfqProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {QuotedItem} from './components/QuotedItem';
-
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
-import { event } from 'jquery';
+import EmptyState from '../../commonComponents/EmptyState';
 
 class MyRFQs extends Component {
 
@@ -84,9 +75,8 @@ class MyRFQs extends Component {
     })
 
     this.renderList(0);
-    const userInfo = await localStorage.getItem('userInfo');
     this.setState({
-      userInfo: JSON.parse(userInfo)
+      userInfo: authUserInfo()
     })
     window.addEventListener("scroll", this.onScrollToEnd);
     window.addEventListener('mousedown', this.handleClickOutside);
@@ -119,27 +109,21 @@ class MyRFQs extends Component {
               this.renderList(page + 1, true);
           } else {
               if (!hasNext) {
-                  // toastWarning("No more data found.")
+                  toastWarning("No more data is available.")
               }
           }
-          // this.setState({
-          //     message: 'bottom reached'
-          // });
       } else {
       }
   };
 
   renderList = async (page = 0, merge = false) => {
     this.setState({ loading: true })
-    let { size, rfqList, search, filterBy, sort, filterById, status, date, collection } = this.state;
-    // let params = `?page=${page}&size=${size}`;
+    let { size, rfqList, search, sort, status, date, collection } = this.state;
     let params = {
       page,
       size,
       search,
-      // filterBy : filterBy,
       sort,
-      // id: filterById,
       status,
       date: date
         ? changeDateFormat(date, "YYYY/MM/DD", "DD/MM/YYYY")
@@ -194,7 +178,6 @@ class MyRFQs extends Component {
         }
           // toastWarning("RFQ List - no data found.");
         }
-        // loadjs(['/js/script.js', '/js/custom.js']);
       })
       .catch(response => {
         this.setState({ loading: false, productLoading: false })
@@ -232,6 +215,9 @@ class MyRFQs extends Component {
       }
       if (e.target.name === 'all') {
         rfq.isSelected = e.target.checked;
+      }
+      if(rfq.status === "ORDER_PLACED" || rfq.status === "PRODUCT_SOLD"){
+        rfq.isSelected = false
       }
       return rfq;
     })
@@ -312,15 +298,14 @@ class MyRFQs extends Component {
   }
 
   render() {
-    let { rfqList, rfqDetails, showNegotiation, messages, userInfo, message, sort, ids, selectedProductName, filterById, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection, orderTitle, orderFlag } = this.state;
+    let { rfqList, sort, hasNext, allCheck, total, search, status, date, totalSelectedItems, collection, orderTitle, orderFlag } = this.state;
     if (!hasNext && !rfqList.length) {
       return (
-        <div className="not-found">
-          <h1 className="msg">There is no quote request from you</h1>
-          <button className="btn btn-nitex-default" onClick={() => this.props.history.push('/designs/add')}>Start now</button>
-          <div className="illustration">
-            <img src={require("../../assets/images/not-found.png")} alt="" />
-          </div>
+        <div className="mt-5 not-found">
+          <EmptyState
+            title="Requested quotes not found"
+          />
+          <Link className="font-18" to='/quotes/list'>Go back</Link>
         </div>
       )
     }
@@ -364,9 +349,11 @@ class MyRFQs extends Component {
                 <div className="status mr-3 mt-3 mt-sm-0">
                     <select className="w-100 bg-gray-light border-0" name="status" value={status} onClick={(e) => this.onChange(e)}>
                         <option>Status </option>
-                        <option value="PENDING">Pending</option>
+                        <option value="OFFER_PENDING">Offer Pending</option>
                         <option value="PRICE_GIVEN">Price Given</option>
                         <option value="APPROVED">Approved</option>
+                        <option value="PRODUCT_SOLD">Design Sold</option>
+                        <option value="ORDER_PLACED">Order Placed</option>
                     </select>
                 </div>
                 <div className="search mr-3">
@@ -431,7 +418,13 @@ class MyRFQs extends Component {
             {
               rfqList.map((quote, i) =>{
                 return(
-                  <QuotedItem quote={quote} key={i} index={i} toggleSelect={this.toggleSelect} search={this.searchByCollection}/>
+                  <QuotedItem 
+                    quote={quote} 
+                    key={i} 
+                    index={i} 
+                    toggleSelect={this.toggleSelect} 
+                    search={this.searchByCollection}
+                  />
                 )
               })
             }

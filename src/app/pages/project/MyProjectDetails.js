@@ -229,17 +229,17 @@ class MyProjectDetails extends Component {
                                       <div className="overview" key={i}>
                                           <div className="style-info" data-toggle="modal" data-target="#project-common" onClick={(e) => this.setModalData(item.productNo)}>
                                               <div className="info">
-                                                  <label className="font-16 text-muted">Design No</label>
+                                                  <label className="font-14 text-muted">Design No</label>
                                                   <h6>{item.productNo}</h6>
                                               </div>
                                               <div className="info">
-                                                  <label className="font-16 text-muted">Design title</label>
+                                                  <label className="font-14 text-muted">Design title</label>
                                                   <h6>{item.name}</h6>
                                               </div>
                                           </div>
                                           <div className="project-status checklist-status" data-toggle="modal" data-target="#project-common" onClick={(e) => this.setModalData(item.productNo)}>
                                               <div className="head">
-                                                  <label className="font-16 text-muted">Checklist Status</label>
+                                                  <label className="font-14 text-muted">Checklist Status</label>
                                                   <div className="percentage">{`${item.percentageComplete}%`}</div>
                                               </div>
                                               <div className="progress">
