@@ -142,14 +142,14 @@ class InvoiceList extends Component {
                          <select class="w-100 bg-gray-light border-0" name="status" id="status" value={status} onClick={this.onChange}>
                              <option value="PENDING">Pending</option>
                              <option value="PARTIALLY_PAID">Partially paid</option>
-                             <option value="APPROVED">Approved</option>
                              <option value="PAID">Paid</option>
                          </select>
                      </div>
 
                      <div class="type ml-3">
                          <select class="w-100 bg-gray-light border-0" name="sort" id="sort" value={sort} onClick={this.onChange}>
-                             <option value="dateCreated,desc">Recent</option>
+                             <option value="dateCreated,desc">Newest first</option>
+                             <option value="dateCreated,asc">Oldest first</option>
                          </select>
                      </div>
                   </div>
@@ -165,7 +165,6 @@ class InvoiceList extends Component {
                               <th scope="col">Value</th>
                               <th scope="col">Invoice date</th>
                               <th scope="col">Due date</th>
-                              <th scope="col">Payment terms</th>
                               <th scope="col">Status</th>
                               <th scope="col">Actions</th>
                           </tr>

@@ -245,8 +245,9 @@ class CollectionList extends Component {
                                     <img src={img3 ? img3 : require('../../assets/images/default_product.svg')} alt=""/>
                                 </div>
                             </div>
-                            <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between"><span>{collection.name}</span>
-                                <span className="semibold brand-color-secondary">{collection.numOfDesign ? collection.numOfDesign : 0}</span></h4>
+                            <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column"><span>{collection.name}</span>
+                                <span className="text-muted font-14 mt-2">{collection.numOfDesign ? collection.numOfDesign : 0} Items</span>
+                            </h4>
                         </div>
                       )
                     })
