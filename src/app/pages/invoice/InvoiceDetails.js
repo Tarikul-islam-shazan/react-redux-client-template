@@ -265,13 +265,13 @@ class InvoiceDetails extends Component {
                         </div>
                     </div>
 
-                    <div class="row mt-2 mt-sm-5">
-                        <div class="col-md-12">
-                            <div class="text-right">
-                                <button class="btn-brand m-0">Approve</button>
-                            </div>
-                        </div>
-                    </div>
+                    {/*<div class="row mt-2 mt-sm-5">*/}
+                    {/*    <div class="col-md-12">*/}
+                    {/*        <div class="text-right">*/}
+                    {/*            <button class="btn-brand m-0">Approve</button>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
             </div>

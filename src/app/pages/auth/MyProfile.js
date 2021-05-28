@@ -624,7 +624,7 @@ class MyProfile extends Component {
                                             <button className="btn-brand" onClick={this.updateEmailPreference}>Save</button>
                                         </div>
                                         <div className="row">
-                                            <div className="col-lg-3">
+                                            <div className="col-lg-4">
                                                 <div className="custom-radio">
                                                     <div className="form-group">
                                                         <input type="radio" id="card" value="NONE" name="emailSettings" checked={emailSettings === "NONE"} onChange={this.onChange} />
@@ -632,7 +632,7 @@ class MyProfile extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-3">
+                                            <div className="col-lg-4">
                                                 <div className="custom-radio">
                                                     <div className="form-group">
                                                         <input type="radio" id="card1" value="LIMITED" name="emailSettings" checked={emailSettings === "LIMITED"} onChange={this.onChange} />
@@ -640,7 +640,7 @@ class MyProfile extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-3">
+                                            <div className="col-lg-4">
                                                 <div className="custom-radio">
                                                     <div className="form-group">
                                                         <input type="radio" id="card2" value="ALL" name="emailSettings" checked={emailSettings === "ALL"} onChange={this.onChange} />

@@ -1840,6 +1840,12 @@ h6.style-overview{
       flex-basis: 110px;
       padding: 0 10px;
       font-size: 14px;
+      cursor: auto;
+      color: $secondary-color;
+      font-weight: 500;
+      &:hover{
+        color: $secondary-color;
+      }
     }
 
   }
