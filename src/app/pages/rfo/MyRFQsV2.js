@@ -210,7 +210,6 @@ class MyRFQs extends Component {
   toggleSelect = async(e) => {
     let {rfqList, allCheck} = this.state;
     rfqList = rfqList.map((rfq, i) => {
-      console.log('!!!!!RFQQQ', rfq);
       if (rfq.id == e.target.value) {
         rfq.isSelected = e.target.checked;
       }
