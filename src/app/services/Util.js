@@ -393,17 +393,27 @@ const rfqProductStatus = (item) => {
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F0EDF7', color: '#452D8F'}}>Offer Pending</span>
       )
-      break;
+     
     case 'PRICE_GIVEN':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Quoted</span>
       )
-      break;
+     
     case 'APPROVED':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
       )
-      break;
+     
+      case 'PRODUCT_SOLD':
+        return(
+          <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Design Sold</span>
+        )
+
+        case 'ORDER_PLACED':
+          return(
+            <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Order Placed</span>
+          )
+       
     default:
       // code block
   }
@@ -703,6 +713,15 @@ const validateNumber = (e) => {
   }
 }
 
+const authUserInfo = () => {
+  let userInfo = localStorage.getItem('userInfo');
+     if(userInfo) {
+       userInfo = JSON.parse(userInfo);
+     } else {
+       userInfo = {};
+     }
+   return userInfo;
+}
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
 
 const isValidJSON = str => {
@@ -720,5 +739,5 @@ export {
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON
+    parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON
 };
