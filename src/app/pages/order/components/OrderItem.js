@@ -44,7 +44,7 @@ export const OrderItem = ({product, remove}) => {
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
                             <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{product.name}</a>
-                            <span className="cat">{product.productGroup}</span>
+                            <span className="cat">{product.productCategory ? product.productCategory + ", " : ''}{product.productGroup}</span>
                         </div>
                         <div className="info-item">
                             <label className="">Color</label>

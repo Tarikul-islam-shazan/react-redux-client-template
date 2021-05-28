@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import loadjs from 'loadjs';
+import moment from 'moment';
 
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
@@ -116,7 +117,16 @@ class ConfirmOrder extends Component {
 
     render() {
         let {order} = this.state;
+        console.log('~~~~~~~~~~', order);
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
+
+        const deliveryDate = () => {
+          const max = order.productResponseList?.reduce((max, item) => item.deliveryTime > max ? item.deliveryTime : max, 0);
+          console.log('!!!!!!!!', max);
+          let deliveryDate = moment().add(1, 'months').calendar();
+        }
+
+        
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request placing-order">
@@ -132,7 +142,7 @@ class ConfirmOrder extends Component {
                       <input type="text" placeholder="Order title" name="name" value={order.name} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
 
-                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {order.deliveryDate}</div></span></h4>
+                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {deliveryDate()}</div></span></h4>
                   <h4 className="mb-3 font-weight-normal pc-step">Product confirmation (Step 1 of 2) <span className="result font-16 mr-3 mt-2 mt-sm-0">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
                   {
                     order.productResponseList ?
@@ -193,7 +203,7 @@ class ConfirmOrder extends Component {
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                               <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={() => this.props.history.push('/orders/confirm-payment/' + this.props.match.params.id)}>Confirm order</button>
-                              <a href="#" className="text-underline font-16 red" onClick={this.cancel}>Cancel order</a>
+                              <a href="#" className="font-16 red" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>
                   </div>
