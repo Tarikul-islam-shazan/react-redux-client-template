@@ -83,7 +83,7 @@ class InvoiceDetails extends Component {
        { !isDownload ?
 
           <>
-            <div class="back cursor-pointer" onClick={() => this.props.history.push('/invoices/list')}></div>
+            <div class="back cursor-pointer" onClick={() => this.props.history.push('/invoices/list')}> Back</div>
 
             <div class="admin-view-invoice mt-4">
 
