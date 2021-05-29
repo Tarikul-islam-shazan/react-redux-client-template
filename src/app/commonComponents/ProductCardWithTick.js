@@ -57,7 +57,7 @@ class ProductCard extends Component {
 
   render() {
     let flag = 1;
-    let { product , showDetails , likeProduct , unlikeProduct } = this.props;
+    let { product , showDetails , likeProduct , unlikeProduct, showEdit } = this.props;
     let disabled = STATUS_NOT_ALLOWED_FOR_SELECTION.includes(product.availabilityStatus);
     return(
       <div className="item">
@@ -105,6 +105,11 @@ class ProductCard extends Component {
                       disabled ?
                       <></> :
                       <Dropdown.Item href="#" className="px-4 pt-0 pb-3 font-weight-normal text-black font-15" onClick={() => this.props.addToQuote([product.id])}>Add to quote</Dropdown.Item>
+                    }
+                    {
+                      showEdit ?
+                      <Dropdown.Item href={`/designs/edit/${product.id}`} className="px-4 pt-0 pb-3 font-weight-normal text-black font-15">Edit Design</Dropdown.Item>
+                      : <></>
                     }
                     </Dropdown.Menu>
                   </Dropdown>

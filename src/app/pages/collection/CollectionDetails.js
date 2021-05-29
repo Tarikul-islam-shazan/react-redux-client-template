@@ -53,7 +53,8 @@ class CollectionDetails extends Component {
           showAddCollectionPopup: false,
           showCollectionAddOption: true,
           collectionType: '',
-          collectionViewType: ''
+          collectionViewType: '',
+          showEdit: true
         };
     }
 
@@ -146,12 +147,17 @@ class CollectionDetails extends Component {
         });
     }
 
-    getCollectionProducts = ( page = 0 ) => {
+    getCollectionProducts = async ( page = 0 ) => {
       let paramName = 'viewType';
       let regex = new RegExp('[\\?&]' + paramName + '=([^&#]*)');
       let results = regex.exec(this.props.location.search);
       if (results !== null) {
-        this.setState({
+        if (results[1] !== 'MY_PRODUCTS') {
+          await this.setState({
+            showEdit: false
+          })
+        }
+        await this.setState({
           collectionViewType: results[1]
         })
         this.getViewTypeCollectionList(page, results[1]);
@@ -620,7 +626,7 @@ class CollectionDetails extends Component {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
         collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption,
-        collectionType, collectionViewType
+        collectionType, collectionViewType, showEdit
        } = this.state;
 
        return (
@@ -857,7 +863,8 @@ class CollectionDetails extends Component {
                               updateProductCard={() => this.updateProductCard()}
                               addToQuote={this.addToQuote}
                               likeProduct={this.likeProduct}
-                              unlikeProduct={this.unlikeProduct}/>
+                              unlikeProduct={this.unlikeProduct}
+                              showEdit={showEdit}/>
                           )
                         })
                       }
