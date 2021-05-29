@@ -393,17 +393,17 @@ const rfqProductStatus = (item) => {
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F0EDF7', color: '#452D8F'}}>Offer Pending</span>
       )
-     
+
     case 'PRICE_GIVEN':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Quoted</span>
       )
-     
+
     case 'APPROVED':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
       )
-     
+
       case 'PRODUCT_SOLD':
         return(
           <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Design Sold</span>
@@ -413,7 +413,7 @@ const rfqProductStatus = (item) => {
           return(
             <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Order Placed</span>
           )
-       
+
     default:
       // code block
   }
@@ -733,11 +733,61 @@ const isValidJSON = str => {
   }
 };
 
+const getImageExt = (url) => {
+  if (!url) {
+    return '';
+  }
+
+  let splits = url.split('.');
+  let result = '';
+  if (splits.length) {
+    result = splits[splits.length - 1];
+  }
+  return result;
+}
+
+const IMAGE_EXTS = ['jpeg', 'jpg', 'png', 'gif', 'tiff', 'svg'];
+
+const replaceUnderLine = (str => capitalizeFirstLetter(str.split("_").join(" ")));
+
+const isValidFile = (file, type) => {
+    let ext = file.name.split('.').pop();
+    if (type === 'PRODUCT_DESIGN' || type == 'REFERENCE_IMAGE') {
+        if (IMAGE_EXTS.includes(ext) && file.size < 2000001) {
+          return true;
+        }
+    } else {
+        if ((IMAGE_EXTS.includes(ext) || ext === 'xls' || ext === 'xlsx' || ext === 'docx' || ext === 'doc' || ext === 'eps' || ext === 'ai' || ext === 'pdf' || ext === 'ppt' || ext === 'pptx') && file.size < 2000001) {
+          return true;
+        }
+    }
+
+    return false;
+}
+
+const parseDate = (date) => {
+  let temp = date.split('/');
+  return (temp[2]+'-'+temp[1]+'-'+temp[0])
+}
+
+const dateCompare = (orderDate, dueDate) => {
+  const dateA = moment(orderDate);
+  const dateB = moment(dueDate);
+  const difference = dateB.diff(dateA, 'days')
+  if(difference >= 1){
+    return true
+  }
+  else {
+    return false
+  }
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON
+    parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON, getImageExt, IMAGE_EXTS,
+    replaceUnderLine, isValidFile, parseDate, dateCompare
 };
