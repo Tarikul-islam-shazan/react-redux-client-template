@@ -47,7 +47,7 @@ class CollectionDetails extends Component {
           collectionName: '',
           collectionNameError: '',
           showAddCollectionPopup: false,
-          showCollectionAddOption: false,
+          showCollectionAddOption: true,
           collectionType: '',
           collectionViewType: ''
         };
@@ -792,7 +792,7 @@ class CollectionDetails extends Component {
                     showAddCollectionPopup ?
                     <div class="create-new-collection">
                         <div class="pop-container" ref={this.setWrapperRef}>
-                            <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: !showCollectionAddOption})}>+ Create new collection</span>
+                            <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: true})}>+ Create new collection</span>
                             {
                               showCollectionAddOption ?
                               <>
