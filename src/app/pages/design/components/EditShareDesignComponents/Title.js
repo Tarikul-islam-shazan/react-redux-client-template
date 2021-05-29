@@ -26,17 +26,16 @@ export const Title = ({data, errors, flag, flagName, toggleFlag, onChange, onSub
     <div className="name">
          <div className="name-display d-flex justify-content-between align-items-center">
 
-            <h4 className="font-26 semibold">{data.name}</h4>
-
-            <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16.576" height="15.841" viewBox="0 0 16.576 15.841">
-                    <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(0.75 0.75)">
-                      <path id="Path_29430" data-name="Path 29430" d="M18,30h7.538" transform="translate(-10.462 -15.659)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
-                      <path id="Path_29431" data-name="Path 29431" d="M15.808,4.838A1.777,1.777,0,1,1,18.32,7.351L7.85,17.821l-3.35.838.838-3.35Z" transform="translate(-4.5 -4.318)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
-                    </g>
-                  </svg>
-            </span>
-
+            <h4 className="font-26 semibold d-flex">{data.name}
+                <span className="cursor-pointer pl-3" onClick={() => toggleFlag(flagName)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16.576" height="15.841" viewBox="0 0 16.576 15.841">
+                        <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(0.75 0.75)">
+                          <path id="Path_29430" data-name="Path 29430" d="M18,30h7.538" transform="translate(-10.462 -15.659)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                          <path id="Path_29431" data-name="Path 29431" d="M15.808,4.838A1.777,1.777,0,1,1,18.32,7.351L7.85,17.821l-3.35.838.838-3.35Z" transform="translate(-4.5 -4.318)" fill="none" stroke="#21242b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                        </g>
+                      </svg>
+                </span>
+            </h4>
          </div>
     </div>
   )
