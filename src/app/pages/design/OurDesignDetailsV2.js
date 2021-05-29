@@ -707,7 +707,7 @@ class OurDesignDetails extends Component {
                           </div>
                           <div className="info-item">
                               <label className="font-14 text-muted mb-2">Notes</label>
-                              <p className="font-16">{product.note}</p>
+                              <p className="font-16" dangerouslySetInnerHTML={{ __html: product.note ? product.note : '' }}></p>
                           </div>
 
                           <div className="info-item details-action">

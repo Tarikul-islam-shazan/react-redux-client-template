@@ -21,6 +21,7 @@ export class MeasurementTable extends React.Component {
   componentDidMount = () => {
     const { data } = this.state;
     let headers = [];
+    console.log("from table",data);
     if(data.length && data[0].measurement){
       for (const [key, value] of Object.entries(data[0].measurement)) {
           headers.push(<th key={Math.random() * 10000}>{key}</th>)
@@ -32,33 +33,31 @@ export class MeasurementTable extends React.Component {
   render() {
     let { data , headers } = this.state;
     return(
-      <div>
-          <table className="table table-bordered table-striped measurement-table table-responsive-xl">
-              <thead>
-              <tr>
-                  <th>Size</th>
-                  {
-                    headers
-                  }
-                  <th>Quantity</th>
-              </tr>
-              </thead>
-              <tbody>
+      <table className="table table-bordered table-striped table-responsive measurement-chart measurement-table">
+          <thead>
+          <tr>
+              <th>Size</th>
               {
-                data.map((item,i) => {
-                  return(
-                    <tr key={i}>
-                      <td>{item.code}</td>
-                      {renderFromObject(item.measurement)}
-                      <td>{item.amount}</td>
-                    </tr>
-                  )
-                })
+                headers
               }
+              {/*<th>Quantity</th>*/}
+          </tr>
+          </thead>
+          <tbody>
+          {
+            data.map((item,i) => {
+              return(
+                <tr key={i}>
+                  <td>{item.code}</td>
+                  {renderFromObject(item.measurement)}
+                  {/*<td>{item.amount}</td>*/}
+                </tr>
+              )
+            })
+          }
 
-              </tbody>
-          </table>
-      </div>
+          </tbody>
+      </table>
     );
   }
 }
