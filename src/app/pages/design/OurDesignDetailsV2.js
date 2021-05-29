@@ -22,6 +22,7 @@ import { productAvailabilityStatus, addImageSuffix } from '../../services/Util';
 
 import {ProductThumbsSkeleton, ProductHeroImageSkeleton, ProductDetailsSkeleton, ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 import {ProductDetailsImgThumb} from '../../commonComponents/ProductDetailsImgThumb'
+import {fetchGeneralSettingsData} from '../../actions';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -46,6 +47,8 @@ class OurDesignDetails extends Component {
           showCollectionAddOption: false,
           collectionName: '',
           collectionNameError: '',
+          TURN_AROUND_TIME: '',
+          MOQ: ''
         };
     }
 
@@ -85,6 +88,70 @@ class OurDesignDetails extends Component {
         } else {
 
         }
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener("scroll", this.handleScroll);
+      document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentDidMount = async() => {
+      document.title = "Product details on Nitex - The easiest clothing manufacturing software";
+      window.addEventListener("scroll", this.handleScroll);
+      document.addEventListener('mousedown', this.handleClickOutside);
+      let id = this.props.match.params.id;
+      this.setState({
+        loading : true,
+      })
+      let selectedImage = '';
+      let flag = 1;
+
+      await Http.GET('getProductDetails',id)
+        .then(({data}) => {
+          console.log('getProductDetails SUCCESS: ', data);
+          if(data){
+            document.title = data.name;
+            data.documentResponseList.map((doc,i) => {
+              if(doc.docType=='PRODUCT_DESIGN' && flag){
+                flag = 0;
+                selectedImage = doc.docUrl;
+              }
+              if(data.documentResponseList.length==i+1 && flag){
+                  selectedImage = data.documentResponseList[0].docUrl;
+              }
+            })
+            this.setState({
+              loading:false,
+              product : data,
+              selectedImage
+            })
+          }else{
+            this.setState({loading:false})
+            // toastError(data.message);
+          }
+          // loadjs(['/js/script.js','/js/custom.js']);
+        })
+        .catch(({response}) => {
+            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
+            this.setState({loading:false})
+            if(response && response.data && response.data.message){
+              toastError(response.data.message);
+            }else{
+              toastError("Something went wrong! Please try again.");
+            }
+        });
+        const keys = ['MOQ', 'TURN_AROUND_TIME']
+        const data = await fetchGeneralSettingsData(keys);
+        if(data){
+          this.setState({
+            TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+            ? data["TURN_AROUND_TIME"].value
+            : "",
+          MOQ: data["MOQ"] ? data["MOQ"].value : "",
+          })
+        }
+        this.getSimilarDesign();
+        this.fetchCollectionList();
     }
 
     likeProduct = (id) => {
@@ -253,60 +320,6 @@ class OurDesignDetails extends Component {
           });
     }
 
-    componentWillUnmount() {
-      window.removeEventListener("scroll", this.handleScroll);
-      document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-
-    componentDidMount = async() => {
-      document.title = "Product details on Nitex - The easiest clothing manufacturing software";
-      window.addEventListener("scroll", this.handleScroll);
-      document.addEventListener('mousedown', this.handleClickOutside);
-      let id = this.props.match.params.id;
-      this.setState({
-        loading : true,
-      })
-      let selectedImage = '';
-      let flag = 1;
-
-      await Http.GET('getProductDetails',id)
-        .then(({data}) => {
-          console.log('getProductDetails SUCCESS: ', data);
-          if(data){
-            document.title = data.name;
-            data.documentResponseList.map((doc,i) => {
-              if(doc.docType=='PRODUCT_DESIGN' && flag){
-                flag = 0;
-                selectedImage = doc.docUrl;
-              }
-              if(data.documentResponseList.length==i+1 && flag){
-                  selectedImage = data.documentResponseList[0].docUrl;
-              }
-            })
-            this.setState({
-              loading:false,
-              product : data,
-              selectedImage
-            })
-          }else{
-            this.setState({loading:false})
-            // toastError(data.message);
-          }
-          // loadjs(['/js/script.js','/js/custom.js']);
-        })
-        .catch(({response}) => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            if(response && response.data && response.data.message){
-              toastError(response.data.message);
-            }else{
-              toastError("Something went wrong! Please try again.");
-            }
-        });
-        this.getSimilarDesign()
-        this.fetchCollectionList()
-    }
-
     fetchCollectionList = () => {
       let userInfo = localStorage.getItem('userInfo');
       if (userInfo) {
@@ -466,6 +479,7 @@ class OurDesignDetails extends Component {
         let {
           product , selectedImage, loading, imageViewerFlag, imageViewerData, imageViewerCurrentIndex, similarDesigns, similarDesignLoading, measurementModal,
           collectionList, showAddCollectionPopup, showCollectionAddOption, collectionName, collectionNameError,
+          TURN_AROUND_TIME, MOQ
          } = this.state;
         // console.log("this.getImageByType()", this.getImageByType())
         const settingsSliderMain = {
@@ -675,7 +689,7 @@ class OurDesignDetails extends Component {
 
                           <div className="info-item">
                               <label className="font-14 text-muted mb-2">Minimum order quantity</label>
-                              <h5 className="font-18 semibold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : 'N/A'}
+                              <h5 className="font-18 semibold">Starts from {product.minimumOrderQuantity ? `${product.minimumOrderQuantity} Pcs` : `${MOQ} Pcs`}
                                   <span className="ml-2" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Minimum order quantity"><svg
                                       xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g
@@ -690,7 +704,7 @@ class OurDesignDetails extends Component {
                           </div>
                           <div className="info-item">
                               <label className="font-14 text-muted mb-2">Turn around time</label>
-                              <h5 className="font-18 semibold">As fast as {product.turnAroundTime ? `${product.turnAroundTime} Days` : 'N/A'}
+                              <h5 className="font-18 semibold">As fast as {product.turnAroundTime ? `${product.turnAroundTime} Days` : `${TURN_AROUND_TIME} Days`}
                                   <span className="ml-2" data-toggle="tooltip" data-placement="top"
                                         data-original-title="Turn around time">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
