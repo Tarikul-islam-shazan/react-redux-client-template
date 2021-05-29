@@ -142,10 +142,10 @@ class ProjectSummaryModal extends Component {
                                         <label>Product category</label>
                                         <h6>{data.productType && data.productType.name}</h6>
                                     </div>
-                                    <div className="ps-item">
-                                        <label>Due Date</label>
-                                        <h6>{data.deliverableResponse && convertTimeToLocal(data.deliverableResponse.deadline, '', 'MMM DD, YYYY')}</h6>
-                                    </div>
+                                    {/*<div className="ps-item">*/}
+                                    {/*    <label>Due Date</label>*/}
+                                    {/*    <h6>{data.deliverableResponse && convertTimeToLocal(data.deliverableResponse.deadline, '', 'MMM DD, YYYY')}</h6>*/}
+                                    {/*</div>*/}
                                     {/*<div className="ps-item">
                                         <label>Color</label>
                                         <h6>Blue</h6>
@@ -153,7 +153,7 @@ class ProjectSummaryModal extends Component {
                                 </div>
                                 <div className="project-status">
                                     <div className="head">
-                                        <label>Checklist Status</label>
+                                        <label>Checklist status</label>
                                         <div className="percentage">{data.percentageComplete}%</div>
                                     </div>
                                     <div className="progress">

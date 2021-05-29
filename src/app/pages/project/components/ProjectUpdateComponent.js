@@ -505,7 +505,8 @@ class ProjectUpdateComponent extends Component {
                               <div className="query">Query</div>
                               <div className="note">Note</div>
                           </div>*/}
-                          <div className="write">
+                          <div className="write main-post">
+                              <div className="rich-text-editor">
                               {
                                 userInfo.profilePicDocument && userInfo.profilePicDocument.docUrl ?
                                 <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} alt="" className="user-photo"/> :
@@ -520,6 +521,7 @@ class ProjectUpdateComponent extends Component {
                                 toolbarStyle={{display: 'none'}}
                               />
                               {/*<textarea name="post" onChange={this.onChangeFromPost} rows="1" value={post} placeholder="Write here....."/>*/}
+                          </div>
                           </div>
 
                           {

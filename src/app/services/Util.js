@@ -393,17 +393,27 @@ const rfqProductStatus = (item) => {
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F0EDF7', color: '#452D8F'}}>Offer Pending</span>
       )
-      break;
+     
     case 'PRICE_GIVEN':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Quoted</span>
       )
-      break;
+     
     case 'APPROVED':
       return(
         <span className="badge table-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
       )
-      break;
+     
+      case 'PRODUCT_SOLD':
+        return(
+          <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Design Sold</span>
+        )
+
+        case 'ORDER_PLACED':
+          return(
+            <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Order Placed</span>
+          )
+       
     default:
       // code block
   }
@@ -544,22 +554,22 @@ const invoiceStatus = (invoice) => {
   switch(invoice.status) {
     case 'PENDING':
       return(
-        <span class="badge design-badge" style={{backgroundColor: '#ECE9F4', color: '#472F91'}}>Pending</span>
+        <span class="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#ECE9F4', color: '#472F91'}}>Pending</span>
       )
       break;
     case 'PARTIALLY_PAID':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially paid</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#F5EFE4', color: '#D29F27'}}>Partially paid</span>
       )
       break;
     case 'APPROVED':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Approved</span>
       )
       break;
     case 'PAID':
       return(
-        <span className="badge design-badge" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
+        <span className="badge-custom mt-2 d-inline-block" style={{backgroundColor: '#E4F6EA', color: '#35D575'}}>Paid</span>
       )
       break;
     default:
@@ -703,7 +713,25 @@ const validateNumber = (e) => {
   }
 }
 
+const authUserInfo = () => {
+  let userInfo = localStorage.getItem('userInfo');
+     if(userInfo) {
+       userInfo = JSON.parse(userInfo);
+     } else {
+       userInfo = {};
+     }
+   return userInfo;
+}
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
+
+const isValidJSON = str => {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
@@ -711,5 +739,5 @@ export {
     getDateFromMillis, doCommaSeparationWithDecimals, doCommaSeparationWithIntegers, getDateWithHourFromMillis, validate,
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
-    parseHtml, validateNumber, STATUS_NOT_ALLOWED_FOR_SELECTION
+    parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON
 };

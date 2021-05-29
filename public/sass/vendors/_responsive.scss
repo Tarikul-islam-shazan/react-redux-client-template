@@ -501,7 +501,7 @@
   }
   .post {
     margin-top: 15px;
-
+    overflow: auto;
     .post-tag .table-badge {
       font-size: 12px;
       font-weight: normal !important;
@@ -800,6 +800,9 @@
   }
 }
 @media screen and (max-width: 1280px) {
+  .quote-req-list-container .quote-list{
+    flex-direction: row;
+  }
   div#sidebar-menu-content.quotation-container {
     margin-left: 290px !important;
   }
@@ -871,6 +874,9 @@
   }
 }
 @media screen and (max-width: 1024px) {
+  .filter-container.explore-design-filter{
+    flex-direction: row !important;
+  }
   .project-statistic h6 {
     font-size: 14px;
   }
@@ -1168,7 +1174,569 @@
   .feedback-editor .uploaded-photo img {
     height: 170px !important;
   }
+
+    .details-action {
+      position: fixed;
+      bottom: 0;
+      z-index: 99;
+      background: #fff;
+      width: 100%;
+      left: 0;
+      padding: 0 20px 22px 20px;
+      box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+    .sidebar-action {
+      margin-bottom: 50px;
+    }
+    .custom-chekbox .form-group input:checked + label:after {
+      top: 3px;
+    }
+    .uploaded-photo img {
+      height: 160px !important;
+    }
+    .modal-body .uploaded-photo img {
+      height: 115px !important;
+    }
+    .feedback-editor .uploaded-photo img {
+      height: 160px !important;
+    }
+    .product-details-skl {
+      .thumbnail-prev {
+        width: 100%;
+        height: 40vh;
+        margin-top: 20px;
+      }
+      .left-thumb {
+        width: 80px;
+        height: 100px;
+        margin: 15px 15px 0 0;
+      }
+    }
+    button.add-new-design {
+      width: 100%;
+    }
+    .skeleton.project-list {
+      height: 140px;
+    }
+    .filter-container button.btn-brand {
+      width: 100%;
+      height: 50px;
+      margin: 0 0 20px 0;
+    }
+    .product-detail-gallery {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .product-detail-gallery .thumbnail-slider ul li {
+      display: inline-block;
+    }
+    .product-detail-gallery .thumbnail-slider {
+      width: 100%;
+    }
+    .product-detail-gallery .thumbnail-prev img {
+      height: 418px;
+    }
+    a.link-invoice {
+      width: 300px;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    //user profile
+    .profile {
+      padding: 0;
+    }
+    .profile-info {
+      flex-direction: column;
+    }
+    .profile .profile-tab ul {
+      max-width: 100%;
+    }
+    .profile .profile-tab ul li {
+      width: 33.33%;
+    }
+    .profile .profile-tab ul li a {
+      font-size: 16px;
+      width: 100%;
+      margin: 0;
+      padding: 15px 0 5px 0;
+      text-align: center;
+    }
+    .profile-info .user-info {
+      padding-left: 0;
+      margin-top: 30px;
+    }
+    .profile .change-pass {
+      max-width: 100%;
+    }
+    //user profile end
+    .client-respons .client-list .list .client-info .info {
+      width: 158px;
+      h6 {
+        width: 100%;
+      }
+    }
+    .dashboard-designs .filter-products.designs .card.product-card {
+      flex-basis: 100%;
+    }
+    //Sign In
+    .auth-page .bg-wrapper {
+      height: 172px;
+    }
+    .auth-page .bg-wrapper .logo-wrapper {
+      top: 60px;
+    }
+    .auth-page .content-wrapper-override {
+      padding: 20px !important;
+    }
+    .questionnaire .section-content .row .col {
+      flex-basis: 100%;
+    }
+    .questionnaire .card .card-img-top {
+      height: auto;
+    }
+    .questionnaire .section-header .row > div {
+      flex: auto;
+      text-align: center;
+      margin: 0 0 20px 0;
+    }
+    .questionnaire button.btn-outline-default {
+      margin-bottom: 20px;
+    }
+    section.questionnaire {
+      padding-bottom: 30px;
+    }
+    .page-header {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    //Dashboard
+    aside.left-panel.active {
+      margin-left: 0;
+      padding-top: 96px;
+    }
+    .filter-products.designs .card.product-card {
+      flex-basis: 100%;
+    }
+    .dashboard-container .section .row .dc {
+      flex-basis: 100%;
+      margin-bottom: 30px;
+    }
+    .dashboard-card .card-topics,
+    .designs .design-category {
+      max-width: 100%;
+    }
+    .myrfqproject {
+      margin-bottom: 30px;
+    }
+    .filter-products .card {
+      flex-basis: 100%;
+      margin-bottom: 30px;
+    }
+    button#sidebarToggleTop {
+      margin: 0 !important;
+      padding: 6px 6px;
+      vertical-align: top;
+      align-self: start;
+    }
+    .navbar {
+      height: auto;
+      width: calc(100%);
+    }
+    //.navbar-expand .navbar-nav {
+    //    flex-direction: column;
+    //    width: 100%;
+    //    display: block;
+    //}
+    ul.navbar-nav li:first-child {
+      .dropdown-menu {
+        position: absolute;
+        left: 0;
+        padding: 10px !important;
+      }
+    }
+    .datepicker.dropdown-menu {
+      width: auto;
+    }
+    //ul.navbar-nav li.notification-bell {
+    //    margin: 1px 15px 10px !important
+    //}
+    //ul.navbar-nav li:nth-child(2) img{
+    //    margin-top: -4px !important;
+    //}
+    //ul.navbar-nav li:nth-last-child(2) {
+    //    float: right;
+    //    margin-right: 5px !important;
+    //    margin-bottom: 0 !important;
+    //}
+    //ul.navbar-nav li:last-child {
+    //    position: absolute;
+    //    right: 20px;
+    //}
+    li.nav-item {
+      width: auto;
+      float: left;
+      vertical-align: middle;
+    }
+    .dashboard-container {
+      padding-top: 90px;
+    }
+
+    //quote-request
+    .demo-product-card {
+      width: 100%;
+    }
+    .drug-n-drop .development-step-1 ul.nav-tabs li {
+      margin-bottom: 0;
+      width: 100%;
+    }
+    .uploaded-img .item {
+      width: 100%;
+    }
+
+    //Pick design
+    .filter-container {
+      flex-direction: column;
+      .search input {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+    .product-slider .owl-carousel .owl-nav .owl-next {
+      position: absolute;
+      right: 53px;
+      z-index: 999999;
+      margin-top: -30px;
+    }
+    #AddNewProduct h5.section-title {
+      font-size: 28px;
+      margin-top: 30px;
+    }
+    .modal-form {
+      padding: 20px 0px 30px 0px;
+    }
+    .modal .section-subtitle {
+      padding: 0;
+    }
+    .share-design-modal img.close-btn {
+      top: 0;
+      right: 0px;
+    }
+    .share-design-modal .section-header {
+      margin-top: 60px;
+    }
+
+    //My Product
+
+    .custom-chekbox .form-group label {
+      font-size: 14px;
+    }
+    .produt-details-description {
+      margin-top: 20px;
+      .btn-nitex-default {
+        margin-top: 15px;
+      }
+    }
+
+    table.measurement-table tr th {
+      padding: 10px !important;
+      font-size: 12px;
+    }
+    table.measurement-table tr td:first-child {
+      font-size: 12px;
+      padding-left: 10px !important;
+    }
+    table.measurement-table tr td {
+      padding: 10px 41px !important;
+      font-size: 14px;
+    }
+
+    //Add New Product
+    #FilltheForm {
+      .btn-outline-secondary {
+        margin: 24px 0 0 15px !important;
+        float: left !important;
+        width: 125px;
+      }
+      .row-item .form-group {
+        margin-bottom: 20px !important;
+      }
+    }
+
+    //.Add New Product
+    .my-project-card {
+      padding: 15px 15px;
+      .table-responsive {
+        width: 700px;
+      }
+    }
+
+    //Add new Project
+    #newProject_1_4.modal .modal-body {
+      padding: 70px 0 50px;
+    }
+    .nav-tabs {
+      padding-left: 0;
+    }
+    .development-step-1 .tab-content {
+      padding: 50px 40px;
+      outline-offset: -15px;
+    }
+    .project-statistic .ps-item {
+      padding-right: 15px;
+      width: 50%;
+      margin-bottom: 18px;
+      margin-right: 0;
+    }
+    .style-overview .overview {
+      flex-basis: 100%;
+      margin: 0 0 20px 0;
+    }
+    .project-profile .back {
+      position: relative;
+      left: 0;
+      top: 15px;
+      cursor: pointer;
+      text-align: left;
+      margin: 0 auto;
+      width: 100%;
+      display: inherit;
+      margin-bottom: 20px;
+    }
+
+    //Project Update
+    .filter {
+      flex-basis: 100%;
+      .production {
+        min-height: auto;
+      }
+    }
+    .timeline {
+      flex-basis: 100%;
+      margin: 0;
+      .editor .write {
+        padding: 10px 10px 0 70px;
+      }
+      .editor .footer-tab {
+        margin: 0 10px 10px 10px;
+        padding-top: 10px;
+        flex-wrap: wrap;
+      }
+    }
+    .editor .footer-tab .file {
+      margin-top: 0px;
+    }
+    .editor .footer-tab {
+      button.send-feed {
+        margin-top: 0;
+        bottom: 0;
+        padding: 0px 25px;
+      }
+    }
+    .timeline .editor .write {
+      padding: 10px;
+      padding-top: 15px;
+      display: flex;
+      img {
+        position: relative;
+      }
+    }
+    .editor .write img.user-photo {
+      left: 0px;
+      top: 0px;
+    }
+    .editor .write textarea {
+      padding-top: 0;
+      width: 85%;
+      margin-left: 10px;
+    }
+    .style-overview {
+      flex-wrap: wrap;
+    }
+    .feedback .feedback-post .post .post-heading span.date-time {
+      width: auto;
+      text-align: left !important;
+    }
+    .post .post-heading {
+      flex-direction: column;
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+      padding: 13px 16px;
+      border-radius: 20px;
+      margin-left: 10px;
+    }
+    .timeline .post .post-tag .table-badge {
+      margin-bottom: 10px;
+    }
+    .stage .sub-stage {
+      flex-direction: column;
+      width: 295px;
+      padding-bottom: 15px;
+      height: 250px;
+    }
+    .stage .sub-stage ul .title {
+      width: 100%;
+      line-height: 20px;
+      padding: 15px 15px;
+      border-top: 1px solid #eee;
+      font-weight: 600;
+      color: #424242;
+    }
+    .stage .sub-stage ul li {
+      padding: 10px 15px 10px 15px;
+      line-height: 20px;
+    }
+    .stage .sub-stage ul {
+      padding-bottom: 0;
+    }
+    .stage span {
+      padding: 6px 25px 5px 10px;
+      height: 35px;
+      width: 125px;
+      line-height: 21px;
+      &:after {
+        margin-top: -7px;
+        right: 15px;
+      }
+    }
+    .notification {
+      width: 338px;
+      height: 400px;
+      right: -92px;
+      top: 12px;
+      ul {
+        li:last-child {
+          position: relative;
+          right: initial;
+        }
+        li:nth-child(2) {
+          float: initial;
+          margin-right: 0 !important;
+          margin-bottom: 0 !important;
+          margin: 0 !important;
+        }
+        li:nth-child(3) {
+          float: initial;
+          margin-right: 0 !important;
+          margin-bottom: 0 !important;
+          margin: 0 !important;
+        }
+      }
+    }
+    .notification .day h6.timing-date,
+    .notification .day ul li a,
+    .notification .see-all a {
+      padding: 10px;
+    }
+    .notification .day ul li a .notify-list .info {
+      width: 188px;
+      .name {
+        width: 188px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 14px;
+      }
+      .tag {
+        font-size: 12px;
+      }
+    }
+    .notification .day ul li a .notify-list img.product {
+      width: 50px !important;
+    }
+    .notification h3.title {
+      padding: 10px 10px;
+      font-size: 16px;
+    }
+
+    .checklist {
+      padding: 10px;
+      flex-direction: column;
+    }
+    .production {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+    .item .messages-popup {
+      width: calc(100% - 19px);
+    }
+    .modal-dialog.modal-xl {
+      max-width: 100%;
+    }
+    .item .messages-popup .post {
+      margin: 10px;
+    }
+    table.payment-checkout button.btn-brand {
+      float: right !important;
+    }
+    .uploaded-img .item .card .card-body {
+      padding: 10px !important;
+    }
+
+    //Admin Panel
+    table.manage-project-table {
+      display: block;
+      overflow: auto;
+    }
+    .add-invoice .btn-brand {
+      margin-top: -3rem !important;
+    }
+    .guide {
+      flex-direction: column;
+      ul {
+        margin-top: 15px;
+        li {
+          font-size: 14px;
+        }
+      }
+    }
+    .manage-product .card {
+      flex-basis: 100%;
+      margin: 10px;
+    }
+    .invoice-width {
+      width: 700px;
+      overflow-x: auto;
+    }
+    .questionnaire {
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .questionnaire .questionnaire-form {
+      margin: 20px auto;
+    }
+    .notify-list-skl .skeleton .line {
+      width: 156px;
+    }
+    .uploaded-photo {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .feedback .feedback-post .post .post-heading .header-title .description {
+      width: 100% !important;
+    }
+    .feedback .editor .feedback-editor .footer-tab {
+      padding: 20px 0 0 0;
+    }
+    .tag-n-deadline {
+      display: none;
+    }
+    .design-tile ~ .add-new {
+      width: 153px;
+      text-align: right;
+    }
+    .share-design.uploaded-img {
+      width: 100%;
+      display: flex;
+      grid-gap: 10px;
+      height: 215px;
+      grid-template-columns: repeat(4, 1fr);
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
 }
+
 @media screen and (max-width: 991px) {
   .uploaded-photo {
     grid-gap: 15px;
@@ -1250,568 +1818,21 @@
 }
 
 @media screen and (max-width: 767px) {
-  .details-action {
-    position: fixed;
-    bottom: 0;
-    z-index: 99;
-    background: #fff;
-    width: 100%;
-    left: 0;
-    padding: 0 20px 22px 20px;
-    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
-  }
-  .sidebar-action {
-    margin-bottom: 50px;
-  }
-  .custom-chekbox .form-group input:checked + label:after {
-    top: 3px;
-  }
-  .uploaded-photo img {
-    height: 160px !important;
-  }
-  .modal-body .uploaded-photo img {
-    height: 115px !important;
-  }
-  .feedback-editor .uploaded-photo img {
-    height: 160px !important;
-  }
-  .product-details-skl {
-    .thumbnail-prev {
-      width: 100%;
-      height: 40vh;
-      margin-top: 20px;
-    }
-    .left-thumb {
-      width: 80px;
-      height: 100px;
-      margin: 15px 15px 0 0;
-    }
-  }
-  button.add-new-design {
-    width: 100%;
-  }
-  .skeleton.project-list {
-    height: 140px;
-  }
-  .filter-container button.btn-brand {
-    width: 100%;
-    height: 50px;
-    margin: 0 0 20px 0;
-  }
-  .product-detail-gallery {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .product-detail-gallery .thumbnail-slider ul li {
-    display: inline-block;
-  }
-  .product-detail-gallery .thumbnail-slider {
-    width: 100%;
-  }
-  .product-detail-gallery .thumbnail-prev img {
-    height: 418px;
-  }
-  a.link-invoice {
-    width: 300px;
-    display: inline-block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  //user profile
-  .profile {
-    padding: 0;
-  }
-  .profile-info {
-    flex-direction: column;
-  }
-  .profile .profile-tab ul {
-    max-width: 100%;
+  .placing-order {
+    margin-top: 50px;
   }
   .profile .profile-tab ul li {
-    width: 50%;
-  }
-  .profile .profile-tab ul li a {
-    font-size: 16px;
     width: 100%;
-    margin: 0;
-    padding: 15px 0 5px 0;
-    text-align: center;
   }
-  .profile-info .user-info {
-    padding-left: 0;
-    margin-top: 30px;
+  .profile {
+    margin-top: 50px;
   }
-  .profile .change-pass {
-    max-width: 100%;
+  .quote-req-list-container .quote-list{
+    flex-direction: column;
   }
-  //user profile end
-  .client-respons .client-list .list .client-info .info {
-    width: 158px;
-    h6 {
-      width: 100%;
-    }
-  }
-  .dashboard-designs .filter-products.designs .card.product-card {
-    flex-basis: 100%;
-  }
-  //Sign In
-  .auth-page .bg-wrapper {
-    height: 172px;
-  }
-  .auth-page .bg-wrapper .logo-wrapper {
-    top: 60px;
-  }
-  .auth-page .content-wrapper-override {
-    padding: 20px !important;
-  }
-  .questionnaire .section-content .row .col {
-    flex-basis: 100%;
-  }
-  .questionnaire .card .card-img-top {
-    height: auto;
-  }
-  .questionnaire .section-header .row > div {
-    flex: auto;
-    text-align: center;
-    margin: 0 0 20px 0;
-  }
-  .questionnaire button.btn-outline-default {
+  table.payment-checkout button{
+    width: 100%;
     margin-bottom: 20px;
-  }
-  section.questionnaire {
-    padding-bottom: 30px;
-  }
-  .page-header {
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-  //Dashboard
-  aside.left-panel.active {
-    margin-left: 0;
-    padding-top: 96px;
-  }
-  .filter-products.designs .card.product-card {
-    flex-basis: 100%;
-  }
-  .dashboard-container .section .row .dc {
-    flex-basis: 100%;
-    margin-bottom: 30px;
-  }
-  .dashboard-card .card-topics,
-  .designs .design-category {
-    max-width: 100%;
-  }
-  .myrfqproject {
-    margin-bottom: 30px;
-  }
-  .filter-products .card {
-    flex-basis: 100%;
-    margin-bottom: 30px;
-  }
-  button#sidebarToggleTop {
-    margin: 0 !important;
-    padding: 6px 6px;
-    vertical-align: top;
-    align-self: start;
-  }
-  .navbar {
-    height: auto;
-    width: calc(100%);
-  }
-  //.navbar-expand .navbar-nav {
-  //    flex-direction: column;
-  //    width: 100%;
-  //    display: block;
-  //}
-  ul.navbar-nav li:first-child {
-    .dropdown-menu {
-      position: absolute;
-      left: 0;
-      padding: 10px !important;
-    }
-  }
-  .datepicker.dropdown-menu {
-    width: auto;
-  }
-  //ul.navbar-nav li.notification-bell {
-  //    margin: 1px 15px 10px !important
-  //}
-  //ul.navbar-nav li:nth-child(2) img{
-  //    margin-top: -4px !important;
-  //}
-  //ul.navbar-nav li:nth-last-child(2) {
-  //    float: right;
-  //    margin-right: 5px !important;
-  //    margin-bottom: 0 !important;
-  //}
-  //ul.navbar-nav li:last-child {
-  //    position: absolute;
-  //    right: 20px;
-  //}
-  li.nav-item {
-    width: auto;
-    float: left;
-    vertical-align: middle;
-  }
-  .dashboard-container {
-    padding-top: 136px;
-  }
-
-  //quote-request
-  .demo-product-card {
-    width: 100%;
-  }
-  .drug-n-drop .development-step-1 ul.nav-tabs li {
-    margin-bottom: 0;
-    width: 100%;
-  }
-  .uploaded-img .item {
-    width: 100%;
-  }
-
-  //Pick design
-  .filter-container {
-    flex-direction: column;
-    .search input {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-  }
-  .product-slider .owl-carousel .owl-nav .owl-next {
-    position: absolute;
-    right: 53px;
-    z-index: 999999;
-    margin-top: -30px;
-  }
-  #AddNewProduct h5.section-title {
-    font-size: 28px;
-    margin-top: 30px;
-  }
-  .modal-form {
-    padding: 20px 0px 30px 0px;
-  }
-  .modal .section-subtitle {
-    padding: 0;
-  }
-  .share-design-modal img.close-btn {
-    top: 0;
-    right: 0px;
-  }
-  .share-design-modal .section-header {
-    margin-top: 60px;
-  }
-
-  //My Product
-
-  .custom-chekbox .form-group label {
-    font-size: 14px;
-  }
-  .produt-details-description {
-    margin-top: 20px;
-    .btn-nitex-default {
-      margin-top: 15px;
-    }
-  }
-
-  table.measurement-table tr th {
-    padding: 10px !important;
-    font-size: 12px;
-  }
-  table.measurement-table tr td:first-child {
-    font-size: 12px;
-    padding-left: 10px !important;
-  }
-  table.measurement-table tr td {
-    padding: 10px 41px !important;
-    font-size: 14px;
-  }
-
-  //Add New Product
-  #FilltheForm {
-    .btn-outline-secondary {
-      margin: 24px 0 0 15px !important;
-      float: left !important;
-      width: 125px;
-    }
-    .row-item .form-group {
-      margin-bottom: 20px !important;
-    }
-  }
-
-  //.Add New Product
-  .my-project-card {
-    padding: 15px 15px;
-    .table-responsive {
-      width: 700px;
-    }
-  }
-
-  //Add new Project
-  #newProject_1_4.modal .modal-body {
-    padding: 70px 0 50px;
-  }
-  .nav-tabs {
-    padding-left: 0;
-  }
-  .development-step-1 .tab-content {
-    padding: 50px 40px;
-    outline-offset: -15px;
-  }
-  .project-statistic .ps-item {
-    padding-right: 15px;
-    width: 50%;
-    margin-bottom: 18px;
-    margin-right: 0;
-  }
-  .style-overview .overview {
-    flex-basis: 100%;
-    margin: 0 0 20px 0;
-  }
-  .project-profile .back {
-    position: relative;
-    left: 0;
-    top: 15px;
-    cursor: pointer;
-    text-align: left;
-    margin: 0 auto;
-    width: 100%;
-    display: inherit;
-    margin-bottom: 20px;
-  }
-
-  //Project Update
-  .filter {
-    flex-basis: 100%;
-    .production {
-      min-height: auto;
-    }
-  }
-  .timeline {
-    flex-basis: 100%;
-    margin: 0;
-    .editor .write {
-      padding: 10px 10px 0 70px;
-    }
-    .editor .footer-tab {
-      margin: 0 10px 10px 10px;
-      padding-top: 10px;
-      flex-wrap: wrap;
-    }
-  }
-  .editor .footer-tab .file {
-    margin-top: 0px;
-  }
-  .editor .footer-tab {
-    button.send-feed {
-      margin-top: 0;
-      bottom: 0;
-      padding: 0px 25px;
-    }
-  }
-  .timeline .editor .write {
-    padding: 10px;
-    padding-top: 15px;
-    display: flex;
-    img {
-      position: relative;
-    }
-  }
-  .editor .write img.user-photo {
-    left: 0px;
-    top: 0px;
-  }
-  .editor .write textarea {
-    padding-top: 0;
-    width: 85%;
-    margin-left: 10px;
-  }
-  .style-overview {
-    flex-wrap: wrap;
-  }
-  .feedback .feedback-post .post .post-heading span.date-time {
-    width: auto;
-    text-align: left !important;
-  }
-  .post .post-heading {
-    flex-direction: column;
-  }
-  .feedback .feedback-post .post .post-heading .header-title .description {
-    padding: 13px 16px;
-    border-radius: 20px;
-    margin-left: 10px;
-  }
-  .timeline .post .post-tag .table-badge {
-    margin-bottom: 10px;
-  }
-  .stage .sub-stage {
-    flex-direction: column;
-    width: 295px;
-    padding-bottom: 15px;
-    height: 250px;
-  }
-  .stage .sub-stage ul .title {
-    width: 100%;
-    line-height: 20px;
-    padding: 15px 15px;
-    border-top: 1px solid #eee;
-    font-weight: 600;
-    color: #424242;
-  }
-  .stage .sub-stage ul li {
-    padding: 10px 15px 10px 15px;
-    line-height: 20px;
-  }
-  .stage .sub-stage ul {
-    padding-bottom: 0;
-  }
-  .stage span {
-    padding: 6px 25px 5px 10px;
-    height: 35px;
-    width: 125px;
-    line-height: 21px;
-    &:after {
-      margin-top: -7px;
-      right: 15px;
-    }
-  }
-  .notification {
-    width: 338px;
-    height: 400px;
-    right: -92px;
-    top: 12px;
-    ul {
-      li:last-child {
-        position: relative;
-        right: initial;
-      }
-      li:nth-child(2) {
-        float: initial;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important;
-        margin: 0 !important;
-      }
-      li:nth-child(3) {
-        float: initial;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important;
-        margin: 0 !important;
-      }
-    }
-  }
-  .notification .day h6.timing-date,
-  .notification .day ul li a,
-  .notification .see-all a {
-    padding: 10px;
-  }
-  .notification .day ul li a .notify-list .info {
-    width: 188px;
-    .name {
-      width: 188px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      font-size: 14px;
-    }
-    .tag {
-      font-size: 12px;
-    }
-  }
-  .notification .day ul li a .notify-list img.product {
-    width: 50px !important;
-  }
-  .notification h3.title {
-    padding: 10px 10px;
-    font-size: 16px;
-  }
-
-  .checklist {
-    padding: 10px;
-    flex-direction: column;
-  }
-  .production {
-    margin: 0;
-    margin-bottom: 20px;
-  }
-  .item .messages-popup {
-    width: calc(100% - 19px);
-  }
-  .modal-dialog.modal-xl {
-    max-width: 100%;
-  }
-  .item .messages-popup .post {
-    margin: 10px;
-  }
-  table.payment-checkout button.btn-brand {
-    float: right !important;
-  }
-  button.btn-brand.btn-outline-secondary {
-    width: 96px;
-  }
-
-  .uploaded-img .item .card .card-body {
-    padding: 10px !important;
-  }
-
-  //Admin Panel
-  table.manage-project-table {
-    display: block;
-    overflow: auto;
-  }
-  .add-invoice .btn-brand {
-    margin-top: -3rem !important;
-  }
-  .guide {
-    flex-direction: column;
-    ul {
-      margin-top: 15px;
-      li {
-        font-size: 14px;
-      }
-    }
-  }
-  .manage-product .card {
-    flex-basis: 100%;
-    margin: 10px;
-  }
-  .invoice-width {
-    width: 700px;
-    overflow-x: auto;
-  }
-  .questionnaire {
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .questionnaire .questionnaire-form {
-    margin: 20px auto;
-  }
-  .notify-list-skl .skeleton .line {
-    width: 156px;
-  }
-  .uploaded-photo {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .feedback .feedback-post .post .post-heading .header-title .description {
-    width: 100% !important;
-  }
-  .feedback .editor .feedback-editor .footer-tab {
-    padding: 20px 0 0 0;
-  }
-  .tag-n-deadline {
-    display: none;
-  }
-  .design-tile ~ .add-new {
-    width: 153px;
-    text-align: right;
-  }
-  .share-design.uploaded-img {
-    width: 100%;
-    display: flex;
-    grid-gap: 10px;
-    height: 215px;
-    grid-template-columns: repeat(4, 1fr);
-    overflow-x: auto;
-    overflow-y: hidden;
   }
 }
 @media screen and (max-width: 375px) {

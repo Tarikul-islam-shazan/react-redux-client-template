@@ -53,6 +53,11 @@
     $(document).ready(function() {
         $('select').niceSelect();
     });
+
+    // Order invoice popup
+    $('.invoice-summary .title').click(function(){
+        $('.invoice-summary').toggleClass('show');
+    });
     
 }(window.jQuery)
 

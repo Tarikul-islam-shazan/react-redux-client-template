@@ -1,3 +1,7 @@
+import { toastError } from '../../../commonComponents/Toast';
+import { isValidJSON } from '../../../services/Util'
+import Http from '../../../services/Http';
+
 export const validate = (state, projectId) => {
   let {
     sameAsBilling, billingName, billingAddress, billingState, billingCity, billingPostCode, billingPhoneNumber,
@@ -126,5 +130,20 @@ export const validate = (state, projectId) => {
     isValid,
     errors,
     reqBody
+  }
+}
+
+export const getDetails = async (id) => {
+  try {
+    const { data } = await Http.GET('getInvoiceDetails', id);
+    data.toAddress = isValidJSON(data?.toAddress) ? JSON.parse(data.toAddress) : data.toAddress;
+    data.fromAddress = isValidJSON(data?.fromAddress) ? JSON.parse(data.fromAddress) : data.fromAddress;
+    return data;
+  } catch ({ response }) {
+    if (response && response.data && response.data.message) {
+      toastError(response.data.message);
+    } else {
+      toastError("Something went wrong! Please try again.");
+    }
   }
 }

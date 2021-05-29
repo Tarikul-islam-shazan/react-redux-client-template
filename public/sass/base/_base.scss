@@ -961,3 +961,28 @@ table.manage-project-table.collection-list-table.invoice-list-table thead{
   }
 }
 
+.rich-text-editor{
+  background: #F4F5F7;
+  border-radius: 20px;
+  padding: 10px 40px 10px 15px;
+  .rich-text{
+    background: #F4F5F7;
+    border: 0;
+    .RichTextEditor__editor___1QqIU .public-DraftEditor-content, .RichTextEditor__editor___1QqIU .public-DraftEditorPlaceholder-root{
+      padding: 0;
+    }
+    .RichTextEditor__editor___1QqIU {
+      font-family: "Open Sans";
+      font-size: 14px;
+    }
+  }
+}
+.write.main-post{
+  .rich-text-editor{
+    background: #fff;
+    .rich-text{
+      background: #fff;
+    }
+  }
+}
+

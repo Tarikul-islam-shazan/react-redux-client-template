@@ -26,13 +26,17 @@ export const ProjectStatus = ({data}) => {
                 <h6>{data.totalStyles ? data.totalStyles : 'N/A'}</h6>
             </div>
             <div className="ps-item">
-                <span className="total-valuation">Total value</span>
+                <span className="total-valuation">Order value</span>
                 <h6>{data.totalValuation ? data.totalValuation : 'N/A'}</h6>
             </div>
             <div className="ps-item">
-              {
-                projectStatus(data)
-              }
+                <span>Status</span>
+                <h6 className="m-0 mt-1">
+                    {
+                        projectStatus(data)
+                    }
+                </h6>
+
 
             </div>
         </div>
