@@ -31,8 +31,23 @@ class CollectionList extends Component {
           height: window.innerHeight,
           totalCount: 0,
           show: false,
+          showAddCollectionPopup: false,
+          collectionName: '',
+          collectionNameError: ''
         };
     }
+
+    setWrapperRef = (node) => {
+      this.wrapperRef = node;
+    }
+
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+              showAddCollectionPopup: false
+            })
+        }
+     }
 
     handleScroll = () => {
       const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -60,6 +75,7 @@ class CollectionList extends Component {
 
     componentDidMount = async() => {
       window.addEventListener("scroll", this.handleScroll);
+      document.addEventListener('mousedown', this.handleClickOutside);
       this.getFixedCollections();
       await this.renderList(0);
       // await this.setData();
@@ -67,6 +83,7 @@ class CollectionList extends Component {
 
     componentWillUnmount() {
       window.removeEventListener("scroll", this.handleScroll);
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     getFixedCollections = async() => {
@@ -169,8 +186,56 @@ class CollectionList extends Component {
 
     }
 
+    createNewCollection = () => {
+      let {collectionName} = this.state;
+      if (!collectionName) {
+        this.setState({
+          collectionNameError: 'Collection name required'
+        })
+        return;
+      } else {
+        this.setState({
+          collectionNameError: ''
+        })
+      }
+      let body = {
+        name: collectionName,
+        privacy: 'CUSTOM',
+        viewType: 'PRODUCT_LIST'
+      };
+      Http.POST('addCollection', body)
+        .then(({data}) => {
+          if (data) {
+            if (data.success) {
+              toastSuccess(data.message);
+              let temp = {
+                id: data.id,
+                name: collectionName,
+                collectionViewType: 'PRODUCT_LIST',
+                numOfDesign: 0,
+                documentResponseList: []
+              };
+              let {collectionList} = this.state;
+              this.setState({
+                collectionName: '',
+                collectionList: [temp, ...collectionList]
+              })
+            }
+            this.setState({showAddCollectionPopup: false});
+          }
+        })
+        .catch(({response}) => {
+          if(response && response.data && response.data.message){
+            toastError(response.data.message);
+          }else{
+            toastError("Request was unsuccessful.");
+          }
+        });
+
+    }
+
     render() {
-      let { name, collectionList, fixedCollections } = this.state;
+      let { name, collectionList, fixedCollections, showAddCollectionPopup, collectionName, collectionNameError } = this.state;
         return (
 
               <div class="explore-design collection-list">
@@ -184,7 +249,7 @@ class CollectionList extends Component {
                           </div>
                       </div>
                       <div class="header-button">
-                          <button class="m-0 btn-brand">+ Create collection</button>
+                          <button class="m-0 btn-brand" onClick={() => this.setState({showAddCollectionPopup: true})}>+ Create collection</button>
                       </div>
                   </div>
 
@@ -251,6 +316,21 @@ class CollectionList extends Component {
                         </div>
                       )
                     })
+                  }
+                  {
+                    showAddCollectionPopup ?
+                    <div class="create-new-collection">
+                        <div class="pop-container" ref={this.setWrapperRef}>
+                            <span class="create-newbutton cursor-pointer">+ Create new collection</span>
+                                <div class="create-new d-flex">
+                                    <input type="text" placeholder="Type your collection name" class="bg-gray-light border-0" name="collectionName" value={collectionName} onChange={this.onChange}/>
+                                    <button class="btn-brand m-0 brand-bg-color" onClick={this.createNewCollection}>Create</button>
+                                </div>
+                                {
+                                  collectionNameError ? <p className="error">{collectionNameError}</p> : <></>
+                                }
+                        </div>
+                    </div> : <></>
                   }
                   </div>
               </div>
