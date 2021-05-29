@@ -626,14 +626,14 @@ class OurDesignDetails extends Component {
                               </div>
                           </div>
                           {
-                            this.getImageByType(['EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).length ?
+                            this.getImageByType(['EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).length ?
                             <div className="info-item">
                                 <label className="font-14 text-muted mb-2">Embellishment</label>
                                 <div className="d-flex">
                                 {
-                                  this.getImageByType(['EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).map((item, i) => {
+                                  this.getImageByType(['EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN']).map((item, i) => {
                                     return(
-                                      <ProductDetailsImgThumb key={i} docs={this.getImageByType(['EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'])} item={item} index={i} showGallery={this.showImageViewer}/>
+                                      <ProductDetailsImgThumb key={i} docs={this.getImageByType(['EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'])} item={item} index={i} showGallery={this.showImageViewer}/>
                                     )
                                   })
                                 }
@@ -658,14 +658,14 @@ class OurDesignDetails extends Component {
                           }
 
                           {
-                            this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'], false).length ?
+                            this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'], false).length ?
                             <div className="info-item">
                                 <label className="font-14 text-muted mb-2">Other</label>
                                 <div className="d-flex">
                                 {
-                                  this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN', 'ACCESSORIES_DESIGN'], false).map((item, i) => {
+                                  this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN', 'ACCESSORIES_DESIGN'], false).map((item, i) => {
                                     return(
-                                      <ProductDetailsImgThumb key={i} item={item} docs={this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'], false)} index={i} showGallery={this.showImageViewer}/>
+                                      <ProductDetailsImgThumb key={i} item={item} docs={this.getImageByType(['PRODUCT_DESIGN', 'REFERENCE_IMAGE', 'EMBELLISHMENT', 'PRINT_DESIGN', 'EMBROIDERY_DESIGN'], false)} index={i} showGallery={this.showImageViewer}/>
                                     )
                                   })
                                 }
