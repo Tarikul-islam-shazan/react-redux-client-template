@@ -583,11 +583,11 @@ class OurDesignDetails extends Component {
                           <div className="d-flex flex-column flex-sm-row">
                               <div className="info-item mr-5">
                                   <label className="font-14 text-muted">Product type</label>
-                                  <h5 className="font-18 semibold">{product.productType ? product.productType.name : ''}</h5>
+                                  <h5 className="font-18 semibold">{product.productType ? product.productType.name : 'N/A'}</h5>
                               </div>
                               <div className="info-item">
                                   <label className="font-14 text-muted">Fabric details</label>
-                                  <h5 className="font-18 semibold">{product.fabricComposition}</h5>
+                                  <h5 className="font-18 semibold">{product.fabricDetails ? product.fabricDetails : 'N/A'}</h5>
                               </div>
                           </div>
 
