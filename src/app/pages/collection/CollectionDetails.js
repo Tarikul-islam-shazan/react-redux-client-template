@@ -17,6 +17,10 @@ import {ModalMyProductCard} from '../../commonComponents/ModalMyProductCard';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import {_storeData, _getProductForQuote} from '../design/actions';
 
+const filterProductBasedOnStatus = (products) => {
+  return products.filter((product) => !['LOCKED', 'SOLD'].includes(product.availabilityStatus))
+}
+
 class CollectionDetails extends Component {
 
     constructor(props) {
@@ -67,7 +71,7 @@ class CollectionDetails extends Component {
         let { hasNext, page, loading, productList, size } = this.state;
         console.log("hasNext", hasNext, page)
         if(hasNext && !loading && productList.length){
-          await this.getCollectionProducts(page+1)
+          await this.getCollectionProducts(page + 1)
         }
       }
     }
@@ -79,7 +83,7 @@ class CollectionDetails extends Component {
         let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, size } = this.state;
         console.log("message", 'bottom reached', myDesignHasNext, myDesignPage, myDesignLoading)
         if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
-          await this.myProducts(myDesignPage+1)
+          await this.myProducts(myDesignPage + 1)
         }
       }
     }
@@ -205,9 +209,9 @@ class CollectionDetails extends Component {
         });
     }
 
-    myProducts = async(page = 0) => {
+    myProducts = async(myDesignPage = 0) => {
       this.setState({myDesignLoading: true})
-      let {myDesignList, myDesignPage, myDesignSize} = this.state;
+      let {myDesignList, myDesignSize} = this.state;
       let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
       await Http.GET('getProductList', params)
         .then(({data}) => {
@@ -215,8 +219,8 @@ class CollectionDetails extends Component {
           this.setState({myDesignLoading: false});
           if(data){
             this.setState({
-              myDesignList: page === 0 ? data : [...myDesignList, ...data],
-              page,
+              myDesignList: myDesignPage === 0 ? data : [...myDesignList, ...data],
+              myDesignPage,
               myDesignHasNext: data.length === myDesignSize ? true : false
             });
           }
@@ -845,7 +849,7 @@ class CollectionDetails extends Component {
 
                       <div class="show-products">
                       {
-                        productList.map((product, i) => {
+                        filterProductBasedOnStatus(productList).map((product, i) => {
                           return (
                             <ProductCardWithTick
                               key={i}
