@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-const IMAGE_EXTENSION = ['jpg', 'jpeg', 'png'];
+import { addImageSuffix, IMAGE_EXTS } from '../services/Util';
 
 export const ProductDetailsImgThumb = ({item, index, showGallery, docs}) => {
   let splits = item.name.split('.');
@@ -8,8 +7,8 @@ export const ProductDetailsImgThumb = ({item, index, showGallery, docs}) => {
   if (splits.length) {
     extension = splits[splits.length - 1];
   }
-  if (IMAGE_EXTENSION.includes(extension)) {
-    return <div className="ref-file mr-2" onPress={() => showGallery(docs, index)}><img src={item.docUrl} alt={item.name}/></div>
+  if (IMAGE_EXTS.includes(extension)) {
+    return <a href={item.docUrl} className="ref-file mr-2" target="_blank" download><img src={addImageSuffix(item.docUrl, '_xthumbnail')} alt={item.name}/></a>
   }
   return(
     <div className="ref-file mr-2 download-file text-center d-flex align-items-center justify-content-center">

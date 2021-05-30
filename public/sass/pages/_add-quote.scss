@@ -197,6 +197,9 @@
       }
       .info-right {
         margin-left: 15px !important;
+        @media (max-width: 1024px) {
+          width: 65%;
+        }
       }
     }
     .sizes{

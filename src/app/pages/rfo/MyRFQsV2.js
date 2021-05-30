@@ -341,7 +341,7 @@ class MyRFQs extends Component {
         <div className="header-sorting d-flex justify-content-between">
             <div className="sort-filter d-flex flex-grow-1">
                 <div className="product-name mr-3">
-                    <input type="text" name="search" value={search} onChange={this.onChange} placeholder="Product name, collection name" className="w-100 bg-gray-light border-0"/>
+                    <input type="text" name="search" value={search} onChange={this.onChange} placeholder="Search by keywords" className="w-100 bg-gray-light border-0"/>
                 </div>
                 <div className="date mr-3">
                     <input type="date" placeholder="Date" className="bg-gray-light border-0" name="date" value={date} onChange={this.onChange}/>

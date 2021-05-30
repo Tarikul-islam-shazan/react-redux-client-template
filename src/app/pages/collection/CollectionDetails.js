@@ -10,12 +10,16 @@ import Modal from 'react-bootstrap/Modal'
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import { encodeQueryData, clothingLabelStatus, STATUS_NOT_ALLOWED_FOR_SELECTION } from '../../services/Util';
+import { encodeQueryData, clothingLabelStatus, STATUS_NOT_ALLOWED_FOR_SELECTION, authUserInfo } from '../../services/Util';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ModalMyProductCard} from '../../commonComponents/ModalMyProductCard';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
 import {_storeData, _getProductForQuote} from '../design/actions';
+
+const filterProductBasedOnStatus = (products) => {
+  return products.filter((product) => !['LOCKED', 'SOLD'].includes(product.availabilityStatus))
+}
 
 class CollectionDetails extends Component {
 
@@ -47,9 +51,10 @@ class CollectionDetails extends Component {
           collectionName: '',
           collectionNameError: '',
           showAddCollectionPopup: false,
-          showCollectionAddOption: false,
+          showCollectionAddOption: true,
           collectionType: '',
-          collectionViewType: ''
+          collectionViewType: '',
+          showEdit: true
         };
     }
 
@@ -67,7 +72,7 @@ class CollectionDetails extends Component {
         let { hasNext, page, loading, productList, size } = this.state;
         console.log("hasNext", hasNext, page)
         if(hasNext && !loading && productList.length){
-          await this.getCollectionProducts(page+1)
+          await this.getCollectionProducts(page + 1)
         }
       }
     }
@@ -79,7 +84,7 @@ class CollectionDetails extends Component {
         let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, size } = this.state;
         console.log("message", 'bottom reached', myDesignHasNext, myDesignPage, myDesignLoading)
         if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
-          await this.myProducts(myDesignPage+1)
+          await this.myProducts(myDesignPage + 1)
         }
       }
     }
@@ -124,10 +129,15 @@ class CollectionDetails extends Component {
     getCollectionDetails = ( collectionId ) => {
       this.setState({loading:true})
       let { size, name } = this.state;
+      let user = authUserInfo();
       Http.GET('getCollectionDetails', collectionId)
         .then(({data}) => {
           console.log('getCollectionDetails SUCCESS: ', data);
           if (data) {
+            data.userResponseList = data.userResponseList.filter((addedUser) => addedUser.id !== user.id);
+            if (user.id) {
+              data.userResponseList = [user, ...data.userResponseList];
+            }
             this.setState({collection: data})
           }
         })
@@ -142,12 +152,17 @@ class CollectionDetails extends Component {
         });
     }
 
-    getCollectionProducts = ( page = 0 ) => {
+    getCollectionProducts = async ( page = 0 ) => {
       let paramName = 'viewType';
       let regex = new RegExp('[\\?&]' + paramName + '=([^&#]*)');
       let results = regex.exec(this.props.location.search);
       if (results !== null) {
-        this.setState({
+        if (results[1] !== 'MY_PRODUCTS') {
+          await this.setState({
+            showEdit: false
+          })
+        }
+        await this.setState({
           collectionViewType: results[1]
         })
         this.getViewTypeCollectionList(page, results[1]);
@@ -205,9 +220,9 @@ class CollectionDetails extends Component {
         });
     }
 
-    myProducts = async(page = 0) => {
+    myProducts = async(myDesignPage = 0) => {
       this.setState({myDesignLoading: true})
-      let {myDesignList, myDesignPage, myDesignSize} = this.state;
+      let {myDesignList, myDesignSize} = this.state;
       let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
       await Http.GET('getProductList', params)
         .then(({data}) => {
@@ -215,8 +230,8 @@ class CollectionDetails extends Component {
           this.setState({myDesignLoading: false});
           if(data){
             this.setState({
-              myDesignList: page === 0 ? data : [...myDesignList, ...data],
-              page,
+              myDesignList: myDesignPage === 0 ? data : [...myDesignList, ...data],
+              myDesignPage,
               myDesignHasNext: data.length === myDesignSize ? true : false
             });
           }
@@ -291,7 +306,7 @@ class CollectionDetails extends Component {
                                 <div class="email">{user.email}</div>
                             </div>
                         </div>
-                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user.id)}>Add</button>
+                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user)}>Add</button>
                     </li>
                   )
                 })
@@ -439,16 +454,33 @@ class CollectionDetails extends Component {
         });
     }
 
-    addUserToCollection = (userId) => {
+    addUserToCollection = (user) => {
       let collectionId = this.props.match.params.id;
+      let {collection} = this.state;
       let body = {
         collectionId,
-        userIds: [userId]
+        userIds: [user.id]
       }
       Http.POST('shareCollection', body)
         .then(({data}) => {
           if (data && data.success) {
-            toastSuccess(data.message);
+            if (collection.userResponseList && collection.userResponseList.length) {
+              let flag = true;
+              collection.userResponseList.map((item) => {
+                if (item.id == user.id) {
+                  flag = false;
+                }
+              })
+              if (flag) {
+                toastSuccess(data.message);
+                collection.userResponseList = [...collection.userResponseList, user];
+              } else {
+                toastSuccess("Collection already shared");
+              }
+            } else {
+              collection.userResponseList = [user];
+            }
+            this.setState({collection});
           }
         })
         .catch(({response}) => {
@@ -616,7 +648,7 @@ class CollectionDetails extends Component {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
         collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption,
-        collectionType, collectionViewType
+        collectionType, collectionViewType, showEdit
        } = this.state;
 
        return (
@@ -657,7 +689,7 @@ class CollectionDetails extends Component {
                                          searchUserSuggestions.map((user, i) => {
                                            return (
                                              <div class="item d-flex" key={i} onClick={async() => {
-                                               await this.addUserToCollection(user.id);
+                                               await this.addUserToCollection(user);
                                                this.setState({searchUserText: '', searchUserSuggestions: []})
                                              }}>
                                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -792,7 +824,7 @@ class CollectionDetails extends Component {
                     showAddCollectionPopup ?
                     <div class="create-new-collection">
                         <div class="pop-container" ref={this.setWrapperRef}>
-                            <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: !showCollectionAddOption})}>+ Create new collection</span>
+                            <span class="create-newbutton cursor-pointer" onClick={() => this.setState({showCollectionAddOption: true})}>+ Create new collection</span>
                             {
                               showCollectionAddOption ?
                               <>
@@ -845,7 +877,7 @@ class CollectionDetails extends Component {
 
                       <div class="show-products">
                       {
-                        productList.map((product, i) => {
+                        filterProductBasedOnStatus(productList).map((product, i) => {
                           return (
                             <ProductCardWithTick
                               key={i}
@@ -853,7 +885,8 @@ class CollectionDetails extends Component {
                               updateProductCard={() => this.updateProductCard()}
                               addToQuote={this.addToQuote}
                               likeProduct={this.likeProduct}
-                              unlikeProduct={this.unlikeProduct}/>
+                              unlikeProduct={this.unlikeProduct}
+                              showEdit={showEdit}/>
                           )
                         })
                       }

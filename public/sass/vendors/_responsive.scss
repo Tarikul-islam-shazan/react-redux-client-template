@@ -800,6 +800,9 @@
   }
 }
 @media screen and (max-width: 1280px) {
+  .quote-req-list-container .quote-list{
+    flex-direction: row;
+  }
   div#sidebar-menu-content.quotation-container {
     margin-left: 290px !important;
   }
@@ -1252,7 +1255,7 @@
       max-width: 100%;
     }
     .profile .profile-tab ul li {
-      width: 50%;
+      width: 33.33%;
     }
     .profile .profile-tab ul li a {
       font-size: 16px;
@@ -1815,6 +1818,18 @@
 }
 
 @media screen and (max-width: 767px) {
+  .placing-order {
+    margin-top: 50px;
+  }
+  .profile .profile-tab ul li {
+    width: 100%;
+  }
+  .profile {
+    margin-top: 50px;
+  }
+  .quote-req-list-container .quote-list{
+    flex-direction: column;
+  }
   table.payment-checkout button{
     width: 100%;
     margin-bottom: 20px;
