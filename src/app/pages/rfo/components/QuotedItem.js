@@ -4,10 +4,10 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 export const QuotedItem = ({quote, index, toggleSelect, search}) => {
-  
+
   let flag = 1;
   let timeDifference = 0;
-  
+
   if (quote.status !== 'PRICE_GIVEN') {
     let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, 'DD/MM/YYYY hh:mm A');
     formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
@@ -51,12 +51,12 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
           </svg>
       </div>
     )
-  } 
+  }
 const renderDisscussButton = () => {
   return (
     <div className="position-relative">
-      <button 
-        onClick={onDiscuss} 
+      <button
+        onClick={onDiscuss}
         className="m-0 btn-brand m-0 shadow float-right">Discuss
       </button>
     </div>
@@ -69,155 +69,155 @@ const renderDisscussButton = () => {
             <div className="custom-chekbox">
                 <div className="form-group m-0">
                     <input type="checkbox" id={`check_${quote.id}`} name={`toggleSelect_${quote.id}`} onClick={toggleSelect} value={quote.id} checked={quote.isSelected ? true : false}/>
-                    { quote.status ===  "ORDER_PLACED" ? 
+                    { quote.status ===  "ORDER_PLACED" ?
                         renderTooltip("Order placed for this design") :
                       quote.status ===  "PRODUCT_SOLD" ?
                         renderTooltip("Design is already sold") :
                       <label for={`check_${quote.id}`} className="m-0"></label>
                     }
-                    
+
                 </div>
             </div>
         </div>
 
         <div className="quote-info">
-            <div className="info-right w-100 d-flex justify-content-between">
-                <div className="features d-flex flex-md-column">
-                {
-                  quote.documentResponseList.length > 0 ?
-                  quote.documentResponseList.map((doc,i) => {
-                    if(doc.docType=='PRODUCT_DESIGN' && flag){
+          <div className="info-right w-100 d-flex justify-content-between my-quotes-items">
+            <div className="features d-flex flex-md-column">
+              {
+                quote.documentResponseList && quote.documentResponseList.length > 0 ?
+                  quote.documentResponseList.map((doc, i) => {
+                    if (doc.docType == 'PRODUCT_DESIGN' && flag) {
                       flag = 0;
                       return (
-                        <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="designer" className="radius-3"/>
+                        <img key={i} src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="designer" className="radius-3" />
                       )
                     }
-                    if(quote.documentResponseList.length==i+1 && flag){
-                      return(
-                        <img key={i} src={addImageSuffix(quote.documentResponseList[0].docUrl, '_xthumbnail')} alt="designer" className="radius-3"/>
+                    if (quote.documentResponseList.length == i + 1 && flag) {
+                      return (
+                        <img key={i} src={addImageSuffix(quote.documentResponseList[0].docUrl, '_xthumbnail')} alt="designer" className="radius-3" />
                       )
                     }
                   })
                   :
-                  <img src={require("../../../assets/images/default_product.svg")} alt="designer" className="radius-3"/>
-                }
-                </div>
-                <div className="features d-flex flex-md-column">
-                    <div className="info-item mt-1 ellipse-2-line product-title">
-                        <Link
-                            to={`/designs/view/${quote.productId}`}
-                            className="font-weight-bold m-0 font-20 ellipse-2-line">
-                            {quote.name ? quote.name : 'N/A'}
-                        </Link>
-
-                        { quote.collectionName &&
-                            <>
-                              <span className="pr-2 font-12">in</span>
-                                <Link 
-                                    className="text-underline font-16 color-brand" 
-                                    onClick={() => search({id: quote.collectionId, name: quote.collectionName})}>{quote.collectionName}
-                                </Link>
-                            </>
-                        }
-              <div>
-                <span className="pr-2 font-12">by</span>
-                <span className="font-14">{quote.clientName}</span>
-              </div>
-                    </div>
-                    <div className="info-item">
-                        <label className="font-14 text-muted">Date</label>
-                        <h5 className="color-333">{changeDateFormat(quote.date, "DD/MM/YYYY", "DD-MM-YYYY")}</h5>
-                    </div>
-                    <div className="info-item">
-                        <label className="font-14 text-muted">Status</label>
-                        {rfqProductStatus(quote)}
-                    </div>
-                </div>
-                <div className="features d-flex flex-md-column">
-                    <div className="info-item mt-2">
-                        <label className="font-14 text-muted">Product category</label>
-                        <h5 className="color-333">{quote.productCategory}, {quote.productGroup}</h5>
-                    </div>
-                    <div className="info-item">
-                        <label className="font-14 text-muted">Color</label>
-                        <div className="color-picker">
-                            <ul>
-                            {
-                              quote.colorWiseSizeQuantityPairList.map((color, i) => {
-                                return(
-                                  <li className="d-flex align-items-center" key={i}>
-                                      <span
-                                        className="circle-color mr-3"
-                                        style={{background: color.hexCode}}
-                                        data-placement="top"
-                                        data-toggle="tooltip"
-                                        data-original-title={color.name}>
-                                      </span>
-                                      <div className="font-20 color-333 ml-2">{color.name}</div>
-                                  </li>
-                                )
-                              })
-                            }
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="info-item">
-                        <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="color-333">
-                        <span>{quote.fabricComposition}</span></h5>
-                    </div>
-                </div>
-                <div className="features d-flex flex-md-column">
-                    <div className="info-item mt-2">
-                        <label className="font-14 text-muted">Quantity</label>
-                        <h5 className="color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
-                    </div>
-
-                    <div className="info-item pr-2 d-flex flex-column">
-                        <table className="text-center p-size-table">
-                            <thead>
-                            {
-                              quote.colorWiseSizeQuantityPairList.length ? quote.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map((pair, j) => {
-                                  return(
-                                    <th>{pair.code}</th>
-                                  )
-                                }) :
-                                <>
-                                  <th>XS</th>
-                                  <th>S</th>
-                                  <th>M</th>
-                                  <th>L</th>
-                                  <th>XL</th>
-                                </>
-                              }
-                            </thead>
-                            <tbody className="text-center">
-                                {
-                                  quote.colorWiseSizeQuantityPairList.map((colorWithSize, i) => {
-                                    return(
-                                      <tr>
-                                      {
-                                        colorWithSize.sizeQuantityPairList.map((pair, j) => {
-                                          return(
-                                            <td>{pair.quantity}</td>
-                                          )
-                                        })
-                                      }
-                                      </tr>
-                                    )
-                                  })
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="info-item">
-                        <div className="size delivery-in-days">
-                            <label className="font-14 text-muted">Delivery in</label>
-                            <h5 className="color-333">{quote.deliveryTime ? quote.deliveryTime : '--'} Days</h5>
-                        </div>
-                    </div>
-                </div>
+                  <img src={require("../../../assets/images/default_product.svg")} alt="designer" className="radius-3" />
+              }
             </div>
+            <div className="features d-flex flex-md-column">
+              <div className="info-item mt-1 ellipse-2-line product-title">
+                <Link
+                  to={`/designs/view/${quote.productId}`}
+                  className="font-weight-bold m-0 font-20 ellipse-2-line">
+                  {quote.name ? quote.name : 'N/A'}
+                </Link>
+
+                {quote.collectionName &&
+                  <>
+                    <span className="pr-2 font-12 text-muted">in</span>
+                    <a
+                      href="#"
+                      className="text-underline font-14 color-brand"
+                      onClick={() => search({ id: quote.collectionId, name: quote.collectionName })}>
+                      {quote.collectionName}
+                    </a>
+                  </>
+                }
+                <div>
+                  <span className="pr-2 font-12 text-muted">by</span>
+                  <span className="font-14">{quote.clientName}</span>
+                </div>
+              </div>
+              <div className="info-item">
+                <label className="font-14 text-muted">Date</label>
+                <h5 className="font-20 color-333">{changeDateFormat(quote.date, 'DD/MM/YYYY', 'DD-MM-YYYY')}</h5>
+              </div>
+              <div className="info-item">
+                <label className="font-14 text-muted">Status</label>
+                {rfqProductStatus(quote)}
+              </div>
+            </div>
+            <div className="features d-flex flex-md-column">
+              <div className="info-item mt-2">
+                <label className="font-14 text-muted">Product category</label>
+                <h5 className="font-20 color-333">{quote.productGroup}, {quote.productCategory}</h5>
+              </div>
+
+              <div className="info-item">
+                <label className="font-14 text-muted">Fabric details</label>
+                <h5 className="font-20 color-333">{quote.fabricComposition}</h5>
+              </div>
+
+              <div className="info-item">
+                <div className="size delivery-in-days">
+                  <label className="font-14 text-muted">Delivery in</label>
+                  <h5 className="font-20 color-333">{quote.deliveryTime ? quote.deliveryTime : '--'} Days</h5>
+                </div>
+              </div>
+
+
+            </div>
+            <div className="features position-relative d-flex flex-md-column">
+              <div className="info-item mt-0 mt-xl-2">
+                <label className="font-14 text-muted">Quantity</label>
+                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
+              </div>
+
+              {
+                quote.colorWiseSizeQuantityPairList && quote.colorWiseSizeQuantityPairList.length ?
+                  <div className="info-item d-flex">
+                    <div className="size">
+                      <label className="text-center mb-0">
+                         <span className="circle-color mr-3 opacity-0"></span>
+                      </label>
+                    </div>
+                    <div className="sizes d-flex  align-items-center text-center">
+                      {
+                        quote.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map((pair, j) => {
+                          return (
+                            <div className="size" key={j}>
+                              <label className="text-center mb-0">{pair.code}</label>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                  : <></>
+              }
+
+              {
+                quote.colorWiseSizeQuantityPairList.map((color, i) => {
+                  return (
+                    <div className="info-item d-flex align-items-start mt-2" key={i}>
+                      <div className="sizes d-flex  align-items-center">
+                        <span
+                          className="circle-color mr-3"
+                          style={{background: color.hexCode}}
+                          data-placement="top"
+                          data-toggle="tooltip"
+                          data-original-title={color.name}>
+                        </span>
+                        {
+                          color.sizeQuantityPairList.map((pair, j) => {
+                            return (
+                              <div className="size" key={j}>
+                                <input
+                                  style={{ background: '#fff' }}
+                                  type="text"
+                                  placeholder="00"
+                                  value={pair.quantity}
+                                  readOnly={true} />
+                              </div>
+                            )
+                          })
+                        }
+                      </div>
+                    </div>
+                  )
+                })
+              }
+
+            </div>
+          </div>
         </div>
         {
           quote.status === 'PRICE_GIVEN' ?
@@ -239,19 +239,19 @@ const renderDisscussButton = () => {
                   {renderDisscussButton()}
               </div>
           </div> :
-          quote.status === 'PRODUCT_SOLD' ? 
+          quote.status === 'PRODUCT_SOLD' ?
             <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
             <div className="text-center">
             { !quote.price?
-                  <span className="font-14">Price will be updated 
+                  <span className="font-14">Price will be updated
                   <br/>within <span className="font-italic font-weight-bold">{timeDifference > 0 ? timeDifference : 0} hours</span>
                     {renderPriceUpdateBox(quote)}
                     {renderDisscussButton()}
                   </span> :
                   <div className="text-center">
-                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold"> 
+                  <span className="font-15 valid-till">Price valid till <span className="font-weight-bold">
                       {getValidDateTill(quote.date, quote.time)}
-                    </span> 
+                    </span>
                   </span>
                   <div className="pricewillbeupdated pt-2 pb-3">
                       <div>
@@ -270,7 +270,7 @@ const renderDisscussButton = () => {
             }
           </div>
       </div> :
-          quote.status === 'ORDER_PLACED' ? 
+          quote.status === 'ORDER_PLACED' ?
           <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
             <div className="text-center">
             <span className="font-15 valid-till">Price confirmed</span>
