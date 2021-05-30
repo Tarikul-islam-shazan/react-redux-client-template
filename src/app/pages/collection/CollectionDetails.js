@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import { encodeQueryData, clothingLabelStatus, STATUS_NOT_ALLOWED_FOR_SELECTION } from '../../services/Util';
+import { encodeQueryData, clothingLabelStatus, STATUS_NOT_ALLOWED_FOR_SELECTION, authUserInfo } from '../../services/Util';
 import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ModalMyProductCard} from '../../commonComponents/ModalMyProductCard';
 
@@ -129,10 +129,15 @@ class CollectionDetails extends Component {
     getCollectionDetails = ( collectionId ) => {
       this.setState({loading:true})
       let { size, name } = this.state;
+      let user = authUserInfo();
       Http.GET('getCollectionDetails', collectionId)
         .then(({data}) => {
           console.log('getCollectionDetails SUCCESS: ', data);
           if (data) {
+            data.userResponseList = data.userResponseList.filter((addedUser) => addedUser.id !== user.id);
+            if (user.id) {
+              data.userResponseList = [user, ...data.userResponseList];
+            }
             this.setState({collection: data})
           }
         })
@@ -301,7 +306,7 @@ class CollectionDetails extends Component {
                                 <div class="email">{user.email}</div>
                             </div>
                         </div>
-                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user.id)}>Add</button>
+                        <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user)}>Add</button>
                     </li>
                   )
                 })
@@ -449,16 +454,33 @@ class CollectionDetails extends Component {
         });
     }
 
-    addUserToCollection = (userId) => {
+    addUserToCollection = (user) => {
       let collectionId = this.props.match.params.id;
+      let {collection} = this.state;
       let body = {
         collectionId,
-        userIds: [userId]
+        userIds: [user.id]
       }
       Http.POST('shareCollection', body)
         .then(({data}) => {
           if (data && data.success) {
-            toastSuccess(data.message);
+            if (collection.userResponseList && collection.userResponseList.length) {
+              let flag = true;
+              collection.userResponseList.map((item) => {
+                if (item.id == user.id) {
+                  flag = false;
+                }
+              })
+              if (flag) {
+                toastSuccess(data.message);
+                collection.userResponseList = [...collection.userResponseList, user];
+              } else {
+                toastSuccess("Collection already shared");
+              }
+            } else {
+              collection.userResponseList = [user];
+            }
+            this.setState({collection});
           }
         })
         .catch(({response}) => {
@@ -667,7 +689,7 @@ class CollectionDetails extends Component {
                                          searchUserSuggestions.map((user, i) => {
                                            return (
                                              <div class="item d-flex" key={i} onClick={async() => {
-                                               await this.addUserToCollection(user.id);
+                                               await this.addUserToCollection(user);
                                                this.setState({searchUserText: '', searchUserSuggestions: []})
                                              }}>
                                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
