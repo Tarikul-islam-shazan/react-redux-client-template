@@ -57,7 +57,7 @@ const renderDisscussButton = () => {
     <div className="position-relative">
       <button
         onClick={onDiscuss}
-        className="m-0 btn-brand m-0 shadow float-right">Discuss
+        className="m-0 btn-brand m-0 shadow float-right semibold border-orrange">Discuss
       </button>
     </div>
   )

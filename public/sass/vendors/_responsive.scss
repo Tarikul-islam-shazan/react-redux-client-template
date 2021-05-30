@@ -472,12 +472,7 @@
     }
   }
   .editor .footer-tab .file {
-    background: url(./images/icons/image-wide.png) no-repeat;
-    padding: 3px 10px 4px 36px;
-    background-position: 8px 8px;
-    line-height: 28px;
-    height: 35px;
-    font-size: 14px;
+    background-position: 10px 12px;
   }
 
   .editor {
@@ -803,6 +798,9 @@
   .quote-req-list-container .quote-list{
     flex-direction: row;
   }
+  .confirm-quote-request .quote-req-list-container .quote-list{
+    flex-direction: column;
+  }
   div#sidebar-menu-content.quotation-container {
     margin-left: 290px !important;
   }
@@ -1077,12 +1075,7 @@
   .post .post-description p {
     font-size: 12px;
   }
-  .comment-status .messages-popup {
-    right: inherit;
-    transform: translateX(-83%);
-    left: 0;
-    width: 330px;
-  }
+
   .filter {
     flex-basis: 25%;
   }
@@ -1490,10 +1483,6 @@
       margin-bottom: 18px;
       margin-right: 0;
     }
-    .style-overview .overview {
-      flex-basis: 100%;
-      margin: 0 0 20px 0;
-    }
     .project-profile .back {
       position: relative;
       left: 0;
@@ -1517,7 +1506,10 @@
       flex-basis: 100%;
       margin: 0;
       .editor .write {
-        padding: 10px 10px 0 70px;
+        padding: 15px 10px 0 75px;
+        @media (max-width: 767px) {
+          padding: 10px 10px 0 50px;
+        }
       }
       .editor .footer-tab {
         margin: 0 10px 10px 10px;
@@ -1535,22 +1527,27 @@
         padding: 0px 25px;
       }
     }
+  .feedback .editor .feedback-editor .footer-tab .file.btn{
+    padding-top: 11px;
+  }
     .timeline .editor .write {
-      padding: 10px;
-      padding-top: 15px;
-      display: flex;
-      img {
-        position: relative;
+      &.main-post{
+        .rich-text-editor {
+          width: 100%;
+          display: flex;
+          padding: 0;
+           .rich-text {
+            background: #fff;
+            flex-basis: 90%;
+             padding-top: 10px;
+             @media (max-width: 767px) {
+               flex-basis: 100%;
+               padding-left: 10px;
+               padding-bottom: 20px;
+             }
+          }
+        }
       }
-    }
-    .editor .write img.user-photo {
-      left: 0px;
-      top: 0px;
-    }
-    .editor .write textarea {
-      padding-top: 0;
-      width: 85%;
-      margin-left: 10px;
     }
     .style-overview {
       flex-wrap: wrap;
@@ -1653,7 +1650,6 @@
 
     .checklist {
       padding: 10px;
-      flex-direction: column;
     }
     .production {
       margin: 0;
@@ -1715,9 +1711,6 @@
     }
     .feedback .feedback-post .post .post-heading .header-title .description {
       width: 100% !important;
-    }
-    .feedback .editor .feedback-editor .footer-tab {
-      padding: 20px 0 0 0;
     }
     .tag-n-deadline {
       display: none;
@@ -1805,6 +1798,9 @@
     flex-basis: calc(100% / 2 - 10px);
     margin: 0;
     margin-bottom: 20px;
+    @media (max-width: 767px) {
+      flex-basis: 100%;
+    }
   }
   .uploaded-photo img {
     height: 140px !important;
@@ -1818,6 +1814,15 @@
 }
 
 @media screen and (max-width: 767px) {
+  .explore-design.collection-list {
+    padding-top: 60px;
+  }
+  .add-quote{
+    padding-top: 60px;
+  }
+  .production {
+    flex-basis: 100%;
+  }
   .placing-order {
     margin-top: 50px;
   }
@@ -1833,6 +1838,10 @@
   table.payment-checkout button{
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  .comment-status .messages-popup {
+    width: 330px;
   }
 }
 @media screen and (max-width: 375px) {
