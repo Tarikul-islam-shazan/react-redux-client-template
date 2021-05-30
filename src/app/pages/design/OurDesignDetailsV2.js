@@ -268,6 +268,7 @@ class OurDesignDetails extends Component {
       await this.props._storeData('selectedProductIds', []);
       if (heroProduct) {
         toastSuccess('Quote added successfully.');
+        this.props.history.push('/quote-now');
       }
       this.updateProductCard();
     }
@@ -743,7 +744,7 @@ class OurDesignDetails extends Component {
                                       </svg>
                                   </a>
                                   <a onClick={() => this.addShowingProductToCollection()} className="btn btn-outline-secondary mr-3  border-gray-light cursor-pointer">Add to collection</a>
-                                  <a onClick={() => this.addShowingProductToQuote()} className="btn mr-3  border-0 brand-bg-color-secondary text-white quote-now cursor-pointer">Quote Now</a>
+                                  <a onClick={() => this.addShowingProductToQuote()} className="btn mr-3  border-0 brand-bg-color-secondary text-white quote-now cursor-pointer">Add to quote</a>
                               </div>
                           </div>
 
