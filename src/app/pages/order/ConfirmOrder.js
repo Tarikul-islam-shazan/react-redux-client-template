@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import axios from 'axios';
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import loadjs from 'loadjs';
 import moment from 'moment';
 
-import LoadingOverlay from 'react-loading-overlay';
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
-import ProductCard from '../../commonComponents/ProductCard';
-import { encodeQueryData, _getKey } from '../../services/Util';
-
+import { addWithCurrentDate, convertTimeToLocal } from '../../services/Util';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 
@@ -117,13 +110,21 @@ class ConfirmOrder extends Component {
 
     render() {
         let {order} = this.state;
-        console.log('~~~~~~~~~~', order);
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
 
-        const deliveryDate = () => {
-          const max = order.productResponseList?.reduce((max, item) => item.deliveryTime > max ? item.deliveryTime : max, 0);
-          console.log('!!!!!!!!', max);
-          let deliveryDate = moment().add(1, 'months').calendar();
+        const getDeliveryDate = () => {
+          let  max = order.productResponseList?.reduce((max, item) => item.deliveryTime > max ? item.deliveryTime : max, 0);
+          max = order.productResponseList?.find((product) => product.deliveryTime === max);
+        
+          let formattedQuoteDate = convertTimeToLocal(max&&max.date, max&&max.time, 'DD/MM/YYYY hh:mm A');
+          formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
+
+          let deliveryDate = addWithCurrentDate(formattedQuoteDate, 1, 'month', "Do MMM YY");
+
+          if(!deliveryDate){
+            return toastError("Invalid date type");
+          }
+          return deliveryDate;
         }
 
         
@@ -142,7 +143,7 @@ class ConfirmOrder extends Component {
                       <input type="text" placeholder="Order title" name="name" value={order.name} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
 
-                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {deliveryDate()}</div></span></h4>
+                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {getDeliveryDate()}</div></span></h4>
                   <h4 className="mb-3 font-weight-normal pc-step">Product confirmation (Step 1 of 2) <span className="result font-16 mr-3 mt-2 mt-sm-0">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
                   {
                     order.productResponseList ?
