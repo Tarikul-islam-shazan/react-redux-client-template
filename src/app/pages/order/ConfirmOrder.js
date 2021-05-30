@@ -113,7 +113,9 @@ class ConfirmOrder extends Component {
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
 
         const getDeliveryDate = () => {
-          let  max = order.productResponseList?.reduce((max, item) => item.deliveryTime > max ? item.deliveryTime : max, 0);
+          const defaultDeliveryTime = 30;
+          let  max = order.productResponseList?.reduce((max, item) => item.deliveryTime ? item.deliveryTime : defaultDeliveryTime > max ? item.deliveryTime : max, 0);
+
           max = order.productResponseList?.find((product) => product.deliveryTime === max);
         
           let formattedQuoteDate = convertTimeToLocal(max&&max.date, max&&max.time, 'DD/MM/YYYY hh:mm A');
