@@ -2,27 +2,36 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from 'moment';
-
 import Http from '../../services/Http';
+import LoadingOverlay from 'react-loading-overlay';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { addWithCurrentDate, convertTimeToLocal } from '../../services/Util';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
-
 import {OrderItem} from './components/OrderItem';
-
+import {fetchGeneralSettingsData} from '../../actions';
 class ConfirmOrder extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          order: {}
+          order: {},
+          TURN_AROUND_TIME: ""
         };
     }
 
-    componentDidMount = () => {
+    componentDidMount = async() => {
       document.title = "My designs on Nitex - The easiest clothing manufacturing software";
       // this.renderList(0, true, true);
+      const keys = ['TURN_AROUND_TIME']
+      const data = await fetchGeneralSettingsData(keys);
+      if(data){
+        this.setState({
+          TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
+          ? data["TURN_AROUND_TIME"].value
+          : "",
+        })
+      }
       let id = this.props.match.params.id;
       this.getOrderDetails(id);
     }
@@ -113,24 +122,52 @@ class ConfirmOrder extends Component {
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
 
         const getDeliveryDate = () => {
-          const defaultDeliveryTime = 30;
-          let  max = order.productResponseList?.reduce((max, item) => item.deliveryTime ? item.deliveryTime : defaultDeliveryTime > max ? item.deliveryTime : max, 0);
+       
+          if(order.productResponseList) {
+            let  max = order.productResponseList.reduce((max, item) => item.deliveryTime ? item.deliveryTime : this.state.TURN_AROUND_TIME > max ? item.deliveryTime : max, 0);
 
-          max = order.productResponseList?.find((product) => product.deliveryTime === max);
-        
-          let formattedQuoteDate = convertTimeToLocal(max&&max.date, max&&max.time, 'DD/MM/YYYY hh:mm A');
-          formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
+            max = order.productResponseList.find((product) => product.deliveryTime === max);
 
-          let deliveryDate = addWithCurrentDate(formattedQuoteDate, 1, 'month', "Do MMM YY");
+            let formattedQuoteDate = convertTimeToLocal(max.date, max.time, 'DD/MM/YYYY hh:mm A');
+            formattedQuoteDate = moment(formattedQuoteDate, 'DD/MM/YYYY hh:mm A');
 
-          if(!deliveryDate){
-            return toastError("Invalid date type");
+            let deliveryDate = addWithCurrentDate(formattedQuoteDate, max.deliveryTime, 'day', "Do MMM YY");
+            
+            if(!deliveryDate){
+              return toastError("Invalid date type");
+            }
+            return deliveryDate;
           }
-          return deliveryDate;
         }
 
         
         return (
+          <LoadingOverlay
+              active={this.state.loading}
+              styles={{
+                overlay: (base) => ({
+                  ...base,
+                  background: LOADER_OVERLAY_BACKGROUND
+                }),
+                spinner: (base) => ({
+                  ...base,
+                  width: LOADER_WIDTH,
+                  position: LOADER_POSITION,
+                  top: LOADER_TOP,
+                  left: LOADER_LEFT,
+                  marginTop: LOADER_MARGIN_TOP,
+                  marginLeft: LOADER_MARGIN_LEFT,
+                  '& svg circle': {
+                    stroke: LOADER_COLOR
+                  }
+                }),
+                content: (base) => ({
+                  ...base,
+                  color: LOADER_COLOR
+                })
+              }}
+              spinner
+              text={LOADER_TEXT}>
           <div className="add-quote d-flex">
               <div className="confirm-quote-request placing-order">
                   <div className="header-title d-flex justify-content-between align-items-center">
@@ -213,6 +250,7 @@ class ConfirmOrder extends Component {
               </div>
 
           </div>
+          </LoadingOverlay>
         );
     }
 }
