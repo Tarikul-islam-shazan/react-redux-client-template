@@ -40,10 +40,10 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   const renderDesignStatus = (message) =>{
     return(
       <div className="favourite-part choose disabled" data-toggle="tooltip" data-placement="top" title={message}>
-        <div className="checkbox disabled">
-        <label><input type="checkbox" disabled /></label>
+          <div className="checkbox disabled">
+          <label><input type="checkbox" disabled /></label>
+          </div>
       </div>
-  </div>
     )
   }
 

@@ -333,7 +333,7 @@ class QuoteNowCart extends Component {
                     </> :
                   <div className="mt-5 not-found">
                     <EmptyState
-                      title="Sorry no quote added yet"
+                      title="No quote added yet"
                     />
                   </div>
               }
