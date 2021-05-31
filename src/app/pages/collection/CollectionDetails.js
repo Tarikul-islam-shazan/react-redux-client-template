@@ -755,7 +755,7 @@ class CollectionDetails extends Component {
                   </div>
 
                   <div class="add-more-designs">
-                      <div class={`add-more ml-auto custom-scrollbar ${showAddProductModal ? `open`:``}`} id="myProductList" onScroll={this.handleMyProductScroll}>
+                      <div class={`add-more ml-auto ${showAddProductModal ? `open`:``}`} id="myProductList" onScroll={this.handleMyProductScroll}>
                           <div id="closeRPop" class="p-3 cursor-pointer">
                               <svg xmlns="http://www.w3.org/2000/svg" width="22.84" height="12.32" viewBox="0 0 22.84 12.32">
                                   <g id="Group_5016" data-name="Group 5016" transform="translate(-1582.964 -1119.323)">
@@ -788,7 +788,7 @@ class CollectionDetails extends Component {
                               </div>
                           </div>
 
-                          <div class="added-item">
+                          <div class="added-item custom-scrollbar">
                           {
                             myDesignList.map((product, i) => {
                               return(
