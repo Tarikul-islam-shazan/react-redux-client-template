@@ -262,6 +262,8 @@ ul.existing-item{
   z-index: 9;
   background: #fff;
   width: 445px;
+  max-height: 500px !important;
+  overflow-y: auto !important;
   display: none;
   &.show{
     display: block;

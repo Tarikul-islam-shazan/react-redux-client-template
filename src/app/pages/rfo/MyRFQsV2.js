@@ -341,7 +341,7 @@ class MyRFQs extends Component {
         <div className="header-sorting d-flex justify-content-between">
             <div className="sort-filter d-flex flex-grow-1">
                 <div className="product-name mr-3">
-                    <input type="text" name="search" value={search} onChange={this.onChange} placeholder="Search by keywords" className="w-100 bg-gray-light border-0"/>
+                    <input type="text" name="search" value={search} onChange={this.onChange} placeholder="Design title, Collection title..." className="w-100 bg-gray-light border-0"/>
                 </div>
                 <div className="date mr-3">
                     <input type="date" placeholder="Date" className="bg-gray-light border-0" name="date" value={date} onChange={this.onChange}/>
@@ -350,8 +350,7 @@ class MyRFQs extends Component {
                     <select className="w-100 bg-gray-light border-0" name="status" value={status} onClick={(e) => this.onChange(e)}>
                         <option>Status </option>
                         <option value="OFFER_PENDING">Offer Pending</option>
-                        <option value="PRICE_GIVEN">Price Given</option>
-                        <option value="APPROVED">Approved</option>
+                        <option value="PRICE_GIVEN">Quoted</option>
                         <option value="PRODUCT_SOLD">Design Sold</option>
                         <option value="ORDER_PLACED">Order Placed</option>
                     </select>
