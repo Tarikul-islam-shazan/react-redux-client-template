@@ -32,7 +32,9 @@ body {
 .fullscreen {
     height: calc(100vh - 149px);
 }
-
+.admin .fullscreen {
+    height: calc(100vh);
+}
 .section {
     margin-bottom: 30px;
 }
@@ -364,10 +366,7 @@ label {
 form.registration-form {
     margin: 30px 0px;
 }
-form.registration-form.mt-5  input[type="email"]{
-    height: 40px;
-    border-bottom: 1px solid #ccc;
-}
+
 .auth-page .MuiFormLabel-root, .auth-page .MuiInputBase-root{
     font-family: 'Open Sans', sans-serif;
     font-size: 12px !important;
@@ -2224,8 +2223,11 @@ button.btn_tour a {
     .layout_headers {
         padding-top: 40px;
     }
-    .fullscreen {
+     .fullscreen {
         height: calc(100vh - 147px);
+    }
+    .admin .fullscreen {
+        height: calc(100vh);
     }
     .bg_white_auth {
         max-width: 100% !important;
@@ -2240,12 +2242,18 @@ button.btn_tour a {
     .fullscreen {
         height: calc(100vh - 162px);
     }
+    .admin .fullscreen {
+        height: calc(100vh);
+    }
 }
 @media screen and (max-width: 767px){
     .auth-page.container {
         padding-bottom: 0 !important;
     }
     .fullscreen {
+        height: calc(100vh);
+    }
+    .admin .fullscreen {
         height: calc(100vh);
     }
 }
