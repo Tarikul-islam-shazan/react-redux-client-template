@@ -718,7 +718,7 @@ class PickDesignV2 extends Component {
                         {
                           !this.state.loading && !designList.length ?
                           <EmptyState
-                           title="Sorry no designs found"
+                           title="No designs found"
                            subTitle="You may want to try using different keywords, checking for typos, or adjusting your filters"
                            /> : <></>
                         }
