@@ -27,7 +27,7 @@ class MyProject extends Component {
           filterBy: '',
           sort: ['PENDING','RUNNING','COMPLETED'],
           project_type : ['BULK', 'DEVELOPMENT', 'SUPERVISION'],
-          sortOrder : 'lastResponseTime,desc',
+          sortOrder : 'dateAdded,desc',
           hasNext : true, //to check if pagination is available or not
           height: window.innerHeight,
           userInfo: {}
@@ -222,13 +222,13 @@ class MyProject extends Component {
 
                                     </path>
                                 </svg>
-                                <input type="search" placeholder="Search... " name="search" value={this.state.search} onChange={this.onChange} onKeyPress={this.keyPressed} />
+                                <input type="search" placeholder="Search with order title..." name="search" value={this.state.search} onChange={this.onChange} onKeyPress={this.keyPressed} />
                             </div>
 
                             <div className="short-by">
                                 <select name="sortOrder" id="sort" value={this.state.sortOrder} onClick={this.onChange}>
-                                    <option value="lastResponseTime,desc">Urgent</option>
                                     <option value="dateAdded,desc">Recent</option>
+                                    <option value="lastResponseTime,desc">Urgent</option>
                                 </select>
                             </div>
 

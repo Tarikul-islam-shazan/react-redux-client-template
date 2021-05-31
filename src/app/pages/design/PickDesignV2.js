@@ -607,7 +607,7 @@ class PickDesignV2 extends Component {
                       <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
                           <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" strokeWidth="0.5"/>
                       </svg>
-                      <input type="search" autoComplete="chrome-off" onFocus={() => this.setState({showSuggestions: true})} placeholder="Product name, collection name" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
+                      <input type="search" autoComplete="chrome-off" onFocus={() => this.setState({showSuggestions: true})} placeholder="Search with seasons, categories, color or anything!" name="search" className="w-100" value={search} onChange={this.onChange} onKeyPress={this.keyPressed}/>
                         {
                           showSuggestions &&
                           <div className="search-suggestions" ref={(node) => this.searchSuggestions = node}>
