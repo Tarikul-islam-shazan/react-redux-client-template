@@ -228,43 +228,44 @@ class Login extends Component {
                       </span>
                       Sign in with Google
                   </a>
-                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
-                      <span>
-                          <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
-                      </span>
-                      Sign in with LinkedIn
-                  </a>
+                  {/*<a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>*/}
+                  {/*    <span>*/}
+                  {/*        <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>*/}
+                  {/*    </span>*/}
+                  {/*    Sign in with LinkedIn*/}
+                  {/*</a>*/}
                   <p className="para_email">Or sign in with your e-mail</p>
               </div>
               <form className="registration-form" autoComplete="off">
 
-                        {/* <InputLabel htmlFor="standard-adornment-email">Email Address</InputLabel> */}
-                        <Input
-                            id="standard-adornment-email"
-                            label="Email Address"
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onChange}
-                            onKeyPress={this.handleKeyPress}
-                            ref="email"
-                            placeholder="Email"
-                            className="form_register_input"
-                            endAdornment= {
-                                <InputAdornment position="end">
-                                    {/* <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/> */}
-                                </InputAdornment>
-                            }
-                        />
-                        {
-                          this.state.emailError ?
-                          <p className="error">{this.state.emailError}</p>
-                          : <></>
-                        }
+                       <div className="position-relative">
+                           <Input
+                               id="standard-adornment-email"
+                               label="Email Address"
+                               type="email"
+                               name="email"
+                               value={this.state.email}
+                               onChange={this.onChange}
+                               onKeyPress={this.handleKeyPress}
+                               ref="email"
+                               placeholder="Email"
+                               className="form_register_input"
+                               endAdornment= {
+                                   <InputAdornment position="end">
+                                       {/* <img src={ require('../../assets/icons/envelope.png') } alt="email" className="img-fluid" style={{width:18}}/> */}
+                                   </InputAdornment>
+                               }
+                           />
+                           {
+                               this.state.emailError ?
+                                   <p className="error">{this.state.emailError}</p>
+                                   : <></>
+                           }
+                       </div>
 
 
 
-                        {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
+                  <div className="position-relative">
                         <Input
                             id="standard-adornment-password"
                             type={showPassword ? "input" : "password"}
@@ -290,7 +291,7 @@ class Login extends Component {
                           <p className="error">{this.state.passwordError}</p>
                           : <></>
                         }
-
+                  </div>
 
                   <div className="form-group">
                       <div className="row justify-content-between">

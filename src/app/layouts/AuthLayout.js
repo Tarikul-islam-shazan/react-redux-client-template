@@ -43,7 +43,7 @@ class AuthLayout extends React.Component {
 
                   </div>
                   <div className="row fullscreen">
-                      <div className="col-lg-7 col-sm-12 col-md-12 bg_white_auth" style={{padding:0}}>
+                      <div className="col-lg-7 col-sm-12 col-md-12 bg_white_auth d-none d-xl-block" style={{padding:0}}>
                           <div className="bg-wrapper">
                               <div className="logo-wrapper">
                                   <img src={ require('../assets/images/logo.png') } alt="logo" className="img-fluid d-block mx-auto" width="125px"/>
@@ -52,8 +52,6 @@ class AuthLayout extends React.Component {
                       </div>
                       <div className="col-lg-5 col-sm-12 col-md-12 bg_white_auth" style={{padding:0}}>
                           <div className="content-wrapper content-wrapper-override">
-                              <br/>
-                              <br/>
                               {this.props.children}
                           </div>
                       </div>
