@@ -249,7 +249,7 @@ class CollectionDetails extends Component {
 
     getUsersByTypes = async() => {
       let {usersByTypeList} = this.state;
-      let params = `?userTypes=MANAGER&userTypes=EXECUTIVE`;
+      let params = `?userTypes=FASHION_DESIGNER&userTypes=EXECUTIVE`;
       await Http.GET('getUsersByTypes', params)
         .then(({data}) => {
           console.log('PRODUCT LIST SUCCESS: ', data);
@@ -294,7 +294,7 @@ class CollectionDetails extends Component {
       for (const [key, value] of Object.entries(usersByTypeList)) {
         result.push(
           <ul class="p-0 m-0 existing-item" key={key}>
-              <div class="title">{key}</div>
+              <div class="title">{key === 'FASHION_DESIGNER'? 'Fashion Designer' : key === 'EXECUTIVE' ? 'Account Manager' : 'Unknown Type'}</div>
               {
                 value.map((user, i) => {
                   return (
@@ -671,7 +671,7 @@ class CollectionDetails extends Component {
                                     </svg>
                                 </div>
 
-                                <div class={`add-people-popup shadow ${showAddMemberModal ? `show` : ``}`}>
+                                <div class={`add-people-popup custom-scrollbar shadow ${showAddMemberModal ? `show` : ``}`}>
                                     <div class="close-add-people mb-3 d-block d-sm-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20.941" height="20.941" viewBox="0 0 20.941 20.941">
                                             <g id="Group_22803" data-name="Group 22803" transform="translate(2489.29 -478.941)">
