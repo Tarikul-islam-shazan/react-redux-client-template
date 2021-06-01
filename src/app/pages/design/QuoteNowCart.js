@@ -131,14 +131,9 @@ class QuoteNowCart extends Component {
             toastError("Something went wrong! Please try again.");
         });
 
-        await Http.GET("getPickDesign", designParams)
+        await Http.GET("searchProduct", designParams)
         .then(({ data }) => {
-          const pickDesignList = data.filter(
-            (design) =>
-              design.availabilityStatus === "AVAILABLE" ||
-              design.availabilityStatus === "CHECKED" ||
-              design.availabilityStatus === "IN_RFQ"
-          );
+          const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
           result = [...result, ...pickDesignList];
         })
         .catch(({ response }) => {
@@ -292,7 +287,7 @@ class QuoteNowCart extends Component {
     }
 
     render() {
-        let { designList, cart, title, TURN_AROUND_TIME, MOQ} = this.state;
+        let { designList, cart, title, TURN_AROUND_TIME, MOQ , loading} = this.state;
         return (
           <div className="add-quote d-flex">
               <div className="confirm-quote-request">
@@ -351,20 +346,8 @@ class QuoteNowCart extends Component {
                   <div className="header d-flex justify-content-between align-items-center">
                       <h4 className="semibold">Add more designs to quote</h4>
                       <div>
-                          <div className="cursor-pointer d-inline-block mr-4">
-                              <svg onClick={async() => {
-                                let designList = await this.renderList(0);
-                                this.setState({designList})
-                              }} xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">
-                                  <g id="reload" transform="translate(-20.982 0)">
-                                      <g id="Group_11184" data-name="Group 11184" transform="translate(20.982 0)">
-                                          <path id="Path_27871" data-name="Path 27871" d="M26.048,5.4a10.847,10.847,0,0,1,14.1-.372l-3.228.122a.75.75,0,0,0,.028,1.5h.028l4.956-.183a.749.749,0,0,0,.722-.75V5.623h0l-.183-4.9a.751.751,0,0,0-1.5.056l.117,3.073a12.337,12.337,0,0,0-16.046.433,12.341,12.341,0,0,0-3.712,12.062.747.747,0,0,0,.728.572.65.65,0,0,0,.178-.022.751.751,0,0,0,.55-.906A10.84,10.84,0,0,1,26.048,5.4Z" transform="translate(-20.982 0)" fill="#41487c"/>
-                                          <path id="Path_27872" data-name="Path 27872" d="M98.7,185.786a.749.749,0,1,0-1.456.356,10.839,10.839,0,0,1-17.452,10.9l3.267-.294a.751.751,0,0,0-.139-1.495l-4.939.444a.749.749,0,0,0-.678.817l.444,4.939a.749.749,0,0,0,.745.683.27.27,0,0,0,.067-.006.749.749,0,0,0,.678-.817l-.267-3.006a12.254,12.254,0,0,0,7.129,2.717c.211.011.422.017.628.017A12.339,12.339,0,0,0,98.7,185.786Z" transform="translate(-74.167 -174.923)" fill="#41487c"/>
-                                      </g>
-                                  </g>
-                              </svg>
-                          </div>
-                          <div className="cursor-pointer d-inline-block">
+                         
+                          <div className="cursor-pointer d-inline-block" data-toggle="tooltip" data-placement="top" title="Add new design">
                               <svg onClick={() => window.open('/designs/add')} xmlns="http://www.w3.org/2000/svg" width="27.615" height="27.615" viewBox="0 0 27.615 27.615">
                                   <g id="Group_11190" data-name="Group 11190" transform="translate(-2672.328 4255.322) rotate(45)">
                                       <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-1108.875 -4907.645) rotate(45)" fill="none" stroke="#41487c" stroke-linecap="round" stroke-width="2"/>
@@ -376,24 +359,24 @@ class QuoteNowCart extends Component {
                   </div>
 
                   <div className="added-item  custom-scrollbar" id="sidebarCollapse">
-                  {
-                    designList.map((product, i) => {
-                      return(
-                        <QuoteNowMyProductCard 
-                          key={i}  
-                          cart={cart} 
-                          product={product} 
-                          addToQuote={this.addToQuote} 
-                          defaultTurnAroundTime={TURN_AROUND_TIME}
-                          defaultMoq={MOQ}
-                          />
-                      )
-                    })
-                  }
-                  </div>
+                    { !loading ?
+                        designList.map((product, i) => {
+                          return(
+                            <QuoteNowMyProductCard 
+                              key={i}  
+                              cart={cart} 
+                              product={product} 
+                              addToQuote={this.addToQuote} 
+                              defaultTurnAroundTime={TURN_AROUND_TIME}
+                              defaultMoq={MOQ}
+                              />
+                          )
+                        }) :
+                      <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                    }
+                </div>
               </div>
-              </div>
-
+            </div>
           </div>
         );
     }
