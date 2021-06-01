@@ -1099,7 +1099,7 @@
   }
   .project-status-container {
     padding: 20px;
-    padding-top: 64px;
+    padding-top: 30px;
   }
   .project-statistic .ps-item {
     margin-right: 15px;
@@ -1738,14 +1738,17 @@
     overflow: auto;
   }
   .project-profile .back {
-    left: 20px;
-    top: -42px;
+    left: -4px;
+    top: 0;
+  }
+  ul.nav.nav-tabs li {
+    width: calc(100% / 3);
   }
   .feedback .feedback-post .post .post-heading .header-title .description {
     width: 260px !important;
   }
   .quote-tab ul.nav-tabs {
-    margin: 40px 0;
+    margin: 30px 0  10px 0;
   }
   .skeleton.project-list {
     height: 80px;
@@ -1814,10 +1817,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .explore-design.collection-list {
-    padding-top: 60px;
-  }
-  .add-quote{
+  section.project-profile, .explore-design.collection-list, .add-quote, section.collapse-side-menu-container {
     padding-top: 60px;
   }
   .production {
