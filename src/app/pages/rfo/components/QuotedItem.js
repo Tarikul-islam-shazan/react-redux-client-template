@@ -40,9 +40,10 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
   const renderDesignStatus = (message) =>{
     return(
       <div className="favourite-part choose disabled" data-toggle="tooltip" data-placement="top" title={message}>
-          <div className="checkbox disabled">
-          <label><input type="checkbox" disabled /></label>
-          </div>
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck" disabled data-toggle="tooltip" data-placement="top" title={message}/>
+            <label class="custom-control-label" for="customCheck"></label>
+        </div>
       </div>
     )
   }
@@ -164,7 +165,7 @@ const renderDisscussButton = () => {
             <div className="features position-relative d-flex flex-md-column">
               <div className="info-item mt-0 mt-xl-2">
                 <label className="font-14 text-muted">Quantity</label>
-                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
+                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} units</h5>
               </div>
 
               {
