@@ -81,7 +81,24 @@ class CollectionDetails extends Component {
       if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
         let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, size } = this.state;
         if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
-          await this.myProducts(myDesignPage + 1)
+          let data = await this.myProducts(myDesignPage+1)
+          if(data.length>0){
+            await this.setState({
+              myDesignList : [ ...myDesignList, ...data ],
+              myDesignPage : myDesignPage+1,
+              myDesignHasNext : data.length === size ? true : false,
+              myDesignLoading:false
+            })
+          }else{
+            this.setState({
+              myDesignHasNext : false,
+              myDesignLoading:false
+            })
+          }
+        } else {
+          if (!myDesignHasNext) {
+            // toastWarning("No more rfq's found.")
+          }
         }
       }
     }
@@ -222,7 +239,8 @@ class CollectionDetails extends Component {
         .then(({data}) => {
           this.setState({loading: false});
           if(data && data.length>0){
-            result = data;
+            const designList = data.filter((design) => design.availabilityStatus === "AVAILABLE" )
+            result = designList;
           }
         })
         .catch(response => {

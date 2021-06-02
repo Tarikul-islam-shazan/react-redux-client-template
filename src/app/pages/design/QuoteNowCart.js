@@ -119,7 +119,8 @@ class QuoteNowCart extends Component {
         .then(({data}) => {
           this.setState({loading: false});
           if(data && data.length>0){
-            result = data;
+            const designList = data.filter((design) => design.availabilityStatus === "AVAILABLE" )
+            result = designList;
           }
         })
         .catch(response => {
