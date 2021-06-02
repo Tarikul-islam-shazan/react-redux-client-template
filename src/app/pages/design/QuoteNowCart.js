@@ -8,7 +8,6 @@ import $ from "jquery";
 import loadjs from "loadjs";
 import Carousel from 'react-elastic-carousel';
 import LoadingOverlay from 'react-loading-overlay';
-
 import Http from '../../services/Http';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import ProductCard from '../../commonComponents/ProductCard';
@@ -120,7 +119,7 @@ class QuoteNowCart extends Component {
           this.setState({loading: false});
           if(data && data.length>0){
             const designList = data.filter((design) => design.availabilityStatus === "AVAILABLE" )
-            result = designList;
+            result = [...result, ...designList];
           }
         })
         .catch(response => {
@@ -130,8 +129,10 @@ class QuoteNowCart extends Component {
 
         await Http.GET("searchProduct", designParams)
         .then(({ data }) => {
-          const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
-          result = [...result, ...pickDesignList];
+          if(data.productResponseList && data.productResponseList.length>0){
+            const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
+            result = [...result, ...pickDesignList];
+          }
         })
         .catch(({ response }) => {
           this.setState({ loading: false });
@@ -329,7 +330,7 @@ class QuoteNowCart extends Component {
               }
               </div>
               <div className="">
-                  <div className="add-more ml-auto" onScroll={this.handleScroll}>
+                  <div className="add-more ml-auto" id="sidebarCollapse" onScroll={this.handleScroll}>
                       <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
                           <svg xmlns="http://www.w3.org/2000/svg" width="22.84" height="12.32" viewBox="0 0 22.84 12.32">
                               <g id="Group_5016" data-name="Group 5016" transform="translate(-1582.964 -1119.323)">
@@ -353,7 +354,7 @@ class QuoteNowCart extends Component {
                       </div>
                   </div>
 
-                  <div className="added-item  custom-scrollbar" id="sidebarCollapse">
+                  <div className="added-item  custom-scrollbar">
                     { !loading ?
                         designList.map((product, i) => {
                           return(
