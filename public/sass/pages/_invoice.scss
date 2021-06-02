@@ -289,6 +289,12 @@ ul.attachment {
     .header-sorting{
         .search{
             @media (max-width: 1200px) {
+                    width: 43% !important;
+            }
+            @media (max-width: 767px) {
+                    width: 100% !important;
+            }
+            @media (max-width: 1200px) {
                 input{
                     width: 100%;
                 }
@@ -296,7 +302,6 @@ ul.attachment {
         }
         .sort-filter{
             @media (max-width: 1200px) {
-                width: 100%;
                 justify-content: start !important;
                 .search{
                     margin-left: auto !important;
