@@ -70,7 +70,6 @@ class CollectionDetails extends Component {
       const windowBottom = windowHeight + window.pageYOffset;
       if (windowBottom >= docHeight) {
         let { hasNext, page, loading, productList, size } = this.state;
-        console.log("hasNext", hasNext, page)
         if(hasNext && !loading && productList.length){
           await this.getCollectionProducts(page + 1)
         }
@@ -80,9 +79,7 @@ class CollectionDetails extends Component {
     handleMyProductScroll = async() => {
       const wrappedElement = document.getElementById('myProductList');
       if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
-        console.log('bottom reached');
         let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, size } = this.state;
-        console.log("message", 'bottom reached', myDesignHasNext, myDesignPage, myDesignLoading)
         if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
           await this.myProducts(myDesignPage + 1)
         }
@@ -122,7 +119,8 @@ class CollectionDetails extends Component {
         })
         return;
       }
-      await this.myProducts();
+      let myDesignList = await this.myProducts();
+      this.setState({myDesignList});
       await this.getUsersByTypes();
     }
 
@@ -132,7 +130,6 @@ class CollectionDetails extends Component {
       let user = authUserInfo();
       Http.GET('getCollectionDetails', collectionId)
         .then(({data}) => {
-          console.log('getCollectionDetails SUCCESS: ', data);
           if (data) {
             data.userResponseList = data.userResponseList.filter((addedUser) => addedUser.id !== user.id);
             if (user.id) {
@@ -142,7 +139,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('getCollectionDetails ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             if (response && response.data && response.data.message) {
               toastError(response.data.message);
@@ -174,7 +170,6 @@ class CollectionDetails extends Component {
       let { size, name, productList } = this.state;
       Http.GET('getCollectionProducts', `${collectionId}?page=${page}&size=${size}`)
         .then(({data}) => {
-          console.log('getclients SUCCESS: ', data);
           this.setState({loading: false})
           if (data) {
             this.setState({
@@ -185,7 +180,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             if (response && response.data && response.data.message) {
               toastError(response.data.message);
@@ -199,7 +193,6 @@ class CollectionDetails extends Component {
       let { size, productList } = this.state;
       Http.GET('getCollectionProductsByCollectionType', `${viewType}?page=${page}&size=${size}`)
         .then(({data}) => {
-          console.log('getclients SUCCESS: ', data);
           this.setState({loading: false})
           if (data) {
             this.setState({
@@ -210,7 +203,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('PROJECT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             if (response && response.data && response.data.message) {
               toastError(response.data.message);
@@ -224,27 +216,30 @@ class CollectionDetails extends Component {
       this.setState({myDesignLoading: true})
       let {myDesignList, myDesignSize} = this.state;
       let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
+      let designParams = `?page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
+      let result = [];
       await Http.GET('getProductList', params)
         .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
-          this.setState({myDesignLoading: false});
-          if(data){
-            this.setState({
-              myDesignList: myDesignPage === 0 ? data : [...myDesignList, ...data],
-              myDesignPage,
-              myDesignHasNext: data.length === myDesignSize ? true : false
-            });
+          this.setState({loading: false});
+          if(data && data.length>0){
+            result = data;
           }
         })
-        .catch(({response}) => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-            this.setState({myDesignLoading:false})
-            if (response && response.data && response.data.message) {
-              toastError(response.data.message);
-            } else {
-              toastError("Something went wrong! Please try again.");
-            }
+        .catch(response => {
+            this.setState({loading:false})
+            toastError("Something went wrong! Please try again.");
         });
+
+        await Http.GET("searchProduct", designParams)
+        .then(({ data }) => {
+          const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
+          result = [...result, ...pickDesignList];
+        })
+        .catch(({ response }) => {
+          this.setState({ loading: false });
+          toastError("Something went wrong! Please try again.");
+        });
+        return result;
     }
 
     getUsersByTypes = async() => {
@@ -252,7 +247,6 @@ class CollectionDetails extends Component {
       let params = `?userTypes=FASHION_DESIGNER&userTypes=EXECUTIVE`;
       await Http.GET('getUsersByTypes', params)
         .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading: false});
           if(data){
             this.setState({
@@ -261,7 +255,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             if (response && response.data && response.data.message) {
               toastError(response.data.message);
@@ -323,7 +316,6 @@ class CollectionDetails extends Component {
       })
       Http.POST( 'likeProduct' , {} , id )
         .then(({data}) => {
-          console.log('likeProduct SUCCESS: ', JSON.stringify(data));
           this.setState({loading:false})
           if(data.success){
             // toastSuccess(data.message);
@@ -343,7 +335,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('LOGIN Error: ', JSON.stringify(response));
             this.setState({loading:false})
             if(response && response.data && response.data.message){
               toastError(response.data.message);
@@ -359,7 +350,6 @@ class CollectionDetails extends Component {
       })
       Http.POST( 'unlikeProduct' , {} , id )
         .then(({data}) => {
-          console.log('unlikeProduct SUCCESS: ', JSON.stringify(data));
           if(data.success){
             // toastSuccess(data.message);
             let { productList } = this.state;
@@ -379,7 +369,6 @@ class CollectionDetails extends Component {
           this.setState({loading:false})
         })
         .catch(({response}) => {
-            console.log('unlikeProduct Error: ', JSON.stringify(response));
             this.setState({loading:false})
             if(response && response.data && response.data.message){
               toastError(response.data.message);
@@ -523,7 +512,6 @@ class CollectionDetails extends Component {
       let params = `?userType=BUYER&email=${searchUserText}`;
       await Http.GET('getUserSuggestions', params)
         .then(({data}) => {
-          console.log('getUserSuggestions SUCCESS: ', data);
           this.setState({searchUserLoading: false});
           if(data){
             this.setState({
@@ -532,7 +520,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(response => {
-            console.log('getUserSuggestions ERROR: ', JSON.stringify(response));
             this.setState({searchUserLoading:false})
             toastError("Something went wrong! Please try again.");
         });
@@ -560,7 +547,6 @@ class CollectionDetails extends Component {
       }
       await Http.DELETE_WITH_BODY('deleteCollection', body)
         .then(({data}) => {
-          console.log('addCollection SUCCESS: ', JSON.stringify(data));
           this.setState({loading:false})
           if(data.success){
             toastSuccess(data.message);
@@ -570,7 +556,6 @@ class CollectionDetails extends Component {
           }
         })
         .catch(({response}) => {
-            console.log('addCollection Error: ', JSON.stringify(response));
             this.setState({loading:false})
             if(response && response.data && response.data.message){
               toastError(response.data.message);
@@ -767,7 +752,7 @@ class CollectionDetails extends Component {
                           <div class="header d-flex justify-content-between align-items-center">
                               <h4 className="semibold">Add more designs to quote</h4>
                               <div>
-                                  <div class="cursor-pointer d-inline-block mr-2 mr-sm-4">
+                                  {/* <div class="cursor-pointer d-inline-block mr-2 mr-sm-4">
                                       <svg onClick={() => this.myProducts(0)} xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">
                                           <g id="reload" transform="translate(-20.982 0)">
                                               <g id="Group_11184" data-name="Group 11184" transform="translate(20.982 0)">
@@ -776,8 +761,8 @@ class CollectionDetails extends Component {
                                               </g>
                                           </g>
                                       </svg>
-                                  </div>
-                                  <div class="cursor-pointer d-inline-block">
+                                  </div> */}
+                                   <div className="cursor-pointer d-inline-block" data-toggle="tooltip" data-placement="top" title="Add new design">
                                       <svg onClick={() => window.open('/designs/add')} xmlns="http://www.w3.org/2000/svg" width="27.615" height="27.615" viewBox="0 0 27.615 27.615">
                                           <g id="Group_11190" data-name="Group 11190" transform="translate(-2672.328 4255.322) rotate(45)">
                                               <line id="Line_153" data-name="Line 153" x2="25.615" transform="translate(-1108.875 -4907.645) rotate(45)" fill="none" stroke="#41487c" stroke-linecap="round" stroke-width="2"></line>

@@ -46,8 +46,6 @@ class QuoteNowCart extends Component {
       const wrappedElement = document.getElementById('sidebarCollapse');
       if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
         let { hasNext, page, loading, designList, size } = this.state;
-        console.log('bottom reached');
-        console.log("message", 'bottom reached', hasNext, page, loading)
         if (hasNext && !loading && designList.length) {
           let data = await this.renderList(page+1)
           if(data.length>0){
@@ -115,18 +113,16 @@ class QuoteNowCart extends Component {
       this.setState({loading:true, searching: true})
       let { size, designList, search, sort, productTypeId, filters } = this.state;
       let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
-      let designParams = `?page=${page}&size=${size}`;
+      let designParams = `?page=${page}&size=${size}&availabilityStatus=AVAILABLE`;
       let result = [];
       await Http.GET('getProductList', params)
         .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
           this.setState({loading: false});
           if(data && data.length>0){
             result = data;
           }
         })
         .catch(response => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
             toastError("Something went wrong! Please try again.");
         });
@@ -266,7 +262,6 @@ class QuoteNowCart extends Component {
           }
           await Http.POST('addRfq',body)
             .then(({data}) => {
-              console.log('addRfq SUCCESS: ', JSON.stringify(data));
               this.setState({loading: false})
               if(data.success){
                 localStorage.setItem(LOCAL_QUOTE_NOW_KEY, '')
@@ -279,7 +274,6 @@ class QuoteNowCart extends Component {
 
             })
             .catch(response => {
-                console.log('LOGIN Error: ', JSON.stringify(response));
                 this.setState({loading:false})
                 toastError("Something went wrong! Please try again.");
             });

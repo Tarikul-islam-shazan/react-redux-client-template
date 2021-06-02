@@ -165,7 +165,7 @@ const renderDisscussButton = () => {
             <div className="features position-relative d-flex flex-md-column">
               <div className="info-item mt-0 mt-xl-2">
                 <label className="font-14 text-muted">Quantity</label>
-                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
+                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} units</h5>
               </div>
 
               {
