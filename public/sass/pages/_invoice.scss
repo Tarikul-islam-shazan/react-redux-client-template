@@ -95,6 +95,7 @@
     }
     .header-title {
         font-size: 20px;
+        text-align: left;
     }
     .stepper {
         padding: 30px 50px;
@@ -124,6 +125,7 @@
             @media (max-width: 1366px) {
                 display: flex;
                 flex-direction: column;
+                text-align: left;
             }
             @media (max-width: 1024px) {
                 &:last-child {

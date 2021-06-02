@@ -173,38 +173,40 @@ class PayInvoice extends Component {
                                     <path id="Path_3" data-name="Path 3" d="M3.514,8.153c0-.542.444-.75,1.181-.75a7.747,7.747,0,0,1,3.444.889V5.028a9.159,9.159,0,0,0-3.444-.639C1.875,4.389,0,5.861,0,8.319c0,3.833,5.278,3.222,5.278,4.875,0,.639-.556.847-1.333.847A8.645,8.645,0,0,1,.153,12.931v3.306a9.628,9.628,0,0,0,3.792.792c2.889,0,4.875-1.431,4.875-3.917C8.806,8.972,3.514,9.708,3.514,8.153ZM12.9,1.611l-3.389.722L9.5,13.458a3.49,3.49,0,0,0,3.6,3.569,5.364,5.364,0,0,0,2.431-.458V13.75c-.444.181-2.639.819-2.639-1.236V7.583h2.639V4.625H12.889Zm6.944,4.042-.222-1.028h-3V16.778H20.1V8.542a2.449,2.449,0,0,1,2.639-.722V4.625A2.357,2.357,0,0,0,19.847,5.653Zm3.736-1.028h3.486V16.778H23.583Zm0-1.056,3.486-.75V0L23.583.736Zm10.736.819A3.924,3.924,0,0,0,31.6,5.472l-.181-.861H28.361V20.806l3.472-.736.014-3.931a3.911,3.911,0,0,0,2.458.875c2.486,0,4.75-2,4.75-6.4C39.042,6.583,36.75,4.389,34.319,4.389Zm-.833,9.569a2.076,2.076,0,0,1-1.639-.653l-.014-5.153a2.067,2.067,0,0,1,1.653-.681c1.264,0,2.139,1.417,2.139,3.236C35.625,12.569,34.764,13.958,33.486,13.958ZM50,10.75c0-3.556-1.722-6.361-5.014-6.361s-5.306,2.806-5.306,6.333c0,4.181,2.361,6.292,5.75,6.292a7.744,7.744,0,0,0,3.847-.9V13.333a7.375,7.375,0,0,1-3.4.764c-1.347,0-2.542-.472-2.694-2.111h6.792C49.972,11.806,50,11.083,50,10.75ZM43.139,9.431c0-1.569.958-2.222,1.833-2.222.847,0,1.75.653,1.75,2.222Z" fill="#472f91"/>
                                 </svg>
                             </div>
-                            <div className={`type credit-card ${paymentMethod === 'CARD' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('CARD')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17.238" height="11.609" viewBox="0 0 17.238 11.609">
-                                    <g id="credit-card_copy" data-name="credit-card copy" transform="translate(0.175 -85.158)">
-                                        <g id="Group_11210" data-name="Group 11210" transform="translate(0 85.333)">
-                                            <g id="Group_11209" data-name="Group 11209" transform="translate(0 0)">
-                                                <path id="Path_27886" data-name="Path 27886" d="M15.129,85.333H1.759A1.762,1.762,0,0,0,0,87.092v7.74a1.762,1.762,0,0,0,1.759,1.759H15.128a1.762,1.762,0,0,0,1.759-1.759v-7.74A1.762,1.762,0,0,0,15.129,85.333Zm1.055,9.5a1.057,1.057,0,0,1-1.055,1.055H1.759A1.057,1.057,0,0,1,.7,94.832v-7.74a1.057,1.057,0,0,1,1.055-1.055H15.128a1.057,1.057,0,0,1,1.055,1.055v7.74Z" transform="translate(0 -85.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>
-                                            </g>
-                                        </g>
-                                        <g id="Group_11212" data-name="Group 11212" transform="translate(0 87.444)">
-                                            <g id="Group_11211" data-name="Group 11211" transform="translate(0 0)">
-                                                <path id="Path_27887" data-name="Path 27887" d="M16.536,149.333H.352a.352.352,0,0,0-.352.352V151.8a.352.352,0,0,0,.352.352H16.536a.352.352,0,0,0,.352-.352v-2.111A.352.352,0,0,0,16.536,149.333Zm-.352,2.111H.7v-1.407h15.48v1.407Z" transform="translate(0 -149.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>
-                                            </g>
-                                        </g>
-                                        <g id="Group_11214" data-name="Group 11214" transform="translate(2.111 92.37)">
-                                            <g id="Group_11213" data-name="Group 11213" transform="translate(0 0)">
-                                                <path id="Path_27888" data-name="Path 27888" d="M68.574,298.667H64.352a.352.352,0,1,0,0,.7h4.222a.352.352,0,1,0,0-.7Z" transform="translate(-64 -298.667)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>
-                                            </g>
-                                        </g>
-                                        <g id="Group_11216" data-name="Group 11216" transform="translate(2.111 93.777)">
-                                            <g id="Group_11215" data-name="Group 11215" transform="translate(0 0)">
-                                                <path id="Path_27889" data-name="Path 27889" d="M68.574,341.333H64.352a.352.352,0,1,0,0,.7h4.222a.352.352,0,1,0,0-.7Z" transform="translate(-64 -341.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>
-                                            </g>
-                                        </g>
-                                        <g id="Group_11218" data-name="Group 11218" transform="translate(11.962 91.666)">
-                                            <g id="Group_11217" data-name="Group 11217" transform="translate(0 0)">
-                                                <path id="Path_27890" data-name="Path 27890" d="M364.426,277.333h-.7a1.057,1.057,0,0,0-1.055,1.055v.7a1.057,1.057,0,0,0,1.055,1.055h.7a1.057,1.057,0,0,0,1.055-1.055v-.7A1.057,1.057,0,0,0,364.426,277.333Zm.352,1.759a.352.352,0,0,1-.352.352h-.7a.352.352,0,0,1-.352-.352v-.7a.352.352,0,0,1,.352-.352h.7a.352.352,0,0,1,.352.352Z" transform="translate(-362.667 -277.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                               &nbsp; Credit Card
-                            </div>
+
+                            {/*<div className={`type credit-card ${paymentMethod === 'CARD' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('CARD')}>*/}
+                            {/*    <svg xmlns="http://www.w3.org/2000/svg" width="17.238" height="11.609" viewBox="0 0 17.238 11.609">*/}
+                            {/*        <g id="credit-card_copy" data-name="credit-card copy" transform="translate(0.175 -85.158)">*/}
+                            {/*            <g id="Group_11210" data-name="Group 11210" transform="translate(0 85.333)">*/}
+                            {/*                <g id="Group_11209" data-name="Group 11209" transform="translate(0 0)">*/}
+                            {/*                    <path id="Path_27886" data-name="Path 27886" d="M15.129,85.333H1.759A1.762,1.762,0,0,0,0,87.092v7.74a1.762,1.762,0,0,0,1.759,1.759H15.128a1.762,1.762,0,0,0,1.759-1.759v-7.74A1.762,1.762,0,0,0,15.129,85.333Zm1.055,9.5a1.057,1.057,0,0,1-1.055,1.055H1.759A1.057,1.057,0,0,1,.7,94.832v-7.74a1.057,1.057,0,0,1,1.055-1.055H15.128a1.057,1.057,0,0,1,1.055,1.055v7.74Z" transform="translate(0 -85.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>*/}
+                            {/*                </g>*/}
+                            {/*            </g>*/}
+                            {/*            <g id="Group_11212" data-name="Group 11212" transform="translate(0 87.444)">*/}
+                            {/*                <g id="Group_11211" data-name="Group 11211" transform="translate(0 0)">*/}
+                            {/*                    <path id="Path_27887" data-name="Path 27887" d="M16.536,149.333H.352a.352.352,0,0,0-.352.352V151.8a.352.352,0,0,0,.352.352H16.536a.352.352,0,0,0,.352-.352v-2.111A.352.352,0,0,0,16.536,149.333Zm-.352,2.111H.7v-1.407h15.48v1.407Z" transform="translate(0 -149.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>*/}
+                            {/*                </g>*/}
+                            {/*            </g>*/}
+                            {/*            <g id="Group_11214" data-name="Group 11214" transform="translate(2.111 92.37)">*/}
+                            {/*                <g id="Group_11213" data-name="Group 11213" transform="translate(0 0)">*/}
+                            {/*                    <path id="Path_27888" data-name="Path 27888" d="M68.574,298.667H64.352a.352.352,0,1,0,0,.7h4.222a.352.352,0,1,0,0-.7Z" transform="translate(-64 -298.667)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>*/}
+                            {/*                </g>*/}
+                            {/*            </g>*/}
+                            {/*            <g id="Group_11216" data-name="Group 11216" transform="translate(2.111 93.777)">*/}
+                            {/*                <g id="Group_11215" data-name="Group 11215" transform="translate(0 0)">*/}
+                            {/*                    <path id="Path_27889" data-name="Path 27889" d="M68.574,341.333H64.352a.352.352,0,1,0,0,.7h4.222a.352.352,0,1,0,0-.7Z" transform="translate(-64 -341.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>*/}
+                            {/*                </g>*/}
+                            {/*            </g>*/}
+                            {/*            <g id="Group_11218" data-name="Group 11218" transform="translate(11.962 91.666)">*/}
+                            {/*                <g id="Group_11217" data-name="Group 11217" transform="translate(0 0)">*/}
+                            {/*                    <path id="Path_27890" data-name="Path 27890" d="M364.426,277.333h-.7a1.057,1.057,0,0,0-1.055,1.055v.7a1.057,1.057,0,0,0,1.055,1.055h.7a1.057,1.057,0,0,0,1.055-1.055v-.7A1.057,1.057,0,0,0,364.426,277.333Zm.352,1.759a.352.352,0,0,1-.352.352h-.7a.352.352,0,0,1-.352-.352v-.7a.352.352,0,0,1,.352-.352h.7a.352.352,0,0,1,.352.352Z" transform="translate(-362.667 -277.333)" fill="#472f91" stroke="#472f91" stroke-width="0.35"/>*/}
+                            {/*                </g>*/}
+                            {/*            </g>*/}
+                            {/*        </g>*/}
+                            {/*    </svg>*/}
+                            {/*   &nbsp; Credit Card*/}
+                            {/*</div>*/}
+
                             <div className={`type bank-slipt ${paymentMethod === 'BANK_SLIP' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('BANK_SLIP')}>
                                 <svg id="bank" xmlns="http://www.w3.org/2000/svg" width="14.998" height="14.881" viewBox="0 0 14.998 14.881">
                                     <g id="Group_11133" data-name="Group 11133" transform="translate(0 0)">
