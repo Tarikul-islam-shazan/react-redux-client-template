@@ -600,6 +600,7 @@ const addImageSuffix = (imgUrl, suffix) => {
   if (!imgUrl) {
     return '';
   }
+
   let flag = true;
 
   IMAGE_SOURCE.map((url) => {
@@ -609,6 +610,11 @@ const addImageSuffix = (imgUrl, suffix) => {
   })
 
   if (flag) {
+    return imgUrl;
+  }
+
+  //checking the scaled image types
+  if (!['jpeg', 'jpg', 'png'].includes(getImageExt(imgUrl))) {
     return imgUrl;
   }
 
