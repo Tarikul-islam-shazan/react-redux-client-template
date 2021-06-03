@@ -729,6 +729,7 @@ const authUserInfo = () => {
    return userInfo;
 }
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
+const STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN = ['SOLD', 'UNAVAILABLE', 'IN_PROJECT', 'LOCKED'];
 
 const isValidJSON = str => {
   try {
@@ -795,5 +796,5 @@ export {
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
     parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON, getImageExt, IMAGE_EXTS,
-    replaceUnderLine, isValidFile, parseDate, dateCompare
+    replaceUnderLine, isValidFile, parseDate, dateCompare, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN
 };
