@@ -162,11 +162,10 @@ class PayInvoice extends Component {
         return (
           <>
             <div class="back cursor-pointer"> Back  </div>
-            <div class="add-quote d-flex">
+            <div class="d-flex mt-2 mt-sm-0">
                 <div class="buyer-payment-methods">
                     <div class="title">Select payment method</div>
                     <div className="stepper">
-                        <h3 className="font-22 semibold mb-4">Select payment method</h3>
                         <div className="payment-method-type">
                             <div className={`type strip ${paymentMethod === 'STRIPE' ? 'active' : ''}`} onClick={() => this.setPaymentMethod('STRIPE')}>
                                 <svg id="stripe-seeklogo.com" xmlns="http://www.w3.org/2000/svg" width="50" height="20.806" viewBox="0 0 50 20.806">
@@ -228,9 +227,9 @@ class PayInvoice extends Component {
                           <div className="credit-card-container">
                               <div className="row">
                                   <div className="col-md-6">
-                                      <div className="form-group">
+                                      <div className="form-group m-0">
                                           <label>Upload bank slip</label>
-                                          <input type="file" placeholder="Full name" name="bankSlipDoc" onChange={(e) => this.onFileUpload(e,'BANK_SLIP')} className="w-100 bg-gray-light border-0"/>
+                                          <input type="file" placeholder="Full name" name="bankSlipDoc" onChange={(e) => this.onFileUpload(e,'BANK_SLIP')} className="w-100 border-0"/>
                                           {
                                             bankSlipDocError ? <span className="error">{bankSlipDocError}</span> : ''
                                           }

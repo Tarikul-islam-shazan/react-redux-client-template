@@ -1360,6 +1360,9 @@ ol {
 }
 .profile-info {
   display: flex;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
   .user-photo{
     flex-basis: 17%;
     img{
@@ -1369,6 +1372,18 @@ ol {
       height: 237px;
       object-fit: cover;
       object-position: center;
+      @media (max-width: 1024px) {
+        height: 310px;
+      }
+      @media (max-width: 991px) {
+        height: 230px;
+      }
+      @media (max-width: 767px) {
+        height: 360px;
+      }
+      @media (max-width: 320px) {
+        height: 285px
+      }
     }
     .file {
       width: 100%;

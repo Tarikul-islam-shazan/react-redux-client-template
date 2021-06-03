@@ -1241,9 +1241,7 @@
     .profile {
       padding: 0;
     }
-    .profile-info {
-      flex-direction: column;
-    }
+
     .profile .profile-tab ul {
       max-width: 100%;
     }
@@ -1258,8 +1256,11 @@
       text-align: center;
     }
     .profile-info .user-info {
-      padding-left: 0;
-      margin-top: 30px;
+      padding-left: 30px;
+      @media (max-width: 767px) {
+        padding-left: 0px;
+        padding-top: 30px;
+      }
     }
     .profile .change-pass {
       max-width: 100%;
