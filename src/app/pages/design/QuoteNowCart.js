@@ -129,6 +129,7 @@ class QuoteNowCart extends Component {
 
         await Http.GET("searchProduct", designParams)
         .then(({ data }) => {
+          this.setState({loading: false});
           if(data.productResponseList && data.productResponseList.length>0){
             const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
             result = [...result, ...pickDesignList];

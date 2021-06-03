@@ -39,6 +39,7 @@ class CollectionDetails extends Component {
           myDesignHasNext: true,
           myDesignPage: 0,
           myDesignSize: 10,
+          myDesignLoading: false,
           showAddMemberModal: false,
           showAddProductModal: false,
           usersByTypeList: [],
@@ -78,28 +79,28 @@ class CollectionDetails extends Component {
     handleMyProductScroll = async() => {
       const wrappedElement = document.getElementById('myProductList');
       if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
-        let { myDesignHasNext, myDesignPage, loading, myDesignList, size } = this.state;
-        if (myDesignHasNext && !loading && myDesignList.length) {
-          let data = await this.myProducts(myDesignPage+1)
+        let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, myDesignSize } = this.state;
+        if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
+          let data = await this.myProducts(myDesignPage + 1)
           if(data.length>0){
             await this.setState({
               myDesignList : [ ...myDesignList, ...data ],
               myDesignPage : myDesignPage+1,
-              myDesignHasNext : data.length === size ? true : false,
-              loading:false
+              myDesignHasNext : data.length === myDesignSize ? true : false,
+              myDesignLoading:false
             })
           }else{
             this.setState({
               myDesignHasNext : false,
-              loading:false
+              myDesignLoading:false
             })
           }
         } else {
-          if (!myDesignHasNext) {
-            // toastWarning("No more rfq's found.")
-          }
+            if (!myDesignHasNext) {
+              // toastWarning("No more rfq's found.")
+            }
         }
-      }
+      } 
     }
 
     handleClickOutside = (event) => {
@@ -229,33 +230,34 @@ class CollectionDetails extends Component {
     }
 
     myProducts = async(myDesignPage = 0) => {
-      this.setState({loading: true})
+      this.setState({myDesignLoading: true})
       let {myDesignList, myDesignSize} = this.state;
       let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
       let designParams = `?page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
       let result = [];
       await Http.GET('getProductList', params)
         .then(({data}) => {
-          this.setState({loading: false});
+          this.setState({myDesignLoading: false});
           if(data && data.length>0){
             const designList = data.filter((design) => design.availabilityStatus === "AVAILABLE" )
             result = [...result, ...designList];
           }
         })
         .catch(response => {
-            this.setState({loading:false})
+            this.setState({myDesignLoading:false})
             toastError("Something went wrong! Please try again.");
         });
 
         await Http.GET("searchProduct", designParams)
         .then(({ data }) => {
+          this.setState({myDesignLoading: false});
           if(data.productResponseList && data.productResponseList.length>0){
           const pickDesignList = data.productResponseList.filter((design) => design.availabilityStatus === "AVAILABLE" );
           result = [...result, ...pickDesignList];
           }
         })
         .catch(({ response }) => {
-          this.setState({ loading: false });
+          this.setState({ myDesignLoading: false });
           toastError("Something went wrong! Please try again.");
         });
         return result;
@@ -652,7 +654,7 @@ class CollectionDetails extends Component {
       let {
         name, collection, productList, showAddMemberModal, showAddProductModal, myDesignList, usersByTypeList, searchUserText, searchUserSuggestions,
         collectionList, collectionName, collectionNameError, showAddCollectionPopup, showCollectionAddOption,
-        collectionType, collectionViewType, showEdit, loading
+        collectionType, collectionViewType, showEdit, loading, myDesignLoading
        } = this.state;
 
        return (
@@ -793,12 +795,12 @@ class CollectionDetails extends Component {
                           </div>
 
                           <div class="added-item custom-scrollbar">
-                          { !loading ?
+                          { !myDesignLoading ?
                             myDesignList.map((product, i) => {
                               return(
                                 <ModalMyProductCard key={i} product={product} buttonAction={this.addToCollection} buttonTitle="Add to collection" />
                               )
-                            }) : <CreateSkeletons iterations={12}><ProductSkeleton/></CreateSkeletons>
+                            }) : <CreateSkeletons iterations={10}><ProductSkeleton/></CreateSkeletons>
                           }
                           </div>
                       </div>
