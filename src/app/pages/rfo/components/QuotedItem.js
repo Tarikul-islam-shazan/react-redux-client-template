@@ -37,6 +37,17 @@ export const QuotedItem = ({quote, index, toggleSelect, search}) => {
       )
   }
 
+  const renderDesignStatus = (message) =>{
+    return(
+      <div className="favourite-part choose disabled" data-toggle="tooltip" data-placement="top" title={message}>
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck" disabled data-toggle="tooltip" data-placement="top" title={message}/>
+            <label class="custom-control-label" for="customCheck"></label>
+        </div>
+      </div>
+    )
+  }
+
   const renderPriceUpdateBox = (quote) => {
     return(
       <div className="pricewillbeupdated pt-2 pb-3">
@@ -70,9 +81,9 @@ const renderDisscussButton = () => {
                 <div className="form-group m-0">
                     <input type="checkbox" id={`check_${quote.id}`} name={`toggleSelect_${quote.id}`} onClick={toggleSelect} value={quote.id} checked={quote.isSelected ? true : false}/>
                     { quote.status ===  "ORDER_PLACED" ?
-                        renderTooltip("Order placed for this design") :
+                        renderDesignStatus("Order placed for this design") :
                       quote.status ===  "PRODUCT_SOLD" ?
-                        renderTooltip("Design is already sold") :
+                        renderDesignStatus("Design is already sold") :
                       <label for={`check_${quote.id}`} className="m-0"></label>
                     }
 
@@ -121,10 +132,6 @@ const renderDisscussButton = () => {
                     </a>
                   </>
                 }
-                <div>
-                  <span className="pr-2 font-12 text-muted">by</span>
-                  <span className="font-14">{quote.clientName}</span>
-                </div>
               </div>
               <div className="info-item">
                 <label className="font-14 text-muted">Date</label>
@@ -158,7 +165,7 @@ const renderDisscussButton = () => {
             <div className="features position-relative d-flex flex-md-column">
               <div className="info-item mt-0 mt-xl-2">
                 <label className="font-14 text-muted">Quantity</label>
-                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} pcs</h5>
+                <h5 className="font-20 color-333">{quote.quantity ? quote.quantity : '--'} units</h5>
               </div>
 
               {
@@ -231,7 +238,7 @@ const renderDisscussButton = () => {
                           </strong>
                           <br/>
                           <span className="cursor-pointer font-14">
-                          /Piece
+                          /Unit
                           {renderTooltip(quote.priceInfoText)}
                           </span>
                       </div>
@@ -260,7 +267,7 @@ const renderDisscussButton = () => {
                           </strong>
                           <br/>
                           <span className="cursor-pointer font-14">
-                          /Piece
+                          /Unit
                           {renderTooltip(quote.priceInfoText)}
                           </span>
                       </div>
@@ -278,7 +285,7 @@ const renderDisscussButton = () => {
                 <strong className="font-30">${quote.price}</strong>
                 <br/>
                 <span className="cursor-pointer font-14">
-                /Piece
+                /Unit
                   {renderTooltip(quote.priceInfoText)}
                 </span>
                 <div className="pt-3">{renderDisscussButton()}</div>

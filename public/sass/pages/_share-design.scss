@@ -31,7 +31,10 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
       height: 560px;
     }
     @media (max-width: 1024px) {
-      height: 400px;
+      height: 515px;
+    }
+    @media (max-width: 991px) {
+      height: 738px;
     }
     @media (max-width: 575px) {
       height: 310px;

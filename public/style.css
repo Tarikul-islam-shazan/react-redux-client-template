@@ -13,9 +13,9 @@ body {
 
 .page-header .page-title {
     margin-bottom: 6px;
-    font-weight: bolder;
-    font-size: 20px;
-    /* font-family: 'Helvetica'; */
+    font-weight: 700;
+    font-size: 30px;
+    color: #21242B;
 }
 
 .page-header .page-subtitle {
@@ -30,9 +30,11 @@ body {
 }
 
 .fullscreen {
-    height: 100vh;
+    height: calc(100vh - 149px);
 }
-
+.admin .fullscreen {
+    height: calc(100vh);
+}
 .section {
     margin-bottom: 30px;
 }
@@ -120,6 +122,7 @@ p.text-center.size_manage_tab {
 
 .section-title {
     font-weight: bold;
+    font-size: 30px;
 }
 p.section-subtitle {
     color: #858C9F;
@@ -287,25 +290,38 @@ label {
 /* Sign Up Page */
 
 .auth-page input[type="email"], .auth-page input[type="password"], .auth-page input[type="input"] {
-    height: 1.1875em;
-    padding: 6px 0 7px;
+    height: 60px;
+    padding: 20px;
     border: none;
     border-radius: 0px;
-    background-color: transparent;
-    font-size: 12px;
-    border-bottom: 1px solid #452D8D;
-    padding-right: 53px;
+    background-color: #F4F5F7;
+    border-bottom: 1px solid #EDEFF4;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #21242B;
+    position: relative;
+    border-radius: 5px !important;
+    padding-right: 50px;
 }
-
+.auth-page input[type="email"]::placeholder, .auth-page input[type="password"]::placeholder, .auth-page input[type="input"]::placeholder {
+    color: #6A7181;
+}
+.auth-page p.error {
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    font-size: 12px !important;
+}
 
 .auth-page input[type="email"]:focus, .auth-page input[type="password"]:focus {
     box-shadow: none !important;
-    border-bottom: 1px solid #452D8D;
+    border: 1px solid #452D8D;
 }
 .MuiInputAdornment-positionEnd{
     position: absolute;
-    right: -6px;
-    top: 12px;
+    right: 6px;
+    top: 30px;
+    cursor: pointer;
 }
 .auth-page .back-link {
     position: absolute;
@@ -343,17 +359,14 @@ label {
     width: 150px;
 }
 
-.auth-page .content-wrapper {
-    padding: 0px 70px 0px 60px;
-}
 
+.content-wrapper-override {
+    padding: 50px !important;
+}
 form.registration-form {
     margin: 30px 0px;
 }
-form.registration-form.mt-5  input[type="email"]{
-    height: 40px;
-    border-bottom: 1px solid #ccc;
-}
+
 .auth-page .MuiFormLabel-root, .auth-page .MuiInputBase-root{
     font-family: 'Open Sans', sans-serif;
     font-size: 12px !important;
@@ -364,22 +377,16 @@ form.registration-form.mt-5  input[type="email"]{
     margin-top: 25px !important;
     display: inline-block;
 }
-.forgot-pass input.form-control {
-    border-radius: 0px !important;
-    padding-right: 34px;
-    height: 30px;
-}
-.forgot-pass input.form-control:focus {
-    border-bottom: 1px solid #452D8D !important;
-}
+
 .forgot-pass .lock {
     position: absolute;
-    right: 0;
+    right: 18px;
     z-index: 999;
     background: transparent;
     border: 0;
     padding: 0;
-    bottom: 4px;
+    bottom: 19px;
+    cursor: pointer;
 }
 .MuiFormLabel-root {
     color: #8C95A8 !important;
@@ -1673,13 +1680,14 @@ button.border-none_btn a:hover
     background: #fff !important;
     max-width: 55% !important;
     margin-right: 15px;
-    height: 90%;
     border-radius: 5px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
-.content-wrapper-override {
-      padding: 0px 50px 50px 50px !important;
-  }
+
   .layout_headers p {
     color: #fff;
 
@@ -1712,16 +1720,6 @@ p.para_email {
     line-height:0;
 }
 
-
-
-
-.bg_color_custom h1.page-title
-{
-    font-size: 26px !important;
-    padding-bottom: 8px;
-    text-transform: inherit;
-}
-
 .MuiFormControl-root.form_register_input {
     background: #F9F5FC 0% 0% no-repeat padding-box;
     border: 1px solid #D7DBE6;
@@ -1734,34 +1732,10 @@ p.para_email {
     border-bottom: none !important;
 }
 
-/*.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedEnd {*/
-/*    height: 60px !important;*/
-/*    padding-left: 8px;*/
-/*    padding-right: 8px;*/
-/*}*/
 .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedEnd:hover
 {
     border: none !important;
 }
-
-
-.custom_page
-{
-font-size: 30px !important;
-padding-top: 50px;
-padding-bottom: 15px;
-
-}
-/*.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd {*/
-/*    background: #F9F5FC 0% 0% no-repeat padding-box;*/
-/*    border: 1px solid #D7DBE6;*/
-/*    border-radius: 5px;*/
-/*    height: 60px;*/
-/*    width: 100%;*/
-/*    padding-left: 8px;*/
-/*    padding-right: 8px;*/
-/*    margin-bottom: 20px;*/
-/*}*/
 
 .MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: none !important;
@@ -1770,29 +1744,8 @@ padding-bottom: 15px;
 {
     font-size: 16px !important;
 }
-@media(min-width: 1200px)
-{
-    .bg_white_auth
-    {
-        height: auto;
-    }
-
-}
-@media(min-width: 1920px)
-{
-    .bg_white_auth
-    {
-        height: 92%;
-    }
-    .fullscreen
-    {
-        height: 100vh;
 
 
-
-    }
-
-}
 
 @media screen and (max-width: 991px)
 {
@@ -1806,9 +1759,7 @@ padding-bottom: 15px;
     max-width: 84% !important;
     margin: 0 auto;
 }
-.size_manage_tab {
-    font-size: 21px !important;
-}
+
 .content-wrapper-override
 {
     padding: 0px 50px 90px 50px !important;
@@ -1822,9 +1773,6 @@ padding-bottom: 15px;
         display: none;
     }
     .auth-page p {
-        font-size: 14px;
-        text-align: center;
-        display: block;
         margin: 15px auto;
     }
 
@@ -1845,9 +1793,6 @@ padding-bottom: 15px;
     {
         max-width: 100% !important;
 
-    }
-    .size_manage_tab {
-        font-size: 16px !important;
     }
     .auth-page .bg-wrapper
     {
@@ -1875,10 +1820,6 @@ padding-bottom: 15px;
     .bg_color_custom
     {
         height: auto;
-    }
-    .bg_color_custom p.error {
-        /* margin-top: -10px !important; */
-        margin-bottom: 11px !important;
     }
     .manage_responsive {
         text-align: center;
@@ -2035,33 +1976,13 @@ font-size: 11px !important;
         height: 50px;
         line-height: 25px;
     }
-    /*.registration-form .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-adornedEnd*/
-    /*{*/
-    /*    height:50px;*/
-    /*}*/
 }
 
 
 
 
-@media(min-width:1024px) and (max-width:1100px)
-{
-    .bg_white_auth
-    {
-        max-width: 48% !important;
-        height: 55%;
-    }
-
-}
 
 
-@media(max-width:768px) and (max-width:800px)
-{
-    .layout_headers
-    {
-          padding-top: 80px;
-    }
-}
 
 a.back-link.back-link-override.custom_l_a:hover
 {
@@ -2254,15 +2175,6 @@ button.btn_tour a {
 
 
 
-@media(min-width:768px) and (max-width: 1024)
-{
-    .img_logo_expand
-    {
-        margin-top: -5px;
-    }
-
-}
-
 
 @media(min-width: 768px )
 {
@@ -2276,14 +2188,7 @@ button.btn_tour a {
 }
 
 
-@media(min-width: 1024px) and (max-width: 1050px)
-{
-    .bg_white_auth
-    {
-        max-width: 55% !important;
-        height: 63%;
-    }
-}
+
 
 @media(min-width: 768px) and (max-width: 1024px)
 
@@ -2314,8 +2219,41 @@ button.btn_tour a {
     }
 
 }
-
-.forgot.fullscreen
-{
-    height: 100vh !important;
+@media screen and (max-width:1024px) {
+    .layout_headers {
+        padding-top: 40px;
+    }
+     .fullscreen {
+        height: calc(100vh - 147px);
+    }
+    .admin .fullscreen {
+        height: calc(100vh);
+    }
+    .bg_white_auth {
+        max-width: 100% !important;
+        margin-right: 0;
+        flex: 100%;
+    }
+    form.registration-form {
+        margin: 30px 0px 0 0;
+    }
+}
+@media screen and (max-width: 991px){
+    .fullscreen {
+        height: calc(100vh - 162px);
+    }
+    .admin .fullscreen {
+        height: calc(100vh);
+    }
+}
+@media screen and (max-width: 767px){
+    .auth-page.container {
+        padding-bottom: 0 !important;
+    }
+    .fullscreen {
+        height: calc(100vh);
+    }
+    .admin .fullscreen {
+        height: calc(100vh);
+    }
 }

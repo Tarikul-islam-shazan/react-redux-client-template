@@ -127,23 +127,25 @@ class ForgetPassword extends Component {
                                 <form className="mt-5 forgot-pass">
                                     <div className="form-group">
                                         <label>Email Address</label>
-                                        <div className="input-group">
-                                            <input type="email" className="form-control" placeholder="jondoe@nitexid.com"
-                                                   name="email"
-                                                   value={this.state.email}
-                                                   onChange={this.onChange}
-                                                   />
-                                            <div className="input-group-append lock">
+                                        <div className="position-relative">
+                                            <div className="input-group">
+                                                <input type="email" className="form-control" placeholder="jondoe@nitexid.com"
+                                                       name="email"
+                                                       value={this.state.email}
+                                                       onChange={this.onChange}
+                                                />
+                                                <div className="input-group-append lock">
                                                 <span>
                                                     <img src={require("../../assets/icons/envelope.png")} alt="email" className="img-fluid"/>
                                                 </span>
+                                                </div>
                                             </div>
+                                            {
+                                                this.state.emailError ?
+                                                    <span className="error">{this.state.emailError}</span>
+                                                    : <></>
+                                            }
                                         </div>
-                                        {
-                                          this.state.emailError ?
-                                          <p className="error">{this.state.emailError}</p>
-                                          : <></>
-                                        }
                                     </div>
                                     <button type="button" className="btn btn-nitex-default btn-block my-4" onClick={this.send}>Send</button>
                                     <div className="text-center">

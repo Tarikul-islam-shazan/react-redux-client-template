@@ -223,37 +223,39 @@ class Register extends Component {
                       </span>
                       Sign up with Google
                   </a>
-                  <a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>
-                      <span>
-                          <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>
-                      </span>
-                      Sign up with LinkedIn
-                  </a>
+                  {/*<a href="#" className="btn btn-linkedin btn-social" style={{marginBottom:10}} href={LINKEDIN_AUTH_URL + (redirection ? ('?redirect=' + redirection) : '')}>*/}
+                  {/*    <span>*/}
+                  {/*        <img src={ require('../../assets/icons/linkedin.png') } alt="linkedin"/>*/}
+                  {/*    </span>*/}
+                  {/*    Sign up with LinkedIn*/}
+                  {/*</a>*/}
                   <p className="para_email manage_mobile_register">Or sign up with your e-mail</p>
               </div>
               <form className="registration-form">
 
-                      <Input
-                          id="standard-adornment-password"
-                          type="email"
-                          value={this.state.fullName}
-                          onChange={this.onChange}
-                          name="fullName"
-                          onKeyPress={this.handleKeyPress}
-                          ref="email"
-                          placeholder="Full Name"
-                          endAdornment={
-                          <InputAdornment position="end">
-                              {/* <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/> */}
-                          </InputAdornment>
+                      <div className="position-relative">
+                          <Input
+                              id="standard-adornment-password"
+                              type="email"
+                              value={this.state.fullName}
+                              onChange={this.onChange}
+                              name="fullName"
+                              onKeyPress={this.handleKeyPress}
+                              ref="email"
+                              placeholder="Full Name"
+                              endAdornment={
+                                  <InputAdornment position="end">
+                                      {/* <img src={ require('../../assets/icons/lock.png') } alt="password" className="img-fluid"/> */}
+                                  </InputAdornment>
+                              }
+                          />
+                          {
+                              this.state.fullNameError ?
+                                  <p className="error">{this.state.fullNameError}</p>
+                                  : <></>
                           }
-                      />
-                      {
-                        this.state.fullNameError ?
-                        <p className="error">{this.state.fullNameError}</p>
-                        : <></>
-                      }
-
+                      </div>
+                     <div className="position-relative">
                       <Input
                           id="standard-adornment-email"
                           label="Email"
@@ -275,7 +277,8 @@ class Register extends Component {
                         <p className="error">{this.state.emailError}</p>
                         : <></>
                       }
-
+                     </div>
+                  <div className="position-relative">
                       <Input
                           id="standard-adornment-repassword"
                           type={showPassword ? "input" : "password"}
@@ -300,7 +303,7 @@ class Register extends Component {
                         <p className="error">{this.state.passwordError}</p>
                         : <></>
                       }
-
+                  </div>
 
 
                   <div className="form-group" style={{display:'none'}}>

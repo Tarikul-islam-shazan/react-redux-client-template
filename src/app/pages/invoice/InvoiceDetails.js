@@ -87,7 +87,7 @@ class InvoiceDetails extends Component {
 
             <div class="admin-view-invoice mt-4">
 
-                <div class="d-flex flex-column flex-xl-row align-items-center justify-content-between header-sec">
+                <div class="d-flex  justify-content-between header-sec">
                     <div>
                         <div class="header-title mb-4">Invoice No: <strong class="text-black">{invoice.invoiceNo}</strong></div>
                         <div class="d-flex terms">
@@ -95,12 +95,12 @@ class InvoiceDetails extends Component {
                             <span class="color-gray term"><span>Due date:</span> <strong class="semibold text-black"> {invoice.dueDate ? changeDateFormat(invoice.dueDate) : 'N/A'}</strong></span>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">
-                        <div class="text-center mr-0 mr-sm-5">
+                    <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row">
+                        <div class="text-center mr-0 mr-xl-5">
                             {invoiceStatus(invoice)}
                         </div>
                         <button onClick={() => onDownload(invoice.id)} className="btn-border my-3">Download</button>
-                        <button onClick={() => this.onPayInvoice(invoice.id)}class="btn-border brand-bg-color text-white border-0 px-5 ml-0 ml-sm-3">Pay</button>
+                        <button onClick={() => this.onPayInvoice(invoice.id)}class="btn-border brand-bg-color text-white border-0 px-5 ml-0 ml-xl-3">Pay</button>
                     </div>
                 </div>
 

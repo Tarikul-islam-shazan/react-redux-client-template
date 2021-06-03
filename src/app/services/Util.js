@@ -411,7 +411,7 @@ const rfqProductStatus = (item) => {
 
         case 'ORDER_PLACED':
           return(
-            <span className="badge table-badge" style={{backgroundColor: '#FFE6E6', color: '#F22B2B'}}>Order Placed</span>
+            <span className="badge table-badge" style={{backgroundColor: '#DBFFE5', color: '#00C334'}}>Order Placed</span>
           )
 
     default:
