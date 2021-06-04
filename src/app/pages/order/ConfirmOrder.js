@@ -7,8 +7,8 @@ import LoadingOverlay from 'react-loading-overlay';
 import { toastSuccess, toastError, toastWarning } from '../../commonComponents/Toast';
 import { addWithCurrentDate, convertTimeToLocal } from '../../services/Util';
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
-import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 import {OrderItem} from './components/OrderItem';
+import EmptyState from '../../commonComponents/EmptyState'
 import {fetchGeneralSettingsData} from '../../actions';
 class ConfirmOrder extends Component {
 
@@ -16,14 +16,14 @@ class ConfirmOrder extends Component {
         super(props);
         this.state = {
           order: {},
-          TURN_AROUND_TIME: ""
+          TURN_AROUND_TIME: "",
+          loading: false,
         };
     }
 
     componentDidMount = async() => {
       document.title = "My designs on Nitex - The easiest clothing manufacturing software";
-      // this.renderList(0, true, true);
-      const keys = ['TURN_AROUND_TIME']
+      const keys = ['TURN_AROUND_TIME'];
       const data = await fetchGeneralSettingsData(keys);
       if(data){
         this.setState({
@@ -32,26 +32,20 @@ class ConfirmOrder extends Component {
           : "",
         })
       }
-      let id = this.props.match.params.id;
-      this.getOrderDetails(id);
-    }
-
-    getOrderDetails = async(id) => {
-      await this.setState({loading: true})
-      await Http.GET('order', '/' + id)
-        .then(({data}) => {
-          console.log('order details SUCCESS: ', data);
-          this.setState({loading: false, order: data})
-        })
-        .catch(({response}) => {
-            console.log('order details ERROR: ', response);
-            this.setState({loading: false})
-            if (response && response.data && response.data.message) {
-              toastError(response.data.message);
-            } else {
-              toastError("Something went wrong! Please try again.");
-            }
-        });
+     
+      await this.setState({ loading: true });
+      let response = this.props.location.routeParams
+      if(response){
+        this.setState({ 
+          order: {
+          productResponseList: response.designList,
+          name:  response.name
+        },
+        loading: false
+      })
+      }else{
+        this.setState({ loading: false });
+      }
     }
 
     onChange = (e) => {
@@ -63,67 +57,20 @@ class ConfirmOrder extends Component {
     }
 
     delete = async(id) => {
-      let orderId = this.props.match.params.id;
       let {order} = this.state;
-      let body = {
-        orderId: parseInt(orderId),
-        invoiceId: order.invoiceResponse.id,
-        productInfoForRfqId: id
-      }
-      this.setState({loading: true});
-      await Http.DELETE('removeOrderItem', body)
-        .then(({data}) => {
-          console.log('removeOrderItem SUCCESS: ', JSON.stringify(data));
-          this.setState({loading:false});
-          if(data.success){
-            toastSuccess(data.message);
-            this.getOrderDetails(orderId);
-          }else{
-            toastError(data.message);
-          }
-        })
-        .catch(({response}) => {
-            console.log('removeOrderItem Error: ', JSON.stringify(response));
-            this.setState({loading: false});
-            if(response!==undefined && response.data && response.data.message){
-              toastError(response.data.message);
-            }else{
-              toastError("Request wasn't successful.");
-            }
-        });
-    }
-
-    cancel = async() => {
-      let orderId = this.props.match.params.id;
-      await Http.DELETE('cancelOrder', {} , orderId)
-        .then(({data}) => {
-          console.log('cancelOrder SUCCESS: ', JSON.stringify(data));
-          this.setState({loading:false});
-          if(data.success){
-            toastSuccess(data.message);
-            this.props.history.push('/orders/my-orders')
-          }else{
-            toastError(data.message);
-          }
-        })
-        .catch(({response}) => {
-            console.log('cancelOrder Error: ', JSON.stringify(response));
-            this.setState({loading: false});
-            if(response!==undefined && response.data && response.data.message){
-              toastError(response.data.message);
-            }else{
-              toastError("Request wasn't successful.");
-            }
-        });
+      let removedItem = order.productResponseList.filter((item) => item.id !== id);
+      this.setState({ 
+        order: {
+        productResponseList: removedItem,
+      }})
     }
 
     render() {
-        let {order} = this.state;
+        let {order, loading} = this.state;
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
 
         const getDeliveryDate = () => {
-       
-          if(order.productResponseList) {
+          if(order.productResponseList.length !==0) {
             let  max = order.productResponseList.reduce((max, item) => item.deliveryTime ? item.deliveryTime : this.state.TURN_AROUND_TIME > max ? item.deliveryTime : max, 0);
 
             max = order.productResponseList.find((product) => product.deliveryTime === max);
@@ -140,7 +87,50 @@ class ConfirmOrder extends Component {
           }
         }
 
-        
+        const getTotalPrice = (order) =>{
+          if(order.productResponseList) {
+            let total = order.productResponseList.reduce((total, pair)=>{
+              return total + pair.price * pair.quantity;
+            },0)
+            return parseFloat(total);
+          }
+        }
+
+        const onConfirm = async () =>{
+            await this.setState({loading: true});
+            let { order: { productResponseList, name }} = this.state;
+
+            let productInfoForRfqIds = [];
+            productResponseList.map((rfq) => {
+              if (rfq.isSelected) {
+                productInfoForRfqIds.push(rfq.id);
+              }
+            })
+       
+            let body = {
+              name: name,
+              productInfoForRfqIds
+            }
+
+            await Http.POST('order', body)
+              .then(({data}) => {
+                this.setState({loading: false});
+                if(data.success){
+                  toastSuccess(data.message);
+                  this.props.history.push('/orders/confirm-payment/' + data.id);
+                }
+              })
+              .catch(({response}) => {
+                  this.setState({loading:false});
+                  if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                  } else {
+                    toastError("Something went wrong! Please try again.");
+                  }
+              });
+        }
+    
+
         return (
           <LoadingOverlay
               active={this.state.loading}
@@ -168,6 +158,9 @@ class ConfirmOrder extends Component {
               }}
               spinner
               text={LOADER_TEXT}>
+                
+        {order.productResponseList && order.productResponseList.length !== 0 && !loading ?
+          <>
           <div className="add-quote d-flex">
               <div className="confirm-quote-request placing-order">
                   <div className="header-title d-flex justify-content-between align-items-center">
@@ -177,13 +170,23 @@ class ConfirmOrder extends Component {
                           </h3>
                       </a>
                   </div>
+
                   <div className="mt-3">
                       <label htmlFor="">Order title</label>
                       <input type="text" placeholder="Order title" name="name" value={order.name} onChange={this.onChange} className="w-100 bg-gray-light"/>
                   </div>
 
-                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">Order ID: <strong>{order.orderId}</strong> <span className="result d-flex">Delivery date: <div className="text-black ml-2 semibold"> {getDeliveryDate()}</div></span></h4>
-                  <h4 className="mb-3 font-weight-normal pc-step">Product confirmation (Step 1 of 2) <span className="result font-16 mr-3 mt-2 mt-sm-0">You have {order.productResponseList ? order.productResponseList.length : '-'} items in your order</span></h4>
+                  <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">
+                    <span className="result d-flex">
+                      Delivery date: <div className="text-black ml-2 semibold"> {getDeliveryDate()}</div>
+                      </span>
+                   </h4>
+                  <h4 className="mb-3 font-weight-normal pc-step">
+                      Product confirmation (Step 1 of 2) 
+                      <span className="result font-16 mr-3 mt-2 mt-sm-0">You have {order.productResponseList ? order.productResponseList.length : '-'} 
+                        items in your order
+                      </span>
+                  </h4>
                   {
                     order.productResponseList ?
                     order.productResponseList.map((product, i) => {
@@ -203,7 +206,6 @@ class ConfirmOrder extends Component {
                       <div className="tab-price font-weight-bold">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</div>
                   </div>
                   <div className="details">
-                      <h4 className="mb-4 color-333 font-20">Invoice No:  <strong className="semibold">{invoice.invoiceNo}</strong></h4>
                       <div className="ordered-container">
                       {
                         invoice.priceBreakDown && invoice.priceBreakDown.itemWisePriceList ?
@@ -217,11 +219,10 @@ class ConfirmOrder extends Component {
                         }) : <></>
                       }
 
-
                           <div className="sub-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Sub total
-                                  <strong className="semibold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.subTotal : ''}</strong>
+                                  <strong className="semibold font-18">${getTotalPrice(order)}</strong>
                               </div>
                           </div>
 
@@ -237,19 +238,21 @@ class ConfirmOrder extends Component {
                           <div className="grand-total pt-2 mt-4 border-top">
                               <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                   Grand total
-                                  <strong className="semibold font-18">${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ''}</strong>
+                                  <strong className="semibold font-18">${getTotalPrice(order)}</strong>
                               </div>
                           </div>
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
-                              <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={() => this.props.history.push('/orders/confirm-payment/' + this.props.match.params.id)}>Confirm order</button>
-                              <a href="#" className="font-16 red" onClick={this.cancel}>Cancel order</a>
+                              <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={onConfirm}>Confirm order</button>
                           </div>
                       </div>
                   </div>
               </div>
-
-          </div>
+           </div>
+          </> : 
+            !loading && <EmptyState title='No design to order' /> 
+          }
+          
           </LoadingOverlay>
         );
     }
