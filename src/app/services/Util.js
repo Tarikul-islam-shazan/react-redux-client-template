@@ -600,6 +600,7 @@ const addImageSuffix = (imgUrl, suffix) => {
   if (!imgUrl) {
     return '';
   }
+
   let flag = true;
 
   IMAGE_SOURCE.map((url) => {
@@ -609,6 +610,11 @@ const addImageSuffix = (imgUrl, suffix) => {
   })
 
   if (flag) {
+    return imgUrl;
+  }
+
+  //checking the scaled image types
+  if (!['jpeg', 'jpg', 'png'].includes(getImageExt(imgUrl))) {
     return imgUrl;
   }
 
@@ -723,6 +729,7 @@ const authUserInfo = () => {
    return userInfo;
 }
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ['SOLD', 'IN_PROJECT', 'LOCKED'];
+const STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN = ['SOLD', 'UNAVAILABLE', 'IN_PROJECT', 'LOCKED'];
 
 const isValidJSON = str => {
   try {
@@ -798,5 +805,5 @@ export {
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
     parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON, getImageExt, IMAGE_EXTS,
-    replaceUnderLine, isValidFile, parseDate, dateCompare, addWithCurrentDate
+    replaceUnderLine, isValidFile, parseDate, dateCompare, addWithCurrentDate, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN
 };
