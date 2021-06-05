@@ -40,6 +40,44 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_TEST_REGION
                 DISTRIBUTION_ID: $TEST_DISTRIBUTION_ID
+    beta:
+      - step:
+          name: Installing & Running Tests
+          caches:
+            - node
+          script:
+            - rm -rf package-lock.json
+            - rm -rf node_modules
+            - yarn install
+            - yarn run test
+      - step:
+          name: Build
+          script:
+            - yarn install --production
+            - REACT_APP_ENVIRONMENT=production yarn run build
+          artifacts:
+            - build/**
+      - step:
+          name: Deploy to s3
+          deployment: test
+          script:
+            - pipe: atlassian/aws-s3-deploy:0.2.4
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_TEST_REGION
+                S3_BUCKET: $BETA_BUYER_APP_BUCKET_NAME
+                ACL: "public-read"
+                LOCAL_PATH: "build"
+      - step:
+          name: Invalidate Cloudfront Cache
+          script:
+            - pipe: atlassian/aws-cloudfront-invalidate:0.1.1
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_TEST_REGION
+                DISTRIBUTION_ID: $BETA_BUYER_APP_DISTRIBUTION_ID
     production:
       - step:
           name: Installing & Running Tests
