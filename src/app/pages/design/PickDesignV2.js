@@ -188,7 +188,6 @@ class PickDesignV2 extends Component {
         .then(({data}) => {
           let response = {...data};
           response.productTypeResponseList = formatProductTypeWithGroup(response.productTypeResponseList);
-          console.log("response.productTypeResponseList", response.productTypeResponseList)
           this.setState({filterOptions: response});
         })
         .catch(({response}) => {

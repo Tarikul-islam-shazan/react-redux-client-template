@@ -100,7 +100,7 @@ class CollectionDetails extends Component {
               // toastWarning("No more rfq's found.")
             }
         }
-      } 
+      }
     }
 
     handleClickOutside = (event) => {
@@ -112,6 +112,11 @@ class CollectionDetails extends Component {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setState({
               showAddCollectionPopup: false
+            })
+        }
+        if (this.addMyProductsModal && !this.addMyProductsModal.contains(event.target)) {
+            this.setState({
+              showAddProductModal: false
             })
         }
      }
@@ -761,7 +766,7 @@ class CollectionDetails extends Component {
                   </div>
 
                   <div class="add-more-designs">
-                      <div class={`add-more ml-auto ${showAddProductModal ? `open`:``}`} id="myProductList" onScroll={this.handleMyProductScroll}>
+                      <div class={`add-more ml-auto ${showAddProductModal ? `open`:``}`} id="myProductList" onScroll={this.handleMyProductScroll} ref={(node) => this.addMyProductsModal = node}>
                           <div id="closeRPop" class="p-3 cursor-pointer">
                               <svg xmlns="http://www.w3.org/2000/svg" width="22.84" height="12.32" viewBox="0 0 22.84 12.32">
                                   <g id="Group_5016" data-name="Group 5016" transform="translate(-1582.964 -1119.323)">
