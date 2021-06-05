@@ -106,6 +106,10 @@ function getBaseUrl(){
     }
     else if( hostName.indexOf( "localhost" ) > -1 ){
         return "https://testapi-v2.nitex.com";
+        //return "http://localhost:8080";
+    }
+    else if( hostName.indexOf( "https://buyer-beta.nitex.com" ) > -1 ){
+        return "https://apiv2.nitex.com";
     }
 }
 
