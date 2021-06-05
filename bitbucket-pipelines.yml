@@ -65,7 +65,7 @@ pipelines:
               variables:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_TEST_REGION
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 S3_BUCKET: $BETA_BUYER_APP_BUCKET_NAME
                 ACL: "public-read"
                 LOCAL_PATH: "build"
@@ -76,7 +76,7 @@ pipelines:
               variables:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_TEST_REGION
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 DISTRIBUTION_ID: $BETA_BUYER_APP_DISTRIBUTION_ID
     production:
       - step:
