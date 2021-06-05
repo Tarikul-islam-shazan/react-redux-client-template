@@ -308,14 +308,13 @@ class CollectionDetails extends Component {
     }
 
     formatUserTypeList = () => {
-      let {usersByTypeList} = this.state;
+      let {usersByTypeList, searchUserText, searchUserSuggestions} = this.state;
       let result = [];
-      for (const [key, value] of Object.entries(usersByTypeList)) {
+      if (searchUserText) {
         result.push(
-          <ul class="p-0 m-0 existing-item" key={key}>
-              <div class="title">{key === 'FASHION_DESIGNER'? 'Fashion Designer' : key === 'EXECUTIVE' ? 'Account Manager' : 'Unknown Type'}</div>
+          <ul class="p-0 m-0 existing-item">
               {
-                value.map((user, i) => {
+                searchUserSuggestions.length ? searchUserSuggestions.map((user, i) => {
                   return (
                     <li key={i}>
                         <div class="d-flex align-items-center">
@@ -328,11 +327,43 @@ class CollectionDetails extends Component {
                         <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user)}>Add</button>
                     </li>
                   )
-                })
+                }) :
+                <li>
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex flex-column ml-2">
+                            <span>No suggestions found</span>
+                        </div>
+                    </div>
+                </li>
               }
           </ul>
         )
+      } else {
+        for (const [key, value] of Object.entries(usersByTypeList)) {
+          result.push(
+            <ul class="p-0 m-0 existing-item" key={key}>
+                <div class="title">{key}</div>
+                {
+                  value.map((user, i) => {
+                    return (
+                      <li key={i}>
+                          <div class="d-flex align-items-center">
+                              <img src={require('../../assets/images/pro_pic_default.svg')} alt=""/>
+                              <div class="d-flex flex-column ml-2">
+                                  <span>{user.name}</span>
+                                  <div class="email">{user.email}</div>
+                              </div>
+                          </div>
+                          <button class="btn-brand m-0 brand-bg-color" onClick={() => this.addUserToCollection(user)}>Add</button>
+                      </li>
+                    )
+                  })
+                }
+            </ul>
+          )
+        }
       }
+
       return result;
     }
 
@@ -695,26 +726,6 @@ class CollectionDetails extends Component {
                                    <div class="form-group position-relative">
                                        <label class="title">Add people</label>
                                        <input type="text" placeholder="demo@gamil.com" name="searchUserText" value={searchUserText} onChange={this.onChange}/>
-                                       <div class="people-suggestions">
-                                       {
-                                         searchUserSuggestions.map((user, i) => {
-                                           return (
-                                             <div class="item d-flex" key={i} onClick={async() => {
-                                               await this.addUserToCollection(user);
-                                               this.setState({searchUserText: '', searchUserSuggestions: []})
-                                             }}>
-                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                     <g id="Group_22796" data-name="Group 22796" transform="translate(-18733 -6319)">
-                                                         <circle id="Ellipse_171" data-name="Ellipse 171" cx="12" cy="12" r="12" transform="translate(18733 6319)" fill="#fff"/>
-                                                         <path id="Icon_awesome-user" data-name="Icon awesome-user" d="M6.186,7.07A3.535,3.535,0,1,0,2.651,3.535,3.535,3.535,0,0,0,6.186,7.07Zm2.475.884H8.2a4.808,4.808,0,0,1-4.027,0H3.712A3.713,3.713,0,0,0,0,11.666v1.149A1.326,1.326,0,0,0,1.326,14.14h9.721a1.326,1.326,0,0,0,1.326-1.326V11.666A3.713,3.713,0,0,0,8.661,7.954Z" transform="translate(18739 6323.8)" fill="#aeaeae"/>
-                                                     </g>
-                                                 </svg>
-                                                 {user.email}
-                                             </div>
-                                           )
-                                         })
-                                       }
-                                       </div>
                                    </div>
                                    {
                                      this.formatUserTypeList()
@@ -725,11 +736,11 @@ class CollectionDetails extends Component {
                                   collection.userResponseList.map((user, i) => {
                                     if (user.profilePicDocument && user.profilePicDocument.docUrl) {
                                       return(
-                                        <img src={user.profilePicDocument.docUrl} alt=""/>
+                                        <img src={user.profilePicDocument.docUrl} alt="" data-toggle="tooltip" data-placement="top" title={user.name}/>
                                       )
                                     }
                                     return(
-                                      <img src={require('../../assets/images/pro_pic_default.svg')} alt=""/>
+                                      <img src={require('../../assets/images/pro_pic_default.svg')} alt="" data-toggle="tooltip" data-placement="top" title={user.name}/>
                                     )
                                   }) : <></>
                                 }
