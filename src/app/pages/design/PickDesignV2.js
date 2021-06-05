@@ -750,7 +750,7 @@ class PickDesignV2 extends Component {
                                 // itemsToShow={5}
                                 pagination={false}>
                               {
-                                data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                data.productResponseList && this.getAllAvailableProducts(data.productResponseList).length ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
                                   return (
                                     <ProductCardWithTick
                                       key={j}
@@ -759,7 +759,10 @@ class PickDesignV2 extends Component {
                                       addToQuote={this.addToQuote}
                                       likeProduct={this.likeProduct}
                                       unlikeProduct={this.unlikeProduct}/>)
-                                }) : <></>
+                                }) :
+                                <EmptyState
+                                 title="No available designs"
+                                 subTitle=""/>
                               }
                               </Carousel>
                           </div>

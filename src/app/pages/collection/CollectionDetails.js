@@ -698,7 +698,17 @@ class CollectionDetails extends Component {
               <div class="explore-design">
                   <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
                       <div class="">
-                          <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
+                        {
+                          collectionViewType === 'MY_PRODUCTS' ?
+                          <h4 class="font-26 semibold mb-4 mb-sm-0">My designs</h4>
+                          :
+                          (
+                            collectionViewType === 'LIKED_PRODUCTS' ?
+                            <h4 class="font-26 semibold mb-4 mb-sm-0">My favourites</h4>
+                            :
+                            <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
+                          )
+                        }
                       </div>
                       {
                         !collectionType && !collectionViewType && collection.privacy === 'CUSTOM' ?
