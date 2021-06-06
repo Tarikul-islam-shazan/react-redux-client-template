@@ -233,7 +233,7 @@ class Register extends Component {
               </div>
               <form className="registration-form">
 
-                      <div className="position-relative">
+                      <div className="position-relative mb-4">
                           <Input
                               id="standard-adornment-password"
                               type="email"
@@ -255,7 +255,7 @@ class Register extends Component {
                                   : <></>
                           }
                       </div>
-                     <div className="position-relative">
+                     <div className="position-relative mb-4">
                       <Input
                           id="standard-adornment-email"
                           label="Email"
@@ -278,7 +278,7 @@ class Register extends Component {
                         : <></>
                       }
                      </div>
-                  <div className="position-relative">
+                  <div className="position-relative mb-4">
                       <Input
                           id="standard-adornment-repassword"
                           type={showPassword ? "input" : "password"}
