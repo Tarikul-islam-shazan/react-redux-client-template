@@ -93,9 +93,9 @@ class PickDesignV2 extends Component {
       const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
       const windowBottom = windowHeight + window.pageYOffset;
       if (windowBottom >= docHeight) {
-        let { hasNext, page, loading, designList, size } = this.state
+        let { hasNext, page, loading, designList, size, searching } = this.state
         console.log("message",'bottom reached',hasNext, page, loading)
-        if(hasNext && !loading && designList.length){
+        if(hasNext && !loading && designList.length && searching){
           let data = await this.renderList(page+1)
           if(data.length>0){
             await this.setState({
@@ -135,7 +135,8 @@ class PickDesignV2 extends Component {
 
         if (this.searchFilters && !this.searchFilters.contains(event.target)) {
             this.setState({
-              showFilters: false
+              showFilters: false,
+              filters: this.state.filters.filter((item) => item.showSelected)
             })
         }
 
@@ -232,7 +233,7 @@ class PickDesignV2 extends Component {
             }
         })
         if (flag) {
-            filters.push({type, id, name});
+            filters.push({type, id, name, showSelected: false});
         } else {
             filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
             if (!filters.length && search === '') {
@@ -246,7 +247,7 @@ class PickDesignV2 extends Component {
         });
         if (!flag) {
             this._search();
-      }
+        }
     }
 
     renderList = async(page = 0) => {
@@ -312,6 +313,18 @@ class PickDesignV2 extends Component {
       if(e.key==='Enter'){
         this._search()
       }
+    }
+
+    applyFilters = async() => {
+        let {filters} = this.state;
+        await this.setState({
+            showSelectedFilters: true,
+            filters: filters.map((filter) => {
+                filter.showSelected = true;
+                return filter;
+            })
+        });
+        this._search();
     }
 
     _search = async() => {
@@ -631,19 +644,22 @@ class PickDesignV2 extends Component {
                         <ul className="filter-tag">
                         {
                           filters.map((filter, i) => {
-                            return (
-                              <li className="active" key={i}>
-                                  <a>{filter.name}</a>
-                                  <div className="close-tag" onClick={() => this.setFilters(filter.type, filter.id, filter.name)}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888" viewBox="0 0 10.888 10.888">
-                                          <g id="Group_10684" data-name="Group 10684" transform="translate(50.699 -260.002) rotate(45)">
-                                              <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" strokeWidth="1"/>
-                                              <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" strokeWidth="1"/>
-                                          </g>
-                                      </svg>
-                                  </div>
-                              </li>
-                            )
+                            if (filter.showSelected) {
+                              return (
+                                <li className="active" key={i}>
+                                    <a>{filter.name}</a>
+                                    <div className="close-tag" onClick={() => this.setFilters(filter.type, filter.id, filter.name)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.888" height="10.888" viewBox="0 0 10.888 10.888">
+                                            <g id="Group_10684" data-name="Group 10684" transform="translate(50.699 -260.002) rotate(45)">
+                                                <path id="Path_27710" data-name="Path 27710" d="M2135.273,2351v14.4" transform="translate(-1979.574 -2138.497)" fill="none" stroke="#fff" strokeWidth="1"/>
+                                                <path id="Path_27711" data-name="Path 27711" d="M0,0V14.4" transform="translate(162.898 219.699) rotate(90)" fill="none" stroke="#fff" strokeWidth="1"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </li>
+                              )
+                            }
+                            return (<></>)
                           })
                         }
                         </ul> : <></>
@@ -698,10 +714,7 @@ class PickDesignV2 extends Component {
                           </ul>
                       </div>
                       <div className="filter-actions d-flex align-items-center">
-                          <button className="m-0 btn-brand m-0 shadow float-right" onClick={async() => {
-                              await this.setState({showSelectedFilters: true});
-                              this._search()
-                          }}>Apply</button>
+                          <button className="m-0 btn-brand m-0 shadow float-right" onClick={this.applyFilters}>Apply</button>
                       </div>
                   </div>
               </div>
@@ -746,23 +759,40 @@ class PickDesignV2 extends Component {
                           return (
                             <div className="designs" key={i}>
                                 <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
-                                <Carousel
-                                  breakPoints={breakPoints}
-                                  // itemsToShow={5}
-                                  pagination={false}>
                                 {
-                                  data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
-                                    return (
-                                      <ProductCardWithTick
-                                        key={j}
-                                        product={product}
-                                        updateProductCard={() => this.updateProductCard()}
-                                        addToQuote={this.addToQuote}
-                                        likeProduct={this.likeProduct}
-                                        unlikeProduct={this.unlikeProduct}/>)
-                                  }) : <></>
+                                  this.getAllAvailableProducts(data.productResponseList).length > 3 ?
+                                  <Carousel
+                                    breakPoints={breakPoints}
+                                    // itemsToShow={5}
+                                    pagination={false}>
+                                  {
+                                    data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                      return (
+                                        <ProductCardWithTick
+                                          key={j}
+                                          product={product}
+                                          updateProductCard={() => this.updateProductCard()}
+                                          addToQuote={this.addToQuote}
+                                          likeProduct={this.likeProduct}
+                                          unlikeProduct={this.unlikeProduct}/>)
+                                    }) : <></>
+                                  }
+                                  </Carousel> :
+                                  <div className="show-products">
+                                  {
+                                    this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                      return (
+                                        <ProductCardWithTick
+                                          key={j}
+                                          product={product}
+                                          updateProductCard={() => this.updateProductCard()}
+                                          addToQuote={this.addToQuote}
+                                          likeProduct={this.likeProduct}
+                                          unlikeProduct={this.unlikeProduct}/>)
+                                    })
+                                  }
+                                  </div>
                                 }
-                                </Carousel>
                             </div>
                           )
                         }
