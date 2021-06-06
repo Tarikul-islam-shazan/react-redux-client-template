@@ -759,23 +759,40 @@ class PickDesignV2 extends Component {
                           return (
                             <div className="designs" key={i}>
                                 <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
-                                <Carousel
-                                  breakPoints={breakPoints}
-                                  // itemsToShow={5}
-                                  pagination={false}>
                                 {
-                                  data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
-                                    return (
-                                      <ProductCardWithTick
-                                        key={j}
-                                        product={product}
-                                        updateProductCard={() => this.updateProductCard()}
-                                        addToQuote={this.addToQuote}
-                                        likeProduct={this.likeProduct}
-                                        unlikeProduct={this.unlikeProduct}/>)
-                                  }) : <></>
+                                  this.getAllAvailableProducts(data.productResponseList).length > 3 ?
+                                  <Carousel
+                                    breakPoints={breakPoints}
+                                    // itemsToShow={5}
+                                    pagination={false}>
+                                  {
+                                    data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                      return (
+                                        <ProductCardWithTick
+                                          key={j}
+                                          product={product}
+                                          updateProductCard={() => this.updateProductCard()}
+                                          addToQuote={this.addToQuote}
+                                          likeProduct={this.likeProduct}
+                                          unlikeProduct={this.unlikeProduct}/>)
+                                    }) : <></>
+                                  }
+                                  </Carousel> :
+                                  <div className="show-products">
+                                  {
+                                    this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                      return (
+                                        <ProductCardWithTick
+                                          key={j}
+                                          product={product}
+                                          updateProductCard={() => this.updateProductCard()}
+                                          addToQuote={this.addToQuote}
+                                          likeProduct={this.likeProduct}
+                                          unlikeProduct={this.unlikeProduct}/>)
+                                    })
+                                  }
+                                  </div>
                                 }
-                                </Carousel>
                             </div>
                           )
                         }
