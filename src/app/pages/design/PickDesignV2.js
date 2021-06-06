@@ -17,7 +17,7 @@ import ProductCardWithTick from '../../commonComponents/ProductCardWithTick';
 import {ProductSkeleton, CreateSkeletons} from '../../commonComponents/ProductSkeleton';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
-import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
+import { _getKey, formatProductTypeWithGroup, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN } from '../../services/Util';
 import {_storeData, _getProductForQuote} from './actions';
 
 const isSelected = (filters, type, id) => {
@@ -188,7 +188,6 @@ class PickDesignV2 extends Component {
         .then(({data}) => {
           let response = {...data};
           response.productTypeResponseList = formatProductTypeWithGroup(response.productTypeResponseList);
-          console.log("response.productTypeResponseList", response.productTypeResponseList)
           this.setState({filterOptions: response});
         })
         .catch(({response}) => {
@@ -567,10 +566,7 @@ class PickDesignV2 extends Component {
 
     getAllAvailableProducts = (data) => {
         return data.filter((product) => (
-            product.availabilityStatus !== 'SOLD' &&
-            product.availabilityStatus !== 'UNAVAILABLE' &&
-            product.availabilityStatus !== 'IN_PROJECT' &&
-            product.availabilityStatus !== 'LOCKED'
+            !STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN.includes(product.availabilityStatus)
         ));
     }
 
@@ -724,7 +720,7 @@ class PickDesignV2 extends Component {
                         }
                     <div className="show-products">
                     {
-                      designList.map(( product , i ) => {
+                      this.getAllAvailableProducts(designList).map(( product , i ) => {
                         return(
                            <ProductCardWithTick
                              key={i}
@@ -746,28 +742,31 @@ class PickDesignV2 extends Component {
                   {
                     landingData.map((data, i) => {
                       if (data.collectionViewType === 'PRODUCT_LIST') {
-                        return (
-                          <div className="designs" key={i}>
-                              <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
-                              <Carousel
-                                breakPoints={breakPoints}
-                                // itemsToShow={5}
-                                pagination={false}>
-                              {
-                                data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
-                                  return (
-                                    <ProductCardWithTick
-                                      key={j}
-                                      product={product}
-                                      updateProductCard={() => this.updateProductCard()}
-                                      addToQuote={this.addToQuote}
-                                      likeProduct={this.likeProduct}
-                                      unlikeProduct={this.unlikeProduct}/>)
-                                }) : <></>
-                              }
-                              </Carousel>
-                          </div>
-                        )
+                        if (this.getAllAvailableProducts(data.productResponseList).length) {
+                          return (
+                            <div className="designs" key={i}>
+                                <h4 className="mb-2 font-weight-normal">{data.name} <a href={'/collections/view/' + data.id}><span className="view-all">View all</span></a></h4>
+                                <Carousel
+                                  breakPoints={breakPoints}
+                                  // itemsToShow={5}
+                                  pagination={false}>
+                                {
+                                  data.productResponseList ? this.getAllAvailableProducts(data.productResponseList).map((product, j) => {
+                                    return (
+                                      <ProductCardWithTick
+                                        key={j}
+                                        product={product}
+                                        updateProductCard={() => this.updateProductCard()}
+                                        addToQuote={this.addToQuote}
+                                        likeProduct={this.likeProduct}
+                                        unlikeProduct={this.unlikeProduct}/>)
+                                  }) : <></>
+                                }
+                                </Carousel>
+                            </div>
+                          )
+                        }
+                        return (<></>)
                       } else if (data.collectionViewType === 'BANNER') {
                         return (
                           <div className="banner-section mt-5 mb-4 overflow-hidden">

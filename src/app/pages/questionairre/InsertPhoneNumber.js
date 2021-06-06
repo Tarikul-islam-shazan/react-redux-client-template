@@ -72,15 +72,15 @@ class InsertPhoneNumber extends Component {
           this.setState({
             [e.target.name + 'Error']: ''
           })
-          loadjs(['/js/script.js']);
         }
     }
 
-    onChangeNumber = (numberValidation, phoneNumber) => {
-      this.setState({
+    onChangeNumber = async (numberValidation, phoneNumber) => {
+      await this.setState({
         numberValidation,
-        phoneNumber
+        phoneNumber,
       })
+      await this.validateData();
     }
 
     onChangeFlag = (e, f) => {
@@ -108,7 +108,6 @@ class InsertPhoneNumber extends Component {
                 phoneNumberError: ''
             })
         }
-        await loadjs(['/js/script.js']);
         return flag;
     }
 
