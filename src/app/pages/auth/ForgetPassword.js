@@ -125,7 +125,7 @@ class ForgetPassword extends Component {
                                     <p className="section-subtitle">Enter your registered email below to receive password reset instruction</p>
                                 </div>
                                 <form className="mt-5 forgot-pass">
-                                    <div className="form-group">
+                                    <div className="form-group m-0">
                                         <label>Email Address</label>
                                         <div className="position-relative">
                                             <div className="input-group">

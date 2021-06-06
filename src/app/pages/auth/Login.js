@@ -238,7 +238,7 @@ class Login extends Component {
               </div>
               <form className="registration-form" autoComplete="off">
 
-                       <div className="position-relative">
+                       <div className="position-relative mb-4">
                            <Input
                                id="standard-adornment-email"
                                label="Email Address"
@@ -265,7 +265,7 @@ class Login extends Component {
 
 
 
-                  <div className="position-relative">
+                  <div className="position-relative mb-4">
                         <Input
                             id="standard-adornment-password"
                             type={showPassword ? "input" : "password"}
