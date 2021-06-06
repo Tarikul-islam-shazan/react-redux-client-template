@@ -789,6 +789,15 @@ const dateCompare = (orderDate, dueDate) => {
   }
 }
 
+const DATE_TYPES = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond']
+
+const addWithCurrentDate = (date, duration, dateType, dateFormat="Do MMM, YY") => {
+  if(DATE_TYPES.includes(dateType)){
+    return moment(date).add(duration, dateType).format(dateFormat);
+  }
+  return false
+}
+
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
     convertToSelectOptions, isTokenExpired, convertToISODate, getOneWeekAgoMillis,
@@ -796,5 +805,5 @@ export {
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
     parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON, getImageExt, IMAGE_EXTS,
-    replaceUnderLine, isValidFile, parseDate, dateCompare, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN
+    replaceUnderLine, isValidFile, parseDate, dateCompare, addWithCurrentDate, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN
 };

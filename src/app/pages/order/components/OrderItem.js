@@ -44,23 +44,7 @@ export const OrderItem = ({product, remove}) => {
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
                             <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{product.name}</a>
-                            <span className="cat">{product.productGroup}</span>
-                        </div>
-                        <div className="info-item">
-                            <label className="">Color</label>
-                            <div className="color-picker">
-                                <ul>
-                                {
-                                  product.colorWiseSizeQuantityPairList.map((color, i) => {
-                                    return(
-                                      <li className="d-flex align-items-center">
-                                        <span style={{backgroundColor: color.hexCode}}></span>
-                                      </li>
-                                    )
-                                  })
-                                }
-                                </ul>
-                            </div>
+                            <span className="cat">{product.productCategory ? product.productCategory + ", " : 'Product Group'}{product.productGroup}</span>
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Fabric details</label>
@@ -68,64 +52,81 @@ export const OrderItem = ({product, remove}) => {
                         </div>
                     </div>
 
-                    <div className="features d-flex flex-md-column">
-                        <div className="info-item mt-2">
-                            <label className="font-14 text-muted">Quantity</label>
-                            <h5 className="font-18 semibold">{product.quantity ? product.quantity : '--'} pc</h5>
+
+                    <div className="features position-relative d-flex flex-md-column">
+                        <div className="info-item mt-0 mt-xl-2">
+                          <label className="font-14 text-muted">Quantity</label>
+                          <h5 className="font-20 color-333">{product.quantity ? product.quantity : '--'} units</h5>
                         </div>
 
-                        <div class="info-item pr-2 d-flex flex-column">
-                            <table class="text-center p-size-table">
-                                <thead>
+                        {
+                          product.colorWiseSizeQuantityPairList && product.colorWiseSizeQuantityPairList.length ?
+                            <div className="info-item d-flex">
+                              <div className="size">
+                                <label className="text-center mb-0">
+                                  <span className="circle-color mr-3 opacity-0"></span>
+                                </label>
+                              </div>
+                              <div className="sizes d-flex  align-items-center text-center">
                                 {
-                                  product.colorWiseSizeQuantityPairList.length ? product.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map((pair, j) => {
-                                      return(
-                                        <th>{pair.code}</th>
+                                  product.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map((pair, j) => {
+                                    return (
+                                      <div className="size" key={j}>
+                                        <label className="text-center mb-0">{pair.code}</label>
+                                      </div>
+                                    )
+                                  })
+                                }
+                              </div>
+                            </div>
+                            : <></>
+                        }
+
+                        {
+                          product.colorWiseSizeQuantityPairList.map((color, i) => {
+                            return (
+                              <div className="info-item d-flex align-items-start mt-2" key={i}>
+                                <div className="sizes d-flex  align-items-center">
+                                  <span
+                                    className="circle-color mr-3"
+                                    style={{background: color.hexCode}}
+                                    data-placement="top"
+                                    data-toggle="tooltip"
+                                    data-original-title={color.name}>
+                                  </span>
+                                  {
+                                    color.sizeQuantityPairList.map((pair, j) => {
+                                      return (
+                                        <div className="size" key={j}>
+                                          <input
+                                            style={{ background: '#fff' }}
+                                            type="text"
+                                            placeholder="00"
+                                            value={pair.quantity}
+                                            readOnly={true} />
+                                        </div>
                                       )
-                                    }) :
-                                    <>
-                                      <th>XS</th>
-                                      <th>S</th>
-                                      <th>M</th>
-                                      <th>L</th>
-                                      <th>XL</th>
-                                    </>
+                                    })
                                   }
-                                </thead>
-                                <tbody class="text-center">
-                                    {
-                                      product.colorWiseSizeQuantityPairList.map((colorWithSize, i) => {
-                                        return(
-                                          <tr>
-                                          {
-                                            colorWithSize.sizeQuantityPairList.map((pair, j) => {
-                                              return(
-                                                <td>{pair.quantity}</td>
-                                              )
-                                            })
-                                          }
-                                          </tr>
-                                        )
-                                      })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div className="features d-flex flex-md-column">
-                        <div className="info-item mt-2">
-                            <label className="">(Per Piece)</label>
-                            <h5 className="font-18 semibold">${product.price}</h5>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
+                      </div>
 
+                        <div className="features d-flex flex-md-column">
+                            <div className="info-item mt-2">
+                                <label className="">(Per Piece)</label>
+                                <h5 className="font-18 semibold">${product.price}</h5>
+                            </div>
+                            <div className="info-item">
+                                <label className="">Total price</label>
+                                <h5 className="font-18 semibold">${(product.price * product.quantity)}</h5>
+                            </div>
                         </div>
-                        <div className="info-item">
-                            <label className="">Total price</label>
-                            <h5 className="font-18 semibold">${(product.price * product.quantity)}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                  </div>
+             </div>
         </div>
     </div>
   )

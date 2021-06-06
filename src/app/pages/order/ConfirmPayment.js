@@ -333,7 +333,7 @@ class ConfirmPayment extends Component {
 
                   <div className="order-step2">
                       <div className="stepper">
-                          <h3 className="font-20 semibold mb-4">Billing Address</h3>
+                          <h3 className="font-20 semibold mb-4">Billing address</h3>
                           <div className="row">
                               <div className="col-md-6">
                                   <div className="form-group">
@@ -401,7 +401,7 @@ class ConfirmPayment extends Component {
                                   <div className="custom-chekbox">
                                       <div className="form-group">
                                           <input type="checkbox" id="1" name="sameAsBilling" onChange={this.handleSameAsBilling} checked={sameAsBilling}/>
-                                          <label for="1" className="font-16 color-gray font-weight-normal">Same as Billing address</label>
+                                          <label for="1" className="font-16 color-gray font-weight-normal">Same as billing address</label>
                                       </div>
                                   </div>
                               </div>
@@ -550,7 +550,7 @@ class ConfirmPayment extends Component {
 
               <div className="invoice-summary">
                   <div className="title">
-                      Invoice Summary
+                      Invoice summary
                       <div className="toggle-up-down">
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="9" viewBox="0 0 18 9">
                               <path id="Icon_ionic-md-arrow-dropdown" data-name="Icon ionic-md-arrow-dropdown" d="M9,22.5l9-9,9,9Z" transform="translate(-9 -13.5)" fill="#21242b"/>
@@ -599,7 +599,7 @@ class ConfirmPayment extends Component {
 
                           <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                               <button className="btn-brand brand-bg-color shadow m-0 mt-5" onClick={this.confirm}>Confirm payment</button>
-                              <a href="#" className="text-underline font-16 red" onClick={this.cancel}>Cancel order</a>
+                              <a href="#" className="font-16 red" onClick={this.cancel}>Cancel order</a>
                           </div>
                       </div>
                   </div>

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import axios from 'axios';
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import loadjs from 'loadjs';
 import { loadStripe } from "@stripe/stripe-js";
 
 import LoadingOverlay from 'react-loading-overlay';
@@ -15,7 +11,6 @@ import { encodeQueryData, _getKey } from '../../services/Util';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT } from '../../constant';
 
-// import {InvoiceItem} from './components/InvoiceItem';
 const stripePromise = loadStripe("pk_test_Os37uKWRds5fdZBl7CM95re700gVT1xOKC");
 
 class PayInvoice extends Component {
@@ -161,9 +156,34 @@ class PayInvoice extends Component {
     render() {
         let {invoice, paymentMethod, paymentMethodError, bankSlipDoc, bankSlipDocError, showMblSummary} = this.state;
         return (
-          <>
-            <div class="back cursor-pointer"> Back  </div>
-            <div class="d-flex mt-2 mt-sm-0">
+           <LoadingOverlay
+              active={this.state.loading}
+              styles={{
+                overlay: (base) => ({
+                  ...base,
+                  background: LOADER_OVERLAY_BACKGROUND
+                }),
+                spinner: (base) => ({
+                  ...base,
+                  width: LOADER_WIDTH,
+                  position: LOADER_POSITION,
+                  top: LOADER_TOP,
+                  left: LOADER_LEFT,
+                  marginTop: LOADER_MARGIN_TOP,
+                  marginLeft: LOADER_MARGIN_LEFT,
+                  '& svg circle': {
+                    stroke: LOADER_COLOR
+                  }
+                }),
+                content: (base) => ({
+                  ...base,
+                  color: LOADER_COLOR
+                })
+              }}
+              spinner
+              text={LOADER_TEXT}> 
+            <div class="back cursor-pointer"></div>
+            <div class="add-quote d-flex">
                 <div class="buyer-payment-methods">
                     <div class="title">Select payment method</div>
                     <div className="stepper">
@@ -255,7 +275,7 @@ class PayInvoice extends Component {
                     <div class="tab-price font-weight-bold">${invoice.amount}</div>
                 </div>
                 <div class="details">
-                    <h4 class="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>IVN{invoice.id}</strong></h4>
+                    <h4 class="mb-4 font-weight-normal color-333 font-22">Invoice No:  <strong>{invoice.invoiceNo}</strong></h4>
                     <div class="ordered-container">
                     {
                       invoice.itemWisePrice ?
@@ -297,7 +317,7 @@ class PayInvoice extends Component {
                     </div>
                 </div>
             </div>
-          </>
+          </LoadingOverlay>
         );
     }
 }

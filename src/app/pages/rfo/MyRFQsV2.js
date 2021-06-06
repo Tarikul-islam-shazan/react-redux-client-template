@@ -267,34 +267,29 @@ class MyRFQs extends Component {
     })
   }
 
-  createOrder = async() => {
-    await this.setState({loading: true});
+  onNextStep = () => {
     let {rfqList, orderTitle} = this.state;
-    let productInfoForRfqIds = [];
-    rfqList.map((rfq) => {
+    if(orderTitle === ''){
+      toastError("Please provide a order title");
+    }
+    else{
+     let productInfoForRfqIds = [];
+      rfqList.map((rfq) => {
       if (rfq.isSelected) {
-        productInfoForRfqIds.push(rfq.id);
+        productInfoForRfqIds.push(rfq);
       }
     })
-    let body = {
-      name: orderTitle,
-      productInfoForRfqIds
-    }
-    await Http.POST('order', body)
-      .then(({data}) => {
-        this.setState({loading: false})
-        if(data.success){
-          toastSuccess(data.message);
-          this.props.history.push('/orders/confirm-order/' + data.id);
-        }else{
-          toastError(data.message);
-        }
 
-      })
-      .catch(response => {
-          this.setState({loading:false})
-          toastError("Something went wrong! Please try again.");
-      });
+    let routeParams = {
+      name: orderTitle,
+      designList: productInfoForRfqIds,
+    }
+
+    this.props.history.push({ 
+      pathname:'/orders/confirm-order', 
+      routeParams
+    });
+  }
   }
 
   render() {
@@ -477,7 +472,7 @@ class MyRFQs extends Component {
                     <span className="create-newbutton cursor-pointer">Create order</span>
                     <div className="create-new d-flex">
                         <input type="text" placeholder="Order title" className="bg-gray-light border-0" value={orderTitle} name="orderTitle" onChange={this.onChange}/>
-                        <button className="btn-brand m-0 brand-bg-color" onClick={this.createOrder}>Create</button>
+                        <button className="btn-brand m-0 brand-bg-color" onClick={this.onNextStep}>Next</button>
                     </div>
                 </div>
               </div>
