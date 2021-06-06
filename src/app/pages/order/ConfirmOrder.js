@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import moment from 'moment';
 import Http from '../../services/Http';
 import LoadingOverlay from 'react-loading-overlay';
@@ -251,7 +252,11 @@ class ConfirmOrder extends Component {
               </div>
            </div>
           </> : 
-            !loading && <EmptyState title='No design to order' /> 
+            !loading && 
+            <div className="mt-5 not-found">
+                 <EmptyState title='No design to order' /> 
+                 <Link className="font-18" to='/quotes/list'>Go back</Link>
+                 </div>
           }
           
           </LoadingOverlay>
