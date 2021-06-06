@@ -29,6 +29,7 @@ class PayInvoice extends Component {
           paymentMethodError: '',
           bankSlipDoc: '',
           bankSlipDocError: '',
+          showMblSummary: false
         };
     }
 
@@ -158,7 +159,7 @@ class PayInvoice extends Component {
     }
 
     render() {
-        let {invoice, paymentMethod, paymentMethodError, bankSlipDoc, bankSlipDocError} = this.state;
+        let {invoice, paymentMethod, paymentMethodError, bankSlipDoc, bankSlipDocError, showMblSummary} = this.state;
         return (
           <>
             <div class="back cursor-pointer"> Back  </div>
@@ -243,8 +244,8 @@ class PayInvoice extends Component {
                 </div>
 
             </div>
-            <div class="invoice-summary">
-                <div class="title">
+            <div class={`invoice-summary ${showMblSummary ? `show` : ``}`}>
+                <div class="title" onClick={() => this.setState({showMblSummary: !showMblSummary})}>
                     Invoice Summary
                     <div class="toggle-up-down">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="9" viewBox="0 0 18 9">
