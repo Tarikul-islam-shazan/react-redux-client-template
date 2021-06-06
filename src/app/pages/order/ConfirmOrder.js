@@ -22,6 +22,7 @@ class ConfirmOrder extends Component {
     }
 
     componentDidMount = async() => {
+      await this.setState({ loading: true });
       document.title = "My designs on Nitex - The easiest clothing manufacturing software";
       const keys = ['TURN_AROUND_TIME'];
       const data = await fetchGeneralSettingsData(keys);
@@ -30,10 +31,10 @@ class ConfirmOrder extends Component {
           TURN_AROUND_TIME: data["TURN_AROUND_TIME"]
           ? data["TURN_AROUND_TIME"].value
           : "",
+          loading: false
         })
       }
      
-      await this.setState({ loading: true });
       let response = this.props.location.routeParams
       if(response){
         this.setState({ 
