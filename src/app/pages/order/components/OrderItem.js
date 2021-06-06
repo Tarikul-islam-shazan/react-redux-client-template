@@ -44,7 +44,7 @@ export const OrderItem = ({product, remove}) => {
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
                             <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">{product.name}</a>
-                            <span className="cat">{product.productCategory ? product.productCategory + ", " : ''}{product.productGroup}</span>
+                            <span className="cat">{product.productCategory ? product.productCategory + ", " : 'Product Group'}{product.productGroup}</span>
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Fabric details</label>
@@ -69,7 +69,7 @@ export const OrderItem = ({product, remove}) => {
                               </div>
                               <div className="sizes d-flex  align-items-center text-center">
                                 {
-                                  product.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map((pair, j) => {
+                                  product.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map((pair, j) => {
                                     return (
                                       <div className="size" key={j}>
                                         <label className="text-center mb-0">{pair.code}</label>

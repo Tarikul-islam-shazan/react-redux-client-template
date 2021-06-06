@@ -88,16 +88,16 @@ class ConfirmOrder extends Component {
           }
         }
 
-        const getTotalPrice = (order) =>{
+        const getTotalPrice = (order) => {
           if(order.productResponseList) {
-            let total = order.productResponseList.reduce((total, pair)=>{
+            let total = order.productResponseList.reduce((total, pair) => {
               return total + pair.price * pair.quantity;
             },0)
             return parseFloat(total);
           }
         }
 
-        const onConfirm = async () =>{
+        const onConfirm = async () => {
             await this.setState({loading: true});
             let { order: { productResponseList, name }} = this.state;
 
