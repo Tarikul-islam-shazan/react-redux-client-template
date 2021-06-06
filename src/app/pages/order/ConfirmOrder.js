@@ -253,10 +253,10 @@ class ConfirmOrder extends Component {
            </div>
           </> : 
             !loading && 
-            <div className="mt-5 not-found">
-                 <EmptyState title='No design to order' /> 
-                 <Link className="font-18" to='/quotes/list'>Go back</Link>
-                 </div>
+              <div className="mt-5 not-found">
+                  <EmptyState title='No design to order' /> 
+                  <Link className="font-18" to='/quotes/list'>Go back</Link>
+              </div>
           }
           
           </LoadingOverlay>
