@@ -87,9 +87,9 @@ class InvoiceDetails extends Component {
 
             <div class="admin-view-invoice mt-4">
 
-                <div class="d-flex  justify-content-between header-sec">
+                <div class="d-flex align-items-center justify-content-between header-sec">
                     <div>
-                        <div class="header-title mb-4">Invoice No: <strong class="text-black">{invoice.invoiceNo}</strong></div>
+                        <div class="header-title mb-2">Invoice No: <strong class="text-black">{invoice.invoiceNo}</strong></div>
                         <div class="d-flex terms">
                             <span class="color-gray term"><span>Invoice Date:</span> <strong class="semibold text-black"> {invoice.date ? changeDateFormat(invoice.date) : 'N/A'}</strong></span>
                             <span class="color-gray term"><span>Due date:</span> <strong class="semibold text-black"> {invoice.dueDate ? changeDateFormat(invoice.dueDate) : 'N/A'}</strong></span>
@@ -107,7 +107,7 @@ class InvoiceDetails extends Component {
                 <div class="stepper">
                 <div className="recipient-from d-flex flex-column flex-sm-row justify-content-between ">
                     <div>
-                      <div className="font-15 semibold mb-2">Bill Form</div>
+                      <div className="font-15 semibold mb-2">Bill From</div>
                       {
                          fromAddress &&
                          <address>
@@ -135,7 +135,7 @@ class InvoiceDetails extends Component {
                     </div>
                   </div>
                
-                    <h3 class="font-28 semibold mb-3">List of items</h3>
+                    <h3 class="font-24 semibold mb-3">List of items</h3>
 
                     <div class="row">
                         <div class="col-sm-12">
