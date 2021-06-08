@@ -798,7 +798,7 @@ const addWithCurrentDate = (date, duration, dateType, dateFormat="Do MMM, YY") =
   return false
 }
 
-const deepCopy = (obj) => JSON.parse(JSON.stringify(obj))
+const copy = (obj) => JSON.parse(JSON.stringify(obj))
 
 export {
     capitalizeFirstLetter, replaceSpace, getDeviceID, shuffle, convertToDateTimeFromMiliSeconds, convertToDateFromMiliSeconds,
@@ -807,5 +807,5 @@ export {
     encodeQueryData, rfqStatus, rfqProductStatus, projectStatus, renderPaymentStatus, deliverableStatus, productAvailabilityStatus, _getKey,
     getToken, addImageSuffix, convertTimeToLocal, getTodayTimeDifference, getUrlParameter, formatProductTypeWithGroup, invoiceStatus, changeDateFormat,
     parseHtml, validateNumber, authUserInfo, STATUS_NOT_ALLOWED_FOR_SELECTION, isValidJSON, getImageExt, IMAGE_EXTS,
-    replaceUnderLine, isValidFile, parseDate, dateCompare, addWithCurrentDate, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN, deepCopy
+    replaceUnderLine, isValidFile, parseDate, dateCompare, addWithCurrentDate, STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN, copy
 };
