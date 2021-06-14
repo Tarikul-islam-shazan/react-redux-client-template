@@ -62,7 +62,7 @@
 	}
 	.designation-title {
 		h4 {
-			font-size: 12px;
+			font-size: 12px !important;
 			line-height: 16px;
 			color: #ABAFB8;
 			padding: 14px 14px 14px 24px;
@@ -132,6 +132,7 @@
 			padding: 8px 12px 8px 40px;
 			background: #F4F5F7;
 			border: none;
+			font-size: 14px;
 		}
 		.search {
 			>svg {
@@ -162,4 +163,26 @@
 			}
 		}
 	}
+}
+
+
+.more-people{
+	a{
+		height: 38px;
+		width: 38px;
+		display: inline-block;
+		text-align: center;
+		line-height: 34px;
+		background: #99A2AD;
+		border-radius: 50px;
+		color: #fff;
+		margin-left: -16px;
+		font-weight: 500;
+		font-family: 'Roboto', sans-serif;
+		border:2px solid #fff;
+		font-size: 12px;
+	}
+}
+.add-new-member{
+	margin-right: 20px;
 }

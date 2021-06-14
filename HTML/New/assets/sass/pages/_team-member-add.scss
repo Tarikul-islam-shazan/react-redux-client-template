@@ -62,7 +62,7 @@
 	}
 	.designation-title {
 		h4 {
-			font-size: 12px;
+			font-size: 12px !important;
 			line-height: 16px;
 			color: #ABAFB8;
 			padding: 14px 14px 14px 24px;
@@ -132,6 +132,7 @@
 			padding: 8px 12px 8px 40px;
 			background: #F4F5F7;
 			border: none;
+			font-size: 14px;
 		}
 		.search {
 			>svg {
@@ -141,13 +142,15 @@
 		}
 	}
 	&::-webkit-scrollbar {
-		width: 8px;
+		width: 6px;
+		
 	}
 	&::-webkit-scrollbar-track {
 		box-shadow: inset 0 0 5px grey;
 	}
 	&::-webkit-scrollbar-thumb {
-		background: #B5B5B5;
+		background: #C4C4C4;
+		height: 100px;
 	}
 }
 .added-members {
@@ -161,5 +164,15 @@
 				border: 0;
 			}
 		}
+	}
+}
+
+.add-new-member{
+	margin-right: 20px;
+}
+
+@media only screen and (max-width: 860px) and (min-width: 768px)  {
+	.add-people-popup{
+		width: 390px;
 	}
 }
