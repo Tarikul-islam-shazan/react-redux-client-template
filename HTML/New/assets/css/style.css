@@ -640,13 +640,14 @@ aside.left-panel.collapsed .navigation > ul > li > a .badge {
     display: block;
     line-height: 15px;
     margin-top: 5px;
+
 }
 
 .collapsed .navigation ul li a i {
     float: none;
 }
 
-/*** 2.3 Sub Menu ***/
+/* 2.3 Sub Menu */
 .navigation ul li ul {
     display: none;
     background-color: #272c35;
@@ -917,6 +918,10 @@ header .navbar-default .navbar-nav>li>a {
 .nav-tabs {
     padding-left: 60px;
 }
+
+/* ---------------------------------------------------
+  Team STYLE
+----------------------------------------------------- */
 
 /* ---------------------------------------------------
   CONTENT STYLE
@@ -2241,6 +2246,9 @@ a.btn_dash_menu a:hover
     button.btn_tour
     {
         display: none;
+    }
+    .team-section .single-person{
+        padding: 8px 8px;
     }
 }
 

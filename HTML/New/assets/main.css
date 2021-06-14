@@ -580,7 +580,7 @@ input.type {
   height: 60px;
   background: #EE761F 0% 0% no-repeat padding-box;
   border-radius: 5px;
-  box-shadow: 0px 3px 0px 6px rgba(238, 118, 31, 0.002);
+  box-shadow: 0px 3px 0px 6px rgba(238, 118, 31, 0.2);
   color: #fff;
   display: inline-block;
   vertical-align: middle;
@@ -2000,7 +2000,7 @@ ol.order-list {
   bottom: 80px;
   cursor: pointer;
   padding: 30px;
-  box-shadow: 0px 0px 40px 10px rgba(11, 28, 67, 0.15);
+  box-shadow: 0px 0px 40px 10px #0b1c43;
   border-radius: 100%; }
 
 .filter-products {
@@ -6603,10 +6603,10 @@ ul.existing-item li {
   position: absolute;
   top: 55px;
   right: 0;
-  padding: 30px;
+  padding: 0px;
   z-index: 9;
   background: #fff;
-  width: 445px;
+  width: 470px;
   display: none; }
   .add-people-popup.show {
     display: block; }
@@ -6768,6 +6768,126 @@ ul.existing-item li {
     border-left: 4px solid #472F91; }
     .bar-container .bar .item span {
       color: #EE761F; }
+
+/* Track */
+/* Handle */
+.add-people-popup.team-add-popup {
+  padding: 0; }
+
+.team-section {
+  max-width: 470px;
+  padding-bottom: 16px;
+  max-height: 550px;
+  overflow-y: auto; }
+  .team-section .no-padding {
+    padding: 0; }
+  .team-section .top-section .first-row {
+    padding: 28px 20px 0 24px;
+    background: #F0EDF7; }
+  .team-section .top-section .nav {
+    background: #F0EDF7;
+    padding: 24px 10px 0 24px; }
+  .team-section .top-section .container-fluid {
+    padding: 0 !important;
+    overflow: hidden; }
+  .team-section .top-section .row {
+    margin: 0; }
+  .team-section .top-section h3 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #21242B; }
+  .team-section .member-tabs {
+    padding-top: 20px; }
+  .team-section .nav a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    position: relative;
+    padding: 0 0 10px 0;
+    margin-right: 40px; }
+  .team-section .nav a.active::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #452C8E;
+    border-radius: 8px 8px 0 0;
+    left: 0;
+    bottom: 0px;
+    position: absolute; }
+  .team-section .designation-title h4 {
+    font-size: 12px;
+    line-height: 16px;
+    color: #ABAFB8;
+    padding: 14px 14px 14px 24px;
+    margin: 0;
+    font-weight: 400; }
+  .team-section .single-person {
+    padding: 8px 16px; }
+    .team-section .single-person:hover {
+      background: #F4F5F7; }
+      .team-section .single-person:hover .action a {
+        background: #ffffff;
+        border-radius: 4px;
+        color: #452C8E; }
+  .team-section .person-info {
+    width: 80%;
+    padding-left: 8px; }
+    .team-section .person-info P {
+      margin: 0; }
+  .team-section .action {
+    width: 20%; }
+    .team-section .action a {
+      font-size: 12px;
+      line-height: 16px;
+      color: #575264;
+      padding: 8px;
+      border-radius: 4px;
+      font-weight: 400; }
+  .team-section .details-info {
+    margin-left: 8px; }
+    .team-section .details-info p {
+      font-size: 14px;
+      line-height: 24px;
+      color: #21242B; }
+    .team-section .details-info .designation {
+      font-size: 12px;
+      line-height: 14px;
+      color: #6A7181;
+      border: 1px solid #DADCE1;
+      padding: 4px;
+      margin-left: 4px;
+      display: inline-block;
+      border-radius: 2px;
+      background: #FEFEFE; }
+    .team-section .details-info .email {
+      font-size: 12px;
+      line-height: 14px;
+      color: #A4A7AD;
+      margin: 2px 0; }
+  .team-section .member-search {
+    margin: 20px 16px 0 16px; }
+    .team-section .member-search input {
+      padding: 8px 12px 8px 40px;
+      background: #F4F5F7;
+      border: none; }
+    .team-section .member-search .search > svg {
+      top: 12px;
+      left: 14px; }
+  .team-section::-webkit-scrollbar {
+    width: 8px; }
+  .team-section::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; }
+  .team-section::-webkit-scrollbar-thumb {
+    background: #B5B5B5; }
+
+.added-members .team-section .top-section img {
+  width: auto;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  border: 0; }
 
 .stepper .form-group {
   margin-bottom: 25px; }
