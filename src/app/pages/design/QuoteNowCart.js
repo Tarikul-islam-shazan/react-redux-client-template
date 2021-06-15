@@ -18,7 +18,7 @@ import {QuoteNowMyProductCard} from './components/QuoteNowMyProductCard';
 import EmptyState from '../../commonComponents/EmptyState';
 
 import { LOADER_OVERLAY_BACKGROUND, LOADER_COLOR, LOADER_WIDTH, LOADER_TEXT, LOADER_POSITION, LOADER_TOP, LOADER_LEFT, LOADER_MARGIN_TOP, LOADER_MARGIN_LEFT, LOCAL_QUOTE_NOW_KEY } from '../../constant';
-import { _getKey, formatProductTypeWithGroup } from '../../services/Util';
+import { _getKey, formatProductTypeWithGroup, copy } from '../../services/Util';
 import {fetchGeneralSettingsData} from '../../actions';
 import {_storeData, _getProductForQuote, getTotal} from './actions';
 
@@ -151,14 +151,13 @@ class QuoteNowCart extends Component {
 
     onChangeQuantity = async(productIndex, colorIndex, name, value) => {
       let {cart} = this.state;
-      cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList =
-      cart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
+      let copiedCart = copy(cart)
+      copiedCart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map((pair) => {
           if (pair.code === name){
               pair.quantity = value
           }
-          return pair;
       })
-      await this.setState({cart});
+      await this.setState({cart: copiedCart});
       await this.updateCartGlobally();
     }
 
