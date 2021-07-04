@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
+import 'react-dates/initialize';
 import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
 import { addImageSuffix, changeDateFormat } from "../../../services/Util";
 import APPROVE_ICON from "../../../assets/images/icons/approve-icon.svg";

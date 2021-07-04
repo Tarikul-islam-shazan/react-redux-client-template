@@ -245,21 +245,24 @@ class MyOrder extends Component {
                             <div class="single-order-details">
                                 <div class="order-details-section">
                                 <div class="container-fluid">
-                                    <div class="row align-items-center py-3">
+                                <div class="row align-items-center py-3">
                                         <div class="col-6 pl-0">
                                             <div class="order-title">
                                                 <h3 class="">{ item.name }</h3> <span class="order-number">({ item.orderRefNumber })</span>
                                             
-                                                <span className = "brand-logo">
+
+                                            
+                                            </div>
+                                        </div>
+                                        <div className="col-2">
+                                              <span className = "brand-logo">
                                                 {
                                                   brandResponse.name &&
                                                   <img src={ brandLogoUrl } alt={ brandResponse.name }/>
                                                 } 
                                                 </span>
-                                            
-                                            </div>
                                         </div>
-                                        <div class="col-6 text-right pr-0">
+                                        <div class="col-4 text-right pr-0">
                                             <div class="delivery-status mr-5">
                                                 <button> Delivery in <span>{ item.timeLeft } days <img src={DELIVERY_ICON} alt="delivery-icon"/></span></button>
                                                 <div class="date-details delivery-date-details text-left">

@@ -70,6 +70,7 @@ const routes = {
   getNotifications: `${BASE_URL}/notification/all`,
   markNotificationRead: `${BASE_URL}/notification/mark-seen/`,
   getSimilarDesign: `${BASE_URL}/product/similar/`,
+  getProjectMembers: `${BASE_URL}/order/get-member-list/`,
 
   getProductCollectionList: `${BASE_URL}/collection/products/`,
   getProductsForRfq: `${BASE_URL}/product/for-rfq`,

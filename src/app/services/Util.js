@@ -2,7 +2,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import React, { Component } from 'react';
 
-const capitalizeFirstLetter = str => str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+const capitalizeFirstLetter = str => str?.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 
 const replaceSpace = str => str.split(' ').join('_');
 

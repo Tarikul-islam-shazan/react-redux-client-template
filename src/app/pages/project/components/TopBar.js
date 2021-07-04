@@ -88,7 +88,7 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
    };
 
    useEffect(() => {
-      setUserResponseList(details.projectMemberResponseList);
+      setUserResponseList(details?.projectMemberResponseList);
       getUsersByTypes();
       document.addEventListener("click", handleClickOutside, { capture: true });
       return () => {
@@ -204,7 +204,7 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
          <section className="order-details-section px-3" style={{ position: "relative" }}>
             <div className="container-fluid">
                <div className="row align-items-center py-3">
-                  <div className="col-3 pl-0">
+                  <div className="col-5 pl-0">
                      <div className="order-title">
                         <button>
                            <img
@@ -217,7 +217,7 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
                         <span className="order-number">({details.orderRefNumber})</span>
                      </div>
                   </div>
-                  <div className="col-4">
+                  <div className="col-3">
                      <span className="brand-logo">
                         {details.brandResponse && details.brandResponse.name && (
                            <img
@@ -231,7 +231,7 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
                      </span>
                      <span className="order-status">{capitalizeFirstLetter(details?.status)}</span>
                   </div>
-                  <div class="col-3 add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end flex-grow-1 flex-grow-1">
+                  <div class="col-2 px-0 add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end flex-grow-1 flex-grow-1">
                      <div className="position-relative">
                         <div class="added-members">
                            <div
