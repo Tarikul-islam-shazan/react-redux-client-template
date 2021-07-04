@@ -715,6 +715,7 @@ class CollectionDetails extends Component {
                         <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
                             <div class="added-members" ref={(node) => this.AddNewMemberModal = node}>
                                 <div id="AddNewMember" class={`add-new-member ${showAddMemberModal ? `show` : ``}`}>
+
                                     <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" onClick={() => this.setState({showAddMemberModal: !showAddMemberModal})}>
                                         <g id="Group_22785" data-name="Group 22785" transform="translate(-1471 -119)">
                                             <circle id="Ellipse_122" data-name="Ellipse 122" cx="18.5" cy="18.5" r="18.5" transform="translate(1472 120)" fill="#ebe8e8" stroke="#fff" stroke-width="2"/>
@@ -754,6 +755,9 @@ class CollectionDetails extends Component {
                                     )
                                   }) : <></>
                                 }
+                                <div className="more-people">
+                                  <a href="#">+5</a>
+                                </div>
 
                             </div>
                             <div class="d-flex mt-4 mt-sm-0">

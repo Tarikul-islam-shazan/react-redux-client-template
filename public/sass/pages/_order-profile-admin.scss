@@ -1,0 +1,412 @@
+.order-admin-profile {
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+   padding-bottom: 0 !important;
+   background: #ffffff;
+}
+ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+.order-admin-no-padding {
+   padding: 0;
+}
+.order-details-section {
+   border-bottom: 1px solid #dcdfe6;
+   margin-left: 16px;
+   h3 {
+      display: inline-block;
+      font-size: 18px;
+      color: #545454;
+      font-weight: 600;
+      margin: 0;
+   }
+   .delivery-status {
+      position: relative;
+   }
+   .order-number {
+      font-size: 14px;
+      line-height: 20px;
+      color: $primary;
+   }
+   .order-title {
+      button {
+         margin-left: -30px;
+         margin-right: 15px;
+      }
+      img{
+         position: relative;
+         top: -3px;
+      }
+   }
+   button {
+      border: none;
+      background: transparent;
+   }
+   .order-status {
+      padding: 4px 20px;
+      border: 1px solid $primary;
+      color: $primary;
+      border-radius: 100px;
+      margin-right: 20px;
+      font-size: 14px;
+   }
+   .add-buyer {
+      justify-content: flex-start !important;
+      .added-members{
+         padding: 0;
+      }
+   }
+}
+.order-style-info {
+   margin-left: 16px;
+   li {
+      padding: 0 20px;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 20px;
+      position: relative;
+      color: $gray_dark_01;
+      &::after {
+         content: "";
+         position: absolute;
+         height: 12px;
+         width: 1px;
+         background: #dddddd;
+         right: 0;
+         top: 50%;
+         transform: translateY(-50%);
+      }
+      &:last-child {
+         &::after {
+            display: none;
+         }
+      }
+      &:first-child {
+         padding-left: 0;
+      }
+   }
+   li.active {
+      color: #452c8e;
+      cursor: pointer;
+   }
+   button {
+      background: transparent;
+      border: none;
+      color: #452c8e;
+      font-size: 14px;
+   }
+}
+.order-style-tab-section {
+   li {
+      padding: 14px 28px;
+      display: flex;
+      cursor: pointer;
+   }
+   li.active {
+      border: 1px solid $gray_dark_04;
+      border-bottom: 0;
+      background: #FCFDFF;
+      .status {
+         display: block;
+      }
+      .task-name{
+         color: $gray_dark_01;
+      }
+   }
+   margin-left: 8px;
+   .status {
+      height: 24px;
+      width: 24px;
+      border: 2px solid #b3b6cb;
+      display: inline-block;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 26px;
+      text-align: center;
+      color: #b3b6cb;
+      display: none;
+   }
+   .status.progress {
+      border: none;
+   }
+   .done {
+      background: $primary;
+      position: relative;
+      border: 2px solid $primary;
+      color: #fff;
+      .task-value {
+         font-size: 0;
+      }
+      &::before {
+         content: "";
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         transform: translate(-50%, -50%);
+         color: #fff;
+         background: url(../../images/filled.png);
+         height: 14px;
+         width: 14px;
+         background-repeat: no-repeat;
+      }
+   }
+   .done.progress {
+      &::after {
+         border: 2px solid #452C8E;
+      }
+   }
+   .task-name {
+      margin-left: 10px;
+      font-size: 16px;
+      color: $gray_dark_02;
+   }
+   .task-tab-section{
+      margin-left: 24px;
+  }
+}
+.more-option-box {
+   width: 170px;
+   display: inline-block;
+   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
+   display: none;
+   a {
+      font-size: 14px;
+      line-height: 18px;
+      color: #6a7181;
+      padding: 12px 16px;
+      display: block;
+      &:hover {
+         background: #f4f6ff;
+         color: #21242b;
+      }
+   }
+}
+.delivery-status {
+   width: 200px;
+   float: right;
+   button {
+      border: 1px solid #dcdfe6;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: #908d8a;
+      font-size: 14px;
+      span {
+         color: #ee761f;
+         font-size: 14px;
+         font-weight: 600;
+      }
+      img{
+         width: 20px;
+      }
+   }
+}
+.delivery-date-details {
+   max-width: 220px;
+   width: 220px;
+   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
+   padding: 16px 18px !important;
+   position: absolute;
+   right: 0;
+   z-index: 99;
+   background: #ffffff;
+   border: 1px solid $gray_light_02;
+   margin-top: 4px;
+   display: none;
+
+   ul {
+      list-style: none;
+      display: flex;
+      margin: 15px 0;
+      max-width: 100% !important;
+   }
+   li {
+      font-size: 14px;
+      line-height: 20px;
+      color: #21242b;
+      &:first-child {
+         width: 85px;
+         color: #6a7181;
+      }
+   }
+   .time-spent {
+      font-weight: 600;
+   }
+   .spent-status {
+      border-top: 1px solid #dcdfe6;
+      li {
+         margin-top: 4px;
+      }
+   }
+}
+.delivery-status {
+   transition: ease-in-out 0.5s;
+   &:hover {
+      .delivery-date-details {
+         display: block;
+      }
+   }
+}
+.task-tab-content-section {
+   background: #FCFDFF;
+   padding: 30px 0 120px 4px;
+   .task-buttons {
+      display: inline-block;
+      margin-bottom: 28px;
+      button {
+         background: #ffffff;
+         border: 1px solid $gray_light_01;
+         padding: 10px 12px;
+         color: #6a7181;
+         margin-right: 12px;
+         height: 40px;
+         line-height: 20px;
+         font-size: 14px;
+         font-weight: 600;
+         
+            &:hover{
+               color:$primary;
+            }
+         
+         // &:last-child {
+         //    border: none;
+         //    border-top-right-radius: 4px;
+         //    border-bottom-right-radius: 4px;
+         // }
+      }
+      button.DayPickerKeyboardShortcuts_buttonReset{
+         display: none;
+      }
+      input {
+         border: none;
+         padding: 0;
+         height: 20px;
+         background: $white;
+         &:focus {
+            box-shadow: none !important;
+         }
+      }
+      .approved-data{
+         font-size: 12px;
+         color: $green;
+      }
+      .DateRangePicker {
+         border: 1px solid $gray_light_01;
+         height: 40px;
+         margin-right: 12px;
+         border-radius: 0;
+         top: -2px;
+         line-height: 28px;
+     }
+   }
+   .modal.task-conversation{
+      .modal-body{
+         height: auto;
+      }
+   } 
+}
+.DateInput_fang{
+   display: none;
+}
+.task-table-design.order-table-view {
+   padding: 0;
+}
+.order-table-view {
+   .task-full-column {
+      border-right: 1px solid $gray_dark_04;
+      // border-bottom: 1px solid #9b9b9b;
+      min-width: 180px;
+      width: 180px;
+   }
+   .pending {
+      background: #f8f5fe;
+      p {
+         color: #452d8f;
+      }
+   }
+   .not-applicable {
+      p {
+         color: $gray_dark_03;
+      }
+   }
+   .approved {
+      p {
+         color: #00c334;
+         img {
+            margin-left: 4px;
+            margin-bottom: 4px;
+         }
+      }
+   }
+   .expired {
+      background: #ffeaea;
+      p {
+         color: #f22b2b;
+      }
+   }
+   .due-count {
+      color: #f22b2b;
+      display: block;
+      font-size: 12px;
+   }
+
+   .one-full-column {
+      height: calc(100% - 80px);
+      min-height: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid $gray_dark_04;
+      border-bottom: 1px solid $gray_dark_04;
+
+      p {
+         font-size: 14px;
+         line-height: 20px;
+         margin: 0;
+      }
+   }
+}
+
+.style-wise-task-view {
+   .task-full-column {
+      border-bottom: 0px;
+   }
+   .task-right-section {
+      .one-box {
+         cursor: pointer;
+      }
+      .heading-box {
+         cursor: auto;
+      }
+   }
+}
+.no-task{
+   text-align: center;
+   padding-top: 120px;
+   color: #A4A7AD;
+   font-size: 16px;
+}
+.no-task.collection-no-list{
+   padding-top: 60px;
+}
+
+@media only screen and (max-width: 1440px) {
+   .delivery-status {
+      button {
+         span {
+            font-size: 14px;
+         }
+      }
+   }
+   .order-style-tab-section{
+      li{
+         padding: 15px;
+      }
+      .task-name{
+         font-size: 14px;
+      }
+   }
+}

@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+/HTML/New/assets/.sass-cache
+/public/.sass-cache
+/HTML/assets/.sass-cache
+/HTML/New/tc-no-comments/.sass-cache
 
 # testing
 /coverage
