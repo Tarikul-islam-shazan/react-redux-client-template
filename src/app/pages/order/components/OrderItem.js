@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { addImageSuffix } from '../../../services/Util';
 
 export const OrderItem = ({product, remove}) => {
+  console.log('~~~~~~~~~~!!!!!',product);
   let flag = 1;
   return (
     <div className="quote-req-list-container mt-3">

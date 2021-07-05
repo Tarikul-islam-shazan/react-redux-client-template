@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import LoadingOverlay from "react-loading-overlay";
 import Modal from "react-bootstrap/Modal";
-
+import useDocumentTitle from "../../hooks/useDocumentTitle ";
 import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
 import {
    LOADER_OVERLAY_BACKGROUND,
@@ -98,6 +98,15 @@ const MyProjectDetailsV2 = () => {
    const [selectedTask, setSelectedTask] = useState({});
    const { id } = useParams();
 
+   // const getTitleName = (data) => {
+   //    if (data) {
+   //       let title = data.name;
+   //       document.title = `Order profile ${
+   //          title ? title : ""
+   //       } Nitex - The easiest clothing manufacturing software`;
+   //    }
+   // };
+
    const getProjectDetails = async (orderId) => {
       setLoading(true);
       await Http.GET("getProjectDetails", +orderId)
@@ -155,6 +164,12 @@ const MyProjectDetailsV2 = () => {
       await setSelectedTask({ taskId, orderId: id });
       await setShowTaskDetailsModal(true);
    };
+
+   useDocumentTitle(
+      `Order profile ${
+         projectDetails.name ? projectDetails.name : ""
+      } Nitex - The easiest clothing manufacturing software`
+   );
 
    return (
       <LoadingOverlay
