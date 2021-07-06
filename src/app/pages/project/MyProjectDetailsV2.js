@@ -98,15 +98,6 @@ const MyProjectDetailsV2 = () => {
    const [selectedTask, setSelectedTask] = useState({});
    const { id } = useParams();
 
-   // const getTitleName = (data) => {
-   //    if (data) {
-   //       let title = data.name;
-   //       document.title = `Order profile ${
-   //          title ? title : ""
-   //       } Nitex - The easiest clothing manufacturing software`;
-   //    }
-   // };
-
    const getProjectDetails = async (orderId) => {
       setLoading(true);
       await Http.GET("getProjectDetails", +orderId)
