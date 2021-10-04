@@ -9917,10 +9917,10 @@ react-simple-image-viewer@^0.0.4:
   resolved "https://registry.yarnpkg.com/react-simple-image-viewer/-/react-simple-image-viewer-0.0.4.tgz#56c9fa8933e2063673d35d803f708481a11cd4d2"
   integrity sha512-dNONq81WYcqOPR43zPVjYnjLy9ccj8QiVyOa5z/EnjS6lIoCSebPW5W5arCJLHujz+Dq1vNvYNJjDPOtBxkZWw==
 
-react-slick@^0.27.13:
-  version "0.27.13"
-  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.27.13.tgz#1fdb60f56b1a08ffbafaa2251924845f1e192230"
-  integrity sha512-ZR6rjZEgvU5S/H3YCZtafvxouhwOnfx/FKEXCQJYVnw+DF5WbNhC3vorKhBJ1ebn3bKwnVeM6vBzGD5Oz/LAdQ==
+react-slick@^0.28.1:
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.28.1.tgz#12c18d991b59432df9c3757ba540a227b3fb85b9"
+  integrity sha512-JwRQXoWGJRbUTE7eZI1rGIHaXX/4YuwX6gn7ulfvUZ4vFDVQAA25HcsHSYaUiRCduTr6rskyIuyPMpuG6bbluw==
   dependencies:
     classnames "^2.2.5"
     enquire.js "^2.1.6"
