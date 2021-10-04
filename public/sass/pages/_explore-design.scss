@@ -652,6 +652,7 @@ table{
     overflow: visible !important;
     .item {
       padding: 15px;
+      width: 100%;
 
       @media (max-width: 767px) {
         padding: 0px;
