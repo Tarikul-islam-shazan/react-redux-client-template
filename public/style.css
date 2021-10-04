@@ -1041,7 +1041,7 @@ section.my-rfq-project tr td p .notify-badge {
     border: none;
 }
 .designs .card:hover {
-    box-shadow: 0px 8px 40px #0B1C4326;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .designs .card-body {
