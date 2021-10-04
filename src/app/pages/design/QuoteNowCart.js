@@ -346,8 +346,8 @@ class QuoteNowCart extends Component {
                                 />
                             </div>
                             <div className="quote-req-list-container mt-3">
-                                {cart
-                                    .map((product, i) => {
+                                {
+                                    cart.map((product, i) => {
                                         return (
                                             <QuoteNowProduct
                                                 key={i}
@@ -360,7 +360,8 @@ class QuoteNowCart extends Component {
                                             />
                                         );
                                     })
-                                    .reverse()}
+                                    // .reverse()
+                                }
                                 <button
                                     className="m-0 btn-brand  shadow float-right"
                                     onClick={this.submit}
