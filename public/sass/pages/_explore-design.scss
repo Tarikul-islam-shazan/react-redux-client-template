@@ -25,6 +25,9 @@
         }
       }
     }
+    .show-products{
+      padding-top: 12px;
+    }
   }
   @media (max-width:1024px) {
     padding:  0;
@@ -761,11 +764,12 @@ button.rec-arrow-right {
           }
         }
       }
+      
     }
   }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1366px) {
   .explore-design{
     .designs{
       .rec-carousel-wrapper{
