@@ -167,7 +167,6 @@ class ShareDesign extends Component {
             });
             Http.UPLOAD_WITH_PROGRESS("uploadDocument", data, "", this.showUploadProgress)
                 .then(({ data }) => {
-                    console.log("uploadDocument POST SUCCESS: ", data);
                     this.setState({
                         documentId: data.id,
                     });
@@ -186,11 +185,11 @@ class ShareDesign extends Component {
         console.log("uploadDocument progress amount: ", (data.loaded / data.total) * 100, doc);
     };
 
-    // removeColor = (index) => {
-    //     let { colors } = this.state;
-    //     colors = colors.filter((color, i) => i != index);
-    //     this.setState({ colors });
-    // };
+    removeColor = (id) => {
+        let { pantoneColorIdList } = this.state;
+        pantoneColorIdList = pantoneColorIdList.filter((color, i) => color != id);
+        this.setState({ pantoneColorIdList });
+    };
 
     addColor = (id) => {
         let { pantoneColorIdList } = this.state;
@@ -200,8 +199,6 @@ class ShareDesign extends Component {
 
     submit = () => {
         let validated = validateShareDesign(this.state);
-        console.log("REQQQQQ", validated);
-
         this.setState({
             errors: { ...this.state.errors, ...validated.errors },
             pantoneColorIdList: validated.errors.pantoneColorIdList
@@ -496,7 +493,10 @@ class ShareDesign extends Component {
                                         </div>
                                     </div>
 
-                                    <ColorDropdown addColor={this.addColor} />
+                                    <ColorDropdown
+                                        addColor={this.addColor}
+                                        removeColor={this.removeColor}
+                                    />
 
                                     <div className="col-lg-12">
                                         <div className="form-group">

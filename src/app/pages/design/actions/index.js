@@ -59,6 +59,7 @@ export const _getProductForQuote = async (productIds) => {
 };
 
 export const validateShareDesign = (state, withName = true, withProductDesign = true) => {
+    console.log("Dppppppppooollllllll===", state);
     let {
         name,
         productCategoryId,

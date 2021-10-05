@@ -3,9 +3,8 @@ import CustomDropdown from "../../../commonComponents/CustomDropdown";
 import Http from "../../../services/Http";
 import { toastSuccess, toastError } from "../../../commonComponents/Toast";
 
-const ColorDropdown = ({ addColor, removeColor }) => {
+const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
     const [colorName, setColorName] = useState("");
-    const [selectedColorList, setSelectedColorList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [allColorList, setAllColorLists] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +13,10 @@ const ColorDropdown = ({ addColor, removeColor }) => {
     const [designInfo, setDesignInfo] = useState({
         pantoneColorIdList: [],
     });
+
+    const [selectedColorList, setSelectedColorList] = useState([]);
+
+    console.log("DDDD=============", selectedColorList);
 
     const getColors = async (term = "") => {
         let params = `?page=0&size=20&search=${term}`;
@@ -31,6 +34,19 @@ const ColorDropdown = ({ addColor, removeColor }) => {
     useEffect(() => {
         getColors(searchColor);
     }, [searchColor]);
+
+    useEffect(() => {
+        setSelectedColorList(
+            colorData?.map((item) => {
+                return {
+                    id: item.id,
+                    value: item.name,
+                    code: item.code,
+                    hexCode: item.hexCode,
+                };
+            })
+        );
+    }, [colorData]);
 
     let colors = allColorList;
     colors = colors.map((item) => {
@@ -86,9 +102,9 @@ const ColorDropdown = ({ addColor, removeColor }) => {
                 isAddNew={false}
                 // onAddMore={() => setShowColorModal(true)}
             />
-            {errors.colorError && <p className="error">{errors.colorError}</p>}
+            {/* {errors.colorError && <p className="error">{errors.colorError}</p>} */}
 
-            {selectedColorList.length > 0 && (
+            {selectedColorList?.length > 0 && (
                 <CustomDropdown
                     type="colorList"
                     title="Color"
@@ -102,4 +118,4 @@ const ColorDropdown = ({ addColor, removeColor }) => {
     );
 };
 
-export default ColorDropdown;
+export default EditColorDropdown;
