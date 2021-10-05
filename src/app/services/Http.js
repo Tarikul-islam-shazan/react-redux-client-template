@@ -33,6 +33,7 @@ const routes = {
     getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
     getProductTypeWithGroupWithData: `${BASE_URL}/product-type/all-with-group-having-product`, // GET
     getColorType: `${BASE_URL}/color/all`, // GET
+    getAllColors: `${BASE_URL}/color/pantone/search`,
     getAccessoriesList: `${BASE_URL}/accessories/by-product-type/`, // GET
     getSizeTableData: `${BASE_URL}/sizes/get-size-table/`, // GET
     likeProduct: `${BASE_URL}/product/like/`, //post
@@ -121,12 +122,12 @@ const routes = {
     uploadDocument: `${BASE_URL}/doc/add`,
     uploadDocumentInProduct: `${BASE_URL}/product/doc/add/`,
     removeProductDocument: `${BASE_URL}/product/doc/`,
-    shareDesign: `${BASE_URL}/product/share-design`,
+    shareDesign: `${BASE_URL}/product/add`,
     getShareDesignDetails: `${BASE_URL}/product/share-design/`,
     updateDesignDetails: `${BASE_URL}/product/share-design/`,
     updateSizeTable: `${BASE_URL}/product/size/`,
     getDesignImages: `${BASE_URL}/product/doc/`,
-    getFabricTypes: `${BASE_URL}/fabric-type/all`,
+    getFabricTypes: `${BASE_URL}/material/fabric-type/all`,
     getDesignCategories: `${BASE_URL}/category/all`,
 
     getSettings: `${BASE_URL}/setting/get/`,
