@@ -75,10 +75,14 @@ body {
 			box-shadow: 0  0 15px 0 rgba(165, 162, 162, 0.2);
 		}
 		p {
-			color: #6A7181;
-			max-width: 250px;
+			color: #9AA1AF;
+			max-width: 230px;
 			font-size: 16px;
 			line-height: 20px;
+			white-space: nowrap;
+			width: 230px;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		a {
 			color: #6A7181;
@@ -97,8 +101,10 @@ body {
 	.style-info {
 		p {
 			font-weight: 400;
-			color: $gray_dark_01;
+			color: #21242B;
 			margin: 0;
+			width: 270px;
+			max-width: 270px;
 		}
 	}
 	.heading-row {
