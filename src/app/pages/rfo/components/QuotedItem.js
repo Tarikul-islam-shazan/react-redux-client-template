@@ -284,7 +284,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     <div className="features  d-flex flex-md-column">
                         <div className="info-item mt-0 mt-xl-2">
                             <label className="font-14 text-muted">Quantity</label>
-                            <h5 className="font-20 color-333">
+                            <h5 className="font-20 color-333 mb-0">
                                 {quote.quantity ? quote.quantity : "--"} units
                             </h5>
 
@@ -292,7 +292,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                         quote.colorWiseSizeQuantityPairList.length ? (
                             <div className="info-item d-flex position-relative color-wise-quantity-table">
                                 <div
-                                    className="sizes d-flex  align-items-center text-center mt-1 cursor-pointer"
+                                    className="sizes d-flex  align-items-center text-center cursor-pointer"
                                     onClick={() => setShowSizes(true)}
                                 >
                                     {/* {quote.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map(
@@ -306,12 +306,12 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                             );
                                         }
                                     )} */}
-                                    Details
+                                    <span className="table-details">Details</span>
                                 </div>
                                 {showSizes && (
                             <div className="quantity-table shadow-12dp">
                                 <div className="quantity-heading d-flex justify-content-between">
-                                    <h4 className="regular-16">Colorwise sizewise quantity</h4>
+                                    <h4 className="regular-16">Color-size wise quantity</h4>
                                     <a
                                         className="cursor-pointer"
                                         onClick={() => setShowSizes(false)}
@@ -330,8 +330,8 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                         </svg>
                                     </a>
                                 </div>
-                                <div className="style-info pb-3">
-                                    <p>{quote.name}</p>
+                                <div className="style-info">
+                                    <p className="mb-0">{quote.name}</p>
                                     <p>{quote.quantity} units</p>
                                 </div>
                                 <table>

@@ -2178,7 +2178,6 @@ button.btn_tour a {
 @media(min-width: 768px )
 {
     nav.navigation ul li:nth-child(2) {
-        border-bottom: 1px solid #CCC6D9;
         margin-top: 20px;
         padding-bottom: 0px;
         margin-top: 20px;

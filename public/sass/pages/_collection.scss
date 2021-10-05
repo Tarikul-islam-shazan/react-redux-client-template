@@ -262,7 +262,7 @@ ul.existing-item{
   position: absolute;
   top: 55px;
   right: 0;
-  padding: 0 !important;
+  padding: 0px !important;
   overflow: hidden !important;
   z-index: 9;
   background: #fff;
@@ -316,6 +316,12 @@ ul.existing-item{
       }
     }
   }
+}
+.explore-design{
+  .add-people-popup{
+    padding: 20px !important;
+  }
+  
 }
 .add-more-designs{
   .add-more {
