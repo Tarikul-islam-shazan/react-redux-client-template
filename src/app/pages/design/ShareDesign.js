@@ -11,7 +11,7 @@ import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
 import { toastSuccess, toastError } from "../../commonComponents/Toast";
 import { _storeData, validateShareDesign } from "./actions";
-
+import ColorDropdown from "./components/ColorDropdown";
 import { columns, fixedHeaders, LOADER_STYLE } from "../../constants";
 import { MeasurementTable } from "./components/MeasurementTable";
 import {
@@ -36,18 +36,12 @@ class ShareDesign extends Component {
         this.state = {
             name: "",
             fabricType: "",
-            fabricTypeId: "",
-            fabricDetails: "",
+            fabricCompositionDetails: "",
             productGroupId: "",
             tableJson: null,
             note: RichTextEditor.createEmptyValue(),
-            colors: [
-                {
-                    hexCode: "",
-                    name: "",
-                },
-            ],
-            documentIds: [],
+            pantoneColorIdList: [],
+            documentId: "",
             productDesignDoc: {},
             productTypeList: [],
             fabricTypeList: [],
@@ -55,8 +49,7 @@ class ShareDesign extends Component {
             errors: {
                 nameError: "",
                 fabricTypeError: "",
-                fabricTypeIdError: "",
-                fabricDetailsError: "",
+                fabricCompositionDetailsError: "",
                 productGroupIdError: "",
             },
         };
@@ -64,19 +57,6 @@ class ShareDesign extends Component {
 
     setPickerRef = (node, i) => {
         this["colorRef_" + i] = node;
-    };
-
-    handleClickOutside = (event) => {
-        let { colors } = this.state;
-        colors = colors.map((color, i) => {
-            if (this["colorRef_" + i] && !this["colorRef_" + i].contains(event.target)) {
-                color.showColorPickerModal = false;
-            }
-            return color;
-        });
-        this.setState({
-            colors,
-        });
     };
 
     componentDidMount = async () => {
@@ -189,7 +169,7 @@ class ShareDesign extends Component {
                 .then(({ data }) => {
                     console.log("uploadDocument POST SUCCESS: ", data);
                     this.setState({
-                        documentIds: [data.id],
+                        documentId: data.id,
                     });
                 })
                 .catch(({ response }) => {
@@ -206,26 +186,27 @@ class ShareDesign extends Component {
         console.log("uploadDocument progress amount: ", (data.loaded / data.total) * 100, doc);
     };
 
-    addColor = () => {
-        let { colors } = this.state;
-        colors.push({
-            hexCode: "",
-            name: "",
-        });
-        this.setState({ colors });
-    };
+    // removeColor = (index) => {
+    //     let { colors } = this.state;
+    //     colors = colors.filter((color, i) => i != index);
+    //     this.setState({ colors });
+    // };
 
-    removeColor = (index) => {
-        let { colors } = this.state;
-        colors = colors.filter((color, i) => i != index);
-        this.setState({ colors });
+    addColor = (id) => {
+        let { pantoneColorIdList } = this.state;
+        pantoneColorIdList.push(id);
+        this.setState({ pantoneColorIdList });
     };
 
     submit = () => {
         let validated = validateShareDesign(this.state);
+        console.log("REQQQQQ", validated);
+
         this.setState({
             errors: { ...this.state.errors, ...validated.errors },
-            colors: validated.errors.colors ? validated.errors.colors : this.state.colors,
+            pantoneColorIdList: validated.errors.pantoneColorIdList
+                ? validated.errors.pantoneColorIdList
+                : this.state.pantoneColorIdList,
         });
         if (validated.isValid) {
             Http.POST("shareDesign", validated.reqBody)
@@ -253,15 +234,13 @@ class ShareDesign extends Component {
     render() {
         let {
             name,
-            categoryId,
+            productCategoryId,
             fabricType,
-            fabricTypeId,
-            fabricDetails,
+            fabricCompositionDetails,
             productGroupId,
             tableJson,
             note,
-            colors,
-            documentIds,
+            documentId,
             productDesignDoc,
             productTypeList,
             fabricTypeList,
@@ -269,12 +248,11 @@ class ShareDesign extends Component {
         } = this.state;
         let {
             nameError,
-            categoryIdError,
+            productCategoryIdError,
             fabricTypeError,
-            fabricTypeIdError,
-            fabricDetailsError,
+            fabricCompositionDetailsError,
             productGroupIdError,
-            documentIdsError,
+            documentIdError,
         } = this.state.errors;
         return (
             <>
@@ -293,7 +271,7 @@ class ShareDesign extends Component {
                                     <div className="form-group">
                                         <div
                                             className={`uploader upload-design-image  mb-4 mb-sm-0 ${
-                                                documentIdsError ? `error2` : ``
+                                                documentIdError ? `error2` : ``
                                             }`}
                                         >
                                             {productDesignDoc && productDesignDoc.name ? (
@@ -308,7 +286,7 @@ class ShareDesign extends Component {
                                                         onClick={() =>
                                                             this.setState({
                                                                 productDesignDoc: {},
-                                                                documentIds: [],
+                                                                documentId: "",
                                                             })
                                                         }
                                                     >
@@ -367,8 +345,8 @@ class ShareDesign extends Component {
                                                 </>
                                             )}
                                         </div>
-                                        {documentIdsError ? (
-                                            <label className="error">{documentIdsError}</label>
+                                        {documentIdError ? (
+                                            <label className="error">{documentIdError}</label>
                                         ) : (
                                             <></>
                                         )}
@@ -404,10 +382,10 @@ class ShareDesign extends Component {
                                             <label for="">Design Category*</label>
                                             <select
                                                 className={`w-100 bg-gray-light border-0 ${
-                                                    categoryIdError ? `error2` : ``
+                                                    productCategoryIdError ? `error2` : ``
                                                 }`}
-                                                name="categoryId"
-                                                value={categoryId}
+                                                name="productCategoryId"
+                                                value={productCategoryId}
                                                 onClick={this.onChange}
                                             >
                                                 <option value="">Select category</option>
@@ -419,8 +397,10 @@ class ShareDesign extends Component {
                                                     );
                                                 })}
                                             </select>
-                                            {categoryIdError ? (
-                                                <label className="error">{categoryIdError}</label>
+                                            {productCategoryIdError ? (
+                                                <label className="error">
+                                                    {productCategoryIdError}
+                                                </label>
                                             ) : (
                                                 <></>
                                             )}
@@ -469,10 +449,10 @@ class ShareDesign extends Component {
                                             <label for="">Fabric type</label>
                                             <select
                                                 className={`w-100 bg-gray-light border-0 ${
-                                                    fabricTypeIdError ? `error2` : ``
+                                                    fabricTypeError ? `error2` : ``
                                                 }`}
-                                                name="fabricTypeId"
-                                                value={fabricTypeId}
+                                                name="fabricType"
+                                                value={fabricType}
                                                 onClick={this.onChange}
                                             >
                                                 <option value="">Select fabric type</option>
@@ -485,8 +465,8 @@ class ShareDesign extends Component {
                                                 })}
                                             </select>
                                             {/*<input type="text" placeholder="Fabric type" className="bg-gray-light border-0" name="fabricType" value={fabricType} onChange={this.onChange}/>*/}
-                                            {fabricTypeIdError ? (
-                                                <label className="error">{fabricTypeIdError}</label>
+                                            {fabricTypeError ? (
+                                                <label className="error">{fabricTypeError}</label>
                                             ) : (
                                                 <></>
                                             )}
@@ -500,15 +480,15 @@ class ShareDesign extends Component {
                                                 type="text"
                                                 placeholder="Enter fabric details"
                                                 className={`bg-gray-light border-0 ${
-                                                    fabricDetailsError ? `error2` : ``
+                                                    fabricCompositionDetailsError ? `error2` : ``
                                                 }`}
-                                                name="fabricDetails"
-                                                value={fabricDetails}
+                                                name="fabricCompositionDetails"
+                                                value={fabricCompositionDetails}
                                                 onChange={this.onChange}
                                             />
-                                            {fabricDetailsError ? (
+                                            {fabricCompositionDetailsError ? (
                                                 <label className="error">
-                                                    {fabricDetailsError}
+                                                    {fabricCompositionDetailsError}
                                                 </label>
                                             ) : (
                                                 <></>
@@ -516,47 +496,7 @@ class ShareDesign extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <table className="w-100 pick-color-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            <label>Color</label>
-                                                        </th>
-                                                        <th>
-                                                            <label>Color name</label>
-                                                        </th>
-                                                        <th className="text-right">
-                                                            <span
-                                                                className="brand-color font-18 semibold cursor-pointer"
-                                                                onClick={this.addColor}
-                                                            >
-                                                                +Add color
-                                                            </span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {colors.map((item, i) => {
-                                                        return (
-                                                            <ColorRowWithPicker
-                                                                setPickerRef={(node) =>
-                                                                    this.setPickerRef(node, i)
-                                                                }
-                                                                item={item}
-                                                                key={i}
-                                                                index={i}
-                                                                data={colors}
-                                                                onChangeColor={this.onChange}
-                                                                remove={this.removeColor}
-                                                            />
-                                                        );
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <ColorDropdown addColor={this.addColor} />
 
                                     <div className="col-lg-12">
                                         <div className="form-group">

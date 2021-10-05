@@ -61,15 +61,14 @@ export const _getProductForQuote = async (productIds) => {
 export const validateShareDesign = (state, withName = true, withProductDesign = true) => {
     let {
         name,
-        categoryId,
+        productCategoryId,
         fabricType,
-        fabricTypeId,
-        fabricDetails,
-        productTypeId,
+        fabricCompositionDetails,
+        productGroupId,
         tableJson,
         note,
-        colors,
-        documentIds,
+        pantoneColorIdList,
+        documentId,
         productDesignDoc,
     } = state;
     let errors = {};
@@ -84,69 +83,54 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         }
     }
 
-    if (!categoryId) {
-        errors.categoryIdError = "Category is required.";
+    if (!productCategoryId) {
+        errors.productCategoryIdError = "Category is required.";
         isValid = false;
     } else {
-        errors.categoryIdError = "";
+        errors.productCategoryIdError = "";
     }
 
-    if (!fabricTypeId) {
-        errors.fabricTypeIdError = "Fabric type is required.";
+    if (!fabricType) {
+        errors.fabricTypeError = "Fabric type is required.";
         isValid = false;
     } else {
-        errors.fabricTypeIdError = "";
+        errors.fabricTypeError = "";
     }
-    if (!fabricDetails) {
-        errors.fabricDetailsError = "Fabric details is required.";
+    if (!fabricCompositionDetails) {
+        errors.fabricCompositionDetailsError = "Fabric details is required.";
         isValid = false;
     } else {
-        errors.fabricDetailsError = "";
+        errors.fabricCompositionDetailsError = "";
     }
-    if (!productTypeId) {
-        errors.productTypeIdError = "Product type is required.";
+    if (!productGroupId) {
+        errors.productGroupIdError = "Product type is required.";
         isValid = false;
     } else {
-        errors.productTypeIdError = "";
-    }
-
-    if (withProductDesign && (!documentIds || !documentIds.length)) {
-        errors.documentIdsError = "Product design is required.";
-        isValid = false;
-    } else {
-        errors.documentIdsError = "";
+        errors.productGroupIdError = "";
     }
 
-    if (colors.length) {
-        errors.colors = colors.map((color) => {
-            if (!color.hexCode) {
-                isValid = false;
-                color.hexCodeError = "Required.";
-            } else {
-                color.hexCodeError = "";
-            }
+    if (withProductDesign && documentId === "") {
+        errors.documentIdError = "Product design is required.";
+        isValid = false;
+    } else {
+        errors.documentIdError = "";
+    }
 
-            if (!color.name) {
-                isValid = false;
-                color.nameError = "Required.";
-            } else {
-                color.nameError = "";
-            }
-            return color;
-        });
+    if (pantoneColorIdList.length === 0) {
+        isValid = false;
     }
 
     if (isValid) {
         reqBody = {
             // fabricType,
-            categoryId,
-            fabricTypeId, //need to make dynamic
-            fabricDetails,
-            productTypeId,
+            productCategoryId,
+            fabricType, //need to make dynamic
+            fabricCompositionDetails,
+            productGroupId,
             // tableJson, //need details
             note: note.toString("html"),
-            colors,
-            documentIds,
+            pantoneColorIdList,
+            documentId,
             isNitexProduct: false,
         };
         if (withName) {

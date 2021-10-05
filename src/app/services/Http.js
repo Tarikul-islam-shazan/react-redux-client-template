@@ -33,6 +33,7 @@ const routes = {
     getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
     getProductTypeWithGroupWithData: `${BASE_URL}/product-type/all-with-group-having-product`, // GET
     getColorType: `${BASE_URL}/color/all`, // GET
+    getAllColors: `${BASE_URL}/color/pantone/search`,
     getAccessoriesList: `${BASE_URL}/accessories/by-product-type/`, // GET
     getSizeTableData: `${BASE_URL}/sizes/get-size-table/`, // GET
     likeProduct: `${BASE_URL}/product/like/`, //post
