@@ -281,24 +281,18 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="features position-relative d-flex flex-md-column">
+                    <div className="features  d-flex flex-md-column">
                         <div className="info-item mt-0 mt-xl-2">
                             <label className="font-14 text-muted">Quantity</label>
                             <h5 className="font-20 color-333">
                                 {quote.quantity ? quote.quantity : "--"} units
                             </h5>
-                        </div>
 
-                        {quote.colorWiseSizeQuantityPairList &&
+                            {quote.colorWiseSizeQuantityPairList &&
                         quote.colorWiseSizeQuantityPairList.length ? (
-                            <div className="info-item d-flex">
-                                <div className="size">
-                                    <label className="text-center mb-0">
-                                        <span className="circle-color mr-3 opacity-0"></span>
-                                    </label>
-                                </div>
+                            <div className="info-item d-flex position-relative color-wise-quantity-table">
                                 <div
-                                    className="sizes d-flex  align-items-center text-center"
+                                    className="sizes d-flex  align-items-center text-center mt-1 cursor-pointer"
                                     onClick={() => setShowSizes(true)}
                                 >
                                     {/* {quote.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map(
@@ -314,12 +308,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     )} */}
                                     Details
                                 </div>
-                            </div>
-                        ) : (
-                            <></>
-                        )}
-
-                        {showSizes && (
+                                {showSizes && (
                             <div className="quantity-table shadow-12dp">
                                 <div className="quantity-heading d-flex justify-content-between">
                                     <h4 className="regular-16">Colorwise sizewise quantity</h4>
@@ -378,6 +367,15 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                 </table>
                             </div>
                         )}
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+                        </div>
+
+                        
+
+
 
                         {/* {
                 quote.colorWiseSizeQuantityPairList.map((color, i) => {
