@@ -364,7 +364,9 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                                     <td>
                                                         <span
                                                             className="color"
-                                                            style={{ background: color.hexCode }}
+                                                            style={{
+                                                                background: `${color.hexCode} none repeat scroll 0% 0%`,
+                                                            }}
                                                         ></span>
                                                     </td>
                                                     {color.sizeQuantityPairList.map((pair, j) => {
