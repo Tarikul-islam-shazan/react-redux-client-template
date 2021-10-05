@@ -155,8 +155,6 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         );
     };
 
-    console.log("DGGGGGGGGGGGGG===", quote);
-
     return (
         <div
             className={`quote-list mb-3 p-4 pl-5 d-flex justify-content-between align-items-center ${
