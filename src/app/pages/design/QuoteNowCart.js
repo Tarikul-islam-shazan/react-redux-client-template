@@ -176,10 +176,16 @@ class QuoteNowCart extends Component {
         await this.updateCartGlobally();
     };
 
+    updateCart = async (cart) => {
+        await this.setState({ cart });
+        await this.updateCartGlobally();
+    };
+
     removeFromCart = async (index) => {
         let { cart } = this.state;
-        cart = cart.filter((product, i) => i !== index);
-        this.updateCart(cart);
+        let newCart = [...cart];
+        newCart = newCart.filter((product, i) => i !== index);
+        this.updateCart(newCart);
     };
 
     updateCartGlobally = async () => {
@@ -219,6 +225,7 @@ class QuoteNowCart extends Component {
     };
 
     validate = () => {
+        this.setState({ loading: false });
         let { cart, title } = this.state;
         let flag = true;
         cart = cart.map((product, i) => {
@@ -248,11 +255,6 @@ class QuoteNowCart extends Component {
         let { cart } = this.state;
         cart = [];
         this.updateCart(cart);
-    };
-
-    updateCart = async (cart) => {
-        await this.setState({ cart });
-        await this.updateCartGlobally();
     };
 
     submit = async () => {

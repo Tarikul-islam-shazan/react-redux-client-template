@@ -15,6 +15,7 @@ export const QuoteNowProduct = ({
 
     return (
         <div className="quote-list mb-3 d-flex justify-content-between align-items-start">
+            {/* <div className="dlt" onClick={() => remove(`${index}-${product.id}`)}> */}
             <div className="dlt" onClick={() => remove(index)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                     <g id="Group_11204" data-name="Group 11204" transform="translate(-1233 -282)">
@@ -108,9 +109,7 @@ export const QuoteNowProduct = ({
                     <div className="features add-quote-list d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
                             <label className="font-14 text-muted">Product category</label>
-                            <h5 className="font-18 semibold">
-                                {product.productType}, {product.productGroup}
-                            </h5>
+                            <h5 className="font-18 semibold">{product.productGroup}</h5>
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">MOQ</label>
@@ -178,7 +177,7 @@ export const QuoteNowProduct = ({
                                         <input
                                             type="text"
                                             placeholder="00"
-                                            value={pair.quantity}
+                                            value={pair.quantity ? pair.quantity : ""}
                                             onChange={(e) =>
                                                 onChange(
                                                     index,
