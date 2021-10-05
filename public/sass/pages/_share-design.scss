@@ -759,15 +759,14 @@ label[aria-expanded="true"]{
 
 .click-box{
   width: 100%;
-  height: 36px;
+  height: 52px;
   border-radius: 2px;
-  box-shadow: inset 0 0 0px 1px #C7CED4 !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0 !important;
-  background: $white;
+  background: #F4F5F7;
   p{
       margin: 0;
       color: $gray_dark_02;
@@ -791,14 +790,14 @@ label[aria-expanded="true"]{
   display: inline-block;
 }
 .dropdown-box{
-  width: 100%;
+  width: calc(100% - 30px);
   padding:4px 0;
   border: 1px solid $gray_light_01;
   border-radius: 4px;
   max-width: 697px;
   max-height: 360px;
   overflow-y: auto;
-  z-index: 1;
+  z-index: 99;
   padding-top: 0 !important;
   box-shadow: none;
   .search-filter{
@@ -848,5 +847,62 @@ label[aria-expanded="true"]{
               color:$gray_dark_02;
           }
       }
+  }
+}
+
+.select-component{
+  .form-control:disabled{
+    background: #F4F5F7;
+  }
+  .input-group{
+    .with-color-element {
+      button {
+        .color {
+          width: 24px;
+          height: 24px;
+          border-radius: 100px;
+          display: inline-block;
+          margin-right: 12px;
+          position: relative;
+          top: 5px;
+      }
+      &.btn-outline-secondary{
+         background: #F4F5F7;
+         border: none;
+         border-top-right-radius: 0 !important;
+         border-bottom-right-radius: 0 !important;
+         z-index: 0;
+         padding-top: 4px;
+         font-size: 16px;
+         &:hover{
+           background:#F4F5F7 !important;
+         }
+      }
+      &:focus{
+        background:#F4F5F7 !important;
+      }
+      }
+    }
+    input{
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+    .action-icon{
+      padding: 12px;
+    }
+  }
+  .search-filter{
+    .with-icon{
+      position: relative;
+    
+    input{
+      width: 100%;
+    }
+    span.right-icon{
+      position: absolute;
+      top: 6px;
+      right: 15px;
+    }
+  }
   }
 }
