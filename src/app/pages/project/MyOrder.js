@@ -186,13 +186,11 @@ class MyOrder extends Component {
             spinner
             text={LOADER_TEXT}
          >
-            <section class="buyer-tasks-section">
+            <div className="top-header">
                <div class="main-task-heading">
-                  <h2>Order list</h2>
+                     <h2>Order list</h2>
                </div>
-
-               <div class="task-tab-section order-tab">
-                  <div class="tabs">
+               <div class="tabs">
                      <ul class="order-tabs d-flex pb-4">
                         <li
                            class={this.state.activeTab === "Running Order" ? "active" : ""}
@@ -214,7 +212,10 @@ class MyOrder extends Component {
                         </li>
                      </ul>
                   </div>
-
+            </div>
+            <section class="buyer-tasks-section">
+               
+               <div class="task-tab-section order-tab">
                   <div class="all-orders">
                      {projectList.length ? (
                         projectList.map((item, i) => {
