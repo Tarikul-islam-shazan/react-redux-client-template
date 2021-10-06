@@ -59,7 +59,6 @@ export const _getProductForQuote = async (productIds) => {
 };
 
 export const validateShareDesign = (state, withName = true, withProductDesign = true) => {
-    console.log("Dppppppppooollllllll===", state);
     let {
         name,
         productCategoryId,
@@ -69,9 +68,11 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         tableJson,
         note,
         pantoneColorIdList,
+        colorEditRequestList,
         documentId,
         productDesignDoc,
     } = state;
+
     let errors = {};
     let reqBody = {};
     let isValid = true;
@@ -117,8 +118,11 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         errors.documentIdError = "";
     }
 
-    if (pantoneColorIdList.length === 0) {
+    if (pantoneColorIdList?.length === 0 || colorEditRequestList?.length === 0) {
+        errors.colorListError = "Color is required";
         isValid = false;
+    } else {
+        errors.colorListError = "";
     }
 
     if (isValid) {
@@ -131,6 +135,7 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
             // tableJson, //need details
             note: note.toString("html"),
             pantoneColorIdList,
+            colorEditRequestList,
             documentId,
             isNitexProduct: false,
         };
@@ -145,17 +150,6 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         reqBody,
     };
 };
-
-// export const _storeData = (key,value) => {
-// 	console.log(key,value)
-//     dispatch({
-//         type: "SET_DATA",
-//         payload: {
-// 					key:key,
-// 					data:value
-// 				}
-//     });
-// };
 
 export const getTotal = (sizeQuantityPairList) => {
     let total = 0;

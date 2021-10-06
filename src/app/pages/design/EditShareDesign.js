@@ -67,26 +67,6 @@ class EditShareDesign extends Component {
         console.log("setPickerRef", node, i);
     };
 
-    //  handleClickOutside = (event) => {
-    //      let { designDetails } = this.state;
-    //      if (designDetails.colors) {
-    //          designDetails.colors = designDetails.colors.map((color, i) => {
-    //              if (
-    //                  this["colorRef_" + i] &&
-    //                  !this["colorRef_" + i].contains(event.target) &&
-    //                  this["colorRef_mbl_" + i] &&
-    //                  !this["colorRef_mbl_" + i].contains(event.target)
-    //              ) {
-    //                  color.showColorPickerModal = false;
-    //              }
-    //              return color;
-    //          });
-    //          this.setState({
-    //              designDetails,
-    //          });
-    //      }
-    //  };
-
     getTitleName = () => {
         let { designDetails } = this.state;
         if (designDetails) {
@@ -118,11 +98,24 @@ class EditShareDesign extends Component {
     getDesignDetails = async (id) => {
         await Http.GET("getShareDesignDetails", id)
             .then(({ data }) => {
-                console.log("getShareDesignDetails SUCCESS========: ", data);
                 if (data) {
                     data.note = data.note
                         ? RichTextEditor.createValueFromString(data.note, "html")
                         : RichTextEditor.createEmptyValue();
+                    data.productCategoryId = data.categoryResponse ? data.categoryResponse.id : "";
+                    data.productGroupId = data.marketResponse ? data.marketResponse.id : "";
+                    data.colorEditRequestList = data.colorResponseList
+                        ? data.colorResponseList.map((item) => {
+                              return {
+                                  id: item.id,
+                                  value: item.name,
+                                  code: item.code,
+                                  hexCode: item.hexCode,
+                                  colorId: item.id,
+                              };
+                          })
+                        : [];
+
                     this.setState({ designDetails: data });
                 }
             })
@@ -161,41 +154,9 @@ class EditShareDesign extends Component {
     getProductTypes = async () => {
         await Http.GET("getProductTypeWithGroup")
             .then(({ data }) => {
-                let arr = [];
-                if (data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
-                        let obj = {
-                            groupId: 0,
-                            groupName: "",
-                            types: [],
-                        };
-                        if (i == 0) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[0] = obj;
-                            continue;
-                        }
-                        let flag = true;
-                        for (let j = 0; j < arr.length; j++) {
-                            if (data[i].productGroup.id == arr[j].groupId) {
-                                arr[j].types[arr[j].types.length] = data[i];
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[arr.length] = obj;
-                        }
-                    }
-                    this.setState({
-                        productTypeList: arr,
-                    });
-                }
-                loadjs(["/js/script.js"]);
+                this.setState({
+                    productTypeList: data,
+                });
             })
             .catch((response) => {});
     };
@@ -248,40 +209,24 @@ class EditShareDesign extends Component {
         });
     };
 
-    //  addColor = () => {
-    //      let { designDetails } = this.state;
-    //      if (designDetails.colors) {
-    //          designDetails.colors.push({
-    //              hexCode: "",
-    //              name: "",
-    //          });
-    //      } else {
-    //          designDetails.colors = [
-    //              {
-    //                  hexCode: "",
-    //                  name: "",
-    //              },
-    //          ];
-    //      }
-    //      this.setState({ designDetails });
-    //  };
+    removeColor = (item) => {
+        let { designDetails } = this.state;
 
-    //  removeColor = (index) => {
-    //      let { designDetails } = this.state;
-    //      designDetails.colors = designDetails.colors.filter((color, i) => i != index);
-    //      this.setState({ designDetails });
-    //  };
-
-    removeColor = (id) => {
-        let { pantoneColorIdList } = this.state;
-        pantoneColorIdList = pantoneColorIdList.filter((color, i) => color != id);
-        this.setState({ pantoneColorIdList });
+        if (designDetails.colorEditRequestList) {
+            designDetails.colorEditRequestList = designDetails.colorEditRequestList.filter(
+                (color, i) => color.id !== item.id
+            );
+        }
+        this.setState({ designDetails });
     };
 
-    addColor = (id) => {
-        let { pantoneColorIdList } = this.state;
-        pantoneColorIdList.push(id);
-        this.setState({ pantoneColorIdList });
+    addColor = (item) => {
+        let { designDetails } = this.state;
+        if (designDetails.colorEditRequestList) {
+            designDetails.colorEditRequestList.push(item);
+        }
+
+        this.setState({ designDetails });
     };
 
     onFileSelect = async (e, docType) => {
@@ -437,13 +382,9 @@ class EditShareDesign extends Component {
             validated = validateShareDesign(designDetails, true, false);
         } else if (sectionName === "editColorAndFabrication") {
             validated = validateShareDesign(designDetails, false, false);
-            // designDetails.colors = validated.errors.colors
-            //     ? validated.errors.colors
-            //     : designDetails.colors;
-
-            designDetails.pantoneColorIdList = validated.errors.pantoneColorIdList
-                ? validated.errors.pantoneColorIdList
-                : designDetails.pantoneColorIdList;
+            designDetails.colorEditRequestList = validated.errors.colorEditRequestList
+                ? validated.errors.colorEditRequestList
+                : designDetails.colorEditRequestList;
         }
 
         this.setState({
@@ -452,10 +393,11 @@ class EditShareDesign extends Component {
         });
 
         if (validated.isValid) {
+            validated.reqBody.id = productId;
             Http.PUT("updateDesignDetails", validated.reqBody, productId)
                 .then(({ data }) => {
-                    console.log("uploadDocument POST SUCCESS: ", data);
                     if (data.success) {
+                        this.getDesignDetails(productId);
                         toastSuccess("Updated successfully.");
                         this.toggleFlag(sectionName);
                     }
