@@ -20,7 +20,8 @@
 // 4. Layout-related sections
 @import
 'layout/header',
-'layout/footer';
+'layout/footer',
+'layout/filter-layout';
 
 // 5. Components
 @import
@@ -49,7 +50,8 @@
 'pages/circular-progress-bar',
 'pages/project-planning',
 'pages/skleton',
-'pages/task-conversation';
+'pages/task-conversation',
+'pages/add-new-design';
 
 // 7. Themes
 @import

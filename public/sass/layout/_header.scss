@@ -206,3 +206,13 @@ button#sidebarToggleTop {
         }
     }
 }
+
+.top-header{
+    position: fixed;
+    width: 100%;
+    background: #FCFDFF;
+    padding: 16px 16px 0 16px;
+    margin-top: -20px;
+    margin-left: -16px;
+    z-index: 99;
+}

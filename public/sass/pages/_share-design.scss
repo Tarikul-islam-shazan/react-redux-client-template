@@ -343,9 +343,9 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
     background: #F1F1F1;
     padding: 20px;
     position: relative;
-    @media (max-width: 1440px) {
-      width: 240px;
-    }
+    // @media (max-width: 1440px) {
+    //   width: 240px;
+    // }
     label, span{
       font-size: 18px;
       @media (max-width: 1440px) {
@@ -760,7 +760,7 @@ label[aria-expanded="true"]{
 .click-box{
   width: 100%;
   height: 52px;
-  border-radius: 2px;
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -845,6 +845,7 @@ label[aria-expanded="true"]{
           }
           .regular-14{
               color:$gray_dark_02;
+              font-size: 14px;
           }
       }
   }
@@ -864,7 +865,7 @@ label[aria-expanded="true"]{
           display: inline-block;
           margin-right: 12px;
           position: relative;
-          top: 5px;
+          top: 7px;
       }
       &.btn-outline-secondary{
          background: #F4F5F7;
@@ -904,5 +905,79 @@ label[aria-expanded="true"]{
       right: 15px;
     }
   }
+  }
+}
+
+.product-img-and-info{
+  .form-group{
+    .col-md-12{
+      &.mb-3{
+        .click-box{
+          p{
+            font-size: 14px;
+          }
+        }
+        padding: 0;
+        .dropdown-box{
+          width: 100%;
+          .one-half{
+            span.regular-14{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .select-component{
+    .input-group {
+      .with-color-element {
+        button{
+          &.btn-outline-secondary{
+            font-size: 14px;
+            padding: 4px 20px 11px  12px;
+          }
+        }
+      }
+      input{
+        padding: 0;
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 1440px){
+.product-img-and-info{
+  .select-component{
+    .input-group {
+      .with-color-element {
+        button {
+          .color {
+            width: 20px;
+            height: 20px;
+            margin-right: 0px;
+            top: 7px;
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+@media (max-width: 1366px) {
+  .click-box{
+    height: 46px;
+  }
+  .select-component{
+    .input-group {
+      .with-color-element {
+        button{
+          &.btn-outline-secondary{
+            height: 46px;
+          }
+        }
+      }
+    }
   }
 }

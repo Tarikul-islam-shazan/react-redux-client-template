@@ -1,10 +1,10 @@
-.buyer-tasks-section{
+.top-header{
     h2{
         font-size: 24px;
         line-height: 32px;
         font-weight: 600;
         color: $gray_dark_01;
-        padding-bottom: 15px;
+        padding-bottom: 10px;
     }
     .order-tabs{
         li{
@@ -22,7 +22,9 @@
         }
     }
 }
+
 .all-orders {
+    padding-top: 110px;
 	.order-images {
         width: 168px;
         flex-wrap: wrap;
