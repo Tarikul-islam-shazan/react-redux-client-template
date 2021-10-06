@@ -130,6 +130,9 @@ const routes = {
     getFabricTypes: `${BASE_URL}/material/fabric-type/all`,
     getDesignCategories: `${BASE_URL}/category/all`,
 
+    getDocumentResponse: `${BASE_URL}/product/groupwise-doc/`,
+    addNewGroupDocument: `${BASE_URL}/product/document-group/add`,
+
     getSettings: `${BASE_URL}/setting/get/`,
 };
 

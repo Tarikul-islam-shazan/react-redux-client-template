@@ -130,8 +130,10 @@ class EditShareDesign extends Component {
             });
     };
 
+    //getDesignImages
+
     getDesignDocuments = async (id) => {
-        await Http.GET("getDesignImages", id)
+        await Http.GET("getDocumentResponse", id)
             .then(({ data }) => {
                 console.log("getDesignImages SUCCESS: ", data);
                 if (data) {
@@ -229,20 +231,21 @@ class EditShareDesign extends Component {
         this.setState({ designDetails });
     };
 
-    onFileSelect = async (e, docType) => {
+    onFileSelect = async (e, docType, documentGroup) => {
         let files = Array.from(e.target.files);
-        if (files.length) {
-            this.setState({
-                showProgressModal: true,
-            });
-        }
+        //   if (files.length) {
+        //       this.setState({
+        //           showProgressModal: true,
+        //       });
+        //   }
         await files.map((item) => {
             let data = {
                 name: item.name,
                 docMimeType: item.type,
                 documentType: docType,
-                print: false,
+                documentGroup,
                 base64Str: "",
+                productId: this.props.match.params.id,
             };
             let reader = new FileReader();
             reader.readAsDataURL(item);
@@ -258,59 +261,97 @@ class EditShareDesign extends Component {
 
     uploadFile = async (doc) => {
         let id = this.props.match.params.id;
-        let { uploadInProgressDocs, designDocuments } = this.state;
-        uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
-        await this.setState({
-            uploadInProgressDocs,
-        });
-        Http.UPLOAD_WITH_PROGRESS("uploadDocumentInProduct", doc, id, this.showUploadProgress)
+        //   let { uploadInProgressDocs, designDocuments } = this.state;
+        //   uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
+        //   await this.setState({
+        //       uploadInProgressDocs,
+        //   });
+        await Http.POST("addNewGroupDocument", doc)
             .then(({ data }) => {
                 console.log("uploadDocument POST SUCCESS: ", data);
                 if (data.id) {
-                    let images = [];
-                    if (designDocuments[doc.documentType]) {
-                        images = designDocuments[doc.documentType];
-                        if (
-                            doc.documentType === "PRODUCT_DESIGN" &&
-                            designDocuments.PRODUCT_DESIGN.length
-                        ) {
-                            this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
-                            images = [];
-                        }
-                    }
-
-                    images = [data.payload, ...images];
-
-                    designDocuments[doc.documentType] = images;
-                    uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
-
-                    this.setState({
-                        uploadInProgressDocs,
-                        designDocuments,
-                    });
-                } else {
-                    uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-                    this.setState({
-                        uploadInProgressDocs,
-                    });
+                    toastSuccess(data.message);
+                    this.getDesignDocuments(id);
+                    //   let images = [];
+                    //   if (designDocuments[doc.documentType]) {
+                    //       images = designDocuments[doc.documentType];
+                    //       if (
+                    //           doc.documentType === "PRODUCT_DESIGN" &&
+                    //           designDocuments.PRODUCT_DESIGN.length
+                    //       ) {
+                    //           this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
+                    //           images = [];
+                    //       }
+                    //   }
+                    //   images = [data.payload, ...images];
+                    //   designDocuments[doc.documentType] = images;
+                    //   uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
+                    //   this.setState({
+                    //       uploadInProgressDocs,
+                    //       designDocuments,
+                    //   });
                 }
             })
             .catch(({ response }) => {
                 console.log("uploadDocument ERROR: ", response);
-                uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-                this.setState({
-                    uploadInProgressDocs,
-                });
             });
     };
 
-    showUploadProgress = (data, doc) => {
-        let { uploadInProgressDocs } = this.state;
-        uploadInProgressDocs[doc.name].progress = (data.loaded / data.total) * 100;
-        this.setState({
-            uploadInProgressDocs,
-        });
-    };
+    //  uploadFile = async (doc) => {
+    //      let id = this.props.match.params.id;
+    //      let { uploadInProgressDocs, designDocuments } = this.state;
+    //      uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
+    //      await this.setState({
+    //          uploadInProgressDocs,
+    //      });
+    //      Http.UPLOAD_WITH_PROGRESS("uploadDocumentInProduct", doc, id, this.showUploadProgress)
+    //          .then(({ data }) => {
+    //              console.log("uploadDocument POST SUCCESS: ", data);
+    //              if (data.id) {
+    //                  let images = [];
+    //                  if (designDocuments[doc.documentType]) {
+    //                      images = designDocuments[doc.documentType];
+    //                      if (
+    //                          doc.documentType === "PRODUCT_DESIGN" &&
+    //                          designDocuments.PRODUCT_DESIGN.length
+    //                      ) {
+    //                          this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
+    //                          images = [];
+    //                      }
+    //                  }
+
+    //                  images = [data.payload, ...images];
+
+    //                  designDocuments[doc.documentType] = images;
+    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
+
+    //                  this.setState({
+    //                      uploadInProgressDocs,
+    //                      designDocuments,
+    //                  });
+    //              } else {
+    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
+    //                  this.setState({
+    //                      uploadInProgressDocs,
+    //                  });
+    //              }
+    //          })
+    //          .catch(({ response }) => {
+    //              console.log("uploadDocument ERROR: ", response);
+    //              uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
+    //              this.setState({
+    //                  uploadInProgressDocs,
+    //              });
+    //          });
+    //  };
+
+    //  showUploadProgress = (data, doc) => {
+    //      let { uploadInProgressDocs } = this.state;
+    //      uploadInProgressDocs[doc.name].progress = (data.loaded / data.total) * 100;
+    //      this.setState({
+    //          uploadInProgressDocs,
+    //      });
+    //  };
 
     onFileRemove = (deletedDoc) => {
         let productId = this.props.match.params.id;
@@ -458,6 +499,8 @@ class EditShareDesign extends Component {
             errors,
         } = this.state;
 
+        console.log("RRR===TTTTTTTT===--", designDocuments);
+
         return (
             <>
                 <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
@@ -569,6 +612,23 @@ class EditShareDesign extends Component {
                             onChange={this.onChange}
                             onSubmit={this.updateDetails}
                             classes="product-type item d-block d-xl-none"
+                        />
+
+                        <DocumentHandler
+                            data={
+                                designDocuments.physicalSampleResponse
+                                    ? designDocuments.physicalSampleResponse.otherDocumentList
+                                    : []
+                            }
+                            title="Physical sample"
+                            name="REFERENCE_IMAGE"
+                            classes="upload-a-file"
+                            visibleDocType={visibleDocType}
+                            setVisibleDocType={this.setVisibleDocType}
+                            onFileSelect={(e) =>
+                                this.onFileSelect(e, e.target.name, "PHYSICAL_SAMPLE")
+                            }
+                            onFileRemove={this.onFileRemove}
                         />
 
                         <DocumentHandler
