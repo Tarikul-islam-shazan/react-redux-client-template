@@ -75,40 +75,9 @@ class ShareDesign extends Component {
     getProductTypes = async () => {
         await Http.GET("getProductTypeWithGroup")
             .then(({ data }) => {
-                let arr = [];
-                if (data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
-                        let obj = {
-                            groupId: 0,
-                            groupName: "",
-                            types: [],
-                        };
-                        if (i == 0) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[0] = obj;
-                            continue;
-                        }
-                        let flag = true;
-                        for (let j = 0; j < arr.length; j++) {
-                            if (data[i].productGroup.id == arr[j].groupId) {
-                                arr[j].types[arr[j].types.length] = data[i];
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[arr.length] = obj;
-                        }
-                    }
-                    this.setState({
-                        productTypeList: arr,
-                    });
-                }
+                this.setState({
+                    productTypeList: data,
+                });
             })
             .catch((response) => {});
     };
@@ -251,6 +220,7 @@ class ShareDesign extends Component {
             productGroupIdError,
             documentIdError,
         } = this.state.errors;
+
         return (
             <>
                 <div>
@@ -415,22 +385,11 @@ class ShareDesign extends Component {
                                                 onClick={this.onChange}
                                             >
                                                 <option value="">Select</option>
-                                                {productTypeList.map((item, i) => {
-                                                    let res = [];
-                                                    res.push(
-                                                        <option key={i} value="" disabled>
-                                                            {item.groupName}
-                                                        </option>
-                                                    );
-                                                    item.types.map((item2, j) => {
-                                                        res.push(
-                                                            <option key={j + 1000} value={item2.id}>
-                                                                {item2.name}
-                                                            </option>
-                                                        );
-                                                    });
-                                                    return res;
-                                                })}
+                                                {productTypeList.map((item, i) => (
+                                                    <option value={item.id} key={item.id}>
+                                                        {item.name}
+                                                    </option>
+                                                ))}
                                             </select>
                                             {productGroupIdError ? (
                                                 <label className="error">

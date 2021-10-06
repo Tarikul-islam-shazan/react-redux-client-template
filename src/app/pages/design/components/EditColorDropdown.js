@@ -11,13 +11,20 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
     const [searchColor, setSearchColor] = useState("");
     const [errors, setErrors] = useState({});
     const [designInfo, setDesignInfo] = useState({
-        pantoneColorIdList: [],
+        pantoneColorIdList: colorData
+            ? colorData.map((item) => {
+                  return {
+                      id: item.id,
+                      value: item.name,
+                      code: item.code,
+                      hexCode: item.hexCode,
+                      colorId: item.id,
+                  };
+              })
+            : [],
     });
 
     const [selectedColorList, setSelectedColorList] = useState([]);
-
-    console.log("DDDD=============", selectedColorList);
-
     const getColors = async (term = "") => {
         let params = `?page=0&size=20&search=${term}`;
         await Http.GET("getAllColors", params)
@@ -43,6 +50,7 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
                     value: item.name,
                     code: item.code,
                     hexCode: item.hexCode,
+                    pantoneColorId: item.pantoneColorId,
                 };
             })
         );
@@ -52,6 +60,7 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
     colors = colors.map((item) => {
         return {
             id: item.id,
+            pantoneColorId: item.id,
             value: item.name,
             code: item.code,
             hexCode: item.hexCode,
@@ -63,9 +72,9 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
             setColorName(item.value);
             setDesignInfo({
                 ...designInfo,
-                pantoneColorIdList: [...designInfo.pantoneColorIdList, item.id],
+                pantoneColorIdList: [...designInfo.pantoneColorIdList, item],
             });
-            addColor(item.id);
+            addColor(item);
             setSelectedColorList([...selectedColorList, item]); // add the selected color below
             colors = colors.filter((color) => color.id !== item.id);
             setColorName("");
@@ -73,11 +82,13 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
         if (type === "Color") {
             let newColor = [...selectedColorList];
             let colorList = newColor.filter((color) => color.id !== item.id);
-            removeColor(item.id);
+            removeColor(item);
             setSelectedColorList(colorList);
             setDesignInfo({
                 ...designInfo,
-                pantoneColorIdList: designInfo.pantoneColorIdList.filter((id) => id !== item.id),
+                pantoneColorIdList: designInfo.pantoneColorIdList.filter(
+                    (data) => data.id !== item.id
+                ),
             });
             // if (selectedColorList.length === 1) {
             //     setColorName("");

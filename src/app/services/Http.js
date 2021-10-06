@@ -30,7 +30,7 @@ const routes = {
     getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)
     getProductDetails: `${BASE_URL}/product/`, // GET
     getProductType: `${BASE_URL}/product-type/all`, // GET
-    getProductTypeWithGroup: `${BASE_URL}/product-type/all-with-group`, // GET
+    getProductTypeWithGroup: `${BASE_URL}/product-group/all`, // GET
     getProductTypeWithGroupWithData: `${BASE_URL}/product-type/all-with-group-having-product`, // GET
     getColorType: `${BASE_URL}/color/all`, // GET
     getAllColors: `${BASE_URL}/color/pantone/search`,
@@ -123,12 +123,15 @@ const routes = {
     uploadDocumentInProduct: `${BASE_URL}/product/doc/add/`,
     removeProductDocument: `${BASE_URL}/product/doc/`,
     shareDesign: `${BASE_URL}/product/add`,
-    getShareDesignDetails: `${BASE_URL}/product/share-design/`,
-    updateDesignDetails: `${BASE_URL}/product/share-design/`,
+    getShareDesignDetails: `${BASE_URL}/product/style-info/`,
+    updateDesignDetails: `${BASE_URL}/product/style-info/`,
     updateSizeTable: `${BASE_URL}/product/size/`,
     getDesignImages: `${BASE_URL}/product/doc/`,
     getFabricTypes: `${BASE_URL}/material/fabric-type/all`,
     getDesignCategories: `${BASE_URL}/category/all`,
+
+    getDocumentResponse: `${BASE_URL}/product/groupwise-doc/`,
+    addNewGroupDocument: `${BASE_URL}/product/document-group/add`,
 
     getSettings: `${BASE_URL}/setting/get/`,
 };

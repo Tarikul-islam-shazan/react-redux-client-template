@@ -22,30 +22,28 @@ export const ColorAndFabrication = ({
     let fabricTypeName = "";
 
     designCategoryList.map((item) => {
-        if (item.id == data.categoryId) {
+        if (item.id == data.productCategoryId) {
             categoryName = item.name;
         }
     });
 
-    productTypeList.map((item) => {
-        item.types.map((item2) => {
-            if (item2.id == data.productTypeId) {
-                productTypeName = item2.name;
-            }
-        });
-    });
+    // productTypeList.map((item) => {
+    //     item.types.map((item2) => {
+    //         if (item2.id == data.productTypeId) {
+    //             productTypeName = item2.name;
+    //         }
+    //     });
+    // });
 
-    fabricTypeList.map((item) => {
-        if (item.id == data.fabricTypeId) {
-            fabricTypeName = item.name;
-        }
-    });
+    // fabricTypeList.map((item) => {
+    //     if (item.id == data.fabricTypeId) {
+    //         fabricTypeName = item.name;
+    //     }
+    // });
 
     const onChangeColor = (e) => {
         onChange(e.target.name, e.target.value);
     };
-
-    console.log("OPPPPPPppppppppppp", data);
 
     return (
         <div className={classes}>
@@ -112,9 +110,11 @@ export const ColorAndFabrication = ({
                 <div className="form-group">
                     <label>Design category*</label>
                     <select
-                        className={`w-100 bg-gray-light ${errors.categoryIdError ? `error2` : ``}`}
-                        name="categoryId"
-                        value={data.categoryId}
+                        className={`w-100 bg-gray-light ${
+                            errors.productCategoryIdError ? `error2` : ``
+                        }`}
+                        name="productCategoryId"
+                        value={data.categoryResponse?.id}
                         onClick={(e) => onChange(e.target.name, e.target.value)}
                     >
                         <option value="">Select design category</option>
@@ -126,8 +126,8 @@ export const ColorAndFabrication = ({
                             );
                         })}
                     </select>
-                    {errors.categoryIdError ? (
-                        <label className="error">{errors.categoryIdError}</label>
+                    {errors.productCategoryIdError ? (
+                        <label className="error">{errors.productCategoryIdError}</label>
                     ) : (
                         <></>
                     )}
@@ -136,32 +136,21 @@ export const ColorAndFabrication = ({
                     <label>Market*</label>
                     <select
                         className={`w-100 bg-gray-light ${
-                            errors.productTypeIdError ? `error2` : ``
+                            errors.productGroupIdError ? `error2` : ``
                         }`}
-                        name="productTypeId"
-                        value={data.productTypeId}
+                        name="productGroupId"
+                        value={data.marketResponse?.id}
                         onClick={(e) => onChange(e.target.name, e.target.value)}
                     >
                         <option value="">Select market</option>
-                        {productTypeList.map((item, i) => {
-                            let res = [];
-                            res.push(
-                                <option key={i} value="" disabled>
-                                    {item.groupName}
-                                </option>
-                            );
-                            item.types.map((item2, j) => {
-                                res.push(
-                                    <option key={j + 1000} value={item2.id}>
-                                        {item2.name}
-                                    </option>
-                                );
-                            });
-                            return res;
-                        })}
+                        {productTypeList.map((item, i) => (
+                            <option value={item.id} key={item.id}>
+                                {item.name}
+                            </option>
+                        ))}
                     </select>
-                    {errors.productTypeIdError ? (
-                        <label className="error">{errors.productTypeIdError}</label>
+                    {errors.productGroupIdError ? (
+                        <label className="error">{errors.productGroupIdError}</label>
                     ) : (
                         <></>
                     )}
@@ -173,14 +162,14 @@ export const ColorAndFabrication = ({
                             errors.fabricTypeIdError ? `error2` : ``
                         }`}
                         name="fabricTypeId"
-                        value={data.fabricTypeId}
+                        value={data.fabricType}
                         onClick={(e) => onChange(e.target.name, e.target.value)}
                     >
                         <option value="">Select fabric type</option>
                         {fabricTypeList.map((item, i) => {
                             return (
-                                <option key={i} value={item.id}>
-                                    {item.name}
+                                <option key={i} value={item.code}>
+                                    {item.value}
                                 </option>
                             );
                         })}
@@ -198,8 +187,8 @@ export const ColorAndFabrication = ({
                         type="text"
                         className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`}
                         placeholder="Enter fabric details"
-                        name="fabricDetails"
-                        value={data.fabricDetails}
+                        name="fabricCompositionDetails"
+                        value={data.fabricCompositionDetails}
                         onChange={(e) => onChange(e.target.name, e.target.value)}
                     />
                     {errors.fabricDetailsError ? (
@@ -210,94 +199,13 @@ export const ColorAndFabrication = ({
                 </div>
                 <div className="form-group">
                     <EditColorDropdown
-                        colorData={data.colors}
+                        colorData={data.colorResponseList}
                         addColor={addColor}
                         removeColor={removeColor}
                     />
-                    {/* <table className="w-100 pick-color-table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <label>Color</label>
-                                </th>
-                                <th>
-                                    <label>Color name</label>
-                                </th>
-                                <th className="text-right">
-                                    <span className="cursor-pointer" onClick={addColor}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="30"
-                                            height="30"
-                                            viewBox="0 0 30 30"
-                                        >
-                                            <g
-                                                id="Group_11133"
-                                                data-name="Group 11133"
-                                                transform="translate(-421 -880)"
-                                            >
-                                                <g
-                                                    id="Rectangle_6032"
-                                                    data-name="Rectangle 6032"
-                                                    transform="translate(451 880) rotate(90)"
-                                                    fill="rgba(190,205,239,0.25)"
-                                                    stroke="#21242b"
-                                                    stroke-width="1"
-                                                    opacity="0.623"
-                                                >
-                                                    <rect
-                                                        width="30"
-                                                        height="30"
-                                                        rx="4"
-                                                        stroke="none"
-                                                    />
-                                                    <rect
-                                                        x="0.5"
-                                                        y="0.5"
-                                                        width="29"
-                                                        height="29"
-                                                        rx="3.5"
-                                                        fill="none"
-                                                    />
-                                                </g>
-                                                <path
-                                                    id="close_3_"
-                                                    data-name="close (3)"
-                                                    d="M4.834,4.15,8.843.142a.483.483,0,0,1,.684.684L5.517,4.834,9.526,8.843a.483.483,0,0,1-.684.684L4.834,5.517.825,9.526a.483.483,0,0,1-.684-.684L4.15,4.834.142.825A.483.483,0,0,1,.825.142Z"
-                                                    transform="translate(435.836 888) rotate(45)"
-                                                    fill="#472f91"
-                                                />
-                                            </g>
-                                        </svg>
-                                    </span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.colors &&
-                                data.colors.map((colorObj, i) => {
-                                    let index = i;
-                                    return (
-                                        <ColorRowWithPicker
-                                            item={colorObj}
-                                            setPickerRef={(node, i) =>
-                                                setPickerRef(
-                                                    node,
-                                                    classes.includes("d-xl-none")
-                                                        ? `mbl_${index}`
-                                                        : index
-                                                )
-                                            }
-                                            key={i}
-                                            index={i}
-                                            data={data.colors}
-                                            onChangeColor={onChangeColor}
-                                            remove={removeColor}
-                                        />
-                                    );
-                                })}
-                        </tbody>
-                    </table> */}
+                    {errors.colorListError && (
+                        <label className="error">{errors.colorListError}</label>
+                    )}
                 </div>
             </div>
             <div className="view-section" style={{ display: !flag ? "block" : "none" }}>
@@ -340,24 +248,24 @@ export const ColorAndFabrication = ({
                 </span>
                 <div className="form-group">
                     <label>Design category*</label>
-                    <span>{categoryName}</span>
+                    <span>{data.categoryResponse?.name}</span>
                 </div>
                 <div className="form-group">
                     <label>Market*</label>
-                    <span>{productTypeName}</span>
+                    <span>{data.marketResponse?.name}</span>
                 </div>
                 <div className="form-group">
                     <label>Fabric type</label>
-                    <span>{fabricTypeName}</span>
+                    <span>{data.fabricType}</span>
                 </div>
                 <div className="form-group">
                     <label>Fabric details</label>
-                    <span>{data.fabricDetails}</span>
+                    <span>{data.fabricCompositionDetails}</span>
                 </div>
                 <div className="form-group">
                     <label>Color</label>
-                    {data.colors &&
-                        data.colors.map((colorObj, i) => {
+                    {data.colorResponseList &&
+                        data.colorResponseList.map((colorObj, i) => {
                             return (
                                 <div className="mb-2">
                                     <span>

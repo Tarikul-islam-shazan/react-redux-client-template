@@ -67,26 +67,6 @@ class EditShareDesign extends Component {
         console.log("setPickerRef", node, i);
     };
 
-    //  handleClickOutside = (event) => {
-    //      let { designDetails } = this.state;
-    //      if (designDetails.colors) {
-    //          designDetails.colors = designDetails.colors.map((color, i) => {
-    //              if (
-    //                  this["colorRef_" + i] &&
-    //                  !this["colorRef_" + i].contains(event.target) &&
-    //                  this["colorRef_mbl_" + i] &&
-    //                  !this["colorRef_mbl_" + i].contains(event.target)
-    //              ) {
-    //                  color.showColorPickerModal = false;
-    //              }
-    //              return color;
-    //          });
-    //          this.setState({
-    //              designDetails,
-    //          });
-    //      }
-    //  };
-
     getTitleName = () => {
         let { designDetails } = this.state;
         if (designDetails) {
@@ -118,11 +98,24 @@ class EditShareDesign extends Component {
     getDesignDetails = async (id) => {
         await Http.GET("getShareDesignDetails", id)
             .then(({ data }) => {
-                console.log("getShareDesignDetails SUCCESS========: ", data);
                 if (data) {
                     data.note = data.note
                         ? RichTextEditor.createValueFromString(data.note, "html")
                         : RichTextEditor.createEmptyValue();
+                    data.productCategoryId = data.categoryResponse ? data.categoryResponse.id : "";
+                    data.productGroupId = data.marketResponse ? data.marketResponse.id : "";
+                    data.colorEditRequestList = data.colorResponseList
+                        ? data.colorResponseList.map((item) => {
+                              return {
+                                  id: item.id,
+                                  value: item.name,
+                                  code: item.code,
+                                  hexCode: item.hexCode,
+                                  colorId: item.id,
+                              };
+                          })
+                        : [];
+
                     this.setState({ designDetails: data });
                 }
             })
@@ -137,8 +130,10 @@ class EditShareDesign extends Component {
             });
     };
 
+    //getDesignImages
+
     getDesignDocuments = async (id) => {
-        await Http.GET("getDesignImages", id)
+        await Http.GET("getDocumentResponse", id)
             .then(({ data }) => {
                 console.log("getDesignImages SUCCESS: ", data);
                 if (data) {
@@ -161,41 +156,9 @@ class EditShareDesign extends Component {
     getProductTypes = async () => {
         await Http.GET("getProductTypeWithGroup")
             .then(({ data }) => {
-                let arr = [];
-                if (data.length > 0) {
-                    for (let i = 0; i < data.length; i++) {
-                        let obj = {
-                            groupId: 0,
-                            groupName: "",
-                            types: [],
-                        };
-                        if (i == 0) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[0] = obj;
-                            continue;
-                        }
-                        let flag = true;
-                        for (let j = 0; j < arr.length; j++) {
-                            if (data[i].productGroup.id == arr[j].groupId) {
-                                arr[j].types[arr[j].types.length] = data[i];
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            obj.groupId = data[i].productGroup.id;
-                            obj.groupName = data[i].productGroup.name;
-                            obj.types[0] = data[i];
-                            arr[arr.length] = obj;
-                        }
-                    }
-                    this.setState({
-                        productTypeList: arr,
-                    });
-                }
-                loadjs(["/js/script.js"]);
+                this.setState({
+                    productTypeList: data,
+                });
             })
             .catch((response) => {});
     };
@@ -248,56 +211,41 @@ class EditShareDesign extends Component {
         });
     };
 
-    //  addColor = () => {
-    //      let { designDetails } = this.state;
-    //      if (designDetails.colors) {
-    //          designDetails.colors.push({
-    //              hexCode: "",
-    //              name: "",
-    //          });
-    //      } else {
-    //          designDetails.colors = [
-    //              {
-    //                  hexCode: "",
-    //                  name: "",
-    //              },
-    //          ];
-    //      }
-    //      this.setState({ designDetails });
-    //  };
+    removeColor = (item) => {
+        let { designDetails } = this.state;
 
-    //  removeColor = (index) => {
-    //      let { designDetails } = this.state;
-    //      designDetails.colors = designDetails.colors.filter((color, i) => i != index);
-    //      this.setState({ designDetails });
-    //  };
-
-    removeColor = (id) => {
-        let { pantoneColorIdList } = this.state;
-        pantoneColorIdList = pantoneColorIdList.filter((color, i) => color != id);
-        this.setState({ pantoneColorIdList });
-    };
-
-    addColor = (id) => {
-        let { pantoneColorIdList } = this.state;
-        pantoneColorIdList.push(id);
-        this.setState({ pantoneColorIdList });
-    };
-
-    onFileSelect = async (e, docType) => {
-        let files = Array.from(e.target.files);
-        if (files.length) {
-            this.setState({
-                showProgressModal: true,
-            });
+        if (designDetails.colorEditRequestList) {
+            designDetails.colorEditRequestList = designDetails.colorEditRequestList.filter(
+                (color, i) => color.id !== item.id
+            );
         }
+        this.setState({ designDetails });
+    };
+
+    addColor = (item) => {
+        let { designDetails } = this.state;
+        if (designDetails.colorEditRequestList) {
+            designDetails.colorEditRequestList.push(item);
+        }
+
+        this.setState({ designDetails });
+    };
+
+    onFileSelect = async (e, docType, documentGroup) => {
+        let files = Array.from(e.target.files);
+        //   if (files.length) {
+        //       this.setState({
+        //           showProgressModal: true,
+        //       });
+        //   }
         await files.map((item) => {
             let data = {
                 name: item.name,
                 docMimeType: item.type,
                 documentType: docType,
-                print: false,
+                documentGroup,
                 base64Str: "",
+                productId: this.props.match.params.id,
             };
             let reader = new FileReader();
             reader.readAsDataURL(item);
@@ -313,59 +261,97 @@ class EditShareDesign extends Component {
 
     uploadFile = async (doc) => {
         let id = this.props.match.params.id;
-        let { uploadInProgressDocs, designDocuments } = this.state;
-        uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
-        await this.setState({
-            uploadInProgressDocs,
-        });
-        Http.UPLOAD_WITH_PROGRESS("uploadDocumentInProduct", doc, id, this.showUploadProgress)
+        //   let { uploadInProgressDocs, designDocuments } = this.state;
+        //   uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
+        //   await this.setState({
+        //       uploadInProgressDocs,
+        //   });
+        await Http.POST("addNewGroupDocument", doc)
             .then(({ data }) => {
                 console.log("uploadDocument POST SUCCESS: ", data);
                 if (data.id) {
-                    let images = [];
-                    if (designDocuments[doc.documentType]) {
-                        images = designDocuments[doc.documentType];
-                        if (
-                            doc.documentType === "PRODUCT_DESIGN" &&
-                            designDocuments.PRODUCT_DESIGN.length
-                        ) {
-                            this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
-                            images = [];
-                        }
-                    }
-
-                    images = [data.payload, ...images];
-
-                    designDocuments[doc.documentType] = images;
-                    uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
-
-                    this.setState({
-                        uploadInProgressDocs,
-                        designDocuments,
-                    });
-                } else {
-                    uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-                    this.setState({
-                        uploadInProgressDocs,
-                    });
+                    toastSuccess(data.message);
+                    this.getDesignDocuments(id);
+                    //   let images = [];
+                    //   if (designDocuments[doc.documentType]) {
+                    //       images = designDocuments[doc.documentType];
+                    //       if (
+                    //           doc.documentType === "PRODUCT_DESIGN" &&
+                    //           designDocuments.PRODUCT_DESIGN.length
+                    //       ) {
+                    //           this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
+                    //           images = [];
+                    //       }
+                    //   }
+                    //   images = [data.payload, ...images];
+                    //   designDocuments[doc.documentType] = images;
+                    //   uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
+                    //   this.setState({
+                    //       uploadInProgressDocs,
+                    //       designDocuments,
+                    //   });
                 }
             })
             .catch(({ response }) => {
                 console.log("uploadDocument ERROR: ", response);
-                uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-                this.setState({
-                    uploadInProgressDocs,
-                });
             });
     };
 
-    showUploadProgress = (data, doc) => {
-        let { uploadInProgressDocs } = this.state;
-        uploadInProgressDocs[doc.name].progress = (data.loaded / data.total) * 100;
-        this.setState({
-            uploadInProgressDocs,
-        });
-    };
+    //  uploadFile = async (doc) => {
+    //      let id = this.props.match.params.id;
+    //      let { uploadInProgressDocs, designDocuments } = this.state;
+    //      uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
+    //      await this.setState({
+    //          uploadInProgressDocs,
+    //      });
+    //      Http.UPLOAD_WITH_PROGRESS("uploadDocumentInProduct", doc, id, this.showUploadProgress)
+    //          .then(({ data }) => {
+    //              console.log("uploadDocument POST SUCCESS: ", data);
+    //              if (data.id) {
+    //                  let images = [];
+    //                  if (designDocuments[doc.documentType]) {
+    //                      images = designDocuments[doc.documentType];
+    //                      if (
+    //                          doc.documentType === "PRODUCT_DESIGN" &&
+    //                          designDocuments.PRODUCT_DESIGN.length
+    //                      ) {
+    //                          this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
+    //                          images = [];
+    //                      }
+    //                  }
+
+    //                  images = [data.payload, ...images];
+
+    //                  designDocuments[doc.documentType] = images;
+    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
+
+    //                  this.setState({
+    //                      uploadInProgressDocs,
+    //                      designDocuments,
+    //                  });
+    //              } else {
+    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
+    //                  this.setState({
+    //                      uploadInProgressDocs,
+    //                  });
+    //              }
+    //          })
+    //          .catch(({ response }) => {
+    //              console.log("uploadDocument ERROR: ", response);
+    //              uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
+    //              this.setState({
+    //                  uploadInProgressDocs,
+    //              });
+    //          });
+    //  };
+
+    //  showUploadProgress = (data, doc) => {
+    //      let { uploadInProgressDocs } = this.state;
+    //      uploadInProgressDocs[doc.name].progress = (data.loaded / data.total) * 100;
+    //      this.setState({
+    //          uploadInProgressDocs,
+    //      });
+    //  };
 
     onFileRemove = (deletedDoc) => {
         let productId = this.props.match.params.id;
@@ -437,13 +423,9 @@ class EditShareDesign extends Component {
             validated = validateShareDesign(designDetails, true, false);
         } else if (sectionName === "editColorAndFabrication") {
             validated = validateShareDesign(designDetails, false, false);
-            // designDetails.colors = validated.errors.colors
-            //     ? validated.errors.colors
-            //     : designDetails.colors;
-
-            designDetails.pantoneColorIdList = validated.errors.pantoneColorIdList
-                ? validated.errors.pantoneColorIdList
-                : designDetails.pantoneColorIdList;
+            designDetails.colorEditRequestList = validated.errors.colorEditRequestList
+                ? validated.errors.colorEditRequestList
+                : designDetails.colorEditRequestList;
         }
 
         this.setState({
@@ -452,10 +434,11 @@ class EditShareDesign extends Component {
         });
 
         if (validated.isValid) {
+            validated.reqBody.id = productId;
             Http.PUT("updateDesignDetails", validated.reqBody, productId)
                 .then(({ data }) => {
-                    console.log("uploadDocument POST SUCCESS: ", data);
                     if (data.success) {
+                        this.getDesignDetails(productId);
                         toastSuccess("Updated successfully.");
                         this.toggleFlag(sectionName);
                     }
@@ -515,6 +498,8 @@ class EditShareDesign extends Component {
             visibleDocType,
             errors,
         } = this.state;
+
+        console.log("RRR===TTTTTTTT===--", designDocuments);
 
         return (
             <>
@@ -627,6 +612,23 @@ class EditShareDesign extends Component {
                             onChange={this.onChange}
                             onSubmit={this.updateDetails}
                             classes="product-type item d-block d-xl-none"
+                        />
+
+                        <DocumentHandler
+                            data={
+                                designDocuments.physicalSampleResponse
+                                    ? designDocuments.physicalSampleResponse.otherDocumentList
+                                    : []
+                            }
+                            title="Physical sample"
+                            name="REFERENCE_IMAGE"
+                            classes="upload-a-file"
+                            visibleDocType={visibleDocType}
+                            setVisibleDocType={this.setVisibleDocType}
+                            onFileSelect={(e) =>
+                                this.onFileSelect(e, e.target.name, "PHYSICAL_SAMPLE")
+                            }
+                            onFileRemove={this.onFileRemove}
                         />
 
                         <DocumentHandler
