@@ -79,14 +79,14 @@ class FillTheForm_1 extends Component {
               productType : arr
             })
           }else{
-            toastWarning("Product Type List - no data found.");
+            // toastWarning("Product Type List - no data found.");
           }
           loadjs(['/js/script.js','/js/custom.js']);
         })
         .catch(response => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
+            // console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
             this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
+            // toastError("Something went wrong! Please try again.");
         });
       await Http.GET('getColorType')
         .then(({data}) => {
