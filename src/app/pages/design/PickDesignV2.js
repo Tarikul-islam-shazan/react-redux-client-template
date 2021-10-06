@@ -946,7 +946,7 @@ class PickDesignV2 extends Component {
                 </div>
 
                 {!showSelectedFilters &&
-                    <div className="explore-design collection-list">
+                    <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
                             Recent collections
                             <a href={"/collections/list"}>
