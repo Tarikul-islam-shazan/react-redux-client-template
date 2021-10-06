@@ -355,18 +355,12 @@ class EditShareDesign extends Component {
 
     onFileRemove = (deletedDoc) => {
         let productId = this.props.match.params.id;
-        let { designDocuments } = this.state;
         Http.DELETE("removeProductDocument", {}, `${productId}/${deletedDoc.id}`)
             .then(({ data }) => {
-                if (designDocuments[deletedDoc.docType]) {
-                    designDocuments[deletedDoc.docType] = designDocuments[
-                        deletedDoc.docType
-                    ].filter((doc) => doc.id !== deletedDoc.id);
-                    this.setState({
-                        designDocuments,
-                    });
+                if (data) {
+                    toastSuccess(data.message);
+                    this.getDesignDocuments(productId);
                 }
-                console.log("uploadDocument POST SUCCESS: ", data);
             })
             .catch(({ response }) => {
                 console.log("uploadDocument ERROR: ", response);
@@ -379,40 +373,40 @@ class EditShareDesign extends Component {
         });
     };
 
-    renderProgressBars = () => {
-        let { uploadInProgressDocs } = this.state;
-        let result = [];
-        for (const [key, data] of Object.entries(uploadInProgressDocs)) {
-            result.push(
-                <div className="row">
-                    <div className="col-md-4">
-                        <p style={{ wordBreak: "break-all" }}>{key}</p>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="progress">
-                            <div
-                                className={`progress-bar ${
-                                    data.status === `SUCCESS`
-                                        ? `bg-success`
-                                        : data.status === "FAILED"
-                                        ? `bg-danger`
-                                        : ``
-                                }`}
-                                role="progressbar"
-                                style={{ width: `${data.progress}%` }}
-                                aria-valuenow={data.progress}
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                            >
-                                {data.status}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        return result;
-    };
+    //  renderProgressBars = () => {
+    //      let { uploadInProgressDocs } = this.state;
+    //      let result = [];
+    //      for (const [key, data] of Object.entries(uploadInProgressDocs)) {
+    //          result.push(
+    //              <div className="row">
+    //                  <div className="col-md-4">
+    //                      <p style={{ wordBreak: "break-all" }}>{key}</p>
+    //                  </div>
+    //                  <div className="col-md-8">
+    //                      <div className="progress">
+    //                          <div
+    //                              className={`progress-bar ${
+    //                                  data.status === `SUCCESS`
+    //                                      ? `bg-success`
+    //                                      : data.status === "FAILED"
+    //                                      ? `bg-danger`
+    //                                      : ``
+    //                              }`}
+    //                              role="progressbar"
+    //                              style={{ width: `${data.progress}%` }}
+    //                              aria-valuenow={data.progress}
+    //                              aria-valuemin="0"
+    //                              aria-valuemax="100"
+    //                          >
+    //                              {data.status}
+    //                          </div>
+    //                      </div>
+    //                  </div>
+    //              </div>
+    //          );
+    //      }
+    //      return result;
+    //  };
 
     updateDetails = (sectionName) => {
         let productId = this.props.match.params.id;
@@ -526,19 +520,24 @@ class EditShareDesign extends Component {
 
                 <section className="product-img-and-info">
                     <div className="product-images d-flex justify-content-between">
-                        {designDocuments.PRODUCT_DESIGN && designDocuments.PRODUCT_DESIGN.length ? (
+                        {designDocuments?.featureImageDocResponse ? (
                             <div className="item">
                                 <div className="type-of-img-name d-flex justify-content-between align-items-center">
                                     <span className="font-20">Feature image</span>
                                 </div>
                                 <div className="p-img">
-                                    <img src={designDocuments.PRODUCT_DESIGN[0].docUrl} alt="" />
+                                    <img
+                                        src={designDocuments.featureImageDocResponse.docUrl}
+                                        alt=""
+                                    />
                                     <input
                                         type="file"
                                         style={{ display: "none" }}
                                         ref={(input) => (this.inputElement = input)}
                                         name="PRODUCT_DESIGN"
-                                        onChange={(e) => this.onFileSelect(e, e.target.name)}
+                                        onChange={(e) =>
+                                            this.onFileSelect(e, e.target.name, "FEATURE_IMAGE")
+                                        }
                                     />
                                     <div className="dlt" onClick={() => this.inputElement.click()}>
                                         <svg
@@ -588,7 +587,9 @@ class EditShareDesign extends Component {
                                         className="file-upload"
                                         id="drag-upload"
                                         name="PRODUCT_DESIGN"
-                                        onChange={(e) => this.onFileSelect(e, e.target.name)}
+                                        onChange={(e) =>
+                                            this.onFileSelect(e, e.target.name, "FEATURE_IMAGE")
+                                        }
                                     />
                                     {/*<div className="center-center">
                                   <div id="loading-spinner"></div>
@@ -624,7 +625,9 @@ class EditShareDesign extends Component {
                             name="REFERENCE_IMAGE"
                             classes="upload-a-file"
                             visibleDocType={visibleDocType}
-                            setVisibleDocType={this.setVisibleDocType}
+                            setVisibleDocType={() =>
+                                this.setVisibleDocType("physicalSampleResponse")
+                            }
                             onFileSelect={(e) =>
                                 this.onFileSelect(e, e.target.name, "PHYSICAL_SAMPLE")
                             }
@@ -632,6 +635,55 @@ class EditShareDesign extends Component {
                         />
 
                         <DocumentHandler
+                            data={
+                                designDocuments.flatSketchResponse
+                                    ? designDocuments.flatSketchResponse.otherDocumentList
+                                    : []
+                            }
+                            title="Flat sketches"
+                            name="REFERENCE_IMAGE"
+                            classes="upload-a-file"
+                            visibleDocType={visibleDocType}
+                            setVisibleDocType={() => this.setVisibleDocType("flatSketchResponse")}
+                            onFileSelect={(e) => this.onFileSelect(e, e.target.name, "FLAT_SKETCH")}
+                            onFileRemove={this.onFileRemove}
+                        />
+
+                        <DocumentHandler
+                            data={
+                                designDocuments.referenceImageResponse
+                                    ? designDocuments.referenceImageResponse.otherDocumentList
+                                    : []
+                            }
+                            title="Reference images"
+                            name="REFERENCE_IMAGE"
+                            classes="upload-a-file"
+                            visibleDocType={visibleDocType}
+                            setVisibleDocType={() =>
+                                this.setVisibleDocType("referenceImageResponse")
+                            }
+                            onFileSelect={(e) =>
+                                this.onFileSelect(e, e.target.name, "REFERENCE_IMAGE")
+                            }
+                            onFileRemove={this.onFileRemove}
+                        />
+
+                        <DocumentHandler
+                            data={
+                                designDocuments.artWorksResponse
+                                    ? designDocuments.artWorksResponse.otherDocumentList
+                                    : []
+                            }
+                            title="Art works"
+                            name="REFERENCE_IMAGE"
+                            classes="upload-a-file"
+                            visibleDocType={visibleDocType}
+                            setVisibleDocType={() => this.setVisibleDocType("artWorksResponse")}
+                            onFileSelect={(e) => this.onFileSelect(e, e.target.name, "ART_WORK")}
+                            onFileRemove={this.onFileRemove}
+                        />
+
+                        {/* <DocumentHandler
                             data={
                                 designDocuments.REFERENCE_IMAGE
                                     ? designDocuments.REFERENCE_IMAGE
@@ -683,7 +735,7 @@ class EditShareDesign extends Component {
                             setVisibleDocType={this.setVisibleDocType}
                             onFileSelect={this.onFileSelect}
                             onFileRemove={this.onFileRemove}
-                        />
+                        /> */}
                     </div>
 
                     <div className="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
@@ -763,16 +815,18 @@ class EditShareDesign extends Component {
                                         </span>
                                     </div>
                                     <div className="product-images">
-                                        {designDocuments[visibleDocType] &&
-                                            designDocuments[visibleDocType].map((doc, i) => {
-                                                return (
-                                                    <ImageItem
-                                                        key={i}
-                                                        doc={doc}
-                                                        remove={this.onFileRemove}
-                                                    />
-                                                );
-                                            })}
+                                        {designDocuments[visibleDocType]?.otherDocumentList &&
+                                            designDocuments[visibleDocType]?.otherDocumentList.map(
+                                                (doc, i) => {
+                                                    return (
+                                                        <ImageItem
+                                                            key={i}
+                                                            doc={doc}
+                                                            remove={this.onFileRemove}
+                                                        />
+                                                    );
+                                                }
+                                            )}
                                     </div>
                                 </div>
                             ) : (
@@ -795,7 +849,7 @@ class EditShareDesign extends Component {
                         </div>
                     </div>
 
-                    <Modal
+                    {/* <Modal
                         show={showProgressModal}
                         onHide={() =>
                             this.setState({ showProgressModal: false, uploadInProgressDocs: {} })
@@ -805,7 +859,7 @@ class EditShareDesign extends Component {
                             <h5>Please wait...</h5>
                             {this.renderProgressBars()}
                         </Modal.Body>
-                    </Modal>
+                    </Modal> */}
                 </section>
             </>
         );
