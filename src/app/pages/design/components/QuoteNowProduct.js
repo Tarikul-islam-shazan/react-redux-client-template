@@ -109,7 +109,13 @@ export const QuoteNowProduct = ({
                     <div className="features add-quote-list d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
                             <label className="font-14 text-muted">Product category</label>
-                            <h5 className="font-18 semibold">{product.productGroup}</h5>
+                            <h5 className="font-18 semibold">
+                                <span>{product.productGroup}</span>
+                                {
+                                    product.productGroup && product.category && <span>, </span>
+                                }
+                                <span>{product.category}</span>
+                            </h5>
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">MOQ</label>
@@ -130,7 +136,6 @@ export const QuoteNowProduct = ({
                                     : product.fabricComposition
                                     ? product.fabricComposition + product.fabricWeight
                                     : ""}{" "}
-                                GSM
                             </h5>
                         </div>
                         <div className="info-item">
