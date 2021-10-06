@@ -1,4 +1,4 @@
-export const validate = (state, projectId) => {
+export const validate = (state, orderId) => {
   let {
     sameAsBilling, billingName, billingAddress, billingState, billingCity, billingPostCode, billingPhoneNumber,
     shippingName, shippingAddress, shippingState, shippingCity, shippingPostCode, shippingPhoneNumber, paymentMethod, bankSlipDoc
@@ -93,7 +93,7 @@ export const validate = (state, projectId) => {
 
   if (isValid) {
     reqBody = {
-      projectId,
+      orderId,
       invoiceId: state.order.invoiceResponse.id,
       addresses: [
         {

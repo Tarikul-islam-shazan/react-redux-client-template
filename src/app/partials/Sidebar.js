@@ -148,28 +148,7 @@ class Sidebar extends Component {
                         />
                         : <></>
                       } */}
-                        <NavLink
-                            to="/dashboard"
-                            classes={this.props.activeTab == "/dashboard" ? "active" : ""}
-                            activeIcon={require("../assets/icons/dashboard_active.png")}
-                            inactiveIcon={require("../assets/icons/dashboard.png")}
-                            title="Dashboard"
-                            onClick={this.props.setActiveTab}
-                        />
-                        {permissions.includes("ORDER_MY_ORDER") ? (
-                            <NavLink
-                                to="/orders/my-orders"
-                                classes={
-                                    this.props.activeTab == "/orders/my-orders" ? "active" : ""
-                                }
-                                activeIcon={require("../assets/icons/my-project-active.png")}
-                                inactiveIcon={require("../assets/icons/my-project.png")}
-                                title="Orders"
-                                onClick={this.props.setActiveTab}
-                            />
-                        ) : (
-                            <></>
-                        )}
+                        
                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
                                 to="/designs/explore"
@@ -211,14 +190,14 @@ class Sidebar extends Component {
                         ) : (
                             <></>
                         )}
-                        {permissions.includes("PROJECT_MY_PROJECT") ? (
+                        {permissions.includes("ORDER_MY_ORDER") ? (
                             <NavLink
                                 to="/orders/my-orders"
                                 classes={
                                     this.props.activeTab == "/orders/my-orders" ? "active" : ""
                                 }
                                 activeIcon={require("../assets/icons/my-project-active.png")}
-                                inactiveIcon={require("../assets/icons/project_new.svg")}
+                                inactiveIcon={require("../assets/icons/my-project.png")}
                                 title="Orders"
                                 onClick={this.props.setActiveTab}
                             />

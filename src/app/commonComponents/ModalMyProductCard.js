@@ -38,17 +38,38 @@ export const ModalMyProductCard = ({product, index, onChange, buttonAction, butt
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">MOQ</label>
-                        <h5 className="font-18 semibold">{product.moq} pcs</h5>
+                        <h5 className="font-18 semibold">
+                          <span>{product.minimumOrderQuantity}</span>
+                          {
+                            product.minimumOrderQuantity &&
+                            <span> pcs</span>
+                          }
+                        </h5>
                     </div>
                 </div>
                 <div className="d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Fabric details</label>
-                        <h5 className="font-18 semibold">{product.fabricComposition} {product.fabricWeight} GSM</h5>
+                        <h5 className="font-18 semibold">
+                          <span>{product.compositionDetails}</span>
+                          {
+                            product.compositionDetails && product.gsm && <span>, </span>
+                          }
+                          <span>{product.gsm}</span>
+                          {
+                            product.gsm && <span> GSM</span>
+                          }
+                        </h5>
                     </div>
                     <div className="info-item">
                         <label className="font-14 text-muted">Delivery in</label>
-                        <h5 className="font-18 semibold">{product.turnAroundTime} Days</h5>
+                        <h5 className="font-18 semibold">
+                          <span>{product.turnAroundTime}</span>
+                          {
+                            product.turnAroundTime &&
+                            <span> Days</span>
+                          }
+                        </h5>
                     </div>
                 </div>
                 <button className="btn-border mt-4" onClick={() => buttonAction(product)}>{buttonTitle}</button>

@@ -532,6 +532,9 @@ table{
       color: #333333;
       font-size: 20px;
       font-weight: 600;
+      position: sticky;
+      top: 0;
+      background: $white;
     }
     li{
       list-style: none;
