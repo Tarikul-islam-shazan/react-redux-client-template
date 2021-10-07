@@ -369,6 +369,44 @@ class OurDesignDetails extends Component {
          .catch(({ response }) => {});
    };
 
+   getDocUrlFromDocResponse = (docResponse) => {
+      return docResponse?.docUrl;
+   }
+
+   getListOfDocUrlFromProductDocumentResponse = (productDocumentResponse, groupKey) => {
+      let result = [];
+
+      if(productDocumentResponse === null || productDocumentResponse === undefined)
+         return result;
+
+      let groupWiseDocumentResponse = productDocumentResponse[groupKey];
+
+      let keySet = ['front', 'back', 'fabric', 'side', 'embelishment'];
+      keySet.map( (key) => {
+         let docUrl = this.getDocUrlFromDocResponse(groupWiseDocumentResponse[key]);
+         if ( docUrl !== null && docUrl !== undefined )
+            result.push(docUrl);
+      })
+
+      groupWiseDocumentResponse.otherDocumentList.map( (docResponse) => {
+         let docUrl = this.getDocUrlFromDocResponse(docResponse);
+         if ( docUrl !== null && docUrl !== undefined )
+            result.push(docUrl);
+      } )
+
+      return result;
+
+   }
+
+   getSliderDocuments = (productDocumentResponse) => {
+      let result = this.getListOfDocUrlFromProductDocumentResponse(productDocumentResponse, "physicalSampleResponse");
+
+      if( productDocumentResponse )
+         result.push(this.getDocUrlFromDocResponse(productDocumentResponse.featureImageDocResponse));
+
+      return result;
+   }
+
    getImageByType = (typeList = ["PRODUCT_DESIGN", "REFERENCE_IMAGE"], included = true) => {
       let { product } = this.state;
       let result = [];
@@ -390,20 +428,6 @@ class OurDesignDetails extends Component {
       return [];
    };
 
-   renderSizes = () => {
-      let { product } = this.state;
-      let result = "";
-      if (product.sizeText && JSON.parse(product.sizeText)) {
-         let data = JSON.parse(product.sizeText);
-         if (data && data.length) {
-            data.map((sizeObj, i) => {
-               result += sizeObj.code + (i !== data.length - 1 ? " / " : "");
-            });
-         }
-      }
-      return result;
-   };
-
    setSelectedImage = async (index) => {
       let { product } = this.state;
       await this.setState({
@@ -416,7 +440,7 @@ class OurDesignDetails extends Component {
       this.setState({
          imageViewerFlag: true,
          imageViewerCurrentIndex: index,
-         imageViewerData: docs.map((item) => item.docUrl),
+         imageViewerData: docs,
       });
    };
 
@@ -525,7 +549,6 @@ class OurDesignDetails extends Component {
          TURN_AROUND_TIME,
          MOQ,
       } = this.state;
-      // console.log("this.getImageByType()", this.getImageByType())
       const settingsSliderMain = {
          slidesToShow: 1,
          slidesToScroll: 1,
@@ -600,7 +623,7 @@ class OurDesignDetails extends Component {
                                     {...settingsSliderNav}
                                     className="slider slider-nav thumb-image"
                                  >
-                                    {this.getImageByType().map((item, i) => {
+                                    {this.getSliderDocuments(product.productDocumentResponse).map((item, i) => {
                                        return (
                                           <a
                                              href="#"
@@ -609,7 +632,7 @@ class OurDesignDetails extends Component {
                                              key={i}
                                           >
                                              <div className="thumbImg">
-                                                <img src={item.docUrl} alt={item.name} />
+                                                <img src={item} />
                                              </div>
                                           </a>
                                        );
@@ -623,16 +646,16 @@ class OurDesignDetails extends Component {
                                     className="slider slider-for"
                                  >
                                     {/*<div className="slider slider-for">*/}
-                                    {this.getImageByType().map((item, i) => {
+                                    {this.getSliderDocuments(product.productDocumentResponse).map((item, i) => {
                                        return (
                                           <div className="slider-banner-image" key={i}>
                                              <a
                                                 className="item-slick"
                                                 onClick={() =>
-                                                   this.showImageViewer(this.getImageByType(), i)
+                                                   this.showImageViewer(this.getSliderDocuments(product.productDocumentResponse), i)
                                                 }
                                              >
-                                                <img src={item.docUrl} alt={item.name} />
+                                                <img src={item} />
                                              </a>
                                           </div>
                                        );
@@ -653,9 +676,13 @@ class OurDesignDetails extends Component {
                      {productAvailabilityStatus(product)}
                      <div className="d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
-                           <label className="font-14 text-muted">Product type</label>
+                           <label className="font-14 text-muted">Market</label>
                            <h5 className="font-18 semibold">
-                              {product.productType ? product.productType.name : "N/A"}
+                              <span>{product.productGroup?.name}</span>
+                                {
+                                    product.productGroup?.name && product.category && <span>, </span>
+                                }
+                                <span>{product.category}</span>
                            </h5>
                         </div>
                         <div className="info-item">
@@ -668,7 +695,7 @@ class OurDesignDetails extends Component {
 
                      <div className="info-item">
                         <div className="d-flex align-items-center mb-2">
-                           <label className="w-auto m-0 font-14">Default sizes</label>
+                           <label className="w-auto m-0 font-14">Available sizes</label>
                            <a href="javascript:void(0)">
                               <span
                                  className="font-14 brand-color ml-3"
@@ -679,7 +706,7 @@ class OurDesignDetails extends Component {
                            </a>
                         </div>
                         <span className="font-18 semibold text-uppercase">
-                           {this.renderSizes()}
+                           { product.sizeList && product.sizeList.toString()}
                         </span>
                      </div>
 
@@ -694,7 +721,14 @@ class OurDesignDetails extends Component {
                                     return (
                                        <li className="d-flex align-items-center">
                                           <span style={{ backgroundColor: color.hexCode }}></span>
-                                          <div className="font-18 semibold ml-2">{color.name}</div>
+                                          <div className="font-18 semibold ml-2 d-flex justify-content-between">
+                                             <p>{color.name}</p>
+                                             {
+                                                color.name && color.code &&
+                                                <p> - </p>
+                                             }
+                                             <p>{color.code}</p>
+                                          </div>
                                        </li>
                                     );
                                  })
@@ -704,24 +738,15 @@ class OurDesignDetails extends Component {
                            </ul>
                         </div>
                      </div>
-                     {this.getImageByType(["EMBELLISHMENT", "PRINT_DESIGN", "EMBROIDERY_DESIGN"])
+                     {this.getListOfDocUrlFromProductDocumentResponse( product.productDocumentResponse, "physicalSampleResponse" )
                         .length ? (
                         <div className="info-item">
-                           <label className="font-14 text-muted mb-2">Embellishment</label>
+                           <label className="font-14 text-muted mb-2">Physical sample</label>
                            <div className="d-flex">
-                              {this.getImageByType([
-                                 "EMBELLISHMENT",
-                                 "PRINT_DESIGN",
-                                 "EMBROIDERY_DESIGN",
-                              ]).map((item, i) => {
+                              {this.getListOfDocUrlFromProductDocumentResponse(product.productDocumentResponse, "physicalSampleResponse").map((item, i) => {
                                  return (
                                     <ProductDetailsImgThumb
                                        key={i}
-                                       docs={this.getImageByType([
-                                          "EMBELLISHMENT",
-                                          "PRINT_DESIGN",
-                                          "EMBROIDERY_DESIGN",
-                                       ])}
                                        item={item}
                                        index={i}
                                        showGallery={this.showImageViewer}
@@ -734,16 +759,16 @@ class OurDesignDetails extends Component {
                         <></>
                      )}
 
-                     {this.getImageByType(["ACCESSORIES_DESIGN"]).length ? (
+                     {this.getListOfDocUrlFromProductDocumentResponse( product.productDocumentResponse, "flatSketchResponse" )
+                        .length ? (
                         <div className="info-item">
-                           <label className="font-14 text-muted mb-2">Accessories</label>
+                           <label className="font-14 text-muted mb-2">Flat sketches</label>
                            <div className="d-flex">
-                              {this.getImageByType(["ACCESSORIES_DESIGN"]).map((item, i) => {
+                              {this.getListOfDocUrlFromProductDocumentResponse(product.productDocumentResponse, "flatSketchResponse").map((item, i) => {
                                  return (
                                     <ProductDetailsImgThumb
                                        key={i}
                                        item={item}
-                                       docs={this.getImageByType(["ACCESSORIES_DESIGN"])}
                                        index={i}
                                        showGallery={this.showImageViewer}
                                     />
@@ -755,44 +780,16 @@ class OurDesignDetails extends Component {
                         <></>
                      )}
 
-                     {this.getImageByType(
-                        [
-                           "PRODUCT_DESIGN",
-                           "REFERENCE_IMAGE",
-                           "EMBELLISHMENT",
-                           "PRINT_DESIGN",
-                           "EMBROIDERY_DESIGN",
-                        ],
-                        false
-                     ).length ? (
+                     {this.getListOfDocUrlFromProductDocumentResponse( product.productDocumentResponse, "referenceImageResponse" )
+                        .length ? (
                         <div className="info-item">
-                           <label className="font-14 text-muted mb-2">Other</label>
+                           <label className="font-14 text-muted mb-2">Reference images</label>
                            <div className="d-flex">
-                              {this.getImageByType(
-                                 [
-                                    "PRODUCT_DESIGN",
-                                    "REFERENCE_IMAGE",
-                                    "EMBELLISHMENT",
-                                    "PRINT_DESIGN",
-                                    "EMBROIDERY_DESIGN",
-                                    "ACCESSORIES_DESIGN",
-                                 ],
-                                 false
-                              ).map((item, i) => {
+                              {this.getListOfDocUrlFromProductDocumentResponse(product.productDocumentResponse, "referenceImageResponse").map((item, i) => {
                                  return (
                                     <ProductDetailsImgThumb
                                        key={i}
                                        item={item}
-                                       docs={this.getImageByType(
-                                          [
-                                             "PRODUCT_DESIGN",
-                                             "REFERENCE_IMAGE",
-                                             "EMBELLISHMENT",
-                                             "PRINT_DESIGN",
-                                             "EMBROIDERY_DESIGN",
-                                          ],
-                                          false
-                                       )}
                                        index={i}
                                        showGallery={this.showImageViewer}
                                     />
@@ -803,6 +800,29 @@ class OurDesignDetails extends Component {
                      ) : (
                         <></>
                      )}
+
+                     {this.getListOfDocUrlFromProductDocumentResponse( product.productDocumentResponse, "artWorksResponse" )
+                        .length ? (
+                        <div className="info-item">
+                           <label className="font-14 text-muted mb-2">Art works</label>
+                           <div className="d-flex">
+                              {this.getListOfDocUrlFromProductDocumentResponse(product.productDocumentResponse, "artWorksResponse").map((item, i) => {
+                                 return (
+                                    <ProductDetailsImgThumb
+                                       key={i}
+                                       item={item}
+                                       index={i}
+                                       showGallery={this.showImageViewer}
+                                    />
+                                 );
+                              })}
+                           </div>
+                        </div>
+                     ) : (
+                        <></>
+                     )}
+
+                     
 
                      <div className="info-item">
                         <label className="font-14 text-muted mb-2">Minimum order quantity</label>
@@ -1036,32 +1056,14 @@ class OurDesignDetails extends Component {
                </div>
                <Modal.Body className="p-0">
                   <div>
-                     {product.sizeText && JSON.parse(product.sizeText) ? (
-                        <div className="row">
-                           <div className="col-lg-12">
-                              {
-                                 <MeasurementTable
-                                    data={JSON.parse(product.sizeText)}
+                  <div className="row">
+                        <div className="col-lg-12">
+                              <MeasurementTable
+                                    measurementResponse={product.measurementResponse}
                                     className={"measurement-table"}
                                  />
-                              }
-                           </div>
                         </div>
-                     ) : (
-                        <div className="row">
-                           <div className="col-lg-12 p-0">
-                              <p
-                                 style={{
-                                    textAlign: "center",
-                                    fontWeight: "bold",
-                                    color: "#452D8D",
-                                 }}
-                              >
-                                 Measurement table not available
-                              </p>
-                           </div>
-                        </div>
-                     )}
+                     </div>
                   </div>
                </Modal.Body>
             </Modal>
