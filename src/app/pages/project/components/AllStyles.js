@@ -34,7 +34,7 @@ const AllStyles = ({ onClose }) => {
 
    const getOrderQuotes = async (orderId) => {
       setLoading(true);
-      await Http.GET("getOrderQuotes", +orderId)
+      await Http.GET("getOrderQuotes", orderId)
          .then(({ data }) => {
             setLoading(false);
             setOrderQuotes(data);
