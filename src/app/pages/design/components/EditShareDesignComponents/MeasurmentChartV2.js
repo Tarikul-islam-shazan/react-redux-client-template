@@ -769,7 +769,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
 											</option>
 										))}
 									</select> */}
-                                    <div style={{ width: 300 }}>
+                                    <div style={{ width: 350 }}>
                                         <CustomDropdown
                                             type="addItem"
                                             isAddNew={false}

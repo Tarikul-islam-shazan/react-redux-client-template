@@ -27,7 +27,11 @@
 @import
 'components/button',
 'components/uploder',
-'components/modal-positions';
+'components/modal-positions',
+'components/shadow',
+'components/table',
+'components/filter-bar',
+'components/input_form';
 
 // 6. Page-specific styles
 @import
@@ -51,7 +55,8 @@
 'pages/project-planning',
 'pages/skleton',
 'pages/task-conversation',
-'pages/add-new-design';
+'pages/add-new-design',
+'pages/notification_new';
 
 // 7. Themes
 @import

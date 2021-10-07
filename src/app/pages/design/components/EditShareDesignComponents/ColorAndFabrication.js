@@ -107,106 +107,131 @@ export const ColorAndFabrication = ({
                         </svg>
                     </div>
                 </span>
-                <div className="form-group">
-                    <label>Design category*</label>
-                    <select
-                        className={`w-100 bg-gray-light ${
-                            errors.productCategoryIdError ? `error2` : ``
-                        }`}
-                        name="productCategoryId"
-                        value={data.categoryResponse?.id}
-                        onClick={(e) => onChange(e.target.name, e.target.value)}
-                    >
-                        <option value="">Select design category</option>
-                        {designCategoryList.map((item, i) => {
-                            return (
-                                <option key={i} value={item.id}>
-                                    {item.name}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    {errors.productCategoryIdError ? (
-                        <label className="error">{errors.productCategoryIdError}</label>
-                    ) : (
-                        <></>
-                    )}
+                <div className="container-fluid px-0 mt-4">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Design category*</label>
+                                <select
+                                    className={`w-100 bg-gray-light ${
+                                        errors.productCategoryIdError ? `error2` : ``
+                                    }`}
+                                    name="productCategoryId"
+                                    value={data.categoryResponse?.id}
+                                    onClick={(e) => onChange(e.target.name, e.target.value)}
+                                >
+                                    <option value="">Select design category</option>
+                                    {designCategoryList.map((item, i) => {
+                                        return (
+                                            <option key={i} value={item.id}>
+                                                {item.name}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                                {errors.productCategoryIdError ? (
+                                    <label className="error">{errors.productCategoryIdError}</label>
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Market*</label>
+                                <select
+                                    className={`w-100 bg-gray-light ${
+                                        errors.productGroupIdError ? `error2` : ``
+                                    }`}
+                                    name="productGroupId"
+                                    value={data.marketResponse?.id}
+                                    onClick={(e) => onChange(e.target.name, e.target.value)}
+                                >
+                                    <option value="">Select market</option>
+                                    {productTypeList.map((item, i) => (
+                                        <option value={item.id} key={item.id}>
+                                            {item.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.productGroupIdError ? (
+                                    <label className="error">{errors.productGroupIdError}</label>
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </div>
+
+
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Fabric type*</label>
+                                <select
+                                    className={`w-100 bg-gray-light ${
+                                        errors.fabricTypeIdError ? `error2` : ``
+                                    }`}
+                                    name="fabricTypeId"
+                                    value={data.fabricType}
+                                    onClick={(e) => onChange(e.target.name, e.target.value)}
+                                >
+                                    <option value="">Select fabric type</option>
+                                    {fabricTypeList.map((item, i) => {
+                                        return (
+                                            <option key={i} value={item.code}>
+                                                {item.value}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                                {/*<input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>*/}
+                                {errors.fabricTypeIdError ? (
+                                    <label className="error">{errors.fabricTypeIdError}</label>
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Fabric details*</label>
+                                <input
+                                    type="text"
+                                    className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`}
+                                    placeholder="Enter fabric details"
+                                    name="fabricCompositionDetails"
+                                    value={data.fabricCompositionDetails}
+                                    onChange={(e) => onChange(e.target.name, e.target.value)}
+                                />
+                                {errors.fabricDetailsError ? (
+                                    <label className="error">{errors.fabricDetailsError}</label>
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <EditColorDropdown
+                                    colorData={data.colorResponseList}
+                                    addColor={addColor}
+                                    removeColor={removeColor}
+                                />
+                                {errors.colorListError && (
+                                    <label className="error">{errors.colorListError}</label>
+                                )}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label>Market*</label>
-                    <select
-                        className={`w-100 bg-gray-light ${
-                            errors.productGroupIdError ? `error2` : ``
-                        }`}
-                        name="productGroupId"
-                        value={data.marketResponse?.id}
-                        onClick={(e) => onChange(e.target.name, e.target.value)}
-                    >
-                        <option value="">Select market</option>
-                        {productTypeList.map((item, i) => (
-                            <option value={item.id} key={item.id}>
-                                {item.name}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.productGroupIdError ? (
-                        <label className="error">{errors.productGroupIdError}</label>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-                <div className="form-group">
-                    <label>Fabric type*</label>
-                    <select
-                        className={`w-100 bg-gray-light ${
-                            errors.fabricTypeIdError ? `error2` : ``
-                        }`}
-                        name="fabricTypeId"
-                        value={data.fabricType}
-                        onClick={(e) => onChange(e.target.name, e.target.value)}
-                    >
-                        <option value="">Select fabric type</option>
-                        {fabricTypeList.map((item, i) => {
-                            return (
-                                <option key={i} value={item.code}>
-                                    {item.value}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    {/*<input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>*/}
-                    {errors.fabricTypeIdError ? (
-                        <label className="error">{errors.fabricTypeIdError}</label>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-                <div className="form-group">
-                    <label>Fabric details*</label>
-                    <input
-                        type="text"
-                        className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`}
-                        placeholder="Enter fabric details"
-                        name="fabricCompositionDetails"
-                        value={data.fabricCompositionDetails}
-                        onChange={(e) => onChange(e.target.name, e.target.value)}
-                    />
-                    {errors.fabricDetailsError ? (
-                        <label className="error">{errors.fabricDetailsError}</label>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-                <div className="form-group">
-                    <EditColorDropdown
-                        colorData={data.colorResponseList}
-                        addColor={addColor}
-                        removeColor={removeColor}
-                    />
-                    {errors.colorListError && (
-                        <label className="error">{errors.colorListError}</label>
-                    )}
-                </div>
+
+
+
+
+
             </div>
             <div className="view-section" style={{ display: !flag ? "block" : "none" }}>
                 <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
@@ -246,39 +271,60 @@ export const ColorAndFabrication = ({
                         </g>
                     </svg>
                 </span>
-                <div className="form-group">
-                    <label>Design category*</label>
-                    <span>{data.categoryResponse?.name}</span>
+                <div className="container-fluid px-0 mt-4">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Design category*</label>
+                                <span>{data.categoryResponse?.name}</span>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Market*</label>
+                                <span>{data.marketResponse?.name}</span>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Fabric type</label>
+                                <span>{data.fabricType}</span>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Fabric details</label>
+                                <span>{data.fabricCompositionDetails}</span>
+                            </div>
+                        </div>
+
+                        
+                        <div className="col-md-4">
+                        <div className="form-group">
+                                <label>Color</label>
+                                {data.colorResponseList &&
+                                    data.colorResponseList.map((colorObj, i) => {
+                                        return (
+                                            <div className="mb-2">
+                                                <span>
+                                                    <span
+                                                        className="color-circle mr-2"
+                                                        style={{ background: colorObj.hexCode }}
+                                                    ></span>
+                                                    {colorObj.hexCode} - {colorObj.name}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label>Market*</label>
-                    <span>{data.marketResponse?.name}</span>
-                </div>
-                <div className="form-group">
-                    <label>Fabric type</label>
-                    <span>{data.fabricType}</span>
-                </div>
-                <div className="form-group">
-                    <label>Fabric details</label>
-                    <span>{data.fabricCompositionDetails}</span>
-                </div>
-                <div className="form-group">
-                    <label>Color</label>
-                    {data.colorResponseList &&
-                        data.colorResponseList.map((colorObj, i) => {
-                            return (
-                                <div className="mb-2">
-                                    <span>
-                                        <span
-                                            className="color-circle mr-2"
-                                            style={{ background: colorObj.hexCode }}
-                                        ></span>
-                                        {colorObj.hexCode} - {colorObj.name}
-                                    </span>
-                                </div>
-                            );
-                        })}
-                </div>
+
             </div>
         </div>
     );
