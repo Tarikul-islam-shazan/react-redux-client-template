@@ -184,14 +184,14 @@ class DefaultLayout extends Component {
                                     to="/dashboard"
                                     >
                                       <i className="fas fa-tachometer-alt mr-2 text-gray-400 font-12"></i>
-                                      Dashboard
+                                      My task
                                   </Link>
                                   <Link
                                     className="dropdown-item"
                                     to="/my-profile"
                                     >
                                       <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                      Profile
+                                      My profile
                                   </Link>
                                   <div className="dropdown-divider"></div>
 

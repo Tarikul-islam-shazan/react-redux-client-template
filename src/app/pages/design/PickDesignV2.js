@@ -949,7 +949,7 @@ class PickDesignV2 extends Component {
                 {!searching &&
                     <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
-                            Recent collections
+                            Collections for you
                             <a href={"/collections/list"}>
                                 <span className="view-all">View all</span>
                             </a>
