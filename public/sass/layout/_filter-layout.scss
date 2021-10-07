@@ -86,7 +86,7 @@ section.filter-data-container {
     opacity: 0;
     height: calc(100vh - 300px);
     scrollbar-width: thin;
-    position: sticky;
+    // position: sticky;
     top: 202px;
     height: calc(100vh - 202px);
     &::-webkit-scrollbar-track

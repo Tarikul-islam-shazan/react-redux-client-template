@@ -116,7 +116,6 @@ class PickDesignV2 extends Component {
         const windowBottom = windowHeight + window.pageYOffset;
         if (windowBottom >= docHeight) {
             let { hasNext, page, loading, designList, size, searching } = this.state;
-            console.log("message", "bottom reached", hasNext, page, loading);
             if (hasNext && !loading && designList.length && searching) {
                 let data = await this.renderList(page + 1);
                 if (data.length > 0) {
@@ -292,7 +291,6 @@ class PickDesignV2 extends Component {
         let result = [];
         await Http.GET("searchProduct", params) //previous url -> getPickDesign
             .then(({ data }) => {
-                console.log("PRODUCT LIST SUCCESS: ", data);
                 this.setState({ loading: false });
                 if (data.productResponseList) {
                     this.setState({ pagination: data.totalHits });
@@ -303,7 +301,6 @@ class PickDesignV2 extends Component {
                 loadjs(["/js/script.js", "/js/custom.js"]);
             })
             .catch((response) => {
-                console.log("PRODUCT LIST ERROR: ", JSON.stringify(response));
                 this.setState({ loading: false });
                 toastError("Something went wrong! Please try again.");
             });
@@ -374,7 +371,7 @@ class PickDesignV2 extends Component {
             search: "",
             page: 0,
             searching: false,
-            showSelectedFilters: false
+            showSelectedFilters: false,
         });
     };
 
@@ -389,7 +386,6 @@ class PickDesignV2 extends Component {
 
         Http.POST("likeProduct", {}, id)
             .then(({ data }) => {
-                console.log("likeProduct SUCCESS: ", JSON.stringify(data));
                 this.setState({ loading: false });
                 if (data.success) {
                     // toastSuccess(data.message);
@@ -425,7 +421,6 @@ class PickDesignV2 extends Component {
                 }
             })
             .catch(({ response }) => {
-                console.log("LOGIN Error: ", JSON.stringify(response));
                 this.setState({ loading: false });
                 if (response.data && response.data.message) {
                     toastError(response.data.message);
@@ -442,7 +437,6 @@ class PickDesignV2 extends Component {
 
         Http.POST("unlikeProduct", {}, id)
             .then(({ data }) => {
-                console.log("unlikeProduct SUCCESS: ", JSON.stringify(data));
                 if (data.success) {
                     // toastSuccess(data.message);
                     let { designList, landingData } = this.state;
@@ -478,7 +472,6 @@ class PickDesignV2 extends Component {
                 this.setState({ loading: false });
             })
             .catch(({ response }) => {
-                console.log("unlikeProduct Error: ", JSON.stringify(response));
                 this.setState({ loading: false });
                 if (response.data && response.data.message) {
                     toastError(response.data.message);
@@ -757,7 +750,7 @@ class PickDesignV2 extends Component {
                             onChange={this.onChange}
                             onKeyPress={this.keyPressed}
                         />
-                        
+
                         {showSelectedFilters && filters.length ? (
                             <ul className="filter-tag">
                                 {filters.map((filter, i) => {
@@ -896,13 +889,21 @@ class PickDesignV2 extends Component {
                                         return (
                                             <li
                                                 style={{
-                                                    color: isSelected(filters, "COMPOSITION", item.code)
+                                                    color: isSelected(
+                                                        filters,
+                                                        "COMPOSITION",
+                                                        item.code
+                                                    )
                                                         ? "rgb(238 118 31)"
                                                         : "black",
                                                 }}
                                                 key={i}
                                                 onClick={() =>
-                                                    this.setFilters("COMPOSITION", item.code, item.value)
+                                                    this.setFilters(
+                                                        "COMPOSITION",
+                                                        item.code,
+                                                        item.value
+                                                    )
                                                 }
                                             >
                                                 {item.value}
@@ -918,13 +919,21 @@ class PickDesignV2 extends Component {
                                         return (
                                             <li
                                                 style={{
-                                                    color: isSelected(filters, "FABRIC_TYPE", item.code)
+                                                    color: isSelected(
+                                                        filters,
+                                                        "FABRIC_TYPE",
+                                                        item.code
+                                                    )
                                                         ? "rgb(238 118 31)"
                                                         : "black",
                                                 }}
                                                 key={i}
                                                 onClick={() =>
-                                                    this.setFilters("FABRIC_TYPE", item.code, item.value)
+                                                    this.setFilters(
+                                                        "FABRIC_TYPE",
+                                                        item.code,
+                                                        item.value
+                                                    )
                                                 }
                                             >
                                                 {item.value}
@@ -932,7 +941,6 @@ class PickDesignV2 extends Component {
                                         );
                                     })}
                             </ul>
-                        
                         </div>
                         <div className="filter-actions d-flex align-items-center">
                             <button
@@ -945,8 +953,7 @@ class PickDesignV2 extends Component {
                     </div>
                 </div>
 
-                
-                {!searching &&
+                {!searching && (
                     <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
                             Collections for you
@@ -956,7 +963,7 @@ class PickDesignV2 extends Component {
                         </h4>
                         <MyCollections myCollectionLists={collectionList} />
                     </div>
-                }
+                )}
 
                 {searching ? (
                     <div className="designs">
@@ -1023,7 +1030,7 @@ class PickDesignV2 extends Component {
                                                 <Carousel
                                                     breakPoints={breakPoints}
                                                     //  outerSpacing={5}
-                                                    itemsToShow={5}
+                                                    // itemsToShow={5}
                                                     pagination={false}
                                                 >
                                                     {data.productResponseList ? (
