@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API, HTTP_STATUS, BASE_URL } from "../constant";
-import store from "../store";
-import { REDIRECT_TO } from "../actions/types";
+import store from "../redux/store";
+import { REDIRECT_TO } from "../redux/actions/types";
 import { getToken } from "./Util";
 
 const { fs, central_auth } = API();
@@ -105,6 +105,7 @@ const routes = {
     updateStage: `${BASE_URL}/stage/`,
     completeStage: `${BASE_URL}/stage/complete/`,
 
+    // collection api
     addCollection: `${BASE_URL}/collection/add`,
     addProductToCollection: `${BASE_URL}/collection/product/add`,
     getUserCollectionList: `${BASE_URL}/collection/search/user/`,
@@ -129,9 +130,22 @@ const routes = {
     getDesignImages: `${BASE_URL}/product/doc/`,
     getFabricTypes: `${BASE_URL}/material/fabric-type/all`,
     getDesignCategories: `${BASE_URL}/category/all`,
-
     getDocumentResponse: `${BASE_URL}/product/groupwise-doc/`,
     addNewGroupDocument: `${BASE_URL}/product/document-group/add`,
+
+    // measurment api
+    getPomAndSize: `${BASE_URL}/product-measurement/pom-and-size/all`,
+    addSizeToProduct: `${BASE_URL}/product-measurement/add-size`,
+    removeSizeFromProduct: `${BASE_URL}/product-measurement/remove-size`,
+    getProductMeasurement: `${BASE_URL}/product-measurement/`,
+    addPomToProduct: `${BASE_URL}/product-measurement/add-point-of-measurement`,
+    removePomFromProduct: `${BASE_URL}/product-measurement/remove-point-of-measurement`,
+    updateCellValue: `${BASE_URL}/product-measurement/update-cell-value`,
+    addGrading: `${BASE_URL}/product-measurement/add-grading`,
+    addNewPom: `${BASE_URL}/product-measurement/point-of-measurement/add`,
+    saveAsTemplate: `${BASE_URL}/product-measurement/save-as-template`,
+    getAllTemplate: `${BASE_URL}/product-measurement/template/all`,
+    loadFromTemplate: `${BASE_URL}/product-measurement/load-from-template`,
 
     getSettings: `${BASE_URL}/setting/get/`,
 };

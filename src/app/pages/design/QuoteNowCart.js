@@ -29,7 +29,7 @@ import {
     LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
 import { _getKey, formatProductTypeWithGroup, copy } from "../../services/Util";
-import { fetchGeneralSettingsData } from "../../actions";
+import { fetchGeneralSettingsData } from "../../redux/actions";
 import { _storeData, _getProductForQuote, getTotal } from "./actions";
 
 class QuoteNowCart extends Component {
