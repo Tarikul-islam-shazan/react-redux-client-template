@@ -1,0 +1,173 @@
+.filter-bar-section{
+    background: $white;
+    max-width: 294px;
+    flex-basis: 294px;
+    margin-right: 24px;
+    opacity: 1;
+    transition: all ease-in-out .2s;
+
+    button{
+        background: transparent;
+        border: none;
+        color: $primary;
+        font-size: 12px;
+        line-height: 24px;
+    }
+
+    &.open{
+        max-width: 0;
+        margin-right: 0;
+        opacity: 0;
+    }
+    .filter-bar-top{
+        padding: 16px;
+        border-bottom: 1px solid $gray_light_02;
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        background:$white;
+        p{
+            font-size: 14px;
+            line-height: 24px;
+            color: $gray_dark_01;
+            margin-bottom: 10px;
+        }
+    }
+    .filter-content{
+        .card{
+            border-radius: 0;
+            border:none;
+            border-bottom: 1px solid $gray_light_02;
+            .card-header{
+                background: $white;
+                padding: 0;
+                border-bottom:none;
+                &::after {
+                    display: none;
+                }
+                button{
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    line-height: 24px;
+                    color: $primary;
+                    font-weight: 600;
+                    text-decoration: none;
+                    border: none;
+                    position: relative;
+                    width: 100%;
+                    text-align: left;
+                    background: $primary_light_03;
+
+                    &::after {
+                        content: '';
+                        position:absolute;
+                        width: 24px;
+                        height: 24px;
+                        right: 16px;
+                        top: 8px;
+                        background-image: url(./icons/maximize_black_24dp.png);
+                        background-size: 24px;
+                    }
+                }
+                button.collapsed{
+                    color: $gray_dark_02;
+                    font-weight: 400;
+                    background: $white;
+
+                    &::after{
+                        background-image: url(./icons/add_black_24dp.png);
+                    }
+                }
+            }
+            .card-body{
+                border:none;
+                padding: 0 16px 16px 16px;
+                .CalendarMonth_caption strong {
+                    font-weight: 600;
+                    font-size: 12px;
+                }
+                .DayPickerNavigation_rightButton__horizontalDefault {
+                    right: 10px;
+                }
+
+               .DayPickerNavigation_leftButton__horizontalDefault {
+                    left: 10px;
+                }
+                &::-webkit-scrollbar-track
+                {
+                   -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                   background-color: #F5F5F5;
+                }
+                
+               &::-webkit-scrollbar{
+                   width:5px;
+                   background-color: #F5F5F5;
+                }
+                &::-webkit-scrollbar-thumb{
+                   border-radius: 10px;
+                   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                   background-color: #F5F5F5;
+                }
+
+                .search-filter{
+                    padding-top: 10px;
+                        input{
+                            height: 32px;
+                            margin-bottom: 15px;
+                            &.DateInput_input{
+                                margin-bottom: 0;
+                                height: 20px;
+                                font-size:12px;
+                            }
+
+                        }
+                        .with-icon{
+                            .right-icon{
+                                top: 2px;
+                            }
+                        }
+                }
+                .custom-chekbox {
+                    .form-group{
+                        margin-bottom: 15px;
+                        padding-left: 10px;
+                        input{
+                            &:checked+label{
+                                &::after{
+                                    left: 7px;
+                                    top: 2px;
+                                }
+                                span{
+                                    color: $primary;
+                                }
+                            }
+                        }
+                        label{
+                            margin-bottom: 0;
+                            display: flex;
+                            span{
+                                font-size: 14px;
+                                line-height: 24px;
+                                color: $gray_dark_02;
+                            }
+                            &::before{
+                                padding: 8px;
+                                height: 20px;
+                            }
+                            img{
+                                width: 24px;
+                                height: 24px;
+                                background: $gray_light_01;
+                                padding: 2px;
+                                margin-right:8px;
+                            }
+                        }
+                    }
+                }
+            }
+            .collapse.show{
+                background: $gray_light_05;
+            }
+        }
+    }
+}
