@@ -566,6 +566,9 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
   padding: 10px 10px 15px 30px;
   box-shadow: 0 -13px 28px 16px rgba(0, 0, 0, .06);
   margin-bottom: 35px;
+  position: relative;
+  background: $white;
+  top: -290px;
   @media (max-width: 1024px) {
     padding: 15px 25px;
     margin-bottom: 0px;
