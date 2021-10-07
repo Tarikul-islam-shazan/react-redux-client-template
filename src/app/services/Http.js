@@ -70,6 +70,8 @@ const routes = {
     getInvoiceDetails: `${BASE_URL}/invoice/`,
     getNotifications: `${BASE_URL}/notification/all`,
     markNotificationRead: `${BASE_URL}/notification/mark-seen/`,
+    markNotificationUnread: `${BASE_URL}/notification/mark-unseen/`,
+    getUnseenNotificationCount: `${BASE_URL}/notification/unseen-count`,
     getSimilarDesign: `${BASE_URL}/product/similar/`,
     getProjectMembers: `${BASE_URL}/order/get-member-list/`,
 
