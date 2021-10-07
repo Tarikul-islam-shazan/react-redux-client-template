@@ -39,7 +39,7 @@ import {
    CreateSkeletons,
 } from "../../commonComponents/ProductSkeleton";
 import { ProductDetailsImgThumb } from "../../commonComponents/ProductDetailsImgThumb";
-import { fetchGeneralSettingsData } from "../../actions";
+import { fetchGeneralSettingsData } from "../../redux/actions";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -399,10 +399,15 @@ class OurDesignDetails extends Component {
    }
 
    getSliderDocuments = (productDocumentResponse) => {
-      let result = this.getListOfDocUrlFromProductDocumentResponse(productDocumentResponse, "physicalSampleResponse");
+      let result = [];
+      let physicaSampleArr = this.getListOfDocUrlFromProductDocumentResponse(productDocumentResponse, "physicalSampleResponse");
 
       if( productDocumentResponse )
          result.push(this.getDocUrlFromDocResponse(productDocumentResponse.featureImageDocResponse));
+
+      physicaSampleArr && physicaSampleArr.map( (url) => {
+         result.push( url );
+      } )
 
       return result;
    }
