@@ -148,6 +148,10 @@ class MyOrder extends Component {
     };
 
     details = (id) => {
+        let { activeTab } = this.state;
+		if ( activeTab === 'Pending Order') {
+			return toastWarning('The order is under review. Please wait till it gets to running');
+		}
         this.props.history.push("/orders/view/" + id);
     };
 

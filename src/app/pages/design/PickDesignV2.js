@@ -89,7 +89,7 @@ class PickDesignV2 extends Component {
             initialLoading: false,
             showSuggestions: false,
             responsiveFilterModal: false,
-            pagination: {},
+            pagination: 0,
             collectionList: [],
             collectionName: "",
             collectionNameError: "",
@@ -979,12 +979,7 @@ class PickDesignV2 extends Component {
                                 </a>
                             </span>
                             <span class="result">
-                                {`${pagination.value ? pagination.value : "--"}${
-                                    pagination.relation &&
-                                    pagination.relation === "GREATER_THAN_OR_EQUAL_TO"
-                                        ? "+"
-                                        : ""
-                                }`}{" "}
+                                {pagination}{" "}
                                 Designs
                             </span>
                         </h4>

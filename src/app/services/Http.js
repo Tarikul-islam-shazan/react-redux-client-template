@@ -134,6 +134,7 @@ const routes = {
     getDesignCategories: `${BASE_URL}/category/all`,
     getDocumentResponse: `${BASE_URL}/product/groupwise-doc/`,
     addNewGroupDocument: `${BASE_URL}/product/document-group/add`,
+    getOrderQuotes: `${BASE_URL}/order/quotes/`,
 
     // measurment api
     getPomAndSize: `${BASE_URL}/product-measurement/pom-and-size/all`,

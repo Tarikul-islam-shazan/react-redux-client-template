@@ -40,7 +40,8 @@ export const _getProductForQuote = async (productIds) => {
         .then(({ data }) => {
             if (data.length) {
                 data.map((product) => {
-                    if (product.colors) {
+                    if (product.colorWiseSizeQuantityPairList) {}
+                    else if (product.colors) {
                         product.colorWiseSizeQuantityPairList = product.colors.map((color) => {
                             if (product.sizeQuantityPairList) {
                                 color.sizeQuantityPairList = product.sizeQuantityPairList;
