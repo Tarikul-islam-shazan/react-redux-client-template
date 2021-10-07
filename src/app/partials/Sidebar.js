@@ -9,7 +9,7 @@ import ReactGA from "react-ga";
 import { hotjar } from "react-hotjar";
 
 import { _storeData } from "./actions";
-import { toggle, setActiveTab } from "../actions/sidebar";
+import { toggle, setActiveTab } from "../redux/actions/sidebar";
 import { NavLink } from "./NavLink";
 
 import { BASE_URL, GA_ID, hjid, hjsv } from "../constant";
@@ -148,7 +148,7 @@ class Sidebar extends Component {
                         />
                         : <></>
                       } */}
-                        
+
                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
                                 to="/designs/explore"
