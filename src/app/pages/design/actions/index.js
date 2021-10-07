@@ -128,7 +128,6 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
 
     if (isValid) {
         reqBody = {
-            // fabricType,
             productCategoryId,
             fabricType, //need to make dynamic
             fabricCompositionDetails,

@@ -318,7 +318,7 @@ class EditShareDesign extends Component {
                 .then(({ data }) => {
                     if (data.success) {
                         this.getDesignDetails(productId);
-                        toastSuccess("Updated successfully.");
+                        toastSuccess(data.message);
                         this.toggleFlag(sectionName);
                     }
                 })
@@ -378,6 +378,7 @@ class EditShareDesign extends Component {
             errors,
         } = this.state;
         let productId = this.props.match.params.id;
+
         return (
             <LoadingOverlay
                 active={this.state.loading}

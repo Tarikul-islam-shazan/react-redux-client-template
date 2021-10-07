@@ -915,7 +915,7 @@ const authUserInfo = () => {
     return userInfo;
 };
 const STATUS_NOT_ALLOWED_FOR_SELECTION = ["SOLD", "IN_PROJECT", "LOCKED"];
-const STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN = ["SOLD", "UNAVAILABLE", "IN_PROJECT", "LOCKED"];
+const STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN = ["SOLD", "IN_PROJECT", "LOCKED"];
 
 const isValidJSON = (str) => {
     try {
