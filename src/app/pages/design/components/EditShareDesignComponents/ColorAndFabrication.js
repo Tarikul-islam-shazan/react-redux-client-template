@@ -163,15 +163,14 @@ export const ColorAndFabrication = ({
                             </div>
                         </div>
 
-
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label>Fabric type*</label>
                                 <select
                                     className={`w-100 bg-gray-light ${
-                                        errors.fabricTypeIdError ? `error2` : ``
+                                        errors.fabricTypeError ? `error2` : ``
                                     }`}
-                                    name="fabricTypeId"
+                                    name="fabricType"
                                     value={data.fabricType}
                                     onClick={(e) => onChange(e.target.name, e.target.value)}
                                 >
@@ -185,20 +184,20 @@ export const ColorAndFabrication = ({
                                     })}
                                 </select>
                                 {/*<input type="text" className={errors.fabricTypeError ? 'error2' : ''} placeholder="Enter fabric type" name="fabricType" value={data.fabricType} onChange={(e) => onChange(e.target.name, e.target.value)}/>*/}
-                                {errors.fabricTypeIdError ? (
-                                    <label className="error">{errors.fabricTypeIdError}</label>
-                                ) : (
-                                    <></>
+                                {errors.fabricTypeError && (
+                                    <label className="error">{errors.fabricTypeError}</label>
                                 )}
                             </div>
                         </div>
-                        
+
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label>Fabric details*</label>
                                 <input
                                     type="text"
-                                    className={`${errors.fabricDetailsError ? `error2` : ``} bg-gray-light`}
+                                    className={`${
+                                        errors.fabricDetailsError ? `error2` : ``
+                                    } bg-gray-light`}
                                     placeholder="Enter fabric details"
                                     name="fabricCompositionDetails"
                                     value={data.fabricCompositionDetails}
@@ -224,14 +223,8 @@ export const ColorAndFabrication = ({
                                 )}
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-
-
-
-
             </div>
             <div className="view-section" style={{ display: !flag ? "block" : "none" }}>
                 <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
@@ -301,9 +294,8 @@ export const ColorAndFabrication = ({
                             </div>
                         </div>
 
-                        
                         <div className="col-md-4">
-                        <div className="form-group">
+                            <div className="form-group">
                                 <label>Color</label>
                                 {data.colorResponseList &&
                                     data.colorResponseList.map((colorObj, i) => {
@@ -321,10 +313,8 @@ export const ColorAndFabrication = ({
                                     })}
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     );
