@@ -32,7 +32,7 @@ import { Title } from "./components/EditShareDesignComponents/Title";
 import { ColorAndFabrication } from "./components/EditShareDesignComponents/ColorAndFabrication";
 import { DocumentHandler } from "./components/EditShareDesignComponents/DocumentHandler";
 import { Notes } from "./components/EditShareDesignComponents/Notes";
-import { MeasurementChart } from "./components/EditShareDesignComponents/MeasurementChart";
+import MeasurmentChartV2 from "./components/EditShareDesignComponents/MeasurmentChartV2";
 import { ImageItem } from "./components/EditShareDesignComponents/ImageItem";
 
 class EditShareDesign extends Component {
@@ -49,7 +49,7 @@ class EditShareDesign extends Component {
             editNotes: false,
             pantoneColorIdList: [],
             showProgressModal: false,
-
+            loading: false,
             uploadInProgressDocs: {},
             visibleDocType: "",
             errors: {
@@ -96,8 +96,10 @@ class EditShareDesign extends Component {
     };
 
     getDesignDetails = async (id) => {
+        this.setState({ loading: true });
         await Http.GET("getShareDesignDetails", id)
             .then(({ data }) => {
+                this.setState({ loading: false });
                 if (data) {
                     data.note = data.note
                         ? RichTextEditor.createValueFromString(data.note, "html")
@@ -129,8 +131,6 @@ class EditShareDesign extends Component {
                 }
             });
     };
-
-    //getDesignImages
 
     getDesignDocuments = async (id) => {
         await Http.GET("getDocumentResponse", id)
@@ -231,13 +231,8 @@ class EditShareDesign extends Component {
         this.setState({ designDetails });
     };
 
-    onFileSelect = async (e, docType, documentGroup) => {
+    onFileSelect = async (e, docType, documentGroup, featureImageDoc = "") => {
         let files = Array.from(e.target.files);
-        //   if (files.length) {
-        //       this.setState({
-        //           showProgressModal: true,
-        //       });
-        //   }
         await files.map((item) => {
             let data = {
                 name: item.name,
@@ -251,7 +246,7 @@ class EditShareDesign extends Component {
             reader.readAsDataURL(item);
             reader.onload = () => {
                 data.base64Str = reader.result;
-                this.uploadFile(data);
+                this.uploadFile(data, featureImageDoc);
             };
             reader.onerror = function (error) {
                 console.log("Error: ", error);
@@ -259,99 +254,24 @@ class EditShareDesign extends Component {
         });
     };
 
-    uploadFile = async (doc) => {
+    uploadFile = async (doc, featureImageDoc) => {
+        this.setState({ loading: true });
         let id = this.props.match.params.id;
-        //   let { uploadInProgressDocs, designDocuments } = this.state;
-        //   uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
-        //   await this.setState({
-        //       uploadInProgressDocs,
-        //   });
         await Http.POST("addNewGroupDocument", doc)
             .then(({ data }) => {
-                console.log("uploadDocument POST SUCCESS: ", data);
+                this.setState({ loading: false });
                 if (data.id) {
                     toastSuccess(data.message);
                     this.getDesignDocuments(id);
-                    //   let images = [];
-                    //   if (designDocuments[doc.documentType]) {
-                    //       images = designDocuments[doc.documentType];
-                    //       if (
-                    //           doc.documentType === "PRODUCT_DESIGN" &&
-                    //           designDocuments.PRODUCT_DESIGN.length
-                    //       ) {
-                    //           this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
-                    //           images = [];
-                    //       }
-                    //   }
-                    //   images = [data.payload, ...images];
-                    //   designDocuments[doc.documentType] = images;
-                    //   uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
-                    //   this.setState({
-                    //       uploadInProgressDocs,
-                    //       designDocuments,
-                    //   });
+                    if (doc.documentGroup === "FEATURE_IMAGE") {
+                        this.onFileRemove(featureImageDoc);
+                    }
                 }
             })
             .catch(({ response }) => {
                 console.log("uploadDocument ERROR: ", response);
             });
     };
-
-    //  uploadFile = async (doc) => {
-    //      let id = this.props.match.params.id;
-    //      let { uploadInProgressDocs, designDocuments } = this.state;
-    //      uploadInProgressDocs[doc.name] = { progress: 0, status: "UPLOADING" };
-    //      await this.setState({
-    //          uploadInProgressDocs,
-    //      });
-    //      Http.UPLOAD_WITH_PROGRESS("uploadDocumentInProduct", doc, id, this.showUploadProgress)
-    //          .then(({ data }) => {
-    //              console.log("uploadDocument POST SUCCESS: ", data);
-    //              if (data.id) {
-    //                  let images = [];
-    //                  if (designDocuments[doc.documentType]) {
-    //                      images = designDocuments[doc.documentType];
-    //                      if (
-    //                          doc.documentType === "PRODUCT_DESIGN" &&
-    //                          designDocuments.PRODUCT_DESIGN.length
-    //                      ) {
-    //                          this.onFileRemove(designDocuments.PRODUCT_DESIGN[0]);
-    //                          images = [];
-    //                      }
-    //                  }
-
-    //                  images = [data.payload, ...images];
-
-    //                  designDocuments[doc.documentType] = images;
-    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "SUCCESS" };
-
-    //                  this.setState({
-    //                      uploadInProgressDocs,
-    //                      designDocuments,
-    //                  });
-    //              } else {
-    //                  uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-    //                  this.setState({
-    //                      uploadInProgressDocs,
-    //                  });
-    //              }
-    //          })
-    //          .catch(({ response }) => {
-    //              console.log("uploadDocument ERROR: ", response);
-    //              uploadInProgressDocs[doc.name] = { progress: 100, status: "FAILED" };
-    //              this.setState({
-    //                  uploadInProgressDocs,
-    //              });
-    //          });
-    //  };
-
-    //  showUploadProgress = (data, doc) => {
-    //      let { uploadInProgressDocs } = this.state;
-    //      uploadInProgressDocs[doc.name].progress = (data.loaded / data.total) * 100;
-    //      this.setState({
-    //          uploadInProgressDocs,
-    //      });
-    //  };
 
     onFileRemove = (deletedDoc) => {
         let productId = this.props.match.params.id;
@@ -372,41 +292,6 @@ class EditShareDesign extends Component {
             visibleDocType: docType,
         });
     };
-
-    //  renderProgressBars = () => {
-    //      let { uploadInProgressDocs } = this.state;
-    //      let result = [];
-    //      for (const [key, data] of Object.entries(uploadInProgressDocs)) {
-    //          result.push(
-    //              <div className="row">
-    //                  <div className="col-md-4">
-    //                      <p style={{ wordBreak: "break-all" }}>{key}</p>
-    //                  </div>
-    //                  <div className="col-md-8">
-    //                      <div className="progress">
-    //                          <div
-    //                              className={`progress-bar ${
-    //                                  data.status === `SUCCESS`
-    //                                      ? `bg-success`
-    //                                      : data.status === "FAILED"
-    //                                      ? `bg-danger`
-    //                                      : ``
-    //                              }`}
-    //                              role="progressbar"
-    //                              style={{ width: `${data.progress}%` }}
-    //                              aria-valuenow={data.progress}
-    //                              aria-valuemin="0"
-    //                              aria-valuemax="100"
-    //                          >
-    //                              {data.status}
-    //                          </div>
-    //                      </div>
-    //                  </div>
-    //              </div>
-    //          );
-    //      }
-    //      return result;
-    //  };
 
     updateDetails = (sectionName) => {
         let productId = this.props.match.params.id;
@@ -492,11 +377,30 @@ class EditShareDesign extends Component {
             visibleDocType,
             errors,
         } = this.state;
-
-        console.log("RRR===TTTTTTTT===--", designDocuments);
-
+        let productId = this.props.match.params.id;
         return (
-            <>
+            <LoadingOverlay
+                active={this.state.loading}
+                styles={{
+                    overlay: (base) => ({
+                        ...base,
+                        background: LOADER_OVERLAY_BACKGROUND,
+                    }),
+                    spinner: (base) => ({
+                        ...base,
+                        width: LOADER_WIDTH,
+                        "& svg circle": {
+                            stroke: LOADER_COLOR,
+                        },
+                    }),
+                    content: (base) => ({
+                        ...base,
+                        color: LOADER_COLOR,
+                    }),
+                }}
+                spinner
+                text={LOADER_TEXT}
+            >
                 <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                     <Title
                         data={designDetails}
@@ -536,7 +440,12 @@ class EditShareDesign extends Component {
                                         ref={(input) => (this.inputElement = input)}
                                         name="PRODUCT_DESIGN"
                                         onChange={(e) =>
-                                            this.onFileSelect(e, e.target.name, "FEATURE_IMAGE")
+                                            this.onFileSelect(
+                                                e,
+                                                e.target.name,
+                                                "FEATURE_IMAGE",
+                                                designDocuments.featureImageDocResponse
+                                            )
                                         }
                                     />
                                     <div className="dlt" onClick={() => this.inputElement.click()}>
@@ -682,60 +591,6 @@ class EditShareDesign extends Component {
                             onFileSelect={(e) => this.onFileSelect(e, e.target.name, "ART_WORK")}
                             onFileRemove={this.onFileRemove}
                         />
-
-                        {/* <DocumentHandler
-                            data={
-                                designDocuments.REFERENCE_IMAGE
-                                    ? designDocuments.REFERENCE_IMAGE
-                                    : []
-                            }
-                            title="Reference images"
-                            name="REFERENCE_IMAGE"
-                            classes="upload-a-file"
-                            visibleDocType={visibleDocType}
-                            setVisibleDocType={this.setVisibleDocType}
-                            onFileSelect={this.onFileSelect}
-                            onFileRemove={this.onFileRemove}
-                        />
-
-                        <DocumentHandler
-                            data={
-                                designDocuments.EMBELLISHMENT ? designDocuments.EMBELLISHMENT : []
-                            }
-                            title="Embellishment"
-                            name="EMBELLISHMENT"
-                            classes="upload-a-file"
-                            visibleDocType={visibleDocType}
-                            setVisibleDocType={this.setVisibleDocType}
-                            onFileSelect={this.onFileSelect}
-                            onFileRemove={this.onFileRemove}
-                        />
-
-                        <DocumentHandler
-                            data={
-                                designDocuments.ACCESSORIES_DESIGN
-                                    ? designDocuments.ACCESSORIES_DESIGN
-                                    : []
-                            }
-                            title="Accessories"
-                            name="ACCESSORIES_DESIGN"
-                            classes="upload-a-file"
-                            visibleDocType={visibleDocType}
-                            setVisibleDocType={this.setVisibleDocType}
-                            onFileSelect={this.onFileSelect}
-                            onFileRemove={this.onFileRemove}
-                        />
-
-                        <DocumentHandler
-                            data={designDocuments.OTHER ? designDocuments.OTHER : []}
-                            title="Other files"
-                            name="OTHER"
-                            classes="upload-a-file"
-                            visibleDocType={visibleDocType}
-                            setVisibleDocType={this.setVisibleDocType}
-                            onFileSelect={this.onFileSelect}
-                            onFileRemove={this.onFileRemove}
-                        /> */}
                     </div>
 
                     <div className="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
@@ -841,27 +696,17 @@ class EditShareDesign extends Component {
                                 onSubmit={this.updateNoteAndSize}
                             />
 
-                            <MeasurementChart
+                            {/* <MeasurementChart
                                 data={designDetails}
                                 onChange={this.onChange}
                                 onSubmit={this.updateNoteAndSize}
-                            />
+                            /> */}
+
+                            <MeasurmentChartV2 productId={productId} />
                         </div>
                     </div>
-
-                    {/* <Modal
-                        show={showProgressModal}
-                        onHide={() =>
-                            this.setState({ showProgressModal: false, uploadInProgressDocs: {} })
-                        }
-                    >
-                        <Modal.Body>
-                            <h5>Please wait...</h5>
-                            {this.renderProgressBars()}
-                        </Modal.Body>
-                    </Modal> */}
                 </section>
-            </>
+            </LoadingOverlay>
         );
     }
 }
