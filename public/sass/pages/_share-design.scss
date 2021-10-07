@@ -340,9 +340,9 @@ input[type="text"], input[type="email"], input[type="url"], input[type="password
 .product-info{
   .product-type{
     width: 100%;
-   
     padding: 20px;
     position: relative;
+    box-shadow: 0px 0px 3px 0px #ddd;
     // @media (max-width: 1440px) {
     //   width: 240px;
     // }
