@@ -687,14 +687,14 @@ class EditShareDesign extends Component {
                             ) : (
                                 <></>
                             )}
-                            <Notes
+                            {/* <Notes
                                 data={designDetails}
                                 flag={editNotes}
                                 flagName="editNotes"
                                 toggleFlag={this.toggleFlag}
                                 onChange={this.onChange}
                                 onSubmit={this.updateNoteAndSize}
-                            />
+                            /> */}
 
                             {/* <MeasurementChart
                                 data={designDetails}
