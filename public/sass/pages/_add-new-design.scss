@@ -5,6 +5,7 @@
         p{
             margin-right: 16px;
             color: $gray_dark_02;
+            margin-bottom: 0;
         }
         select{
             width: auto;
@@ -21,6 +22,10 @@
         }
         .css-2b097c-container{
             width: 200px;
+        }
+        .nice-select{
+            width: 100px;
+            margin-right: 10px;
         }
     
     }
@@ -85,6 +90,10 @@
                         color: $gray_dark_02;
                         margin: 0 auto;
                     }
+                    .button.text{
+                        background: transparent;
+                        border: none;
+                    }
     
                 }
             }
@@ -121,5 +130,4 @@
         }
     }
 }
-
 

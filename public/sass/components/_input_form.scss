@@ -1,0 +1,38 @@
+
+.with-icon {
+  position: relative;
+  span {
+    position: absolute;
+    top: 6px;
+  }
+  &.left-icon{
+    span.left-icon{
+      left: 15px;
+    }
+    input{
+      padding-left: 40px;
+    }
+  }
+  &.right-icon{
+    span.right-icon{
+      right: 15px;
+    }
+    input{
+      padding-right: 40px;
+    }
+  }
+}
+
+.button {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  background: #452D8F;
+  color: #fff;
+  height: 40px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 0;
+  position: relative;
+  width: max-content;
+}

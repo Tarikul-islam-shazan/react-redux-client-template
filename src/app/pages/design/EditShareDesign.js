@@ -593,7 +593,7 @@ class EditShareDesign extends Component {
                         />
                     </div>
 
-                    <div className="product-info d-flex justify-content-between align-items-start flex-column flex-xl-row">
+                    <div className="product-info flex-wrap d-flex justify-content-between align-items-start flex-column flex-xl-row">
                         <ColorAndFabrication
                             data={designDetails}
                             setPickerRef={this.setPickerRef}
