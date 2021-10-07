@@ -856,8 +856,12 @@ label[aria-expanded="true"]{
     background: #F4F5F7;
   }
   .input-group{
+    .input-group-prepend{
+      cursor: disabled;
+    }
     .with-color-element {
       button {
+
         .color {
           width: 24px;
           height: 24px;
@@ -875,6 +879,7 @@ label[aria-expanded="true"]{
          z-index: 0;
          padding-top: 4px;
          font-size: 16px;
+         cursor: default;
          &:hover{
            background:#F4F5F7 !important;
          }
@@ -887,9 +892,14 @@ label[aria-expanded="true"]{
     input{
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;
+      box-shadow: none !important;
+      &:focus{
+        box-shadow: none !important;
+      }
     }
     .action-icon{
       padding: 12px;
+      cursor: pointer;
     }
   }
   .search-filter{
