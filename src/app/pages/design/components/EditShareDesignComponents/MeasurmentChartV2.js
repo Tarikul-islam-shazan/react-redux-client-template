@@ -52,8 +52,6 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
     const sizeClickRef = useRef();
     const saveRef = useRef();
 
-    console.log("ppppp iDDDDDDDDDD", productId);
-
     useClickOutside(saveRef, () => {
         setTemplateNamePopUp(!templateNamePopUp);
         setErrors({ templateNameError: "" });
@@ -347,7 +345,6 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
     };
 
     const onLoadTemplate = async (name) => {
-        console.log("BBBBBBBBBBBB", productId);
         setIsLoading(true);
         let body = {
             productId,
@@ -359,7 +356,6 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                 setIsLoading(false);
                 if (data) {
                     setProductMeasurement(data);
-                    console.log("LOADDDDDDDDD", data);
                 }
             })
             .catch(({ response }) => {
