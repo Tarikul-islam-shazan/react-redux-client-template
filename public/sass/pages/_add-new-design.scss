@@ -9,16 +9,33 @@
         }
         select{
             width: auto;
-            height: 32px;
+            height: 36px;
             margin-right: 24px;
             line-height: 16px;
             background-position: calc(100% - 12px) 13px;
             font-family: "Open Sans";
             padding: 6px 30px 6px 12px;
             border-radius: 4px;
+            background-color: #F4F5F7;
+            border: none;
+            color: $gray_dark_02;
+            display: block !important;
+            font-size: 14px;
+            &:focus{
+                outline: none;
+            }
             option{
                 font-family: "Open Sans";
             }
+        }
+        .click-box{
+            height: 36px;
+            p{
+                font-size: 14px;
+            }
+        }
+        .nice-select{
+            display: none !important;
         }
         .css-2b097c-container{
             width: 200px;
@@ -126,7 +143,7 @@
                 z-index: 1;
 
                 input{
-                    height: 36px;
+                    height: 40px;
                 }
                 .grading-value{
                     margin-right: 10px;
