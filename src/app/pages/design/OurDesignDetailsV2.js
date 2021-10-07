@@ -701,18 +701,24 @@ class OurDesignDetails extends Component {
                      <div className="info-item">
                         <div className="d-flex align-items-center mb-2">
                            <label className="w-auto m-0 font-14">Available sizes</label>
+                        </div>
+                        <span className="font-18 semibold text-uppercase">
+                           { product.sizeList && product.sizeList.toString()}
+                        </span>
+                     </div>
+
+                     <div className="info-item">
+                        <div className="d-flex align-items-center mb-2">
                            <a href="javascript:void(0)">
                               <span
-                                 className="font-14 brand-color ml-3"
+                                 className="font-14 brand-color"
                                  onClick={() => this.setState({ measurementModal: true })}
                               >
                                  Measurement Guide
                               </span>
                            </a>
                         </div>
-                        <span className="font-18 semibold text-uppercase">
-                           { product.sizeList && product.sizeList.toString()}
-                        </span>
+                        
                      </div>
 
                      <div className="info-item">
@@ -727,12 +733,12 @@ class OurDesignDetails extends Component {
                                        <li className="d-flex align-items-center">
                                           <span style={{ backgroundColor: color.hexCode }}></span>
                                           <div className="font-18 semibold ml-2 d-flex justify-content-between">
-                                             <p>{color.name}</p>
+                                             <p className="mb-0">{color.name}</p>
                                              {
                                                 color.name && color.code &&
-                                                <p> - </p>
+                                                <p className="mb-0"> - </p>
                                              }
-                                             <p>{color.code}</p>
+                                             <p className="mb-0">{color.code}</p>
                                           </div>
                                        </li>
                                     );

@@ -26,6 +26,7 @@
         .nice-select{
             width: 100px;
             margin-right: 10px;
+            color: #6A7181;
         }
     
     }
@@ -69,6 +70,18 @@
                             select{
                                 height: 36px;
                                 margin-top: 8px;
+                                height: 36px;
+                                margin-top: 8px;
+                                width: 130px;
+                                border: 1px solid #C7CED4 !important;
+                                padding: 0 10px;
+                                font-size: 14px;
+                                color: $gray_dark_02;
+                                border-radius: 2px;
+                                background-position-x: 95%;
+                                &:focus{
+                                    outline: 0;
+                                }
                             }
                             input{
                                 display: block;
@@ -76,6 +89,8 @@
                                 height: 36px;
                                 text-align: left;
                                 margin-top: 8px;
+                                border: 1px solid #C7CED4 !important;
+                                background: $white;
                             }
                         }
                     }
@@ -83,6 +98,7 @@
                         margin: 0;
                         color: $gray_dark_02;
                         cursor: pointer;
+                        font-size: 14px;
                     }
                     input{
                         width: 64px;
