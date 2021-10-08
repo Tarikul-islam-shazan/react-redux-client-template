@@ -288,11 +288,17 @@ class ProductCard extends Component {
                                     </span>
                                 )}
                                 {product.gsm && (
-                                    <span className="design-category dot">{product.gsm} GSM</span>
+                                    <span
+                                        className={`design-category ${
+                                            product.minimumOrderQuantity ? "dot" : ""
+                                        }`}
+                                    >
+                                        {product.gsm} GSM
+                                    </span>
                                 )}
 
                                 {product.composition && (
-                                    <span className="design-category dot">
+                                    <span className={`design-category ${product.gsm ? "dot" : ""}`}>
                                         {product.composition}
                                     </span>
                                 )}
