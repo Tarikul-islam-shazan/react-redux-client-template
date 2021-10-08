@@ -151,7 +151,8 @@ export const QuoteNowProduct = ({
                 </div>
             </div>
 
-            <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
+          <div className="all-sizes">
+          <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
                 <div className="sizes d-flex  align-items-center mb-2">
                     <div className="size">
                         <label className="text-center">&nbsp;</label>
@@ -211,6 +212,7 @@ export const QuoteNowProduct = ({
                 })}
                 <p className="error">{product.error}</p>
             </div>
+          </div>
         </div>
     );
 };

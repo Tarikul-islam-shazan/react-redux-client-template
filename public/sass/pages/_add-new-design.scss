@@ -1,7 +1,7 @@
 .data-table{
 
     .measurement-filter{
-        margin-top: -48px;
+        margin-top: -70px;
         p{
             margin-right: 16px;
             color: $gray_dark_02;
@@ -9,16 +9,33 @@
         }
         select{
             width: auto;
-            height: 32px;
+            height: 36px;
             margin-right: 24px;
             line-height: 16px;
             background-position: calc(100% - 12px) 13px;
             font-family: "Open Sans";
             padding: 6px 30px 6px 12px;
             border-radius: 4px;
+            background-color: #F4F5F7;
+            border: none;
+            color: $gray_dark_02;
+            display: block !important;
+            font-size: 14px;
+            &:focus{
+                outline: none;
+            }
             option{
                 font-family: "Open Sans";
             }
+        }
+        .click-box{
+            height: 36px;
+            p{
+                font-size: 14px;
+            }
+        }
+        .nice-select{
+            display: none !important;
         }
         .css-2b097c-container{
             width: 200px;
@@ -26,6 +43,7 @@
         .nice-select{
             width: 100px;
             margin-right: 10px;
+            color: #6A7181;
         }
     
     }
@@ -69,6 +87,18 @@
                             select{
                                 height: 36px;
                                 margin-top: 8px;
+                                height: 36px;
+                                margin-top: 8px;
+                                width: 130px;
+                                border: 1px solid #C7CED4 !important;
+                                padding: 0 10px;
+                                font-size: 14px;
+                                color: $gray_dark_02;
+                                border-radius: 2px;
+                                background-position-x: 95%;
+                                &:focus{
+                                    outline: 0;
+                                }
                             }
                             input{
                                 display: block;
@@ -76,6 +106,8 @@
                                 height: 36px;
                                 text-align: left;
                                 margin-top: 8px;
+                                border: 1px solid #C7CED4 !important;
+                                background: $white;
                             }
                         }
                     }
@@ -83,6 +115,7 @@
                         margin: 0;
                         color: $gray_dark_02;
                         cursor: pointer;
+                        font-size: 14px;
                     }
                     input{
                         width: 64px;
@@ -110,7 +143,7 @@
                 z-index: 1;
 
                 input{
-                    height: 36px;
+                    height: 40px;
                 }
                 .grading-value{
                     margin-right: 10px;

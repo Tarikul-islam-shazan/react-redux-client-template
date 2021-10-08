@@ -839,28 +839,6 @@ class PickDesignV2 extends Component {
                             </ul>
 
                             <ul className="list custom-scrollbar">
-                                <div className="title">Season</div>
-                                {filterOptions.seasonResponseList &&
-                                    filterOptions.seasonResponseList.map((item, i) => {
-                                        return (
-                                            <li
-                                                style={{
-                                                    color: isSelected(filters, "SEASON", item.code)
-                                                        ? "rgb(238 118 31)"
-                                                        : "black",
-                                                }}
-                                                key={i}
-                                                onClick={() =>
-                                                    this.setFilters("SEASON", item.code, item.name)
-                                                }
-                                            >
-                                                {item.name}
-                                            </li>
-                                        );
-                                    })}
-                            </ul>
-
-                            <ul className="list custom-scrollbar">
                                 <div className="title">Market</div>
                                 {filterOptions.productGroupResponseList &&
                                     filterOptions.productGroupResponseList.map((item, i) => {
@@ -874,6 +852,28 @@ class PickDesignV2 extends Component {
                                                 key={i}
                                                 onClick={() =>
                                                     this.setFilters("MARKET", item.id, item.name)
+                                                }
+                                            >
+                                                {item.name}
+                                            </li>
+                                        );
+                                    })}
+                            </ul>
+
+                            <ul className="list custom-scrollbar">
+                                <div className="title">Season</div>
+                                {filterOptions.seasonResponseList &&
+                                    filterOptions.seasonResponseList.map((item, i) => {
+                                        return (
+                                            <li
+                                                style={{
+                                                    color: isSelected(filters, "SEASON", item.code)
+                                                        ? "rgb(238 118 31)"
+                                                        : "black",
+                                                }}
+                                                key={i}
+                                                onClick={() =>
+                                                    this.setFilters("SEASON", item.code, item.name)
                                                 }
                                             >
                                                 {item.name}
@@ -956,7 +956,7 @@ class PickDesignV2 extends Component {
                 {!searching && (
                     <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
-                            Recent collections
+                            Collections for you
                             <a href={"/collections/list"}>
                                 <span className="view-all">View all</span>
                             </a>

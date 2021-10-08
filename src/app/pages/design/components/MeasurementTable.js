@@ -24,7 +24,7 @@ export class MeasurementTable extends React.Component {
   render() {
     let { data , headers, productMeasurement } = this.state;
     return(
-      <div className="data-table px-3 py-2">
+      <div className="data-table px-3 pt-2 pb-3">
 															<div className="measurement-filter mb-3 mt-0 d-flex justify-content-start align-items-center">
 																<p className="mb-0">
 																	Measurement in: <span>CM</span>

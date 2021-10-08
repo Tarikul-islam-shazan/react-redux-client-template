@@ -2808,3 +2808,15 @@ button.upload-more {
     font-size: 14px;
   }
 }
+
+.alert.alert-secondary {
+  background: transparent;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  color: #8A6FD6;
+  padding: 200px 0;
+  border-radius: 0;
+  height: 100vh;
+  border: none;
+}
