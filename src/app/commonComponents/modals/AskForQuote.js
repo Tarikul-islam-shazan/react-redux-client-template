@@ -79,7 +79,7 @@ class AskForQuote extends Component {
           productDTOList : this.props.ids.map((item,index) => {
             return({
               productCreationType : 'FROM_CATALOG',
-              id : item,
+                productId : item,
               name : "Style "+(index+1)
             })
           })

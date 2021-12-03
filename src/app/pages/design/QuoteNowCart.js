@@ -275,7 +275,7 @@ class QuoteNowCart extends Component {
                         });
                     });
                     return {
-                        id: product.id,
+                        productId: product.id,
                         total,
                         colorWiseSizeQuantityPairList: product.colorWiseSizeQuantityPairList,
                     };

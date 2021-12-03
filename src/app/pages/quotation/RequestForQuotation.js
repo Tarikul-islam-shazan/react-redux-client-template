@@ -344,11 +344,11 @@ class RequestForQuotation extends Component {
             }
             if(item.nitexDesignList){
               temp.productCreationType = 'FROM_CATALOG';
-              temp.id = item.nitexDesignList;
+              temp.productId = item.nitexDesignList;
             }
             if(item.myDesignList){
               temp.productCreationType = 'FROM_CATALOG';
-              temp.id = item.myDesignList;
+              temp.productId = item.myDesignList;
             }
             // temp.documentDTOList = [...item.designInspirationsFiles, ...item.otherFiles];
             return temp;
