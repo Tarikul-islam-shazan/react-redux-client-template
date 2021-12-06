@@ -1,0 +1,506 @@
+.buyer-dashboard-container{
+    p, h1, h2, h3, h4{
+        margin: 0;
+    }
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .welcome-message{
+        h3{
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+            padding-top: 12px;
+            color: #21242B;        
+            margin-bottom: 20px;
+        }
+    }
+    .full-journey-status{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .one-sixth{
+            width:calc(16.66% - 12px);
+            border: 1px solid #C7CED4;
+            border-radius: 4px;
+            padding: 24px 16px;
+            display: flex;
+            justify-content: space-between;
+            margin-right: 12px;
+            &:last-child{
+                margin-right: 0;
+            }
+            h3{
+                color: #6A7181;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+            }
+            span{
+                color: #6A7181;
+                font-size: 14px;
+                line-height: 20px;
+            }
+            &.sustainable-box{
+                background: #EDFDF0;
+            }
+            &.quote-order-box{
+                background: #F4F9FF;
+            }
+            &.design-box{
+                background:#F5FEFA;
+            }
+            &.delivered-box{
+                background:#FFF4FB;
+            }
+            &.order-value-box{
+                background:#FFFFF5;
+            }
+            &.supplier-box{
+                background:#F8FFFD;
+            }
+        }
+    }
+    .orders-and-quotes-status{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        justify-content: space-between;
+        .one-half{
+            width: calc(50% - 8px);
+            .orders-table{
+                height: 505px;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                &::-webkit-scrollbar-track
+                {
+                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                background-color: #F5F5F5;
+                }
+                
+                &::-webkit-scrollbar{
+                width: 8px;
+                background-color: #F5F5F5;
+                }
+                &::-webkit-scrollbar-thumb{
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                background-color: #F5F5F5;
+                }
+            }
+            &.my-orders{
+                .state-title{
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+    .state-title{
+        padding-bottom: 8px;
+        border-bottom: 1px solid $gray_light_01;
+        h3{
+            font-size: 18px;
+            line-height: 28px;
+            color: #000000;
+        }
+        a{
+            font-size: 16px;
+            line-height: 24px;
+            color: $primary;
+            margin-left: 24px;
+            position: relative;
+            &::after{
+                content: '';
+                position: absolute;
+                left: -12px;
+                top: 50%;
+                height: 11px;
+                width: 1px;
+                background: #9AA1AF;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    .quick-actions{
+        margin-top: 32px;
+        .quick-actions-table{
+            height: 507px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+                &::-webkit-scrollbar-track
+                {
+                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                background-color: #F5F5F5;
+                }
+                
+                &::-webkit-scrollbar{
+                width: 8px;
+                background-color: #F5F5F5;
+                }
+                &::-webkit-scrollbar-thumb{
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                background-color: #F5F5F5;
+                }
+            table{
+                &.table{
+                    tr{
+                        td{
+                            &:first-child{
+                                width: 400px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    table{
+        margin-top: -1px;
+        thead{
+            
+            th{
+                position:sticky;
+                top: 0;
+                left: 0;
+               
+            }
+        }
+    }
+}
+
+
+.progress-info-team-brand {
+    .one-half {
+      flex-basis: calc(50% - 12px) !important;
+      border-radius: 4px;
+  
+      &:first-child {
+        margin-right: 12px;
+      }
+      &:last-child {
+        margin-left: 12px;
+      }
+    }
+    .team-performance-top {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #C7CED4;
+      margin-bottom: 20px;
+  
+      .css-1va3kn4-control{
+        border: 1px solid #C7CED4 !important;
+        height: 36px;
+        border-radius:2px;
+        font-size: 14px;
+        .css-g1d714-ValueContainer{
+          position: relative;
+          top: -2px;
+        }
+      }
+      .css-ay7dqj-control{
+        border-color: $gray_light_01;
+        border-radius:4px;
+        box-shadow: none;
+        height: 36px;
+        font-size: 14px;
+   
+        .css-g1d714-ValueContainer{
+          position: relative;
+          top: -2px;
+        }
+      }
+  
+    }
+    .one-half {
+      background: $white;
+      border: 1px solid $gray_light_01;
+      padding: 28px 20px;
+    }
+    .order-status {
+      li {
+        margin-right: 12px;
+      }
+    }
+    .progress-identifier {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      margin-right: 4px;
+      margin-bottom: -1px;
+    }
+    .green {
+      background: $ontime;
+    }
+    .blue {
+      background: $pending;
+    }
+    .red {
+      background: $overdue;
+    }
+    .ahead-schedule {
+      background: $ahead_of_schedule;
+    }
+    .single-person-progress {
+      height: 60px;
+    }
+    .bg-warning {
+      background: $behind_the_schedule !important;
+    }
+    .progress-section {
+      height: 370px;
+      overflow: auto;
+      .person-info {
+        width: 190px;
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 100px;
+          margin-right: 8px;
+        }
+        p {
+          margin-bottom: 0 !important;
+          a {
+            font-size: 14px;
+            color: $gray_dark_02;
+          }
+        }
+      }
+    }
+    .brand-satisfaction {
+      .person-info {
+        width: 214px;
+  
+        img {
+          width: 56px;
+          height: 24px;
+          object-fit: contain;
+        }
+      }
+      .progress-info {
+        width: calc(100% - 214px);
+      }
+    }
+  }
+  
+  .progress-info {
+    width: calc(100% - 190px);
+  
+    .progress {
+      width: 100%;
+      height: 14px;
+      border-radius: 0;
+      .progress-bar {
+        border: none !important;
+        position: unset;
+      }
+  
+      &::after {
+        display: none;
+      }
+    }
+    .completed {
+      background: $ontime;
+    }
+    .pending {
+      background: $pending;
+    }
+    .overdue {
+      background: $overdue;
+    }
+    .ahead-schedule {
+      background: $ahead_of_schedule;
+    }
+    .progress-info .bg-warning {
+      background: $behind_the_schedule !important;
+    }
+  }
+  
+  .running-orders-info-section {
+    background: $white;
+    border: 1px solid $gray_light_01;
+    padding: 24px 20px;
+    border-radius: 4px;
+    .single-person-progress {
+      height: 80px;
+    }
+    .four-images {
+      flex-wrap: wrap;
+      width: 54px ;
+      .single-one {
+        background: $gray_light_04;
+        width: 23px;
+        height: 26px;
+        margin-left: 2px;
+        margin-bottom: 2px;
+  
+        img {
+          width: 23px;
+          height: 26px;
+          object-fit: contain;
+          margin: 0;
+          border-radius: 0;
+          border: 1px solid $gray_light_03;
+        }
+      }
+    }
+    .progress-section {
+      height: 400px;
+      .single-person-progress {
+        .person-info {
+          width: 420px;
+          .order-name {
+            width: 200px;
+            margin-left: 16px;
+            color: $gray_dark_02;
+          }
+          .assigned-person {
+            width: 30px;
+            margin-left: 12px;
+            color: $gray_dark_03;
+            img{
+                width: 24px;
+                height: 24px;
+                object-fit: cover;
+                border-radius: 100px;
+            }
+          }
+          .date-info {
+            width: 100px;
+            margin: 0 12px;
+            color: $gray_dark_01;
+            .date-count {
+              font-weight: 600;
+            }
+          }
+          p {
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
+        .progress-info {
+          width: calc(100% - 420px);
+        }
+      }
+    }
+  }
+  
+  .overdue-tasks-section {
+    background: $white;
+    border: 1px solid $gray_light_01;
+    margin-top: 24px;
+    border-radius: 4px;
+    padding: 0 20px;
+  
+    .month-count {
+      font-weight: 600;
+    }
+  
+    .team-performance-top {
+      padding: 16px 0px;
+      .col-title {
+        h3 {
+          margin: 0;
+          padding: 0;
+        }
+      }
+      .order-filter {
+        select {
+          margin-left: 8px;
+        }
+  
+      }
+    }
+    
+    .overdue-tasks-details-section {
+      border-top: 1px solid $gray_light_01;
+      overflow-x: auto;
+  
+      .single-date-wise-column {
+        width: 260px;
+        min-width: 260px;
+        height: 700px;
+        border-right: 1px solid $gray_light_01;
+  
+        .day-status {
+          height: 90px;
+          padding: 24px 0;
+          border-bottom: 1px solid $gray_light_01;
+          h4 {
+            color: $gray_dark_02;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 20px;
+            padding-top: 4px;
+          }
+          .mini-fonts {
+            margin-bottom: 0;
+          }
+        }
+        .task-cards {
+          padding: 16px 12px;
+          overflow-y: auto;
+          height: 610px;
+          .single-card {
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 16px;
+  
+            &:hover {
+              box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
+              background: $primary_light_05;
+            }
+            &:last-child {
+              margin-bottom: 0;
+            }
+  
+            .mini-fonts {
+              color: $gray_dark_01;
+              margin-bottom: 10px;
+            }
+  
+            ul {
+              li {
+                font-size: 14px;
+                line-height: 20px;
+                display: inline-block;
+                padding-right: 12px;
+                color: $gray_dark_03;
+                position: relative;
+                a {
+                  color: $gray_dark_03;
+                  font-size: 14px;
+                }
+                &::after {
+                  content: "";
+                  position: absolute;
+                  right: 4px;
+                  top: 50%;
+                  height: 2px;
+                  width: 2px;
+                  background: $gray_dark_03;
+                  border-radius: 100px;
+                  transform: translateY(-50%);
+                }
+                &:last-child {
+                  &::after {
+                    display: none;
+                  }
+                }
+              }
+            }
+            img {
+              height: 24px;
+              width: 24px;
+              border-radius: 100px;
+            }
+          }
+        }
+      }
+    }
+  }
+  

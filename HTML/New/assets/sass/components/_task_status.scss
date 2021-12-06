@@ -1,0 +1,50 @@
+.task-status-section{
+    .task-status{
+        margin-bottom: 15px;
+    }
+}
+
+.task-status{
+    .status-btn{
+        font-size: 14px;
+        line-height: 20px;
+        border: 1px solid $gray_light_02;
+        padding: 1px 12px;
+        border-radius: 100px;
+        display: inline-block;
+
+        svg{
+            position: relative;
+            top: -1px;
+            margin-left: 4px;
+        }
+    }
+}
+.task-status.purple{
+    color: $primary;
+    .status-btn{
+        background: $primary_light_04;
+        border: 1px solid $primary_light_02;
+    }
+}
+.task-status.green{
+    color: $green;
+    .status-btn{
+        background: $green_light_02;
+        border: 1px solid $green_light_01;
+    }
+}
+.task-status.yellow{
+    color: $yellow_dark_01;
+    .status-btn{
+        background: $yellow_light_02;
+        border: 1px solid $yellow_light_01;
+    }
+}
+.task-status.red{
+    color: $red;
+    .status-btn{
+        background: $red_light_02;
+        border: 1px solid $red_light_01;
+    }
+}

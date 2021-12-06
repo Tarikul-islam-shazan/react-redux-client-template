@@ -29,7 +29,9 @@
 @import
 'components/button',
 'components/uploder',
-'components/modal-positions';
+'components/modal-positions',
+'components/table',
+'components/task_status';
 
 // 6. Page-specific styles
 @import
@@ -44,7 +46,8 @@
 'pages/role-management',
 'pages/collection',
 'pages/task-conversation',
-'pages/team-member-add';
+'pages/team-member-add',
+'pages/buyer-dashboard';
 
 
 
