@@ -953,7 +953,7 @@ class PickDesignV2 extends Component {
                     </div>
                 </div>
 
-                {!searching && (
+                {!searching && collectionList && collectionList.length > 0 && (
                     <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
                             Collections for you
