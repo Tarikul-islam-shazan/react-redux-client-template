@@ -178,11 +178,11 @@ export const OrderItem = ({ product, remove }) => {
                   <div className="features d-flex flex-md-column">
                      <div className="info-item mt-2">
                         <label className="">(Per Piece)</label>
-                        <h5 className="font-18 semibold">${product.price}</h5>
+                        <h5 className="font-18 semibold">${product.designWiseBuyerPrice}</h5>
                      </div>
                      <div className="info-item">
                         <label className="">Total price</label>
-                        <h5 className="font-18 semibold">${product.price * product.quantity}</h5>
+                        <h5 className="font-18 semibold">${product.designWiseBuyerPrice * product.quantity}</h5>
                      </div>
                   </div>
                </div>
