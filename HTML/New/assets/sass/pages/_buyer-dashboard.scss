@@ -519,6 +519,34 @@
           &.my-orders{
             margin-bottom: 24px;
           }
+          &.my-quotes{
+            table{
+              &.table{
+                tr{
+                  td{
+                    
+                    &:nth-child(2){
+                      span{
+                        width: 90px;
+                        display: inline-block;
+                      }
+                    }
+                    &:nth-child(3){
+                      .task-status{
+                        &.purple{
+                          span{
+                        width: 112px;
+                        display: inline-block;
+                      }
+                        }
+                      }
+                      
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
       .performence-status{
@@ -535,6 +563,8 @@
           .single-person-progress {
             flex-wrap: wrap;
             margin-bottom: 12px;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
+            padding-bottom: 12px;
             .person-info{
               width: 100%;
               p{
@@ -562,6 +592,34 @@
       .progress-info-team-brand{
         .team-performance-top{
           margin-bottom: 0;
+        }
+      }
+      .quick-actions{
+        table{
+          &.table{
+            tr{
+              td{
+                &:nth-child(2){
+                  span{
+                    width: 90px;
+                    display: inline-block;
+                  }
+                }
+                &:nth-child(3){
+                  span{
+                    width: 112px;
+                    display: inline-block;
+                  }
+                }
+                &:nth-child(4){
+                  span{
+                    width: 130px;
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+          }
         }
       }
       

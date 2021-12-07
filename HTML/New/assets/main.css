@@ -7797,6 +7797,12 @@ input.date-range-picker {
       margin: 0; }
       .buyer-dashboard-container .orders-and-quotes-status .one-half.my-orders {
         margin-bottom: 24px; }
+      .buyer-dashboard-container .orders-and-quotes-status .one-half.my-quotes table.table tr td:nth-child(2) span {
+        width: 90px;
+        display: inline-block; }
+      .buyer-dashboard-container .orders-and-quotes-status .one-half.my-quotes table.table tr td:nth-child(3) .task-status.purple span {
+        width: 112px;
+        display: inline-block; }
   .buyer-dashboard-container .performence-status .order-status {
     flex-wrap: wrap; }
     .buyer-dashboard-container .performence-status .order-status li {
@@ -7805,7 +7811,9 @@ input.date-range-picker {
     padding: 16px; }
     .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress {
       flex-wrap: wrap;
-      margin-bottom: 12px; }
+      margin-bottom: 12px;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
+      padding-bottom: 12px; }
       .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info {
         width: 100%; }
         .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info p {
@@ -7822,7 +7830,16 @@ input.date-range-picker {
         .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .progress-info .assigned-person {
           margin-left: 0; }
   .buyer-dashboard-container .progress-info-team-brand .team-performance-top {
-    margin-bottom: 0; } }
+    margin-bottom: 0; }
+  .buyer-dashboard-container .quick-actions table.table tr td:nth-child(2) span {
+    width: 90px;
+    display: inline-block; }
+  .buyer-dashboard-container .quick-actions table.table tr td:nth-child(3) span {
+    width: 112px;
+    display: inline-block; }
+  .buyer-dashboard-container .quick-actions table.table tr td:nth-child(4) span {
+    width: 130px;
+    display: inline-block; } }
 .stepper .form-group {
   margin-bottom: 25px; }
 
