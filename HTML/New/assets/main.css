@@ -7490,8 +7490,11 @@ input.date-range-picker {
     .buyer-dashboard-container .full-journey-status .one-sixth h3 {
       color: #6A7181;
       font-weight: 600;
-      font-size: 16px;
-      line-height: 24px; }
+      font-size: 24px;
+      line-height: 32px; }
+      .buyer-dashboard-container .full-journey-status .one-sixth h3 span {
+        font-size: 16px;
+        line-height: 24px; }
     .buyer-dashboard-container .full-journey-status .one-sixth span {
       color: #6A7181;
       font-size: 14px;
@@ -7530,6 +7533,8 @@ input.date-range-picker {
         border-radius: 10px;
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         background-color: #F5F5F5; }
+      .buyer-dashboard-container .orders-and-quotes-status .one-half .orders-table table tr td:nth-child(3) {
+        width: 144px; }
     .buyer-dashboard-container .orders-and-quotes-status .one-half.my-orders .state-title {
       border-bottom: none; }
 .buyer-dashboard-container .state-title {
@@ -7578,6 +7583,9 @@ input.date-range-picker {
     position: sticky;
     top: 0;
     left: 0; }
+  .buyer-dashboard-container table tr td .image-with-title {
+    display: flex;
+    align-items: center; }
 
 .progress-info-team-brand .one-half {
   flex-basis: calc(50% - 12px) !important;
@@ -7744,70 +7752,77 @@ input.date-range-picker {
       padding: 0; }
     .overdue-tasks-section .team-performance-top .order-filter select {
       margin-left: 8px; }
-  .overdue-tasks-section .overdue-tasks-details-section {
-    border-top: 1px solid #E4E7EB;
-    overflow-x: auto; }
-    .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column {
-      width: 260px;
-      min-width: 260px;
-      height: 700px;
-      border-right: 1px solid #E4E7EB; }
-      .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .day-status {
-        height: 90px;
-        padding: 24px 0;
-        border-bottom: 1px solid #E4E7EB; }
-        .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .day-status h4 {
-          color: #6A7181;
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 20px;
-          padding-top: 4px; }
-        .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .day-status .mini-fonts {
-          margin-bottom: 0; }
-      .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards {
-        padding: 16px 12px;
-        overflow-y: auto;
-        height: 610px; }
-        .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card {
-          padding: 12px;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-bottom: 16px; }
-          .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card:hover {
-            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
-            background: #FBFAFE; }
-          .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card:last-child {
-            margin-bottom: 0; }
-          .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card .mini-fonts {
-            color: #21242B;
-            margin-bottom: 10px; }
-          .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card ul li {
-            font-size: 14px;
-            line-height: 20px;
-            display: inline-block;
-            padding-right: 12px;
-            color: #9AA1AF;
-            position: relative; }
-            .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card ul li a {
-              color: #9AA1AF;
-              font-size: 14px; }
-            .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card ul li::after {
-              content: "";
-              position: absolute;
-              right: 4px;
-              top: 50%;
-              height: 2px;
-              width: 2px;
-              background: #9AA1AF;
-              border-radius: 100px;
-              transform: translateY(-50%); }
-            .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card ul li:last-child::after {
-              display: none; }
-          .overdue-tasks-section .overdue-tasks-details-section .single-date-wise-column .task-cards .single-card img {
-            height: 24px;
-            width: 24px;
-            border-radius: 100px; }
 
+@media only screen and (max-width: 1366px) {
+  .buyer-dashboard-container .full-journey-status .one-sixth span {
+    font-size: 13px; }
+
+  .running-orders-info-section .progress-section .single-person-progress .person-info {
+    width: 360px; }
+    .running-orders-info-section .progress-section .single-person-progress .person-info .order-name {
+      margin-left: 12px;
+      width: 150px; }
+  .running-orders-info-section .progress-section .single-person-progress .progress-info {
+    width: calc(100% - 360px); } }
+@media only screen and (max-width: 1024px) {
+  .buyer-dashboard-container .full-journey-status .one-sixth {
+    width: calc(33.33% - 12px);
+    margin-bottom: 12px; }
+    .buyer-dashboard-container .full-journey-status .one-sixth:nth-child(3) {
+      margin-right: 0; }
+  .buyer-dashboard-container .orders-and-quotes-status {
+    margin-top: 24px; }
+  .buyer-dashboard-container .orders-and-quotes-status .one-half {
+    width: 100%;
+    margin: 0; }
+    .buyer-dashboard-container .orders-and-quotes-status .one-half.my-orders {
+      margin-bottom: 24px; } }
+@media only screen and (max-width: 520px) {
+  .buyer-dashboard-container .full-journey-status .one-sixth {
+    width: calc(50% - 4px);
+    margin-bottom: 8px;
+    margin-right: 8px;
+    position: relative; }
+    .buyer-dashboard-container .full-journey-status .one-sixth:nth-child(even) {
+      margin-right: 0; }
+    .buyer-dashboard-container .full-journey-status .one-sixth img {
+      width: 28px;
+      position: absolute;
+      right: 20px;
+      top: 20px; }
+  .buyer-dashboard-container .orders-and-quotes-status {
+    margin-top: 16px; }
+    .buyer-dashboard-container .orders-and-quotes-status .one-half {
+      width: 100%;
+      margin: 0; }
+      .buyer-dashboard-container .orders-and-quotes-status .one-half.my-orders {
+        margin-bottom: 24px; }
+  .buyer-dashboard-container .performence-status .order-status {
+    flex-wrap: wrap; }
+    .buyer-dashboard-container .performence-status .order-status li {
+      font-size: 13px; }
+  .buyer-dashboard-container .running-orders-info-section {
+    padding: 16px; }
+    .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress {
+      flex-wrap: wrap;
+      margin-bottom: 12px; }
+      .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info {
+        width: 100%; }
+        .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info p {
+          font-size: 12px;
+          line-height: 16px; }
+        .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info .order-name {
+          margin-left: 8px;
+          width: 130px; }
+        .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .person-info .date-info {
+          width: 74px;
+          margin-right: 0; }
+      .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .progress-info {
+        width: 100%; }
+        .buyer-dashboard-container .running-orders-info-section .progress-section .single-person-progress .progress-info .assigned-person {
+          margin-left: 0; }
+  .buyer-dashboard-container .progress-info-team-brand .team-performance-top {
+    margin-bottom: 0; } }
 .stepper .form-group {
   margin-bottom: 25px; }
 

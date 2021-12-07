@@ -36,8 +36,12 @@
             h3{
                 color: #6A7181;
                 font-weight: 600;
-                font-size: 16px;
-                line-height: 24px;
+                font-size: 24px;
+                line-height: 32px;
+                span{
+                  font-size: 16px;
+                  line-height: 24px;
+                }
             }
             span{
                 color: #6A7181;
@@ -91,6 +95,16 @@
                 -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
                 background-color: #F5F5F5;
                 }
+                table{
+                  tr{
+                    td{
+                      &:nth-child(3){
+                        width: 144px;
+                      }
+                    }
+                  }
+                }
+                
             }
             &.my-orders{
                 .state-title{
@@ -162,13 +176,19 @@
     table{
         margin-top: -1px;
         thead{
-            
             th{
                 position:sticky;
                 top: 0;
                 left: 0;
-               
             }
+        }
+        tr{
+          td{
+            .image-with-title{
+              display: flex;
+              align-items: center;
+            }
+          }
         }
     }
 }
@@ -414,93 +434,137 @@
   
       }
     }
-    
-    .overdue-tasks-details-section {
-      border-top: 1px solid $gray_light_01;
-      overflow-x: auto;
   
-      .single-date-wise-column {
-        width: 260px;
-        min-width: 260px;
-        height: 700px;
-        border-right: 1px solid $gray_light_01;
+  }
   
-        .day-status {
-          height: 90px;
-          padding: 24px 0;
-          border-bottom: 1px solid $gray_light_01;
-          h4 {
-            color: $gray_dark_02;
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 20px;
-            padding-top: 4px;
-          }
-          .mini-fonts {
-            margin-bottom: 0;
+
+  @media only screen and (max-width: 1366px) {
+    .buyer-dashboard-container{
+      .full-journey-status{
+        .one-sixth{
+          span{
+            font-size: 13px;
           }
         }
-        .task-cards {
-          padding: 16px 12px;
-          overflow-y: auto;
-          height: 610px;
-          .single-card {
-            padding: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 16px;
-  
-            &:hover {
-              box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
-              background: $primary_light_05;
+      }
+    }
+    .running-orders-info-section {
+      .progress-section {
+        .single-person-progress {
+          .person-info{
+            width: 360px;
+            .order-name{
+              margin-left: 12px;
+              width: 150px;
             }
-            &:last-child {
-              margin-bottom: 0;
-            }
-  
-            .mini-fonts {
-              color: $gray_dark_01;
-              margin-bottom: 10px;
-            }
-  
-            ul {
-              li {
-                font-size: 14px;
-                line-height: 20px;
-                display: inline-block;
-                padding-right: 12px;
-                color: $gray_dark_03;
-                position: relative;
-                a {
-                  color: $gray_dark_03;
-                  font-size: 14px;
-                }
-                &::after {
-                  content: "";
-                  position: absolute;
-                  right: 4px;
-                  top: 50%;
-                  height: 2px;
-                  width: 2px;
-                  background: $gray_dark_03;
-                  border-radius: 100px;
-                  transform: translateY(-50%);
-                }
-                &:last-child {
-                  &::after {
-                    display: none;
-                  }
-                }
-              }
-            }
-            img {
-              height: 24px;
-              width: 24px;
-              border-radius: 100px;
-            }
+          }
+          .progress-info {
+            width: calc(100% - 360px);
           }
         }
       }
     }
   }
-  
+  @media only screen and (max-width: 1024px){
+    .buyer-dashboard-container{
+      .full-journey-status {
+        .one-sixth{
+          width: calc(33.33% - 12px);
+          margin-bottom: 12px;
+          &:nth-child(3){
+            margin-right: 0;
+          }
+        }
+      }
+      .orders-and-quotes-status{
+        margin-top: 24px;
+      }
+      .orders-and-quotes-status{
+        .one-half{
+          width: 100%;
+          margin: 0;
+          &.my-orders{
+            margin-bottom: 24px;
+          }
+        }
+      }
+    }
+    
+  }
+
+  @media only screen and (max-width: 520px){
+    .buyer-dashboard-container{
+      .full-journey-status {
+        .one-sixth{
+          width: calc(50% - 4px);
+          margin-bottom: 8px;
+          margin-right: 8px;
+          position: relative;
+          &:nth-child(even){
+            margin-right: 0;
+          }
+          img{
+            width: 28px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+          }
+        }
+      }
+      .orders-and-quotes-status{
+        margin-top: 16px;
+        .one-half{
+          width: 100%;
+          margin: 0;
+          &.my-orders{
+            margin-bottom: 24px;
+          }
+        }
+      }
+      .performence-status{
+        .order-status{
+          flex-wrap: wrap;
+          li{
+            font-size: 13px;
+          }
+        }
+      }
+      .running-orders-info-section{
+        padding: 16px;
+        .progress-section {
+          .single-person-progress {
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            .person-info{
+              width: 100%;
+              p{
+                font-size: 12px;
+                line-height: 16px;
+              }
+              .order-name{
+                margin-left: 8px;
+                width: 130px;
+              }
+              .date-info{
+                width: 74px;
+                margin-right: 0;
+              }
+            }
+            .progress-info {
+              width:100%;
+              .assigned-person{
+                margin-left: 0;
+              }
+            }
+          }
+        }
+      }
+      .progress-info-team-brand{
+        .team-performance-top{
+          margin-bottom: 0;
+        }
+      }
+      
+    }
+    
+  }
