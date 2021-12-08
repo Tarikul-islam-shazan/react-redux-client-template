@@ -623,6 +623,19 @@ table.w-100.p-size-table input {
   }
 }
 
+@media only screen and (max-width:1440px) {
+  .collection-type-container{
+    .collection-type-item {
+      .product-img-container {
+        .prev-img-thumb {
+          img{
+            height: calc(200px / 2 - 5px);
+          }
+        }
+      }
+    }
+  }
+}
 @media only screen and (max-width:1024px) {
   .collection-type-container{
     .collection-type-item {
