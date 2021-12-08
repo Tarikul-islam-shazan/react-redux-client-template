@@ -835,7 +835,7 @@ class ConfirmPayment extends Component {
                             </svg>
                         </div>
                         <div className="tab-price font-weight-bold">
-                            ${invoice.priceBreakDown ? invoice.priceBreakDown.grandTotal : ""}
+                            ${invoice.amount ? invoice.amount : ""}
                         </div>
                     </div>
                     <div className="details">
@@ -852,7 +852,7 @@ class ConfirmPayment extends Component {
                                         >
                                             {item.itemName}
                                             <strong className="font-weight-bold font-18">
-                                                ${item.price}
+                                                ${item.designWiseBuyerPrice}
                                             </strong>
                                         </div>
                                     );
@@ -866,8 +866,8 @@ class ConfirmPayment extends Component {
                                     Sub total
                                     <strong className="font-weight-bold font-18">
                                         $
-                                        {invoice.priceBreakDown
-                                            ? invoice.priceBreakDown.subTotal
+                                        {invoice.amount
+                                            ? invoice.amount
                                             : ""}
                                     </strong>
                                 </div>
@@ -888,8 +888,8 @@ class ConfirmPayment extends Component {
                                     Grand total
                                     <strong className="font-weight-bold font-18">
                                         $
-                                        {invoice.priceBreakDown
-                                            ? invoice.priceBreakDown.grandTotal
+                                        {invoice.amount
+                                            ? invoice.amount
                                             : ""}
                                     </strong>
                                 </div>

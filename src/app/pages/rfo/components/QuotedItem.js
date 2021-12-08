@@ -134,7 +134,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             letter-spacing="0.03em"
                         >
                             <tspan x="0" y="0">
-                                {quote.price ? quote.price : `—————`}
+                                {quote.designWiseBuyerPrice ? quote.designWiseBuyerPrice : `—————`}
                             </tspan>
                         </text>
                     </g>
@@ -424,7 +424,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                         <div className="pricewillbeupdated pt-2 pb-3">
                             <div>
                                 <strong className="font-30">
-                                    ${quote.price ? quote.price : `—————`}
+                                    ${quote.designWiseBuyerPrice ? quote.designWiseBuyerPrice : `—————`}
                                 </strong>
                                 <br />
                                 <span className="cursor-pointer font-14">
@@ -439,7 +439,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
             ) : quote.status === "PRODUCT_SOLD" ? (
                 <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
                     <div className="text-center">
-                        {!quote.price ? (
+                        {!quote.designWiseBuyerPrice ? (
                             <span className="font-14">
                                 Price will be updated
                                 <br />
@@ -461,7 +461,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                 <div className="pricewillbeupdated pt-2 pb-3">
                                     <div>
                                         <strong className="font-30">
-                                            ${quote.price ? quote.price : `—————`}
+                                            ${quote.designWiseBuyerPrice ? quote.designWiseBuyerPrice : `—————`}
                                         </strong>
                                         <br />
                                         <span className="cursor-pointer font-14">
@@ -480,7 +480,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     <div className="text-center">
                         <span className="font-15 valid-till">Price confirmed</span>
                         <br />
-                        <strong className="font-30">${quote.price}</strong>
+                        <strong className="font-30">${quote.designWiseBuyerPrice}</strong>
                         <br />
                         <span className="cursor-pointer font-14">
                             /Unit

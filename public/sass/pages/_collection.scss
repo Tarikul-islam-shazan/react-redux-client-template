@@ -194,7 +194,7 @@ ul.existing-item{
         margin-left: 10px;
         max-height: 312px;
         img{
-          height: calc(100% / 2 - 5px);
+          height: calc(290px / 2 - 5px);
           object-fit: cover;
           background: #F2F2F2;
         }
@@ -215,6 +215,11 @@ ul.existing-item{
     margin-bottom: 20px;
     &:nth-child(even){
       margin-left: 0px;
+    }
+  }
+  .font-16{
+    span{
+      font-weight: 600;
     }
   }
   }

@@ -117,7 +117,7 @@ class ConfirmOrder extends Component {
         const getTotalPrice = (order) => {
             if (order.productResponseList) {
                 let total = order.productResponseList.reduce((total, pair) => {
-                    return total + pair.price * pair.quantity;
+                    return total + pair.designWiseBuyerPrice * pair.quantity;
                 }, 0);
                 return parseFloat(total);
             }
@@ -284,7 +284,7 @@ class ConfirmOrder extends Component {
                                                         >
                                                             {item.itemName}
                                                             <strong className="semibold font-18">
-                                                                ${item.price}
+                                                                ${item.designWiseBuyerPrice}
                                                             </strong>
                                                         </div>
                                                     );
