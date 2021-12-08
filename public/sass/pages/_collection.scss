@@ -617,3 +617,31 @@ table.w-100.p-size-table input {
     outline: 0;
   }
 }
+
+@media only screen and (max-width:1024px) {
+  .collection-type-container{
+    .collection-type-item {
+      .product-img-container {
+        .prev-img-thumb {
+          img{
+            height: calc(190px / 2 - 5px);
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width:767px) {
+  .collection-type-container{
+    .collection-type-item {
+      .product-img-container {
+        .prev-img-thumb {
+          img{
+            height: calc(220px / 2 - 5px);
+          }
+        }
+      }
+    }
+  }
+}
+
