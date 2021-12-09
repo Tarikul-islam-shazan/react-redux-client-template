@@ -228,7 +228,7 @@ class ConfirmPayment extends Component {
                 .then(({ data }) => {
                     if (data.success) {
                         toastSuccess(data.message);
-                        this.props.history.push("/orders/my-orders");
+                        this.props.history.push("/orders/my-orders?tab=pending");
                     } else {
                         toastError(data.message);
                     }
@@ -290,7 +290,7 @@ class ConfirmPayment extends Component {
             .then(({ data }) => {
                 if (data.success) {
                     toastSuccess(data.message);
-                    this.props.history.push("/orders/my-orders");
+                    this.props.history.push("/orders/my-orders?tab=pending");
                 } else {
                     this.setState({
                         loading: false,
@@ -315,7 +315,7 @@ class ConfirmPayment extends Component {
                 this.setState({ loading: false });
                 if (data.success) {
                     toastSuccess(data.message);
-                    this.props.history.push("/orders/my-orders");
+                    this.props.history.push("/orders/my-orders?tab=pending");
                 } else {
                     toastError(data.message);
                 }
@@ -386,11 +386,11 @@ class ConfirmPayment extends Component {
                     </div>
 
                     <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">
-                        Order ID: <strong>{order.orderId}</strong>{" "}
-                        <span className="result d-flex">
+                        Order ID: <strong>{order.orderRefNumber}</strong>{" "}
+                        {/* <span className="result d-flex">
                             Delivery date:{" "}
                             <div className="text-black ml-2 semibold"> {order.deliveryDate}</div>
-                        </span>
+                        </span> */}
                     </h4>
                     <h4 className="mb-3 font-weight-normal pc-step">
                         <span>Payment (Step 2 of 2)</span>

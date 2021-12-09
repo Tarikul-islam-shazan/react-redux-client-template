@@ -85,6 +85,15 @@ class MyOrder extends Component {
 
     componentDidMount = async () => {
         document.title = "My orders with Nitex - The easiest clothing";
+        const query = new URLSearchParams(this.props.location.search);
+        const tab = query.get('tab');
+        if (tab === 'pending') {
+            const tabName = 'Pending Order';
+            this.setState({ activeTab: tabName, isPendingTab: true });
+            this.renderList(0, tabName);
+        } else {
+            this.renderList(0, this.state.activeTab);
+        }
         window.addEventListener("scroll", this.handleScroll);
         this.renderList(0, this.state.activeTab);
         let userInfo = await localStorage.getItem("userInfo");
