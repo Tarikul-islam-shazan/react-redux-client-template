@@ -39,8 +39,6 @@ const routes = {
     likeProduct: `${BASE_URL}/product/like/`, //post
     unlikeProduct: `${BASE_URL}/product/unlike/`, //post
     updateProductStatus: `${BASE_URL}/product/update-product-status/`, //post
-    getDashboardData: `${BASE_URL}/dashboard/`, // GET
-    getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
     getExploreDesignLanding: `${BASE_URL}/product/explore-design`, // GET called initially for landing data
     getExploreDesignFilterOptions: `${BASE_URL}/product/search/filter-options`,
     getSearchSuggestions: `${BASE_URL}/product/search/suggestion`,
@@ -151,6 +149,13 @@ const routes = {
     loadFromTemplate: `${BASE_URL}/product-measurement/load-from-template`,
 
     getSettings: `${BASE_URL}/setting/get/`,
+
+    // Dashboard
+    getDashboarOverview: `${BASE_URL}/dashboard/buyer/dashboard-overview`, // GET
+    getDashboardQuotes: `${BASE_URL}/dashboard/buyer/my-quotes`, // GET
+    getDashboardAllTasks: `${BASE_URL}/step/tasks/all-tasks`, // GET
+
+    getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
 };
 
 // Axios request interceptor
