@@ -628,9 +628,9 @@ class PickDesignV2 extends Component {
 
         return (
             <div className="explore-design">
-                <div className="filter-container explore-design-filter">
+                <div className="filter-container explore-design-filter new-explore">
                     <div className="cat-menu d-none d-xl-block">
-                        <svg
+                        {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="26"
                             height="18"
@@ -672,14 +672,19 @@ class PickDesignV2 extends Component {
                                     strokeWidth="2"
                                 />
                             </g>
-                        </svg>
+                        </svg> */}
+                        <span className="explore-design-filter-icon" onClick={() => this.setState({ showFilters: !showFilters })}>
+                            <img src="../icons/Filter.svg"/>
+                            <span className="filter-text">Filter</span>
+                            <img src="../icons/arrow_drop_up.svg" alt="arrow"/>
+                        </span>
                     </div>
                     <div
                         className="cat-menu cat-mobile-menu d-block d-xl-none"
                         data-toggle="modal"
                         data-target="#CatMenuMobile"
                     >
-                        <svg
+                        {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="26"
                             height="18"
@@ -721,7 +726,12 @@ class PickDesignV2 extends Component {
                                     strokeWidth="2"
                                 />
                             </g>
-                        </svg>
+                        </svg> */}
+                        <span className="explore-design-filter-icon" onClick={() => this.setState({ responsiveFilterModal: true })}>
+                            <img src="../icons/Filter.svg"/>
+                            
+                        </span>
+                        
                     </div>
                     <div className="search flex-grow-1">
                         <svg

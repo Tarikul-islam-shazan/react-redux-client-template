@@ -257,8 +257,11 @@ class CollectionList extends Component {
       } = this.state;
       return (
          <div class="explore-design collection-list">
-            <div class="d-flex justify-content-between mb-3 mb-sm-0">
-               <div class="filter-container explore-design-filter w-50">
+            <div class="d-flex justify-content-between mb-3 mb-sm-0 collection-top-header">
+               <div class="filter-container explore-design-filter mb-3">
+                  <h3>Collections</h3>
+
+
                   {/*<div class="search w-100">*/}
                   {/*    <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">*/}
                   {/*        <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"></path>*/}
@@ -266,7 +269,18 @@ class CollectionList extends Component {
                   {/*    <input type="search" placeholder="Search by collection name….. " class="w-100"/>*/}
                   {/*</div>*/}
                </div>
-               <div class="header-button">
+               <div class="header-button collection-header">
+               <span class="search collection-search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">
+                     <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5">
+                     </path>
+                  </svg>
+                  <input type="text" placeholder="Search" name="search"/>
+                  </span>
+                  <button class="m-0 btn-with-icon">
+                     <img src="../icons/upload.svg"/>
+                     Upload design
+                  </button>
                   <button
                      class="m-0 btn-brand"
                      onClick={() => this.setState({ showAddCollectionPopup: true })}
@@ -275,8 +289,14 @@ class CollectionList extends Component {
                   </button>
                </div>
             </div>
+            <div className="collections-tab">
+               <ul>
+                  <li className="active">Shared with me</li>
+                  <li>My collections</li>
+               </ul>
+            </div>
 
-            <h4 class="mb-4 font-weight-normal">Default collections</h4>
+            {/* <h4 class="mb-4 font-weight-normal">Default collections</h4> */}
             <div class="collection-type-container mb-5">
                {fixedCollections.map((collection, i) => {
                   let docs =
@@ -325,6 +345,7 @@ class CollectionList extends Component {
                            <h4 class="font-16 font-weight-normal mt-3 d-flex justify-content-between">
                               <span>My designs</span>
                            </h4>
+                           
                         ) : (
                            <></>
                         )}
@@ -388,6 +409,13 @@ class CollectionList extends Component {
                               {collection.numOfDesign ? collection.numOfDesign : 0} Items
                            </span>
                         </h4>
+                        
+                              <div className="quantity collections-quantity">
+                                 <span><span>By: </span> Sadat rahman</span>
+                                 <span className="design-category dot">8 Styles</span>
+                                 <span className="design-category dot">2 Days ago</span>
+                                 </div>
+                            
                      </div>
                   );
                })}
