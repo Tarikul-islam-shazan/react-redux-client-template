@@ -114,7 +114,12 @@ class DefaultLayout extends Component {
 
 
                       <ul className="navbar-nav ml-auto align-items-center">
-
+                          <li>
+                            <button className='btn my-task-btn'>
+                              <img src='../icons/list.svg'/>
+                              <span>My tasks</span>
+                            </button>
+                          </li>
                           <li className="nav-item quote-cart dropdown no-arrow" data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
                               <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="19.372" height="19.372" viewBox="0 0 19.372 19.372">
@@ -138,6 +143,8 @@ class DefaultLayout extends Component {
                                           </g>
                                       </g>
                                   </svg>
+                                  <span>RFQ</span>
+                                  
 
                                   {
                                     (this.props.quoteObj && this.props.quoteObj.products && this.props.quoteObj.products.length) ?

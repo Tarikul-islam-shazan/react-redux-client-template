@@ -35,6 +35,19 @@ button#sidebarToggleTop {
     background: url(./images/icons/close.png) no-repeat center;
     background-size: 46%;
 }
+.navbar-nav{
+    .my-task-btn{
+        border: 1px solid #C4C4C4;
+        background: $primary_light_04;
+        height: 38px;
+        margin-right: 16px;
+        padding: 6px 12px;
+        img{
+            margin-right: 4px;
+            margin-top: -2px;
+        }
+    }
+}
 
 .notification-count {
     width: 20px;
