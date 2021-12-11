@@ -7902,7 +7902,7 @@ input.date-range-picker {
   .common-popup .modal-body {
     padding: 0; }
   .common-popup .common-popup-body {
-    padding: 16px 24px; }
+    padding-top: 0; }
     .common-popup .common-popup-body .upload-section .reupload-btn {
       position: absolute;
       top: 4px;
@@ -7943,7 +7943,8 @@ input.date-range-picker {
       width: inherit;
       margin-bottom: 0; }
     .common-popup .common-popup-body .collection-search {
-      position: relative; }
+      position: relative;
+      margin: 16px 20px 0 20px; }
       .common-popup .common-popup-body .collection-search input {
         width: 100%;
         height: 42px;
@@ -7958,7 +7959,7 @@ input.date-range-picker {
         right: 12px;
         top: 10px; }
     .common-popup .common-popup-body .collections-list {
-      margin-top: 10px;
+      margin: 10px 20px 0 20px;
       height: 200px;
       overflow-y: auto;
       scrollbar-width: thin; }
@@ -7992,6 +7993,32 @@ input.date-range-picker {
           background: #F4F5F7; }
           .common-popup .common-popup-body .collections-list .single-collection:hover span {
             visibility: visible; }
+    .common-popup .common-popup-body .collection-add {
+      border-top: 1px solid #E4E7EB;
+      padding: 8px 20px; }
+      .common-popup .common-popup-body .collection-add button {
+        color: #664AB6;
+        background: transparent;
+        border: none; }
+    .common-popup .common-popup-body .collection-add-element {
+      padding: 0 20px 16px 20px; }
+      .common-popup .common-popup-body .collection-add-element label {
+        margin-bottom: 0; }
+      .common-popup .common-popup-body .collection-add-element input {
+        height: 40px; }
+      .common-popup .common-popup-body .collection-add-element .buttons button {
+        padding: 8px 16px;
+        height: 40px;
+        border-radius: 4px;
+        font-size: 14px; }
+        .common-popup .common-popup-body .collection-add-element .buttons button:nth-child(1) {
+          background: #FFFFFF;
+          border: 1px solid #C7CED4;
+          color: #6A7181; }
+        .common-popup .common-popup-body .collection-add-element .buttons button:nth-child(2) {
+          background: #452C8E;
+          border: 1px solid #452C8E;
+          color: #FFFFFF; }
   .common-popup .common-popup-footer {
     width: 100%; }
     .common-popup .common-popup-footer .delete-btn button {
