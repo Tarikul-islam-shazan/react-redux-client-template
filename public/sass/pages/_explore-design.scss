@@ -96,9 +96,9 @@
 }
 .search{
   width: calc(100% - 50px);
-  @media (max-width: 1024px) {
-      width: auto;
-  }
+  // @media (max-width: 1024px) {
+  //     width: auto;
+  // }
   @media (max-width: 767px) {
     float: left;
   }
@@ -842,6 +842,18 @@ button.rec-arrow-right {
             height: 45px;
             font-size: 14px;
           }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px){
+  .explore-design{
+    .explore-design-filter{
+      &.new-explore{
+        .search{
+          max-width: 100%;
+          margin-bottom: 20px;
         }
       }
     }
