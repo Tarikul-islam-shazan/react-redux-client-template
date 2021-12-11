@@ -276,7 +276,7 @@ class DefaultLayout extends Component {
                                     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="dropdownProfileButton"
                                 >
-                                    <Link className="dropdown-item" to="/dashboard">
+                                    <Link className="dropdown-item" to="/tasks">
                                         <i className="fas fa-tachometer-alt mr-2 text-gray-400 font-12"></i>
                                         My task
                                     </Link>

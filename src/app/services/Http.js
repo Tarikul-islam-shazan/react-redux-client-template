@@ -154,6 +154,7 @@ const routes = {
     getDashboarOverview: `${BASE_URL}/dashboard/buyer/dashboard-overview`, // GET
     getDashboardQuotes: `${BASE_URL}/dashboard/buyer/my-quotes`, // GET
     getDashboardAllTasks: `${BASE_URL}/step/tasks/all-tasks`, // GET
+    getRunningOrders: `${BASE_URL}/dashboard/buyer/my-orders`, // GET
 
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
 };

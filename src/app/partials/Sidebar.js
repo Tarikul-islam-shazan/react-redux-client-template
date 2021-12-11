@@ -150,8 +150,8 @@ class Sidebar extends Component {
                       } */}
 
                         <NavLink
-                            to="/"
-                            classes={this.props.activeTab === "/" ? "active" : ""}
+                            to="/dashboard"
+                            classes={this.props.activeTab === "/dashboard" ? "active" : ""}
                             activeIcon={require("../assets/icons/share-design-active.png")}
                             inactiveIcon={require("../assets/icons/share-design.png")}
                             title="Dashboard"

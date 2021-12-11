@@ -1007,6 +1007,12 @@ const addWithCurrentDate = (date, duration, dateType, dateFormat = "Do MMM, YY")
 
 const copy = (obj) => JSON.parse(JSON.stringify(obj));
 
+const getDateDifference = (startDate = moment(), endDate) => {
+    const dateA = moment(startDate);
+    const dateB = moment(endDate);
+    return dateB.diff(dateA, "days");
+};
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -1054,4 +1060,5 @@ export {
     STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN,
     copy,
     validateFloatNumber,
+    getDateDifference,
 };

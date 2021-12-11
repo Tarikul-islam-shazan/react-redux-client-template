@@ -93,7 +93,10 @@ class Root extends Component {
         return (
             <Router>
                 <Switch>
-                    <PublicRoute exact path="/" component={Dashboard} />
+                    {/* <PublicRoute exact path="/" component={Dashboard} /> */}
+                    <PublicRoute exact path="/dashboard" component={Dashboard} />
+                    {/* <PublicRoute exact path="/dashboard" component={TaskDashboard} /> */}
+                    <PublicRoute exact path="/tasks" component={TaskDashboard} />
                     <QuestionairreRoute exact path="/info" component={InsertPhoneNumber} />
                     <QuestionairreRoute exact path="/verify-otp" component={VerifyOtp} />
                     {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
@@ -101,6 +104,7 @@ class Root extends Component {
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
                   <QuestionairreRoute exact path="/questionairre-final" component={ Questionairre_final }/>*/}
                     <AuthRoute exact path="/login" component={Login} />
+                    <AuthRoute exact path="/" component={Login} />
                     <AuthRoute exact path="/oauth2/redirect" component={OAuth2RedirectHandler} />
                     <Route exact path="/logout" component={Logout} />
                     <AuthRoute exact path="/register" component={Register} />
@@ -115,7 +119,7 @@ class Root extends Component {
                         component={ResetPassword}
                     />
                     <PublicRoute exact path="/my-profile" component={MyProfile} />
-                    <PublicRoute exact path="/dashboard" component={TaskDashboard} />
+
                     <PublicRoute exact path="/designs/add" component={ShareDesign} />
                     {/*<PublicRoute exact path="/designs/explore" component={ PickDesign }/>*/}
                     <PublicRoute exact path="/designs/explore" component={PickDesignV2} />
