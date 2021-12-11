@@ -97,9 +97,11 @@ class DefaultLayout extends Component {
         if (!userInfo.phoneVerified) {
             return <Redirect to="info" />;
         }
+        // window.location.pathname
+        // console.log("@@@@@@@@@@@@", this.props.location.pathname);
         return (
             <>
-                <Sidebar />
+                <Sidebar activePath={this.props.location.pathname} />
 
                 <div className="content">
                     <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">

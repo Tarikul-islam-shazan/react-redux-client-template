@@ -8,7 +8,6 @@ import { getUrlParameter } from "../services/Util";
 class AuthLayout extends React.Component {
     componentDidMount() {
         this.props.setActiveTab(window.location.pathname);
-        console.log("setActiveTab", this.props.activeTab);
     }
 
     render() {

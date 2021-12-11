@@ -23,6 +23,7 @@ class Sidebar extends Component {
             // activeTab: window.location.pathname,
             // parentTab: ''
             permissions: [],
+            // activeTab: "",
         };
     }
 
@@ -123,6 +124,8 @@ class Sidebar extends Component {
 
     render() {
         let { permissions } = this.state;
+        const pathname = this.props.activeTab;
+
         return (
             <aside className="left-panel" id="side-menu">
                 <div className="logo">
@@ -136,22 +139,9 @@ class Sidebar extends Component {
                 </div>
                 <nav className="navigation">
                     <ul className="list-unstyled list_sidebar">
-                        {/* {
-                        permissions.includes('DASHBOARD_GET_DASHBOARD') ?
-                        <NavLink
-                          to="/dashboard"
-                          classes={this.props.activeTab == '/dashboard' ? 'active' : ''}
-                          activeIcon={require("../assets/icons/dashboard_active.png")}
-                          inactiveIcon={require("../assets/icons/dashboard.png")}
-                          title="Dashboard"
-                          onClick={this.setTabToStore}
-                        />
-                        : <></>
-                      } */}
-
                         <NavLink
                             to="/dashboard"
-                            classes={this.props.activeTab === "/dashboard" ? "active" : ""}
+                            classes={`${pathname.match("/dashboard") ? "active" : ""}`}
                             activeIcon={require("../assets/icons/share-design-active.png")}
                             inactiveIcon={require("../assets/icons/share-design.png")}
                             title="Dashboard"
@@ -161,12 +151,7 @@ class Sidebar extends Component {
                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
                                 to="/designs/explore"
-                                classes={
-                                    this.props.activeTab === "/designs/explore" ||
-                                    this.props.activeTab === "/designs/explore"
-                                        ? "active"
-                                        : ""
-                                }
+                                classes={`${pathname.match("/designs/") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/pick-design-active.png")}
                                 inactiveIcon={require("../assets/icons/drafting-compass.png")}
                                 title="Explore Designs"
@@ -178,7 +163,7 @@ class Sidebar extends Component {
                         {permissions.includes("RFQ_ADD") ? (
                             <NavLink
                                 to="/designs/add"
-                                classes={this.props.activeTab === "/designs/add" ? "active" : ""}
+                                classes={`${pathname.match("/designs/add") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/share-design-active.png")}
                                 inactiveIcon={require("../assets/icons/share-design.png")}
                                 title="Share Designs"
@@ -190,7 +175,7 @@ class Sidebar extends Component {
                         {permissions.includes("RFQ_MY_RFQ") ? (
                             <NavLink
                                 to="/quotes/list"
-                                classes={this.props.activeTab === "/quotes/list" ? "active" : ""}
+                                classes={`${pathname.match("quotes") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/my-rfq-active.png")}
                                 inactiveIcon={require("../assets/icons/quote_new.svg")}
                                 title="Quotes"
@@ -202,9 +187,7 @@ class Sidebar extends Component {
                         {permissions.includes("ORDER_MY_ORDER") ? (
                             <NavLink
                                 to="/orders/my-orders"
-                                classes={
-                                    this.props.activeTab === "/orders/my-orders" ? "active" : ""
-                                }
+                                classes={`${pathname.match("orders") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/my-project-active.png")}
                                 inactiveIcon={require("../assets/icons/my-project.png")}
                                 title="Orders"
@@ -226,7 +209,7 @@ class Sidebar extends Component {
                         {
                             <NavLink
                                 to="/invoices/list"
-                                classes={this.props.activeTab.includes("invoices") ? "active" : ""}
+                                classes={`${pathname.match("invoices") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/share-design-active.png")}
                                 inactiveIcon={require("../assets/icons/share-design.png")}
                                 title="Payments"
@@ -236,9 +219,7 @@ class Sidebar extends Component {
                         {
                             <NavLink
                                 to="/collections/list"
-                                classes={
-                                    this.props.activeTab.includes("collection") ? "active" : ""
-                                }
+                                classes={`${pathname.match("collections") ? "active" : ""}`}
                                 activeIcon={require("../assets/icons/share-design-active.png")}
                                 inactiveIcon={require("../assets/icons/share-design.png")}
                                 title="Collections"

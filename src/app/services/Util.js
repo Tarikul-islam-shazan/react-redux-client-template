@@ -818,6 +818,15 @@ const convertTimeToLocal = (date, time = "", outputFormat = "DD.MM.YYYY") => {
     return local;
 };
 
+const convertDateTimeToLocal = (date, time = "", outputFormat = "DD.MM.YYYY") => {
+    let formattedTime = moment(time, "HH:mm:ss").format("hh:mm A");
+    let formatForUtc =
+        moment(date, "YYYY-MM-DD").format("MM/DD/YYYY") + (time ? " " + formattedTime : "");
+    let convertedDate = moment.utc(formatForUtc).format();
+    var local = moment.utc(convertedDate).local().format(outputFormat);
+    return local;
+};
+
 const getTodayTimeDifference = (startDate, endDate = moment()) => {
     let a = moment(startDate);
     let b = moment(endDate);
@@ -1061,4 +1070,5 @@ export {
     copy,
     validateFloatNumber,
     getDateDifference,
+    convertDateTimeToLocal,
 };

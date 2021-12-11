@@ -47,29 +47,7 @@ const Dashboard = () => {
 
     let allQuotes = useSelector(getDashboardQuotes);
     let allTasks = useSelector(getDashboardAllTasks);
-
     const classes = useStyles();
-    const styles = {
-        container: (provided) => ({
-            ...provided,
-            display: "inline-block",
-            width: "180px",
-            minHeight: "1px",
-            textAlign: "left",
-            border: "none",
-        }),
-        control: (provided) => ({
-            ...provided,
-            borderRadius: "0",
-            minHeight: "1px",
-            height: "42px",
-            cursor: "pointer",
-        }),
-        clearIndicator: (provided) => ({
-            ...provided,
-            minHeight: "1px",
-        }),
-    };
 
     const getOrderSuppliers = async () => {
         setIsLoading(true);
@@ -167,9 +145,6 @@ const Dashboard = () => {
             setCurrentQuoutePage((page) => page + 1);
         }
     };
-
-    console.log("zzzzzzzzzz", runnigOrders);
-
     const getTotalSustainable = () => {
         return (buyerOverview.sustainableProductCount / buyerOverview.totalProductCount) * 100;
     };
@@ -213,7 +188,6 @@ const Dashboard = () => {
     // console.log("`````````````", dateTime);
     const getPriceDateTime = (dateAdded, dateAddedTime) => {
         let timeDifference = 0;
-
         let formattedQuoteDate = convertTimeToLocal(dateAdded, dateAddedTime, "DD/MM/YYYY hh:mm A");
         formattedQuoteDate = moment(formattedQuoteDate, "DD/MM/YYYY hh:mm A");
         const currentDate = moment().format("DD/MM/YYYY hh:mm A");
@@ -338,7 +312,7 @@ const Dashboard = () => {
                             <h3>
                                 My orders <span className="count">({runnigOrders.length})</span>
                             </h3>
-                            <a href="/orders/my-orders">View all</a>
+                            <Link to="/orders/my-orders"> View all</Link>
                         </div>
                         <div className="running-orders-info-section progress-info-team-brand">
                             <div className="container-fluid">
@@ -548,8 +522,7 @@ const Dashboard = () => {
                     <div className="one-half my-quotes">
                         <div className="state-title d-flex align-items-center">
                             <h3>My quotes</h3>
-                            {/* <Link to="/quotes/list">View all</Link> */}
-                            <a href="/quotes/list">View all</a>
+                            <Link to="/quotes/list">View all</Link>
                         </div>
                         <div className="orders-table">
                             <table className="table table-responsive-sm">
@@ -642,8 +615,7 @@ const Dashboard = () => {
                 <div className="quick-actions">
                     <div className="state-title d-flex align-items-center">
                         <h3>Quick actions</h3>
-                        {/* <Link to="/tasks">View all</Link> */}
-                        <a href={"/tasks"}>View all</a>
+                        <Link to="/tasks">View all</Link>
                     </div>
                     <div className="quick-actions-table">
                         <table className="table table-responsive-sm">
