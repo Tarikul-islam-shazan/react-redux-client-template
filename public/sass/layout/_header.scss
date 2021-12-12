@@ -36,7 +36,8 @@ button#sidebarToggleTop {
     background-size: 46%;
 }
 .navbar-nav{
-    .my-task-btn{
+    li{
+        .my-task-btn{
         border: 1px solid #C4C4C4;
         background: $primary_light_04;
         height: 38px;
@@ -46,7 +47,31 @@ button#sidebarToggleTop {
             margin-right: 4px;
             margin-top: -2px;
         }
+        }
+        &.active{
+            button{
+                border: 1px solid $primary_bright_01;
+            }
+        }
+        &:nth-child(2){
+            button{
+                background: $primary_light_04;
+                padding-right: 28px !important;
+                span{
+                    color: $gray_dark_01;
+                }
+            }
+
+        }
+        &.quote-cart{
+            .quote-cart-count{
+                top: 5px;
+                right: 8px;
+                color: $white;
+            }
+        }
     }
+    
 }
 
 .notification-count {
@@ -228,4 +253,36 @@ button#sidebarToggleTop {
     margin-top: -20px;
     margin-left: -16px;
     z-index: 99;
+}
+
+@media only screen and (max-width: 414px) {
+    .navbar{
+        .navbar-nav{
+            li{
+                .my-task-btn{
+                    margin-right: 8px;   
+                    font-size:14px;
+                    padding: 6px 8px;                                                                                                                                                                                                                                                                                    ;
+                }
+                
+                &.notification-bell{
+                    margin-left: 8px !important; 
+                    margin-right: 8px !important;
+                }
+                &.quote-cart{
+                    button {
+                        padding:8px !important;
+                        padding-right: 20px !important;
+                    }
+                    .quote-cart-count{
+                        top: 2px;
+                        right: 3px;
+                    }
+                }
+                #dropdownNotification{
+                    width: 48px;
+                }
+            }
+        }
+    }
 }
