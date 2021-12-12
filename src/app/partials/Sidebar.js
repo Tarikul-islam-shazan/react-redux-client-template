@@ -151,7 +151,11 @@ class Sidebar extends Component {
                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
                                 to="/designs/explore"
-                                classes={`${pathname.match("/designs/") ? "active" : ""}`}
+                                classes={`${
+                                    pathname.includes("/designs/explore" || "/designs/view/")
+                                        ? "active"
+                                        : ""
+                                }`}
                                 activeIcon={require("../assets/icons/pick-design-active.png")}
                                 inactiveIcon={require("../assets/icons/drafting-compass.png")}
                                 title="Explore Designs"

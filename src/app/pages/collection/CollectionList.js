@@ -103,25 +103,25 @@ class CollectionList extends Component {
         document.removeEventListener("mousedown", this.handleClickOutside);
     }
 
-    //  getFixedCollections = async () => {
-    //      await Http.GET("getFixedCollection")
-    //          .then(({ data }) => {
-    //              console.log("PRODUCT LIST SUCCESS: ", data);
-    //              this.setState({ loading: false });
-    //              if (data) {
-    //                  this.setState({
-    //                      fixedCollections: data,
-    //                  });
-    //              }
-    //          })
-    //          .catch((response) => {
-    //              console.log("PRODUCT LIST ERROR: ", JSON.stringify(response));
-    //              this.setState({ loading: false });
-    //              toastError("Something went wrong! Please try again.");
-    //          });
-    //  };
+    getFixedCollections = async () => {
+        await Http.GET("getFixedCollection")
+            .then(({ data }) => {
+                console.log("PRODUCT LIST SUCCESS: ", data);
+                this.setState({ loading: false });
+                if (data) {
+                    this.setState({
+                        fixedCollections: data,
+                    });
+                }
+            })
+            .catch((response) => {
+                console.log("PRODUCT LIST ERROR: ", JSON.stringify(response));
+                this.setState({ loading: false });
+                toastError("Something went wrong! Please try again.");
+            });
+    };
 
-    renderList = (page = 0, merge = true, type) => {
+    renderList = (page = 0, merge = true) => {
         let userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
             userInfo = JSON.parse(userInfo);
@@ -129,13 +129,13 @@ class CollectionList extends Component {
             userInfo = {};
         }
         this.setState({ loading: true });
-        let { size, name, collectionList } = this.state;
+        let { size, name, collectionList, selectedTab } = this.state;
 
         let params = {
             page: page,
             size: size,
             name,
-            memberType: type ? type : "SHARED",
+            memberType: selectedTab,
         };
         let paramData = encodeQueryData(params);
 
@@ -183,7 +183,7 @@ class CollectionList extends Component {
         });
     };
 
-    _search = async () => {
+    _search = async (searchTerm) => {
         await this.setState({
             page: 0,
             // size : 100
@@ -274,7 +274,6 @@ class CollectionList extends Component {
                 const currentDate = moment().format("DD/MM/YYYY hh:mm A");
                 const formattedCurrentDate = moment(currentDate, "DD/MM/YYYY hh:mm A");
                 timeDifference = formattedCurrentDate.diff(formattedQuoteDate, "days");
-                console.log("####$$$$$$$$", timeDifference);
                 let hours = 0;
                 if (timeDifference < 1 && timeDifference >= 0) {
                     hours = formattedCurrentDate.diff(formattedQuoteDate, "hours");
@@ -287,247 +286,305 @@ class CollectionList extends Component {
                 }
             }
         };
+
+        const onSearch = (e) => {
+            this.setState({ name: e.target.value });
+            this._search();
+        };
+
         return (
-            <div className="explore-design collection-list">
-                <div className="d-flex justify-content-between mb-3 mb-sm-0 collection-top-header">
-                    <div className="filter-container explore-design-filter mb-3">
-                        <h3>Collections</h3>
+            <LoadingOverlay
+                active={this.state.loading}
+                styles={{
+                    overlay: (base) => ({
+                        ...base,
+                        background: LOADER_OVERLAY_BACKGROUND,
+                    }),
+                    spinner: (base) => ({
+                        ...base,
+                        width: LOADER_WIDTH,
+                        position: LOADER_POSITION,
+                        top: LOADER_TOP,
+                        left: LOADER_LEFT,
+                        marginTop: LOADER_MARGIN_TOP,
+                        marginLeft: LOADER_MARGIN_LEFT,
+                        "& svg circle": {
+                            stroke: LOADER_COLOR,
+                        },
+                    }),
+                    content: (base) => ({
+                        ...base,
+                        color: LOADER_COLOR,
+                    }),
+                }}
+                spinner
+                text={LOADER_TEXT}
+            >
+                <div className="explore-design collection-list">
+                    <div className="d-flex justify-content-between mb-3 mb-sm-0 collection-top-header">
+                        <div className="filter-container explore-design-filter mb-3">
+                            <h3>Collections</h3>
 
-                        {/*<div className="search w-100">*/}
-                        {/*    <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">*/}
-                        {/*        <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"></path>*/}
-                        {/*    </svg>*/}
-                        {/*    <input type="search" placeholder="Search by collection name….. " className="w-100"/>*/}
-                        {/*</div>*/}
-                    </div>
-                    <div className="header-button collection-header">
-                        <span className="search collection-search">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16.55"
-                                height="16.508"
-                                viewBox="0 0 16.55 16.508"
-                            >
-                                <path
-                                    id="Path_23797"
-                                    data-name="Path 23797"
-                                    d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z"
-                                    transform="translate(0.2 0.25)"
-                                    fill="#a1a6b2"
-                                    stroke="#a1a6b2"
-                                    stroke-width="0.5"
-                                ></path>
-                            </svg>
-                            <input type="text" placeholder="Search" name="search" />
-                        </span>
-                        <button
-                            className="m-0 btn-with-icon"
-                            onClick={() => this.props.history.push("/designs/add")}
-                        >
-                            <img src="../icons/upload.svg" />
-                            Upload design
-                        </button>
-                        <button
-                            className="m-0 btn-brand"
-                            onClick={() => this.setState({ showAddCollectionPopup: true })}
-                        >
-                            + Create collection
-                        </button>
-                    </div>
-                </div>
-                <div className="collections-tab">
-                    <ul>
-                        <li
-                            className={selectedTab === "SHARED" ? "active" : ""}
-                            onClick={() => {
-                                this.setState({ selectedTab: "SHARED", collectionList: [] });
-
-                                this.renderList(0, false, "SHARED");
-                            }}
-                        >
-                            Shared with me
-                        </li>
-                        <li
-                            className={selectedTab === "OWNER" ? "active" : ""}
-                            onClick={() => {
-                                this.setState({ selectedTab: "OWNER", collectionList: [] });
-                                this.renderList(0, false, "OWNER");
-                            }}
-                        >
-                            My collections
-                        </li>
-                    </ul>
-                </div>
-
-                {/* <h4 className="mb-4 font-weight-normal">Default collections</h4> */}
-                {/* <div className="collection-type-container mb-5">
-               {fixedCollections.map((collection, i) => {
-                  let docs =
-                     collection.documentResponseList && collection.documentResponseList.length
-                        ? collection.documentResponseList
-                        : [];
-                  let img1 = docs.length > 0 ? docs[0].docUrl : "";
-                  let img2 = docs.length > 1 ? docs[1].docUrl : "";
-                  let img3 = docs.length > 2 ? docs[2].docUrl : "";
-                  return (
-                     <div
-                        className="collection-type-item"
-                        key={i}
-                        onClick={() => {
-                           this.props.history.push(
-                              "/collections/view/private-collection?viewType=" +
-                                 collection.collectionViewType
-                           );
-                        }}
-                     >
-                        <div className="product-img-container">
-                           <div className="prev-img">
-                              <img
-                                 src={
-                                    img1 ? img1 : require("../../assets/images/default_product.svg")
-                                 }
-                                 alt=""
-                              />
-                           </div>
-                           <div className="prev-img-thumb">
-                              <img
-                                 src={
-                                    img2 ? img2 : require("../../assets/images/default_product.svg")
-                                 }
-                                 alt=""
-                              />
-                              <img
-                                 src={
-                                    img3 ? img3 : require("../../assets/images/default_product.svg")
-                                 }
-                                 alt=""
-                              />
-                           </div>
+                            {/*<div className="search w-100">*/}
+                            {/*    <svg xmlns="http://www.w3.org/2000/svg" width="16.55" height="16.508" viewBox="0 0 16.55 16.508">*/}
+                            {/*        <path id="Path_23797" data-name="Path 23797" d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z" transform="translate(0.2 0.25)" fill="#a1a6b2" stroke="#a1a6b2" stroke-width="0.5"></path>*/}
+                            {/*    </svg>*/}
+                            {/*    <input type="search" placeholder="Search by collection name….. " className="w-100"/>*/}
+                            {/*</div>*/}
                         </div>
-                        {collection.collectionViewType === "MY_PRODUCTS" ? (
-                           <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
-                              <span>My designs</span>
-                           </h4>
-                           
-                        ) : (
-                           <></>
-                        )}
-                        {collection.collectionViewType === "LIKED_PRODUCTS" ? (
-                           <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
-                              <span>My favourites</span>{" "}
-                           </h4>
-                        ) : (
-                           <></>
-                        )}
-                     </div>
-                  );
-               })}
-            </div> */}
-
-                {/* <h4 className="mb-4 font-weight-normal">Custom collections</h4> */}
-                <div className="collection-type-container">
-                    {collectionList.map((collection, i) => {
-                        let docs =
-                            collection.documentResponseList &&
-                            collection.documentResponseList.length
-                                ? collection.documentResponseList
-                                : [];
-                        let img1 = docs.length > 0 ? docs[0].docUrl : "";
-                        let img2 = docs.length > 1 ? docs[1].docUrl : "";
-                        let img3 = docs.length > 2 ? docs[2].docUrl : "";
-                        return (
-                            <div
-                                className="collection-type-item"
-                                key={i}
-                                onClick={() =>
-                                    this.props.history.push("/collections/view/" + collection.id)
-                                }
+                        <div className="header-button collection-header">
+                            <span className="search collection-search">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16.55"
+                                    height="16.508"
+                                    viewBox="0 0 16.55 16.508"
+                                >
+                                    <path
+                                        id="Path_23797"
+                                        data-name="Path 23797"
+                                        d="M15.916,15.191l-3.89-3.89a6.831,6.831,0,1,0-.674.674l3.89,3.89a.482.482,0,0,0,.337.142.468.468,0,0,0,.337-.142A.48.48,0,0,0,15.916,15.191ZM1,6.826A5.867,5.867,0,1,1,6.872,12.7,5.874,5.874,0,0,1,1,6.826Z"
+                                        transform="translate(0.2 0.25)"
+                                        fill="#a1a6b2"
+                                        stroke="#a1a6b2"
+                                        stroke-width="0.5"
+                                    ></path>
+                                </svg>
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    name="search"
+                                    value={name}
+                                    onChange={(e) => onSearch(e)}
+                                />
+                            </span>
+                            <button
+                                className="m-0 btn-with-icon"
+                                onClick={() => this.props.history.push("/designs/add")}
                             >
-                                <div className="product-img-container">
-                                    <div className="prev-img">
-                                        <img
-                                            src={
-                                                img1
-                                                    ? img1
-                                                    : require("../../assets/images/default_product.svg")
-                                            }
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="prev-img-thumb">
-                                        <img
-                                            src={
-                                                img2
-                                                    ? img2
-                                                    : require("../../assets/images/default_product.svg")
-                                            }
-                                            alt=""
-                                        />
-                                        <img
-                                            src={
-                                                img3
-                                                    ? img3
-                                                    : require("../../assets/images/default_product.svg")
-                                            }
-                                            alt=""
-                                        />
-                                    </div>
-                                </div>
-                                <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column">
-                                    <span>{collection.name}</span>
-                                    <span className="text-muted font-14 mt-2">
-                                        {collection.numOfDesign ? collection.numOfDesign : 0} Items
-                                    </span>
-                                </h4>
+                                <img src="../icons/upload.svg" />
+                                Upload design
+                            </button>
+                            <button
+                                className="m-0 btn-brand"
+                                onClick={() => this.setState({ showAddCollectionPopup: true })}
+                            >
+                                + Create collection
+                            </button>
+                        </div>
+                    </div>
+                    <div className="collections-tab">
+                        <ul>
+                            <li
+                                className={selectedTab === "SHARED" ? "active" : ""}
+                                onClick={async () => {
+                                    await this.setState({
+                                        selectedTab: "SHARED",
+                                        collectionList: [],
+                                        name: "",
+                                    });
+                                    await this.renderList(0, false);
+                                }}
+                            >
+                                Shared with me
+                            </li>
+                            <li
+                                className={selectedTab === "OWNER" ? "active" : ""}
+                                onClick={async () => {
+                                    await this.setState({
+                                        selectedTab: "OWNER",
+                                        collectionList: [],
+                                        name: "",
+                                    });
+                                    await this.getFixedCollections();
+                                    await this.renderList(0, false);
+                                }}
+                            >
+                                My collections
+                            </li>
+                        </ul>
+                    </div>
 
-                                <div className="quantity collections-quantity">
-                                    <span>
-                                        <span>By: </span> {collection.ownerName}
-                                    </span>
-                                    <span className="design-category dot">
-                                        {collection.numOfDesign} Styles
-                                    </span>
-                                    <span className="design-category dot">
-                                        {getDuration(collection.lastDesignUpdatedAt)}
-                                    </span>
-                                </div>
-                            </div>
-                        );
-                    })}
-                    {showAddCollectionPopup ? (
-                        <div className="create-new-collection">
-                            <div className="pop-container" ref={this.setWrapperRef}>
-                                <span className="create-newbutton cursor-pointer">
-                                    + Create new collection
-                                </span>
-                                <div className="create-new d-flex">
-                                    <input
-                                        type="text"
-                                        placeholder="Type your collection name"
-                                        className="bg-gray-light border-0"
-                                        name="collectionName"
-                                        value={collectionName}
-                                        onChange={this.onChange}
-                                    />
-                                    <button
-                                        className="btn-brand m-0 brand-bg-color"
-                                        onClick={this.createNewCollection}
+                    {selectedTab === "OWNER" && (
+                        <div className="collection-type-container mb-5">
+                            {fixedCollections.map((collection, i) => {
+                                let docs =
+                                    collection.documentResponseList &&
+                                    collection.documentResponseList.length
+                                        ? collection.documentResponseList
+                                        : [];
+                                let img1 = docs.length > 0 ? docs[0].docUrl : "";
+                                let img2 = docs.length > 1 ? docs[1].docUrl : "";
+                                let img3 = docs.length > 2 ? docs[2].docUrl : "";
+                                return (
+                                    <div
+                                        className="collection-type-item"
+                                        key={i}
+                                        onClick={() => {
+                                            this.props.history.push(
+                                                "/collections/view/private-collection?viewType=" +
+                                                    collection.collectionViewType
+                                            );
+                                        }}
                                     >
-                                        Create
-                                    </button>
-                                </div>
-                                {collectionNameError ? (
-                                    <p className="error">{collectionNameError}</p>
-                                ) : (
-                                    <></>
-                                )}
-                            </div>
+                                        <div className="product-img-container">
+                                            <div className="prev-img">
+                                                <img
+                                                    src={
+                                                        img1
+                                                            ? img1
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="prev-img-thumb">
+                                                <img
+                                                    src={
+                                                        img2
+                                                            ? img2
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                                <img
+                                                    src={
+                                                        img3
+                                                            ? img3
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+                                        {collection.collectionViewType === "MY_PRODUCTS" ? (
+                                            <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
+                                                <span>My designs</span>
+                                            </h4>
+                                        ) : (
+                                            <></>
+                                        )}
+                                        {collection.collectionViewType === "LIKED_PRODUCTS" ? (
+                                            <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
+                                                <span>My favourites</span>{" "}
+                                            </h4>
+                                        ) : (
+                                            <></>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
-                    ) : (
-                        <></>
                     )}
+
+                    {/* <h4 className="mb-4 font-weight-normal">Custom collections</h4> */}
+                    <div className="collection-type-container">
+                        {collectionList.map((collection, i) => {
+                            let docs =
+                                collection.documentResponseList &&
+                                collection.documentResponseList.length
+                                    ? collection.documentResponseList
+                                    : [];
+                            let img1 = docs.length > 0 ? docs[0].docUrl : "";
+                            let img2 = docs.length > 1 ? docs[1].docUrl : "";
+                            let img3 = docs.length > 2 ? docs[2].docUrl : "";
+                            return (
+                                <div
+                                    className="collection-type-item"
+                                    key={i}
+                                    onClick={() =>
+                                        this.props.history.push(
+                                            "/collections/view/" + collection.id
+                                        )
+                                    }
+                                >
+                                    <div className="product-img-container">
+                                        <div className="prev-img">
+                                            <img
+                                                src={
+                                                    img1
+                                                        ? img1
+                                                        : require("../../assets/images/default_product.svg")
+                                                }
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div className="prev-img-thumb">
+                                            <img
+                                                src={
+                                                    img2
+                                                        ? img2
+                                                        : require("../../assets/images/default_product.svg")
+                                                }
+                                                alt=""
+                                            />
+                                            <img
+                                                src={
+                                                    img3
+                                                        ? img3
+                                                        : require("../../assets/images/default_product.svg")
+                                                }
+                                                alt=""
+                                            />
+                                        </div>
+                                    </div>
+                                    <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column">
+                                        <span>{collection.name}</span>
+                                        <span className="text-muted font-14 mt-2">
+                                            {collection.numOfDesign ? collection.numOfDesign : 0}{" "}
+                                            Items
+                                        </span>
+                                    </h4>
+
+                                    <div className="quantity collections-quantity">
+                                        <span>
+                                            <span>By: </span> {collection.ownerName}
+                                        </span>
+                                        <span className="design-category dot">
+                                            {collection.numOfDesign} Styles
+                                        </span>
+                                        <span className="design-category dot">
+                                            {getDuration(collection.lastDesignUpdatedAt)}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {showAddCollectionPopup ? (
+                            <div className="create-new-collection">
+                                <div className="pop-container" ref={this.setWrapperRef}>
+                                    <span className="create-newbutton cursor-pointer">
+                                        + Create new collection
+                                    </span>
+                                    <div className="create-new d-flex">
+                                        <input
+                                            type="text"
+                                            placeholder="Type your collection name"
+                                            className="bg-gray-light border-0"
+                                            name="collectionName"
+                                            value={collectionName}
+                                            onChange={this.onChange}
+                                        />
+                                        <button
+                                            className="btn-brand m-0 brand-bg-color"
+                                            onClick={this.createNewCollection}
+                                        >
+                                            Create
+                                        </button>
+                                    </div>
+                                    {collectionNameError ? (
+                                        <p className="error">{collectionNameError}</p>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </LoadingOverlay>
         );
     }
 }
