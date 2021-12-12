@@ -100,7 +100,7 @@ class DefaultLayout extends Component {
       }
       return (
           <>
-              <Sidebar/>
+              <Sidebar activePath={this.props.location.pathname} />
 
               <div className="content">
                   <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
