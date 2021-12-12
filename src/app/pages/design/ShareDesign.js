@@ -46,11 +46,16 @@ class ShareDesign extends Component {
             productTypeList: [],
             fabricTypeList: [],
             designCategoryList: [],
+            collectionList: [],
+            showAddCollectionPopup: false,
+            showCollectionAddOption: false,
+            collectionName: "",
             errors: {
                 nameError: "",
                 fabricTypeError: "",
                 fabricCompositionDetailsError: "",
                 productGroupIdError: "",
+                collectionNameError: "",
             },
         };
     }
@@ -59,12 +64,25 @@ class ShareDesign extends Component {
         this["colorRef_" + i] = node;
     };
 
+    setWrapperRef = (node) => {
+        this.wrapperRef = node;
+    };
+
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+                showAddCollectionPopup: false,
+            });
+        }
+    };
+
     componentDidMount = async () => {
         document.title = "Share Design - Nitex";
         window.addEventListener("mousedown", this.handleClickOutside);
         await this.getProductTypes();
         await this.getFabricTypes();
         await this.getDesignCategories();
+        await this.fetchCollectionList();
         loadjs(["/js/script.js"]);
     };
 
@@ -197,6 +215,22 @@ class ShareDesign extends Component {
         }
     };
 
+    fetchCollectionList = async (term = "") => {
+        // let userInfo = localStorage.getItem('userInfo');
+        // if (userInfo) {
+        // 	userInfo = JSON.parse(userInfo);
+        // } else {
+        // 	userInfo = {};
+        // }
+        await Http.GET("getCollectionList", `?name=${term}`)
+            .then(({ data }) => {
+                if (data.data) {
+                    this.setState({ collectionList: data.data });
+                }
+            })
+            .catch(({ response }) => {});
+    };
+
     render() {
         let {
             name,
@@ -211,6 +245,10 @@ class ShareDesign extends Component {
             productTypeList,
             fabricTypeList,
             designCategoryList,
+            showAddCollectionPopup,
+            showCollectionAddOption,
+            collectionName,
+            collectionList,
         } = this.state;
         let {
             nameError,
@@ -219,6 +257,7 @@ class ShareDesign extends Component {
             fabricCompositionDetailsError,
             productGroupIdError,
             documentIdError,
+            collectionNameError,
         } = this.state.errors;
 
         return (
@@ -476,7 +515,9 @@ class ShareDesign extends Component {
                                         <div className="text-right">
                                             <button
                                                 className="btn-brand m-0 brand-bg-color"
-                                                onClick={this.submit}
+                                                onClick={() =>
+                                                    this.setState({ showAddCollectionPopup: true })
+                                                }
                                             >
                                                 Submit
                                             </button>
@@ -487,6 +528,79 @@ class ShareDesign extends Component {
                         </div>
                     </div>
                 </div>
+
+                {showAddCollectionPopup ? (
+                    <div className="create-new-collection">
+                        <div className="pop-container" ref={this.setWrapperRef}>
+                            <h4>Add to collection</h4>
+                            {collectionList.length ? (
+                                <div className="all-collection">
+                                    {/* <span className="semibold-16">Add to collection</span> */}
+                                    <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
+                                        {collectionList.map((collection, i) => {
+                                            return (
+                                                <li key={i}>
+                                                    <span>{collection.name}</span>
+                                                    <button
+                                                        className="button size32"
+                                                        onClick={() =>
+                                                            this.addToExistingCollection(
+                                                                collection.id
+                                                            )
+                                                        }
+                                                    >
+                                                        Add
+                                                    </button>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
+                            <span
+                                className="create-newbutton cursor-pointer"
+                                onClick={() =>
+                                    this.setState({
+                                        showCollectionAddOption: !showCollectionAddOption,
+                                    })
+                                }
+                            >
+                                + Create new collection
+                            </span>
+                            {showCollectionAddOption ? (
+                                <>
+                                    <div className="create-new d-flex">
+                                        <input
+                                            type="text"
+                                            placeholder="Type your collection name"
+                                            className="bg-gray-light border-0"
+                                            name="collectionName"
+                                            value={collectionName}
+                                            onChange={this.onChangeText}
+                                        />
+                                        <button
+                                            className="button size36 ml-2"
+                                            onClick={this.createNewCollection}
+                                        >
+                                            Create
+                                        </button>
+                                    </div>
+                                    {collectionNameError ? (
+                                        <p className="error">{collectionNameError}</p>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
             </>
         );
     }

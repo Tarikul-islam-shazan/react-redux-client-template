@@ -109,6 +109,7 @@ const routes = {
     addCollection: `${BASE_URL}/collection/add`,
     addProductToCollection: `${BASE_URL}/collection/product/add`,
     getUserCollectionList: `${BASE_URL}/collection/search/user/`,
+    getCollectionList: `${BASE_URL}/collection/search`,
     getCollectionDetails: `${BASE_URL}/collection/`,
     getCollectionProducts: `${BASE_URL}/collection/products/`,
     getCollectionProductsByCollectionType: `${BASE_URL}/collection/products/collection-type/`,
