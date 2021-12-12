@@ -10,7 +10,7 @@ const AddCollectionTeamMember = ({
     onChange,
 }) => {
     let fashionDesigner = memberData.usersByTypeList?.FASHION_DESIGNER;
-    let projectManager = memberData.usersByTypeList?.MANAGER;
+    let accountManager = memberData.usersByTypeList?.EXECUTIVE;
     let merchandiser = memberData.usersByTypeList?.MERCHANDISER;
     let qa = memberData.usersByTypeList?.QA;
     let searchUserText = memberData.searchUserText;
@@ -215,14 +215,14 @@ const AddCollectionTeamMember = ({
                             </div>
                             {!searchUserText ? (
                                 <>
-                                    {projectManager && (
+                                    {accountManager && (
                                         <div className="manager-designation-persons">
                                             <div className="designation-title">
-                                                <h4>Project Manager</h4>
+                                                <h4>Account Manager</h4>
                                             </div>
-                                            {projectManager && projectManager.length !== 0
-                                                ? renderUserInfo(projectManager, "add")
-                                                : "No project manager added yet"}
+                                            {accountManager && accountManager.length !== 0
+                                                ? renderUserInfo(accountManager, "add")
+                                                : "No account manager added yet"}
                                         </div>
                                     )}
                                     {fashionDesigner && (
