@@ -114,7 +114,7 @@ class DefaultLayout extends Component {
 
 
                       <ul className="navbar-nav ml-auto align-items-center">
-                          <li>
+                          <li className='active'>
                             <button className='btn my-task-btn'>
                               <img src='../icons/list.svg'/>
                               <span>My tasks</span>
@@ -122,28 +122,13 @@ class DefaultLayout extends Component {
                           </li>
                           <li className="nav-item quote-cart dropdown no-arrow" data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
                               <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="19.372" height="19.372" viewBox="0 0 19.372 19.372">
-                                      <g id="Group_11425" data-name="Group 11425" transform="translate(-1580.925 -30.129)">
-                                          <g id="search_1_" data-name="search (1)" transform="translate(1580.925 30.129)">
-                                              <g id="Group_11422" data-name="Group 11422">
-                                                  <g id="Group_11421" data-name="Group 11421">
-                                                      <path id="Path_29570" data-name="Path 29570" d="M8.183,0a8.183,8.183,0,1,0,8.183,8.183A8.192,8.192,0,0,0,8.183,0Zm0,14.935a6.752,6.752,0,1,1,6.752-6.752A6.759,6.759,0,0,1,8.183,14.935Z" fill="#21242b"/>
-                                                  </g>
-                                              </g>
-                                              <g id="Group_11424" data-name="Group 11424" transform="translate(12.74 12.74)">
-                                                  <g id="Group_11423" data-name="Group 11423">
-                                                      <path id="Path_29571" data-name="Path 29571" d="M343.131,342.12l-5.2-5.2a.716.716,0,0,0-1.012,1.012l5.2,5.2a.716.716,0,0,0,1.012-1.012Z" transform="translate(-336.708 -336.709)" fill="#21242b"/>
-                                                  </g>
-                                              </g>
-                                          </g>
-                                          <g id="dollar" transform="translate(1586.549 33.297)">
-                                              <g id="Group_11395" data-name="Group 11395" transform="translate(0 0)">
-                                                  <path id="Path_29558" data-name="Path 29558" d="M112.695,4.116V2.026a2.787,2.787,0,0,1,1.229.534.44.44,0,0,0,.244.077.511.511,0,0,0,.511-.5.453.453,0,0,0-.131-.321,3.134,3.134,0,0,0-1.859-.748v-.7A.362.362,0,0,0,112.327,0h-.012a.368.368,0,0,0-.374.363V1.04A2.152,2.152,0,0,0,109.7,3.059c0,1.348,1.146,1.722,2.245,2.019V7.454a3.083,3.083,0,0,1-1.574-.695.494.494,0,0,0-.3-.107.517.517,0,0,0-.481.523.453.453,0,0,0,.131.321,3.5,3.5,0,0,0,2.227.9v.653s0,.008,0,.012a.368.368,0,0,0,.385.35.362.362,0,0,0,.362-.362V8.38a2.126,2.126,0,0,0,2.275-2.138C114.969,4.841,113.793,4.413,112.695,4.116Zm-.748-.19c-.647-.19-1.152-.386-1.152-.938s.457-.95,1.152-1Zm.748,3.54V5.3c.671.19,1.194.445,1.188,1.069C113.883,6.824,113.574,7.359,112.695,7.466Z" transform="translate(-109.589 0)" fill="#21242b"/>
-                                              </g>
-                                          </g>
-                                      </g>
-                                  </svg>
-                                  <span>RFQ</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#21242B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20.9999 20.9999L16.6499 16.6499" stroke="#21242B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.1776 8.81279C13.0367 8.58373 12.832 8.39488 12.5854 8.26648C12.3388 8.13807 12.0596 8.07494 11.7776 8.08383H10.2221C9.8095 8.08383 9.41384 8.23744 9.12212 8.51085C8.83039 8.78426 8.6665 9.15509 8.6665 9.54175C8.6665 9.92842 8.83039 10.2992 9.12212 10.5727C9.41384 10.8461 9.8095 10.9997 10.2221 10.9997H11.7776C12.1902 10.9997 12.5858 11.1533 12.8776 11.4267C13.1693 11.7001 13.3332 12.0709 13.3332 12.4576C13.3332 12.8443 13.1693 13.2151 12.8776 13.4885C12.5858 13.7619 12.1902 13.9155 11.7776 13.9155H10.2221C9.94011 13.9244 9.66088 13.8613 9.41427 13.7329C9.16766 13.6045 8.96296 13.4156 8.82206 13.1866" stroke="#21242B" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 14.1113V15.6668M11 6.3335V7.88905V6.3335Z" stroke="#21242B" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                              <span>RFQ</span>
                                   
 
                                   {
