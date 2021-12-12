@@ -31,9 +31,9 @@ import {
 } from "../../constant";
 import { _storeData, _getProductForQuote } from "../design/actions";
 
-const filterProductBasedOnStatus = (products) => {
-    return products.filter((product) => !["LOCKED", "SOLD"].includes(product.availabilityStatus));
-};
+// const filterProductBasedOnStatus = (products) => {
+//     return products.filter((product) => !["LOCKED", "SOLD"].includes(product.availabilityStatus));
+// };
 
 class CollectionDetails extends Component {
     constructor(props) {
@@ -559,44 +559,6 @@ class CollectionDetails extends Component {
             });
     };
 
-    addUserToCollection = (user) => {
-        let collectionId = this.props.match.params.id;
-        let { collection } = this.state;
-        let body = {
-            collectionId,
-            userIds: [user.id],
-        };
-        Http.POST("shareCollection", body)
-            .then(({ data }) => {
-                if (data && data.success) {
-                    if (collection.userResponseList && collection.userResponseList.length) {
-                        let flag = true;
-                        collection.userResponseList.map((item) => {
-                            if (item.id == user.id) {
-                                flag = false;
-                            }
-                        });
-                        if (flag) {
-                            toastSuccess(data.message);
-                            collection.userResponseList = [...collection.userResponseList, user];
-                        } else {
-                            toastSuccess("Collection already shared");
-                        }
-                    } else {
-                        collection.userResponseList = [user];
-                    }
-                    this.setState({ collection });
-                }
-            })
-            .catch(({ response }) => {
-                if (response && response.data && response.data.message) {
-                    toastError(response.data.message);
-                } else {
-                    toastError("Request was unsuccessful.");
-                }
-            });
-    };
-
     onChange = async (e) => {
         let { name, value, checked } = e.target;
         let { productList } = this.state;
@@ -743,8 +705,47 @@ class CollectionDetails extends Component {
             });
     };
 
+    addUserToCollection = (user) => {
+        let collectionId = this.props.match.params.id;
+        let { collection } = this.state;
+        let body = {
+            collectionId,
+            userIds: [user.id],
+        };
+        Http.POST("shareCollection", body)
+            .then(({ data }) => {
+                if (data && data.success) {
+                    if (collection.userResponseList && collection.userResponseList.length) {
+                        let flag = true;
+                        collection.userResponseList.map((item) => {
+                            if (item.id == user.id) {
+                                flag = false;
+                            }
+                        });
+                        if (flag) {
+                            toastSuccess(data.message);
+                            collection.userResponseList = [...collection.userResponseList, user];
+                        } else {
+                            toastSuccess("Collection already shared");
+                        }
+                    } else {
+                        collection.userResponseList = [user];
+                    }
+                    this.setState({ collection });
+                }
+            })
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was unsuccessful.");
+                }
+            });
+    };
+
     removeUserFromCollelction = async (user) => {
         let collectionId = this.props.match.params.id;
+        let { collection } = this.state;
         let body = {
             collectionId,
             userIds: [user.id],
@@ -752,9 +753,13 @@ class CollectionDetails extends Component {
         await Http.POST("removeMemberFromCollection", body)
             .then(({ data }) => {
                 if (data && data.success) {
-                    this.getCollectionDetails(collectionId);
+                    let updatedCollection = collection.userResponseList.filter(
+                        (item) => item.id !== user.id
+                    );
                     toastSuccess(data.message);
+                    collection.userResponseList = [...updatedCollection];
                 }
+                this.setState({ collection });
             })
             .catch(({ response }) => {
                 if (response && response.data && response.data.message) {
@@ -789,7 +794,6 @@ class CollectionDetails extends Component {
         } = this.state;
 
         const moreMember = 4;
-
         let memberData = {
             usersByTypeList,
             searchUserText,
@@ -850,182 +854,6 @@ class CollectionDetails extends Component {
                         {!collectionType &&
                         !collectionViewType &&
                         collection.privacy === "CUSTOM" ? (
-                            // <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
-                            //     <div
-                            //         class="added-members"
-                            //         ref={(node) => (this.AddNewMemberModal = node)}
-                            //     >
-                            //         <div
-                            //             id="AddNewMember"
-                            //             class={`add-new-member ${showAddMemberModal ? `show` : ``}`}
-                            //         >
-                            //             <svg
-                            //                 xmlns="http://www.w3.org/2000/svg"
-                            //                 width="39"
-                            //                 height="39"
-                            //                 viewBox="0 0 39 39"
-                            //                 onClick={() =>
-                            //                     this.setState({
-                            //                         showAddMemberModal: !showAddMemberModal,
-                            //                     })
-                            //                 }
-                            //             >
-                            //                 <g
-                            //                     id="Group_22785"
-                            //                     data-name="Group 22785"
-                            //                     transform="translate(-1471 -119)"
-                            //                 >
-                            //                     <circle
-                            //                         id="Ellipse_122"
-                            //                         data-name="Ellipse 122"
-                            //                         cx="18.5"
-                            //                         cy="18.5"
-                            //                         r="18.5"
-                            //                         transform="translate(1472 120)"
-                            //                         fill="#ebe8e8"
-                            //                         stroke="#fff"
-                            //                         stroke-width="2"
-                            //                     />
-                            //                     <text
-                            //                         id="_"
-                            //                         data-name="+"
-                            //                         transform="translate(1484 148)"
-                            //                         fill="#21242b"
-                            //                         font-size="24"
-                            //                         font-family="OpenSans-Semibold, Open Sans"
-                            //                         font-weight="600"
-                            //                     >
-                            //                         <tspan x="0" y="0">
-                            //                             +
-                            //                         </tspan>
-                            //                     </text>
-                            //                 </g>
-                            //             </svg>
-                            //         </div>
-
-                            //         <div
-                            //             class={`add-people-popup custom-scrollbar shadow ${
-                            //                 showAddMemberModal ? `show` : ``
-                            //             }`}
-                            //         >
-                            //             <div class="close-add-people mb-3 d-block d-sm-none">
-                            //                 <svg
-                            //                     xmlns="http://www.w3.org/2000/svg"
-                            //                     width="20.941"
-                            //                     height="20.941"
-                            //                     viewBox="0 0 20.941 20.941"
-                            //                 >
-                            //                     <g
-                            //                         id="Group_22803"
-                            //                         data-name="Group 22803"
-                            //                         transform="translate(2489.29 -478.941)"
-                            //                     >
-                            //                         <line
-                            //                             id="Line_153"
-                            //                             data-name="Line 153"
-                            //                             x2="25.615"
-                            //                             transform="translate(-2487.875 480.355) rotate(45)"
-                            //                             fill="none"
-                            //                             stroke="#21242b"
-                            //                             stroke-linecap="round"
-                            //                             stroke-width="2"
-                            //                         />
-                            //                         <line
-                            //                             id="Line_154"
-                            //                             data-name="Line 154"
-                            //                             x2="25.615"
-                            //                             transform="translate(-2469.763 480.355) rotate(135)"
-                            //                             fill="none"
-                            //                             stroke="#21242b"
-                            //                             stroke-linecap="round"
-                            //                             stroke-width="2"
-                            //                         />
-                            //                     </g>
-                            //                 </svg>
-                            //             </div>
-
-                            //             <div class="form-group position-relative">
-                            //                 <label class="title">Add people</label>
-                            //                 <input
-                            //                     type="text"
-                            //                     placeholder="demo@gamil.com"
-                            //                     name="searchUserText"
-                            //                     value={searchUserText}
-                            //                     onChange={this.onChange}
-                            //                 />
-                            //             </div>
-                            //             {this.formatUserTypeList()}
-                            //         </div>
-                            //         {collection && collection.userResponseList ? (
-                            //             collection.userResponseList.map((user, i) => {
-                            //                 if (
-                            //                     user.profilePicDocument &&
-                            //                     user.profilePicDocument.docUrl
-                            //                 ) {
-                            //                     return (
-                            //                         <img
-                            //                             src={user.profilePicDocument.docUrl}
-                            //                             alt=""
-                            //                             data-toggle="tooltip"
-                            //                             data-placement="top"
-                            //                             title={user.name}
-                            //                         />
-                            //                     );
-                            //                 }
-                            //                 return (
-                            //                     <img
-                            //                         src={require("../../assets/images/pro_pic_default.svg")}
-                            //                         alt=""
-                            //                         data-toggle="tooltip"
-                            //                         data-placement="top"
-                            //                         title={user.name}
-                            //                     />
-                            //                 );
-                            //             })
-                            //         ) : (
-                            //             <></>
-                            //         )}
-                            //         <div className="more-people">
-                            //             <a href="#">+5</a>
-                            //         </div>
-                            //     </div>
-                            //     <div class="d-flex mt-4 mt-sm-0">
-                            //         {collection.privacy === "CUSTOM" ? (
-                            //             <button
-                            //                 id="CreateCollection"
-                            //                 class="m-0 btn-brand"
-                            //                 onClick={() =>
-                            //                     this.setState({
-                            //                         showAddProductModal: !showAddProductModal,
-                            //                     })
-                            //                 }
-                            //             >
-                            //                 +Add more products
-                            //             </button>
-                            //         ) : (
-                            //             <></>
-                            //         )}
-
-                            //         {/*<div class="option">
-                            //         <div class="dropdown">
-                            //             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
-                            //                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
-                            //                     <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
-                            //                         <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                            //                         <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                            //                         <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                            //                     </g>
-                            //                 </svg>
-                            //                 <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
-                            //                     <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
-                            //                     <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
-                            //                 </ul>
-                            //             </button>
-                            //         </div>
-                            //     </div>*/}
-                            //     </div>
-                            // </div>
-
                             <div className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
                                 {collection.privacy === "CUSTOM" ||
                                 collection.privacy === "USER_TYPE" ? (
@@ -1428,7 +1256,7 @@ class CollectionDetails extends Component {
                             </div>
 
                             <div class="show-products">
-                                {filterProductBasedOnStatus(productList).map((product, i) => {
+                                {productList.map((product, i) => {
                                     return (
                                         <ProductCardWithTick
                                             key={i}
