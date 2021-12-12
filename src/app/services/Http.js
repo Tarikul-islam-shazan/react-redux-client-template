@@ -114,6 +114,7 @@ const routes = {
     getCollectionProductsByCollectionType: `${BASE_URL}/collection/products/collection-type/`,
     getUsersByTypes: `${BASE_URL}/user/by-user-types`,
     shareCollection: `${BASE_URL}/collection/share`,
+    removeMemberFromCollection: `${BASE_URL}/collection/remove-member`,
     getFixedCollection: `${BASE_URL}/collection/fixed-collection`,
     getUserSuggestions: `${BASE_URL}/user/find-list-by-email-and-user-type`,
     updatePaymentStatus: `${BASE_URL}/payment/confirm`,

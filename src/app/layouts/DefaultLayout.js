@@ -92,13 +92,11 @@ class DefaultLayout extends Component {
         } else {
             userInfo = {};
         }
-        console.log("userInfo from layout", userInfo.businessInfoGiven);
         let { showNotification } = this.state;
         if (!userInfo.phoneVerified) {
             return <Redirect to="info" />;
         }
-        // window.location.pathname
-        // console.log("@@@@@@@@@@@@", this.props.location.pathname);
+
         return (
             <>
                 <Sidebar activePath={this.props.location.pathname} />

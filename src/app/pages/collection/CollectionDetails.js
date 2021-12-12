@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import loadjs from "loadjs";
 import Modal from "react-bootstrap/Modal";
 import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
-import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
+import { toastSuccess, toastError } from "../../commonComponents/Toast";
 import {
     encodeQueryData,
     clothingLabelStatus,
@@ -17,6 +15,7 @@ import {
 } from "../../services/Util";
 import ProductCardWithTick from "../../commonComponents/ProductCardWithTick";
 import { ModalMyProductCard } from "../../commonComponents/ModalMyProductCard";
+import AddCollectionTeamMember from "../../commonComponents/AddCollectionTeamMember";
 import { ProductSkeleton, CreateSkeletons } from "../../commonComponents/ProductSkeleton";
 import {
     LOADER_OVERLAY_BACKGROUND,
@@ -744,6 +743,28 @@ class CollectionDetails extends Component {
             });
     };
 
+    removeUserFromCollelction = async (user) => {
+        let collectionId = this.props.match.params.id;
+        let body = {
+            collectionId,
+            userIds: [user.id],
+        };
+        await Http.POST("removeMemberFromCollection", body)
+            .then(({ data }) => {
+                if (data && data.success) {
+                    this.getCollectionDetails(collectionId);
+                    toastSuccess(data.message);
+                }
+            })
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was unsuccessful.");
+                }
+            });
+    };
+
     render() {
         let {
             name,
@@ -767,6 +788,52 @@ class CollectionDetails extends Component {
             myDesignLoading,
         } = this.state;
 
+        const moreMember = 4;
+
+        let memberData = {
+            usersByTypeList,
+            searchUserText,
+            searchUserSuggestions,
+            memberList: collection && collection.userResponseList,
+        };
+
+        const renderIcon = (user) => {
+            if (user.profilePicDocument && user.profilePicDocument.docUrl) {
+                return (
+                    <img
+                        onClick={() => this.setState({ showAddMemberModal: !showAddMemberModal })}
+                        src={user.profilePicDocument.docUrl}
+                        alt=""
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title={user.name}
+                    />
+                );
+            }
+            return (
+                <img
+                    onClick={() => this.setState({ showAddMemberModal: !showAddMemberModal })}
+                    src="/images/pro_pic_default.svg"
+                    alt=""
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title={user.name}
+                />
+            );
+        };
+
+        const renderMemberIcon = (collection) => {
+            if (collection.userResponseList.length > moreMember) {
+                return collection.userResponseList.slice(0, moreMember).map((user, i) => {
+                    return renderIcon(user);
+                });
+            } else {
+                return collection.userResponseList.map((user, i) => {
+                    return renderIcon(user);
+                });
+            }
+        };
+
         return (
             <>
                 <div class="explore-design">
@@ -783,180 +850,318 @@ class CollectionDetails extends Component {
                         {!collectionType &&
                         !collectionViewType &&
                         collection.privacy === "CUSTOM" ? (
-                            <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
-                                <div
-                                    class="added-members"
-                                    ref={(node) => (this.AddNewMemberModal = node)}
-                                >
-                                    <div
-                                        id="AddNewMember"
-                                        class={`add-new-member ${showAddMemberModal ? `show` : ``}`}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="39"
-                                            height="39"
-                                            viewBox="0 0 39 39"
-                                            onClick={() =>
-                                                this.setState({
-                                                    showAddMemberModal: !showAddMemberModal,
-                                                })
-                                            }
-                                        >
-                                            <g
-                                                id="Group_22785"
-                                                data-name="Group 22785"
-                                                transform="translate(-1471 -119)"
-                                            >
-                                                <circle
-                                                    id="Ellipse_122"
-                                                    data-name="Ellipse 122"
-                                                    cx="18.5"
-                                                    cy="18.5"
-                                                    r="18.5"
-                                                    transform="translate(1472 120)"
-                                                    fill="#ebe8e8"
-                                                    stroke="#fff"
-                                                    stroke-width="2"
-                                                />
-                                                <text
-                                                    id="_"
-                                                    data-name="+"
-                                                    transform="translate(1484 148)"
-                                                    fill="#21242b"
-                                                    font-size="24"
-                                                    font-family="OpenSans-Semibold, Open Sans"
-                                                    font-weight="600"
-                                                >
-                                                    <tspan x="0" y="0">
-                                                        +
-                                                    </tspan>
-                                                </text>
-                                            </g>
-                                        </svg>
-                                    </div>
+                            // <div class="add-buyer d-flex flex-column flex-sm-row align-items-center">
+                            //     <div
+                            //         class="added-members"
+                            //         ref={(node) => (this.AddNewMemberModal = node)}
+                            //     >
+                            //         <div
+                            //             id="AddNewMember"
+                            //             class={`add-new-member ${showAddMemberModal ? `show` : ``}`}
+                            //         >
+                            //             <svg
+                            //                 xmlns="http://www.w3.org/2000/svg"
+                            //                 width="39"
+                            //                 height="39"
+                            //                 viewBox="0 0 39 39"
+                            //                 onClick={() =>
+                            //                     this.setState({
+                            //                         showAddMemberModal: !showAddMemberModal,
+                            //                     })
+                            //                 }
+                            //             >
+                            //                 <g
+                            //                     id="Group_22785"
+                            //                     data-name="Group 22785"
+                            //                     transform="translate(-1471 -119)"
+                            //                 >
+                            //                     <circle
+                            //                         id="Ellipse_122"
+                            //                         data-name="Ellipse 122"
+                            //                         cx="18.5"
+                            //                         cy="18.5"
+                            //                         r="18.5"
+                            //                         transform="translate(1472 120)"
+                            //                         fill="#ebe8e8"
+                            //                         stroke="#fff"
+                            //                         stroke-width="2"
+                            //                     />
+                            //                     <text
+                            //                         id="_"
+                            //                         data-name="+"
+                            //                         transform="translate(1484 148)"
+                            //                         fill="#21242b"
+                            //                         font-size="24"
+                            //                         font-family="OpenSans-Semibold, Open Sans"
+                            //                         font-weight="600"
+                            //                     >
+                            //                         <tspan x="0" y="0">
+                            //                             +
+                            //                         </tspan>
+                            //                     </text>
+                            //                 </g>
+                            //             </svg>
+                            //         </div>
 
-                                    <div
-                                        class={`add-people-popup custom-scrollbar shadow ${
-                                            showAddMemberModal ? `show` : ``
-                                        }`}
-                                    >
-                                        <div class="close-add-people mb-3 d-block d-sm-none">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20.941"
-                                                height="20.941"
-                                                viewBox="0 0 20.941 20.941"
+                            //         <div
+                            //             class={`add-people-popup custom-scrollbar shadow ${
+                            //                 showAddMemberModal ? `show` : ``
+                            //             }`}
+                            //         >
+                            //             <div class="close-add-people mb-3 d-block d-sm-none">
+                            //                 <svg
+                            //                     xmlns="http://www.w3.org/2000/svg"
+                            //                     width="20.941"
+                            //                     height="20.941"
+                            //                     viewBox="0 0 20.941 20.941"
+                            //                 >
+                            //                     <g
+                            //                         id="Group_22803"
+                            //                         data-name="Group 22803"
+                            //                         transform="translate(2489.29 -478.941)"
+                            //                     >
+                            //                         <line
+                            //                             id="Line_153"
+                            //                             data-name="Line 153"
+                            //                             x2="25.615"
+                            //                             transform="translate(-2487.875 480.355) rotate(45)"
+                            //                             fill="none"
+                            //                             stroke="#21242b"
+                            //                             stroke-linecap="round"
+                            //                             stroke-width="2"
+                            //                         />
+                            //                         <line
+                            //                             id="Line_154"
+                            //                             data-name="Line 154"
+                            //                             x2="25.615"
+                            //                             transform="translate(-2469.763 480.355) rotate(135)"
+                            //                             fill="none"
+                            //                             stroke="#21242b"
+                            //                             stroke-linecap="round"
+                            //                             stroke-width="2"
+                            //                         />
+                            //                     </g>
+                            //                 </svg>
+                            //             </div>
+
+                            //             <div class="form-group position-relative">
+                            //                 <label class="title">Add people</label>
+                            //                 <input
+                            //                     type="text"
+                            //                     placeholder="demo@gamil.com"
+                            //                     name="searchUserText"
+                            //                     value={searchUserText}
+                            //                     onChange={this.onChange}
+                            //                 />
+                            //             </div>
+                            //             {this.formatUserTypeList()}
+                            //         </div>
+                            //         {collection && collection.userResponseList ? (
+                            //             collection.userResponseList.map((user, i) => {
+                            //                 if (
+                            //                     user.profilePicDocument &&
+                            //                     user.profilePicDocument.docUrl
+                            //                 ) {
+                            //                     return (
+                            //                         <img
+                            //                             src={user.profilePicDocument.docUrl}
+                            //                             alt=""
+                            //                             data-toggle="tooltip"
+                            //                             data-placement="top"
+                            //                             title={user.name}
+                            //                         />
+                            //                     );
+                            //                 }
+                            //                 return (
+                            //                     <img
+                            //                         src={require("../../assets/images/pro_pic_default.svg")}
+                            //                         alt=""
+                            //                         data-toggle="tooltip"
+                            //                         data-placement="top"
+                            //                         title={user.name}
+                            //                     />
+                            //                 );
+                            //             })
+                            //         ) : (
+                            //             <></>
+                            //         )}
+                            //         <div className="more-people">
+                            //             <a href="#">+5</a>
+                            //         </div>
+                            //     </div>
+                            //     <div class="d-flex mt-4 mt-sm-0">
+                            //         {collection.privacy === "CUSTOM" ? (
+                            //             <button
+                            //                 id="CreateCollection"
+                            //                 class="m-0 btn-brand"
+                            //                 onClick={() =>
+                            //                     this.setState({
+                            //                         showAddProductModal: !showAddProductModal,
+                            //                     })
+                            //                 }
+                            //             >
+                            //                 +Add more products
+                            //             </button>
+                            //         ) : (
+                            //             <></>
+                            //         )}
+
+                            //         {/*<div class="option">
+                            //         <div class="dropdown">
+                            //             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
+                            //                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
+                            //                     <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
+                            //                         <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                            //                         <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                            //                         <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
+                            //                     </g>
+                            //                 </svg>
+                            //                 <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
+                            //                     <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
+                            //                     <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
+                            //                 </ul>
+                            //             </button>
+                            //         </div>
+                            //     </div>*/}
+                            //     </div>
+                            // </div>
+
+                            <div className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
+                                {collection.privacy === "CUSTOM" ||
+                                collection.privacy === "USER_TYPE" ? (
+                                    <div className="position-relative">
+                                        <div className="added-members">
+                                            <div
+                                                id="AddNewMember"
+                                                ref={(node) => (this.AddNewMemberButton = node)}
+                                                className={`add-new-member ${
+                                                    showAddMemberModal ? `show` : ``
+                                                }`}
                                             >
-                                                <g
-                                                    id="Group_22803"
-                                                    data-name="Group 22803"
-                                                    transform="translate(2489.29 -478.941)"
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="39"
+                                                    height="39"
+                                                    viewBox="0 0 39 39"
+                                                    onClick={() =>
+                                                        this.setState({
+                                                            showAddMemberModal: !showAddMemberModal,
+                                                        })
+                                                    }
                                                 >
-                                                    <line
-                                                        id="Line_153"
-                                                        data-name="Line 153"
-                                                        x2="25.615"
-                                                        transform="translate(-2487.875 480.355) rotate(45)"
-                                                        fill="none"
-                                                        stroke="#21242b"
-                                                        stroke-linecap="round"
-                                                        stroke-width="2"
-                                                    />
-                                                    <line
-                                                        id="Line_154"
-                                                        data-name="Line 154"
-                                                        x2="25.615"
-                                                        transform="translate(-2469.763 480.355) rotate(135)"
-                                                        fill="none"
-                                                        stroke="#21242b"
-                                                        stroke-linecap="round"
-                                                        stroke-width="2"
-                                                    />
-                                                </g>
-                                            </svg>
+                                                    <g
+                                                        id="Group_22785"
+                                                        data-name="Group 22785"
+                                                        transform="translate(-1471 -119)"
+                                                    >
+                                                        <circle
+                                                            id="Ellipse_122"
+                                                            data-name="Ellipse 122"
+                                                            cx="18.5"
+                                                            cy="18.5"
+                                                            r="18.5"
+                                                            transform="translate(1472 120)"
+                                                            fill="#ebe8e8"
+                                                            stroke="#fff"
+                                                            strokeWidth="2"
+                                                        />
+                                                        <text
+                                                            id="_"
+                                                            data-name="+"
+                                                            transform="translate(1484 148)"
+                                                            fill="#21242b"
+                                                            fontSize="24"
+                                                            fontFamily="OpenSans-Semibold, Open Sans"
+                                                            fontWeight="600"
+                                                        >
+                                                            <tspan x="0" y="0">
+                                                                +
+                                                            </tspan>
+                                                        </text>
+                                                    </g>
+                                                </svg>
+                                            </div>
+
+                                            {collection && collection.userResponseList ? (
+                                                <>
+                                                    {renderMemberIcon(collection)}
+                                                    {collection.userResponseList.length >
+                                                    moreMember ? (
+                                                        <div className="more-people">
+                                                            <a
+                                                                href="#"
+                                                                onClick={() =>
+                                                                    this.setState({
+                                                                        showAddMemberModal:
+                                                                            !showAddMemberModal,
+                                                                    })
+                                                                }
+                                                            >
+                                                                +
+                                                                {collection.userResponseList
+                                                                    .length - moreMember}
+                                                            </a>
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <></>
+                                            )}
                                         </div>
-
-                                        <div class="form-group position-relative">
-                                            <label class="title">Add people</label>
-                                            <input
-                                                type="text"
-                                                placeholder="demo@gamil.com"
-                                                name="searchUserText"
-                                                value={searchUserText}
+                                        <div
+                                            className={`add-people-popup no-padding-popup shadow ${
+                                                showAddMemberModal ? `show` : ``
+                                            }`}
+                                            ref={(node) => (this.AddNewMemberModal = node)}
+                                        >
+                                            <div className="close-add-people mb-3 d-block d-sm-none">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="20.941"
+                                                    height="20.941"
+                                                    viewBox="0 0 20.941 20.941"
+                                                >
+                                                    <g
+                                                        id="Group_22803"
+                                                        data-name="Group 22803"
+                                                        transform="translate(2489.29 -478.941)"
+                                                    >
+                                                        <line
+                                                            id="Line_153"
+                                                            data-name="Line 153"
+                                                            x2="25.615"
+                                                            transform="translate(-2487.875 480.355) rotate(45)"
+                                                            fill="none"
+                                                            stroke="#21242b"
+                                                            stroke-linecap="round"
+                                                            strokeWidth="2"
+                                                        />
+                                                        <line
+                                                            id="Line_154"
+                                                            data-name="Line 154"
+                                                            x2="25.615"
+                                                            transform="translate(-2469.763 480.355) rotate(135)"
+                                                            fill="none"
+                                                            stroke="#21242b"
+                                                            stroke-linecap="round"
+                                                            strokeWidth="2"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <AddCollectionTeamMember
+                                                memberData={memberData}
+                                                onAddMember={this.addUserToCollection}
+                                                onRemoveMember={this.removeUserFromCollelction}
                                                 onChange={this.onChange}
                                             />
                                         </div>
-                                        {this.formatUserTypeList()}
                                     </div>
-                                    {collection && collection.userResponseList ? (
-                                        collection.userResponseList.map((user, i) => {
-                                            if (
-                                                user.profilePicDocument &&
-                                                user.profilePicDocument.docUrl
-                                            ) {
-                                                return (
-                                                    <img
-                                                        src={user.profilePicDocument.docUrl}
-                                                        alt=""
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title={user.name}
-                                                    />
-                                                );
-                                            }
-                                            return (
-                                                <img
-                                                    src={require("../../assets/images/pro_pic_default.svg")}
-                                                    alt=""
-                                                    data-toggle="tooltip"
-                                                    data-placement="top"
-                                                    title={user.name}
-                                                />
-                                            );
-                                        })
-                                    ) : (
-                                        <></>
-                                    )}
-                                    <div className="more-people">
-                                        <a href="#">+5</a>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-4 mt-sm-0">
-                                    {collection.privacy === "CUSTOM" ? (
-                                        <button
-                                            id="CreateCollection"
-                                            class="m-0 btn-brand"
-                                            onClick={() =>
-                                                this.setState({
-                                                    showAddProductModal: !showAddProductModal,
-                                                })
-                                            }
-                                        >
-                                            +Add more products
-                                        </button>
-                                    ) : (
-                                        <></>
-                                    )}
-
-                                    {/*<div class="option">
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="27" viewBox="0 0 6 27">
-                                                <g id="Group_10" data-name="Group 10" transform="translate(1243 -4045)">
-                                                    <path id="Path_27893" data-name="Path 27893" d="M22.5,19.5a3,3,0,1,1-3-3A3,3,0,0,1,22.5,19.5Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                                    <path id="Path_27894" data-name="Path 27894" d="M22.5,9a3,3,0,1,1-3-3A3,3,0,0,1,22.5,9Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                                    <path id="Path_27895" data-name="Path 27895" d="M22.5,30a3,3,0,1,1-3-3A3,3,0,0,1,22.5,30Z" transform="translate(-1259.5 4039)" fill="#21242b"></path>
-                                                </g>
-                                            </svg>
-                                            <ul class="dropdown-menu dropdown-menu-right shadow-lg" role="menu" aria-labelledby="menu1" x-placement="bottom-end" style={{position: 'absolute', transform: 'translate3d(-102px, 51px, 0px)', top: 0, left: 0, willChange: 'transform'}}>
-                                                <li role="presentation" class="px-4 pb-3 pt-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Get Quotes</a></li>
-                                                <li role="presentation" class="px-4 pb-3"><a role="menuitem" tabindex="-1" href="#" class="font-weight-normal  text-black">Delete</a></li>
-                                            </ul>
-                                        </button>
-                                    </div>
-                                </div>*/}
-                                </div>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         ) : (
                             <></>
