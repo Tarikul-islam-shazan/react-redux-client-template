@@ -673,10 +673,13 @@ class PickDesignV2 extends Component {
                                 />
                             </g>
                         </svg> */}
-                        <span className="explore-design-filter-icon" onClick={() => this.setState({ showFilters: !showFilters })}>
-                            <img src="../icons/Filter.svg"/>
+                        <span
+                            className="explore-design-filter-icon"
+                            onClick={() => this.setState({ showFilters: !showFilters })}
+                        >
+                            <img src="../icons/Filter.svg" />
                             <span className="filter-text">Filter</span>
-                            <img src="../icons/arrow_drop_up.svg" alt="arrow"/>
+                            <img src="../icons/arrow_drop_up.svg" alt="arrow" />
                         </span>
                     </div>
                     <div
@@ -727,14 +730,16 @@ class PickDesignV2 extends Component {
                                 />
                             </g>
                         </svg> */}
-                        <span className="explore-design-filter-icon" onClick={() => this.setState({ responsiveFilterModal: true })}>
-                            <img src="../icons/Filter.svg"/>
-                            
+                        <span
+                            className="explore-design-filter-icon"
+                            onClick={() => this.setState({ responsiveFilterModal: true })}
+                        >
+                            <img src="../icons/Filter.svg" />
                         </span>
-                        
                     </div>
                     <div className="search flex-grow-1">
                         <svg
+                            onClick={() => this._search()}
                             xmlns="http://www.w3.org/2000/svg"
                             width="16.55"
                             height="16.508"
@@ -988,10 +993,7 @@ class PickDesignV2 extends Component {
                                     Clear
                                 </a>
                             </span>
-                            <span class="result">
-                                {pagination}{" "}
-                                Designs
-                            </span>
+                            <span class="result">{pagination} Designs</span>
                         </h4>
                         {!this.state.loading && !designList.length ? (
                             <EmptyState

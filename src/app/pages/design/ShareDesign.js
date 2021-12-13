@@ -649,9 +649,18 @@ class ShareDesign extends Component {
                                 text={LOADER_TEXT}
                             >
                                 <h4>Add to collection</h4>
-                                {collectionList.length ? (
-                                    <div className="all-collection">
-                                        {/* <span className="semibold-16">Add to collection</span> */}
+                                <div className="all-collection">
+                                    <div className="collection-search">
+                                        <input
+                                            type="search"
+                                            placeholder="Collection name"
+                                            onChange={(e) =>
+                                                this.fetchCollectionList(e.target.value)
+                                            }
+                                        />
+                                        <img src="/icons/search.svg" alt="search" />
+                                    </div>
+                                    {collectionList.length > 0 ? (
                                         <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
                                             {collectionList.map((collection, i) => {
                                                 return (
@@ -671,10 +680,11 @@ class ShareDesign extends Component {
                                                 );
                                             })}
                                         </ul>
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
+                                    ) : (
+                                        <span>No collection found</span>
+                                    )}
+                                </div>
+
                                 <span
                                     className="create-newbutton cursor-pointer"
                                     onClick={() =>
