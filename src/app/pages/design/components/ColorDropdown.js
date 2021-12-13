@@ -3,7 +3,7 @@ import CustomDropdown from "../../../commonComponents/CustomDropdown";
 import Http from "../../../services/Http";
 import { toastSuccess, toastError } from "../../../commonComponents/Toast";
 
-const ColorDropdown = ({ addColor, removeColor }) => {
+const ColorDropdown = ({ addColor, removeColor, error }) => {
     const [colorName, setColorName] = useState("");
     const [selectedColorList, setSelectedColorList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +77,7 @@ const ColorDropdown = ({ addColor, removeColor }) => {
     return (
         <div className="col-md-12 mb-3">
             <CustomDropdown
+                isError={`${error ? `error2` : ``}`}
                 type="addColor"
                 title="Select color"
                 onItemClick={onItemClick}
@@ -86,7 +87,8 @@ const ColorDropdown = ({ addColor, removeColor }) => {
                 isAddNew={false}
                 // onAddMore={() => setShowColorModal(true)}
             />
-            {errors.colorError && <p className="error">{errors.colorError}</p>}
+            {/* {errors.colorError && <p className="error">{errors.colorError}</p>} */}
+            {error ? <label className="error">{error}</label> : <></>}
 
             {selectedColorList.length > 0 && (
                 <CustomDropdown
