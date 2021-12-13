@@ -779,6 +779,10 @@ label[aria-expanded="true"]{
   justify-content: space-between;
   margin-bottom: 0 !important;
   background: #F4F5F7;
+  &.error2{
+    background: #fee;
+    border: 1px solid red !important;
+  }
   p{
       margin: 0;
       color: $gray_dark_02;
