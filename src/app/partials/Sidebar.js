@@ -142,46 +142,40 @@ class Sidebar extends Component {
                         <NavLink
                             to="/dashboard"
                             classes={`${pathname.match("/dashboard") ? "active" : ""}`}
-                            activeIcon={require("../assets/icons/share-design-active.png")}
-                            inactiveIcon={require("../assets/icons/share-design.png")}
+                            activeIcon={require("../assets/icons/Dashboard-active.svg")}
+                            inactiveIcon={require("../assets/icons/Dashboard-default.svg")}
                             title="Dashboard"
                             onClick={this.props.setActiveTab}
                         />
-
-                        {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
+                        {
                             <NavLink
-                                to="/designs/explore"
-                                classes={`${
-                                    pathname.includes("/designs/explore" || "/designs/view/")
-                                        ? "active"
-                                        : ""
-                                }`}
-                                activeIcon={require("../assets/icons/pick-design-active.png")}
-                                inactiveIcon={require("../assets/icons/drafting-compass.png")}
-                                title="Explore Designs"
+                                to="/collections/list"
+                                classes={`${pathname.match("collections") ? "active" : ""}`}
+                                activeIcon={require("../assets/icons/collections-active.svg")}
+                                inactiveIcon={require("../assets/icons/collections-default.svg")}
+                                title="Collections"
                                 onClick={this.props.setActiveTab}
                             />
-                        ) : (
-                            <></>
-                        )}
-                        {permissions.includes("RFQ_ADD") ? (
+                        }
+                       
+                        {/* {permissions.includes("RFQ_ADD") ? (
                             <NavLink
                                 to="/designs/add"
                                 classes={`${pathname.match("/designs/add") ? "active" : ""}`}
-                                activeIcon={require("../assets/icons/share-design-active.png")}
-                                inactiveIcon={require("../assets/icons/share-design.png")}
+                                activeIcon={require("../assets/icons/explore-design-active.svg")}
+                                inactiveIcon={require("../assets/icons/explore-design-default.svg")}
                                 title="Share Designs"
                                 onClick={this.props.setActiveTab}
                             />
                         ) : (
                             <></>
-                        )}
+                        )} */}
                         {permissions.includes("RFQ_MY_RFQ") ? (
                             <NavLink
                                 to="/quotes/list"
                                 classes={`${pathname.match("quotes") ? "active" : ""}`}
-                                activeIcon={require("../assets/icons/my-rfq-active.png")}
-                                inactiveIcon={require("../assets/icons/quote_new.svg")}
+                                activeIcon={require("../assets/icons/quotes-active.svg")}
+                                inactiveIcon={require("../assets/icons/quotes-default.svg")}
                                 title="Quotes"
                                 onClick={this.props.setActiveTab}
                             />
@@ -192,8 +186,8 @@ class Sidebar extends Component {
                             <NavLink
                                 to="/orders/my-orders"
                                 classes={`${pathname.match("orders") ? "active" : ""}`}
-                                activeIcon={require("../assets/icons/my-project-active.png")}
-                                inactiveIcon={require("../assets/icons/my-project.png")}
+                                activeIcon={require("../assets/icons/orders-active.svg")}
+                                inactiveIcon={require("../assets/icons/orders-default.svg")}
                                 title="Orders"
                                 onClick={this.props.setActiveTab}
                             />
@@ -214,22 +208,29 @@ class Sidebar extends Component {
                             <NavLink
                                 to="/invoices/list"
                                 classes={`${pathname.match("invoices") ? "active" : ""}`}
-                                activeIcon={require("../assets/icons/share-design-active.png")}
-                                inactiveIcon={require("../assets/icons/share-design.png")}
+                                activeIcon={require("../assets/icons/payments-active.svg")}
+                                inactiveIcon={require("../assets/icons/payments-deafult.svg")}
                                 title="Payments"
                                 onClick={this.props.setActiveTab}
                             />
                         }
-                        {
+                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
-                                to="/collections/list"
-                                classes={`${pathname.match("collections") ? "active" : ""}`}
-                                activeIcon={require("../assets/icons/share-design-active.png")}
-                                inactiveIcon={require("../assets/icons/share-design.png")}
-                                title="Collections"
+                                to="/designs/explore"
+                                classes={`${
+                                    pathname.includes("/designs/explore" || "/designs/view/")
+                                        ? "active"
+                                        : ""
+                                }`}
+                                activeIcon={require("../assets/icons/explore-design-active.svg")}
+                                inactiveIcon={require("../assets/icons/explore-design-default.svg")}
+                                title="Explore Designs"
                                 onClick={this.props.setActiveTab}
                             />
-                        }
+                        ) : (
+                            <></>
+                        )}
+                        
 
                         {/* {
                         permissions.includes('PRODUCT_MY_PRODUCT') ?
