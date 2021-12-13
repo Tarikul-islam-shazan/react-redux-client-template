@@ -12,7 +12,6 @@ import Http from "../../services/Http";
 import { toastSuccess, toastError } from "../../commonComponents/Toast";
 import { _storeData, validateShareDesign } from "./actions";
 import ColorDropdown from "./components/ColorDropdown";
-import { columns, fixedHeaders, LOADER_STYLE } from "../../constants";
 import { MeasurementTable } from "./components/MeasurementTable";
 import {
     LOADER_OVERLAY_BACKGROUND,
@@ -25,8 +24,6 @@ import {
     LOADER_MARGIN_TOP,
     LOADER_MARGIN_LEFT,
 } from "../../constant";
-import ColorRowWithPicker from "./components/ColorRowWithPicker";
-import { parseHtml } from "../../services/Util";
 
 let toolbarConfig = { display: [] };
 
@@ -46,11 +43,20 @@ class ShareDesign extends Component {
             productTypeList: [],
             fabricTypeList: [],
             designCategoryList: [],
+            collectionList: [],
+            collectionId: "",
+            showAddCollectionPopup: false,
+            showCollectionAddOption: false,
+            collectionName: "",
+            isLoading: false,
             errors: {
                 nameError: "",
                 fabricTypeError: "",
                 fabricCompositionDetailsError: "",
                 productGroupIdError: "",
+                collectionNameError: "",
+                collectionIdError: "",
+                colorListError: "",
             },
         };
     }
@@ -59,12 +65,25 @@ class ShareDesign extends Component {
         this["colorRef_" + i] = node;
     };
 
+    setWrapperRef = (node) => {
+        this.wrapperRef = node;
+    };
+
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.setState({
+                showAddCollectionPopup: false,
+            });
+        }
+    };
+
     componentDidMount = async () => {
         document.title = "Share Design - Nitex";
         window.addEventListener("mousedown", this.handleClickOutside);
         await this.getProductTypes();
         await this.getFabricTypes();
         await this.getDesignCategories();
+        await this.fetchCollectionList();
         loadjs(["/js/script.js"]);
     };
 
@@ -79,7 +98,13 @@ class ShareDesign extends Component {
                     productTypeList: data,
                 });
             })
-            .catch((response) => {});
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was not successful");
+                }
+            });
     };
 
     getFabricTypes = async () => {
@@ -91,7 +116,13 @@ class ShareDesign extends Component {
                     });
                 }
             })
-            .catch((response) => {});
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was not successful");
+                }
+            });
     };
 
     getDesignCategories = async () => {
@@ -103,7 +134,13 @@ class ShareDesign extends Component {
                     });
                 }
             })
-            .catch((response) => {});
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was not successful");
+                }
+            });
     };
 
     onChange = (e) => {
@@ -141,16 +178,19 @@ class ShareDesign extends Component {
                     });
                 })
                 .catch(({ response }) => {
-                    console.log("uploadDocument ERROR: ", JSON.stringify(response));
+                    if (response && response.data && response.data.message) {
+                        toastError(response.data.message);
+                    } else {
+                        toastError("Request was not successful");
+                    }
                 });
         };
         reader.onerror = function (error) {
-            console.log("Error: ", error);
+            toastError(error);
         };
     };
 
     showUploadProgress = (data, doc) => {
-        // console.log("data from showUploadProgress", data)
         console.log("uploadDocument progress amount: ", (data.loaded / data.total) * 100, doc);
     };
 
@@ -166,6 +206,27 @@ class ShareDesign extends Component {
         this.setState({ pantoneColorIdList });
     };
 
+    onShareDesign = async (body) => {
+        this.setState({ isLoading: true });
+        await Http.POST("shareDesign", body)
+            .then(({ data }) => {
+                this.setState({ showAddCollectionPopup: false, isLoading: false });
+                if (data.success) {
+                    this.props.history.push("/designs/edit/" + data.id);
+                } else {
+                    toastError(data.message);
+                }
+            })
+            .catch(({ response }) => {
+                this.setState({ isLoading: false });
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was not successful");
+                }
+            });
+    };
+
     submit = () => {
         let validated = validateShareDesign(this.state);
         this.setState({
@@ -175,26 +236,91 @@ class ShareDesign extends Component {
                 : this.state.pantoneColorIdList,
         });
         if (validated.isValid) {
-            Http.POST("shareDesign", validated.reqBody)
-                .then(({ data }) => {
-                    console.log("shareDesign POST SUCCESS: ", data);
-                    if (data.success) {
-                        this.props.history.push("/designs/edit/" + data.id);
-                    } else {
-                        toastError(data.message);
-                    }
-                })
-                .catch(({ response }) => {
-                    console.log("shareDesign ERROR: ", JSON.stringify(response));
-                    if (response && response.data && response.data.message) {
-                        toastError(response.data.message);
-                    } else {
-                        toastError("Request was not successful");
-                    }
-                });
+            this.setState({ showAddCollectionPopup: true });
+            // this.onShareDesign(validated.reqBody);
         } else {
             loadjs(["/js/script.js"]);
         }
+    };
+
+    fetchCollectionList = async (term = "") => {
+        await Http.GET("getCollectionList", `?name=${term}`)
+            .then(({ data }) => {
+                if (data.data) {
+                    this.setState({ collectionList: data.data });
+                }
+            })
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was not successful");
+                }
+            });
+    };
+
+    addToExistingCollection = async (collectionId) => {
+        let {
+            documentId,
+            fabricCompositionDetails,
+            fabricType,
+            name,
+            note,
+            pantoneColorIdList,
+            productCategoryId,
+            productGroupId,
+        } = this.state;
+        await this.setState({ collectionId });
+        await this.onShareDesign({
+            documentId,
+            fabricCompositionDetails,
+            fabricType,
+            isNitexProduct: false,
+            name,
+            note: note.toString("html"),
+            pantoneColorIdList,
+            productCategoryId,
+            productGroupId,
+            collectionId,
+        });
+    };
+
+    createNewCollection = async () => {
+        let { collectionName } = this.state;
+        if (!collectionName) {
+            this.setState({
+                errors: { ...this.state.errors, collectionNameError: "Collection name required" },
+            });
+            return;
+        } else {
+            this.setState({
+                errors: { ...this.state.errors, collectionNameError: "" },
+            });
+        }
+        let body = {
+            name: collectionName,
+            privacy: "CUSTOM",
+        };
+
+        await Http.POST("addCollection", body)
+            .then(({ data }) => {
+                if (data) {
+                    this.addToExistingCollection(data.id);
+                }
+            })
+            .catch(({ response }) => {
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Request was unsuccessful.");
+                }
+            });
+    };
+
+    onChangeText = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
     };
 
     render() {
@@ -204,13 +330,14 @@ class ShareDesign extends Component {
             fabricType,
             fabricCompositionDetails,
             productGroupId,
-            tableJson,
             note,
-            documentId,
             productDesignDoc,
             productTypeList,
             fabricTypeList,
             designCategoryList,
+            showAddCollectionPopup,
+            showCollectionAddOption,
+            collectionList,
         } = this.state;
         let {
             nameError,
@@ -219,6 +346,8 @@ class ShareDesign extends Component {
             fabricCompositionDetailsError,
             productGroupIdError,
             documentIdError,
+            collectionNameError,
+            colorListError,
         } = this.state.errors;
 
         return (
@@ -453,6 +582,7 @@ class ShareDesign extends Component {
                                     </div>
 
                                     <ColorDropdown
+                                        error={colorListError}
                                         addColor={this.addColor}
                                         removeColor={this.removeColor}
                                     />
@@ -476,7 +606,7 @@ class ShareDesign extends Component {
                                         <div className="text-right">
                                             <button
                                                 className="btn-brand m-0 brand-bg-color"
-                                                onClick={this.submit}
+                                                onClick={() => this.submit()}
                                             >
                                                 Submit
                                             </button>
@@ -487,6 +617,123 @@ class ShareDesign extends Component {
                         </div>
                     </div>
                 </div>
+
+                {showAddCollectionPopup ? (
+                    <div className="create-new-collection">
+                        <div className="pop-container" ref={this.setWrapperRef}>
+                            <LoadingOverlay
+                                active={this.state.isLoading}
+                                styles={{
+                                    overlay: (base) => ({
+                                        ...base,
+                                        background: LOADER_OVERLAY_BACKGROUND,
+                                    }),
+                                    spinner: (base) => ({
+                                        ...base,
+                                        width: LOADER_WIDTH,
+                                        position: LOADER_POSITION,
+                                        top: LOADER_TOP,
+                                        left: LOADER_LEFT,
+                                        marginTop: LOADER_MARGIN_TOP,
+                                        marginLeft: LOADER_MARGIN_LEFT,
+                                        "& svg circle": {
+                                            stroke: LOADER_COLOR,
+                                        },
+                                    }),
+                                    content: (base) => ({
+                                        ...base,
+                                        color: LOADER_COLOR,
+                                    }),
+                                }}
+                                spinner
+                                text={LOADER_TEXT}
+                            >
+                                <h4>Add to collection</h4>
+                                {collectionList.length ? (
+                                    <div className="all-collection">
+                                        {/* <span className="semibold-16">Add to collection</span> */}
+                                        <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
+                                            {collectionList.map((collection, i) => {
+                                                return (
+                                                    <li key={i}>
+                                                        <span>{collection.name}</span>
+                                                        <button
+                                                            className="button size32"
+                                                            onClick={() =>
+                                                                this.addToExistingCollection(
+                                                                    collection.id
+                                                                )
+                                                            }
+                                                        >
+                                                            Add
+                                                        </button>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}
+                                <span
+                                    className="create-newbutton cursor-pointer"
+                                    onClick={() =>
+                                        this.setState({
+                                            showCollectionAddOption: !showCollectionAddOption,
+                                        })
+                                    }
+                                >
+                                    + Create new collection
+                                </span>
+                                {showCollectionAddOption ? (
+                                    <>
+                                        <div className="collection-add-element">
+                                            <div className="form-group">
+                                                <label htmlFor="cname">Collection name</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Type your collection name"
+                                                    classname="bg-gray-light border-0"
+                                                    name="collectionName"
+                                                    onChange={(e) => this.onChangeText(e)}
+                                                />
+                                                {collectionNameError ? (
+                                                    <label className="error">
+                                                        {collectionNameError}
+                                                    </label>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                            </div>
+                                            <div className="buttons text-right">
+                                                <button
+                                                    onClick={() =>
+                                                        this.setState({
+                                                            showCollectionAddOption:
+                                                                !showCollectionAddOption,
+                                                        })
+                                                    }
+                                                >
+                                                    Cancel
+                                                </button>
+                                                <button
+                                                    disabled={this.state.isLoading}
+                                                    onClick={() => this.createNewCollection()}
+                                                >
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+                            </LoadingOverlay>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
             </>
         );
     }

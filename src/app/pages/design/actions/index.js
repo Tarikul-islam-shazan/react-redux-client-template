@@ -40,8 +40,8 @@ export const _getProductForQuote = async (productIds) => {
         .then(({ data }) => {
             if (data.length) {
                 data.map((product) => {
-                    if (product.colorWiseSizeQuantityPairList) {}
-                    else if (product.colors) {
+                    if (product.colorWiseSizeQuantityPairList) {
+                    } else if (product.colors) {
                         product.colorWiseSizeQuantityPairList = product.colors.map((color) => {
                             if (product.sizeQuantityPairList) {
                                 color.sizeQuantityPairList = product.sizeQuantityPairList;
@@ -72,6 +72,7 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         colorEditRequestList,
         documentId,
         productDesignDoc,
+        collectionId,
     } = state;
 
     let errors = {};
@@ -125,6 +126,13 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
     } else {
         errors.colorListError = "";
     }
+
+    // if (!collectionId) {
+    //     errors.collectionIdError = "Collection is required.";
+    //     isValid = false;
+    // } else {
+    //     errors.collectionIdError = "";
+    // }
 
     if (isValid) {
         reqBody = {

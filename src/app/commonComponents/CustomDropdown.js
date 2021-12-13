@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const CustomDropdown = ({
+    isError,
     type,
     title,
     onItemClick,
@@ -12,7 +13,6 @@ const CustomDropdown = ({
     isAddNew,
 }) => {
     const [searchTerm, setSearchTerm] = useState("");
-
     const onSearchItem = (event) => {
         if (onItemSearch) {
             onItemSearch(event.target.value);
@@ -192,7 +192,7 @@ const CustomDropdown = ({
             {type === "addColor" && (
                 <>
                     <div
-                        className="click-box click mb-1 "
+                        className={`click-box click mb-1 ${isError}`}
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
