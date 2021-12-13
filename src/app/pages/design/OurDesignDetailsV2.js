@@ -329,9 +329,8 @@ class OurDesignDetails extends Component {
    getSimilarDesign = async (page = 0) => {
       await this.setState({ similarDesignLoading: true });
       let id = this.props.match.params.id;
-      await Http.GET("getSimilarDesign", `${id}?page=${page}&size=20`)
+      await Http.GET("getMoreProductInCollection", `${id}?page=${page}&size=20`)
          .then(({ data }) => {
-            console.log("getSimilarDesign success", data);
             if (data.length) {
                let result = data.map((product) => {
                   product.isSelected = false;
@@ -565,7 +564,8 @@ class OurDesignDetails extends Component {
          },
       };
       const settingsSliderNav = {
-         slidesToShow: this.getImageByType().length > 4 ? 4 : this.getImageByType().length,
+         slidesToShow: this.getSliderDocuments(product.productDocumentResponse).length > 4 ? 4 : this.getSliderDocuments(product.productDocumentResponse).length,
+         // slidesToShow: 4,
          slidesToScroll: 1,
          vertical: true,
          // asNavFor: '.slider-for',
@@ -1021,7 +1021,7 @@ class OurDesignDetails extends Component {
             </div>
             <div className="other-description p-0 pt-5 mt-4">
                <div className="designs">
-                  <h4 className="mb-4">Similar Designs</h4>
+                  <h4 className="mb-4">More from this collection</h4>
                   <div className="show-products">
                      {similarDesigns.map((product, i) => {
                         return (

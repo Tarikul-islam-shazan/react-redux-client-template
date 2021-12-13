@@ -71,6 +71,7 @@ const routes = {
     markNotificationUnread: `${BASE_URL}/notification/mark-unseen/`,
     getUnseenNotificationCount: `${BASE_URL}/notification/unseen-count`,
     getSimilarDesign: `${BASE_URL}/product/similar/`,
+    getMoreProductInCollection: `${BASE_URL}/product/more-in-collection/`,
     getProjectMembers: `${BASE_URL}/order/get-member-list/`,
 
     getProductCollectionList: `${BASE_URL}/collection/products/`,
