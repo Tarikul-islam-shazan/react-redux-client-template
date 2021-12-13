@@ -765,7 +765,8 @@ class PickDesignV2 extends Component {
                             onChange={this.onChange}
                             onKeyPress={this.keyPressed}
                         />
-
+                    </div>
+                    {/* <div>
                         {showSelectedFilters && filters.length ? (
                             <ul className="filter-tag">
                                 {filters.map((filter, i) => {
@@ -824,7 +825,7 @@ class PickDesignV2 extends Component {
                         ) : (
                             <></>
                         )}
-                    </div>
+                    </div> */}
                     <div
                         className="filter-cat"
                         style={{ display: showFilters ? "flex" : "none" }}
@@ -979,6 +980,67 @@ class PickDesignV2 extends Component {
                         <MyCollections myCollectionLists={collectionList} />
                     </div>
                 )}
+
+                <div>
+                    {showSelectedFilters && filters.length ? (
+                        <ul className="filter-tag">
+                            {filters.map((filter, i) => {
+                                if (filter.showSelected) {
+                                    return (
+                                        <li className="active" key={i}>
+                                            <a>{filter.name}</a>
+                                            <div
+                                                className="close-tag"
+                                                onClick={() =>
+                                                    this.setFilters(
+                                                        filter.type,
+                                                        filter.id,
+                                                        filter.name
+                                                    )
+                                                }
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="10.888"
+                                                    height="10.888"
+                                                    viewBox="0 0 10.888 10.888"
+                                                >
+                                                    <g
+                                                        id="Group_10684"
+                                                        data-name="Group 10684"
+                                                        transform="translate(50.699 -260.002) rotate(45)"
+                                                    >
+                                                        <path
+                                                            id="Path_27710"
+                                                            data-name="Path 27710"
+                                                            d="M2135.273,2351v14.4"
+                                                            transform="translate(-1979.574 -2138.497)"
+                                                            fill="none"
+                                                            stroke="#fff"
+                                                            strokeWidth="1"
+                                                        />
+                                                        <path
+                                                            id="Path_27711"
+                                                            data-name="Path 27711"
+                                                            d="M0,0V14.4"
+                                                            transform="translate(162.898 219.699) rotate(90)"
+                                                            fill="none"
+                                                            stroke="#fff"
+                                                            strokeWidth="1"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </li>
+                                    );
+                                }
+                                return <></>;
+                            })}
+                        </ul>
+                    ) : (
+                        <></>
+                    )}
+                </div>
 
                 {searching ? (
                     <div className="designs">
@@ -1310,6 +1372,180 @@ class PickDesignV2 extends Component {
                                                         </li>
                                                     );
                                                 })}
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="#pageSubmenuMarket"
+                                            data-toggle="collapse"
+                                            aria-expanded="false"
+                                            className="dropdown-toggle"
+                                        >
+                                            Market
+                                        </a>
+                                        <ul
+                                            className="collapse list-unstyled sub-collapse-menu"
+                                            id="pageSubmenuMarket"
+                                        >
+                                            {filterOptions.productGroupResponseList &&
+                                                filterOptions.productGroupResponseList.map(
+                                                    (item, i) => {
+                                                        return (
+                                                            <li
+                                                                style={{
+                                                                    color: isSelected(
+                                                                        filters,
+                                                                        "MARKET",
+                                                                        item.id
+                                                                    )
+                                                                        ? "rgb(238 118 31)"
+                                                                        : "black",
+                                                                }}
+                                                                key={i}
+                                                                onClick={() =>
+                                                                    this.setFilters(
+                                                                        "MARKET",
+                                                                        item.id,
+                                                                        item.name
+                                                                    )
+                                                                }
+                                                            >
+                                                                {item.name}
+                                                            </li>
+                                                        );
+                                                    }
+                                                )}
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="#pageSubmenuSeason"
+                                            data-toggle="collapse"
+                                            aria-expanded="false"
+                                            className="dropdown-toggle"
+                                        >
+                                            Season
+                                        </a>
+                                        <ul
+                                            className="collapse list-unstyled sub-collapse-menu"
+                                            id="pageSubmenuSeason"
+                                        >
+                                            {filterOptions.seasonResponseList &&
+                                                filterOptions.seasonResponseList.map((item, i) => {
+                                                    return (
+                                                        <li
+                                                            style={{
+                                                                color: isSelected(
+                                                                    filters,
+                                                                    "SEASON",
+                                                                    item.code
+                                                                )
+                                                                    ? "rgb(238 118 31)"
+                                                                    : "black",
+                                                            }}
+                                                            key={i}
+                                                            onClick={() =>
+                                                                this.setFilters(
+                                                                    "SEASON",
+                                                                    item.code,
+                                                                    item.name
+                                                                )
+                                                            }
+                                                        >
+                                                            {item.name}
+                                                        </li>
+                                                    );
+                                                })}
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="#pageSubmenuComposition"
+                                            data-toggle="collapse"
+                                            aria-expanded="false"
+                                            className="dropdown-toggle"
+                                        >
+                                            Composition
+                                        </a>
+                                        <ul
+                                            className="collapse list-unstyled sub-collapse-menu"
+                                            id="pageSubmenuComposition"
+                                        >
+                                            {filterOptions.compositionResponseList &&
+                                                filterOptions.compositionResponseList.map(
+                                                    (item, i) => {
+                                                        return (
+                                                            <li
+                                                                style={{
+                                                                    color: isSelected(
+                                                                        filters,
+                                                                        "COMPOSITION",
+                                                                        item.code
+                                                                    )
+                                                                        ? "rgb(238 118 31)"
+                                                                        : "black",
+                                                                }}
+                                                                key={i}
+                                                                onClick={() =>
+                                                                    this.setFilters(
+                                                                        "COMPOSITION",
+                                                                        item.code,
+                                                                        item.value
+                                                                    )
+                                                                }
+                                                            >
+                                                                {item.value}
+                                                            </li>
+                                                        );
+                                                    }
+                                                )}
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a
+                                            href="#pageSubmenuFabricType"
+                                            data-toggle="collapse"
+                                            aria-expanded="false"
+                                            className="dropdown-toggle"
+                                        >
+                                            Fabric type
+                                        </a>
+                                        <ul
+                                            className="collapse list-unstyled sub-collapse-menu"
+                                            id="pageSubmenuFabricType"
+                                        >
+                                            {filterOptions.fabricTypeResponseList &&
+                                                filterOptions.fabricTypeResponseList.map(
+                                                    (item, i) => {
+                                                        return (
+                                                            <li
+                                                                style={{
+                                                                    color: isSelected(
+                                                                        filters,
+                                                                        "FABRIC_TYPE",
+                                                                        item.code
+                                                                    )
+                                                                        ? "rgb(238 118 31)"
+                                                                        : "black",
+                                                                }}
+                                                                key={i}
+                                                                onClick={() =>
+                                                                    this.setFilters(
+                                                                        "FABRIC_TYPE",
+                                                                        item.code,
+                                                                        item.value
+                                                                    )
+                                                                }
+                                                            >
+                                                                {item.value}
+                                                            </li>
+                                                        );
+                                                    }
+                                                )}
                                         </ul>
                                     </li>
                                 </ul>

@@ -648,7 +648,7 @@ class ShareDesign extends Component {
                                 spinner
                                 text={LOADER_TEXT}
                             >
-                                <h4>Add to collection</h4>
+                                <h4 className="c-popup-title">Add to collection</h4>
                                 <div className="all-collection">
                                     <div className="collection-search">
                                         <input
@@ -693,7 +693,7 @@ class ShareDesign extends Component {
                                         })
                                     }
                                 >
-                                    + Create new collection
+                                    <span className="plus">+</span> Create new collection
                                 </span>
                                 {showCollectionAddOption ? (
                                     <>
