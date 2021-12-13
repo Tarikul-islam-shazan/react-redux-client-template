@@ -207,9 +207,18 @@ const Dashboard = () => {
         const formattedCurrentDate = moment(currentDate, "DD/MM/YYYY hh:mm A");
         timeDifference = formattedCurrentDate.diff(formattedEndDate, "hours");
         if (timeDifference >= 0) {
-            return "Overdue";
+            return  <div className="task-status red">
+            <span className="status-btn">
+            Overdue
+            </span>
+        </div>
+            
         }
-        return "Running";
+        return  <div className="task-status yellow">
+        <span className="status-btn">
+        Running
+        </span>
+    </div>
     };
 
     return (
@@ -567,7 +576,7 @@ const Dashboard = () => {
                                                             </span>
                                                         </div>
                                                     ) : (
-                                                        <div className="task-status yellow">
+                                                        <div className="task-status purple">
                                                             <span className="status-btn">
                                                                 Offer pending
                                                             </span>
@@ -668,11 +677,8 @@ const Dashboard = () => {
                                                 <span>{item.orderRefNumber}</span>{" "}
                                             </td>
                                             <td>
-                                                <div className="task-status red">
-                                                    <span className="status-btn">
-                                                        {getTasksStatus(item.endDate)}
-                                                    </span>
-                                                </div>
+                                            {getTasksStatus(item.endDate)}
+                                               
                                             </td>
                                         </tr>
                                     ))
