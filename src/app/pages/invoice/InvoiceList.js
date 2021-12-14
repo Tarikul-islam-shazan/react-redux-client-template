@@ -95,7 +95,6 @@ class InvoiceList extends Component {
       let paramData = encodeQueryData(params);
       await Http.GET("invoiceList", user.id + paramData)
          .then(({ data }) => {
-            console.log("invoiceList SUCCESS: ", data);
             if (data.invoiceResponseList) {
                this.setState({
                   invoiceList: merge
@@ -124,6 +123,9 @@ class InvoiceList extends Component {
       });
       if (e.target.name !== "search") {
          this.renderList();
+      }
+      else if(e.target.name === "search" && e.target.value === ""){
+         this.renderList()
       }
    };
 

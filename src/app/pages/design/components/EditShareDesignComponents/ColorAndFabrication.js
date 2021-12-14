@@ -1,53 +1,25 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import EditColorDropdown from "../EditColorDropdown";
 
 export const ColorAndFabrication = ({
-    data,
-    setPickerRef,
-    errors,
-    designCategoryList,
-    productTypeList,
-    fabricTypeList,
-    flag,
-    flagName,
-    toggleFlag,
-    addColor,
-    removeColor,
-    onChange,
-    onSubmit,
-    classes,
-}) => {
-    let productTypeName = "";
-    let categoryName = "";
-    let fabricTypeName = "";
-
-    designCategoryList.map((item) => {
-        if (item.id == data.productCategoryId) {
-            categoryName = item.name;
-        }
-    });
-
-    // productTypeList.map((item) => {
-    //     item.types.map((item2) => {
-    //         if (item2.id == data.productTypeId) {
-    //             productTypeName = item2.name;
-    //         }
-    //     });
-    // });
-
-    // fabricTypeList.map((item) => {
-    //     if (item.id == data.fabricTypeId) {
-    //         fabricTypeName = item.name;
-    //     }
-    // });
-
-    const onChangeColor = (e) => {
-        onChange(e.target.name, e.target.value);
-    };
-
+                                        data,
+                                        setPickerRef,
+                                        errors,
+                                        designCategoryList,
+                                        productTypeList,
+                                        fabricTypeList,
+                                        flag,
+                                        flagName,
+                                        toggleFlag,
+                                        addColor,
+                                        removeColor,
+                                        onChange,
+                                        onSubmit,
+                                        classes,
+                                    }) => {
     return (
         <div className={classes}>
-            <div className="edit-section" style={{ display: flag ? "block" : "none" }}>
+            <div className="edit-section" style={{display: flag ? "block" : "none"}}>
                 <span className="p-edit cursor-pointer" onClick={() => onSubmit(flagName)}>
                     <span className="d-none">
                         <svg
@@ -226,7 +198,7 @@ export const ColorAndFabrication = ({
                     </div>
                 </div>
             </div>
-            <div className="view-section" style={{ display: !flag ? "block" : "none" }}>
+            <div className="view-section" style={{display: !flag ? "block" : "none"}}>
                 <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +276,7 @@ export const ColorAndFabrication = ({
                                                 <span>
                                                     <span
                                                         className="color-circle mr-2"
-                                                        style={{ background: colorObj.hexCode }}
+                                                        style={{background: colorObj.hexCode}}
                                                     ></span>
                                                     {colorObj.hexCode} - {colorObj.name}
                                                 </span>
