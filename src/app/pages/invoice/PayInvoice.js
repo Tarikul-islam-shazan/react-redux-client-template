@@ -199,7 +199,6 @@ class PayInvoice extends Component {
             spinner
             text={LOADER_TEXT}
          >
-            <div class="back cursor-pointer"></div>
             <div class="add-quote d-flex">
                <div class="buyer-payment-methods">
                   <div class="title">Select payment method</div>

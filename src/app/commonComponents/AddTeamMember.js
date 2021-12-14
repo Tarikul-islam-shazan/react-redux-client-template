@@ -202,7 +202,8 @@ const AddTeamMember = ({ memberData, showViewType, onAddMember, onRemoveMember, 
                            />
                         </div>
                      </div>
-                     {!searchUserText ? (
+                    <div className="all-team-members">
+                    {!searchUserText ? (
                         <>
                            {projectManager && (
                               <div className="manager-designation-persons">
@@ -249,6 +250,7 @@ const AddTeamMember = ({ memberData, showViewType, onAddMember, onRemoveMember, 
                      ) : (
                         renderUserSuggetion()
                      )}
+                    </div>
                   </div>
                </div>
             </div>

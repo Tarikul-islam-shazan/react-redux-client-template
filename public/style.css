@@ -631,7 +631,6 @@ aside.left-panel.collapsed .navigation > ul > li > a .badge {
 .navigation > ul > li.active > a {
     color: #EE761F;
     background: #fff;
-    border-left:3px solid #EE761F;
 }
 .navigation > ul > li.active > a:hover {
     color: #EE761F !important;

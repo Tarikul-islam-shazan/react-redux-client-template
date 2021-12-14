@@ -86,6 +86,7 @@ class DefaultLayout extends Component {
     };
 
     render() {
+        let {pathname} = this.props.history.location;
         let userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
             userInfo = JSON.parse(userInfo);
@@ -113,13 +114,16 @@ class DefaultLayout extends Component {
 
 
                       <ul className="navbar-nav ml-auto align-items-center">
-                          <li className='active'>
-                            <button className='btn my-task-btn'>
-                              <img src='../icons/list.svg'/>
-                              <span>My tasks</span>
+                          <li className={pathname === "/tasks" ? "active" : ""}>
+                             {/* <Link className="dropdown-item my-task-btn" to="/tasks">
+                              
+                            </Link> */}
+                            <button className="btn my-task-btn" onClick={() => this.props.history.push('/tasks')}>
+                                <img src='../icons/list.svg'/>
+                                <span>My tasks</span>
                             </button>
                           </li>
-                          <li className="nav-item quote-cart dropdown no-arrow" data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
+                          <li className={pathname === "/quote-now" ? "nav-item quote-cart dropdown no-arrow active" : "nav-item quote-cart dropdown no-arrow"} data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
                               <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#21242B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

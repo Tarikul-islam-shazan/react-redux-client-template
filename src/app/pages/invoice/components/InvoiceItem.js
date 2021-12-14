@@ -7,7 +7,7 @@ export const InvoiceItem = ({invoice, details, remove, payInvoice}) => {
   return (
       <tr>
           <td>{invoice.invoiceNo}</td>
-          <td>{invoice.orderId}</td>
+          <td>{invoice.orderRefNumber}</td>
           <td>${invoice.amount}</td>
           <td>{invoice.dateCreated ? moment(invoice.dateCreated, 'DD/MM/YYYY').format('DD MMM, YY') : 'N/A'}</td>
           <td>{invoice.dueDate ? moment(invoice.dueDate, 'DD/MM/YYYY').format('DD MMM, YY') : 'N/A'}</td>

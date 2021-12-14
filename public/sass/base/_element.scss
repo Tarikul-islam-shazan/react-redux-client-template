@@ -2,6 +2,17 @@
   padding: 12px 8px;
   font-size: 16px;
 }
+.navigation{
+  .list-unstyled{
+    &.list_sidebar{
+      li{
+        &:last-child{
+          border-top: 1px solid $gray_dark_04 !important;
+        }
+      }
+    }
+  }
+}
 .navbar-expand .navbar-nav .nav-link {
   font-size: 14px;
 }

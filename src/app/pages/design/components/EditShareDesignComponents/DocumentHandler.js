@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { renderImageOrIcon } from '../../../../commonComponents/renderImageOrIcon';
 import { addImageSuffix, getImageExt, IMAGE_EXTS } from '../../../../services/Util';
 
-export const DocumentHandler = ({data, title, name, classes, visibleDocType, setVisibleDocType, onFileSelect, onFileRemove}) => {
+export const DocumentHandler = ({data, title, name, classes, visibleDocType, setVisibleDocType, onFileSelect, onFileRemove,setModalTitle}) => {
+
+    const [randomNumber,] = useState(Math.floor((Math.random() * 100) + 1));
+
+
   if (!data.length) {
     return (
-      <div class="item">
-          <div class="type-of-img-name">
-              <span class="font-20">{title}</span>
+      <div className="item">
+          <div className="type-of-img-name">
+              <span className="font-20">{title}</span>
           </div>
-          <div class={`uploader ${classes}`}>
-              <label for={name} class="drag-upload">&nbsp;</label>
-              <input type="file" class="file-upload" id={name} name={name} onChange={(e) => onFileSelect(e, e.target.name)} multiple/>
-              {/*<div class="center-center">
+          <div className={`uploader ${classes}`}>
+              <label htmlFor={randomNumber.toString()} className="drag-upload">&nbsp;</label>
+              <input type="file" className="file-upload" id={randomNumber.toString()} name={name} onChange={(e) => onFileSelect(e, e.target.name)} multiple/>
+              {/*<div className="center-center">
                   <div id="loading-spinner"></div>
               </div>*/}
           </div>
@@ -20,13 +24,20 @@ export const DocumentHandler = ({data, title, name, classes, visibleDocType, set
     )
   }
 
+  const handleClick = () => {
+      if(setModalTitle){
+          setModalTitle(title);
+      }
+      setVisibleDocType(name)
+    }
+
   return(
-    <div class="item">
-        <div class="type-of-img-name d-flex justify-content-between align-items-center">
-            <span class="font-20">{title}</span>
-            <span class="add-more-img">
-                <div class="upload-btn-wrapper">
-                  <button class="btn">
+    <div className="item">
+        <div className="type-of-img-name d-flex justify-content-between align-items-center">
+            <span className="font-20">{title}</span>
+            <span className="add-more-img">
+                <div className="upload-btn-wrapper">
+                  <button className="btn">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
                       <g id="Group_11129" data-name="Group 11129" transform="translate(-750 -184)">
                         <g id="Rectangle_6032" data-name="Rectangle 6032" transform="translate(780 184) rotate(90)" fill="rgba(190,205,239,0.25)" stroke="#21242b" stroke-width="1" opacity="0.623">
@@ -37,22 +48,22 @@ export const DocumentHandler = ({data, title, name, classes, visibleDocType, set
                       </g>
                     </svg>
                   </button>
-                  <input type="file" name="myfile" name={name} onChange={(e) => onFileSelect(e, e.target.name)} multiple/>
+                  <input type="file" name={name} onChange={(e) => onFileSelect(e, e.target.name)} multiple/>
                 </div>
             </span>
         </div>
 
-        <ul class="p-img-container">
+        <ul className="p-img-container">
         {
           data.map((item, i) => {
             if (IMAGE_EXTS.includes(getImageExt(item.docUrl))) {
               return(
                 <li key={`responsive_${i}`}>
-                    <div class="p-img">
+                    <div className="p-img">
                         {
                           renderImageOrIcon(item.docUrl, '_xthumbnail', item.name)
                         }
-                        <div class="dlt" onClick={() => onFileRemove(item)}>
+                        <div className="dlt" onClick={() => onFileRemove(item)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                 <g id="Group_11045" data-name="Group 11045" transform="translate(-396 -260)">
                                     <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(428 260) rotate(90)" fill="rgba(253,39,39,0.05)"></rect>
@@ -71,11 +82,11 @@ export const DocumentHandler = ({data, title, name, classes, visibleDocType, set
             } else {
               return(
                 <li key={`responsive_${i}`} className="cursor-pointer">
-                    <div class="files">
+                    <div className="files">
                         {
                           renderImageOrIcon(item.docUrl, '_xthumbnail', item.name)
                         }
-                        <div class="dlt" onClick={() => onFileRemove(item)}>
+                        <div className="dlt" onClick={() => onFileRemove(item)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                 <g id="Group_11045" data-name="Group 11045" transform="translate(-396 -260)">
                                     <rect id="Rectangle_6032" data-name="Rectangle 6032" width="32" height="32" rx="4" transform="translate(428 260) rotate(90)" fill="rgba(253,39,39,0.05)"></rect>
@@ -98,7 +109,7 @@ export const DocumentHandler = ({data, title, name, classes, visibleDocType, set
         </ul>
         {
           data.length > 1 ?
-          <div class={`more-item font-18 brand-color text-underline mt-2 cursor-pointer ${visibleDocType === name ? `open` : ``}`} onClick={() => setVisibleDocType(name)}>{data.length - 1} more file</div>
+          <div className={`more-item font-18 brand-color text-underline mt-2 cursor-pointer ${visibleDocType === name ? `open` : ``}`} onClick={handleClick}>{data.length - 1} more file</div>
           : <></>
         }
     </div>
