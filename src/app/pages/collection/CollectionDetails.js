@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import Modal from "react-bootstrap/Modal";
 import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
-import { toastSuccess, toastError } from "../../commonComponents/Toast";
+import {toastSuccess, toastError} from "../../commonComponents/Toast";
 import {
     encodeQueryData,
     clothingLabelStatus,
@@ -14,9 +14,9 @@ import {
     authUserInfo,
 } from "../../services/Util";
 import ProductCardWithTick from "../../commonComponents/ProductCardWithTick";
-import { ModalMyProductCard } from "../../commonComponents/ModalMyProductCard";
+import {ModalMyProductCard} from "../../commonComponents/ModalMyProductCard";
 import AddCollectionTeamMember from "../../commonComponents/AddCollectionTeamMember";
-import { ProductSkeleton, CreateSkeletons } from "../../commonComponents/ProductSkeleton";
+import {ProductSkeleton, CreateSkeletons} from "../../commonComponents/ProductSkeleton";
 import {
     LOADER_OVERLAY_BACKGROUND,
     LOADER_COLOR,
@@ -29,7 +29,7 @@ import {
     LOADER_MARGIN_LEFT,
     LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
-import { _storeData, _getProductForQuote } from "../design/actions";
+import {_storeData, _getProductForQuote} from "../design/actions";
 
 // const filterProductBasedOnStatus = (products) => {
 //     return products.filter((product) => !["LOCKED", "SOLD"].includes(product.availabilityStatus));
@@ -90,7 +90,7 @@ class CollectionDetails extends Component {
         );
         const windowBottom = windowHeight + window.pageYOffset;
         if (windowBottom >= docHeight) {
-            let { hasNext, page, loading, productList, size } = this.state;
+            let {hasNext, page, loading, productList, size} = this.state;
             if (hasNext && !loading && productList.length) {
                 await this.getCollectionProducts(page + 1);
             }
@@ -103,7 +103,7 @@ class CollectionDetails extends Component {
             wrappedElement.scrollHeight - wrappedElement.scrollTop ===
             wrappedElement.clientHeight
         ) {
-            let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, myDesignSize } =
+            let {myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, myDesignSize} =
                 this.state;
             if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
                 let data = await this.myProducts(myDesignPage + 1);
@@ -147,7 +147,7 @@ class CollectionDetails extends Component {
     };
 
     getTitleName = () => {
-        let { collection } = this.state;
+        let {collection} = this.state;
         if (collection) {
             let title = collection.name;
             document.title = `View collection ${
@@ -181,16 +181,16 @@ class CollectionDetails extends Component {
             return;
         }
         let myDesignList = await this.myProducts();
-        this.setState({ myDesignList });
+        this.setState({myDesignList});
         await this.getUsersByTypes();
     };
 
     getCollectionDetails = (collectionId) => {
-        this.setState({ loading: true });
-        let { size, name } = this.state;
+        this.setState({loading: true});
+        let {size, name} = this.state;
         let user = authUserInfo();
         Http.GET("getCollectionDetails", collectionId)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
                     data.userResponseList = data.userResponseList.filter(
                         (addedUser) => addedUser.id !== user.id
@@ -198,11 +198,11 @@ class CollectionDetails extends Component {
                     if (user.id) {
                         data.userResponseList = [user, ...data.userResponseList];
                     }
-                    this.setState({ collection: data });
+                    this.setState({collection: data});
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -229,11 +229,11 @@ class CollectionDetails extends Component {
         }
 
         let collectionId = this.props.match.params.id;
-        this.setState({ loading: true });
-        let { size, name, productList } = this.state;
+        this.setState({loading: true});
+        let {size, name, productList} = this.state;
         Http.GET("getCollectionProducts", `${collectionId}?page=${page}&size=${size}`)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data) {
                     this.setState({
                         productList: [...productList, ...data.data],
@@ -242,8 +242,8 @@ class CollectionDetails extends Component {
                     });
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -253,10 +253,10 @@ class CollectionDetails extends Component {
     };
 
     getViewTypeCollectionList = async (page, viewType) => {
-        let { size, productList } = this.state;
+        let {size, productList} = this.state;
         Http.GET("getCollectionProductsByCollectionType", `${viewType}?page=${page}&size=${size}`)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data) {
                     this.setState({
                         productList: [...productList, ...data.data],
@@ -265,8 +265,8 @@ class CollectionDetails extends Component {
                     });
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -276,14 +276,14 @@ class CollectionDetails extends Component {
     };
 
     myProducts = async (myDesignPage = 0) => {
-        this.setState({ myDesignLoading: true });
-        let { myDesignList, myDesignSize } = this.state;
+        this.setState({myDesignLoading: true});
+        let {myDesignList, myDesignSize} = this.state;
         let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
         let designParams = `?page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
         let result = [];
         await Http.GET("getProductList", params)
-            .then(({ data }) => {
-                this.setState({ myDesignLoading: false });
+            .then(({data}) => {
+                this.setState({myDesignLoading: false});
                 if (data && data.length > 0) {
                     const designList = data.filter(
                         (design) => design.availabilityStatus === "AVAILABLE"
@@ -292,13 +292,13 @@ class CollectionDetails extends Component {
                 }
             })
             .catch((response) => {
-                this.setState({ myDesignLoading: false });
+                this.setState({myDesignLoading: false});
                 toastError("Something went wrong! Please try again.");
             });
 
         await Http.GET("searchProduct", designParams)
-            .then(({ data }) => {
-                this.setState({ myDesignLoading: false });
+            .then(({data}) => {
+                this.setState({myDesignLoading: false});
                 if (data.productResponseList && data.productResponseList.length > 0) {
                     const pickDesignList = data.productResponseList.filter(
                         (design) => design.availabilityStatus === "AVAILABLE"
@@ -306,27 +306,27 @@ class CollectionDetails extends Component {
                     result = [...result, ...pickDesignList];
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ myDesignLoading: false });
+            .catch(({response}) => {
+                this.setState({myDesignLoading: false});
                 toastError("Something went wrong! Please try again.");
             });
         return result;
     };
 
     getUsersByTypes = async () => {
-        let { usersByTypeList } = this.state;
+        let {usersByTypeList} = this.state;
         let params = `?userTypes=FASHION_DESIGNER&userTypes=EXECUTIVE`;
         await Http.GET("getUsersByTypes", params)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data) {
                     this.setState({
                         usersByTypeList: data,
                     });
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -343,16 +343,17 @@ class CollectionDetails extends Component {
             userInfo = {};
         }
         Http.GET("getUserCollectionList", userInfo.id)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data.data) {
-                    this.setState({ collectionList: data.data });
+                    this.setState({collectionList: data.data});
                 }
             })
-            .catch(({ response }) => {});
+            .catch(({response}) => {
+            });
     };
 
     formatUserTypeList = () => {
-        let { usersByTypeList, searchUserText, searchUserSuggestions } = this.state;
+        let {usersByTypeList, searchUserText, searchUserSuggestions} = this.state;
         let result = [];
         if (searchUserText) {
             result.push(
@@ -431,11 +432,11 @@ class CollectionDetails extends Component {
             loading: true,
         });
         Http.POST("likeProduct", {}, id)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data.success) {
                     // toastSuccess(data.message);
-                    let { productList } = this.state;
+                    let {productList} = this.state;
                     productList = productList.map((item, i) => {
                         if (item.id == id) {
                             item.liked = true;
@@ -450,8 +451,8 @@ class CollectionDetails extends Component {
                     toastError(data.message);
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -465,27 +466,28 @@ class CollectionDetails extends Component {
             loading: true,
         });
         Http.POST("unlikeProduct", {}, id)
-            .then(({ data }) => {
-                if (data.success) {
-                    // toastSuccess(data.message);
-                    let { productList } = this.state;
+            .then(({data}) => {
+                let {productList} = this.state;
+                if (this.state.collectionViewType === "LIKED_PRODUCTS") {
+                    productList = productList.filter((item) => item.id !== id);
+                } else {
                     productList = productList.map((item, i) => {
-                        if (item.id == id) {
+                        if (item.id === id) {
                             item.liked = false;
                             return item;
                         }
                         return item;
                     });
-                    this.setState({
-                        productList,
-                    });
-                } else {
-                    toastError(data.message);
                 }
-                this.setState({ loading: false });
+
+                console.log(productList)
+                this.setState({
+                    productList,
+                    loading: false
+                });
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -495,8 +497,8 @@ class CollectionDetails extends Component {
     };
 
     updateProductCard = () => {
-        let { selectedProductIds } = this.props;
-        let { productList } = this.state;
+        let {selectedProductIds} = this.props;
+        let {productList} = this.state;
         productList = productList.map((product) => {
             if (selectedProductIds.includes(product.id)) {
                 product.isSelected = true;
@@ -510,7 +512,7 @@ class CollectionDetails extends Component {
             }
             return product;
         });
-        this.setState({ productList });
+        this.setState({productList});
     };
 
     addToQuote = async (ids) => {
@@ -543,14 +545,14 @@ class CollectionDetails extends Component {
             productIds: [product.id],
         };
         Http.POST("addProductToCollection", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data.success) {
                     this.setState({
                         productList: [product, ...this.state.productList],
                     });
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -560,8 +562,8 @@ class CollectionDetails extends Component {
     };
 
     onChange = async (e) => {
-        let { name, value, checked } = e.target;
-        let { productList } = this.state;
+        let {name, value, checked} = e.target;
+        let {productList} = this.state;
         this.setState({
             [name]: name === "allCheckBox" ? checked : value,
         });
@@ -585,12 +587,12 @@ class CollectionDetails extends Component {
     };
 
     getSearchSuggestions = async () => {
-        let { searchUserText } = this.state;
-        this.setState({ searchUserLoading: true });
+        let {searchUserText} = this.state;
+        this.setState({searchUserLoading: true});
         let params = `?userType=BUYER&email=${searchUserText}`;
         await Http.GET("getUserSuggestions", params)
-            .then(({ data }) => {
-                this.setState({ searchUserLoading: false });
+            .then(({data}) => {
+                this.setState({searchUserLoading: false});
                 if (data) {
                     this.setState({
                         searchUserSuggestions: data,
@@ -598,7 +600,7 @@ class CollectionDetails extends Component {
                 }
             })
             .catch((response) => {
-                this.setState({ searchUserLoading: false });
+                this.setState({searchUserLoading: false});
                 toastError("Something went wrong! Please try again.");
             });
     };
@@ -624,8 +626,8 @@ class CollectionDetails extends Component {
             id,
         };
         await Http.DELETE_WITH_BODY("deleteCollection", body)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data.success) {
                     toastSuccess(data.message);
                     this.props.history.push("/collections/list");
@@ -633,8 +635,8 @@ class CollectionDetails extends Component {
                     toastError(data.message);
                 }
             })
-            .catch(({ response }) => {
-                this.setState({ loading: false });
+            .catch(({response}) => {
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -650,7 +652,7 @@ class CollectionDetails extends Component {
     };
 
     createNewCollection = () => {
-        let { collectionName } = this.state;
+        let {collectionName} = this.state;
         if (!collectionName) {
             this.setState({
                 collectionNameError: "Collection name required",
@@ -667,13 +669,13 @@ class CollectionDetails extends Component {
             viewType: "PRODUCT_LIST",
         };
         Http.POST("addCollection", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
                     this.addToExistingCollection(data.id);
                     // this.setState({showAddCollectionPopup: false});
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -688,15 +690,15 @@ class CollectionDetails extends Component {
             productIds: this.props.selectedProductIds,
         };
         Http.POST("addProductToCollection", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
                     this.props._storeData("selectedProductIds", []);
                     this.updateProductCard();
-                    this.setState({ showAddCollectionPopup: false });
+                    this.setState({showAddCollectionPopup: false});
                     toastSuccess(data.message);
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -707,13 +709,13 @@ class CollectionDetails extends Component {
 
     addUserToCollection = (user) => {
         let collectionId = this.props.match.params.id;
-        let { collection } = this.state;
+        let {collection} = this.state;
         let body = {
             collectionId,
             userIds: [user.id],
         };
         Http.POST("shareCollection", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data && data.success) {
                     if (collection.userResponseList && collection.userResponseList.length) {
                         let flag = true;
@@ -731,10 +733,10 @@ class CollectionDetails extends Component {
                     } else {
                         collection.userResponseList = [user];
                     }
-                    this.setState({ collection });
+                    this.setState({collection});
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -745,13 +747,13 @@ class CollectionDetails extends Component {
 
     removeUserFromCollelction = async (user) => {
         let collectionId = this.props.match.params.id;
-        let { collection } = this.state;
+        let {collection} = this.state;
         let body = {
             collectionId,
             userIds: [user.id],
         };
         await Http.POST("removeMemberFromCollection", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data && data.success) {
                     let updatedCollection = collection.userResponseList.filter(
                         (item) => item.id !== user.id
@@ -759,9 +761,9 @@ class CollectionDetails extends Component {
                     toastSuccess(data.message);
                     collection.userResponseList = [...updatedCollection];
                 }
-                this.setState({ collection });
+                this.setState({collection});
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -805,7 +807,7 @@ class CollectionDetails extends Component {
             if (user.profilePicDocument && user.profilePicDocument.docUrl) {
                 return (
                     <img
-                        onClick={() => this.setState({ showAddMemberModal: !showAddMemberModal })}
+                        onClick={() => this.setState({showAddMemberModal: !showAddMemberModal})}
                         src={user.profilePicDocument.docUrl}
                         alt=""
                         data-toggle="tooltip"
@@ -816,7 +818,7 @@ class CollectionDetails extends Component {
             }
             return (
                 <img
-                    onClick={() => this.setState({ showAddMemberModal: !showAddMemberModal })}
+                    onClick={() => this.setState({showAddMemberModal: !showAddMemberModal})}
                     src="/images/pro_pic_default.svg"
                     alt=""
                     data-toggle="tooltip"
@@ -841,7 +843,8 @@ class CollectionDetails extends Component {
         return (
             <>
                 <div class="explore-design">
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
+                    <div
+                        class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
                         <div class="">
                             {collectionViewType === "MY_PRODUCTS" ? (
                                 <h4 class="font-26 semibold mb-4 mb-sm-0">My designs</h4>
@@ -854,7 +857,8 @@ class CollectionDetails extends Component {
                         {!collectionType &&
                         !collectionViewType &&
                         collection.privacy === "CUSTOM" ? (
-                            <div className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
+                            <div
+                                className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
                                 {collection.privacy === "CUSTOM" ||
                                 collection.privacy === "USER_TYPE" ? (
                                     <div className="position-relative">
@@ -1107,7 +1111,7 @@ class CollectionDetails extends Component {
                                     })
                                 ) : (
                                     <CreateSkeletons iterations={10}>
-                                        <ProductSkeleton />
+                                        <ProductSkeleton/>
                                     </CreateSkeletons>
                                 )}
                             </div>
@@ -1126,10 +1130,10 @@ class CollectionDetails extends Component {
                                 >
                                     Add to quote
                                 </button>
-                                <div style={{ width: 20 }}></div>
+                                <div style={{width: 20}}></div>
                                 <button
                                     className="m-0 btn-brand brand-bg-color shadow"
-                                    onClick={() => this.setState({ showAddCollectionPopup: true })}
+                                    onClick={() => this.setState({showAddCollectionPopup: true})}
                                 >
                                     Add to collection
                                 </button>
@@ -1163,7 +1167,7 @@ class CollectionDetails extends Component {
                             <div class="pop-container" ref={this.setWrapperRef}>
                                 <span
                                     class="create-newbutton cursor-pointer"
-                                    onClick={() => this.setState({ showCollectionAddOption: true })}
+                                    onClick={() => this.setState({showCollectionAddOption: true})}
                                 >
                                     + Create new collection
                                 </span>
@@ -1256,6 +1260,7 @@ class CollectionDetails extends Component {
                             </div>
 
                             <div class="show-products">
+                                {console.log(productList)}
                                 {productList.map((product, i) => {
                                     return (
                                         <ProductCardWithTick
@@ -1266,6 +1271,7 @@ class CollectionDetails extends Component {
                                             likeProduct={this.likeProduct}
                                             unlikeProduct={this.unlikeProduct}
                                             showEdit={showEdit}
+                                            collectionViewType={collectionViewType}
                                         />
                                     );
                                 })}
