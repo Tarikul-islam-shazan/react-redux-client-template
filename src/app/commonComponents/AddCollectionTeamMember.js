@@ -213,6 +213,7 @@ const AddCollectionTeamMember = ({
                                     />
                                 </div>
                             </div>
+                            <div className="all-team-members">
                             {!searchUserText ? (
                                 <>
                                     {accountManager && (
@@ -260,6 +261,8 @@ const AddCollectionTeamMember = ({
                             ) : (
                                 renderUserSuggetion()
                             )}
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -681,7 +681,7 @@ class ShareDesign extends Component {
                                             })}
                                         </ul>
                                     ) : (
-                                        <span>No collection found</span>
+                                        <span className="no-collection-found">No collection found</span>
                                     )}
                                 </div>
 
