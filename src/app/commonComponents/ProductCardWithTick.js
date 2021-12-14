@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Dropdown } from "react-bootstrap";
@@ -240,7 +240,8 @@ class ProductCard extends Component {
                           </ul>
                       </div>
                   </div>*/}
-                        <a href={"/designs/view/" + product.id}>
+                        {/* <a href={"/designs/view/" + product.id}> */}
+                        <Link to={"/designs/view/" + product.id}>
                             {product.designDocuments.length > 0 ? (
                                 product.designDocuments.map((doc, i) => {
                                     if (doc.docType == "PRODUCT_DESIGN" && flag) {
@@ -272,7 +273,7 @@ class ProductCard extends Component {
                                     className="card-img-top img-fluid d-block mx-auto"
                                 />
                             )}
-                        </a>
+                        </Link>
                         {/*<button className="btn-brand">Quote Now</button>*/}
                     </div>
                     <div className="card-body">

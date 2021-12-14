@@ -121,7 +121,7 @@ class CollectionList extends Component {
             });
     };
 
-    renderList = (page = 0, merge = true) => {
+    renderList = async (page = 0, merge = true) => {
         let userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
             userInfo = JSON.parse(userInfo);
@@ -139,7 +139,7 @@ class CollectionList extends Component {
         };
         let paramData = encodeQueryData(params);
 
-        Http.GET("getUserCollectionList", userInfo.id + paramData)
+        await Http.GET("getUserCollectionList", userInfo.id + paramData)
             .then(({ data }) => {
                 console.log("getclients SUCCESS: ", data);
                 if (data.data && data.data.length > 0) {
