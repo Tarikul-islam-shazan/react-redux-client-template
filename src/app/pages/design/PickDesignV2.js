@@ -895,6 +895,7 @@ class PickDesignV2 extends Component {
                     <>
                         <div className="designs">
                             <h4 className="mb-4 font-weight-normal">
+                                <span>Explore our design</span>
                                 <span class="result">{pagination} Designs</span>
                             </h4>
                             <div className="show-products">

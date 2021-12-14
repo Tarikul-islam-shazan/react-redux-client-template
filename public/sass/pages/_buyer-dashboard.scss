@@ -561,6 +561,11 @@
     }
     
   }
+  @media only screen and (max-width: 767px){
+    .buyer-dashboard-container{
+      padding-top: 24px;
+    }
+  }
 
   @media only screen and (max-width: 520px){
     .buyer-dashboard-container{
@@ -640,7 +645,7 @@
         }
       }
       .running-orders-info-section{
-        padding: 16px;
+        padding: 8px;
         .progress-section {
           .single-person-progress {
             flex-wrap: wrap;
@@ -673,7 +678,7 @@
       }
       .progress-info-team-brand{
         .team-performance-top{
-          margin-bottom: 0;
+          margin-bottom: 12px;
         }
       }
       .quick-actions{

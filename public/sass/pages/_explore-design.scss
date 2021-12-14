@@ -16,6 +16,15 @@
   position: relative;
   .designs{
     margin-top: 30px;
+    @media (max-width:414px){
+      h4{
+        font-size: 16px;
+        margin-bottom: 12px !important;
+        .result{
+          font-size: 16px;
+        }
+      }
+    }
     .rec-carousel-wrapper{
       .rec-carousel-item{
         width: 345px;
@@ -30,7 +39,7 @@
     }
   }
   @media (max-width:1024px) {
-    padding:  0;
+    padding:0;
   }
   .explore-design-filter{
     @media (max-width: 767px) {
@@ -118,9 +127,9 @@ span.result {
   font-size: 20px;
   float: right;
   text-align: right;
-  @media (max-width:1024px) {
-    float: left;
-  }
+  // @media (max-width:1024px) {
+  //   float: left;
+  // }
 }
 .explore-design-carasoul{
   width: calc(100% - 50px);
