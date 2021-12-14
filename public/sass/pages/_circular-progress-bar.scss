@@ -1,5 +1,5 @@
 
-$borderWidth: 2px;
+$borderWidth: 1px;
 $animationTime: .5s;
 $border-color-default: #CBDCFF;
 $border-color-fill: $primary;
@@ -19,7 +19,7 @@ $howManySteps: 100;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: $borderWidth solid $border-color-default;
+    border: $borderWidth solid $gray_dark_03;
     position: absolute;
     top: 0;
     left: 0;
@@ -43,7 +43,7 @@ $howManySteps: 100;
     border-style: solid;
     position: absolute;
     top: 0;
-    border-color: $border-color-fill;
+    border-color: $completed;
   }
   .progress-left .progress-bar {
     left: 100%;
@@ -128,18 +128,4 @@ $howManySteps: 100;
 			transform: rotate(#{$degrees}deg);
     }
 	}
-}
-
-.modal-body{
-  .progress{
-    width: auto;
-    border: none;
-    .progress-bar{
-      border: none;
-    }
-    &::after{
-      border: none;
-    }
-  }
-
 }

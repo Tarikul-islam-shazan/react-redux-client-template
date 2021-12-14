@@ -133,12 +133,12 @@ ul {
       border: none;
    }
    .done {
-      background: $primary;
+      background: $green_light_02;
       position: relative;
-      border: 2px solid $primary;
+      border: 1px solid $green;
       color: #fff;
       .task-value {
-         font-size: 0;
+         font-size: 0 !important;
       }
       &::before {
          content: "";
@@ -147,15 +147,15 @@ ul {
          top: 50%;
          transform: translate(-50%, -50%);
          color: #fff;
-         background: url(../../images/filled.png);
-         height: 14px;
-         width: 14px;
+         background: url(../../images/Check-green.svg);
+         height: 9px;
+         width: 10px;
          background-repeat: no-repeat;
       }
    }
    .done.progress {
       &::after {
-         border: 2px solid #452C8E;
+         border: 1px solid $green;
       }
    }
    .task-name {
