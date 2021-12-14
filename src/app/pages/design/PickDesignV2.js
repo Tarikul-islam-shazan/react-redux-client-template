@@ -1,33 +1,15 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import $ from "jquery";
 import loadjs from "loadjs";
-import Carousel from "react-elastic-carousel";
-import LoadingOverlay from "react-loading-overlay";
 import Modal from "react-bootstrap/Modal";
-
 import Http from "../../services/Http";
-import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
+import { toastSuccess, toastError } from "../../commonComponents/Toast";
 import EmptyState from "../../commonComponents/EmptyState";
-import ProductCard from "../../commonComponents/ProductCard";
 import ProductCardWithTick from "../../commonComponents/ProductCardWithTick";
 import { ProductSkeleton, CreateSkeletons } from "../../commonComponents/ProductSkeleton";
 
-import {
-    LOADER_OVERLAY_BACKGROUND,
-    LOADER_COLOR,
-    LOADER_WIDTH,
-    LOADER_TEXT,
-    LOADER_POSITION,
-    LOADER_TOP,
-    LOADER_LEFT,
-    LOADER_MARGIN_TOP,
-    LOADER_MARGIN_LEFT,
-    LOCAL_QUOTE_NOW_KEY,
-} from "../../constant";
+import { LOCAL_QUOTE_NOW_KEY } from "../../constant";
 import {
     _getKey,
     formatProductTypeWithGroup,
@@ -115,12 +97,13 @@ class PickDesignV2 extends Component {
         );
         const windowBottom = windowHeight + window.pageYOffset;
         if (windowBottom >= docHeight) {
-            let { hasNext, page, loading, designList, size, searching } = this.state;
-            if (hasNext && !loading && designList.length && searching) {
+            let { hasNext, page, loading, designList, size, landingData } = this.state;
+            if (hasNext && !loading) {
                 let data = await this.renderList(page + 1);
                 if (data.length > 0) {
                     await this.setState({
                         designList: [...designList, ...data],
+                        // landingData: [...landingData, ...data],
                         page: page + 1,
                         hasNext: data.length === size ? true : false,
                         loading: false,
@@ -177,31 +160,12 @@ class PickDesignV2 extends Component {
         document.addEventListener("mousedown", this.handleClickOutside);
         window.addEventListener("scroll", this.handleScroll);
         this.setState({ loading: true });
-        this.initialDataFetch();
-        this.setFilterOptions();
-        this.fetchSuggestions();
-        this.fetchCollectionList();
-    };
 
-    initialDataFetch = async () => {
-        await this.setState({ initialLoading: true });
-        await Http.GET("getExploreDesignLanding")
-            .then(({ data }) => {
-                let result = data.collections.map((collection) => {
-                    if (collection.collectionViewType === "PRODUCT_LIST") {
-                        collection.productResponseList = collection.productResponseList.map(
-                            (product) => {
-                                product.isSelected = false;
-                                return product;
-                            }
-                        );
-                    }
-                    return collection;
-                });
-                this.setState({ landingData: result });
-            })
-            .catch(({ response }) => {});
-        await this.setState({ initialLoading: false });
+        let designList = await this.renderList();
+        this.setState({ designList: designList });
+
+        this.setFilterOptions();
+        this.fetchCollectionList();
     };
 
     setFilterOptions = async () => {
@@ -209,17 +173,6 @@ class PickDesignV2 extends Component {
             .then(({ data }) => {
                 let response = { ...data };
                 this.setState({ filterOptions: response });
-            })
-            .catch(({ response }) => {});
-    };
-
-    fetchSuggestions = () => {
-        let { search, suggestions } = this.state;
-        Http.GET("getSearchSuggestions", `${search ? `/${search}` : ``}`)
-            .then(({ data }) => {
-                if (data.length) {
-                    this.setState({ suggestions: data });
-                }
             })
             .catch(({ response }) => {});
     };
@@ -267,9 +220,9 @@ class PickDesignV2 extends Component {
     };
 
     renderList = async (page = 0) => {
-        this.setState({ loading: true, searching: true });
+        this.setState({ loading: true });
         let { size, designList, search, sort, productTypeId, filters } = this.state;
-        let params = `?page=${page}&size=${size}`;
+        let params = `?page=${page}&size=${size}&exploreDesign=true`;
         if (search) {
             params += `&search=${search.trim()}`;
         }
@@ -308,18 +261,13 @@ class PickDesignV2 extends Component {
     };
 
     onChange = async (e) => {
-        this.setState(
-            {
-                [e.target.name]: e.target.value,
-                page: 0,
-                hasNext: true,
-                productTypeId: "",
-                // size : 100
-            },
-            async (name) => {
-                this.fetchSuggestions();
-            }
-        );
+        this.setState({
+            [e.target.name]: e.target.value,
+            page: 0,
+            hasNext: true,
+            productTypeId: "",
+            // size : 100
+        });
     };
 
     onChangeText = (e) => {
@@ -355,6 +303,7 @@ class PickDesignV2 extends Component {
             showSuggestions: false,
             designList: [],
             loading: true,
+            searching: true,
         });
         let designList = await this.renderList();
         await this.setState({
@@ -365,14 +314,16 @@ class PickDesignV2 extends Component {
         this.updateProductCard();
     };
 
-    resetFilter = () => {
-        this.setState({
+    resetFilter = async () => {
+        await this.setState({
             filters: [],
             search: "",
             page: 0,
             searching: false,
             showSelectedFilters: false,
         });
+        let designList = await this.renderList();
+        this.setState({ designList: designList });
     };
 
     details = (id = 0) => {
@@ -389,7 +340,7 @@ class PickDesignV2 extends Component {
                 this.setState({ loading: false });
                 if (data.success) {
                     // toastSuccess(data.message);
-                    let { designList, landingData } = this.state;
+                    let { designList } = this.state;
                     designList = designList.map((item, i) => {
                         if (item.id == id) {
                             item.liked = true;
@@ -398,7 +349,7 @@ class PickDesignV2 extends Component {
                         return item;
                     });
 
-                    let result = landingData.map((collection) => {
+                    let result = designList.map((collection) => {
                         if (collection.collectionViewType === "PRODUCT_LIST") {
                             collection.productResponseList = collection.productResponseList.map(
                                 (product) => {
@@ -413,8 +364,8 @@ class PickDesignV2 extends Component {
                     });
 
                     this.setState({
-                        designList,
-                        landingData: result,
+                        // designList,
+                        designList: result,
                     });
                 } else {
                     toastError(data.message);
@@ -439,7 +390,7 @@ class PickDesignV2 extends Component {
             .then(({ data }) => {
                 if (data.success) {
                     // toastSuccess(data.message);
-                    let { designList, landingData } = this.state;
+                    let { designList } = this.state;
                     designList = designList.map((item, i) => {
                         if (item.id == id) {
                             item.liked = false;
@@ -448,7 +399,7 @@ class PickDesignV2 extends Component {
                         return item;
                     });
 
-                    let result = landingData.map((collection) => {
+                    let result = designList.map((collection) => {
                         if (collection.collectionViewType === "PRODUCT_LIST") {
                             collection.productResponseList = collection.productResponseList.map(
                                 (product) => {
@@ -463,8 +414,8 @@ class PickDesignV2 extends Component {
                     });
 
                     this.setState({
-                        designList,
-                        landingData: result,
+                        // designList,
+                        designList: result,
                     });
                 } else {
                     toastError(data.message);
@@ -483,8 +434,8 @@ class PickDesignV2 extends Component {
 
     updateProductCard = () => {
         let { selectedProductIds } = this.props;
-        let { landingData, designList } = this.state;
-        landingData = landingData.map((collection) => {
+        let { designList } = this.state;
+        designList = designList.map((collection) => {
             if (collection.productResponseList) {
                 collection.productResponseList = collection.productResponseList.map((product) => {
                     if (selectedProductIds.includes(product.id)) {
@@ -515,7 +466,7 @@ class PickDesignV2 extends Component {
             }
             return product;
         });
-        this.setState({ landingData, designList });
+        this.setState({ designList });
     };
 
     addToQuote = async (ids) => {
@@ -630,49 +581,6 @@ class PickDesignV2 extends Component {
             <div className="explore-design">
                 <div className="filter-container explore-design-filter new-explore">
                     <div className="cat-menu d-none d-xl-block">
-                        {/* <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="26"
-                            height="18"
-                            viewBox="0 0 26 18"
-                            onClick={() => this.setState({ showFilters: !showFilters })}
-                        >
-                            <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
-                                <line
-                                    id="Line_53"
-                                    data-name="Line 53"
-                                    x2="18"
-                                    transform="translate(6.5 14)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                                <line
-                                    id="Line_54"
-                                    data-name="Line 54"
-                                    x2="24"
-                                    transform="translate(3.5 6)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                                <line
-                                    id="Line_55"
-                                    data-name="Line 55"
-                                    x2="9"
-                                    transform="translate(11.5 22)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                            </g>
-                        </svg> */}
                         <span
                             className="explore-design-filter-icon"
                             onClick={() => this.setState({ showFilters: !showFilters })}
@@ -687,49 +595,6 @@ class PickDesignV2 extends Component {
                         data-toggle="modal"
                         data-target="#CatMenuMobile"
                     >
-                        {/* <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="26"
-                            height="18"
-                            viewBox="0 0 26 18"
-                            onClick={() => this.setState({ responsiveFilterModal: true })}
-                        >
-                            <g id="menu_5_" data-name="menu (5)" transform="translate(-2.5 -5)">
-                                <line
-                                    id="Line_53"
-                                    data-name="Line 53"
-                                    x2="18"
-                                    transform="translate(6.5 14)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                                <line
-                                    id="Line_54"
-                                    data-name="Line 54"
-                                    x2="24"
-                                    transform="translate(3.5 6)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                                <line
-                                    id="Line_55"
-                                    data-name="Line 55"
-                                    x2="9"
-                                    transform="translate(11.5 22)"
-                                    fill="none"
-                                    stroke="#818ba0"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                />
-                            </g>
-                        </svg> */}
                         <span
                             className="explore-design-filter-icon"
                             onClick={() => this.setState({ responsiveFilterModal: true })}
@@ -766,66 +631,6 @@ class PickDesignV2 extends Component {
                             onKeyPress={this.keyPressed}
                         />
                     </div>
-                    {/* <div>
-                        {showSelectedFilters && filters.length ? (
-                            <ul className="filter-tag">
-                                {filters.map((filter, i) => {
-                                    if (filter.showSelected) {
-                                        return (
-                                            <li className="active" key={i}>
-                                                <a>{filter.name}</a>
-                                                <div
-                                                    className="close-tag"
-                                                    onClick={() =>
-                                                        this.setFilters(
-                                                            filter.type,
-                                                            filter.id,
-                                                            filter.name
-                                                        )
-                                                    }
-                                                >
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="10.888"
-                                                        height="10.888"
-                                                        viewBox="0 0 10.888 10.888"
-                                                    >
-                                                        <g
-                                                            id="Group_10684"
-                                                            data-name="Group 10684"
-                                                            transform="translate(50.699 -260.002) rotate(45)"
-                                                        >
-                                                            <path
-                                                                id="Path_27710"
-                                                                data-name="Path 27710"
-                                                                d="M2135.273,2351v14.4"
-                                                                transform="translate(-1979.574 -2138.497)"
-                                                                fill="none"
-                                                                stroke="#fff"
-                                                                strokeWidth="1"
-                                                            />
-                                                            <path
-                                                                id="Path_27711"
-                                                                data-name="Path 27711"
-                                                                d="M0,0V14.4"
-                                                                transform="translate(162.898 219.699) rotate(90)"
-                                                                fill="none"
-                                                                stroke="#fff"
-                                                                strokeWidth="1"
-                                                            />
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                            </li>
-                                        );
-                                    }
-                                    return <></>;
-                                })}
-                            </ul>
-                        ) : (
-                            <></>
-                        )}
-                    </div> */}
                     <div
                         className="filter-cat"
                         style={{ display: showFilters ? "flex" : "none" }}
@@ -969,7 +774,7 @@ class PickDesignV2 extends Component {
                     </div>
                 </div>
 
-                {!searching && collectionList && collectionList.length > 0 && (
+                {/* {!searching && collectionList && collectionList.length > 0 && (
                     <div className=" collection-list">
                         <h4 className="mb-4 font-weight-normal">
                             Collections for you
@@ -979,7 +784,7 @@ class PickDesignV2 extends Component {
                         </h4>
                         <MyCollections myCollectionLists={collectionList} />
                     </div>
-                )}
+                )} */}
 
                 <div>
                     {showSelectedFilters && filters.length ? (
@@ -1088,119 +893,38 @@ class PickDesignV2 extends Component {
                     </div>
                 ) : (
                     <>
-                        {landingData.map((data, i) => {
-                            if (data.collectionViewType === "PRODUCT_LIST") {
-                                if (this.getAllAvailableProducts(data.productResponseList).length) {
-                                    return (
-                                        <div className="designs" key={i}>
-                                            <h4 className="mb-2 font-weight-normal">
-                                                {data.name}{" "}
-                                                <a href={"/collections/view/" + data.id}>
-                                                    <span className="view-all">View all</span>
-                                                </a>
-                                            </h4>
-                                            {this.getAllAvailableProducts(data.productResponseList)
-                                                .length > 3 ? (
-                                                <Carousel
-                                                    breakPoints={breakPoints}
-                                                    //  outerSpacing={5}
-                                                    // itemsToShow={5}
-                                                    pagination={false}
-                                                >
-                                                    {data.productResponseList ? (
-                                                        this.getAllAvailableProducts(
-                                                            data.productResponseList
-                                                        ).map((product, j) => {
-                                                            return (
-                                                                <ProductCardWithTick
-                                                                    key={j}
-                                                                    product={product}
-                                                                    updateProductCard={() =>
-                                                                        this.updateProductCard()
-                                                                    }
-                                                                    addToQuote={this.addToQuote}
-                                                                    likeProduct={this.likeProduct}
-                                                                    unlikeProduct={
-                                                                        this.unlikeProduct
-                                                                    }
-                                                                />
-                                                            );
-                                                        })
-                                                    ) : (
-                                                        <></>
-                                                    )}
-                                                </Carousel>
-                                            ) : (
-                                                <div className="show-products">
-                                                    {this.getAllAvailableProducts(
-                                                        data.productResponseList
-                                                    ).map((product, j) => {
-                                                        return (
-                                                            <ProductCardWithTick
-                                                                key={j}
-                                                                product={product}
-                                                                updateProductCard={() =>
-                                                                    this.updateProductCard()
-                                                                }
-                                                                addToQuote={this.addToQuote}
-                                                                likeProduct={this.likeProduct}
-                                                                unlikeProduct={this.unlikeProduct}
-                                                            />
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                        </div>
-                                    );
-                                }
-                                return <></>;
-                            } else if (data.collectionViewType === "BANNER") {
-                                return (
-                                    <div className="banner-section mt-5 mb-4 overflow-hidden">
-                                        <div className="row">
-                                            {data.collections ? (
-                                                data.collections.map((banner, j) => {
-                                                    if (j > 1) {
-                                                        return <></>;
-                                                    }
-                                                    if (banner.banners && banner.banners.length) {
-                                                        return (
-                                                            <div className="col-md-6" key={j}>
-                                                                <a
-                                                                    href={
-                                                                        "/collections/view/" +
-                                                                        banner.id
-                                                                    }
-                                                                >
-                                                                    <img
-                                                                        src={
-                                                                            banner.banners[0].docUrl
-                                                                        }
-                                                                        alt=""
-                                                                        className="w-100 mb-4 mb-sm-0"
-                                                                    />
-                                                                </a>
-                                                            </div>
-                                                        );
-                                                    } else {
-                                                        return <></>;
-                                                    }
-                                                })
-                                            ) : (
-                                                <></>
-                                            )}
-                                        </div>
-                                    </div>
-                                );
-                            }
-                        })}
-                        {this.state.initialLoading && (
+                        <div className="designs">
+                            <h4 className="mb-4 font-weight-normal">
+                                <span>Explore our design</span>
+                                <span class="result">{pagination} Designs</span>
+                            </h4>
                             <div className="show-products">
-                                <CreateSkeletons iterations={12}>
-                                    <ProductSkeleton />
-                                </CreateSkeletons>
+                                {designList.map((data, i) => {
+                                    return (
+                                        <ProductCardWithTick
+                                            key={i}
+                                            product={data}
+                                            updateProductCard={() => this.updateProductCard()}
+                                            addToQuote={this.addToQuote}
+                                            likeProduct={this.likeProduct}
+                                            unlikeProduct={this.unlikeProduct}
+                                        />
+                                    );
+                                })}
+                                {this.state.loading && (
+                                    <CreateSkeletons iterations={12}>
+                                        <ProductSkeleton />
+                                    </CreateSkeletons>
+                                )}
                             </div>
-                        )}
+                            {this.state.initialLoading && (
+                                <div className="show-products">
+                                    <CreateSkeletons iterations={12}>
+                                        <ProductSkeleton />
+                                    </CreateSkeletons>
+                                </div>
+                            )}
+                        </div>
                     </>
                 )}
                 {this.props.selectedProductIds.length ? (
