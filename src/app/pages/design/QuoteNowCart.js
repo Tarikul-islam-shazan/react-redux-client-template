@@ -330,17 +330,18 @@ class QuoteNowCart extends Component {
                                                 stroke-width="2"
                                             />
                                         </svg>
-                                        Confirm quote request
+                                        Confirm RFQ
                                     </h3>
                                 </a>
                                 <div className="add-more-design font-14 brand-color text-underline d-block d-xl-none cursor-pointer">
                                     Add more designs
                                 </div>
                             </div>
-                            <div className="mt-3">
+                            <div className="mt-3 rfq-title">
+                                <label>RFQ title*</label>
                                 <input
                                     type="text"
-                                    placeholder="Demo Collection name"
+                                    placeholder="Give a title forr your request"
                                     name="title"
                                     value={title}
                                     onChange={this.onChange}
@@ -368,7 +369,7 @@ class QuoteNowCart extends Component {
                                     className="m-0 btn-brand  shadow float-right"
                                     onClick={this.submit}
                                 >
-                                    Submit to quote
+                                    Submit to RFQ
                                 </button>
                             </div>
                         </>

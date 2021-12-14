@@ -126,6 +126,15 @@ export const QuoteNowProduct = ({
                                 pcs
                             </h5>
                         </div>
+                        <div className="info-item">
+                            <label className="font-14 text-muted">Delivery in</label>
+                            <h5 className="font-18 semibold">
+                                {product.turnAroundTime
+                                    ? product.turnAroundTime
+                                    : defaultTurnAroundTime}{" "}
+                                Days
+                            </h5>
+                        </div>
                     </div>
                     <div className="features add-quote-list d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
@@ -138,21 +147,19 @@ export const QuoteNowProduct = ({
                                     : ""}{" "}
                             </h5>
                         </div>
-                        <div className="info-item">
-                            <label className="font-14 text-muted">Delivery in</label>
-                            <h5 className="font-18 semibold">
-                                {product.turnAroundTime
-                                    ? product.turnAroundTime
-                                    : defaultTurnAroundTime}{" "}
-                                Days
-                            </h5>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
 
           <div className="all-sizes">
-          <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
+
+            <div className="order-quantity">
+                <label>Quantity</label>
+                <input type="number" placeholder="Pcs"/>
+            </div>
+
+          {/* <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
                 <div className="sizes d-flex  align-items-center mb-2">
                     <div className="size">
                         <label className="text-center">&nbsp;</label>
@@ -211,7 +218,9 @@ export const QuoteNowProduct = ({
                     );
                 })}
                 <p className="error">{product.error}</p>
-            </div>
+            </div> */}
+
+            
           </div>
         </div>
     );
