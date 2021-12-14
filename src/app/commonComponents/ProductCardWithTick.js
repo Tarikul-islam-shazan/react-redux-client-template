@@ -170,7 +170,7 @@ class ProductCard extends Component {
                                 alignRight
                                 className="dropdown-menu dropdown-menu-right shadow-lg mt-2"
                             >
-                                {product.liked ? (
+                                {(product.liked || this.props.collectionViewType === "LIKED_PRODUCTS") ? (
                                     <Dropdown.Item
                                         href="#"
                                         className="px-4 pb-3 pt-3 font-weight-normal text-black font-15"

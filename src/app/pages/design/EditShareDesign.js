@@ -268,7 +268,7 @@ class EditShareDesign extends Component {
                     toastSuccess(data.message);
                     this.getDesignDocuments(id);
                     if (doc.documentGroup === "FEATURE_IMAGE") {
-                        this.onFileRemove(featureImageDoc);
+                        this.onFileRemove(featureImageDoc,false);
                     }
                 }
             })
@@ -277,12 +277,12 @@ class EditShareDesign extends Component {
             });
     };
 
-    onFileRemove = (deletedDoc) => {
+    onFileRemove = (deletedDoc,showRemoveAlert) => {
         let productId = this.props.match.params.id;
         Http.DELETE("removeProductDocument", {}, `${productId}/${deletedDoc.id}`)
             .then(({data}) => {
                 if (data) {
-                    toastSuccess(data.message);
+                    showRemoveAlert === undefined && toastSuccess(data.message);
                     this.getDesignDocuments(productId);
                 }
             })
@@ -698,8 +698,8 @@ class EditShareDesign extends Component {
                                         </span>
                                     </div>
                                     <div className="product-images">
-                                        {designDocuments[visibleDocType]?.otherDocumentList &&
-                                            designDocuments[visibleDocType]?.otherDocumentList.map(
+                                        {this.mergeTypeWiseDocument(designDocuments[visibleDocType]).length > 0 &&
+                                            this.mergeTypeWiseDocument(designDocuments[visibleDocType]).map(
                                                 (doc, i) => {
                                                     return (
                                                         <ImageItem
