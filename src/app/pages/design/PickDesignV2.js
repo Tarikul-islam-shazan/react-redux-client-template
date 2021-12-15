@@ -136,12 +136,14 @@ class PickDesignV2 extends Component {
             });
         }
 
-        if (this.searchFilters && !this.searchFilters.contains(event.target)) {
-            this.setState({
-                showFilters: false,
-                filters: this.state.filters.filter((item) => item.showSelected),
-            });
-        }
+        // console.log(this.searchFilters && !this.searchFilters.contains(event.target))
+        // if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+        //     this.setState({
+        //         showFilters: false,
+        //         filters: this.state.filters.filter((item) => item.showSelected),
+        //     });
+        // }
+        // console.log(this.state.filters,this.searchFilters && !this.searchFilters.contains(event.target))
 
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setState({
@@ -286,6 +288,7 @@ class PickDesignV2 extends Component {
         let { filters } = this.state;
         await this.setState({
             showSelectedFilters: true,
+            responsiveFilterModal: false,
             filters: filters.map((filter) => {
                 filter.showSelected = true;
                 return filter;
@@ -1275,13 +1278,7 @@ class PickDesignV2 extends Component {
                                 </ul>
                                 <button
                                     className="m-0 btn-brand m-0 shadow"
-                                    onClick={async () => {
-                                        await this.setState({
-                                            showSelectedFilters: true,
-                                            responsiveFilterModal: false,
-                                        });
-                                        this._search();
-                                    }}
+                                    onClick={this.applyFilters}
                                 >
                                     Submit
                                 </button>
