@@ -717,7 +717,7 @@ const invoiceStatus = (invoice) => {
             className="badge-custom mt-2 d-inline-block"
             style={{backgroundColor: "#ECE9F4", color: "#472F91"}}
         >
-            {invoice.paymentStatus && invoice.paymentStatus.replace("_","")}
+            {invoice.paymentStatus && capitalizeFirstLetter(invoice.paymentStatus.replace("_"," "))}
         </span>
     );
 };
