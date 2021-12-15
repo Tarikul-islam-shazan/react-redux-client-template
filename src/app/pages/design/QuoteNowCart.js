@@ -50,12 +50,10 @@ class QuoteNowCart extends Component {
         };
     }
 
-    handleScroll = async () => {
-        const wrappedElement = document.getElementById("sidebarCollapse");
-        if (
-            wrappedElement.scrollHeight - wrappedElement.scrollTop ===
-            wrappedElement.clientHeight
-        ) {
+    handleScroll = async (event) => {
+        const { scrollHeight, scrollTop, clientHeight } = event.target;
+        const scroll = scrollHeight - scrollTop - clientHeight;
+        if (scroll === 0) {
             let { hasNext, page, loading, designList, size } = this.state;
             if (hasNext && !loading && designList.length) {
                 let data = await this.renderList(page + 1);
@@ -373,7 +371,7 @@ class QuoteNowCart extends Component {
                     <div
                         className="add-more ml-auto"
                         id="sidebarCollapse"
-                        onScroll={this.handleScroll}
+                        onScroll={(e) => this.handleScroll(e)}
                     >
                         <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
                             <svg
@@ -414,11 +412,11 @@ class QuoteNowCart extends Component {
                                     <h4 className="semibold">Select design for RFQ</h4>
                                     <button onClick={() => window.open("/designs/add")}>
                                         <span>Design</span>
-                                        <img src="../icons/upload.svg" />
+                                        <img src="/icons/upload.svg" />
                                     </button>
                                 </div>
                                 <div className="search">
-                                    <img src="../icons/search.svg" />
+                                    <img src="/icons/search.svg" />
                                     <input
                                         type="search"
                                         className="w-100"

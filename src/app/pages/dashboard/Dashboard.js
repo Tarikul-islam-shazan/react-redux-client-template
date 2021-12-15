@@ -8,6 +8,7 @@ import {
     getDateDifference,
     convertTimeToLocal,
     getNumberUnit,
+    getShortName,
 } from "../../services/Util";
 import Http from "../../services/Http";
 import { makeStyles } from "@material-ui/core/styles";
@@ -155,7 +156,7 @@ const Dashboard = () => {
     const getAcceptedDesigns = () => {
         return (
             <>
-                {buyerOverview.quoteToOrderCount}
+                {buyerOverview.nitexDesignSold}
                 <span>/{buyerOverview.totalDesignSold}</span>
             </>
         );
@@ -170,7 +171,7 @@ const Dashboard = () => {
         );
     };
     const getOrderValue = () => {
-        return buyerOverview.orderValue;
+        return getNumberUnit(buyerOverview.orderValue);
     };
     const getTotalUnits = () => {
         return buyerOverview.noOfSupplier;
@@ -207,18 +208,17 @@ const Dashboard = () => {
         const formattedCurrentDate = moment(currentDate, "DD/MM/YYYY hh:mm A");
         timeDifference = formattedCurrentDate.diff(formattedEndDate, "hours");
         if (timeDifference >= 0) {
-            return  <div className="task-status red">
-            <span className="status-btn">
-            Overdue
-            </span>
-        </div>
-            
+            return (
+                <div className="task-status red">
+                    <span className="status-btn">Overdue</span>
+                </div>
+            );
         }
-        return  <div className="task-status yellow">
-        <span className="status-btn">
-        Running
-        </span>
-    </div>
+        return (
+            <div className="task-status yellow">
+                <span className="status-btn">Running</span>
+            </div>
+        );
     };
 
     return (
@@ -401,11 +401,20 @@ const Dashboard = () => {
 
                                                                 <div className="order-name">
                                                                     <p>
-                                                                        <Link
-                                                                            to={`/orders/view/${item.orderId}`}
+                                                                        <Tooltip
+                                                                            title={item.orderName}
+                                                                            placement="top"
+                                                                            arrow
                                                                         >
-                                                                            {item.orderName}
-                                                                        </Link>
+                                                                            <Link
+                                                                                to={`/orders/view/${item.orderId}`}
+                                                                            >
+                                                                                {getShortName(
+                                                                                    item.orderName,
+                                                                                    35
+                                                                                )}
+                                                                            </Link>
+                                                                        </Tooltip>
                                                                     </p>
                                                                 </div>
                                                                 <div className="assigned-person">
@@ -561,7 +570,20 @@ const Dashboard = () => {
                                                             className="cell-img pr-2"
                                                         />
                                                         <span className="d-inline-block align-middle">
-                                                            {item.productName}
+                                                            <Tooltip
+                                                                title={item.productName}
+                                                                placement="top"
+                                                                arrow
+                                                            >
+                                                                <Link
+                                                                    to={`/orders/view/${item.orderId}`}
+                                                                >
+                                                                    {getShortName(
+                                                                        item.productName,
+                                                                        35
+                                                                    )}
+                                                                </Link>
+                                                            </Tooltip>
                                                         </span>
                                                     </span>
                                                 </td>
@@ -657,13 +679,27 @@ const Dashboard = () => {
                                         <tr>
                                             <td>
                                                 <span className="image-with-title">
-                                                    <img
-                                                        src={item?.stepProduct?.image}
-                                                        alt="image"
-                                                        className="cell-img pr-2"
-                                                    />
+                                                    {item?.stepProduct?.image ? (
+                                                        <img
+                                                            src={item?.stepProduct?.image}
+                                                            alt="image"
+                                                            className="cell-img pr-2"
+                                                        />
+                                                    ) : (
+                                                        ""
+                                                    )}
                                                     <span className="d-inline-block align-middle">
-                                                        {item.stepName}
+                                                        <Tooltip
+                                                            title={item.stepName}
+                                                            placement="top"
+                                                            arrow
+                                                        >
+                                                            <Link
+                                                                to={`/orders/view/${item.orderId}`}
+                                                            >
+                                                                {getShortName(item.stepName, 35)}
+                                                            </Link>
+                                                        </Tooltip>
                                                     </span>
                                                 </span>
                                             </td>
@@ -676,10 +712,7 @@ const Dashboard = () => {
                                             <td>
                                                 <span>{item.orderRefNumber}</span>{" "}
                                             </td>
-                                            <td>
-                                            {getTasksStatus(item.endDate)}
-                                               
-                                            </td>
+                                            <td>{getTasksStatus(item.endDate)}</td>
                                         </tr>
                                     ))
                                 ) : (
