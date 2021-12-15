@@ -1,10 +1,10 @@
 import * as actionTypes from "./action-types";
 import Http from "../../services/Http";
 
-export const fetchPomAndSize = () => async (dispatch) => {
+export const fetchPomAndSize = (productId) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.FETCH_POM_AND_SIZE_REQUEST });
-        const response = await Http.GET("getPomAndSize");
+        const response = await Http.GET("getPomAndSize",`?productId=${productId}`);
         dispatch({
             type: actionTypes.FETCH_POM_AND_SIZE_SUCCESS,
             payload: response.data,
