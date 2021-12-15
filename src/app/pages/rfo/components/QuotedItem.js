@@ -101,7 +101,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     const renderPriceUpdateBox = (quote) => {
         return (
             <div className="pricewillbeupdated pt-2 pb-3">
-                <svg
+                {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="211"
                     height="54"
@@ -138,7 +138,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             </tspan>
                         </text>
                     </g>
-                </svg>
+                </svg> */}
             </div>
         );
     };
@@ -415,16 +415,61 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
             </div>
             {quote.status === "PRICE_GIVEN" ? (
                 <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">
-                    <div className="text-center">
+                    {/* Start New design update */}
+                    <div className="price-category-info text-center">
                         <span className="font-15 valid-till">
-                            Price valid till{" "}
-                            <span className="font-weight-bold">
-                                {" "}
-                                {getValidDateTill(quote.date, quote.time)}
-                            </span>{" "}
-                        </span>
-                        <p>Designwise FOB price</p>
-                        <div className="pricewillbeupdated pt-2 pb-3">
+                                Price valid till{" "}
+                                <span className="font-weight-bold">
+                                    {" "}
+                                    {getValidDateTill(quote.date, quote.time)}
+                                </span>{" "}
+                            </span>
+                            <p>Designwise FOB price</p>
+                    </div>
+
+                    {/* Size wise table */}
+                    <div className="category-wise-quantity-table desingwise-table">
+                        <table>
+                            <tr>
+                                <th><p>XS</p></th>
+                                <th><p>S</p></th>
+                                <th><p>M</p></th>
+                                <th><p>L</p></th>
+                                <th><p>XL</p></th>
+                            </tr>
+                            <tr>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>11.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                               
+                            </tr>
+                        </table>
+                    </div>
+
+                    {/* Design wise table */}
+                    <div className="category-wise-quantity-table color-wise-table">
+                        <table>
+                            <tr>
+                            <th><span class="cursor-pointer color-icon" style={{background: "blue"}}></span></th>
+                            <th><span class="cursor-pointer color-icon" style={{background: "red"}}></span></th>
+                            <th><span class="cursor-pointer color-icon" style={{background: "green"}}></span></th>
+                            <th><span class="cursor-pointer color-icon" style={{background: "yellow"}}></span></th>
+                            <th><span class="cursor-pointer color-icon" style={{background: "gray"}}></span></th>
+                            </tr>
+                            <tr>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                                <td><p><span>$</span>11.99</p></td>
+                                <td><p><span>$</span>12.99</p></td>
+                               
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div className="pricewillbeupdated pt-2 pb-3">
                             <div>
                                 <strong className="font-30">
                                     ${quote.designWiseBuyerPrice ? quote.designWiseBuyerPrice : `—————`}
@@ -435,8 +480,12 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     {renderTooltip(quote.priceInfoText)}
                                 </span>
                             </div>
-                        </div>
                     </div>
+
+                    {/* Requst for quote */}
+                    <p className="not-quoted">Price will given within 24 hours</p>
+
+                    {/* End New design update */}
                 </div>
             ) : quote.status === "PRODUCT_SOLD" ? (
                 <div className="quote-price admin-quote-price d-flex flex-column justify-content-center align-items-center">

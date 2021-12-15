@@ -46,7 +46,7 @@ class MyOrder extends Component {
             filterBy: "",
             sort: ["RUNNING", "PENDING", "COMPLETED"],
             project_type: ["BULK", "DEVELOPMENT", "SUPERVISION"],
-            sortOrder: "lastResponseTime,desc",
+            sortOrder: "id,desc",
             hasNext: true, //to check if pagination is available or not
             height: window.innerHeight,
             userInfo: {},

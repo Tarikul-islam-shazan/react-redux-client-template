@@ -50,12 +50,10 @@ class QuoteNowCart extends Component {
         };
     }
 
-    handleScroll = async () => {
-        const wrappedElement = document.getElementById("sidebarCollapse");
-        if (
-            wrappedElement.scrollHeight - wrappedElement.scrollTop ===
-            wrappedElement.clientHeight
-        ) {
+    handleScroll = async (event) => {
+        const { scrollHeight, scrollTop, clientHeight } = event.target;
+        const scroll = scrollHeight - scrollTop - clientHeight;
+        if (scroll === 0) {
             let { hasNext, page, loading, designList, size } = this.state;
             if (hasNext && !loading && designList.length) {
                 let data = await this.renderList(page + 1);
@@ -119,24 +117,9 @@ class QuoteNowCart extends Component {
 
     renderList = async (page = 0) => {
         this.setState({ loading: true, searching: true });
-        let { size, designList, search, sort, productTypeId, filters } = this.state;
-        let params = `?page=${page}&size=${size}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
-        let designParams = `?page=${page}&size=${size}&availabilityStatus=AVAILABLE`;
+        let { size, search } = this.state;
+        let designParams = `?search=${search}&page=${page}&size=${size}&availabilityStatus=AVAILABLE`;
         let result = [];
-        await Http.GET("getProductList", params)
-            .then(({ data }) => {
-                this.setState({ loading: false });
-                if (data && data.length > 0) {
-                    const designList = data.filter(
-                        (design) => design.availabilityStatus === "AVAILABLE"
-                    );
-                    result = [...result, ...designList];
-                }
-            })
-            .catch((response) => {
-                this.setState({ loading: false });
-                toastError("Something went wrong! Please try again.");
-            });
 
         await Http.GET("searchProduct", designParams)
             .then(({ data }) => {
@@ -160,6 +143,12 @@ class QuoteNowCart extends Component {
             [e.target.name]: e.target.value,
         });
         await this.updateCartGlobally();
+    };
+
+    onSearch = async (e) => {
+        await this.setState({ search: e.target.value });
+        let designList = await this.renderList(0);
+        this.setState({ designList });
     };
 
     onChangeQuantity = async (productIndex, colorIndex, name, value) => {
@@ -383,7 +372,7 @@ class QuoteNowCart extends Component {
                     <div
                         className="add-more ml-auto"
                         id="sidebarCollapse"
-                        onScroll={this.handleScroll}
+                        onScroll={(e) => this.handleScroll(e)}
                     >
                         <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
                             <svg
@@ -419,18 +408,22 @@ class QuoteNowCart extends Component {
                             </svg>
                         </div>
                         <div className="header rfq-header">
-                            
                             <div className="rfq-design-btn">
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <h4 className="semibold">Select design for RFQ</h4>   
+                                    <h4 className="semibold">Select design for RFQ</h4>
                                     <button onClick={() => window.open("/designs/add")}>
                                         <span>Design</span>
-                                        <img src="../icons/upload.svg"/>
+                                        <img src="/icons/upload.svg" />
                                     </button>
                                 </div>
                                 <div className="search">
-                                    <img src="../icons/search.svg" />
-                                    <input type="search" className="w-100" placeholder="Search"/>
+                                    <img src="/icons/search.svg" />
+                                    <input
+                                        type="search"
+                                        className="w-100"
+                                        placeholder="Search"
+                                        onChange={(e) => this.onSearch(e)}
+                                    />
                                 </div>
                             </div>
                         </div>

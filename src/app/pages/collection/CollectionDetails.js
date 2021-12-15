@@ -69,6 +69,7 @@ class CollectionDetails extends Component {
             collectionType: "",
             collectionViewType: "",
             showEdit: true,
+            search: "",
         };
     }
 
@@ -97,12 +98,11 @@ class CollectionDetails extends Component {
         }
     };
 
-    handleMyProductScroll = async () => {
-        const wrappedElement = document.getElementById("myProductList");
-        if (
-            wrappedElement.scrollHeight - wrappedElement.scrollTop ===
-            wrappedElement.clientHeight
-        ) {
+    handleMyProductScroll = async (event) => {
+        const { scrollHeight, scrollTop, clientHeight } = event.target;
+        const scroll = scrollHeight - scrollTop - clientHeight;
+
+        if (scroll === 0) {
             let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, myDesignSize } =
                 this.state;
             if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
@@ -181,7 +181,7 @@ class CollectionDetails extends Component {
             return;
         }
         let myDesignList = await this.myProducts();
-        this.setState({ myDesignList });
+        await this.setState({ myDesignList });
         await this.getUsersByTypes();
     };
 
@@ -277,25 +277,9 @@ class CollectionDetails extends Component {
 
     myProducts = async (myDesignPage = 0) => {
         this.setState({ myDesignLoading: true });
-        let { myDesignList, myDesignSize } = this.state;
-        let params = `?page=${myDesignPage}&size=${myDesignSize}&filterBy=ADDED_BY_ME&filterBy=FAVED_BY_ME&filterBy=QUOTATION`;
-        let designParams = `?page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
+        let { myDesignSize, search } = this.state;
+        let designParams = `?search=${search}&page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
         let result = [];
-        await Http.GET("getProductList", params)
-            .then(({ data }) => {
-                this.setState({ myDesignLoading: false });
-                if (data && data.length > 0) {
-                    const designList = data.filter(
-                        (design) => design.availabilityStatus === "AVAILABLE"
-                    );
-                    result = [...result, ...designList];
-                }
-            })
-            .catch((response) => {
-                this.setState({ myDesignLoading: false });
-                toastError("Something went wrong! Please try again.");
-            });
-
         await Http.GET("searchProduct", designParams)
             .then(({ data }) => {
                 this.setState({ myDesignLoading: false });
@@ -311,6 +295,12 @@ class CollectionDetails extends Component {
                 toastError("Something went wrong! Please try again.");
             });
         return result;
+    };
+
+    onSearch = async (e) => {
+        await this.setState({ search: e.target.value });
+        let myDesignList = await this.myProducts(0);
+        this.setState({ myDesignList });
     };
 
     getUsersByTypes = async () => {
@@ -356,23 +346,23 @@ class CollectionDetails extends Component {
         let result = [];
         if (searchUserText) {
             result.push(
-                <ul class="p-0 m-0 existing-item">
+                <ul className="p-0 m-0 existing-item">
                     {searchUserSuggestions.length ? (
                         searchUserSuggestions.map((user, i) => {
                             return (
                                 <li key={i}>
-                                    <div class="d-flex align-items-center">
+                                    <div className="d-flex align-items-center">
                                         <img
                                             src={require("../../assets/images/pro_pic_default.svg")}
                                             alt=""
                                         />
-                                        <div class="d-flex flex-column ml-2">
+                                        <div className="d-flex flex-column ml-2">
                                             <span>{user.name}</span>
-                                            <div class="email">{user.email}</div>
+                                            <div className="email">{user.email}</div>
                                         </div>
                                     </div>
                                     <button
-                                        class="btn-brand m-0 brand-bg-color"
+                                        className="btn-brand m-0 brand-bg-color"
                                         onClick={() => this.addUserToCollection(user)}
                                     >
                                         Add
@@ -382,8 +372,8 @@ class CollectionDetails extends Component {
                         })
                     ) : (
                         <li>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex flex-column ml-2">
+                            <div className="d-flex align-items-center">
+                                <div className="d-flex flex-column ml-2">
                                     <span>No suggestions found</span>
                                 </div>
                             </div>
@@ -394,23 +384,23 @@ class CollectionDetails extends Component {
         } else {
             for (const [key, value] of Object.entries(usersByTypeList)) {
                 result.push(
-                    <ul class="p-0 m-0 existing-item" key={key}>
-                        <div class="title">{key}</div>
+                    <ul className="p-0 m-0 existing-item" key={key}>
+                        <div className="title">{key}</div>
                         {value.map((user, i) => {
                             return (
                                 <li key={i}>
-                                    <div class="d-flex align-items-center">
+                                    <div className="d-flex align-items-center">
                                         <img
                                             src={require("../../assets/images/pro_pic_default.svg")}
                                             alt=""
                                         />
-                                        <div class="d-flex flex-column ml-2">
+                                        <div className="d-flex flex-column ml-2">
                                             <span>{user.name}</span>
-                                            <div class="email">{user.email}</div>
+                                            <div className="email">{user.email}</div>
                                         </div>
                                     </div>
                                     <button
-                                        class="btn-brand m-0 brand-bg-color"
+                                        className="btn-brand m-0 brand-bg-color"
                                         onClick={() => this.addUserToCollection(user)}
                                     >
                                         Add
@@ -466,23 +456,24 @@ class CollectionDetails extends Component {
         });
         Http.POST("unlikeProduct", {}, id)
             .then(({ data }) => {
-                if (data.success) {
-                    // toastSuccess(data.message);
-                    let { productList } = this.state;
+                let { productList } = this.state;
+                if (this.state.collectionViewType === "LIKED_PRODUCTS") {
+                    productList = productList.filter((item) => item.id !== id);
+                } else {
                     productList = productList.map((item, i) => {
-                        if (item.id == id) {
+                        if (item.id === id) {
                             item.liked = false;
                             return item;
                         }
                         return item;
                     });
-                    this.setState({
-                        productList,
-                    });
-                } else {
-                    toastError(data.message);
                 }
-                this.setState({ loading: false });
+
+                console.log(productList);
+                this.setState({
+                    productList,
+                    loading: false,
+                });
             })
             .catch(({ response }) => {
                 this.setState({ loading: false });
@@ -840,15 +831,15 @@ class CollectionDetails extends Component {
 
         return (
             <>
-                <div class="explore-design">
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
-                        <div class="">
+                <div className="explore-design">
+                    <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-5  buyer-add-customer">
+                        <div className="">
                             {collectionViewType === "MY_PRODUCTS" ? (
-                                <h4 class="font-26 semibold mb-4 mb-sm-0">My designs</h4>
+                                <h4 className="font-26 semibold mb-4 mb-sm-0">My designs</h4>
                             ) : collectionViewType === "LIKED_PRODUCTS" ? (
-                                <h4 class="font-26 semibold mb-4 mb-sm-0">My favourites</h4>
+                                <h4 className="font-26 semibold mb-4 mb-sm-0">My favourites</h4>
                             ) : (
-                                <h4 class="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
+                                <h4 className="font-26 semibold mb-4 mb-sm-0">{collection.name}</h4>
                             )}
                         </div>
                         {!collectionType &&
@@ -857,7 +848,7 @@ class CollectionDetails extends Component {
                             <div className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
                                 {collection.privacy === "CUSTOM" ||
                                 collection.privacy === "USER_TYPE" ? (
-                                    <div className="position-relative">
+                                    <>
                                         <div className="added-members">
                                             <div
                                                 id="AddNewMember"
@@ -938,6 +929,19 @@ class CollectionDetails extends Component {
                                                 <></>
                                             )}
                                         </div>
+                                        <div className="d-flex mt-4 mt-sm-0">
+                                            <button
+                                                id="CreateCollection"
+                                                className="m-0 btn-brand"
+                                                onClick={() =>
+                                                    this.setState({
+                                                        showAddProductModal: !showAddProductModal,
+                                                    })
+                                                }
+                                            >
+                                                +Add more products
+                                            </button>
+                                        </div>
                                         <div
                                             className={`add-people-popup no-padding-popup shadow ${
                                                 showAddMemberModal ? `show` : ``
@@ -986,7 +990,7 @@ class CollectionDetails extends Component {
                                                 onChange={this.onChange}
                                             />
                                         </div>
-                                    </div>
+                                    </>
                                 ) : (
                                     <></>
                                 )}
@@ -996,14 +1000,14 @@ class CollectionDetails extends Component {
                         )}
                     </div>
 
-                    <div class="add-more-designs">
+                    <div className="add-more-designs">
                         <div
-                            class={`add-more ml-auto ${showAddProductModal ? `open` : ``}`}
+                            className={`add-more ml-auto ${showAddProductModal ? `open` : ``}`}
                             id="myProductList"
-                            onScroll={this.handleMyProductScroll}
+                            onScroll={(e) => this.handleMyProductScroll(e)}
                             ref={(node) => (this.addMyProductsModal = node)}
                         >
-                            <div id="closeRPop" class="p-3 cursor-pointer">
+                            <div id="closeRPop" className="p-3 cursor-pointer">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="22.84"
@@ -1036,64 +1040,28 @@ class CollectionDetails extends Component {
                                     </g>
                                 </svg>
                             </div>
-                            <div class="header d-flex justify-content-between align-items-center">
-                                <h4 className="semibold">Add more designs to collection</h4>
-                                <div>
-                                    {/* <div class="cursor-pointer d-inline-block mr-2 mr-sm-4">
-                                      <svg onClick={() => this.myProducts(0)} xmlns="http://www.w3.org/2000/svg" width="24.877" height="27.209" viewBox="0 0 24.877 27.209">
-                                          <g id="reload" transform="translate(-20.982 0)">
-                                              <g id="Group_11184" data-name="Group 11184" transform="translate(20.982 0)">
-                                                  <path id="Path_27871" data-name="Path 27871" d="M26.048,5.4a10.847,10.847,0,0,1,14.1-.372l-3.228.122a.75.75,0,0,0,.028,1.5h.028l4.956-.183a.749.749,0,0,0,.722-.75V5.623h0l-.183-4.9a.751.751,0,0,0-1.5.056l.117,3.073a12.337,12.337,0,0,0-16.046.433,12.341,12.341,0,0,0-3.712,12.062.747.747,0,0,0,.728.572.65.65,0,0,0,.178-.022.751.751,0,0,0,.55-.906A10.84,10.84,0,0,1,26.048,5.4Z" transform="translate(-20.982 0)" fill="#41487c"></path>
-                                                  <path id="Path_27872" data-name="Path 27872" d="M98.7,185.786a.749.749,0,1,0-1.456.356,10.839,10.839,0,0,1-17.452,10.9l3.267-.294a.751.751,0,0,0-.139-1.495l-4.939.444a.749.749,0,0,0-.678.817l.444,4.939a.749.749,0,0,0,.745.683.27.27,0,0,0,.067-.006.749.749,0,0,0,.678-.817l-.267-3.006a12.254,12.254,0,0,0,7.129,2.717c.211.011.422.017.628.017A12.339,12.339,0,0,0,98.7,185.786Z" transform="translate(-74.167 -174.923)" fill="#41487c"></path>
-                                              </g>
-                                          </g>
-                                      </svg>
-                                  </div> */}
-                                    <div
-                                        className="cursor-pointer d-inline-block"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Add new design"
-                                    >
-                                        <svg
-                                            onClick={() => window.open("/designs/add")}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="27.615"
-                                            height="27.615"
-                                            viewBox="0 0 27.615 27.615"
-                                        >
-                                            <g
-                                                id="Group_11190"
-                                                data-name="Group 11190"
-                                                transform="translate(-2672.328 4255.322) rotate(45)"
-                                            >
-                                                <line
-                                                    id="Line_153"
-                                                    data-name="Line 153"
-                                                    x2="25.615"
-                                                    transform="translate(-1108.875 -4907.645) rotate(45)"
-                                                    fill="none"
-                                                    stroke="#41487c"
-                                                    stroke-linecap="round"
-                                                    stroke-width="2"
-                                                ></line>
-                                                <line
-                                                    id="Line_154"
-                                                    data-name="Line 154"
-                                                    x2="25.615"
-                                                    transform="translate(-1090.763 -4907.645) rotate(135)"
-                                                    fill="none"
-                                                    stroke="#41487c"
-                                                    stroke-linecap="round"
-                                                    stroke-width="2"
-                                                ></line>
-                                            </g>
-                                        </svg>
+                            <div className="header rfq-header">
+                                <div className="rfq-design-btn">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <h4 className="semibold">Add more designs to collection</h4>
+                                        <button onClick={() => window.open("/designs/add")}>
+                                            <span>Design</span>
+                                            <img src="/icons/upload.svg" />
+                                        </button>
+                                    </div>
+                                    <div className="search">
+                                        <img src="/icons/search.svg" />
+                                        <input
+                                            type="search"
+                                            className="w-100"
+                                            placeholder="Search"
+                                            onChange={(e) => this.onSearch(e)}
+                                        />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="added-item custom-scrollbar">
+                            <div className="added-item custom-scrollbar">
                                 {!myDesignLoading ? (
                                     myDesignList.map((product, i) => {
                                         return (
@@ -1159,27 +1127,27 @@ class CollectionDetails extends Component {
                     )}
 
                     {showAddCollectionPopup ? (
-                        <div class="create-new-collection">
-                            <div class="pop-container" ref={this.setWrapperRef}>
+                        <div className="create-new-collection">
+                            <div className="pop-container" ref={this.setWrapperRef}>
                                 <span
-                                    class="create-newbutton cursor-pointer"
+                                    className="create-newbutton cursor-pointer"
                                     onClick={() => this.setState({ showCollectionAddOption: true })}
                                 >
                                     + Create new collection
                                 </span>
                                 {showCollectionAddOption ? (
                                     <>
-                                        <div class="create-new d-flex">
+                                        <div className="create-new d-flex">
                                             <input
                                                 type="text"
                                                 placeholder="Type your collection name"
-                                                class="bg-gray-light border-0"
+                                                className="bg-gray-light border-0"
                                                 name="collectionName"
                                                 value={collectionName}
                                                 onChange={this.onChangeText}
                                             />
                                             <button
-                                                class="btn-brand m-0 brand-bg-color"
+                                                className="btn-brand m-0 brand-bg-color"
                                                 onClick={this.createNewCollection}
                                             >
                                                 Create
@@ -1196,15 +1164,15 @@ class CollectionDetails extends Component {
                                 )}
 
                                 {collectionList.length > 0 ? (
-                                    <div class="all-collection">
+                                    <div className="all-collection">
                                         <span>All collection</span>
-                                        <ul class="p-0 m-0 existing-item pop-list-item custom-scrollbar">
+                                        <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
                                             {collectionList.map((collection, i) => {
                                                 return (
                                                     <li key={i}>
                                                         <span>{collection.name}</span>
                                                         <button
-                                                            class="btn-brand m-0 brand-bg-color"
+                                                            className="btn-brand m-0 brand-bg-color"
                                                             onClick={() =>
                                                                 this.addToExistingCollection(
                                                                     collection.id
@@ -1228,26 +1196,26 @@ class CollectionDetails extends Component {
                     )}
 
                     {productList.length === 0 && !loading && (
-                        <div class="alert alert-secondary text-center" role="alert">
+                        <div className="alert alert-secondary text-center" role="alert">
                             No result found
                         </div>
                     )}
 
                     {productList.length > 0 && !loading && (
-                        <div class="designs">
-                            <div class="all-select d-flex align-items-center mb-3">
-                                <div class="flex-grow-1 d-flex align-items-center">
-                                    <div class="all-checkbox bg-gray-light p-3">
-                                        <div class="custom-chekbox">
-                                            <div class="form-group m-0">
+                        <div className="designs">
+                            <div className="all-select d-flex align-items-center mb-3">
+                                <div className="flex-grow-1 d-flex align-items-center">
+                                    <div className="all-checkbox bg-gray-light p-3">
+                                        <div className="custom-chekbox">
+                                            <div className="form-group m-0">
                                                 <input
                                                     type="checkbox"
                                                     id="All"
                                                     name="allCheckBox"
                                                     onChange={this.onChange}
                                                 />
-                                                <label for="All" class="m-0">
-                                                    <span class="align-middle">All</span>
+                                                <label for="All" className="m-0">
+                                                    <span className="align-middle">All</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -1255,7 +1223,8 @@ class CollectionDetails extends Component {
                                 </div>
                             </div>
 
-                            <div class="show-products">
+                            <div className="show-products">
+                                {console.log(productList)}
                                 {productList.map((product, i) => {
                                     return (
                                         <ProductCardWithTick
@@ -1266,6 +1235,7 @@ class CollectionDetails extends Component {
                                             likeProduct={this.likeProduct}
                                             unlikeProduct={this.unlikeProduct}
                                             showEdit={showEdit}
+                                            collectionViewType={collectionViewType}
                                         />
                                     );
                                 })}

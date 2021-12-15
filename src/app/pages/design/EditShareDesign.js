@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import loadjs from "loadjs";
 import Modal from "react-bootstrap/Modal";
 import RichTextEditor from "react-rte";
 
 import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
-import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
-import { _storeData, validateShareDesign } from "./actions";
+import {toastSuccess, toastError, toastWarning} from "../../commonComponents/Toast";
+import {_storeData, validateShareDesign} from "./actions";
 
-import { columns, fixedHeaders, LOADER_STYLE } from "../../constants";
-import { MeasurementTable } from "./components/MeasurementTable";
+import {columns, fixedHeaders, LOADER_STYLE} from "../../constants";
+import {MeasurementTable} from "./components/MeasurementTable";
 import {
     LOADER_OVERLAY_BACKGROUND,
     LOADER_COLOR,
@@ -28,12 +28,12 @@ import {
 } from "../../constant";
 import ColorRowWithPicker from "./components/ColorRowWithPicker";
 
-import { Title } from "./components/EditShareDesignComponents/Title";
-import { ColorAndFabrication } from "./components/EditShareDesignComponents/ColorAndFabrication";
-import { DocumentHandler } from "./components/EditShareDesignComponents/DocumentHandler";
-import { Notes } from "./components/EditShareDesignComponents/Notes";
+import {Title} from "./components/EditShareDesignComponents/Title";
+import {ColorAndFabrication} from "./components/EditShareDesignComponents/ColorAndFabrication";
+import {DocumentHandler} from "./components/EditShareDesignComponents/DocumentHandler";
+import {Notes} from "./components/EditShareDesignComponents/Notes";
 import MeasurmentChartV2 from "./components/EditShareDesignComponents/MeasurmentChartV2";
-import { ImageItem } from "./components/EditShareDesignComponents/ImageItem";
+import {ImageItem} from "./components/EditShareDesignComponents/ImageItem";
 
 class EditShareDesign extends Component {
     constructor(props) {
@@ -50,6 +50,7 @@ class EditShareDesign extends Component {
             pantoneColorIdList: [],
             showProgressModal: false,
             loading: false,
+            modalTitle: "",
             uploadInProgressDocs: {},
             visibleDocType: "",
             errors: {
@@ -68,7 +69,7 @@ class EditShareDesign extends Component {
     };
 
     getTitleName = () => {
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
         if (designDetails) {
             let title = designDetails.name;
             document.title = `Edit design ${
@@ -84,11 +85,11 @@ class EditShareDesign extends Component {
     componentDidMount = async () => {
         let id = this.props.match.params.id;
         window.addEventListener("mousedown", this.handleClickOutside);
-        this.getDesignDetails(id);
-        this.getDesignDocuments(id);
-        this.getProductTypes();
-        this.getFabricTypes();
-        this.getDesignCategories();
+        await this.getDesignCategories();
+        await this.getDesignDetails(id);
+        await this.getDesignDocuments(id);
+        await this.getProductTypes();
+        await this.getFabricTypes();
     };
 
     componentWillUnmount = () => {
@@ -96,10 +97,10 @@ class EditShareDesign extends Component {
     };
 
     getDesignDetails = async (id) => {
-        this.setState({ loading: true });
+        this.setState({loading: true});
         await Http.GET("getShareDesignDetails", id)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data) {
                     data.note = data.note
                         ? RichTextEditor.createValueFromString(data.note, "html")
@@ -108,22 +109,22 @@ class EditShareDesign extends Component {
                     data.productGroupId = data.marketResponse ? data.marketResponse.id : "";
                     data.colorEditRequestList = data.colorResponseList
                         ? data.colorResponseList.map((item) => {
-                              return {
-                                  id: item.id,
-                                  value: item.name,
-                                  code: item.code,
-                                  hexCode: item.hexCode,
-                                  colorId: item.id,
-                              };
-                          })
+                            return {
+                                id: item.id,
+                                value: item.name,
+                                code: item.code,
+                                hexCode: item.hexCode,
+                                colorId: item.id,
+                            };
+                        })
                         : [];
 
-                    this.setState({ designDetails: data });
+                    this.setState({designDetails: data});
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 console.log("getShareDesignDetails ERROR: ", JSON.stringify(response));
-                this.setState({ loading: false });
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -134,7 +135,7 @@ class EditShareDesign extends Component {
 
     getDesignDocuments = async (id) => {
         await Http.GET("getDocumentResponse", id)
-            .then(({ data }) => {
+            .then(({data}) => {
                 console.log("getDesignImages SUCCESS: ", data);
                 if (data) {
                     this.setState({
@@ -142,9 +143,9 @@ class EditShareDesign extends Component {
                     });
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 console.log("getDesignImages ERROR: ", JSON.stringify(response));
-                this.setState({ loading: false });
+                this.setState({loading: false});
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -155,17 +156,18 @@ class EditShareDesign extends Component {
 
     getProductTypes = async () => {
         await Http.GET("getProductTypeWithGroup")
-            .then(({ data }) => {
+            .then(({data}) => {
                 this.setState({
                     productTypeList: data,
                 });
             })
-            .catch((response) => {});
+            .catch((response) => {
+            });
     };
 
     getFabricTypes = async () => {
         await Http.GET("getFabricTypes")
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
                     this.setState({
                         fabricTypeList: data,
@@ -173,19 +175,21 @@ class EditShareDesign extends Component {
                     loadjs(["/js/script.js"]);
                 }
             })
-            .catch((response) => {});
+            .catch((response) => {
+            });
     };
 
     getDesignCategories = async () => {
         await Http.GET("getDesignCategories")
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
                     this.setState({
                         designCategoryList: data,
                     });
                 }
             })
-            .catch((response) => {});
+            .catch((response) => {
+            });
     };
 
     toggleFlag = async (sectionName) => {
@@ -204,7 +208,7 @@ class EditShareDesign extends Component {
     };
 
     onChange = (name, value) => {
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
         designDetails[name] = value;
         this.setState({
             designDetails,
@@ -212,28 +216,28 @@ class EditShareDesign extends Component {
     };
 
     removeColor = (item) => {
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
 
         if (designDetails.colorEditRequestList) {
             designDetails.colorEditRequestList = designDetails.colorEditRequestList.filter(
                 (color, i) => color.id !== item.id
             );
         }
-        this.setState({ designDetails });
+        this.setState({designDetails});
     };
 
     addColor = (item) => {
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
         if (designDetails.colorEditRequestList) {
             designDetails.colorEditRequestList.push(item);
         }
 
-        this.setState({ designDetails });
+        this.setState({designDetails});
     };
 
     onFileSelect = async (e, docType, documentGroup, featureImageDoc = "") => {
         let files = Array.from(e.target.files);
-        await files.map((item) => {
+        files.map((item) => {
             let data = {
                 name: item.name,
                 docMimeType: item.type,
@@ -255,34 +259,34 @@ class EditShareDesign extends Component {
     };
 
     uploadFile = async (doc, featureImageDoc) => {
-        this.setState({ loading: true });
+        this.setState({loading: true});
         let id = this.props.match.params.id;
         await Http.POST("addNewGroupDocument", doc)
-            .then(({ data }) => {
-                this.setState({ loading: false });
+            .then(({data}) => {
+                this.setState({loading: false});
                 if (data.id) {
                     toastSuccess(data.message);
                     this.getDesignDocuments(id);
                     if (doc.documentGroup === "FEATURE_IMAGE") {
-                        this.onFileRemove(featureImageDoc);
+                        this.onFileRemove(featureImageDoc,false);
                     }
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 console.log("uploadDocument ERROR: ", response);
             });
     };
 
-    onFileRemove = (deletedDoc) => {
+    onFileRemove = (deletedDoc,showRemoveAlert) => {
         let productId = this.props.match.params.id;
         Http.DELETE("removeProductDocument", {}, `${productId}/${deletedDoc.id}`)
-            .then(({ data }) => {
+            .then(({data}) => {
                 if (data) {
-                    toastSuccess(data.message);
+                    showRemoveAlert === undefined && toastSuccess(data.message);
                     this.getDesignDocuments(productId);
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 console.log("uploadDocument ERROR: ", response);
             });
     };
@@ -295,7 +299,7 @@ class EditShareDesign extends Component {
 
     updateDetails = (sectionName) => {
         let productId = this.props.match.params.id;
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
         let validated = null;
 
         if (sectionName === "editTitle") {
@@ -308,21 +312,21 @@ class EditShareDesign extends Component {
         }
 
         this.setState({
-            errors: { ...this.state.errors, ...validated.errors },
+            errors: {...this.state.errors, ...validated.errors},
             designDetails,
         });
 
         if (validated.isValid) {
             validated.reqBody.id = productId;
             Http.PUT("updateDesignDetails", validated.reqBody, productId)
-                .then(({ data }) => {
+                .then(({data}) => {
                     if (data.success) {
                         this.getDesignDetails(productId);
                         toastSuccess(data.message);
                         this.toggleFlag(sectionName);
                     }
                 })
-                .catch(({ response }) => {
+                .catch(({response}) => {
                     console.log("uploadDocument ERROR: ", response);
                     toastError("Error occured.");
                 });
@@ -333,7 +337,7 @@ class EditShareDesign extends Component {
 
     updateNoteAndSize = (sectionName, measurementChart = null) => {
         let productId = this.props.match.params.id;
-        let { designDetails } = this.state;
+        let {designDetails} = this.state;
         let body = {};
 
         if (sectionName === "editNotes") {
@@ -343,7 +347,7 @@ class EditShareDesign extends Component {
         }
 
         Http.PUT("updateSizeTable", body, productId)
-            .then(({ data }) => {
+            .then(({data}) => {
                 console.log("uploadDocument POST SUCCESS: ", data);
                 if (data.success) {
                     toastSuccess("Updated successfully.");
@@ -357,10 +361,27 @@ class EditShareDesign extends Component {
                     }
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 console.log("uploadDocument ERROR: ", response);
                 toastError("Error occured.");
             });
+    };
+
+    mergeTypeWiseDocument = (documentType) => {
+        let tempArray = [];
+        if (Object.keys(documentType.front).length > 0) {
+            tempArray.push(documentType.front)
+        }
+        if (Object.keys(documentType.back).length > 0) {
+            tempArray.push(documentType.back)
+        }
+        if (Object.keys(documentType.fabric).length > 0) {
+            tempArray.push(documentType.fabric)
+        }
+        if (Object.keys(documentType.embellishment).length > 0) {
+            tempArray.push(documentType.embellishment)
+        }
+        return [...tempArray, ...documentType.otherDocumentList];
     };
 
     render() {
@@ -402,7 +423,8 @@ class EditShareDesign extends Component {
                 spinner
                 text={LOADER_TEXT}
             >
-                <div className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
+                <div
+                    className="desgin-name-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                     <Title
                         data={designDetails}
                         errors={errors}
@@ -437,7 +459,7 @@ class EditShareDesign extends Component {
                                     />
                                     <input
                                         type="file"
-                                        style={{ display: "none" }}
+                                        style={{display: "none"}}
                                         ref={(input) => (this.inputElement = input)}
                                         name="PRODUCT_DESIGN"
                                         onChange={(e) =>
@@ -528,7 +550,7 @@ class EditShareDesign extends Component {
                         <DocumentHandler
                             data={
                                 designDocuments.physicalSampleResponse
-                                    ? designDocuments.physicalSampleResponse.otherDocumentList
+                                    ? this.mergeTypeWiseDocument(designDocuments.physicalSampleResponse)
                                     : []
                             }
                             title="Physical sample"
@@ -541,19 +563,21 @@ class EditShareDesign extends Component {
                             onFileSelect={(e) =>
                                 this.onFileSelect(e, e.target.name, "PHYSICAL_SAMPLE")
                             }
+                            setModalTitle={(title) => this.setState({modalTitle: title})}
                             onFileRemove={this.onFileRemove}
                         />
 
                         <DocumentHandler
                             data={
                                 designDocuments.flatSketchResponse
-                                    ? designDocuments.flatSketchResponse.otherDocumentList
+                                    ? this.mergeTypeWiseDocument(designDocuments.flatSketchResponse)
                                     : []
                             }
                             title="Flat sketches"
                             name="REFERENCE_IMAGE"
                             classes="upload-a-file"
                             visibleDocType={visibleDocType}
+                            setModalTitle={(title) => this.setState({modalTitle: title})}
                             setVisibleDocType={() => this.setVisibleDocType("flatSketchResponse")}
                             onFileSelect={(e) => this.onFileSelect(e, e.target.name, "FLAT_SKETCH")}
                             onFileRemove={this.onFileRemove}
@@ -562,7 +586,7 @@ class EditShareDesign extends Component {
                         <DocumentHandler
                             data={
                                 designDocuments.referenceImageResponse
-                                    ? designDocuments.referenceImageResponse.otherDocumentList
+                                    ? this.mergeTypeWiseDocument(designDocuments.referenceImageResponse)
                                     : []
                             }
                             title="Reference images"
@@ -575,13 +599,14 @@ class EditShareDesign extends Component {
                             onFileSelect={(e) =>
                                 this.onFileSelect(e, e.target.name, "REFERENCE_IMAGE")
                             }
+                            setModalTitle={(title) => this.setState({modalTitle: title})}
                             onFileRemove={this.onFileRemove}
                         />
 
                         <DocumentHandler
                             data={
                                 designDocuments.artWorksResponse
-                                    ? designDocuments.artWorksResponse.otherDocumentList
+                                    ? this.mergeTypeWiseDocument(designDocuments.artWorksResponse)
                                     : []
                             }
                             title="Art works"
@@ -589,12 +614,14 @@ class EditShareDesign extends Component {
                             classes="upload-a-file"
                             visibleDocType={visibleDocType}
                             setVisibleDocType={() => this.setVisibleDocType("artWorksResponse")}
+                            setModalTitle={(title) => this.setState({modalTitle: title})}
                             onFileSelect={(e) => this.onFileSelect(e, e.target.name, "ART_WORK")}
                             onFileRemove={this.onFileRemove}
                         />
                     </div>
 
-                    <div className="product-info flex-wrap d-flex justify-content-between align-items-start flex-column flex-xl-row">
+                    <div
+                        className="product-info flex-wrap d-flex justify-content-between align-items-start flex-column flex-xl-row">
                         <ColorAndFabrication
                             data={designDetails}
                             setPickerRef={this.setPickerRef}
@@ -617,11 +644,11 @@ class EditShareDesign extends Component {
                                 <div className="more-files">
                                     <div className="type-of-img-name d-flex justify-content-between align-items-center">
                                         <span className="font-20">
-                                            {visibleDocType.replace(/_/g, " ")}
+                                            {this.state.modalTitle.replace(/_/g, " ")}
                                         </span>
                                         <span
                                             className="close-pop cursor-pointer"
-                                            onClick={() => this.setState({ visibleDocType: "" })}
+                                            onClick={() => this.setState({visibleDocType: ""})}
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -671,8 +698,8 @@ class EditShareDesign extends Component {
                                         </span>
                                     </div>
                                     <div className="product-images">
-                                        {designDocuments[visibleDocType]?.otherDocumentList &&
-                                            designDocuments[visibleDocType]?.otherDocumentList.map(
+                                        {this.mergeTypeWiseDocument(designDocuments[visibleDocType]).length > 0 &&
+                                            this.mergeTypeWiseDocument(designDocuments[visibleDocType]).map(
                                                 (doc, i) => {
                                                     return (
                                                         <ImageItem
@@ -703,7 +730,7 @@ class EditShareDesign extends Component {
                                 onSubmit={this.updateNoteAndSize}
                             /> */}
 
-                            <MeasurmentChartV2 productId={productId} />
+                            <MeasurmentChartV2 productId={productId}/>
                         </div>
                     </div>
                 </section>

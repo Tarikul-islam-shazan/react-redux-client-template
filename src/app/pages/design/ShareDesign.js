@@ -243,8 +243,30 @@ class ShareDesign extends Component {
         }
     };
 
+    // fetchCollectionList = async (term = "") => {
+    //     await Http.GET("getCollectionList", `?name=${term}`)
+    //         .then(({ data }) => {
+    //             if (data.data) {
+    //                 this.setState({ collectionList: data.data });
+    //             }
+    //         })
+    //         .catch(({ response }) => {
+    //             if (response && response.data && response.data.message) {
+    //                 toastError(response.data.message);
+    //             } else {
+    //                 toastError("Request was not successful");
+    //             }
+    //         });
+    // };
+
     fetchCollectionList = async (term = "") => {
-        await Http.GET("getCollectionList", `?name=${term}`)
+        let userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            userInfo = JSON.parse(userInfo);
+        } else {
+            userInfo = {};
+        }
+        await Http.GET("getUserCollectionList", `${userInfo.id}?name=${term}`)
             .then(({ data }) => {
                 if (data.data) {
                     this.setState({ collectionList: data.data });
@@ -681,7 +703,9 @@ class ShareDesign extends Component {
                                             })}
                                         </ul>
                                     ) : (
-                                        <span className="no-collection-found">No collection found</span>
+                                        <span className="no-collection-found">
+                                            No collection found
+                                        </span>
                                     )}
                                 </div>
 

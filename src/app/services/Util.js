@@ -712,50 +712,22 @@ const productAvailabilityStatus = (item) => {
 };
 
 const invoiceStatus = (invoice) => {
-    switch (invoice.status) {
-        case "PENDING":
-            return (
-                <span
-                    class="badge-custom mt-2 d-inline-block"
-                    style={{ backgroundColor: "#ECE9F4", color: "#472F91" }}
-                >
-                    Pending
-                </span>
-            );
-            break;
-        case "PARTIALLY_PAID":
-            return (
-                <span
-                    className="badge-custom mt-2 d-inline-block"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
-                    Partially paid
-                </span>
-            );
-            break;
-        case "APPROVED":
-            return (
-                <span
-                    className="badge-custom mt-2 d-inline-block"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
-                    Approved
-                </span>
-            );
-            break;
-        case "PAID":
-            return (
-                <span
-                    className="badge-custom mt-2 d-inline-block"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
-                    Paid
-                </span>
-            );
-            break;
-        default:
-        // code block
+    let invoiceStatus = "";
+    if(invoice.paymentStatus === "PARTIALLY_PAID"){
+        invoiceStatus = "yellow";
+    }else if(invoice.paymentStatus === "PAID"){
+        invoiceStatus = "green";
+    }else{
+        invoiceStatus = "purple";
     }
+    return (
+        <div className={`task-status ${invoiceStatus}`}>
+            <span className="status-btn">
+            {invoice.paymentStatus &&
+                capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
+            </span>
+        </div>
+    );
 };
 
 const _getKey = () => {
@@ -1022,6 +994,18 @@ const getDateDifference = (startDate = moment(), endDate) => {
     return dateB.diff(dateA, "days");
 };
 
+const getNumberUnit = (value) => {
+    if (value < 1e3) return value;
+    if (value >= 1e3 && value < 1e6) return +(value / 1e3).toFixed(1) + "K";
+    if (value >= 1e6 && value < 1e9) return +(value / 1e6).toFixed(1) + "M";
+    if (value >= 1e9 && value < 1e12) return +(value / 1e9).toFixed(1) + "B";
+    if (value >= 1e12) return +(value / 1e12).toFixed(1) + "T";
+};
+
+const getShortName = (source, size = 35) => {
+    return source?.length > size ? source?.slice(0, size - 1) + "…" : source;
+};
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -1071,4 +1055,6 @@ export {
     validateFloatNumber,
     getDateDifference,
     convertDateTimeToLocal,
+    getNumberUnit,
+    getShortName,
 };
