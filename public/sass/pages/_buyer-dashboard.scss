@@ -108,6 +108,11 @@
                     border: none !important;
                     tr{
                       td{
+                        &:first-child{
+                          a{
+                            font-size: 14px;
+                          }
+                        }
                         &:nth-child(2){
                           width: 160px;
                         }
@@ -202,13 +207,15 @@
                             display: inline-block;
                             width: 120px;
                           }
-                          
+                         
                         }
                         
                       }
                         td{
-                            &:first-child{
-                                width: 400px;
+                            &:first-child{                               
+                                  a{
+                                    font-size: 14px;
+                                  }
                             }
                         }
                     }
