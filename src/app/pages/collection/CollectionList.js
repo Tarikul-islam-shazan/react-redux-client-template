@@ -405,7 +405,7 @@ class CollectionList extends Component {
                         </ul>
                     </div>
 
-                    {selectedTab === "OWNER" && (
+                    {selectedTab === "OWNER" && !name && (
                         <div className="collection-type-container mb-5">
                             {fixedCollections.map((collection, i) => {
                                 let docs =
@@ -458,16 +458,38 @@ class CollectionList extends Component {
                                             </div>
                                         </div>
                                         {collection.collectionViewType === "MY_PRODUCTS" ? (
-                                            <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
-                                                <span>My designs</span>
-                                            </h4>
+                                            <>
+                                                <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
+                                                    <span>My designs</span>
+                                                </h4>
+                                                <div className="quantity collections-quantity">
+                                                    <span className="design-category">
+                                                        {`${
+                                                            collection.numOfDesign > 1
+                                                                ? `${collection.numOfDesign} Styles`
+                                                                : `${collection.numOfDesign} Style`
+                                                        }`}
+                                                    </span>
+                                                </div>
+                                            </>
                                         ) : (
                                             <></>
                                         )}
                                         {collection.collectionViewType === "LIKED_PRODUCTS" ? (
-                                            <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
-                                                <span>My favourites</span>{" "}
-                                            </h4>
+                                            <>
+                                                <h4 className="font-16 font-weight-normal mt-3 d-flex justify-content-between">
+                                                    <span>My favourites</span>
+                                                </h4>
+                                                <div className="quantity collections-quantity">
+                                                    <span className="design-category">
+                                                        {`${
+                                                            collection.numOfDesign > 1
+                                                                ? `${collection.numOfDesign} Styles`
+                                                                : `${collection.numOfDesign} Style`
+                                                        }`}
+                                                    </span>
+                                                </div>
+                                            </>
                                         ) : (
                                             <></>
                                         )}
@@ -530,10 +552,6 @@ class CollectionList extends Component {
                                     </div>
                                     <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column">
                                         <span>{collection.name}</span>
-                                        <span className="text-muted font-14 mt-2">
-                                            {collection.numOfDesign ? collection.numOfDesign : 0}{" "}
-                                            Items
-                                        </span>
                                     </h4>
 
                                     <div className="quantity collections-quantity">
@@ -541,11 +559,17 @@ class CollectionList extends Component {
                                             <span>By: </span> {collection.ownerName}
                                         </span>
                                         <span className="design-category dot">
-                                            {collection.numOfDesign} Styles
+                                            {`${
+                                                collection.numOfDesign > 1
+                                                    ? `${collection.numOfDesign} Styles`
+                                                    : `${collection.numOfDesign} Style`
+                                            }`}
                                         </span>
-                                        <span className="design-category dot">
-                                            {getDuration(collection.lastDesignUpdatedAt)}
-                                        </span>
+                                        {collection.lastDesignUpdatedAt && (
+                                            <span className="design-category dot">
+                                                {getDuration(collection.lastDesignUpdatedAt)}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                             );

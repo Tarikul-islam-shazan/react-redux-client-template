@@ -42,10 +42,6 @@ export const fetchDashboardAllTasks =
         try {
             const params = { page, size, sort, taskStatus: "PENDING", isStarted: true };
             const response = await Http.GET("getDashboardAllTasks", params);
-            dispatch({
-                type: actionTypes.FETCH_DASHBOARD_ALL_TASKS_SUCCESS,
-                payload: response.data,
-            });
 
             dispatch({
                 type:
@@ -53,11 +49,8 @@ export const fetchDashboardAllTasks =
                         ? actionTypes.FETCH_MORE_DASHBOARD_ALL_TASKS_SUCCESS
                         : actionTypes.FETCH_DASHBOARD_ALL_TASKS_SUCCESS,
                 payload: {
-                    // ...response.data,
                     data: response.data,
-                    hasNext:
-                        // response?.data.currentPage + 1 >= response?.data.totalPages ? false : true,
-                        response.data?.length < 15 ? false : true,
+                    hasNext: response.data?.length < 15 ? false : true,
                 },
             });
         } catch (error) {
