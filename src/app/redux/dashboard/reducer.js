@@ -33,8 +33,6 @@ const initialTasks = {
 };
 
 const getDashboardAllTasks = (state = initialTasks, { type, payload }) => {
-    // console.log("State===", state?.data);
-    console.log("Payload===", payload);
     switch (type) {
         case actionTypes.FETCH_DASHBOARD_ALL_TASKS_FAILURE:
             return state;

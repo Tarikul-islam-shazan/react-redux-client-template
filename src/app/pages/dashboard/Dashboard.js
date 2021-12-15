@@ -7,6 +7,7 @@ import {
     changeDateFormat,
     getDateDifference,
     convertTimeToLocal,
+    convertDateTimeToLocal,
     getNumberUnit,
     getShortName,
 } from "../../services/Util";
@@ -189,7 +190,7 @@ const Dashboard = () => {
 
     const getTasksStatus = (endDate) => {
         let timeDifference = 0;
-        let formattedEndDate = convertTimeToLocal(endDate, "07:00 PM", "DD/MM/YYYY hh:mm A");
+        let formattedEndDate = convertDateTimeToLocal(endDate, "19:00:00", "DD/MM/YYYY hh:mm A");
         formattedEndDate = moment(formattedEndDate, "DD/MM/YYYY hh:mm A");
         const currentDate = moment().format("DD/MM/YYYY hh:mm A");
         const formattedCurrentDate = moment(currentDate, "DD/MM/YYYY hh:mm A");
@@ -226,9 +227,25 @@ const Dashboard = () => {
                 a = o1.brandResponse ? o1.brandResponse.name.toUpperCase() : "";
                 b = o2.brandResponse ? o2.brandResponse.name.toUpperCase() : "";
             }
+            console.log("!!!!!!", allTasks);
 
-            return orderFlags[type] ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
+            return allTasks?.data ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
         });
+    };
+
+    const getGreetingMsg = () => {
+        var d = new Date();
+        var time = d.getHours();
+
+        if (time >= 5 && time < 12) {
+            return "Good Morning";
+        }
+        if (time >= 12 && time < 17) {
+            return "Good Afternoon";
+        }
+        if (time >= 17 && time < 5) {
+            return "Good Evening";
+        }
     };
 
     return (
@@ -262,7 +279,7 @@ const Dashboard = () => {
             <div className="buyer-dashboard-container">
                 <div className="welcome-message">
                     <h3>
-                        Hi <span>{userName}</span>, good afternoon!
+                        Hi <span>{userName}</span>, {getGreetingMsg()}!
                     </h3>
                 </div>
                 {/* Order journey status */}
@@ -393,19 +410,19 @@ const Dashboard = () => {
                                                                         )}
                                                                     {item.productDesignPaths
                                                                         .length < 1 && (
-                                                                        <div class="single-one"></div>
+                                                                        <div className="single-one"></div>
                                                                     )}
                                                                     {item.productDesignPaths
                                                                         .length < 2 && (
-                                                                        <div class="single-one"></div>
+                                                                        <div className="single-one"></div>
                                                                     )}
                                                                     {item.productDesignPaths
                                                                         .length < 3 && (
-                                                                        <div class="single-one"></div>
+                                                                        <div className="single-one"></div>
                                                                     )}
                                                                     {item.productDesignPaths
                                                                         .length < 4 && (
-                                                                        <div class="single-one"></div>
+                                                                        <div className="single-one"></div>
                                                                     )}
                                                                 </div>
 
@@ -735,7 +752,7 @@ const Dashboard = () => {
                                             <td>
                                                 <span>{item.orderRefNumber}</span>{" "}
                                             </td>
-                                            <td>{getTasksStatus(item.endDate)}</td>
+                                            <td>{getTasksStatus(item?.endDate)}</td>
                                         </tr>
                                     ))
                                 ) : (

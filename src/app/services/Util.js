@@ -713,18 +713,18 @@ const productAvailabilityStatus = (item) => {
 
 const invoiceStatus = (invoice) => {
     let invoiceStatus = "";
-    if(invoice.paymentStatus === "PARTIALLY_PAID"){
+    if (invoice.paymentStatus === "PARTIALLY_PAID") {
         invoiceStatus = "yellow";
-    }else if(invoice.paymentStatus === "PAID"){
+    } else if (invoice.paymentStatus === "PAID") {
         invoiceStatus = "green";
-    }else{
+    } else {
         invoiceStatus = "purple";
     }
     return (
         <div className={`task-status ${invoiceStatus}`}>
             <span className="status-btn">
-            {invoice.paymentStatus &&
-                capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
+                {invoice.paymentStatus &&
+                    capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
             </span>
         </div>
     );

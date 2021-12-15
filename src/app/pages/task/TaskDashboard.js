@@ -129,7 +129,6 @@ class TaskDashboard extends Component {
 
     orderData = async (type) => {
         let { orderFlags, selectedTab } = this.state;
-        console.log("AAAAAAAA", orderFlags);
         let data = this.state[selectedTab];
         orderFlags[type] = orderFlags[type] ? false : true;
         await this.setState({
