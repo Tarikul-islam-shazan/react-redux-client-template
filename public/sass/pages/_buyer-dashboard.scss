@@ -198,7 +198,13 @@
                       th{
                         &:nth-child(2), &:nth-child(3), &:nth-child(4){
                           cursor: pointer;
+                          span{
+                            display: inline-block;
+                            width: 120px;
+                          }
+                          
                         }
+                        
                       }
                         td{
                             &:first-child{
@@ -685,6 +691,7 @@
         table{
           &.table{
             tr{
+              
               td{
                 &:nth-child(2){
                   span{
