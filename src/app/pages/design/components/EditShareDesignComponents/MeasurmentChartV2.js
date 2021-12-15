@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {
     fetchPomAndSize,
     fetchProductMeasurement,
     fetchAllTemplate,
 } from "../../../../redux/design/action";
-import { addImageSuffix, validateFloatNumber } from "../../../../services/Util";
-import { getPomAndSize, getProductMeasurement, getAllTemplate } from "../../../../redux/reducers";
-import { toastSuccess, toastError } from "../../../../commonComponents/Toast";
+import {addImageSuffix, validateFloatNumber} from "../../../../services/Util";
+import {getPomAndSize, getProductMeasurement, getAllTemplate} from "../../../../redux/reducers";
+import {toastSuccess, toastError} from "../../../../commonComponents/Toast";
 import CustomDropdown from "../../../../commonComponents/CustomDropdown";
 import useClickOutside from "../../../../hooks/useClickOutside";
 // import ImageUpload from "../../../commonComponents/ImageUpload";
 import Http from "../../../../services/Http";
+import AddPom from "../AddPom";
 // import AddPom from "./AddPom";
 
-const MeasurmentChartV2 = ({ productId, documentGroup }) => {
+const MeasurmentChartV2 = ({productId, documentGroup}) => {
     const [pomAndSize, setPomAndSize] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [unitType, setUnitType] = useState("CM");
@@ -54,11 +55,11 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
 
     useClickOutside(saveRef, () => {
         setTemplateNamePopUp(!templateNamePopUp);
-        setErrors({ templateNameError: "" });
+        setErrors({templateNameError: ""});
     });
 
     useEffect(() => {
-        dispatch(fetchPomAndSize()).finally(() => {
+        dispatch(fetchPomAndSize(productId)).finally(() => {
             setIsLoading(false);
         });
         dispatch(fetchProductMeasurement(productId, unitType)).finally(() => {
@@ -91,14 +92,14 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             pointOfMeasurementId: pomId,
             productId: productId,
         })
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     // dispatch(fetchProductSteps(productId));
                     dispatch(fetchProductMeasurement(productId, unitType));
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -115,14 +116,14 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             pointOfMeasurementId: pomId,
             productId: productId,
         })
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     // dispatch(fetchProductSteps(productId));
                     dispatch(fetchProductMeasurement(productId, unitType));
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -133,7 +134,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
     };
 
     const onPomClick = (item) => {
-        let newPom = { ...productMeasurement };
+        let newPom = {...productMeasurement};
         if (newPom?.data.some((data) => data?.pomResponse?.id === item?.id)) {
             newPom = newPom.data.filter((data) => data.pomResponse.id !== item.id);
             onRemovePom(productId, item.id);
@@ -150,14 +151,14 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             productId: productId,
             size: sizeCode,
         })
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     // dispatch(fetchProductSteps(productId));
                     dispatch(fetchProductMeasurement(productId, unitType));
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -174,14 +175,14 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             productId: productId,
             size: sizeCode,
         })
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     // dispatch(fetchProductSteps(productId));
                     dispatch(fetchProductMeasurement(productId, unitType));
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -192,7 +193,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
     };
 
     const onSizeClick = (item) => {
-        let newPom = { ...productMeasurement };
+        let newPom = {...productMeasurement};
         if (newPom.sizeList.some((data) => data.code === item.code)) {
             newPom = newPom.sizeList.filter((data) => data.code !== item.code);
             onRemoveSize(productId, item.code);
@@ -223,7 +224,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
         }
 
         await Http.POST("updateCellValue", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     dispatch(fetchProductMeasurement(productId, unitType)).finally(() => {
@@ -231,7 +232,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                     });
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -259,13 +260,13 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
     useClickOutside(sizeClickRef, onOutSideSizeClick);
 
     const onTolChange = (e, index) => {
-        let newPom = { ...productMeasurement };
+        let newPom = {...productMeasurement};
         newPom.data[index].tolerance = e.target.value;
         setProductMeasurement(newPom);
     };
 
     const onSizeChange = (e, rowIndex, colIndex) => {
-        let newPom = { ...productMeasurement };
+        let newPom = {...productMeasurement};
         newPom.data[rowIndex].sizeValueList[colIndex] = e.target.value;
         setProductMeasurement(newPom);
     };
@@ -282,7 +283,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             productId,
         };
         await Http.POST("addGrading", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     dispatch(fetchProductMeasurement(productId, unitType)).finally(() => {
@@ -290,7 +291,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                     });
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -303,7 +304,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
         setShowPomModal(true);
     };
     const onCloseModal = () => {
-        dispatch(fetchPomAndSize()).finally(() => {
+        dispatch(fetchPomAndSize(productId)).finally(() => {
             setIsLoading(false);
         });
         setShowPomModal(false);
@@ -311,7 +312,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
 
     const onSaveTempalte = async (productId) => {
         if (templateName === "") {
-            setErrors({ ...errors, templateNameError: "Template name is required" });
+            setErrors({...errors, templateNameError: "Template name is required"});
             return;
         }
         setIsLoading(true);
@@ -321,7 +322,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             templateName,
         };
         await Http.POST("saveAsTemplate", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     toastSuccess(data.message);
@@ -333,7 +334,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                     });
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -352,13 +353,13 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
             measurementUnit: unitType,
         };
         await Http.POST("loadFromTemplate", body)
-            .then(({ data }) => {
+            .then(({data}) => {
                 setIsLoading(false);
                 if (data) {
                     setProductMeasurement(data);
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setIsLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -602,7 +603,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        {/* <div className="add-btn">
+                                                        <div className="add-btn">
                                                             <button className="button text">
                                                                 <svg
                                                                     width={14}
@@ -628,7 +629,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                                                     onCloseModal={onCloseModal}
                                                                 />
                                                             )}
-                                                        </div> */}
+                                                        </div>
                                                         <div className="custom-chekbox">
                                                             {allPomList?.map((item) => (
                                                                 <div
@@ -747,7 +748,8 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                 </div>
                             )}
                             <div className="data-table mt-4">
-                                <div className="measurement-filter mb-3 d-flex justify-content-start align-items-center">
+                                <div
+                                    className="measurement-filter mb-3 d-flex justify-content-start align-items-center">
                                     <p className="mb-0">Measurement in:</p>
                                     <select
                                         name="team-members"
@@ -769,7 +771,7 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
 											</option>
 										))}
 									</select> */}
-                                    <div style={{ width: 350 }}>
+                                    <div style={{width: 350}}>
                                         <CustomDropdown
                                             type="addItem"
                                             isAddNew={false}
@@ -783,44 +785,87 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                 <div className="measurement-info-table">
                                     <table className="table">
                                         <thead>
-                                            <tr>
-                                                <th>SL</th>
-                                                <th>Points</th>
-                                                <th>TOL(+/-)</th>
-                                                {productMeasurement?.sizeList?.map(
-                                                    (item, index) => (
-                                                        <th key={index}>{item.value}</th>
-                                                    )
-                                                )}
-                                                <th>Action</th>
-                                            </tr>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Points</th>
+                                            <th>TOL(+/-)</th>
+                                            {productMeasurement?.sizeList?.map(
+                                                (item, index) => (
+                                                    <th key={index}>{item.value}</th>
+                                                )
+                                            )}
+                                            <th>Action</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            {productMeasurement?.data?.map((item, index) => (
-                                                <tr>
-                                                    <td>{index + 1}</td>
-                                                    <td>
+                                        {productMeasurement?.data?.map((item, index) => (
+                                            <tr>
+                                                <td>{index + 1}</td>
+                                                <td>
                                                         <span
                                                             className="d-inline-block align-middle"
                                                             // onClick={() => onToleranceClick(productId, item)}
                                                         >
                                                             {item.pomResponse?.name}
                                                         </span>
-                                                    </td>
+                                                </td>
+                                                <td
+                                                    onDoubleClick={() => {
+                                                        setCellId(`${index}-tolerance`);
+                                                        setTollId(index);
+                                                    }}
+                                                >
+                                                    {cellId === `${index}-tolerance` ? (
+                                                        <input
+                                                            ref={clickRef}
+                                                            style={{display: "block"}}
+                                                            type="text"
+                                                            value={item?.tolerance}
+                                                            onChange={(e) =>
+                                                                onTolChange(e, index)
+                                                            }
+                                                            onKeyDown={(event) => {
+                                                                if (
+                                                                    event.key === "Enter" ||
+                                                                    event.key === "Escape"
+                                                                ) {
+                                                                    setCellId("");
+                                                                    setTollId("");
+                                                                    onOutSideClick();
+                                                                    event.preventDefault();
+                                                                    event.stopPropagation();
+                                                                }
+                                                            }}
+                                                        ></input>
+                                                    ) : (
+                                                        <p>{item?.tolerance}</p>
+                                                    )}
+                                                </td>
+
+                                                {item?.sizeValueList?.map((item2, colIndex) => (
                                                     <td
                                                         onDoubleClick={() => {
-                                                            setCellId(`${index}-tolerance`);
-                                                            setTollId(index);
+                                                            setCellId(
+                                                                `${index}-${colIndex}-size`
+                                                            );
+                                                            setSizeId(index);
+                                                            setSizeColIndex(colIndex);
                                                         }}
+                                                        key={colIndex}
                                                     >
-                                                        {cellId === `${index}-tolerance` ? (
+                                                        {cellId ===
+                                                        `${index}-${colIndex}-size` ? (
                                                             <input
-                                                                ref={clickRef}
-                                                                style={{ display: "block" }}
+                                                                ref={sizeClickRef}
+                                                                style={{display: "block"}}
                                                                 type="text"
-                                                                value={item?.tolerance}
+                                                                value={item2}
                                                                 onChange={(e) =>
-                                                                    onTolChange(e, index)
+                                                                    onSizeChange(
+                                                                        e,
+                                                                        index,
+                                                                        colIndex
+                                                                    )
                                                                 }
                                                                 onKeyDown={(event) => {
                                                                     if (
@@ -828,105 +873,63 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                                                         event.key === "Escape"
                                                                     ) {
                                                                         setCellId("");
-                                                                        setTollId("");
-                                                                        onOutSideClick();
+                                                                        setSizeId("");
+                                                                        setSizeColIndex("");
+                                                                        onOutSideSizeClick();
                                                                         event.preventDefault();
                                                                         event.stopPropagation();
                                                                     }
                                                                 }}
                                                             ></input>
                                                         ) : (
-                                                            <p>{item?.tolerance}</p>
+                                                            <p>{item2}</p>
                                                         )}
                                                     </td>
+                                                ))}
 
-                                                    {item?.sizeValueList?.map((item2, colIndex) => (
-                                                        <td
-                                                            onDoubleClick={() => {
-                                                                setCellId(
-                                                                    `${index}-${colIndex}-size`
-                                                                );
-                                                                setSizeId(index);
-                                                                setSizeColIndex(colIndex);
-                                                            }}
-                                                            key={colIndex}
-                                                        >
-                                                            {cellId ===
-                                                            `${index}-${colIndex}-size` ? (
-                                                                <input
-                                                                    ref={sizeClickRef}
-                                                                    style={{ display: "block" }}
-                                                                    type="text"
-                                                                    value={item2}
-                                                                    onChange={(e) =>
-                                                                        onSizeChange(
-                                                                            e,
-                                                                            index,
-                                                                            colIndex
-                                                                        )
-                                                                    }
-                                                                    onKeyDown={(event) => {
-                                                                        if (
-                                                                            event.key === "Enter" ||
-                                                                            event.key === "Escape"
-                                                                        ) {
-                                                                            setCellId("");
-                                                                            setSizeId("");
-                                                                            setSizeColIndex("");
-                                                                            onOutSideSizeClick();
-                                                                            event.preventDefault();
-                                                                            event.stopPropagation();
-                                                                        }
-                                                                    }}
-                                                                ></input>
-                                                            ) : (
-                                                                <p>{item2}</p>
-                                                            )}
-                                                        </td>
-                                                    ))}
-
-                                                    <td>
-                                                        <button
-                                                            className="button text"
-                                                            onClick={() => {
-                                                                setActionClick(!actionClick);
-                                                                setCellId(`${index}`);
-                                                            }}
-                                                        >
-                                                            <img src="/icons/calculator.svg" alt />
-                                                        </button>
-                                                        {actionClick === true &&
-                                                        parseInt(cellId) === index ? (
-                                                            <div className="action-popup shadow-8dp bg-white d-flex align-items-end justify-content-between">
-                                                                <div className="base-size">
+                                                <td>
+                                                    <button
+                                                        className="button text"
+                                                        onClick={() => {
+                                                            setActionClick(!actionClick);
+                                                            setCellId(`${index}`);
+                                                        }}
+                                                    >
+                                                        <img src="/icons/calculator.svg" alt/>
+                                                    </button>
+                                                    {actionClick === true &&
+                                                    parseInt(cellId) === index ? (
+                                                        <div
+                                                            className="action-popup shadow-8dp bg-white d-flex align-items-end justify-content-between">
+                                                            <div className="base-size">
                                                                     <span className="regular-14">
                                                                         Base size
                                                                     </span>
-                                                                    <select
-                                                                        name="base-size"
-                                                                        id="base-size"
-                                                                        onChange={(e) =>
-                                                                            setBaseSize(
-                                                                                e.target.value
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        <option>Select </option>
-                                                                        {productMeasurement?.sizeList.map(
-                                                                            (item) => (
-                                                                                <option
-                                                                                    value={
-                                                                                        item.code
-                                                                                    }
-                                                                                    key={item.code}
-                                                                                >
-                                                                                    {item.value}
-                                                                                </option>
-                                                                            )
-                                                                        )}
-                                                                    </select>
-                                                                </div>
-                                                                <div className="grading-value ml-2">
+                                                                <select
+                                                                    name="base-size"
+                                                                    id="base-size"
+                                                                    onChange={(e) =>
+                                                                        setBaseSize(
+                                                                            e.target.value
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <option>Select</option>
+                                                                    {productMeasurement?.sizeList.map(
+                                                                        (item) => (
+                                                                            <option
+                                                                                value={
+                                                                                    item.code
+                                                                                }
+                                                                                key={item.code}
+                                                                            >
+                                                                                {item.value}
+                                                                            </option>
+                                                                        )
+                                                                    )}
+                                                                </select>
+                                                            </div>
+                                                            <div className="grading-value ml-2">
                                                                     <span className="regular-14">
                                                                         Grading value
                                                                         <span>
@@ -945,28 +948,28 @@ const MeasurmentChartV2 = ({ productId, documentGroup }) => {
                                                                             />
                                                                         </span>
                                                                     </span>
-                                                                </div>
-                                                                <div className="add ml-2">
-                                                                    <button
-                                                                        className="button size36"
-                                                                        onClick={() => {
-                                                                            onAddGrading(
-                                                                                productId,
-                                                                                item.pomResponse?.id
-                                                                            );
-                                                                            setGrading("");
-                                                                        }}
-                                                                    >
-                                                                        Add
-                                                                    </button>
-                                                                </div>
                                                             </div>
-                                                        ) : (
-                                                            ""
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                                            <div className="add ml-2">
+                                                                <button
+                                                                    className="button size36"
+                                                                    onClick={() => {
+                                                                        onAddGrading(
+                                                                            productId,
+                                                                            item.pomResponse?.id
+                                                                        );
+                                                                        setGrading("");
+                                                                    }}
+                                                                >
+                                                                    Add
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        ""
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
                                         </tbody>
                                     </table>
                                     {productMeasurement?.data?.length === 0 && (

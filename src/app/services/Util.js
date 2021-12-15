@@ -712,14 +712,21 @@ const productAvailabilityStatus = (item) => {
 };
 
 const invoiceStatus = (invoice) => {
+    let invoiceStatus = "";
+    if(invoice.paymentStatus === "PARTIALLY_PAID"){
+        invoiceStatus = "yellow";
+    }else if(invoice.paymentStatus === "PAID"){
+        invoiceStatus = "green";
+    }else{
+        invoiceStatus = "purple";
+    }
     return (
-        <span
-            className="badge-custom mt-2 d-inline-block"
-            style={{ backgroundColor: "#ECE9F4", color: "#472F91" }}
-        >
+        <div className={`task-status ${invoiceStatus}`}>
+            <span className="status-btn">
             {invoice.paymentStatus &&
                 capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
-        </span>
+            </span>
+        </div>
     );
 };
 
