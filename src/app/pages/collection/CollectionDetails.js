@@ -578,7 +578,7 @@ class CollectionDetails extends Component {
     getSearchSuggestions = async () => {
         let { searchUserText } = this.state;
         this.setState({ searchUserLoading: true });
-        let params = `?userType=BUYER&email=${searchUserText}`;
+        let params = `?email=${searchUserText}`;
         await Http.GET("getUserSuggestions", params)
             .then(({ data }) => {
                 this.setState({ searchUserLoading: false });
@@ -1040,8 +1040,8 @@ class CollectionDetails extends Component {
                                     </g>
                                 </svg>
                             </div>
-                            <div className="header d-flex justify-content-between align-items-center">
-                                <div>
+                            <div className="header rfq-header">
+                                <div className="rfq-design-btn">
                                     <div className="d-flex justify-content-between align-items-center">
                                         <h4 className="semibold">Add more designs to collection</h4>
                                         <button onClick={() => window.open("/designs/add")}>

@@ -77,11 +77,19 @@ class MyRFQs extends Component {
         let name = "rfqId";
         let regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
         let results = regex.exec(this.props.location.search);
-
         await this.setState({
             filterById: results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")),
             productLoading: true,
         });
+
+        const search = window.location.search;
+        const params = new URLSearchParams(search);
+        const selectedTab = params.get("title");
+        if (selectedTab) {
+            await this.setState({
+                search: selectedTab,
+            });
+        }
 
         this.renderList(0);
         this.setState({

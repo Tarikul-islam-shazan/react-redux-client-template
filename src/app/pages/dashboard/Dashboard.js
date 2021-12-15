@@ -33,10 +33,14 @@ const PRO_PIC_DEFAULT = "/images/pro_pic_default.svg";
 
 const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isTaskLoading, setIsTaskLoading] = useState(false);
+    const [isQuoteLoading, setIsQuoteLoading] = useState(false);
+    const [userName, setUserName] = useState("");
     const [buyerOverview, setBuyerOverview] = useState([]);
     const [runnigOrders, setRunningOrders] = useState([]);
     const [currentQuoutePage, setCurrentQuoutePage] = useState(0);
     const [currentTaskPage, setCurrentTaskPage] = useState(0);
+    const [orderFlags, setOrderFlags] = useState({});
     const useStyles = makeStyles({
         tooltip: {
             fontSize: "12px",
@@ -87,65 +91,54 @@ const Dashboard = () => {
                 }
             });
     };
+    const getUserInfo = () => {
+        let userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            userInfo = JSON.parse(userInfo);
+            setUserName(userInfo.name);
+        }
+    };
     useEffect(() => {
         setIsLoading(true);
         getOrderSuppliers();
         getRunningOrders();
-        dispatch(fetchDashboardQuotes(0, 15, sort)).finally(() => {
-            setIsLoading(false);
-        });
-        dispatch(fetchDashboardAllTasks(0, 15, sort)).finally(() => {
-            setIsLoading(false);
-        });
-    }, [dispatch, sort]);
+        getUserInfo();
+    }, [dispatch]);
 
     useEffect(() => {
-        let hasNext = allQuotes?.hasNext;
-        if (hasNext) {
-            setIsLoading(true);
-            dispatch(fetchDashboardQuotes(currentQuoutePage, 15, sort)).finally(() => {
-                setIsLoading(false);
-            });
-        }
-        document.addEventListener("scroll", onScrollQuotes);
-        return () => {
-            document.removeEventListener("scroll", onScrollQuotes);
-        };
+        setIsQuoteLoading(true);
+        dispatch(fetchDashboardQuotes(currentQuoutePage, 15, sort)).finally(() => {
+            setIsQuoteLoading(false);
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, currentQuoutePage]);
 
-    const onScrollQuotes = () => {
-        let reachedBottom =
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight;
-        if (reachedBottom) {
+    const onScrollQuotes = (event) => {
+        const { scrollHeight, scrollTop, clientHeight } = event.target;
+        const scroll = scrollHeight - scrollTop - clientHeight;
+        let hasNext = allQuotes?.hasNext;
+        if (scroll === 0 && hasNext) {
             setCurrentQuoutePage((page) => page + 1);
         }
     };
 
     useEffect(() => {
-        let hasNext = allTasks?.hasNext;
-        if (hasNext) {
-            setIsLoading(true);
-            dispatch(fetchDashboardAllTasks(currentTaskPage, 15, sort)).finally(() => {
-                setIsLoading(false);
-            });
-        }
-        document.addEventListener("scroll", onScrollTaskList);
-        return () => {
-            document.removeEventListener("scroll", onScrollTaskList);
-        };
+        setIsTaskLoading(true);
+        dispatch(fetchDashboardAllTasks(currentTaskPage, 15, sort)).finally(() => {
+            setIsTaskLoading(false);
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, currentTaskPage]);
 
-    const onScrollTaskList = () => {
-        let reachedBottom =
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight;
-        if (reachedBottom) {
-            setCurrentQuoutePage((page) => page + 1);
+    const onScrollTaskList = (event) => {
+        const { scrollHeight, scrollTop, clientHeight } = event.target;
+        const scroll = scrollHeight - scrollTop - clientHeight;
+        let hasNext = allTasks?.hasNext;
+        if (scroll === 0 && hasNext) {
+            setCurrentTaskPage((page) => page + 1);
         }
     };
+
     const getTotalSustainable = () => {
         return (buyerOverview.sustainableProductCount / buyerOverview.totalProductCount) * 100;
     };
@@ -181,12 +174,6 @@ const Dashboard = () => {
         return Math.round((targetNumber * 100) / (overdue + pending + completed));
     };
 
-    // let today = new Date();
-    // let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    // // let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // let dateTime = date;
-
-    // console.log("`````````````", dateTime);
     const getPriceDateTime = (dateAdded, dateAddedTime) => {
         let timeDifference = 0;
         let formattedQuoteDate = convertTimeToLocal(dateAdded, dateAddedTime, "DD/MM/YYYY hh:mm A");
@@ -221,9 +208,32 @@ const Dashboard = () => {
         );
     };
 
+    const onSortCLicked = (type) => {
+        orderFlags[type] = orderFlags[type] ? false : true;
+        setOrderFlags(orderFlags);
+        allTasks = allTasks?.data?.sort((o1, o2) => {
+            let a = null;
+            let b = null;
+            if (type === "STYLE") {
+                a = o1.stepProduct ? o1.stepProduct.name.toUpperCase() : "";
+                b = o2.stepProduct ? o2.stepProduct.name.toUpperCase() : "";
+            }
+            if (type === "ORDER") {
+                a = o1.orderName.toUpperCase();
+                b = o2.orderName.toUpperCase();
+            }
+            if (type === "BRAND") {
+                a = o1.brandResponse ? o1.brandResponse.name.toUpperCase() : "";
+                b = o2.brandResponse ? o2.brandResponse.name.toUpperCase() : "";
+            }
+
+            return orderFlags[type] ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
+        });
+    };
+
     return (
         <LoadingOverlay
-            active={isLoading}
+            active={isLoading || isTaskLoading || isQuoteLoading}
             styles={{
                 overlay: (base) => ({
                     ...base,
@@ -251,8 +261,8 @@ const Dashboard = () => {
         >
             <div className="buyer-dashboard-container">
                 <div className="welcome-message">
-                    <h3 data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                        Hi <span>Jone</span>, good afternoon!
+                    <h3>
+                        Hi <span>{userName}</span>, good afternoon!
                     </h3>
                 </div>
                 {/* Order journey status */}
@@ -542,7 +552,7 @@ const Dashboard = () => {
                             <h3>My quotes</h3>
                             <Link to="/quotes/list">View all</Link>
                         </div>
-                        <div className="orders-table">
+                        <div className="orders-table" onScroll={(e) => onScrollQuotes(e)}>
                             <table className="table table-responsive-sm">
                                 <thead>
                                     <tr>
@@ -576,7 +586,7 @@ const Dashboard = () => {
                                                                 arrow
                                                             >
                                                                 <Link
-                                                                    to={`/orders/view/${item.orderId}`}
+                                                                    to={`/quotes/list?title=${item.productName}`}
                                                                 >
                                                                     {getShortName(
                                                                         item.productName,
@@ -648,26 +658,39 @@ const Dashboard = () => {
                         <h3>Quick actions</h3>
                         <Link to="/tasks">View all</Link>
                     </div>
-                    <div className="quick-actions-table">
+                    <div className="quick-actions-table" onScroll={(e) => onScrollTaskList(e)}>
                         <table className="table table-responsive-sm">
                             <thead>
                                 <tr>
                                     <th>Task</th>
                                     <th>
                                         <span>
-                                            Style <img src="/icons/down-arrow.svg" alt="arrow" />
+                                            Style{" "}
+                                            <img
+                                                src="/icons/down-arrow.svg"
+                                                alt="arrow"
+                                                onClick={() => onSortCLicked("STYLE")}
+                                            />
                                         </span>
                                     </th>
                                     <th>
                                         <span>
                                             Order title{" "}
-                                            <img src="/icons/down-arrow.svg" alt="arrow" />
+                                            <img
+                                                src="/icons/down-arrow.svg"
+                                                alt="arrow"
+                                                onClick={() => onSortCLicked("title")}
+                                            />
                                         </span>
                                     </th>
                                     <th>
                                         <span>
                                             Order number{" "}
-                                            <img src="/icons/down-arrow.svg" alt="arrow" />
+                                            <img
+                                                src="/icons/down-arrow.svg"
+                                                alt="arrow"
+                                                onClick={() => onSortCLicked("order")}
+                                            />
                                         </span>
                                     </th>
                                     <th>Status</th>
