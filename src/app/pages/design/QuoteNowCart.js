@@ -174,6 +174,7 @@ class QuoteNowCart extends Component {
         let { cart } = this.state;
         let newCart = [...cart];
         newCart = newCart.filter((product, i) => i !== index);
+        toastSuccess("Quote removed successful!")
         this.updateCart(newCart);
     };
 
@@ -207,6 +208,7 @@ class QuoteNowCart extends Component {
                 products,
             };
         }
+        toastSuccess("Quote added successful!")
         this.setState({ cart: quote.products });
         localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
         await this.props._storeData("quoteObj", quote);

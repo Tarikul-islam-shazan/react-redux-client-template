@@ -262,12 +262,12 @@ const AllStyles = ({onClose}) => {
                                             <table>
                                                 <tbody>
                                                 <tr>
-                                                    <th/>
-                                                    <th>XS</th>
-                                                    <th>S</th>
-                                                    <th>M</th>
-                                                    <th>L</th>
-                                                    <th>XL</th>
+                                                    <th></th>
+                                                    {item.colorWiseSizeQuantityPairList[0].sizeQuantityPairList.map(
+                                                        (size, i) => {
+                                                            return <th key={i}>{size.code}</th>;
+                                                        }
+                                                    )}
                                                     <th>Total</th>
                                                 </tr>
 

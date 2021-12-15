@@ -553,7 +553,7 @@ class ShareDesign extends Component {
                                     </div>
                                     <div className="col-lg-12">
                                         <div className="form-group">
-                                            <label for="">Fabric type</label>
+                                            <label for="">Fabric type*</label>
                                             <select
                                                 className={`w-100 bg-gray-light border-0 ${
                                                     fabricTypeError ? `error2` : ``

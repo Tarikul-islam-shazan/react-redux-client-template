@@ -1,5 +1,6 @@
 import React from "react";
-import { addImageSuffix } from "../../../services/Util";
+import {addImageSuffix, getShortName} from "../../../services/Util";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export const QuoteNowMyProductCard = ({
     product,
@@ -50,9 +51,15 @@ export const QuoteNowMyProductCard = ({
                     </a>
                 )}
                 <div className="info-right ml-3">
+                    <Tooltip
+                        title={product.name}
+                        placement="top"
+                        arrow
+                    >
                     <a href="#" className="semibold m-0 mt-1 font-20">
-                        {product.name}
+                        {getShortName(product.name,21)}
                     </a>
+                    </Tooltip>
                     <div className="d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
                             <label className="font-14 text-muted">Product category</label>
