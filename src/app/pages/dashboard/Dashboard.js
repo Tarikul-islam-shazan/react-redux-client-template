@@ -35,7 +35,7 @@ const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isTaskLoading, setIsTaskLoading] = useState(false);
     const [isQuoteLoading, setIsQuoteLoading] = useState(false);
-
+    const [userName, setUserName] = useState("");
     const [buyerOverview, setBuyerOverview] = useState([]);
     const [runnigOrders, setRunningOrders] = useState([]);
     const [currentQuoutePage, setCurrentQuoutePage] = useState(0);
@@ -91,10 +91,18 @@ const Dashboard = () => {
                 }
             });
     };
+    const getUserInfo = () => {
+        let userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            userInfo = JSON.parse(userInfo);
+            setUserName(userInfo.name);
+        }
+    };
     useEffect(() => {
         setIsLoading(true);
         getOrderSuppliers();
         getRunningOrders();
+        getUserInfo();
     }, [dispatch]);
 
     useEffect(() => {
@@ -253,8 +261,8 @@ const Dashboard = () => {
         >
             <div className="buyer-dashboard-container">
                 <div className="welcome-message">
-                    <h3 data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                        Hi <span>Jone</span>, good afternoon!
+                    <h3>
+                        Hi <span>{userName}</span>, good afternoon!
                     </h3>
                 </div>
                 {/* Order journey status */}
@@ -578,7 +586,7 @@ const Dashboard = () => {
                                                                 arrow
                                                             >
                                                                 <Link
-                                                                    to={`/orders/view/${item.orderId}`}
+                                                                    to={`/quotes/list?title=${item.productName}`}
                                                                 >
                                                                     {getShortName(
                                                                         item.productName,
