@@ -100,12 +100,12 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
     } else {
         errors.fabricTypeError = "";
     }
-    if (!fabricCompositionDetails) {
-        errors.fabricCompositionDetailsError = "Fabric details is required.";
-        isValid = false;
-    } else {
-        errors.fabricCompositionDetailsError = "";
-    }
+    // if (!fabricCompositionDetails) {
+    //     errors.fabricCompositionDetailsError = "Fabric details is required.";
+    //     isValid = false;
+    // } else {
+    //     errors.fabricCompositionDetailsError = "";
+    // }
     if (!productGroupId) {
         errors.productGroupIdError = "Product type is required.";
         isValid = false;
@@ -120,12 +120,12 @@ export const validateShareDesign = (state, withName = true, withProductDesign = 
         errors.documentIdError = "";
     }
 
-    if (pantoneColorIdList?.length === 0 || colorEditRequestList?.length === 0) {
-        errors.colorListError = "Color is required";
-        isValid = false;
-    } else {
-        errors.colorListError = "";
-    }
+    // if (pantoneColorIdList?.length === 0 || colorEditRequestList?.length === 0) {
+    //     errors.colorListError = "Color is required";
+    //     isValid = false;
+    // } else {
+    //     errors.colorListError = "";
+    // }
 
     // if (!collectionId) {
     //     errors.collectionIdError = "Collection is required.";

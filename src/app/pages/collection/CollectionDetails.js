@@ -578,7 +578,7 @@ class CollectionDetails extends Component {
     getSearchSuggestions = async () => {
         let { searchUserText } = this.state;
         this.setState({ searchUserLoading: true });
-        let params = `?userType=BUYER&email=${searchUserText}`;
+        let params = `?email=${searchUserText}`;
         await Http.GET("getUserSuggestions", params)
             .then(({ data }) => {
                 this.setState({ searchUserLoading: false });

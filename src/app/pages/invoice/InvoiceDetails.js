@@ -109,13 +109,11 @@ class InvoiceDetails extends Component {
                     <div>
                       <div className="font-15 semibold mb-2">Bill From</div>
                       {
-                         fromAddress &&
+                         invoice.beneficiaryDetails &&
                          <address>
-                           <div className="name">{fromAddress.name}</div>
-                           <span className="address">{fromAddress.invoiceAddress}</span>
-                           <span className="address">{fromAddress.country} {fromAddress.postalCode}</span>
-                           <span>{fromAddress.email}</span>
-                           <span className="phone">{fromAddress.phoneNumber}</span>
+                           <div className="name">{invoice.beneficiaryDetails?.name}</div>
+                           <span className="address">{invoice.beneficiaryDetails?.address}</span>
+                           <span className="phone">{invoice.beneficiaryDetails?.website}</span>
                          </address>
                       }
 
@@ -123,12 +121,16 @@ class InvoiceDetails extends Component {
                     <div>
                       <div className="font-15 semibold mb-2">Bill To</div>
                       {
-                         toAddress &&
+                         invoice.buyerBillingLocation &&
                          <address>
-                           <div className="name">{toAddress.fullName}</div>
-                           <span className="address">{toAddress.address} {toAddress.city} {toAddress.stateOrProvince}</span>
-                           <span className="mail">{toAddress.email}</span>
-                           <span className="phone">{toAddress.phoneNo}</span>
+                           <div className="name">{invoice?.brandName}</div>
+                           <span className="address">{invoice.buyerBillingLocation?.addressLine1}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.addressLine2}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.city}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.state}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.countryName}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.phone}</span>
+                           <span className="mail">{invoice.buyerBillingLocation?.email}</span>
                          </address>
                       }
 
