@@ -857,7 +857,7 @@ class CollectionDetails extends Component {
                             <div className="add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end">
                                 {collection.privacy === "CUSTOM" ||
                                 collection.privacy === "USER_TYPE" ? (
-                                    <div className="position-relative">
+                                    <>
                                         <div className="added-members">
                                             <div
                                                 id="AddNewMember"
@@ -938,6 +938,9 @@ class CollectionDetails extends Component {
                                                 <></>
                                             )}
                                         </div>
+                                        <div className="d-flex mt-4 mt-sm-0">
+                                            <button id="CreateCollection" className="m-0 btn-brand">+Add more products</button>
+                                        </div>
                                         <div
                                             className={`add-people-popup no-padding-popup shadow ${
                                                 showAddMemberModal ? `show` : ``
@@ -986,7 +989,7 @@ class CollectionDetails extends Component {
                                                 onChange={this.onChange}
                                             />
                                         </div>
-                                    </div>
+                                    </>
                                 ) : (
                                     <></>
                                 )}
