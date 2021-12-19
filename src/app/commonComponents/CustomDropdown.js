@@ -241,7 +241,7 @@ const CustomDropdown = ({
                         </div>
                         {isAddNew && (
                             <div className="add-btn" onClick={onAddMore}>
-                                <button className="button text">
+                                <button className="button text" style={{background: "transparent", border: "1px solid transparent",color: "#664AB6"}}>
                                     <svg
                                         width={14}
                                         height={14}
