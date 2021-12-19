@@ -3,7 +3,7 @@ import { parseHtml, IMAGE_EXTS, getImageExt } from '../../../../services/Util';
 
 export const SelectedFileViewComponent = ({file, showRemoveOption, index, remove}) => {
   let ext = getImageExt(file.name);
-  if ( IMAGE_EXTS.includes(ext)) {
+    if ( IMAGE_EXTS.includes(ext)) {
     return (
       <div className="item">
       {
@@ -16,7 +16,7 @@ export const SelectedFileViewComponent = ({file, showRemoveOption, index, remove
         </div> : <></>
       }
 
-          <a href="#">
+          <a href={file.docUrl} target="_blank">
               <img src={showRemoveOption ? file.base64Str : file.docUrl} alt=""/>
           </a>
       </div>
@@ -31,7 +31,7 @@ export const SelectedFileViewComponent = ({file, showRemoveOption, index, remove
         {/*        <path d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z" fill="white"></path>*/}
         {/*    </svg>*/}
         {/*</div>*/}
-        <a href="#">
+        <a href={file.docUrl} target="_blank">
             <span>{ext}</span>
         </a>
     </div>
