@@ -227,9 +227,7 @@ const Dashboard = () => {
                 a = o1.brandResponse ? o1.brandResponse.name.toUpperCase() : "";
                 b = o2.brandResponse ? o2.brandResponse.name.toUpperCase() : "";
             }
-            console.log("!!!!!!", allTasks);
-
-            return allTasks?.data ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
+            return orderFlags[type] ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
         });
     };
 
