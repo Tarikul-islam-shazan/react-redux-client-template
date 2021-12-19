@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CustomDropdown from "../../../commonComponents/CustomDropdown";
 import Http from "../../../services/Http";
 import { toastSuccess, toastError } from "../../../commonComponents/Toast";
+import AddColor from "../../../commonComponents/AddColor";
 
 const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
     const [colorName, setColorName] = useState("");
@@ -10,6 +11,7 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchColor, setSearchColor] = useState("");
     const [errors, setErrors] = useState({});
+    const [showColorModal, setShowColorModal] = useState(false);
     const [designInfo, setDesignInfo] = useState({
         pantoneColorIdList: colorData
             ? colorData.map((item) => {
@@ -110,11 +112,16 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
                 items={colors}
                 onItemSearch={onColorSearch}
                 selectedItem={colorName}
-                isAddNew={false}
-                // onAddMore={() => setShowColorModal(true)}
+                isAddNew={true}
+                onAddMore={() => setShowColorModal(true)}
             />
             {/* {errors.colorError && <p className="error">{errors.colorError}</p>} */}
-
+            {showColorModal && (
+                <AddColor
+                    isShowCollection={true}
+                    onCloseModal={() => setShowColorModal(false)}
+                />
+            )}
             {selectedColorList?.length > 0 && (
                 <CustomDropdown
                     type="colorList"

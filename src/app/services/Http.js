@@ -80,6 +80,7 @@ const routes = {
     getRfqListV2: `${BASE_URL}/rfq/my-quotes`,
     getSettingsData: `${BASE_URL}/personal-setting/get/`,
     updatePersonalSettings: `${BASE_URL}/personal-setting/set`,
+    addColor: `${BASE_URL}/color/pantone/add`,
 
     order: `${BASE_URL}/order/place-order`,
     updateOrderAddress: `${BASE_URL}/order/update-address`,
