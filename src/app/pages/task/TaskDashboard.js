@@ -231,7 +231,6 @@ class TaskDashboard extends Component {
                                     selfName="START_TODAY"
                                     onClick={this.onClickTab}
                                     value={myTaskCount.startTodayCount}
-                                    onClick={this.onClickTab}
                                 />
                                 <TabHeader
                                     title="Due soon"
@@ -239,7 +238,6 @@ class TaskDashboard extends Component {
                                     selfName="DUE_SOON"
                                     onClick={this.onClickTab}
                                     value={myTaskCount.dueSoonCount}
-                                    onClick={this.onClickTab}
                                 />
                                 <TabHeader
                                     title="Overdue"
@@ -247,13 +245,11 @@ class TaskDashboard extends Component {
                                     selfName="OVERDUE"
                                     onClick={this.onClickTab}
                                     value={myTaskCount.overdueCount}
-                                    onClick={this.onClickTab}
                                 />
                                 <TabHeader
                                     title="Completed"
                                     selectedTab={selectedTab}
                                     selfName="COMPLETE"
-                                    onClick={this.onClickTab}
                                     onClick={this.onClickTab}
                                 />
                             </ul>

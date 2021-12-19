@@ -39,6 +39,7 @@ const Dashboard = () => {
     const [userName, setUserName] = useState("");
     const [buyerOverview, setBuyerOverview] = useState([]);
     const [runnigOrders, setRunningOrders] = useState([]);
+    const [taskList, setTaskList] = useState(null);
     const [currentQuoutePage, setCurrentQuoutePage] = useState(0);
     const [currentTaskPage, setCurrentTaskPage] = useState(0);
     const [orderFlags, setOrderFlags] = useState({});
@@ -47,7 +48,6 @@ const Dashboard = () => {
             fontSize: "12px",
         },
     });
-
     const [sort, setSort] = useState("id,desc");
     const dispatch = useDispatch();
 
@@ -128,8 +128,13 @@ const Dashboard = () => {
         dispatch(fetchDashboardAllTasks(currentTaskPage, 15, sort)).finally(() => {
             setIsTaskLoading(false);
         });
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, currentTaskPage]);
+
+    useEffect(() => {
+        setTaskList(allTasks);
+    }, [allTasks]);
 
     const onScrollTaskList = (event) => {
         const { scrollHeight, scrollTop, clientHeight } = event.target;
@@ -212,23 +217,24 @@ const Dashboard = () => {
     const onSortCLicked = (type) => {
         orderFlags[type] = orderFlags[type] ? false : true;
         setOrderFlags(orderFlags);
-        allTasks = allTasks?.data?.sort((o1, o2) => {
+        let newTaskList = taskList?.data?.sort((o1, o2) => {
             let a = null;
             let b = null;
             if (type === "STYLE") {
-                a = o1.stepProduct ? o1.stepProduct.name.toUpperCase() : "";
-                b = o2.stepProduct ? o2.stepProduct.name.toUpperCase() : "";
+                a = o1.stepName ? o1.stepName.toUpperCase() : "";
+                b = o2.stepName ? o2.stepName.toUpperCase() : "";
             }
             if (type === "ORDER") {
                 a = o1.orderName.toUpperCase();
                 b = o2.orderName.toUpperCase();
             }
-            if (type === "BRAND") {
-                a = o1.brandResponse ? o1.brandResponse.name.toUpperCase() : "";
-                b = o2.brandResponse ? o2.brandResponse.name.toUpperCase() : "";
+            if (type === "ORDER_NUMBER") {
+                a = o1.orderRefNumber ? o1.orderRefNumber.toUpperCase() : "";
+                b = o2.orderRefNumber ? o2.orderRefNumber.toUpperCase() : "";
             }
             return orderFlags[type] ? (a >= b ? 1 : -1) : b >= a ? 1 : -1;
         });
+        setTaskList({ ...taskList, data: newTaskList });
     };
 
     const getGreetingMsg = () => {
@@ -237,13 +243,26 @@ const Dashboard = () => {
 
         if (time >= 5 && time < 12) {
             return "Good Morning";
-        }
-        if (time >= 12 && time < 17) {
+        } else if (time >= 12 && time < 17) {
             return "Good Afternoon";
         }
-        if (time >= 17 && time < 5) {
+        // if (time >= 17 && time < 5) {
+        else {
             return "Good Evening";
         }
+    };
+
+    const taskImageStyle = {
+        height: "62px",
+        width: "56px",
+        textAlign: "center",
+        background: "#EDF0F2",
+        borderRadius: "2px",
+        marginRight: "5px",
+    };
+
+    const clicked = {
+        transform: "rotate(180deg)",
     };
 
     return (
@@ -580,7 +599,7 @@ const Dashboard = () => {
                                 <tbody>
                                     {allQuotes?.data?.length > 0 && !isLoading ? (
                                         allQuotes?.data?.map((item) => (
-                                            <tr>
+                                            <tr kwy={item.id}>
                                                 <td>
                                                     <span className="image-with-title">
                                                         <img
@@ -682,6 +701,7 @@ const Dashboard = () => {
                                         <span>
                                             Style{" "}
                                             <img
+                                                style={orderFlags["STYLE"] ? clicked : {}}
                                                 src="/icons/down-arrow.svg"
                                                 alt="arrow"
                                                 onClick={() => onSortCLicked("STYLE")}
@@ -692,9 +712,10 @@ const Dashboard = () => {
                                         <span>
                                             Order title{" "}
                                             <img
+                                                style={orderFlags["ORDER"] ? clicked : {}}
                                                 src="/icons/down-arrow.svg"
                                                 alt="arrow"
-                                                onClick={() => onSortCLicked("title")}
+                                                onClick={() => onSortCLicked("ORDER")}
                                             />
                                         </span>
                                     </th>
@@ -702,18 +723,21 @@ const Dashboard = () => {
                                         <span>
                                             Order number{" "}
                                             <img
+                                                style={orderFlags["ORDER_NUMBER"] ? clicked : {}}
                                                 src="/icons/down-arrow.svg"
                                                 alt="arrow"
-                                                onClick={() => onSortCLicked("order")}
+                                                onClick={() => onSortCLicked("ORDER_NUMBER")}
                                             />
                                         </span>
                                     </th>
-                                    <th>Status</th>
+                                    <th>
+                                        <span>Status </span>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {allTasks?.data?.length > 0 && !isLoading ? (
-                                    allTasks?.data.map((item) => (
+                                {taskList?.data?.length > 0 && !isLoading ? (
+                                    taskList?.data.map((item) => (
                                         <tr>
                                             <td>
                                                 <span className="image-with-title">
@@ -724,7 +748,10 @@ const Dashboard = () => {
                                                             className="cell-img pr-2"
                                                         />
                                                     ) : (
-                                                        ""
+                                                        <div
+                                                            className="task-image"
+                                                            style={taskImageStyle}
+                                                        ></div>
                                                     )}
                                                     <span className="d-inline-block align-middle">
                                                         <Tooltip
