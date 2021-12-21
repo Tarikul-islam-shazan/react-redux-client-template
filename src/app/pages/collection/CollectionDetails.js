@@ -102,7 +102,7 @@ class CollectionDetails extends Component {
         const { scrollHeight, scrollTop, clientHeight } = event.target;
         const scroll = scrollHeight - scrollTop - clientHeight;
 
-        if (scroll === 0) {
+        if (Math.abs(scroll) < 10) {
             let { myDesignHasNext, myDesignPage, myDesignLoading, myDesignList, myDesignSize } =
                 this.state;
             if (myDesignHasNext && !myDesignLoading && myDesignList.length) {
@@ -111,7 +111,7 @@ class CollectionDetails extends Component {
                     await this.setState({
                         myDesignList: [...myDesignList, ...data],
                         myDesignPage: myDesignPage + 1,
-                        myDesignHasNext: data.length === myDesignSize ? true : false,
+                        myDesignHasNext: !(data.length < myDesignSize),
                         myDesignLoading: false,
                     });
                 } else {
@@ -939,7 +939,7 @@ class CollectionDetails extends Component {
                                                     })
                                                 }
                                             >
-                                                +Add more products
+                                                +Add more design
                                             </button>
                                         </div>
                                         <div
