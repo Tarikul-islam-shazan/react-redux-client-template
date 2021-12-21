@@ -42,10 +42,10 @@ class QuoteNowCart extends Component {
             size: 10,
             search: "",
             hasNext: true, //to check if pagination is available or not
-            height: window.innerHeight,
             cart: [],
             title: "",
             TURN_AROUND_TIME: "",
+            titleError: "",
             MOQ: "",
         };
     }
@@ -66,15 +66,13 @@ class QuoteNowCart extends Component {
                     });
                 } else {
                     this.setState({
-                        // designList : [],
                         hasNext: false,
                         loading: false,
                     });
-                    // toastWarning("Product List - no data found.");
                 }
             } else {
                 if (!hasNext) {
-                    // toastWarning("No more rfq's found.")
+                    toastWarning("No more rfq's found.");
                 }
             }
         }
@@ -82,7 +80,6 @@ class QuoteNowCart extends Component {
 
     componentDidMount = async () => {
         document.title = "Request quotes with Nitex - The easiest clothing manufacturing software";
-        // window.addEventListener("scroll", this.handleScroll);
         let quote = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
 
         if (quote) {
@@ -151,17 +148,11 @@ class QuoteNowCart extends Component {
         this.setState({ designList });
     };
 
-    onChangeQuantity = async (productIndex, colorIndex, name, value) => {
+    onChangeQuantity = async (productIndex, e) => {
         let { cart } = this.state;
-        let copiedCart = copy(cart);
-        copiedCart[productIndex].colorWiseSizeQuantityPairList[colorIndex].sizeQuantityPairList.map(
-            (pair) => {
-                if (pair.code === name) {
-                    pair.quantity = value;
-                }
-            }
-        );
-        await this.setState({ cart: copiedCart });
+        let { name, value } = e.target;
+        cart[productIndex][name] = value;
+        await this.setState({ cart });
         await this.updateCartGlobally();
     };
 
@@ -174,7 +165,7 @@ class QuoteNowCart extends Component {
         let { cart } = this.state;
         let newCart = [...cart];
         newCart = newCart.filter((product, i) => i !== index);
-        toastSuccess("Quote removed successful!")
+        toastSuccess("Quote removed successful!");
         this.updateCart(newCart);
     };
 
@@ -208,7 +199,7 @@ class QuoteNowCart extends Component {
                 products,
             };
         }
-        toastSuccess("Quote added successful!")
+        toastSuccess("Quote added successful!");
         this.setState({ cart: quote.products });
         localStorage.setItem(LOCAL_QUOTE_NOW_KEY, JSON.stringify(quote));
         await this.props._storeData("quoteObj", quote);
@@ -219,20 +210,18 @@ class QuoteNowCart extends Component {
         this.setState({ loading: false });
         let { cart, title } = this.state;
         let flag = true;
+        if (!title) {
+            this.setState({ titleError: "Title is required" });
+            flag = false;
+            return flag;
+        }
         cart = cart.map((product, i) => {
             let tempFlag = true;
-            product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
-                colorWithSize.sizeQuantityPairList.map((pair) => {
-                    if (
-                        getTotal(colorWithSize.sizeQuantityPairList) <
-                        parseInt(product.minimumOrderQuantity)
-                    ) {
-                        flag = false;
-                        tempFlag = false;
-                        product.error = "Please insert values greater than or equal to MOQ";
-                    }
-                });
-            });
+            if (!product.quotationQuantity) {
+                flag = false;
+                tempFlag = false;
+                product.error = "Please insert quantity";
+            }
             if (tempFlag) {
                 product.error = "";
             }
@@ -255,20 +244,10 @@ class QuoteNowCart extends Component {
             let body = {
                 name: title,
                 rfqRequestDTOList: cart.map((product) => {
-                    let total = 0;
-                    product.colorWiseSizeQuantityPairList.map((colorWithSize) => {
-                        colorWithSize.sizeQuantityPairList.map((pair) => {
-                            if (pair.quantity === "" || pair.quantity === null) {
-                                pair.quantity = 0;
-                            } else {
-                                total += parseInt(pair.quantity);
-                            }
-                        });
-                    });
                     return {
                         productId: product.id,
-                        total,
-                        colorWiseSizeQuantityPairList: product.colorWiseSizeQuantityPairList,
+                        quotationQuantity: product.quotationQuantity,
+                        buyerQuotationType: "DESIGNWISE",
                     };
                 }),
             };
@@ -292,7 +271,9 @@ class QuoteNowCart extends Component {
     };
 
     render() {
-        let { designList, cart, title, TURN_AROUND_TIME, MOQ, loading } = this.state;
+        let { designList, cart, title, TURN_AROUND_TIME, MOQ, loading, titleError } = this.state;
+
+        console.log("TEST========", cart);
         return (
             <div className="add-quote d-flex">
                 <div className="confirm-quote-request">
@@ -329,6 +310,7 @@ class QuoteNowCart extends Component {
                                 </div>
                             </div>
                             <div className="mt-3">
+                                <h6>RFQ title*</h6>
                                 <input
                                     type="text"
                                     placeholder="Demo Collection name"
@@ -337,6 +319,7 @@ class QuoteNowCart extends Component {
                                     onChange={this.onChange}
                                     className="w-100 bg-gray-light"
                                 />
+                                {titleError && <p className="error">{titleError}</p>}
                             </div>
                             <div className="quote-req-list-container mt-3">
                                 {
@@ -369,86 +352,84 @@ class QuoteNowCart extends Component {
                         </div>
                     )}
                 </div>
-                <div className="">
-                    <div
-                        className="add-more ml-auto"
-                        id="sidebarCollapse"
-                        onScroll={(e) => this.handleScroll(e)}
-                    >
-                        <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="22.84"
-                                height="12.32"
-                                viewBox="0 0 22.84 12.32"
+                <div
+                    className="add-more ml-auto"
+                    id="sidebarCollapse"
+                    onScroll={(e) => this.handleScroll(e)}
+                >
+                    {/* <div id="closeRPop" className="p-3 cursor-pointer d-inline-block d-xl-none">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22.84"
+                            height="12.32"
+                            viewBox="0 0 22.84 12.32"
+                        >
+                            <g
+                                id="Group_5016"
+                                data-name="Group 5016"
+                                transform="translate(-1582.964 -1119.323)"
                             >
-                                <g
-                                    id="Group_5016"
-                                    data-name="Group 5016"
-                                    transform="translate(-1582.964 -1119.323)"
-                                >
-                                    <path
-                                        id="Path_2339"
-                                        data-name="Path 2339"
-                                        d="M6734.325,696h21.625"
-                                        transform="translate(-5151.361 429.59)"
-                                        fill="none"
-                                        stroke="#000"
-                                        stroke-width="1.5"
-                                    />
-                                    <path
-                                        id="Path_2340"
-                                        data-name="Path 2340"
-                                        d="M6766.935,684.293l5.8,5.8-5.46,5.46"
-                                        transform="translate(-5167.99 435.56)"
-                                        fill="none"
-                                        stroke="#000"
-                                        stroke-width="1.5"
-                                    />
-                                </g>
-                            </svg>
-                        </div>
-                        <div className="header rfq-header">
-                            <div className="rfq-design-btn">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <h4 className="semibold">Select design for RFQ</h4>
-                                    <button onClick={() => window.open("/designs/add")}>
-                                        <span>Design</span>
-                                        <img src="/icons/upload.svg" />
-                                    </button>
-                                </div>
-                                <div className="search">
-                                    <img src="/icons/search.svg" />
-                                    <input
-                                        type="search"
-                                        className="w-100"
-                                        placeholder="Search"
-                                        onChange={(e) => this.onSearch(e)}
-                                    />
-                                </div>
+                                <path
+                                    id="Path_2339"
+                                    data-name="Path 2339"
+                                    d="M6734.325,696h21.625"
+                                    transform="translate(-5151.361 429.59)"
+                                    fill="none"
+                                    stroke="#000"
+                                    stroke-width="1.5"
+                                />
+                                <path
+                                    id="Path_2340"
+                                    data-name="Path 2340"
+                                    d="M6766.935,684.293l5.8,5.8-5.46,5.46"
+                                    transform="translate(-5167.99 435.56)"
+                                    fill="none"
+                                    stroke="#000"
+                                    stroke-width="1.5"
+                                />
+                            </g>
+                        </svg>
+                    </div> */}
+                    <div className="header rfq-header">
+                        <div className="rfq-design-btn">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h4 className="semibold">Select design for RFQ</h4>
+                                <button onClick={() => window.open("/designs/add")}>
+                                    <span>Design</span>
+                                    <img src="/icons/upload.svg" />
+                                </button>
+                            </div>
+                            <div className="search">
+                                <img src="/icons/search.svg" />
+                                <input
+                                    type="search"
+                                    className="w-100"
+                                    placeholder="Search"
+                                    onChange={(e) => this.onSearch(e)}
+                                />
                             </div>
                         </div>
+                    </div>
 
-                        <div className="added-item  custom-scrollbar">
-                            {!loading ? (
-                                designList.map((product, i) => {
-                                    return (
-                                        <QuoteNowMyProductCard
-                                            key={i}
-                                            cart={cart}
-                                            product={product}
-                                            addToQuote={this.addToQuote}
-                                            defaultTurnAroundTime={TURN_AROUND_TIME}
-                                            defaultMoq={MOQ}
-                                        />
-                                    );
-                                })
-                            ) : (
-                                <CreateSkeletons iterations={12}>
-                                    <ProductSkeleton />
-                                </CreateSkeletons>
-                            )}
-                        </div>
+                    <div className="added-item  custom-scrollbar">
+                        {!loading ? (
+                            designList.map((product, i) => {
+                                return (
+                                    <QuoteNowMyProductCard
+                                        key={i}
+                                        cart={cart}
+                                        product={product}
+                                        addToQuote={this.addToQuote}
+                                        defaultTurnAroundTime={TURN_AROUND_TIME}
+                                        defaultMoq={MOQ}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <CreateSkeletons iterations={12}>
+                                <ProductSkeleton />
+                            </CreateSkeletons>
+                        )}
                     </div>
                 </div>
             </div>
