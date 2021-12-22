@@ -412,20 +412,19 @@ class QuoteNowCart extends Component {
                     </div>
 
                     <div className="added-item  custom-scrollbar">
-                        {!loading ? (
-                            designList.map((product, i) => {
-                                return (
-                                    <QuoteNowMyProductCard
-                                        key={i}
-                                        cart={cart}
-                                        product={product}
-                                        addToQuote={this.addToQuote}
-                                        defaultTurnAroundTime={TURN_AROUND_TIME}
-                                        defaultMoq={MOQ}
-                                    />
-                                );
-                            })
-                        ) : (
+                        {designList.map((product, i) => {
+                            return (
+                                <QuoteNowMyProductCard
+                                    key={i}
+                                    cart={cart}
+                                    product={product}
+                                    addToQuote={this.addToQuote}
+                                    defaultTurnAroundTime={TURN_AROUND_TIME}
+                                    defaultMoq={MOQ}
+                                />
+                            );
+                        })}
+                        {loading && (
                             <CreateSkeletons iterations={12}>
                                 <ProductSkeleton />
                             </CreateSkeletons>

@@ -1062,19 +1062,18 @@ class CollectionDetails extends Component {
                             </div>
 
                             <div className="added-item custom-scrollbar">
-                                {!myDesignLoading ? (
-                                    myDesignList.map((product, i) => {
-                                        return (
-                                            <ModalMyProductCard
-                                                key={i}
-                                                product={product}
-                                                buttonAction={this.addToCollection}
-                                                buttonTitle="Add to collection"
-                                            />
-                                        );
-                                    })
-                                ) : (
-                                    <CreateSkeletons iterations={10}>
+                                {myDesignList.map((product, i) => {
+                                    return (
+                                        <ModalMyProductCard
+                                            key={i}
+                                            product={product}
+                                            buttonAction={this.addToCollection}
+                                            buttonTitle="Add to collection"
+                                        />
+                                    );
+                                })}
+                                {myDesignLoading && (
+                                    <CreateSkeletons iterations={12}>
                                         <ProductSkeleton />
                                     </CreateSkeletons>
                                 )}
