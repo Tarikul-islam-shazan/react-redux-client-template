@@ -335,7 +335,10 @@ class ConfirmOrder extends Component {
                                             <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                                 Sub total
                                                 <strong className="semibold font-18">
-                                                    ${getTotalPrice(order)}
+                                                    $
+                                                    {isNaN(getTotalPrice(order))
+                                                        ? 0
+                                                        : getTotalPrice(order)}
                                                 </strong>
                                             </div>
                                         </div>
@@ -355,7 +358,10 @@ class ConfirmOrder extends Component {
                                             <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                                 Grand total
                                                 <strong className="semibold font-18">
-                                                    ${getTotalPrice(order)}
+                                                    $
+                                                    {isNaN(getTotalPrice(order))
+                                                        ? 0
+                                                        : getTotalPrice(order)}
                                                 </strong>
                                             </div>
                                         </div>

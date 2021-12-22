@@ -86,7 +86,7 @@ class DefaultLayout extends Component {
     };
 
     render() {
-        let {pathname} = this.props.history.location;
+        let { pathname } = this.props.history.location;
         let userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
             userInfo = JSON.parse(userInfo);
@@ -100,7 +100,7 @@ class DefaultLayout extends Component {
 
         return (
             <>
-                <Sidebar activePath={this.props.location.pathname} />
+                <Sidebar activePath={pathname} />
 
                 <div className="content">
                     <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
@@ -112,33 +112,112 @@ class DefaultLayout extends Component {
                             <i className="fa fa-bars"></i>
                         </button>
 
-
-                      <ul className="navbar-nav ml-auto align-items-center">
-                          <li className={pathname === "/tasks" ? "active" : ""}>
-                             {/* <Link className="dropdown-item my-task-btn" to="/tasks">
+                        <ul className="navbar-nav ml-auto align-items-center">
+                            <li className={pathname === "/tasks" ? "active" : ""}>
+                                {/* <Link className="dropdown-item my-task-btn" to="/tasks">
                               
                             </Link> */}
-                            <button className="btn my-task-btn" onClick={() => this.props.history.push('/tasks')}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M5 5H15.8333" stroke="#21242B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M5 10H15.8333" stroke="#21242B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M5 15H15.8333" stroke="#21242B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2.5 5H2.50833" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2.5 15H2.50833" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                                <span>My tasks</span>
-                            </button>
-                          </li>
-                          <li className={pathname === "/quote-now" ? "nav-item quote-cart dropdown no-arrow active" : "nav-item quote-cart dropdown no-arrow"} data-toggle="tooltip" data-placement="top" title="" data-original-title="Request quote">
-                              <button className="btn btn-outline-default nav-link" type="button" onClick={() => this.props.history.push('/quote-now')}>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#21242B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20.9999 20.9999L16.6499 16.6499" stroke="#21242B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M13.1776 8.81279C13.0367 8.58373 12.832 8.39488 12.5854 8.26648C12.3388 8.13807 12.0596 8.07494 11.7776 8.08383H10.2221C9.8095 8.08383 9.41384 8.23744 9.12212 8.51085C8.83039 8.78426 8.6665 9.15509 8.6665 9.54175C8.6665 9.92842 8.83039 10.2992 9.12212 10.5727C9.41384 10.8461 9.8095 10.9997 10.2221 10.9997H11.7776C12.1902 10.9997 12.5858 11.1533 12.8776 11.4267C13.1693 11.7001 13.3332 12.0709 13.3332 12.4576C13.3332 12.8443 13.1693 13.2151 12.8776 13.4885C12.5858 13.7619 12.1902 13.9155 11.7776 13.9155H10.2221C9.94011 13.9244 9.66088 13.8613 9.41427 13.7329C9.16766 13.6045 8.96296 13.4156 8.82206 13.1866" stroke="#21242B" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M11 14.1113V15.6668M11 6.3335V7.88905V6.3335Z" stroke="#21242B" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                              <span>RFQ</span>
-                                  
+                                <button
+                                    className="btn my-task-btn"
+                                    onClick={() => this.props.history.push("/tasks")}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M5 5H15.8333"
+                                            stroke="#21242B"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M5 10H15.8333"
+                                            stroke="#21242B"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M5 15H15.8333"
+                                            stroke="#21242B"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M2.5 5H2.50833"
+                                            stroke="white"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M2.5 15H2.50833"
+                                            stroke="white"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                    <span>My tasks</span>
+                                </button>
+                            </li>
+                            <li
+                                className={
+                                    pathname === "/quote-now"
+                                        ? "nav-item quote-cart dropdown no-arrow active"
+                                        : "nav-item quote-cart dropdown no-arrow"
+                                }
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title=""
+                                data-original-title="Request quote"
+                            >
+                                <button
+                                    className="btn btn-outline-default nav-link"
+                                    type="button"
+                                    onClick={() => this.props.history.push("/quote-now")}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                                            stroke="#21242B"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M20.9999 20.9999L16.6499 16.6499"
+                                            stroke="#21242B"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M13.1776 8.81279C13.0367 8.58373 12.832 8.39488 12.5854 8.26648C12.3388 8.13807 12.0596 8.07494 11.7776 8.08383H10.2221C9.8095 8.08383 9.41384 8.23744 9.12212 8.51085C8.83039 8.78426 8.6665 9.15509 8.6665 9.54175C8.6665 9.92842 8.83039 10.2992 9.12212 10.5727C9.41384 10.8461 9.8095 10.9997 10.2221 10.9997H11.7776C12.1902 10.9997 12.5858 11.1533 12.8776 11.4267C13.1693 11.7001 13.3332 12.0709 13.3332 12.4576C13.3332 12.8443 13.1693 13.2151 12.8776 13.4885C12.5858 13.7619 12.1902 13.9155 11.7776 13.9155H10.2221C9.94011 13.9244 9.66088 13.8613 9.41427 13.7329C9.16766 13.6045 8.96296 13.4156 8.82206 13.1866"
+                                            stroke="#21242B"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M11 14.1113V15.6668M11 6.3335V7.88905V6.3335Z"
+                                            stroke="#21242B"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                    <span>RFQ</span>
 
                                     {this.props.quoteObj &&
                                     this.props.quoteObj.products &&

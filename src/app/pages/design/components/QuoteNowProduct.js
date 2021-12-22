@@ -111,28 +111,8 @@ export const QuoteNowProduct = ({
                             <label className="font-14 text-muted">Product category</label>
                             <h5 className="font-18 semibold">
                                 <span>{product.productGroup}</span>
-                                {
-                                    product.productGroup && product.category && <span>, </span>
-                                }
+                                {product.productGroup && product.category && <span>, </span>}
                                 <span>{product.category}</span>
-                            </h5>
-                        </div>
-                        <div className="info-item">
-                            <label className="font-14 text-muted">MOQ</label>
-                            <h5 className="font-18 semibold">
-                                {product.minimumOrderQuantity
-                                    ? product.minimumOrderQuantity
-                                    : (product.minimumOrderQuantity = defaultMoq)}{" "}
-                                pcs
-                            </h5>
-                        </div>
-                        <div className="info-item">
-                            <label className="font-14 text-muted">Delivery in</label>
-                            <h5 className="font-18 semibold">
-                                {product.turnAroundTime
-                                    ? product.turnAroundTime
-                                    : defaultTurnAroundTime}{" "}
-                                Days
                             </h5>
                         </div>
                     </div>
@@ -147,81 +127,36 @@ export const QuoteNowProduct = ({
                                     : ""}{" "}
                             </h5>
                         </div>
-                        
                     </div>
                 </div>
             </div>
 
-          <div className="all-sizes">
-
-            <div className="order-quantity">
-                <label>Quantity</label>
-                <input type="number" placeholder="Pcs"/>
-            </div>
-
-          {/* <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
-                <div className="sizes d-flex  align-items-center mb-2">
-                    <div className="size">
-                        <label className="text-center">&nbsp;</label>
-                    </div>
-
-                    {product?.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map((item) => (
-                        <div className="size" key={item.id}>
-                            <label className="text-center">{item.code}</label>
+            <div className="all-sizes">
+                <div class="size-n-color d-flex align-items-center justify-content-center flex-column">
+                    <div className="sizes d-flex  align-items-center mb-2">
+                        <div className="size">
+                            <label className="text-center">&nbsp;</label>
                         </div>
-                    ))}
 
-                    <div className="size total">
-                        <label className="text-right">Total</label>
+                        <div className="size total">
+                            <label className="text-right">Quantity</label>
+                        </div>
+                        <div className="size total">
+                            <input
+                                type="text"
+                                placeholder="00"
+                                name="quotationQuantity"
+                                value={product.quotationQuantity ? product.quotationQuantity : ""}
+                                onChange={(e) => onChange(index, e)}
+                                onKeyPress={validateNumber}
+                                className="bg-gray-light"
+                            />
+                        </div>
                     </div>
+
+                    <p className="error">{product.error}</p>
                 </div>
-                {product?.colorWiseSizeQuantityPairList.map((colorWithSize, colorIndex) => {
-                    return (
-                        <div class="sizes d-flex  align-items-center">
-                            <div class="size">
-                                <div
-                                    class="product-color"
-                                    style={{ background: colorWithSize.hexCode }}
-                                ></div>
-                            </div>
-                            {colorWithSize?.sizeQuantityPairList.map((pair, key) => {
-                                return (
-                                    <div className="size">
-                                        <input
-                                            type="text"
-                                            placeholder="00"
-                                            value={pair.quantity ? pair.quantity : ""}
-                                            onChange={(e) =>
-                                                onChange(
-                                                    index,
-                                                    colorIndex,
-                                                    pair.code,
-                                                    e.target.value
-                                                )
-                                            }
-                                            onKeyPress={validateNumber}
-                                            className="bg-gray-light"
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <div className="size total">
-                                <input
-                                    type="text"
-                                    placeholder="00"
-                                    value={getTotal(colorWithSize.sizeQuantityPairList)}
-                                    className="bg-blue-light"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-                    );
-                })}
-                <p className="error">{product.error}</p>
-            </div> */}
-
-            
-          </div>
+            </div>
         </div>
     );
 };

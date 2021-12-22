@@ -136,14 +136,12 @@ class PickDesignV2 extends Component {
             });
         }
 
-        // console.log(this.searchFilters && !this.searchFilters.contains(event.target))
-        // if (this.searchFilters && !this.searchFilters.contains(event.target)) {
-        //     this.setState({
-        //         showFilters: false,
-        //         filters: this.state.filters.filter((item) => item.showSelected),
-        //     });
-        // }
-        // console.log(this.state.filters,this.searchFilters && !this.searchFilters.contains(event.target))
+        if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+            this.setState({
+                showFilters: false,
+                filters: this.state.filters.filter((item) => item.showSelected),
+            });
+        }
 
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setState({

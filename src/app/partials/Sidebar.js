@@ -157,7 +157,7 @@ class Sidebar extends Component {
                                 onClick={this.props.setActiveTab}
                             />
                         }
-                       
+
                         {/* {permissions.includes("RFQ_ADD") ? (
                             <NavLink
                                 to="/designs/add"
@@ -214,7 +214,7 @@ class Sidebar extends Component {
                                 onClick={this.props.setActiveTab}
                             />
                         }
-                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
+                        {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
                             <NavLink
                                 to="/designs/explore"
                                 classes={`${
@@ -230,7 +230,6 @@ class Sidebar extends Component {
                         ) : (
                             <></>
                         )}
-                        
 
                         {/* {
                         permissions.includes('PRODUCT_MY_PRODUCT') ?

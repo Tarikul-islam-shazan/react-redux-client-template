@@ -135,21 +135,15 @@ const getDateWithHourFromMillis = (millis) => {
 
 const doCommaSeparationWithIntegers = (amount) => {
     if (amount === null || amount === undefined) return "-";
-
     amount = amount.toString();
-
     if (amount.length <= 3) {
         return amount;
     }
-
     let formattedAmount = "";
-
     for (let i = amount.length - 1, p = 0; i >= 0; i--, p++) {
         if (p >= 3 && (p - 3) % 2 === 0) formattedAmount = ",".concat(formattedAmount);
         formattedAmount = amount[i].concat(formattedAmount);
     }
-
-    console.log("formattedAmount: ", formattedAmount);
     return formattedAmount;
 };
 
@@ -713,18 +707,18 @@ const productAvailabilityStatus = (item) => {
 
 const invoiceStatus = (invoice) => {
     let invoiceStatus = "";
-    if(invoice.paymentStatus === "PARTIALLY_PAID"){
+    if (invoice.paymentStatus === "PARTIALLY_PAID") {
         invoiceStatus = "yellow";
-    }else if(invoice.paymentStatus === "PAID"){
+    } else if (invoice.paymentStatus === "PAID") {
         invoiceStatus = "green";
-    }else{
+    } else {
         invoiceStatus = "purple";
     }
     return (
         <div className={`task-status ${invoiceStatus}`}>
             <span className="status-btn">
-            {invoice.paymentStatus &&
-                capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
+                {invoice.paymentStatus &&
+                    capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
             </span>
         </div>
     );
