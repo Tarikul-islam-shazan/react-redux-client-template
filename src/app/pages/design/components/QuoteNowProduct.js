@@ -115,15 +115,6 @@ export const QuoteNowProduct = ({
                                 <span>{product.category}</span>
                             </h5>
                         </div>
-                        <div className="info-item">
-                            <label className="font-14 text-muted">MOQ</label>
-                            <h5 className="font-18 semibold">
-                                {product.minimumOrderQuantity
-                                    ? product.minimumOrderQuantity
-                                    : (product.minimumOrderQuantity = defaultMoq)}{" "}
-                                pcs
-                            </h5>
-                        </div>
                     </div>
                     <div className="features add-quote-list d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
@@ -136,15 +127,6 @@ export const QuoteNowProduct = ({
                                     : ""}{" "}
                             </h5>
                         </div>
-                        <div className="info-item">
-                            <label className="font-14 text-muted">Delivery in</label>
-                            <h5 className="font-18 semibold">
-                                {product.turnAroundTime
-                                    ? product.turnAroundTime
-                                    : defaultTurnAroundTime}{" "}
-                                Days
-                            </h5>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -155,14 +137,6 @@ export const QuoteNowProduct = ({
                         <div className="size">
                             <label className="text-center">&nbsp;</label>
                         </div>
-
-                        {/* {product?.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map(
-                            (item) => (
-                                <div className="size" key={item.id}>
-                                    <label className="text-center">{item.code}</label>
-                                </div>
-                            )
-                        )} */}
 
                         <div className="size total">
                             <label className="text-right">Quantity</label>
@@ -180,48 +154,6 @@ export const QuoteNowProduct = ({
                         </div>
                     </div>
 
-                    {/* {product?.colorWiseSizeQuantityPairList.map((colorWithSize, colorIndex) => {
-                    return (
-                        <div class="sizes d-flex  align-items-center">
-                            <div class="size">
-                                <div
-                                    class="product-color"
-                                    style={{ background: colorWithSize.hexCode }}
-                                ></div>
-                            </div>
-                            {colorWithSize?.sizeQuantityPairList.map((pair, key) => {
-                                return (
-                                    <div className="size">
-                                        <input
-                                            type="text"
-                                            placeholder="00"
-                                            value={pair.quantity ? pair.quantity : ""}
-                                            onChange={(e) =>
-                                                onChange(
-                                                    index,
-                                                    colorIndex,
-                                                    pair.code,
-                                                    e.target.value
-                                                )
-                                            }
-                                            onKeyPress={validateNumber}
-                                            className="bg-gray-light"
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <div className="size total">
-                                <input
-                                    type="text"
-                                    placeholder="00"
-                                    value={getTotal(colorWithSize.sizeQuantityPairList)}
-                                    className="bg-blue-light"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-                    );
-                })} */}
                     <p className="error">{product.error}</p>
                 </div>
             </div>
