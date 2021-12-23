@@ -311,5 +311,16 @@ ul.attachment {
             }
         }
     }
-
+    table{
+        &.table{
+            tr{
+                td{
+                    .status-btn{
+                        font-size: 16px;
+                        line-height: 24px;
+                    }
+                }
+            }
+        }
+    }
 }
