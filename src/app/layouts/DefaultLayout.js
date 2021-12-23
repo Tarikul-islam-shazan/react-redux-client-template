@@ -17,9 +17,9 @@ import StartProject from "../commonComponents/modals/StartProject";
 
 import { _storeData } from "../partials/actions";
 import { _storeData as _storeQuoteData } from "../pages/design/actions";
-import { addImageSuffix } from "../services/Util";
+import {addImageSuffix, isValidJSON} from "../services/Util";
 
-import { LOCAL_QUOTE_NOW_KEY } from "../constant";
+import {getOneSignalAppId, LOCAL_QUOTE_NOW_KEY} from "../constant";
 import Http from '../services/Http';
 
 // var stompClient = null;
@@ -31,6 +31,7 @@ class DefaultLayout extends Component {
             showNotification: false,
         };
         this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.OneSignal = window.OneSignal || [];
     }
 
     setWrapperRef = (node) => {
@@ -72,6 +73,86 @@ class DefaultLayout extends Component {
     //
     // }
 
+    setupOneSignal = async () => {
+        try {
+            // this.OneSignal = window.OneSignal || [];
+            // if (this.OneSignal.installServiceWorker) {
+            //   this.OneSignal.installServiceWorker();
+            // } else {
+            //   if (navigator.serviceWorker) {
+            //     navigator.serviceWorker.register(`./OneSignalSDKWorker.js?appId=${getOneSignalAppId()}`);
+            //   }
+            // }
+            let userInfo = localStorage.getItem('userInfo');
+            if (userInfo) {
+                userInfo = JSON.parse(userInfo);
+            } else {
+                userInfo = {};
+            }
+            this.OneSignal.push(() => {
+                this.OneSignal.init({
+                    appId: getOneSignalAppId()
+                });
+            });
+            let userId = null;
+            await this.OneSignal.getExternalUserId().then((res) => {
+                //console.log('res from getExternalUserId', res);
+                userId = parseInt(res);
+            });
+            //console.log('getExternalUserId', userId);
+            if (parseInt(userId) !== userInfo.id) {
+                //console.log('entered condition setExternalUserId');
+                this.OneSignal.setExternalUserId(userInfo.id.toString());
+            }
+            this.OneSignal.log.setLevel('trace');
+            this.OneSignal.on('notificationDisplay', (event) => {
+                let { data } = event;
+                if (
+                    data &&
+                    data.category &&
+                    ['COLLECTION', 'INVOICE', 'ORDER', 'POST', 'PRODUCT', 'RFQ', 'STEP'].includes(
+                        data.category
+                    )
+                ) {
+                    data.body = data.body && isValidJSON(data.body) ? JSON.parse(data.body) : {};
+                    this.props._storeData('notifications', [data, ...this.props.notifications]);
+                    this.props._storeData('unseenCount', parseInt(this.props.unseenCount) + 1);
+                }
+            });
+            this.OneSignal.log.setLevel('trace');
+            this.OneSignal.on('notificationDisplay', (event) => {
+                let { data } = event;
+                if (
+                    data &&
+                    data.category &&
+                    ['COLLECTION', 'INVOICE', 'ORDER', 'POST', 'PRODUCT', 'RFQ', 'STEP'].includes(
+                        data.category
+                    )
+                ) {
+                    data.body = data.body && isValidJSON(data.body) ? JSON.parse(data.body) : {};
+                    this.props._storeData('notifications', [data, ...this.props.notifications]);
+                    this.props._storeData('unseenCount', parseInt(this.props.unseenCount) + 1);
+                }
+            });
+            this.OneSignal.on('notificationDismiss', (event) => {
+                console.warn('OneSignal notification dismissed:', event);
+            });
+            this.OneSignal.on('addListenerForNotificationOpened', (event) => {
+                console.warn('OneSignal notification dismissed:', event);
+            });
+            this.OneSignal.on('subscriptionChange', (isSubscribed) => {
+                console.warn('OneSignal subscriptionChange:', isSubscribed);
+                localStorage.setItem('subscriptionStatus', isSubscribed ? 'subscribed' : 'notSubscribed');
+                if (isSubscribed && parseInt(userId) !== userInfo.id) {
+                    //console.log('entered condition setExternalUserId');
+                    this.OneSignal.setExternalUserId(userInfo.id.toString());
+                }
+            });
+        } catch (e) {
+            //console.log('error', e.message);
+        }
+    };
+
     componentDidMount = () => {
         const hostName = window.location.toString();
         if (hostName.indexOf("https://app.nitex.com") > -1) {
@@ -89,10 +170,20 @@ class DefaultLayout extends Component {
             quoteObj = JSON.parse(quoteObj);
         }
         this.props._storeQuoteData("quoteObj", quoteObj);
+        this.setupOneSignal()
     };
 
     componentWillUnmount = () => {
         window.removeEventListener("mousedown", this.handleClickOutside);
+    };
+
+    logout = async () => {
+        try {
+            this.OneSignal.removeExternalUserId();
+        } catch (e) {
+            //console.log(e.message);
+        }
+        this.props.history.push('/logout');
     };
 
     render() {
@@ -335,7 +426,7 @@ class DefaultLayout extends Component {
                                     </Link>
                                     <div className="dropdown-divider"></div>
 
-                                    <a className="dropdown-item" href="/logout">
+                                    <a className="dropdown-item" onClick={() => this.logout()}>
                                         <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>

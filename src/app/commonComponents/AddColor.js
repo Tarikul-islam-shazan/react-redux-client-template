@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Http from '../services/Http';
 import {toastError, toastSuccess} from './Toast';
 
-const AddColor = ({ isShowCollection, onCloseModal }) => {
+const AddColor = ({ isShowCollection, onCloseModal, callBack }) => {
     const [name, setName] = useState('');
     const [hexCode, setHexCode] = useState('');
     const [pantoneCode, setPantoneCode] = useState('');
@@ -31,6 +31,11 @@ const AddColor = ({ isShowCollection, onCloseModal }) => {
             .then(({ data }) => {
                 setLoading(false);
                 if (data.success) {
+                    if (callBack) callBack(data,{
+                        name,
+                        hexCode,
+                        code: pantoneCode
+                    })
                     toastSuccess(data.message);
                     onCloseModal();
                 } else {

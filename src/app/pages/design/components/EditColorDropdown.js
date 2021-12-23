@@ -99,6 +99,19 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
         }
     };
 
+    const setColorsData = async (data, value) => {
+        let postData = {}
+        if (data.success === true) {
+            postData.id = data.id;
+            postData.pantoneColorId = data.id;
+            postData.value = value.name
+            postData.code = value.code
+            postData.hexCode = value.hexCode
+        }
+
+        onItemClick("Select color", postData)
+    }
+
     const onColorSearch = (value) => {
         setSearchColor(value);
     };
@@ -118,6 +131,7 @@ const EditColorDropdown = ({ colorData, addColor, removeColor }) => {
             {/* {errors.colorError && <p className="error">{errors.colorError}</p>} */}
             {showColorModal && (
                 <AddColor
+                    callBack={setColorsData}
                     isShowCollection={true}
                     onCloseModal={() => setShowColorModal(false)}
                 />

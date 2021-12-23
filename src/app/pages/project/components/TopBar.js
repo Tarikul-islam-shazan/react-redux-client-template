@@ -7,13 +7,14 @@ import {
    addImageSuffix,
    changeDateFormat,
    capitalizeFirstLetter,
-   doCommaSeparationWithIntegers,
+   doCommaSeparationWithIntegers, getShortName,
 } from "../../../services/Util";
 import { toastSuccess, toastError } from "../../../commonComponents/Toast";
 import BACK_ICON from "../../../assets/images/icons/order-back-icon.svg";
 import PRO_PIC_DEFAULT from "../../../assets/images/pro_pic_default.svg";
 import MORE_ICON from "../../../assets/images/icons/down-arrow-bottom.png";
 import DELIVERY_ICON from "../../../assets/images/icons/delivery-status-icon.svg";
+import {Tooltip} from "@material-ui/core";
 
 const TopBar = ({ details, orderId, getProjectDetails }) => {
    const [userResponseList, setUserResponseList] = useState([]);
@@ -213,8 +214,9 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
                               onClick={() => history.push(`/orders/my-orders`)}
                            />
                         </button>
-                        <h3 className>{details.name}</h3>{" "}
-                        <span className="order-number">({details.orderRefNumber})</span>
+                        <Tooltip title={details.name} placement={"top"}>
+                           <h3 className>{getShortName(details.name,35)} <span className="order-number">({details.orderRefNumber})</span></h3>
+                        </Tooltip>
                      </div>
                   </div>
                   <div className="col-3">
