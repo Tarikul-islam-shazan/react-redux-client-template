@@ -20,6 +20,7 @@ import { _storeData as _storeQuoteData } from "../pages/design/actions";
 import { addImageSuffix } from "../services/Util";
 
 import { LOCAL_QUOTE_NOW_KEY } from "../constant";
+import Http from '../services/Http';
 
 // var stompClient = null;
 // const DefaultLayout = ({children, ...rest}) => {
@@ -43,6 +44,15 @@ class DefaultLayout extends Component {
             });
         }
     };
+
+    getUnseenNotificationCount = async () => {
+        await Http.GET('getUnseenNotificationCount')
+            .then(({ data }) => {
+                this.props._storeData('unseenCount', data);
+            })
+            .catch(({ response }) => {});
+    };
+
 
     show = () => {
         this.setState({ showNotification: true });
@@ -73,7 +83,7 @@ class DefaultLayout extends Component {
         }
 
         window.addEventListener("mousedown", this.handleClickOutside);
-
+        this.getUnseenNotificationCount();
         let quoteObj = localStorage.getItem(LOCAL_QUOTE_NOW_KEY);
         if (quoteObj) {
             quoteObj = JSON.parse(quoteObj);
@@ -273,7 +283,11 @@ class DefaultLayout extends Component {
                                     ) : (
                                         <></>
                                     )}
-                                    {/*<span className="notification-count">123</span>*/}
+                                    {this.props.unseenCount ? (
+                                        <span className="notification-count">{this.props.unseenCount}</span>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </button>
                             </li>
 
@@ -346,6 +360,7 @@ class DefaultLayout extends Component {
 }
 const mapStateToProps = (store) => ({
     notificationIconActive: store.notification.notificationIconActive,
+    unseenCount: store.notification.unseenCount,
     quoteObj: store.product.quoteObj,
 });
 
