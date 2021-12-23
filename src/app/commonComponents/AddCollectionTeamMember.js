@@ -170,13 +170,16 @@ const AddCollectionTeamMember = ({
                             role="tabpanel"
                             aria-labelledby="nav-home-tab"
                         >
-                            <div className="manager-designation-persons">
-                                {memberList && memberList.length !== 0 ? (
-                                    renderUserInfo(memberList, "remove")
-                                ) : (
-                                    <span className="no-member">No member added yet</span>
-                                )}
+                            <div className="all-team-members-without-search">
+                                <div className="manager-designation-persons">
+                                    {memberList && memberList.length !== 0 ? (
+                                        renderUserInfo(memberList, "remove")
+                                    ) : (
+                                        <span className="no-member">No member added yet</span>
+                                    )}
+                                </div>
                             </div>
+                            
                         </div>
                         <div
                             className="tab-pane fade"
