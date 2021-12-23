@@ -191,44 +191,81 @@ class ConfirmOrder extends Component {
                     <>
                         <div className="add-quote d-flex">
                             <div className="confirm-quote-request placing-order">
-                                <div className="header-title d-flex justify-content-between align-items-center">
+                                <div className="header-title">
                                     <a href="#">
                                         <h3 className="text-black font-26 semibold">
                                             Placing order
                                         </h3>
                                     </a>
+                                    <p className="mt-3">Order basic information*</p>
                                 </div>
 
-                                <div className="mt-3">
-                                    <label htmlFor="">Order title</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Order title"
-                                        name="name"
-                                        value={order.name}
-                                        onChange={this.onChange}
-                                        className="w-100 bg-gray-light"
-                                    />
+                                <div className="order-confirm-info-with-po d-flex mt-3">
+                                    <div className="title-and-date">
+                                        <div className="form-group">
+                                        <label htmlFor="">Order title</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Order title"
+                                            name="name"
+                                            value={order.name}
+                                            onChange={this.onChange}
+                                            className="w-100 bg-gray-light"
+                                            />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="">Delivery date*</label>
+                                                <input
+                                                    type="date"
+                                                    className="w-100 bg-gray-light"
+                                                />
+                                            </div>
+                                    </div>
+                                    <div className="po-column bg-white">
+                                        <div className="uploded-po">
+                                            <div className="single-po d-flex justify-content-between align-items-center">
+                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
+                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                            </div>
+                                            <div className="single-po d-flex justify-content-between align-items-center">
+                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
+                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                            </div>
+                                            <div className="single-po d-flex justify-content-between align-items-center">
+                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
+                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                            </div>
+                                            <div className="single-po d-flex justify-content-between align-items-center">
+                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
+                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                            </div>
+                                            {/* <p className="text-center no-po">No PO uploaded</p> */}
+                                        </div>
+                                        <div className="upload-po text-center">
+                                            <label for="po-upload" className="drag-upload"><img src="../icons/upload-sm.svg" alt=""/> <span>Upload PO</span></label>
+                                            <input type="file" className="file-upload d-none" name="po-upload" id="po-upload" accept=""/> 
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">
-                                    <span className="result d-flex">
+                                    {/* <span className="result d-flex">
                                         Delivery date:{" "}
                                         <div className="text-black ml-2 semibold">
                                             {" "}
                                             {getDeliveryDate()}
                                         </div>
-                                    </span>
+                                    </span> */}
                                 </h4>
                                 <h4 className="mb-3 font-weight-normal pc-step">
                                     Product confirmation (Step 1 of 2)
-                                    <span className="result font-16 mr-3 mt-2 mt-sm-0">
+                                    {/* <span className="result font-16 mr-3 mt-2 mt-sm-0">
                                         You have{" "}
                                         {order.productResponseList
                                             ? order.productResponseList.length
                                             : "-"}
                                         items in your order
-                                    </span>
+                                    </span> */}
                                 </h4>
                                 {order.productResponseList ? (
                                     order.productResponseList.map((product, i) => {
