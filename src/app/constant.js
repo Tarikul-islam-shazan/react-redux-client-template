@@ -122,3 +122,17 @@ function getHotjarId(){
         return 1986852;
     }
 }
+
+export function getOneSignalAppId() {
+    return "944586d0-b5c4-4e89-9822-28dd97aaca14";
+    // const hostName = window.location.toString();
+    //
+    // if (hostName.indexOf('https://admin-beta.nitex.com') > -1) {
+    //     return 'dc4f825e-f9ab-4e68-b720-2173adb24b9d';
+    // } else if (hostName.indexOf('http://localhost:3000') > -1) {
+    //     // return '36090c1c-19c8-4189-8574-38b42c1cef8c';
+    //     return 'd0e82cf7-19a5-49e5-a98a-7a2a6f7a715d';
+    // } else {
+    //     return 'd0e82cf7-19a5-49e5-a98a-7a2a6f7a715d';
+    // }
+}
