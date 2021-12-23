@@ -94,6 +94,7 @@ class DefaultLayout extends Component {
                     appId: getOneSignalAppId()
                 });
             });
+            console.log(this.OneSignal)
             let userId = null;
             await this.OneSignal.getExternalUserId().then((res) => {
                 //console.log('res from getExternalUserId', res);
