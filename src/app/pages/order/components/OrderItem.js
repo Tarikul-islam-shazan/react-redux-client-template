@@ -115,13 +115,19 @@ export const OrderItem = ({ product, remove }) => {
 
                   <div className="features position-relative d-flex flex-md-column">
                      <div className="info-item mt-0 mt-xl-2">
-                        <label className="font-14 text-muted">Quantity</label>
+                        <label className="font-14 text-muted">Quoted quantity</label>
                         <h5 className="font-20 color-333">
                            {product.quantity ? product.quantity : "--"} units
                         </h5>
+
+                        <div className="new-quantity">
+                              <label>Order quantity</label>
+                              <input type="number" placeholder="Unit"/>
+                              <p className="quote-warning"><img src="../icons/alert-triangle.svg"/> Price may change as order qty {"<"} quoted qty </p>
+                        </div>
                      </div>
 
-                     {product.colorWiseSizeQuantityPairList &&
+                     {/* {product.colorWiseSizeQuantityPairList &&
                      product.colorWiseSizeQuantityPairList.length ? (
                         <div className="info-item d-flex">
                            <div className="size">
@@ -143,12 +149,12 @@ export const OrderItem = ({ product, remove }) => {
                         </div>
                      ) : (
                         <></>
-                     )}
+                     )} */}
 
                      {product.colorWiseSizeQuantityPairList.map((color, i) => {
                         return (
                            <div className="info-item d-flex align-items-start mt-2" key={i}>
-                              <div className="sizes d-flex  align-items-center">
+                              {/* <div className="sizes d-flex  align-items-center">
                                  <span
                                     className="circle-color mr-3"
                                     style={{ background: color.hexCode }}
@@ -169,7 +175,83 @@ export const OrderItem = ({ product, remove }) => {
                                        </div>
                                     );
                                  })}
+                              </div> */}
+
+                              <div className="category-wise-quantity-table color-wise-table">
+                                 <table>
+                                    <tr>
+                                       <th><span className="cursor-pointer color-icon" style={{background: 'red'}}></span></th>
+                                       <th><span className="cursor-pointer color-icon" style={{background: 'green'}}></span></th>
+                                       <th><span className="cursor-pointer color-icon" style={{background: 'blue'}}></span></th>
+                                       <th><span className="cursor-pointer color-icon" style={{background: 'gray'}}></span></th>
+                                       <th><span className="cursor-pointer color-icon" style={{background: 'red'}}></span></th>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>11.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                    </tr>
+                                 </table>
+                                 <p className="quote-warning"><img src="../icons/alert-triangle.svg"/> Price may change as order qty {"<"} quoted qty </p>
                               </div>
+
+                              {/* Sizewise quantity table */}
+                              {/* <div className="category-wise-quantity-table color-wise-table">
+                                 <table>
+                                    <tr>
+                                       <th><p>XS</p></th>
+                                       <th><p>S</p></th>
+                                       <th><p>M</p></th>
+                                       <th><p>L</p></th>
+                                       <th><p>XL</p></th>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>11.99</p>
+                                       </td>
+                                       <td>
+                                          <p><span>$</span>12.99</p>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                       <td><input type="number" placeholder="Qty"/></td>
+                                    </tr>
+                                 </table>
+                                 <p className="quote-warning"><img src="../icons/alert-triangle.svg"/> Price may change as order qty {"<"} quoted qty </p>
+                              </div> */}
+
                            </div>
                         );
                      })}

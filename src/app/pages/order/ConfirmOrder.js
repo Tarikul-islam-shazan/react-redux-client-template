@@ -194,7 +194,7 @@ class ConfirmOrder extends Component {
                                 <div className="header-title">
                                     <a href="#">
                                         <h3 className="text-black font-26 semibold">
-                                            Placing order
+                                            Place order
                                         </h3>
                                     </a>
                                     <p className="mt-3">Order basic information*</p>
@@ -284,7 +284,7 @@ class ConfirmOrder extends Component {
 
                             <div className="invoice-summary">
                                 <div className="title">
-                                    Invoice Summary
+                                    Order summary
                                     <div className="toggle-up-down">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -331,9 +331,18 @@ class ConfirmOrder extends Component {
                                             <></>
                                         )}
 
-                                        <div className="sub-total pt-2 mt-4 border-top">
+                                        <div className="sub-total pt-2 mt-4">
                                             <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
-                                                Sub total
+                                                Total Quantity:
+                                                <strong className="semibold font-18">
+                                                    $
+                                                    {isNaN(getTotalPrice(order))
+                                                        ? 0
+                                                        : getTotalPrice(order)}
+                                                </strong>
+                                            </div>
+                                            <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
+                                                Total price:
                                                 <strong className="semibold font-18">
                                                     $
                                                     {isNaN(getTotalPrice(order))
@@ -343,7 +352,7 @@ class ConfirmOrder extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="mt-5 shipping-info">
+                                        {/* <div className="mt-5 shipping-info">
                                             <div className="mb-2 font-weight-normal color-333 font-18">
                                                 Shipping <br />
                                                 <div className="mt-4 color-gray font-12 info-text">
@@ -364,7 +373,7 @@ class ConfirmOrder extends Component {
                                                         : getTotalPrice(order)}
                                                 </strong>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="submit-for-payment d-flex flex-column align-items-center justify-content-center">
                                             <button
@@ -373,6 +382,7 @@ class ConfirmOrder extends Component {
                                             >
                                                 Confirm order
                                             </button>
+                                            <span>Price maybe change</span>
                                         </div>
                                     </div>
                                 </div>
