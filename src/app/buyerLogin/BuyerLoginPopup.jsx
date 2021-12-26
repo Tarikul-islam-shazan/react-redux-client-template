@@ -6,7 +6,7 @@ const BuyerLoginPopup = ({}) => {
             <aside className="left-panel" id="side-menu">
                 <div className="logo"><a href="#" className="logo-expanded">
                     <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAA3CAYAAACxUDzgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJCQTVCMkZBMTQyNzExRUI4NENGQkU0OTNENUMxREUzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJCQTVCMkZCMTQyNzExRUI4NENGQkU0OTNENUMxREUzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkJBNUIyRjgxNDI3MTFFQjg0Q0ZCRTQ5M0Q1QzFERTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkJBNUIyRjkxNDI3MTFFQjg0Q0ZCRTQ5M0Q1QzFERTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4252QDAAAF0UlEQVR42uTafWxT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"
+                    src="/images/logo_final.png"
                     alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
                 <nav className="navigation">
                     <ul className="list-unstyled list_sidebar">
@@ -37,7 +37,7 @@ const BuyerLoginPopup = ({}) => {
                     </ul>
                 </nav>
             </aside>
-            <div className="content">
+            <div className="content overflow-hidden vh-100">
                 <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
                     <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                         <svg className="svg-inline--fa fa-bars fa-w-14" aria-hidden="true" data-prefix="fa"
@@ -263,8 +263,65 @@ const BuyerLoginPopup = ({}) => {
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            <div className="buyer-login-popup-message">
+                    <div className="popup-full-contents">
+                    <div className="popup-message-contents">
+                        <div className="message-top-content">
+                            <h2 className="message-title">Your account will be activated soon</h2>
+                            <div className="welcome-message-section">
+                                <div className="left-half">
+                                    <div className="ac-manager-details">
+                                        <img src="/images/mh-mahdi-profile.png" alt="profile" />
+                                        <h3 className="semibold-16 mb-0">Hussain Mahdi</h3>
+                                        <p className="designatgion">Co-founder & Chairman  <a href="#" target="_blank">LinkedIn</a> </p>
+                                        <p className="designatgion"><span>+11758-339722 </span> | <span>mahdi@nitex.info</span></p>
+                                    </div>
+                                </div>
+                                <div className="right-half">
+                                    <h3>Welcome, Sir Ma rzan!</h3>
+                                    <p>Thanks for signing up to the Nitex and joining our creative community!</p>
+                                    <p>This is <span>Mahdi</span>, a Business Evangelist dedicated to you and your brand. I’m really looking forward to knowing more about you and how Nitex can help grow your brand. I will contact you within 24 hours to show you our product capabilities, understand your business goals, and of course help you achieve them.</p>
+                                    <p className="mb-0">While waiting, you can check out how we’re empowering +50 brands from across the world.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="how-we-help-section">
+                            <h4 className="title">How we help you grow</h4>
+                            <div className="one-third-row">
+                                <div className="single-item">
+                                    <img src="/icons/100-designs.png" alt="100 designs" />
+                                    <h3>100s of designs every week</h3>
+                                    <p>We offer you curated collections from our Design Studio based on your brand DNA</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/4-6-wsks-production.png" alt="4-6-wsks-production" />
+                                    <h3>4-6 wks production lead time</h3>
+                                    <p>We reduced the production lead time by 50% from our robust supply chain network</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/100-sustainable.png" alt="100% sustainable" />
+                                    <h3>100% Sustainable materials</h3>
+                                    <p>We source, innovate and offer value added organic, recycled, & eco-vero materials</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/upto-150-cd.png" alt="100 designs" />
+                                    <h3>Up to 150 days Credit line</h3>
+                                    <p>Our ‘Buy now, pay later’ credit line keeps you sane while you manage the cash flow</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/order-low-as-250.png" alt="100 designs" />
+                                    <h3>Order as low as 250 units</h3>
+                                    <p>There is no MOQ limit while doing productions with us. Feel free to order anything</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
         </>
     )
 }
