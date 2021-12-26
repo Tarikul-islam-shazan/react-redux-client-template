@@ -1019,7 +1019,7 @@ class OurDesignDetails extends Component {
                   </div>
                </div>
             </div>
-            <div className="other-description p-0 pt-5 mt-4">
+            {similarDesigns.length > 0 && <div className="other-description p-0 pt-5 mt-4">
                <div className="designs">
                   <h4 className="mb-4">More from this collection</h4>
                   <div className="show-products">
@@ -1042,7 +1042,7 @@ class OurDesignDetails extends Component {
                      )}
                   </div>
                </div>
-            </div>
+            </div>}
             <Modal
                show={measurementModal}
                onHide={() => this.setState({ measurementModal: false })}

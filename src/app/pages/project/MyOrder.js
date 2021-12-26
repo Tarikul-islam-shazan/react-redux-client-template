@@ -10,7 +10,7 @@ import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
 import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
 import { ProjectCard } from "./components/ProjectCard";
-import { encodeQueryData, changeDateFormat } from "../../services/Util";
+import {encodeQueryData, changeDateFormat, getShortName} from "../../services/Util";
 import DELIVERY_ICON from "../../assets/images/icons/delivery-status-icon.svg";
 
 import {
@@ -26,6 +26,7 @@ import {
 } from "../../constant";
 import product from "../../redux/reducers/product";
 import { isEmptyObject } from "jquery";
+import {Tooltip} from "@material-ui/core";
 
 const tabFilterMap = {
     "Pending Order": "PENDING",
@@ -200,11 +201,11 @@ class MyOrder extends Component {
                 text={LOADER_TEXT}
             >
                 <div className="top-header">
-                    <div class="main-task-heading">
+                    <div className="main-task-heading">
                         <h2>Order list</h2>
                     </div>
-                    <div class="tabs">
-                        <ul class="order-tabs d-flex pb-4">
+                    <div className="tabs">
+                        <ul className="order-tabs d-flex pb-4">
                             <li
                                 class={this.state.activeTab === "Running Order" ? "active" : ""}
                                 onClick={() => this.changeTab("Running Order")}
@@ -226,9 +227,9 @@ class MyOrder extends Component {
                         </ul>
                     </div>
                 </div>
-                <section class="buyer-tasks-section">
-                    <div class="task-tab-section order-tab">
-                        <div class="all-orders">
+                <section className="buyer-tasks-section">
+                    <div className="task-tab-section order-tab">
+                        <div className="all-orders">
                             {projectList.length ? (
                                 projectList.map((item, i) => {
                                     let productList = item.orderProductList;
@@ -251,14 +252,14 @@ class MyOrder extends Component {
 
                                     return (
                                         <div
-                                            class="single-order d-flex"
+                                            className="single-order d-flex"
                                             onClick={() => this.details(item.orderId)}
                                         >
-                                            <div class="order-images d-flex">
+                                            <div className="order-images d-flex">
                                                 {productList && productList.length ? (
                                                     productList.map((product, j) => {
                                                         return (
-                                                            <div class="single-image">
+                                                            <div className="single-image">
                                                                 <img src={product.image} />
                                                             </div>
                                                         );
@@ -268,45 +269,44 @@ class MyOrder extends Component {
                                                 )}
 
                                                 {productList.length < 1 && (
-                                                    <div class="single-image"></div>
+                                                    <div className="single-image"></div>
                                                 )}
 
                                                 {productList.length < 2 && (
-                                                    <div class="single-image"></div>
+                                                    <div className="single-image"></div>
                                                 )}
 
                                                 {productList.length < 3 && (
-                                                    <div class="single-image"></div>
+                                                    <div className="single-image"></div>
                                                 )}
 
                                                 {productList.length < 4 && (
-                                                    <div class="single-image"></div>
+                                                    <div className="single-image"></div>
                                                 )}
                                             </div>
-                                            <div class="single-order-details">
-                                                <div class="order-details-section">
-                                                    <div class="container-fluid">
-                                                        <div class="row align-items-center py-3">
-                                                            <div class="col-6 pl-0">
-                                                                <div class="order-title">
-                                                                    <h3 class="">{item.name}</h3>{" "}
-                                                                    <span class="order-number">
-                                                                        ({item.orderRefNumber})
-                                                                    </span>
+                                            <div className="single-order-details">
+                                                <div className="order-details-section">
+                                                    <div className="container-fluid">
+                                                        <div className="row align-items-center py-3">
+                                                            <div className="col-8 pl-0">
+                                                                <div className="order-title">
+                                                                    <Tooltip title={item.name} placement={"top"}>
+                                                                        <h3 className>{getShortName(item.name,35)} <span className="order-number">({item.orderRefNumber})</span></h3>
+                                                                    </Tooltip>
                                                                 </div>
                                                             </div>
-                                                            <div className="col-2">
-                                                                <span className="brand-logo">
-                                                                    {brandResponse.name && (
-                                                                        <img
-                                                                            src={brandLogoUrl}
-                                                                            alt={brandResponse.name}
-                                                                        />
-                                                                    )}
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-4 text-right pr-0">
-                                                                <div class="delivery-status mr-5">
+                                                            {/*<div className="col-2">*/}
+                                                            {/*    <span className="brand-logo">*/}
+                                                            {/*        {brandResponse.name && (*/}
+                                                            {/*            <img*/}
+                                                            {/*                src={brandLogoUrl}*/}
+                                                            {/*                alt={brandResponse.name}*/}
+                                                            {/*            />*/}
+                                                            {/*        )}*/}
+                                                            {/*    </span>*/}
+                                                            {/*</div>*/}
+                                                            <div className="col-4 text-right pr-0">
+                                                                <div className="delivery-status mr-5">
                                                                     <button>
                                                                         {" "}
                                                                         Delivery in{" "}
@@ -318,19 +318,19 @@ class MyOrder extends Component {
                                                                             />
                                                                         </span>
                                                                     </button>
-                                                                    <div class="date-details delivery-date-details text-left">
-                                                                        <ul class="start">
+                                                                    <div className="date-details delivery-date-details text-left">
+                                                                        <ul className="start">
                                                                             <li>Start:</li>
                                                                             <li>{startDate}</li>
                                                                         </ul>
-                                                                        <ul class="end">
+                                                                        <ul className="end">
                                                                             <li>End:</li>
                                                                             <li>{endDate}</li>
                                                                         </ul>
-                                                                        <ul class="spent-status">
+                                                                        <ul className="spent-status">
                                                                             <li>Days spent:</li>
                                                                             <li>
-                                                                                <span class="time-spent">
+                                                                                <span className="time-spent">
                                                                                     {item.daySpent}
                                                                                 </span>{" "}
                                                                                 Days
@@ -343,12 +343,12 @@ class MyOrder extends Component {
                                                     </div>
                                                 </div>
 
-                                                <div class="order-style-info">
-                                                    <div class="container-fluid">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-12 pl-0">
-                                                                <ul class="d-flex py-4">
-                                                                    <li class="active">
+                                                <div className="order-style-info">
+                                                    <div className="container-fluid">
+                                                        <div className="row align-items-center">
+                                                            <div className="col-12 pl-0">
+                                                                <ul className="d-flex py-4">
+                                                                    <li className="active">
                                                                         {item.totalStyles} styles
                                                                     </li>
                                                                     <li>
@@ -361,11 +361,11 @@ class MyOrder extends Component {
                                                     </div>
                                                 </div>
 
-                                                <div class="order-style-tab-section py-2">
-                                                    <div class="container-fluid">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-12 pl-0">
-                                                                <ul class="order-stepper">
+                                                <div className="order-style-tab-section py-2">
+                                                    <div className="container-fluid">
+                                                        <div className="row align-items-center">
+                                                            <div className="col-12 pl-0">
+                                                                <ul className="order-stepper">
                                                                     {stageCompletenessList.length ? (
                                                                         stageCompletenessList.map(
                                                                             (stage, k) => {
@@ -394,14 +394,14 @@ class MyOrder extends Component {
                                                                                                 stage.percentageOfCompleteness
                                                                                             }
                                                                                         >
-                                                                                            <span class="progress-left">
-                                                                                                <span class="progress-bar"></span>
+                                                                                            <span className="progress-left">
+                                                                                                <span className="progress-bar"></span>
                                                                                             </span>
-                                                                                            <span class="progress-right">
-                                                                                                <span class="progress-bar"></span>
+                                                                                            <span className="progress-right">
+                                                                                                <span className="progress-bar"></span>
                                                                                             </span>
-                                                                                            <div class="progress-value">
-                                                                                                <div class="task-value">
+                                                                                            <div className="progress-value">
+                                                                                                <div className="task-value">
                                                                                                     {
                                                                                                         stage.percentageOfCompleteness
                                                                                                     }
@@ -430,7 +430,7 @@ class MyOrder extends Component {
                                     );
                                 })
                             ) : (
-                                <div class="no-order">No order available</div>
+                                <div className="no-order">No order available</div>
                             )}
                         </div>
                     </div>
