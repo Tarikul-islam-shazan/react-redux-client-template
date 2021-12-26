@@ -25,6 +25,7 @@ const routes = {
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
     sendOtpRe: `${BASE_URL}/user/send-otp`, // GET
     verifyOtp: `${BASE_URL}/user/validate-otp/`, // POST
+    updateBrandInfo: `${BASE_URL}/user/update-brand-info`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
     getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)

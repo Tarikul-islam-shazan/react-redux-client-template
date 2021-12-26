@@ -168,7 +168,7 @@ class Questionairre_1 extends Component {
                   if (redirection) {
                     this.props.history.push('/designs/explore?redirect=' + redirection);
                   } else {
-                    this.props.history.push('/designs/explore');
+                    this.props.history.push('/brandCreation');
                   }
                 }else{
                   toastError(data.message);

@@ -35,6 +35,7 @@ import ShareDesign from "./pages/design/ShareDesign";
 import EditShareDesign from "./pages/design/EditShareDesign";
 import Dashboard from "./pages/dashboard/Dashboard";
 import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
+import BrandCreation from "./pages/questionairre/BrandCreation";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -101,6 +102,7 @@ class Root extends Component {
                     <QuestionairreRoute exact path="/loginPopup" component={BuyerLoginPopup} />
                     <QuestionairreRoute exact path="/info" component={InsertPhoneNumber} />
                     <QuestionairreRoute exact path="/verify-otp" component={VerifyOtp} />
+                    <QuestionairreRoute exact path="/brandCreation" component={BrandCreation} />
                     {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>

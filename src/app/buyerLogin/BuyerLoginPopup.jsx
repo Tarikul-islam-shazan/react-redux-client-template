@@ -1,38 +1,60 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Http from "../services/Http";
+import {getUrlParameter} from "../services/Util";
+import {toastError} from "../commonComponents/Toast";
+import LoaderComponent from "../commonComponents/Loader";
 
 const BuyerLoginPopup = ({}) => {
-    return(
+
+    const [loading,setLoading] = useState(true)
+
+    useEffect(() => {
+        Http.GET('userInfo')
+            .then((response) => {
+               setLoading(false)
+            })
+            .catch(({response}) => {
+               setLoading(false)
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Couldn't fetch user info.");
+                }
+            });
+    },[])
+
+    return (
         <>
             <aside className="left-panel" id="side-menu">
                 <div className="logo"><a href="#" className="logo-expanded">
                     <img
-                    src="/images/logo_final.png"
-                    alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
+                        src="/images/logo_final.png"
+                        alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
                 <nav className="navigation">
                     <ul className="list-unstyled list_sidebar">
                         <li className="active"><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/Dashboard-active.840c2977.svg" alt="" />
+                            <div className="sidbar-icon"><img src="/static/media/Dashboard-active.840c2977.svg" alt=""/>
                             </div>
                             <span className="nav-label">Dashboard</span></a></li>
                         <li className=""><a href="#">
                             <div className="sidbar-icon"><img src="/static/media/collections-default.2dd0530d.svg"
-                                                              alt="" /></div>
+                                                              alt=""/></div>
                             <span className="nav-label">Collections</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/quotes-default.e8152120.svg" alt="" />
+                            <div className="sidbar-icon"><img src="/static/media/quotes-default.e8152120.svg" alt=""/>
                             </div>
                             <span className="nav-label">Quotes</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/orders-default.17c00b2b.svg" alt="" />
+                            <div className="sidbar-icon"><img src="/static/media/orders-default.17c00b2b.svg" alt=""/>
                             </div>
                             <span className="nav-label">Orders</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/payments-deafult.cb4d4ca9.svg" alt="" />
+                            <div className="sidbar-icon"><img src="/static/media/payments-deafult.cb4d4ca9.svg" alt=""/>
                             </div>
                             <span className="nav-label">Payments</span></a></li>
                         <li className=""><a href="#">
                             <div className="sidbar-icon"><img src="/static/media/explore-design-default.6b40eb77.svg"
-                                                              alt="" /></div>
+                                                              alt=""/></div>
                             <span className="nav-label">Explore Designs</span></a></li>
                     </ul>
                 </nav>
@@ -46,7 +68,7 @@ const BuyerLoginPopup = ({}) => {
                             <path fill="currentColor"
                                   d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
                         </svg>
-                        </button>
+                    </button>
                     <ul className="navbar-nav ml-auto align-items-center">
                         <li className="">
                             <button className="btn my-task-btn">
@@ -102,7 +124,7 @@ const BuyerLoginPopup = ({}) => {
                                     id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false"><img className="img-profile rounded-circle"
                                                                src="/static/media/pro_pic_default.27c2c214.svg"
-                                                               alt="profile-pic" /><span
+                                                               alt="profile-pic"/><span
                                 className="mr-2 d-none d-lg-inline">Sample buyer 1</span></button>
                             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="dropdownProfileButton"><a className="dropdown-item" href="#">
@@ -120,7 +142,7 @@ const BuyerLoginPopup = ({}) => {
                                     <path fill="currentColor"
                                           d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
                                 </svg>
-                               My profile</a>
+                                My profile</a>
                                 <div className="dropdown-divider"></div>
                                 <a className="dropdown-item">
                                     <svg
@@ -143,31 +165,31 @@ const BuyerLoginPopup = ({}) => {
                             <div className="full-journey-status">
                                 <div className="one-sixth sustainable-box">
                                     <div className="status-details"><h3>0%</h3><span>Sustainable</span></div>
-                                    <div className="status-icon"><img src="/icons/sustainable.svg" alt="sustainable" />
+                                    <div className="status-icon"><img src="/icons/sustainable.svg" alt="sustainable"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth quote-order-box">
                                     <div className="status-details"><h3>0%</h3><span>Quote to order</span></div>
-                                    <div className="status-icon"><img src="/icons/quote-order.svg" alt="quote" /></div>
+                                    <div className="status-icon"><img src="/icons/quote-order.svg" alt="quote"/></div>
                                 </div>
                                 <div className="one-sixth design-box">
                                     <div className="status-details"><h3>0<span>/0</span></h3>
                                         <span>Designs accepted</span></div>
-                                    <div className="status-icon"><img src="/icons/Design.svg" alt="Design" /></div>
+                                    <div className="status-icon"><img src="/icons/Design.svg" alt="Design"/></div>
                                 </div>
                                 <div className="one-sixth delivered-box">
                                     <div className="status-details"><h3>0<span>/0</span></h3>
                                         <span>Orders deliverd</span></div>
-                                    <div className="status-icon"><img src="/icons/shipment.svg" alt="shipment" /></div>
+                                    <div className="status-icon"><img src="/icons/shipment.svg" alt="shipment"/></div>
                                 </div>
                                 <div className="one-sixth order-value-box">
                                     <div className="status-details"><h3>$</h3><span>Order value</span></div>
-                                    <div className="status-icon"><img src="/icons/order-value.svg" alt="order-value" />
+                                    <div className="status-icon"><img src="/icons/order-value.svg" alt="order-value"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth supplier-box">
                                     <div className="status-details"><h3>0</h3><span>Manufacturing units</span></div>
-                                    <div className="status-icon"><img src="/icons/Supplier.svg" alt="Supplier" /></div>
+                                    <div className="status-icon"><img src="/icons/Supplier.svg" alt="Supplier"/></div>
                                 </div>
                             </div>
                             <div className="orders-and-quotes-status">
@@ -223,7 +245,7 @@ const BuyerLoginPopup = ({}) => {
                                             <tr>
                                                 <td colSpan="4">
                                                     <div className="nothing-found text-center"><img
-                                                        src="/icons/Nothing found.svg" alt="nothing found" /><p>No qoutes
+                                                        src="/icons/Nothing found.svg" alt="nothing found"/><p>No qoutes
                                                         added yet</p></div>
                                                 </td>
                                             </tr>
@@ -266,62 +288,74 @@ const BuyerLoginPopup = ({}) => {
             </div>
 
             <div className="buyer-login-popup-message">
-                    <div className="popup-full-contents">
+                <div className="popup-full-contents">
                     <div className="popup-message-contents">
                         <div className="message-top-content">
                             <h2 className="message-title">Your account will be activated soon</h2>
                             <div className="welcome-message-section">
                                 <div className="left-half">
                                     <div className="ac-manager-details">
-                                        <img src="/images/mh-mahdi-profile.png" alt="profile" />
+                                        <img src="/images/mh-mahdi-profile.png" alt="profile"/>
                                         <h3 className="semibold-16 mb-0">Hussain Mahdi</h3>
-                                        <p className="designatgion">Co-founder & Chairman  <a href="#" target="_blank">LinkedIn</a> </p>
-                                        <p className="designatgion"><span>+11758-339722 </span> | <span>mahdi@nitex.info</span></p>
+                                        <p className="designatgion">Co-founder & Chairman <a href="#"
+                                                                                             target="_blank">LinkedIn</a>
+                                        </p>
+                                        <p className="designatgion">
+                                            <span>+11758-339722 </span> | <span>mahdi@nitex.info</span></p>
                                     </div>
                                 </div>
                                 <div className="right-half">
                                     <h3>Welcome, Sir Ma rzan!</h3>
                                     <p>Thanks for signing up to the Nitex and joining our creative community!</p>
-                                    <p>This is <span>Mahdi</span>, a Business Evangelist dedicated to you and your brand. I’m really looking forward to knowing more about you and how Nitex can help grow your brand. I will contact you within 24 hours to show you our product capabilities, understand your business goals, and of course help you achieve them.</p>
-                                    <p className="mb-0">While waiting, you can check out how we’re empowering +50 brands from across the world.</p>
+                                    <p>This is <span>Mahdi</span>, a Business Evangelist dedicated to you and your
+                                        brand. I’m really looking forward to knowing more about you and how Nitex can
+                                        help grow your brand. I will contact you within 24 hours to show you our product
+                                        capabilities, understand your business goals, and of course help you achieve
+                                        them.</p>
+                                    <p className="mb-0">While waiting, you can check out how we’re empowering +50 brands
+                                        from across the world.</p>
                                 </div>
                             </div>
                         </div>
-
                         <div className="how-we-help-section">
                             <h4 className="title">How we help you grow</h4>
                             <div className="one-third-row">
                                 <div className="single-item">
-                                    <img src="/icons/100-designs.png" alt="100 designs" />
+                                    <img src="/icons/100-designs.png" alt="100 designs"/>
                                     <h3>100s of designs every week</h3>
-                                    <p>We offer you curated collections from our Design Studio based on your brand DNA</p>
+                                    <p>We offer you curated collections from our Design Studio based on your brand
+                                        DNA</p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/4-6-wsks-production.png" alt="4-6-wsks-production" />
+                                    <img src="/icons/4-6-wsks-production.png" alt="4-6-wsks-production"/>
                                     <h3>4-6 wks production lead time</h3>
-                                    <p>We reduced the production lead time by 50% from our robust supply chain network</p>
+                                    <p>We reduced the production lead time by 50% from our robust supply chain
+                                        network</p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/100-sustainable.png" alt="100% sustainable" />
+                                    <img src="/icons/100-sustainable.png" alt="100% sustainable"/>
                                     <h3>100% Sustainable materials</h3>
-                                    <p>We source, innovate and offer value added organic, recycled, & eco-vero materials</p>
+                                    <p>We source, innovate and offer value added organic, recycled, & eco-vero
+                                        materials</p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/upto-150-cd.png" alt="100 designs" />
+                                    <img src="/icons/upto-150-cd.png" alt="100 designs"/>
                                     <h3>Up to 150 days Credit line</h3>
-                                    <p>Our ‘Buy now, pay later’ credit line keeps you sane while you manage the cash flow</p>
+                                    <p>Our ‘Buy now, pay later’ credit line keeps you sane while you manage the cash
+                                        flow</p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/order-low-as-250.png" alt="100 designs" />
+                                    <img src="/icons/order-low-as-250.png" alt="100 designs"/>
                                     <h3>Order as low as 250 units</h3>
-                                    <p>There is no MOQ limit while doing productions with us. Feel free to order anything</p>
+                                    <p>There is no MOQ limit while doing productions with us. Feel free to order
+                                        anything</p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    </div>
+                    <LoaderComponent loading={loading}/>
                 </div>
+            </div>
         </>
     )
 }
