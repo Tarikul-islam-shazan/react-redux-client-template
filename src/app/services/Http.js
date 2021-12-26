@@ -14,6 +14,7 @@ const headers = {
 
 const routes = {
     userInfo: `${BASE_URL}/user/me`, // get
+    accManagerInfo: `${BASE_URL}/user/my-account-manager`, // get
     updateProfile: `${BASE_URL}/user/update-basic-info`, //post
     updateProPic: `${BASE_URL}/user/update-profile-picture`, //post
     updatePassword: `${BASE_URL}/user/change-password`, //post

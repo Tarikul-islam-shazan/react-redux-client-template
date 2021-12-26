@@ -7,10 +7,30 @@ import LoaderComponent from "../commonComponents/Loader";
 const BuyerLoginPopup = ({}) => {
 
     const [loading,setLoading] = useState(true)
+    const [managerInfo,setManagerInfo] = useState({})
+    const [buyerDetailsInfo,setBuyerDetailsInfo] = useState({})
 
     useEffect(() => {
         Http.GET('userInfo')
             .then((response) => {
+               setLoading(false)
+            })
+            .catch(({response}) => {
+               setLoading(false)
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Couldn't fetch user info.");
+                }
+            });
+    },[])
+
+    useEffect(() => {
+        Http.GET('accManagerInfo')
+            .then((response) => {
+            let buyerInfo = JSON.parse(localStorage.getItem("userInfo"))
+               setManagerInfo(response.data);
+               setBuyerDetailsInfo(buyerInfo);
                setLoading(false)
             })
             .catch(({response}) => {
@@ -295,19 +315,19 @@ const BuyerLoginPopup = ({}) => {
                             <div className="welcome-message-section">
                                 <div className="left-half">
                                     <div className="ac-manager-details">
-                                        <img src="/images/mh-mahdi-profile.png" alt="profile"/>
-                                        <h3 className="semibold-16 mb-0">Hussain Mahdi</h3>
-                                        <p className="designatgion">Co-founder & Chairman <a href="#"
+                                        <img src={managerInfo?.profilePicDocument?.docUrl} alt="profile"/>
+                                        <h3 className="semibold-16 mb-0">{managerInfo?.name}</h3>
+                                        <p className="designatgion">{managerInfo?.designation} <a href={managerInfo?.linkedInUrl}
                                                                                              target="_blank">LinkedIn</a>
                                         </p>
                                         <p className="designatgion">
-                                            <span>+11758-339722 </span> | <span>mahdi@nitex.info</span></p>
+                                            <span>{managerInfo?.phone} </span> | <span>{managerInfo?.email}</span></p>
                                     </div>
                                 </div>
                                 <div className="right-half">
-                                    <h3>Welcome, Sir Ma rzan!</h3>
+                                    <h3>Welcome, {buyerDetailsInfo?.name}</h3>
                                     <p>Thanks for signing up to the Nitex and joining our creative community!</p>
-                                    <p>This is <span>Mahdi</span>, a Business Evangelist dedicated to you and your
+                                    <p>This is <span>{managerInfo?.name}</span>, a Business Evangelist dedicated to you and your
                                         brand. I’m really looking forward to knowing more about you and how Nitex can
                                         help grow your brand. I will contact you within 24 hours to show you our product
                                         capabilities, understand your business goals, and of course help you achieve
