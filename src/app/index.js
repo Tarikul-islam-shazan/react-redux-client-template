@@ -34,6 +34,7 @@ import PayInvoice from "./pages/invoice/PayInvoice";
 import ShareDesign from "./pages/design/ShareDesign";
 import EditShareDesign from "./pages/design/EditShareDesign";
 import Dashboard from "./pages/dashboard/Dashboard";
+import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -97,6 +98,7 @@ class Root extends Component {
                     <PublicRoute exact path="/dashboard" component={Dashboard} />
                     {/* <PublicRoute exact path="/dashboard" component={TaskDashboard} /> */}
                     <PublicRoute exact path="/tasks" component={TaskDashboard} />
+                    <QuestionairreRoute exact path="/loginPopup" component={BuyerLoginPopup} />
                     <QuestionairreRoute exact path="/info" component={InsertPhoneNumber} />
                     <QuestionairreRoute exact path="/verify-otp" component={VerifyOtp} />
                     {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
