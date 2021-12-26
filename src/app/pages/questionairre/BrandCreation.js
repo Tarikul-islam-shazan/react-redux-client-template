@@ -26,7 +26,7 @@ const BrandCreation = () => {
         Http.POST('updateBrandInfo', "","?brandName=" + brandName)
             .then((response) => {
                 toastSuccess(response.data.message);
-                // history.push("")
+                history.push("/loginPopup")
                 setLoading(false)
             })
             .catch(({response}) => {
