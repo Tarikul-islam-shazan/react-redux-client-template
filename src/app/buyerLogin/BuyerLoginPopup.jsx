@@ -1,47 +1,59 @@
 import React, {useEffect, useState} from "react";
 import Http from "../services/Http";
-import {getUrlParameter} from "../services/Util";
 import {toastError} from "../commonComponents/Toast";
 import LoaderComponent from "../commonComponents/Loader";
+import {useHistory} from "react-router-dom";
 
 const BuyerLoginPopup = ({}) => {
 
-    const [loading,setLoading] = useState(true)
-    const [managerInfo,setManagerInfo] = useState({})
-    const [buyerDetailsInfo,setBuyerDetailsInfo] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [managerInfo, setManagerInfo] = useState({})
+    const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({})
+    const history = useHistory();
 
     useEffect(() => {
         Http.GET('userInfo')
             .then((response) => {
-               setLoading(false)
+                let refreshToken = localStorage.getItem("refreshToken");
+                let isTokenUpdateRequired = response.data.updatedTokenRequired
+                if(isTokenUpdateRequired === true){
+                    Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
+                        if(tokenResponse.data.accessToken){
+                            localStorage.setItem("token",`${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
+                        }
+                        setLoading(false)
+                    }).catch((error) => {
+                        setLoading(false)
+                        toastError(error.response.data.message);
+                    })
+                }
+                else if(response.data.status === "ACTIVE"){
+                    history.push("/dashboard");
+                }
             })
             .catch(({response}) => {
-               setLoading(false)
-                if (response && response.data && response.data.message) {
-                    toastError(response.data.message);
-                } else {
-                    toastError("Couldn't fetch user info.");
-                }
+                setLoading(false)
+                toastError(response.data.message);
             });
-    },[])
+    }, [])
 
     useEffect(() => {
         Http.GET('accManagerInfo')
             .then((response) => {
-            let buyerInfo = JSON.parse(localStorage.getItem("userInfo"))
-               setManagerInfo(response.data);
-               setBuyerDetailsInfo(buyerInfo);
-               setLoading(false)
+                let buyerInfo = JSON.parse(localStorage.getItem("userInfo"))
+                setManagerInfo(response.data);
+                setBuyerDetailsInfo(buyerInfo);
+                setLoading(false)
             })
             .catch(({response}) => {
-               setLoading(false)
+                setLoading(false)
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
                     toastError("Couldn't fetch user info.");
                 }
             });
-    },[])
+    }, [])
 
     return (
         <>
@@ -317,8 +329,9 @@ const BuyerLoginPopup = ({}) => {
                                     <div className="ac-manager-details">
                                         <img src={managerInfo?.profilePicDocument?.docUrl} alt="profile"/>
                                         <h3 className="semibold-16 mb-0">{managerInfo?.name}</h3>
-                                        <p className="designatgion">{managerInfo?.designation} <a href={managerInfo?.linkedInUrl}
-                                                                                             target="_blank">LinkedIn</a>
+                                        <p className="designatgion">{managerInfo?.designation} <a
+                                            href={managerInfo?.linkedInUrl}
+                                            target="_blank">LinkedIn</a>
                                         </p>
                                         <p className="designatgion">
                                             <span>{managerInfo?.phone} </span> | <span>{managerInfo?.email}</span></p>
@@ -327,7 +340,8 @@ const BuyerLoginPopup = ({}) => {
                                 <div className="right-half">
                                     <h3>Welcome, {buyerDetailsInfo?.name}</h3>
                                     <p>Thanks for signing up to the Nitex and joining our creative community!</p>
-                                    <p>This is <span>{managerInfo?.name}</span>, a Business Evangelist dedicated to you and your
+                                    <p>This is <span>{managerInfo?.name}</span>, a Business Evangelist dedicated to you
+                                        and your
                                         brand. I’m really looking forward to knowing more about you and how Nitex can
                                         help grow your brand. I will contact you within 24 hours to show you our product
                                         capabilities, understand your business goals, and of course help you achieve

@@ -163,6 +163,7 @@ const routes = {
     getRunningOrders: `${BASE_URL}/dashboard/buyer/my-orders`, // GET
 
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
+    refreshUserToken: `${BASE_URL}/auth/refresh`
 };
 
 // Axios request interceptor
@@ -191,7 +192,7 @@ axios.interceptors.response.use(
                 // localStorage.removeItem('token');
                 // localStorage.clear();
                 // delete axios.defaults.headers.common['Authorization'];
-                window.location.href = "/logout";
+                // window.location.href = "/logout";
                 // store.dispatch({
                 //     type: REDIRECT_TO,
                 //     payload: {

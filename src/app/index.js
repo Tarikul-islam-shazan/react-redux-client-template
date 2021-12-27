@@ -65,6 +65,19 @@ const AuthRouteWithoutLayout = ({ component: Component, ...rest }) => {
 const PublicRoute = ({ component: Component, ...rest }) => {
     const token = getToken();
     const redirectRoute = window.location.pathname;
+
+    let data = JSON.parse(localStorage.getItem("userInfo"))
+
+    if (data.businessInfoGiven === false) {
+        return <Redirect to="/info" />
+    } else if (data.brandInfoGiven === false) {
+        return <Redirect to="/brandCreation" />
+    } else if (data.phoneVerified === false) {
+        return <Redirect to="/info" />
+    } else if (data.status === "PENDING") {
+        return <Redirect to="/loginPopup" />
+    }
+
     const url =
         "/login" + (redirectRoute && redirectRoute !== "/" ? "?redirect=" + redirectRoute : "");
     return token ? (

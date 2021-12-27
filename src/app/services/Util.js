@@ -1000,6 +1000,35 @@ const getShortName = (source, size = 35) => {
     return source?.length > size ? source?.slice(0, size - 1) + "…" : source;
 };
 
+const generateRedirectRoute = (data, props) => {
+    let redirection = getUrlParameter(
+        "redirect",
+        props.location.search
+    );
+    if (data.status === "ACTIVE") {
+        props.history.push({
+            pathname: redirection ? redirection : "/dashboard",
+            state: {from: "login"},
+        });
+    } else if (data.businessInfoGiven === false) {
+        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    } else if (data.brandInfoGiven === false) {
+        props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
+    } else if (data.phoneVerified === false) {
+        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    } else if (data.status === "PENDING") {
+        props.history.push({
+            pathname: redirection ? redirection : "/loginPopup",
+            state: {from: "login"},
+        });
+    } else {
+        props.history.push({
+            pathname: redirection ? redirection : "/dashboard",
+            state: {from: "login"},
+        });
+    }
+}
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -1051,4 +1080,5 @@ export {
     convertDateTimeToLocal,
     getNumberUnit,
     getShortName,
+    generateRedirectRoute
 };
