@@ -15,6 +15,7 @@ const BuyerLoginPopup = ({}) => {
         await Http.GET('userInfo')
             .then(async (response) => {
                 let refreshToken = localStorage.getItem("refreshToken");
+                localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired
                 if(isTokenUpdateRequired === true){
                     await Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
@@ -192,7 +193,7 @@ const BuyerLoginPopup = ({}) => {
                 <div className="wraper container-fluid dashboard-container">
                     <div data-testid="wrapper" className="_loading_overlay_wrapper css-79elbk">
                         <div className="buyer-dashboard-container">
-                            <div className="welcome-message"><h3>Hi <span>Sample buyer 1</span>, Good Afternoon!</h3>
+                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good Afternoon!</h3>
                             </div>
                             <div className="full-journey-status">
                                 <div className="one-sixth sustainable-box">
