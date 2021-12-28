@@ -1012,13 +1012,18 @@ const generateRedirectRoute = (data, props) => {
         });
     } else if (data.businessInfoGiven === false) {
         props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.brandInfoGiven === false) {
-        props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
     } else if (data.phoneVerified === false) {
         props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    } else if (data.brandInfoGiven === false) {
+        props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
     } else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
+            state: {from: "login"},
+        });
+    } else if (data.status === "DISABLED") {
+        props.history.push({
+            pathname: redirection ? redirection : "/login",
             state: {from: "login"},
         });
     } else {

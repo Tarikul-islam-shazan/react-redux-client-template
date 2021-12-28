@@ -11,13 +11,13 @@ const BuyerLoginPopup = ({}) => {
     const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({})
     const history = useHistory();
 
-    useEffect(() => {
-        Http.GET('userInfo')
-            .then((response) => {
+    useEffect(async () => {
+        await Http.GET('userInfo')
+            .then(async (response) => {
                 let refreshToken = localStorage.getItem("refreshToken");
                 let isTokenUpdateRequired = response.data.updatedTokenRequired
                 if(isTokenUpdateRequired === true){
-                    Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
+                    await Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
                         if(tokenResponse.data.accessToken){
                             localStorage.setItem("token",`${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
                         }
@@ -27,7 +27,7 @@ const BuyerLoginPopup = ({}) => {
                         toastError(error.response.data.message);
                     })
                 }
-                else if(response.data.status === "ACTIVE"){
+                if(response.data.status === "ACTIVE"){
                     history.push("/dashboard");
                 }
             })
@@ -157,7 +157,7 @@ const BuyerLoginPopup = ({}) => {
                                     aria-expanded="false"><img className="img-profile rounded-circle"
                                                                src="/static/media/pro_pic_default.27c2c214.svg"
                                                                alt="profile-pic"/><span
-                                className="mr-2 d-none d-lg-inline">Sample buyer 1</span></button>
+                                className="mr-2 d-none d-lg-inline">{buyerDetailsInfo?.name}</span></button>
                             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="dropdownProfileButton"><a className="dropdown-item" href="#">
                                 <svg className="svg-inline--fa fa-tachometer-alt fa-w-18 mr-2 text-gray-400 font-12"

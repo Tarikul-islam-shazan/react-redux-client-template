@@ -376,7 +376,7 @@ class DefaultLayout extends Component {
                                         <></>
                                     )}
                                     {this.props.unseenCount ? (
-                                        <span className="notification-count">{this.props.unseenCount}</span>
+                                        <span className="notification-count">{this.props.unseenCount < 100 ? this.props.unseenCount : "99+"}</span>
                                     ) : (
                                         <></>
                                     )}

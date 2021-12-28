@@ -69,13 +69,15 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     let data = JSON.parse(localStorage.getItem("userInfo"))
 
     if (data.businessInfoGiven === false) {
-        return <Redirect to="/info" />
-    } else if (data.brandInfoGiven === false) {
-        return <Redirect to="/brandCreation" />
+        return <Redirect to="/info"/>
     } else if (data.phoneVerified === false) {
-        return <Redirect to="/info" />
+        return <Redirect to="/info"/>
+    } else if (data.brandInfoGiven === false) {
+        return <Redirect to="/brandCreation"/>
     } else if (data.status === "PENDING") {
-        return <Redirect to="/loginPopup" />
+        return <Redirect to="/loginPopup"/>
+    } else if (data.status === "DISABLED") {
+        return <Redirect to="/login"/>
     }
 
     const url =
