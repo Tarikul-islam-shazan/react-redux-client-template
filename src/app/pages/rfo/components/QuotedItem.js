@@ -126,8 +126,9 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             title={<Typography fontSize={30}>{item.name}</Typography>}
                             placement="top"
                             arrow
+                            key={item.id}
                         >
-                            <th key={item.id}>
+                            <th>
                                 <span
                                     class="cursor-pointer color-icon"
                                     style={{ background: item.hexCode }}
@@ -320,7 +321,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                 units
                                 {quote.quantity > 0 && (
                                     <span
-                                        className="table-details"
+                                        className="table-details cursor-pointer"
                                         onClick={() => setShowSizes(true)}
                                     >
                                         Details
