@@ -17,6 +17,7 @@ import {
     LOADER_LEFT,
     LOADER_MARGIN_TOP,
     LOADER_MARGIN_LEFT,
+    LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
 import { OrderItem } from "./components/OrderItem";
 import EmptyState from "../../commonComponents/EmptyState";
@@ -28,6 +29,7 @@ class ConfirmOrder extends Component {
             order: {},
             TURN_AROUND_TIME: "",
             loading: false,
+            colorWiseTotal: [],
         };
     }
 
@@ -42,9 +44,9 @@ class ConfirmOrder extends Component {
                 loading: false,
             });
         }
-
-        let response = this.props.location.routeParams;
+        let response = localStorage.getItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
         if (response) {
+            response = JSON.parse(response);
             this.setState({
                 order: {
                     productResponseList: response.designList,
@@ -78,6 +80,8 @@ class ConfirmOrder extends Component {
     render() {
         let { order, loading } = this.state;
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
+
+        console.log("~~~=======", order);
 
         const getDeliveryDate = () => {
             if (order.productResponseList.length !== 0) {
@@ -159,6 +163,25 @@ class ConfirmOrder extends Component {
                 });
         };
 
+        const onUpdateColorSize = (productId, colorId, price, quantity) => {
+            // this.state.colorWiseTotal.map((item) => {
+            //     // if (item.productId === productId) {
+            //     //     this.setState({ productId: { [colorId]: { quantity, price } } });
+            //     // } else {
+            //     // }
+            //     this.setState({ productId: { [colorId]: { quantity, price } } });
+            // });
+            this.setState((prev) => ({
+                ...prev,
+                colorWiseTotal: [
+                    ...this.state.colorWiseTotal,
+                    { [productId]: { [colorId]: { quantity, price } } },
+                ],
+            }));
+        };
+
+        console.log("***********", this.state.colorWiseTotal);
+
         return (
             <LoadingOverlay
                 active={this.state.loading}
@@ -193,9 +216,7 @@ class ConfirmOrder extends Component {
                             <div className="confirm-quote-request placing-order">
                                 <div className="header-title">
                                     <a href="#">
-                                        <h3 className="text-black font-26 semibold">
-                                            Place order
-                                        </h3>
+                                        <h3 className="text-black font-26 semibold">Place order</h3>
                                     </a>
                                     <p className="mt-3">Order basic information*</p>
                                 </div>
@@ -203,47 +224,109 @@ class ConfirmOrder extends Component {
                                 <div className="order-confirm-info-with-po d-flex mt-3">
                                     <div className="title-and-date">
                                         <div className="form-group">
-                                        <label htmlFor="">Order title</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Order title"
-                                            name="name"
-                                            value={order.name}
-                                            onChange={this.onChange}
-                                            className="w-100 bg-gray-light"
+                                            <label htmlFor="">Order title</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Order title"
+                                                name="name"
+                                                value={order.name}
+                                                onChange={this.onChange}
+                                                className="w-100 bg-gray-light"
                                             />
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="">Delivery date*</label>
-                                                <input
-                                                    type="date"
-                                                    className="w-100 bg-gray-light"
-                                                />
-                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">Delivery date*</label>
+                                            <input type="date" className="w-100 bg-gray-light" />
+                                        </div>
                                     </div>
                                     <div className="po-column bg-white">
                                         <div className="uploded-po">
                                             <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
-                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                                <div className="po-names">
+                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
+                                                    <a
+                                                        href="#"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        BMW PO/2021
+                                                    </a>
+                                                </div>
+                                                <div className="delete-btn">
+                                                    <img
+                                                        src="../icons/delete_gray.svg"
+                                                        alt="delete"
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
-                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                                <div className="po-names">
+                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
+                                                    <a
+                                                        href="#"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        BMW PO/2021
+                                                    </a>
+                                                </div>
+                                                <div className="delete-btn">
+                                                    <img
+                                                        src="../icons/delete_gray.svg"
+                                                        alt="delete"
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
-                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                                <div className="po-names">
+                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
+                                                    <a
+                                                        href="#"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        BMW PO/2021
+                                                    </a>
+                                                </div>
+                                                <div className="delete-btn">
+                                                    <img
+                                                        src="../icons/delete_gray.svg"
+                                                        alt="delete"
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names"><img src="../icons/file-pdf.svg" alt="pdf"/> <a href="#" target="_blank" rel="noopener noreferrer">BMW PO/2021</a></div>
-                                                <div className="delete-btn"><img src="../icons/delete_gray.svg" alt="delete"/></div>
+                                                <div className="po-names">
+                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
+                                                    <a
+                                                        href="#"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        BMW PO/2021
+                                                    </a>
+                                                </div>
+                                                <div className="delete-btn">
+                                                    <img
+                                                        src="../icons/delete_gray.svg"
+                                                        alt="delete"
+                                                    />
+                                                </div>
                                             </div>
                                             {/* <p className="text-center no-po">No PO uploaded</p> */}
                                         </div>
                                         <div className="upload-po text-center">
-                                            <label for="po-upload" className="drag-upload"><img src="../icons/upload-sm.svg" alt=""/> <span>Upload PO</span></label>
-                                            <input type="file" className="file-upload d-none" name="po-upload" id="po-upload" accept=""/> 
+                                            <label for="po-upload" className="drag-upload">
+                                                <img src="../icons/upload-sm.svg" alt="" />{" "}
+                                                <span>Upload PO</span>
+                                            </label>
+                                            <input
+                                                type="file"
+                                                className="file-upload d-none"
+                                                name="po-upload"
+                                                id="po-upload"
+                                                accept=""
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -274,6 +357,8 @@ class ConfirmOrder extends Component {
                                                 product={product}
                                                 key={i}
                                                 remove={this.delete}
+                                                // onSetPriceWiseQuantity={onSetPriceWiseQuantity}
+                                                onUpdateColorSize={onUpdateColorSize}
                                             />
                                         );
                                     })

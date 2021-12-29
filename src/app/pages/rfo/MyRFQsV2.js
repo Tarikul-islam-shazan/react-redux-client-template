@@ -19,6 +19,7 @@ import {
     LOADER_LEFT,
     LOADER_MARGIN_TOP,
     LOADER_MARGIN_LEFT,
+    LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
 import EmptyState from "../../commonComponents/EmptyState";
 
@@ -281,15 +282,24 @@ class MyRFQs extends Component {
                 }
             });
 
-            let routeParams = {
+            // let ids = `${productInfoForRfqIds.toString()}`;
+            // let ids = productInfoForRfqIds.map((i) => i.id.toString());
+            // history.push('/orders/create?id='+ids);
+
+            let selectedDesigns = {
                 name: orderTitle,
                 designList: productInfoForRfqIds,
             };
 
-            this.props.history.push({
-                pathname: "/orders/confirm-order",
-                routeParams,
-            });
+            localStorage.setItem(
+                `PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`,
+                JSON.stringify(selectedDesigns)
+            );
+            // this.props.history.push({
+            //     pathname: "/orders/confirm-order",
+            //     routeParams,
+            // });
+            this.props.history.push("/orders/confirm-order");
         }
     };
 
