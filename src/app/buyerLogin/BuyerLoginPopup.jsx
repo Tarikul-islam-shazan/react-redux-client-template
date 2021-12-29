@@ -1,43 +1,103 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Http from "../services/Http";
+import {toastError} from "../commonComponents/Toast";
+import LoaderComponent from "../commonComponents/Loader";
+import {useHistory} from "react-router-dom";
 
 const BuyerLoginPopup = ({}) => {
-    return(
+
+    const [loading, setLoading] = useState(true)
+    const [managerInfo, setManagerInfo] = useState({})
+    const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({})
+    const history = useHistory();
+
+    useEffect(() => {
+        Http.GET('userInfo')
+            .then(async (response) => {
+                let refreshToken = localStorage.getItem("refreshToken");
+                localStorage.setItem("userInfo", JSON.stringify(response.data));
+                let isTokenUpdateRequired = response.data.updatedTokenRequired
+                if (isTokenUpdateRequired === true) {
+                    await Http.POST("refreshUserToken", {"refreshToken": refreshToken}).then(async (tokenResponse) => {
+                        await localStorage.setItem("token", `${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
+                        await redirectPage(response)
+                        setLoading(false)
+                    }).catch((error) => {
+                        setLoading(false)
+                        toastError(error.response.data.message);
+                    })
+                } else {
+                    await redirectPage(response)
+                }
+
+            })
+            .catch(({response}) => {
+                setLoading(false)
+                toastError(response.data.message);
+            });
+    }, [])
+
+    const redirectPage = async (response) => {
+        if (response.data.status === "ACTIVE") {
+            await history.push("/dashboard");
+        } else if (response.data.status === "DISABLED") {
+            await history.push("/login");
+        }
+    }
+
+    useEffect(() => {
+        Http.GET('accManagerInfo')
+            .then((response) => {
+                let buyerInfo = JSON.parse(localStorage.getItem("userInfo"))
+                setManagerInfo(response.data);
+                setBuyerDetailsInfo(buyerInfo);
+                setLoading(false)
+            })
+            .catch(({response}) => {
+                setLoading(false)
+                if (response && response.data && response.data.message) {
+                    toastError(response.data.message);
+                } else {
+                    toastError("Couldn't fetch user info.");
+                }
+            });
+    }, [])
+
+    return (
         <>
             <aside className="left-panel" id="side-menu">
                 <div className="logo"><a href="#" className="logo-expanded">
                     <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAA3CAYAAACxUDzgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJCQTVCMkZBMTQyNzExRUI4NENGQkU0OTNENUMxREUzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJCQTVCMkZCMTQyNzExRUI4NENGQkU0OTNENUMxREUzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkJBNUIyRjgxNDI3MTFFQjg0Q0ZCRTQ5M0Q1QzFERTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkJBNUIyRjkxNDI3MTFFQjg0Q0ZCRTQ5M0Q1QzFERTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4252QDAAAF0UlEQVR42uTafWxT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"
-                    alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
+                        src={require("../assets/images/logo_final.png")}
+                        alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
                 <nav className="navigation">
                     <ul className="list-unstyled list_sidebar">
                         <li className="active"><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/Dashboard-active.840c2977.svg" alt="" />
+                            <div className="sidbar-icon"><img src={require("../assets/icons/Dashboard-active.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Dashboard</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/collections-default.2dd0530d.svg"
-                                                              alt="" /></div>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/collections-default.svg")} alt=""/></div>
                             <span className="nav-label">Collections</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/quotes-default.e8152120.svg" alt="" />
+                            <div className="sidbar-icon"><img src={require("../assets/icons/quotes-default.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Quotes</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/orders-default.17c00b2b.svg" alt="" />
+                            <div className="sidbar-icon"><img src={require("../assets/icons/orders-default.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Orders</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/payments-deafult.cb4d4ca9.svg" alt="" />
+                            <div className="sidbar-icon"><img src={require("../assets/icons/payments-deafult.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Payments</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/explore-design-default.6b40eb77.svg"
-                                                              alt="" /></div>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/explore-design-default.svg")} alt=""/></div>
                             <span className="nav-label">Explore Designs</span></a></li>
                     </ul>
                 </nav>
             </aside>
-            <div className="content">
+            <div className="content overflow-hidden vh-100">
                 <nav className="navbar navbar-expand navbar-light bg-white topbar static-top">
                     <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                         <svg className="svg-inline--fa fa-bars fa-w-14" aria-hidden="true" data-prefix="fa"
@@ -46,7 +106,7 @@ const BuyerLoginPopup = ({}) => {
                             <path fill="currentColor"
                                   d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
                         </svg>
-                        </button>
+                    </button>
                     <ul className="navbar-nav ml-auto align-items-center">
                         <li className="">
                             <button className="btn my-task-btn">
@@ -101,9 +161,9 @@ const BuyerLoginPopup = ({}) => {
                             <button className="btn btn-outline-default nav-link dropdown-toggle" type="button"
                                     id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false"><img className="img-profile rounded-circle"
-                                                               src="/static/media/pro_pic_default.27c2c214.svg"
-                                                               alt="profile-pic" /><span
-                                className="mr-2 d-none d-lg-inline">Sample buyer 1</span></button>
+                                                               src={process.env.PUBLIC_URL + "/icons/buyerDefault.png"}
+                                                               alt="profile-pic"/><span
+                                className="mr-2 d-none d-lg-inline">{buyerDetailsInfo?.name}</span></button>
                             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="dropdownProfileButton"><a className="dropdown-item" href="#">
                                 <svg className="svg-inline--fa fa-tachometer-alt fa-w-18 mr-2 text-gray-400 font-12"
@@ -120,7 +180,7 @@ const BuyerLoginPopup = ({}) => {
                                     <path fill="currentColor"
                                           d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
                                 </svg>
-                               My profile</a>
+                                My profile</a>
                                 <div className="dropdown-divider"></div>
                                 <a className="dropdown-item">
                                     <svg
@@ -138,36 +198,37 @@ const BuyerLoginPopup = ({}) => {
                 <div className="wraper container-fluid dashboard-container">
                     <div data-testid="wrapper" className="_loading_overlay_wrapper css-79elbk">
                         <div className="buyer-dashboard-container">
-                            <div className="welcome-message"><h3>Hi <span>Sample buyer 1</span>, Good Afternoon!</h3>
+                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good
+                                Afternoon!</h3>
                             </div>
                             <div className="full-journey-status">
                                 <div className="one-sixth sustainable-box">
                                     <div className="status-details"><h3>0%</h3><span>Sustainable</span></div>
-                                    <div className="status-icon"><img src="/icons/sustainable.svg" alt="sustainable" />
+                                    <div className="status-icon"><img src="/icons/sustainable.svg" alt="sustainable"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth quote-order-box">
                                     <div className="status-details"><h3>0%</h3><span>Quote to order</span></div>
-                                    <div className="status-icon"><img src="/icons/quote-order.svg" alt="quote" /></div>
+                                    <div className="status-icon"><img src="/icons/quote-order.svg" alt="quote"/></div>
                                 </div>
                                 <div className="one-sixth design-box">
                                     <div className="status-details"><h3>0<span>/0</span></h3>
                                         <span>Designs accepted</span></div>
-                                    <div className="status-icon"><img src="/icons/Design.svg" alt="Design" /></div>
+                                    <div className="status-icon"><img src="/icons/Design.svg" alt="Design"/></div>
                                 </div>
                                 <div className="one-sixth delivered-box">
                                     <div className="status-details"><h3>0<span>/0</span></h3>
                                         <span>Orders deliverd</span></div>
-                                    <div className="status-icon"><img src="/icons/shipment.svg" alt="shipment" /></div>
+                                    <div className="status-icon"><img src="/icons/shipment.svg" alt="shipment"/></div>
                                 </div>
                                 <div className="one-sixth order-value-box">
                                     <div className="status-details"><h3>$</h3><span>Order value</span></div>
-                                    <div className="status-icon"><img src="/icons/order-value.svg" alt="order-value" />
+                                    <div className="status-icon"><img src="/icons/order-value.svg" alt="order-value"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth supplier-box">
                                     <div className="status-details"><h3>0</h3><span>Manufacturing units</span></div>
-                                    <div className="status-icon"><img src="/icons/Supplier.svg" alt="Supplier" /></div>
+                                    <div className="status-icon"><img src="/icons/Supplier.svg" alt="Supplier"/></div>
                                 </div>
                             </div>
                             <div className="orders-and-quotes-status">
@@ -223,7 +284,7 @@ const BuyerLoginPopup = ({}) => {
                                             <tr>
                                                 <td colSpan="4">
                                                     <div className="nothing-found text-center"><img
-                                                        src="/icons/Nothing found.svg" alt="nothing found" /><p>No qoutes
+                                                        src="/icons/Nothing found.svg" alt="nothing found"/><p>No qoutes
                                                         added yet</p></div>
                                                 </td>
                                             </tr>
@@ -263,7 +324,80 @@ const BuyerLoginPopup = ({}) => {
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div className="buyer-login-popup-message">
+                <div className="popup-full-contents">
+                    <div className="popup-message-contents">
+                        <div className="message-top-content">
+                            <h2 className="message-title">Your account will be activated soon</h2>
+                            <div className="welcome-message-section">
+                                <div className="left-half">
+                                    <div className="ac-manager-details">
+                                        <img
+                                            src={managerInfo?.profilePicDocument?.docUrl ? managerInfo?.profilePicDocument?.docUrl : process.env.PUBLIC_URL + "/icons/buyerDefault.png"}
+                                            alt="profile"/>
+                                        <h3 className="semibold-16 mb-0">{managerInfo?.name}</h3>
+                                        <p className="designatgion">{managerInfo?.designation} <a
+                                            href={managerInfo?.linkedInUrl}
+                                            target="_blank">LinkedIn</a>
+                                        </p>
+                                        <p className="designatgion">
+                                            <span>{managerInfo?.phone} </span> | <span>{managerInfo?.email}</span></p>
+                                    </div>
+                                </div>
+                                <div className="right-half">
+                                    <h3>Welcome, {buyerDetailsInfo?.name}</h3>
+                                    <p>Thanks for signing up to the Nitex and joining our creative community!</p>
+                                    <p>This is <span>{managerInfo?.name}</span>, a Business Evangelist dedicated to you
+                                        and your
+                                        brand. I’m really looking forward to knowing more about you and how Nitex can
+                                        help grow your brand. I will contact you within 24 hours to show you our product
+                                        capabilities, understand your business goals, and of course help you achieve
+                                        them.</p>
+                                    <p className="mb-0">While waiting, you can check out how we’re empowering +50 brands
+                                        from across the world.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="how-we-help-section">
+                            <h4 className="title mb-5">How we help you grow</h4>
+                            <div className="one-third-row">
+                                <div className="single-item">
+                                    <img src="/icons/100-designs.png" alt="100 designs"/>
+                                    <h3>100s of designs every week</h3>
+                                    <p>We offer you curated collections from our Design Studio based on your brand
+                                        DNA</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/4-6-wsks-production.png" alt="4-6-wsks-production"/>
+                                    <h3>4-6 wks production lead time</h3>
+                                    <p>We reduced the production lead time by 50% from our robust supply chain
+                                        network</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/100-sustainable.png" alt="100% sustainable"/>
+                                    <h3>100% Sustainable materials</h3>
+                                    <p>We source, innovate and offer value added organic, recycled, & eco-vero
+                                        materials</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/upto-150-cd.png" alt="100 designs"/>
+                                    <h3>Up to 150 days Credit line</h3>
+                                    <p>Our ‘Buy now, pay later’ credit line keeps you sane while you manage the cash
+                                        flow</p>
+                                </div>
+                                <div className="single-item">
+                                    <img src="/icons/order-low-as-250.png" alt="100 designs"/>
+                                    <h3>Order as low as 250 units</h3>
+                                    <p>There is no MOQ limit while doing productions with us. Feel free to order
+                                        anything</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <LoaderComponent loading={loading}/>
+                </div>
             </div>
         </>
     )

@@ -8,7 +8,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import Recaptcha from 'react-recaptcha';
 
-import { validate, getUrlParameter } from '../../services/Util';
+import {validate, getUrlParameter, generateRedirectRoute} from '../../services/Util';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -67,24 +67,14 @@ class Register extends Component {
                 if (data.accessToken) {
                     localStorage.setItem('rememberMe', 1);
                     localStorage.setItem('token', data.tokenType + ' ' + data.accessToken);
+                    localStorage.setItem("refreshToken",data.refreshToken)
                     localStorage.setItem('email',email);
                     toastSuccess("Successfully Registered.");
                     Http.GET('userInfo')
                       .then(({data}) => {
                         localStorage.setItem('userInfo',JSON.stringify(data));
                         this.setState({loading: false})
-                        let redirection = getUrlParameter('redirect', this.props.location.search)
-                          if (data.businessInfoGiven) {
-                            this.props.history.push({
-                              pathname: redirection ? redirection : '/designs/explore',
-                              state: { from: 'login' }
-                            });
-                          } else {
-                            this.props.history.push(
-                              '/info' +
-                              (redirection ? ('?redirect=' + redirection) : '')
-                            );
-                          }
+                          generateRedirectRoute(data,this.props)
                       })
                       .catch(({response}) => {
                           this.setState({loading: false})
@@ -93,7 +83,7 @@ class Register extends Component {
                           } else {
                             toastError("Couldn't fetch user info.");
                           }
-                          this.props.history.push('/designs/explore');
+                          this.props.history.push('/dashboard');
                       });
                 } else {
                     this.setState({loading: false})

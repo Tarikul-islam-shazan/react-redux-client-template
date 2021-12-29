@@ -521,6 +521,136 @@
   }
   
 
+  .buyer-login-popup-message{
+    position:fixed;
+    width: 100%;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left:0;
+    z-index: 9999;
+    .popup-full-contents{
+      height: 100vh;
+      overflow-y: auto;
+      margin:0 16px;
+    }
+
+    .popup-message-contents{
+      max-width: 1165px;
+      padding: 8px;
+      border-radius: 8px;
+      background: $white;
+      margin: 0 auto;
+      margin-top: 60px;
+      margin-bottom: 8px;
+
+      .message-top-content{
+        padding-left: 48px;
+        padding-top: 32px;
+        .message-title{
+          font-size: 24px;
+          line-height: 32px;
+          color: $secondary;
+          margin-bottom: 40px;
+          font-weight: 600;
+        }
+        .welcome-message-section{
+          display: flex;
+          width: 100%;
+          margin-bottom: 48px;
+          .left-half{
+            min-width: 248px;
+            padding-right: 48px;
+            text-align: center;
+            border-right: 1px solid $gray_dark_04;
+            .ac-manager-details{
+              img{
+                width: 144px;
+                height: 144px;
+                border-radius: 100px;
+              }
+              h3{
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 600;
+              }
+              p, a{
+                color: $gray_dark_01;
+                margin: 0;
+                font-size: 12px;
+                line-height: 16px;
+                
+              }
+              .designatgion{
+                font-style: italic;
+                a{
+                  color: $primary_bright_01;
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+          .right-half{
+            padding-left: 48px;
+            padding-right: 12px;
+            h3{
+              font-size: 18px;
+              line-height: 26px;
+              font-weight: 600;
+              color: $gray_dark_01;
+              margin-bottom: 22px;
+            }
+            p{
+              font-size: 16px;
+              line-height: 24px;
+              margin-bottom: 22px;
+            }
+          }
+        }
+      }
+      .how-we-help-section{
+        padding: 32px;
+        border-radius: 60px 60px 8px 8px;
+        background: $primary_bright_02;
+        padding-bottom: 0;
+        .title{
+          font-size: 22px;
+          line-height: 40px;
+          margin-bottom: 20px;
+          color: $white;
+          text-transform: uppercase;
+          font-weight: 600;
+          text-align: center;
+        }
+        .one-third-row{
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 100%;
+          .single-item{
+            text-align: center;
+            max-width: 33.33%;
+            padding: 0 16px;
+            margin-bottom: 32px;
+            h3{
+              font-size: 16px;
+              line-height: 24px;
+              color: $white;
+              font-weight: 600;
+              margin-bottom: 2px;
+              margin-top: 6px;
+            }
+            p{
+              font-size: 14px;
+              line-height: 20px;
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
+      }
+    }
+  }
+  
   @media only screen and (max-width: 1366px) {
     .buyer-dashboard-container{
       .full-journey-status{
@@ -577,6 +707,32 @@
   @media only screen and (max-width: 767px){
     .buyer-dashboard-container{
       padding-top: 24px;
+    }
+    .buyer-login-popup-message{
+      .popup-message-contents{
+        .message-top-content {
+          padding: 20px 20px 0 20px;
+          .welcome-message-section{
+            flex-wrap: wrap;
+            .left-half, .right-half{
+              width: 100%;
+              padding: 0;
+              border: none;
+            }
+            .right-half{
+              margin-top: 32px;
+
+            }
+          }
+        }
+        .how-we-help-section{
+          .one-third-row {
+            .single-item{
+             max-width: 50%;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -725,5 +881,39 @@
       }
       
     }
-    
+    .buyer-login-popup-message{
+      .popup-message-contents{
+        .message-top-content{
+          .message-title{
+            font-size: 20px;
+            line-height: 26px;
+          }
+          .welcome-message-section {
+            .right-half {
+              p{
+                font-size: 14px;
+                line-height: 20px;
+                margin-bottom: 16px;
+              }
+            }
+          }
+        }
+        .how-we-help-section{
+          padding: 32px 20px;
+          .title{
+            font-size: 20px;
+          }
+          .one-third-row {
+            .single-item{
+             max-width: 100%;
+            margin-bottom: 20px;
+            img{
+              width: 48px;
+            }
+            }
+          }
+        }
+        
+      }
+    }
   }

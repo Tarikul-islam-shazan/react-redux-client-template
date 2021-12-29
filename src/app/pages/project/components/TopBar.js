@@ -220,17 +220,17 @@ const TopBar = ({ details, orderId, getProjectDetails }) => {
                      </div>
                   </div>
                   <div className="col-3">
-                     <span className="brand-logo">
-                        {details.brandResponse && details.brandResponse.name && (
-                           <img
-                              src={addImageSuffix(
-                                 details.brandResponse?.brandLogoDocResponse.docUrl,
-                                 "_xicon"
-                              )}
-                              alt={details.brandResponse?.name}
-                           />
-                        )}
-                     </span>
+                     {/*<span className="brand-logo">*/}
+                     {/*   {details.brandResponse && details.brandResponse.name && (*/}
+                     {/*      <img*/}
+                     {/*         src={addImageSuffix(*/}
+                     {/*            details.brandResponse?.brandLogoDocResponse.docUrl,*/}
+                     {/*            "_xicon"*/}
+                     {/*         )}*/}
+                     {/*         alt={details.brandResponse?.name}*/}
+                     {/*      />*/}
+                     {/*   )}*/}
+                     {/*</span>*/}
                      <span className="order-status">{capitalizeFirstLetter(details?.status)}</span>
                   </div>
                   <div class="col-2 px-0 add-buyer d-flex flex-column flex-sm-row align-items-center justify-content-end flex-grow-1 flex-grow-1">

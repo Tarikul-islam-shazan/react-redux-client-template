@@ -14,6 +14,7 @@ const headers = {
 
 const routes = {
     userInfo: `${BASE_URL}/user/me`, // get
+    accManagerInfo: `${BASE_URL}/user/my-account-manager`, // get
     updateProfile: `${BASE_URL}/user/update-basic-info`, //post
     updateProPic: `${BASE_URL}/user/update-profile-picture`, //post
     updatePassword: `${BASE_URL}/user/change-password`, //post
@@ -25,6 +26,7 @@ const routes = {
     updateBusinessInfo: `${BASE_URL}/user/update-business-info`, // POST
     sendOtpRe: `${BASE_URL}/user/send-otp`, // GET
     verifyOtp: `${BASE_URL}/user/validate-otp/`, // POST
+    updateBrandInfo: `${BASE_URL}/user/update-brand-info`, // POST
     addProduct: `${BASE_URL}/product/add`, // POST
     getProductList: `${BASE_URL}/product/my-product`, // GET
     getAvailableProductList: `${BASE_URL}/product/my-product-by-availability-status`, // GET (new)
@@ -161,6 +163,7 @@ const routes = {
     getRunningOrders: `${BASE_URL}/dashboard/buyer/my-orders`, // GET
 
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
+    refreshUserToken: `${BASE_URL}/auth/refresh`
 };
 
 // Axios request interceptor
@@ -189,7 +192,7 @@ axios.interceptors.response.use(
                 // localStorage.removeItem('token');
                 // localStorage.clear();
                 // delete axios.defaults.headers.common['Authorization'];
-                window.location.href = "/logout";
+                // window.location.href = "/logout";
                 // store.dispatch({
                 //     type: REDIRECT_TO,
                 //     payload: {
