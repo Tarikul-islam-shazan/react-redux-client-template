@@ -1010,6 +1010,11 @@ const generateRedirectRoute = (data, props) => {
             pathname: redirection ? redirection : "/dashboard",
             state: {from: "login"},
         });
+    } else if (data.status === "DISABLED") {
+        props.history.push({
+            pathname: redirection ? redirection : "/login",
+            state: {from: "login"},
+        });
     } else if (data.businessInfoGiven === false) {
         props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
     } else if (data.phoneVerified === false) {
@@ -1019,11 +1024,6 @@ const generateRedirectRoute = (data, props) => {
     } else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
-            state: {from: "login"},
-        });
-    } else if (data.status === "DISABLED") {
-        props.history.push({
-            pathname: redirection ? redirection : "/login",
             state: {from: "login"},
         });
     } else {
