@@ -27,7 +27,7 @@ const BuyerLoginPopup = ({}) => {
                         toastError(error.response.data.message);
                     })
                 } else {
-                    // await redirectPage(response)
+                    await redirectPage(response)
                 }
 
             })
