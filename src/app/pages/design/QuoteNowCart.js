@@ -95,7 +95,7 @@ class QuoteNowCart extends Component {
     renderList = async (page = 0) => {
         this.setState({ loading: true, searching: true });
         let { size, search } = this.state;
-        let designParams = `?search=${search}&page=${page}&size=${size}&availabilityStatus=AVAILABLE`;
+        let designParams = `?search=${search}&page=${page}&size=${size}&availabilityStatus=AVAILABLE,UNAVAILABLE`;
         let result = [];
 
         await Http.GET("searchProduct", designParams)

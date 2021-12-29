@@ -11,32 +11,39 @@ const BuyerLoginPopup = ({}) => {
     const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({})
     const history = useHistory();
 
-    useEffect(async () => {
-        await Http.GET('userInfo')
+    useEffect(() => {
+        Http.GET('userInfo')
             .then(async (response) => {
                 let refreshToken = localStorage.getItem("refreshToken");
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired
-                if(isTokenUpdateRequired === true){
-                    await Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
-                        if(tokenResponse.data.accessToken){
-                            localStorage.setItem("token",`${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
-                        }
+                if (isTokenUpdateRequired === true) {
+                    await Http.POST("refreshUserToken", {"refreshToken": refreshToken}).then(async (tokenResponse) => {
+                        await localStorage.setItem("token", `${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
+                        await redirectPage(response)
                         setLoading(false)
                     }).catch((error) => {
                         setLoading(false)
                         toastError(error.response.data.message);
                     })
+                } else {
+                    await redirectPage(response)
                 }
-                if(response.data.status === "ACTIVE"){
-                    history.push("/dashboard");
-                }
+
             })
             .catch(({response}) => {
                 setLoading(false)
                 toastError(response.data.message);
             });
     }, [])
+
+    const redirectPage = async (response) => {
+        if (response.data.status === "ACTIVE") {
+            await history.push("/dashboard");
+        } else if (response.data.status === "DISABLED") {
+            await history.push("/login");
+        }
+    }
 
     useEffect(() => {
         Http.GET('accManagerInfo')
@@ -61,33 +68,31 @@ const BuyerLoginPopup = ({}) => {
             <aside className="left-panel" id="side-menu">
                 <div className="logo"><a href="#" className="logo-expanded">
                     <img
-                        src="/images/logo_final.png"
+                        src={require("../assets/images/logo_final.png")}
                         alt="logo" className="img-fluid d-block mx-auto img_logo_expand"/></a></div>
                 <nav className="navigation">
                     <ul className="list-unstyled list_sidebar">
                         <li className="active"><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/Dashboard-active.840c2977.svg" alt=""/>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/Dashboard-active.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Dashboard</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/collections-default.2dd0530d.svg"
-                                                              alt=""/></div>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/collections-default.svg")} alt=""/></div>
                             <span className="nav-label">Collections</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/quotes-default.e8152120.svg" alt=""/>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/quotes-default.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Quotes</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/orders-default.17c00b2b.svg" alt=""/>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/orders-default.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Orders</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/payments-deafult.cb4d4ca9.svg" alt=""/>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/payments-deafult.svg")} alt=""/>
                             </div>
                             <span className="nav-label">Payments</span></a></li>
                         <li className=""><a href="#">
-                            <div className="sidbar-icon"><img src="/static/media/explore-design-default.6b40eb77.svg"
-                                                              alt=""/></div>
+                            <div className="sidbar-icon"><img src={require("../assets/icons/explore-design-default.svg")} alt=""/></div>
                             <span className="nav-label">Explore Designs</span></a></li>
                     </ul>
                 </nav>
@@ -156,7 +161,7 @@ const BuyerLoginPopup = ({}) => {
                             <button className="btn btn-outline-default nav-link dropdown-toggle" type="button"
                                     id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false"><img className="img-profile rounded-circle"
-                                                               src="/static/media/pro_pic_default.27c2c214.svg"
+                                                               src={process.env.PUBLIC_URL + "/icons/buyerDefault.png"}
                                                                alt="profile-pic"/><span
                                 className="mr-2 d-none d-lg-inline">{buyerDetailsInfo?.name}</span></button>
                             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -193,7 +198,8 @@ const BuyerLoginPopup = ({}) => {
                 <div className="wraper container-fluid dashboard-container">
                     <div data-testid="wrapper" className="_loading_overlay_wrapper css-79elbk">
                         <div className="buyer-dashboard-container">
-                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good Afternoon!</h3>
+                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good
+                                Afternoon!</h3>
                             </div>
                             <div className="full-journey-status">
                                 <div className="one-sixth sustainable-box">
@@ -328,7 +334,9 @@ const BuyerLoginPopup = ({}) => {
                             <div className="welcome-message-section">
                                 <div className="left-half">
                                     <div className="ac-manager-details">
-                                        <img src={managerInfo?.profilePicDocument?.docUrl} alt="profile"/>
+                                        <img
+                                            src={managerInfo?.profilePicDocument?.docUrl ? managerInfo?.profilePicDocument?.docUrl : process.env.PUBLIC_URL + "/icons/buyerDefault.png"}
+                                            alt="profile"/>
                                         <h3 className="semibold-16 mb-0">{managerInfo?.name}</h3>
                                         <p className="designatgion">{managerInfo?.designation} <a
                                             href={managerInfo?.linkedInUrl}
@@ -353,7 +361,7 @@ const BuyerLoginPopup = ({}) => {
                             </div>
                         </div>
                         <div className="how-we-help-section">
-                            <h4 className="title">How we help you grow</h4>
+                            <h4 className="title mb-5">How we help you grow</h4>
                             <div className="one-third-row">
                                 <div className="single-item">
                                     <img src="/icons/100-designs.png" alt="100 designs"/>

@@ -17,13 +17,18 @@ const BrandCreation = () => {
 
     const [loading, setLoading] = useState(false)
     const [brandName, setBrandName] = useState("")
+    const [brandError, setBrandError] = useState("");
     const history = useHistory();
 
     const handleSubmit = () => {
+        if (brandName === "") {
+            setBrandError("Brand Name Required!");
+            return false;
+        }
         let postData = {};
         postData.brandName = "?brandName=" + brandName
         setLoading(true)
-        Http.POST('updateBrandInfo', "","?brandName=" + brandName)
+        Http.POST('updateBrandInfo', "", "?brandName=" + brandName)
             .then((response) => {
                 toastSuccess(response.data.message);
                 history.push("/loginPopup")
@@ -37,6 +42,13 @@ const BrandCreation = () => {
                     toastError("Request wasn't successful.");
                 }
             });
+    }
+
+    const onChange = (event) => {
+        setBrandName(event.target.value)
+        if (event.target.value !== null) {
+            setBrandError("")
+        }
     }
 
     return (
@@ -75,8 +87,14 @@ const BrandCreation = () => {
                         <div className="col-lg-12">
                             <div className="form-group">
                                 <div className="country-code">
-                                    <input onChange={e => setBrandName(e.target.value)} value={brandName} name="code"
-                                           type="text" className="text-center bg-gray-light border-0 font-weight-bold"/>
+                                    <input
+                                        onChange={onChange}
+                                        value={brandName}
+                                        name="code"
+                                        type="text"
+                                        className="text-center bg-gray-light border-0 font-weight-bold"
+                                    />
+                                    {brandError && <span className="error">{brandError}</span>}
                                 </div>
                             </div>
                         </div>
