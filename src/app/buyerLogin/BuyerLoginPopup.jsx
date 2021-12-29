@@ -11,16 +11,16 @@ const BuyerLoginPopup = ({}) => {
     const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({})
     const history = useHistory();
 
-    useEffect(async () => {
-        await Http.GET('userInfo')
+    useEffect(() => {
+        Http.GET('userInfo')
             .then(async (response) => {
                 let refreshToken = localStorage.getItem("refreshToken");
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired
-                if(isTokenUpdateRequired === true){
-                    await Http.POST("refreshUserToken",{"refreshToken" : refreshToken}).then((tokenResponse) => {
-                        if(tokenResponse.data.accessToken){
-                            localStorage.setItem("token",`${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
+                if (isTokenUpdateRequired === true) {
+                    await Http.POST("refreshUserToken", {"refreshToken": refreshToken}).then((tokenResponse) => {
+                        if (tokenResponse.data.accessToken) {
+                            localStorage.setItem("token", `${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`)
                         }
                         setLoading(false)
                     }).catch((error) => {
@@ -28,7 +28,7 @@ const BuyerLoginPopup = ({}) => {
                         toastError(error.response.data.message);
                     })
                 }
-                if(response.data.status === "ACTIVE"){
+                if (response.data.status === "ACTIVE") {
                     history.push("/dashboard");
                 }
             })
@@ -155,9 +155,7 @@ const BuyerLoginPopup = ({}) => {
                         <li className="nav-item dropdown no-arrow">
                             <button className="btn btn-outline-default nav-link dropdown-toggle" type="button"
                                     id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false"><img className="img-profile rounded-circle"
-                                                               src="/static/media/pro_pic_default.27c2c214.svg"
-                                                               alt="profile-pic"/><span
+                                    aria-expanded="false"><img className="img-profile rounded-circle" src={process.env.PUBLIC_URL + "/icons/buyerDefault.png"} alt="profile-pic"/><span
                                 className="mr-2 d-none d-lg-inline">{buyerDetailsInfo?.name}</span></button>
                             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="dropdownProfileButton"><a className="dropdown-item" href="#">
@@ -193,7 +191,8 @@ const BuyerLoginPopup = ({}) => {
                 <div className="wraper container-fluid dashboard-container">
                     <div data-testid="wrapper" className="_loading_overlay_wrapper css-79elbk">
                         <div className="buyer-dashboard-container">
-                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good Afternoon!</h3>
+                            <div className="welcome-message"><h3>Hi <span>{buyerDetailsInfo?.name}</span>, Good
+                                Afternoon!</h3>
                             </div>
                             <div className="full-journey-status">
                                 <div className="one-sixth sustainable-box">
@@ -328,7 +327,9 @@ const BuyerLoginPopup = ({}) => {
                             <div className="welcome-message-section">
                                 <div className="left-half">
                                     <div className="ac-manager-details">
-                                        <img src={managerInfo?.profilePicDocument?.docUrl} alt="profile"/>
+                                        <img
+                                            src={managerInfo?.profilePicDocument?.docUrl ? managerInfo?.profilePicDocument?.docUrl : process.env.PUBLIC_URL + "/icons/buyerDefault.png"}
+                                            alt="profile"/>
                                         <h3 className="semibold-16 mb-0">{managerInfo?.name}</h3>
                                         <p className="designatgion">{managerInfo?.designation} <a
                                             href={managerInfo?.linkedInUrl}
