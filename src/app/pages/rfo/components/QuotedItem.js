@@ -162,15 +162,13 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     ))}
                 </tr>
                 <tr>
-                    <tr>
-                        {Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
-                            <td key={i}>
-                                <p>
-                                    <span>${value}</span>
-                                </p>
-                            </td>
-                        ))}
-                    </tr>
+                    {Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
+                        <td key={i}>
+                            <p>
+                                <span>${value}</span>
+                            </p>
+                        </td>
+                    ))}
                 </tr>
             </table>
         </div>

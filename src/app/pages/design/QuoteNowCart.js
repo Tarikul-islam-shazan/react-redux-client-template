@@ -294,7 +294,7 @@ class QuoteNowCart extends Component {
                                     <h6>RFQ title*</h6>
                                     <input
                                         type="text"
-                                        placeholder="Give a title forr your request"
+                                        placeholder="Give a title for your request"
                                         name="title"
                                         value={title}
                                         onChange={this.onChange}
