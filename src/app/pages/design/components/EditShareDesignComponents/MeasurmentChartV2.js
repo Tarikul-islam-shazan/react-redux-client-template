@@ -532,11 +532,10 @@ const MeasurmentChartV2 = ({productId, documentGroup}) => {
                         {/* Filter Data container */}
                         <section className="filter-data-container px-0">
                             {isCollapse === false && (
-                                <div className="filter-bar-section materials-filter dp2 custom-scrollbar open mt-4">
+                                <div className="filter-bar-section materials-filter dp2 custom-scrollbar open mt-2">
                                     <div className="filter-bar-top">
                                         <div className="filter-heading d-flex justify-content-between">
                                             <p>Select POM and Sizes</p>
-
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width={24}
@@ -576,11 +575,12 @@ const MeasurmentChartV2 = ({productId, documentGroup}) => {
                                                     aria-labelledby="headingOne"
                                                 >
                                                     <div className="card-body">
-                                                        <div className="form-group size36 m-0 search-filter">
+                                                        <div className="form-group size36 pt-3 m-0 search-filter">
                                                             <div className="with-icon right-icon">
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Search"
+                                                                    className="mb-1 bg-white"
                                                                     onChange={(e) =>
                                                                         setPomSearch(e.target.value)
                                                                     }
@@ -604,21 +604,12 @@ const MeasurmentChartV2 = ({productId, documentGroup}) => {
                                                             </div>
                                                         </div>
                                                         <div className="add-btn">
-                                                            <button className="button text">
-                                                                <svg
-                                                                    width={14}
-                                                                    height={14}
-                                                                    viewBox="0 0 14 14"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M13 8H8V13C8 13.55 7.55 14 7 14C6.45 14 6 13.55 6 13V8H1C0.45 8 0 7.55 0 7C0 6.45 0.45 6 1 6H6V1C6 0.45 6.45 0 7 0C7.55 0 8 0.45 8 1V6H13C13.55 6 14 6.45 14 7C14 7.55 13.55 8 13 8Z"
-                                                                        fill="white"
-                                                                    />
-                                                                </svg>
+                                                            <button className="button text pl-0 mb-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M18 13H13V18C13 18.55 12.55 19 12 19C11.45 19 11 18.55 11 18V13H6C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11H11V6C11 5.45 11.45 5 12 5C12.55 5 13 5.45 13 6V11H18C18.55 11 19 11.45 19 12C19 12.55 18.55 13 18 13Z" fill="#664AB6"/>
+                                                            </svg>
                                                                 <span
-                                                                    className="ml-2"
+                                                                    className="ml-2 font-14"
                                                                     onClick={() => onAddNew()}
                                                                 >
                                                                     Add new
@@ -682,12 +673,13 @@ const MeasurmentChartV2 = ({productId, documentGroup}) => {
                                                     className="collapse"
                                                     aria-labelledby="headingFour"
                                                 >
-                                                    <div className="card-body">
-                                                        <div className="form-group size36 m-0 pb-2 search-filter">
+                                                    <div className="card-body pb-0">
+                                                        <div className="form-group size36 m-0 pb-2 pt-0 search-filter">
                                                             <div className="with-icon right-icon">
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Search"
+                                                                    className="bg-white"
                                                                     onChange={(e) =>
                                                                         setSizeSearch(
                                                                             e.target.value
