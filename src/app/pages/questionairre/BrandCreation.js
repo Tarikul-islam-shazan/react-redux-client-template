@@ -92,6 +92,7 @@ const BrandCreation = () => {
                                         value={brandName}
                                         name="code"
                                         type="text"
+                                        placeholder="Brand name"
                                         className="text-center bg-gray-light border-0 font-weight-bold"
                                     />
                                     {brandError && <span className="error">{brandError}</span>}
@@ -99,7 +100,7 @@ const BrandCreation = () => {
                             </div>
                         </div>
                     </div>
-                    <button className="btn-brand m-0" onClick={handleSubmit}>Verify</button>
+                    <button className="btn-brand m-0" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </LoadingOverlay>
