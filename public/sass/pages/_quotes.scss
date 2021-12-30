@@ -226,6 +226,7 @@
       img {
         height: 280px;
         width: 260px;
+        object-fit: contain;
         @media (max-width: 1440px) {
           height: 180px;
           max-width: 156px;
@@ -768,6 +769,15 @@
     }
     .quantity-table{
       right: calc(100% - 44px);
+      
+    }
+}
+}
+
+@media (max-width: 1024px){
+  .color-wise-quantity-table {
+    .quantity-table{
+      right:unset;
       
     }
 }

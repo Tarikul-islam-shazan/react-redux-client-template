@@ -94,6 +94,7 @@ class DefaultLayout extends Component {
                     appId: getOneSignalAppId()
                 });
             });
+            console.log(this.OneSignal)
             let userId = null;
             await this.OneSignal.getExternalUserId().then((res) => {
                 //console.log('res from getExternalUserId', res);
@@ -375,7 +376,7 @@ class DefaultLayout extends Component {
                                         <></>
                                     )}
                                     {this.props.unseenCount ? (
-                                        <span className="notification-count">{this.props.unseenCount}</span>
+                                        <span className="notification-count">{this.props.unseenCount < 100 ? this.props.unseenCount : "99+"}</span>
                                     ) : (
                                         <></>
                                     )}

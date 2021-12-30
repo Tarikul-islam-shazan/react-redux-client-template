@@ -12,6 +12,7 @@ class AuthLayout extends React.Component {
 
     render() {
         let { activeTab } = this.props;
+        console.log(activeTab)
         let redirect = getUrlParameter("redirect", this.props.location.search);
         return (
             <>
@@ -43,7 +44,7 @@ class AuthLayout extends React.Component {
                                 </p>
                             )}
 
-                            {activeTab.includes("login") && (
+                            {(activeTab.includes("login") || activeTab.includes("/")) && (
                                 <p>
                                     Don't have an account?
                                     <Link

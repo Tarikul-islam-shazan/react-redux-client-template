@@ -8,7 +8,7 @@ import LoadingOverlay from "react-loading-overlay";
 
 import Recaptcha from "react-recaptcha";
 
-import { validate, getUrlParameter } from "../../services/Util";
+import {validate, getUrlParameter, generateRedirectRoute} from "../../services/Util";
 import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -61,7 +61,6 @@ class Login extends Component {
     };
 
     login = async () => {
-        // const { addToast } = useToasts();
         const {
             emailError,
             passwordError,
@@ -72,7 +71,6 @@ class Login extends Component {
         } = this.state;
         if (!emailError && !passwordError) {
             if (email && password) {
-                //previously captchaResponse
                 this.setState({ loading: true });
                 let body = {
                     email,
@@ -82,42 +80,26 @@ class Login extends Component {
                 console.log("login body", body);
                 Http.POST("login", body)
                     .then(({ data }) => {
-                        console.log("LOGIN SUCCESS: ", JSON.stringify(data));
                         this.setState({ loading: false });
                         if (data.accessToken) {
                             if (rememberMe) {
-                                console.log("entered localStorage", rememberMe);
                                 localStorage.setItem(
                                     "token",
                                     data.tokenType + " " + data.accessToken
                                 );
                             } else {
-                                // console.log("entered sessionStorage", localStorage.getItem('rememberMe'))
                                 sessionStorage.setItem(
                                     "token",
                                     data.tokenType + " " + data.accessToken
                                 );
                             }
+                            localStorage.setItem("refreshToken",data.refreshToken)
                             localStorage.setItem("email", email);
                             toastSuccess("Successfully Logged In.");
                             Http.GET("userInfo")
                                 .then(({ data }) => {
                                     localStorage.setItem("userInfo", JSON.stringify(data));
-                                    let redirection = getUrlParameter(
-                                        "redirect",
-                                        this.props.location.search
-                                    );
-                                    if (data.businessInfoGiven) {
-                                        this.props.history.push({
-                                            pathname: redirection ? redirection : "/dashboard",
-                                            state: { from: "login" },
-                                        });
-                                    } else {
-                                        this.props.history.push(
-                                            "/info" +
-                                                (redirection ? "?redirect=" + redirection : "")
-                                        );
-                                    }
+                                    generateRedirectRoute(data,this.props)
                                 })
                                 .catch(({ response }) => {
                                     if (response && response.data && response.data.message) {

@@ -42,8 +42,8 @@ export const fetchDashboardAllTasks =
                         ? actionTypes.FETCH_MORE_DASHBOARD_ALL_TASKS_SUCCESS
                         : actionTypes.FETCH_DASHBOARD_ALL_TASKS_SUCCESS,
                 payload: {
-                    data: response.data,
-                    hasNext: response.data?.length < 15 ? false : true,
+                    data: response.data.data,
+                    hasNext: response.data.data?.length < 15 ? false : true,
                 },
             });
         } catch (error) {
