@@ -347,7 +347,7 @@ const BuyerLoginPopup = ({}) => {
                                     </div>
                                 </div>
                                 <div className="right-half">
-                                    <h3>Welcome, {buyerDetailsInfo?.name}</h3>
+                                    <h3>Hi, {buyerDetailsInfo?.name}!</h3>
                                     <p>Thanks for signing up to the Nitex and joining our creative community!</p>
                                     <p>This is <span>{managerInfo?.name}</span>, a Business Evangelist dedicated to you
                                         and your

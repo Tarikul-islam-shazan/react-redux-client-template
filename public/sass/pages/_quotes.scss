@@ -226,6 +226,7 @@
       img {
         height: 280px;
         width: 260px;
+        object-fit: contain;
         @media (max-width: 1440px) {
           height: 180px;
           max-width: 156px;

@@ -256,7 +256,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     {quote.name ? getShortName(quote.name, 35) : "N/A"}
                                 </Link>
                             </Tooltip>
-
+                            <p className="ref-no font-14 mb-0">{quote?.productReferenceNumber}</p>
                             {quote.collectionName && (
                                 <>
                                     <span className="pr-2 font-12 text-muted">in</span>
@@ -274,7 +274,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     </a>
                                 </>
                             )}
-                            <p className="ref-no">{quote?.productReferenceNumber}</p>
+                            
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Date</label>
