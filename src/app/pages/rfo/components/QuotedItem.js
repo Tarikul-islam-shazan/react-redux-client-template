@@ -291,7 +291,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                         <div className="info-item mt-2">
                             <label className="font-14 text-muted">Product category</label>
                             <h5 className="font-20 color-333">
-                                {quote.productGroup}, {quote.productCategory}
+                                {quote.productGroup} {(quote.productGroup && quote.productCategory) && "," } {quote.productCategory}
                             </h5>
                         </div>
 

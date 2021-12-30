@@ -164,7 +164,7 @@ export const ColorAndFabrication = ({
 
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Fabric details*</label>
+                                <label>Fabric details</label>
                                 <input
                                     type="text"
                                     className={`${

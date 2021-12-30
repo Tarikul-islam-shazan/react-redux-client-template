@@ -1223,7 +1223,6 @@ class CollectionDetails extends Component {
                             </div>
 
                             <div className="show-products">
-                                {console.log(productList)}
                                 {productList.map((product, i) => {
                                     return (
                                         <ProductCardWithTick

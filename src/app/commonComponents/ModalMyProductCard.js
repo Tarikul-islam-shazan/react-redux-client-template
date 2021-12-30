@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { addImageSuffix } from '../services/Util';
+import {Link} from "react-router-dom";
 export const ModalMyProductCard = ({product, index, onChange, buttonAction, buttonTitle}) => {
   let flag = 1;
   return(
@@ -11,7 +12,7 @@ export const ModalMyProductCard = ({product, index, onChange, buttonAction, butt
             if(doc.docType=='PRODUCT_DESIGN' && flag){
               flag = 0;
               return (
-                <a href="#"><img src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="" className="radius-3"/></a>
+                  <Link to={"/designs/view/" + product.id} href="#"><img src={addImageSuffix(doc.docUrl, '_xthumbnail')} alt="" className="radius-3"/></Link>
               )
             }
             if(product.designDocuments.length==i+1 && flag){
@@ -24,7 +25,7 @@ export const ModalMyProductCard = ({product, index, onChange, buttonAction, butt
           <a href="#"><img src={require("../assets/images/default_product.svg")} alt="" className="radius-3"/></a>
         }
             <div className="info-right ml-3">
-                <a href="#" className="semibold m-0 mt-1 font-20">{product.name}</a>
+                <Link to={"/designs/view/" + product.id} className="semibold m-0 mt-1 font-20">{product.name}</Link>
                 <div className="d-flex flex-column flex-sm-row">
                     <div className="info-item mr-5">
                         <label className="font-14 text-muted">Product category</label>
