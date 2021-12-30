@@ -136,12 +136,12 @@ class PickDesignV2 extends Component {
             });
         }
 
-        if (this.searchFilters && !this.searchFilters.contains(event.target)) {
-            this.setState({
-                showFilters: false,
-                filters: this.state.filters.filter((item) => item.showSelected),
-            });
-        }
+        // if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+        //     this.setState({
+        //         showFilters: false,
+        //         filters: this.state.filters.filter((item) => item.showSelected),
+        //     });
+        // }
 
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setState({
@@ -214,9 +214,9 @@ class PickDesignV2 extends Component {
             filters,
             showSelectedFilters: filters.length === 0 ? false : this.state.showSelectedFilters,
         });
-        if (!flag) {
-            this._search();
-        }
+        // if (!flag) {
+        //     this._search();
+        // }
     };
 
     renderList = async (page = 0) => {
