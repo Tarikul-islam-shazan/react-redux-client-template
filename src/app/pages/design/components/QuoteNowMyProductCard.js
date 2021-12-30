@@ -1,6 +1,7 @@
 import React from "react";
 import {addImageSuffix, getShortName} from "../../../services/Util";
 import Tooltip from "@material-ui/core/Tooltip";
+import Link from "react-router-dom/es/Link";
 
 export const QuoteNowMyProductCard = ({
     product,
@@ -20,13 +21,13 @@ export const QuoteNowMyProductCard = ({
                         if (doc.docType == "PRODUCT_DESIGN" && flag) {
                             flag = 0;
                             return (
-                                <a href="#">
+                                <Link to={"/designs/view/" + product.id}>
                                     <img
                                         src={addImageSuffix(doc.docUrl, "_xthumbnail")}
                                         alt=""
                                         className="radius-3"
                                     />
-                                </a>
+                                </Link>
                             );
                         }
                         if (product.designDocuments.length == i + 1 && flag) {
@@ -56,9 +57,9 @@ export const QuoteNowMyProductCard = ({
                         placement="top"
                         arrow
                     >
-                    <a href="#" className="semibold m-0 mt-1 font-20">
+                    <Link to={"/designs/view/" + product.id} className="semibold m-0 mt-1 font-20">
                         {getShortName(product.name,21)}
-                    </a>
+                    </Link>
                     </Tooltip>
                     <div className="d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">

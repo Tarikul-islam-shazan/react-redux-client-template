@@ -36,6 +36,7 @@ import EditShareDesign from "./pages/design/EditShareDesign";
 import Dashboard from "./pages/dashboard/Dashboard";
 import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 import BrandCreation from "./pages/questionairre/BrandCreation";
+import NotificationAll from "./pages/notification/NotificationAll";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -148,6 +149,7 @@ class Root extends Component {
                         path="/designs/collections/view/:id"
                         component={ShowProductCollection}
                     />
+                    <PublicRoute exact path="/notifications/all" component={NotificationAll} />
                     <PublicRoute exact path="/quote-now" component={QuoteNowCart} />
                     <PublicRoute exact path="/our-design-details" component={OurDesignDetails} />
                     <PublicRoute exact path="/my-products" component={MyProduct} />

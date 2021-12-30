@@ -149,7 +149,7 @@ export default class TaskManage extends Component {
                loadingDetails: false,
                task: data,
                tempTask: {...data}
-            });
+            },() => this.fetchTaskPosts());
          })
          .catch(({ response }) => {
             this.setState({ loadingDetails: false });
@@ -159,7 +159,6 @@ export default class TaskManage extends Component {
                // toastError("Something went wrong! Please try again.");
             }
          });
-      this.fetchTaskPosts();
       this.fetchOrderMembers();
    };
 

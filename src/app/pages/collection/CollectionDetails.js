@@ -278,16 +278,16 @@ class CollectionDetails extends Component {
     myProducts = async (myDesignPage = 0) => {
         this.setState({ myDesignLoading: true });
         let { myDesignSize, search } = this.state;
-        let designParams = `?search=${search}&page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE`;
+        let designParams = `?search=${search}&page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE,UNAVAILABLE`;
         let result = [];
         await Http.GET("searchProduct", designParams)
             .then(({ data }) => {
                 this.setState({ myDesignLoading: false });
                 if (data.productResponseList && data.productResponseList.length > 0) {
-                    const pickDesignList = data.productResponseList.filter(
-                        (design) => design.availabilityStatus === "AVAILABLE"
-                    );
-                    result = [...result, ...pickDesignList];
+                    // const pickDesignList = data.productResponseList.filter(
+                    //     (design) => design.availabilityStatus === "AVAILABLE"
+                    // );
+                    result = [...result, ...data.productResponseList];
                 }
             })
             .catch(({ response }) => {
@@ -1223,7 +1223,6 @@ class CollectionDetails extends Component {
                             </div>
 
                             <div className="show-products">
-                                {console.log(productList)}
                                 {productList.map((product, i) => {
                                     return (
                                         <ProductCardWithTick

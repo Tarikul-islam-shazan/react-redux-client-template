@@ -1,31 +1,23 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
-import loadjs from "loadjs";
-import moment from "moment";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import { _storeData } from "./actions";
-import { NotificationCard } from "./NotificationCard";
-import { NotificationListItem } from "./NotificationListItem";
-import { NotificationSkeleton, CreateSkeletons } from "../commonComponents/ProductSkeleton";
+import {_storeData} from './actions';
+import {NotificationListItem} from './NotificationListItem';
+import {CreateSkeletons, NotificationSkeleton} from '../commonComponents/ProductSkeleton';
 
-import LoadingOverlay from "react-loading-overlay";
-import Http from "../services/Http";
-import { toastSuccess, toastError, toastWarning } from "../commonComponents/Toast";
+import LoadingOverlay from 'react-loading-overlay';
+import Http from '../services/Http';
+import {toastError} from '../commonComponents/Toast';
 import {
-    LOADER_OVERLAY_BACKGROUND,
     LOADER_COLOR,
-    LOADER_WIDTH,
-    LOADER_TEXT,
-    LOADER_POSITION,
-    LOADER_TOP,
-    LOADER_LEFT,
-    LOADER_MARGIN_TOP,
     LOADER_MARGIN_LEFT,
-} from "../constant";
-import { convertTimeToLocal } from "../services/Util";
+    LOADER_MARGIN_TOP,
+    LOADER_OVERLAY_BACKGROUND,
+    LOADER_POSITION,
+    LOADER_TEXT,
+    LOADER_WIDTH
+} from '../constant';
 
 class Notification extends Component {
     constructor(props) {
@@ -33,7 +25,7 @@ class Notification extends Component {
         this.state = {
             loading: false,
             notifications: {},
-            category: "",
+            category: ''
         };
     }
 
@@ -46,7 +38,7 @@ class Notification extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.notifications !== prevState.notifications) {
             return {
-                notifications: nextProps.notifications,
+                notifications: nextProps.notifications
             };
             // return {
             //   derivedData: computeDerivedState(nextProps),
@@ -64,24 +56,21 @@ class Notification extends Component {
             this.fetchNotification(0);
         } else {
             this.setState({
-                notifications: this.props.notifications,
+                notifications: this.props.notifications
             });
         }
         if (this.props.fromRoute) {
-            window.addEventListener("scroll", this.handleScroll);
+            window.addEventListener('scroll', this.handleScroll);
         }
     };
 
     componentWillUnmount() {
-        window.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener('scroll', this.handleScroll);
     }
 
     onScrollToEnd = () => {
-        const wrappedElement = document.getElementById("notification-panel");
-        if (
-            wrappedElement.scrollHeight - wrappedElement.scrollTop ===
-            wrappedElement.clientHeight
-        ) {
+        const wrappedElement = document.getElementById('notification-panel');
+        if (wrappedElement.scrollHeight - wrappedElement.scrollTop === wrappedElement.clientHeight) {
             let { hasNext, page } = this.props;
             let { loading } = this.state;
             if (hasNext && !loading) {
@@ -96,7 +85,7 @@ class Notification extends Component {
 
     handleScroll = () => {
         const windowHeight =
-            "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+            'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
         const body = document.body;
         const html = document.documentElement;
         const docHeight = Math.max(
@@ -127,30 +116,30 @@ class Notification extends Component {
             page,
             size,
             sort,
-            notificationCategory: category,
+            notificationCategory: category
         };
         await this.setState({
-            loading: true,
+            loading: true
         });
         let result = [];
-        await Http.GET("getNotifications", params)
+        await Http.GET('getNotifications', params)
             .then(({ data }) => {
                 if (data && data.length !== 0) {
-                    console.log("getNotifications SUCCESS: ", data);
+                    //console.log('getNotifications SUCCESS: ', data);
                     this.setState({
-                        loading: false,
+                        loading: false
                     });
                     result = data;
                 }
             })
             .catch(({ response }) => {
                 this.setState({
-                    loading: false,
+                    loading: false
                 });
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
-                    toastError("Something went wrong! Please try again.");
+                    toastError('Something went wrong! Please try again.');
                 }
             });
         if (page === 0) {
@@ -159,14 +148,14 @@ class Notification extends Component {
             notifications = [...notifications, ...result];
         }
 
-        await this.props._storeData("dataLoadedOnce", true);
-        await this.props._storeData("hasNext", result.length === size ? true : false);
-        await this.props._storeData("notifications", notifications);
+        await this.props._storeData('dataLoadedOnce', true);
+        await this.props._storeData('hasNext', result.length === size ? true : false);
+        await this.props._storeData('notifications', notifications);
         await this.setState({
-            notifications,
+            notifications
         });
         if (result.length) {
-            await this.props._storeData("page", page);
+            await this.props._storeData('page', page);
         }
     };
 
@@ -174,10 +163,10 @@ class Notification extends Component {
         this.setState({ loading: true });
         let { notifications } = this.props;
         if (isSeen) {
-            await Http.POST("markNotificationUnread", {}, id)
+            await Http.POST('markNotificationUnread', {}, id)
                 .then(({ data }) => {
                     this.setState({
-                        loading: false,
+                        loading: false
                     });
                     notifications = notifications.map((notification) => {
                         if (notification.id === id) {
@@ -185,26 +174,26 @@ class Notification extends Component {
                         }
                         return notification;
                     });
-                    this.props._storeData("notifications", notifications);
+                    this.props._storeData('notifications', notifications);
                     if (this.props.unseenCount) {
-                        this.props._storeData("unseenCount", parseInt(this.props.unseenCount) + 1);
+                        this.props._storeData('unseenCount', parseInt(this.props.unseenCount) + 1);
                     }
                 })
                 .catch(({ response }) => {
                     this.setState({
-                        loading: false,
+                        loading: false
                     });
                     if (response && response.data && response.data.message) {
                         toastError(response.data.message);
                     } else {
-                        toastError("Something went wrong! Please try again.");
+                        toastError('Something went wrong! Please try again.');
                     }
                 });
         } else {
-            await Http.POST("markNotificationRead", {}, id)
+            await Http.POST('markNotificationRead', {}, id)
                 .then(({ data }) => {
                     this.setState({
-                        loading: false,
+                        loading: false
                     });
                     notifications = notifications.map((notification) => {
                         if (notification.id === id) {
@@ -212,19 +201,19 @@ class Notification extends Component {
                         }
                         return notification;
                     });
-                    this.props._storeData("notifications", notifications);
+                    this.props._storeData('notifications', notifications);
                     if (this.props.unseenCount) {
-                        this.props._storeData("unseenCount", parseInt(this.props.unseenCount) - 1);
+                        this.props._storeData('unseenCount', parseInt(this.props.unseenCount) - 1);
                     }
                 })
                 .catch(({ response }) => {
                     this.setState({
-                        loading: false,
+                        loading: false
                     });
                     if (response && response.data && response.data.message) {
                         toastError(response.data.message);
                     } else {
-                        toastError("Something went wrong! Please try again.");
+                        toastError('Something went wrong! Please try again.');
                     }
                 });
         }
@@ -233,7 +222,7 @@ class Notification extends Component {
     onChangeFilter = (e) => {
         this.setState(
             {
-                [e.target.name]: e.target.value,
+                [e.target.name]: e.target.value
             },
             () => {
                 this.fetchNotification(0);
@@ -242,61 +231,51 @@ class Notification extends Component {
     };
 
     seeAll = () => {
-        window.open("/notifications/all", "_blank");
+        window.open('/notifications/all', '_blank');
     };
 
     render() {
         let { notifications } = this.props;
-        console.log("ODSSsssssssssssss====", notifications);
         return (
             <LoadingOverlay
                 active={this.state.loading && this.props.fromRoute}
                 styles={{
                     overlay: (base) => ({
                         ...base,
-                        background: LOADER_OVERLAY_BACKGROUND,
+                        background: LOADER_OVERLAY_BACKGROUND
                     }),
                     spinner: (base) => ({
                         ...base,
                         width: LOADER_WIDTH,
                         position: LOADER_POSITION,
-                        top: "50%",
-                        left: "50%",
+                        top: '50%',
+                        left: '50%',
                         marginTop: LOADER_MARGIN_TOP,
                         marginLeft: LOADER_MARGIN_LEFT,
-                        "& svg circle": {
-                            stroke: LOADER_COLOR,
-                        },
+                        '& svg circle': {
+                            stroke: LOADER_COLOR
+                        }
                     }),
                     content: (base) => ({
                         ...base,
-                        color: LOADER_COLOR,
-                    }),
+                        color: LOADER_COLOR
+                    })
                 }}
                 spinner
                 text={LOADER_TEXT}
             >
                 {this.props.fromRoute ? (
                     <section class="all-notifications">
-                        <div
-                            className="notification-section custom-scrollbar"
-                            id="notification-panel"
-                        >
+                        <div className="notification-section custom-scrollbar" id="notification-panel">
                             <div className="notification-header d-flex align-items-center justify-content-between">
                                 <div className="left-heading">
                                     <h3>
-                                        Notifications{" "}
-                                        <span className="count-notification">
-                                            ({this.props.unseenCount})
-                                        </span>
+                                        Notifications{' '}
+                                        <span className="count-notification">({this.props.unseenCount})</span>
                                     </h3>
                                 </div>
                                 <div class="notification-filter">
-                                    <select
-                                        name="category"
-                                        id="notification"
-                                        onChange={this.onChangeFilter}
-                                    >
+                                    <select name="category" id="notification" onChange={this.onChangeFilter}>
                                         <option value="">All</option>
                                         <option value="COLLECTION">Collection</option>
                                         <option value="INVOICE">Invoice</option>
@@ -330,14 +309,10 @@ class Notification extends Component {
                         <div className="notification-header d-flex align-items-center justify-content-between">
                             <div className="left-heading">
                                 <h3>
-                                    Notifications{" "}
+                                    Notifications{' '}
                                     <span className="count-notification">
-                                        (
-                                        {this.props.unseenCount > 99
-                                            ? `99+`
-                                            : this.props.unseenCount}
-                                        )
-                                    </span>
+										({this.props.unseenCount > 99 ? `99+` : this.props.unseenCount})
+									</span>
                                 </h3>
                             </div>
                             <div className="see-all">
@@ -359,7 +334,7 @@ class Notification extends Component {
                                     <NotificationSkeleton />
                                 </CreateSkeletons>
                             ) : (
-                                ""
+                                ''
                             )}
                         </div>
                     </div>
@@ -376,13 +351,13 @@ const mapStateToProps = (store) => ({
     size: store.notification.size,
     sort: store.notification.sort,
     hasNext: store.notification.hasNext,
-    unseenCount: store.notification.unseenCount,
+    unseenCount: store.notification.unseenCount
 });
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
-            _storeData,
+            _storeData
         },
         dispatch
     );

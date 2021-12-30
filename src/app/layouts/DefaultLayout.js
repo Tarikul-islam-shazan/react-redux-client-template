@@ -370,7 +370,7 @@ class DefaultLayout extends Component {
 
                                     {showNotification ? (
                                         <div ref={this.setWrapperRef}>
-                                            <Notification />
+                                            <Notification history={this.props.history} />
                                         </div>
                                     ) : (
                                         <></>

@@ -102,10 +102,11 @@ class QuoteNowCart extends Component {
             .then(({ data }) => {
                 this.setState({ loading: false });
                 if (data.productResponseList && data.productResponseList.length > 0) {
-                    const pickDesignList = data.productResponseList.filter(
-                        (design) => design.availabilityStatus === "AVAILABLE"
-                    );
-                    result = [...result, ...pickDesignList];
+                    // const pickDesignList = data.productResponseList.filter(
+                    //     (design) => design.availabilityStatus === "AVAILABLE"
+                    // );
+                    // result = [...result, ...pickDesignList];
+                    result = [...data.productResponseList];
                 }
             })
             .catch(({ response }) => {
