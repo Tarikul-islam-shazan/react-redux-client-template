@@ -111,6 +111,7 @@
                         &:first-child{
                           a{
                             font-size: 14px;
+                            color: $gray_dark_01;
                           }
                         }
                         &:nth-child(2){
@@ -215,6 +216,7 @@
                             &:first-child{                               
                                   a{
                                     font-size: 14px;
+                                    color: $gray_dark_01;
                                   }
                             }
                         }
@@ -367,7 +369,7 @@
           margin-bottom: 0 !important;
           a {
             font-size: 14px;
-            color: $gray_dark_02;
+            color: $gray_dark_01;
           }
         }
       }
