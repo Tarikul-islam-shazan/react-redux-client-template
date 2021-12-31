@@ -125,7 +125,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     );
 
     const renderColorWisePrice = (quote) => (
-        <div className="category-wise-quantity-table color-wise-table">
+        <div className="category-wise-quantity-table color-wise-table scroll-x-label">
             <table>
                 <tr>
                     {quote?.colorWiseSizeQuantityPairList?.map((item) => (
@@ -159,7 +159,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     );
 
     const renderSizeWisePrice = (quote) => (
-        <div className="category-wise-quantity-table desingwise-table">
+        <div className="category-wise-quantity-table desingwise-table scroll-x-label">
             <table>
                 <tr>
                     {Object.keys(quote?.sizeWiseBuyerPrice).map((key, i) => (

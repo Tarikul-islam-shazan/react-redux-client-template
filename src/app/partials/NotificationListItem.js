@@ -56,7 +56,7 @@ export const NotificationListItem = ({ item, markRead, todayData }) => {
                 // code block
                 break;
             case 'RFQ':
-                url += `/quotes/my-quotes`;
+                url += `/quotes/list`;
                 // code block
                 break;
             default:

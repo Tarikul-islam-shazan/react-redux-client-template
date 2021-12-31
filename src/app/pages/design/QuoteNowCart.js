@@ -212,16 +212,10 @@ class QuoteNowCart extends Component {
         return flag;
     };
 
-    removeAllFromCart = async () => {
-        let { cart } = this.state;
-        cart = [];
-        this.updateCart(cart);
-    };
-
     submit = async () => {
-        await this.setState({ loading: true });
         let { title, cart } = this.state;
         if (this.validate()) {
+            await this.setState({ loading: true });
             let body = {
                 name: title,
                 rfqRequestDTOList: cart.map((product) => {
@@ -237,8 +231,8 @@ class QuoteNowCart extends Component {
                     this.setState({ loading: false });
                     if (data.success) {
                         localStorage.setItem(LOCAL_QUOTE_NOW_KEY, "");
+                        this.props._storeData("quoteObj", null);
                         toastSuccess(data.message);
-                        this.removeAllFromCart();
                         this.props.history.push("/quotes/list");
                     } else {
                         toastError(data.message);
