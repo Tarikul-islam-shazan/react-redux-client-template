@@ -95,13 +95,6 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         );
     };
 
-    const getColorWisePrice = (colorWisePrices, id) => {
-        if (colorWisePrices && colorWisePrices[id]) {
-            return colorWisePrices[id];
-        }
-        return null;
-    };
-
     const getColors = (colorList, key) => {
         let hexCode = "";
         colorList.forEach((item, id) => {
@@ -225,6 +218,8 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             renderDesignStatus("Order placed for this design")
                         ) : quote.status === "PRODUCT_SOLD" ? (
                             renderDesignStatus("Design is already sold")
+                        ) : quote.status !== "PRICE_GIVEN" ? (
+                            renderDesignStatus("Price has not been given yet")
                         ) : (
                             <label for={`check_${quote.id}`} className="m-0"></label>
                         )}
