@@ -23,6 +23,7 @@ import {
 } from "../../constant";
 import { OrderItem } from "./components/OrderItem";
 import EmptyState from "../../commonComponents/EmptyState";
+import Loader from "../../commonComponents/Loader";
 import { fetchGeneralSettingsData } from "../../redux/actions";
 
 class ConfirmOrder extends Component {
@@ -31,6 +32,7 @@ class ConfirmOrder extends Component {
         this.state = {
             order: {},
             loading: false,
+            poLoading: false,
             colorWiseTotal: [],
             sizeWiseTotal: [],
             designWiseTotal: [],
@@ -39,10 +41,10 @@ class ConfirmOrder extends Component {
             totalAmountList: [],
             totalQuantityList: [],
             name: "",
-            deliveryDate: "",
             poDocIdList: [],
             designLists: [],
-            allDesginTotal: [],
+            errorId: null,
+            errorInfo: {},
         };
     }
 
@@ -76,10 +78,14 @@ class ConfirmOrder extends Component {
         let { order } = this.state;
         if (e.target.name === "deliveryDate") {
             order[e.target.name] = e.target.value;
+            this.setState({
+                errorInfo: {},
+            });
         } else {
             order[e.target.name] = e.target.value;
             this.setState({
                 order,
+                errorInfo: {},
             });
         }
     };
@@ -288,74 +294,101 @@ class ConfirmOrder extends Component {
             return total;
         };
 
-        const onConfirm = async () => {
-            let amounts = [];
-            let quantityList = [];
-            let dt = [];
-            this.state.designLists.forEach((item, index) => {
-                amounts[item.order] = calculateTotalPrice(item.id, item.type);
-            });
-            this.state.designLists.forEach((item, index) => {
-                quantityList[item.order] = calculateTotalQuantity(item.id, item.type);
-            });
+        const validateQuantity = () => {
+            let allDesginTotal = [];
+            let itemId = null;
 
             this.state.order.productResponseList.forEach((item, index) => {
-                dt.push({
+                allDesginTotal.push({
                     id: item.id,
                     total: calculateTotalQuantity(item.id, item.buyerQuotationType),
                 });
-                // this.setState({
-                //     allDesginTotal: [
-                //         ...this.state.allDesginTotal,
-                //         {
-                //             id: item.id,
-                //             total: calculateTotalQuantity(item.id, item.buyerQuotationType),
-                //         },
-                //     ],
-                // });
             });
-
-            console.log("DTTTTTTTTT", dt);
-
-            // await this.setState({ loading: true });
-            let {
-                order: { productResponseList, name, deliveryDate },
-            } = this.state;
-            let productInfoForRfqIds = [];
-            productResponseList.map((rfq) => {
-                if (rfq.isSelected) {
-                    productInfoForRfqIds.push(rfq.id);
+            allDesginTotal.forEach((item, index) => {
+                if (item.total === 0) {
+                    itemId = item.id;
+                    return item.id;
                 }
             });
-            let body = {
-                name: name,
-                productInfoForRfqIds,
-                amountList: [...amounts],
-                quantityList,
-                deliveryDate: changeDateFormat(deliveryDate, "", "DD/MM/YYYY"),
-                poDocIdList: this.state.poDocIdList.map((item) => item.id),
-                orderValue: getTotalPrice(),
-            };
-            await Http.POST("order", body)
-                .then(({ data }) => {
-                    this.setState({ loading: false });
-                    if (data.success) {
-                        toastSuccess(data.message);
-                        this.props.history.push("/orders/confirm-payment/" + data.id);
-                        localStorage.removeItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
-                    }
-                })
-                .catch(({ response }) => {
-                    this.setState({ loading: false });
-                    if (response && response.data && response.data.message) {
-                        toastError(response.data.message);
-                    } else {
-                        toastError("Something went wrong! Please try again.");
-                    }
-                });
+            return itemId;
         };
 
-        console.log("RRRRRRRRRRRR", this.state.allDesginTotal);
+        const validateOrderInfo = () => {
+            let isValid = true;
+            let {
+                order: { name, deliveryDate },
+            } = this.state;
+            if (!name) {
+                this.setState({
+                    errorInfo: { name: "Title is required" },
+                });
+                isValid = false;
+            }
+
+            if (!deliveryDate) {
+                this.setState({
+                    errorInfo: { date: "Title is required" },
+                });
+                isValid = false;
+            }
+            return isValid;
+        };
+
+        const onConfirm = async () => {
+            let itemId = validateQuantity();
+            let isValid = validateOrderInfo();
+
+            if (!itemId && isValid) {
+                let amounts = [];
+                let quantityList = [];
+
+                this.state.designLists.forEach((item, index) => {
+                    amounts[item.order] = calculateTotalPrice(item.id, item.type);
+                });
+                this.state.designLists.forEach((item, index) => {
+                    quantityList[item.order] = calculateTotalQuantity(item.id, item.type);
+                });
+
+                await this.setState({ loading: true });
+                let {
+                    order: { productResponseList, name, deliveryDate },
+                } = this.state;
+                let productInfoForRfqIds = [];
+                productResponseList.map((rfq) => {
+                    if (rfq.isSelected) {
+                        productInfoForRfqIds.push(rfq.id);
+                    }
+                });
+                let body = {
+                    name: name,
+                    productInfoForRfqIds,
+                    amountList: [...amounts],
+                    quantityList,
+                    deliveryDate: changeDateFormat(deliveryDate, "", "DD/MM/YYYY"),
+                    poDocIdList: this.state.poDocIdList.map((item) => item.id),
+                    orderValue: getTotalPrice(),
+                };
+                await Http.POST("order", body)
+                    .then(({ data }) => {
+                        this.setState({ loading: false, errorId: itemId });
+                        if (data.success) {
+                            toastSuccess(data.message);
+                            localStorage.removeItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
+                            this.props.history.push("/orders/my-orders?tab=pending");
+                        }
+                    })
+                    .catch(({ response }) => {
+                        this.setState({ loading: false });
+                        if (response && response.data && response.data.message) {
+                            toastError(response.data.message);
+                        } else {
+                            toastError("Something went wrong! Please try again.");
+                        }
+                    });
+            } else {
+                this.setState({ errorId: itemId });
+            }
+        };
 
         const onUpdateColorSize = (productId, colorId, price, quantity, index) => {
             let itemIndex = this.state.designLists.findIndex(
@@ -468,10 +501,10 @@ class ConfirmOrder extends Component {
         };
 
         const onUploadPo = async (poData) => {
-            // this.setState({ loading: true });
+            this.setState({ poLoading: true });
             await Http.POST("uploadDocument", poData)
                 .then(({ data }) => {
-                    // this.setState({ loading: false });
+                    this.setState({ poLoading: false });
                     if (data) {
                         this.setState({
                             poDocIdList: [
@@ -483,7 +516,7 @@ class ConfirmOrder extends Component {
                     }
                 })
                 .catch(({ response }) => {
-                    // this.setState({ loading: false });
+                    this.setState({ poLoading: false });
                     if (response && response.data && response.data.message) {
                         toastError(response.data.message);
                     } else {
@@ -518,37 +551,8 @@ class ConfirmOrder extends Component {
             });
         };
 
-        console.log("WWWWWWWWWWWWWWW", this.state.order);
-
         return (
-            // <LoadingOverlay
-            //     active={this.state.loading}
-            //     styles={{
-            //         overlay: (base) => ({
-            //             ...base,
-            //             background: LOADER_OVERLAY_BACKGROUND,
-            //         }),
-            //         spinner: (base) => ({
-            //             ...base,
-            //             width: LOADER_WIDTH,
-            //             position: LOADER_POSITION,
-            //             top: LOADER_TOP,
-            //             left: LOADER_LEFT,
-            //             marginTop: LOADER_MARGIN_TOP,
-            //             marginLeft: LOADER_MARGIN_LEFT,
-            //             "& svg circle": {
-            //                 stroke: LOADER_COLOR,
-            //             },
-            //         }),
-            //         content: (base) => ({
-            //             ...base,
-            //             color: LOADER_COLOR,
-            //         }),
-            //     }}
-            //     spinner
-            //     text={LOADER_TEXT}
-            // >
-            <>
+            <Loader loading={loading}>
                 {order.productResponseList && order.productResponseList.length !== 0 && !loading ? (
                     <>
                         <div className="add-quote d-flex">
@@ -572,6 +576,9 @@ class ConfirmOrder extends Component {
                                                 onChange={this.onChange}
                                                 className="w-100 bg-gray-light"
                                             />
+                                            {this.state.errorInfo.name && (
+                                                <p className="error">{this.state.errorInfo.name}</p>
+                                            )}
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="">Delivery date*</label>
@@ -582,6 +589,9 @@ class ConfirmOrder extends Component {
                                                 value={order.deliveryDate}
                                                 onChange={this.onChange}
                                             />
+                                            {this.state.errorInfo.date && (
+                                                <p className="error">{this.state.errorInfo.date}</p>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="po-column bg-white">
@@ -631,20 +641,27 @@ class ConfirmOrder extends Component {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="upload-po text-center">
-                                            <label for="po-upload" className="drag-upload">
-                                                <img src="../icons/upload-sm.svg" alt="" />{" "}
-                                                <span>Upload PO</span>
-                                            </label>
-                                            <input
-                                                type="file"
-                                                className="file-upload d-none"
-                                                onChange={(e) => onChangePo(e, "PURCHASE_ORDER")}
-                                                name="po-upload"
-                                                id="po-upload"
-                                                accept="application/pdf"
-                                            />
-                                        </div>
+                                        <Loader loading={this.state.poLoading}>
+                                            <div className="upload-po text-center">
+                                                <label
+                                                    for="po-upload"
+                                                    className="drag-upload cursor-pointer"
+                                                >
+                                                    <img src="../icons/upload-sm.svg" alt="" />{" "}
+                                                    <span>Upload PO</span>
+                                                </label>
+                                                <input
+                                                    type="file"
+                                                    className="file-upload d-none"
+                                                    onChange={(e) =>
+                                                        onChangePo(e, "PURCHASE_ORDER")
+                                                    }
+                                                    name="po-upload"
+                                                    id="po-upload"
+                                                    accept="application/pdf"
+                                                />
+                                            </div>
+                                        </Loader>
                                     </div>
                                 </div>
 
@@ -659,48 +676,47 @@ class ConfirmOrder extends Component {
                                 </h4>
                                 <h4 className="mb-3 font-weight-normal pc-step">
                                     Product confirmation (Step 1 of 2)
-                                    {/* <span className="result font-16 mr-3 mt-2 mt-sm-0">
-                                        You have{" "}
-                                        {order.productResponseList
-                                            ? order.productResponseList.length
-                                            : "-"}
-                                        items in your order
-                                    </span> */}
                                 </h4>
                                 {order.productResponseList ? (
-                                    order.productResponseList.map((product, i) => {
-                                        return (
-                                            <OrderItem
-                                                product={product}
-                                                key={i}
-                                                designIndex={i}
-                                                remove={this.delete}
-                                                onUpdateColorSize={onUpdateColorSize}
-                                                colorWiseItems={this.state.colorWiseTotal}
-                                                onUpdateSizeQuantity={onUpdateSizeQuantity}
-                                                sizeWiseItems={this.state.sizeWiseTotal}
-                                                onUpdateDesignQuantity={onUpdateDesignQuantity}
-                                                designWiseItems={this.state.designWiseTotal}
-                                                getTotalPrice={getTotalPrice}
-                                                renderSizeWiseTotalPrice={renderSizeWiseTotalPrice}
-                                                renderColorWiseTotalPrice={
-                                                    renderColorWiseTotalPrice
-                                                }
-                                                renderDesignWiseTotalPrice={
-                                                    renderDesignWiseTotalPrice
-                                                }
-                                                renderDesignWiseTotalQuantity={
-                                                    renderDesignWiseTotalQuantity
-                                                }
-                                                renderSizeWiseTotalQuantity={
-                                                    renderSizeWiseTotalQuantity
-                                                }
-                                                renderColorWiseTotalQuantity={
-                                                    renderColorWiseTotalQuantity
-                                                }
-                                            />
-                                        );
-                                    })
+                                    order.productResponseList
+                                        .slice(0)
+                                        .reverse()
+                                        .map((product, i) => {
+                                            return (
+                                                <OrderItem
+                                                    product={product}
+                                                    key={i}
+                                                    designIndex={i}
+                                                    remove={this.delete}
+                                                    onUpdateColorSize={onUpdateColorSize}
+                                                    colorWiseItems={this.state.colorWiseTotal}
+                                                    onUpdateSizeQuantity={onUpdateSizeQuantity}
+                                                    sizeWiseItems={this.state.sizeWiseTotal}
+                                                    onUpdateDesignQuantity={onUpdateDesignQuantity}
+                                                    designWiseItems={this.state.designWiseTotal}
+                                                    getTotalPrice={getTotalPrice}
+                                                    renderSizeWiseTotalPrice={
+                                                        renderSizeWiseTotalPrice
+                                                    }
+                                                    renderColorWiseTotalPrice={
+                                                        renderColorWiseTotalPrice
+                                                    }
+                                                    renderDesignWiseTotalPrice={
+                                                        renderDesignWiseTotalPrice
+                                                    }
+                                                    renderDesignWiseTotalQuantity={
+                                                        renderDesignWiseTotalQuantity
+                                                    }
+                                                    renderSizeWiseTotalQuantity={
+                                                        renderSizeWiseTotalQuantity
+                                                    }
+                                                    renderColorWiseTotalQuantity={
+                                                        renderColorWiseTotalQuantity
+                                                    }
+                                                    errorId={this.state.errorId}
+                                                />
+                                            );
+                                        })
                                 ) : (
                                     <></>
                                 )}
@@ -799,8 +815,7 @@ class ConfirmOrder extends Component {
                         </div>
                     )
                 )}
-            </>
-            // </LoadingOverlay>
+            </Loader>
         );
     }
 }

@@ -102,6 +102,17 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         return null;
     };
 
+    const getColors = (colorList, key) => {
+        let hexCode = "";
+        colorList.forEach((item, id) => {
+            if (item.id === parseInt(key)) {
+                hexCode = item.hexCode;
+                return item.hexCode;
+            }
+        });
+        return hexCode;
+    };
+
     const getSizeWiseLabel = (size, id) => {
         if (size && size[id]) {
             return size[id];
@@ -128,28 +139,40 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         <div className="category-wise-quantity-table color-wise-table scroll-x-label">
             <table>
                 <tr>
-                    {quote?.colorWiseSizeQuantityPairList?.map((item) => (
+                    {Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
                         <Tooltip
-                            title={<Typography fontSize={30}>{item.name}</Typography>}
+                            title={<Typography fontSize={30}>{`#${key}`}</Typography>}
                             placement="top"
                             arrow
-                            key={item.id}
+                            key={key}
                         >
-                            <th>
+                            <th key={key}>
                                 <span
                                     class="cursor-pointer color-icon"
-                                    style={{ background: item.hexCode }}
+                                    style={{
+                                        background: `${getColors(
+                                            quote?.colorWiseSizeQuantityPairList,
+                                            key
+                                        )}`,
+                                    }}
                                 />
                             </th>
                         </Tooltip>
                     ))}
                 </tr>
                 <tr>
-                    {quote?.colorWiseSizeQuantityPairList?.map((value, index) => (
+                    {/* {quote?.colorWiseSizeQuantityPairList?.map((value, index) => (
                         <td key={value.id}>
                             <p>
                                 <span>$</span>
                                 {getColorWisePrice(quote?.colorWiseBuyerPrice, value?.id)}
+                            </p>
+                        </td>
+                    ))} */}
+                    {Object.values(quote?.colorWiseBuyerPrice).map((value, i) => (
+                        <td key={i}>
+                            <p>
+                                <span>${value}</span>
                             </p>
                         </td>
                     ))}

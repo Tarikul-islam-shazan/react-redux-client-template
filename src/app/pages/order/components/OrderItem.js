@@ -14,8 +14,11 @@ export const OrderItem = ({
     renderDesignWiseTotalQuantity,
     renderSizeWiseTotalQuantity,
     renderColorWiseTotalQuantity,
+    errorId,
 }) => {
     let flag = 1;
+
+    console.log("QQQQQQQQQQQ", product);
 
     const getColorWisePrice = (colorWisePrices, id) => {
         if (colorWisePrices && colorWisePrices[id]) {
@@ -84,6 +87,23 @@ export const OrderItem = ({
 
     const getQuotationQuantity = (product) => {
         return product.quotationQuantity || product.quantity || 0;
+    };
+
+    const getColors = (colorList, key) => {
+        //    if (sizePrices && sizePrices[id]) {
+        //       return sizePrices[id];
+        //   }
+        //   return null;
+        let hexCode = "";
+        colorList.forEach((item, id) => {
+            // console.log("!!!!!!!!!!!!!!", item.id, color, key);
+            if (item.id === parseInt(key)) {
+                console.log("!!!!!!!!!!!!!!", item.hexCode);
+                hexCode = item.hexCode;
+                return item.hexCode;
+            }
+        });
+        return hexCode;
     };
 
     return (
@@ -255,6 +275,9 @@ export const OrderItem = ({
                                             change as order qty {"<"} quoted qty{" "}
                                         </p>
                                     )}
+                                    {errorId === product.id && (
+                                        <p className="error">Atleast one quantity is required</p>
+                                    )}
                                 </div>
                             )}
 
@@ -263,36 +286,35 @@ export const OrderItem = ({
                                     <div className="category-wise-quantity-table color-wise-table">
                                         <table>
                                             <tr>
-                                                {product?.colorWiseSizeQuantityPairList?.map(
-                                                    (item) => (
-                                                        <th>
+                                                {Object.keys(product?.colorWiseBuyerPrice).map(
+                                                    (key) => (
+                                                        <th key={key}>
                                                             <span
                                                                 class="cursor-pointer color-icon"
-                                                                style={{ background: item.hexCode }}
+                                                                style={{
+                                                                    background: `${getColors(
+                                                                        product?.colorWiseSizeQuantityPairList,
+                                                                        key
+                                                                    )}`,
+                                                                }}
                                                             />
                                                         </th>
                                                     )
                                                 )}
                                             </tr>
                                             <tr>
-                                                {product?.colorWiseSizeQuantityPairList?.map(
-                                                    (value, index) => (
-                                                        <>
-                                                            <td key={value.id}>
-                                                                <p>
-                                                                    <span>$</span>
-                                                                    {getColorWisePrice(
-                                                                        product?.colorWiseBuyerPrice,
-                                                                        value?.id
-                                                                    )}
-                                                                </p>
-                                                            </td>
-                                                        </>
+                                                {Object.values(product?.colorWiseBuyerPrice).map(
+                                                    (value, i) => (
+                                                        <td key={i}>
+                                                            <p>
+                                                                <span>${value}</span>
+                                                            </p>
+                                                        </td>
                                                     )
                                                 )}
                                             </tr>
                                             <tr>
-                                                {product?.colorWiseSizeQuantityPairList?.map(
+                                                {Object.keys(product?.colorWiseBuyerPrice).map(
                                                     (value, index) => (
                                                         <td key={value.id}>
                                                             <td>
@@ -324,6 +346,11 @@ export const OrderItem = ({
                                             <p className="quote-warning">
                                                 <img src="../icons/alert-triangle.svg" /> Price may
                                                 change as order qty {"<"} quoted qty{" "}
+                                            </p>
+                                        )}
+                                        {errorId === product.id && (
+                                            <p className="error">
+                                                Atleast one quantity is required
                                             </p>
                                         )}
                                     </div>
@@ -394,6 +421,11 @@ export const OrderItem = ({
                                                 change as order qty {"<"} quoted qty{" "}
                                             </p>
                                         )}
+                                        {errorId === product.id && (
+                                            <p className="error">
+                                                Atleast one quantity is required
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -435,6 +467,9 @@ export const OrderItem = ({
                                     </h5>
                                 </div>
                             )}
+                            {/* {errorId === product.id && (
+                                  <p className="error">Atleast one quantity is required</p>
+                            )} */}
                         </div>
                     </div>
                 </div>

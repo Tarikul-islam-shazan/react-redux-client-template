@@ -247,8 +247,6 @@ class QuoteNowCart extends Component {
 
     render() {
         let { designList, cart, title, TURN_AROUND_TIME, MOQ, loading, titleError } = this.state;
-
-        console.log("TEST========", cart);
         return (
             <Loader loading={loading}>
                 <div className="add-quote d-flex">
