@@ -102,6 +102,13 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         return null;
     };
 
+    const getSizeWiseLabel = (size, id) => {
+        if (size && size[id]) {
+            return size[id];
+        }
+        return null;
+    };
+
     const renderDesignWisePrice = (quote) => (
         <div className="pricewillbeupdated pt-2 pb-3">
             <div>
@@ -157,7 +164,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                 <tr>
                     {Object.keys(quote?.sizeWiseBuyerPrice).map((key, i) => (
                         <th key={i}>
-                            <p>{key}</p>
+                            <p> {getSizeWiseLabel(quote?.sizeLabelMap, key)}</p>
                         </th>
                     ))}
                 </tr>
@@ -272,7 +279,6 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     </a>
                                 </>
                             )}
-                            
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Date</label>
@@ -289,7 +295,9 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                         <div className="info-item mt-2">
                             <label className="font-14 text-muted">Product category</label>
                             <h5 className="font-20 color-333">
-                                {quote.productGroup} {(quote.productGroup && quote.productCategory) && "," } {quote.productCategory}
+                                {quote.productGroup}{" "}
+                                {quote.productGroup && quote.productCategory && ","}{" "}
+                                {quote.productCategory}
                             </h5>
                         </div>
 
