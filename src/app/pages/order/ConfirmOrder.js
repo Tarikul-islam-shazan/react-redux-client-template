@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import moment from "moment";
 import Http from "../../services/Http";
 import LoadingOverlay from "react-loading-overlay";
 import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
-import { addWithCurrentDate, convertTimeToLocal } from "../../services/Util";
+import { addWithCurrentDate, convertTimeToLocal, changeDateFormat } from "../../services/Util";
 import {
     LOADER_OVERLAY_BACKGROUND,
     LOADER_COLOR,
@@ -23,21 +25,24 @@ import { OrderItem } from "./components/OrderItem";
 import EmptyState from "../../commonComponents/EmptyState";
 import { fetchGeneralSettingsData } from "../../redux/actions";
 
-let AMOUNT = [];
 class ConfirmOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
             order: {},
-            TURN_AROUND_TIME: "",
             loading: false,
             colorWiseTotal: [],
             sizeWiseTotal: [],
             designWiseTotal: [],
             totalPrice: 0,
             totalQuantity: 0,
-            amountList: [],
-            quantityList: [],
+            totalAmountList: [],
+            totalQuantityList: [],
+            name: "",
+            deliveryDate: "",
+            poDocIdList: [],
+            designLists: [],
+            allDesginTotal: [],
         };
     }
 
@@ -69,359 +74,481 @@ class ConfirmOrder extends Component {
 
     onChange = (e) => {
         let { order } = this.state;
-        order[e.target.name] = e.target.value;
-        this.setState({
-            order,
-        });
+        if (e.target.name === "deliveryDate") {
+            order[e.target.name] = e.target.value;
+        } else {
+            order[e.target.name] = e.target.value;
+            this.setState({
+                order,
+            });
+        }
     };
 
     delete = async (id) => {
-        let { order } = this.state;
+        let { order, designLists } = this.state;
         let removedItem = order.productResponseList.filter((item) => item.id !== id);
+        let filteredDesignList = designLists.filter((item) => item.id !== id);
         this.setState({
             order: {
                 productResponseList: removedItem,
             },
+            designLists: filteredDesignList,
         });
+    };
+
+    getQuotationQuantity = (product) => {
+        return product.quotationQuantity || product.quantity || 0;
+    };
+
+    getTotalQuotationQuantity = () => {
+        let total = 0;
+        this.state.order.productResponseList.forEach((product) => {
+            total += this.getQuotationQuantity(product);
+        });
+        return total;
     };
 
     render() {
         let { order, loading } = this.state;
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
 
-        console.log("~~~=======", order);
-
-        // const getDeliveryDate = () => {
-        //     if (order.productResponseList.length !== 0) {
-        //         let max = order.productResponseList.reduce(
-        //             (max, item) =>
-        //                 item.deliveryTime
-        //                     ? item.deliveryTime
-        //                     : this.state.TURN_AROUND_TIME > max
-        //                     ? item.deliveryTime
-        //                     : max,
-        //             0
-        //         );
-
-        //         max = order.productResponseList.find((product) => product.deliveryTime === max);
-
-        //         let formattedQuoteDate = convertTimeToLocal(
-        //             max.date,
-        //             max.time,
-        //             "DD/MM/YYYY hh:mm A"
-        //         );
-        //         formattedQuoteDate = moment(formattedQuoteDate, "DD/MM/YYYY hh:mm A");
-
-        //         let deliveryDate = addWithCurrentDate(
-        //             formattedQuoteDate,
-        //             max.deliveryTime,
-        //             "day",
-        //             "Do MMM YY"
-        //         );
-
-        //         if (!deliveryDate) {
-        //             return toastError("Invalid date type");
-        //         }
-        //         return deliveryDate;
-        //     }
-        // };
-
         const renderDesignWiseTotalPrice = (productId) => {
             let total = 0;
-            this.state.designWiseTotal.map((item, index) => {
-                if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                    let tmpObj = item[productId];
-                    total += parseInt(tmpObj["quantity"]) * parseFloat(tmpObj["price"]);
+            let designWiseList = this.state.designLists.filter(
+                (design) => design.type === "DESIGNWISE"
+            );
+            let item = designWiseList.find((design) => parseInt(design.id) === parseInt(productId));
+            if (item?.product) {
+                total += parseInt(item?.product["quantity"]) * parseFloat(item?.product["price"]);
+            }
+            return total.toFixed(2);
+        };
 
-                    return total;
-                }
-            });
-
+        const renderDesignWiseTotalQuantity = (productId) => {
+            let total = 0;
+            let designWiseList = this.state.designLists.filter(
+                (design) => design.type === "DESIGNWISE"
+            );
+            let item = designWiseList.find((design) => parseInt(design.id) === parseInt(productId));
+            if (item?.product) {
+                total += parseInt(item?.product["quantity"]);
+            }
             return total;
         };
 
         const renderSizeWiseTotalPrice = (productId) => {
             let total = 0;
-            this.state.sizeWiseTotal.map((item, index) => {
-                if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                    let tmpObj = item[productId];
-                    for (let size in tmpObj) {
-                        total +=
-                            parseInt(tmpObj[size]["quantity"]) * parseFloat(tmpObj[size]["price"]);
-                    }
-                    return total;
+            let sizeWiseDesignList = this.state.designLists.filter(
+                (design) => design.type === "SIZEWISE"
+            );
+            let item = sizeWiseDesignList.find(
+                (design) => parseInt(design.id) === parseInt(productId)
+            );
+            if (item) {
+                for (let size in item.product) {
+                    total +=
+                        parseInt(item.product[size]["quantity"]) *
+                        parseFloat(item.product[size]["price"]);
                 }
-            });
+            }
+            return total.toFixed(2);
+        };
+
+        const renderSizeWiseTotalQuantity = (productId) => {
+            let total = 0;
+            let sizeWiseDesignList = this.state.designLists.filter(
+                (design) => design.type === "SIZEWISE"
+            );
+            let item = sizeWiseDesignList.find(
+                (design) => parseInt(design.id) === parseInt(productId)
+            );
+            if (item) {
+                for (let size in item.product) {
+                    total += parseInt(item.product[size]["quantity"]);
+                }
+            }
             return total;
         };
 
         const renderColorWiseTotalPrice = (productId) => {
             let total = 0;
-            this.state.colorWiseTotal.map((item, index) => {
-                if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                    let tmpObj = item[productId];
-                    for (let color in tmpObj) {
-                        total +=
-                            parseInt(tmpObj[color]["quantity"]) *
-                            parseFloat(tmpObj[color]["price"]);
-                    }
-                    return total;
+            let colorWiseDesignList = this.state.designLists.filter(
+                (design) => design.type === "COLORWISE"
+            );
+            let item = colorWiseDesignList.find(
+                (design) => parseInt(design.id) === parseInt(productId)
+            );
+            if (item) {
+                for (let size in item.product) {
+                    total +=
+                        parseInt(item.product[size]["quantity"]) *
+                        parseFloat(item.product[size]["price"]);
                 }
-            });
+            }
+            return total.toFixed(2);
+        };
+
+        const renderColorWiseTotalQuantity = (productId) => {
+            let total = 0;
+            let colorWiseDesignList = this.state.designLists.filter(
+                (design) => design.type === "COLORWISE"
+            );
+            let item = colorWiseDesignList.find(
+                (design) => parseInt(design.id) === parseInt(productId)
+            );
+            if (item) {
+                for (let size in item.product) {
+                    total += parseInt(item.product[size]["quantity"]);
+                }
+            }
+            return total;
+        };
+
+        const calculateTotalPrice = (productId, type) => {
+            let total = 0;
+            if (type === "SIZEWISE") {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    for (let size in item.product) {
+                        total +=
+                            parseInt(item.product[size]["quantity"]) *
+                            parseFloat(item.product[size]["price"]);
+                    }
+                }
+            } else if (type === "COLORWISE") {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    for (let size in item.product) {
+                        total +=
+                            parseInt(item.product[size]["quantity"]) *
+                            parseFloat(item.product[size]["price"]);
+                    }
+                }
+            } else {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    total += parseInt(item.product["quantity"]) * parseFloat(item.product["price"]);
+                }
+            }
+            return total;
+        };
+
+        const calculateTotalQuantity = (productId, type) => {
+            let total = 0;
+            if (type === "SIZEWISE") {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    for (let size in item.product) {
+                        total += parseInt(item.product[size]["quantity"]);
+                    }
+                }
+            } else if (type === "COLORWISE") {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    for (let size in item.product) {
+                        total += parseInt(item.product[size]["quantity"]);
+                    }
+                }
+            } else {
+                let item = this.state.designLists.find(
+                    (design) => parseInt(design.id) === parseInt(productId)
+                );
+                if (item) {
+                    total += parseInt(item.product["quantity"]);
+                }
+            }
             return total;
         };
 
         const getTotalPrice = () => {
             let total = 0;
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "DESIGNWISE") {
-                        total += renderDesignWiseTotalPrice(item.id);
-                    }
-                });
-            }
+            this.state.designLists.forEach((item, index) => {
+                total += calculateTotalPrice(item.id, item.type);
+            });
 
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "COLORWISE") {
-                        total += renderColorWiseTotalPrice(item.id);
-                    }
-                });
-            }
-
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "SIZEWISE") {
-                        total += renderSizeWiseTotalPrice(item.id);
-                    }
-                });
-            }
             return total;
         };
 
-        const renderDesignWiseSinglePrice = () => {
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "DESIGNWISE") {
-                        this.setState({
-                            amountList: [...this.state.amountList, 55],
-                        });
-                    }
-                });
-            }
+        const getTotalQuantity = () => {
+            let total = 0;
+            this.state.designLists.forEach((item, index) => {
+                total += calculateTotalQuantity(item.id, item.type);
+            });
 
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "COLORWISE") {
-                        return renderColorWiseTotalPrice(item.id);
-                    }
-                });
-            }
-
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "SIZEWISE") {
-                        return renderSizeWiseTotalPrice(item.id);
-                    }
-                });
-            }
+            return total;
         };
 
         const onConfirm = async () => {
-            console.log("EEEEEEEEEEE", renderDesignWiseSinglePrice());
+            let amounts = [];
+            let quantityList = [];
+            let dt = [];
+            this.state.designLists.forEach((item, index) => {
+                amounts[item.order] = calculateTotalPrice(item.id, item.type);
+            });
+            this.state.designLists.forEach((item, index) => {
+                quantityList[item.order] = calculateTotalQuantity(item.id, item.type);
+            });
+
+            this.state.order.productResponseList.forEach((item, index) => {
+                dt.push({
+                    id: item.id,
+                    total: calculateTotalQuantity(item.id, item.buyerQuotationType),
+                });
+                // this.setState({
+                //     allDesginTotal: [
+                //         ...this.state.allDesginTotal,
+                //         {
+                //             id: item.id,
+                //             total: calculateTotalQuantity(item.id, item.buyerQuotationType),
+                //         },
+                //     ],
+                // });
+            });
+
+            console.log("DTTTTTTTTT", dt);
+
             // await this.setState({ loading: true });
-            // let {
-            //     order: { productResponseList, name },
-            // } = this.state;
-            // let productInfoForRfqIds = [];
-            // productResponseList.map((rfq) => {
-            //     if (rfq.isSelected) {
-            //         productInfoForRfqIds.push(rfq.id);
-            //     }
-            // });
-            // let body = {
-            //     name: name,
-            //     productInfoForRfqIds,
-            // };
-            // await Http.POST("order", body)
-            //     .then(({ data }) => {
-            //         this.setState({ loading: false });
-            //         if (data.success) {
-            //             toastSuccess(data.message);
-            //             this.props.history.push("/orders/confirm-payment/" + data.id);
-            //         }
-            //     })
-            //     .catch(({ response }) => {
-            //         this.setState({ loading: false });
-            //         if (response && response.data && response.data.message) {
-            //             toastError(response.data.message);
-            //         } else {
-            //             toastError("Something went wrong! Please try again.");
-            //         }
-            //     });
+            let {
+                order: { productResponseList, name, deliveryDate },
+            } = this.state;
+            let productInfoForRfqIds = [];
+            productResponseList.map((rfq) => {
+                if (rfq.isSelected) {
+                    productInfoForRfqIds.push(rfq.id);
+                }
+            });
+            let body = {
+                name: name,
+                productInfoForRfqIds,
+                amountList: [...amounts],
+                quantityList,
+                deliveryDate: changeDateFormat(deliveryDate, "", "DD/MM/YYYY"),
+                poDocIdList: this.state.poDocIdList.map((item) => item.id),
+                orderValue: getTotalPrice(),
+            };
+            await Http.POST("order", body)
+                .then(({ data }) => {
+                    this.setState({ loading: false });
+                    if (data.success) {
+                        toastSuccess(data.message);
+                        this.props.history.push("/orders/confirm-payment/" + data.id);
+                        localStorage.removeItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
+                    }
+                })
+                .catch(({ response }) => {
+                    this.setState({ loading: false });
+                    if (response && response.data && response.data.message) {
+                        toastError(response.data.message);
+                    } else {
+                        toastError("Something went wrong! Please try again.");
+                    }
+                });
         };
 
-        console.log("DDDDDDDDDDDDDD", this.state.amountList);
+        console.log("RRRRRRRRRRRR", this.state.allDesginTotal);
 
-        const onUpdateColorSize = (productId, colorId, price, quantity) => {
-            if (this.state.colorWiseTotal.length > 0) {
-                let tmpArray = [...this.state.colorWiseTotal];
-                this.state.colorWiseTotal.map((item, index) => {
-                    for (let key in item) {
-                        if (parseInt(key) === productId) {
-                            let newItem = { [colorId]: { quantity, price } };
-                            let newProduct = { [key]: { ...item[key], ...newItem } };
-                            tmpArray.splice(index, 1);
-                            if (quantity === "") {
-                                delete newProduct[key][colorId];
-                            }
-                            tmpArray.push(newProduct);
-                            this.setState((prev) => ({
-                                ...prev,
-                                colorWiseTotal: tmpArray,
-                            }));
-                        } else {
-                            this.setState((prev) => ({
-                                ...prev,
-                                colorWiseTotal: [
-                                    ...this.state.colorWiseTotal,
-                                    { [parseInt(productId)]: { [colorId]: { quantity, price } } },
-                                ],
-                            }));
-                        }
-                    }
+        const onUpdateColorSize = (productId, colorId, price, quantity, index) => {
+            let itemIndex = this.state.designLists.findIndex(
+                (product) => parseInt(product.id) === parseInt(productId)
+            );
+            if (itemIndex > -1) {
+                let designList = [...this.state.designLists];
+                let item = designList[itemIndex];
+                let newItem = {
+                    ...item,
+                    product: { ...item.product, [colorId]: { quantity, price } },
+                };
+                if (quantity === "") {
+                    delete newItem.product[colorId];
+                }
+                designList[itemIndex] = newItem;
+                this.setState({
+                    designLists: designList,
                 });
             } else {
                 this.setState((prev) => ({
                     ...prev,
-                    colorWiseTotal: [
-                        ...this.state.colorWiseTotal,
-                        { [parseInt(productId)]: { [colorId]: { quantity, price } } },
-                    ],
-                }));
-            }
-        };
-
-        const onUpdateSizeQuantity = (productId, sizeId, price, quantity) => {
-            if (this.state.sizeWiseTotal.length > 0) {
-                let tmpArray = [...this.state.sizeWiseTotal];
-                this.state.sizeWiseTotal.map((item, index) => {
-                    for (let key in item) {
-                        if (parseInt(key) === productId) {
-                            let newItem = { [sizeId]: { quantity, price } };
-                            let newProduct = { [key]: { ...item[key], ...newItem } };
-                            tmpArray.splice(index, 1);
-                            if (quantity === "") {
-                                delete newProduct[key][sizeId];
-                            }
-                            tmpArray.push(newProduct);
-                            this.setState((prev) => ({
-                                ...prev,
-                                sizeWiseTotal: tmpArray,
-                            }));
-                        } else {
-                            this.setState((prev) => ({
-                                ...prev,
-                                sizeWiseTotal: [
-                                    ...this.state.sizeWiseTotal,
-                                    { [parseInt(productId)]: { [sizeId]: { quantity, price } } },
-                                ],
-                            }));
-                        }
-                    }
-                });
-            } else {
-                this.setState((prev) => ({
-                    ...prev,
-                    sizeWiseTotal: [
-                        ...this.state.sizeWiseTotal,
-                        { [parseInt(productId)]: { [sizeId]: { quantity, price } } },
-                    ],
-                }));
-            }
-        };
-
-        const onUpdateDesignQuantity = (productId, price, quantity) => {
-            if (this.state.designWiseTotal.length > 0) {
-                console.log("==");
-                let tmpArray = [...this.state.designWiseTotal];
-                this.state.designWiseTotal.map((item, index) => {
-                    for (let key in item) {
-                        if (parseInt(key) === productId) {
-                            let newProduct = { [productId]: { quantity, price } };
-                            tmpArray.splice(index, 1);
-                            if (quantity === "") {
-                                delete newProduct[key];
-                            } else {
-                                tmpArray.push(newProduct);
-                            }
-
-                            this.setState((prev) => ({
-                                ...prev,
-                                designWiseTotal: tmpArray,
-                            }));
-                        } else {
-                            this.setState((prev) => ({
-                                ...prev,
-                                designWiseTotal: [
-                                    ...this.state.designWiseTotal,
-                                    {
-                                        [parseInt(productId)]: {
-                                            quantity,
-                                            price,
-                                        },
-                                    },
-                                ],
-                            }));
-                        }
-                    }
-                });
-            } else {
-                this.setState((prev) => ({
-                    ...prev,
-                    designWiseTotal: [
-                        ...this.state.designWiseTotal,
+                    designLists: [
+                        ...this.state.designLists,
                         {
-                            [parseInt(productId)]: {
-                                quantity,
-                                price,
+                            id: productId,
+                            product: {
+                                [colorId]: { quantity, price },
                             },
+                            type: "COLORWISE",
+                            order: index,
                         },
                     ],
                 }));
             }
         };
 
-        console.log("***********", this.state.colorWiseTotal);
+        const onUpdateSizeQuantity = (productId, sizeId, price, quantity, index) => {
+            let itemIndex = this.state.designLists.findIndex(
+                (product) => parseInt(product.id) === parseInt(productId)
+            );
+            if (itemIndex > -1) {
+                let designList = [...this.state.designLists];
+                let item = designList[itemIndex];
+                let newItem = {
+                    ...item,
+                    product: { ...item.product, [sizeId]: { quantity, price } },
+                };
+                if (quantity === "") {
+                    delete newItem.product[sizeId];
+                }
+                designList[itemIndex] = newItem;
+                this.setState({
+                    designLists: designList,
+                });
+            } else {
+                this.setState((prev) => ({
+                    ...prev,
+                    designLists: [
+                        ...this.state.designLists,
+                        {
+                            id: productId,
+                            product: {
+                                [sizeId]: { quantity, price },
+                            },
+                            type: "SIZEWISE",
+                            order: index,
+                        },
+                    ],
+                }));
+            }
+        };
+
+        const onUpdateDesignQuantity = (productId, price, quantity, index) => {
+            let itemIndex = this.state.designLists.findIndex(
+                (product) => parseInt(product.id) === parseInt(productId)
+            );
+            if (itemIndex > -1) {
+                let designList = [...this.state.designLists];
+                let item = designList[itemIndex];
+                let newItem = {
+                    ...item,
+                    product: { ...item.product, ...{ quantity, price } },
+                };
+                if (quantity === "") {
+                    delete newItem["id"];
+                }
+                designList[itemIndex] = newItem;
+                this.setState({
+                    designLists: designList,
+                });
+            } else {
+                this.setState((prev) => ({
+                    ...prev,
+                    designLists: [
+                        ...this.state.designLists,
+                        {
+                            id: productId,
+                            product: { quantity, price },
+                            type: "DESIGNWISE",
+                            order: index,
+                        },
+                    ],
+                }));
+            }
+        };
+
+        const getShortName = (source, size = 35) => {
+            return source?.length > size ? source?.slice(0, size - 1) + "…" : source;
+        };
+
+        const onUploadPo = async (poData) => {
+            // this.setState({ loading: true });
+            await Http.POST("uploadDocument", poData)
+                .then(({ data }) => {
+                    // this.setState({ loading: false });
+                    if (data) {
+                        this.setState({
+                            poDocIdList: [
+                                ...this.state.poDocIdList,
+                                { name: poData.name, id: data.id, docUrl: data.docUrl },
+                            ],
+                        });
+                        toastSuccess("Uploaded successfully");
+                    }
+                })
+                .catch(({ response }) => {
+                    // this.setState({ loading: false });
+                    if (response && response.data && response.data.message) {
+                        toastError(response.data.message);
+                    } else {
+                        toastError("Request was unsuccessful.");
+                    }
+                });
+        };
+
+        const onChangePo = (e, docType) => {
+            let file = e.target.files[0];
+            let data = {
+                name: file.name,
+                docMimeType: file.type,
+                documentType: docType,
+                base64Str: "",
+            };
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                data.base64Str = reader.result;
+                onUploadPo(data);
+            };
+            reader.onerror = function (error) {
+                toastError(error);
+            };
+        };
+
+        const onRemovePo = async (itemId) => {
+            const updatedList = this.state.poDocIdList.filter((item) => item.id !== itemId);
+            this.setState({
+                poDocIdList: [...updatedList],
+            });
+        };
+
+        console.log("WWWWWWWWWWWWWWW", this.state.order);
 
         return (
-            <LoadingOverlay
-                active={this.state.loading}
-                styles={{
-                    overlay: (base) => ({
-                        ...base,
-                        background: LOADER_OVERLAY_BACKGROUND,
-                    }),
-                    spinner: (base) => ({
-                        ...base,
-                        width: LOADER_WIDTH,
-                        position: LOADER_POSITION,
-                        top: LOADER_TOP,
-                        left: LOADER_LEFT,
-                        marginTop: LOADER_MARGIN_TOP,
-                        marginLeft: LOADER_MARGIN_LEFT,
-                        "& svg circle": {
-                            stroke: LOADER_COLOR,
-                        },
-                    }),
-                    content: (base) => ({
-                        ...base,
-                        color: LOADER_COLOR,
-                    }),
-                }}
-                spinner
-                text={LOADER_TEXT}
-            >
+            // <LoadingOverlay
+            //     active={this.state.loading}
+            //     styles={{
+            //         overlay: (base) => ({
+            //             ...base,
+            //             background: LOADER_OVERLAY_BACKGROUND,
+            //         }),
+            //         spinner: (base) => ({
+            //             ...base,
+            //             width: LOADER_WIDTH,
+            //             position: LOADER_POSITION,
+            //             top: LOADER_TOP,
+            //             left: LOADER_LEFT,
+            //             marginTop: LOADER_MARGIN_TOP,
+            //             marginLeft: LOADER_MARGIN_LEFT,
+            //             "& svg circle": {
+            //                 stroke: LOADER_COLOR,
+            //             },
+            //         }),
+            //         content: (base) => ({
+            //             ...base,
+            //             color: LOADER_COLOR,
+            //         }),
+            //     }}
+            //     spinner
+            //     text={LOADER_TEXT}
+            // >
+            <>
                 {order.productResponseList && order.productResponseList.length !== 0 && !loading ? (
                     <>
                         <div className="add-quote d-flex">
@@ -448,84 +575,61 @@ class ConfirmOrder extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="">Delivery date*</label>
-                                            <input type="date" className="w-100 bg-gray-light" />
+                                            <input
+                                                type="date"
+                                                className="w-100 bg-gray-light"
+                                                name="deliveryDate"
+                                                value={order.deliveryDate}
+                                                onChange={this.onChange}
+                                            />
                                         </div>
                                     </div>
                                     <div className="po-column bg-white">
                                         <div className="uploded-po">
-                                            <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names">
-                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
-                                                    <a
-                                                        href="#"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
+                                            {this.state?.poDocIdList.map((item) => (
+                                                <div
+                                                    className="single-po d-flex justify-content-between align-items-center"
+                                                    key={item.id}
+                                                >
+                                                    <div className="po-names">
+                                                        <img
+                                                            src="../icons/file-pdf.svg"
+                                                            alt="pdf"
+                                                        />{" "}
+                                                        <Tooltip
+                                                            title={item.name}
+                                                            placement="top"
+                                                            arrow
+                                                        >
+                                                            <a
+                                                                href={item.docUrl}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                            >
+                                                                {getShortName(item.name, 15)}
+                                                            </a>
+                                                        </Tooltip>
+                                                    </div>
+                                                    <div
+                                                        className="delete-btn"
+                                                        onClick={() => onRemovePo(item.id)}
                                                     >
-                                                        BMW PO/2021
-                                                    </a>
+                                                        <img
+                                                            src="../icons/delete_gray.svg"
+                                                            alt="delete"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className="delete-btn">
-                                                    <img
-                                                        src="../icons/delete_gray.svg"
-                                                        alt="delete"
-                                                    />
+                                            ))}
+
+                                            {(!this.state?.poDocIdList ||
+                                                this.state?.poDocIdList.length === 0) && (
+                                                <div className="uploded-po pt-2">
+                                                    <p className="regular-14 gray_dark_02 text-center no-po">
+                                                        No PO uploaded
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names">
-                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
-                                                    <a
-                                                        href="#"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        BMW PO/2021
-                                                    </a>
-                                                </div>
-                                                <div className="delete-btn">
-                                                    <img
-                                                        src="../icons/delete_gray.svg"
-                                                        alt="delete"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names">
-                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
-                                                    <a
-                                                        href="#"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        BMW PO/2021
-                                                    </a>
-                                                </div>
-                                                <div className="delete-btn">
-                                                    <img
-                                                        src="../icons/delete_gray.svg"
-                                                        alt="delete"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="single-po d-flex justify-content-between align-items-center">
-                                                <div className="po-names">
-                                                    <img src="../icons/file-pdf.svg" alt="pdf" />{" "}
-                                                    <a
-                                                        href="#"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        BMW PO/2021
-                                                    </a>
-                                                </div>
-                                                <div className="delete-btn">
-                                                    <img
-                                                        src="../icons/delete_gray.svg"
-                                                        alt="delete"
-                                                    />
-                                                </div>
-                                            </div>
-                                            {/* <p className="text-center no-po">No PO uploaded</p> */}
+                                            )}
                                         </div>
                                         <div className="upload-po text-center">
                                             <label for="po-upload" className="drag-upload">
@@ -535,9 +639,10 @@ class ConfirmOrder extends Component {
                                             <input
                                                 type="file"
                                                 className="file-upload d-none"
+                                                onChange={(e) => onChangePo(e, "PURCHASE_ORDER")}
                                                 name="po-upload"
                                                 id="po-upload"
-                                                accept=""
+                                                accept="application/pdf"
                                             />
                                         </div>
                                     </div>
@@ -568,8 +673,8 @@ class ConfirmOrder extends Component {
                                             <OrderItem
                                                 product={product}
                                                 key={i}
+                                                designIndex={i}
                                                 remove={this.delete}
-                                                // onSetPriceWiseQuantity={onSetPriceWiseQuantity}
                                                 onUpdateColorSize={onUpdateColorSize}
                                                 colorWiseItems={this.state.colorWiseTotal}
                                                 onUpdateSizeQuantity={onUpdateSizeQuantity}
@@ -577,7 +682,22 @@ class ConfirmOrder extends Component {
                                                 onUpdateDesignQuantity={onUpdateDesignQuantity}
                                                 designWiseItems={this.state.designWiseTotal}
                                                 getTotalPrice={getTotalPrice}
-                                                loading={this.state.loading}
+                                                renderSizeWiseTotalPrice={renderSizeWiseTotalPrice}
+                                                renderColorWiseTotalPrice={
+                                                    renderColorWiseTotalPrice
+                                                }
+                                                renderDesignWiseTotalPrice={
+                                                    renderDesignWiseTotalPrice
+                                                }
+                                                renderDesignWiseTotalQuantity={
+                                                    renderDesignWiseTotalQuantity
+                                                }
+                                                renderSizeWiseTotalQuantity={
+                                                    renderSizeWiseTotalQuantity
+                                                }
+                                                renderColorWiseTotalQuantity={
+                                                    renderColorWiseTotalQuantity
+                                                }
                                             />
                                         );
                                     })
@@ -639,10 +759,9 @@ class ConfirmOrder extends Component {
                                             <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
                                                 Total Quantity:
                                                 <strong className="semibold font-18">
-                                                    {/* $
-                                                    {isNaN(getTotalPrice(order))
+                                                    {isNaN(getTotalQuantity())
                                                         ? 0
-                                                        : getTotalPrice(order)} */}
+                                                        : getTotalQuantity()}
                                                 </strong>
                                             </div>
                                             <div className="mb-2 font-weight-normal color-333 font-18 d-flex align-items-center justify-content-between">
@@ -660,7 +779,10 @@ class ConfirmOrder extends Component {
                                             >
                                                 Confirm order
                                             </button>
-                                            <span>Price maybe change</span>
+                                            {getTotalQuantity() <
+                                                this.getTotalQuotationQuantity() && (
+                                                <span>Price maybe change</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -677,7 +799,8 @@ class ConfirmOrder extends Component {
                         </div>
                     )
                 )}
-            </LoadingOverlay>
+            </>
+            // </LoadingOverlay>
         );
     }
 }

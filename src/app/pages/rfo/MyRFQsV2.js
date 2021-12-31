@@ -272,35 +272,29 @@ class MyRFQs extends Component {
 
     onNextStep = () => {
         let { rfqList, orderTitle } = this.state;
-        if (orderTitle === "") {
-            toastError("Please provide a order title");
-        } else {
-            let productInfoForRfqIds = [];
-            rfqList.map((rfq) => {
-                if (rfq.isSelected) {
-                    productInfoForRfqIds.push(rfq);
-                }
-            });
 
-            // let ids = `${productInfoForRfqIds.toString()}`;
-            // let ids = productInfoForRfqIds.map((i) => i.id.toString());
-            // history.push('/orders/create?id='+ids);
+        let productInfoForRfqIds = [];
+        rfqList.map((rfq) => {
+            if (rfq.isSelected) {
+                productInfoForRfqIds.push(rfq);
+            }
+        });
 
-            let selectedDesigns = {
-                name: orderTitle,
-                designList: productInfoForRfqIds,
-            };
+        // let ids = `${productInfoForRfqIds.toString()}`;
+        // let ids = productInfoForRfqIds.map((i) => i.id.toString());
+        // history.push('/orders/create?id='+ids);
 
-            localStorage.setItem(
-                `PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`,
-                JSON.stringify(selectedDesigns)
-            );
-            // this.props.history.push({
-            //     pathname: "/orders/confirm-order",
-            //     routeParams,
-            // });
-            this.props.history.push("/orders/confirm-order");
-        }
+        let selectedDesigns = {
+            name: orderTitle,
+            designList: productInfoForRfqIds,
+        };
+
+        localStorage.setItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`, JSON.stringify(selectedDesigns));
+        // this.props.history.push({
+        //     pathname: "/orders/confirm-order",
+        //     routeParams,
+        // });
+        this.props.history.push("/orders/confirm-order");
     };
 
     render() {
@@ -530,7 +524,7 @@ class MyRFQs extends Component {
                                     </h4>
                                     <button
                                         className="m-0 btn-brand brand-bg-color shadow"
-                                        onClick={this.order}
+                                        onClick={this.onNextStep}
                                     >
                                         Place your order
                                     </button>
