@@ -336,23 +336,23 @@ class ConfirmOrder extends Component {
                 poDocIdList: this.state.poDocIdList.map((item) => item.id),
                 orderValue: getTotalPrice(),
             };
-            // await Http.POST("order", body)
-            //     .then(({ data }) => {
-            //         this.setState({ loading: false });
-            //         if (data.success) {
-            //             toastSuccess(data.message);
-            //             this.props.history.push("/orders/confirm-payment/" + data.id);
-            //             localStorage.removeItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
-            //         }
-            //     })
-            //     .catch(({ response }) => {
-            //         this.setState({ loading: false });
-            //         if (response && response.data && response.data.message) {
-            //             toastError(response.data.message);
-            //         } else {
-            //             toastError("Something went wrong! Please try again.");
-            //         }
-            //     });
+            await Http.POST("order", body)
+                .then(({ data }) => {
+                    this.setState({ loading: false });
+                    if (data.success) {
+                        toastSuccess(data.message);
+                        this.props.history.push("/orders/confirm-payment/" + data.id);
+                        localStorage.removeItem(`PLACE_ORDER_${LOCAL_QUOTE_NOW_KEY}`);
+                    }
+                })
+                .catch(({ response }) => {
+                    this.setState({ loading: false });
+                    if (response && response.data && response.data.message) {
+                        toastError(response.data.message);
+                    } else {
+                        toastError("Something went wrong! Please try again.");
+                    }
+                });
         };
 
         console.log("RRRRRRRRRRRR", this.state.allDesginTotal);
