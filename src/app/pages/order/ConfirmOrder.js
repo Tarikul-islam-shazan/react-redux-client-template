@@ -22,8 +22,6 @@ import {
 import { OrderItem } from "./components/OrderItem";
 import EmptyState from "../../commonComponents/EmptyState";
 import { fetchGeneralSettingsData } from "../../redux/actions";
-
-let AMOUNT = [];
 class ConfirmOrder extends Component {
     constructor(props) {
         super(props);
@@ -88,8 +86,6 @@ class ConfirmOrder extends Component {
     render() {
         let { order, loading } = this.state;
         let invoice = order.invoiceResponse ? order.invoiceResponse : {};
-
-        console.log("~~~=======", order);
 
         // const getDeliveryDate = () => {
         //     if (order.productResponseList.length !== 0) {
@@ -199,36 +195,8 @@ class ConfirmOrder extends Component {
             return total;
         };
 
-        const renderDesignWiseSinglePrice = () => {
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "DESIGNWISE") {
-                        this.setState({
-                            amountList: [...this.state.amountList, 55],
-                        });
-                    }
-                });
-            }
-
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "COLORWISE") {
-                        return renderColorWiseTotalPrice(item.id);
-                    }
-                });
-            }
-
-            if (order.productResponseList) {
-                order.productResponseList.map((item) => {
-                    if (item.buyerQuotationType === "SIZEWISE") {
-                        return renderSizeWiseTotalPrice(item.id);
-                    }
-                });
-            }
-        };
-
         const onConfirm = async () => {
-            console.log("EEEEEEEEEEE", renderDesignWiseSinglePrice());
+            console.log("EEEEEEEEEEE");
             // await this.setState({ loading: true });
             // let {
             //     order: { productResponseList, name },
