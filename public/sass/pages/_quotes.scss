@@ -321,6 +321,12 @@
     }
     .category-wise-quantity-table{
       margin-top: 32px;
+      max-width: 360px;
+      overflow-x: auto;
+      margin-left: 16px;
+      @media (max-width: 1440px){
+        max-width: 280px;
+      }
       table{
         tr{
           td, th{

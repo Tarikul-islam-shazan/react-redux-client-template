@@ -5,20 +5,17 @@ export const OrderItem = ({
     product,
     remove,
     onUpdateColorSize,
-    colorWiseItems,
     onUpdateSizeQuantity,
-    sizeWiseItems,
     onUpdateDesignQuantity,
-    designWiseItems,
-    getTotalPrice,
-    loading,
+    renderSizeWiseTotalPrice,
+    renderColorWiseTotalPrice,
+    renderDesignWiseTotalPrice,
+    designIndex,
+    renderDesignWiseTotalQuantity,
+    renderSizeWiseTotalQuantity,
+    renderColorWiseTotalQuantity,
 }) => {
-    const [totalQuantity, setTotalQuantity] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
-
     let flag = 1;
-
-    console.log("@@@@@@@@@@@@", colorWiseItems);
 
     const getColorWisePrice = (colorWisePrices, id) => {
         if (colorWisePrices && colorWisePrices[id]) {
@@ -27,46 +24,49 @@ export const OrderItem = ({
         return null;
     };
 
-    const renderDesignWiseTotalPrice = (productId) => {
-        let total = 0;
-        designWiseItems.map((item, index) => {
-            if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                let tmpObj = item[productId];
-                total += parseInt(tmpObj["quantity"]) * parseFloat(tmpObj["price"]);
-                return total;
-            }
-        });
-        return total;
-    };
+    //  const renderDesignWiseTotalPrice = (productId) => {
+    //      let total = 0;
+    //      designWiseItems.map((item, index) => {
+    //          if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
+    //              let tmpObj = item[productId];
+    //              total += parseInt(tmpObj["quantity"]) * parseFloat(tmpObj["price"]);
+    //              return total;
+    //          }
+    //      });
+    //      return total;
+    //  };
 
-    const renderSizeWiseTotalPrice = (productId) => {
-        let total = 0;
-        sizeWiseItems.map((item, index) => {
-            if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                let tmpObj = item[productId];
-                for (let size in tmpObj) {
-                    total += parseInt(tmpObj[size]["quantity"]) * parseFloat(tmpObj[size]["price"]);
-                }
-                return total;
-            }
-        });
-        return total;
-    };
+    //   const renderSizeWiseTotalPrice = (productId) => {
+    //     let total = 0;
+    //     sizeWiseItems.map((item, index) => {
+    //       if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
+    //         let tmpObj = item[productId];
+    //         for (let size in tmpObj) {
+    //           total +=
+    //             parseInt(tmpObj[size]["quantity"]) *
+    //             parseFloat(tmpObj[size]["price"]);
+    //         }
+    //         return total;
+    //       }
+    //     });
+    //     return total;
+    //   };
 
-    const renderColorWiseTotalPrice = (productId) => {
-        let total = 0;
-        colorWiseItems.map((item, index) => {
-            if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-                let tmpObj = item[productId];
-                for (let color in tmpObj) {
-                    total +=
-                        parseInt(tmpObj[color]["quantity"]) * parseFloat(tmpObj[color]["price"]);
-                }
-                return total;
-            }
-        });
-        return total;
-    };
+    //   const renderColorWiseTotalPrice = (productId) => {
+    //     let total = 0;
+    //     colorWiseItems.map((item, index) => {
+    //       if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
+    //         let tmpObj = item[productId];
+    //         for (let color in tmpObj) {
+    //           total +=
+    //             parseInt(tmpObj[color]["quantity"]) *
+    //             parseFloat(tmpObj[color]["price"]);
+    //         }
+    //         return total;
+    //       }
+    //     });
+    //     return total;
+    //   };
 
     const getSizeWisePrice = (sizePrices, id) => {
         if (sizePrices && sizePrices[id]) {
@@ -75,7 +75,16 @@ export const OrderItem = ({
         return null;
     };
 
-    console.log("ZZZZZZZZZZZZZZ", designWiseItems);
+    const getSizeWiseLabel = (size, id) => {
+        if (size && size[id]) {
+            return size[id];
+        }
+        return null;
+    };
+
+    const getQuotationQuantity = (product) => {
+        return product.quotationQuantity || product.quantity || 0;
+    };
 
     return (
         <div className="quote-req-list-container mt-3">
@@ -195,7 +204,7 @@ export const OrderItem = ({
                             <div className="info-item mt-0 mt-xl-2">
                                 <label className="font-14 text-muted">Quoted quantity</label>
                                 <h5 className="font-20 color-333">
-                                    {product.quantity || product.quotationQuantity || "--"} units
+                                    {product.quotationQuantity || product.quantity || "--"} units
                                 </h5>
                             </div>
 
@@ -234,14 +243,18 @@ export const OrderItem = ({
                                             onUpdateDesignQuantity(
                                                 product.id,
                                                 product.designWiseBuyerPrice,
-                                                e.target.value
+                                                e.target.value,
+                                                designIndex
                                             )
                                         }
                                     />
-                                    <p className="quote-warning">
-                                        <img src="../icons/alert-triangle.svg" /> Price may change
-                                        as order qty {"<"} quoted qty{" "}
-                                    </p>
+                                    {renderDesignWiseTotalQuantity(product.id) <
+                                        getQuotationQuantity(product) && (
+                                        <p className="quote-warning">
+                                            <img src="../icons/alert-triangle.svg" /> Price may
+                                            change as order qty {"<"} quoted qty{" "}
+                                        </p>
+                                    )}
                                 </div>
                             )}
 
@@ -295,7 +308,8 @@ export const OrderItem = ({
                                                                                 product?.colorWiseBuyerPrice,
                                                                                 value?.id
                                                                             ),
-                                                                            e.target.value
+                                                                            e.target.value,
+                                                                            designIndex
                                                                         )
                                                                     }
                                                                 />
@@ -305,10 +319,13 @@ export const OrderItem = ({
                                                 )}
                                             </tr>
                                         </table>
-                                        <p className="quote-warning">
-                                            <img src="../icons/alert-triangle.svg" /> Price may
-                                            change as order qty {"<"} quoted qty{" "}
-                                        </p>
+                                        {renderColorWiseTotalQuantity(product.id) <
+                                            getQuotationQuantity(product) && (
+                                            <p className="quote-warning">
+                                                <img src="../icons/alert-triangle.svg" /> Price may
+                                                change as order qty {"<"} quoted qty{" "}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -318,15 +335,18 @@ export const OrderItem = ({
                                     <div className="category-wise-quantity-table color-wise-table">
                                         <table>
                                             <tr>
-                                                {product?.colorWiseSizeQuantityPairList.length >
-                                                    0 &&
-                                                    product?.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map(
-                                                        (value) => (
-                                                            <th key={value.code}>
-                                                                <p>{value.code}</p>
-                                                            </th>
-                                                        )
-                                                    )}
+                                                {Object.keys(product?.sizeWiseBuyerPrice).map(
+                                                    (key) => (
+                                                        <th key={key}>
+                                                            <p>
+                                                                {getSizeWiseLabel(
+                                                                    product?.sizeLabelMap,
+                                                                    key
+                                                                )}
+                                                            </p>
+                                                        </th>
+                                                    )
+                                                )}
                                             </tr>
                                             <tr>
                                                 {Object.values(product?.sizeWiseBuyerPrice).map(
@@ -356,7 +376,8 @@ export const OrderItem = ({
                                                                                 product?.sizeWiseBuyerPrice,
                                                                                 value
                                                                             ),
-                                                                            e.target.value
+                                                                            e.target.value,
+                                                                            designIndex
                                                                         )
                                                                     }
                                                                 />
@@ -366,10 +387,13 @@ export const OrderItem = ({
                                                 )}
                                             </tr>
                                         </table>
-                                        <p className="quote-warning">
-                                            <img src="../icons/alert-triangle.svg" /> Price may
-                                            change as order qty {"<"} quoted qty{" "}
-                                        </p>
+                                        {renderSizeWiseTotalQuantity(product.id) <
+                                            getQuotationQuantity(product) && (
+                                            <p className="quote-warning">
+                                                <img src="../icons/alert-triangle.svg" /> Price may
+                                                change as order qty {"<"} quoted qty{" "}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -397,6 +421,20 @@ export const OrderItem = ({
                                     {/* ${product.designWiseBuyerPrice * product.quantity} */}
                                 </h5>
                             </div>
+
+                            {product.buyerQuotationType !== "DESIGNWISE" && (
+                                <div className="info-item">
+                                    <label className="">Total quantity</label>
+                                    <h5 className="font-18 semibold">
+                                        {product.buyerQuotationType === "SIZEWISE"
+                                            ? renderSizeWiseTotalQuantity(product.id)
+                                            : product.buyerQuotationType === "COLORWISE"
+                                            ? renderColorWiseTotalQuantity(product.id)
+                                            : ""}
+                                        {/* ${product.designWiseBuyerPrice * product.quantity} */}
+                                    </h5>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

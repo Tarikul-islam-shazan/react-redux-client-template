@@ -1393,10 +1393,10 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
-"@stripe/stripe-js@^1.12.1":
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.12.1.tgz#baa5f1d8cfdbda174a0419cb42d2f1c8d622a7eb"
-  integrity sha512-CE602Mzx6DnUHGrL+S9Kk7UK6674BCYlklh9F2NWU6ue0xdVzRTfFCuL5LHvs7Plicw5rsjuDhJ9sIdwFBVCIQ==
+"@stripe/stripe-js@^1.22.0":
+  version "1.22.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.22.0.tgz#9d3d2f0a1ce81f185ec477fd7cc67544b2b2a00c"
+  integrity sha512-fm8TR8r4LwbXgBIYdPmeMjJJkxxFC66tvoliNnmXOpUgZSgQKoNPW3ON0ZphZIiif1oqWNhAaSrr7tOvGu+AFg==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
