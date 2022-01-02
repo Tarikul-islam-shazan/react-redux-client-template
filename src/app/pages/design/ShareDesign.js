@@ -671,7 +671,7 @@ class ShareDesign extends Component {
                                 text={LOADER_TEXT}
                             >
                                 <h4 className="c-popup-title">Add to collection</h4>
-                                <div className="all-collection">
+                                <div className="all-collection share-design-collection-popup scroll-y-label">
                                     <div className="collection-search">
                                         <input
                                             type="search"
@@ -683,7 +683,7 @@ class ShareDesign extends Component {
                                         <img src="/icons/search.svg" alt="search" />
                                     </div>
                                     {collectionList.length > 0 ? (
-                                        <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
+                                        <ul className="p-0 m-0 existing-item pop-list-item">
                                             {collectionList.map((collection, i) => {
                                                 return (
                                                     <li key={i}>

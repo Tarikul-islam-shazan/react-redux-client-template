@@ -95,9 +95,20 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         );
     };
 
-    const getColorWisePrice = (colorWisePrices, id) => {
-        if (colorWisePrices && colorWisePrices[id]) {
-            return colorWisePrices[id];
+    const getColors = (colorList, key) => {
+        let hexCode = "";
+        colorList.forEach((item, id) => {
+            if (item.id === parseInt(key)) {
+                hexCode = item.hexCode;
+                return item.hexCode;
+            }
+        });
+        return hexCode;
+    };
+
+    const getSizeWiseLabel = (size, id) => {
+        if (size && size[id]) {
+            return size[id];
         }
         return null;
     };
@@ -118,31 +129,43 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     );
 
     const renderColorWisePrice = (quote) => (
-        <div className="category-wise-quantity-table color-wise-table">
+        <div className="category-wise-quantity-table color-wise-table scroll-x-label">
             <table>
                 <tr>
-                    {quote?.colorWiseSizeQuantityPairList?.map((item) => (
+                    {Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
                         <Tooltip
-                            title={<Typography fontSize={30}>{item.name}</Typography>}
+                            title={<Typography fontSize={30}>{`#${key}`}</Typography>}
                             placement="top"
                             arrow
-                            key={item.id}
+                            key={key}
                         >
-                            <th>
+                            <th key={key}>
                                 <span
                                     class="cursor-pointer color-icon"
-                                    style={{ background: item.hexCode }}
+                                    style={{
+                                        background: `${getColors(
+                                            quote?.colorWiseSizeQuantityPairList,
+                                            key
+                                        )}`,
+                                    }}
                                 />
                             </th>
                         </Tooltip>
                     ))}
                 </tr>
                 <tr>
-                    {quote?.colorWiseSizeQuantityPairList?.map((value, index) => (
+                    {/* {quote?.colorWiseSizeQuantityPairList?.map((value, index) => (
                         <td key={value.id}>
                             <p>
                                 <span>$</span>
                                 {getColorWisePrice(quote?.colorWiseBuyerPrice, value?.id)}
+                            </p>
+                        </td>
+                    ))} */}
+                    {Object.values(quote?.colorWiseBuyerPrice).map((value, i) => (
+                        <td key={i}>
+                            <p>
+                                <span>${value}</span>
                             </p>
                         </td>
                     ))}
@@ -152,25 +175,23 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     );
 
     const renderSizeWisePrice = (quote) => (
-        <div className="category-wise-quantity-table desingwise-table">
+        <div className="category-wise-quantity-table desingwise-table scroll-x-label">
             <table>
                 <tr>
                     {Object.keys(quote?.sizeWiseBuyerPrice).map((key, i) => (
                         <th key={i}>
-                            <p>{key}</p>
+                            <p> {getSizeWiseLabel(quote?.sizeLabelMap, key)}</p>
                         </th>
                     ))}
                 </tr>
                 <tr>
-                    <tr>
-                        {Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
-                            <td key={i}>
-                                <p>
-                                    <span>${value}</span>
-                                </p>
-                            </td>
-                        ))}
-                    </tr>
+                    {Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
+                        <td key={i}>
+                            <p>
+                                <span>${value}</span>
+                            </p>
+                        </td>
+                    ))}
                 </tr>
             </table>
         </div>
@@ -197,6 +218,8 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             renderDesignStatus("Order placed for this design")
                         ) : quote.status === "PRODUCT_SOLD" ? (
                             renderDesignStatus("Design is already sold")
+                        ) : quote.status !== "PRICE_GIVEN" ? (
+                            renderDesignStatus("Price has not been given yet")
                         ) : (
                             <label for={`check_${quote.id}`} className="m-0"></label>
                         )}
@@ -274,7 +297,6 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     </a>
                                 </>
                             )}
-                            
                         </div>
                         <div className="info-item">
                             <label className="font-14 text-muted">Date</label>
@@ -291,7 +313,9 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                         <div className="info-item mt-2">
                             <label className="font-14 text-muted">Product category</label>
                             <h5 className="font-20 color-333">
-                                {quote.productGroup} {(quote.productGroup && quote.productCategory) && "," } {quote.productCategory}
+                                {quote.productGroup}{" "}
+                                {quote.productGroup && quote.productCategory && ","}{" "}
+                                {quote.productCategory}
                             </h5>
                         </div>
 

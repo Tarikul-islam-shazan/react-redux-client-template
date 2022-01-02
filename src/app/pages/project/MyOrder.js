@@ -10,7 +10,7 @@ import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
 import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
 import { ProjectCard } from "./components/ProjectCard";
-import {encodeQueryData, changeDateFormat, getShortName} from "../../services/Util";
+import { encodeQueryData, changeDateFormat, getShortName } from "../../services/Util";
 import DELIVERY_ICON from "../../assets/images/icons/delivery-status-icon.svg";
 
 import {
@@ -26,7 +26,7 @@ import {
 } from "../../constant";
 import product from "../../redux/reducers/product";
 import { isEmptyObject } from "jquery";
-import {Tooltip} from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 
 const tabFilterMap = {
     "Pending Order": "PENDING",
@@ -87,9 +87,9 @@ class MyOrder extends Component {
     componentDidMount = async () => {
         document.title = "My orders with Nitex - The easiest clothing";
         const query = new URLSearchParams(this.props.location.search);
-        const tab = query.get('tab');
-        if (tab === 'pending') {
-            const tabName = 'Pending Order';
+        const tab = query.get("tab");
+        if (tab === "pending") {
+            const tabName = "Pending Order";
             this.setState({ activeTab: tabName, isPendingTab: true });
             this.renderList(0, tabName);
         } else {
@@ -159,9 +159,9 @@ class MyOrder extends Component {
 
     details = (id) => {
         let { activeTab } = this.state;
-		if ( activeTab === 'Pending Order') {
-			return toastWarning('The order is under review. Please wait till it gets to running');
-		}
+        if (activeTab === "Pending Order") {
+            return toastWarning("The order is under review. Please wait till it gets to running");
+        }
         this.props.history.push("/orders/view/" + id);
     };
 
@@ -290,8 +290,23 @@ class MyOrder extends Component {
                                                         <div className="row align-items-center py-3">
                                                             <div className="col-8 pl-0">
                                                                 <div className="order-title">
-                                                                    <Tooltip title={item.name} placement={"top"}>
-                                                                        <h3 className>{getShortName(item.name,35)} <span className="order-number">({item.orderRefNumber})</span></h3>
+                                                                    <Tooltip
+                                                                        title={item.name}
+                                                                        placement={"top"}
+                                                                    >
+                                                                        <h3 className>
+                                                                            {getShortName(
+                                                                                item.name,
+                                                                                35
+                                                                            )}{" "}
+                                                                            <span className="order-number">
+                                                                                (
+                                                                                {
+                                                                                    item.orderRefNumber
+                                                                                }
+                                                                                )
+                                                                            </span>
+                                                                        </h3>
                                                                     </Tooltip>
                                                                 </div>
                                                             </div>

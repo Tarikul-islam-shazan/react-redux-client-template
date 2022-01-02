@@ -88,7 +88,7 @@ const formatStagesData = (data) => {
    return result;
 };
 
-const MyProjectDetailsV2 = () => {
+const MyProjectDetailsV2 = (props) => {
    const [projectDetails, setProjectDetails] = useState({});
    const [styleData, setStyleData] = useState([]);
    const [stagesData, setStagesData] = useState([]);
@@ -121,6 +121,25 @@ const MyProjectDetailsV2 = () => {
             setLoading(false);
             setStyleData(data);
             setStagesData(formatStagesData(data));
+
+            try {
+               let name = 'stageId';
+               let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+               let results = regex.exec(props.location.search);
+               let selectedId = null;
+               if (results !== null) {
+                  selectedId = decodeURIComponent(results[1].replace(/\+/g, ' '));
+               }
+               formatStagesData(data).map((item, i) => {
+                  if (item.id === parseInt(selectedId)) {
+                     setActiveTab(i);
+                  }
+               });
+            }
+            catch (e) {
+               
+            }
+
          })
          .catch(({ response }) => {
             setLoading(false);
@@ -139,10 +158,24 @@ const MyProjectDetailsV2 = () => {
       getStylesPlan(id);
    }, [id]);
 
+   const setStepData = useCallback(async () => {
+      let name2 = 'stepId';
+      let regex2 = new RegExp('[\\?&]' + name2 + '=([^&#]*)');
+      let results2 = regex2.exec(props.location.search);
+      if (results2 !== null) {
+         await setSelectedTask({
+            taskId: decodeURIComponent(results2[1].replace(/\+/g, ' ')),
+            orderId: id
+         });
+         setShowTaskDetailsModal(true);
+      }
+   }, [id, props.location.search]);
+
    useEffect(() => {
+      setStepData();
       getProjectDetails(id);
       getStylesPlan(id);
-   }, [id, callback]);
+   }, [id, callback, setStepData]);
 
    const getPercentage = () => {
       return (

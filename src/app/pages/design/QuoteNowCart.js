@@ -212,16 +212,10 @@ class QuoteNowCart extends Component {
         return flag;
     };
 
-    removeAllFromCart = async () => {
-        let { cart } = this.state;
-        cart = [];
-        this.updateCart(cart);
-    };
-
     submit = async () => {
-        await this.setState({ loading: true });
         let { title, cart } = this.state;
         if (this.validate()) {
+            await this.setState({ loading: true });
             let body = {
                 name: title,
                 rfqRequestDTOList: cart.map((product) => {
@@ -237,8 +231,8 @@ class QuoteNowCart extends Component {
                     this.setState({ loading: false });
                     if (data.success) {
                         localStorage.setItem(LOCAL_QUOTE_NOW_KEY, "");
+                        this.props._storeData("quoteObj", null);
                         toastSuccess(data.message);
-                        this.removeAllFromCart();
                         this.props.history.push("/quotes/list");
                     } else {
                         toastError(data.message);
@@ -253,8 +247,6 @@ class QuoteNowCart extends Component {
 
     render() {
         let { designList, cart, title, TURN_AROUND_TIME, MOQ, loading, titleError } = this.state;
-
-        console.log("TEST========", cart);
         return (
             <Loader loading={loading}>
                 <div className="add-quote d-flex">
@@ -295,7 +287,7 @@ class QuoteNowCart extends Component {
                                     <h6>RFQ title*</h6>
                                     <input
                                         type="text"
-                                        placeholder="Give a title forr your request"
+                                        placeholder="Give a title for your request"
                                         name="title"
                                         value={title}
                                         onChange={this.onChange}

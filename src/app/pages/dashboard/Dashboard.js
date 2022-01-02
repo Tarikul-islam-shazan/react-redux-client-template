@@ -304,7 +304,12 @@ const Dashboard = () => {
                     <div className="full-journey-status">
                         <div className="one-sixth sustainable-box">
                             <div className="status-details">
-                                <h3>{getTotalSustainable().toFixed(2)}%</h3>
+                                <h3>
+                                    {isNaN(getTotalSustainable().toFixed(2))
+                                        ? 0
+                                        : getTotalSustainable().toFixed(2)}
+                                    %
+                                </h3>
                                 <span>Sustainable</span>
                             </div>
                             <div className="status-icon">
@@ -313,7 +318,12 @@ const Dashboard = () => {
                         </div>
                         <div className="one-sixth quote-order-box">
                             <div className="status-details">
-                                <h3>{getTotalQuoteToOrder().toFixed(2)}%</h3>
+                                <h3>
+                                    {isNaN(getTotalQuoteToOrder().toFixed(2))
+                                        ? 0
+                                        : getTotalQuoteToOrder().toFixed(2)}
+                                    %
+                                </h3>
                                 <span>Quote to order</span>
                             </div>
                             <div className="status-icon">
