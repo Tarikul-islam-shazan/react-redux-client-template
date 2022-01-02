@@ -276,6 +276,10 @@ const Dashboard = () => {
         setShowTaskDetailsModal(true);
     };
 
+    const getQuotationQuantity = (product) => {
+        return product.quotationQuantity || product.quantity || 0;
+    };
+
     return (
         <LoadingOverlay
             active={isLoading || isTaskLoading || isQuoteLoading}
@@ -653,7 +657,7 @@ const Dashboard = () => {
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span>{item.total} pcs</span>{" "}
+                                                    <span>{getQuotationQuantity(item)} pcs</span>{" "}
                                                 </td>
                                                 <td>
                                                     {item.status === "PRICE_GIVEN" ? (
