@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { addImageSuffix, validateNumber } from "../../../services/Util";
 
 export const OrderItem = ({
@@ -17,59 +17,12 @@ export const OrderItem = ({
     errorId,
 }) => {
     let flag = 1;
-
-    console.log("QQQQQQQQQQQ", product);
-
     const getColorWisePrice = (colorWisePrices, id) => {
         if (colorWisePrices && colorWisePrices[id]) {
             return colorWisePrices[id];
         }
         return null;
     };
-
-    //  const renderDesignWiseTotalPrice = (productId) => {
-    //      let total = 0;
-    //      designWiseItems.map((item, index) => {
-    //          if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-    //              let tmpObj = item[productId];
-    //              total += parseInt(tmpObj["quantity"]) * parseFloat(tmpObj["price"]);
-    //              return total;
-    //          }
-    //      });
-    //      return total;
-    //  };
-
-    //   const renderSizeWiseTotalPrice = (productId) => {
-    //     let total = 0;
-    //     sizeWiseItems.map((item, index) => {
-    //       if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-    //         let tmpObj = item[productId];
-    //         for (let size in tmpObj) {
-    //           total +=
-    //             parseInt(tmpObj[size]["quantity"]) *
-    //             parseFloat(tmpObj[size]["price"]);
-    //         }
-    //         return total;
-    //       }
-    //     });
-    //     return total;
-    //   };
-
-    //   const renderColorWiseTotalPrice = (productId) => {
-    //     let total = 0;
-    //     colorWiseItems.map((item, index) => {
-    //       if (parseInt(productId) === parseInt(Object.keys(item)[0])) {
-    //         let tmpObj = item[productId];
-    //         for (let color in tmpObj) {
-    //           total +=
-    //             parseInt(tmpObj[color]["quantity"]) *
-    //             parseFloat(tmpObj[color]["price"]);
-    //         }
-    //         return total;
-    //       }
-    //     });
-    //     return total;
-    //   };
 
     const getSizeWisePrice = (sizePrices, id) => {
         if (sizePrices && sizePrices[id]) {
@@ -90,15 +43,9 @@ export const OrderItem = ({
     };
 
     const getColors = (colorList, key) => {
-        //    if (sizePrices && sizePrices[id]) {
-        //       return sizePrices[id];
-        //   }
-        //   return null;
         let hexCode = "";
         colorList.forEach((item, id) => {
-            // console.log("!!!!!!!!!!!!!!", item.id, color, key);
             if (item.id === parseInt(key)) {
-                console.log("!!!!!!!!!!!!!!", item.hexCode);
                 hexCode = item.hexCode;
                 return item.hexCode;
             }
@@ -227,31 +174,6 @@ export const OrderItem = ({
                                     {product.quotationQuantity || product.quantity || "--"} units
                                 </h5>
                             </div>
-
-                            {/* {product.colorWiseSizeQuantityPairList &&
-                     product.colorWiseSizeQuantityPairList.length ? (
-                        <div className="info-item d-flex">
-                           <div className="size">
-                              <label className="text-center mb-0">
-                                 <span className="circle-color mr-3 opacity-0"></span>
-                              </label>
-                           </div>
-                           <div className="sizes d-flex  align-items-center text-center">
-                              {product.colorWiseSizeQuantityPairList[0]?.sizeQuantityPairList.map(
-                                 (pair, j) => {
-                                    return (
-                                       <div className="size" key={j}>
-                                          <label className="text-center mb-0">{pair.code}</label>
-                                       </div>
-                                    );
-                                 }
-                              )}
-                           </div>
-                        </div>
-                     ) : (
-                        <></>
-                     )} */}
-
                             {product.buyerQuotationType === "DESIGNWISE" && (
                                 <div className="new-quantity">
                                     <label>Order quantity</label>
@@ -285,39 +207,39 @@ export const OrderItem = ({
                                 <div className="info-item d-flex align-items-start mt-2">
                                     <div className="category-wise-quantity-table color-wise-table">
                                         <table>
-                                            <tr>
-                                                {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                    (key) => (
-                                                        <th key={key}>
-                                                            <span
-                                                                class="cursor-pointer color-icon"
-                                                                style={{
-                                                                    background: `${getColors(
-                                                                        product?.colorWiseSizeQuantityPairList,
-                                                                        key
-                                                                    )}`,
-                                                                }}
-                                                            />
-                                                        </th>
-                                                    )
-                                                )}
-                                            </tr>
-                                            <tr>
-                                                {Object.values(product?.colorWiseBuyerPrice).map(
-                                                    (value, i) => (
+                                            <tbody>
+                                                <tr>
+                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
+                                                        (key) => (
+                                                            <th key={key}>
+                                                                <span
+                                                                    className="cursor-pointer color-icon"
+                                                                    style={{
+                                                                        background: `${getColors(
+                                                                            product?.colorWiseSizeQuantityPairList,
+                                                                            key
+                                                                        )}`,
+                                                                    }}
+                                                                />
+                                                            </th>
+                                                        )
+                                                    )}
+                                                </tr>
+                                                <tr>
+                                                    {Object.values(
+                                                        product?.colorWiseBuyerPrice
+                                                    ).map((value, i) => (
                                                         <td key={i}>
                                                             <p>
                                                                 <span>${value}</span>
                                                             </p>
                                                         </td>
-                                                    )
-                                                )}
-                                            </tr>
-                                            <tr>
-                                                {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                    (value, index) => (
-                                                        <td key={value.id}>
-                                                            <td>
+                                                    ))}
+                                                </tr>
+                                                <tr>
+                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
+                                                        (value, index) => (
+                                                            <td key={value}>
                                                                 <input
                                                                     type="number"
                                                                     placeholder="Qty"
@@ -325,10 +247,10 @@ export const OrderItem = ({
                                                                     onChange={(e) =>
                                                                         onUpdateColorSize(
                                                                             product.id,
-                                                                            value.id,
+                                                                            value,
                                                                             getColorWisePrice(
                                                                                 product?.colorWiseBuyerPrice,
-                                                                                value?.id
+                                                                                value
                                                                             ),
                                                                             e.target.value,
                                                                             designIndex
@@ -336,10 +258,10 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        </td>
-                                                    )
-                                                )}
-                                            </tr>
+                                                        )
+                                                    )}
+                                                </tr>
+                                            </tbody>
                                         </table>
                                         {renderColorWiseTotalQuantity(product.id) <
                                             getQuotationQuantity(product) && (
@@ -361,36 +283,36 @@ export const OrderItem = ({
                                 <div className="info-item d-flex align-items-start mt-2">
                                     <div className="category-wise-quantity-table color-wise-table">
                                         <table>
-                                            <tr>
-                                                {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                    (key) => (
-                                                        <th key={key}>
-                                                            <p>
-                                                                {getSizeWiseLabel(
-                                                                    product?.sizeLabelMap,
-                                                                    key
-                                                                )}
-                                                            </p>
-                                                        </th>
-                                                    )
-                                                )}
-                                            </tr>
-                                            <tr>
-                                                {Object.values(product?.sizeWiseBuyerPrice).map(
-                                                    (value, i) => (
-                                                        <td key={i}>
-                                                            <p>
-                                                                <span>${value}</span>
-                                                            </p>
-                                                        </td>
-                                                    )
-                                                )}
-                                            </tr>
-                                            <tr>
-                                                {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                    (value, i) => (
-                                                        <td key={i}>
-                                                            <td>
+                                            <tbody>
+                                                <tr>
+                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
+                                                        (key) => (
+                                                            <th key={key}>
+                                                                <p>
+                                                                    {getSizeWiseLabel(
+                                                                        product?.sizeLabelMap,
+                                                                        key
+                                                                    )}
+                                                                </p>
+                                                            </th>
+                                                        )
+                                                    )}
+                                                </tr>
+                                                <tr>
+                                                    {Object.values(product?.sizeWiseBuyerPrice).map(
+                                                        (value, i) => (
+                                                            <td key={i}>
+                                                                <p>
+                                                                    <span>${value}</span>
+                                                                </p>
+                                                            </td>
+                                                        )
+                                                    )}
+                                                </tr>
+                                                <tr>
+                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
+                                                        (value, i) => (
+                                                            <td key={i}>
                                                                 <input
                                                                     type="number"
                                                                     placeholder="Qty"
@@ -409,10 +331,10 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        </td>
-                                                    )
-                                                )}
-                                            </tr>
+                                                        )
+                                                    )}
+                                                </tr>
+                                            </tbody>
                                         </table>
                                         {renderSizeWiseTotalQuantity(product.id) <
                                             getQuotationQuantity(product) && (
