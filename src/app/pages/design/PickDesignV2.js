@@ -130,18 +130,19 @@ class PickDesignV2 extends Component {
     };
 
     handleClickOutside = (event) => {
+        console.log(this.searchFilters,event.target)
         if (this.searchSuggestions && !this.searchSuggestions.contains(event.target)) {
             this.setState({
                 showSuggestions: false,
             });
         }
 
-        // if (this.searchFilters && !this.searchFilters.contains(event.target)) {
-        //     this.setState({
-        //         showFilters: false,
-        //         filters: this.state.filters.filter((item) => item.showSelected),
-        //     });
-        // }
+        if (this.searchFilters && !this.searchFilters.contains(event.target)) {
+            this.setState({
+                showFilters: false,
+                // filters: this.state.filters.filter((item) => item.showSelected),
+            });
+        }
 
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setState({
@@ -193,8 +194,9 @@ class PickDesignV2 extends Component {
             .catch(({ response }) => {});
     };
 
-    setFilters = async (type, id, name) => {
+    setFilters = async (type, id, name, clearFlag = false) => {
         let { filters, search } = this.state;
+        console.log(filters)
         let flag = true;
         filters.map((filter) => {
             if (filter.type === type && filter.id === id) {
@@ -206,7 +208,7 @@ class PickDesignV2 extends Component {
         } else {
             filters = filters.filter((filter) => !(filter.type === type && filter.id === id));
             if (!filters.length && search === "") {
-                await this.resetFilter();
+                await this.resetFilter(clearFlag);
                 return;
             }
         }
@@ -214,9 +216,9 @@ class PickDesignV2 extends Component {
             filters,
             showSelectedFilters: filters.length === 0 ? false : this.state.showSelectedFilters,
         });
-        // if (!flag) {
-        //     this._search();
-        // }
+        if (!flag && clearFlag) {
+            this._search();
+        }
     };
 
     renderList = async (page = 0) => {
@@ -315,7 +317,7 @@ class PickDesignV2 extends Component {
         this.updateProductCard();
     };
 
-    resetFilter = async () => {
+    resetFilter = async (clearFlag) => {
         await this.setState({
             filters: [],
             search: "",
@@ -323,8 +325,11 @@ class PickDesignV2 extends Component {
             searching: false,
             showSelectedFilters: false,
         });
-        let designList = await this.renderList();
-        this.setState({ designList: designList });
+        console.log(clearFlag)
+        if(clearFlag === true){
+            let designList = await this.renderList();
+            this.setState({ designList: designList });
+        }
     };
 
     details = (id = 0) => {
@@ -801,7 +806,8 @@ class PickDesignV2 extends Component {
                                                     this.setFilters(
                                                         filter.type,
                                                         filter.id,
-                                                        filter.name
+                                                        filter.name,
+                                                        true
                                                     )
                                                 }
                                             >
@@ -848,7 +854,7 @@ class PickDesignV2 extends Component {
                     )}
                 </div>
 
-                {searching ? (
+                {(searching && showSelectedFilters && filters.length) ? (
                     <div className="designs">
                         <h4 className="mb-4 font-weight-normal">
                             <span>
