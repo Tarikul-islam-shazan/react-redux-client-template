@@ -281,7 +281,7 @@ class ConfirmOrder extends Component {
             this.state.designLists.forEach((item, index) => {
                 total += calculateTotalPrice(item.id, item.type);
             });
-            return total;
+            return total.toFixed(2);
         };
 
         const getTotalQuantity = () => {
