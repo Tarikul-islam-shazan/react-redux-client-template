@@ -224,7 +224,7 @@ class PickDesignV2 extends Component {
     renderList = async (page = 0) => {
         this.setState({ loading: true });
         let { size, designList, search, sort, productTypeId, filters } = this.state;
-        let params = `?page=${page}&size=${size}&exploreDesign=true`;
+        let params = `?page=${page}&size=${size}&exploreDesign=true&sort=id,desc`;
         if (search) {
             params += `&search=${search.trim()}`;
         }
@@ -854,7 +854,7 @@ class PickDesignV2 extends Component {
                     )}
                 </div>
 
-                {searching && showSelectedFilters && filters.length ? (
+                {((searching && showSelectedFilters && filters.length) || (search && searching)) ? (
                     <div className="designs">
                         <h4 className="mb-4 font-weight-normal">
                             <span>
