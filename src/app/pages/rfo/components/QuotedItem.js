@@ -32,7 +32,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     const renderTooltip = (message) => {
         return (
             <Tooltip
-                title={<Typography fontSize={30}>{message}</Typography>}
+                title={<Typography fontSize={22}>{message}</Typography>}
                 placement="bottom"
                 arrow
             >
@@ -134,7 +134,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                 <tr>
                     {Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
                         <Tooltip
-                            title={<Typography fontSize={30}>{`#${key}`}</Typography>}
+                            title={<Typography fontSize={22}>{`#${key}`}</Typography>}
                             placement="top"
                             arrow
                             key={key}
@@ -268,7 +268,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
                             <Tooltip
-                                title={<Typography fontSize={30}>{quote?.name}</Typography>}
+                                title={<Typography fontSize={22}>{quote?.name}</Typography>}
                                 placement="top"
                                 arrow
                             >
