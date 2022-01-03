@@ -1,7 +1,7 @@
 import React from "react";
-import {addImageSuffix, getShortName} from "../../../services/Util";
+import { addImageSuffix, getShortName } from "../../../services/Util";
 import Tooltip from "@material-ui/core/Tooltip";
-import Link from "react-router-dom/es/Link";
+import { Link } from "react-router-dom";
 
 export const QuoteNowMyProductCard = ({
     product,
@@ -52,23 +52,20 @@ export const QuoteNowMyProductCard = ({
                     </a>
                 )}
                 <div className="info-right ml-3">
-                    <Tooltip
-                        title={product.name}
-                        placement="top"
-                        arrow
-                    >
-                    <Link to={"/designs/view/" + product.id} className="semibold m-0 mt-1 font-20">
-                        {getShortName(product.name,21)}
-                    </Link>
+                    <Tooltip title={product.name} placement="top" arrow>
+                        <Link
+                            to={"/designs/view/" + product.id}
+                            className="semibold m-0 mt-1 font-20"
+                        >
+                            {getShortName(product.name, 21)}
+                        </Link>
                     </Tooltip>
                     <div className="d-flex flex-column flex-sm-row">
                         <div className="info-item mr-5">
                             <label className="font-14 text-muted">Product category</label>
                             <h5 className="font-18 semibold">
                                 <span>{product.productGroup}</span>
-                                {
-                                    product.productGroup && product.category && <span>, </span>
-                                }
+                                {product.productGroup && product.category && <span>, </span>}
                                 <span>{product.category}</span>
                             </h5>
                         </div>

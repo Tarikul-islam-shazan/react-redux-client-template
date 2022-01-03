@@ -414,7 +414,7 @@
 .add-quote .confirm-quote-request .quote-req-list-container{
   .quote-list .quote-info img {
     max-width: 195px;
-    object-fit: cover;
+    object-fit: contain;
     @media (max-width: 1790px) {
       height: 132px;
       width: auto;

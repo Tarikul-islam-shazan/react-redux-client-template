@@ -19,6 +19,10 @@ import { fetchDashboardQuotes, fetchDashboardAllTasks } from "../../redux/dashbo
 import { getDashboardQuotes, getDashboardAllTasks } from "../../redux/reducers";
 import LoadingOverlay from "react-loading-overlay";
 import Tooltip from "@material-ui/core/Tooltip";
+import Modal from "react-bootstrap/Modal";
+
+import TaskManage from "../task/components/TaskManage";
+
 import {
     LOADER_COLOR,
     LOADER_LEFT,
@@ -34,6 +38,7 @@ const PRO_PIC_DEFAULT = "/images/pro_pic_default.svg";
 
 const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [isTaskLoading, setIsTaskLoading] = useState(false);
     const [isQuoteLoading, setIsQuoteLoading] = useState(false);
     const [userName, setUserName] = useState("");
@@ -43,6 +48,7 @@ const Dashboard = () => {
     const [currentQuoutePage, setCurrentQuoutePage] = useState(0);
     const [currentTaskPage, setCurrentTaskPage] = useState(0);
     const [orderFlags, setOrderFlags] = useState({});
+    const [selectedTask, setSelectedTask] = useState({});
     const useStyles = makeStyles({
         tooltip: {
             fontSize: "12px",
@@ -263,6 +269,15 @@ const Dashboard = () => {
 
     const clicked = {
         transform: "rotate(180deg)",
+    };
+
+    const onClickCell = (taskId, orderId) => {
+        setSelectedTask({ taskId, orderId });
+        setShowTaskDetailsModal(true);
+    };
+
+    const getQuotationQuantity = (product) => {
+        return product.quotationQuantity || product.quantity || 0;
     };
 
     return (
@@ -642,7 +657,7 @@ const Dashboard = () => {
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span>{item.total} pcs</span>{" "}
+                                                    <span>{getQuotationQuantity(item)} pcs</span>{" "}
                                                 </td>
                                                 <td>
                                                     {item.status === "PRICE_GIVEN" ? (
@@ -781,7 +796,10 @@ const Dashboard = () => {
                                             <td>
                                                 <span>{item?.stepProduct?.name}</span>{" "}
                                             </td>
-                                            <td>
+                                            <td
+                                                onClick={() => onClickCell(item.id, item.orderId)}
+                                                className="cursor-pointer"
+                                            >
                                                 <span>{item.orderName}</span>{" "}
                                             </td>
                                             <td>
@@ -808,6 +826,19 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showTaskDetailsModal}
+                onHide={() => setShowTaskDetailsModal(false)}
+                className="modal-right task-conversation"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <TaskManage
+                    id={selectedTask.taskId}
+                    orderId={selectedTask.orderId}
+                    closeModal={() => setShowTaskDetailsModal(false)}
+                    callback={() => {}}
+                />
+            </Modal>
         </LoadingOverlay>
     );
 };
