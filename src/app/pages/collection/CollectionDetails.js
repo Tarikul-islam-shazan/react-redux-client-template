@@ -1200,7 +1200,7 @@ class CollectionDetails extends Component {
                         </div>
                     )}
 
-                    {productList.length > 0 && !loading && (
+                    {/*{productList.length > 0 && (*/}
                         <div className="designs">
                             <div className="all-select d-flex align-items-center mb-3">
                                 <div className="flex-grow-1 d-flex align-items-center">
@@ -1237,9 +1237,14 @@ class CollectionDetails extends Component {
                                         />
                                     );
                                 })}
+                                {loading && (
+                                    <CreateSkeletons iterations={12}>
+                                        <ProductSkeleton />
+                                    </CreateSkeletons>
+                                )}
                             </div>
                         </div>
-                    )}
+                    {/*)}*/}
                 </div>
             </>
         );
