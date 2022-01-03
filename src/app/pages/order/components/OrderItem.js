@@ -213,8 +213,11 @@ export const OrderItem = ({
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                        (key) => (
+                                                    <>
+                                                        <td>Color</td>
+                                                        {Object.keys(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((key) => (
                                                             <th key={key}>
                                                                 <span
                                                                     className="cursor-pointer color-icon"
@@ -226,23 +229,29 @@ export const OrderItem = ({
                                                                     }}
                                                                 />
                                                             </th>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.values(
-                                                        product?.colorWiseBuyerPrice
-                                                    ).map((value, i) => (
-                                                        <td key={i}>
-                                                            <p>
-                                                                <span>${value}</span>
-                                                            </p>
-                                                        </td>
-                                                    ))}
+                                                    <>
+                                                        <td>Price</td>
+                                                        {Object.values(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((value, i) => (
+                                                            <td key={i}>
+                                                                <p>
+                                                                    <span>${value}</span>
+                                                                </p>
+                                                            </td>
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                        (value, index) => (
+                                                    <>
+                                                        <td>Qty</td>
+                                                        {Object.keys(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((value, index) => (
                                                             <td key={value}>
                                                                 <input
                                                                     type="number"
@@ -262,8 +271,8 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -289,8 +298,11 @@ export const OrderItem = ({
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                        (key) => (
+                                                    <>
+                                                        <td>Size</td>
+                                                        {Object.keys(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((key) => (
                                                             <th key={key}>
                                                                 <p>
                                                                     {getSizeWiseLabel(
@@ -299,23 +311,29 @@ export const OrderItem = ({
                                                                     )}
                                                                 </p>
                                                             </th>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.values(product?.sizeWiseBuyerPrice).map(
-                                                        (value, i) => (
+                                                    <>
+                                                        <td>Price</td>
+                                                        {Object.values(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((value, i) => (
                                                             <td key={i}>
                                                                 <p>
                                                                     <span>${value}</span>
                                                                 </p>
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                        (value, i) => (
+                                                    <>
+                                                        <td>Qty</td>
+                                                        {Object.keys(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((value, i) => (
                                                             <td key={i}>
                                                                 <input
                                                                     type="number"
@@ -335,8 +353,8 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                             </tbody>
                                         </table>

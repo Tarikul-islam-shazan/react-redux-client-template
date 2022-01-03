@@ -664,18 +664,6 @@ class ConfirmOrder extends Component {
                                     </div>
                                 </div>
 
-                                <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">
-                                    {/* <span className="result d-flex">
-                                        Delivery date:{" "}
-                                        <div className="text-black ml-2 semibold">
-                                            {" "}
-                                            {getDeliveryDate()}
-                                        </div>
-                                    </span> */}
-                                </h4>
-                                <h4 className="mb-3 font-weight-normal pc-step">
-                                    Product confirmation (Step 1 of 2)
-                                </h4>
                                 {order.productResponseList ? (
                                     order.productResponseList
                                         .slice(0)
