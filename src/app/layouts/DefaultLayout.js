@@ -95,38 +95,12 @@ class DefaultLayout extends Component {
             }
             this.OneSignal.log.setLevel('trace');
             await this.OneSignal.on('notificationDisplay', (event) => {
-                // let { data } = event;
-                let obj = {
-                    "id":"4a1cf82e-41a3-44f0-9132-5530efbf5514",
-                    "content":"Hussain Mahdi added a comment on Techpack ready to share",
-                    "data":{
-                        "id":32058,
-                        "body":"{\"titlePartList\":[{\"id\":1,\"text\":\"Hussain Mahdi\",\"titlePartType\":\"ACTOR\"},{\"text\":\"added a comment\",\"titlePartType\":\"ACTION\"},{\"text\":\"on\",\"titlePartType\":\"PREPOSITION\"},{\"id\":17514,\"text\":\"Techpack ready to share\",\"titlePartType\":\"ACTED_UPON\",\"entityType\":\"STEP\"}],\"entityIdTypeMapList\":[{\"id\":4453,\"text\":\"NTX/D21/0096\",\"type\":\"ORDER\"},{\"id\":14854,\"text\":\"\\u003cp\\u003ettttt\\u003c/p\\u003e\",\"type\":\"POST\"}]}",
-                        "createdAt":"02/01/2022",
-                        "createdTime":"09:34 AM",
-                        "profileImage":"https://d2939dhdpmjcbe.cloudfront.net/profile_pic/2020/8/1598536589833_DSC_0227_Original_(2).jpeg",
-                        "notificationImages":[
-
-                        ],
-                        "event":"TASK_POST_ADDED",
-                        "category":"POST",
-                        "redirectPath":"/orders/view/4453?stageId=4504&stepId=17514",
-                        "isSeen":false
-                    },
-                    "url":"https://testadmin.nitex.com/orders/view/4453?stageId=4504&stepId=17514",
-                    "icon":"https://img.onesignal.com/permanent/cd2d35f1-87be-491e-968e-8e623ca4ab19",
-                    "heading":"Nitex"
-                }
-                let {data} = obj;
+                let {data} = event;
                 if (
                     data &&
                     data.category
                 ) {
                     data.body = data.body && isValidJSON(data.body) ? JSON.parse(data.body) : {};
-                    console.log(data,this.props.notifications)
-                    console.log([data, ...this.props.notifications])
-
-
                     this.props._storeData('notifications', [data, ...this.props.notifications]);
                     this.props._storeData('unseenCount', parseInt(this.props.unseenCount) + 1);
                 }
@@ -366,8 +340,10 @@ class DefaultLayout extends Component {
                                         <></>
                                     )}
                                     {this.props.unseenCount ? (
-                                        // <span className="notification-count">{this.props.unseenCount < 100 ? this.props.unseenCount : "99+"}</span>
-                                        <span className="notification-count">{this.props.unseenCount}</span>
+                                        <span
+                                            className="notification-count">
+                                            {this.props.unseenCount < 100 ? this.props.unseenCount : "99+"}
+                                        </span>
                                     ) : (
                                         <></>
                                     )}
