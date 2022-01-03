@@ -317,6 +317,12 @@ class ConfirmOrder extends Component {
             let {
                 order: { name, deliveryDate },
             } = this.state;
+            if (!deliveryDate) {
+                this.setState({
+                    errorInfo: { date: "Delivery date is required" },
+                });
+                isValid = false;
+            }
             if (!name) {
                 this.setState({
                     errorInfo: { name: "Title is required" },
@@ -324,12 +330,6 @@ class ConfirmOrder extends Component {
                 isValid = false;
             }
 
-            if (!deliveryDate) {
-                this.setState({
-                    errorInfo: { date: "Title is required" },
-                });
-                isValid = false;
-            }
             return isValid;
         };
 
