@@ -854,7 +854,7 @@ class PickDesignV2 extends Component {
                     )}
                 </div>
 
-                {searching && showSelectedFilters && filters.length ? (
+                {((searching && showSelectedFilters && filters.length) || (search && searching)) ? (
                     <div className="designs">
                         <h4 className="mb-4 font-weight-normal">
                             <span>
