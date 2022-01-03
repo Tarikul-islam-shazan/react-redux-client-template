@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { addImageSuffix, validateNumber } from "../../../services/Util";
 
 export const OrderItem = ({
@@ -151,9 +152,12 @@ export const OrderItem = ({
                         </div>
                         <div className="features d-flex flex-md-column">
                             <div className="info-item mt-1 ellipse-2-line product-title">
-                                <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">
+                                <Link
+                                    to={`/designs/view/${product.productId}`}
+                                    className="font-weight-bold m-0 font-20 ellipse-2-line"
+                                >
                                     {product.name}
-                                </a>
+                                </Link>
                                 <span className="cat">
                                     {product.productCategory
                                         ? product.productCategory + ", "
