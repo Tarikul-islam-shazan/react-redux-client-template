@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Http from "../services/Http";
-import { toastError } from "../commonComponents/Toast";
+import {toastError, toastSuccess} from "../commonComponents/Toast";
 import LoaderComponent from "../commonComponents/Loader";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import IntlTelInput from "react-intl-tel-input";
 
 const BuyerLoginPopup = ({}) => {
     const [loading, setLoading] = useState(true);
     const [managerInfo, setManagerInfo] = useState({});
     const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({});
+    const [phoneNumberError, setPhoneNumberError] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [state, setState] = useState({iso2: "us", countryCode: "1"})
     const history = useHistory();
 
     useEffect(() => {
@@ -17,7 +21,7 @@ const BuyerLoginPopup = ({}) => {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired;
                 if (isTokenUpdateRequired === true) {
-                    await Http.POST("refreshUserToken", { refreshToken: refreshToken })
+                    await Http.POST("refreshUserToken", {refreshToken: refreshToken})
                         .then(async (tokenResponse) => {
                             await localStorage.setItem(
                                 "token",
@@ -34,11 +38,11 @@ const BuyerLoginPopup = ({}) => {
                     await redirectPage(response);
                 }
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setLoading(false);
                 toastError(response.data.message);
             });
-    }, [redirectPage]);
+    }, []);
 
     const redirectPage = async (response) => {
         if (response.data.status === "ACTIVE") {
@@ -56,7 +60,7 @@ const BuyerLoginPopup = ({}) => {
                 setBuyerDetailsInfo(buyerInfo);
                 setLoading(false);
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setLoading(false);
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
@@ -65,6 +69,109 @@ const BuyerLoginPopup = ({}) => {
                 }
             });
     }, []);
+
+    const handleSubmit = () => {
+        if (phoneNumber === "") {
+            setPhoneNumberError("Phone Number Required!")
+            return false
+        }
+        let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+        let body = {
+            email: userInfo.email,
+            phoneNumber: "+" + state.countryCode + phoneNumber,
+            countryCode: state.countryCode,
+            iso2: state.iso2
+        };
+        setLoading(true)
+        Http.POST('updateBusinessInfo', body)
+            .then((response) => {
+                Http.GET("userInfo")
+                    .then(async (response) => {
+                        localStorage.setItem("userInfo", JSON.stringify(response.data));
+                        toastSuccess("Information updated successful!");
+                        setLoading(false)
+                    })
+                    .catch(({response}) => {
+                        setLoading(false);
+                        toastError(response.data.message);
+                    });
+            })
+            .catch(({response}) => {
+                setLoading(false)
+                toastError("Request wasn't successful.");
+            });
+    }
+
+    const onChangeFlag = (e, f) => {
+        console.log(f)
+        setState({
+            iso2: f.iso2,
+            countryCode: f.dialCode
+        })
+    }
+
+    const onChangeNumber = async (numberValidation, phoneNumber) => {
+        await setPhoneNumber(phoneNumber)
+        await setPhoneNumberError("");
+    }
+
+
+    const renderWelcomeMessage = () => {
+        let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (userInfo.reason === "WRONG_NUMBER") {
+            return (
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="text-center">
+                            <p>We are unable to reach you over the phone Please recheck your phone number, and update if
+                                necessary</p>
+                        </div>
+                        <div className="form-group">
+                            <div className="country-phone-code">
+                                <IntlTelInput
+                                    containerClassName="intl-tel-input"
+                                    inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
+                                    onSelectFlag={onChangeFlag}
+                                    onPhoneNumberChange={onChangeNumber}
+                                    separateDialCode={true}
+                                />
+                            </div>
+                            {
+                                phoneNumberError &&
+                                <div
+                                    className="error"
+                                >
+                                    {phoneNumberError}
+                                </div>
+                            }
+                            <button className="btn-brand m-0" onClick={handleSubmit}>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <>
+                    <p>
+                        Thanks for signing up to the Nitex and joining our creative
+                        community!
+                    </p>
+                    <p>
+                        This is <span>{managerInfo?.name}</span>, a Business
+                        Evangelist dedicated to you and your brand. I’m really
+                        looking forward to knowing more about you and how Nitex can
+                        help grow your brand. I will contact you within 24 hours to
+                        show you our product capabilities, understand your business
+                        goals, and of course help you achieve them.
+                    </p>
+                    <p className="mb-0">
+                        While waiting, you can check out how we’re empowering +50
+                        brands from across the world.
+                    </p>
+                </>
+            )
+        }
+    }
 
     return (
         <>
@@ -391,7 +498,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Sustainable</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/sustainable.svg" alt="sustainable" />
+                                        <img src="/icons/sustainable.svg" alt="sustainable"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth quote-order-box">
@@ -400,7 +507,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Quote to order</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/quote-order.svg" alt="quote" />
+                                        <img src="/icons/quote-order.svg" alt="quote"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth design-box">
@@ -411,7 +518,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Designs accepted</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/Design.svg" alt="Design" />
+                                        <img src="/icons/Design.svg" alt="Design"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth delivered-box">
@@ -422,7 +529,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Orders deliverd</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/shipment.svg" alt="shipment" />
+                                        <img src="/icons/shipment.svg" alt="shipment"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth order-value-box">
@@ -431,7 +538,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Order value</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/order-value.svg" alt="order-value" />
+                                        <img src="/icons/order-value.svg" alt="order-value"/>
                                     </div>
                                 </div>
                                 <div className="one-sixth supplier-box">
@@ -440,7 +547,7 @@ const BuyerLoginPopup = ({}) => {
                                         <span>Manufacturing units</span>
                                     </div>
                                     <div className="status-icon">
-                                        <img src="/icons/Supplier.svg" alt="Supplier" />
+                                        <img src="/icons/Supplier.svg" alt="Supplier"/>
                                     </div>
                                 </div>
                             </div>
@@ -461,15 +568,18 @@ const BuyerLoginPopup = ({}) => {
                                                             <div className="performence-status">
                                                                 <ul className="order-status d-flex">
                                                                     <li className="mini-fonts">
-                                                                        <span className="progress-identifier green"></span>
+                                                                        <span
+                                                                            className="progress-identifier green"></span>
                                                                         Completed on time
                                                                     </li>
                                                                     <li className="mini-fonts">
-                                                                        <span className="progress-identifier blue"></span>
+                                                                        <span
+                                                                            className="progress-identifier blue"></span>
                                                                         Pending
                                                                     </li>
                                                                     <li className="mini-fonts">
-                                                                        <span className="progress-identifier red"></span>
+                                                                        <span
+                                                                            className="progress-identifier red"></span>
                                                                         Overdue
                                                                     </li>
                                                                 </ul>
@@ -498,25 +608,25 @@ const BuyerLoginPopup = ({}) => {
                                     <div className="orders-table">
                                         <table className="table table-responsive-sm">
                                             <thead>
-                                                <tr>
-                                                    <th>Design</th>
-                                                    <th>Quanity</th>
-                                                    <th>Status</th>
-                                                    <th>Price/ Unit</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Design</th>
+                                                <th>Quanity</th>
+                                                <th>Status</th>
+                                                <th>Price/ Unit</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td colSpan="4">
-                                                        <div className="nothing-found text-center">
-                                                            <img
-                                                                src="/icons/Nothing found.svg"
-                                                                alt="nothing found"
-                                                            />
-                                                            <p>No qoutes added yet</p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td colSpan="4">
+                                                    <div className="nothing-found text-center">
+                                                        <img
+                                                            src="/icons/Nothing found.svg"
+                                                            alt="nothing found"
+                                                        />
+                                                        <p>No qoutes added yet</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -530,9 +640,9 @@ const BuyerLoginPopup = ({}) => {
                                 <div className="quick-actions-table">
                                     <table className="table table-responsive-sm">
                                         <thead>
-                                            <tr>
-                                                <th>Task</th>
-                                                <th>
+                                        <tr>
+                                            <th>Task</th>
+                                            <th>
                                                     <span>
                                                         Style{" "}
                                                         <img
@@ -540,8 +650,8 @@ const BuyerLoginPopup = ({}) => {
                                                             alt="arrow"
                                                         />
                                                     </span>
-                                                </th>
-                                                <th>
+                                            </th>
+                                            <th>
                                                     <span>
                                                         Order title{" "}
                                                         <img
@@ -549,8 +659,8 @@ const BuyerLoginPopup = ({}) => {
                                                             alt="arrow"
                                                         />
                                                     </span>
-                                                </th>
-                                                <th>
+                                            </th>
+                                            <th>
                                                     <span>
                                                         Order number{" "}
                                                         <img
@@ -558,26 +668,26 @@ const BuyerLoginPopup = ({}) => {
                                                             alt="arrow"
                                                         />
                                                     </span>
-                                                </th>
-                                                <th>
-                                                    <span>Status </span>
-                                                </th>
-                                            </tr>
+                                            </th>
+                                            <th>
+                                                <span>Status </span>
+                                            </th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td colSpan="5">
-                                                    <div className="nothing-found text-center">
-                                                        <img
-                                                            src="/icons/Nothing found.svg"
-                                                            alt="nothing found"
-                                                        />
-                                                        <p>
-                                                            You have completed all tasks. Great job!
-                                                        </p>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td colSpan="5">
+                                                <div className="nothing-found text-center">
+                                                    <img
+                                                        src="/icons/Nothing found.svg"
+                                                        alt="nothing found"
+                                                    />
+                                                    <p>
+                                                        You have completed all tasks. Great job!
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -600,7 +710,7 @@ const BuyerLoginPopup = ({}) => {
                                                 managerInfo?.profilePicDocument?.docUrl
                                                     ? managerInfo?.profilePicDocument?.docUrl
                                                     : process.env.PUBLIC_URL +
-                                                      "/icons/buyerDefault.png"
+                                                    "/icons/buyerDefault.png"
                                             }
                                             alt="profile"
                                         />
@@ -619,22 +729,7 @@ const BuyerLoginPopup = ({}) => {
                                 </div>
                                 <div className="right-half">
                                     <h3>Hi, {buyerDetailsInfo?.name}!</h3>
-                                    <p>
-                                        Thanks for signing up to the Nitex and joining our creative
-                                        community!
-                                    </p>
-                                    <p>
-                                        This is <span>{managerInfo?.name}</span>, a Business
-                                        Evangelist dedicated to you and your brand. I’m really
-                                        looking forward to knowing more about you and how Nitex can
-                                        help grow your brand. I will contact you within 24 hours to
-                                        show you our product capabilities, understand your business
-                                        goals, and of course help you achieve them.
-                                    </p>
-                                    <p className="mb-0">
-                                        While waiting, you can check out how we’re empowering +50
-                                        brands from across the world.
-                                    </p>
+                                    {renderWelcomeMessage()}
                                 </div>
                             </div>
                         </div>
@@ -642,7 +737,7 @@ const BuyerLoginPopup = ({}) => {
                             <h4 className="title mb-5">How we help you grow</h4>
                             <div className="one-third-row">
                                 <div className="single-item">
-                                    <img src="/icons/100-designs.png" alt="100 designs" />
+                                    <img src="/icons/100-designs.png" alt="100 designs"/>
                                     <h3>100s of designs every week</h3>
                                     <p>
                                         We offer you curated collections from our Design Studio
@@ -661,7 +756,7 @@ const BuyerLoginPopup = ({}) => {
                                     </p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/100-sustainable.png" alt="100% sustainable" />
+                                    <img src="/icons/100-sustainable.png" alt="100% sustainable"/>
                                     <h3>100% Sustainable materials</h3>
                                     <p>
                                         We source, innovate and offer value added organic, recycled,
@@ -669,7 +764,7 @@ const BuyerLoginPopup = ({}) => {
                                     </p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/upto-150-cd.png" alt="100 designs" />
+                                    <img src="/icons/upto-150-cd.png" alt="100 designs"/>
                                     <h3>Up to 150 days Credit line</h3>
                                     <p>
                                         Our ‘Buy now, pay later’ credit line keeps you sane while
@@ -677,7 +772,7 @@ const BuyerLoginPopup = ({}) => {
                                     </p>
                                 </div>
                                 <div className="single-item">
-                                    <img src="/icons/order-low-as-250.png" alt="100 designs" />
+                                    <img src="/icons/order-low-as-250.png" alt="100 designs"/>
                                     <h3>Order as low as 250 units</h3>
                                     <p>
                                         There is no MOQ limit while doing productions with us. Feel
@@ -687,7 +782,7 @@ const BuyerLoginPopup = ({}) => {
                             </div>
                         </div>
                     </div>
-                    <LoaderComponent loading={loading} />
+                    <LoaderComponent loading={loading}/>
                 </div>
             </div>
         </>

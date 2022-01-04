@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import LoaderComponent from "../commonComponents/Loader";
+import Http from "../services/Http";
+import {toastError, toastSuccess} from "../commonComponents/Toast";
 
 const TIME_LIMIT = 120;
 const TIME_INTERVAL = 1000;
@@ -19,13 +21,21 @@ const VerifyEmail = () => {
 
         return () => clearInterval(timer)
     }, [timeLimit])
-    
+
     const resend = () => {
-      
+        setLoading(true)
+        Http.POST("resendVerificationMail")
+            .then(res => {
+                toastSuccess("Mail Resend Successful!")
+                setLoading(false)
+            }).catch(error => {
+            toastError(error.response.data.message);
+            setLoading(false)
+        })
     }
 
     return (
-        <LoaderComponent>
+        <LoaderComponent loading={loading}>
             <div className="questionnaire otp">
                 <div className="questionnaire-form">
                     <div className="ques-heading">
@@ -37,9 +47,18 @@ const VerifyEmail = () => {
                     </div>
                     {
                         timeLimit ?
-                            <button className="btn-brand font-16 brand-color bg-gray-light m-0" disabled>Resend E-mail
-                                after {`${Math.floor(timeLimit / 60)}:${(timeLimit - (Math.floor(timeLimit / 60) * 60))}`} mins</button> :
-                            <button className="btn-brand m-0" onClick={resend}>Resend E-mail</button>
+                            <button
+                                className="btn-brand font-16 brand-color bg-gray-light m-0" disabled
+                            >
+                                Resend E-mail
+                                after {`${Math.floor(timeLimit / 60)}:${(timeLimit - (Math.floor(timeLimit / 60) * 60))}`} mins
+                            </button> :
+                            <button
+                                className="btn-brand m-0"
+                                onClick={resend}
+                            >
+                                Resend E-mail
+                            </button>
                     }
                 </div>
             </div>

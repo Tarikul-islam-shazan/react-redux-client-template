@@ -1015,13 +1015,17 @@ const generateRedirectRoute = (data, props) => {
             pathname: redirection ? redirection : "/login",
             state: {from: "login"},
         });
-    } else if (data.businessInfoGiven === false) {
-        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.phoneVerified === false) {
-        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.brandInfoGiven === false) {
-        props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.status === "PENDING") {
+    } else if (data.emailVerified === false || data.businessInfoGiven === false) {
+        props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
+    }
+    // else if (data.businessInfoGiven === false) {
+    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    // } else if (data.phoneVerified === false) {
+    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    // } else if (data.brandInfoGiven === false) {
+    //     props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
+    // }
+    else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
             state: {from: "login"},
