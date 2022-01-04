@@ -37,6 +37,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 import BrandCreation from "./pages/questionairre/BrandCreation";
 import NotificationAll from "./pages/notification/NotificationAll";
+import VerifyEmail from "./buyerLogin/VerifyEmail";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -119,6 +120,7 @@ class Root extends Component {
                     <QuestionairreRoute exact path="/info" component={InsertPhoneNumber} />
                     <QuestionairreRoute exact path="/verify-otp" component={VerifyOtp} />
                     <QuestionairreRoute exact path="/brandCreation" component={BrandCreation} />
+                    <QuestionairreRoute exact path="/verifyEmail" component={VerifyEmail} />
                     {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>
