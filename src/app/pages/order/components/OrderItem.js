@@ -183,6 +183,7 @@ export const OrderItem = ({
                                     <label>Order quantity</label>
                                     <input
                                         type="number"
+                                        min="0"
                                         placeholder="Unit"
                                         onKeyPress={validateNumber}
                                         onChange={(e) =>
@@ -255,6 +256,7 @@ export const OrderItem = ({
                                                             <td key={value}>
                                                                 <input
                                                                     type="number"
+                                                                    min="0"
                                                                     placeholder="Qty"
                                                                     onKeyPress={validateNumber}
                                                                     onChange={(e) =>
@@ -338,6 +340,7 @@ export const OrderItem = ({
                                                                 <input
                                                                     type="number"
                                                                     placeholder="Qty"
+                                                                    min="0"
                                                                     onKeyPress={validateNumber}
                                                                     onChange={(e) =>
                                                                         onUpdateSizeQuantity(
