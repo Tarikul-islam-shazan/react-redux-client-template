@@ -142,11 +142,8 @@ class Notification extends Component {
                     toastError('Something went wrong! Please try again.');
                 }
             });
-        if (page === 0) {
-            notifications = result;
-        } else {
-            notifications = [...notifications, ...result];
-        }
+
+        notifications = [...notifications, ...result];
 
         await this.props._storeData('dataLoadedOnce', true);
         await this.props._storeData('hasNext', result.length === size ? true : false);

@@ -281,8 +281,7 @@ class ConfirmOrder extends Component {
             this.state.designLists.forEach((item, index) => {
                 total += calculateTotalPrice(item.id, item.type);
             });
-
-            return total;
+            return total.toFixed(2);
         };
 
         const getTotalQuantity = () => {
@@ -318,6 +317,12 @@ class ConfirmOrder extends Component {
             let {
                 order: { name, deliveryDate },
             } = this.state;
+            if (!deliveryDate) {
+                this.setState({
+                    errorInfo: { date: "Delivery date is required" },
+                });
+                isValid = false;
+            }
             if (!name) {
                 this.setState({
                     errorInfo: { name: "Title is required" },
@@ -325,12 +330,6 @@ class ConfirmOrder extends Component {
                 isValid = false;
             }
 
-            if (!deliveryDate) {
-                this.setState({
-                    errorInfo: { date: "Title is required" },
-                });
-                isValid = false;
-            }
             return isValid;
         };
 
@@ -665,18 +664,6 @@ class ConfirmOrder extends Component {
                                     </div>
                                 </div>
 
-                                <h4 className="mb-5 mt-3 font-weight-normal color-333 order-id">
-                                    {/* <span className="result d-flex">
-                                        Delivery date:{" "}
-                                        <div className="text-black ml-2 semibold">
-                                            {" "}
-                                            {getDeliveryDate()}
-                                        </div>
-                                    </span> */}
-                                </h4>
-                                <h4 className="mb-3 font-weight-normal pc-step">
-                                    Product confirmation (Step 1 of 2)
-                                </h4>
                                 {order.productResponseList ? (
                                     order.productResponseList
                                         .slice(0)

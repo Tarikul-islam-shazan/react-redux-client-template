@@ -130,7 +130,7 @@ class PickDesignV2 extends Component {
     };
 
     handleClickOutside = (event) => {
-        console.log(this.searchFilters,event.target)
+        console.log(this.searchFilters, event.target);
         if (this.searchSuggestions && !this.searchSuggestions.contains(event.target)) {
             this.setState({
                 showSuggestions: false,
@@ -196,7 +196,7 @@ class PickDesignV2 extends Component {
 
     setFilters = async (type, id, name, clearFlag = false) => {
         let { filters, search } = this.state;
-        console.log(filters)
+        console.log(filters);
         let flag = true;
         filters.map((filter) => {
             if (filter.type === type && filter.id === id) {
@@ -224,7 +224,7 @@ class PickDesignV2 extends Component {
     renderList = async (page = 0) => {
         this.setState({ loading: true });
         let { size, designList, search, sort, productTypeId, filters } = this.state;
-        let params = `?page=${page}&size=${size}&exploreDesign=true`;
+        let params = `?page=${page}&size=${size}&exploreDesign=true&sort=id,desc`;
         if (search) {
             params += `&search=${search.trim()}`;
         }
@@ -325,8 +325,8 @@ class PickDesignV2 extends Component {
             searching: false,
             showSelectedFilters: false,
         });
-        console.log(clearFlag)
-        if(clearFlag === true){
+
+        if (clearFlag === true) {
             let designList = await this.renderList();
             this.setState({ designList: designList });
         }
@@ -854,14 +854,14 @@ class PickDesignV2 extends Component {
                     )}
                 </div>
 
-                {(searching && showSelectedFilters && filters.length) ? (
+                {((searching && showSelectedFilters && filters.length) || (search && searching)) ? (
                     <div className="designs">
                         <h4 className="mb-4 font-weight-normal">
                             <span>
                                 Search results{" "}
                                 <a
                                     href="#"
-                                    onClick={this.resetFilter}
+                                    onClick={() => this.resetFilter(true)}
                                     className="text-underline ml-3 font-18"
                                 >
                                     Clear
