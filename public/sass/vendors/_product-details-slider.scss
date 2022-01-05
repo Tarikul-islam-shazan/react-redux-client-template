@@ -5,6 +5,15 @@
   max-width: 180px;
   margin: 0 auto;
 }
+.product-detail-gallery{
+  .thumbnail-prev{
+    .banner-slider{
+      .slick-track{
+        height: auto !important;
+      }
+    }
+  }
+}
 .banner-slider .slider.slider-for {
   max-width: calc(100% - 120px);
   padding-left: 30px;
