@@ -1018,8 +1018,11 @@ const generateRedirectRoute = (data, props) => {
             pathname: redirection ? redirection : "/dashboard",
             state: {from: "login"},
         });
-    }  else if (data.emailVerified === false || data.businessInfoGiven === false) {
+    }  else if (data.emailVerified === false) {
         props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
+    }
+    else if (data.businessInfoGiven === false) {
+        props.history.push("/verify/email" + (redirection ? "?redirect=" + redirection : ""));
     }
     // else if (data.businessInfoGiven === false) {
     //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
