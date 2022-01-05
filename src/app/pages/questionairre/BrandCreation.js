@@ -110,7 +110,7 @@ const BrandCreation = ({location}) => {
             return (
                 <div className="ques-heading">
                     <img src={process.env.PUBLIC_URL + "/icons/emailVerificationSuccessful.png"} alt/>
-                    <h2>Your email is successfully verified</h2>
+                    <h2 className="verified-message">Your email is successfully verified</h2>
                     <p>Please submit your brand name & phone number</p>
                 </div>
             )
@@ -139,7 +139,7 @@ const BrandCreation = ({location}) => {
                                         name="code"
                                         type="text"
                                         placeholder="Brand name"
-                                        className="bg-gray-light border-0 font-weight-bold"
+                                        className="bg-gray-light border-0 "
                                     />
                                     {brandError && <span className="error">{brandError}</span>}
                                 </div>
