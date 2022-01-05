@@ -147,7 +147,7 @@ const BuyerLoginPopup = ({}) => {
                                     {phoneNumberError}
                                 </div>
                             }
-                            <button className="btn-brand" onClick={handleSubmit}>Submit</button>
+                            <button className="btn-brand" onClick={handleSubmit}>Update</button>
                         </div>
                     </div>
                 </div>
