@@ -608,6 +608,27 @@
               margin-bottom: 22px;
             }
           }
+          .wrong-number-worning-text{
+            max-width: 620px;
+          }
+          .questionnaire{
+            max-width: 620px;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            .questionnaire-form{
+              margin: 0;
+              
+            }
+            button{
+              &.btn-brand{
+                margin-bottom: 0 !important;
+                display: block;
+                width: 100%;
+                margin-top: 20px;
+              }
+            }
+          }
         }
       }
       .how-we-help-section{

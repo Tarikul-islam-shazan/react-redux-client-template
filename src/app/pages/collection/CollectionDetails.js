@@ -1200,8 +1200,8 @@ class CollectionDetails extends Component {
                         </div>
                     )}
 
-                    {/*{productList.length > 0 && (*/}
-                        <div className="designs">
+                    <div className="designs">
+                        {productList.length > 0 && (
                             <div className="all-select d-flex align-items-center mb-3">
                                 <div className="flex-grow-1 d-flex align-items-center">
                                     <div className="all-checkbox bg-gray-light p-3">
@@ -1221,29 +1221,30 @@ class CollectionDetails extends Component {
                                     </div>
                                 </div>
                             </div>
+                        )}
 
-                            <div className="show-products">
-                                {productList.map((product, i) => {
-                                    return (
-                                        <ProductCardWithTick
-                                            key={i}
-                                            product={product}
-                                            updateProductCard={() => this.updateProductCard()}
-                                            addToQuote={this.addToQuote}
-                                            likeProduct={this.likeProduct}
-                                            unlikeProduct={this.unlikeProduct}
-                                            showEdit={showEdit}
-                                            collectionViewType={collectionViewType}
-                                        />
-                                    );
-                                })}
-                                {loading && (
-                                    <CreateSkeletons iterations={12}>
-                                        <ProductSkeleton />
-                                    </CreateSkeletons>
-                                )}
-                            </div>
+                        <div className="show-products">
+                            {productList.map((product, i) => {
+                                return (
+                                    <ProductCardWithTick
+                                        key={i}
+                                        product={product}
+                                        updateProductCard={() => this.updateProductCard()}
+                                        addToQuote={this.addToQuote}
+                                        likeProduct={this.likeProduct}
+                                        unlikeProduct={this.unlikeProduct}
+                                        showEdit={showEdit}
+                                        collectionViewType={collectionViewType}
+                                    />
+                                );
+                            })}
+                            {loading && (
+                                <CreateSkeletons iterations={12}>
+                                    <ProductSkeleton />
+                                </CreateSkeletons>
+                            )}
                         </div>
+                    </div>
                     {/*)}*/}
                 </div>
             </>

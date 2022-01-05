@@ -122,20 +122,23 @@ const BuyerLoginPopup = ({}) => {
             return (
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="text-center">
+                        <div className="wrong-number-worning-text">
                             <p>We are unable to reach you over the phone Please recheck your phone number, and update if
                                 necessary</p>
                         </div>
-                        <div className="form-group">
-                            <div className="country-phone-code">
-                                <IntlTelInput
-                                    containerClassName="intl-tel-input"
-                                    inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
-                                    onSelectFlag={onChangeFlag}
-                                    onPhoneNumberChange={onChangeNumber}
-                                    separateDialCode={true}
-                                />
+                        <div className="form-group questionnaire">
+                            <div className="questionnaire-form">
+                                <div className="country-phone-code">
+                                    <IntlTelInput
+                                        containerClassName="intl-tel-input"
+                                        inputClassName={`form-control ${phoneNumberError ? 'error' : ''}`}
+                                        onSelectFlag={onChangeFlag}
+                                        onPhoneNumberChange={onChangeNumber}
+                                        separateDialCode={true}
+                                    />
+                                </div>
                             </div>
+                            
                             {
                                 phoneNumberError &&
                                 <div
@@ -144,7 +147,7 @@ const BuyerLoginPopup = ({}) => {
                                     {phoneNumberError}
                                 </div>
                             }
-                            <button className="btn-brand m-0" onClick={handleSubmit}>Submit</button>
+                            <button className="btn-brand" onClick={handleSubmit}>Update</button>
                         </div>
                     </div>
                 </div>
