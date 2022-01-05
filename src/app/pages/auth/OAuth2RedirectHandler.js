@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { toastSuccess, toastError } from '../../commonComponents/Toast';
 import Http from '../../services/Http';
-import { getUrlParameter } from '../../services/Util';
+import {generateRedirectRoute, getUrlParameter} from '../../services/Util';
 
 class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -29,17 +29,8 @@ class OAuth2RedirectHandler extends Component {
             toastError("Couldn't fetch user info.");
           }
         });
-        console.log("checking userinfo outside fetch",userInfo)
         await localStorage.setItem('userInfo',JSON.stringify(userInfo));
-        let redirection = getUrlParameter('redirect', this.props.location.search)
-        if(userInfo.businessInfoGiven){
-          this.props.history.push(redirection ? redirection : "/designs/explore");
-        }else{
-          this.props.history.push(
-            '/info' +
-            (redirection ? ('?redirect=' + redirection) : '')
-          );
-        }
+        generateRedirectRoute(userInfo,this.props)
     }
 
     render() {

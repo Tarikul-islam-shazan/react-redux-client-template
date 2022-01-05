@@ -65,7 +65,7 @@ const BrandCreation = ({location}) => {
         let userInfo = JSON.parse(localStorage.getItem("userInfo"))
         let body = {
             email: userInfo.email,
-            brandName: brandName,
+            userInputtedBrandName: brandName,
             phoneNumber: "+" + state.countryCode + phoneNumber,
             countryCode: state.countryCode,
             iso2: state.iso2

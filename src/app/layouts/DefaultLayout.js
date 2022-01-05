@@ -160,9 +160,9 @@ class DefaultLayout extends Component {
             userInfo = {};
         }
         let { showNotification } = this.state;
-        if (!userInfo.phoneVerified) {
-            return <Redirect to="info" />;
-        }
+        // if (!userInfo.phoneVerified) {
+        //     return <Redirect to="info" />;
+        // }
 
         return (
             <>

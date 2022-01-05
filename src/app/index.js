@@ -70,14 +70,16 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     let data = JSON.parse(localStorage.getItem("userInfo"))
 
-    if (data.emailVerified === false) {
+    if (data.status === "DISABLED") {
+        localStorage.clear();
+        sessionStorage.clear()
+        return <Redirect to="/login"/>
+    } else if (data.emailVerified === false) {
         return <Redirect to="/verifyEmail"/>
     }else if (data.businessInfoGiven === false) {
         return <Redirect to="/verify/email"/>
     } else if (data.status === "PENDING") {
         return <Redirect to="/loginPopup"/>
-    } else if (data.status === "DISABLED") {
-        return <Redirect to="/login"/>
     }
 
     const url =

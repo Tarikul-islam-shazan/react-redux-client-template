@@ -1005,17 +1005,20 @@ const generateRedirectRoute = (data, props) => {
         "redirect",
         props.location.search
     );
-    if (data.status === "ACTIVE") {
-        props.history.push({
-            pathname: redirection ? redirection : "/dashboard",
-            state: {from: "login"},
-        });
-    } else if (data.status === "DISABLED") {
+    if (data.status === "DISABLED") {
+        localStorage.clear();
+        sessionStorage.clear()
         props.history.push({
             pathname: redirection ? redirection : "/login",
             state: {from: "login"},
         });
-    } else if (data.emailVerified === false || data.businessInfoGiven === false) {
+    }
+    else if (data.status === "ACTIVE") {
+        props.history.push({
+            pathname: redirection ? redirection : "/dashboard",
+            state: {from: "login"},
+        });
+    }  else if (data.emailVerified === false || data.businessInfoGiven === false) {
         props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
     }
     // else if (data.businessInfoGiven === false) {
