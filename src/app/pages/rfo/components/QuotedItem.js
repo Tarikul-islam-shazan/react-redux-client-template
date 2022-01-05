@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     addImageSuffix,
     rfqProductStatus,
@@ -14,6 +14,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
     const [showSizes, setShowSizes] = useState(false);
     let flag = 1;
     let timeDifference = 0;
+    let colorWiseRef = useRef(null);
 
     if (quote.status !== "PRICE_GIVEN") {
         let formattedQuoteDate = convertTimeToLocal(quote.date, quote.time, "DD/MM/YYYY hh:mm A");
@@ -29,10 +30,23 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         return formattedDate.add(1, "months").format("MMM D, YYYY");
     };
 
+    useEffect(() => {
+        document.addEventListener('click', onClickOutside, { capture: true });
+        return () => {
+            document.removeEventListener('click', onClickOutside);
+        };
+    }, []);
+
+    const onClickOutside = (event) => {
+        if (colorWiseRef.current && !colorWiseRef.current.contains(event.target)) {
+            setShowSizes(false)
+        }
+    };
+
     const renderTooltip = (message) => {
         return (
             <Tooltip
-                title={<Typography fontSize={30}>{message}</Typography>}
+                title={<Typography fontSize={22}>{message}</Typography>}
                 placement="bottom"
                 arrow
             >
@@ -134,7 +148,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                 <tr>
                     {Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
                         <Tooltip
-                            title={<Typography fontSize={30}>{`#${key}`}</Typography>}
+                            title={<Typography fontSize={22}>{`#${key}`}</Typography>}
                             placement="top"
                             arrow
                             key={key}
@@ -268,7 +282,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     <div className="features d-flex flex-md-column">
                         <div className="info-item mt-1 ellipse-2-line product-title">
                             <Tooltip
-                                title={<Typography fontSize={30}>{quote?.name}</Typography>}
+                                title={<Typography fontSize={22}>{quote?.name}</Typography>}
                                 placement="top"
                                 arrow
                             >
@@ -370,7 +384,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     )} */}
                                     </div>
                                     {showSizes && (
-                                        <div className="quantity-table shadow-12dp">
+                                        <div className="quantity-table shadow-12dp" ref={colorWiseRef}>
                                             <div className="quantity-heading d-flex justify-content-between">
                                                 <h4 className="regular-16">
                                                     Color-size wise quantity

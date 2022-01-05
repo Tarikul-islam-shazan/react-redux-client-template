@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { addImageSuffix, validateNumber } from "../../../services/Util";
 
 export const OrderItem = ({
@@ -151,9 +152,12 @@ export const OrderItem = ({
                         </div>
                         <div className="features d-flex flex-md-column">
                             <div className="info-item mt-1 ellipse-2-line product-title">
-                                <a href="#" className="font-weight-bold m-0 font-20 ellipse-2-line">
+                                <Link
+                                    to={`/designs/view/${product.productId}`}
+                                    className="font-weight-bold m-0 font-20 ellipse-2-line"
+                                >
                                     {product.name}
-                                </a>
+                                </Link>
                                 <span className="cat">
                                     {product.productCategory
                                         ? product.productCategory + ", "
@@ -179,6 +183,7 @@ export const OrderItem = ({
                                     <label>Order quantity</label>
                                     <input
                                         type="number"
+                                        min="0"
                                         placeholder="Unit"
                                         onKeyPress={validateNumber}
                                         onChange={(e) =>
@@ -209,8 +214,11 @@ export const OrderItem = ({
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                        (key) => (
+                                                    <>
+                                                        <td>Color</td>
+                                                        {Object.keys(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((key) => (
                                                             <th key={key}>
                                                                 <span
                                                                     className="cursor-pointer color-icon"
@@ -222,26 +230,33 @@ export const OrderItem = ({
                                                                     }}
                                                                 />
                                                             </th>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.values(
-                                                        product?.colorWiseBuyerPrice
-                                                    ).map((value, i) => (
-                                                        <td key={i}>
-                                                            <p>
-                                                                <span>${value}</span>
-                                                            </p>
-                                                        </td>
-                                                    ))}
+                                                    <>
+                                                        <td>Price</td>
+                                                        {Object.values(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((value, i) => (
+                                                            <td key={i}>
+                                                                <p>
+                                                                    <span>${value}</span>
+                                                                </p>
+                                                            </td>
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.keys(product?.colorWiseBuyerPrice).map(
-                                                        (value, index) => (
+                                                    <>
+                                                        <td>Qty</td>
+                                                        {Object.keys(
+                                                            product?.colorWiseBuyerPrice
+                                                        ).map((value, index) => (
                                                             <td key={value}>
                                                                 <input
                                                                     type="number"
+                                                                    min="0"
                                                                     placeholder="Qty"
                                                                     onKeyPress={validateNumber}
                                                                     onChange={(e) =>
@@ -258,8 +273,8 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -285,8 +300,11 @@ export const OrderItem = ({
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                        (key) => (
+                                                    <>
+                                                        <td>Size</td>
+                                                        {Object.keys(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((key) => (
                                                             <th key={key}>
                                                                 <p>
                                                                     {getSizeWiseLabel(
@@ -295,27 +313,34 @@ export const OrderItem = ({
                                                                     )}
                                                                 </p>
                                                             </th>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.values(product?.sizeWiseBuyerPrice).map(
-                                                        (value, i) => (
+                                                    <>
+                                                        <td>Price</td>
+                                                        {Object.values(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((value, i) => (
                                                             <td key={i}>
                                                                 <p>
                                                                     <span>${value}</span>
                                                                 </p>
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                                 <tr>
-                                                    {Object.keys(product?.sizeWiseBuyerPrice).map(
-                                                        (value, i) => (
+                                                    <>
+                                                        <td>Qty</td>
+                                                        {Object.keys(
+                                                            product?.sizeWiseBuyerPrice
+                                                        ).map((value, i) => (
                                                             <td key={i}>
                                                                 <input
                                                                     type="number"
                                                                     placeholder="Qty"
+                                                                    min="0"
                                                                     onKeyPress={validateNumber}
                                                                     onChange={(e) =>
                                                                         onUpdateSizeQuantity(
@@ -331,8 +356,8 @@ export const OrderItem = ({
                                                                     }
                                                                 />
                                                             </td>
-                                                        )
-                                                    )}
+                                                        ))}
+                                                    </>
                                                 </tr>
                                             </tbody>
                                         </table>

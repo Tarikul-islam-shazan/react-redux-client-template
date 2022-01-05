@@ -83,7 +83,7 @@ class Register extends Component {
                           } else {
                             toastError("Couldn't fetch user info.");
                           }
-                          this.props.history.push('/dashboard');
+                          // this.props.history.push('/dashboard');
                       });
                 } else {
                     this.setState({loading: false})

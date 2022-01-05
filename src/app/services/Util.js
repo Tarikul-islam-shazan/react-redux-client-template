@@ -990,10 +990,10 @@ const getDateDifference = (startDate = moment(), endDate) => {
 
 const getNumberUnit = (value) => {
     if (value < 1e3) return value;
-    if (value >= 1e3 && value < 1e6) return +(value / 1e3).toFixed(1) + "K";
-    if (value >= 1e6 && value < 1e9) return +(value / 1e6).toFixed(1) + "M";
-    if (value >= 1e9 && value < 1e12) return +(value / 1e9).toFixed(1) + "B";
-    if (value >= 1e12) return +(value / 1e12).toFixed(1) + "T";
+    if (value >= 1e3 && value < 1e6) return +(value / 1e3).toFixed(2) + "K";
+    if (value >= 1e6 && value < 1e9) return +(value / 1e6).toFixed(2) + "M";
+    if (value >= 1e9 && value < 1e12) return +(value / 1e9).toFixed(2) + "B";
+    if (value >= 1e12) return +(value / 1e12).toFixed(2) + "T";
 };
 
 const getShortName = (source, size = 35) => {
@@ -1001,38 +1001,39 @@ const getShortName = (source, size = 35) => {
 };
 
 const generateRedirectRoute = (data, props) => {
-    let redirection = getUrlParameter(
-        "redirect",
-        props.location.search
-    );
+    let redirection = getUrlParameter("redirect", props.location.search);
     if (data.status === "ACTIVE") {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     } else if (data.status === "DISABLED") {
         props.history.push({
             pathname: redirection ? redirection : "/login",
-            state: {from: "login"},
+            state: { from: "login" },
         });
-    } else if (data.businessInfoGiven === false) {
-        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.phoneVerified === false) {
-        props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.brandInfoGiven === false) {
-        props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
-    } else if (data.status === "PENDING") {
+    } else if (data.emailVerified === false || data.businessInfoGiven === false) {
+        props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
+    }
+    // else if (data.businessInfoGiven === false) {
+    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    // } else if (data.phoneVerified === false) {
+    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
+    // } else if (data.brandInfoGiven === false) {
+    //     props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
+    // }
+    else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     } else {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     }
-}
+};
 
 export {
     capitalizeFirstLetter,
@@ -1085,5 +1086,5 @@ export {
     convertDateTimeToLocal,
     getNumberUnit,
     getShortName,
-    generateRedirectRoute
+    generateRedirectRoute,
 };

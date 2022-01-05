@@ -415,7 +415,6 @@ const AllStyles = ({onClose}) => {
                             {capitalizeFirstLetter(quote.buyerQuotationType)} {quote.priceType}{" "}
                             price
                         </p>
-                        {/* <br /> */}
                         {quote.buyerQuotationType === "SIZEWISE"
                             ? renderSizeWisePrice(quote)
                             : quote.buyerQuotationType === "COLORWISE"
@@ -593,114 +592,9 @@ const AllStyles = ({onClose}) => {
                                                 </tbody>
                                             </table>
                                         </div>
-
-                                        {/*{editableField == item.id ? (*/}
-                                        {/*    <>*/}
-                                        {/*        <button*/}
-                                        {/*            className="cancel-button"*/}
-                                        {/*            onClick={() => onCancel(item)}*/}
-                                        {/*        >*/}
-                                        {/*            Cancel*/}
-                                        {/*        </button>*/}
-                                        {/*        <button*/}
-                                        {/*            className="save-button inactive"*/}
-                                        {/*            onClick={() => onSave(item)}*/}
-                                        {/*        >*/}
-                                        {/*            Save*/}
-                                        {/*        </button>*/}
-                                        {/*    </>*/}
-                                        {/*) : (*/}
-                                        {/*    <button*/}
-                                        {/*        className="edit-button"*/}
-                                        {/*        onClick={() => onEditQuantity(item)}*/}
-                                        {/*    >*/}
-                                        {/*        Edit quantity*/}
-                                        {/*    </button>*/}
-                                        {/*)}*/}
                                     </div>
                                     <div className="col-3">
                                         {renderCriteriaWisePrice(item)}
-                                        {/*<div className="price-column text-center">*/}
-                                        {/*    {editablePriceFieldId == item.id ? (*/}
-                                        {/*        <div className="edit-view text-left">*/}
-                                        {/*            <p className="pb-1">Price per unit</p>*/}
-                                        {/*            <div className="form-group d-flex mb-0">*/}
-                                        {/*                <input*/}
-                                        {/*                    type="text"*/}
-                                        {/*                    id="price"*/}
-                                        {/*                    name="price"*/}
-                                        {/*                    value={item.price}*/}
-                                        {/*                    onChange={(e) => onEditPrice(e, quoteIndex)}*/}
-                                        {/*                    onKeyPress={validateNumber}*/}
-                                        {/*                    placeholder="0"*/}
-                                        {/*                />*/}
-
-                                        {/*                <select*/}
-                                        {/*                    id="currency"*/}
-                                        {/*                    name="currency"*/}
-                                        {/*                    onChange={(e) => onEditPrice(e, quoteIndex)}*/}
-                                        {/*                    value={item.currency}*/}
-                                        {/*                >*/}
-                                        {/*                    <option value="USD">$</option>*/}
-                                        {/*                    <option value="EUR">€</option>*/}
-                                        {/*                </select>*/}
-                                        {/*            </div>*/}
-                                        {/*            {errors.priceError ? (*/}
-                                        {/*                <p className="error">{errors.priceError}</p>*/}
-                                        {/*            ) : (*/}
-                                        {/*                <></>*/}
-                                        {/*            )}*/}
-                                        {/*            <p className="pb-2 total-value-info">Total value: $25,320</p>*/}
-                                        {/*            <p className="price-type">Price type</p>*/}
-                                        {/*            <input*/}
-                                        {/*                type="radio"*/}
-                                        {/*                id="priceType"*/}
-                                        {/*                name="priceType"*/}
-                                        {/*                value="FOB"*/}
-                                        {/*                checked={item.priceType === "FOB"}*/}
-                                        {/*                onChange={(e) => onEditPrice(e, quoteIndex)}*/}
-                                        {/*            />*/}
-                                        {/*            <label htmlFor="fob">Fob</label>*/}
-                                        {/*            <input*/}
-                                        {/*                type="radio"*/}
-                                        {/*                id="priceType"*/}
-                                        {/*                name="priceType"*/}
-                                        {/*                value="CIF"*/}
-                                        {/*                checked={item.priceType === "CIF"}*/}
-                                        {/*                onChange={(e) => onEditPrice(e, quoteIndex)}*/}
-                                        {/*            />*/}
-                                        {/*            <label htmlFor="cif">CIF</label>*/}
-                                        {/*            <div className="actions text-center pt-2">*/}
-                                        {/*                <button className="cancel-button" onClick={onCancel}>*/}
-                                        {/*                    Cancel*/}
-                                        {/*                </button>*/}
-                                        {/*                <button*/}
-                                        {/*                    className="save-button inactive"*/}
-                                        {/*                    onClick={onSavePriceData}*/}
-                                        {/*                >*/}
-                                        {/*                    Save*/}
-                                        {/*                </button>*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*    ) : (*/}
-                                        {/*        <div className="normal-view">*/}
-                                        {/*            <h2>${item.price}</h2>*/}
-                                        {/*            <p className="unit-info">/unit ({item.priceType})</p>*/}
-
-                                        {/*            <p className="value-info">*/}
-                                        {/*                Total value: $*/}
-                                        {/*                {item.price **/}
-                                        {/*                    getItemTotal(item.colorWiseSizeQuantityPairList)}*/}
-                                        {/*            </p>*/}
-                                        {/*            <button*/}
-                                        {/*                className="edit-button"*/}
-                                        {/*                onClick={(e) => onEditPriceInfo(item)}*/}
-                                        {/*            >*/}
-                                        {/*                Edit price*/}
-                                        {/*            </button>*/}
-                                        {/*        </div>*/}
-                                        {/*    )}*/}
-                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>

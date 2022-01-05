@@ -37,6 +37,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 import BrandCreation from "./pages/questionairre/BrandCreation";
 import NotificationAll from "./pages/notification/NotificationAll";
+import VerifyEmail from "./buyerLogin/VerifyEmail";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -69,12 +70,10 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     let data = JSON.parse(localStorage.getItem("userInfo"))
 
-    if (data.businessInfoGiven === false) {
-        return <Redirect to="/info"/>
-    } else if (data.phoneVerified === false) {
-        return <Redirect to="/info"/>
-    } else if (data.brandInfoGiven === false) {
-        return <Redirect to="/brandCreation"/>
+    if (data.emailVerified === false) {
+        return <Redirect to="/verifyEmail"/>
+    }else if (data.businessInfoGiven === false) {
+        return <Redirect to="/verify/email"/>
     } else if (data.status === "PENDING") {
         return <Redirect to="/loginPopup"/>
     } else if (data.status === "DISABLED") {
@@ -118,7 +117,9 @@ class Root extends Component {
                     <QuestionairreRoute exact path="/loginPopup" component={BuyerLoginPopup} />
                     <QuestionairreRoute exact path="/info" component={InsertPhoneNumber} />
                     <QuestionairreRoute exact path="/verify-otp" component={VerifyOtp} />
-                    <QuestionairreRoute exact path="/brandCreation" component={BrandCreation} />
+                    <QuestionairreRoute exact path="/verify/email" component={BrandCreation} />
+                    {/*<QuestionairreRoute exact path="/brandCreation" component={BrandCreation} />*/}
+                    <QuestionairreRoute exact path="/verifyEmail" component={VerifyEmail} />
                     {/*<QuestionairreRoute exact path="/questionairre-step-1" component={ Questionairre_1 }/>
                   <QuestionairreRoute exact path="/questionairre-step-2" component={ Questionairre_2 }/>
                   <QuestionairreRoute exact path="/questionairre-step-3" component={ Questionairre_3 }/>

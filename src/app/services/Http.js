@@ -163,7 +163,10 @@ const routes = {
     getRunningOrders: `${BASE_URL}/dashboard/buyer/my-orders`, // GET
 
     getDashboardDesignList: `${BASE_URL}/dashboard/design-by-nitex`, // GET
-    refreshUserToken: `${BASE_URL}/auth/refresh`
+    refreshUserToken: `${BASE_URL}/auth/refresh`,
+    verifyToken: `${BASE_URL}/auth/with-verification-token`,
+    verifyEmail: `${BASE_URL}/user/client/verify-email`,
+    resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
 };
 
 // Axios request interceptor

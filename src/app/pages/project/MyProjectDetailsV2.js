@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import LoadingOverlay from "react-loading-overlay";
 import Modal from "react-bootstrap/Modal";
@@ -116,7 +116,8 @@ const MyProjectDetailsV2 = (props) => {
             });
     };
 
-    const getStylesPlan = useCallback(async (orderId) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getStylesPlan = async (orderId) => {
         await Http.GET("getStepResponseForOrderDetails", "/" + orderId)
             .then(({ data }) => {
                 setLoading(false);
@@ -146,44 +147,45 @@ const MyProjectDetailsV2 = (props) => {
                     toastError("Something went wrong! Please try again.");
                 }
             });
-    });
-    const callback = useCallback(() => {
+    };
+    const callback = () => {
         getStylesPlan(id);
-    }, [getStylesPlan, id]);
+    };
 
-    const onStyleCallBack = useCallback(() => {
+    const onStyleCallBack = () => {
         getStylesPlan(id);
-    }, [getStylesPlan, id]);
-
-    const setStepData = useCallback(async () => {
-        let name2 = "stepId";
-        let regex2 = new RegExp("[\\?&]" + name2 + "=([^&#]*)");
-        let results2 = regex2.exec(props.location.search);
-        if (results2 !== null) {
-            await setSelectedTask({
-                taskId: decodeURIComponent(results2[1].replace(/\+/g, " ")),
-                orderId: id,
-            });
-            setShowTaskDetailsModal(true);
-        }
-    }, [id, props.location.search]);
+    };
 
     useEffect(() => {
+        const setStepData = () => {
+            let name2 = "stepId";
+            let regex2 = new RegExp("[\\?&]" + name2 + "=([^&#]*)");
+            let results2 = regex2.exec(props.location.search);
+            if (results2 !== null) {
+                setSelectedTask({
+                    taskId: decodeURIComponent(results2[1].replace(/\+/g, " ")),
+                    orderId: id,
+                });
+                setShowTaskDetailsModal(true);
+            }
+        };
+
         setStepData();
         getProjectDetails(id);
         getStylesPlan(id);
-    }, [id, callback, setStepData, getStylesPlan]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, props.location.search]);
 
     const getPercentage = () => {
         return (
             projectDetails.stageCompletenessList &&
-            projectDetails.stageCompletenessList[activeTab].percentageOfCompleteness
+            projectDetails.stageCompletenessList[activeTab]?.percentageOfCompleteness
         );
     };
 
-    const onClickCell = async (taskId) => {
-        await setSelectedTask({ taskId, orderId: id });
-        await setShowTaskDetailsModal(true);
+    const onClickCell = (taskId) => {
+        setSelectedTask({ taskId, orderId: id });
+        setShowTaskDetailsModal(true);
     };
 
     useDocumentTitle(
