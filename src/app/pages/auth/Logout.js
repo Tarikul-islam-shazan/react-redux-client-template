@@ -25,6 +25,7 @@ class Login extends Component {
           sessionStorage.clear()
           delete axios.defaults.headers.common['Authorization'];
           this.props.history.push('/login');
+          console.log("...logout component...")
       }, 1000);
     }
 
