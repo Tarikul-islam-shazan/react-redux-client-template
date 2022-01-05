@@ -10,6 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import LoadingOverlay from "react-loading-overlay";
 import Http from "../../services/Http";
 import { toastSuccess, toastError, toastWarning } from "../../commonComponents/Toast";
+import Loader from "../../commonComponents/Loader";
 import { encodeQueryData, convertTimeToLocal, convertDateTimeToLocal } from "../../services/Util";
 import moment from "moment";
 import {
@@ -44,6 +45,7 @@ class CollectionList extends Component {
             collectionName: "",
             collectionNameError: "",
             selectedTab: "SHARED",
+            collectionLoading: false,
         };
     }
 
@@ -202,10 +204,14 @@ class CollectionList extends Component {
     delete = async (id) => {};
 
     createNewCollection = () => {
+        this.setState({
+            collectionLoading: true,
+        });
         let { collectionName } = this.state;
         if (!collectionName) {
             this.setState({
                 collectionNameError: "Collection name required",
+                collectionLoading: false,
             });
             return;
         } else {
@@ -234,12 +240,16 @@ class CollectionList extends Component {
                         this.setState({
                             collectionName: "",
                             collectionList: [temp, ...collectionList],
+                            collectionLoading: false,
                         });
                     }
-                    this.setState({ showAddCollectionPopup: false });
+                    this.setState({ showAddCollectionPopup: false, collectionLoading: false });
                 }
             })
             .catch(({ response }) => {
+                this.setState({
+                    collectionLoading: false,
+                });
                 if (response && response.data && response.data.message) {
                     toastError(response.data.message);
                 } else {
@@ -592,6 +602,7 @@ class CollectionList extends Component {
                                         <button
                                             className="btn-brand m-0 brand-bg-color"
                                             onClick={this.createNewCollection}
+                                            disabled={this.state.collectionLoading}
                                         >
                                             Create
                                         </button>

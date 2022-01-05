@@ -129,6 +129,6 @@ export function getOneSignalAppId() {
     if (hostName.indexOf('https://app.nitex.com') > -1) {
         return 'd0288891-96ed-4f96-82f1-698d75dabe49';
     } else {
-        return "85a73256-c0c0-45f7-87ba-2720ecbd7873";
+        return "944586d0-b5c4-4e89-9822-28dd97aaca14";
     }
 }

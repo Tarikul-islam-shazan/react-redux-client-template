@@ -142,13 +142,13 @@ class DefaultLayout extends Component {
     };
 
     logout = async () => {
+        this.props.history.push('/logout');
+        console.log("inside logout function")
         try {
             await this.OneSignal.removeExternalUserId();
-            // this.OneSignal = [];
         } catch (e) {
             console.log(e.message);
         }
-        this.props.history.push('/logout');
     };
 
     render() {
