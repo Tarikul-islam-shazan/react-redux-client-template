@@ -10,6 +10,7 @@ class OAuth2RedirectHandler extends Component {
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
 
         var results = regex.exec(this.props.location.search);
+        console.log(results)
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
 
@@ -34,14 +35,16 @@ class OAuth2RedirectHandler extends Component {
         generateRedirectRoute(userInfo,this.props)
     }
 
+    getUrlParam = (name) => {
+        const param = new URLSearchParams(this.props.location.search)
+        return param.get(name)
+    }
+
+
     render() {
-        console.log(URLSearchParams(this.props.location.search))
-        const token = this.getUrlParameter('token');
-        const refreshToken = this.getUrlParameter('refreshToken');
-        const error = this.getUrlParameter('error');
-        console.log("token",token)
-        console.log("error",error)
-        // return (<></>);
+        const token = this.getUrlParam('token');
+        const refreshToken = this.getUrlParam('refreshToken');
+        const error = this.getUrlParam('error');
         if(token) {
             this.saveToken(token,refreshToken)
             return (<div></div>);
