@@ -44,7 +44,7 @@ class AuthLayout extends React.Component {
                                 </p>
                             )}
 
-                            {(activeTab.includes("login") || activeTab.includes("/")) && (
+                            {((activeTab.includes("login") || activeTab.includes("/")) && !activeTab.includes("/register")) && (
                                 <p>
                                     Don't have an account?
                                     <Link
