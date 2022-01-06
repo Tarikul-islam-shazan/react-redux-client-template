@@ -531,7 +531,7 @@ const AllStyles = ({onClose}) => {
                                         </div>
                                     </div>
                                     <div className="col-4 text-right">
-                                        <div className="quantity-table">
+                                        <div className="quantity-table scroll-y-label scroll-x-label">
                                             <table>
                                                 <tbody>
                                                 <tr>
