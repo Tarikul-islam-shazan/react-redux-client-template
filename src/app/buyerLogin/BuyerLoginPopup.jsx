@@ -11,12 +11,14 @@ const BuyerLoginPopup = ({}) => {
     const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({});
     const [phoneNumberError, setPhoneNumberError] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+    const [userInformation, setUserInformation] = useState({});
     const [state, setState] = useState({iso2: "us", countryCode: "1"})
     const history = useHistory();
 
     useEffect(() => {
         Http.GET("userInfo")
             .then(async (response) => {
+                await setUserInformation(response.data);
                 let refreshToken = localStorage.getItem("refreshToken");
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired;
@@ -117,8 +119,7 @@ const BuyerLoginPopup = ({}) => {
 
 
     const renderWelcomeMessage = () => {
-        let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        if (userInfo.reason === "WRONG_NUMBER") {
+        if (userInformation.reason === "WRONG_NUMBER") {
             return (
                 <div className="row">
                     <div className="col-lg-12">
