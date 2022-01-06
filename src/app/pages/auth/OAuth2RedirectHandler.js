@@ -13,9 +13,10 @@ class OAuth2RedirectHandler extends Component {
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
 
-    saveToken = async(token) => {
+    saveToken = async(token,refreshToken) => {
       localStorage.setItem('rememberMe', 1);
       localStorage.setItem('token', 'Bearer '+token);
+      localStorage.setItem('refreshToken', refreshToken);
       let userInfo = {};
       await Http.GET('userInfo')
         .then(({data}) => {
@@ -34,13 +35,15 @@ class OAuth2RedirectHandler extends Component {
     }
 
     render() {
+        console.log(URLSearchParams(this.props.location.search))
         const token = this.getUrlParameter('token');
+        const refreshToken = this.getUrlParameter('refreshToken');
         const error = this.getUrlParameter('error');
         console.log("token",token)
         console.log("error",error)
         // return (<></>);
         if(token) {
-            this.saveToken(token)
+            this.saveToken(token,refreshToken)
             return (<div></div>);
         } else {
             toastError(error)

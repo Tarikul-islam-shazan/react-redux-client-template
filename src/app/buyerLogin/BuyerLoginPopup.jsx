@@ -20,7 +20,7 @@ const BuyerLoginPopup = ({}) => {
                 let refreshToken = localStorage.getItem("refreshToken");
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
                 let isTokenUpdateRequired = response.data.updatedTokenRequired;
-                if (isTokenUpdateRequired === true) {
+                if (isTokenUpdateRequired === true && refreshToken) {
                     await Http.POST("refreshUserToken", {refreshToken: refreshToken})
                         .then(async (tokenResponse) => {
                             await localStorage.setItem(
