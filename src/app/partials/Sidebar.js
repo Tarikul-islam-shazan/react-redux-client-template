@@ -129,7 +129,7 @@ class Sidebar extends Component {
         return (
             <aside className="left-panel" id="side-menu">
                 <div className="logo">
-                    <a href="/designs/explore" className="logo-expanded">
+                    <a href="/dashboard" className="logo-expanded">
                         <img
                             src={require("../assets/images/logo_final.png")}
                             alt="logo"
