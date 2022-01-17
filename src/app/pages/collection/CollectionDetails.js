@@ -68,7 +68,6 @@ class CollectionDetails extends Component {
             showCollectionAddOption: true,
             collectionType: "",
             collectionViewType: "",
-            showEdit: true,
             search: "",
         };
     }
@@ -216,11 +215,6 @@ class CollectionDetails extends Component {
         let regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)");
         let results = regex.exec(this.props.location.search);
         if (results !== null) {
-            if (results[1] !== "MY_PRODUCTS") {
-                await this.setState({
-                    showEdit: false,
-                });
-            }
             await this.setState({
                 collectionViewType: results[1],
             });
@@ -779,7 +773,6 @@ class CollectionDetails extends Component {
             showCollectionAddOption,
             collectionType,
             collectionViewType,
-            showEdit,
             loading,
             myDesignLoading,
         } = this.state;
@@ -1233,7 +1226,12 @@ class CollectionDetails extends Component {
                                         addToQuote={this.addToQuote}
                                         likeProduct={this.likeProduct}
                                         unlikeProduct={this.unlikeProduct}
-                                        showEdit={showEdit}
+                                        showEdit={
+                                            parseInt(product.addedBy) ===
+                                            parseInt(authUserInfo().id)
+                                                ? true
+                                                : false
+                                        }
                                         collectionViewType={collectionViewType}
                                     />
                                 );
