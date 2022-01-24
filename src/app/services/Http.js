@@ -110,6 +110,7 @@ const routes = {
     completeStage: `${BASE_URL}/stage/complete/`,
 
     // collection api
+    removeProductFromCollection: `${BASE_URL}/collection/product/remove`,
     deleteCollection: `${BASE_URL}/collection/delete`,
     addCollection: `${BASE_URL}/collection/add`,
     addProductToCollection: `${BASE_URL}/collection/product/add`,

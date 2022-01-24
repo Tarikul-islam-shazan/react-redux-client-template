@@ -12,6 +12,9 @@ import {
 } from "../services/Util";
 
 import { _storeData } from "../pages/design/actions";
+import DeleteModal from "./modals/DeleteModal";
+import Http from "../services/Http";
+import {toastError, toastSuccess} from "./Toast";
 // export class ProductCard = ({ item , showDetails , likeProduct , unlikeProduct }) => {
 
 class ProductCard extends Component {
@@ -19,6 +22,9 @@ class ProductCard extends Component {
         super(props);
         this.state = {
             step: 1,
+            productId: null,
+            showRemove: false,
+            selectedTab: ""
             // likeFlag : this.props.item.liked
         };
     }
@@ -29,7 +35,48 @@ class ProductCard extends Component {
         // }
     };
 
-    componentDidMount = async () => {};
+    removeCollection = (id) => {
+        this.setState({
+            productId: id,
+            showRemove: true
+        })
+    }
+
+    handleClose = () => {
+        this.setState({
+            showRemove: false
+        })
+    }
+
+    deleteCollection = async () => {
+        let {collectionList, productId} = this.state;
+        let body = {
+            productIds: [productId],
+            id: this.props.collectionId
+        };
+        await Http.POST('removeProductFromCollection', body)
+            .then(({data}) => {
+                this.props.fetchCollectionProduct(productId)
+                toastSuccess(data.message);
+                this.setState({
+                    showRemove: false,
+                    loading: false,
+                    collectionList
+                });
+            })
+            .catch(({response}) => {
+                this.setState({loading: false});
+                toastError('Something went wrong! Please try again.');
+            });
+    }
+
+    componentDidMount = () => {
+        const param = new URLSearchParams(window.location.search)
+        const selectedTab = param.get('selectedTab');
+        this.setState({
+            selectedTab: selectedTab
+        })
+    };
 
     startProject = (arr) => {
         this.props._storeData("choosenIdsForQuick", arr);
@@ -201,13 +248,20 @@ class ProductCard extends Component {
                                 {showEdit ? (
                                     <Dropdown.Item
                                         href={`/designs/edit/${product.id}`}
-                                        className="px-4 pt-0 pb-3 font-weight-normal text-black font-15"
+                                        className="px-4 pt-0 font-weight-normal text-black font-15"
                                     >
                                         Edit Design
                                     </Dropdown.Item>
                                 ) : (
                                     <></>
                                 )}
+                                {this.state.selectedTab === "OWNER" && <Dropdown.Item
+                                    href="#"
+                                    className="px-4 pb-3 font-weight-normal text-black font-15"
+                                    onClick={(e) => this.removeCollection(product.id)}
+                                >
+                                    Remove
+                                </Dropdown.Item>}
                             </Dropdown.Menu>
                         </Dropdown>
 
@@ -308,6 +362,9 @@ class ProductCard extends Component {
                         </div>
                     </div>
                 </div>
+                {this.state.showRemove && (
+                    <DeleteModal onRemove={this.deleteCollection} onClose={this.handleClose} />
+                )}
             </div>
         );
     }

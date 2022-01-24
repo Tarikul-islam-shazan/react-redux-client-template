@@ -564,7 +564,7 @@ class CollectionList extends Component {
                                 >
                                     <div onClick={() =>
                                         this.props.history.push(
-                                            "/collections/view/" + collection.id
+                                            "/collections/view/" + collection.id + `?selectedTab=${this.state.selectedTab}`
                                         )
                                     }>
                                         <div className="product-img-container">

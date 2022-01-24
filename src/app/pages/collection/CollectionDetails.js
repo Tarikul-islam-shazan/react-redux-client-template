@@ -30,6 +30,7 @@ import {
     LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
 import { _storeData, _getProductForQuote } from "../design/actions";
+import productCard from "../../commonComponents/ProductCard";
 
 // const filterProductBasedOnStatus = (products) => {
 //     return products.filter((product) => !["LOCKED", "SOLD"].includes(product.availabilityStatus));
@@ -755,6 +756,18 @@ class CollectionDetails extends Component {
             });
     };
 
+    fetchCollectionWiseProduct = async (id) => {
+        await this.setState({
+            loading: true
+        })
+        let {productList} = this.state;
+        let listOfProducts = productList.filter((product) => product.id !== id);
+        await this.setState({
+            productList: listOfProducts,
+            loading: false
+        });
+    }
+
     render() {
         let {
             name,
@@ -1218,20 +1231,20 @@ class CollectionDetails extends Component {
                         )}
 
                         <div className="show-products">
-                            {productList.map((product, i) => {
+                            {!loading && productList.map((product, i) => {
                                 return (
                                     <ProductCardWithTick
                                         key={i}
+                                        fetchCollectionProduct={this.fetchCollectionWiseProduct}
                                         product={product}
                                         updateProductCard={() => this.updateProductCard()}
+                                        collectionId={this.props.match.params.id}
                                         addToQuote={this.addToQuote}
                                         likeProduct={this.likeProduct}
                                         unlikeProduct={this.unlikeProduct}
                                         showEdit={
                                             parseInt(product.addedBy) ===
                                             parseInt(authUserInfo().id)
-                                                ? true
-                                                : false
                                         }
                                         collectionViewType={collectionViewType}
                                     />
