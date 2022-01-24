@@ -31,9 +31,6 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
     const [focusedInput, setFocusedInput] = useState(null);
 
     const renderOrderWise = (data) => {
-
-        console.log(data)
-
         return (
             <div className="task-table-design style-wise-task-view order-table-view d-flex ">
                 <div className="task-left-section">
@@ -51,6 +48,20 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                         ))}
                     </div>
                 </div>
+                {data.planData[0].values[0].product?.supplier?.id && <div className="task-left-section">
+                    <div className="fixed-tasks text-center style-base-list">
+                        <div className="one-box heading-box first-heading right-border">
+                            <p>Supplier</p>
+                        </div>
+                        {data.planData[0].values.map((item) => (
+                            <div className="one-box right-border bottom-border" key={item.id}>
+                                <p>
+                                    <a href={`/suppliers/view/${item.product?.supplier?.id}`}>{item.product?.supplier?.name}</a>
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>}
                 <div className="task-right-section clearfix">
                     {data.planData.map((item, index) => (
                         <div
@@ -110,7 +121,20 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                         ))}
                     </div>
                 </div>
-
+                {data.planData[0].values[0].material?.supplier?.id && <div className="task-left-section">
+                    <div className="fixed-tasks text-center style-base-list">
+                        <div className="one-box heading-box first-heading right-border">
+                            <p>Supplier</p>
+                        </div>
+                        {data.planData[0]?.values?.map((item) => (
+                            <div className="one-box right-border bottom-border" key={item.id}>
+                                <p>
+                                    <a href={`/suppliers/view/${item.material?.supplier?.id}`}>{item.material?.supplier?.name}</a>
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>}
                 <div className="task-right-section clearfix">
                     {data.planData.map((item) => (
                         <div
@@ -168,7 +192,20 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                         ))}
                     </div>
                 </div>
-
+                {data.planData[0].values[0].product?.supplier?.id && <div className="task-left-section">
+                    <div className="fixed-tasks text-center style-base-list">
+                        <div className="one-box heading-box first-heading right-border">
+                            <p>Supplier</p>
+                        </div>
+                        {data.planData[0].values.map((item) => (
+                            <div className="one-box right-border bottom-border" key={item.id}>
+                                <p>
+                                    <a href={`/suppliers/view/${item.product?.supplier?.id}`}>{item.product?.supplier?.name}</a>
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>}
                 <div className="task-right-section clearfix">
                     {data.planData.map((item) => (
                         <div

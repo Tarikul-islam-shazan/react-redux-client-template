@@ -1203,6 +1203,7 @@ class CollectionDetails extends Component {
                                                 <input
                                                     type="checkbox"
                                                     id="All"
+                                                    checked={this.props.selectedProductIds.length === productList.length && this.props.selectedProductIds.length > 0}
                                                     name="allCheckBox"
                                                     onChange={this.onChange}
                                                 />

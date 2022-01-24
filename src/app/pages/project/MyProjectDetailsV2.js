@@ -21,22 +21,24 @@ import TopBar from "./components/TopBar";
 import StyleTable from "./components/StyleTable";
 import TaskManage from "../task/components/TaskManage";
 
-const groupByIds = (styleStepBasicInfoList) => {
+const groupByIds = (styleStepBasicInfoList, supplierResponseMap, stageResponse) => {
     const groupedResult = {};
     styleStepBasicInfoList.forEach((item) => {
         item.stepBasicInfoList.forEach((infoItem) => {
             const data = { ...infoItem };
             if (item.stepProduct) {
-                data.product = item.stepProduct;
+                data.product = {...item.stepProduct, supplier: supplierResponseMap[item.stepProduct.id]};
             }
             if (item.stepMaterial) {
-                data.material = item.stepMaterial;
+                data.material = {...item.stepMaterial, supplier: supplierResponseMap[item.stepMaterial.productId]};
             }
 
-            if (!groupedResult[data.stepName]) {
-                groupedResult[data.stepName] = [data];
+            let key = "S" + stageResponse.id + "I" + data.stepSequenceIndex;
+
+            if (!groupedResult[key]) {
+                groupedResult[key] = [data];
             } else {
-                groupedResult[data.stepName].push(data);
+                groupedResult[key].push(data);
             }
         });
     });
@@ -71,9 +73,9 @@ const formatStagesData = (data) => {
     const result = [];
 
     data.forEach((stage) => {
-        const { styleStepBasicInfoList, stageResponse, startDate, endDate, stepProductList } =
+        const { styleStepBasicInfoList, stageResponse, supplierResponseMap, startDate, endDate, stepProductList } =
             stage;
-        const groupedList = groupByIds(styleStepBasicInfoList);
+        const groupedList = groupByIds(styleStepBasicInfoList, supplierResponseMap, stageResponse);
 
         const formattedResult = groupedList.map(formatData);
 
