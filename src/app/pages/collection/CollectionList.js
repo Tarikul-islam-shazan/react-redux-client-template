@@ -24,6 +24,7 @@ import {
     LOADER_MARGIN_TOP,
     LOADER_MARGIN_LEFT,
 } from "../../constant";
+import DeleteModal from "../../commonComponents/modals/DeleteModal";
 
 // import {CollectionCard} from './components/CollectionCard';
 
@@ -36,10 +37,12 @@ class CollectionList extends Component {
             page: 0,
             size: 15,
             loading: false,
+            showRemove: false,
             name: "",
             hasNext: true, //to check if pagination is available or not
             height: window.innerHeight,
             totalCount: 0,
+            removedCollectionId: null,
             show: false,
             showAddCollectionPopup: false,
             collectionName: "",
@@ -257,6 +260,40 @@ class CollectionList extends Component {
                 }
             });
     };
+
+    removeCollection = (id) => {
+        this.setState({
+            removedCollectionId: id,
+            showRemove: true
+        })
+    }
+
+    handleClose = () => {
+        this.setState({
+            showRemove: false
+        })
+    }
+
+    deleteCollection = async () => {
+        let {collectionList, removedCollectionId} = this.state;
+        let body = {
+            id: removedCollectionId
+        };
+        await Http.DELETE_WITH_BODY('deleteCollection', body)
+            .then(({data}) => {
+                this.setState({loading: false});
+                toastSuccess(data.message);
+                collectionList = collectionList.filter((collection) => collection.id !== removedCollectionId);
+                this.setState({
+                    showRemove: false,
+                    collectionList
+                });
+            })
+            .catch(({response}) => {
+                this.setState({loading: false});
+                toastError('Something went wrong! Please try again.');
+            });
+    }
 
     render() {
         let {
@@ -524,46 +561,46 @@ class CollectionList extends Component {
                                 <div
                                     className="collection-type-item"
                                     key={i}
-                                    onClick={() =>
+                                >
+                                    <div onClick={() =>
                                         this.props.history.push(
                                             "/collections/view/" + collection.id
                                         )
-                                    }
-                                >
-                                    <div className="product-img-container">
-                                        <div className="prev-img">
-                                            <img
-                                                src={
-                                                    img1
-                                                        ? img1
-                                                        : require("../../assets/images/default_product.svg")
-                                                }
-                                                alt=""
-                                            />
+                                    }>
+                                        <div className="product-img-container">
+                                            <div className="prev-img">
+                                                <img
+                                                    src={
+                                                        img1
+                                                            ? img1
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="prev-img-thumb">
+                                                <img
+                                                    src={
+                                                        img2
+                                                            ? img2
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                                <img
+                                                    src={
+                                                        img3
+                                                            ? img3
+                                                            : require("../../assets/images/default_product.svg")
+                                                    }
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="prev-img-thumb">
-                                            <img
-                                                src={
-                                                    img2
-                                                        ? img2
-                                                        : require("../../assets/images/default_product.svg")
-                                                }
-                                                alt=""
-                                            />
-                                            <img
-                                                src={
-                                                    img3
-                                                        ? img3
-                                                        : require("../../assets/images/default_product.svg")
-                                                }
-                                                alt=""
-                                            />
-                                        </div>
+                                        <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column">
+                                            <span>{collection.name}</span>
+                                        </h4>
                                     </div>
-                                    <h4 className="font-16 font-weight-normal mt-3 d-flex flex-column">
-                                        <span>{collection.name}</span>
-                                    </h4>
-
                                     <div className="quantity collections-quantity">
                                         <span>
                                             <span>By: </span> {collection.ownerName}
@@ -580,6 +617,14 @@ class CollectionList extends Component {
                                                 {getDuration(collection.lastDesignUpdatedAt)}
                                             </span>
                                         )}
+                                        {selectedTab === "OWNER" &&
+                                            <span
+                                                onClick={() => this.removeCollection(collection.id)}
+                                                className="float-right"
+                                            >
+                                                Delete
+                                            </span>
+                                        }
                                     </div>
                                 </div>
                             );
@@ -619,6 +664,9 @@ class CollectionList extends Component {
                         )}
                     </div>
                 </div>
+                {this.state.showRemove && (
+                    <DeleteModal onRemove={this.deleteCollection} onClose={this.handleClose} />
+                )}
             </LoadingOverlay>
         );
     }
