@@ -65,6 +65,7 @@ const API = () => {
 //export const BASE_URL = "https://api.nitex.com"; //Live
 //export const BASE_URL_2 = "http://bb43c5f2.ngrok.io";
 export const BASE_URL = getBaseUrl(); //"http://localhost:8080"; //Live
+export const BASE_FRONT_END_URL = getBaseFrontEndUrl()
 
 export const OAUTH2_REDIRECT_URI = window.location.origin+'/oauth2/redirect'
 
@@ -112,6 +113,25 @@ function getBaseUrl(){
         return "https://apiv2.nitex.com";
     }
 }
+
+function getBaseFrontEndUrl() {
+    const hostName = window.location.toString();
+
+    if (hostName.indexOf('https://test.nitex.com') > -1) {
+        return 'https://test.nitex.com';
+    } else if (hostName.indexOf('https://testadmin.nitex.com') > -1) {
+        return 'https://testadmin.nitex.com';
+    } else if (hostName.indexOf('https://app.nitex.com') > -1) {
+        return 'https://app.nitex.com';
+    } else if (hostName.indexOf('https://admin.nitex.com') > -1) {
+        return 'https://admin.nitex.com';
+    } else if (hostName.indexOf('localhost') > -1) {
+        return 'http://localhost:3000';
+    } else if (hostName.indexOf('https://admin-beta.nitex.com') > -1) {
+        return 'https://admin-beta.nitex.com';
+    }
+}
+
 
 function getHotjarId(){
     const hostName = window.location.toString();

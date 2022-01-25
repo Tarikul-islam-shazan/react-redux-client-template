@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API, HTTP_STATUS, BASE_URL } from "../constant";
+import {API, HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL} from "../constant";
 import store from "../redux/store";
 import { REDIRECT_TO } from "../redux/actions/types";
 import { getToken } from "./Util";
@@ -189,22 +189,10 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        if (
-            HTTP_STATUS["Unauthorized"] === error.response.status &&
-            localStorage.getItem("token")
-        ) {
-            setTimeout(() => {
-                // localStorage.removeItem('token');
-                // localStorage.clear();
-                // delete axios.defaults.headers.common['Authorization'];
-                // window.location.href = "/logout";
-                // store.dispatch({
-                //     type: REDIRECT_TO,
-                //     payload: {
-                //         link: '/login'
-                //     }
-                // });
-            }, 10);
+        if (error.response.data.status === HTTP_STATUS['Unauthorized'] && localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+            delete axios.defaults.headers.common['Authorization'];
+            window.location.replace(BASE_FRONT_END_URL)
         }
         return Promise.reject(error);
     }

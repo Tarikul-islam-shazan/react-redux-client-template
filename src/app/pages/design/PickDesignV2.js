@@ -11,7 +11,7 @@ import { ProductSkeleton, CreateSkeletons } from "../../commonComponents/Product
 
 import { LOCAL_QUOTE_NOW_KEY } from "../../constant";
 import {
-    _getKey,
+    _getKey, authUserInfo,
     formatProductTypeWithGroup,
     STATUS_NOT_ALLOWED_FOR_SHOW_EXPLORE_DESIGN,
 } from "../../services/Util";
@@ -76,6 +76,7 @@ class PickDesignV2 extends Component {
             collectionName: "",
             collectionNameError: "",
             showAddCollectionPopup: false,
+            searchCollection: ""
         };
     }
 
@@ -560,6 +561,28 @@ class PickDesignV2 extends Component {
         );
     };
 
+    handleChangeCollection = (e) => {
+        let {value} = e.target;
+        let userInfo = authUserInfo();
+        let param;
+        if (value) {
+            param = userInfo.id + `?name=${value}`
+        } else {
+            param = userInfo.id
+        }
+        Http.GET("getUserCollectionList", param)
+            .then(({data}) => {
+                if (data.data) {
+                    this.setState({collectionList: data.data});
+                }
+            })
+            .catch((error) => toastError(error.response.data.message));
+
+        this.setState({
+            searchCollection: e.target.value
+        })
+    }
+
     render() {
         let {
             designList,
@@ -581,6 +604,7 @@ class PickDesignV2 extends Component {
             showAddCollectionPopup,
             collectionName,
             collectionNameError,
+            searchCollection
         } = this.state;
 
         return (
@@ -1005,6 +1029,17 @@ class PickDesignV2 extends Component {
                             ) : (
                                 <></>
                             )}
+                            <div className="mt-2">
+                                <input
+                                    type="search"
+                                    autoComplete="chrome-off"
+                                    placeholder="Search collection"
+                                    className="w-100"
+                                    name="searchCollection"
+                                    value={searchCollection}
+                                    onChange={this.handleChangeCollection}
+                                />
+                            </div>
                             {collectionList.length ? (
                                 <div class="all-collection">
                                     <span>All collection</span>
