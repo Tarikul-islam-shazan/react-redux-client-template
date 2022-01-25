@@ -9,6 +9,7 @@ import ADD_TASK_ICON from "../../../assets/images/icons/add-task-icon.svg";
 import AddNewTask from "./AddNewTask";
 import Http from "../../../services/Http";
 import {toastSuccess, toastError} from "../../../commonComponents/Toast";
+import {Link} from "react-router-dom";
 
 const checkStatus = (status) => {
     switch (status) {
@@ -48,20 +49,6 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                         ))}
                     </div>
                 </div>
-                {data.planData[0].values[0].product?.supplier?.id && <div className="task-left-section">
-                    <div className="fixed-tasks text-center style-base-list">
-                        <div className="one-box heading-box first-heading right-border">
-                            <p>Supplier</p>
-                        </div>
-                        {data.planData[0].values.map((item) => (
-                            <div className="one-box right-border bottom-border" key={item.id}>
-                                <p>
-                                    <a href={`/suppliers/view/${item.product?.supplier?.id}`}>{item.product?.supplier?.name}</a>
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>}
                 <div className="task-right-section clearfix">
                     {data.planData.map((item, index) => (
                         <div
@@ -110,31 +97,31 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                 <div className="task-left-section">
                     <div className="fixed-tasks text-center style-base-list">
                         <div className="one-box heading-box first-heading right-border">
-                            <p>Material</p>
+                            <p>Style</p>
                         </div>
-                        {data.planData[0].values.map((item) => (
+                        {data.planData[0]?.values?.map((item) => (
                             <div className="one-box right-border bottom-border" key={item.id}>
                                 <p>
-                                    <a href="#">{item.material.materialName}</a>
+                                    <Link to={`/designs/view/${item.material.productId}`} target="_blank">{item.material.productReferenceNumber}</Link>
                                 </p>
                             </div>
                         ))}
                     </div>
                 </div>
-                {data.planData[0].values[0].material?.supplier?.id && <div className="task-left-section">
+                <div className="task-left-section">
                     <div className="fixed-tasks text-center style-base-list">
                         <div className="one-box heading-box first-heading right-border">
-                            <p>Supplier</p>
+                            <p>Material</p>
                         </div>
-                        {data.planData[0]?.values?.map((item) => (
+                        {data.planData[0].values.map((item) => (
                             <div className="one-box right-border bottom-border" key={item.id}>
                                 <p>
-                                    <a href={`/suppliers/view/${item.material?.supplier?.id}`}>{item.material?.supplier?.name}</a>
+                                    <a href="#" style={{textDecoration: "none"}}>{item.material.materialName}</a>
                                 </p>
                             </div>
                         ))}
                     </div>
-                </div>}
+                </div>
                 <div className="task-right-section clearfix">
                     {data.planData.map((item) => (
                         <div
@@ -145,8 +132,8 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                                 <p>{item.stepName}</p>
                             </div>
 
-                            {item.values.map((val) => (
-                                <div
+                            {item.values.map((val) => {
+                                return val.notApplicable === false ? <div
                                     className={`one-box left-no-border ${checkStatus(
                                         val.formattedTaskStatus
                                     )}`}
@@ -159,11 +146,11 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                                             <img src={APPROVE_ICON} alt=""></img>
                                         )}
                                         {Math.sign(val.dateOver) === 1 && (
-                                            <span class="due-count">+{val.dateOver}d</span>
+                                            <span className="due-count">+{val.dateOver}d</span>
                                         )}
                                     </p>
-                                </div>
-                            ))}
+                                </div> : <div className="one-box left-no-border"><p>N/A</p></div>
+                            })}
                         </div>
                     ))}
                 </div>
@@ -186,26 +173,12 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                                     alt={item.product.name}
                                 />
                                 <p>
-                                    <a href="#">{item.product.name}</a>
+                                    <Link to={`/designs/view/${item.product.id}`} target="_blank">{item.product.name}</Link>
                                 </p>
                             </div>
                         ))}
                     </div>
                 </div>
-                {data.planData[0].values[0].product?.supplier?.id && <div className="task-left-section">
-                    <div className="fixed-tasks text-center style-base-list">
-                        <div className="one-box heading-box first-heading right-border">
-                            <p>Supplier</p>
-                        </div>
-                        {data.planData[0].values.map((item) => (
-                            <div className="one-box right-border bottom-border" key={item.id}>
-                                <p>
-                                    <a href={`/suppliers/view/${item.product?.supplier?.id}`}>{item.product?.supplier?.name}</a>
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>}
                 <div className="task-right-section clearfix">
                     {data.planData.map((item) => (
                         <div
@@ -216,8 +189,8 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                                 <p>{item.stepName}</p>
                             </div>
 
-                            {item.values.map((val) => (
-                                <div
+                            {item.values.map((val) => {
+                                return val.notApplicable === false ? <div
                                     className={`one-box left-no-border ${checkStatus(
                                         val.formattedTaskStatus
                                     )}`}
@@ -232,11 +205,11 @@ const StyleTable = ({styleData, orderId, getStylesPlan, onClickCell, onStyleCall
                                             <img src={APPROVE_ICON} alt=""></img>
                                         )}
                                         {Math.sign(val.dateOver) === 1 && (
-                                            <span class="due-count">+{val.dateOver}d</span>
+                                            <span className="due-count">+{val.dateOver}d</span>
                                         )}
                                     </p>
-                                </div>
-                            ))}
+                                </div> : <div className="one-box left-no-border"><p>N/A</p></div>
+                            })}
                         </div>
                     ))}
                 </div>

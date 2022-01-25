@@ -17,6 +17,7 @@ import {
 } from "../../services/Util";
 import { _storeData, _getProductForQuote } from "./actions";
 import MyCollections from "./components/MyCollections";
+import LoaderComponent from "../../commonComponents/Loader";
 
 const isSelected = (filters, type, id) => {
     let flag = false;
@@ -65,6 +66,7 @@ class PickDesignV2 extends Component {
             showFilters: false,
             filterOptions: {},
             showSelectedFilters: false,
+            modalLoader: false,
             filters: [],
             suggestions: [],
             searching: false,
@@ -562,6 +564,9 @@ class PickDesignV2 extends Component {
     };
 
     handleChangeCollection = (e) => {
+        this.setState({
+            modalLoader: true
+        })
         let {value} = e.target;
         let userInfo = authUserInfo();
         let param;
@@ -573,13 +578,18 @@ class PickDesignV2 extends Component {
         Http.GET("getUserCollectionList", param)
             .then(({data}) => {
                 if (data.data) {
-                    this.setState({collectionList: data.data});
+                    this.setState({collectionList: data.data, modalLoader: false});
                 }
             })
-            .catch((error) => toastError(error.response.data.message));
+            .catch((error) => {
+                toastError(error.response.data.message)
+                this.setState({
+                    modalLoader: false
+                })
+            });
 
         this.setState({
-            searchCollection: e.target.value
+            searchCollection: e.target.value,
         })
     }
 
@@ -1029,12 +1039,13 @@ class PickDesignV2 extends Component {
                             ) : (
                                 <></>
                             )}
-                            <div className="mt-2">
+                            <LoaderComponent loading={this.state.modalLoader}/>
+                            <div className="mt-2 search w-100">
                                 <input
                                     type="search"
                                     autoComplete="chrome-off"
                                     placeholder="Search collection"
-                                    className="w-100"
+                                    className="w-100 pl-3"
                                     name="searchCollection"
                                     value={searchCollection}
                                     onChange={this.handleChangeCollection}

@@ -31,6 +31,7 @@ import {
 } from "../../constant";
 import { _storeData, _getProductForQuote } from "../design/actions";
 import productCard from "../../commonComponents/ProductCard";
+import LoaderComponent from "../../commonComponents/Loader";
 
 // const filterProductBasedOnStatus = (products) => {
 //     return products.filter((product) => !["LOCKED", "SOLD"].includes(product.availabilityStatus));
@@ -48,6 +49,7 @@ class CollectionDetails extends Component {
             hasNext: true, //to check if pagination is available or not
             height: window.innerHeight,
             totalCount: 0,
+            selectableCount: 0,
             show: false,
             productList: [],
             myDesignList: [],
@@ -62,6 +64,7 @@ class CollectionDetails extends Component {
             searchUserText: "",
             searchUserSuggestions: [],
             searchUserLoading: false,
+            modalLoader: false,
             collectionList: [],
             collectionName: "",
             collectionNameError: "",
@@ -70,6 +73,7 @@ class CollectionDetails extends Component {
             collectionType: "",
             collectionViewType: "",
             search: "",
+            searchCollection: ""
         };
     }
 
@@ -559,6 +563,9 @@ class CollectionDetails extends Component {
                         list.push(product.id);
                     }
                 });
+                this.setState({
+                    selectableCount: list.length
+                })
                 await this.props._storeData("selectedProductIds", list);
                 this.updateProductCard();
             } else {
@@ -768,6 +775,37 @@ class CollectionDetails extends Component {
         });
     }
 
+    handleChangeCollection = (e) => {
+        this.setState({
+            modalLoader: true
+        })
+        let {value} = e.target;
+        let userInfo = authUserInfo();
+        let param;
+        if (value) {
+            param = userInfo.id + `?name=${value}`
+        } else {
+            param = userInfo.id
+        }
+        Http.GET("getUserCollectionList", param)
+            .then(({data}) => {
+                if (data.data) {
+                    this.setState({collectionList: data.data, modalLoader: false});
+                }
+            })
+            .catch((error) => {
+                toastError(error.response.data.message)
+                this.setState({
+                    modalLoader: false
+                })
+            });
+
+        this.setState({
+            searchCollection: e.target.value
+        })
+    }
+
+
     render() {
         let {
             name,
@@ -788,6 +826,7 @@ class CollectionDetails extends Component {
             collectionViewType,
             loading,
             myDesignLoading,
+            searchCollection
         } = this.state;
 
         const moreMember = 4;
@@ -1133,69 +1172,80 @@ class CollectionDetails extends Component {
 
                     {showAddCollectionPopup ? (
                         <div className="create-new-collection">
-                            <div className="pop-container" ref={this.setWrapperRef}>
+                                <div className="pop-container" ref={this.setWrapperRef}>
                                 <span
                                     className="create-newbutton cursor-pointer"
                                     onClick={() => this.setState({ showCollectionAddOption: true })}
                                 >
                                     + Create new collection
                                 </span>
-                                {showCollectionAddOption ? (
-                                    <>
-                                        <div className="create-new d-flex">
-                                            <input
-                                                type="text"
-                                                placeholder="Type your collection name"
-                                                className="bg-gray-light border-0"
-                                                name="collectionName"
-                                                value={collectionName}
-                                                onChange={this.onChangeText}
-                                            />
-                                            <button
-                                                className="btn-brand m-0 brand-bg-color"
-                                                onClick={this.createNewCollection}
-                                            >
-                                                Create
-                                            </button>
-                                        </div>
-                                        {collectionNameError ? (
-                                            <p className="error">{collectionNameError}</p>
-                                        ) : (
-                                            <></>
-                                        )}
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
-
-                                {collectionList.length > 0 ? (
-                                    <div className="all-collection">
-                                        <span>All collection</span>
-                                        <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
-                                            {collectionList.map((collection, i) => {
-                                                return (
-                                                    <li key={i}>
-                                                        <span>{collection.name}</span>
-                                                        <button
-                                                            className="btn-brand m-0 brand-bg-color"
-                                                            onClick={() =>
-                                                                this.addToExistingCollection(
-                                                                    collection.id
-                                                                )
-                                                            }
-                                                        >
-                                                            Add
-                                                        </button>
-                                                    </li>
-                                                );
-                                            })}
-                                        </ul>
+                                    {showCollectionAddOption ? (
+                                        <>
+                                            <div className="create-new d-flex">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Type your collection name"
+                                                    className="bg-gray-light border-0"
+                                                    name="collectionName"
+                                                    value={collectionName}
+                                                    onChange={this.onChangeText}
+                                                />
+                                                <button
+                                                    className="btn-brand m-0 brand-bg-color"
+                                                    onClick={this.createNewCollection}
+                                                >
+                                                    Create
+                                                </button>
+                                            </div>
+                                            {collectionNameError ? (
+                                                <p className="error">{collectionNameError}</p>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <LoaderComponent loading={this.state.modalLoader}/>
+                                    <div className="mt-2 search w-100">
+                                        <input
+                                            type="search"
+                                            autoComplete="chrome-off"
+                                            placeholder="Search collection"
+                                            className="w-100 pl-3"
+                                            name="searchCollection"
+                                            value={searchCollection}
+                                            onChange={this.handleChangeCollection}
+                                        />
                                     </div>
-                                ) : (
-                                    <></>
-                                )}
+                                    {collectionList.length > 0 ? (
+                                        <div className="all-collection">
+                                            <span>All collection</span>
+                                            <ul className="p-0 m-0 existing-item pop-list-item custom-scrollbar">
+                                                {collectionList.map((collection, i) => {
+                                                    return (
+                                                        <li key={i}>
+                                                            <span>{collection.name}</span>
+                                                            <button
+                                                                className="btn-brand m-0 brand-bg-color"
+                                                                onClick={() =>
+                                                                    this.addToExistingCollection(
+                                                                        collection.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                Add
+                                                            </button>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </div>
                             </div>
-                        </div>
                     ) : (
                         <></>
                     )}
@@ -1216,7 +1266,7 @@ class CollectionDetails extends Component {
                                                 <input
                                                     type="checkbox"
                                                     id="All"
-                                                    checked={this.props.selectedProductIds.length === productList.length && this.props.selectedProductIds.length > 0}
+                                                    checked={this.props.selectedProductIds.length === this.state.selectableCount && this.props.selectedProductIds.length > 0}
                                                     name="allCheckBox"
                                                     onChange={this.onChange}
                                                 />
