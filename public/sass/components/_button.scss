@@ -125,3 +125,40 @@ button.border-orrange {
   color: $secondary-color;
 }
 
+button{
+  //tertiary
+  &.tertiary{
+    background: $secondary-color;
+    border: 1px solid $secondary-color;
+    &:hover{
+      background: $secondary_bright_01;
+    }
+    &:active, &:focus{
+      background: $secondary_dark_01;
+    }
+    &:disabled {
+      opacity: .3;
+    }
+  }
+  //Gray Outline
+  &.gray-outline{
+    background: #fff;
+    border: 1px solid $gray_dark_04;
+    color: $gray_dark_02;
+    svg{
+      path, circle, rect{
+        fill: $gray_dark_03;
+        strock: $gray_dark_03;
+      }
+    }
+    &:hover{
+      background: $gray_light_03;
+    }
+    &:active, &:focus{
+      background: $gray_light_02;
+    }
+    &:disabled {
+      opacity: .5;
+    }
+  }
+}
