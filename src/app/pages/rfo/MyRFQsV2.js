@@ -156,7 +156,7 @@ class MyRFQs extends Component {
                                 ? [...rfqList, ...data.myQuotesProductResponses]
                                 : data.myQuotesProductResponses,
                             page: page,
-                            hasNext: data.myQuotesProductResponses.length == size ? true : false,
+                            hasNext: data.myQuotesProductResponses.length === size,
                             loading: false,
                             total: data.total,
                         });
@@ -164,7 +164,7 @@ class MyRFQs extends Component {
                         this.setState({
                             rfqList: data.myQuotesProductResponses,
                             page: page,
-                            hasNext: data.myQuotesProductResponses.length == size ? true : false,
+                            hasNext: data.myQuotesProductResponses.length === size,
                             loading: false,
                             total: data.total,
                         });
@@ -175,7 +175,7 @@ class MyRFQs extends Component {
                         hasNext: false,
                         loading: false,
                     });
-                    if (page == 0) {
+                    if (page === 0) {
                         this.setState({
                             productLoading: false,
                         });
@@ -213,13 +213,13 @@ class MyRFQs extends Component {
     toggleSelect = async (e) => {
         let { rfqList, allCheck } = this.state;
         rfqList = rfqList.map((rfq, i) => {
-            if (rfq.id == e.target.value) {
+            if (rfq.id === e.target.value) {
                 rfq.isSelected = e.target.checked;
             }
             if (e.target.name === "all") {
                 rfq.isSelected = e.target.checked;
             }
-            if (rfq.status === "ORDER_PLACED" || rfq.status === "PRODUCT_SOLD") {
+            if (rfq.status !== "PRICE_GIVEN") {
                 rfq.isSelected = false;
             }
             return rfq;
