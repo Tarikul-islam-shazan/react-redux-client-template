@@ -43,6 +43,7 @@ import { fetchGeneralSettingsData } from "../../redux/actions";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LoaderComponent from "../../commonComponents/Loader";
 
 class OurDesignDetails extends Component {
     constructor(props) {
@@ -65,7 +66,39 @@ class OurDesignDetails extends Component {
             collectionNameError: "",
             TURN_AROUND_TIME: "",
             MOQ: "",
+            searchCollection: "",
+            modalLoader: false
         };
+    }
+
+    handleChangeCollection = (e) => {
+        this.setState({
+            modalLoader: true
+        })
+        let {value} = e.target;
+        let userInfo = authUserInfo();
+        let param;
+        if (value) {
+            param = userInfo.id + `?name=${value}`
+        } else {
+            param = userInfo.id
+        }
+        Http.GET("getUserCollectionList", param)
+            .then(({data}) => {
+                if (data.data) {
+                    this.setState({collectionList: data.data, modalLoader: false});
+                }
+            })
+            .catch((error) => {
+                toastError(error.response.data.message)
+                this.setState({
+                    modalLoader: false
+                })
+            });
+
+        this.setState({
+            searchCollection: e.target.value
+        })
     }
 
     setWrapperRef = (node) => {
@@ -589,6 +622,7 @@ class OurDesignDetails extends Component {
             collectionNameError,
             TURN_AROUND_TIME,
             MOQ,
+            searchCollection
         } = this.state;
         const settingsSliderMain = {
             slidesToShow: 1,
@@ -1248,7 +1282,18 @@ class OurDesignDetails extends Component {
                             ) : (
                                 <></>
                             )}
-
+                            <LoaderComponent loading={this.state.modalLoader}/>
+                            <div className="mt-2 search w-100">
+                                <input
+                                    type="search"
+                                    autoComplete="chrome-off"
+                                    placeholder="Search collection"
+                                    className="w-100 pl-3"
+                                    name="searchCollection"
+                                    value={searchCollection}
+                                    onChange={this.handleChangeCollection}
+                                />
+                            </div>
                             {collectionList.length ? (
                                 <div class="all-collection">
                                     <span>All collection</span>
