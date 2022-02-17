@@ -88,24 +88,6 @@ class FillTheForm_1 extends Component {
             this.setState({loading:false})
             toastError("Something went wrong! Please try again.");
         });
-      await Http.GET('getColorType')
-        .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
-          this.setState({loading:false})
-          if(data.length>0){
-            this.setState({
-              colors : data
-            })
-          }else{
-            // toastWarning("Color List - no data found.");
-          }
-          loadjs(['/js/script.js','/js/custom.js']);
-        })
-        .catch(response => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
-        });
     }
 
     _setData = (key,val) => {

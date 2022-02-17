@@ -277,7 +277,7 @@ class CollectionDetails extends Component {
     myProducts = async (myDesignPage = 0) => {
         this.setState({ myDesignLoading: true });
         let { myDesignSize, search } = this.state;
-        let designParams = `?search=${search}&page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=AVAILABLE,UNAVAILABLE`;
+        let designParams = `?search=${search}&page=${myDesignPage}&size=${myDesignSize}&availabilityStatus=COMPLETE,DEVELOPMENT`;
         let result = [];
         await Http.GET("searchProduct", designParams)
             .then(({ data }) => {

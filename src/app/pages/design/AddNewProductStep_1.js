@@ -32,26 +32,6 @@ class AddNewProductStep_1 extends Component {
         };
     }
 
-    componentDidMount = async() => {
-      await Http.GET('getColorType')
-        .then(({data}) => {
-          console.log('PRODUCT LIST SUCCESS: ', data);
-          this.setState({loading:false})
-          if(data.length>0){
-            this.setState({
-              colors : data
-            })
-          }else{
-            toastError("Request wasn't successsful.");
-          }
-          loadjs(['/js/script.js']);
-        })
-        .catch(response => {
-            console.log('PRODUCT LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            toastError("Something went wrong! Please try again.");
-        });
-    }
 
     addColorObj = async() => {
       let { colorList } = this.props.product;

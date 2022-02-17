@@ -53,28 +53,6 @@ class RequestForQuotation extends Component {
       // await this.renderNitexList()
       document.title = "Share designs with Nitex - The easiest clothing manufacturing software";
       await this.renderMyList()
-      await Http.GET('getColorType')
-        .then(({data}) => {
-          console.log('COLOR LIST SUCCESS: ', data);
-          this.setState({loading:false})
-          if(data.length>0){
-            this.setState({
-              colors : data
-            })
-          }else{
-            // toastWarning("Color List - no data found.");
-          }
-          loadjs(['/js/script.js']);
-        })
-        .catch(({response}) => {
-            console.log('COLOR LIST ERROR: ', JSON.stringify(response));
-            this.setState({loading:false})
-            if(response!==undefined && response.data && response.data.message){
-              toastError(response.data.message);
-            }else{
-              toastError("Couldn't fetch color list.");
-            }
-        });
     }
 
     onScrollToEnd = (flag) => {
