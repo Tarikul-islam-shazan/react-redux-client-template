@@ -124,19 +124,19 @@ class MyOrder extends Component {
 
         Http.GET("getOrderList", paramData + statusFilter_text)
             .then(({ data }) => {
-                if (data.length > 0) {
+                if (data.data.length > 0) {
                     if (merge) {
                         this.setState({
-                            projectList: [...projectList, ...data],
+                            projectList: [...projectList, ...data.data],
                             page: page,
-                            hasNext: data.length === size ? true : false,
+                            hasNext: data.data.length === size,
                             loading: false,
                         });
                     } else {
                         this.setState({
-                            projectList: data,
+                            projectList: data.data,
                             page: page,
-                            hasNext: data.length === size ? true : false,
+                            hasNext: data.data.length === size,
                             loading: false,
                         });
                     }
