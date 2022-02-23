@@ -1,26 +1,26 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import EditColorDropdown from "../EditColorDropdown";
-import {renderMultiColor} from "../../../../services/Util";
+import { renderMultiColor } from "../../../../services/Util";
 
 export const ColorAndFabrication = ({
-                                        data,
-                                        setPickerRef,
-                                        errors,
-                                        designCategoryList,
-                                        productTypeList,
-                                        fabricTypeList,
-                                        flag,
-                                        flagName,
-                                        toggleFlag,
-                                        addColor,
-                                        removeColor,
-                                        onChange,
-                                        onSubmit,
-                                        classes,
-                                    }) => {
+    data,
+    setPickerRef,
+    errors,
+    designCategoryList,
+    productTypeList,
+    fabricTypeList,
+    flag,
+    flagName,
+    toggleFlag,
+    addColor,
+    removeColor,
+    onChange,
+    onSubmit,
+    classes,
+}) => {
     return (
         <div className={classes}>
-            <div className="edit-section" style={{display: flag ? "block" : "none"}}>
+            <div className="edit-section" style={{ display: flag ? "block" : "none" }}>
                 <span className="p-edit cursor-pointer" onClick={() => onSubmit(flagName)}>
                     <span className="d-none">
                         <svg
@@ -199,7 +199,7 @@ export const ColorAndFabrication = ({
                     </div>
                 </div>
             </div>
-            <div className="view-section" style={{display: !flag ? "block" : "none"}}>
+            <div className="view-section" style={{ display: !flag ? "block" : "none" }}>
                 <span className="p-edit cursor-pointer" onClick={() => toggleFlag(flagName)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -274,9 +274,14 @@ export const ColorAndFabrication = ({
                                     data.colorResponseList.map((colorObj, i) => {
                                         return (
                                             <div className="mb-2">
-                                                <span>
+                                                <span
+                                                    className="colors-on-edit-page d-flex align-items-center
+                                                "
+                                                >
                                                     {renderMultiColor(colorObj)}
-                                                    {colorObj.hexCode} - {colorObj.name}
+                                                    <span className="ml-2">
+                                                        {colorObj.hexCode} - {colorObj.name}
+                                                    </span>
                                                 </span>
                                             </div>
                                         );
