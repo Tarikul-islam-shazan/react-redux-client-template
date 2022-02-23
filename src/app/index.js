@@ -70,7 +70,22 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     let data = JSON.parse(localStorage.getItem("userInfo"))
 
-    if (data.status === "DISABLED") {
+    if(data.status === "ACTIVE"){
+        const url =
+            "/login" + (redirectRoute && redirectRoute !== "/" ? "?redirect=" + redirectRoute : "");
+        return token ? (
+            <Route
+                {...rest}
+                render={(matchProps) => (
+                    <DefaultLayout {...matchProps}>
+                        <Component {...matchProps} />
+                    </DefaultLayout>
+                )}
+            />
+        ) : (
+            <Redirect to={url} />
+        );
+    } else if (data.status === "DISABLED") {
         localStorage.clear();
         sessionStorage.clear()
         return <Redirect to="/login"/>
@@ -81,21 +96,6 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     } else if (data.status === "PENDING") {
         return <Redirect to="/loginPopup"/>
     }
-
-    const url =
-        "/login" + (redirectRoute && redirectRoute !== "/" ? "?redirect=" + redirectRoute : "");
-    return token ? (
-        <Route
-            {...rest}
-            render={(matchProps) => (
-                <DefaultLayout {...matchProps}>
-                    <Component {...matchProps} />
-                </DefaultLayout>
-            )}
-        />
-    ) : (
-        <Redirect to={url} />
-    );
 };
 
 const QuestionairreRoute = ({ component: Component, ...rest }) => {

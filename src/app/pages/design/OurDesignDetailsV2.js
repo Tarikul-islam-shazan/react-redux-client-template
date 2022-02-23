@@ -29,7 +29,7 @@ import {
     LOADER_MARGIN_LEFT,
     LOCAL_QUOTE_NOW_KEY,
 } from "../../constant";
-import { productAvailabilityStatus, authUserInfo } from "../../services/Util";
+import {productAvailabilityStatus, authUserInfo, renderMultiColor} from "../../services/Util";
 
 import {
     ProductThumbsSkeleton,
@@ -819,11 +819,7 @@ class OurDesignDetails extends Component {
                                             product.colorResponseList.map((color) => {
                                                 return (
                                                     <li className="d-flex align-items-center">
-                                                        <span
-                                                            style={{
-                                                                backgroundColor: color.hexCode,
-                                                            }}
-                                                        ></span>
+                                                        {renderMultiColor(color)}
                                                         <div className="font-18 semibold ml-2 d-flex justify-content-between">
                                                             <p className="mb-0">{color.name}</p>
                                                             {color.name && color.code && (

@@ -1024,13 +1024,6 @@ const generateRedirectRoute = (data, props) => {
     else if (data.businessInfoGiven === false) {
         props.history.push("/verify/email" + (redirection ? "?redirect=" + redirection : ""));
     }
-    // else if (data.businessInfoGiven === false) {
-    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    // } else if (data.phoneVerified === false) {
-    //     props.history.push("/info" + (redirection ? "?redirect=" + redirection : ""));
-    // } else if (data.brandInfoGiven === false) {
-    //     props.history.push("/brandCreation" + (redirection ? "?redirect=" + redirection : ""));
-    // }
     else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
@@ -1041,6 +1034,54 @@ const generateRedirectRoute = (data, props) => {
             pathname: redirection ? redirection : "/dashboard",
             state: { from: "login" },
         });
+    }
+};
+
+const renderMultiColor = (color) => {
+    if (color.representedBy === 'SWATCH') {
+        return (
+            <div className='colors-row'>
+                <div className='multicolors'>
+					<span
+                        className='color-icon'
+                    >
+						<img src={color?.swatchDocResponse?.docUrl} alt={`swatch color`}/>
+					</span>
+                </div>
+            </div>
+        );
+    } else if (color.colorType !== 'SOLID') {
+        return (
+            <div className='colors-row'>
+                <div className='multicolors'>
+
+                    {color?.compositeColorList?.length > 0 &&
+                        color.compositeColorList.map((item, index) => {
+                            return (
+                                <span
+                                    key={`multi_color_${index}`}
+                                    className='color-icon'
+                                    style={{background: item.hexCode}}
+                                >
+								</span>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div className='colors-row'>
+                <div className='multicolors'>
+					<span
+                        className='color-icon'
+                        style={{background: color.hexCode}}
+                    >
+					</span>
+                </div>
+            </div>
+        );
     }
 };
 
@@ -1096,4 +1137,5 @@ export {
     getNumberUnit,
     getShortName,
     generateRedirectRoute,
+    renderMultiColor
 };

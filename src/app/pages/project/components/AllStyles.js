@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import CLOSE_ICON from "../../../assets/images/icons/close-icon.svg";
 import Http from "../../../services/Http";
-import {capitalizeFirstLetter, convertTimeToLocal, validateNumber} from "../../../services/Util";
+import {capitalizeFirstLetter, convertTimeToLocal, renderMultiColor, validateNumber} from "../../../services/Util";
 import {toastSuccess, toastError, toastWarning} from "../../../commonComponents/Toast";
 import {
     LOADER_OVERLAY_BACKGROUND,
@@ -280,8 +280,7 @@ const AllStyles = ({onClose}) => {
         let hexCode = "";
         colorList.forEach((item, id) => {
             if (item.id === parseInt(key)) {
-                hexCode = item.hexCode;
-                return item.hexCode;
+                hexCode = renderMultiColor(item)
             }
         });
         return hexCode;
@@ -300,15 +299,7 @@ const AllStyles = ({onClose}) => {
                             key={key}
                         >
                             <th key={key}>
-                                <span
-                                    class="cursor-pointer color-icon"
-                                    style={{
-                                        background: `${getColors(
-                                            quote?.colorWiseSizeQuantityPairList,
-                                            key
-                                        )}`,
-                                    }}
-                                />
+                               {getColors(quote?.colorWiseSizeQuantityPairList, key)}
                             </th>
                         </Tooltip>
                     ))}
@@ -548,10 +539,7 @@ const AllStyles = ({onClose}) => {
                                                     item.colorWiseSizeQuantityPairList.map((value, index) => (
                                                         <tr key={value.id}>
                                                             <td>
-                                                   <span
-                                                       className="color"
-                                                       style={{background: value.hexCode}}
-                                                   />
+                                                                {renderMultiColor(value)}
                                                             </td>
 
                                                             {value &&

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import EditColorDropdown from "../EditColorDropdown";
+import {renderMultiColor} from "../../../../services/Util";
 
 export const ColorAndFabrication = ({
                                         data,
@@ -274,10 +275,7 @@ export const ColorAndFabrication = ({
                                         return (
                                             <div className="mb-2">
                                                 <span>
-                                                    <span
-                                                        className="color-circle mr-2"
-                                                        style={{background: colorObj.hexCode}}
-                                                    ></span>
+                                                    {renderMultiColor(colorObj)}
                                                     {colorObj.hexCode} - {colorObj.name}
                                                 </span>
                                             </div>
