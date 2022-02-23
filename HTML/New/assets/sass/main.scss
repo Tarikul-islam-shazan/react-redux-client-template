@@ -1,66 +1,29 @@
 @charset "UTF-8";
 
 // 1. Configuration and helpers
-@import
-'abstracts/variables',
-'abstracts/functions',
-'abstracts/mixins',
-'abstracts/nice-select',
-'abstracts/side-collapse-menu';
-
-
-
+@import "abstracts/variables", "abstracts/functions", "abstracts/mixins", "abstracts/nice-select",
+    "abstracts/side-collapse-menu";
 
 // 3. Base stuff
-@import
-'base/base',
-'base/fonts',
-'base/typography',
-'base/helpers',
-'base/element',
-'base/skeleton';
+@import "base/base", "base/fonts", "base/typography", "base/helpers", "base/element",
+    "base/skeleton";
 
 // 4. Layout-related sections
-@import
-'layout/header',
-'layout/footer';
+@import "layout/header", "layout/footer";
 
 // 5. Components
-@import
-'components/button',
-'components/uploder',
-'components/modal-positions',
-'components/table',
-'components/task_status';
+@import "components/button", "components/uploder", "components/modal-positions", "components/table",
+    "components/task_status";
 
 // 6. Page-specific styles
-@import
-'pages/home',
-'pages/new-pages',
-'pages/explore-design',
-'pages/add-quote',
-'pages/quotes',
-'pages/place-order',
-'pages/invoice',
-'pages/share-design',
-'pages/role-management',
-'pages/collection',
-'pages/task-conversation',
-'pages/team-member-add',
-'pages/buyer-dashboard',
-'pages/common-popups';
-
-
+@import "pages/home", "pages/new-pages", "pages/explore-design", "pages/add-quote", "pages/quotes",
+    "pages/place-order", "pages/invoice", "pages/share-design", "pages/role-management",
+    "pages/collection", "pages/task-conversation", "pages/team-member-add", "pages/buyer-dashboard",
+    "pages/common-popups", "pages/buyer-timeline";
 
 // 7. Themes
-@import
-'themes/default',
-'themes/admin-panel';
+@import "themes/default", "themes/admin-panel";
 
 // 2. Vendors
-@import
-'vendors/normalize',
-'vendors/responsive',
-'vendors/slick',
-'vendors/_product-details-slider';
-
+@import "vendors/normalize", "vendors/responsive", "vendors/slick",
+    "vendors/_product-details-slider";
