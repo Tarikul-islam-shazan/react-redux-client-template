@@ -2,6 +2,12 @@
     p {
         margin: 0;
     }
+    .common-blocks {
+        padding: 16px;
+        border: 1px solid $gray_light_02;
+        background: $white;
+        margin-bottom: 12px;
+    }
     .timeline-row {
         width: 100%;
         max-width: 1108px;
@@ -12,9 +18,6 @@
                 width: 100%;
                 max-width: 300px;
                 .design-info-with-po {
-                    padding: 16px;
-                    border: 1px solid $gray_light_02;
-                    background: $white;
                     .design-title-with-date {
                         p {
                             span {
@@ -73,6 +76,104 @@
                             top: -2px;
                         }
                     }
+                    .add-team-members {
+                        padding: 4px 0 10px 0;
+                        border-bottom: 1px solid $gray_light_01;
+                    }
+                    .all-po-list {
+                        padding-top: 10px;
+                        .po-names {
+                            font-size: 12px;
+                            line-height: 16px;
+                            color: $gray_dark_02;
+                            display: inline-block;
+                            a {
+                                font-size: 12px;
+                                line-height: 16px;
+                            }
+                        }
+                        button {
+                            span {
+                                font-size: 12px;
+                                line-height: 16px;
+                            }
+                        }
+                    }
+                }
+
+                .all-designs-with-status {
+                    .custom-chekbox {
+                        .form-group {
+                            float: unset;
+                            margin: 0;
+                            label {
+                                font-size: 12px;
+                                line-height: 16px;
+                                &::before {
+                                    padding: 7px;
+                                    margin-right: 8px;
+                                    top: -1px;
+                                }
+                            }
+                            input {
+                                &:checked + label {
+                                    &::before {
+                                        border: 2px solid $gray_dark_02;
+                                        background: $gray_dark_02;
+                                    }
+                                    &::after {
+                                        left: 6px;
+                                        top: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .select-all-designs {
+                        label {
+                            color: $gray_dark_01;
+                        }
+                    }
+                    .design-lists {
+                        .single-design-row {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            .design-details {
+                                display: flex;
+                                align-items: center;
+                                .design-info {
+                                    img {
+                                        width: 24px;
+                                        height: 27px;
+                                        background: $gray_light_02;
+                                        object-fit: contain;
+                                    }
+                                    span {
+                                        font-size: 12px;
+                                        line-height: 16px;
+                                        color: $gray_dark_02;
+                                    }
+                                }
+                            }
+
+                            .design-status {
+                                max-width: 50px;
+                                justify-content: end;
+                                span {
+                                    font-size: 10px;
+                                    line-height: 16px;
+                                    color: $gray_dark_02;
+                                }
+                                .progress {
+                                    height: 8px;
+                                    border-radius: 0;
+                                    height: 3px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
             &.activity-logs {
@@ -86,4 +187,41 @@
             }
         }
     }
+}
+
+.add-team-members {
+    .added-members {
+        img {
+            width: 24px;
+            height: 24px;
+            border: 1px solid $white;
+            margin-left: -15px;
+            border-radius: 100px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+    .more-member {
+        a {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 24px;
+            color: $primary_bright_01;
+            text-align: center;
+            background: $primary_light_02;
+            border-radius: 100px;
+            margin-left: -15px;
+        }
+    }
+}
+
+.button.text {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #664ab6;
+    padding: 0;
 }
