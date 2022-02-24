@@ -3,7 +3,7 @@ import {
     addImageSuffix,
     rfqProductStatus,
     convertTimeToLocal,
-    changeDateFormat,
+    changeDateFormat, renderMultiColor,
 } from "../../../services/Util";
 import moment from "moment";
 import { Tooltip, Typography } from "@material-ui/core";
@@ -113,8 +113,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         let hexCode = "";
         colorList.forEach((item, id) => {
             if (item.id === parseInt(key)) {
-                hexCode = item.hexCode;
-                return item.hexCode;
+                hexCode = renderMultiColor(item);
             }
         });
         return hexCode;
@@ -154,15 +153,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                             key={key}
                         >
                             <th key={key}>
-                                <span
-                                    class="cursor-pointer color-icon"
-                                    style={{
-                                        background: `${getColors(
-                                            quote?.colorWiseSizeQuantityPairList,
-                                            key
-                                        )}`,
-                                    }}
-                                />
+                               {getColors(quote?.colorWiseSizeQuantityPairList, key)}
                             </th>
                         </Tooltip>
                     ))}
@@ -427,12 +418,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                                             return (
                                                                 <tr key={i}>
                                                                     <td>
-                                                                        <span
-                                                                            className="color"
-                                                                            style={{
-                                                                                background: `${color.hexCode} none repeat scroll 0% 0%`,
-                                                                            }}
-                                                                        ></span>
+                                                                        {renderMultiColor(color)}
                                                                     </td>
                                                                     {color.sizeQuantityPairList.map(
                                                                         (pair, j) => {
