@@ -2,6 +2,11 @@
     p {
         margin: 0;
     }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
     .common-blocks {
         padding: 16px;
         border: 1px solid $gray_light_02;
@@ -109,6 +114,7 @@
                             label {
                                 font-size: 12px;
                                 line-height: 16px;
+                                margin-bottom: 4px;
                                 &::before {
                                     padding: 7px;
                                     margin-right: 8px;
@@ -130,6 +136,7 @@
                         }
                     }
                     .select-all-designs {
+                        margin-bottom: 8px;
                         label {
                             color: $gray_dark_01;
                         }
@@ -140,6 +147,7 @@
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
+                            margin-bottom: 6px;
                             .design-details {
                                 display: flex;
                                 align-items: center;
@@ -154,13 +162,15 @@
                                         font-size: 12px;
                                         line-height: 16px;
                                         color: $gray_dark_02;
+                                        margin-left: 4px;
                                     }
                                 }
                             }
 
                             .design-status {
                                 max-width: 50px;
-                                justify-content: end;
+                                width: 50px;
+                                text-align: right;
                                 span {
                                     font-size: 10px;
                                     line-height: 16px;
@@ -180,10 +190,150 @@
                 width: 100%;
                 max-width: 460px;
                 margin: 0 24px;
+                .top-write-comments {
+                    .comments-header {
+                        display: flex;
+                        align-items: center;
+                        padding: 8px 12px;
+                        border: 1px solid $gray_light_02;
+                        background: $white;
+                        .comments-hint {
+                            font-size: 12px;
+                            line-height: 16px;
+                        }
+                        .dropdown {
+                            button {
+                                padding: 0;
+                                padding-right: 16px;
+                                font-size: 12px;
+                                line-height: 16px;
+                                color: $gray_dark_01;
+                            }
+                            span {
+                                font-size: 10px;
+                                line-height: 16px;
+                                color: $gray_dark_02;
+                            }
+                            ul {
+                                li {
+                                    margin-bottom: 8px;
+                                    cursor: pointer;
+                                    &:last-child {
+                                        margin-bottom: 0;
+                                    }
+                                }
+                            }
+                            .select-design-list {
+                                padding: 8px;
+                                li {
+                                    img {
+                                        width: 24px;
+                                        height: 27px;
+                                        object-fit: contain;
+                                        background: $gray_light_02;
+                                        margin-right: 8px;
+                                    }
+                                }
+                            }
+                            .select-task-list {
+                                width: 250px;
+                                padding: 8px;
+                            }
+                        }
+                    }
+                    .comments-body {
+                        .comment-text {
+                            background: $white;
+                            border: 1px solid $gray_light_02;
+                            border-top: none;
+                            position: relative;
+
+                            textarea {
+                                border: none;
+                                border-radius: 0;
+                                font-size: 12px;
+                                line-height: 16px;
+                                resize: none;
+                                height: 50px;
+                            }
+                            .attachment {
+                                position: absolute;
+                                bottom: 16px;
+                                right: 16px;
+                            }
+                            &.clicked {
+                                textarea {
+                                    height: 110px;
+                                }
+                            }
+                            .files-n-photos {
+                                height: 88px;
+                                margin-bottom: 0;
+                            }
+                        }
+                        .post-actions {
+                            text-align: right;
+                            margin-top: 16px;
+                            button {
+                                font-size: 14px;
+                                line-height: 20px;
+                                height: 32px;
+                                border: none;
+                                &.cancel {
+                                    padding: 0;
+                                    background: transparent;
+                                    margin-right: 8px;
+                                }
+                                &.post-btn {
+                                    padding: 6px 16px;
+                                    background: $primary;
+                                    color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             &.all-production-details {
                 width: 100%;
                 max-width: 300px;
+            }
+        }
+    }
+}
+
+.single-activity {
+    background: $white;
+    border: 1px solid $gray_light_02;
+    padding: 16px;
+    margin-top: 12px;
+    .activity-common-header {
+        display: flex;
+        padding-bottom: 12px;
+        border-bottom: $gray_light_02;
+        .person-profile {
+            margin-right: 4px;
+            img {
+                width: 24px;
+                height: 24px;
+                border-radius: 100px;
+            }
+        }
+        .activity-content {
+            p {
+                color: $gray_dark_02;
+                span {
+                    color: $gray_dark_01;
+                }
+            }
+        }
+        .design-image {
+            margin-left: 12px;
+            img {
+                width: 24px;
+                height: 27px;
+                object-fit: contain;
+                background: $gray_light_02;
             }
         }
     }
