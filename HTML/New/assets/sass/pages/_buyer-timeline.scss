@@ -241,54 +241,91 @@
                             }
                         }
                     }
-                    .comments-body {
-                        .comment-text {
-                            background: $white;
-                            border: 1px solid $gray_light_02;
-                            border-top: none;
-                            position: relative;
+                }
+                .comments-body {
+                    .comment-text {
+                        background: $white;
+                        border: 1px solid $gray_light_02;
+                        border-top: none;
+                        position: relative;
 
+                        textarea {
+                            border: none;
+                            border-radius: 0;
+                            font-size: 12px;
+                            line-height: 16px;
+                            resize: none;
+                            height: 50px;
+                        }
+                        .attachment {
+                            position: absolute;
+                            bottom: 13px;
+                            right: 16px;
+                        }
+                        &.clicked {
                             textarea {
-                                border: none;
-                                border-radius: 0;
-                                font-size: 12px;
-                                line-height: 16px;
-                                resize: none;
-                                height: 50px;
-                            }
-                            .attachment {
-                                position: absolute;
-                                bottom: 16px;
-                                right: 16px;
-                            }
-                            &.clicked {
-                                textarea {
-                                    height: 110px;
-                                }
-                            }
-                            .files-n-photos {
-                                height: 88px;
-                                margin-bottom: 0;
+                                height: 110px;
                             }
                         }
-                        .post-actions {
-                            text-align: right;
-                            margin-top: 16px;
-                            button {
-                                font-size: 14px;
-                                line-height: 20px;
-                                height: 32px;
-                                border: none;
-                                &.cancel {
-                                    padding: 0;
-                                    background: transparent;
-                                    margin-right: 8px;
-                                }
-                                &.post-btn {
-                                    padding: 6px 16px;
-                                    background: $primary;
-                                    color: $white;
-                                }
+                        .files-n-photos {
+                            height: 88px;
+                            margin-bottom: 0;
+                        }
+                    }
+                    .post-actions {
+                        text-align: right;
+                        margin-top: 16px;
+                        button {
+                            font-size: 14px;
+                            line-height: 20px;
+                            height: 32px;
+                            border: none;
+                            &.cancel {
+                                padding: 0;
+                                background: transparent;
+                                margin-right: 8px;
+                                color: $gray_dark_02;
+                            }
+                            &.post-btn {
+                                padding: 6px 16px;
+                                background: $primary;
+                                color: $white;
+                                border-radius: 2px;
+                            }
+                        }
+                    }
+                }
+                .reply-btn {
+                    button {
+                        color: $primary_bright_02;
+                    }
+                }
+                .reply-container {
+                    .comment-text {
+                        border: none;
+                    }
+                    .reply-box {
+                        margin-top: 8px;
+
+                        button {
+                            color: $primary_bright_02;
+                        }
+                        .profile-image {
+                            position: absolute;
+                            top: 12px;
+                            left: 12px;
+                            width: 24px;
+                            height: 24px;
+                        }
+                        input {
+                            background: $gray_light_03;
+                            border: none;
+                            padding-left: 48px;
+                            border-radius: 4px;
+                            height: 48px;
+                            font-size: 14px;
+                            &:focus {
+                                box-shadow: none !important;
                             }
                         }
                     }
@@ -300,6 +337,13 @@
             }
         }
     }
+    .button.text {
+        background: transparent;
+        border: 1px solid transparent;
+        padding: 0;
+        font-size: 12px;
+        line-height: 16px;
+    }
 }
 
 .single-activity {
@@ -310,7 +354,7 @@
     .activity-common-header {
         display: flex;
         padding-bottom: 12px;
-        border-bottom: $gray_light_02;
+        border-bottom: 1px solid $gray_light_02;
         .person-profile {
             margin-right: 4px;
             img {
@@ -334,6 +378,38 @@
                 height: 27px;
                 object-fit: contain;
                 background: $gray_light_02;
+            }
+        }
+    }
+    .activity-common-body {
+        padding-top: 12px;
+        .description {
+            color: $gray_dark_02;
+            margin-bottom: 4px;
+        }
+        .body-style-images-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            column-gap: 5px;
+            .single-one {
+                background: #edf0f2;
+                img {
+                    width: 100%;
+                    aspect-ratio: 9 / 10;
+                    object-fit: contain;
+                }
+            }
+        }
+        .reply-btn {
+            button {
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+        .details-btn {
+            button {
+                color: $gray_dark_02;
             }
         }
     }
@@ -367,11 +443,4 @@
             margin-left: -15px;
         }
     }
-}
-
-.button.text {
-    background: transparent;
-    border: 1px solid transparent;
-    color: #664ab6;
-    padding: 0;
 }

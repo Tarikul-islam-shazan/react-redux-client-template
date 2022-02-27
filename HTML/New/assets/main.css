@@ -1071,7 +1071,7 @@ h4.details-title {
 /**
  * Basic typography style for copy text
  */
-.regular-14 {
+.regular-12 {
   font-size: 12px;
   line-height: 16px; }
 
@@ -8588,46 +8588,77 @@ span.mention {
       .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header .dropdown .select-task-list {
         width: 250px;
         padding: 8px; }
-    .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .comment-text {
+    .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text {
       background: #ffffff;
       border: 1px solid #edf0f2;
       border-top: none;
       position: relative; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .comment-text textarea {
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text textarea {
         border: none;
         border-radius: 0;
         font-size: 12px;
         line-height: 16px;
         resize: none;
         height: 50px; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .comment-text .attachment {
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text .attachment {
         position: absolute;
-        bottom: 16px;
+        bottom: 13px;
         right: 16px; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .comment-text.clicked textarea {
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text.clicked textarea {
         height: 110px; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .comment-text .files-n-photos {
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text .files-n-photos {
         height: 88px;
         margin-bottom: 0; }
-    .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .post-actions {
+    .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions {
       text-align: right;
       margin-top: 16px; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .post-actions button {
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button {
         font-size: 14px;
         line-height: 20px;
         height: 32px;
         border: none; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .post-actions button.cancel {
+        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button.cancel {
           padding: 0;
           background: transparent;
-          margin-right: 8px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-body .post-actions button.post-btn {
+          margin-right: 8px;
+          color: #6a7181; }
+        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button.post-btn {
           padding: 6px 16px;
           background: #452c8e;
-          color: #ffffff; }
+          color: #ffffff;
+          border-radius: 2px; }
+    .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-btn button {
+      color: #8a6fd6; }
+    .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .comment-text {
+      border: none; }
+    .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .reply-box {
+      margin-top: 8px; }
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .reply-box button {
+        color: #8a6fd6; }
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .reply-box .profile-image {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 24px;
+        height: 24px; }
+      .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .reply-box input {
+        background: #f4f5f7;
+        border: none;
+        padding-left: 48px;
+        border-radius: 4px;
+        height: 48px;
+        font-size: 14px; }
+        .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .reply-box input:focus {
+          box-shadow: none !important; }
   .buyer-timeline-container .timeline-row .one-third.all-production-details {
     width: 100%;
     max-width: 300px; }
+.buyer-timeline-container .button.text {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0;
+  font-size: 12px;
+  line-height: 16px; }
 
 .single-activity {
   background: #ffffff;
@@ -8637,7 +8668,7 @@ span.mention {
   .single-activity .activity-common-header {
     display: flex;
     padding-bottom: 12px;
-    border-bottom: #edf0f2; }
+    border-bottom: 1px solid #edf0f2; }
     .single-activity .activity-common-header .person-profile {
       margin-right: 4px; }
       .single-activity .activity-common-header .person-profile img {
@@ -8655,6 +8686,27 @@ span.mention {
         height: 27px;
         object-fit: contain;
         background: #edf0f2; }
+  .single-activity .activity-common-body {
+    padding-top: 12px; }
+    .single-activity .activity-common-body .description {
+      color: #6a7181;
+      margin-bottom: 4px; }
+    .single-activity .activity-common-body .body-style-images-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      column-gap: 5px; }
+      .single-activity .activity-common-body .body-style-images-row .single-one {
+        background: #edf0f2; }
+        .single-activity .activity-common-body .body-style-images-row .single-one img {
+          width: 100%;
+          aspect-ratio: 9 / 10;
+          object-fit: contain; }
+    .single-activity .activity-common-body .reply-btn button {
+      font-size: 12px;
+      line-height: 16px; }
+    .single-activity .activity-common-body .details-btn button {
+      color: #6a7181; }
 
 .add-team-members .added-members img {
   width: 24px;
@@ -8676,12 +8728,6 @@ span.mention {
   background: #eae7f8;
   border-radius: 100px;
   margin-left: -15px; }
-
-.button.text {
-  background: transparent;
-  border: 1px solid transparent;
-  color: #664ab6;
-  padding: 0; }
 
 .stepper .form-group {
   margin-bottom: 25px; }
