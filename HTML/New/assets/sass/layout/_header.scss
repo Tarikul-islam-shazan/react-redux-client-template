@@ -7,17 +7,17 @@ button#sidebarToggleTop {
     width: 34px;
     height: 36px;
     display: none;
-    svg{
+    svg {
         color: #7f7f7f;
     }
 }
 .navbar {
     padding: 10px 15px;
-    position: fixed; 
+    position: fixed;
     width: calc(100% - 248px);
     z-index: 999;
-    .navbar-search{
-        input{
+    .navbar-search {
+        input {
             height: 38px;
             font-size: 14px;
             &:focus {
@@ -28,14 +28,13 @@ button#sidebarToggleTop {
     }
 }
 
-.close-menu{
-    svg{
+.close-menu {
+    svg {
         display: none;
     }
     background: url(./images/icons/close.png) no-repeat center;
     background-size: 46%;
 }
-
 
 .notification {
     position: absolute;
@@ -49,7 +48,7 @@ button#sidebarToggleTop {
     overflow-y: auto;
     height: 800px;
     z-index: 99;
-    &.all{
+    &.all {
         position: relative;
         top: inherit;
         right: inherit;
@@ -59,59 +58,59 @@ button#sidebarToggleTop {
         max-width: 970px;
         box-shadow: none;
         border: 1px solid #eff0f5;
-        .notify-list { 
-            justify-content: flex-start; 
-            .info { 
+        .notify-list {
+            justify-content: flex-start;
+            .info {
                 flex-basis: 90%;
                 margin-left: 20px;
             }
-        } 
+        }
     }
     h3.title {
         text-align: left;
         font: Bold 20px/24px Open Sans;
         letter-spacing: 0px;
-        color: #21242B;
+        color: #21242b;
         padding: 20px;
         margin: 0;
     }
-    .see-all{
-        a{
-            color: #452D8F;
+    .see-all {
+        a {
+            color: #452d8f;
             font-size: 18px;
             padding: 20px;
             background: #fff;
             text-align: center;
             display: block;
             border-top: 1px solid #ccc;
-            &:hover{
-                background: #452D8F;
+            &:hover {
+                background: #452d8f;
                 color: #fff !important;
             }
         }
     }
-    .day{
-        h6.timing-date{
+    .day {
+        h6.timing-date {
             font-size: 14px;
             letter-spacing: 0.28px;
             color: #818795;
-            background: #F4F5F8;
+            background: #f4f5f8;
             padding: 12px 20px;
             margin: 0;
         }
-        ul{
+        ul {
             margin: 0;
             padding: 0;
-            li{
+            li {
                 list-style: none;
-                a{
+                a {
                     display: inline-block;
                     padding: 10px 20px;
-                    border-bottom: 1px solid #EFF0F5;
+                    border-bottom: 1px solid #eff0f5;
                     display: block;
                     background: #fff;
-                    transition: all ease-in-out .2s;
-                    &:hover{
+                    transition: all ease-in-out 0.2s;
+                    &:hover {
                         background: #f4f5f8;
                     }
                     .notify-list {
@@ -126,23 +125,23 @@ button#sidebarToggleTop {
                             border-radius: 100%;
                             flex-basis: 40px;
                             object-position: center;
-                            background: #DCD5F8;
+                            background: #dcd5f8;
                         }
-                        .info{
+                        .info {
                             width: 300px;
-                            .name{
-                                font-size: 16px;; 
-                                color: #21242B;
+                            .name {
+                                font-size: 16px;
+                                color: #21242b;
                                 width: 300px;
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
                                 text-transform: initial;
-                                span{
+                                span {
                                     color: $brand-color;
                                 }
                             }
-                            
+
                             .post-time {
                                 color: #818795;
                                 font-size: 12px;
@@ -151,7 +150,7 @@ button#sidebarToggleTop {
                                 line-height: 25px;
                                 text-transform: initial;
                                 position: relative;
-                                &:after{
+                                &:after {
                                     content: "";
                                     width: 1px;
                                     height: 14px;
@@ -169,26 +168,35 @@ button#sidebarToggleTop {
                                 padding: 2px 8px;
                                 border-radius: 7px;
                                 line-height: 20px;
-                                &.product{
-                                    background: #DCE0F5;
-                                    color: #2239B4;
+                                &.product {
+                                    background: #dce0f5;
+                                    color: #2239b4;
                                 }
-                                &.quatation{
-                                    background: #F5E8DC;
-                                    color: #D97518;
+                                &.quatation {
+                                    background: #f5e8dc;
+                                    color: #d97518;
                                 }
-                                &.project{
-                                    background: #F4DFF8;
-                                    color: #C952E5;
+                                &.project {
+                                    background: #f4dff8;
+                                    color: #c952e5;
                                 }
                             }
                         }
                         img.product {
-                            width: 70px !important; 
+                            width: 70px !important;
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .navigation {
+        ul {
+            display: flex;
+            overflow-x: auto;
         }
     }
 }

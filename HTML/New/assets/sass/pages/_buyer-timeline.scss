@@ -1,4 +1,5 @@
 .buyer-timeline-container {
+    height: 100vh;
     p {
         margin: 0;
     }
@@ -47,7 +48,7 @@
                 max-width: 300px;
                 position: sticky;
                 top: 100px;
-                height: 620px;
+                height: calc(100vh - 100px);
                 .design-info-with-po {
                     .design-title-with-date {
                         p {
@@ -168,6 +169,11 @@
                         }
                     }
                     .design-lists {
+                        max-height: 332px;
+                        padding-right: 4px;
+                        &::-webkit-scrollbar {
+                            width: 4px;
+                        }
                         .single-design-row {
                             width: 100%;
                             display: flex;
@@ -216,6 +222,7 @@
                 width: 100%;
                 max-width: 460px;
                 margin: 0 24px;
+                padding-bottom: 24px;
                 .top-write-comments {
                     width: 100%;
                     position: sticky;
@@ -292,23 +299,21 @@
                     }
                     .post-actions {
                         text-align: right;
-                        margin-top: 16px;
+                        margin-top: 4px;
                         button {
                             font-size: 14px;
                             line-height: 20px;
                             height: 32px;
                             border: none;
+                            background: transparent;
+                            padding: 0;
+                            text-transform: uppercase;
                             &.cancel {
-                                padding: 0;
-                                background: transparent;
                                 margin-right: 8px;
                                 color: $gray_dark_02;
                             }
                             &.post-btn {
-                                padding: 6px 16px;
-                                background: $primary;
-                                color: $white;
-                                border-radius: 2px;
+                                color: $primary_bright_01;
                             }
                         }
                     }
@@ -354,7 +359,7 @@
                 max-width: 300px;
                 position: sticky;
                 top: 100px;
-                height: 620px;
+                height: calc(100vh - 100px);
                 .design-select {
                     button {
                         border: 1px solid $gray_light_01;
@@ -367,6 +372,7 @@
                         display: block;
                         width: 100%;
                         text-align: left;
+                        background-color: $white;
                         img {
                             width: 24px;
                             height: 27px;
@@ -452,6 +458,23 @@
     }
 }
 
+.more-designs-popup {
+    padding: 12px;
+    .designs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        height: 400px;
+        img {
+            width: 100%;
+            aspect-ratio: 9 / 10;
+            object-fit: contain;
+            background: #edf0f2;
+        }
+    }
+}
+
 .single-activity {
     background: $white;
     border: 1px solid $gray_light_02;
@@ -489,6 +512,7 @@
     }
     .activity-common-body {
         padding-top: 12px;
+        position: relative;
         .description {
             color: $gray_dark_02;
             margin-bottom: 4px;
