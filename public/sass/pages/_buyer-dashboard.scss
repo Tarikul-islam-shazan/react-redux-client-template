@@ -1,942 +1,932 @@
-.buyer-dashboard-container{
-    p, h1, h2, h3, h4{
+.buyer-dashboard-container {
+    p,
+    h1,
+    h2,
+    h3,
+    h4 {
         margin: 0;
     }
-    ul{
+    ul {
         list-style: none;
         margin: 0;
         padding: 0;
     }
-    .welcome-message{
-        h3{
+    .welcome-message {
+        h3 {
             font-size: 20px;
             line-height: 28px;
             font-weight: 600;
             padding-top: 12px;
-            color: #21242B;        
+            color: #21242b;
             margin-bottom: 20px;
         }
     }
-    .full-journey-status{
+    .full-journey-status {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        .one-sixth{
-            width:calc(16.66% - 12px);
-            border: 1px solid #C7CED4;
+        .one-sixth {
+            width: calc(16.66% - 12px);
+            border: 1px solid #c7ced4;
             border-radius: 4px;
             padding: 24px 16px;
             display: flex;
             justify-content: space-between;
             margin-right: 12px;
             position: relative;
-            &:last-child{
+            &:last-child {
                 margin-right: 0;
             }
-            .status-icon{
-              position: absolute;
-              right: 16px;
+            .status-icon {
+                position: absolute;
+                right: 16px;
             }
-            h3{
-                color: #6A7181;
+            h3 {
+                color: #6a7181;
                 font-weight: 600;
                 font-size: 24px;
                 line-height: 32px;
-                span{
-                  font-size: 16px;
-                  line-height: 24px;
+                span {
+                    font-size: 16px;
+                    line-height: 24px;
                 }
             }
-            span{
-                color: #6A7181;
+            span {
+                color: #6a7181;
                 font-size: 14px;
                 line-height: 20px;
             }
-            &.sustainable-box{
-                background: #EDFDF0;
+            &.sustainable-box {
+                background: #edfdf0;
             }
-            &.quote-order-box{
-                background: #F4F9FF;
+            &.quote-order-box {
+                background: #f4f9ff;
             }
-            &.design-box{
-                background:#F5FEFA;
+            &.design-box {
+                background: #f5fefa;
             }
-            &.delivered-box{
-                background:#FFF4FB;
+            &.delivered-box {
+                background: #fff4fb;
             }
-            &.order-value-box{
-                background:#FFFFF5;
+            &.order-value-box {
+                background: #fffff5;
             }
-            &.supplier-box{
-                background:#F8FFFD;
+            &.supplier-box {
+                background: #f8fffd;
             }
         }
     }
-    .orders-and-quotes-status{
+    .orders-and-quotes-status {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         margin-top: 40px;
         justify-content: space-between;
-        .one-half{
+        .one-half {
             width: calc(50% - 8px);
-            .orders-table{
+            .orders-table {
                 height: 504px;
                 overflow-y: auto;
                 scrollbar-width: thin;
                 border: 1px solid $gray_light_01;
                 border-top: none;
                 background: $white;
-                &::-webkit-scrollbar-track
-                {
-                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                background-color: #F5F5F5;
+                &::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                    background-color: #f5f5f5;
                 }
-                
-                &::-webkit-scrollbar{
-                width: 8px;
-                background-color: #F5F5F5;
+
+                &::-webkit-scrollbar {
+                    width: 8px;
+                    background-color: #f5f5f5;
                 }
-                &::-webkit-scrollbar-thumb{
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                background-color: #F5F5F5;
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 10px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                    background-color: #f5f5f5;
                 }
-                table{
-                  &.table{
-                    border: none !important;
-                    tr{
-                      td{
-                        &:first-child{
-                          a{
-                            font-size: 14px;
-                            color: $gray_dark_01;
-                          }
+                table {
+                    &.table {
+                        border: none !important;
+                        tr {
+                            td {
+                                &:first-child {
+                                    a {
+                                        font-size: 14px;
+                                        color: $gray_dark_01;
+                                    }
+                                }
+                                &:nth-child(2) {
+                                    width: 160px;
+                                }
+                                &:nth-child(3) {
+                                    width: 150px;
+                                }
+                                &:nth-child(4) {
+                                    width: 144px;
+                                }
+                            }
                         }
-                        &:nth-child(2){
-                          width: 160px;
-                        }
-                        &:nth-child(3){
-                          width: 150px;
-                        }
-                        &:nth-child(4){
-                          width: 144px;
-                        }
-                      }
                     }
-                  }
                 }
-                
             }
-            &.my-orders{
-                .state-title{
+            &.my-orders {
+                .state-title {
                     border-bottom: none;
                 }
-                .nothing-found{
-                  padding: 174px 0;
+                .nothing-found {
+                    padding: 174px 0;
                 }
             }
-            &.my-quotes{
-              table{
-                &.table{
-                  margin-bottom: 0;
+            &.my-quotes {
+                table {
+                    &.table {
+                        margin-bottom: 0;
+                    }
                 }
-              }
-              .nothing-found{
-                padding: 184px 0;
-                border-top: none;
-              }
+                .nothing-found {
+                    padding: 184px 0;
+                    border-top: none;
+                }
             }
         }
     }
-    .state-title{
+    .state-title {
         padding-bottom: 8px;
         border-bottom: 1px solid $gray_light_01;
-        h3{
+        h3 {
             font-size: 18px;
             line-height: 28px;
             color: #000000;
         }
-        a{
+        a {
             font-size: 16px;
             line-height: 24px;
             color: $primary;
             margin-left: 24px;
             position: relative;
-            &::after{
-                content: '';
+            &::after {
+                content: "";
                 position: absolute;
                 left: -12px;
                 top: 50%;
                 height: 11px;
                 width: 1px;
-                background: #9AA1AF;
+                background: #9aa1af;
                 transform: translateY(-50%);
             }
         }
     }
-    .quick-actions{
+    .quick-actions {
         margin-top: 32px;
-        .quick-actions-table{
+        .quick-actions-table {
             height: 507px;
             overflow-y: auto;
             scrollbar-width: thin;
-                &::-webkit-scrollbar-track
-                {
+            &::-webkit-scrollbar-track {
                 -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                background-color: #F5F5F5;
-                }
-                
-                &::-webkit-scrollbar{
+                background-color: #f5f5f5;
+            }
+
+            &::-webkit-scrollbar {
                 width: 8px;
-                background-color: #F5F5F5;
-                }
-                &::-webkit-scrollbar-thumb{
+                background-color: #f5f5f5;
+            }
+            &::-webkit-scrollbar-thumb {
                 border-radius: 10px;
                 -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                background-color: #F5F5F5;
-                }
-            table{
-                &.table{
-                  margin-bottom: 0;
-                    tr{
-                      th{
-                        &:nth-child(2), &:nth-child(3), &:nth-child(4){
-                          cursor: pointer;
-                          span{
-                            display: inline-block;
-                            width: 120px;
-                          }
-                         
+                background-color: #f5f5f5;
+            }
+            table {
+                &.table {
+                    margin-bottom: 0;
+                    tr {
+                        th {
+                            &:nth-child(2),
+                            &:nth-child(3),
+                            &:nth-child(4) {
+                                cursor: pointer;
+                                span {
+                                    display: inline-block;
+                                    width: 120px;
+                                }
+                            }
                         }
-                        
-                      }
-                        td{
-                            &:first-child{                               
-                                  a{
+                        td {
+                            &:first-child {
+                                a {
                                     font-size: 14px;
                                     color: $gray_dark_01;
-                                  }
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        .nothing-found{
-          padding: 192px 0;
-          border: 1px solid $gray_light_01;
-          border-top: none;
+        .nothing-found {
+            padding: 192px 0;
+            border: 1px solid $gray_light_01;
+            border-top: none;
         }
     }
-    table{
+    table {
         margin-top: -1px;
-        thead{
-            th{
-                position:sticky;
+        thead {
+            th {
+                position: sticky;
                 top: -1px;
                 left: 0;
             }
         }
-        tr{
-          td{
-            .image-with-title{
-              display: flex;
-              align-items: center;
+        tr {
+            td {
+                .image-with-title {
+                    display: flex;
+                    align-items: center;
+                }
             }
-          }
         }
     }
-    .nothing-found{
-      img{
-        height: 32px;
-        width: 32px;
-      }
-      p{
-        color: $gray_dark_02;
-        font-size: 14px;
-        line-height: 20px;
-      }
+    .nothing-found {
+        img {
+            height: 32px;
+            width: 32px;
+        }
+        p {
+            color: $gray_dark_02;
+            font-size: 14px;
+            line-height: 20px;
+        }
     }
 }
 
-
 .progress-info-team-brand {
     .one-half {
-      flex-basis: calc(50% - 12px) !important;
-      border-radius: 4px;
-  
-      &:first-child {
-        margin-right: 12px;
-      }
-      &:last-child {
-        margin-left: 12px;
-      }
+        flex-basis: calc(50% - 12px) !important;
+        border-radius: 4px;
+
+        &:first-child {
+            margin-right: 12px;
+        }
+        &:last-child {
+            margin-left: 12px;
+        }
     }
     .team-performance-top {
-      padding-bottom: 10px;
-      border-bottom: 1px solid #C7CED4;
-      margin-bottom: 20px;
-  
-      .css-1va3kn4-control{
-        border: 1px solid #C7CED4 !important;
-        height: 36px;
-        border-radius:2px;
-        font-size: 14px;
-        .css-g1d714-ValueContainer{
-          position: relative;
-          top: -2px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #c7ced4;
+        margin-bottom: 20px;
+
+        .css-1va3kn4-control {
+            border: 1px solid #c7ced4 !important;
+            height: 36px;
+            border-radius: 2px;
+            font-size: 14px;
+            .css-g1d714-ValueContainer {
+                position: relative;
+                top: -2px;
+            }
         }
-      }
-      .css-ay7dqj-control{
-        border-color: $gray_light_01;
-        border-radius:4px;
-        box-shadow: none;
-        height: 36px;
-        font-size: 14px;
-   
-        .css-g1d714-ValueContainer{
-          position: relative;
-          top: -2px;
+        .css-ay7dqj-control {
+            border-color: $gray_light_01;
+            border-radius: 4px;
+            box-shadow: none;
+            height: 36px;
+            font-size: 14px;
+
+            .css-g1d714-ValueContainer {
+                position: relative;
+                top: -2px;
+            }
         }
-      }
-  
     }
     .one-half {
-      background: $white;
-      border: 1px solid $gray_light_01;
-      padding: 28px 20px;
+        background: $white;
+        border: 1px solid $gray_light_01;
+        padding: 28px 20px;
     }
     .order-status {
-      li {
-        margin-right: 12px;
-      }
+        li {
+            margin-right: 12px;
+        }
     }
     .progress-identifier {
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      margin-right: 4px;
-      margin-bottom: -1px;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        margin-right: 4px;
+        margin-bottom: -1px;
     }
     .green {
-      background: $ontime;
+        background: $ontime;
     }
     .blue {
-      background: $pending;
+        background: $pending;
     }
     .red {
-      background: $overdue;
+        background: $overdue;
     }
     .ahead-schedule {
-      background: $ahead_of_schedule;
+        background: $ahead_of_schedule;
     }
     .single-person-progress {
-      height: 60px;
+        height: 60px;
     }
     .bg-warning {
-      background: $behind_the_schedule !important;
+        background: $behind_the_schedule !important;
     }
     .progress-section {
-      height: 370px;
-      scrollbar-width: thin;
-                &::-webkit-scrollbar-track
-                {
-                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                background-color: #F5F5F5;
-                }
-                
-                &::-webkit-scrollbar{
-                width: 8px;
-                background-color: #F5F5F5;
-                }
-                &::-webkit-scrollbar-thumb{
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                background-color: #F5F5F5;
-                }
-      overflow: auto;
-      .person-info {
-        width: 190px;
-        img {
-          width: 32px;
-          height: 32px;
-          border-radius: 100px;
-          margin-right: 8px;
+        height: 370px;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+            background-color: #f5f5f5;
         }
-        p {
-          margin-bottom: 0 !important;
-          a {
-            font-size: 14px;
-            color: $gray_dark_01;
-          }
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: #f5f5f5;
         }
-      }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: #f5f5f5;
+        }
+        overflow: auto;
+        .person-info {
+            width: 190px;
+            img {
+                width: 32px;
+                height: 32px;
+                border-radius: 100px;
+                margin-right: 8px;
+            }
+            p {
+                margin-bottom: 0 !important;
+                a {
+                    font-size: 14px;
+                    color: $gray_dark_01;
+                }
+            }
+        }
     }
     .brand-satisfaction {
-      .person-info {
-        width: 214px;
-  
-        img {
-          width: 56px;
-          height: 24px;
-          object-fit: contain;
+        .person-info {
+            width: 214px;
+
+            img {
+                width: 56px;
+                height: 24px;
+                object-fit: contain;
+            }
         }
-      }
-      .progress-info {
-        width: calc(100% - 214px);
-      }
+        .progress-info {
+            width: calc(100% - 214px);
+        }
     }
-  }
-  
-  .progress-info {
+}
+
+.progress-info {
     width: calc(100% - 190px);
-  
+
     .progress {
-      width: 100%;
-      height: 14px;
-      border-radius: 0;
-      .progress-bar {
-        border: none !important;
-        position: unset;
-      }
-  
-      &::after {
-        display: none;
-      }
+        width: 100%;
+        height: 14px;
+        border-radius: 0;
+        .progress-bar {
+            border: none !important;
+            position: unset;
+        }
+
+        &::after {
+            display: none;
+        }
     }
     .completed {
-      background: $ontime;
+        background: $ontime;
     }
     .pending {
-      background: $pending;
+        background: $pending;
     }
     .overdue {
-      background: $overdue;
+        background: $overdue;
     }
     .ahead-schedule {
-      background: $ahead_of_schedule;
+        background: $ahead_of_schedule;
     }
     .progress-info .bg-warning {
-      background: $behind_the_schedule !important;
+        background: $behind_the_schedule !important;
     }
-  }
-  
-  .running-orders-info-section {
+}
+
+.running-orders-info-section {
     background: $white;
     border: 1px solid $gray_light_01;
     padding: 24px 20px;
     border-radius: 4px;
     .single-person-progress {
-      height: 80px;
-      padding-right: 4px;
+        height: 80px;
+        padding-right: 4px;
     }
     .four-images {
-      flex-wrap: wrap;
-      width: 54px ;
-      .single-one {
-        background: $gray_light_04;
-        width: 23px;
-        height: 26px;
-        margin-left: 2px;
-        margin-bottom: 2px;
-  
-        img {
-          width: 23px;
-          height: 26px;
-          object-fit: contain;
-          margin: 0;
-          border-radius: 0;
-          border: 1px solid $gray_light_03;
+        flex-wrap: wrap;
+        width: 54px;
+        .single-one {
+            background: $gray_light_04;
+            width: 23px;
+            height: 26px;
+            margin-left: 2px;
+            margin-bottom: 2px;
+
+            img {
+                width: 23px;
+                height: 26px;
+                object-fit: contain;
+                margin: 0;
+                border-radius: 0;
+                border: 1px solid $gray_light_03;
+            }
         }
-      }
     }
     .progress-section {
-      height: 400px;
-      .single-person-progress {
-        .person-info {
-          width: 420px;
-          .order-name {
-            width: 200px;
-            margin-left: 16px;
-            color: $gray_dark_02;
-          }
-          .assigned-person {
-            width: 30px;
-            margin-left: 12px;
-            color: $gray_dark_03;
-            img{
-                width: 24px;
-                height: 24px;
-                object-fit: cover;
-                border-radius: 100px;
+        height: 400px;
+        .single-person-progress {
+            .person-info {
+                width: 420px;
+                .order-name {
+                    width: 160px;
+                    margin-left: 16px;
+                    color: $gray_dark_02;
+                }
+                .assigned-person {
+                    width: 70px;
+                    margin-left: 12px;
+                    color: $gray_dark_03;
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        object-fit: cover;
+                        border-radius: 100px;
+                    }
+                }
+                .date-info {
+                    width: 100px;
+                    margin: 0 12px;
+                    color: $gray_dark_01;
+                    .date-count {
+                        font-weight: 600;
+                    }
+                }
+                p {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
             }
-          }
-          .date-info {
-            width: 100px;
-            margin: 0 12px;
-            color: $gray_dark_01;
-            .date-count {
-              font-weight: 600;
+            .progress-info {
+                width: calc(100% - 420px);
             }
-          }
-          p {
-            font-size: 14px;
-            line-height: 20px;
-          }
         }
-        .progress-info {
-          width: calc(100% - 420px);
-        }
-      }
     }
-  }
-  
-  .overdue-tasks-section {
+}
+
+.overdue-tasks-section {
     background: $white;
     border: 1px solid $gray_light_01;
     margin-top: 24px;
     border-radius: 4px;
     padding: 0 20px;
-  
-    .month-count {
-      font-weight: 600;
-    }
-  
-    .team-performance-top {
-      padding: 16px 0px;
-      .col-title {
-        h3 {
-          margin: 0;
-          padding: 0;
-        }
-      }
-      .order-filter {
-        select {
-          margin-left: 8px;
-        }
-  
-      }
-    }
-  
-  }
-  
 
-  .buyer-login-popup-message{
-    position:fixed;
+    .month-count {
+        font-weight: 600;
+    }
+
+    .team-performance-top {
+        padding: 16px 0px;
+        .col-title {
+            h3 {
+                margin: 0;
+                padding: 0;
+            }
+        }
+        .order-filter {
+            select {
+                margin-left: 8px;
+            }
+        }
+    }
+}
+
+.buyer-login-popup-message {
+    position: fixed;
     width: 100%;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.3);
     top: 0;
-    left:0;
+    left: 0;
     z-index: 9999;
-    .popup-full-contents{
-      height: 100vh;
-      overflow-y: auto;
-      margin:0 16px;
+    .popup-full-contents {
+        height: 100vh;
+        overflow-y: auto;
+        margin: 0 16px;
     }
 
-    .popup-message-contents{
-      max-width: 1165px;
-      padding: 8px;
-      border-radius: 8px;
-      background: $white;
-      margin: 0 auto;
-      margin-top: 60px;
-      margin-bottom: 8px;
+    .popup-message-contents {
+        max-width: 1165px;
+        padding: 8px;
+        border-radius: 8px;
+        background: $white;
+        margin: 0 auto;
+        margin-top: 60px;
+        margin-bottom: 8px;
 
-      .message-top-content{
-        padding-left: 48px;
-        padding-top: 32px;
-        .message-title{
-          font-size: 24px;
-          line-height: 32px;
-          color: $secondary;
-          margin-bottom: 40px;
-          font-weight: 600;
-        }
-        .welcome-message-section{
-          display: flex;
-          width: 100%;
-          margin-bottom: 48px;
-          .left-half{
-            min-width: 248px;
-            padding-right: 48px;
-            text-align: center;
-            border-right: 1px solid $gray_dark_04;
-            .ac-manager-details{
-              img{
-                width: 144px;
-                height: 144px;
-                border-radius: 100px;
-              }
-              h3{
-                font-size: 16px;
-                line-height: 24px;
-                font-weight: 600;
-              }
-              p, a{
-                color: $gray_dark_01;
-                margin: 0;
-                font-size: 12px;
-                line-height: 16px;
-                
-              }
-              .designatgion{
-                font-style: italic;
-                a{
-                  color: $primary_bright_01;
-                  text-decoration: underline;
-                }
-              }
-            }
-          }
-          .right-half{
+        .message-top-content {
             padding-left: 48px;
-            padding-right: 12px;
-            h3{
-              font-size: 18px;
-              line-height: 26px;
-              font-weight: 600;
-              color: $gray_dark_01;
-              margin-bottom: 22px;
+            padding-top: 32px;
+            .message-title {
+                font-size: 24px;
+                line-height: 32px;
+                color: $secondary;
+                margin-bottom: 40px;
+                font-weight: 600;
             }
-            p{
-              font-size: 16px;
-              line-height: 24px;
-              margin-bottom: 22px;
-            }
-          }
-          .wrong-number-worning-text{
-            max-width: 620px;
-          }
-          .questionnaire{
-            max-width: 620px;
-            margin: 0;
-            padding: 0;
-            box-shadow: none;
-            .questionnaire-form{
-              margin: 0;
-              
-            }
-            button{
-              &.btn-brand{
-                margin-bottom: 0 !important;
-                display: block;
+            .welcome-message-section {
+                display: flex;
                 width: 100%;
-                margin-top: 20px;
-              }
+                margin-bottom: 48px;
+                .left-half {
+                    min-width: 248px;
+                    padding-right: 48px;
+                    text-align: center;
+                    border-right: 1px solid $gray_dark_04;
+                    .ac-manager-details {
+                        img {
+                            width: 144px;
+                            height: 144px;
+                            border-radius: 100px;
+                        }
+                        h3 {
+                            font-size: 16px;
+                            line-height: 24px;
+                            font-weight: 600;
+                        }
+                        p,
+                        a {
+                            color: $gray_dark_01;
+                            margin: 0;
+                            font-size: 12px;
+                            line-height: 16px;
+                        }
+                        .designatgion {
+                            font-style: italic;
+                            a {
+                                color: $primary_bright_01;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+                .right-half {
+                    padding-left: 48px;
+                    padding-right: 12px;
+                    h3 {
+                        font-size: 18px;
+                        line-height: 26px;
+                        font-weight: 600;
+                        color: $gray_dark_01;
+                        margin-bottom: 22px;
+                    }
+                    p {
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin-bottom: 22px;
+                    }
+                }
+                .wrong-number-worning-text {
+                    max-width: 620px;
+                }
+                .questionnaire {
+                    max-width: 620px;
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: none;
+                    .questionnaire-form {
+                        margin: 0;
+                    }
+                    button {
+                        &.btn-brand {
+                            margin-bottom: 0 !important;
+                            display: block;
+                            width: 100%;
+                            margin-top: 20px;
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-      .how-we-help-section{
-        padding: 32px;
-        border-radius: 60px 60px 8px 8px;
-        background: $primary_bright_02;
-        padding-bottom: 0;
-        .title{
-          font-size: 22px;
-          line-height: 40px;
-          margin-bottom: 20px;
-          color: $white;
-          text-transform: uppercase;
-          font-weight: 600;
-          text-align: center;
-        }
-        .one-third-row{
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-          width: 100%;
-          .single-item{
-            text-align: center;
-            max-width: 33.33%;
-            padding: 0 16px;
-            margin-bottom: 32px;
-            h3{
-              font-size: 16px;
-              line-height: 24px;
-              color: $white;
-              font-weight: 600;
-              margin-bottom: 2px;
-              margin-top: 6px;
+        .how-we-help-section {
+            padding: 32px;
+            border-radius: 60px 60px 8px 8px;
+            background: $primary_bright_02;
+            padding-bottom: 0;
+            .title {
+                font-size: 22px;
+                line-height: 40px;
+                margin-bottom: 20px;
+                color: $white;
+                text-transform: uppercase;
+                font-weight: 600;
+                text-align: center;
             }
-            p{
-              font-size: 14px;
-              line-height: 20px;
-              color: rgba(255, 255, 255, 0.8);
+            .one-third-row {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+                .single-item {
+                    text-align: center;
+                    max-width: 33.33%;
+                    padding: 0 16px;
+                    margin-bottom: 32px;
+                    h3 {
+                        font-size: 16px;
+                        line-height: 24px;
+                        color: $white;
+                        font-weight: 600;
+                        margin-bottom: 2px;
+                        margin-top: 6px;
+                    }
+                    p {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: rgba(255, 255, 255, 0.8);
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
-  
-  @media only screen and (max-width: 1366px) {
-    .buyer-dashboard-container{
-      .full-journey-status{
-        .one-sixth{
-          span{
-            font-size: 13px;
-          }
+}
+
+@media only screen and (max-width: 1366px) {
+    .buyer-dashboard-container {
+        .full-journey-status {
+            .one-sixth {
+                span {
+                    font-size: 13px;
+                }
+            }
         }
-      }
     }
     .running-orders-info-section {
-      .progress-section {
-        .single-person-progress {
-          .person-info{
-            width: 360px;
-            .order-name{
-              margin-left: 12px;
-              width: 150px;
-            }
-          }
-          .progress-info {
-            width: calc(100% - 360px);
-          }
-        }
-      }
-    }
-  }
-  @media only screen and (max-width: 1024px){
-    .buyer-dashboard-container{
-      .full-journey-status {
-        .one-sixth{
-          width: calc(33.33% - 12px);
-          margin-bottom: 12px;
-          &:nth-child(3){
-            margin-right: 0;
-          }
-        }
-      }
-      .orders-and-quotes-status{
-        margin-top: 24px;
-      }
-      .orders-and-quotes-status{
-        .one-half{
-          width: 100%;
-          margin: 0;
-          &.my-orders{
-            margin-bottom: 24px;
-          }
-        }
-      }
-    }
-    
-  }
-  @media only screen and (max-width: 767px){
-    .buyer-dashboard-container{
-      padding-top: 24px;
-    }
-    .buyer-login-popup-message{
-      .popup-message-contents{
-        .message-top-content {
-          padding: 20px 20px 0 20px;
-          .welcome-message-section{
-            flex-wrap: wrap;
-            .left-half, .right-half{
-              width: 100%;
-              padding: 0;
-              border: none;
-            }
-            .right-half{
-              margin-top: 32px;
-
-            }
-          }
-        }
-        .how-we-help-section{
-          .one-third-row {
-            .single-item{
-             max-width: 50%;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 520px){
-    .buyer-dashboard-container{
-      .full-journey-status {
-        .one-sixth{
-          width: calc(50% - 4px);
-          margin-bottom: 8px;
-          margin-right: 8px;
-          position: relative;
-          &:nth-child(even){
-            margin-right: 0;
-          }
-          .status-icon{
-            img{
-              width: 28px;
-              right: 20px;
-            }
-          }
-        }
-      }
-      .orders-and-quotes-status{
-        margin-top: 16px;
-        .one-half{
-          width: 100%;
-          margin: 0;
-          &.my-orders{
-            margin-bottom: 24px;
-          }
-          &.my-quotes{
-            table{
-              &.table{
-                tr{
-                  td{
-                    &:first-child{
-                      .image-with-title{
-                        span{
-                          width: 140px;
-                        }
-                      }
-                    }
-                    
-                    &:nth-child(2){
-                      span{
-                        width: 90px;
-                        display: inline-block;
-                      }
-                    }
-                    &:nth-child(3){
-                      .task-status{
-                        &.purple{
-                          .status-btn{
-                        width: 118px;
-                        display: inline-block;
-                      }
-                        }
-                      }
-                    }
-                    &:nth-child(4){
-                      span{
-                        width: 100px;
-                        display: inline-block;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      .performence-status{
-        .order-status{
-          flex-wrap: wrap;
-          li{
-            font-size: 13px;
-          }
-        }
-      }
-      .running-orders-info-section{
-        padding: 8px;
         .progress-section {
-          .single-person-progress {
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
-            padding-bottom: 12px;
-            .person-info{
-              width: 100%;
-              p{
-                font-size: 12px;
-                line-height: 16px;
-              }
-              .order-name{
-                margin-left: 8px;
-                width: 130px;
-              }
-              .date-info{
-                width: 74px;
-                margin-right: 0;
-              }
-            }
-            .progress-info {
-              width:100%;
-              .assigned-person{
-                margin-left: 0;
-              }
-            }
-          }
-        }
-      }
-      .progress-info-team-brand{
-        .team-performance-top{
-          margin-bottom: 12px;
-        }
-      }
-      .quick-actions{
-        table{
-          &.table{
-            tr{
-              
-              td{
-                &:nth-child(2){
-                  span{
-                    width: 90px;
-                    display: inline-block;
-                  }
+            .single-person-progress {
+                .person-info {
+                    width: 360px;
+                    .order-name {
+                        margin-left: 12px;
+                        width: 150px;
+                    }
                 }
-                &:nth-child(3){
-                  span{
-                    width: 112px;
-                    display: inline-block;
-                  }
+                .progress-info {
+                    width: calc(100% - 360px);
                 }
-                &:nth-child(4){
-                  span{
-                    width: 130px;
-                    display: inline-block;
-                  }
-                }
-              }
             }
-          }
         }
-      }
-      
     }
-    .buyer-login-popup-message{
-      .popup-message-contents{
-        .message-top-content{
-          .message-title{
-            font-size: 20px;
-            line-height: 26px;
-          }
-          .welcome-message-section {
-            .right-half {
-              p{
-                font-size: 14px;
-                line-height: 20px;
-                margin-bottom: 16px;
-              }
+}
+@media only screen and (max-width: 1024px) {
+    .buyer-dashboard-container {
+        .full-journey-status {
+            .one-sixth {
+                width: calc(33.33% - 12px);
+                margin-bottom: 12px;
+                &:nth-child(3) {
+                    margin-right: 0;
+                }
             }
-          }
         }
-        .how-we-help-section{
-          padding: 32px 20px;
-          .title{
-            font-size: 20px;
-          }
-          .one-third-row {
-            .single-item{
-             max-width: 100%;
-            margin-bottom: 20px;
-            img{
-              width: 48px;
-            }
-            }
-          }
+        .orders-and-quotes-status {
+            margin-top: 24px;
         }
-        
-      }
+        .orders-and-quotes-status {
+            .one-half {
+                width: 100%;
+                margin: 0;
+                &.my-orders {
+                    margin-bottom: 24px;
+                }
+            }
+        }
     }
-  }
+}
+@media only screen and (max-width: 767px) {
+    .buyer-dashboard-container {
+        padding-top: 24px;
+    }
+    .buyer-login-popup-message {
+        .popup-message-contents {
+            .message-top-content {
+                padding: 20px 20px 0 20px;
+                .welcome-message-section {
+                    flex-wrap: wrap;
+                    .left-half,
+                    .right-half {
+                        width: 100%;
+                        padding: 0;
+                        border: none;
+                    }
+                    .right-half {
+                        margin-top: 32px;
+                    }
+                }
+            }
+            .how-we-help-section {
+                .one-third-row {
+                    .single-item {
+                        max-width: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .buyer-dashboard-container {
+        .full-journey-status {
+            .one-sixth {
+                width: calc(50% - 4px);
+                margin-bottom: 8px;
+                margin-right: 8px;
+                position: relative;
+                &:nth-child(even) {
+                    margin-right: 0;
+                }
+                .status-icon {
+                    img {
+                        width: 28px;
+                        right: 20px;
+                    }
+                }
+            }
+        }
+        .orders-and-quotes-status {
+            margin-top: 16px;
+            .one-half {
+                width: 100%;
+                margin: 0;
+                &.my-orders {
+                    margin-bottom: 24px;
+                }
+                &.my-quotes {
+                    table {
+                        &.table {
+                            tr {
+                                td {
+                                    &:first-child {
+                                        .image-with-title {
+                                            span {
+                                                width: 140px;
+                                            }
+                                        }
+                                    }
+
+                                    &:nth-child(2) {
+                                        span {
+                                            width: 90px;
+                                            display: inline-block;
+                                        }
+                                    }
+                                    &:nth-child(3) {
+                                        .task-status {
+                                            &.purple {
+                                                .status-btn {
+                                                    width: 118px;
+                                                    display: inline-block;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &:nth-child(4) {
+                                        span {
+                                            width: 100px;
+                                            display: inline-block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .performence-status {
+            .order-status {
+                flex-wrap: wrap;
+                li {
+                    font-size: 13px;
+                }
+            }
+        }
+        .running-orders-info-section {
+            padding: 8px;
+            .progress-section {
+                .single-person-progress {
+                    flex-wrap: wrap;
+                    margin-bottom: 12px;
+                    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
+                    padding-bottom: 12px;
+                    .person-info {
+                        width: 100%;
+                        p {
+                            font-size: 12px;
+                            line-height: 16px;
+                        }
+                        .order-name {
+                            margin-left: 8px;
+                            width: 130px;
+                        }
+                        .date-info {
+                            width: 74px;
+                            margin-right: 0;
+                        }
+                    }
+                    .progress-info {
+                        width: 100%;
+                        .assigned-person {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .progress-info-team-brand {
+            .team-performance-top {
+                margin-bottom: 12px;
+            }
+        }
+        .quick-actions {
+            table {
+                &.table {
+                    tr {
+                        td {
+                            &:nth-child(2) {
+                                span {
+                                    width: 90px;
+                                    display: inline-block;
+                                }
+                            }
+                            &:nth-child(3) {
+                                span {
+                                    width: 112px;
+                                    display: inline-block;
+                                }
+                            }
+                            &:nth-child(4) {
+                                span {
+                                    width: 130px;
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .buyer-login-popup-message {
+        .popup-message-contents {
+            .message-top-content {
+                .message-title {
+                    font-size: 20px;
+                    line-height: 26px;
+                }
+                .welcome-message-section {
+                    .right-half {
+                        p {
+                            font-size: 14px;
+                            line-height: 20px;
+                            margin-bottom: 16px;
+                        }
+                    }
+                }
+            }
+            .how-we-help-section {
+                padding: 32px 20px;
+                .title {
+                    font-size: 20px;
+                }
+                .one-third-row {
+                    .single-item {
+                        max-width: 100%;
+                        margin-bottom: 20px;
+                        img {
+                            width: 48px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
