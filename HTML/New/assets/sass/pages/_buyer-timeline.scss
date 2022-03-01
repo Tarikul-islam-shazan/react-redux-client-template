@@ -1,42 +1,20 @@
+p {
+    margin: 0;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 .buyer-timeline-container {
     height: 100vh;
-    p {
-        margin: 0;
-    }
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
     .common-blocks {
         padding: 16px;
         border: 1px solid $gray_light_02;
         background: $white;
         margin-bottom: 12px;
     }
-    .dropdown {
-        ul {
-            li {
-                margin-bottom: 8px;
-                cursor: pointer;
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-        .select-design-list {
-            padding: 8px;
-            li {
-                img {
-                    width: 24px;
-                    height: 27px;
-                    object-fit: contain;
-                    background: $gray_light_02;
-                    margin-right: 8px;
-                }
-            }
-        }
-    }
+
     .timeline-row {
         width: 100%;
         max-width: 1108px;
@@ -224,7 +202,6 @@
                 margin: 0 24px;
                 padding-bottom: 24px;
                 .top-write-comments {
-                    width: 100%;
                     position: sticky;
                     top: 58px;
                     z-index: 1;
@@ -232,91 +209,6 @@
                     padding-bottom: 12px;
                     padding-top: 42px;
                     margin-top: -42px;
-                    .comments-header {
-                        display: flex;
-                        align-items: center;
-                        padding: 8px 12px;
-                        border: 1px solid $gray_light_02;
-                        background: $white;
-                        .comments-hint {
-                            font-size: 12px;
-                            line-height: 16px;
-                        }
-                        .dropdown {
-                            button {
-                                padding: 0;
-                                padding-right: 16px;
-                                font-size: 12px;
-                                line-height: 16px;
-                                color: $gray_dark_01;
-                            }
-                            span {
-                                font-size: 10px;
-                                line-height: 16px;
-                                color: $gray_dark_02;
-                            }
-
-                            .select-task-list {
-                                width: 250px;
-                                padding: 8px;
-                            }
-                        }
-                    }
-                }
-                .comments-body {
-                    .comment-text {
-                        background: $white;
-                        border: 1px solid $gray_light_02;
-                        border-top: none;
-                        position: relative;
-
-                        textarea {
-                            border: none;
-                            border-radius: 0;
-                            font-size: 12px;
-                            line-height: 16px;
-                            resize: none;
-                            height: 50px;
-                        }
-                        .attachment {
-                            position: absolute;
-                            bottom: 13px;
-                            right: 16px;
-                        }
-                        &.clicked {
-                            textarea {
-                                height: 110px;
-                            }
-                        }
-                        .files-n-photos {
-                            height: 88px;
-                            margin-bottom: 0;
-                            display: none;
-                            &.open {
-                                display: flex;
-                            }
-                        }
-                    }
-                    .post-actions {
-                        text-align: right;
-                        margin-top: 4px;
-                        button {
-                            font-size: 14px;
-                            line-height: 20px;
-                            height: 32px;
-                            border: none;
-                            background: transparent;
-                            padding: 0;
-                            text-transform: uppercase;
-                            &.cancel {
-                                margin-right: 8px;
-                                color: $gray_dark_02;
-                            }
-                            &.post-btn {
-                                color: $primary_bright_01;
-                            }
-                        }
-                    }
                 }
                 .reply-btn {
                     button {
@@ -455,6 +347,117 @@
         padding: 0;
         font-size: 12px;
         line-height: 16px;
+    }
+}
+
+.top-write-comments {
+    width: 100%;
+    .comments-header {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border: 1px solid $gray_light_02;
+        background: $white;
+        .comments-hint {
+            font-size: 12px;
+            line-height: 16px;
+        }
+        .dropdown {
+            button {
+                padding: 0;
+                padding-right: 16px;
+                font-size: 12px;
+                line-height: 16px;
+                color: $gray_dark_01;
+            }
+            span {
+                font-size: 10px;
+                line-height: 16px;
+                color: $gray_dark_02;
+            }
+
+            .select-task-list {
+                width: 250px;
+                padding: 8px;
+            }
+
+            ul {
+                li {
+                    margin-bottom: 8px;
+                    cursor: pointer;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .select-design-list {
+                padding: 8px;
+                li {
+                    img {
+                        width: 24px;
+                        height: 27px;
+                        object-fit: contain;
+                        background: $gray_light_02;
+                        margin-right: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.comments-body {
+    .comment-text {
+        background: $white;
+        border: 1px solid $gray_light_02;
+        position: relative;
+
+        textarea {
+            border: none;
+            border-radius: 0;
+            font-size: 12px;
+            line-height: 16px;
+            resize: none;
+            height: 50px;
+        }
+        .attachment {
+            position: absolute;
+            bottom: 13px;
+            right: 16px;
+        }
+        &.clicked {
+            textarea {
+                height: 110px;
+            }
+        }
+        .files-n-photos {
+            height: 88px;
+            margin-bottom: 0;
+            display: none;
+            &.open {
+                display: flex;
+            }
+        }
+    }
+    .post-actions {
+        text-align: right;
+        margin-top: 4px;
+        button {
+            font-size: 14px;
+            line-height: 20px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            padding: 0;
+            text-transform: uppercase;
+            &.cancel {
+                margin-right: 8px;
+                color: $gray_dark_02;
+            }
+            &.post-btn {
+                color: $primary_bright_01;
+            }
+        }
     }
 }
 

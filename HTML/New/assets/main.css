@@ -8453,32 +8453,21 @@ span.mention {
     .common-popup .common-popup-footer .delete-btn button {
       color: #f82b60; }
 
+p {
+  margin: 0; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
 .buyer-timeline-container {
   height: 100vh; }
-  .buyer-timeline-container p {
-    margin: 0; }
-  .buyer-timeline-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0; }
   .buyer-timeline-container .common-blocks {
     padding: 16px;
     border: 1px solid #edf0f2;
     background: #ffffff;
     margin-bottom: 12px; }
-  .buyer-timeline-container .dropdown ul li {
-    margin-bottom: 8px;
-    cursor: pointer; }
-    .buyer-timeline-container .dropdown ul li:last-child {
-      margin-bottom: 0; }
-  .buyer-timeline-container .dropdown .select-design-list {
-    padding: 8px; }
-    .buyer-timeline-container .dropdown .select-design-list li img {
-      width: 24px;
-      height: 27px;
-      object-fit: contain;
-      background: #edf0f2;
-      margin-right: 8px; }
   .buyer-timeline-container .timeline-row {
     width: 100%;
     max-width: 1108px;
@@ -8611,7 +8600,6 @@ span.mention {
       margin: 0 24px;
       padding-bottom: 24px; }
       .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments {
-        width: 100%;
         position: sticky;
         top: 58px;
         z-index: 1;
@@ -8619,68 +8607,6 @@ span.mention {
         padding-bottom: 12px;
         padding-top: 42px;
         margin-top: -42px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header {
-          display: flex;
-          align-items: center;
-          padding: 8px 12px;
-          border: 1px solid #edf0f2;
-          background: #ffffff; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header .comments-hint {
-            font-size: 12px;
-            line-height: 16px; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header .dropdown button {
-            padding: 0;
-            padding-right: 16px;
-            font-size: 12px;
-            line-height: 16px;
-            color: #21242b; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header .dropdown span {
-            font-size: 10px;
-            line-height: 16px;
-            color: #6a7181; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .top-write-comments .comments-header .dropdown .select-task-list {
-            width: 250px;
-            padding: 8px; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text {
-        background: #ffffff;
-        border: 1px solid #edf0f2;
-        border-top: none;
-        position: relative; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text textarea {
-          border: none;
-          border-radius: 0;
-          font-size: 12px;
-          line-height: 16px;
-          resize: none;
-          height: 50px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text .attachment {
-          position: absolute;
-          bottom: 13px;
-          right: 16px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text.clicked textarea {
-          height: 110px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text .files-n-photos {
-          height: 88px;
-          margin-bottom: 0;
-          display: none; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .comment-text .files-n-photos.open {
-            display: flex; }
-      .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions {
-        text-align: right;
-        margin-top: 4px; }
-        .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button {
-          font-size: 14px;
-          line-height: 20px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          padding: 0;
-          text-transform: uppercase; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button.cancel {
-            margin-right: 8px;
-            color: #6a7181; }
-          .buyer-timeline-container .timeline-row .one-third.activity-logs .comments-body .post-actions button.post-btn {
-            color: #664ab6; }
       .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-btn button {
         color: #8a6fd6; }
       .buyer-timeline-container .timeline-row .one-third.activity-logs .reply-container .comment-text {
@@ -8771,6 +8697,84 @@ span.mention {
     padding: 0;
     font-size: 12px;
     line-height: 16px; }
+
+.top-write-comments {
+  width: 100%; }
+  .top-write-comments .comments-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #edf0f2;
+    background: #ffffff; }
+    .top-write-comments .comments-header .comments-hint {
+      font-size: 12px;
+      line-height: 16px; }
+    .top-write-comments .comments-header .dropdown button {
+      padding: 0;
+      padding-right: 16px;
+      font-size: 12px;
+      line-height: 16px;
+      color: #21242b; }
+    .top-write-comments .comments-header .dropdown span {
+      font-size: 10px;
+      line-height: 16px;
+      color: #6a7181; }
+    .top-write-comments .comments-header .dropdown .select-task-list {
+      width: 250px;
+      padding: 8px; }
+    .top-write-comments .comments-header .dropdown ul li {
+      margin-bottom: 8px;
+      cursor: pointer; }
+      .top-write-comments .comments-header .dropdown ul li:last-child {
+        margin-bottom: 0; }
+    .top-write-comments .comments-header .dropdown .select-design-list {
+      padding: 8px; }
+      .top-write-comments .comments-header .dropdown .select-design-list li img {
+        width: 24px;
+        height: 27px;
+        object-fit: contain;
+        background: #edf0f2;
+        margin-right: 8px; }
+
+.comments-body .comment-text {
+  background: #ffffff;
+  border: 1px solid #edf0f2;
+  position: relative; }
+  .comments-body .comment-text textarea {
+    border: none;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 16px;
+    resize: none;
+    height: 50px; }
+  .comments-body .comment-text .attachment {
+    position: absolute;
+    bottom: 13px;
+    right: 16px; }
+  .comments-body .comment-text.clicked textarea {
+    height: 110px; }
+  .comments-body .comment-text .files-n-photos {
+    height: 88px;
+    margin-bottom: 0;
+    display: none; }
+    .comments-body .comment-text .files-n-photos.open {
+      display: flex; }
+.comments-body .post-actions {
+  text-align: right;
+  margin-top: 4px; }
+  .comments-body .post-actions button {
+    font-size: 14px;
+    line-height: 20px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-transform: uppercase; }
+    .comments-body .post-actions button.cancel {
+      margin-right: 8px;
+      color: #6a7181; }
+    .comments-body .post-actions button.post-btn {
+      color: #664ab6; }
 
 .more-designs-popup {
   padding: 12px; }
