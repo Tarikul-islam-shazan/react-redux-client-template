@@ -176,51 +176,58 @@
                     <div class="common-popup-body">
                         <div class="top-write-comments">
 
-                            <div class="comments-header">
-                                <p class="comments-hint gray_dark_02 mr-2">Comments on:</p>
-                                <div class="design-select">
-                                   <div class="dropdown">
-                                       <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                           NTX/A22/0001
-                                       </button>
-                                       <div class="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
-                                         <ul class="select-design-list">
-                                             <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
-                                             <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
-                                             <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
-                                             <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
-                                             <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
-                                         </ul>
-                                       </div>
-                                     </div>
+                            <div class="comments-header justify-content-between">
+                                <div class="header-contents d-flex align-items-end">
+                                    <div class="profile-image">
+                                        <img src="../../public/images/jobaidu.png" alt="profile">
+                                    </div>
+                                   
+                                    <div class="design-select">
+                                        <p class="comments-hint gray_dark_02 mr-2">Comments on:</p>
+                                       <div class="dropdown">
+                                           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               NTX/A22/0001
+                                           </button>
+                                           <div class="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
+                                             <ul class="select-design-list">
+                                                 <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
+                                                 <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
+                                                 <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
+                                                 <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
+                                                 <li><img src="../../public/images/design5.png" alt="img"><span>NTX/A22/0001</span></li>
+                                             </ul>
+                                           </div>
+                                         </div>
+                                    </div>
+                                    
+                                    <div class="tast-select">
+                                       <div class="dropdown">
+                                           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               Task
+                                           </button>
+                                           <div class="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
+                                             <ul class="select-task-list">
+                                                 <li><span>Arrange materials for sampling</span></li>
+                                                 <li><span>Sample requisition to sampling</span></li>
+                                                 <li><span>Lab dips, Strike off, Handloom submission</span></li>
+                                                 <li><span>Lab dips, Strike off, Handloom Approval</span></li>
+                                                 <li><span>Fit sample submission</span></li>
+                                                
+                                             </ul>
+                                           </div>
+                                         </div>
+                                    </div>
                                 </div>
 
-                                <div class="tast-select">
-                                   <div class="dropdown">
-                                       <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                           Task
-                                       </button>
-                                       <div class="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
-                                         <ul class="select-task-list">
-                                             <li><span>Arrange materials for sampling</span></li>
-                                             <li><span>Sample requisition to sampling</span></li>
-                                             <li><span>Lab dips, Strike off, Handloom submission</span></li>
-                                             <li><span>Lab dips, Strike off, Handloom Approval</span></li>
-                                             <li><span>Fit sample submission</span></li>
-                                            
-                                         </ul>
-                                       </div>
-                                     </div>
+                                <div class="close-icon">
+                                    <img src="../../public/icons/close.svg" alt="close">
                                 </div>
 
                             </div>
                             <div class="comments-body">
                                 <div class="comment-text clicked">
                                    <textarea name="" id="" placeholder="Write comment..."></textarea>
-                                       <div class="attachment cursor-pointer">
-                                           <label for="upload-input-file"><img src="../../public/icons/attachment.svg" alt="attach"></label>
-                                           <input id="upload-input-file" type="file" name="selectedFiles" multiple="">
-                                       </div>
+                                    
                                   
                                        <div class="files-n-photos custom-scrollbar open">
                                            <div class="item">
@@ -243,8 +250,12 @@
                                            </div>
                                         </div>
                                 </div>
-                                <div class="post-actions">
-                                   <button class="cancel">Cancel</button>
+                                <div class="post-actions d-flex justify-content-end">
+
+                                      <div class="attachment cursor-pointer mr-2">
+                                           <label for="upload-input-file"><img src="../../public/icons/attachment.svg" alt="attach"></label>
+                                           <input id="upload-input-file" type="file" name="selectedFiles" multiple="">
+                                       </div>
                                    <button class="post-btn">Post</button>
                                 </div>
                             </div>
