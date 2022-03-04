@@ -489,17 +489,18 @@ ul {
     .single-activity {
         background: $white;
         border: 1px solid $gray_light_02;
-        padding: 16px;
+        padding: 12px 16px;
         margin-top: 12px;
         &:first-child {
             margin-top: 0;
         }
         .activity-common-header {
             display: flex;
-            padding-bottom: 12px;
-            border-bottom: 1px solid $gray_light_02;
+            .activity-icon {
+                margin-right: 8px;
+            }
             .person-profile {
-                margin-right: 4px;
+                margin-right: 8px;
                 img {
                     width: 24px;
                     height: 24px;
@@ -527,6 +528,7 @@ ul {
         .activity-common-body {
             padding-top: 12px;
             position: relative;
+            border-top: 1px solid $gray_light_02;
             .description {
                 color: $gray_dark_02;
                 margin-bottom: 4px;
@@ -577,6 +579,11 @@ ul {
                 button {
                     color: $gray_dark_02;
                 }
+            }
+        }
+        &.activity-with-header {
+            .activity-common-header {
+                margin-bottom: 12px;
             }
         }
     }

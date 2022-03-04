@@ -8810,16 +8810,16 @@ ul {
 .activity-list .single-activity {
   background: #ffffff;
   border: 1px solid #edf0f2;
-  padding: 16px;
+  padding: 12px 16px;
   margin-top: 12px; }
   .activity-list .single-activity:first-child {
     margin-top: 0; }
   .activity-list .single-activity .activity-common-header {
-    display: flex;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #edf0f2; }
+    display: flex; }
+    .activity-list .single-activity .activity-common-header .activity-icon {
+      margin-right: 8px; }
     .activity-list .single-activity .activity-common-header .person-profile {
-      margin-right: 4px; }
+      margin-right: 8px; }
       .activity-list .single-activity .activity-common-header .person-profile img {
         width: 24px;
         height: 24px;
@@ -8837,7 +8837,8 @@ ul {
         background: #edf0f2; }
   .activity-list .single-activity .activity-common-body {
     padding-top: 12px;
-    position: relative; }
+    position: relative;
+    border-top: 1px solid #edf0f2; }
     .activity-list .single-activity .activity-common-body .description {
       color: #6a7181;
       margin-bottom: 4px; }
@@ -8876,6 +8877,8 @@ ul {
       line-height: 16px; }
     .activity-list .single-activity .activity-common-body .details-btn button {
       color: #6a7181; }
+  .activity-list .single-activity.activity-with-header .activity-common-header {
+    margin-bottom: 12px; }
 
 .add-team-members .added-members img {
   width: 24px;
