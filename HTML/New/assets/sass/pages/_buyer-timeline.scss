@@ -75,6 +75,43 @@ ul {
                                 }
                             }
                         }
+                        .etd-status {
+                            .etd-dates {
+                                background: $white;
+                                padding: 8px 12px;
+                                max-width: 170px;
+                                position: absolute;
+                                right: 0;
+                                z-index: 1;
+                                display: none;
+                                ul {
+                                    list-style: none;
+                                    display: flex;
+                                    margin: 8px 0;
+                                    max-width: 100% !important;
+                                    &:last-child {
+                                        margin-bottom: 0;
+                                    }
+                                    li {
+                                        font-size: 12px;
+                                        line-height: 16px;
+                                        &:first-child {
+                                            width: 70px;
+                                            color: $gray_dark_02;
+                                        }
+                                        &:last-child {
+                                            font-weight: 600;
+                                            color: $gray_dark_01;
+                                        }
+                                    }
+                                }
+                            }
+                            &:hover {
+                                .etd-dates {
+                                    display: block;
+                                }
+                            }
+                        }
                     }
                     .untis-price {
                         span {
@@ -137,6 +174,14 @@ ul {
                                 font-size: 12px;
                                 line-height: 16px;
                             }
+                        }
+                    }
+                    .pi-download {
+                        margin-top: 4px;
+                        button {
+                            font-size: 14px;
+                            line-height: 20px;
+                            color: $primary_bright_01;
                         }
                     }
                 }
@@ -491,13 +536,38 @@ ul {
         border: 1px solid $gray_light_02;
         padding: 12px 16px;
         margin-top: 12px;
+        transition: 0.4s;
+        &:hover {
+            border: 1px solid $primary_bright_02;
+            background: $gray_light_05;
+        }
         &:first-child {
             margin-top: 0;
         }
         .activity-common-header {
             display: flex;
+            align-items: center;
+            cursor: pointer;
             .activity-icon {
                 margin-right: 8px;
+                margin-top: -2px;
+            }
+            .activity-text {
+                p {
+                    margin-bottom: 4px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    &.time {
+                        font-size: 10px;
+                        line-height: 14px;
+                    }
+                    span {
+                        &.pi-title {
+                            color: $primary_bright_01;
+                        }
+                    }
+                }
             }
             .person-profile {
                 margin-right: 8px;
@@ -577,6 +647,13 @@ ul {
             }
             .details-btn {
                 button {
+                    color: $gray_dark_02;
+                }
+            }
+            .info-details {
+                p {
+                    font-size: 12px;
+                    line-height: 16px;
                     color: $gray_dark_02;
                 }
             }

@@ -8508,6 +8508,32 @@ ul {
           font-size: 12px;
           line-height: 16px;
           color: #6a7181; }
+      .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates {
+        background: #ffffff;
+        padding: 8px 12px;
+        max-width: 170px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        display: none; }
+        .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul {
+          list-style: none;
+          display: flex;
+          margin: 8px 0;
+          max-width: 100% !important; }
+          .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul:last-child {
+            margin-bottom: 0; }
+          .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li {
+            font-size: 12px;
+            line-height: 16px; }
+            .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li:first-child {
+              width: 70px;
+              color: #6a7181; }
+            .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li:last-child {
+              font-weight: 600;
+              color: #21242b; }
+      .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status:hover .etd-dates {
+        display: block; }
       .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .untis-price span {
         font-size: 12px;
         line-height: 16px;
@@ -8555,6 +8581,12 @@ ul {
         .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .all-po-list button span {
           font-size: 12px;
           line-height: 16px; }
+      .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .pi-download {
+        margin-top: 4px; }
+        .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .pi-download button {
+          font-size: 14px;
+          line-height: 20px;
+          color: #664ab6; }
       .buyer-timeline-container .timeline-row .one-third.all-designs-destails .tab-design-task-buttons {
         display: none;
         border: 1px solid #edf0f2;
@@ -8811,13 +8843,29 @@ ul {
   background: #ffffff;
   border: 1px solid #edf0f2;
   padding: 12px 16px;
-  margin-top: 12px; }
+  margin-top: 12px;
+  transition: 0.4s; }
+  .activity-list .single-activity:hover {
+    border: 1px solid #8a6fd6;
+    background: #f9fafc; }
   .activity-list .single-activity:first-child {
     margin-top: 0; }
   .activity-list .single-activity .activity-common-header {
-    display: flex; }
+    display: flex;
+    align-items: center;
+    cursor: pointer; }
     .activity-list .single-activity .activity-common-header .activity-icon {
-      margin-right: 8px; }
+      margin-right: 8px;
+      margin-top: -2px; }
+    .activity-list .single-activity .activity-common-header .activity-text p {
+      margin-bottom: 4px; }
+      .activity-list .single-activity .activity-common-header .activity-text p:last-child {
+        margin-bottom: 0; }
+      .activity-list .single-activity .activity-common-header .activity-text p.time {
+        font-size: 10px;
+        line-height: 14px; }
+      .activity-list .single-activity .activity-common-header .activity-text p span.pi-title {
+        color: #664ab6; }
     .activity-list .single-activity .activity-common-header .person-profile {
       margin-right: 8px; }
       .activity-list .single-activity .activity-common-header .person-profile img {
@@ -8876,6 +8924,10 @@ ul {
       font-size: 12px;
       line-height: 16px; }
     .activity-list .single-activity .activity-common-body .details-btn button {
+      color: #6a7181; }
+    .activity-list .single-activity .activity-common-body .info-details p {
+      font-size: 12px;
+      line-height: 16px;
       color: #6a7181; }
   .activity-list .single-activity.activity-with-header .activity-common-header {
     margin-bottom: 12px; }
