@@ -9131,7 +9131,6 @@ ul {
         .order-card-items .single-order-card .order-details .progress-with-count .progress {
           width: 100%;
           max-width: 292px;
-          margin-right: 8px;
           border-radius: 0;
           height: 12px;
           background: #e4e7eb;
@@ -9139,7 +9138,8 @@ ul {
           .order-card-items .single-order-card .order-details .progress-with-count .progress::after {
             display: none; }
         .order-card-items .single-order-card .order-details .progress-with-count .count {
-          color: #6a7181; }
+          color: #6a7181;
+          margin-left: 8px; }
 
 .stepper .form-group {
   margin-bottom: 25px; }
