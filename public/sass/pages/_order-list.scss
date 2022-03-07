@@ -135,3 +135,9 @@
         }
     }
 }
+
+@media only screen and (max-width: 1024px) {
+    .order-card-items {
+        grid-template-columns: 1fr;
+    }
+}
