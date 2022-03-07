@@ -38,6 +38,7 @@ import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 import BrandCreation from "./pages/questionairre/BrandCreation";
 import NotificationAll from "./pages/notification/NotificationAll";
 import VerifyEmail from "./buyerLogin/VerifyEmail";
+import OrderList from "./modules/timeline/OrderList";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -182,6 +183,7 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/list" component={InvoiceList} />
                     <PublicRoute exact path="/invoices/view/:id" component={InvoiceDetails} />
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
+                    <PublicRoute exact path="/orders" component={OrderList} />
                 </Switch>
             </Router>
         );

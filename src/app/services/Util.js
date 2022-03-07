@@ -1085,6 +1085,17 @@ const renderMultiColor = (color) => {
     }
 };
 
+const isPageReachBottom = () => {
+    let bool = false;
+    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const html = document.documentElement;
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (Math.floor(windowBottom) - html.scrollHeight === 0) {
+        bool = true;
+    }
+    return bool;
+};
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -1137,5 +1148,6 @@ export {
     getNumberUnit,
     getShortName,
     generateRedirectRoute,
-    renderMultiColor
+    renderMultiColor,
+    isPageReachBottom
 };
