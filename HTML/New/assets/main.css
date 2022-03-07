@@ -8508,30 +8508,6 @@ ul {
           font-size: 12px;
           line-height: 16px;
           color: #6a7181; }
-      .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates {
-        background: #ffffff;
-        padding: 8px 12px;
-        max-width: 170px;
-        position: absolute;
-        right: 0;
-        z-index: 1;
-        display: none; }
-        .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul {
-          list-style: none;
-          display: flex;
-          margin: 8px 0;
-          max-width: 100% !important; }
-          .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul:last-child {
-            margin-bottom: 0; }
-          .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li {
-            font-size: 12px;
-            line-height: 16px; }
-            .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li:first-child {
-              width: 70px;
-              color: #6a7181; }
-            .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status .etd-dates ul li:last-child {
-              font-weight: 600;
-              color: #21242b; }
       .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .design-title-with-date .etd-status:hover .etd-dates {
         display: block; }
       .buyer-timeline-container .timeline-row .one-third.all-designs-destails .design-info-with-po .untis-price span {
@@ -8671,6 +8647,31 @@ ul {
     padding: 0;
     font-size: 12px;
     line-height: 16px; }
+
+.etd-dates {
+  background: #ffffff;
+  padding: 8px 12px;
+  width: 170px;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  display: none; }
+  .etd-dates ul {
+    list-style: none;
+    display: flex;
+    margin: 8px 0;
+    max-width: 100% !important; }
+    .etd-dates ul:last-child {
+      margin-bottom: 0; }
+    .etd-dates ul li {
+      font-size: 12px;
+      line-height: 16px; }
+      .etd-dates ul li:first-child {
+        width: 70px;
+        color: #6a7181; }
+      .etd-dates ul li:last-child {
+        font-weight: 600;
+        color: #21242b; }
 
 .all-designs-with-status .custom-chekbox .form-group {
   float: unset;
@@ -9039,6 +9040,103 @@ ul {
       max-width: 100%; }
     .buyer-timeline-container .timeline-row .tab-none {
       display: none; } }
+.order-list-page-container .page-title h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #21242b;
+  padding-bottom: 10px; }
+.order-list-page-container .order-list-tab ul {
+  display: flex; }
+  .order-list-page-container .order-list-tab ul li {
+    margin-right: 32px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; }
+    .order-list-page-container .order-list-tab ul li .order-count {
+      font-size: 12px;
+      line-height: 20px;
+      padding: 1px 8px;
+      border-radius: 10px;
+      color: #fff;
+      margin-left: 7px; }
+      .order-list-page-container .order-list-tab ul li .order-count.running {
+        background: #f57f17; }
+      .order-list-page-container .order-list-tab ul li .order-count.pending {
+        background: #8a6fd6; }
+      .order-list-page-container .order-list-tab ul li .order-count.complete {
+        background: #00c334; }
+    .order-list-page-container .order-list-tab ul li.active {
+      border-bottom: 2px solid #452c8e; }
+.order-list-page-container .order-card-items {
+  margin-top: 20px; }
+
+.order-card-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px; }
+  .order-card-items .single-order-card {
+    padding: 8px;
+    border: 1px solid #edf0f2;
+    display: flex; }
+    .order-card-items .single-order-card .design-images {
+      width: 148px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      grid-gap: 2px; }
+      .order-card-items .single-order-card .design-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #edf0f2;
+        aspect-ratio: 9 / 10; }
+    .order-card-items .single-order-card .order-details {
+      width: calc(100% - 148px);
+      padding-left: 16px;
+      padding-top: 12px; }
+      .order-card-items .single-order-card .order-details .order-quantity-details {
+        margin: 8px 0 12px 0; }
+        .order-card-items .single-order-card .order-details .order-quantity-details li {
+          font-size: 14px;
+          line-height: 20px;
+          position: relative;
+          color: #6a7181;
+          margin-right: 24px; }
+          .order-card-items .single-order-card .order-details .order-quantity-details li::after {
+            content: "";
+            position: absolute;
+            height: 12px;
+            width: 1px;
+            background: #c7ced4;
+            right: -12px;
+            top: 6px; }
+          .order-card-items .single-order-card .order-details .order-quantity-details li:last-child::after {
+            display: none; }
+      .order-card-items .single-order-card .order-details .delivery-status span {
+        font-size: 14px;
+        line-height: 20px;
+        color: #6a7181; }
+        .order-card-items .single-order-card .order-details .delivery-status span.date-info {
+          color: #664ab6;
+          font-weight: 500;
+          position: relative;
+          cursor: pointer; }
+          .order-card-items .single-order-card .order-details .delivery-status span.date-info:hover .etd-dates {
+            display: block; }
+      .order-card-items .single-order-card .order-details .progress-with-count {
+        margin-top: 24px;
+        padding-bottom: 16px; }
+        .order-card-items .single-order-card .order-details .progress-with-count .progress {
+          width: 100%;
+          max-width: 292px;
+          margin-right: 8px;
+          border-radius: 0;
+          height: 12px; }
+        .order-card-items .single-order-card .order-details .progress-with-count .count {
+          color: #6a7181; }
+
 .stepper .form-group {
   margin-bottom: 25px; }
 

@@ -1,74 +1,32 @@
 @charset "UTF-8";
 
 // 1. Configuration and helpers
-@import
-'abstracts/variables',
-'abstracts/functions',
-'abstracts/mixins',
-'abstracts/nice-select',
-'abstracts/side-collapse-menu';
+@import "abstracts/variables", "abstracts/functions", "abstracts/mixins", "abstracts/nice-select",
+    "abstracts/side-collapse-menu";
 
 // 3. Base stuff
-@import
-'base/fonts',
-'base/base',
-'base/typography',
-'base/helpers',
-'base/element',
-'base/skeleton';
+@import "base/fonts", "base/base", "base/typography", "base/helpers", "base/element",
+    "base/skeleton";
 
 // 4. Layout-related sections
-@import
-'layout/header',
-'layout/footer',
-'layout/filter-layout';
+@import "layout/header", "layout/footer", "layout/filter-layout";
 
 // 5. Components
-@import
-'components/button',
-'components/uploder',
-'components/modal-positions',
-'components/shadow',
-'components/table',
-'components/filter-bar',
-'components/input_form',
-'components/task_status';
+@import "components/button", "components/uploder", "components/modal-positions", "components/shadow",
+    "components/table", "components/filter-bar", "components/input_form", "components/task_status";
 
 // 6. Page-specific styles
-@import
-'pages/home',
-'pages/new-pages',
-'pages/explore-design',
-'pages/add-quote',
-'pages/quotes',
-'pages/place-order',
-'pages/invoice',
-'pages/share-design',
-'pages/role-management',
-'pages/get-cost',
-'pages/collection',
-'pages/team-member-add',
-'pages/merchandiser-task-list',
-'pages/order-list-buyer',
-'pages/order-profile-admin',
-'pages/all-styles-popup',
-'pages/circular-progress-bar',
-'pages/project-planning',
-'pages/skleton',
-'pages/task-conversation',
-'pages/add-new-design',
-'pages/notification_new',
-'pages/buyer-dashboard',
-'pages/common-popups';
+@import "pages/home", "pages/new-pages", "pages/explore-design", "pages/add-quote", "pages/quotes",
+    "pages/place-order", "pages/invoice", "pages/share-design", "pages/role-management",
+    "pages/get-cost", "pages/collection", "pages/team-member-add", "pages/merchandiser-task-list",
+    "pages/order-list-buyer", "pages/order-profile-admin", "pages/all-styles-popup",
+    "pages/circular-progress-bar", "pages/project-planning", "pages/skleton",
+    "pages/task-conversation", "pages/add-new-design", "pages/notification_new",
+    "pages/buyer-dashboard", "pages/common-popups", "pages/order-list";
 
 // 7. Themes
-@import
-'themes/default',
-'themes/admin-panel';
+@import "themes/default", "themes/admin-panel";
 
 // 2. Vendors
-@import
-'vendors/normalize',
-'vendors/responsive',
-'vendors/slick',
-'vendors/_product-details-slider';
+@import "vendors/normalize", "vendors/responsive", "vendors/slick",
+    "vendors/_product-details-slider";
