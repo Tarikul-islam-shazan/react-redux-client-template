@@ -1,0 +1,16 @@
+.order-list-page-container {
+    .page-title {
+        h2 {
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 500;
+            color: #21242b;
+            padding-bottom: 10px;
+        }
+    }
+    .order-list-tab {
+        ul {
+            display: flex;
+        }
+    }
+}

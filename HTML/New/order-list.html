@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+
+            <div class="order-list-page-container">
+                <div class="page-title">
+                    <h2>Order list</h2>
+                </div>
+                 <div class="order-list-tab">
+                     <ul>
+                         <li class="active">
+                             <span class="task-name regular-14">Running<span class="order-count running">156</span> </span>
+                        </li>
+                         <li>
+                             <span class="task-name regular-14">Pending<span class="order-count pending">156</span> </span>
+                        </li>
+                         <li>
+                             <span class="task-name regular-14">Completed<span class="order-count complete">156</span> </span>
+                        </li>
+                         
+                     </ul>
+                 </div>
+
+                 <div class="order-card-items">
+                     <div class="single-order-card">
+                        <div class="design-images">
+                            <img src="../../public/images/design1.png" alt="design">
+                            <img src="../../public/images/design2.png" alt="design">
+                            <img src="../../public/images/design3.png" alt="design">
+                            <img src="../../public/images/design4.png" alt="design">
+                        </div>
+                        <div class="order-details">
+                               <div class="po-numbers">
+                                   <div class="pos">
+                                       <span class="regular-14">0549008, 0549009, 0549008</span>
+                                       <span class="regular-14 gray_dark_02">(NITEX/B1/2021)</span>
+                                   </div>
+                               </div>
+                               <ul class="order-quantity-details d-flex">
+                                   <li>1 styles</li>
+                                   <li>1000 units</li>
+                                   <li>$12000</li>
+                                </ul>
+                                <div class="delivery-status">
+                                    <span>DELIVERY IN</span>
+                                    <span class="date-info">25-APR 
+                                        <img src="../../public/icons/info-primary.svg" alt="">
+
+                                        <div class="etd-dates shadow-2dp">
+                                            <ul class="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>2nd ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>3rd ETD:</li><li>06 Apr, 2022</li></ul>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="progress-with-count d-flex align-items-center">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                      <div><span class="count regular-14">100%</span></div>
+                                </div>
+                        </div>
+                        
+                     </div> 
+                     <div class="single-order-card">
+                        <div class="design-images">
+                            <img src="../../public/images/design1.png" alt="design">
+                            <img src="../../public/images/design2.png" alt="design">
+                            <img src="../../public/images/design3.png" alt="design">
+                            <img src="../../public/images/design4.png" alt="design">
+                        </div>
+                        <div class="order-details">
+                               <div class="po-numbers">
+                                   <div class="pos">
+                                       <span class="regular-14">0549008, 0549009, 0549008</span>
+                                       <span class="regular-14 gray_dark_02">(NITEX/B1/2021)</span>
+                                   </div>
+                               </div>
+                               <ul class="order-quantity-details d-flex">
+                                   <li>1 styles</li>
+                                   <li>1000 units</li>
+                                   <li>$12000</li>
+                                </ul>
+                                <div class="delivery-status">
+                                    <span>DELIVERY IN</span>
+                                    <span class="date-info">25-APR 
+                                        <img src="../../public/icons/info-primary.svg" alt="">
+
+                                        <div class="etd-dates shadow-2dp">
+                                            <ul class="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>2nd ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>3rd ETD:</li><li>06 Apr, 2022</li></ul>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="progress-with-count d-flex align-items-center">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                      <div><span class="count regular-14">100%</span></div>
+                                </div>
+                        </div>
+                        
+                     </div> 
+                     <div class="single-order-card">
+                        <div class="design-images">
+                            <img src="../../public/images/design1.png" alt="design">
+                            <img src="../../public/images/design2.png" alt="design">
+                            <img src="../../public/images/design3.png" alt="design">
+                            <img src="../../public/images/design4.png" alt="design">
+                        </div>
+                        <div class="order-details">
+                               <div class="po-numbers">
+                                   <div class="pos">
+                                       <span class="regular-14">0549008, 0549009, 0549008</span>
+                                       <span class="regular-14 gray_dark_02">(NITEX/B1/2021)</span>
+                                   </div>
+                               </div>
+                               <ul class="order-quantity-details d-flex">
+                                   <li>1 styles</li>
+                                   <li>1000 units</li>
+                                   <li>$12000</li>
+                                </ul>
+                                <div class="delivery-status">
+                                    <span>DELIVERY IN</span>
+                                    <span class="date-info">25-APR 
+                                        <img src="../../public/icons/info-primary.svg" alt="">
+
+                                        <div class="etd-dates shadow-2dp">
+                                            <ul class="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>2nd ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>3rd ETD:</li><li>06 Apr, 2022</li></ul>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="progress-with-count d-flex align-items-center">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                      <div><span class="count regular-14">100%</span></div>
+                                </div>
+                        </div>
+                        
+                     </div> 
+                     <div class="single-order-card">
+                        <div class="design-images">
+                            <img src="../../public/images/design1.png" alt="design">
+                            <img src="../../public/images/design2.png" alt="design">
+                            <img src="../../public/images/design3.png" alt="design">
+                            <img src="../../public/images/design4.png" alt="design">
+                        </div>
+                        <div class="order-details">
+                               <div class="po-numbers">
+                                   <div class="pos">
+                                       <span class="regular-14">0549008, 0549009, 0549008</span>
+                                       <span class="regular-14 gray_dark_02">(NITEX/B1/2021)</span>
+                                   </div>
+                               </div>
+                               <ul class="order-quantity-details d-flex">
+                                   <li>1 styles</li>
+                                   <li>1000 units</li>
+                                   <li>$12000</li>
+                                </ul>
+                                <div class="delivery-status">
+                                    <span>DELIVERY IN</span>
+                                    <span class="date-info">25-APR 
+                                        <img src="../../public/icons/info-primary.svg" alt="">
+
+                                        <div class="etd-dates shadow-2dp">
+                                            <ul class="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>2nd ETD:</li><li>06 Apr, 2022</li></ul>
+                                            <ul class="start"><li>3rd ETD:</li><li>06 Apr, 2022</li></ul>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="progress-with-count d-flex align-items-center">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                      <div><span class="count regular-14">100%</span></div>
+                                </div>
+                        </div>
+                        
+                     </div> 
+                 </div>
+            </div>
+
+        </div>
+    </div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+</body>
+
+</html>
