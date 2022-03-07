@@ -95,7 +95,7 @@
                     }
                 }
             }
-            .delivery-status {
+            .delivery-date-status {
                 span {
                     font-size: 14px;
                     line-height: 20px;
@@ -119,12 +119,17 @@
                 .progress {
                     width: 100%;
                     max-width: 292px;
-                    margin-right: 8px;
                     border-radius: 0;
                     height: 12px;
+                    background: $gray_light_01;
+                    margin: 0;
+                    &::after {
+                        display: none;
+                    }
                 }
                 .count {
                     color: $gray_dark_02;
+                    margin-left: 8px;
                 }
             }
         }
