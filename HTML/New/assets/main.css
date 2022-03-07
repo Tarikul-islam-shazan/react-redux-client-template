@@ -9114,16 +9114,16 @@ ul {
             top: 6px; }
           .order-card-items .single-order-card .order-details .order-quantity-details li:last-child::after {
             display: none; }
-      .order-card-items .single-order-card .order-details .delivery-status span {
+      .order-card-items .single-order-card .order-details .delivery-date-status span {
         font-size: 14px;
         line-height: 20px;
         color: #6a7181; }
-        .order-card-items .single-order-card .order-details .delivery-status span.date-info {
+        .order-card-items .single-order-card .order-details .delivery-date-status span.date-info {
           color: #664ab6;
           font-weight: 500;
           position: relative;
           cursor: pointer; }
-          .order-card-items .single-order-card .order-details .delivery-status span.date-info:hover .etd-dates {
+          .order-card-items .single-order-card .order-details .delivery-date-status span.date-info:hover .etd-dates {
             display: block; }
       .order-card-items .single-order-card .order-details .progress-with-count {
         margin-top: 24px;
@@ -9133,7 +9133,11 @@ ul {
           max-width: 292px;
           margin-right: 8px;
           border-radius: 0;
-          height: 12px; }
+          height: 12px;
+          background: #e4e7eb;
+          margin: 0; }
+          .order-card-items .single-order-card .order-details .progress-with-count .progress::after {
+            display: none; }
         .order-card-items .single-order-card .order-details .progress-with-count .count {
           color: #6a7181; }
 
