@@ -185,7 +185,7 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/view/:id" component={InvoiceDetails} />
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
                     <PublicRoute exact path="/orders" component={MyOrderList} />
-                    <PublicRoute exact path="/timeline" component={Timeline} />
+                    <PublicRoute exact path="/timeline/:orderId" component={Timeline} />
                 </Switch>
             </Router>
         );

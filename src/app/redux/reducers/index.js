@@ -10,6 +10,7 @@ import notificationReducer from "./notification";
 import designReducer from "../design/reducer";
 import dashboardReducer from "../dashboard/reducer";
 import OrderReducer from "../../modules/store/reducer/OrderReducer";
+import TimelineReducer from "../../modules/store/reducer/TimelineReducer";
 
 // const appReducers = combineReducers({
 //     sidebar: sidebarReducer,
@@ -34,7 +35,8 @@ export default combineReducers({
     notification: notificationReducer,
     design: designReducer,
     dashboard: dashboardReducer,
-    orderStore: OrderReducer
+    orderStore: OrderReducer,
+    timelineStore: TimelineReducer
 });
 
 // design selectors

@@ -170,6 +170,7 @@ const routes = {
     verifyEmail: `${BASE_URL}/user/client/verify-email`,
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
     statusWiseCount: `${BASE_URL}/order/status-wise-count`,
+    getTimeLineData: `${BASE_URL}/timeline/order/`,
 };
 
 // Axios request interceptor

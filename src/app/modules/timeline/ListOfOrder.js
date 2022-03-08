@@ -1,7 +1,10 @@
 import React from "react";
-import {changeDateFormat, toOrdinalSuffix} from "../../services/Util";
+import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
+import {useHistory} from "react-router-dom";
 
 const ListOfOrder = ({orderStore}) => {
+    const history = useHistory();
+
     const renderOrderImage = (imageSrc) => {
         if (imageSrc) {
             return <img src={imageSrc} alt="design"/>
@@ -23,10 +26,14 @@ const ListOfOrder = ({orderStore}) => {
         })
     }
 
+    const handleRoute = (id) => {
+        history.push(`timeline/${id}`)
+    }
+
     const renderOrderList = () => {
         return orderStore?.orderResponse?.data?.map((item, index) => {
             return (
-                <div className="single-order-card" key={`order_response_${index}`}>
+                <div className="single-order-card" key={`order_response_${index}`} onClick={() => handleRoute(item.orderId)}>
                     <div className="design-images">
                         {renderOrderImage(item.orderProductList[0]?.image)}
                         {renderOrderImage(item.orderProductList[1]?.image)}
@@ -36,7 +43,7 @@ const ListOfOrder = ({orderStore}) => {
                     <div className="order-details">
                         <div className="po-numbers">
                             <div className="pos">
-                                <span className="regular-14">{item?.poNumberList?.join(",")}</span>
+                                <span className="regular-14">{getShortName(item?.poNumberList?.join(","), 32)}</span>
                                 <span className="regular-14 gray_dark_02">
                                     &nbsp;({item.orderRefNumber})
                                 </span>
