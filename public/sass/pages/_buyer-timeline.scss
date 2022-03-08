@@ -114,6 +114,10 @@ ul {
                             margin-right: 4px;
                             height: 8px;
                             border-radius: 0;
+                            background: $gray_light_01;
+                            &::after {
+                                display: none;
+                            }
                         }
                         .count {
                             font-size: 12px;
@@ -384,6 +388,12 @@ ul {
                     height: 8px;
                     border-radius: 0;
                     height: 3px;
+                    background: $gray_light_01;
+                    margin: 0;
+                    width: 100%;
+                    &::after {
+                        display: none;
+                    }
                 }
             }
         }
@@ -751,6 +761,9 @@ ul {
                         justify-content: space-between;
                         .task-name {
                             padding-right: 16px;
+                            img {
+                                margin-right: 4px;
+                            }
                         }
                         span {
                             font-size: 12px;
@@ -760,8 +773,10 @@ ul {
                         .date-details {
                             width: 50px;
                             text-align: right;
+                            padding: 0;
                         }
                         &.completed {
+                            background: transparent;
                             .date-details {
                                 span {
                                     color: $green;
