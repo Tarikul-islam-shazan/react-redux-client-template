@@ -11,8 +11,6 @@ const TimelineActivityLog = () => {
                 </div>
             </div>
             <div className="activity-list">
-                {/* Step */}
-                {/* Added new task */}
                 <div className="single-activity added-new-task">
                     <div className="activity-common-header justify-content-between">
                         <div className="activity-content d-flex">
