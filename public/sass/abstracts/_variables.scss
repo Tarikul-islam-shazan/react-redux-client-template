@@ -75,7 +75,7 @@ $behind_the_schedule: #f2a264;
 $overdue: #d4605e;
 
 /// Main Font
-$primary-font: "Inter";
+$primary-font: "Inter" !important;
 
 .primary {
     color: $primary;
