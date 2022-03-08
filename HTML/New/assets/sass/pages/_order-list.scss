@@ -52,9 +52,9 @@
     .single-order-card {
         padding: 8px;
         border: 1px solid $gray_light_02;
-        display: flex;
+        display: grid;
+        grid-template-columns: 148px auto;
         .design-images {
-            width: 148px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto;
@@ -68,7 +68,6 @@
             }
         }
         .order-details {
-            width: calc(100% - 148px);
             padding-left: 16px;
             padding-top: 12px;
             .order-quantity-details {
@@ -89,6 +88,7 @@
                         top: 6px;
                     }
                     &:last-child {
+                        margin-right: 0;
                         &::after {
                             display: none;
                         }
@@ -130,6 +130,51 @@
                 .count {
                     color: $gray_dark_02;
                     margin-left: 8px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .order-card-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .order-card-items {
+        .single-order-card {
+            .order-details {
+                .regular-14 {
+                    font-size: 12px;
+                    margin-right: 16px;
+                }
+                .po-numbers {
+                    .pos {
+                        span {
+                            display: block;
+                        }
+                    }
+                }
+                .progress-with-count {
+                    margin-top: 4px;
+                }
+                .order-quantity-details {
+                    margin: 8px 0 4px 0;
+                    li {
+                        font-size: 12px;
+                        margin-right: 16px;
+                        &::after {
+                            right: -9px;
+                        }
+                    }
+                }
+                .delivery-date-status {
+                    span {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
                 }
             }
         }
