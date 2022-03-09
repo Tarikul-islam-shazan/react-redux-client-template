@@ -1,11 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import {MeasurementTable} from "../../../pages/design/components/MeasurementTable";
+import {addImageSuffix, authUserInfo} from "../../../services/Util";
+import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import Http from "../../../services/Http";
+import {toastError, toastSuccess} from "../../../commonComponents/Toast";
+import {useParams} from "react-router-dom";
 
-const AddComment = ({toggleAddComment, openModal}) => {
+const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
     const [selectedTask, setSelectedTask] = useState("")
     const [selectedDesign, setSelectedDesign] = useState("")
     const [error, setError] = useState({})
+    const [message, setMessage] = useState("")
+    const [selectedFiles, setSelectedFiles] = useState([])
+    const params = useParams()
 
     const renderTaskList = () => {
         return (
@@ -38,19 +45,75 @@ const AddComment = ({toggleAddComment, openModal}) => {
         return Object.keys(errors).length > 0;
     }
 
-    const handlePost = () => {
+    const handlePost = async () => {
         if (!checkValidation()) {
-            toggleAddComment()
+            setLoader(true)
+            let body = {
+                documentDTOList: selectedFiles,
+                orderId: params.orderId,
+                text: message.replace(/"/g, "'"),
+                taggedUserIdList: [],
+            };
+            await Http.POST('commentOnTask', body)
+                .then(({data}) => {
+                    setLoader(false)
+                    toggleAddComment()
+                    toastSuccess("Comment Add Successful!")
+                })
+                .catch(({response}) => {
+                    setLoader(false)
+                    toastError(response.data.message);
+                });
         }
+    }
+
+    const onMultipleFileSelect = (e, docType) => {
+        let files = Array.from(e.target.files);
+        let fileList = [...selectedFiles]
+        files.map((item) => {
+            let data = {
+                name: item.name, docMimeType: item.type, documentType: docType, print: false,
+            };
+            let reader = new FileReader();
+            reader.readAsDataURL(item);
+            reader.onload = async () => {
+                data.base64Str = reader.result;
+                fileList.push(data);
+            };
+        });
+        setTimeout(() => {
+            setSelectedFiles(fileList)
+        }, 500)
+    };
+
+    const removeFile = (index) => {
+        let fileList = selectedFiles.filter((file, i) => i !== index)
+        setSelectedFiles(fileList)
+    };
+
+    const renderFilePreview = () => {
+        return (<div
+            className={`files-n-photos custom-scrollbar ${selectedFiles.length ? `open` : ``}`}
+            key={selectedFiles.length}
+        >
+            {selectedFiles.map((file, i) => {
+                return (<SelectedFileViewComponent
+                    showRemoveOption={true}
+                    file={file}
+                    key={i}
+                    index={i}
+                    remove={removeFile}
+                />);
+            })}
+        </div>)
     }
 
     return (
         <Modal
             show={openModal}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+            aria-labelledby="example-custom-modal-timeline"
             onHide={toggleAddComment}
+            centered
         >
             <div className="popup-wrapper">
                 <div className="common-popup">
@@ -59,7 +122,10 @@ const AddComment = ({toggleAddComment, openModal}) => {
                             <div className="comments-header justify-content-between">
                                 <div className="header-contents d-flex align-items-end">
                                     <div className="profile-image">
-                                        <img src="/images/jobaidu.png" alt="profile"/>
+                                        <img
+                                            src={addImageSuffix(authUserInfo().profilePicDocument.docUrl, "_xicon")}
+                                            alt="profile"
+                                        />
                                     </div>
                                     <div className="design-select">
                                         <p className="comments-hint gray_dark_02 mr-2">Comments on:</p>
@@ -103,54 +169,28 @@ const AddComment = ({toggleAddComment, openModal}) => {
                             </div>
                             <div className="comments-body">
                                 <div className="comment-text clicked">
-                                    <textarea name id placeholder="Write comment..." defaultValue={""}/>
-                                    <div className="files-n-photos custom-scrollbar open">
-                                        <div className="item">
-                                            <div className="close">
-                                                <svg width={16} height={16} viewBox="0 0 16 16" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx={8} cy={8} r={8} fill="#8B8B8B"/>
-                                                    <path
-                                                        d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z"
-                                                        fill="white"/>
-                                                </svg>
-                                            </div>
-                                            <a target="_blank"><img src="/images/design3.png" alt="photo"/></a>
-                                        </div>
-                                        <div className="item">
-                                            <div className="close">
-                                                <svg width={16} height={16} viewBox="0 0 16 16" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx={8} cy={8} r={8} fill="#8B8B8B"/>
-                                                    <path
-                                                        d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z"
-                                                        fill="white"/>
-                                                </svg>
-                                            </div>
-                                            <a target="_blank"><img src="/images/design3.png" alt="photo"/></a>
-                                        </div>
-                                        <div className="item">
-                                            <div className="close">
-                                                <svg width={16} height={16} viewBox="0 0 16 16" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx={8} cy={8} r={8} fill="#8B8B8B"/>
-                                                    <path
-                                                        d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z"
-                                                        fill="white"/>
-                                                </svg>
-                                            </div>
-                                            <a target="_blank">
-                                                <img src="/images/design3.png" alt="photo"/>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <textarea
+                                        name
+                                        id
+                                        value={message}
+                                        placeholder="Write comment..."
+                                        defaultValue={""}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                    />
+                                    {renderFilePreview()}
                                 </div>
                                 <div className="post-actions d-flex justify-content-end">
                                     <div className="attachment cursor-pointer mr-2">
                                         <label htmlFor="upload-input-file">
                                             <img src="/icons/attachment.svg" alt="attach"/>
                                         </label>
-                                        <input id="upload-input-file" type="file" name="selectedFiles" multiple/>
+                                        <input
+                                            id="upload-input-file"
+                                            type="file"
+                                            name="selectedFiles"
+                                            onChange={(e) => onMultipleFileSelect(e, "ACCESSORIES_DESIGN")}
+                                            multiple
+                                        />
                                     </div>
                                     <button className="post-btn" onClick={handlePost}>Post</button>
                                 </div>

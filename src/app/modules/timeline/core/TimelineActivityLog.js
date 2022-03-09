@@ -1,24 +1,14 @@
 import React, {useEffect, useState} from "react";
-import AddComment from "./AddComment";
 import {useSelector, useDispatch} from "react-redux";
-import LoaderComponent from "../../../commonComponents/Loader";
-import {fetchTimeline} from "../../store/action/Timeline";
-import {useParams} from "react-router-dom";
 import ActivityLog from "./ActivityLog";
+import {addImageSuffix, authUserInfo} from "../../../services/Util";
 
-const TimelineActivityLog = () => {
-
-    const [addComment, setAddComment] = useState(false);
+const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
     const timelineStore = useSelector(store => store.timelineStore)
-
-
-    const toggleAddComment = () => {
-        setAddComment(!addComment)
-    }
 
     const renderTimeline = () => {
         return timelineStore?.data?.map((item, index) => {
-            return <ActivityLog activity={item} key={`timeline_${index}`}/>
+            return <ActivityLog activity={item} key={`timeline_${index}`} setLoader={setLoader}/>
         })
     }
 
@@ -29,7 +19,10 @@ const TimelineActivityLog = () => {
                     <div className="comments-button cursor-pointer">
                         <p className="regular-12 mb-0">
                             <img
-                                src="/images/zahinul haque.png"
+                                src={addImageSuffix(
+                                    authUserInfo().profilePicDocument.docUrl,
+                                    "_xicon"
+                                )}
                                 alt="profile"
                                 className="profile-image"
                             />
@@ -42,7 +35,6 @@ const TimelineActivityLog = () => {
                     {renderTimeline()}
                 </div>
             </div>
-            <AddComment toggleAddComment={toggleAddComment} openModal={addComment}/>
         </>
     )
 }

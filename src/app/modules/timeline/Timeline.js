@@ -8,13 +8,20 @@ import {fetchTimeline} from "../store/action/Timeline";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 import LoaderComponent from "../../commonComponents/Loader";
+import AddComment from "./core/AddComment";
 
 const Timeline = () => {
     const [loader, setLoader] = useState(true)
+    const [addComment, setAddComment] = useState(false);
     const dispatch = useDispatch();
     const params = useParams();
+
+    const toggleAddComment = () => {
+        setAddComment(!addComment)
+    }
+
     const generateParams = (page) => {
-        return `${params.orderId}?page=${page}&size=5`
+        return `${params.orderId}?page=${page}&size=6`
     }
 
     useEffect(() => {
@@ -23,46 +30,55 @@ const Timeline = () => {
 
 
     return (
-        <LoaderComponent loading={loader}>
-            <div className="buyer-timeline-container">
-                <div className="timeline-row">
-                    <TimelinePoDetails/>
-                    <TimelineActivityLog/>
-                    <TimelineProductionDetails/>
-                </div>
-                <div className="modal modal-left fade " id="all-designs" tabIndex={-1} role="dialog"
-                     aria-labelledby="right_modal">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                {/* Modal CLose button*/}
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <img src="/icons/close.svg"/>
-                                </button>
+        <>
+            {addComment &&
+                <AddComment
+                    toggleAddComment={toggleAddComment}
+                    openModal={addComment}
+                    setLoader={setLoader}
+                />
+            }
+            <LoaderComponent loading={loader}>
+                <div className="buyer-timeline-container">
+                    <div className="timeline-row">
+                        <TimelinePoDetails/>
+                        <TimelineActivityLog toggleAddComment={toggleAddComment} setLoader={setLoader}/>
+                        <TimelineProductionDetails/>
+                    </div>
+                    <div className="modal modal-left fade " id="all-designs" tabIndex={-1} role="dialog"
+                         aria-labelledby="right_modal">
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    {/* Modal CLose button*/}
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <img src="/icons/close.svg"/>
+                                    </button>
+                                </div>
+                                <div className="modal-body custom-scrollbar">
+                                    <AllDesignList/>
+                                </div>
                             </div>
-                            <div className="modal-body custom-scrollbar">
-                                <AllDesignList/>
+                        </div>
+                    </div>
+                    <div className="modal modal-right fade " id="all-production-details" tabIndex={-1} role="dialog"
+                         aria-labelledby="right_modal">
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <img src="/icons/close.svg"/>
+                                    </button>
+                                </div>
+                                <div className="modal-body custom-scrollbar">
+                                    <AllProductionList/>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="modal modal-right fade " id="all-production-details" tabIndex={-1} role="dialog"
-                     aria-labelledby="right_modal">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <img src="/icons/close.svg"/>
-                                </button>
-                            </div>
-                            <div className="modal-body custom-scrollbar">
-                                <AllProductionList/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </LoaderComponent>
+            </LoaderComponent>
+        </>
     )
 }
 

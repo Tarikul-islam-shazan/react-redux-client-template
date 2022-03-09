@@ -1,14 +1,26 @@
 import React, {useEffect, useState} from "react";
-import {parseHtml} from "../../../services/Util";
+import {addImageSuffix, authUserInfo, parseHtml} from "../../../services/Util";
+import Modal from "react-bootstrap/Modal";
+import TaskManage from "../../../pages/task/components/TaskManage";
+import {useParams} from "react-router-dom";
+import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import Http from "../../../services/Http";
+import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 
-const ActivityLog = ({activity}) => {
+const ActivityLog = ({activity, setLoader}) => {
 
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
+    const [isReplying, setIsReplying] = useState(false)
     const [commentList, setCommentList] = useState([])
+    const [selectedFiles, setSelectedFiles] = useState([])
+    const [message, setMessage] = useState("")
+    const params = useParams();
 
     useEffect(() => {
-        console.log(activity)
         if (activity.body?.entityIdTypeMapList) {
-            setCommentList(activity.body.entityIdTypeMapList)
+            let comment = [];
+            comment.push(activity.body.entityIdTypeMapList[0].text)
+            setCommentList(comment)
         }
     }, [activity])
 
@@ -23,17 +35,13 @@ const ActivityLog = ({activity}) => {
 
     const renderIconOrImage = () => {
         if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
-            return (
-                <div className="person-profile">
-                    <img src={activity.profileImage} alt=""/>
-                </div>
-            )
+            return (<div className="person-profile">
+                <img src={activity.profileImage} alt=""/>
+            </div>)
         } else {
-            return (
-                <div className="activity-icon">
-                    <img src={iconPath()} alt=""/>
-                </div>
-            )
+            return (<div className="activity-icon">
+                <img src={iconPath()} alt=""/>
+            </div>)
         }
     }
 
@@ -47,9 +55,7 @@ const ActivityLog = ({activity}) => {
                 string.push(item.text + " ")
             }
         })
-        return (
-            <p className="regular-12">{string}</p>
-        )
+        return (<p className="regular-12">{string}</p>)
     }
 
     const renderTimeLineImages = () => {
@@ -69,93 +75,185 @@ const ActivityLog = ({activity}) => {
 
     const renderDescription = () => {
         return commentList?.map((comment, index) => {
-            return <p className="description regular-12"
-                      dangerouslySetInnerHTML={{__html: parseHtml(comment.text.toString('html'))}}
+            return <p
+                className={`description regular-12 ${index > 0 ? "pl-2" : ""}`}
+                dangerouslySetInnerHTML={{__html: parseHtml(comment.toString('html'))}}
             />
         })
     }
 
+    const onMultipleFileSelect = (e, docType) => {
+        let files = Array.from(e.target.files);
+        let fileList = [...selectedFiles]
+        files.map((item) => {
+            let data = {
+                name: item.name, docMimeType: item.type, documentType: docType, print: false,
+            };
+            let reader = new FileReader();
+            reader.readAsDataURL(item);
+            reader.onload = async () => {
+                data.base64Str = reader.result;
+                fileList.push(data);
+            };
+        });
+        setTimeout(() => {
+            setSelectedFiles(fileList)
+        }, 500)
+    };
+
+    const removeFile = (index) => {
+        let fileList = selectedFiles.filter((file, i) => i !== index)
+        setSelectedFiles(fileList)
+    };
+
+    const renderFilePreview = () => {
+        return (<div
+            className={`files-n-photos custom-scrollbar ${selectedFiles.length ? `open` : ``}`}
+            key={selectedFiles.length}
+        >
+            {selectedFiles.map((file, i) => {
+                return (<SelectedFileViewComponent
+                    showRemoveOption={true}
+                    file={file}
+                    key={i}
+                    index={i}
+                    remove={removeFile}
+                />);
+            })}
+        </div>)
+    }
+
+    const cancelPost = () => {
+        setIsReplying(false)
+        setMessage("")
+        setSelectedFiles([]);
+    }
+
+
+    const handleReply = async () => {
+        setLoader(true)
+        let body = {
+            documentDTOList: selectedFiles,
+            postId: activity?.body?.entityIdTypeMapList[0]?.id,
+            postType: "COMMENT",
+            text: message.replace(/"/g, "'"),
+            taggedUserIdList: [],
+        };
+        await Http.POST('commentOnTask', body)
+            .then(({data}) => {
+                let tempCommentList = [...commentList]
+                tempCommentList.push(message)
+                setCommentList(tempCommentList)
+                cancelPost()
+                setLoader(false)
+                toastSuccess("Replied Successful!")
+            })
+            .catch(({response}) => {
+                setLoader(false)
+                toastError(response.data.message);
+            });
+    }
+
+    const renderReplySection = () => {
+        if (isReplying) {
+            return (<div className="comments-body">
+                <div className="comment-text clicked">
+                    <div className="reply-box">
+                        <img
+                            src={addImageSuffix(authUserInfo().profilePicDocument.docUrl, "_xicon")}
+                            alt=""
+                            className="profile-image"
+                        />
+                        <input
+                            type="text"
+                            value={message}
+                            placeholder="Write reply......"
+                            onChange={(e) => setMessage(e.target.value)}
+                        />
+                    </div>
+                    <div className="attachment cursor-pointer">
+                        <label htmlFor="upload-input-file">
+                            <img
+                                src="/icons/attachment.svg"
+                                alt="attach"
+                            />
+                        </label>
+                        <input
+                            id="upload-input-file"
+                            type="file"
+                            name="selectedFiles"
+                            onChange={(e) => onMultipleFileSelect(e, "ACCESSORIES_DESIGN")} multiple
+                        />
+                    </div>
+                    {renderFilePreview()}
+                </div>
+                <div className="post-actions">
+                    <button
+                        className="cancel"
+                        onClick={cancelPost}
+                    >
+                        Cancel
+                    </button>
+                    <button className="post-btn" onClick={handleReply}>Post</button>
+                </div>
+            </div>)
+        }
+    }
+
     const renderActivityBody = () => {
         if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
-            return (
-                <div className="activity-common-body">
-                    {renderDescription()}
-                    {renderTimeLineImages()}
-                    <div className="reply-btn ">
-                        <button className="button text">Reply</button>
-                    </div>
-                    <div className="reply-container">
-                        <div className="comments-body">
-                            <div className="comment-text clicked">
-                                <div className="reply-box">
-                                    <img src="/images/zahinul haque.png" alt=""
-                                         className="profile-image"/>
-                                    <input type="text" placeholder="Write reply......"/>
-                                </div>
-                                <div className="attachment cursor-pointer">
-                                    <label htmlFor="upload-input-file"><img src="/icons/attachment.svg"
-                                                                            alt="attach"/></label>
-                                    <input id="upload-input-file" type="file" name="selectedFiles" multiple/>
-                                </div>
-                                <div className="files-n-photos custom-scrollbar open">
-                                    <div className="item">
-                                        <div className="close">
-                                            <svg width={16} height={16} viewBox="0 0 16 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx={8} cy={8} r={8} fill="#8B8B8B"/>
-                                                <path
-                                                    d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z"
-                                                    fill="white"/>
-                                            </svg>
-                                        </div>
-                                        <a target="_blank"><img src="/images/design3.png" alt="photo"/></a>
-                                    </div>
-                                    <div className="item">
-                                        <div className="close">
-                                            <svg width={16} height={16} viewBox="0 0 16 16" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx={8} cy={8} r={8} fill="#8B8B8B"/>
-                                                <path
-                                                    d="M11.5 5.205L10.795 4.5L8 7.295L5.205 4.5L4.5 5.205L7.295 8L4.5 10.795L5.205 11.5L8 8.705L10.795 11.5L11.5 10.795L8.705 8L11.5 5.205Z"
-                                                    fill="white"/>
-                                            </svg>
-                                        </div>
-                                        <a target="_blank"><img src="/images/design3.png" alt="photo"/></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="post-actions">
-                                <button className="cancel">Cancel</button>
-                                <button className="post-btn">Post</button>
-                            </div>
-                        </div>
-                        <div className="details-btn">
-                            <button className="button text">View details <img
-                                src="/icons/comments-btn-arrow.svg" alt="arrow"/></button>
-                        </div>
+            return (<div className="activity-common-body">
+                {renderDescription()}
+                {renderTimeLineImages()}
+                <div className="reply-btn ">
+                    <button className="button text" onClick={() => setIsReplying(true)}>Reply</button>
+                </div>
+                <div className="reply-container">
+                    {renderReplySection()}
+                    <div className="details-btn">
+                        <button
+                            className="button text"
+                            onClick={() => setShowTaskDetailsModal(true)}
+                        >
+                            View details
+                            <img
+                                src="/icons/comments-btn-arrow.svg" alt="arrow"
+                            />
+                        </button>
                     </div>
                 </div>
-            )
+            </div>)
         }
     }
 
 
-    return (
-        <div className="single-activity activity-with-header added-comment">
-            <div className="activity-common-header justify-content-between">
-                <div className="activity-content d-flex">
-                    {renderIconOrImage()}
-                    <div className="activity-text">
-                        {renderActivityText()}
-                    </div>
-                </div>
-                <div className="design-image">
-                    <img src="/images/design2.png" alt="design image"/>
+    return (<div className="single-activity activity-with-header added-comment">
+        <div className="activity-common-header justify-content-between">
+            <div className="activity-content d-flex">
+                {renderIconOrImage()}
+                <div className="activity-text">
+                    {renderActivityText()}
                 </div>
             </div>
-            {renderActivityBody()}
+            <div className="design-image">
+                <img src="/images/design2.png" alt="design image"/>
+            </div>
         </div>
-    )
+        {renderActivityBody()}
+        <Modal
+            show={showTaskDetailsModal}
+            onHide={() => setShowTaskDetailsModal(false)}
+            className="modal-right task-conversation"
+            aria-labelledby="example-custom-modal-styling-title"
+        >
+            <TaskManage
+                id={activity.id}
+                orderId={params.orderId}
+                closeModal={() => setShowTaskDetailsModal(false)}
+                callback={() => false}
+            />
+        </Modal>
+    </div>)
 }
 
 export default ActivityLog
