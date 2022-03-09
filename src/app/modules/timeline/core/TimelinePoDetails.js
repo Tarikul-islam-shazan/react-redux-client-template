@@ -5,8 +5,12 @@ import Http from "../../../services/Http";
 import {storeMemberList} from "../../store/action/Timeline";
 import {useParams} from "react-router-dom";
 import {toastError} from "../../../commonComponents/Toast";
+import {useSelector} from "react-redux";
+import {changeDateFormat, toOrdinalSuffix} from "../../../services/Util";
 
 const TimelinePoDetails = ({setLoader}) => {
+    const timelineStore = useSelector(store => store.timelineStore)
+    const {orderInfo} = timelineStore;
     const params = useParams();
 
     const downloadPI = () => {
@@ -19,39 +23,54 @@ const TimelinePoDetails = ({setLoader}) => {
             .finally(() => setLoader(false));
     }
 
+    const renderETD = () => {
+        return orderInfo?.deliveryDateList?.map((etd, index) => {
+            return (
+                <ul className="start">
+                    <li>{toOrdinalSuffix(index + 1)} ETD:</li>
+                    <li>
+                        {changeDateFormat(etd, "YYYY-MM-DD", "DD MMM, YYYY")}
+                    </li>
+                </ul>
+            )
+        })
+    }
+
     return (
         <div className="one-third all-designs-destails">
             <div className="design-info-with-po common-blocks">
                 <div className="design-title-with-date">
-                <span><span>NITEX/B1/2021</span>
+                <span><span>{orderInfo?.orderRefNumber}</span>
                   <span className="etd-status">
-                    <span className="regular-12 gray_dark_02">25-Aug</span>
+                    <span
+                        className="regular-12 gray_dark_02">{changeDateFormat(orderInfo?.deliveryDateList[0], "YYYY-MM-DD", "DD-MMM")}</span>
                       <img
                           src="/icons/info.svg"
                           alt=""
                       />
                     <div className="etd-dates shadow-2dp">
-                      <ul className="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
-                      <ul className="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
-                      <ul className="start"><li>1st ETD:</li><li>06 Apr, 2022</li></ul>
+                     {renderETD()}
                     </div>
                   </span>
                 </span>
                     <div className="untis-price">
-                        <span>4500 UNITS</span>
-                        <span>$85,00</span>
+                        <span>{orderInfo?.orderQuantity} UNITS</span>
+                        <span>${orderInfo?.orderValue}</span>
                     </div>
                     <div className="progress-with-count">
                         <div className="progress">
-                            <div className="progress-bar bg-success" role="progressbar" style={{width: '25%'}}
-                                 aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}/>
+                            <div className="progress-bar bg-success" role="progressbar"
+                                 style={{width: orderInfo?.percentageOfCompleteness + "%"}}
+                                 aria-valuenow={orderInfo?.percentageOfCompleteness} aria-valuemin={0}
+                                 aria-valuemax={100}/>
                         </div>
-                        <div><span className="count">100%</span></div>
+                        <div><span className="count">{orderInfo?.percentageOfCompleteness}%</span></div>
                     </div>
                     <MemberList/>
 
                     <div className="all-po-list">
-                  <span className="po-names">PO/12/NTR/2021, PO/12/NTR/2021, PO/12/NTR/2021
+                  <span className="po-names">
+                      {orderInfo?.poNumberList?.join(", ")}
                     <a href className="button text">
                       <span>PO Details</span>
                       <img src="/icons/arrow-right-no-padding.svg" alt=""/>

@@ -5,7 +5,7 @@ import TimelineProductionDetails from "./core/TimelineProductionDetails";
 import AllDesignList from "./core/AllDesignList";
 import AllProductionList from "./core/AllProductionList";
 import {fetchTimeline} from "../store/action/Timeline";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import LoaderComponent from "../../commonComponents/Loader";
 import AddComment from "./core/AddComment";
@@ -15,13 +15,19 @@ const Timeline = () => {
     const [addComment, setAddComment] = useState(false);
     const dispatch = useDispatch();
     const params = useParams();
+    const timelineStore = useSelector(store => store.timelineStore)
 
     const toggleAddComment = () => {
         setAddComment(!addComment)
     }
 
     const generateParams = (page) => {
-        return `${params.orderId}?page=${page}&size=6`
+        if(timelineStore.selectedDesignList?.length > 0){
+            return `${params.orderId}?page=${page}&size=6&productIds=${timelineStore.selectedDesignList?.join(",")}`
+        }else{
+            return `${params.orderId}?page=${page}&size=6`
+        }
+
     }
 
     useEffect(() => {

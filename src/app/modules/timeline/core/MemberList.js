@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {fetchMemberList} from "../../store/action/Timeline";
+import {fetchMemberList, fetchOrderInfo} from "../../store/action/Timeline";
 
 const MemberList = () => {
 
@@ -11,12 +11,12 @@ const MemberList = () => {
     const [memberList, setMemberList] = useState([])
 
     useEffect(() => {
-        dispatch(fetchMemberList(params.orderId))
+        dispatch(fetchOrderInfo(params.orderId))
     }, [])
 
     useEffect(() => {
-        if (timelineStore.memberList?.memberList) {
-            setMemberList(timelineStore.memberList.memberList)
+        if (timelineStore.orderInfo?.orderMemberList) {
+            setMemberList(timelineStore.orderInfo.orderMemberList)
         }
     }, [timelineStore])
 
@@ -33,7 +33,7 @@ const MemberList = () => {
             return (
                 <span className="more-member" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
-                      {memberList.length > 3 && <a href="#">+{memberList.length - 3}</a>}
+                      <a href="#">{memberList.length}</a>
                       <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
                         <div className="assign-member shadow open">
                           <div className="title">Assigned member</div>

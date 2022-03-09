@@ -172,6 +172,7 @@ const routes = {
     statusWiseCount: `${BASE_URL}/order/status-wise-count`,
     getTimeLineData: `${BASE_URL}/timeline/order/`,
     downloadInvoice: `${BASE_URL}/invoice/download/`,
+    getTimeLineOrderInfo: `${BASE_URL}/timeline/order-info/`,
 };
 
 // Axios request interceptor

@@ -27,7 +27,11 @@ const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
     }, [])
 
     const generateParams = (page) => {
-        return `${params.orderId}?page=${page}&size=6`
+        if(timelineStore.selectedDesignList?.length > 0){
+            return `${params.orderId}?page=${page}&size=6&productIds=${timelineStore.selectedDesignList?.join(",")}`
+        }else{
+            return `${params.orderId}?page=${page}&size=6`
+        }
     }
 
 

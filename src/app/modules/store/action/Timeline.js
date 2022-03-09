@@ -8,13 +8,33 @@ export const storeTimeline = (data, merge) => {
     }
 }
 
-export const storeMemberList = (data) => {
+export const storeOrderInfo = (data) => {
     return {
-        type: ActionTypes.FETCH_ORDER_MEMBER_LIST,
+        type: ActionTypes.FETCH_ORDER_INFO_LIST,
         payload: data
     }
 }
 
+export const clearDesignSelection = () => {
+    return{
+        type: ActionTypes.CLEAR_DESIGN_SELECTION,
+        payload: []
+    }
+}
+
+export const selectAllDesign = (data) => {
+    return{
+        type: ActionTypes.SELECT_ALL_DESIGN,
+        payload: data
+    }
+}
+
+export const toggleDesignSelection = (data) => {
+    return{
+        type: ActionTypes.TOGGLE_DESIGN_SELECTION,
+        payload: data
+    }
+}
 
 export const fetchTimeline = (params, merge) => async (dispatch) => {
     await Http.GET('getTimeLineData', params).then((response) => {
@@ -23,8 +43,8 @@ export const fetchTimeline = (params, merge) => async (dispatch) => {
 }
 
 
-export const fetchMemberList = (orderId) => async (dispatch) => {
-    await Http.GET('getProjectMembers', orderId).then((response) => {
-        dispatch(storeMemberList(response.data));
+export const fetchOrderInfo = (orderId) => async (dispatch) => {
+    await Http.GET('getTimeLineOrderInfo', orderId).then((response) => {
+        dispatch(storeOrderInfo(response.data));
     });
 }

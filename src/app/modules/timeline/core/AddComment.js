@@ -5,6 +5,7 @@ import {SelectedFileViewComponent} from "../../../pages/task/components/TaskMana
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
     const [selectedTask, setSelectedTask] = useState("")
@@ -12,7 +13,15 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
     const [error, setError] = useState({})
     const [message, setMessage] = useState("")
     const [selectedFiles, setSelectedFiles] = useState([])
+    const [memberList, setMemberList] = useState([])
     const params = useParams()
+    const timelineStore = useSelector(store => store.timelineStore)
+
+    useEffect(() => {
+        if (timelineStore?.memberList) {
+            setMemberList(timelineStore.memberList.memberList)
+        }
+    }, [timelineStore])
 
     const renderTaskList = () => {
         return (
