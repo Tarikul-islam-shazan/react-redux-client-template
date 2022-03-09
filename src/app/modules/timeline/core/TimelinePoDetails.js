@@ -1,7 +1,24 @@
 import React from "react";
 import AllDesignList from "./AllDesignList";
+import MemberList from "./MemberList";
+import Http from "../../../services/Http";
+import {storeMemberList} from "../../store/action/Timeline";
+import {useParams} from "react-router-dom";
+import {toastError} from "../../../commonComponents/Toast";
 
-const TimelinePoDetails = () => {
+const TimelinePoDetails = ({setLoader}) => {
+    const params = useParams();
+
+    const downloadPI = () => {
+        setLoader(true)
+        Http.GET('downloadInvoice', params.orderId)
+            .then((response) => {
+                window.open(response.data, '_parent');
+            })
+            .catch((error) => toastError(error.response.data.message))
+            .finally(() => setLoader(false));
+    }
+
     return (
         <div className="one-third all-designs-destails">
             <div className="design-info-with-po common-blocks">
@@ -31,45 +48,8 @@ const TimelinePoDetails = () => {
                         </div>
                         <div><span className="count">100%</span></div>
                     </div>
-                    <div className="add-team-members">
-                        <div className="all-team-members">
-                                <span className="added-members">
-                      <img src="/images/Imranul.png" alt="" data-toggle="tooltip" data-placement="top" title
-                           data-original-title="Mamun"/>
-                      <img src="/images/jobaidu.png" alt="" data-toggle="tooltip" data-placement="top" title
-                           data-original-title="Zahinul Haque"/>
-                      <img src="/images/zahinul haque.png" alt="" data-toggle="tooltip" data-placement="top"
-                           title data-original-title="pm"/>
-                    </span>
-                            <span className="more-member" data-toggle="dropdown" aria-haspopup="true"
-                                  aria-expanded="false">
-                      <a href="#">+5</a>
-                      <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
-                        <div className="assign-member shadow open">
-                          <div className="title">Assigned member</div>
-                          <div className="member-list-container">
-                            <div className="member-list">
-                              <img src="/images/jobaidu.png" alt=""/>
-                              <div className="name">Md. Sarwar Hossain <span className="tag">Merchandiser</span></div>
-                            </div>
-                            <div className="member-list">
-                              <img src="/images/zahinul haque.png" alt=""/>
-                              <div className="name">pm <span className="tag">Project manager</span></div>
-                            </div>
-                            <div className="member-list">
-                              <img src="/images/Imranul.png" alt=""/>
-                              <div className="name">Bryan Johnson <span className="tag">Project manager</span> </div>
-                            </div>
-                            <div className="member-list">
-                              <img src="/images/jobaidu.png" alt=""/>
-                              <div className="name">Towhid <span className="tag">Impression officer</span></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </span>
-                        </div>
-                    </div>
+                    <MemberList/>
+
                     <div className="all-po-list">
                   <span className="po-names">PO/12/NTR/2021, PO/12/NTR/2021, PO/12/NTR/2021
                     <a href className="button text">
@@ -79,8 +59,12 @@ const TimelinePoDetails = () => {
                   </span>
                     </div>
                     <div className="pi-download">
-                        <button className="button text"><img src="/icons/download.svg"
-                                                             alt="download"/> Download PI
+                        <button className="button text" onClick={downloadPI}>
+                            <img
+                                src="/icons/download.svg"
+                                alt="download"
+                            />
+                            Download PI
                         </button>
                     </div>
                 </div>

@@ -171,6 +171,7 @@ const routes = {
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
     statusWiseCount: `${BASE_URL}/order/status-wise-count`,
     getTimeLineData: `${BASE_URL}/timeline/order/`,
+    downloadInvoice: `${BASE_URL}/invoice/download/`,
 };
 
 // Axios request interceptor

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import TimelinePoDetails from "./core/TimelinePoDetails";
 import TimelineActivityLog from "./core/TimelineActivityLog";
 import TimelineProductionDetails from "./core/TimelineProductionDetails";
@@ -28,7 +28,6 @@ const Timeline = () => {
         dispatch(fetchTimeline(generateParams(0), false)).finally(() => setLoader(false))
     }, [])
 
-
     return (
         <>
             {addComment &&
@@ -41,7 +40,7 @@ const Timeline = () => {
             <LoaderComponent loading={loader}>
                 <div className="buyer-timeline-container">
                     <div className="timeline-row">
-                        <TimelinePoDetails/>
+                        <TimelinePoDetails setLoader={setLoader}/>
                         <TimelineActivityLog toggleAddComment={toggleAddComment} setLoader={setLoader}/>
                         <TimelineProductionDetails/>
                     </div>
