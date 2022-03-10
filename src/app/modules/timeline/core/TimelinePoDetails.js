@@ -104,7 +104,7 @@ const TimelinePoDetails = ({setLoader}) => {
                 </div>
             </div>
             <div className="tab-none">
-                <AllDesignList/>
+                <AllDesignList setLoader={setLoader}/>
             </div>
         </div>
     )

@@ -1,25 +1,31 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {capitalizeFirstLetter} from "../../../services/Util";
-import {clearDesignSelection, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
+import {clearDesignSelection, fetchTimeline, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
+import {useParams} from "react-router-dom";
 
-const AllDesignList = () => {
+const AllDesignList = ({setLoader}) => {
     const timelineStore = useSelector(store => store.timelineStore)
     const dispatch = useDispatch()
+    const params = useParams();
 
     const isCheckboxChecked = (id) => {
         let design
         if (timelineStore.selectedDesignList.length > 0) {
-            console.log("========", timelineStore.selectedDesignList)
             design = timelineStore.selectedDesignList.find(item => item === id);
         }
         return design !== undefined
     }
 
-    const toggleCheckbox = (value) => {
-        dispatch(toggleDesignSelection(value))
+    const toggleCheckbox = async (value) => {
+        setLoader(true)
+        await dispatch(toggleDesignSelection(value, generateParams()))
+        setLoader(false)
     }
 
+    const generateParams = () => {
+        return `${params.orderId}?page=0&size=6`
+    }
 
     const renderDesignList = () => {
         return timelineStore?.orderInfo?.orderProductList?.map((design, index) => {
@@ -56,17 +62,19 @@ const AllDesignList = () => {
         })
     }
 
-    const clearSelection = (e) => {
+    const clearSelection = async (e) => {
+        setLoader(true)
         if (e.target.checked === false) {
-            dispatch(clearDesignSelection())
+            await dispatch(clearDesignSelection(generateParams()))
         } else {
             let designs = []
             let productList = timelineStore?.orderInfo?.orderProductList
             productList.forEach((design) => {
                 designs.push(design.id)
             })
-            dispatch(selectAllDesign(designs))
+            await dispatch(selectAllDesign(designs, generateParams()))
         }
+        setLoader(false)
     }
 
     return (

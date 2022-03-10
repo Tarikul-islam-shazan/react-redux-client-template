@@ -15,25 +15,35 @@ export const storeOrderInfo = (data) => {
     }
 }
 
-export const clearDesignSelection = () => {
-    return{
+const generateTimeLineParams = (getState, params) => {
+    if (getState().timelineStore.selectedDesignList.length > 0) {
+        params += `&productIds=${getState().timelineStore.selectedDesignList.join(",")}`
+    }
+    return params;
+}
+
+export const clearDesignSelection = (params) => async (dispatch, getState) => {
+    await dispatch({
         type: ActionTypes.CLEAR_DESIGN_SELECTION,
         payload: []
-    }
+    })
+    await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false))
 }
 
-export const selectAllDesign = (data) => {
-    return{
+export const selectAllDesign = (data, params) => async (dispatch, getState) => {
+    await dispatch({
         type: ActionTypes.SELECT_ALL_DESIGN,
         payload: data
-    }
+    })
+    await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false))
 }
 
-export const toggleDesignSelection = (data) => {
-    return{
+export const toggleDesignSelection = (data, params) => async (dispatch, getState) => {
+    await dispatch({
         type: ActionTypes.TOGGLE_DESIGN_SELECTION,
         payload: data
-    }
+    })
+    await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false))
 }
 
 export const fetchTimeline = (params, merge) => async (dispatch) => {
