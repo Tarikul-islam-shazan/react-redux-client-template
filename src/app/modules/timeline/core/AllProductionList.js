@@ -1,27 +1,104 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchProductionDetailsByDesignNumber} from "../../store/action/Timeline";
+import {useParams} from "react-router-dom";
 
 const AllProductionList = () => {
-    return(
+    const timelineStore = useSelector(store => store.timelineStore);
+    const [selectedDesign, setSelectedDesign] = useState(null)
+    const [designList, setDesignList] = useState([])
+    const dispatch = useDispatch()
+    const params = useParams();
+
+    useEffect(() => {
+        if (timelineStore?.orderInfo?.orderProductList) {
+            if (!selectedDesign) {
+                setSelectedDesign(timelineStore?.orderInfo?.orderProductList[0])
+            }
+            let productList = timelineStore?.orderInfo?.orderProductList;
+            let tmpDesignList = []
+            productList.map((design) => {
+                tmpDesignList.push(design)
+            })
+            setDesignList(tmpDesignList)
+        }
+    }, [timelineStore])
+
+    useEffect(() => {
+        if (selectedDesign?.id) {
+            dispatch(fetchProductionDetailsByDesignNumber(params.orderId, selectedDesign.id))
+        }
+    }, [selectedDesign])
+
+    const renderDesignList = () => {
+        return designList?.map((design, index) => {
+            return (
+                <li key={`po_design_${index}`} onClick={() => setSelectedDesign(design)}>
+                    <img src={design.image} alt="img"/>
+                    <span>{design.referenceNumber}</span>
+                </li>
+            )
+        })
+    }
+
+
+    const renderStepIcon = (sample) => {
+        if (sample.formattedTaskStatus === "EXPIRED") {
+            return "/icons/Due icon.svg"
+        } else if (sample.formattedTaskStatus === "APPROVED" || sample.formattedTaskStatus === "LATE_APPROVED") {
+            return "/icons/Completed icon.svg"
+        } else {
+            return "/icons/Pending icon.svg"
+        }
+    }
+
+    const renderStepClass = (sample) => {
+        if (sample.formattedTaskStatus === "EXPIRED") {
+            return "due"
+        } else if (sample.formattedTaskStatus === "APPROVED" || sample.formattedTaskStatus === "LATE_APPROVED") {
+            return "completed"
+        } else {
+            return "pending"
+        }
+    }
+
+    const renderSamplingStepList = (list) => {
+        return list?.map((sample, index) => {
+            return (
+                <div className={`single-task ${renderStepClass(sample)}`} key={`sample_index_${index}`}>
+                    <div className="task-name">
+                        <img
+                            src={renderStepIcon(sample)}
+                            alt="complete"
+                        />
+                        <span>{sample.stepName}</span>
+                    </div>
+                    <div className="date-details">
+                        <span>
+                            {sample.formattedTaskStatus === "EXPIRED" ? "+" + sample.dateOver : sample.startDate}
+                        </span>
+                    </div>
+                </div>
+            )
+        })
+    }
+
+
+    return (
         <div className="one-third all-production-details">
             <div className="design-select">
                 <div className="dropdown">
                     <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/images/design5.png"
-                             alt="img"/><span>Design Number</span>
+                        {selectedDesign?.image && <img
+                            src={selectedDesign?.image}
+                            alt="img"
+                        />}
+                        <span>{selectedDesign?.referenceNumber}</span>
                     </button>
                     <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
                         <ul className="select-design-list">
-                            <li><img src="/images/design5.png"
-                                     alt="img"/><span>NTX/A22/0001</span></li>
-                            <li><img src="/images/design5.png"
-                                     alt="img"/><span>NTX/A22/0001</span></li>
-                            <li><img src="/images/design5.png"
-                                     alt="img"/><span>NTX/A22/0001</span></li>
-                            <li><img src="/images/design5.png"
-                                     alt="img"/><span>NTX/A22/0001</span></li>
-                            <li><img src="/images/design5.png"
-                                     alt="img"/><span>NTX/A22/0001</span></li>
+                            {renderDesignList()}
                         </ul>
                     </div>
                 </div>
@@ -42,156 +119,7 @@ const AllProductionList = () => {
                              data-parent="#accordion">
                             <div className="card-body">
                                 <div className="all-task-status">
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
+                                    {renderSamplingStepList(timelineStore?.stepList?.SAMPLING)}
                                 </div>
                             </div>
                         </div>
@@ -210,36 +138,7 @@ const AllProductionList = () => {
                              data-parent="#accordion">
                             <div className="card-body">
                                 <div className="all-task-status">
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
+                                    {renderSamplingStepList(timelineStore?.stepList?.PRODUCTION)}
                                 </div>
                             </div>
                         </div>
@@ -258,36 +157,7 @@ const AllProductionList = () => {
                              data-parent="#accordion">
                             <div className="card-body">
                                 <div className="all-task-status">
-                                    <div className="single-task completed">
-                                        <div className="task-name">
-                                            <img src="/icons/Completed icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task pending">
-                                        <div className="task-name">
-                                            <img src="/icons/Pending icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>25-APR</span>
-                                        </div>
-                                    </div>
-                                    <div className="single-task due">
-                                        <div className="task-name">
-                                            <img src="/icons/Due icon.svg"
-                                                 alt="complete"/>
-                                            <span>Arrange materials for sampling</span>
-                                        </div>
-                                        <div className="date-details">
-                                            <span>+2</span>
-                                        </div>
-                                    </div>
+                                    {renderSamplingStepList(timelineStore?.stepList?.inspection)}
                                 </div>
                             </div>
                         </div>
