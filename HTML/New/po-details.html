@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta content -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+
+    <!-- necessary stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+</head>
+
+<body>
+    <!-- Side Bar -->
+    <aside class="left-panel">
+        <div class="logo">
+            <a href="#" class="logo-expanded">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid d-block mx-auto" />
+            </a>
+        </div>
+        <nav class="navigation">
+            <ul class="list-unstyled">
+                <li class="active">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Request for Quotes</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">Pick Designs</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Products</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My RFQ's</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <img src="" alt="">
+                        <span class="nav-label">My Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="content">
+        <!-- Top Nav -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn p-1">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control border-0 small" placeholder="Search..." aria-label="Search"
+                        aria-describedby="basic-addon2" />
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span style="margin-right: 5px;">
+                            <img src="assets/icons/document.png" alt="" class="img-fluid" />
+                        </span>
+                        Instant Quotation
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link" type="button" id="dropdownNotification">
+                        <span>
+                            <img src="assets/icons/notification-bell.png" alt="notification" />
+                        </span>
+                    </button>
+                </li>
+
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownNewButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Add New
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownNewButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#newProject_1_4">New Project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">New Product</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <button class="btn btn-outline-default nav-link dropdown-toggle" type="button"
+                        id="dropdownProfileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" />
+                        <span class="mr-2 d-none d-lg-inline">Trevor Beilis</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="dropdownProfileButton">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="wraper container-fluid dashboard-container">
+
+            
+            <div class="create-order-container">
+        
+                <div class="designs-info-section">
+                    <h3 class="semibold-16 mb-2"><img src="../../public/icons/Left arrwo.svg" alt="back"> PO details</h3>
+                
+                    <div class="designs-row">
+                        <!-- Designwise quantity table -->
+                        <div class="single-design d-flex bg-white">
+                            <div class="design-image">
+                                <img src="../../public/images/design5.png" alt="">
+                            </div>
+                            <div class="design-details-info">
+                                <div class="design-title mt-3 d-flex justify-content-between">
+                                    <h3 class="semibold-16 mb-3">Blue Huddie Long Sleeve <span class="regular-12 gray_dark_02">(DFWWTI-AW2122-AM-0020)</span></h3>
+                               
+                                </div>
+                           
+
+                                <div class="po-details-view">
+                                    <div class="po-info-colums-view">
+                                        <ul>
+                                            <li>PO: PO/45/KM/2021</li>
+                                            <li>ETD: 25-Aug-2021</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="po-quantity-colums-view">
+                                        <ul>
+                                            <li><span>4</span> colors</li>
+                                            <li><span>6</span> size</li>
+                                        </ul>
+                                        <div class="values d-flex mt-1">
+                                            <div class="total-value">
+                                                <span class="regular-14 gray_dark_02">Total Qty:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                            <div class="total-value ml-2">
+                                                <span class="regular-14 gray_dark_02">Price:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                </div>
+                            </div>
+                            <div class="design-quantity-table mt-2      ">
+                                <div class="text-right">
+                                    <p class="regular-14">Colorwise FOB</p>
+                                </div>
+                                <div class="design-table">
+                                    <div class="category-wise-table color-wise-table">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th> </th>
+                                                    <th><p class="semibold-14">XS</p></th>
+                                                    <th><p class="semibold-14">S</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">L</p></th>
+                                                    <th><p class="semibold-14">Qty</p></th>
+                                                    <th><p class="semibold-14">Price</p></th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                             <span class="color-icon" style="background: rgb(231, 74, 51);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="color-icon" style="background: rgb(41, 84, 141);"></span></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-design d-flex bg-white">
+                            <div class="design-image">
+                                <img src="../../public/images/design5.png" alt="">
+                            </div>
+                            <div class="design-details-info">
+                                <div class="design-title mt-3 d-flex justify-content-between">
+                                    <h3 class="semibold-16 mb-3">Blue Huddie Long Sleeve <span class="regular-12 gray_dark_02">(DFWWTI-AW2122-AM-0020)</span></h3>
+                               
+                                </div>
+                           
+
+                                <div class="po-details-view">
+                                    <div class="po-info-colums-view">
+                                        <ul>
+                                            <li>PO: PO/45/KM/2021</li>
+                                            <li>ETD: 25-Aug-2021</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="po-quantity-colums-view">
+                                        <ul>
+                                            <li><span>4</span> colors</li>
+                                            <li><span>6</span> size</li>
+                                        </ul>
+                                        <div class="values d-flex mt-1">
+                                            <div class="total-value">
+                                                <span class="regular-14 gray_dark_02">Total Qty:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                            <div class="total-value ml-2">
+                                                <span class="regular-14 gray_dark_02">Price:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                </div>
+                            </div>
+                            <div class="design-quantity-table mt-2      ">
+                                <div class="text-right">
+                                    <p class="regular-14">Designwise FOB</p>
+                                </div>
+                                <div class="design-table">
+                                    <div class="category-wise-table design-wise-table">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th> </th>
+                                                    <th><p class="semibold-14">XS</p></th>
+                                                    <th><p class="semibold-14">S</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">L</p></th>
+                                                    <th><p class="semibold-14">Qty</p></th>
+                                                    <th><p class="semibold-14">Price</p></th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                             <span class="color-icon" style="background: rgb(231, 74, 51);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="color-icon" style="background: rgb(41, 84, 141);"></span></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="total-units text-right">
+                                            <span class="regular-14 gray_dark_02">Unit price: <span class="semibold-14 unit-price-total">$00</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="single-design d-flex bg-white">
+                            <div class="design-image">
+                                <img src="../../public/images/design5.png" alt="">
+                            </div>
+                            <div class="design-details-info">
+                                <div class="design-title mt-3 d-flex justify-content-between">
+                                    <h3 class="semibold-16 mb-3">Blue Huddie Long Sleeve <span class="regular-12 gray_dark_02">(DFWWTI-AW2122-AM-0020)</span></h3>
+                               
+                                </div>
+                           
+
+                                <div class="po-details-view">
+                                    <div class="po-info-colums-view">
+                                        <ul>
+                                            <li>PO: PO/45/KM/2021</li>
+                                            <li>ETD: 25-Aug-2021</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="po-quantity-colums-view">
+                                        <ul>
+                                            <li><span>4</span> colors</li>
+                                            <li><span>6</span> size</li>
+                                        </ul>
+                                        <div class="values d-flex mt-1">
+                                            <div class="total-value">
+                                                <span class="regular-14 gray_dark_02">Total Qty:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                            <div class="total-value ml-2">
+                                                <span class="regular-14 gray_dark_02">Price:</span>
+                                                <span class="semibold-14"> $25,320</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                </div>
+                            </div>
+                            <div class="design-quantity-table mt-2      ">
+                                <div class="text-right">
+                                    <p class="regular-14">Sizewise FOB</p>
+                                </div>
+                                <div class="design-table">
+                                    <div class="category-wise-table size-wise-table">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th> </th>
+                                                    <th><p class="semibold-14">XS</p></th>
+                                                    <th><p class="semibold-14">S</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">M</p></th>
+                                                    <th><p class="semibold-14">L</p></th>
+                                                    <th><p class="semibold-14">Qty</p></th>
+                                                    <th><p class="semibold-14">Price</p></th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                             <span class="color-icon" style="background: rgb(231, 74, 51);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="colors-row">
+                                                        <div class="multicolors">
+                                                            <span class="color-icon" style="background: rgb(240, 238, 233);"></span>
+                                                            <span class="color-icon" style="background: rgb(100, 96, 147);"></span>
+                                                        </div>
+                                                     </div>
+                                                    </td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="color-icon" style="background: rgb(41, 84, 141);"></span></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                    <td><p>21</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+                </div>
+                <div class="submit-button text-right">
+                    <button class="button size32 ml-2">Submit</button>
+                </div>
+            </div>
+           
+        </div>
+
+        </div>
+    </div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+
+    <!-- necessary scripts -->
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+</body>
+
+</html>

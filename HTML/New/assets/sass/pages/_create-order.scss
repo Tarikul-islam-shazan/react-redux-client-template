@@ -1,0 +1,930 @@
+.create-order-container {
+    .designs-info-section {
+        .designs-row {
+            .single-design {
+                border: 1px solid $gray_light_01;
+                border-radius: 6px;
+                padding: 8px;
+                margin-bottom: 20px;
+                .design-image {
+                    width: 184px;
+                    height: 236px;
+                    background: $gray_light_03;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+                .po-details-view {
+                    ul {
+                        display: flex;
+                        li {
+                            margin-right: 17px;
+                            position: relative;
+                            font-size: 12px;
+                            line-height: 16px;
+                            color: $gray_dark_01;
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 2px;
+                                height: 8px;
+                                background: $gray_dark_03;
+                                top: 50%;
+                                right: -8px;
+                                transform: translateY(-50%);
+                            }
+                            &:last-child {
+                                &::after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .po-quantity-colums-view {
+                        ul {
+                            li {
+                                font-size: 14px;
+                                color: $gray_dark_02;
+                            }
+                        }
+                    }
+                    .po-quantity-colums-view {
+                        margin-top: 32px;
+                    }
+                }
+                .design-details-info {
+                    margin-left: 16px;
+                    max-width: 500px;
+                    width: 500px;
+                    .po-details {
+                        max-width: 324px;
+                        input {
+                            border-radius: 4px;
+                        }
+                    }
+
+                    .design-title {
+                        .buttons {
+                            visibility: hidden;
+                        }
+                    }
+                }
+                .design-quantity-table {
+                    width: calc(100% - 720px);
+                }
+                &:hover {
+                    .design-details-info {
+                        .design-title {
+                            .buttons {
+                                visibility: visible;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.supplier-design-info-section {
+            margin-top: 16px;
+            .designs-row {
+                .single-design {
+                    position: relative;
+                    padding-right: 24px;
+                    .custom-chekbox {
+                        position: absolute;
+                        padding: 5px 8px;
+                        border-radius: 4px;
+                        background: rgba(255, 255, 255, 0.8);
+                        left: 0;
+                        top: 0;
+                        .form-group {
+                            width: 20px;
+                            height: 26px;
+                            img {
+                                position: relative;
+                                right: 7px;
+                                top: -2px;
+                            }
+                        }
+                    }
+                    .design-image {
+                        width: 116px;
+                        height: 128px;
+                    }
+                    .design-details-info {
+                        width: 400px;
+                        max-width: 400px;
+                        .buttons {
+                            span {
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                        .etd-info {
+                            p {
+                                margin: 0;
+                                span {
+                                    display: inline-block;
+                                    &:first-child {
+                                        width: 85px;
+                                    }
+                                }
+                                &:nth-child(2) {
+                                    span {
+                                        &:nth-child(2) {
+                                            color: $secondary;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .etd-edit {
+                            max-width: 210px;
+                            input {
+                                border-radius: 4px;
+                            }
+                        }
+                    }
+                    .design-quantity-details {
+                        width: 300px;
+                        max-width: 300px;
+                        .po-details-view {
+                            margin-top: 16px;
+                            ul {
+                                li {
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    color: $gray_dark_02;
+                                }
+                            }
+                        }
+                        .selected-buyer {
+                            margin-top: 35px;
+                            a {
+                                font-weight: 600;
+                                text-transform: uppercase;
+                            }
+                            span {
+                                cursor: pointer;
+                                &.red {
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .design-quantity-table {
+                        width: calc(100% - 832px);
+                        position: relative;
+                        .buyer-price-info {
+                            p {
+                                &.buyer-price {
+                                    color: $primary_bright_01;
+                                    padding-right: 12px;
+                                    margin-top: 7px;
+                                    position: relative;
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+                                    &::after {
+                                        content: "";
+                                        position: absolute;
+                                        right: 0;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        width: 2px;
+                                        height: 8px;
+                                        background: $gray_dark_03;
+                                    }
+                                }
+                            }
+                        }
+                        .design-table {
+                            .category-wise-table {
+                                padding-bottom: 0;
+                                position: relative;
+
+                                .buttons {
+                                    position: absolute;
+                                    bottom: 4px;
+                                    right: 0;
+                                    span {
+                                        &:hover {
+                                            text-decoration: underline;
+                                        }
+                                        &.edit-btn {
+                                            visibility: hidden;
+                                        }
+                                    }
+                                }
+                                .size-wise-view,
+                                .color-wise-view {
+                                    width: 52px;
+                                    background: $gray_light_04;
+                                    padding: 3px 0;
+                                    text-align: center;
+                                    border-radius: 4px;
+                                    font-weight: 600;
+                                    color: $secondary;
+                                }
+                            }
+                            .designwise-price {
+                                margin-top: 16px;
+                                input {
+                                    width: 168px;
+                                    border-radius: 4px;
+                                    height: 32px;
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    box-shadow: inset 0 0 0px 1px $secondary !important;
+                                    &::placeholder {
+                                        color: $secondary !important;
+                                        font-weight: 600;
+                                    }
+                                    &:disabled {
+                                        box-shadow: none !important;
+                                        background: $gray_light_03;
+                                    }
+                                    &.border-error {
+                                        box-shadow: inset 0 0 0px 1px #f22b2b !important;
+                                        background: #ffdce5;
+                                    }
+                                }
+                                .design-wise-view {
+                                    background: $gray_light_04;
+                                    color: $secondary;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    font-weight: 600;
+                                    max-width: 168px;
+                                    padding: 6px 12px;
+                                    border-radius: 4px;
+                                    text-align: left;
+                                }
+                            }
+                            table.table {
+                                tr {
+                                    th {
+                                        text-align: center;
+                                        &:last-child {
+                                            .col-heading {
+                                                background: $gray_light_04;
+                                            }
+                                        }
+                                    }
+                                    td {
+                                        input {
+                                            color: $secondary !important;
+                                            font-weight: 600;
+                                            box-shadow: inset 0 0 0px 1px $secondary !important;
+                                            &::placeholder {
+                                                color: $secondary !important;
+                                                font-weight: 600;
+                                            }
+                                            &:disabled {
+                                                box-shadow: none !important;
+                                                background: $gray_light_03;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .quantity-table {
+                            width: auto;
+                            min-width: 400px;
+                            background: #fff;
+                            border: 1px solid #e4e7eb;
+                            border-radius: 4px;
+                            padding: 16px;
+                            position: absolute;
+                            top: -33px;
+                            left: -220px;
+                            margin-top: 24px;
+                            z-index: 1;
+                            .color {
+                                width: 24px;
+                                height: 24px;
+                                border-radius: 100px;
+                                display: inline-block;
+                            }
+                            .quantity-heading {
+                                padding-bottom: 4px;
+                                border-bottom: 1px solid $gray_light_01;
+                                margin-bottom: 12px;
+                            }
+                            p {
+                                font-size: 14px;
+                                color: $gray_dark_02;
+                                padding: 2px 4px;
+                            }
+                            .unit-price {
+                                p {
+                                    span {
+                                        font-weight: 600;
+                                        color: $secondary;
+                                        margin-left: 12px;
+                                    }
+                                }
+                            }
+                            table {
+                                width: 100%;
+                                text-align: center;
+                                tr {
+                                    th {
+                                        padding-bottom: 8px;
+                                        font-weight: 600;
+                                        color: $gray_dark_01;
+                                        font-size: 14px;
+                                        line-height: 24px;
+                                        &:last-child {
+                                            color: $gray_dark_02;
+                                        }
+                                    }
+
+                                    td {
+                                        vertical-align: middle;
+                                        padding: 4px;
+                                        p {
+                                            margin-bottom: 4px;
+                                            cursor: pointer;
+                                            // cursor: url("./icons/edit-2.svg"), auto;
+                                            input {
+                                                height: 28px;
+                                                width: 46px;
+                                                padding: 6px;
+                                                text-align: center;
+                                            }
+                                        }
+                                        &:last-child {
+                                            p {
+                                                font-weight: 600;
+                                                color: $primary;
+                                            }
+                                        }
+                                    }
+                                }
+                                &.sizewise-table {
+                                    tr {
+                                        &:last-child {
+                                            td {
+                                                p {
+                                                    font-weight: 600;
+                                                    color: $secondary;
+                                                    margin: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                &.colorwise-table {
+                                    tr {
+                                        th {
+                                            &:nth-last-child(2) {
+                                                color: $gray_dark_02;
+                                            }
+                                        }
+                                        td {
+                                            &:nth-last-child(2) {
+                                                p {
+                                                    color: $primary;
+                                                    font-weight: 600;
+                                                }
+                                            }
+                                            &:last-child {
+                                                p {
+                                                    color: $secondary;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            button {
+                                float: right;
+                                margin-right: 26px;
+                                margin-top: 14px;
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+                    &:hover {
+                        .design-quantity-table {
+                            .design-table {
+                                .category-wise-table {
+                                    .buttons {
+                                        span {
+                                            &.edit-btn {
+                                                visibility: visible;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .design-table {
+        display: flex;
+        justify-content: end;
+        position: relative;
+        .multiple-color-add-option {
+            display: flex;
+            float: right;
+            .option {
+                button {
+                    &.dropdown-toggle {
+                        position: relative;
+                        left: 32px;
+                        top: 2px;
+                        z-index: 1;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        .dropdown-box {
+            width: 486px;
+            left: 40px;
+            top: 28px;
+            display: block;
+            max-height: 270px;
+        }
+        .category-wise-table {
+            max-width: 660px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 16px;
+            text-align: right;
+            text-align: -webkit-right;
+            text-align: -moz-right;
+            // min-width: 280px;
+            min-height: 160px;
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                background-color: #f5f5f5;
+            }
+            &::-webkit-scrollbar {
+                height: 8px;
+                background-color: #f5f5f5;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                background-color: #f5f5f5;
+            }
+            label {
+                display: none;
+            }
+            .click-box {
+                display: none;
+            }
+            .swatch-file {
+                label {
+                    display: block;
+                }
+            }
+            .add-sizep-category-modal {
+                right: 0;
+                left: unset;
+                top: 0;
+                transform: none;
+                z-index: 1;
+                .click-box {
+                    display: inline-flex;
+                }
+                .fabric-select {
+                    .dropdown-box {
+                        display: none;
+                    }
+                }
+            }
+        }
+        p {
+            margin: 0;
+        }
+        table {
+            &.table {
+                width: auto;
+                border: none !important;
+                box-shadow: none;
+                margin-bottom: 8px;
+
+                tr {
+                    &:active {
+                        box-shadow: none;
+                    }
+                    th,
+                    td {
+                        border: none !important;
+                        background: transparent;
+                        padding: 4px 3px !important;
+                        min-width: 52px;
+                        text-align: center;
+                        p {
+                            color: $gray_dark_02;
+                        }
+                    }
+                    th {
+                        position: relative;
+                        p {
+                            font-size: 14px;
+                            line-height: 24px;
+                            font-weight: 500;
+                            color: $gray_dark_01;
+                        }
+                        .size-popup {
+                            position: absolute;
+                            padding: 12px;
+                            border-radius: 4px;
+                            width: 185px;
+                            right: 3px;
+                            z-index: 1;
+                        }
+                        &:last-child {
+                            .col-heading {
+                                background: $white;
+                            }
+                        }
+                    }
+                    td {
+                        height: auto;
+                        input[type="number"] {
+                            width: 52px;
+                            height: 24px;
+                            text-align: center;
+                            border: none !important;
+                            box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                            border-radius: 4px;
+                            padding: 0;
+                            color: $gray_dark_01;
+                            &.border-error {
+                                box-shadow: inset 0 0 0px 1px $red !important;
+                                background: $red_light_01;
+                                &::placeholder {
+                                    color: $red !important;
+                                }
+                            }
+                            &:hover {
+                                box-shadow: inset 0 0 0px 1px $primary !important;
+                            }
+                            &:focus {
+                                box-shadow: inset 0 0 0px 1px $primary !important;
+                            }
+                        }
+                        &:last-child {
+                            input {
+                                color: $primary !important;
+                                font-weight: 600;
+                                &::placeholder {
+                                    color: $primary !important;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .total-units {
+            padding-left: 24px;
+            input {
+                width: 112px;
+                height: 32px;
+                text-align: center;
+                font-weight: 600;
+                color: $secondary;
+                border-radius: 4px;
+                &::placeholder {
+                    color: $secondary !important;
+                    font-weight: 600;
+                }
+                &.border-error {
+                    box-shadow: inset 0 0 0px 1px $red !important;
+                    background: $red_light_01;
+                    &::placeholder {
+                        color: $red !important;
+                    }
+                }
+            }
+            .error {
+                position: absolute;
+                bottom: -20px;
+                width: 100%;
+                left: 0;
+                text-align: right !important;
+            }
+            .unit-price-total {
+                color: $secondary;
+            }
+        }
+        .sizewise-wise-table {
+            table {
+                &.table {
+                    tr {
+                        &:last-child {
+                            td {
+                                input {
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        color: $secondary !important;
+                                        font-weight: 600;
+                                    }
+                                }
+                                &:last-child {
+                                    input {
+                                        background: $white !important;
+                                        &:hover {
+                                            box-shadow: inset 0 0 0px 1px #452c8e !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        td {
+                            &:last-child {
+                                input {
+                                    background: $gray_light_04 !important;
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .color-wise-table {
+            table {
+                &.table {
+                    tr {
+                        th {
+                            &:nth-last-child(2) {
+                                p {
+                                    color: $gray_dark_02;
+                                }
+                            }
+                            &:last-child {
+                                p {
+                                    color: $gray_dark_02;
+                                }
+                            }
+                        }
+                        td {
+                            &:last-child {
+                                input {
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        color: $secondary !important;
+                                        font-weight: 600;
+                                    }
+                                    &.border-error {
+                                        &::placeholder {
+                                            color: $red !important;
+                                        }
+                                    }
+                                }
+                            }
+                            &:nth-last-child(2) {
+                                input {
+                                    color: $primary !important;
+                                    font-weight: 600;
+                                    background: $gray_light_04 !important;
+                                    &::placeholder {
+                                        color: $primary !important;
+                                        font-weight: 600;
+                                    }
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .design-wise-table {
+            padding-bottom: 40px;
+            table {
+                &.table {
+                    tr {
+                        td {
+                            &:last-child {
+                                input {
+                                    background: $gray_light_04 !important;
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .total-units {
+                position: absolute;
+                right: 0;
+            }
+        }
+
+        .size-color-wise-table {
+            table {
+                &.table {
+                    tr {
+                        th,
+                        td {
+                            p {
+                                display: inline-block;
+                                box-shadow: none !important;
+                                border: 1px solid #c7ced4;
+                            }
+                            input[type="number"] {
+                                width: 48px;
+                            }
+                        }
+                        th {
+                            p {
+                                &:first-child {
+                                    border-top-right-radius: 0;
+                                    border-bottom-right-radius: 0;
+                                    width: 48px;
+                                }
+                                &:nth-child(2) {
+                                    margin-left: -1px;
+                                    border-top-left-radius: 0;
+                                    border-bottom-left-radius: 0;
+                                    width: 52px;
+                                }
+                            }
+                            &:last-child {
+                                p {
+                                    border-radius: 4px;
+                                    width: 100px;
+                                }
+                            }
+                        }
+                        td {
+                            input {
+                                &:first-child {
+                                    border-top-right-radius: 0;
+                                    border-bottom-right-radius: 0;
+                                    width: 48px;
+                                }
+                                &:nth-child(2) {
+                                    margin-left: -1px;
+                                    border-top-left-radius: 0;
+                                    border-bottom-left-radius: 0;
+                                    width: 52px;
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        // color:$secondary !important;
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                input {
+                                    border-radius: 4px;
+                                    width: 100px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .custom-tooltip {
+            .tooltiptext {
+                font-size: 11px;
+                line-height: 16px;
+                width: 68px;
+
+                visibility: hidden;
+            }
+            &:hover {
+                .tooltiptext {
+                    visibility: visible;
+                }
+            }
+            &.color-add {
+                .tooltiptext {
+                    left: 58px;
+                    &::after {
+                        left: 15px;
+                    }
+                }
+            }
+            &.size-add {
+                .tooltiptext {
+                    left: 44px;
+                    &::after {
+                        left: 54px;
+                    }
+                }
+            }
+        }
+        table {
+            &.table {
+                &.multiple-sizes-table {
+                    tr {
+                        th {
+                            .col-heading {
+                                width: 65px;
+                            }
+                        }
+                        td {
+                            input[type="number"] {
+                                width: 65px;
+                            }
+                            .size-wise-view {
+                                width: auto !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .create-order-container {
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    flex-wrap: wrap;
+                    .design-image {
+                        width: 160px;
+                        height: 178px;
+                        aspect-ratio: 9 / 10;
+                    }
+                    .design-details-info {
+                        width: calc(100% - 192px);
+                    }
+                    .design-quantity-table {
+                        width: 100%;
+                        .text-right {
+                            text-align: left !important;
+                        }
+                        .total-units {
+                            right: unset;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+            .design-table {
+                justify-content: flex-start;
+                .category-wise-table {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .create-order-container {
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    .po-details-view {
+                        ul {
+                            flex-wrap: wrap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .create-order-container {
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    .design-title {
+                        margin-top: 0 !important;
+                    }
+                    .po-details-view {
+                        .po-quantity-colums-view {
+                            margin-top: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
