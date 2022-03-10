@@ -2,10 +2,16 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProductionDetailsByDesignNumber} from "../../store/action/Timeline";
 import {useParams} from "react-router-dom";
+import TaskManage from "../../../pages/task/components/TaskManage";
+import Modal from "react-bootstrap/Modal";
+import {changeDateFormat, getShortName} from "../../../services/Util";
+import {Tooltip} from "@material-ui/core";
 
 const AllProductionList = () => {
     const timelineStore = useSelector(store => store.timelineStore);
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
     const [selectedDesign, setSelectedDesign] = useState(null)
+    const [selectedId, setSelectedId] = useState(null)
     const [designList, setDesignList] = useState([])
     const dispatch = useDispatch()
     const params = useParams();
@@ -62,20 +68,33 @@ const AllProductionList = () => {
         }
     }
 
+    const handleTaskManager = (sample) => {
+        setSelectedId(sample.id)
+        setShowTaskDetailsModal(true)
+    }
+
     const renderSamplingStepList = (list) => {
         return list?.map((sample, index) => {
             return (
-                <div className={`single-task ${renderStepClass(sample)}`} key={`sample_index_${index}`}>
+                <div className={`single-task ${renderStepClass(sample)}`} key={`sample_index_${index}`}
+                     onClick={() => handleTaskManager(sample)}>
                     <div className="task-name">
                         <img
                             src={renderStepIcon(sample)}
                             alt="complete"
                         />
-                        <span>{sample.stepName}</span>
+                        <Tooltip
+                            title={sample.stepName}
+                            placement={"top"}
+                            arrow
+                        >
+
+                            <span>{getShortName(sample.stepName, 25)}</span>
+                        </Tooltip>
                     </div>
                     <div className="date-details">
                         <span>
-                            {sample.formattedTaskStatus === "EXPIRED" ? "+" + sample.dateOver : sample.startDate}
+                            {sample.formattedTaskStatus === "EXPIRED" ? "+" + sample.dateOver : changeDateFormat(sample.startDate, "YYYY-MM-DD", "DD-MMM")}
                         </span>
                     </div>
                 </div>
@@ -164,6 +183,19 @@ const AllProductionList = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showTaskDetailsModal}
+                onHide={() => setShowTaskDetailsModal(false)}
+                className="modal-right task-conversation"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <TaskManage
+                    id={selectedId}
+                    orderId={params.orderId}
+                    closeModal={() => setShowTaskDetailsModal(false)}
+                    callback={() => false}
+                />
+            </Modal>
         </div>
     )
 }

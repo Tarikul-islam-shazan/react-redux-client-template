@@ -174,6 +174,7 @@ const routes = {
     downloadInvoice: `${BASE_URL}/invoice/download/`,
     getTimeLineOrderInfo: `${BASE_URL}/timeline/order-info/`,
     getTimeLineStepInfo: `${BASE_URL}/timeline/steps/order/`,
+    getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
 };
 
 // Axios request interceptor

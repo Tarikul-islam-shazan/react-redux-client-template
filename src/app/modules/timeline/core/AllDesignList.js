@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {capitalizeFirstLetter} from "../../../services/Util";
+import {capitalizeFirstLetter, getShortName} from "../../../services/Util";
 import {clearDesignSelection, fetchTimeline, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
 import {useParams} from "react-router-dom";
+import {Tooltip} from "@material-ui/core";
 
 const AllDesignList = ({setLoader}) => {
     const timelineStore = useSelector(store => store.timelineStore)
@@ -18,6 +19,7 @@ const AllDesignList = ({setLoader}) => {
     }
 
     const toggleCheckbox = async (value) => {
+        window.scrollTo(0, 0)
         setLoader(true)
         await dispatch(toggleDesignSelection(value, generateParams()))
         setLoader(false)
@@ -46,7 +48,16 @@ const AllDesignList = ({setLoader}) => {
                         </div>
                         <div className="design-info">
                             <img src={design.image} alt="design"/>
-                            <span>{design.referenceNumber}</span>
+
+                            <Tooltip
+                                title={design.referenceNumber}
+                                placement="top"
+                                arrow
+                            >
+                                <span>
+                                    {getShortName(design.referenceNumber, 15)}
+                                </span>
+                            </Tooltip>
                         </div>
                     </div>
                     <div className="design-status">
@@ -63,6 +74,7 @@ const AllDesignList = ({setLoader}) => {
     }
 
     const clearSelection = async (e) => {
+        window.scrollTo(0, 0)
         setLoader(true)
         if (e.target.checked === false) {
             await dispatch(clearDesignSelection(generateParams()))

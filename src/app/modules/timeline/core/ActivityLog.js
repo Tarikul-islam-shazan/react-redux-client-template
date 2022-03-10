@@ -6,10 +6,12 @@ import {useParams} from "react-router-dom";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
+import MoreDesign from "./MoreDesign";
 
 const ActivityLog = ({activity, setLoader}) => {
 
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
+    const [showImageModal, setShowImageModal] = useState(false)
     const [isReplying, setIsReplying] = useState(false)
     const [commentList, setCommentList] = useState([])
     const [selectedFiles, setSelectedFiles] = useState([])
@@ -58,6 +60,10 @@ const ActivityLog = ({activity, setLoader}) => {
         return (<p className="regular-12">{string}</p>)
     }
 
+    const toggleImageModal = () => {
+        setShowImageModal(!showImageModal)
+    }
+
     const renderTimeLineImages = () => {
         let {timelineImages} = activity
         return <div className="body-style-images-row">
@@ -66,7 +72,7 @@ const ActivityLog = ({activity, setLoader}) => {
             </div>}
             {timelineImages[1] && <div className="single-one">
                 <img src={timelineImages[1]} alt=""/>
-                {timelineImages?.length > 2 && <div className="more-style-count">
+                {timelineImages?.length > 2 && <div className="more-style-count" onClick={toggleImageModal}>
                     <div className="count-number">{timelineImages?.length - 2}+</div>
                 </div>}
             </div>}
@@ -253,6 +259,12 @@ const ActivityLog = ({activity, setLoader}) => {
                 callback={() => false}
             />
         </Modal>
+        {showImageModal && <MoreDesign
+            toggleModal={toggleImageModal}
+            openModal={showImageModal}
+            setLoader={setLoader}
+            imageList={activity?.timelineImages}
+        />}
     </div>)
 }
 
