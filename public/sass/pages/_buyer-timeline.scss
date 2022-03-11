@@ -18,13 +18,13 @@ ul {
     }
     .timeline-row {
         width: 100%;
-        max-width: 1108px;
+        max-width: 100%;
         margin: 0 auto;
         display: flex;
         .one-third {
             &.all-designs-destails {
                 width: 100%;
-                max-width: 300px;
+                max-width: 20%;
                 position: sticky;
                 top: 100px;
                 height: calc(100vh - 100px);
@@ -185,7 +185,7 @@ ul {
             }
             &.activity-logs {
                 width: 100%;
-                max-width: 460px;
+                max-width: calc(60% - 60px);
                 margin: 0 24px;
                 padding-bottom: 24px;
                 z-index: 0;
@@ -263,12 +263,18 @@ ul {
                     }
                 }
             }
+
             &.all-production-details {
-                width: 300px;
-                max-width: 300px;
+                width: 100%;
+                max-width: 100%;
                 position: sticky;
                 top: 100px;
                 height: calc(100vh - 100px);
+            }
+        }
+        .tab-none {
+            &.one-third {
+                width: 20%;
             }
         }
     }
