@@ -26,21 +26,20 @@ const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
         };
     }, [])
 
-    const generateParams = (page) => {
-        if(timelineStore.selectedDesignList?.length > 0){
-            return `${params.orderId}?page=${page}&size=6&productIds=${timelineStore.selectedDesignList?.join(",")}`
-        }else{
-            return `${params.orderId}?page=${page}&size=6`
-        }
-    }
-
 
     const handleScroll = () => {
         if (isPageReachBottom()) {
-            let {totalElements, totalPages, currentPage, data} = myStateRef.current;
+            console.log("==========", myStateRef.current)
+            let {totalElements, totalPages, currentPage, selectedDesignList} = myStateRef.current;
             if (totalElements > 0 && (totalPages > currentPage)) {
+                let paramString;
+                if (selectedDesignList?.length > 0) {
+                    paramString = `${params.orderId}?page=${currentPage + 1}&size=6&productIds=${selectedDesignList?.join(",")}`
+                } else {
+                    paramString = `${params.orderId}?page=${currentPage + 1}&size=6`
+                }
                 setLoader(true);
-                dispatch(fetchTimeline(generateParams(currentPage + 1), true)).finally(() => setLoader(false))
+                dispatch(fetchTimeline(paramString, true)).finally(() => setLoader(false))
             }
         }
     };

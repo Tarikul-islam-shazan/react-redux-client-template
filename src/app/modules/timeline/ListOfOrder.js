@@ -1,6 +1,8 @@
 import React from "react";
 import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
 import {useHistory} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {toastWarning} from "../../commonComponents/Toast";
 
 const ListOfOrder = ({orderStore}) => {
     const history = useHistory();
@@ -27,13 +29,18 @@ const ListOfOrder = ({orderStore}) => {
     }
 
     const handleRoute = (id) => {
-        history.push(`timeline/${id}`)
+        if (orderStore.activeTab === "PENDING") {
+            toastWarning("The order is under review. Please wait till it gets to running");
+        } else {
+            history.push(`/timeline/${id}`)
+        }
     }
 
     const renderOrderList = () => {
         return orderStore?.orderResponse?.data?.map((item, index) => {
             return (
-                <div className="single-order-card" key={`order_response_${index}`} onClick={() => handleRoute(item.orderId)}>
+                <div className="single-order-card" key={`order_response_${index}`}
+                     onClick={() => handleRoute(item.orderId)}>
                     <div className="design-images">
                         {renderOrderImage(item.orderProductList[0]?.image)}
                         {renderOrderImage(item.orderProductList[1]?.image)}

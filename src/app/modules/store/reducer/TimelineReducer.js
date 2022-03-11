@@ -4,6 +4,8 @@ const initialState = {};
 
 const TimelineReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ActionTypes.FETCH_STEP_INFO:
+            return {...state, stepList: action.payload};
         case ActionTypes.TOGGLE_DESIGN_SELECTION:
             let designList = [...state.selectedDesignList];
             let designObj = designList.find(item => item === action.payload);
@@ -39,14 +41,16 @@ const TimelineReducer = (state = initialState, action) => {
                 return {
                     ...payload.response,
                     orderInfo: state.orderInfo,
-                    selectedDesignList: state.selectedDesignList
+                    selectedDesignList: state.selectedDesignList,
+                    stepList: state.stepList
                 }
             } else {
                 return {
                     ...payload.response,
                     data: [...state.data, ...payload.response.data],
                     orderInfo: state.orderInfo,
-                    selectedDesignList: state.selectedDesignList
+                    selectedDesignList: state.selectedDesignList,
+                    stepList: state.stepList
                 }
             }
         default:

@@ -6,41 +6,74 @@ import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
+import LoaderComponent from "../../../commonComponents/Loader";
 
-const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
-    const [selectedTask, setSelectedTask] = useState("")
-    const [selectedDesign, setSelectedDesign] = useState("")
+const AddComment = ({toggleAddComment, openModal, activity}) => {
+    const [selectedTask, setSelectedTask] = useState(null)
+    const [loader, setLoader] = useState(false)
+    const [selectedDesign, setSelectedDesign] = useState(null)
     const [error, setError] = useState({})
     const [message, setMessage] = useState("")
     const [selectedFiles, setSelectedFiles] = useState([])
     const [memberList, setMemberList] = useState([])
     const params = useParams()
     const timelineStore = useSelector(store => store.timelineStore)
+    const [designList, setDesignList] = useState([])
+    const [taskList, setTaskList] = useState([])
+    const [taskListHistory, setTaskListHistory] = useState([])
+
+    useEffect(() => {
+        if (selectedDesign !== null) {
+            setLoader(true)
+            Http.GET('getDesignWiseTaskList', `${params.orderId}/${selectedDesign.id}`)
+                .then(response => {
+                    setTaskList(response.data)
+                    setTaskListHistory(response.data)
+                    setLoader(false)
+                }).catch(error => {
+                setLoader(false)
+            })
+        }
+    }, [selectedDesign])
 
     useEffect(() => {
         if (timelineStore?.memberList) {
             setMemberList(timelineStore.memberList.memberList)
         }
+        if (timelineStore?.orderInfo?.orderProductList) {
+            let productList = timelineStore?.orderInfo?.orderProductList;
+            let tmpDesignList = []
+            productList.map((design) => {
+                tmpDesignList.push(design)
+            })
+            setDesignList(tmpDesignList)
+        }
     }, [timelineStore])
 
     const renderTaskList = () => {
-        return (
-            <li
-                onClick={() => setSelectedTask("Arrange materials for sampling")}
-            >
-                <span>Arrange materials for sampling</span>
-            </li>
-        )
+        return taskList?.map((task, index) => {
+            return (
+                <li
+                    key={`task_${index}`}
+                    onClick={() => setSelectedTask(task)}
+                >
+                    <span>{task.stepName}</span>
+                </li>
+            )
+        })
     }
 
     const renderDesignList = () => {
-        return (
-            <li onClick={() => setSelectedDesign("NTX/A22/0001")}>
-                <img src="/images/design5.png" alt="img"/>
-                <span>NTX/A22/0001</span>
-            </li>
-        )
+        return designList?.map((design, index) => {
+            return (
+                <li key={`add_comment_design_${index}`} onClick={() => setSelectedDesign(design)}>
+                    <img src={design.image} alt="img"/>
+                    <span>{design.referenceNumber}</span>
+                </li>
+            )
+        })
     }
+
 
     const checkValidation = () => {
         let errors = {}
@@ -49,6 +82,9 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
         }
         if (!selectedDesign) {
             errors["designError"] = "Required!"
+        }
+        if (!message && selectedFiles.length === 0) {
+            errors["commentError"] = "Message or attachment required"
         }
         setError(errors)
         return Object.keys(errors).length > 0;
@@ -59,11 +95,12 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
             setLoader(true)
             let body = {
                 documentDTOList: selectedFiles,
-                orderId: params.orderId,
+                orderId: parseInt(params.orderId),
+                stepId: selectedTask.id,
                 text: message.replace(/"/g, "'"),
                 taggedUserIdList: [],
             };
-            await Http.POST('commentOnTask', body)
+            await Http.POST('postOnTask', body)
                 .then(({data}) => {
                     setLoader(false)
                     toggleAddComment()
@@ -117,6 +154,14 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
         </div>)
     }
 
+    const handleTaskSearch = (e) => {
+        let tmpArray = taskListHistory;
+        if (tmpArray?.length > 0) {
+            tmpArray = tmpArray.filter(task => task.stepName.toLowerCase().indexOf(e.target.value) > -1)
+        }
+        setTaskList(tmpArray)
+    }
+
     return (
         <Modal
             show={openModal}
@@ -124,60 +169,63 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
             onHide={toggleAddComment}
             centered
         >
-            <div className="popup-wrapper">
-                <div className="common-popup">
-                    <div className="common-popup-body">
-                        <div className="top-write-comments">
-                            <div className="comments-header justify-content-between">
-                                <div className="header-contents d-flex align-items-end">
-                                    <div className="profile-image">
-                                        <img
-                                            src={addImageSuffix(authUserInfo().profilePicDocument.docUrl, "_xicon")}
-                                            alt="profile"
-                                        />
-                                    </div>
-                                    <div className="design-select">
-                                        <p className="comments-hint gray_dark_02 mr-2">Comments on:</p>
-                                        <div className="dropdown">
-                                            <button className="btn dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                {selectedDesign || "Select Design"}
-                                            </button>
-                                            <div className="dropdown-menu shadow-2dp"
-                                                 aria-labelledby="dropdownMenuButton">
-                                                <ul className="select-design-list">
-                                                    {renderDesignList()}
-                                                </ul>
+            <Modal.Body>
+                <LoaderComponent loading={loader}>
+                    <div className="popup-wrapper">
+                        <div className="common-popup">
+                            <div className="common-popup-body">
+                                <div className="top-write-comments">
+                                    <div className="comments-header justify-content-between">
+                                        <div className="header-contents d-flex align-items-end">
+                                            <div className="profile-image">
+                                                <img
+                                                    src={addImageSuffix(authUserInfo().profilePicDocument.docUrl, "_xicon")}
+                                                    alt="profile"
+                                                />
                                             </div>
-                                            {error.designError && <p className="error">{error.designError}</p>}
+                                            <div className="design-select">
+                                                <p className="comments-hint gray_dark_02 mr-2">Comments on:</p>
+                                                <div className="dropdown">
+                                                    <button className="btn dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        {selectedDesign?.referenceNumber || "Select Design"}
+                                                    </button>
+                                                    <div className="dropdown-menu shadow-2dp"
+                                                         aria-labelledby="dropdownMenuButton">
+                                                        <ul className="select-design-list">
+                                                            {renderDesignList()}
+                                                        </ul>
+                                                    </div>
+                                                    {error.designError && <p className="error">{error.designError}</p>}
+                                                </div>
+                                            </div>
+                                            <div className="tast-select">
+                                                <div className="dropdown">
+                                                    <button className="btn dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        {selectedTask?.stepName || "Task"}
+                                                    </button>
+                                                    <div className="dropdown-menu shadow-2dp"
+                                                         aria-labelledby="dropdownMenuButton">
+                                                        <input type="text" onChange={handleTaskSearch}/>
+                                                        <ul className="select-task-list">
+                                                            {renderTaskList()}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                {error.taskError && <p className="error">{error.taskError}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="close-icon" onClick={toggleAddComment}>
+                                            <img src="/icons/close.svg" alt="close"/>
                                         </div>
                                     </div>
-                                    <div className="tast-select">
-                                        <div className="dropdown">
-                                            <button className="btn dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                {selectedTask || "Task"}
-                                            </button>
-                                            <div className="dropdown-menu shadow-2dp"
-                                                 aria-labelledby="dropdownMenuButton">
-                                                <ul className="select-task-list">
-                                                    {renderTaskList()}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        {error.taskError && <p className="error">{error.taskError}</p>}
-                                    </div>
-                                </div>
-                                <div className="close-icon" onClick={toggleAddComment}>
-                                    <img src="/icons/close.svg" alt="close"/>
-                                </div>
-                            </div>
-                            <div className="comments-body">
-                                <div className="comment-text clicked">
+                                    <div className="comments-body">
+                                        <div className="comment-text clicked">
                                     <textarea
                                         name
                                         id
@@ -186,28 +234,31 @@ const AddComment = ({toggleAddComment, openModal, setLoader, activity}) => {
                                         defaultValue={""}
                                         onChange={(e) => setMessage(e.target.value)}
                                     />
-                                    {renderFilePreview()}
-                                </div>
-                                <div className="post-actions d-flex justify-content-end">
-                                    <div className="attachment cursor-pointer mr-2">
-                                        <label htmlFor="upload-input-file">
-                                            <img src="/icons/attachment.svg" alt="attach"/>
-                                        </label>
-                                        <input
-                                            id="upload-input-file"
-                                            type="file"
-                                            name="selectedFiles"
-                                            onChange={(e) => onMultipleFileSelect(e, "ACCESSORIES_DESIGN")}
-                                            multiple
-                                        />
+                                            {error.commentError && <p className="error">{error.commentError}</p>}
+                                            {renderFilePreview()}
+                                        </div>
+                                        <div className="post-actions d-flex justify-content-end">
+                                            <div className="attachment cursor-pointer mr-2">
+                                                <label htmlFor="upload-input-file">
+                                                    <img src="/icons/attachment.svg" alt="attach"/>
+                                                </label>
+                                                <input
+                                                    id="upload-input-file"
+                                                    type="file"
+                                                    name="selectedFiles"
+                                                    onChange={(e) => onMultipleFileSelect(e, "ACCESSORIES_DESIGN")}
+                                                    multiple
+                                                />
+                                            </div>
+                                            <button className="post-btn" onClick={handlePost}>Post</button>
+                                        </div>
                                     </div>
-                                    <button className="post-btn" onClick={handlePost}>Post</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </LoaderComponent>
+            </Modal.Body>
         </Modal>
     )
 }

@@ -166,7 +166,7 @@ class Root extends Component {
                     {/*<PublicRoute exact path="/v2/quotes/list" component={ MyRFQsV2 }/>*/}
                     <PublicRoute exact path="/negotiation/:id" component={RfoNegotiation} />
 
-                    <PublicRoute exact path="/orders/my-orders" component={MyOrder} />
+                    {/*<PublicRoute exact path="/orders/my-orders" component={MyOrder} />*/}
 
                     <PublicRoute exact path="/orders/view/:id" component={MyProjectDetailsV2} />
 
@@ -184,7 +184,7 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/list" component={InvoiceList} />
                     <PublicRoute exact path="/invoices/view/:id" component={InvoiceDetails} />
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
-                    <PublicRoute exact path="/orders" component={MyOrderList} />
+                    <PublicRoute exact path="/orders/my-orders" component={MyOrderList} />
                     <PublicRoute exact path="/timeline/:orderId" component={Timeline} />
                 </Switch>
             </Router>
