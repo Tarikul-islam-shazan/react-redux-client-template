@@ -102,11 +102,21 @@ const PODetails = () => {
         )
     }
 
+    const uniqueStyleName = (order) => {
+        switch (order.buyerQuotationType) {
+            case "DESIGNWISE":
+                return "design-wise"
+            case "COLORWISE":
+                return "color-wise"
+            default:
+                return "size-wise"
+        }
+    }
 
     const renderOrderList = () => {
         return orderList?.map((order, index) => {
             return (
-                <div className="single-design d-flex bg-white" key={`po_order_${index}`}>
+                <div className={`single-design d-flex bg-white ${uniqueStyleName(order)}`} key={`po_order_${index}`}>
                     <div className="design-image">
                         <img src={order?.documentResponseList[0]?.docUrl} alt=""/>
                     </div>

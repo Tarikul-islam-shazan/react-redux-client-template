@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {capitalizeFirstLetter, getShortName} from "../../../services/Util";
-import {clearDesignSelection, fetchTimeline, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
+import {clearDesignSelection, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
 import {useParams} from "react-router-dom";
 import {Tooltip} from "@material-ui/core";
 
@@ -99,7 +99,7 @@ const AllDesignList = ({setLoader}) => {
                             id="all"
                             name
                             checked={timelineStore?.orderInfo?.orderProductList?.length === timelineStore?.selectedDesignList?.length}
-                            onChange={clearSelection}
+                            onClick={clearSelection}
                         />
                         <label
                             htmlFor="all"><span>ALL DESIGN ({timelineStore?.selectedDesignList?.length})</span></label>
