@@ -29,7 +29,6 @@ const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
 
     const handleScroll = () => {
         if (isPageReachBottom()) {
-            console.log("==========", myStateRef.current)
             let {totalElements, totalPages, currentPage, selectedDesignList} = myStateRef.current;
             if (totalElements > 0 && (totalPages > currentPage)) {
                 let paramString;

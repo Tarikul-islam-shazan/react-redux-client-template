@@ -97,7 +97,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                 text: message.replace(/"/g, "'"),
                 taggedUserIdList: [],
             };
-            await Http.POST("postOnTask", body)
+            await Http.POST("postOnTask", body, "?fromTimeline=true")
                 .then(({ data }) => {
                     setLoader(false);
                     toggleAddComment();
@@ -245,7 +245,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                                                 placeholder="Search task"
                                                             />
                                                         </div>
-                                                        <ul className="select-task-list">
+                                                        <ul className="select-task-list scroll-y-label">
                                                             {renderTaskList()}
                                                         </ul>
                                                     </div>

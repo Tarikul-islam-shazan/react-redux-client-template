@@ -167,7 +167,7 @@ export default class PostWithComments extends Component {
       text: comment.replace(/"/g,"'"),
       taggedUserIdList: this.getMentionedUserIds(),
     };
-    await Http.POST('commentOnTask', body)
+    await Http.POST('commentOnTask', body, "?fromTimeline=false")
       .then(({data}) => {
         this.props.toggleLoader(false);
         if (data.success) {

@@ -164,7 +164,7 @@ const ActivityLog = ({ activity, setLoader }) => {
             text: message.replace(/"/g, "'"),
             taggedUserIdList: [],
         };
-        await Http.POST("commentOnTask", body)
+        await Http.POST("commentOnTask", body, "?fromTimeline=true")
             .then(({ data }) => {
                 let tempCommentList = [...commentList];
                 tempCommentList.push(message);
