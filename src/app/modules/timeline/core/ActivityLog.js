@@ -7,15 +7,25 @@ import { SelectedFileViewComponent } from "../../../pages/task/components/TaskMa
 import Http from "../../../services/Http";
 import { toastError, toastSuccess } from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
+import {useSelector} from "react-redux";
 
 const ActivityLog = ({ activity, setLoader }) => {
+    const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
     const [isReplying, setIsReplying] = useState(false);
     const [commentList, setCommentList] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [message, setMessage] = useState("");
+    const [memberList, setMemberList] = useState([]);
+
     const params = useParams();
+
+    useEffect(() => {
+        if (timelineStore?.memberList) {
+            setMemberList(timelineStore.memberList.memberList);
+        }
+    }, [timelineStore]);
 
     useEffect(() => {
         if (activity.body?.entityIdTypeMapList) {
@@ -267,7 +277,7 @@ const ActivityLog = ({ activity, setLoader }) => {
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
                 <div className="design-image">
-                    <img src="/images/design2.png" alt="design image" />
+                    <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image" />
                 </div>
             </div>
             {renderActivityBody()}
