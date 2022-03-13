@@ -48,7 +48,7 @@ const Timeline = () => {
                     <div className="timeline-row">
                         <TimelinePoDetails setLoader={setLoader}/>
                         <TimelineActivityLog toggleAddComment={toggleAddComment} setLoader={setLoader}/>
-                        <TimelineProductionDetails/>
+                        <TimelineProductionDetails setLoader={setLoader}/>
                     </div>
                     <div className="modal modal-left fade " id="all-designs" tabIndex={-1} role="dialog"
                          aria-labelledby="right_modal">
