@@ -1,11 +1,11 @@
 import React from "react";
 import AllProductionList from "./AllProductionList";
 
-const TimelineProductionDetails = () => {
+const TimelineProductionDetails = ({setLoader}) => {
     return (
         <>
             <div className="tab-none">
-                <AllProductionList/>
+                <AllProductionList setLoader={setLoader}/>
             </div>
         </>
     )

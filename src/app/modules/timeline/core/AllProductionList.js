@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import {changeDateFormat, getShortName} from "../../../services/Util";
 import {Tooltip} from "@material-ui/core";
 
-const AllProductionList = () => {
+const AllProductionList = ({setLoader}) => {
     const timelineStore = useSelector(store => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
     const [selectedDesign, setSelectedDesign] = useState(null)
@@ -39,7 +39,11 @@ const AllProductionList = () => {
     const renderDesignList = () => {
         return designList?.map((design, index) => {
             return (
-                <li key={`po_design_${index}`} onClick={() => setSelectedDesign(design)}>
+                <li key={`po_design_${index}`} onClick={() => {
+                    setLoader(true)
+                    setSelectedDesign(design)
+                    setLoader(false)
+                }}>
                     <img src={design.image} alt="img"/>
                     <span>{design.referenceNumber}</span>
                 </li>
