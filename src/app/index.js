@@ -40,6 +40,7 @@ import NotificationAll from "./pages/notification/NotificationAll";
 import VerifyEmail from "./buyerLogin/VerifyEmail";
 import MyOrderList from "./modules/timeline/MyOrderList";
 import Timeline from "./modules/timeline/Timeline";
+import PODetails from "./modules/timeline/PODetails";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -186,6 +187,7 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
                     <PublicRoute exact path="/orders/my-orders" component={MyOrderList} />
                     <PublicRoute exact path="/timeline/:orderId" component={Timeline} />
+                    <PublicRoute exact path="/purchaseDetails/:orderId" component={PODetails} />
                 </Switch>
             </Router>
         );
