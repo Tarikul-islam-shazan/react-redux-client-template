@@ -248,7 +248,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                                 placeholder="Search task"
                                                             />
                                                         </div>
-                                                        <ul className="select-task-list">
+                                                        <ul className="select-task-list scroll-y-label">
                                                             {renderTaskList()}
                                                         </ul>
                                                     </div>

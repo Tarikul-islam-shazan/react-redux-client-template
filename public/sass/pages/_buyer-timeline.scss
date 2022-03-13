@@ -8,6 +8,10 @@ ul {
 }
 .buyer-timeline-container {
     height: calc(100vh - 160px);
+    .regular-12 {
+        font-size: 14px;
+        line-height: 20px;
+    }
     .common-blocks {
         padding: 16px;
         border: 1px solid $gray_light_02;
@@ -29,6 +33,7 @@ ul {
                 top: 100px;
                 height: calc(100vh - 100px);
                 z-index: 1;
+
                 .assign-member {
                     max-width: 300px;
                     left: -58px;
@@ -59,6 +64,17 @@ ul {
                 }
                 .design-info-with-po {
                     .design-title-with-date {
+                        .order-number {
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 20px;
+                        }
+                        .etd-status {
+                            margin-left: 8px;
+                            img {
+                                margin-left: 4px;
+                            }
+                        }
                         p {
                             span {
                                 display: inline-block;
@@ -110,8 +126,9 @@ ul {
                         display: flex;
                         align-items: center;
                         .progress {
-                            width: 90%;
+                            width: calc(100% - 32px);
                             margin-right: 4px;
+                            margin-left: 0;
                             height: 8px;
                             border-radius: 0;
                             background: $gray_light_01;
@@ -185,7 +202,7 @@ ul {
             }
             &.activity-logs {
                 width: 100%;
-                max-width: calc(60% - 60px);
+                max-width: calc(60% - 48px);
                 margin: 0 24px;
                 padding-bottom: 24px;
                 z-index: 0;
@@ -211,6 +228,7 @@ ul {
                                 height: 32px;
                                 border-radius: 100px;
                                 margin-right: 8px;
+                                object-fit: cover;
                             }
                         }
                     }
@@ -452,6 +470,8 @@ ul {
             .select-task-list {
                 width: 250px;
                 padding: 8px;
+                height: 225px;
+                overflow-y: auto;
             }
 
             ul {
@@ -602,6 +622,8 @@ ul {
                     width: 24px;
                     height: 24px;
                     border-radius: 100px;
+                    object-fit: cover;
+                    margin-top: -4px;
                 }
             }
             .activity-content {
@@ -701,6 +723,7 @@ ul {
             border: 1px solid $white;
             margin-left: -15px;
             border-radius: 100px;
+            object-fit: cover;
             &:first-child {
                 margin-left: 0;
             }
@@ -757,8 +780,8 @@ ul {
                 border: none;
                 border-bottom: 1px solid $gray_light_02;
                 button {
-                    font-size: 12px;
-                    line-height: 16px;
+                    font-size: 14px;
+                    line-height: 20px;
                     color: $gray_dark_02;
                     padding: 7px 12px;
                     width: 100%;
@@ -834,15 +857,50 @@ ul {
 
 @media only screen and (max-width: 1440px) {
     .buyer-timeline-container {
+        .regular-12 {
+            font-size: 12px;
+            line-height: 16px;
+        }
         .timeline-row {
             .one-third {
+                &.all-designs-destails {
+                    width: 25%;
+                    max-width: 25%;
+                    top: 76px;
+                }
                 &.activity-logs {
+                    max-width: calc(50% - 48px);
                     .activity-list {
-                        margin-top: 24px;
+                        margin-top: 0;
                     }
                     .top-write-comments {
                         top: 34px;
                     }
+                }
+                &.tab-none {
+                    width: 25%;
+                }
+                &.all-production-details {
+                    top: 76px;
+                    .production-accordion {
+                        .card {
+                            .card-header {
+                                button {
+                                    font-size: 12px;
+                                    line-height: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .activity-list {
+        .single-activity {
+            .activity-common-header {
+                .activity-icon {
+                    margin-top: -4px;
                 }
             }
         }
@@ -854,7 +912,7 @@ ul {
         .timeline-row {
             flex-wrap: wrap;
             width: 100%;
-            max-width: 460px;
+            max-width: 100%;
             .one-third {
                 &.all-designs-destails {
                     width: 100%;
@@ -867,6 +925,8 @@ ul {
                 }
                 &.activity-logs {
                     margin: 0;
+                    width: 100%;
+                    max-width: 100%;
                     .top-write-comments {
                         position: unset;
                         margin: 0;
@@ -882,6 +942,17 @@ ul {
             }
             .tab-none {
                 display: none;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 767px) {
+    .buyer-timeline-container {
+        .timeline-row {
+            .one-third {
+                &.all-designs-destails {
+                    margin-top: 36px;
+                }
             }
         }
     }

@@ -39,7 +39,7 @@ const TimelinePoDetails = ({setLoader}) => {
             <div className="design-info-with-po common-blocks">
                 <div className="design-title-with-date">
                     <span>
-                        <span>{orderInfo?.orderRefNumber}</span>
+                        <span className="order-number">{orderInfo?.orderRefNumber}</span>
                         <span className="etd-status">
                             <span className="regular-12 gray_dark_02">
                                 {changeDateFormat(
