@@ -71,3 +71,14 @@ export const fetchProductionDetailsByDesignNumber = (orderNumber, designNumber) 
         dispatch(storeDesignWiseStepList(response.data));
     });
 }
+
+export const storeAddNewComment = (data) => {
+    return {
+        type: ActionTypes.ADD_NEW_COMMENT,
+        payload: data
+    }
+}
+
+export const addNewCommentOnTimeline = (data) => async (dispatch) => {
+    await dispatch(storeAddNewComment(data))
+}

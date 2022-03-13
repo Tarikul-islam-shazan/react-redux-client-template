@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import { addImageSuffix, authUserInfo } from "../../../services/Util";
-import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import {addImageSuffix, authUserInfo} from "../../../services/Util";
+import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import { toastError, toastSuccess } from "../../../commonComponents/Toast";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {toastError, toastSuccess} from "../../../commonComponents/Toast";
+import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import LoaderComponent from "../../../commonComponents/Loader";
+import {addNewCommentOnTimeline} from "../../store/action/Timeline";
 
-const AddComment = ({ toggleAddComment, openModal, activity }) => {
+const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [loader, setLoader] = useState(false);
     const [selectedDesign, setSelectedDesign] = useState(null);
@@ -21,6 +22,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
     const [designList, setDesignList] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (selectedDesign !== null) {
@@ -65,7 +67,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
         return designList?.map((design, index) => {
             return (
                 <li key={`add_comment_design_${index}`} onClick={() => setSelectedDesign(design)}>
-                    <img src={design.image} alt="img" />
+                    <img src={design.image} alt="img"/>
                     <span>{design.referenceNumber}</span>
                 </li>
             );
@@ -97,13 +99,14 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                 text: message.replace(/"/g, "'"),
                 taggedUserIdList: [],
             };
-            await Http.POST("postOnTask", body,"?fromTimeline=true")
-                .then(({ data }) => {
+            await Http.POST("postOnTask", body, "?fromTimeline=true")
+                .then(response => {
+                    dispatch(addNewCommentOnTimeline(response.data.payload))
                     setLoader(false);
                     toggleAddComment();
                     toastSuccess("Comment Add Successful!");
                 })
-                .catch(({ response }) => {
+                .catch(({response}) => {
                     setLoader(false);
                     toastError(response.data.message);
                 });
@@ -256,7 +259,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                             </div>
                                         </div>
                                         <div className="close-icon" onClick={toggleAddComment}>
-                                            <img src="/icons/close.svg" alt="close" />
+                                            <img src="/icons/close.svg" alt="close"/>
                                         </div>
                                     </div>
                                     <div className="comments-body">
@@ -277,7 +280,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                         <div className="post-actions d-flex justify-content-end">
                                             <div className="attachment cursor-pointer mr-2">
                                                 <label htmlFor="upload-input-file">
-                                                    <img src="/icons/attachment.svg" alt="attach" />
+                                                    <img src="/icons/attachment.svg" alt="attach"/>
                                                 </label>
                                                 <input
                                                     id="upload-input-file"
