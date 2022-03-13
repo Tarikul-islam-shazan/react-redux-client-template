@@ -4,11 +4,11 @@ import AllProductionList from "./AllProductionList";
 const TimelineProductionDetails = ({setLoader}) => {
     return (
         <>
-            <div className="tab-none">
+            <div className="tab-none one-third">
                 <AllProductionList setLoader={setLoader}/>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default TimelineProductionDetails
+export default TimelineProductionDetails;

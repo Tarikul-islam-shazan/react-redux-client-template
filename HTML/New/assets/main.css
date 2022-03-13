@@ -1037,66 +1037,71 @@ h4.details-title {
 .custom-scrollbar-x::-webkit-scrollbar-thumb {
   background-color: #8b8a8e; }
 
+.color-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 100px;
+  display: inline-block; }
+
+.colors-row .dropdown-menu {
+  min-width: 105px;
+  transform: translate3d(45px, -70px, 0px) !important; }
+  .colors-row .dropdown-menu::before {
+    display: none; }
+.colors-row .multicolors {
+  margin-top: 6px;
+  display: flex; }
+  .colors-row .multicolors span {
+    margin-left: -20px;
+    border: 1px solid #f4f5f7; }
+    .colors-row .multicolors span:first-child {
+      margin-left: 0; }
+    .colors-row .multicolors span:last-child {
+      border: none; }
+      .colors-row .multicolors span:last-child img {
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        background: #ffffff;
+        border-radius: 100px;
+        padding: 3px;
+        visibility: hidden;
+        position: relative;
+        top: -10px;
+        left: -10px;
+        cursor: pointer; }
+  .colors-row .multicolors:hover span:last-child {
+    visibility: visible; }
+    .colors-row .multicolors:hover span:last-child img {
+      visibility: visible; }
+.colors-row .solid-colors {
+  margin-top: 6px; }
+  .colors-row .solid-colors .sinlge-group {
+    position: relative;
+    margin-left: 4px; }
+    .colors-row .solid-colors .sinlge-group:first-child {
+      margin-left: 0; }
+    .colors-row .solid-colors .sinlge-group span:nth-child(2) {
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      background: #ffffff;
+      border-radius: 100px;
+      display: inline-block;
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      visibility: hidden; }
+      .colors-row .solid-colors .sinlge-group span:nth-child(2) img {
+        width: 20px;
+        margin-top: -2px;
+        cursor: pointer; }
+    .colors-row .solid-colors .sinlge-group:hover span:nth-child(2) {
+      visibility: visible; }
+
 @font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-Light.woff2") format("woff2"), url("./fonts/OpenSans-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-Regular.woff2") format("woff2"), url("./fonts/OpenSans-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-LightItalic.woff2") format("woff2"), url("./fonts/OpenSans-LightItalic.woff") format("woff");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-Bold.woff2") format("woff2"), url("./fonts/OpenSans-Bold.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-SemiBold.woff2") format("woff2"), url("./fonts/OpenSans-SemiBold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-SemiBoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-SemiBoldItalic.woff") format("woff");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-ExtraBoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-ExtraBoldItalic.woff") format("woff");
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-BoldItalic.woff2") format("woff2"), url("./fonts/OpenSans-BoldItalic.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-ExtraBold.woff2") format("woff2"), url("./fonts/OpenSans-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap; }
-@font-face {
-  font-family: 'Open Sans';
-  src: url("./fonts/OpenSans-Italic.woff2") format("woff2"), url("./fonts/OpenSans-Italic.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap; }
+  font-family: "Inter";
+  src: url("./fonts/Inter-VariableFont_slnt,wght.woff2") format("woff2"), url("./fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf"); }
 /**
  * Basic typography style for copy text
  */
@@ -1107,6 +1112,17 @@ h4.details-title {
 .regular-14 {
   font-size: 14px;
   line-height: 20px; }
+
+.semibold-14 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600; }
+
+.semibold-16 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #21242b; }
 
 .radius-2 {
   border-radius: 2px !important; }
@@ -4263,6 +4279,46 @@ table.invoice-table {
 
 .shadow-nav-4dp {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 2px 2px rgba(0, 0, 0, 0.04); }
+
+.with-icon {
+  position: relative; }
+  .with-icon span {
+    position: absolute;
+    top: 6px; }
+  .with-icon.left-icon span.left-icon {
+    left: 15px; }
+  .with-icon.left-icon input {
+    padding-left: 40px; }
+  .with-icon.right-icon span.right-icon {
+    right: 15px; }
+  .with-icon.right-icon input {
+    padding-right: 40px; }
+
+.button {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  background: #452d8f;
+  color: #fff;
+  height: 40px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 0;
+  position: relative;
+  width: max-content; }
+
+.add-btn .text {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #664ab6 !important; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type="number"] {
+  -moz-appearance: textfield; }
 
 .questionnaire {
   max-width: 1110px;
@@ -9167,1044 +9223,535 @@ ul {
   .order-card-items .single-order-card .order-details .delivery-date-status span {
     font-size: 12px;
     line-height: 16px; } }
-.create-order-container {
-  width: 100%; }
-  .create-order-container .order-basic-info-section .info-column {
-    width: calc(100% - 316px);
-    border-radius: 6px;
-    border: 1px solid #e4e7eb;
-    padding: 20px 16px; }
-  .create-order-container .order-basic-info-section .po-column {
-    max-width: 300px;
-    width: 300px;
-    border-radius: 6px;
-    border: 1px solid #e4e7eb; }
-    .create-order-container .order-basic-info-section .po-column .uploded-po {
-      height: 210px;
-      overflow-y: auto;
-      border-bottom: 1px solid #e4e7eb;
-      scrollbar-width: thin; }
-      .create-order-container .order-basic-info-section .po-column .uploded-po::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-        background-color: #f5f5f5; }
-      .create-order-container .order-basic-info-section .po-column .uploded-po::-webkit-scrollbar {
-        width: 4px;
-        background-color: #f5f5f5; }
-      .create-order-container .order-basic-info-section .po-column .uploded-po::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #f5f5f5; }
-      .create-order-container .order-basic-info-section .po-column .uploded-po .single-po {
-        padding: 4px 20px;
-        margin-bottom: 8px; }
-        .create-order-container .order-basic-info-section .po-column .uploded-po .single-po a {
-          font-size: 12px;
-          margin-left: 4px;
-          margin-top: 4px; }
-        .create-order-container .order-basic-info-section .po-column .uploded-po .single-po .po-names {
-          display: flex;
-          width: 220px;
-          word-break: break-word; }
-          .create-order-container .order-basic-info-section .po-column .uploded-po .single-po .po-names img {
-            width: 24px; }
-        .create-order-container .order-basic-info-section .po-column .uploded-po .single-po .delete-btn {
-          visibility: hidden;
+.create-order-container .designs-info-section .designs-row .single-design {
+  border: 1px solid #e4e7eb;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 20px; }
+  .create-order-container .designs-info-section .designs-row .single-design .design-image {
+    width: 184px;
+    height: 236px;
+    background: #f4f5f7; }
+    .create-order-container .designs-info-section .designs-row .single-design .design-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; }
+  .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul {
+    display: flex; }
+    .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li {
+      margin-right: 17px;
+      position: relative;
+      font-size: 12px;
+      line-height: 16px;
+      color: #21242b; }
+      .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 8px;
+        background: #9aa1af;
+        top: 50%;
+        right: -8px;
+        transform: translateY(-50%); }
+      .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li:last-child::after {
+        display: none; }
+  .create-order-container .designs-info-section .designs-row .single-design .po-details-view .po-quantity-colums-view ul li {
+    font-size: 14px;
+    color: #6a7181; }
+  .create-order-container .designs-info-section .designs-row .single-design .po-details-view .po-quantity-colums-view {
+    margin-top: 32px; }
+  .create-order-container .designs-info-section .designs-row .single-design .design-details-info {
+    margin-left: 16px;
+    max-width: 500px;
+    width: 500px; }
+    .create-order-container .designs-info-section .designs-row .single-design .design-details-info .po-details {
+      max-width: 324px; }
+      .create-order-container .designs-info-section .designs-row .single-design .design-details-info .po-details input {
+        border-radius: 4px; }
+    .create-order-container .designs-info-section .designs-row .single-design .design-details-info .design-title .buttons {
+      visibility: hidden; }
+  .create-order-container .designs-info-section .designs-row .single-design .design-quantity-table {
+    width: calc(100% - 720px); }
+  .create-order-container .designs-info-section .designs-row .single-design:hover .design-details-info .design-title .buttons {
+    visibility: visible; }
+.create-order-container .designs-info-section.supplier-design-info-section {
+  margin-top: 16px; }
+  .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design {
+    position: relative;
+    padding-right: 24px; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox {
+      position: absolute;
+      padding: 5px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      left: 0;
+      top: 0; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox .form-group {
+        width: 20px;
+        height: 26px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox .form-group img {
+          position: relative;
+          right: 7px;
+          top: -2px; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-image {
+      width: 116px;
+      height: 128px; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info {
+      width: 400px;
+      max-width: 400px; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .buttons span:hover {
+        text-decoration: underline; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p {
+        margin: 0; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p span {
+          display: inline-block; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p span:first-child {
+            width: 85px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p:nth-child(2) span:nth-child(2) {
+          color: #ee761f; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-edit {
+        max-width: 210px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-edit input {
+          border-radius: 4px; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details {
+      width: 300px;
+      max-width: 300px; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .po-details-view {
+        margin-top: 16px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .po-details-view ul li {
+          font-size: 14px;
+          line-height: 20px;
+          color: #6a7181; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer {
+        margin-top: 35px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer a {
+          font-weight: 600;
+          text-transform: uppercase; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer span {
           cursor: pointer; }
-        .create-order-container .order-basic-info-section .po-column .uploded-po .single-po:hover .delete-btn {
-          visibility: visible; }
-      .create-order-container .order-basic-info-section .po-column .uploded-po .no-po {
-        padding: 80px 0;
-        color: #9aa1af; }
-    .create-order-container .order-basic-info-section .po-column .upload-po label {
-      margin: 10px 0;
-      cursor: pointer; }
-      .create-order-container .order-basic-info-section .po-column .upload-po label span {
-        color: #664ab6; }
-      .create-order-container .order-basic-info-section .po-column .upload-po label:hover span {
-        color: #452c8e; }
-  .create-order-container .designs-info-section .designs-row .single-design {
-    border: 1px solid #e4e7eb;
-    border-radius: 6px;
-    padding: 8px;
-    margin-bottom: 20px; }
-    .create-order-container .designs-info-section .designs-row .single-design .design-image {
-      width: 184px;
-      height: 236px;
-      background: #f4f5f7; }
-      .create-order-container .designs-info-section .designs-row .single-design .design-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; }
-    .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul {
-      display: flex; }
-      .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li {
-        margin-right: 17px;
-        position: relative;
-        font-size: 12px;
-        line-height: 16px;
-        color: #21242b; }
-        .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li::after {
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer span.red:hover {
+            text-decoration: underline; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table {
+      width: calc(100% - 832px);
+      position: relative; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price {
+        color: #664ab6;
+        padding-right: 12px;
+        margin-top: 7px;
+        position: relative; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price:hover {
+          text-decoration: underline; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price::after {
           content: "";
           position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
           width: 2px;
           height: 8px;
-          background: #9aa1af;
-          top: 50%;
-          right: -8px;
-          transform: translateY(-50%); }
-        .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul li:last-child::after {
-          display: none; }
-    .create-order-container .designs-info-section .designs-row .single-design .po-details-view .po-quantity-colums-view ul li {
-      font-size: 14px;
-      color: #6a7181; }
-    .create-order-container .designs-info-section .designs-row .single-design .po-details-view .po-quantity-colums-view {
-      margin-top: 32px; }
-    .create-order-container .designs-info-section .designs-row .single-design .design-details-info {
-      margin-left: 16px;
-      max-width: 380px;
-      width: 380px; }
-      .create-order-container .designs-info-section .designs-row .single-design .design-details-info .po-details {
-        max-width: 324px; }
-        .create-order-container .designs-info-section .designs-row .single-design .design-details-info .po-details input {
-          border-radius: 4px; }
-      .create-order-container .designs-info-section .designs-row .single-design .design-details-info .design-title .buttons {
-        visibility: hidden; }
-    .create-order-container .designs-info-section .designs-row .single-design .design-quantity-table {
-      width: calc(100% - 600px); }
-    .create-order-container .designs-info-section .designs-row .single-design:hover .design-details-info .design-title .buttons {
-      visibility: visible; }
-  .create-order-container .designs-info-section.supplier-design-info-section {
-    margin-top: 16px; }
-    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design {
-      position: relative;
-      padding-right: 24px; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox {
-        position: absolute;
-        padding: 5px 8px;
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.8);
-        left: 0;
-        top: 0; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox .form-group {
-          width: 20px;
-          height: 26px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .custom-chekbox .form-group img {
-            position: relative;
-            right: 7px;
-            top: -2px; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-image {
-        width: 116px;
-        height: 128px; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info {
-        width: 400px;
-        max-width: 400px; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .buttons span:hover {
-          text-decoration: underline; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p {
-          margin: 0; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p span {
-            display: inline-block; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p span:first-child {
-              width: 85px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-info p:nth-child(2) span:nth-child(2) {
-            color: #ee761f; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-edit {
-          max-width: 210px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-details-info .etd-edit input {
-            border-radius: 4px; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details {
-        width: 300px;
-        max-width: 300px; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .po-details-view {
-          margin-top: 16px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .po-details-view ul li {
-            font-size: 14px;
-            line-height: 20px;
-            color: #6a7181; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer {
-          margin-top: 35px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer a {
-            font-weight: 600;
-            text-transform: uppercase; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer span {
-            cursor: pointer; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-details .selected-buyer span.red:hover {
-              text-decoration: underline; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table {
-        width: calc(100% - 832px);
+          background: #9aa1af; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table {
+        padding-bottom: 0;
         position: relative; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price {
-          color: #664ab6;
-          padding-right: 12px;
-          margin-top: 7px;
-          position: relative; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price:hover {
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons {
+          position: absolute;
+          bottom: 4px;
+          right: 0; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons span:hover {
             text-decoration: underline; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .buyer-price-info p.buyer-price::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 2px;
-            height: 8px;
-            background: #9aa1af; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table {
-          padding-bottom: 0;
-          position: relative; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons {
-            position: absolute;
-            bottom: 4px;
-            right: 0; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons span:hover {
-              text-decoration: underline; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons span.edit-btn {
-              visibility: hidden; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .size-wise-view,
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .color-wise-view {
-            width: 52px;
-            background: #f7f8fa;
-            padding: 3px 0;
-            text-align: center;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #ee761f; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price {
-          margin-top: 16px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input {
-            width: 168px;
-            border-radius: 4px;
-            height: 32px;
-            color: #ee761f !important;
-            font-weight: 600;
-            box-shadow: inset 0 0 0px 1px #ee761f !important; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input::placeholder {
-              color: #ee761f !important;
-              font-weight: 600; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input:disabled {
-              box-shadow: none !important;
-              background: #f4f5f7; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input.border-error {
-              box-shadow: inset 0 0 0px 1px #f22b2b !important;
-              background: #ffdce5; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price .design-wise-view {
-            background: #f7f8fa;
-            color: #ee761f;
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 600;
-            max-width: 168px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            text-align: left; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr th {
-          text-align: center; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr th:last-child .col-heading {
-            background: #f7f8fa; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input {
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .buttons span.edit-btn {
+            visibility: hidden; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .size-wise-view,
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .category-wise-table .color-wise-view {
+          width: 52px;
+          background: #f7f8fa;
+          padding: 3px 0;
+          text-align: center;
+          border-radius: 4px;
+          font-weight: 600;
+          color: #ee761f; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price {
+        margin-top: 16px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input {
+          width: 168px;
+          border-radius: 4px;
+          height: 32px;
           color: #ee761f !important;
           font-weight: 600;
           box-shadow: inset 0 0 0px 1px #ee761f !important; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input::placeholder {
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input::placeholder {
             color: #ee761f !important;
             font-weight: 600; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input:disabled {
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input:disabled {
             box-shadow: none !important;
             background: #f4f5f7; }
-        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table {
-          width: auto;
-          min-width: 400px;
-          background: #fff;
-          border: 1px solid #e4e7eb;
-          border-radius: 4px;
-          padding: 16px;
-          position: absolute;
-          top: -33px;
-          left: -220px;
-          margin-top: 24px;
-          z-index: 1; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .color {
-            width: 24px;
-            height: 24px;
-            border-radius: 100px;
-            display: inline-block; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .quantity-heading {
-            padding-bottom: 4px;
-            border-bottom: 1px solid #e4e7eb;
-            margin-bottom: 12px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table p {
-            font-size: 14px;
-            color: #6a7181;
-            padding: 2px 4px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .unit-price p span {
-            font-weight: 600;
-            color: #ee761f;
-            margin-left: 12px; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table {
-            width: 100%;
-            text-align: center; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr th {
-              padding-bottom: 8px;
-              font-weight: 600;
-              color: #21242b;
-              font-size: 14px;
-              line-height: 24px; }
-              .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr th:last-child {
-                color: #6a7181; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td {
-              vertical-align: middle;
-              padding: 4px; }
-              .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td p {
-                margin-bottom: 4px;
-                cursor: pointer; }
-                .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td p input {
-                  height: 28px;
-                  width: 46px;
-                  padding: 6px;
-                  text-align: center; }
-              .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td:last-child p {
-                font-weight: 600;
-                color: #452c8e; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.sizewise-table tr:last-child td p {
-              font-weight: 600;
-              color: #ee761f;
-              margin: 0; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr th:nth-last-child(2) {
-              color: #6a7181; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr td:nth-last-child(2) p {
-              color: #452c8e;
-              font-weight: 600; }
-            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr td:last-child p {
-              color: #ee761f; }
-          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table button {
-            float: right;
-            margin-right: 26px;
-            margin-top: 14px;
-            margin-bottom: 10px; }
-      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design:hover .design-quantity-table .design-table .category-wise-table .buttons span.edit-btn {
-        visibility: visible; }
-  .create-order-container .design-quantity-table .dropdown button:focus {
-    color: #6a7181; }
-  .create-order-container .design-quantity-table .dropdown button:hover {
-    color: #6a7181; }
-  .create-order-container .design-quantity-table .dropdown button img {
-    margin-left: 8px; }
-  .create-order-container .design-quantity-table .dropdown.show button img {
-    transform: rotate(180deg); }
-  .create-order-container .design-quantity-table .design-table {
-    display: flex;
-    justify-content: end;
-    position: relative; }
-    .create-order-container .design-quantity-table .design-table .multiple-color-add-option {
-      display: flex;
-      float: right; }
-      .create-order-container .design-quantity-table .design-table .multiple-color-add-option .option button.dropdown-toggle {
-        position: relative;
-        left: 32px;
-        top: 2px;
-        z-index: 1;
-        padding: 0; }
-    .create-order-container .design-quantity-table .design-table .dropdown-box {
-      width: 486px;
-      left: 40px;
-      top: 28px;
-      display: block;
-      max-height: 270px; }
-    .create-order-container .design-quantity-table .design-table .category-wise-table {
-      max-width: 660px;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      padding-bottom: 16px;
-      text-align: right;
-      text-align: -webkit-right;
-      text-align: -moz-right;
-      min-height: 160px; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-        background-color: #f5f5f5; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table::-webkit-scrollbar {
-        height: 8px;
-        background-color: #f5f5f5; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #f5f5f5; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table label {
-        display: none; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table .click-box {
-        display: none; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table .swatch-file label {
-        display: block; }
-      .create-order-container .design-quantity-table .design-table .category-wise-table .add-sizep-category-modal {
-        right: 0;
-        left: unset;
-        top: 0;
-        transform: none;
-        z-index: 1; }
-        .create-order-container .design-quantity-table .design-table .category-wise-table .add-sizep-category-modal .click-box {
-          display: inline-flex; }
-        .create-order-container .design-quantity-table .design-table .category-wise-table .add-sizep-category-modal .fabric-select .dropdown-box {
-          display: none; }
-    .create-order-container .design-quantity-table .design-table p {
-      margin: 0; }
-    .create-order-container .design-quantity-table .design-table table.table {
-      width: auto;
-      border: none !important;
-      box-shadow: none;
-      margin-bottom: 8px; }
-      .create-order-container .design-quantity-table .design-table table.table tr:active {
-        box-shadow: none; }
-      .create-order-container .design-quantity-table .design-table table.table tr th,
-      .create-order-container .design-quantity-table .design-table table.table tr td {
-        border: none !important;
-        background: transparent;
-        padding: 4px 3px !important; }
-      .create-order-container .design-quantity-table .design-table table.table tr th {
-        position: relative; }
-        .create-order-container .design-quantity-table .design-table table.table tr th .col-heading {
-          width: 52px;
-          height: 24px;
-          text-align: center;
-          box-shadow: inset 0 0 0px 1px #c7ced4 !important;
-          border-radius: 4px;
-          background: #f7f8fa; }
-        .create-order-container .design-quantity-table .design-table table.table tr th .size-popup {
-          position: absolute;
-          padding: 12px;
-          border-radius: 4px;
-          width: 185px;
-          right: 3px;
-          z-index: 1; }
-        .create-order-container .design-quantity-table .design-table table.table tr th:last-child .col-heading {
-          background: #ffffff; }
-      .create-order-container .design-quantity-table .design-table table.table tr td {
-        height: auto; }
-        .create-order-container .design-quantity-table .design-table table.table tr td input[type="number"] {
-          width: 52px;
-          height: 24px;
-          text-align: center;
-          border: none !important;
-          box-shadow: inset 0 0 0px 1px #c7ced4 !important;
-          border-radius: 4px;
-          padding: 0;
-          color: #21242b; }
-          .create-order-container .design-quantity-table .design-table table.table tr td input[type="number"].border-error {
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price input.border-error {
             box-shadow: inset 0 0 0px 1px #f22b2b !important;
             background: #ffdce5; }
-            .create-order-container .design-quantity-table .design-table table.table tr td input[type="number"].border-error::placeholder {
-              color: #f22b2b !important; }
-          .create-order-container .design-quantity-table .design-table table.table tr td input[type="number"]:hover {
-            box-shadow: inset 0 0 0px 1px #452c8e !important; }
-          .create-order-container .design-quantity-table .design-table table.table tr td input[type="number"]:focus {
-            box-shadow: inset 0 0 0px 1px #452c8e !important; }
-        .create-order-container .design-quantity-table .design-table table.table tr td:last-child input {
-          color: #452c8e !important;
-          font-weight: 600; }
-          .create-order-container .design-quantity-table .design-table table.table tr td:last-child input::placeholder {
-            color: #452c8e !important;
-            font-weight: 600; }
-    .create-order-container .design-quantity-table .design-table .total-units {
-      padding-left: 24px; }
-      .create-order-container .design-quantity-table .design-table .total-units input {
-        width: 112px;
-        height: 32px;
-        text-align: center;
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table .designwise-price .design-wise-view {
+          background: #f7f8fa;
+          color: #ee761f;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 600;
+          max-width: 168px;
+          padding: 6px 12px;
+          border-radius: 4px;
+          text-align: left; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr th {
+        text-align: center; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr th:last-child .col-heading {
+          background: #f7f8fa; }
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input {
+        color: #ee761f !important;
         font-weight: 600;
-        color: #ee761f;
-        border-radius: 4px; }
-        .create-order-container .design-quantity-table .design-table .total-units input::placeholder {
+        box-shadow: inset 0 0 0px 1px #ee761f !important; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input::placeholder {
           color: #ee761f !important;
           font-weight: 600; }
-        .create-order-container .design-quantity-table .design-table .total-units input.border-error {
-          box-shadow: inset 0 0 0px 1px #f22b2b !important;
-          background: #ffdce5; }
-          .create-order-container .design-quantity-table .design-table .total-units input.border-error::placeholder {
-            color: #f22b2b !important; }
-      .create-order-container .design-quantity-table .design-table .total-units .error {
-        position: absolute;
-        bottom: -20px;
-        width: 100%;
-        left: 0;
-        text-align: right !important; }
-    .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr:last-child td input {
-      color: #ee761f !important;
-      font-weight: 600; }
-      .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr:last-child td input::placeholder {
-        color: #ee761f !important;
-        font-weight: 600; }
-    .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr:last-child td:last-child input {
-      background: #ffffff !important; }
-      .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr:last-child td:last-child input:hover {
-        box-shadow: inset 0 0 0px 1px #452c8e !important; }
-    .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr td:last-child input {
-      background: #f7f8fa !important; }
-      .create-order-container .design-quantity-table .design-table .sizewise-wise-table table.table tr td:last-child input:hover {
-        box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
-    .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr th:nth-last-child(2) .col-heading {
-      background: #ffffff; }
-    .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr th:last-child .col-heading {
-      background: #f7f8fa; }
-    .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:last-child input {
-      color: #ee761f !important;
-      font-weight: 600; }
-      .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:last-child input::placeholder {
-        color: #ee761f !important;
-        font-weight: 600; }
-      .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:last-child input.border-error::placeholder {
-        color: #f22b2b !important; }
-    .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:nth-last-child(2) input {
-      color: #452c8e !important;
-      font-weight: 600;
-      background: #f7f8fa !important; }
-      .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:nth-last-child(2) input::placeholder {
-        color: #452c8e !important;
-        font-weight: 600; }
-      .create-order-container .design-quantity-table .design-table .color-wise-table table.table tr td:nth-last-child(2) input:hover {
-        box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
-    .create-order-container .design-quantity-table .design-table .design-wise-table {
-      padding-bottom: 40px; }
-      .create-order-container .design-quantity-table .design-table .design-wise-table table.table tr td:last-child input {
-        background: #f7f8fa !important; }
-        .create-order-container .design-quantity-table .design-table .design-wise-table table.table tr td:last-child input:hover {
-          box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
-      .create-order-container .design-quantity-table .design-table .design-wise-table .total-units {
-        position: absolute;
-        right: 0; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr th p,
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr td p {
-      display: inline-block;
-      box-shadow: none !important;
-      border: 1px solid #c7ced4; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr th input[type="number"],
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr td input[type="number"] {
-      width: 48px; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr th p:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      width: 48px; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr th p:nth-child(2) {
-      margin-left: -1px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      width: 52px; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr th:last-child p {
-      border-radius: 4px;
-      width: 100px; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr td input:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      width: 48px; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr td input:nth-child(2) {
-      margin-left: -1px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      width: 52px;
-      color: #ee761f !important;
-      font-weight: 600; }
-    .create-order-container .design-quantity-table .design-table .size-color-wise-table table.table tr td:last-child input {
-      border-radius: 4px;
-      width: 100px; }
-    .create-order-container .design-quantity-table .design-table .custom-tooltip .tooltiptext {
-      font-size: 11px;
-      line-height: 16px;
-      width: 68px;
-      visibility: hidden; }
-    .create-order-container .design-quantity-table .design-table .custom-tooltip:hover .tooltiptext {
-      visibility: visible; }
-    .create-order-container .design-quantity-table .design-table .custom-tooltip.color-add .tooltiptext {
-      left: 58px; }
-      .create-order-container .design-quantity-table .design-table .custom-tooltip.color-add .tooltiptext::after {
-        left: 15px; }
-    .create-order-container .design-quantity-table .design-table .custom-tooltip.size-add .tooltiptext {
-      left: 44px; }
-      .create-order-container .design-quantity-table .design-table .custom-tooltip.size-add .tooltiptext::after {
-        left: 54px; }
-    .create-order-container .design-quantity-table .design-table table.table.multiple-sizes-table tr th .col-heading {
-      width: 65px; }
-    .create-order-container .design-quantity-table .design-table table.table.multiple-sizes-table tr td input[type="number"] {
-      width: 65px; }
-    .create-order-container .design-quantity-table .design-table table.table.multiple-sizes-table tr td .size-wise-view {
-      width: auto !important; }
-  .create-order-container .select-supplier-box {
-    max-width: 660px;
-    margin: 0 auto;
-    padding: 24px;
-    border: 1px solid #e4e7eb;
-    border-radius: 4px;
-    background: #ffffff; }
-    .create-order-container .select-supplier-box p {
-      margin: 0; }
-    .create-order-container .select-supplier-box .dropdown-box {
-      max-width: 610px; }
-    .create-order-container .select-supplier-box .supplier-view-details {
-      display: flex;
-      margin-top: 32px; }
-      .create-order-container .select-supplier-box .supplier-view-details .supplier-profile-image {
-        margin-right: 12px; }
-        .create-order-container .select-supplier-box .supplier-view-details .supplier-profile-image img {
-          height: 100px;
-          width: 100px;
-          border-radius: 100px;
-          object-fit: contain;
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .design-table table.table tr td input:disabled {
+          box-shadow: none !important;
           background: #f4f5f7; }
-      .create-order-container .select-supplier-box .supplier-view-details .contact-person a {
-        color: #664ab6;
-        margin-top: 10px;
-        display: inline-block; }
-  .create-order-container .assign-supplier-tab .supplier-title {
-    margin-bottom: 20px; }
-  .create-order-container .assign-supplier-tab .selected-items-details .selected-info {
-    margin-left: 16px; }
-    .create-order-container .assign-supplier-tab .selected-items-details .selected-info .count {
-      font-size: 12px;
-      line-height: 10px;
-      height: 20px;
-      width: 20px;
-      display: inline-block;
-      color: #ffffff;
-      background: #8a6fd6;
-      padding: 6px;
-      border-radius: 100px; }
-    .create-order-container .assign-supplier-tab .selected-items-details .selected-info button {
-      margin-left: 8px; }
-  .create-order-container .team-conainer {
-    background: #ffffff;
-    border: 1px solid #e4e7eb;
-    padding: 20px;
-    border: 4px;
-    max-width: 500px;
-    margin: 0 auto; }
-    .create-order-container .team-conainer.team-section {
-      overflow-y: unset; }
-    .create-order-container .team-conainer p {
-      margin: 0; }
-    .create-order-container .team-conainer .team-body .single-team-person {
-      width: 100%;
-      margin-bottom: 20px;
-      align-items: center; }
-      .create-order-container .team-conainer .team-body .single-team-person .person-title {
-        width: calc(100% - 300px);
-        padding-right: 16px; }
-      .create-order-container .team-conainer .team-body .single-team-person .person-details {
-        width: 300px; }
-        .create-order-container .team-conainer .team-body .single-team-person .person-details .person-info {
-          width: 100%;
-          padding-left: 0;
-          border: 1px solid #edf0f2;
-          padding: 6px 8px;
-          border-radius: 4px;
-          min-height: 56px; }
-      .create-order-container .team-conainer .team-body .single-team-person.multiperson {
-        align-items: flex-start; }
-        .create-order-container .team-conainer .team-body .single-team-person.multiperson .person-details .person-info {
-          margin-bottom: 20px; }
-          .create-order-container .team-conainer .team-body .single-team-person.multiperson .person-details .person-info:last-child {
-            margin-bottom: 0; }
-      .create-order-container .team-conainer .team-body .single-team-person .assign-member {
-        top: 0; }
-        .create-order-container .team-conainer .team-body .single-team-person .assign-member .title {
-          background: #ffffff;
-          border-bottom: 1px solid #e4e7eb; }
-        .create-order-container .team-conainer .team-body .single-team-person .assign-member .search-filter {
-          padding: 12px 16px 8px 16px;
-          position: sticky;
-          top: 0;
-          width: 100%;
-          z-index: 1; }
-        .create-order-container .team-conainer .team-body .single-team-person .assign-member .member-list-container {
-          height: 276px;
-          overflow-y: auto; }
-          .create-order-container .team-conainer .team-body .single-team-person .assign-member .member-list-container .member-list {
-            cursor: pointer; }
-            .create-order-container .team-conainer .team-body .single-team-person .assign-member .member-list-container .member-list.added {
-              background: url(./icons/tick24.svg) center no-repeat;
-              background-position: calc(100% - 15px) 13px;
-              background-color: #f4f5f7; }
-    .create-order-container .team-conainer.team-section {
-      height: unset;
-      min-height: unset;
-      border: 1px solid #e4e7eb;
-      border-radius: 4px; }
-
-.pending-order-tabs {
-  padding: 20px 24px 0 24px;
-  border-bottom: 1px solid #e4e7eb; }
-  .pending-order-tabs .pending-order-stepper li {
-    cursor: pointer;
-    padding-bottom: 8px;
-    border-bottom: 2px solid transparent; }
-    .pending-order-tabs .pending-order-stepper li.active {
-      border-bottom: 2px solid #6a7181; }
-
-.order-assigned-people {
-  display: flex;
-  justify-content: end; }
-  .order-assigned-people .add-buyer .added-members img {
-    border: 2px solid #f7f8fa; }
-
-.proforma-invoice-tab .section-heading .order-assigned-people .button {
-  margin-right: 140px; }
-.proforma-invoice-tab .same-space {
-  padding: 24px;
-  border: 1px solid #e4e7eb;
-  border-radius: 4px;
-  background: #ffffff;
-  margin-top: 8px; }
-.proforma-invoice-tab .invoice-info p {
-  margin: 0; }
-  .proforma-invoice-tab .invoice-info p img {
-    visibility: hidden; }
-.proforma-invoice-tab .invoice-info:hover p img {
-  visibility: visible;
-  cursor: pointer; }
-.proforma-invoice-tab .invoice-info .invoice-details input {
-  height: 32px;
-  margin-top: 4px; }
-.proforma-invoice-tab .invoice-heaing h3,
-.proforma-invoice-tab .sales-contract-heading h3 {
-  width: 120px;
-  font-size: 20px;
-  font-weight: 600; }
-.proforma-invoice-tab .sales-contract-heading h3 {
-  width: 220px; }
-.proforma-invoice-tab .buyer-and-beneficiary-section {
-  width: 100%; }
-  .proforma-invoice-tab .buyer-and-beneficiary-section.with-title {
-    margin-top: 40px; }
-    .proforma-invoice-tab .buyer-and-beneficiary-section.with-title .one-half {
-      position: relative; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section.with-title .one-half .one-half-title {
+      .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table {
+        width: auto;
+        min-width: 400px;
+        background: #fff;
+        border: 1px solid #e4e7eb;
+        border-radius: 4px;
+        padding: 16px;
         position: absolute;
-        top: -32px;
-        left: 0; }
-  .proforma-invoice-tab .buyer-and-beneficiary-section .one-half {
-    width: calc(50% - 8px); }
-    .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-heading {
-      border-bottom: 1px solid #e4e7eb;
-      padding-bottom: 8px; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-heading .dropdown button:focus {
-        color: #6a7181; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-heading .dropdown button:hover {
-        color: #6a7181; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-heading .dropdown.show button img {
-        transform: rotate(180deg); }
-    .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-details {
-      margin-top: 20px; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-details p {
-        margin: 0; }
-      .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-details textarea {
-        background: #ffffff;
-        font-size: 14px;
-        line-height: 20px;
-        resize: none;
-        box-shadow: inset 0 0 0px 1px #452d8f;
-        cursor: pointer; }
-        .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-details textarea:disabled {
-          box-shadow: inset 0 0 0px 1px #c7ced4; }
-          .proforma-invoice-tab .buyer-and-beneficiary-section .one-half .info-details textarea:disabled:hover {
-            box-shadow: inset 0 0 0px 1px #452d8f; }
-.proforma-invoice-tab .product-and-service-details {
-  margin-top: 24px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td input {
-    border: 1px solid #8a6fd6;
-    height: 28px !important;
-    width: 100% !important; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td:nth-child(2) {
-    width: 200px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td:nth-child(8) {
-    width: 90px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td:nth-child(7), .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td:nth-child(9) {
-    width: 115px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table table.table tr td:nth-child(10) {
-    width: 120px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td:first-child {
-    width: 48px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td:nth-child(2) {
-    width: 100px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td:nth-child(3) {
-    width: 400px; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td:last-child img {
-    visibility: visible;
-    margin: 0; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td textarea {
-    background: #ffffff;
-    font-size: 14px;
-    line-height: 20px;
-    resize: none;
-    box-shadow: inset 0 0 0px 1px #452d8f;
-    cursor: pointer;
-    height: 130px; }
-    .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td textarea:disabled {
-      box-shadow: none; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr:hover td textarea:disabled {
-    background: #f4f5f7; }
-  .proforma-invoice-tab .product-and-service-details .service-details-table.order-sumamary-table table.table tr td:nth-child(6) {
-    width: 100px; }
-
-.service-details-table table.table tr td:last-child img {
-  visibility: hidden;
-  cursor: pointer;
-  margin-top: -4px; }
-.service-details-table table.table tr:hover td:last-child img {
-  visibility: visible; }
-
-.order-container-with-sidebar {
-  background: #f7f8fa; }
-  .order-container-with-sidebar .order-details-sidebar {
-    width: 190px;
-    position: sticky;
-    border: 1px solid #e4e7eb;
-    border-radius: 4px;
-    margin-left: 24px;
-    height: 165px;
-    top: 200px;
-    margin-top: 20px; }
-    .order-container-with-sidebar .order-details-sidebar ul li {
-      padding: 10px 12px;
-      font-size: 14px;
-      line-height: 20px;
-      color: #6a7181;
-      background: #ffffff;
-      border-bottom: 1px solid #e4e7eb;
-      cursor: pointer; }
-      .order-container-with-sidebar .order-details-sidebar ul li span {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        border-radius: 100px;
-        background: #dbffe5;
-        text-align: center;
-        line-height: 14px;
-        border: 1px solid #00c334;
-        margin-right: 8px; }
-      .order-container-with-sidebar .order-details-sidebar ul li:hover {
-        background: #f8f5fe; }
-  .order-container-with-sidebar .create-order-container {
-    margin: 0;
-    margin-top: 24px;
-    width: 1380px; }
-  .order-container-with-sidebar .material-list-add-section {
-    width: 1380px;
-    margin-top: 30px; }
-  .order-container-with-sidebar .proforma-invoice-tab .section-heading button.secondary {
-    margin-right: 0 !important; }
-  .order-container-with-sidebar .proforma-invoice-tab .invoice-info.same-space {
-    margin-top: 8px; }
-
-.create-container-with-add-people {
-  background: #f7f8fa;
-  min-height: 100vh; }
-  .create-container-with-add-people .add-buyer {
-    max-width: 1380px;
-    padding: 0 24px !important;
-    margin: 0 auto;
-    position: relative; }
-    .create-container-with-add-people .add-buyer .added-members {
-      top: 28px;
+        top: -33px;
+        left: -220px;
+        margin-top: 24px;
+        z-index: 1; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .color {
+          width: 24px;
+          height: 24px;
+          border-radius: 100px;
+          display: inline-block; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .quantity-heading {
+          padding-bottom: 4px;
+          border-bottom: 1px solid #e4e7eb;
+          margin-bottom: 12px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table p {
+          font-size: 14px;
+          color: #6a7181;
+          padding: 2px 4px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table .unit-price p span {
+          font-weight: 600;
+          color: #ee761f;
+          margin-left: 12px; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table {
+          width: 100%;
+          text-align: center; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr th {
+            padding-bottom: 8px;
+            font-weight: 600;
+            color: #21242b;
+            font-size: 14px;
+            line-height: 24px; }
+            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr th:last-child {
+              color: #6a7181; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td {
+            vertical-align: middle;
+            padding: 4px; }
+            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td p {
+              margin-bottom: 4px;
+              cursor: pointer; }
+              .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td p input {
+                height: 28px;
+                width: 46px;
+                padding: 6px;
+                text-align: center; }
+            .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table tr td:last-child p {
+              font-weight: 600;
+              color: #452c8e; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.sizewise-table tr:last-child td p {
+            font-weight: 600;
+            color: #ee761f;
+            margin: 0; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr th:nth-last-child(2) {
+            color: #6a7181; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr td:nth-last-child(2) p {
+            color: #452c8e;
+            font-weight: 600; }
+          .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table table.colorwise-table tr td:last-child p {
+            color: #ee761f; }
+        .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design .design-quantity-table .quantity-table button {
+          float: right;
+          margin-right: 26px;
+          margin-top: 14px;
+          margin-bottom: 10px; }
+    .create-order-container .designs-info-section.supplier-design-info-section .designs-row .single-design:hover .design-quantity-table .design-table .category-wise-table .buttons span.edit-btn {
+      visibility: visible; }
+.create-order-container .design-table {
+  display: flex;
+  justify-content: end;
+  position: relative; }
+  .create-order-container .design-table .multiple-color-add-option {
+    display: flex;
+    float: right; }
+    .create-order-container .design-table .multiple-color-add-option .option button.dropdown-toggle {
+      position: relative;
+      left: 32px;
+      top: 2px;
       z-index: 1;
       padding: 0; }
-
-.factory-slider {
-  margin-bottom: 32px;
-  margin-top: 16px; }
-  .factory-slider .factory-slider-row {
-    display: flex;
-    justify-content: space-between; }
-    .factory-slider .factory-slider-row .slick-list {
-      margin: 0 -7px !important; }
-    .factory-slider .factory-slider-row .slick-slide > div {
-      padding: 0 7px !important; }
-    .factory-slider .factory-slider-row .slick-track {
-      margin-left: 0; }
-    .factory-slider .factory-slider-row .slick-arrow {
-      transition: 0.2s; }
-      .factory-slider .factory-slider-row .slick-arrow.slick-prev {
-        left: -24px;
-        margin-top: 4px; }
-      .factory-slider .factory-slider-row .slick-arrow.slick-next {
-        right: -25px;
-        margin-top: 0; }
-      .factory-slider .factory-slider-row .slick-arrow.slick-disabled {
-        display: none !important; }
-    .factory-slider .factory-slider-row .one-fourth {
-      width: 320px;
-      max-width: 100%;
-      border: 1px solid #e4e7eb;
-      background: #ffffff;
-      border-radius: 4px;
-      padding: 16px;
-      min-height: 122px;
-      cursor: pointer; }
-      .factory-slider .factory-slider-row .one-fourth .f-title {
-        font-size: 16px;
-        line-height: 24px;
-        color: #21242b;
-        margin: 0; }
-      .factory-slider .factory-slider-row .one-fourth .f-location {
-        color: #6a7181;
-        display: flex;
-        align-items: self-start;
-        margin-top: 2px; }
-        .factory-slider .factory-slider-row .one-fourth .f-location img {
-          width: 20px;
-          position: relative;
-          top: 1px;
-          left: -2px; }
-      .factory-slider .factory-slider-row .one-fourth .button.approved img {
-        display: inline-block; }
-      .factory-slider .factory-slider-row .one-fourth .price-and-design {
-        font-weight: 600;
-        margin: 0;
-        color: #ee761f; }
-        .factory-slider .factory-slider-row .one-fourth .price-and-design span {
-          color: #6a7181; }
-      .factory-slider .factory-slider-row .one-fourth.active {
-        border: 1px solid #664ab6; }
-        .factory-slider .factory-slider-row .one-fourth.active .f-title {
-          color: #664ab6;
-          font-weight: 600; }
-
-.filter-bar-section.material-list-toggle-section {
-  margin-top: 40px;
-  margin-right: 0;
-  max-width: 100%; }
-  .filter-bar-section.material-list-toggle-section .card .card-header button {
-    padding: 16px;
-    font-size: 12px;
-    line-height: 16px;
-    color: #21242b;
-    font-weight: 600; }
-    .filter-bar-section.material-list-toggle-section .card .card-header button::after {
-      background: url(./icons/Down-arrow-primary.svg);
-      transform: rotate(180deg);
-      top: 16px; }
-    .filter-bar-section.material-list-toggle-section .card .card-header button.collapsed {
-      font-size: 12px;
-      line-height: 16px;
-      color: #6a7181;
-      font-weight: 600; }
-      .filter-bar-section.material-list-toggle-section .card .card-header button.collapsed::after {
-        background: url(./icons/Down-arrow-primary.svg);
-        transform: rotate(0deg); }
-  .filter-bar-section.material-list-toggle-section .card .card-body {
-    padding: 0 0 24px 0;
-    background: #f7f8fa; }
-  .filter-bar-section.material-list-toggle-section .update-material-list-table table.table {
-    margin-bottom: 0; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr:hover td {
-      background: #ffffff; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr th,
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td {
-      border: 1px solid #e4e7eb; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr th {
-      padding: 14px 16px !important; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr th:nth-child(4) {
-        min-width: 160px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .click-box {
-      flex-wrap: wrap;
-      background: url("./images/chevron_down.svg") center no-repeat;
-      background-position: 100%; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .click-box p {
-        width: 100%; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .click-box img {
+  .create-order-container .design-table .dropdown-box {
+    width: 486px;
+    left: 40px;
+    top: 28px;
+    display: block;
+    max-height: 270px; }
+  .create-order-container .design-table .category-wise-table {
+    max-width: 660px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: 16px;
+    text-align: right;
+    text-align: -webkit-right;
+    text-align: -moz-right;
+    min-height: 160px; }
+    .create-order-container .design-table .category-wise-table::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+      background-color: #f5f5f5; }
+    .create-order-container .design-table .category-wise-table::-webkit-scrollbar {
+      height: 8px;
+      background-color: #f5f5f5; }
+    .create-order-container .design-table .category-wise-table::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5; }
+    .create-order-container .design-table .category-wise-table label {
+      display: none; }
+    .create-order-container .design-table .category-wise-table .click-box {
+      display: none; }
+    .create-order-container .design-table .category-wise-table .swatch-file label {
+      display: block; }
+    .create-order-container .design-table .category-wise-table .add-sizep-category-modal {
+      right: 0;
+      left: unset;
+      top: 0;
+      transform: none;
+      z-index: 1; }
+      .create-order-container .design-table .category-wise-table .add-sizep-category-modal .click-box {
+        display: inline-flex; }
+      .create-order-container .design-table .category-wise-table .add-sizep-category-modal .fabric-select .dropdown-box {
         display: none; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:hover {
-      background: #f4f5f7 !important; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:first-child {
-      width: 210px; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:first-child .select-component .click-box {
-        flex-wrap: wrap;
-        background: url("./images/chevron_down.svg") center no-repeat;
-        background-position: 100%; }
-        .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:first-child .select-component .click-box p {
-          width: 100%; }
-        .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:first-child .select-component .click-box img {
-          display: none; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(2) {
-      width: 180px; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(2) select {
+  .create-order-container .design-table p {
+    margin: 0; }
+  .create-order-container .design-table table.table {
+    width: auto;
+    border: none !important;
+    box-shadow: none;
+    margin-bottom: 8px; }
+    .create-order-container .design-table table.table tr:active {
+      box-shadow: none; }
+    .create-order-container .design-table table.table tr th,
+    .create-order-container .design-table table.table tr td {
+      border: none !important;
+      background: transparent;
+      padding: 4px 3px !important;
+      min-width: 52px;
+      text-align: center; }
+      .create-order-container .design-table table.table tr th p,
+      .create-order-container .design-table table.table tr td p {
+        color: #6a7181; }
+    .create-order-container .design-table table.table tr th {
+      position: relative; }
+      .create-order-container .design-table table.table tr th p {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 500;
+        color: #21242b; }
+      .create-order-container .design-table table.table tr th .size-popup {
+        position: absolute;
+        padding: 12px;
+        border-radius: 4px;
+        width: 185px;
+        right: 3px;
+        z-index: 1; }
+      .create-order-container .design-table table.table tr th:last-child .col-heading {
+        background: #ffffff; }
+    .create-order-container .design-table table.table tr td {
+      height: auto; }
+      .create-order-container .design-table table.table tr td input[type="number"] {
+        width: 52px;
+        height: 24px;
+        text-align: center;
         border: none !important;
-        padding: 6px;
-        width: 100%;
-        background-color: transparent;
-        background-position: calc(100% - 0px) 13px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(3) {
-      width: 350px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(4) {
-      width: 140px; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(4) .f-consumption input {
-        width: 60px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        border: 1px solid #8a6fd6 !important;
-        box-shadow: none !important; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(4) .f-consumption select {
-        color: #6a7181;
-        min-width: 68px;
-        padding: 8px 4px;
-        background-position: calc(100% - 6px) 13px;
-        border: 1px solid #8a6fd6 !important;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        margin-left: -1px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(5):hover, .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(6):hover {
-      background: #ffffff !important; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:nth-child(6) {
-      width: 160px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:last-child {
-      width: 135px; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td:last-child .option {
-        text-align: center; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .type-tag {
-      color: #6a7181;
-      font-size: 12px;
-      line-height: 16px;
-      border: 1px solid #9aa1af;
-      border-radius: 2px;
-      padding: 2px 4px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .click-box {
+        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+        border-radius: 4px;
+        padding: 0;
+        color: #21242b; }
+        .create-order-container .design-table table.table tr td input[type="number"].border-error {
+          box-shadow: inset 0 0 0px 1px #f22b2b !important;
+          background: #ffdce5; }
+          .create-order-container .design-table table.table tr td input[type="number"].border-error::placeholder {
+            color: #f22b2b !important; }
+        .create-order-container .design-table table.table tr td input[type="number"]:hover {
+          box-shadow: inset 0 0 0px 1px #452c8e !important; }
+        .create-order-container .design-table table.table tr td input[type="number"]:focus {
+          box-shadow: inset 0 0 0px 1px #452c8e !important; }
+      .create-order-container .design-table table.table tr td:last-child input {
+        color: #452c8e !important;
+        font-weight: 600; }
+        .create-order-container .design-table table.table tr td:last-child input::placeholder {
+          color: #452c8e !important;
+          font-weight: 600; }
+  .create-order-container .design-table .total-units {
+    padding-left: 24px; }
+    .create-order-container .design-table .total-units input {
+      width: 112px;
+      height: 32px;
+      text-align: center;
+      font-weight: 600;
+      color: #ee761f;
+      border-radius: 4px; }
+      .create-order-container .design-table .total-units input::placeholder {
+        color: #ee761f !important;
+        font-weight: 600; }
+      .create-order-container .design-table .total-units input.border-error {
+        box-shadow: inset 0 0 0px 1px #f22b2b !important;
+        background: #ffdce5; }
+        .create-order-container .design-table .total-units input.border-error::placeholder {
+          color: #f22b2b !important; }
+    .create-order-container .design-table .total-units .error {
+      position: absolute;
+      bottom: -20px;
       width: 100%;
-      box-shadow: none !important;
-      background-color: transparent; }
-      .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .click-box p {
-        padding-left: 0; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .search-filter input {
-      width: 100%;
-      margin-bottom: 0; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td .select-component .dropdown-box {
-      max-width: 460px; }
-    .filter-bar-section.material-list-toggle-section .update-material-list-table table.table tr td.error-border-bottom {
-      background: #ffdce5; }
+      left: 0;
+      text-align: right !important; }
+    .create-order-container .design-table .total-units .unit-price-total {
+      color: #ee761f; }
+  .create-order-container .design-table .sizewise-wise-table table.table tr:last-child td input {
+    color: #ee761f !important;
+    font-weight: 600; }
+    .create-order-container .design-table .sizewise-wise-table table.table tr:last-child td input::placeholder {
+      color: #ee761f !important;
+      font-weight: 600; }
+  .create-order-container .design-table .sizewise-wise-table table.table tr:last-child td:last-child input {
+    background: #ffffff !important; }
+    .create-order-container .design-table .sizewise-wise-table table.table tr:last-child td:last-child input:hover {
+      box-shadow: inset 0 0 0px 1px #452c8e !important; }
+  .create-order-container .design-table .sizewise-wise-table table.table tr td:last-child input {
+    background: #f7f8fa !important; }
+    .create-order-container .design-table .sizewise-wise-table table.table tr td:last-child input:hover {
+      box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
+  .create-order-container .design-table .color-wise-table table.table tr th:nth-last-child(2) p {
+    color: #6a7181; }
+  .create-order-container .design-table .color-wise-table table.table tr th:last-child p {
+    color: #6a7181; }
+  .create-order-container .design-table .color-wise-table table.table tr td:last-child input {
+    color: #ee761f !important;
+    font-weight: 600; }
+    .create-order-container .design-table .color-wise-table table.table tr td:last-child input::placeholder {
+      color: #ee761f !important;
+      font-weight: 600; }
+    .create-order-container .design-table .color-wise-table table.table tr td:last-child input.border-error::placeholder {
+      color: #f22b2b !important; }
+  .create-order-container .design-table .color-wise-table table.table tr td:nth-last-child(2) input {
+    color: #452c8e !important;
+    font-weight: 600;
+    background: #f7f8fa !important; }
+    .create-order-container .design-table .color-wise-table table.table tr td:nth-last-child(2) input::placeholder {
+      color: #452c8e !important;
+      font-weight: 600; }
+    .create-order-container .design-table .color-wise-table table.table tr td:nth-last-child(2) input:hover {
+      box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
+  .create-order-container .design-table .design-wise-table {
+    padding-bottom: 40px; }
+    .create-order-container .design-table .design-wise-table table.table tr td:last-child input {
+      background: #f7f8fa !important; }
+      .create-order-container .design-table .design-wise-table table.table tr td:last-child input:hover {
+        box-shadow: inset 0 0 0px 1px #c7ced4 !important; }
+    .create-order-container .design-table .design-wise-table .total-units {
+      position: absolute;
+      right: 0; }
+  .create-order-container .design-table .size-color-wise-table table.table tr th p,
+  .create-order-container .design-table .size-color-wise-table table.table tr td p {
+    display: inline-block;
+    box-shadow: none !important;
+    border: 1px solid #c7ced4; }
+  .create-order-container .design-table .size-color-wise-table table.table tr th input[type="number"],
+  .create-order-container .design-table .size-color-wise-table table.table tr td input[type="number"] {
+    width: 48px; }
+  .create-order-container .design-table .size-color-wise-table table.table tr th p:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 48px; }
+  .create-order-container .design-table .size-color-wise-table table.table tr th p:nth-child(2) {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 52px; }
+  .create-order-container .design-table .size-color-wise-table table.table tr th:last-child p {
+    border-radius: 4px;
+    width: 100px; }
+  .create-order-container .design-table .size-color-wise-table table.table tr td input:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 48px; }
+  .create-order-container .design-table .size-color-wise-table table.table tr td input:nth-child(2) {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 52px;
+    color: #ee761f !important;
+    font-weight: 600; }
+  .create-order-container .design-table .size-color-wise-table table.table tr td:last-child input {
+    border-radius: 4px;
+    width: 100px; }
+  .create-order-container .design-table .custom-tooltip .tooltiptext {
+    font-size: 11px;
+    line-height: 16px;
+    width: 68px;
+    visibility: hidden; }
+  .create-order-container .design-table .custom-tooltip:hover .tooltiptext {
+    visibility: visible; }
+  .create-order-container .design-table .custom-tooltip.color-add .tooltiptext {
+    left: 58px; }
+    .create-order-container .design-table .custom-tooltip.color-add .tooltiptext::after {
+      left: 15px; }
+  .create-order-container .design-table .custom-tooltip.size-add .tooltiptext {
+    left: 44px; }
+    .create-order-container .design-table .custom-tooltip.size-add .tooltiptext::after {
+      left: 54px; }
+  .create-order-container .design-table table.table.multiple-sizes-table tr th .col-heading {
+    width: 65px; }
+  .create-order-container .design-table table.table.multiple-sizes-table tr td input[type="number"] {
+    width: 65px; }
+  .create-order-container .design-table table.table.multiple-sizes-table tr td .size-wise-view {
+    width: auto !important; }
 
-@media only screen and (max-width: 1440px) {
-  .order-container-with-sidebar .material-list-add-section {
-    width: 1226px; }
-  .order-container-with-sidebar .create-order-container {
-    width: 1226px; }
-    .order-container-with-sidebar .create-order-container .design-quantity-table .design-table .category-wise-table {
-      max-width: 450px; }
-    .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table thead th {
-      padding: 24px 8px !important; }
-      .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table thead th:first-child {
-        padding-left: 16px !important; }
-    .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table tr td {
-      padding: 5px 8px !important; }
-      .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table tr td:first-child {
-        padding-left: 16px !important; }
-      .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table tr td:nth-child(7) {
-        width: 85px; }
-      .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table table.table tr td:last-child {
-        width: 120px; }
-    .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table.terms-and-conditions-table table.table thead th {
-      padding: 24px 16px !important; }
-    .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td {
-      padding: 5px 16px !important; }
-      .order-container-with-sidebar .create-order-container .product-and-service-details .service-details-table.terms-and-conditions-table table.table tr td:nth-child(4) {
-        width: 600px; } }
-@media only screen and (max-width: 1366px) {
-  .order-container-with-sidebar .create-order-container,
-  .order-container-with-sidebar .material-list-add-section {
-    width: 1112px; } }
+@media only screen and (max-width: 1024px) {
+  .create-order-container .designs-info-section .designs-row .single-design {
+    flex-wrap: wrap; }
+    .create-order-container .designs-info-section .designs-row .single-design .design-image {
+      width: 160px;
+      height: 178px;
+      aspect-ratio: 9 / 10; }
+    .create-order-container .designs-info-section .designs-row .single-design .design-details-info {
+      width: calc(100% - 192px); }
+    .create-order-container .designs-info-section .designs-row .single-design .design-quantity-table {
+      width: 100%; }
+      .create-order-container .designs-info-section .designs-row .single-design .design-quantity-table .text-right {
+        text-align: left !important; }
+      .create-order-container .designs-info-section .designs-row .single-design .design-quantity-table .total-units {
+        right: unset;
+        left: 0; }
+  .create-order-container .designs-info-section .design-table {
+    justify-content: flex-start; }
+    .create-order-container .designs-info-section .design-table .category-wise-table {
+      max-width: 100%; } }
+@media only screen and (max-width: 1024px) {
+  .create-order-container .designs-info-section .designs-row .single-design .po-details-view ul {
+    flex-wrap: wrap; } }
+@media only screen and (max-width: 520px) {
+  .create-order-container .designs-info-section .designs-row .single-design .design-title {
+    margin-top: 0 !important; }
+  .create-order-container .designs-info-section .designs-row .single-design .po-details-view .po-quantity-colums-view {
+    margin-top: 16px; } }
 .stepper .form-group {
   margin-bottom: 25px; }
 

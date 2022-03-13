@@ -4,6 +4,9 @@ const initialState = {};
 
 const TimelineReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ActionTypes.ADD_NEW_COMMENT:
+            let data = [action.payload, ...state.data]
+            return {...state, data: data}
         case ActionTypes.FETCH_STEP_INFO:
             return {...state, stepList: action.payload};
         case ActionTypes.TOGGLE_DESIGN_SELECTION:

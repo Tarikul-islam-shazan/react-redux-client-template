@@ -445,7 +445,7 @@ export default class TaskManage extends Component {
          orderId,
          stepId: taskId,
          text: post.replace(/"/g, "'"),
-         taggedUserIdList: this.getMentionedUserIds(),
+         taggedUserIdList: this.getMentionedUserIds()
       };
       if (postType === "COMPLETE" || postType === "APPROVE") {
          this.approvePost(body);
@@ -453,7 +453,7 @@ export default class TaskManage extends Component {
          this.revisePost(body);
       } else {
          await this.setState({ loading: true });
-         await Http.POST("postOnTask", body)
+         await Http.POST("postOnTask", body,"?fromTimeline=false")
             .then(({ data }) => {
                this.setState({ loading: false });
                if (data.success) {
