@@ -38,6 +38,9 @@ import BuyerLoginPopup from "./buyerLogin/BuyerLoginPopup";
 import BrandCreation from "./pages/questionairre/BrandCreation";
 import NotificationAll from "./pages/notification/NotificationAll";
 import VerifyEmail from "./buyerLogin/VerifyEmail";
+import MyOrderList from "./modules/timeline/MyOrderList";
+import Timeline from "./modules/timeline/Timeline";
+import PODetails from "./modules/timeline/PODetails";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -164,7 +167,7 @@ class Root extends Component {
                     {/*<PublicRoute exact path="/v2/quotes/list" component={ MyRFQsV2 }/>*/}
                     <PublicRoute exact path="/negotiation/:id" component={RfoNegotiation} />
 
-                    <PublicRoute exact path="/orders/my-orders" component={MyOrder} />
+                    {/*<PublicRoute exact path="/orders/my-orders" component={MyOrder} />*/}
 
                     <PublicRoute exact path="/orders/view/:id" component={MyProjectDetailsV2} />
 
@@ -182,6 +185,9 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/list" component={InvoiceList} />
                     <PublicRoute exact path="/invoices/view/:id" component={InvoiceDetails} />
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
+                    <PublicRoute exact path="/orders/my-orders" component={MyOrderList} />
+                    <PublicRoute exact path="/timeline/:orderId" component={Timeline} />
+                    <PublicRoute exact path="/purchaseDetails/:orderId" component={PODetails} />
                 </Switch>
             </Router>
         );

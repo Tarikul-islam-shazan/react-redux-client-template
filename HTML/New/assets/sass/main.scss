@@ -13,13 +13,13 @@
 
 // 5. Components
 @import "components/button", "components/uploder", "components/modal-positions", "components/table",
-    "components/task_status", "components/shadow";
+    "components/task_status", "components/shadow", "components/input_form";
 
 // 6. Page-specific styles
 @import "pages/home", "pages/new-pages", "pages/explore-design", "pages/add-quote", "pages/quotes",
     "pages/place-order", "pages/invoice", "pages/share-design", "pages/role-management",
     "pages/collection", "pages/task-conversation", "pages/team-member-add", "pages/buyer-dashboard",
-    "pages/common-popups", "pages/buyer-timeline";
+    "pages/common-popups", "pages/buyer-timeline", "pages/order-list", "pages/create-order";
 
 // 7. Themes
 @import "themes/default", "themes/admin-panel";
