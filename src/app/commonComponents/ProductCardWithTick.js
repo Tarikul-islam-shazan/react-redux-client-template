@@ -103,12 +103,16 @@ class ProductCard extends Component {
         }
     };
 
+    handleRoute = () => {
+        return <Redirect to={`/designs/view/${this.props.product.id}`} />
+    }
+
     render() {
         let flag = 1;
         let { product, showDetails, likeProduct, unlikeProduct, showEdit } = this.props;
         let disabled = STATUS_NOT_ALLOWED_FOR_SELECTION.includes(product.availabilityStatus);
         return (
-            <div className="item">
+            <div className="item" onClick={this.handleRoute}>
                 <div
                     className={`card product-card new-card ${
                         product.isSelected ? "active" : product.isAddedToList ? "hovered" : ""

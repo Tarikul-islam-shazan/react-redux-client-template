@@ -21,6 +21,7 @@ const ActivityLog = ({activity, setLoader}) => {
     const [message, setMessage] = useState("");
     const [memberList, setMemberList] = useState([]);
     const [taggedUser, setTaggedUer] = useState([])
+    const [taskId, setTaskId] = useState(0)
     const params = useParams();
     const history = useHistory();
 
@@ -38,6 +39,12 @@ const ActivityLog = ({activity, setLoader}) => {
             let comment = [];
             comment.push(activity.body.entityIdTypeMapList[0].text);
             setCommentList(comment);
+        }
+        if (activity?.body?.titlePartList) {
+            let task = activity?.body?.titlePartList.find(item => item.entityType === "STEP" && item.titlePartType === "ACTED_UPON");
+            if (task !== undefined) {
+                setTaskId(task.id)
+            }
         }
     }, [activity]);
 
@@ -116,6 +123,9 @@ const ActivityLog = ({activity, setLoader}) => {
 
     const renderTimeLineImages = () => {
         let {timelineImages} = activity;
+        if (!("timelineImages" in activity)) {
+            timelineImages = []
+        }
         const fileTypeOne = getFileType(timelineImages[0])
         const fileTypeTwo = getFileType(timelineImages[1])
         return (
@@ -295,14 +305,49 @@ const ActivityLog = ({activity, setLoader}) => {
         }
     };
 
+    const renderPiShippingUpdateDescription = () => {
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        return (
+            <>
+                <p>{textObj["title"]}</p>
+                <p>{textObj["addressLine1"]}</p>
+                <p>{textObj["addressLine2"]}</p>
+                <p>{textObj["city"]}</p>
+                <p>{textObj["zip"]}</p>
+                <p>{textObj["state"]}</p>
+                <p>{textObj["country"]}</p>
+            </>
+        )
+    };
+
+    const renderPiBeneficiaryDetails = () => {
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        return (
+            <>
+                <p>{textObj["name"]}</p>
+                <p>{textObj["address"]}</p>
+                <p>{textObj["website"]}</p>
+            </>
+        )
+    };
+
+    const renderBankDetails = () => {
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        return (
+            <>
+                <p>Swift: {textObj["swiftCode"]}</p>
+                <p>A/C: {textObj["accountNumber"]}</p>
+                <p>{textObj["bankName"]}</p>
+                <p>{textObj["bankDetails"]}</p>
+            </>
+        )
+    };
+
+
     const renderActivityBody = () => {
         if (
             activity.actionType === "TASK_REGULAR_POST" ||
-            activity.actionType === "COMMENT" ||
-            activity.actionType === "PI_SHIPPING_UPDATED" ||
-            activity.actionType === "PI_BENEFICIARY_DETAILS_UPDATED" ||
-            activity.actionType === "PI_BUYER_ADDRESS_UPDATED" ||
-            activity.actionType === "PI_BANK_DETAILS_UPDATED"
+            activity.actionType === "COMMENT"
         ) {
             return (
                 <div className="activity-common-body">
@@ -331,6 +376,46 @@ const ActivityLog = ({activity, setLoader}) => {
                     </div>
                 </div>
             );
+        } else if (
+            activity.actionType === "TASK_DESCRIPTION_UPDATED"
+        ) {
+            return (
+                <div className="activity-common-body">
+                    {renderDescription()}
+                </div>
+            );
+        } else if (
+            activity.actionType === "PI_SHIPPING_UPDATED"
+        ) {
+            return (
+                <div className="activity-common-body">
+                    {renderPiShippingUpdateDescription()}
+                </div>
+            );
+        } else if (
+            activity.actionType === "PI_BENEFICIARY_DETAILS_UPDATED"
+        ) {
+            return (
+                <div className="activity-common-body">
+                    {renderPiBeneficiaryDetails()}
+                </div>
+            );
+        } else if (
+            activity.actionType === "PI_BUYER_ADDRESS_UPDATED"
+        ) {
+            return (
+                <div className="activity-common-body">
+                    {renderPiShippingUpdateDescription()}
+                </div>
+            );
+        } else if (
+            activity.actionType === "PI_BANK_DETAILS_UPDATED"
+        ) {
+            return (
+                <div className="activity-common-body">
+                    {renderBankDetails()}
+                </div>
+            );
         }
     };
 
@@ -349,7 +434,6 @@ const ActivityLog = ({activity, setLoader}) => {
         } else if (activity.activityModule === "TASK") {
             setShowTaskDetailsModal(true)
         }
-
     }
 
     return (
@@ -373,7 +457,7 @@ const ActivityLog = ({activity, setLoader}) => {
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <TaskManage
-                    id={activity.id}
+                    id={taskId}
                     orderId={params.orderId}
                     closeModal={() => setShowTaskDetailsModal(false)}
                     callback={() => false}

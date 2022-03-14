@@ -45,30 +45,33 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LoaderComponent from "../../commonComponents/Loader";
 
+
+const initialState = {
+    product: {},
+    loading: false,
+    selectedImage: "",
+    imageViewerFlag: false,
+    imageViewerData: [],
+    imageViewerCurrentIndex: 0,
+    similarDesigns: [],
+    similarDesignLoading: false,
+    measurementModal: false,
+    page: 0,
+    collectionList: [],
+    showAddCollectionPopup: false,
+    showCollectionAddOption: false,
+    collectionName: "",
+    collectionNameError: "",
+    TURN_AROUND_TIME: "",
+    MOQ: "",
+    searchCollection: "",
+    modalLoader: false
+};
+
 class OurDesignDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            product: {},
-            loading: false,
-            selectedImage: "",
-            imageViewerFlag: false,
-            imageViewerData: [],
-            imageViewerCurrentIndex: 0,
-            similarDesigns: [],
-            similarDesignLoading: false,
-            measurementModal: false,
-            page: 0,
-            collectionList: [],
-            showAddCollectionPopup: false,
-            showCollectionAddOption: false,
-            collectionName: "",
-            collectionNameError: "",
-            TURN_AROUND_TIME: "",
-            MOQ: "",
-            searchCollection: "",
-            modalLoader: false
-        };
+        this.state = initialState;
     }
 
     handleChangeCollection = (e) => {
@@ -155,16 +158,21 @@ class OurDesignDetails extends Component {
         }
     };
 
-    componentDidUpdate = () => {
-        this.getTitleName();
-    };
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // this.getTitleName();
+        if(prevProps.match.params.id !== this.props.match.params.id){
+            this.renderDidMount().then(() => {
+                window.scrollTo(0, 0)
+            })
+        }
+    }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
         document.removeEventListener("mousedown", this.handleClickOutside);
     }
 
-    componentDidMount = async () => {
+    renderDidMount = async () => {
         document.title = "Product details on Nitex - The easiest clothing manufacturing software";
         window.addEventListener("scroll", this.handleScroll);
         document.addEventListener("mousedown", this.handleClickOutside);
@@ -224,6 +232,10 @@ class OurDesignDetails extends Component {
         }
         this.getSimilarDesign();
         this.fetchCollectionList();
+    }
+
+    componentDidMount = () => {
+        this.renderDidMount()
     };
 
     likeProduct = (id) => {
