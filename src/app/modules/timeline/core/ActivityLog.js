@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { addImageSuffix, authUserInfo, parseHtml } from "../../../services/Util";
+import React, {useEffect, useState} from "react";
+import {addImageSuffix, authUserInfo, parseHtml} from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import { useParams } from "react-router-dom";
-import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import {useParams} from "react-router-dom";
+import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import { toastError, toastSuccess } from "../../../commonComponents/Toast";
+import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
+import {useSelector} from "react-redux";
+import {MentionsInput, Mention} from 'react-mentions'
 
-const ActivityLog = ({ activity, setLoader }) => {
+const ActivityLog = ({activity, setLoader}) => {
+    const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
     const [isReplying, setIsReplying] = useState(false);
     const [commentList, setCommentList] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [message, setMessage] = useState("");
+    const [memberList, setMemberList] = useState([]);
+    const [taggedUser, setTaggedUer] = useState([])
+
     const params = useParams();
+
+    useEffect(() => {
+        if (timelineStore?.orderInfo?.orderMemberList) {
+            let members = []
+            let tmpList = timelineStore?.orderInfo?.orderMemberList
+            tmpList.map(member => members.push({id: member.memberId, display: member.memberName}))
+            setMemberList(members)
+        }
+    }, [timelineStore]);
 
     useEffect(() => {
         if (activity.body?.entityIdTypeMapList) {
@@ -38,13 +53,13 @@ const ActivityLog = ({ activity, setLoader }) => {
         if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
             return (
                 <div className="person-profile">
-                    <img src={activity.profileImage} alt="" />
+                    <img src={activity.profileImage} alt=""/>
                 </div>
             );
         } else {
             return (
                 <div className="activity-icon">
-                    <img src={iconPath()} alt="" />
+                    <img src={iconPath()} alt=""/>
                 </div>
             );
         }
@@ -68,17 +83,17 @@ const ActivityLog = ({ activity, setLoader }) => {
     };
 
     const renderTimeLineImages = () => {
-        let { timelineImages } = activity;
+        let {timelineImages} = activity;
         return (
             <div className="body-style-images-row">
                 {timelineImages[0] && (
                     <div className="single-one">
-                        <img src={timelineImages[0]} alt="" />
+                        <img src={timelineImages[0]} alt=""/>
                     </div>
                 )}
                 {timelineImages[1] && (
                     <div className="single-one">
-                        <img src={timelineImages[1]} alt="" />
+                        <img src={timelineImages[1]} alt=""/>
                         {timelineImages?.length > 2 && (
                             <div className="more-style-count" onClick={toggleImageModal}>
                                 <div className="count-number">{timelineImages?.length - 2}+</div>
@@ -95,7 +110,7 @@ const ActivityLog = ({ activity, setLoader }) => {
             return (
                 <p
                     className={`description regular-12 ${index > 0 ? "pl-2" : ""}`}
-                    dangerouslySetInnerHTML={{ __html: parseHtml(comment.toString("html")) }}
+                    dangerouslySetInnerHTML={{__html: parseHtml(comment.toString("html"))}}
                 />
             );
         });
@@ -162,10 +177,10 @@ const ActivityLog = ({ activity, setLoader }) => {
             postId: activity?.body?.entityIdTypeMapList[0]?.id,
             postType: "COMMENT",
             text: message.replace(/"/g, "'"),
-            taggedUserIdList: [],
+            taggedUserIdList: taggedUser,
         };
         await Http.POST("commentOnTask", body, "?fromTimeline=true")
-            .then(({ data }) => {
+            .then(({data}) => {
                 let tempCommentList = [...commentList];
                 tempCommentList.push(message);
                 setCommentList(tempCommentList);
@@ -173,11 +188,17 @@ const ActivityLog = ({ activity, setLoader }) => {
                 setLoader(false);
                 toastSuccess("Replied Successful!");
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setLoader(false);
                 toastError(response.data.message);
             });
     };
+
+    const handleUserTag = (id, display) => {
+        if (!taggedUser.includes(id)) {
+            setTaggedUer([...taggedUser, id])
+        }
+    }
 
     const renderReplySection = () => {
         if (isReplying) {
@@ -193,16 +214,23 @@ const ActivityLog = ({ activity, setLoader }) => {
                                 alt=""
                                 className="profile-image"
                             />
-                            <input
-                                type="text"
+                            <MentionsInput
                                 value={message}
-                                placeholder="Write reply......"
                                 onChange={(e) => setMessage(e.target.value)}
-                            />
+                                placeholder="Reply..."
+                            >
+                                <Mention
+                                    markup='@__display__'
+                                    trigger="@"
+                                    data={memberList}
+                                    onAdd={handleUserTag}
+                                    appendSpaceOnAdd={true}
+                                />
+                            </MentionsInput>
                         </div>
                         <div className="attachment cursor-pointer">
                             <label htmlFor="upload-input-file">
-                                <img src="/icons/attachment.svg" alt="attach" />
+                                <img src="/icons/attachment.svg" alt="attach"/>
                             </label>
                             <input
                                 id="upload-input-file"
@@ -267,7 +295,7 @@ const ActivityLog = ({ activity, setLoader }) => {
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
                 <div className="design-image">
-                    <img src="/images/design2.png" alt="design image" />
+                    <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
                 </div>
             </div>
             {renderActivityBody()}
