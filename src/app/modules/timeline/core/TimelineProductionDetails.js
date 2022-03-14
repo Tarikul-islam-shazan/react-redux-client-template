@@ -5,7 +5,7 @@ const TimelineProductionDetails = ({ setLoader }) => {
     return (
         <>
             <div className="tab-none one-third">
-                <AllProductionList />
+                <AllProductionList setLoader={setLoader}/>
             </div>
         </>
     );

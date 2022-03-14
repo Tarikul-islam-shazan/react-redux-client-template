@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {addImageSuffix, authUserInfo, parseHtml} from "../../../services/Util";
+import {addImageSuffix, authUserInfo, getFileType, getIconByFileType, parseHtml} from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
 import {useParams} from "react-router-dom";
@@ -43,9 +43,40 @@ const ActivityLog = ({activity, setLoader}) => {
     const iconPath = () => {
         switch (activity.actionType) {
             case "TASK_COMPLETE":
+            case "COMPLETED_ORDER":
+                return "/icons/check.svg";
+            case "TASK_APPROVE":
+                return "/icons/thumbs-up.svg";
+            case "TASK_REVISION":
+                return "/icons/Revision.svg";
+            case "NEW_TASK_ADDED":
+            case "TASK_MEMBER_ASSIGNED":
                 return "/icons/plus-square.svg";
+            case "TASK_MEMBER_REMOVED":
+                return "/icons/trash-2.svg";
+            case "TASK_DEADLINE_UPDATED":
+                return "/icons/calendar.svg";
+            case "TASK_DESCRIPTION_UPDATED":
+            case "UPDATED_MEASUREMENT_CHART":
+            case "UPDATED_MATERIAL_LIST":
+            case "UPDATED_COLOR_SIZEWISE_QTY":
+            case "UPDATED_INCOTERM":
+            case "UPDATED_PRICE":
+            case "UPDATED_PO_NO":
+            case "UPDATED_ETD":
+            case "PI_APPROVAL_ACKNOWLEDGEMENT":
+            case "PI_TERMS_UPDATED":
+            case "PI_SHIPPING_UPDATED":
+            case "PI_BENEFICIARY_DETAILS_UPDATED":
+            case "PI_BUYER_ADDRESS_UPDATED":
+            case "PI_BANK_DETAILS_UPDATED":
+                return "/icons/Update.svg";
+            case "STARTED_ORDER":
+                return "/icons/start-order.svg";
+            case "PI_SENT":
+                return "/icons/send.svg";
             default:
-                return "";
+                return "/icons/Update.svg";
         }
     };
 
@@ -84,16 +115,24 @@ const ActivityLog = ({activity, setLoader}) => {
 
     const renderTimeLineImages = () => {
         let {timelineImages} = activity;
+        const fileTypeOne = getFileType(timelineImages[0])
+        const fileTypeTwo = getFileType(timelineImages[1])
         return (
             <div className="body-style-images-row">
                 {timelineImages[0] && (
                     <div className="single-one">
-                        <img src={timelineImages[0]} alt=""/>
+                        {(fileTypeOne === 'IMAGE' || fileTypeOne === 'NO_FILE') ?
+                            <img src={timelineImages[0]} alt=""/> :
+                            <img src={getIconByFileType(fileTypeOne)} alt=""/>
+                        }
                     </div>
                 )}
                 {timelineImages[1] && (
                     <div className="single-one">
-                        <img src={timelineImages[1]} alt=""/>
+                        {(fileTypeTwo === 'IMAGE' || fileTypeTwo === 'NO_FILE') ?
+                            <img src={timelineImages[1]} alt=""/> :
+                            <img src={getIconByFileType(fileTypeTwo)} alt=""/>
+                        }
                         {timelineImages?.length > 2 && (
                             <div className="more-style-count" onClick={toggleImageModal}>
                                 <div className="count-number">{timelineImages?.length - 2}+</div>
@@ -256,7 +295,14 @@ const ActivityLog = ({activity, setLoader}) => {
     };
 
     const renderActivityBody = () => {
-        if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
+        if (
+            activity.actionType === "TASK_REGULAR_POST" ||
+            activity.actionType === "COMMENT" ||
+            activity.actionType === "PI_SHIPPING_UPDATED" ||
+            activity.actionType === "PI_BENEFICIARY_DETAILS_UPDATED" ||
+            activity.actionType === "PI_BUYER_ADDRESS_UPDATED" ||
+            activity.actionType === "PI_BANK_DETAILS_UPDATED"
+        ) {
             return (
                 <div className="activity-common-body">
                     {renderDescription()}
@@ -295,7 +341,9 @@ const ActivityLog = ({activity, setLoader}) => {
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
                 <div className="design-image">
-                    <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
+                    {activity?.secondaryActedUpon?.docUrlList[0] &&
+                        <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
+                    }
                 </div>
             </div>
             {renderActivityBody()}

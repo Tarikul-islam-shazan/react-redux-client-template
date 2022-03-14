@@ -1,7 +1,6 @@
 import React from "react";
 import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {toastWarning} from "../../commonComponents/Toast";
 
 const ListOfOrder = ({orderStore, activeTab}) => {
