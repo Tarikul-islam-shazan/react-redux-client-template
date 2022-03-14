@@ -886,3 +886,93 @@ h4.details-title {
 .custom-scrollbar-x::-webkit-scrollbar-thumb {
     background-color: #8b8a8e;
 }
+
+.color-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 100px;
+    display: inline-block;
+}
+.colors-row {
+    .dropdown-menu {
+        min-width: 105px;
+        transform: translate3d(45px, -70px, 0px) !important;
+        &::before {
+            display: none;
+        }
+    }
+
+    .multicolors {
+        margin-top: 6px;
+        display: flex;
+        span {
+            margin-left: -20px;
+            border: 1px solid $gray_light_03;
+            &:first-child {
+                margin-left: 0;
+            }
+            &:last-child {
+                border: none;
+                img {
+                    width: 24px;
+                    height: 24px;
+                    text-align: center;
+                    background: $white;
+                    border-radius: 100px;
+                    padding: 3px;
+                    visibility: hidden;
+                    position: relative;
+                    top: -10px;
+                    left: -10px;
+                    cursor: pointer;
+                }
+            }
+        }
+        &:hover {
+            span {
+                &:last-child {
+                    visibility: visible;
+                    img {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+    .solid-colors {
+        margin-top: 6px;
+        .sinlge-group {
+            position: relative;
+            margin-left: 4px;
+            &:first-child {
+                margin-left: 0;
+            }
+            span {
+                &:nth-child(2) {
+                    width: 24px;
+                    height: 24px;
+                    text-align: center;
+                    background: $white;
+                    border-radius: 100px;
+                    display: inline-block;
+                    position: absolute;
+                    left: 2px;
+                    top: 2px;
+                    visibility: hidden;
+                    img {
+                        width: 20px;
+                        margin-top: -2px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            &:hover {
+                span {
+                    &:nth-child(2) {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+}

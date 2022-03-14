@@ -1,0 +1,676 @@
+.create-order-container {
+    .designs-info-section {
+        .back-icon {
+            margin-top: -2px;
+        }
+        .designs-row {
+            .single-design {
+                border: 1px solid $gray_light_01;
+                border-radius: 6px;
+                padding: 8px;
+                margin-bottom: 20px;
+                .design-image {
+                    width: 184px;
+                    height: 236px;
+                    background: $gray_light_03;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+                .po-details-view {
+                    ul {
+                        display: flex;
+                        li {
+                            margin-right: 17px;
+                            position: relative;
+                            font-size: 12px;
+                            line-height: 16px;
+                            color: $gray_dark_01;
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 2px;
+                                height: 8px;
+                                background: $gray_dark_03;
+                                top: 50%;
+                                right: -8px;
+                                transform: translateY(-50%);
+                            }
+                            &:last-child {
+                                &::after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .po-quantity-colums-view {
+                        ul {
+                            li {
+                                font-size: 14px;
+                                color: $gray_dark_02;
+                            }
+                        }
+                    }
+                }
+                .design-details-info {
+                    margin-left: 16px;
+                    max-width: 500px;
+                    width: 500px;
+                    .po-info-colums-view {
+                        margin: 16px 0 32px 0;
+                    }
+                    .po-details {
+                        max-width: 324px;
+                        input {
+                            border-radius: 4px;
+                        }
+                    }
+
+                    .design-title {
+                        .buttons {
+                            visibility: hidden;
+                        }
+                    }
+                }
+                .design-quantity-table {
+                    width: calc(100% - 720px);
+                }
+                &:hover {
+                    .design-details-info {
+                        .design-title {
+                            .buttons {
+                                visibility: visible;
+                            }
+                        }
+                    }
+                }
+                .colors-row {
+                    .multicolors {
+                        margin-top: 0;
+                        justify-content: end;
+                    }
+                }
+                &.design-wise,
+                &.size-wise {
+                    .design-table {
+                        table {
+                            &.table {
+                                tr {
+                                    td {
+                                        &:last-child {
+                                            color: $primary;
+                                            font-weight: 500;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &.color-wise {
+                    .design-table {
+                        table {
+                            &.table {
+                                tr {
+                                    td {
+                                        &:nth-last-child(2) {
+                                            color: $primary;
+                                            font-weight: 500;
+                                        }
+                                        &:last-child {
+                                            p {
+                                                color: $secondary;
+                                                font-weight: 500;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .design-table {
+        display: flex;
+        justify-content: end;
+        position: relative;
+        .multiple-color-add-option {
+            display: flex;
+            float: right;
+            .option {
+                button {
+                    &.dropdown-toggle {
+                        position: relative;
+                        left: 32px;
+                        top: 2px;
+                        z-index: 1;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        .dropdown-box {
+            width: 486px;
+            left: 40px;
+            top: 28px;
+            display: block;
+            max-height: 270px;
+        }
+        .category-wise-table {
+            max-width: 660px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 16px;
+            text-align: right;
+            text-align: -webkit-right;
+            text-align: -moz-right;
+            // min-width: 280px;
+            min-height: 160px;
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                background-color: #f5f5f5;
+            }
+            &::-webkit-scrollbar {
+                height: 8px;
+                background-color: #f5f5f5;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                background-color: #f5f5f5;
+            }
+            label {
+                display: none;
+            }
+            .click-box {
+                display: none;
+            }
+            .swatch-file {
+                label {
+                    display: block;
+                }
+            }
+            .add-sizep-category-modal {
+                right: 0;
+                left: unset;
+                top: 0;
+                transform: none;
+                z-index: 1;
+                .click-box {
+                    display: inline-flex;
+                }
+                .fabric-select {
+                    .dropdown-box {
+                        display: none;
+                    }
+                }
+            }
+        }
+        p {
+            margin: 0;
+        }
+        table {
+            &.table {
+                width: auto;
+                border: none !important;
+                box-shadow: none;
+                margin-bottom: 8px;
+
+                tr {
+                    &:active {
+                        box-shadow: none;
+                    }
+                    th,
+                    td {
+                        border: none !important;
+                        background: transparent;
+                        padding: 2px !important;
+                        min-width: 52px;
+                        text-align: center;
+                        p {
+                            color: $gray_dark_02;
+                        }
+                    }
+                    th {
+                        position: relative;
+                        p {
+                            font-size: 14px;
+                            line-height: 24px;
+                            font-weight: 500;
+                            color: $gray_dark_01;
+                        }
+                        .size-popup {
+                            position: absolute;
+                            padding: 12px;
+                            border-radius: 4px;
+                            width: 185px;
+                            right: 3px;
+                            z-index: 1;
+                        }
+                        &:last-child {
+                            .col-heading {
+                                background: $white;
+                            }
+                        }
+                    }
+                    td {
+                        height: auto;
+                        input[type="number"] {
+                            width: 52px;
+                            height: 24px;
+                            text-align: center;
+                            border: none !important;
+                            box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                            border-radius: 4px;
+                            padding: 0;
+                            color: $gray_dark_01;
+                            &.border-error {
+                                box-shadow: inset 0 0 0px 1px $red !important;
+                                background: $red_light_01;
+                                &::placeholder {
+                                    color: $red !important;
+                                }
+                            }
+                            &:hover {
+                                box-shadow: inset 0 0 0px 1px $primary !important;
+                            }
+                            &:focus {
+                                box-shadow: inset 0 0 0px 1px $primary !important;
+                            }
+                        }
+                        &:last-child {
+                            input {
+                                color: $primary !important;
+                                font-weight: 600;
+                                &::placeholder {
+                                    color: $primary !important;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .total-units {
+            padding-left: 24px;
+            input {
+                width: 112px;
+                height: 32px;
+                text-align: center;
+                font-weight: 600;
+                color: $secondary;
+                border-radius: 4px;
+                &::placeholder {
+                    color: $secondary !important;
+                    font-weight: 600;
+                }
+                &.border-error {
+                    box-shadow: inset 0 0 0px 1px $red !important;
+                    background: $red_light_01;
+                    &::placeholder {
+                        color: $red !important;
+                    }
+                }
+            }
+            .error {
+                position: absolute;
+                bottom: -20px;
+                width: 100%;
+                left: 0;
+                text-align: right !important;
+            }
+            .unit-price-total {
+                color: $secondary;
+            }
+        }
+        .sizewise-wise-table {
+            table {
+                &.table {
+                    tr {
+                        &:last-child {
+                            td {
+                                input {
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        color: $secondary !important;
+                                        font-weight: 600;
+                                    }
+                                }
+                                &:last-child {
+                                    input {
+                                        background: $white !important;
+                                        &:hover {
+                                            box-shadow: inset 0 0 0px 1px #452c8e !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        td {
+                            &:last-child {
+                                input {
+                                    background: $gray_light_04 !important;
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .color-wise-table {
+            table {
+                &.table {
+                    tr {
+                        th {
+                            &:nth-last-child(2) {
+                                p {
+                                    color: $gray_dark_02;
+                                }
+                            }
+                            &:last-child {
+                                p {
+                                    color: $gray_dark_02;
+                                }
+                            }
+                        }
+                        td {
+                            &:last-child {
+                                input {
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        color: $secondary !important;
+                                        font-weight: 600;
+                                    }
+                                    &.border-error {
+                                        &::placeholder {
+                                            color: $red !important;
+                                        }
+                                    }
+                                }
+                            }
+                            &:nth-last-child(2) {
+                                input {
+                                    color: $primary !important;
+                                    font-weight: 600;
+                                    background: $gray_light_04 !important;
+                                    &::placeholder {
+                                        color: $primary !important;
+                                        font-weight: 600;
+                                    }
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .design-wise-table {
+            padding-bottom: 40px;
+            table {
+                &.table {
+                    tr {
+                        td {
+                            &:last-child {
+                                input {
+                                    background: $gray_light_04 !important;
+                                    &:hover {
+                                        box-shadow: inset 0 0 0px 1px #c7ced4 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .total-units {
+                position: absolute;
+                right: 0;
+            }
+        }
+
+        .size-color-wise-table {
+            table {
+                &.table {
+                    tr {
+                        th,
+                        td {
+                            p {
+                                display: inline-block;
+                                box-shadow: none !important;
+                                border: 1px solid #c7ced4;
+                            }
+                            input[type="number"] {
+                                width: 48px;
+                            }
+                        }
+                        th {
+                            p {
+                                &:first-child {
+                                    border-top-right-radius: 0;
+                                    border-bottom-right-radius: 0;
+                                    width: 48px;
+                                }
+                                &:nth-child(2) {
+                                    margin-left: -1px;
+                                    border-top-left-radius: 0;
+                                    border-bottom-left-radius: 0;
+                                    width: 52px;
+                                }
+                            }
+                            &:last-child {
+                                p {
+                                    border-radius: 4px;
+                                    width: 100px;
+                                }
+                            }
+                        }
+                        td {
+                            input {
+                                &:first-child {
+                                    border-top-right-radius: 0;
+                                    border-bottom-right-radius: 0;
+                                    width: 48px;
+                                }
+                                &:nth-child(2) {
+                                    margin-left: -1px;
+                                    border-top-left-radius: 0;
+                                    border-bottom-left-radius: 0;
+                                    width: 52px;
+                                    color: $secondary !important;
+                                    font-weight: 600;
+                                    &::placeholder {
+                                        // color:$secondary !important;
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                input {
+                                    border-radius: 4px;
+                                    width: 100px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .custom-tooltip {
+            .tooltiptext {
+                font-size: 11px;
+                line-height: 16px;
+                width: 68px;
+
+                visibility: hidden;
+            }
+            &:hover {
+                .tooltiptext {
+                    visibility: visible;
+                }
+            }
+            &.color-add {
+                .tooltiptext {
+                    left: 58px;
+                    &::after {
+                        left: 15px;
+                    }
+                }
+            }
+            &.size-add {
+                .tooltiptext {
+                    left: 44px;
+                    &::after {
+                        left: 54px;
+                    }
+                }
+            }
+        }
+        table {
+            &.table {
+                &.multiple-sizes-table {
+                    tr {
+                        th {
+                            .col-heading {
+                                width: 65px;
+                            }
+                        }
+                        td {
+                            input[type="number"] {
+                                width: 65px;
+                            }
+                            .size-wise-view {
+                                width: auto !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .create-order-container {
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    flex-wrap: wrap;
+                    .design-image {
+                        width: 160px;
+                        height: 178px;
+                        aspect-ratio: 9 / 10;
+                    }
+                    .design-details-info {
+                        width: calc(100% - 192px);
+                    }
+                    .design-quantity-table {
+                        width: 100%;
+                        .text-right {
+                            text-align: left !important;
+                        }
+                        .total-units {
+                            right: unset;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+            .design-table {
+                justify-content: flex-start;
+                .category-wise-table {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .create-order-container {
+        margin-top: 36px;
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    .po-details-view {
+                        ul {
+                            flex-wrap: wrap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .create-order-container {
+        .designs-info-section {
+            .designs-row {
+                .single-design {
+                    .design-title {
+                        margin-top: 0 !important;
+                        h3 {
+                            span {
+                                display: block;
+                            }
+                        }
+                    }
+                    .po-details-view {
+                        .po-quantity-colums-view {
+                            ul {
+                                li {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                    .design-details-info {
+                        .po-info-colums-view {
+                            margin: 12px 0 12px 0;
+                        }
+                        .values {
+                            flex-wrap: wrap;
+                            .total-value {
+                                width: 100%;
+                                margin: 0 !important;
+                                .regular-14,
+                                .semibold-14 {
+                                    font-size: 12px;
+                                    line-height: 16px;
+                                }
+                            }
+                        }
+                    }
+                    .design-table {
+                        table {
+                            &.table {
+                                tr {
+                                    th {
+                                        width: 48px;
+                                    }
+                                    td {
+                                        width: 48px;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,7 +7,11 @@ ul {
     margin: 0;
 }
 .buyer-timeline-container {
-    height: 100vh;
+    height: calc(100vh - 160px);
+    .regular-12 {
+        font-size: 14px;
+        line-height: 20px;
+    }
     .common-blocks {
         padding: 16px;
         border: 1px solid $gray_light_02;
@@ -18,20 +22,21 @@ ul {
     }
     .timeline-row {
         width: 100%;
-        max-width: 1108px;
+        max-width: 100%;
         margin: 0 auto;
         display: flex;
         .one-third {
             &.all-designs-destails {
                 width: 100%;
-                max-width: 300px;
+                max-width: 20%;
                 position: sticky;
                 top: 100px;
                 height: calc(100vh - 100px);
                 z-index: 1;
+
                 .assign-member {
                     max-width: 300px;
-                    left: -100px;
+                    left: -58px;
                     top: 5px;
                     .title {
                         font-weight: 500;
@@ -59,6 +64,17 @@ ul {
                 }
                 .design-info-with-po {
                     .design-title-with-date {
+                        .order-number {
+                            font-weight: 500;
+                            font-size: 14px;
+                            line-height: 20px;
+                        }
+                        .etd-status {
+                            margin-left: 8px;
+                            img {
+                                margin-left: 4px;
+                            }
+                        }
                         p {
                             span {
                                 display: inline-block;
@@ -110,10 +126,15 @@ ul {
                         display: flex;
                         align-items: center;
                         .progress {
-                            width: 90%;
+                            width: calc(100% - 32px);
                             margin-right: 4px;
+                            margin-left: 0;
                             height: 8px;
                             border-radius: 0;
+                            background: $gray_light_01;
+                            &::after {
+                                display: none;
+                            }
                         }
                         .count {
                             font-size: 12px;
@@ -152,6 +173,7 @@ ul {
                             font-size: 14px;
                             line-height: 20px;
                             color: $primary_bright_01;
+                            height: 24px;
                         }
                     }
                 }
@@ -180,7 +202,7 @@ ul {
             }
             &.activity-logs {
                 width: 100%;
-                max-width: 460px;
+                max-width: calc(60% - 48px);
                 margin: 0 24px;
                 padding-bottom: 24px;
                 z-index: 0;
@@ -206,6 +228,7 @@ ul {
                                 height: 32px;
                                 border-radius: 100px;
                                 margin-right: 8px;
+                                object-fit: cover;
                             }
                         }
                     }
@@ -222,6 +245,9 @@ ul {
                     }
                     .reply-box {
                         margin-top: 8px;
+                        div {
+                            height: 48px;
+                        }
 
                         button {
                             color: $primary_bright_02;
@@ -232,16 +258,25 @@ ul {
                             left: 12px;
                             width: 24px;
                             height: 24px;
+                            border-radius: 100px;
+                            z-index: 1;
                         }
-                        input {
-                            background: $gray_light_03;
+                        textarea {
+                            background-color: $gray_light_03 !important;
                             border: none;
                             padding-left: 48px;
                             border-radius: 4px;
                             height: 48px;
-                            font-size: 14px;
+                            font-size: 14px !important;
+                            padding: 15px 48px 0 48px;
                             &:focus {
                                 box-shadow: none !important;
+                            }
+                        }
+                        div {
+                            div {
+                                left: 65px !important;
+                                top: 20px !important;
                             }
                         }
                     }
@@ -258,12 +293,18 @@ ul {
                     }
                 }
             }
+
             &.all-production-details {
                 width: 100%;
-                max-width: 300px;
+                max-width: 100%;
                 position: sticky;
                 top: 100px;
                 height: calc(100vh - 100px);
+            }
+        }
+        .tab-none {
+            &.one-third {
+                width: 20%;
             }
         }
     }
@@ -278,7 +319,7 @@ ul {
 .etd-dates {
     background: $white;
     padding: 8px 12px;
-    width: 170px;
+    width: 172px;
     position: absolute;
     right: 0;
     z-index: 1;
@@ -384,6 +425,12 @@ ul {
                     height: 8px;
                     border-radius: 0;
                     height: 3px;
+                    background: $gray_light_01;
+                    margin: 0;
+                    width: 100%;
+                    &::after {
+                        display: none;
+                    }
                 }
             }
         }
@@ -421,14 +468,22 @@ ul {
                 color: $gray_dark_01;
             }
             span {
-                font-size: 10px;
-                line-height: 16px;
                 color: $gray_dark_02;
             }
-
+            .task-search {
+                padding: 8px;
+                input {
+                    width: 100%;
+                    height: 28px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+            }
             .select-task-list {
                 width: 250px;
                 padding: 8px;
+                height: 225px;
+                overflow-y: auto;
             }
 
             ul {
@@ -444,9 +499,12 @@ ul {
 }
 .select-design-list {
     padding: 8px;
+    width: 190px;
     li {
         margin-bottom: 8px;
         span {
+            font-size: 10px;
+            line-height: 16px;
             color: $gray_dark_02;
         }
         img {
@@ -471,10 +529,11 @@ ul {
             resize: none;
             height: 80px;
             padding: 0;
+            background: transparent;
         }
         .attachment {
             position: absolute;
-            bottom: 13px;
+            bottom: 11px;
             right: 16px;
         }
         .files-n-photos {
@@ -483,6 +542,18 @@ ul {
             display: none;
             &.open {
                 display: flex;
+            }
+        }
+        div {
+            ul {
+                padding: 8px !important;
+                box-shadow: $shadow_4dp;
+                background: $primary_light_04;
+                li {
+                    span {
+                        font-size: 12px;
+                    }
+                }
             }
         }
     }
@@ -521,7 +592,7 @@ ul {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         grid-gap: 5px;
-        height: 400px;
+        height: 530px;
         img {
             width: 100%;
             aspect-ratio: 9 / 10;
@@ -575,6 +646,8 @@ ul {
                     width: 24px;
                     height: 24px;
                     border-radius: 100px;
+                    object-fit: cover;
+                    margin-top: -4px;
                 }
             }
             .activity-content {
@@ -674,6 +747,7 @@ ul {
             border: 1px solid $white;
             margin-left: -15px;
             border-radius: 100px;
+            object-fit: cover;
             &:first-child {
                 margin-left: 0;
             }
@@ -730,8 +804,8 @@ ul {
                 border: none;
                 border-bottom: 1px solid $gray_light_02;
                 button {
-                    font-size: 12px;
-                    line-height: 16px;
+                    font-size: 14px;
+                    line-height: 20px;
                     color: $gray_dark_02;
                     padding: 7px 12px;
                     width: 100%;
@@ -751,6 +825,9 @@ ul {
                         justify-content: space-between;
                         .task-name {
                             padding-right: 16px;
+                            img {
+                                margin-right: 4px;
+                            }
                         }
                         span {
                             font-size: 12px;
@@ -760,8 +837,10 @@ ul {
                         .date-details {
                             width: 50px;
                             text-align: right;
+                            padding: 0;
                         }
                         &.completed {
+                            background: transparent;
                             .date-details {
                                 span {
                                     color: $green;
@@ -788,15 +867,64 @@ ul {
         }
     }
 }
+.add-comment-popup,
+.more-design-popup {
+    .common-popup {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .modal-body {
+        padding: 0;
+    }
+}
 
 @media only screen and (max-width: 1440px) {
     .buyer-timeline-container {
+        .regular-12 {
+            font-size: 12px;
+            line-height: 16px;
+        }
         .timeline-row {
             .one-third {
+                &.all-designs-destails {
+                    width: 25%;
+                    max-width: 25%;
+                    top: 76px;
+                }
                 &.activity-logs {
+                    max-width: calc(50% - 48px);
                     .activity-list {
-                        margin-top: 24px;
+                        margin-top: 0;
                     }
+                    .top-write-comments {
+                        top: 34px;
+                    }
+                }
+                &.tab-none {
+                    width: 25%;
+                }
+                &.all-production-details {
+                    top: 76px;
+                    .production-accordion {
+                        .card {
+                            .card-header {
+                                button {
+                                    font-size: 12px;
+                                    line-height: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .activity-list {
+        .single-activity {
+            .activity-common-header {
+                .activity-icon {
+                    margin-top: -4px;
                 }
             }
         }
@@ -808,7 +936,7 @@ ul {
         .timeline-row {
             flex-wrap: wrap;
             width: 100%;
-            max-width: 460px;
+            max-width: 100%;
             .one-third {
                 &.all-designs-destails {
                     width: 100%;
@@ -821,6 +949,8 @@ ul {
                 }
                 &.activity-logs {
                     margin: 0;
+                    width: 100%;
+                    max-width: 100%;
                     .top-write-comments {
                         position: unset;
                         margin: 0;
@@ -837,6 +967,25 @@ ul {
             .tab-none {
                 display: none;
             }
+        }
+    }
+}
+@media only screen and (max-width: 767px) {
+    .buyer-timeline-container {
+        .timeline-row {
+            .one-third {
+                &.all-designs-destails {
+                    margin-top: 36px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .more-designs-popup {
+        .designs-grid {
+            height: 413px;
         }
     }
 }
