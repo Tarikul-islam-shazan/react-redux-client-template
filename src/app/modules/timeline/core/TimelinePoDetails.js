@@ -2,7 +2,7 @@ import React from "react";
 import AllDesignList from "./AllDesignList";
 import MemberList from "./MemberList";
 import Http from "../../../services/Http";
-import {storeMemberList} from "../../store/action/Timeline";
+import {downloadInvoice, storeMemberList} from "../../store/action/Timeline";
 import {Link, useParams} from "react-router-dom";
 import {toastError} from "../../../commonComponents/Toast";
 import {useSelector} from "react-redux";
@@ -15,12 +15,9 @@ const TimelinePoDetails = ({setLoader}) => {
 
     const downloadPI = () => {
         setLoader(true);
-        Http.GET("downloadInvoice", timelineStore?.orderInfo?.invoiceId)
-            .then((response) => {
-                window.open(response.data, "_parent");
-            })
-            .catch((error) => toastError(error.response.data.message))
-            .finally(() => setLoader(false));
+        downloadInvoice(timelineStore?.orderInfo?.invoiceId)
+            .then(() => setLoader(false))
+            .catch(() => setLoader(false))
     };
 
     const renderETD = () => {

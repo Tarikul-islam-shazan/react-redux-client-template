@@ -194,6 +194,11 @@ class OurDesignDetails extends Component {
                         product: data,
                         selectedImage,
                     });
+
+                    const queryParams = new URLSearchParams(window.location.search);
+                    if(queryParams.get("openModal") === "true"){
+                        this.setState({ measurementModal: true })
+                    }
                 } else {
                     this.setState({ loading: false });
                     // toastError(data.message);

@@ -1,5 +1,6 @@
 import {ActionTypes} from "../ActionTypes";
 import Http from "../../../services/Http";
+import {toastError} from "../../../commonComponents/Toast";
 
 export const storeTimeline = (data, merge) => {
     return {
@@ -88,4 +89,12 @@ export const clearTimelineData = () => async (dispatch) => {
         type: ActionTypes.CLEAR_TIMELINE_DATA,
         payload: {}
     })
+}
+
+export const downloadInvoice = async (invoiceId) => {
+    await Http.GET("downloadInvoice", invoiceId)
+        .then((response) => {
+            window.open(response.data, "_parent");
+        })
+        .catch((error) => toastError(error.response.data.message))
 }

@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import {addImageSuffix, authUserInfo, getFileType, getIconByFileType, parseHtml} from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
 import {useSelector} from "react-redux";
 import {MentionsInput, Mention} from 'react-mentions'
+import {downloadInvoice} from "../../store/action/Timeline";
 
 const ActivityLog = ({activity, setLoader}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -20,8 +21,8 @@ const ActivityLog = ({activity, setLoader}) => {
     const [message, setMessage] = useState("");
     const [memberList, setMemberList] = useState([]);
     const [taggedUser, setTaggedUer] = useState([])
-
     const params = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
@@ -333,10 +334,27 @@ const ActivityLog = ({activity, setLoader}) => {
         }
     };
 
+    const handePageRoute = () => {
+        if (activity.activityModule === "COMMENT") {
+            setShowTaskDetailsModal(true)
+        } else if (activity.activityModule === "PROFORMA_INVOICE") {
+            setLoader(true);
+            downloadInvoice(timelineStore?.orderInfo?.invoiceId)
+                .then(() => setLoader(false))
+                .catch(() => setLoader(false))
+        } else if (activity.activityModule === "ORDER") {
+            history.push(`/purchaseDetails/${params.orderId}`)
+        } else if (activity.activityModule === "PRODUCT") {
+            history.push(`/designs/view/${activity.id}?openModal=true`)
+        } else if (activity.activityModule === "TASK") {
+            setShowTaskDetailsModal(true)
+        }
+    }
+
     return (
         <div className="single-activity activity-with-header added-comment">
             <div className="activity-common-header justify-content-between">
-                <div className="activity-content d-flex">
+                <div className="activity-content d-flex" onClick={handePageRoute}>
                     {renderIconOrImage()}
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
