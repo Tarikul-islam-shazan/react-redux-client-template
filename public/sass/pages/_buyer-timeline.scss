@@ -245,6 +245,9 @@ ul {
                     }
                     .reply-box {
                         margin-top: 8px;
+                        div {
+                            height: 48px;
+                        }
 
                         button {
                             color: $primary_bright_02;
@@ -255,16 +258,25 @@ ul {
                             left: 12px;
                             width: 24px;
                             height: 24px;
+                            border-radius: 100px;
+                            z-index: 1;
                         }
-                        input {
-                            background: $gray_light_03;
+                        textarea {
+                            background-color: $gray_light_03 !important;
                             border: none;
                             padding-left: 48px;
                             border-radius: 4px;
                             height: 48px;
-                            font-size: 14px;
+                            font-size: 14px !important;
+                            padding: 15px 48px 0 48px;
                             &:focus {
                                 box-shadow: none !important;
+                            }
+                        }
+                        div {
+                            div {
+                                left: 65px !important;
+                                top: 20px !important;
                             }
                         }
                     }
@@ -307,7 +319,7 @@ ul {
 .etd-dates {
     background: $white;
     padding: 8px 12px;
-    width: 170px;
+    width: 172px;
     position: absolute;
     right: 0;
     z-index: 1;
@@ -521,7 +533,7 @@ ul {
         }
         .attachment {
             position: absolute;
-            bottom: 13px;
+            bottom: 11px;
             right: 16px;
         }
         .files-n-photos {
@@ -530,6 +542,18 @@ ul {
             display: none;
             &.open {
                 display: flex;
+            }
+        }
+        div {
+            ul {
+                padding: 8px !important;
+                box-shadow: $shadow_4dp;
+                background: $primary_light_04;
+                li {
+                    span {
+                        font-size: 12px;
+                    }
+                }
             }
         }
     }

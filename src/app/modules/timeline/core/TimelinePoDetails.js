@@ -1,12 +1,11 @@
 import React from "react";
 import AllDesignList from "./AllDesignList";
 import MemberList from "./MemberList";
-import Http from "../../../services/Http";
-import {downloadInvoice, storeMemberList} from "../../store/action/Timeline";
+import {downloadInvoice} from "../../store/action/Timeline";
 import {Link, useParams} from "react-router-dom";
-import {toastError} from "../../../commonComponents/Toast";
 import {useSelector} from "react-redux";
 import {changeDateFormat, toOrdinalSuffix} from "../../../services/Util";
+
 
 const TimelinePoDetails = ({setLoader}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -73,8 +72,10 @@ const TimelinePoDetails = ({setLoader}) => {
                     <div className="all-po-list">
                         <span className="po-names">
                             {orderInfo?.poNumberList?.join(", ")}
-                            <a href className="button text">
-                                <Link to={`/purchaseDetails/${params.orderId}`} className="pr-1">PO Details</Link>
+                            <a href className="button text ml-1">
+                                <Link to={`/purchaseDetails/${params.orderId}`} className="pr-1">
+                                    PO Details
+                                </Link>
                                 <img src="/icons/arrow-right-no-padding.svg" alt=""/>
                             </a>
                         </span>
@@ -96,13 +97,16 @@ const TimelinePoDetails = ({setLoader}) => {
                                 id
                                 name
                                 defaultValue
-                                checked={timelineStore?.orderInfo?.orderProductList?.length === timelineStore?.selectedDesignList?.length}
+                                checked={
+                                    timelineStore?.orderInfo?.orderProductList?.length ===
+                                    timelineStore?.selectedDesignList?.length
+                                }
                                 disabled
                             />
                             <label htmlFor>
                                 <span>
-                                    ALL DESIGN ({timelineStore?.selectedDesignList?.length})<img
-                                    src="/icons/Right-arrow.svg" alt=""/>
+                                    ALL DESIGN ({timelineStore?.selectedDesignList?.length})
+                                    <img src="/icons/Right-arrow.svg" alt=""/>
                                 </span>
                             </label>
                         </div>

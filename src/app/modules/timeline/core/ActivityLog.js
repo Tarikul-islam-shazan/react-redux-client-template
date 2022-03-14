@@ -349,6 +349,7 @@ const ActivityLog = ({activity, setLoader}) => {
         } else if (activity.activityModule === "TASK") {
             setShowTaskDetailsModal(true)
         }
+
     }
 
     return (
