@@ -24,6 +24,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
     const [taggedUser, setTaggedUer] = useState([])
+    const [taskSearch, setTaskSearch] = useState("")
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -173,6 +174,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                 (task) => task.stepName.toLowerCase().indexOf(e.target.value) > -1
             );
         }
+        setTaskSearch(e.target.value)
         setTaskList(tmpArray);
     };
 
@@ -238,7 +240,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="tast-select">
+                                            <div className="tast-select" onBlur={() => {
+                                                setTaskSearch("")
+                                                setTaskList(taskListHistory)
+                                            }}>
                                                 <div className="dropdown">
                                                     <button
                                                         className="btn dropdown-toggle"
@@ -258,6 +263,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                             <input
                                                                 type="text"
                                                                 onChange={handleTaskSearch}
+                                                                value={taskSearch}
                                                                 placeholder="Search task"
                                                             />
                                                         </div>
