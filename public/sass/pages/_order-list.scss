@@ -110,7 +110,27 @@
                                 display: block;
                             }
                         }
+                        .remaining-days {
+                            color: $primary_bright_02;
+                            font-weight: 500;
+                        }
+                        .overdue-days {
+                            color: $red;
+                            font-weight: 500;
+                        }
+                        .completed-days {
+                            color: $green;
+                            font-weight: 500;
+                        }
                     }
+                }
+                .overdue-time {
+                    background: $red;
+                    color: $white;
+                    padding: 1px 4px 2px 4px;
+                    border-radius: 2px;
+                    margin-right: 8px;
+                    font-size: 12px;
                 }
             }
             .progress-with-count {
