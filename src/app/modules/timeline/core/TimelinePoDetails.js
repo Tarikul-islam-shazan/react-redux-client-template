@@ -15,7 +15,7 @@ const TimelinePoDetails = ({setLoader}) => {
 
     const downloadPI = () => {
         setLoader(true);
-        Http.GET("downloadInvoice", params.orderId)
+        Http.GET("downloadInvoice", timelineStore?.orderInfo?.invoiceId)
             .then((response) => {
                 window.open(response.data, "_parent");
             })

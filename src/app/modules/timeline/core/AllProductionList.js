@@ -180,7 +180,7 @@ const AllProductionList = ({setLoader}) => {
                              data-parent="#accordion">
                             <div className="card-body">
                                 <div className="all-task-status">
-                                    {renderSamplingStepList(timelineStore?.stepList?.inspection)}
+                                    {renderSamplingStepList(timelineStore?.stepList?.INSPECTION)}
                                 </div>
                             </div>
                         </div>

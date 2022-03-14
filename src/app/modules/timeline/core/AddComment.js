@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import LoaderComponent from "../../../commonComponents/Loader";
 import {addNewCommentOnTimeline} from "../../store/action/Timeline";
+import {Mention, MentionsInput} from "react-mentions";
 
 const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [selectedTask, setSelectedTask] = useState(null);
@@ -22,6 +23,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [designList, setDesignList] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
+    const [taggedUser, setTaggedUer] = useState([])
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -40,8 +42,11 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     }, [selectedDesign]);
 
     useEffect(() => {
-        if (timelineStore?.memberList) {
-            setMemberList(timelineStore.memberList.memberList);
+        if (timelineStore?.orderInfo?.orderMemberList) {
+            let members = []
+            let tmpList = timelineStore?.orderInfo?.orderMemberList
+            tmpList.map(member => members.push({id: member.memberId, display: member.memberName}))
+            setMemberList(members)
         }
         if (timelineStore?.orderInfo?.orderProductList) {
             let productList = timelineStore?.orderInfo?.orderProductList;
@@ -97,7 +102,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                 orderId: parseInt(params.orderId),
                 stepId: selectedTask.id,
                 text: message.replace(/"/g, "'"),
-                taggedUserIdList: [],
+                taggedUserIdList: taggedUser,
             };
             await Http.POST("postOnTask", body, "?fromTimeline=true")
                 .then(response => {
@@ -170,6 +175,14 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         }
         setTaskList(tmpArray);
     };
+
+
+    const handleUserTag = (id, display) => {
+        if (!taggedUser.includes(id)) {
+            setTaggedUer([...taggedUser, id])
+        }
+    }
+
 
     return (
         <Modal
@@ -264,14 +277,19 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                     </div>
                                     <div className="comments-body">
                                         <div className="comment-text clicked">
-                                            <textarea
-                                                name
-                                                id
+                                            <MentionsInput
                                                 value={message}
-                                                placeholder="Write comment..."
-                                                defaultValue={""}
                                                 onChange={(e) => setMessage(e.target.value)}
-                                            />
+                                                placeholder="Write Comment..."
+                                            >
+                                                <Mention
+                                                    markup='@__display__'
+                                                    trigger="@"
+                                                    data={memberList}
+                                                    onAdd={handleUserTag}
+                                                    appendSpaceOnAdd={true}
+                                                />
+                                            </MentionsInput>
                                             {error.commentError && (
                                                 <p className="error">{error.commentError}</p>
                                             )}

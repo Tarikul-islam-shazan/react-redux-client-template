@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import Http from "../../services/Http";
 import LoaderComponent from "../../commonComponents/Loader";
 import {toastError} from "../../commonComponents/Toast";
@@ -9,6 +9,7 @@ const PODetails = () => {
     const [orderList, setOrderList] = useState();
     const [loader, setLoader] = useState(true);
     const params = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         Http.GET('getOrderQuotes', `${params.orderId}`).then((response) => {
@@ -181,7 +182,7 @@ const PODetails = () => {
         <LoaderComponent loading={loader}>
             <div className="create-order-container">
                 <div className="designs-info-section">
-                    <h3 className="semibold-16 mb-2"><img src="/icons/Left arrwo.svg" alt="back"/> PO details</h3>
+                    <h3 className="semibold-16 mb-2"><img src="/icons/Left arrwo.svg" alt="back" onClick={history.goBack}/> PO details</h3>
                     <div className="designs-row">
                         {renderOrderList()}
                     </div>
