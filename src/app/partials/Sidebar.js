@@ -15,6 +15,7 @@ import { NavLink } from "./NavLink";
 import { BASE_URL, GA_ID, hjid, hjsv } from "../constant";
 import { toastSuccess, toastError, toastWarning } from "../commonComponents/Toast";
 import { _storeData as _storeDesignData } from "../pages/design/actions";
+import {clearTimelineData} from "../modules/store/action/Timeline";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -122,6 +123,11 @@ class Sidebar extends Component {
         hotjar.initialize(hjid, hjsv);
     };
 
+    handleClickNav = () => {
+        this.props.clearTimelineData()
+        this.props.setActiveTab(window.location.pathname)
+    }
+
     render() {
         let { permissions } = this.state;
         const pathname = this.props.activeTab;
@@ -145,7 +151,7 @@ class Sidebar extends Component {
                             activeIcon={require("../assets/icons/Dashboard-active.svg")}
                             inactiveIcon={require("../assets/icons/Dashboard-default.svg")}
                             title="Dashboard"
-                            onClick={this.props.setActiveTab}
+                            onClick={this.handleClickNav}
                         />
                         {
                             <NavLink
@@ -154,7 +160,7 @@ class Sidebar extends Component {
                                 activeIcon={require("../assets/icons/collections-active.svg")}
                                 inactiveIcon={require("../assets/icons/collections-default.svg")}
                                 title="Collections"
-                                onClick={this.props.setActiveTab}
+                                onClick={this.handleClickNav}
                             />
                         }
 
@@ -177,7 +183,7 @@ class Sidebar extends Component {
                                 activeIcon={require("../assets/icons/quotes-active.svg")}
                                 inactiveIcon={require("../assets/icons/quotes-default.svg")}
                                 title="Quotes"
-                                onClick={this.props.setActiveTab}
+                                onClick={this.handleClickNav}
                             />
                         ) : (
                             <></>
@@ -185,11 +191,11 @@ class Sidebar extends Component {
                         {permissions.includes("ORDER_MY_ORDER") ? (
                             <NavLink
                                 to="/orders/my-orders"
-                                classes={`${pathname.match("orders") ? "active" : ""}`}
+                                classes={`${(pathname.match("orders") || pathname.match("timeline") || pathname.match("purchaseDetails") )? "active" : ""}`}
                                 activeIcon={require("../assets/icons/orders-active.svg")}
                                 inactiveIcon={require("../assets/icons/orders-default.svg")}
                                 title="Orders"
-                                onClick={this.props.setActiveTab}
+                                onClick={this.handleClickNav}
                             />
                         ) : (
                             <></>
@@ -211,7 +217,7 @@ class Sidebar extends Component {
                                 activeIcon={require("../assets/icons/payments-active.svg")}
                                 inactiveIcon={require("../assets/icons/payments-deafult.svg")}
                                 title="Payments"
-                                onClick={this.props.setActiveTab}
+                                onClick={this.handleClickNav}
                             />
                         }
                         {permissions.includes("PRODUCT_FOR_PICK_DESIGN") ? (
@@ -225,7 +231,7 @@ class Sidebar extends Component {
                                 activeIcon={require("../assets/icons/explore-design-active.svg")}
                                 inactiveIcon={require("../assets/icons/explore-design-default.svg")}
                                 title="Explore Designs"
-                                onClick={this.props.setActiveTab}
+                                onClick={this.handleClickNav}
                             />
                         ) : (
                             <></>
@@ -267,4 +273,5 @@ export default connect(mapStateToProps, {
     setActiveTab,
     _storeData,
     _storeDesignData,
+    clearTimelineData
 })(Sidebar);

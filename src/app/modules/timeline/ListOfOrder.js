@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {toastWarning} from "../../commonComponents/Toast";
 
-const ListOfOrder = ({orderStore}) => {
+const ListOfOrder = ({orderStore, activeTab}) => {
     const history = useHistory();
 
     const renderOrderImage = (imageSrc) => {
@@ -36,6 +36,68 @@ const ListOfOrder = ({orderStore}) => {
         }
     }
 
+    const renderOrderStatus = (item) => {
+        if (Math.sign(item.timeLeft) === -1) {
+            return <span className="overdue-time">
+                        Overdue&nbsp;
+                    </span>
+        } else if (activeTab === "COMPLETED") {
+            return <span>DELIVERED IN </span>
+        } else {
+            return <span>DELIVERY IN </span>
+        }
+    }
+
+    const renderOrderStatusWiseDate = (item) => {
+        if (Math.sign(item.timeLeft) === -1) {
+            return (
+                <span>
+                    {Math.abs(item.timeLeft) + " Days"}
+                    <img
+                        src={process.env.PUBLIC_URL + "/icons/info-primary.svg"}
+                        className="ml-1"
+                        alt=""
+                    />
+                </span>
+            )
+        } else if (activeTab === "COMPLETED") {
+            return <span>
+                {item.actualDeliveryDate ? changeDateFormat(item.actualDeliveryDate, "YYYY-MM-DD", "DD-MMM") : "--"}
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/info-primary.svg"}
+                    className="ml-1"
+                    alt=""
+                />
+            </span>
+        } else {
+            return <span>
+                {changeDateFormat(item.deliveryDateList[0], "YYYY-MM-DD", "DD-MMM")}
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/info-primary.svg"}
+                    className="ml-1"
+                    alt=""
+                />
+            </span>
+        }
+    }
+
+    const renderDeliveryStatus = (item) => {
+        return (
+            <div className="delivery-date-status">
+                {renderOrderStatus(item)}
+                <span
+                    className="date-info">
+                    {renderOrderStatusWiseDate(item)}
+                    <div
+                        className="etd-dates shadow-2dp"
+                    >
+                        {renderETD(item)}
+                    </div>
+                </span>
+            </div>
+        )
+    }
+
     const renderOrderList = () => {
         return orderStore?.orderResponse?.data?.map((item, index) => {
             return (
@@ -61,16 +123,7 @@ const ListOfOrder = ({orderStore}) => {
                             <li>{item.orderQuantity} units</li>
                             <li>${item.orderValue}</li>
                         </ul>
-                        <div className="delivery-date-status">
-                            <span>DELIVERY IN</span>
-                            <span
-                                className="date-info"> {changeDateFormat(item.deliveryDateList[0], "YYYY-MM-DD", "DD-MMM")}
-                                <img src={process.env.PUBLIC_URL + "/icons/info-primary.svg"} className="ml-1" alt=""/>
-                              <div className="etd-dates shadow-2dp">
-                                  {renderETD(item)}
-                              </div>
-                            </span>
-                        </div>
+                        {renderDeliveryStatus(item)}
                         <div className="progress-with-count d-flex align-items-center">
                             <div className="progress">
                                 <div className="progress-bar bg-success" role="progressbar"

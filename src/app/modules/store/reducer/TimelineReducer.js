@@ -56,6 +56,8 @@ const TimelineReducer = (state = initialState, action) => {
                     stepList: state.stepList
                 }
             }
+        case ActionTypes.CLEAR_TIMELINE_DATA:
+            return {}
         default:
             return state;
     }

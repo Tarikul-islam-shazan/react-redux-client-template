@@ -95,7 +95,7 @@ const MyOrderList = () => {
                     </li>
                 </ul>
             </div>
-            <ListOfOrder orderStore={orderStore}/>
+            <ListOfOrder orderStore={orderStore} activeTab={activeTab}/>
         </div>
     </LoaderComponent>)
 }

@@ -82,3 +82,10 @@ export const storeAddNewComment = (data) => {
 export const addNewCommentOnTimeline = (data) => async (dispatch) => {
     await dispatch(storeAddNewComment(data))
 }
+
+export const clearTimelineData = () => async (dispatch) => {
+    await dispatch({
+        type: ActionTypes.CLEAR_TIMELINE_DATA,
+        payload: {}
+    })
+}
