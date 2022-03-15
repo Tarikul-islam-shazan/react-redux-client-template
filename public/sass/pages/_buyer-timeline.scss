@@ -839,6 +839,26 @@ ul {
                     }
                 }
             }
+            .card-header {
+                button {
+                    position: relative;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        background: url(./icons/Down-arrow-24.svg) no-repeat;
+                        right: 12px;
+                        top: 8px;
+                        width: 24px;
+                        height: 24px;
+                        transform: rotate(180deg);
+                    }
+                    &.collapsed {
+                        &::after {
+                            transform: rotate(0);
+                        }
+                    }
+                }
+            }
             .card-body {
                 padding: 12px;
                 border-bottom: 1px solid $gray_light_02;
