@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import moment from "moment";
 import {
     addImageSuffix,
@@ -60,6 +60,7 @@ const Dashboard = () => {
     let allQuotes = useSelector(getDashboardQuotes);
     let allTasks = useSelector(getDashboardAllTasks);
     const classes = useStyles();
+    const history = useHistory();
 
     const getOrderSuppliers = async () => {
         setIsLoading(true);
@@ -423,6 +424,7 @@ const Dashboard = () => {
                                                         <div
                                                             className="single-person-progress d-flex align-items-center"
                                                             key={item.orderId}
+                                                            onClick={() => history.push(`/timeline/${item.orderId}`)}
                                                         >
                                                             <div className="person-info d-flex align-items-center">
                                                                 <div className="four-images d-flex">
@@ -475,14 +477,12 @@ const Dashboard = () => {
                                                                             placement="top"
                                                                             arrow
                                                                         >
-                                                                            <Link
-                                                                                to={`/orders/view/${item.orderId}`}
-                                                                            >
+                                                                            <span>
                                                                                 {getShortName(
                                                                                     item.orderName,
                                                                                     35
                                                                                 )}
-                                                                            </Link>
+                                                                            </span>
                                                                         </Tooltip>
                                                                     </p>
                                                                 </div>
@@ -763,7 +763,7 @@ const Dashboard = () => {
                             <tbody>
                                 {taskList?.data?.length > 0 && !isLoading ? (
                                     taskList?.data.map((item) => (
-                                        <tr>
+                                        <tr onClick={() => onClickCell(item.id, item.orderId)}>
                                             <td>
                                                 <span className="image-with-title">
                                                     {item?.stepProduct?.image ? (
@@ -784,11 +784,9 @@ const Dashboard = () => {
                                                             placement="top"
                                                             arrow
                                                         >
-                                                            <Link
-                                                                to={`/orders/view/${item.orderId}`}
-                                                            >
+                                                            <span>
                                                                 {getShortName(item.stepName, 35)}
-                                                            </Link>
+                                                            </span>
                                                         </Tooltip>
                                                     </span>
                                                 </span>
@@ -797,10 +795,11 @@ const Dashboard = () => {
                                                 <span>{item?.stepProduct?.name}</span>{" "}
                                             </td>
                                             <td
-                                                onClick={() => onClickCell(item.id, item.orderId)}
                                                 className="cursor-pointer"
                                             >
-                                                <span>{item.orderName}</span>{" "}
+                                                <Link to={`/timeline/${item.orderId}`}>
+                                                    {item.orderName}
+                                                </Link>{" "}
                                             </td>
                                             <td>
                                                 <span>{item.orderRefNumber}</span>{" "}
