@@ -169,7 +169,7 @@ class Root extends Component {
 
                     {/*<PublicRoute exact path="/orders/my-orders" component={MyOrder} />*/}
 
-                    <PublicRoute exact path="/orders/view/:id" component={MyProjectDetailsV2} />
+                    <PublicRoute exact path="/orders/oldView/:id" component={MyProjectDetailsV2} />
 
                     <PublicRoute exact path="/orders/confirm-order" component={ConfirmOrder} />
                     <PublicRoute exact path="/orders/confirm-order/:id" component={ConfirmOrder} />
@@ -186,7 +186,7 @@ class Root extends Component {
                     <PublicRoute exact path="/invoices/view/:id" component={InvoiceDetails} />
                     <PublicRoute exact path="/invoices/pay/:id" component={PayInvoice} />
                     <PublicRoute exact path="/orders/my-orders" component={MyOrderList} />
-                    <PublicRoute exact path="/timeline/:orderId" component={Timeline} />
+                    <PublicRoute exact path="/orders/view/:orderId" component={Timeline} />
                     <PublicRoute exact path="/purchaseDetails/:orderId" component={PODetails} />
                 </Switch>
             </Router>

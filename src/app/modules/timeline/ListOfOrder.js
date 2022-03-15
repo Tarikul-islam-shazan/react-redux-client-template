@@ -1,16 +1,17 @@
 import React from "react";
-import { changeDateFormat, getShortName, toOrdinalSuffix } from "../../services/Util";
-import { useHistory } from "react-router-dom";
-import { toastWarning } from "../../commonComponents/Toast";
+import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
+import {useHistory} from "react-router-dom";
+import {toastWarning} from "../../commonComponents/Toast";
+import {Tooltip} from "@material-ui/core";
 
-const ListOfOrder = ({ orderStore, activeTab }) => {
+const ListOfOrder = ({orderStore, activeTab}) => {
     const history = useHistory();
 
     const renderOrderImage = (imageSrc) => {
         if (imageSrc) {
-            return <img src={imageSrc} alt="design" />;
+            return <img src={imageSrc} alt="design"/>;
         } else {
-            return <img src="/images/default_product.svg" alt="design" />;
+            return <img src="/images/default_product.svg" alt="design"/>;
         }
     };
 
@@ -29,33 +30,22 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
         if (orderStore.activeTab === "PENDING") {
             toastWarning("The order is under review. Please wait till it gets to running");
         } else {
-            history.push(`/timeline/${id}`);
+            history.push(`/orders/view/${id}`);
         }
     };
 
     const renderOrderStatus = (item) => {
-        if (Math.sign(item.timeLeft) === -1) {
+        if (activeTab === "COMPLETED") {
+            return <span>DELIVERED ON </span>;
+        } else if (Math.sign(item.timeLeft) === -1) {
             return <span className="overdue-time">Overdue&nbsp;</span>;
-        } else if (activeTab === "COMPLETED") {
-            return <span>DELIVERED IN </span>;
         } else {
-            return <span>DELIVERY ON </span>;
+            return <span>DELIVERY IN </span>;
         }
     };
 
     const renderOrderStatusWiseDate = (item) => {
-        if (Math.sign(item.timeLeft) === -1) {
-            return (
-                <span className="overdue-days">
-                    {Math.abs(item.timeLeft) + " Days"}
-                    <img
-                        src={process.env.PUBLIC_URL + "/icons/status-overdue.svg"}
-                        className="ml-1"
-                        alt=""
-                    />
-                </span>
-            );
-        } else if (activeTab === "COMPLETED") {
+        if (activeTab === "COMPLETED") {
             return (
                 <span className="completed-days">
                     {item.actualDeliveryDate
@@ -63,6 +53,17 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                         : "--"}
                     <img
                         src={process.env.PUBLIC_URL + "/icons/status-completed.svg"}
+                        className="ml-1"
+                        alt=""
+                    />
+                </span>
+            );
+        } else if (Math.sign(item.timeLeft) === -1) {
+            return (
+                <span className="overdue-days">
+                    {Math.abs(item.timeLeft) + " Days"}
+                    <img
+                        src={process.env.PUBLIC_URL + "/icons/status-overdue.svg"}
                         className="ml-1"
                         alt=""
                     />
@@ -111,16 +112,21 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                     <div className="order-details">
                         <div className="po-numbers">
                             <div className="pos">
-                                <span className="regular-14">
-                                    {getShortName(item?.poNumberList?.join(","), 32)}
-                                </span>
+                                <Tooltip title={item?.poNumberList?.join(",")} placement={"top"} arrow>
+                                    <span className="regular-14">
+                                        {getShortName(item?.poNumberList?.join(","), 32)}
+                                    </span>
+                                </Tooltip>
                                 <span className="regular-14 gray_dark_02">
                                     &nbsp;({item.orderRefNumber})
                                 </span>
                             </div>
                         </div>
                         <ul className="order-quantity-details d-flex">
-                            <li>{item.totalStyles}</li>
+                            <li>
+                                {item.totalStyles}&nbsp;
+                                {item.totalStyles > 1 ? "Styles" : "Style"}
+                            </li>
                             <li>{item.orderQuantity} units</li>
                             <li>${item.orderValue}</li>
                         </ul>
@@ -130,7 +136,7 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                                 <div
                                     className="progress-bar bg-success"
                                     role="progressbar"
-                                    style={{ width: item?.percentageOfCompleteness + "%" }}
+                                    style={{width: item?.percentageOfCompleteness + "%"}}
                                     aria-valuenow={item?.percentageOfCompleteness}
                                     aria-valuemin={0}
                                     aria-valuemax={100}
