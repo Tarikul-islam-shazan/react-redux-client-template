@@ -53,6 +53,12 @@
         padding: 8px;
         border: 1px solid $gray_light_02;
         display: flex;
+        cursor: pointer;
+        background: $white;
+        transition: 0.4s;
+        &:hover {
+            box-shadow: $shadow_2dp;
+        }
         .design-images {
             width: 148px;
             display: grid;
