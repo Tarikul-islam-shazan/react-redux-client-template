@@ -319,7 +319,7 @@ ul {
 .etd-dates {
     background: $white;
     padding: 8px 12px;
-    width: 172px;
+    width: 176px;
     position: absolute;
     right: 0;
     z-index: 1;
@@ -484,6 +484,13 @@ ul {
                 padding: 8px;
                 height: 225px;
                 overflow-y: auto;
+                padding-top: 0;
+                li {
+                    padding: 5px 4px;
+                    &:hover {
+                        background: $primary_light_04;
+                    }
+                }
             }
 
             ul {
