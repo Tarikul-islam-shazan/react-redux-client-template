@@ -2,6 +2,7 @@
     .designs-info-section {
         .back-icon {
             margin-top: -2px;
+            cursor: pointer;
         }
         .designs-row {
             .single-design {
@@ -90,6 +91,14 @@
                     .multicolors {
                         margin-top: 0;
                         justify-content: end;
+                        .color-icon {
+                            img {
+                                width: 28px;
+                                height: 28px;
+                                visibility: visible;
+                                background: #edf0f2;
+                            }
+                        }
                     }
                 }
                 &.design-wise,
@@ -102,6 +111,25 @@
                                         &:last-child {
                                             color: $primary;
                                             font-weight: 500;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.size-wise {
+                    .design-table {
+                        table {
+                            &.table {
+                                tr {
+                                    &:last-child {
+                                        td {
+                                            p {
+                                                color: $secondary;
+                                                font-weight: 500;
+                                            }
                                         }
                                     }
                                 }
