@@ -525,6 +525,7 @@ ul {
     width: 190px;
     li {
         margin-bottom: 8px;
+        cursor: pointer;
         span {
             font-size: 10px;
             line-height: 16px;
@@ -845,6 +846,7 @@ ul {
                     .single-task {
                         display: flex;
                         justify-content: space-between;
+                        margin-bottom: 8px;
                         .task-name {
                             padding-right: 16px;
                             img {
@@ -953,7 +955,7 @@ ul {
     }
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1024px) {
     .buyer-timeline-container {
         .timeline-row {
             flex-wrap: wrap;
