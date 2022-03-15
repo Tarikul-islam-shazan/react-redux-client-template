@@ -33,9 +33,9 @@ const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
             if (totalElements > 0 && (totalPages > currentPage)) {
                 let paramString;
                 if (selectedDesignList?.length > 0) {
-                    paramString = `${params.orderId}?page=${currentPage + 1}&size=6&productIds=${selectedDesignList?.join(",")}`
+                    paramString = `${params.orderId}?page=${currentPage + 1}&size=15&productIds=${selectedDesignList?.join(",")}`
                 } else {
-                    paramString = `${params.orderId}?page=${currentPage + 1}&size=6`
+                    paramString = `${params.orderId}?page=${currentPage + 1}&size=15`
                 }
                 setLoader(true);
                 dispatch(fetchTimeline(paramString, true)).finally(() => setLoader(false))

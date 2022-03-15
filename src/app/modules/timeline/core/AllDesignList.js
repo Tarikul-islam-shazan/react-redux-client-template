@@ -26,7 +26,7 @@ const AllDesignList = ({setLoader}) => {
     }
 
     const generateParams = () => {
-        return `${params.orderId}?page=0&size=6`
+        return `${params.orderId}?page=0&size=15`
     }
 
     const renderDesignList = () => {

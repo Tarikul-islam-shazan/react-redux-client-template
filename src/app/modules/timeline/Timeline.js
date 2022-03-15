@@ -23,9 +23,9 @@ const Timeline = () => {
 
     const generateParams = (page) => {
         if(timelineStore.selectedDesignList?.length > 0){
-            return `${params.orderId}?page=${page}&size=6&productIds=${timelineStore.selectedDesignList?.join(",")}`
+            return `${params.orderId}?page=${page}&size=15&productIds=${timelineStore.selectedDesignList?.join(",")}`
         }else{
-            return `${params.orderId}?page=${page}&size=6`
+            return `${params.orderId}?page=${page}&size=15`
         }
 
     }
