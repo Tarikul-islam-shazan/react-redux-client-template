@@ -90,6 +90,14 @@
                     .multicolors {
                         margin-top: 0;
                         justify-content: end;
+                        .color-icon {
+                            img {
+                                width: 28px;
+                                height: 28px;
+                                visibility: visible;
+                                background: #edf0f2;
+                            }
+                        }
                     }
                 }
                 &.design-wise,
