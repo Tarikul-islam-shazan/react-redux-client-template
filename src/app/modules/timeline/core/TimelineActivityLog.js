@@ -46,7 +46,7 @@ const TimelineActivityLog = ({toggleAddComment, setLoader}) => {
 
     const renderTimeline = () => {
         return timelineStore?.data?.map((item, index) => {
-            return <ActivityLog activity={item} key={`timeline_${index}`} setLoader={setLoader}/>
+            return <ActivityLog index={index} activity={item} key={`timeline_${index}`} setLoader={setLoader}/>
         })
     }
 

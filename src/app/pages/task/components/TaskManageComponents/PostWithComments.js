@@ -8,6 +8,9 @@ import { parseHtml, addImageSuffix } from '../../../../services/Util';
 import Http from '../../../../services/Http';
 import { toastSuccess, toastError } from '../../../../commonComponents/Toast';
 import {SelectedFileViewComponent} from './SelectedFileViewComponent';
+import {bindActionCreators} from "redux";
+import {addCommentIndexWise, fetchProductionDetailsByDesignNumber} from "../../../../modules/store/action/Timeline";
+import {connect} from "react-redux";
 
 
 const renderPostTitleExt = (post) => {
@@ -30,7 +33,7 @@ const renderPostTitleExt = (post) => {
   }
 }
 
-export default class PostWithComments extends Component {
+class PostWithComments extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -169,10 +172,13 @@ export default class PostWithComments extends Component {
     };
     await Http.POST('commentOnTask', body, "?fromTimeline=false")
       .then(({data}) => {
+        if (this.props.timelinePanel !== undefined) {
+          this.props.addCommentIndexWise(data.payload, 0)
+        }
         this.props.toggleLoader(false);
         if (data.success) {
-          if (data.payload) {
-            post.commentList.push(data.payload);
+          if (data.payload?.postResponse) {
+            post.commentList.push(data.payload.postResponse);
           }
           this.setState({
             comment: '',
@@ -334,6 +340,21 @@ export default class PostWithComments extends Component {
     )
   }
 }
+const mapStateToProps = store => {
+  return {
+    timelineStore: store.timelineStore,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+      {
+        addCommentIndexWise
+      },
+      dispatch
+  )
+};
+export default connect(mapStateToProps, mapDispatchToProps)(PostWithComments);
 
 const getMinsCountFromNow = (dateTime, format) => {
   let res = moment().diff(moment.utc(dateTime, format));

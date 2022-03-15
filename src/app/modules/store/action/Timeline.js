@@ -98,3 +98,10 @@ export const downloadInvoice = async (invoiceId) => {
         })
         .catch((error) => toastError(error.response.data.message))
 }
+
+export const addCommentIndexWise = (data, index) => async (dispatch) => {
+    await dispatch({
+        type: ActionTypes.ADD_TIMELINE_DATA_BY_INDEX,
+        payload: {data: data, index: index}
+    })
+}

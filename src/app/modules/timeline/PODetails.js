@@ -3,7 +3,7 @@ import {useHistory, useParams} from "react-router-dom";
 import Http from "../../services/Http";
 import LoaderComponent from "../../commonComponents/Loader";
 import {toastError} from "../../commonComponents/Toast";
-import {capitalizeFirstLetter, getShortName, renderMultiColor} from "../../services/Util";
+import {capitalizeFirstLetter, changeDateFormat, getShortName, renderMultiColor} from "../../services/Util";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const PODetails = () => {
@@ -150,7 +150,9 @@ const PODetails = () => {
                             <div className="po-info-colums-view">
                                 <ul>
                                     <li>PO: {order.poNumber}</li>
-                                    <li>ETD: {order.deliveryDate}</li>
+                                    <li>ETD:&nbsp;
+                                        {changeDateFormat(order.deliveryDate, "YYYY-MM-DD", "DD-MMM-YYYY")}
+                                    </li>
                                 </ul>
                             </div>
                             <div className="po-quantity-colums-view">
@@ -185,7 +187,7 @@ const PODetails = () => {
                     <div className="design-quantity-table mt-2      ">
                         <div className="text-right mb-2">
                             <p className="regular-14">
-                                {capitalizeFirstLetter(order.buyerQuotationType)} {capitalizeFirstLetter(order.priceType)}
+                                {capitalizeFirstLetter(order.buyerQuotationType)} {order.priceType ? order.priceType : "FOB"}
                             </p>
                         </div>
                         <div className="design-table">

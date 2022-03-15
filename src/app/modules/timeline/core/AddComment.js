@@ -59,20 +59,35 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         }
     }, [timelineStore]);
 
+    const handleTask = (task) => {
+        let errorObj = {...error}
+        errorObj["taskError"] = undefined;
+        setError(errorObj)
+        setSelectedTask(task)
+    }
+
     const renderTaskList = () => {
         return taskList?.map((task, index) => {
             return (
-                <li key={`task_${index}`} onClick={() => setSelectedTask(task)}>
+                <li key={`task_${index}`} onClick={() => handleTask(task)}>
                     <span>{task.stepName}</span>
                 </li>
             );
         });
     };
 
+    const handleDesign = (design) => {
+        let errorObj = {...error}
+        errorObj["designError"] = undefined;
+        setError(errorObj)
+        setSelectedDesign(design)
+    }
+
+
     const renderDesignList = () => {
         return designList?.map((design, index) => {
             return (
-                <li key={`add_comment_design_${index}`} onClick={() => setSelectedDesign(design)}>
+                <li key={`add_comment_design_${index}`} onClick={() => handleDesign(design)}>
                     <img src={design.image} alt="img"/>
                     <span>{design.referenceNumber}</span>
                 </li>
@@ -121,6 +136,11 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
 
     const onMultipleFileSelect = (e, docType) => {
         let files = Array.from(e.target.files);
+        if(files.length > 0) {
+            let errorObj = {...error}
+            errorObj["commentError"] = undefined;
+            setError(errorObj)
+        }
         let fileList = [...selectedFiles];
         files.map((item) => {
             let data = {
@@ -185,6 +205,14 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         }
     }
 
+    const handleComment = (e) => {
+        if(e.target.value) {
+            setMessage(e.target.value)
+            let errorObj = {...error}
+            errorObj["commentError"] = undefined;
+            setError(errorObj)
+        }
+    }
 
     return (
         <Modal
@@ -285,7 +313,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                         <div className="comment-text clicked">
                                             <MentionsInput
                                                 value={message}
-                                                onChange={(e) => setMessage(e.target.value)}
+                                                onChange={handleComment}
                                                 placeholder="Write Comment..."
                                             >
                                                 <Mention

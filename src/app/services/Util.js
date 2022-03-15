@@ -1,6 +1,7 @@
 import $ from "jquery";
 import moment from "moment";
-import React, {Component} from "react";
+import React from "react";
+import {Tooltip} from "@material-ui/core";
 
 const capitalizeFirstLetter = (str) =>
     str?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -1055,12 +1056,14 @@ const renderMultiColor = (color) => {
                     {color?.compositeColorList?.length > 0 &&
                         color.compositeColorList.map((item, index) => {
                             return (
-                                <span
-                                    key={`multi_color_${index}`}
-                                    className='color-icon'
-                                    style={{background: item.hexCode}}
-                                >
-								</span>
+                                <Tooltip title={color.name} arrow placement={"top"}>
+                                    <span
+                                        key={`multi_color_${index}`}
+                                        className='color-icon'
+                                        style={{background: item.hexCode}}
+                                    >
+                                    </span>
+                                </Tooltip>
                             );
                         })
                     }
@@ -1071,11 +1074,13 @@ const renderMultiColor = (color) => {
         return (
             <div className='colors-row'>
                 <div className='multicolors'>
-					<span
-                        className='color-icon'
-                        style={{background: color.hexCode}}
-                    >
-					</span>
+                    <Tooltip title={color.name} arrow placement={"top"}>
+                        <span
+                            className='color-icon'
+                            style={{background: color.hexCode}}
+                        >
+                        </span>
+                    </Tooltip>
                 </div>
             </div>
         );

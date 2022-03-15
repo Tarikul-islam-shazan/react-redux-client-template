@@ -4,6 +4,13 @@ const initialState = {};
 
 const TimelineReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ActionTypes.ADD_TIMELINE_DATA_BY_INDEX:
+            let timelineData = [...state.data];
+            timelineData.splice(action.payload.index, 0, action.payload.data);
+            return {
+                ...state,
+                data: timelineData
+            }
         case ActionTypes.ADD_NEW_COMMENT:
             let data = [action.payload, ...state.data]
             return {...state, data: data}

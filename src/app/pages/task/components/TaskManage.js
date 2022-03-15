@@ -31,7 +31,7 @@ import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {addNewCommentOnTimeline, fetchProductionDetailsByDesignNumber} from "../../../modules/store/action/Timeline";
+import {addCommentIndexWise, fetchProductionDetailsByDesignNumber} from "../../../modules/store/action/Timeline";
 
 class TaskManage extends Component {
     constructor(props) {
@@ -455,10 +455,12 @@ class TaskManage extends Component {
             await this.setState({loading: true});
             await Http.POST("postOnTask", body, "?fromTimeline=false")
                 .then(({data}) => {
-                    // this.props.addNewCommentOnTimeline()
+                    if (this.props.timelinePanel !== undefined) {
+                        this.props.addCommentIndexWise(data.payload, 0)
+                    }
                     this.setState({loading: false});
                     if (data.success) {
-                        if (data.payload) posts.push(data.payload);
+                        if (data.payload?.postResponse) posts.push(data.payload.postResponse);
                         this.setState({
                             post: "",
                             selectedFiles: [],
@@ -488,12 +490,13 @@ class TaskManage extends Component {
             .then(({data}) => {
                 if (this.props.timelinePanel !== undefined) {
                     let selectedDesignNumber = this.props.timelineStore?.selectedDesignNumber || null
+                    this.props.addCommentIndexWise(data.payload.timelineResponse)
                     this.props.fetchProductionDetailsByDesignNumber(this.props.orderId, selectedDesignNumber)
                 }
                 this.setState({loading: false});
                 if (data.success) {
-                    if (data.payload && data.payload.postResponse && data.payload.stepDetailsResponse) {
-                        posts.push(data.payload.postResponse);
+                    if (data.payload && data.payload?.timelineResponse?.postResponse && data.payload.stepDetailsResponse) {
+                        posts.push(data.payload?.timelineResponse?.postResponse);
                         task = {...data.payload.stepDetailsResponse};
                         this.props.callback(data.payload.stepDetailsResponse);
                     }
@@ -816,12 +819,12 @@ class TaskManage extends Component {
 
                                 {task.stepType === "REVIEW" &&
                                     task.actualEndDate &&
-                                    task.status === "APPROVED" && (
+                                    (task.status === "APPROVED" || task.status === "SCOPE_OFF") && (
                                         <button className="completed-btn">
                                             Approved
                                             <span>
                                     {" "}
-                                                {changeDateFormat(task.actualEndDate, "YYYY-MM-DD", "MMM-DD")}
+                                                {task.status !== "SCOPE_OFF" && changeDateFormat(task.actualEndDate, "YYYY-MM-DD", "MMM-DD")}
                                  </span>
                                             <svg
                                                 width="18"
@@ -919,6 +922,7 @@ class TaskManage extends Component {
                                         orderMemberList={orderMemberList}
                                         toggleLoader={this.toggleLoader}
                                         userInfo={userInfo}
+                                        timelinePanel={this.props.timelinePanel}
                                     />
                                 );
                             })}
@@ -1087,7 +1091,7 @@ const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
             fetchProductionDetailsByDesignNumber,
-            addNewCommentOnTimeline
+            addCommentIndexWise
         },
         dispatch
     )

@@ -14,11 +14,11 @@ import {SelectedFileViewComponent} from "../../../pages/task/components/TaskMana
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Mention, MentionsInput} from 'react-mentions'
-import {downloadInvoice} from "../../store/action/Timeline";
+import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
 
-const ActivityLog = ({activity, setLoader}) => {
+const ActivityLog = ({activity, setLoader, index}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
@@ -31,6 +31,7 @@ const ActivityLog = ({activity, setLoader}) => {
     const [taskId, setTaskId] = useState(0)
     const params = useParams();
     const history = useHistory();
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
@@ -250,10 +251,8 @@ const ActivityLog = ({activity, setLoader}) => {
             taggedUserIdList: taggedUser,
         };
         await Http.POST("commentOnTask", body, "?fromTimeline=true")
-            .then(({data}) => {
-                let tempCommentList = [...commentList];
-                tempCommentList.push(message);
-                setCommentList(tempCommentList);
+            .then(async ({data}) => {
+                await dispatch(addCommentIndexWise(data.payload, index + 1))
                 cancelPost();
                 setLoader(false);
                 toastSuccess("Replied Successful!");
