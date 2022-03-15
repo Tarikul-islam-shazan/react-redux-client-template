@@ -424,7 +424,7 @@ const Dashboard = () => {
                                                         <div
                                                             className="single-person-progress d-flex align-items-center"
                                                             key={item.orderId}
-                                                            onClick={() => history.push(`/timeline/${item.orderId}`)}
+                                                            onClick={() => history.push(`/orders/view/${item.orderId}`)}
                                                         >
                                                             <div className="person-info d-flex align-items-center">
                                                                 <div className="four-images d-flex">
@@ -797,7 +797,7 @@ const Dashboard = () => {
                                             <td
                                                 className="cursor-pointer"
                                             >
-                                                <Link to={`/timeline/${item.orderId}`}>
+                                                <Link to={`/orders/view/${item.orderId}`}>
                                                     {item.orderName}
                                                 </Link>{" "}
                                             </td>
