@@ -55,7 +55,10 @@ const AllProductionList = ({setLoader}) => {
     const renderStepIcon = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
             return "/icons/Due icon.svg"
-        } else if (sample.formattedTaskStatus === "APPROVED" || sample.formattedTaskStatus === "LATE_APPROVED") {
+        } else if (sample.formattedTaskStatus === "APPROVED" ||
+            sample.formattedTaskStatus === "LATE_APPROVED" ||
+            sample.status === "SCOPE_OFF"
+        ) {
             return "/icons/Completed icon.svg"
         } else {
             return "/icons/Pending icon.svg"
@@ -65,7 +68,10 @@ const AllProductionList = ({setLoader}) => {
     const renderStepClass = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
             return "due"
-        } else if (sample.formattedTaskStatus === "APPROVED" || sample.formattedTaskStatus === "LATE_APPROVED") {
+        } else if (sample.formattedTaskStatus === "APPROVED" ||
+            sample.formattedTaskStatus === "LATE_APPROVED" ||
+            sample.status === "SCOPE_OFF"
+        ) {
             return "completed"
         } else {
             return "pending"
@@ -75,6 +81,16 @@ const AllProductionList = ({setLoader}) => {
     const handleTaskManager = (sample) => {
         setSelectedId(sample.id)
         setShowTaskDetailsModal(true)
+    }
+
+    const renderTaskDate = (sample) => {
+        if (sample.formattedTaskStatus === "EXPIRED") {
+            return "+" + sample.dateOver
+        } else if (('actualEndDate' in sample)) {
+            return changeDateFormat(sample.actualEndDate, "YYYY-MM-DD", "DD-MMM")
+        } else {
+            return changeDateFormat(sample.endDate, "YYYY-MM-DD", "DD-MMM")
+        }
     }
 
     const renderSamplingStepList = (list) => {
@@ -98,7 +114,7 @@ const AllProductionList = ({setLoader}) => {
                     </div>
                     <div className="date-details">
                         <span>
-                            {sample.formattedTaskStatus === "EXPIRED" ? "+" + sample.dateOver : changeDateFormat(sample.startDate, "YYYY-MM-DD", "DD-MMM")}
+                            {renderTaskDate(sample)}
                         </span>
                     </div>
                 </div>
@@ -194,6 +210,7 @@ const AllProductionList = ({setLoader}) => {
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <TaskManage
+                    timelinePanel={true}
                     id={selectedId}
                     orderId={params.orderId}
                     closeModal={() => setShowTaskDetailsModal(false)}

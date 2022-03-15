@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { addImageSuffix, authUserInfo } from "../../../services/Util";
-import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
-import Http from "../../../services/Http";
-import { toastError, toastSuccess } from "../../../commonComponents/Toast";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {getFileType, getIconByFileType} from "../../../services/Util";
 
-const MoreDesign = ({ toggleModal, openModal, setLoader, imageList }) => {
+const MoreDesign = ({toggleModal, openModal, imageList}) => {
     const renderImageList = () => {
         return imageList?.map((image, index) => {
-            return <img src={image} alt="" key={`image_list_${index}`} />;
+            const fileType = getFileType(image)
+            return (
+                (fileType === 'IMAGE' || fileType === 'NO_FILE') ? <a href={image} target="_blank">
+                    <img
+                        src={image}
+                        alt=""
+                        key={`image_list_${index}`}
+                    />
+                </a> : <a href={image} target="_blank">
+                    <img
+                        src={getIconByFileType(fileType)}
+                        alt=""
+                        key={`image_list_${index}`}
+                    />
+                </a>
+            );
         });
     };
 
@@ -30,7 +40,7 @@ const MoreDesign = ({ toggleModal, openModal, setLoader, imageList }) => {
                                 <h3 className="semibold-16 mb-0">All designs</h3>
                             </div>
                             <div className="close-btn" onClick={toggleModal}>
-                                <img src="/icons/close.svg" alt="close" />
+                                <img src="/icons/close.svg" alt="close"/>
                             </div>
                         </div>
                         <div className="common-popup-body">

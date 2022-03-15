@@ -253,7 +253,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                         aria-haspopup="true"
                                                         aria-expanded="false"
                                                     >
-                                                        {selectedTask?.stepName || "Task"}
+                                                        {selectedTask?.stepName || "Select Task"}
                                                     </button>
                                                     <div
                                                         className="dropdown-menu shadow-2dp"

@@ -1,14 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {addImageSuffix, authUserInfo, getFileType, getIconByFileType, parseHtml} from "../../../services/Util";
+import {
+    addImageSuffix,
+    authUserInfo,
+    changeDateFormat,
+    getFileType,
+    getIconByFileType,
+    parseHtml
+} from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import {useHistory, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
 import {useSelector} from "react-redux";
-import {MentionsInput, Mention} from 'react-mentions'
+import {Mention, MentionsInput} from 'react-mentions'
 import {downloadInvoice} from "../../store/action/Timeline";
 
 const ActivityLog = ({activity, setLoader}) => {
@@ -114,7 +121,12 @@ const ActivityLog = ({activity, setLoader}) => {
                 string.push(item.text + " ");
             }
         });
-        return <p className="regular-12">{string}</p>;
+        return (
+            <>
+                <p className="regular-12">{string}</p>
+                <p className="regular-12">{changeDateFormat(activity.createdAt, "YYYY-MM-DDThh:mm", "DD-MMM hh:mm a")}</p>
+            </>
+        );
     };
 
     const toggleImageModal = () => {
@@ -133,16 +145,24 @@ const ActivityLog = ({activity, setLoader}) => {
                 {timelineImages[0] && (
                     <div className="single-one">
                         {(fileTypeOne === 'IMAGE' || fileTypeOne === 'NO_FILE') ?
-                            <img src={timelineImages[0]} alt=""/> :
-                            <img src={getIconByFileType(fileTypeOne)} alt=""/>
+                            <a href={timelineImages[0]} target="_blank">
+                                <img src={timelineImages[0]} alt=""/>
+                            </a> :
+                            <a href={timelineImages[0]} target="_blank">
+                                <img src={getIconByFileType(fileTypeOne)} alt=""/>
+                            </a>
                         }
                     </div>
                 )}
                 {timelineImages[1] && (
                     <div className="single-one">
                         {(fileTypeTwo === 'IMAGE' || fileTypeTwo === 'NO_FILE') ?
-                            <img src={timelineImages[1]} alt=""/> :
-                            <img src={getIconByFileType(fileTypeTwo)} alt=""/>
+                            <a href={timelineImages[1]} target="_blank">
+                                <img src={timelineImages[1]} alt=""/>
+                            </a> :
+                            <a href={timelineImages[1]} target="_blank">
+                                <img className="timeline-file-icon" src={getIconByFileType(fileTypeTwo)} alt=""/>
+                            </a>
                         }
                         {timelineImages?.length > 2 && (
                             <div className="more-style-count" onClick={toggleImageModal}>
@@ -267,7 +287,7 @@ const ActivityLog = ({activity, setLoader}) => {
                             <MentionsInput
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                placeholder="Reply..."
+                                placeholder="Write reply..."
                             >
                                 <Mention
                                     markup='@__display__'
@@ -430,7 +450,7 @@ const ActivityLog = ({activity, setLoader}) => {
         } else if (activity.activityModule === "ORDER") {
             history.push(`/purchaseDetails/${params.orderId}`)
         } else if (activity.activityModule === "PRODUCT") {
-            history.push(`/designs/view/${activity.id}?openModal=true`)
+            history.push(`/designs/view/${activity?.secondaryActedUpon?.id}?openModal=true`)
         } else if (activity.activityModule === "TASK") {
             setShowTaskDetailsModal(true)
         }
@@ -438,14 +458,16 @@ const ActivityLog = ({activity, setLoader}) => {
 
     return (
         <div className="single-activity activity-with-header added-comment">
-            <div className="activity-common-header justify-content-between">
-                <div className="activity-content d-flex" onClick={handePageRoute}>
+            <div className="activity-common-header justify-content-between" onClick={handePageRoute}>
+                <div className="activity-content d-flex">
                     {renderIconOrImage()}
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
                 <div className="design-image">
                     {activity?.secondaryActedUpon?.docUrlList[0] &&
-                        <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
+                        <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
+                            <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
+                        </Link>
                     }
                 </div>
             </div>
@@ -457,6 +479,7 @@ const ActivityLog = ({activity, setLoader}) => {
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <TaskManage
+                    timelinePanel={true}
                     id={taskId}
                     orderId={params.orderId}
                     closeModal={() => setShowTaskDetailsModal(false)}

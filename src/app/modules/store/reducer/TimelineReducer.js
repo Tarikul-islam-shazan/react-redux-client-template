@@ -8,7 +8,11 @@ const TimelineReducer = (state = initialState, action) => {
             let data = [action.payload, ...state.data]
             return {...state, data: data}
         case ActionTypes.FETCH_STEP_INFO:
-            return {...state, stepList: action.payload};
+            return {
+                ...state,
+                stepList: action.payload.data,
+                selectedDesignNumber: action.payload.selectedDesignNumber
+            };
         case ActionTypes.TOGGLE_DESIGN_SELECTION:
             let designList = [...state.selectedDesignList];
             let designObj = designList.find(item => item === action.payload);
@@ -45,7 +49,8 @@ const TimelineReducer = (state = initialState, action) => {
                     ...payload.response,
                     orderInfo: state.orderInfo,
                     selectedDesignList: state.selectedDesignList,
-                    stepList: state.stepList
+                    stepList: state.stepList,
+                    selectedDesignNumber: state.selectedDesignNumber
                 }
             } else {
                 return {
@@ -53,7 +58,8 @@ const TimelineReducer = (state = initialState, action) => {
                     data: [...state.data, ...payload.response.data],
                     orderInfo: state.orderInfo,
                     selectedDesignList: state.selectedDesignList,
-                    stepList: state.stepList
+                    stepList: state.stepList,
+                    selectedDesignNumber: state.selectedDesignNumber
                 }
             }
         case ActionTypes.CLEAR_TIMELINE_DATA:

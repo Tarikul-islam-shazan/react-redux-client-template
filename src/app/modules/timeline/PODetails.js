@@ -3,7 +3,7 @@ import {useHistory, useParams} from "react-router-dom";
 import Http from "../../services/Http";
 import LoaderComponent from "../../commonComponents/Loader";
 import {toastError} from "../../commonComponents/Toast";
-import {renderMultiColor, getShortName, capitalizeFirstLetter} from "../../services/Util";
+import {capitalizeFirstLetter, getShortName, renderMultiColor} from "../../services/Util";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const PODetails = () => {
@@ -68,7 +68,9 @@ const PODetails = () => {
                                 </td>
                                 {value &&
                                     value.sizeQuantityPairList.map((style, inputIndex) => {
-                                        qty += style.quantity;
+                                        if (style.quantity) {
+                                            qty += style.quantity;
+                                        }
                                         return (
                                             <td key={`style_${inputIndex}`}>
                                                 <p>{style.quantity}</p>

@@ -60,16 +60,16 @@ export const fetchOrderInfo = (orderId) => async (dispatch) => {
     });
 }
 
-export const storeDesignWiseStepList = (data) => {
+export const storeDesignWiseStepList = (data, designNumber) => {
     return {
         type: ActionTypes.FETCH_STEP_INFO,
-        payload: data
+        payload: {"data": data, "selectedDesignNumber": designNumber}
     }
 }
 
 export const fetchProductionDetailsByDesignNumber = (orderNumber, designNumber) => async (dispatch) => {
     await Http.GET('getTimeLineStepInfo', `${orderNumber}/${designNumber}`).then((response) => {
-        dispatch(storeDesignWiseStepList(response.data));
+        dispatch(storeDesignWiseStepList(response.data, designNumber));
     });
 }
 
