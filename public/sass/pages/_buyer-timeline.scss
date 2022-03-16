@@ -710,6 +710,7 @@ ul {
                     img {
                         width: 100%;
                         object-fit: contain;
+                        aspect-ratio: 9 / 10;
                         &.timeline-file-icon {
                             width: 140px;
                             position: relative;
