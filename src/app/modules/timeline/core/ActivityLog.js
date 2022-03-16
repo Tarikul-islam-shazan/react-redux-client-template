@@ -1,46 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     addImageSuffix,
     authUserInfo,
     changeDateFormat,
     getFileType,
     getIconByFileType,
-    parseHtml,
+    getMentionedUserIds,
+    parseHtml
 } from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import {Link, useHistory, useParams} from "react-router-dom";
+import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import { toastError, toastSuccess } from "../../../commonComponents/Toast";
+import {toastError, toastSuccess} from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
-import { useDispatch, useSelector } from "react-redux";
-import { Mention, MentionsInput } from "react-mentions";
-import { addCommentIndexWise, downloadInvoice } from "../../store/action/Timeline";
+import {useDispatch, useSelector} from "react-redux";
+import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-const ActivityLog = ({ activity, setLoader, index }) => {
+const ActivityLog = ({activity, setLoader, index}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
     const [isReplying, setIsReplying] = useState(false);
     const [commentList, setCommentList] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
-    const [message, setMessage] = useState("");
     const [memberList, setMemberList] = useState([]);
-    const [taggedUser, setTaggedUer] = useState([]);
-    const [taskId, setTaskId] = useState(0);
+    const [taskId, setTaskId] = useState(0)
     const params = useParams();
     const history = useHistory();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    const postInputRef = useRef(null)
+
+    const mentionModule = {
+        allowedChars: /^[A-Za-z\s]*$/,
+        mentionDenotationChars: ["@"],
+        source: async (searchTerm, renderList) => {
+            if (searchTerm.length === 0) {
+                renderList(memberList, searchTerm);
+            } else {
+                let matches = [];
+                for (let i = 0; i < memberList.length; i++) {
+                    if (
+                        memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
+                    ) {
+                        matches.push(memberList[i]);
+                    }
+                }
+                renderList(matches, searchTerm);
+            }
+        },
+    };
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
-            let members = [];
-            let tmpList = timelineStore?.orderInfo?.orderMemberList;
-            tmpList.map((member) =>
-                members.push({ id: member.memberId, display: member.memberName })
-            );
-            setMemberList(members);
+            let members = []
+            let tmpList = timelineStore?.orderInfo?.orderMemberList
+            tmpList.map(member => members.push({id: member.email, value: member.memberName}))
+            setMemberList(members)
         }
     }, [timelineStore]);
 
@@ -104,13 +123,13 @@ const ActivityLog = ({ activity, setLoader, index }) => {
         if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
             return (
                 <div className="person-profile">
-                    <img src={activity.profileImage} alt="" />
+                    <img src={activity.profileImage} alt=""/>
                 </div>
             );
         } else {
             return (
                 <div className="activity-icon">
-                    <img src={iconPath()} alt="" />
+                    <img src={iconPath()} alt=""/>
                 </div>
             );
         }
@@ -141,7 +160,7 @@ const ActivityLog = ({ activity, setLoader, index }) => {
     };
 
     const renderTimeLineImages = () => {
-        let { timelineImages } = activity;
+        let {timelineImages} = activity;
         if (!("timelineImages" in activity)) {
             timelineImages = [];
         }
@@ -153,7 +172,7 @@ const ActivityLog = ({ activity, setLoader, index }) => {
                     <div className="single-one">
                         {fileTypeOne === "IMAGE" || fileTypeOne === "NO_FILE" ? (
                             <a href={timelineImages[0]} target="_blank">
-                                <img src={timelineImages[0]} alt="" />
+                                <img src={timelineImages[0]} alt=""/>
                             </a>
                         ) : (
                             <a href={timelineImages[0]} target="_blank">
@@ -170,7 +189,7 @@ const ActivityLog = ({ activity, setLoader, index }) => {
                     <div className="single-one">
                         {fileTypeTwo === "IMAGE" || fileTypeTwo === "NO_FILE" ? (
                             <a href={timelineImages[1]} target="_blank">
-                                <img src={timelineImages[1]} alt="" />
+                                <img src={timelineImages[1]} alt=""/>
                             </a>
                         ) : (
                             <a href={timelineImages[1]} target="_blank">
@@ -197,7 +216,7 @@ const ActivityLog = ({ activity, setLoader, index }) => {
             return (
                 <p
                     className={`description regular-12 ${index > 0 ? "pl-2" : ""}`}
-                    dangerouslySetInnerHTML={{ __html: parseHtml(comment.toString("html")) }}
+                    dangerouslySetInnerHTML={{__html: parseHtml(comment.toString("html"))}}
                 />
             );
         });
@@ -253,36 +272,30 @@ const ActivityLog = ({ activity, setLoader, index }) => {
 
     const cancelPost = () => {
         setIsReplying(false);
-        setMessage("");
         setSelectedFiles([]);
     };
 
     const handleReply = async () => {
         setLoader(true);
+        let message = postInputRef.current
         let body = {
             documentDTOList: selectedFiles,
             postId: activity?.body?.entityIdTypeMapList[0]?.id,
             postType: "COMMENT",
             text: message.replace(/"/g, "'"),
-            taggedUserIdList: taggedUser,
+            taggedUserIdList: timelineStore?.orderInfo?.orderMemberList ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList) : [],
         };
         await Http.POST("commentOnTask", body, "?fromTimeline=true")
-            .then(async ({ data }) => {
+            .then(async ({data}) => {
                 await dispatch(addCommentIndexWise(data.payload, index + 1));
                 cancelPost();
                 setLoader(false);
                 toastSuccess("Replied Successful!");
             })
-            .catch(({ response }) => {
+            .catch(({response}) => {
                 setLoader(false);
                 toastError(response.data.message);
             });
-    };
-
-    const handleUserTag = (id, display) => {
-        if (!taggedUser.includes(id)) {
-            setTaggedUer([...taggedUser, id]);
-        }
     };
 
     const renderReplySection = () => {
@@ -299,23 +312,19 @@ const ActivityLog = ({ activity, setLoader, index }) => {
                                 alt=""
                                 className="profile-image"
                             />
-                            <MentionsInput
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
-                                placeholder="Write reply..."
-                            >
-                                <Mention
-                                    markup="@__display__"
-                                    trigger="@"
-                                    data={memberList}
-                                    onAdd={handleUserTag}
-                                    appendSpaceOnAdd={true}
-                                />
-                            </MentionsInput>
+                            <ReactQuill
+                                name="post"
+                                debug="info"
+                                theme="bubble"
+                                onChange={(value) => postInputRef.current = value}
+                                className="custom-scrollbar"
+                                placeholder="Write comment…"
+                                modules={{mention: mentionModule}}
+                            />
                         </div>
                         <div className="attachment cursor-pointer">
                             <label htmlFor="upload-input-file">
-                                <img src="/icons/attachment.svg" alt="attach" />
+                                <img src="/icons/attachment.svg" alt="attach"/>
                             </label>
                             <input
                                 id="upload-input-file"
