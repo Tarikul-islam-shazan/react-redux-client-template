@@ -136,7 +136,7 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                 <div
                                     className="progress-bar bg-success"
                                     role="progressbar"
-                                    style={{width: item?.percentageOfCompleteness + "%"}}
+                                    style={{width: item?.percentageOfCompleteness ? item?.percentageOfCompleteness : 0 + "%"}}
                                     aria-valuenow={item?.percentageOfCompleteness}
                                     aria-valuemin={0}
                                     aria-valuemax={100}
