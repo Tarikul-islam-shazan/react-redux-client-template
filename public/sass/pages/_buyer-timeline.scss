@@ -706,10 +706,17 @@ ul {
                 column-gap: 5px;
                 .single-one {
                     background: #edf0f2;
+                    aspect-ratio: 9 / 10;
                     img {
                         width: 100%;
-                        aspect-ratio: 9 / 10;
                         object-fit: contain;
+                        &.timeline-file-icon {
+                            width: 140px;
+                            position: relative;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
                     }
                     &:nth-child(2) {
                         position: relative;

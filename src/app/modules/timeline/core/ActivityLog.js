@@ -1,24 +1,24 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     addImageSuffix,
     authUserInfo,
     changeDateFormat,
     getFileType,
     getIconByFileType,
-    parseHtml
+    parseHtml,
 } from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import {Link, useHistory, useParams} from "react-router-dom";
-import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import {toastError, toastSuccess} from "../../../commonComponents/Toast";
+import { toastError, toastSuccess } from "../../../commonComponents/Toast";
 import MoreDesign from "./MoreDesign";
-import {useDispatch, useSelector} from "react-redux";
-import {Mention, MentionsInput} from 'react-mentions'
-import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
+import { useDispatch, useSelector } from "react-redux";
+import { Mention, MentionsInput } from "react-mentions";
+import { addCommentIndexWise, downloadInvoice } from "../../store/action/Timeline";
 
-const ActivityLog = ({activity, setLoader, index}) => {
+const ActivityLog = ({ activity, setLoader, index }) => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
@@ -27,18 +27,20 @@ const ActivityLog = ({activity, setLoader, index}) => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [message, setMessage] = useState("");
     const [memberList, setMemberList] = useState([]);
-    const [taggedUser, setTaggedUer] = useState([])
-    const [taskId, setTaskId] = useState(0)
+    const [taggedUser, setTaggedUer] = useState([]);
+    const [taskId, setTaskId] = useState(0);
     const params = useParams();
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
-            let members = []
-            let tmpList = timelineStore?.orderInfo?.orderMemberList
-            tmpList.map(member => members.push({id: member.memberId, display: member.memberName}))
-            setMemberList(members)
+            let members = [];
+            let tmpList = timelineStore?.orderInfo?.orderMemberList;
+            tmpList.map((member) =>
+                members.push({ id: member.memberId, display: member.memberName })
+            );
+            setMemberList(members);
         }
     }, [timelineStore]);
 
@@ -49,9 +51,11 @@ const ActivityLog = ({activity, setLoader, index}) => {
             setCommentList(comment);
         }
         if (activity?.body?.titlePartList) {
-            let task = activity?.body?.titlePartList.find(item => item.entityType === "STEP" && item.titlePartType === "ACTED_UPON");
+            let task = activity?.body?.titlePartList.find(
+                (item) => item.entityType === "STEP" && item.titlePartType === "ACTED_UPON"
+            );
             if (task !== undefined) {
-                setTaskId(task.id)
+                setTaskId(task.id);
             }
         }
     }, [activity]);
@@ -100,13 +104,13 @@ const ActivityLog = ({activity, setLoader, index}) => {
         if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
             return (
                 <div className="person-profile">
-                    <img src={activity.profileImage} alt=""/>
+                    <img src={activity.profileImage} alt="" />
                 </div>
             );
         } else {
             return (
                 <div className="activity-icon">
-                    <img src={iconPath()} alt=""/>
+                    <img src={iconPath()} alt="" />
                 </div>
             );
         }
@@ -125,7 +129,9 @@ const ActivityLog = ({activity, setLoader, index}) => {
         return (
             <>
                 <p className="regular-12">{string}</p>
-                <p className="regular-12">{changeDateFormat(activity.createdAt, "YYYY-MM-DDThh:mm", "DD-MMM hh:mm a")}</p>
+                <p className="regular-12">
+                    {changeDateFormat(activity.createdAt, "YYYY-MM-DDThh:mm", "DD-MMM hh:mm a")}
+                </p>
             </>
         );
     };
@@ -135,36 +141,46 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const renderTimeLineImages = () => {
-        let {timelineImages} = activity;
+        let { timelineImages } = activity;
         if (!("timelineImages" in activity)) {
-            timelineImages = []
+            timelineImages = [];
         }
-        const fileTypeOne = getFileType(timelineImages[0])
-        const fileTypeTwo = getFileType(timelineImages[1])
+        const fileTypeOne = getFileType(timelineImages[0]);
+        const fileTypeTwo = getFileType(timelineImages[1]);
         return (
             <div className="body-style-images-row">
                 {timelineImages[0] && (
                     <div className="single-one">
-                        {(fileTypeOne === 'IMAGE' || fileTypeOne === 'NO_FILE') ?
+                        {fileTypeOne === "IMAGE" || fileTypeOne === "NO_FILE" ? (
                             <a href={timelineImages[0]} target="_blank">
-                                <img src={timelineImages[0]} alt=""/>
-                            </a> :
-                            <a href={timelineImages[0]} target="_blank">
-                                <img src={getIconByFileType(fileTypeOne)} alt=""/>
+                                <img src={timelineImages[0]} alt="" />
                             </a>
-                        }
+                        ) : (
+                            <a href={timelineImages[0]} target="_blank">
+                                <img
+                                    className="timeline-file-icon"
+                                    src={getIconByFileType(fileTypeOne)}
+                                    alt=""
+                                />
+                            </a>
+                        )}
                     </div>
                 )}
                 {timelineImages[1] && (
                     <div className="single-one">
-                        {(fileTypeTwo === 'IMAGE' || fileTypeTwo === 'NO_FILE') ?
+                        {fileTypeTwo === "IMAGE" || fileTypeTwo === "NO_FILE" ? (
                             <a href={timelineImages[1]} target="_blank">
-                                <img src={timelineImages[1]} alt=""/>
-                            </a> :
-                            <a href={timelineImages[1]} target="_blank">
-                                <img className="timeline-file-icon" src={getIconByFileType(fileTypeTwo)} alt=""/>
+                                <img src={timelineImages[1]} alt="" />
                             </a>
-                        }
+                        ) : (
+                            <a href={timelineImages[1]} target="_blank">
+                                <img
+                                    className="timeline-file-icon"
+                                    src={getIconByFileType(fileTypeTwo)}
+                                    alt=""
+                                />
+                            </a>
+                        )}
                         {timelineImages?.length > 2 && (
                             <div className="more-style-count" onClick={toggleImageModal}>
                                 <div className="count-number">{timelineImages?.length - 2}+</div>
@@ -181,7 +197,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
             return (
                 <p
                     className={`description regular-12 ${index > 0 ? "pl-2" : ""}`}
-                    dangerouslySetInnerHTML={{__html: parseHtml(comment.toString("html"))}}
+                    dangerouslySetInnerHTML={{ __html: parseHtml(comment.toString("html")) }}
                 />
             );
         });
@@ -251,13 +267,13 @@ const ActivityLog = ({activity, setLoader, index}) => {
             taggedUserIdList: taggedUser,
         };
         await Http.POST("commentOnTask", body, "?fromTimeline=true")
-            .then(async ({data}) => {
-                await dispatch(addCommentIndexWise(data.payload, index + 1))
+            .then(async ({ data }) => {
+                await dispatch(addCommentIndexWise(data.payload, index + 1));
                 cancelPost();
                 setLoader(false);
                 toastSuccess("Replied Successful!");
             })
-            .catch(({response}) => {
+            .catch(({ response }) => {
                 setLoader(false);
                 toastError(response.data.message);
             });
@@ -265,9 +281,9 @@ const ActivityLog = ({activity, setLoader, index}) => {
 
     const handleUserTag = (id, display) => {
         if (!taggedUser.includes(id)) {
-            setTaggedUer([...taggedUser, id])
+            setTaggedUer([...taggedUser, id]);
         }
-    }
+    };
 
     const renderReplySection = () => {
         if (isReplying) {
@@ -289,7 +305,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
                                 placeholder="Write reply..."
                             >
                                 <Mention
-                                    markup='@__display__'
+                                    markup="@__display__"
                                     trigger="@"
                                     data={memberList}
                                     onAdd={handleUserTag}
@@ -299,7 +315,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
                         </div>
                         <div className="attachment cursor-pointer">
                             <label htmlFor="upload-input-file">
-                                <img src="/icons/attachment.svg" alt="attach"/>
+                                <img src="/icons/attachment.svg" alt="attach" />
                             </label>
                             <input
                                 id="upload-input-file"
@@ -325,7 +341,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const renderPiShippingUpdateDescription = () => {
-        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text);
         return (
             <>
                 <p>{textObj["title"]}</p>
@@ -336,22 +352,22 @@ const ActivityLog = ({activity, setLoader, index}) => {
                 <p>{textObj["state"]}</p>
                 <p>{textObj["country"]}</p>
             </>
-        )
+        );
     };
 
     const renderPiBeneficiaryDetails = () => {
-        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text);
         return (
             <>
                 <p>{textObj["name"]}</p>
                 <p>{textObj["address"]}</p>
                 <p>{textObj["website"]}</p>
             </>
-        )
+        );
     };
 
     const renderBankDetails = () => {
-        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text)
+        let textObj = JSON.parse(activity?.body?.entityIdTypeMapList[0]?.text);
         return (
             <>
                 <p>Swift: {textObj["swiftCode"]}</p>
@@ -359,15 +375,11 @@ const ActivityLog = ({activity, setLoader, index}) => {
                 <p>{textObj["bankName"]}</p>
                 <p>{textObj["bankDetails"]}</p>
             </>
-        )
+        );
     };
 
-
     const renderActivityBody = () => {
-        if (
-            activity.actionType === "TASK_REGULAR_POST" ||
-            activity.actionType === "COMMENT"
-        ) {
+        if (activity.actionType === "TASK_REGULAR_POST" || activity.actionType === "COMMENT") {
             return (
                 <div className="activity-common-body">
                     {renderDescription()}
@@ -395,79 +407,59 @@ const ActivityLog = ({activity, setLoader, index}) => {
                     </div>
                 </div>
             );
-        } else if (
-            activity.actionType === "TASK_DESCRIPTION_UPDATED"
-        ) {
+        } else if (activity.actionType === "TASK_DESCRIPTION_UPDATED") {
+            return <div className="activity-common-body">{renderDescription()}</div>;
+        } else if (activity.actionType === "PI_SHIPPING_UPDATED") {
             return (
-                <div className="activity-common-body">
-                    {renderDescription()}
-                </div>
+                <div className="activity-common-body">{renderPiShippingUpdateDescription()}</div>
             );
-        } else if (
-            activity.actionType === "PI_SHIPPING_UPDATED"
-        ) {
+        } else if (activity.actionType === "PI_BENEFICIARY_DETAILS_UPDATED") {
+            return <div className="activity-common-body">{renderPiBeneficiaryDetails()}</div>;
+        } else if (activity.actionType === "PI_BUYER_ADDRESS_UPDATED") {
             return (
-                <div className="activity-common-body">
-                    {renderPiShippingUpdateDescription()}
-                </div>
+                <div className="activity-common-body">{renderPiShippingUpdateDescription()}</div>
             );
-        } else if (
-            activity.actionType === "PI_BENEFICIARY_DETAILS_UPDATED"
-        ) {
-            return (
-                <div className="activity-common-body">
-                    {renderPiBeneficiaryDetails()}
-                </div>
-            );
-        } else if (
-            activity.actionType === "PI_BUYER_ADDRESS_UPDATED"
-        ) {
-            return (
-                <div className="activity-common-body">
-                    {renderPiShippingUpdateDescription()}
-                </div>
-            );
-        } else if (
-            activity.actionType === "PI_BANK_DETAILS_UPDATED"
-        ) {
-            return (
-                <div className="activity-common-body">
-                    {renderBankDetails()}
-                </div>
-            );
+        } else if (activity.actionType === "PI_BANK_DETAILS_UPDATED") {
+            return <div className="activity-common-body">{renderBankDetails()}</div>;
         }
     };
 
     const handePageRoute = () => {
         if (activity.activityModule === "COMMENT") {
-            setShowTaskDetailsModal(true)
+            setShowTaskDetailsModal(true);
         } else if (activity.activityModule === "PROFORMA_INVOICE") {
             setLoader(true);
             downloadInvoice(timelineStore?.orderInfo?.invoiceId)
                 .then(() => setLoader(false))
-                .catch(() => setLoader(false))
+                .catch(() => setLoader(false));
         } else if (activity.activityModule === "ORDER") {
-            history.push(`/purchaseDetails/${params.orderId}`)
+            history.push(`/purchaseDetails/${params.orderId}`);
         } else if (activity.activityModule === "PRODUCT") {
-            history.push(`/designs/view/${activity?.secondaryActedUpon?.id}?openModal=true`)
+            history.push(`/designs/view/${activity?.secondaryActedUpon?.id}?openModal=true`);
         } else if (activity.activityModule === "TASK") {
-            setShowTaskDetailsModal(true)
+            setShowTaskDetailsModal(true);
         }
-    }
+    };
 
     return (
         <div className="single-activity activity-with-header added-comment">
-            <div className="activity-common-header justify-content-between" onClick={handePageRoute}>
+            <div
+                className="activity-common-header justify-content-between"
+                onClick={handePageRoute}
+            >
                 <div className="activity-content d-flex">
                     {renderIconOrImage()}
                     <div className="activity-text">{renderActivityText()}</div>
                 </div>
                 <div className="design-image">
-                    {activity?.secondaryActedUpon?.docUrlList[0] &&
+                    {activity?.secondaryActedUpon?.docUrlList[0] && (
                         <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
-                            <img src={activity?.secondaryActedUpon?.docUrlList[0]} alt="design image"/>
+                            <img
+                                src={activity?.secondaryActedUpon?.docUrlList[0]}
+                                alt="design image"
+                            />
                         </Link>
-                    }
+                    )}
                 </div>
             </div>
             {renderActivityBody()}
