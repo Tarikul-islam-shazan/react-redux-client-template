@@ -1151,6 +1151,26 @@ const getIconByFileType = (fileType) => {
     }
 };
 
+const getMentionedUserIds = (post, orderMemberList) => {
+    let foundEmails = [];
+    let emailRegex =
+        /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+    let match = null;
+    let ids = [];
+    while ((match = emailRegex.exec(post))) {
+        foundEmails.push(match[0]);
+        post = post.replace(match[0], "");
+    }
+    foundEmails.map((email) => {
+        orderMemberList.map((member) => {
+            if (member.email === email && !ids.includes(member.memberId)) {
+                ids.push(member.memberId);
+            }
+        });
+    });
+    return ids;
+};
+
 
 export {
     capitalizeFirstLetter,
@@ -1208,5 +1228,6 @@ export {
     isPageReachBottom,
     toOrdinalSuffix,
     getFileType,
-    getIconByFileType
+    getIconByFileType,
+    getMentionedUserIds
 };
