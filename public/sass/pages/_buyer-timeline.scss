@@ -16,6 +16,7 @@ ul {
         padding: 16px;
         border: 1px solid $gray_light_02;
         background: $white;
+        border-radius: 4px;
         &.all-designs-with-status {
             margin-top: 12px;
         }
@@ -66,8 +67,8 @@ ul {
                     .design-title-with-date {
                         .order-number {
                             font-weight: 500;
-                            font-size: 14px;
-                            line-height: 20px;
+                            font-size: 16px;
+                            line-height: 24px;
                         }
                         .etd-status {
                             margin-left: 8px;
@@ -103,10 +104,10 @@ ul {
                         span {
                             font-size: 12px;
                             line-height: 16px;
-                            color: $gray_dark_03;
+                            color: $gray_dark_02;
                             position: relative;
                             display: inline-block;
-                            margin-right: 8px;
+                            margin-right: 16px;
                             &:first-child {
                                 &::after {
                                     content: "";
@@ -115,7 +116,7 @@ ul {
                                     height: 4px;
                                     background: $gray_dark_04;
                                     border-radius: 100px;
-                                    right: -8px;
+                                    right: -10px;
                                     top: 50%;
                                     transform: translateY(-50%);
                                 }
@@ -152,7 +153,7 @@ ul {
                         padding-top: 10px;
                         .po-names {
                             font-size: 12px;
-                            line-height: 16px;
+                            line-height: 18px;
                             color: $gray_dark_02;
                             display: inline-block;
                             a {
@@ -220,6 +221,7 @@ ul {
                         background: $white;
                         padding: 8px 12px;
                         border: 1px solid $gray_light_02;
+                        border-radius: 4px;
                         p {
                             color: $gray_dark_03;
 
@@ -368,8 +370,8 @@ ul {
             float: unset;
             margin: 0;
             label {
-                font-size: 12px;
-                line-height: 16px;
+                font-size: 14px;
+                line-height: 20px;
                 margin-bottom: 4px;
                 &::before {
                     padding: 7px;
@@ -415,13 +417,14 @@ ul {
                 .design-info {
                     img {
                         width: 24px;
-                        height: 27px;
+                        height: 24px;
                         background: $gray_light_02;
+                        border: 1px solid $gray_light_02;
                         object-fit: contain;
                     }
                     span {
-                        font-size: 12px;
-                        line-height: 16px;
+                        font-size: 14px;
+                        line-height: 20px;
                         color: $gray_dark_02;
                         margin-left: 4px;
                     }
@@ -429,11 +432,11 @@ ul {
             }
 
             .design-status {
-                max-width: 50px;
-                width: 50px;
+                max-width: 60px;
+                width: 60px;
                 text-align: right;
                 span {
-                    font-size: 10px;
+                    font-size: 12px;
                     line-height: 16px;
                     color: $gray_dark_02;
                 }
@@ -472,15 +475,15 @@ ul {
             }
         }
         .comments-hint {
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 14px;
+            line-height: 20px;
         }
         .dropdown {
             button {
                 padding: 0;
                 padding-right: 16px;
-                font-size: 12px;
-                line-height: 16px;
+                font-size: 14px;
+                line-height: 20px;
                 color: $gray_dark_01;
             }
             span {
@@ -527,7 +530,7 @@ ul {
         margin-bottom: 8px;
         cursor: pointer;
         span {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 16px;
             color: $gray_dark_02;
         }
@@ -630,10 +633,11 @@ ul {
         background: $white;
         border: 1px solid $gray_light_02;
         padding: 12px 16px;
-        margin-top: 12px;
-        transition: 0.4s;
+        margin-bottom: 12px;
+        transition: 0.3s;
+        border-radius: 4px;
         &:hover {
-            border: 1px solid $primary_bright_02;
+            box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
         }
         &:first-child {
             margin-top: 0;
@@ -685,9 +689,10 @@ ul {
                 margin-left: 12px;
                 img {
                     width: 24px;
-                    height: 27px;
+                    height: 24px;
                     object-fit: contain;
                     background: $gray_light_02;
+                    border: 1px solid $gray_light_02;
                 }
             }
         }
@@ -745,8 +750,8 @@ ul {
             }
             .reply-btn {
                 button {
-                    font-size: 12px;
-                    line-height: 16px;
+                    font-size: 14px;
+                    line-height: 20px;
                 }
             }
             .details-btn {
@@ -805,10 +810,10 @@ ul {
     .design-select {
         button {
             border: 1px solid $gray_light_01;
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 14px;
+            line-height: 20px;
             color: $gray_dark_03;
-            height: 35px;
+            height: 46px;
             border-radius: 0;
             padding: 0 12px;
             display: block;
@@ -817,9 +822,10 @@ ul {
             background-color: $white;
             img {
                 width: 24px;
-                height: 27px;
+                height: 24px;
                 object-fit: contain;
                 background: $gray_light_02;
+                border: 1px solid $gray_light_02;
                 margin-right: 8px;
             }
         }
@@ -930,13 +936,14 @@ ul {
         padding: 0;
     }
 }
+.more-design-popup {
+    .modal-dialog {
+        max-width: 1024px;
+    }
+}
 
 @media only screen and (max-width: 1440px) {
     .buyer-timeline-container {
-        .regular-12 {
-            font-size: 12px;
-            line-height: 16px;
-        }
         .timeline-row {
             .one-third {
                 &.all-designs-destails {
@@ -958,25 +965,24 @@ ul {
                 }
                 &.all-production-details {
                     top: 76px;
-                    .production-accordion {
-                        .card {
-                            .card-header {
-                                button {
-                                    font-size: 12px;
-                                    line-height: 16px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
     }
+
     .activity-list {
         .single-activity {
             .activity-common-header {
                 .activity-icon {
                     margin-top: -4px;
+                }
+            }
+            .activity-common-body {
+                .reply-btn {
+                    button {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
                 }
             }
         }
@@ -985,6 +991,10 @@ ul {
 
 @media only screen and (max-width: 1024px) {
     .buyer-timeline-container {
+        .regular-12 {
+            font-size: 12px;
+            line-height: 16px;
+        }
         .timeline-row {
             flex-wrap: wrap;
             width: 100%;
@@ -1037,7 +1047,8 @@ ul {
 @media only screen and (max-width: 520px) {
     .more-designs-popup {
         .designs-grid {
-            height: 413px;
+            height: 525px;
+            grid-template-columns: 1fr;
         }
     }
 }
