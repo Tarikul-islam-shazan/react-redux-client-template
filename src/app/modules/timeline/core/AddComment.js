@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import {addImageSuffix, authUserInfo} from "../../../services/Util";
+import {addImageSuffix, authUserInfo, getMentionedUserIds, mentionModule} from "../../../services/Util";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
@@ -8,14 +8,13 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import LoaderComponent from "../../../commonComponents/Loader";
 import {addNewCommentOnTimeline} from "../../store/action/Timeline";
-import {Mention, MentionsInput} from "react-mentions";
+import ReactQuill from "react-quill";
 
 const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [loader, setLoader] = useState(false);
     const [selectedDesign, setSelectedDesign] = useState(null);
     const [error, setError] = useState({});
-    const [message, setMessage] = useState("");
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [memberList, setMemberList] = useState([]);
     const params = useParams();
@@ -26,6 +25,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [taggedUser, setTaggedUer] = useState([])
     const [taskSearch, setTaskSearch] = useState("")
     const dispatch = useDispatch()
+    const postInputRef = useRef(null)
 
     useEffect(() => {
         if (selectedDesign !== null) {
@@ -46,7 +46,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         if (timelineStore?.orderInfo?.orderMemberList) {
             let members = []
             let tmpList = timelineStore?.orderInfo?.orderMemberList
-            tmpList.map(member => members.push({id: member.memberId, display: member.memberName}))
+            tmpList.map(member => members.push({id: member.email, value: member.memberName}))
             setMemberList(members)
         }
         if (timelineStore?.orderInfo?.orderProductList) {
@@ -103,8 +103,8 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         if (!selectedDesign) {
             errors["designError"] = "Required!";
         }
-        if (!message && selectedFiles.length === 0) {
-            errors["commentError"] = "Message or attachment required";
+        if (postInputRef.current === null || postInputRef?.current.toString().match("<p><br></p>")) {
+            errors["commentError"] = "Comment required";
         }
         setError(errors);
         return Object.keys(errors).length > 0;
@@ -113,12 +113,13 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const handlePost = async () => {
         if (!checkValidation()) {
             setLoader(true);
+            let message = postInputRef.current
             let body = {
                 documentDTOList: selectedFiles,
                 orderId: parseInt(params.orderId),
                 stepId: selectedTask.id,
                 text: message.replace(/"/g, "'"),
-                taggedUserIdList: taggedUser,
+                taggedUserIdList: timelineStore?.orderInfo?.orderMemberList ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList) : [],
             };
             await Http.POST("postOnTask", body, "?fromTimeline=true")
                 .then(response => {
@@ -136,11 +137,6 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
 
     const onMultipleFileSelect = (e, docType) => {
         let files = Array.from(e.target.files);
-        if(files.length > 0) {
-            let errorObj = {...error}
-            errorObj["commentError"] = undefined;
-            setError(errorObj)
-        }
         let fileList = [...selectedFiles];
         files.map((item) => {
             let data = {
@@ -202,15 +198,6 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const handleUserTag = (id, display) => {
         if (!taggedUser.includes(id)) {
             setTaggedUer([...taggedUser, id])
-        }
-    }
-
-    const handleComment = (e) => {
-        if(e.target.value) {
-            setMessage(e.target.value)
-            let errorObj = {...error}
-            errorObj["commentError"] = undefined;
-            setError(errorObj)
         }
     }
 
@@ -311,19 +298,15 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                     </div>
                                     <div className="comments-body">
                                         <div className="comment-text clicked">
-                                            <MentionsInput
-                                                value={message}
-                                                onChange={handleComment}
-                                                placeholder="Write Comment..."
-                                            >
-                                                <Mention
-                                                    markup='@__display__'
-                                                    trigger="@"
-                                                    data={memberList}
-                                                    onAdd={handleUserTag}
-                                                    appendSpaceOnAdd={true}
-                                                />
-                                            </MentionsInput>
+                                            <ReactQuill
+                                                name="post"
+                                                debug="info"
+                                                theme="bubble"
+                                                onChange={(value) => postInputRef.current = value}
+                                                className="custom-scrollbar"
+                                                placeholder="Write comment…"
+                                                modules={{mention: mentionModule(memberList)}}
+                                            />
                                             {error.commentError && (
                                                 <p className="error">{error.commentError}</p>
                                             )}
