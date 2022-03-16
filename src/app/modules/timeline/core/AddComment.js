@@ -1,16 +1,21 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import {addImageSuffix, authUserInfo, getMentionedUserIds, mentionModule} from "../../../services/Util";
-import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import {
+    addImageSuffix,
+    authUserInfo,
+    getMentionedUserIds,
+    mentionModule,
+} from "../../../services/Util";
+import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import {toastError, toastSuccess} from "../../../commonComponents/Toast";
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { toastError, toastSuccess } from "../../../commonComponents/Toast";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import LoaderComponent from "../../../commonComponents/Loader";
-import {addNewCommentOnTimeline} from "../../store/action/Timeline";
+import { addNewCommentOnTimeline } from "../../store/action/Timeline";
 import ReactQuill from "react-quill";
 
-const AddComment = ({toggleAddComment, openModal, activity}) => {
+const AddComment = ({ toggleAddComment, openModal, activity }) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [loader, setLoader] = useState(false);
     const [selectedDesign, setSelectedDesign] = useState(null);
@@ -22,10 +27,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [designList, setDesignList] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
-    const [taggedUser, setTaggedUer] = useState([])
-    const [taskSearch, setTaskSearch] = useState("")
-    const dispatch = useDispatch()
-    const postInputRef = useRef(null)
+    const [taggedUser, setTaggedUer] = useState([]);
+    const [taskSearch, setTaskSearch] = useState("");
+    const dispatch = useDispatch();
+    const postInputRef = useRef(null);
 
     useEffect(() => {
         if (selectedDesign !== null) {
@@ -44,10 +49,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
-            let members = []
-            let tmpList = timelineStore?.orderInfo?.orderMemberList
-            tmpList.map(member => members.push({id: member.email, value: member.memberName}))
-            setMemberList(members)
+            let members = [];
+            let tmpList = timelineStore?.orderInfo?.orderMemberList;
+            tmpList.map((member) => members.push({ id: member.email, value: member.memberName }));
+            setMemberList(members);
         }
         if (timelineStore?.orderInfo?.orderProductList) {
             let productList = timelineStore?.orderInfo?.orderProductList;
@@ -60,11 +65,11 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     }, [timelineStore]);
 
     const handleTask = (task) => {
-        let errorObj = {...error}
+        let errorObj = { ...error };
         errorObj["taskError"] = undefined;
-        setError(errorObj)
-        setSelectedTask(task)
-    }
+        setError(errorObj);
+        setSelectedTask(task);
+    };
 
     const renderTaskList = () => {
         return taskList?.map((task, index) => {
@@ -77,18 +82,17 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     };
 
     const handleDesign = (design) => {
-        let errorObj = {...error}
+        let errorObj = { ...error };
         errorObj["designError"] = undefined;
-        setError(errorObj)
-        setSelectedDesign(design)
-    }
-
+        setError(errorObj);
+        setSelectedDesign(design);
+    };
 
     const renderDesignList = () => {
         return designList?.map((design, index) => {
             return (
                 <li key={`add_comment_design_${index}`} onClick={() => handleDesign(design)}>
-                    <img src={design.image} alt="img"/>
+                    <img src={design.image} alt="img" />
                     <span>{design.referenceNumber}</span>
                 </li>
             );
@@ -103,7 +107,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
         if (!selectedDesign) {
             errors["designError"] = "Required!";
         }
-        if (postInputRef.current === null || postInputRef?.current.toString().match("<p><br></p>")) {
+        if (
+            postInputRef.current === null ||
+            postInputRef?.current.toString().match("<p><br></p>")
+        ) {
             errors["commentError"] = "Comment required";
         }
         setError(errors);
@@ -113,22 +120,24 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const handlePost = async () => {
         if (!checkValidation()) {
             setLoader(true);
-            let message = postInputRef.current
+            let message = postInputRef.current;
             let body = {
                 documentDTOList: selectedFiles,
                 orderId: parseInt(params.orderId),
                 stepId: selectedTask.id,
                 text: message.replace(/"/g, "'"),
-                taggedUserIdList: timelineStore?.orderInfo?.orderMemberList ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList) : [],
+                taggedUserIdList: timelineStore?.orderInfo?.orderMemberList
+                    ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList)
+                    : [],
             };
             await Http.POST("postOnTask", body, "?fromTimeline=true")
-                .then(response => {
-                    dispatch(addNewCommentOnTimeline(response.data.payload))
+                .then((response) => {
+                    dispatch(addNewCommentOnTimeline(response.data.payload));
                     setLoader(false);
                     toggleAddComment();
                     toastSuccess("Comment Add Successful!");
                 })
-                .catch(({response}) => {
+                .catch(({ response }) => {
                     setLoader(false);
                     toastError(response.data.message);
                 });
@@ -190,23 +199,22 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                 (task) => task.stepName.toLowerCase().indexOf(e.target.value) > -1
             );
         }
-        setTaskSearch(e.target.value)
+        setTaskSearch(e.target.value);
         setTaskList(tmpArray);
     };
 
-
     const handleUserTag = (id, display) => {
         if (!taggedUser.includes(id)) {
-            setTaggedUer([...taggedUser, id])
+            setTaggedUer([...taggedUser, id]);
         }
-    }
+    };
 
     return (
         <Modal
             show={openModal}
             aria-labelledby="example-custom-modal-timeline"
             onHide={toggleAddComment}
-            centered
+            size="lg"
             className="add-comment-popup"
         >
             <Modal.Body>
@@ -255,10 +263,13 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="tast-select" onBlur={() => {
-                                                setTaskSearch("")
-                                                setTaskList(taskListHistory)
-                                            }}>
+                                            <div
+                                                className="tast-select"
+                                                onBlur={() => {
+                                                    setTaskSearch("");
+                                                    setTaskList(taskListHistory);
+                                                }}
+                                            >
                                                 <div className="dropdown">
                                                     <button
                                                         className="btn dropdown-toggle"
@@ -293,7 +304,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                             </div>
                                         </div>
                                         <div className="close-icon" onClick={toggleAddComment}>
-                                            <img src="/icons/close.svg" alt="close"/>
+                                            <img src="/icons/close.svg" alt="close" />
                                         </div>
                                     </div>
                                     <div className="comments-body">
@@ -302,10 +313,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                 name="post"
                                                 debug="info"
                                                 theme="bubble"
-                                                onChange={(value) => postInputRef.current = value}
+                                                onChange={(value) => (postInputRef.current = value)}
                                                 className="custom-scrollbar"
                                                 placeholder="Write comment…"
-                                                modules={{mention: mentionModule(memberList)}}
+                                                modules={{ mention: mentionModule(memberList) }}
                                             />
                                             {error.commentError && (
                                                 <p className="error">{error.commentError}</p>
@@ -315,7 +326,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                         <div className="post-actions d-flex justify-content-end">
                                             <div className="attachment cursor-pointer mr-2">
                                                 <label htmlFor="upload-input-file">
-                                                    <img src="/icons/attachment.svg" alt="attach"/>
+                                                    <img src="/icons/attachment.svg" alt="attach" />
                                                 </label>
                                                 <input
                                                     id="upload-input-file"

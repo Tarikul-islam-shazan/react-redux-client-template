@@ -1,24 +1,18 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import {getFileType, getIconByFileType} from "../../../services/Util";
+import { getFileType, getIconByFileType } from "../../../services/Util";
 
-const MoreDesign = ({toggleModal, openModal, imageList}) => {
+const MoreDesign = ({ toggleModal, openModal, imageList }) => {
     const renderImageList = () => {
         return imageList?.map((image, index) => {
-            const fileType = getFileType(image)
-            return (
-                (fileType === 'IMAGE' || fileType === 'NO_FILE') ? <a href={image} target="_blank">
-                    <img
-                        src={image}
-                        alt=""
-                        key={`image_list_${index}`}
-                    />
-                </a> : <a href={image} target="_blank">
-                    <img
-                        src={getIconByFileType(fileType)}
-                        alt=""
-                        key={`image_list_${index}`}
-                    />
+            const fileType = getFileType(image);
+            return fileType === "IMAGE" || fileType === "NO_FILE" ? (
+                <a href={image} target="_blank">
+                    <img src={image} alt="" key={`image_list_${index}`} />
+                </a>
+            ) : (
+                <a href={image} target="_blank">
+                    <img src={getIconByFileType(fileType)} alt="" key={`image_list_${index}`} />
                 </a>
             );
         });
@@ -29,7 +23,7 @@ const MoreDesign = ({toggleModal, openModal, imageList}) => {
             show={openModal}
             aria-labelledby="example-custom-modal-timeline"
             onHide={toggleModal}
-            centered
+            size="lg"
             className="more-design-popup"
         >
             <Modal.Body>
@@ -40,7 +34,7 @@ const MoreDesign = ({toggleModal, openModal, imageList}) => {
                                 <h3 className="semibold-16 mb-0">All designs</h3>
                             </div>
                             <div className="close-btn" onClick={toggleModal}>
-                                <img src="/icons/close.svg" alt="close"/>
+                                <img src="/icons/close.svg" alt="close" />
                             </div>
                         </div>
                         <div className="common-popup-body">

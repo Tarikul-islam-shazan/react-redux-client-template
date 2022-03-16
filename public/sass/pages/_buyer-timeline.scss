@@ -16,6 +16,7 @@ ul {
         padding: 16px;
         border: 1px solid $gray_light_02;
         background: $white;
+        border-radius: 4px;
         &.all-designs-with-status {
             margin-top: 12px;
         }
@@ -66,8 +67,8 @@ ul {
                     .design-title-with-date {
                         .order-number {
                             font-weight: 500;
-                            font-size: 14px;
-                            line-height: 20px;
+                            font-size: 16px;
+                            line-height: 24px;
                         }
                         .etd-status {
                             margin-left: 8px;
@@ -103,10 +104,10 @@ ul {
                         span {
                             font-size: 12px;
                             line-height: 16px;
-                            color: $gray_dark_03;
+                            color: $gray_dark_02;
                             position: relative;
                             display: inline-block;
-                            margin-right: 8px;
+                            margin-right: 16px;
                             &:first-child {
                                 &::after {
                                     content: "";
@@ -115,7 +116,7 @@ ul {
                                     height: 4px;
                                     background: $gray_dark_04;
                                     border-radius: 100px;
-                                    right: -8px;
+                                    right: -10px;
                                     top: 50%;
                                     transform: translateY(-50%);
                                 }
@@ -152,7 +153,7 @@ ul {
                         padding-top: 10px;
                         .po-names {
                             font-size: 12px;
-                            line-height: 16px;
+                            line-height: 18px;
                             color: $gray_dark_02;
                             display: inline-block;
                             a {
@@ -214,12 +215,15 @@ ul {
                     padding-bottom: 12px;
                     padding-top: 42px;
                     margin-top: -42px;
+                    z-index: 2;
                     .comments-button {
                         display: flex;
                         justify-content: space-between;
                         background: $white;
                         padding: 8px 12px;
                         border: 1px solid $gray_light_02;
+                        border-radius: 4px;
+                        margin: 0 4px;
                         p {
                             color: $gray_dark_03;
 
@@ -245,9 +249,6 @@ ul {
                     }
                     .reply-box {
                         margin-top: 8px;
-                        div {
-                            height: 48px;
-                        }
 
                         button {
                             color: $primary_bright_02;
@@ -260,40 +261,6 @@ ul {
                             height: 24px;
                             border-radius: 100px;
                             z-index: 1;
-                        }
-                        textarea {
-                            background-color: $gray_light_03 !important;
-                            border: none;
-                            padding-left: 48px;
-                            border-radius: 4px;
-                            height: 48px;
-                            font-size: 14px !important;
-                            padding: 15px 48px 15px 48px;
-                            overflow-y: auto !important;
-                            scrollbar-width: thin;
-                            &::-webkit-scrollbar-track {
-                                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                                background-color: #f5f5f5;
-                            }
-
-                            &::-webkit-scrollbar {
-                                width: 6px;
-                                background-color: #f5f5f5;
-                            }
-                            &::-webkit-scrollbar-thumb {
-                                border-radius: 10px;
-                                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                                background-color: #f5f5f5;
-                            }
-                            &:focus {
-                                box-shadow: none !important;
-                            }
-                        }
-                        div {
-                            div {
-                                left: 65px !important;
-                                top: 20px !important;
-                            }
                         }
                     }
                 }
@@ -328,8 +295,8 @@ ul {
         background: transparent;
         border: 1px solid transparent;
         padding: 0;
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 14px;
+        line-height: 20px;
     }
 }
 .etd-dates {
@@ -362,13 +329,65 @@ ul {
         }
     }
 }
+.top-write-comments,
+.reply-container {
+    .quill {
+        overflow-y: visible;
+        .ql-container {
+            font-family: "Inter" !important;
+            .ql-mention-list-container {
+                z-index: 1;
+            }
+        }
+        .ql-toolbar {
+            display: none;
+        }
+        .ql-tooltip-editor {
+            input {
+                display: none;
+            }
+        }
+        .ql-editor {
+            &.ql-blank {
+                &::before {
+                    left: 48px !important;
+                    top: 15px !important;
+                }
+            }
+            p {
+                background-color: $gray_light_03 !important;
+                border: none;
+                padding-left: 48px;
+                border-radius: 4px;
+                font-size: 14px !important;
+                padding: 15px 48px 15px 48px;
+                overflow-y: visible !important;
+                scrollbar-width: thin;
+                &::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                    background-color: #f5f5f5;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 6px;
+                    background-color: #f5f5f5;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 10px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                    background-color: #f5f5f5;
+                }
+            }
+        }
+    }
+}
 .all-designs-with-status {
     .custom-chekbox {
         .form-group {
             float: unset;
             margin: 0;
             label {
-                font-size: 12px;
+                font-size: 14px;
                 line-height: 16px;
                 margin-bottom: 4px;
                 &::before {
@@ -415,13 +434,14 @@ ul {
                 .design-info {
                     img {
                         width: 24px;
-                        height: 27px;
+                        height: 24px;
                         background: $gray_light_02;
+                        border: 1px solid $gray_light_02;
                         object-fit: contain;
                     }
                     span {
-                        font-size: 12px;
-                        line-height: 16px;
+                        font-size: 14px;
+                        line-height: 20px;
                         color: $gray_dark_02;
                         margin-left: 4px;
                     }
@@ -429,11 +449,11 @@ ul {
             }
 
             .design-status {
-                max-width: 50px;
-                width: 50px;
+                max-width: 60px;
+                width: 60px;
                 text-align: right;
                 span {
-                    font-size: 10px;
+                    font-size: 12px;
                     line-height: 16px;
                     color: $gray_dark_02;
                 }
@@ -472,15 +492,15 @@ ul {
             }
         }
         .comments-hint {
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 14px;
+            line-height: 20px;
         }
         .dropdown {
             button {
                 padding: 0;
                 padding-right: 16px;
-                font-size: 12px;
-                line-height: 16px;
+                font-size: 14px;
+                line-height: 20px;
                 color: $gray_dark_01;
             }
             span {
@@ -519,6 +539,18 @@ ul {
             }
         }
     }
+    .quill {
+        .ql-editor {
+            p {
+                padding-left: 16px !important;
+            }
+            &.ql-blank {
+                &::before {
+                    left: 16px !important;
+                }
+            }
+        }
+    }
 }
 .select-design-list {
     padding: 8px;
@@ -527,7 +559,7 @@ ul {
         margin-bottom: 8px;
         cursor: pointer;
         span {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 16px;
             color: $gray_dark_02;
         }
@@ -590,7 +622,6 @@ ul {
             height: 32px;
             border: none;
             background: transparent;
-            text-transform: uppercase;
             &.cancel {
                 margin-right: 8px;
                 color: $gray_dark_02;
@@ -626,14 +657,16 @@ ul {
     }
 }
 .activity-list {
+    margin: 0 4px;
     .single-activity {
         background: $white;
         border: 1px solid $gray_light_02;
         padding: 12px 16px;
-        margin-top: 12px;
-        transition: 0.4s;
+        margin-bottom: 12px;
+        transition: 0.3s;
+        border-radius: 4px;
         &:hover {
-            border: 1px solid $primary_bright_02;
+            box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
         }
         &:first-child {
             margin-top: 0;
@@ -685,9 +718,10 @@ ul {
                 margin-left: 12px;
                 img {
                     width: 24px;
-                    height: 27px;
+                    height: 24px;
                     object-fit: contain;
                     background: $gray_light_02;
+                    border: 1px solid $gray_light_02;
                 }
             }
         }
@@ -745,8 +779,8 @@ ul {
             }
             .reply-btn {
                 button {
-                    font-size: 12px;
-                    line-height: 16px;
+                    font-size: 14px;
+                    line-height: 20px;
                 }
             }
             .details-btn {
@@ -805,10 +839,10 @@ ul {
     .design-select {
         button {
             border: 1px solid $gray_light_01;
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 14px;
+            line-height: 20px;
             color: $gray_dark_03;
-            height: 35px;
+            height: 46px;
             border-radius: 0;
             padding: 0 12px;
             display: block;
@@ -817,11 +851,16 @@ ul {
             background-color: $white;
             img {
                 width: 24px;
-                height: 27px;
+                height: 24px;
                 object-fit: contain;
                 background: $gray_light_02;
+                border: 1px solid $gray_light_02;
                 margin-right: 8px;
             }
+        }
+        .dropdown-toggle {
+            background-image: url(./icons/Down-arrow-24.svg);
+            background-size: 24px;
         }
     }
     .production-accordion {
@@ -858,12 +897,6 @@ ul {
                         top: 8px;
                         width: 24px;
                         height: 24px;
-                        transform: rotate(180deg);
-                    }
-                    &.collapsed {
-                        &::after {
-                            transform: rotate(0);
-                        }
                     }
                 }
             }
@@ -874,7 +907,7 @@ ul {
                     .single-task {
                         display: flex;
                         justify-content: space-between;
-                        margin-bottom: 8px;
+                        margin-bottom: 5px;
                         .task-name {
                             padding-right: 16px;
                             img {
@@ -885,6 +918,7 @@ ul {
                             font-size: 12px;
                             line-height: 16px;
                             color: $gray_dark_02;
+                            cursor: pointer;
                         }
                         .date-details {
                             width: 50px;
@@ -921,6 +955,7 @@ ul {
 }
 .add-comment-popup,
 .more-design-popup {
+    margin-top: 60px;
     .common-popup {
         max-width: 100%;
         width: 100%;
@@ -930,13 +965,14 @@ ul {
         padding: 0;
     }
 }
+.more-design-popup {
+    .modal-dialog {
+        max-width: 1024px;
+    }
+}
 
 @media only screen and (max-width: 1440px) {
     .buyer-timeline-container {
-        .regular-12 {
-            font-size: 12px;
-            line-height: 16px;
-        }
         .timeline-row {
             .one-third {
                 &.all-designs-destails {
@@ -958,20 +994,11 @@ ul {
                 }
                 &.all-production-details {
                     top: 76px;
-                    .production-accordion {
-                        .card {
-                            .card-header {
-                                button {
-                                    font-size: 12px;
-                                    line-height: 16px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
     }
+
     .activity-list {
         .single-activity {
             .activity-common-header {
@@ -985,6 +1012,10 @@ ul {
 
 @media only screen and (max-width: 1024px) {
     .buyer-timeline-container {
+        .regular-12 {
+            font-size: 12px;
+            line-height: 16px;
+        }
         .timeline-row {
             flex-wrap: wrap;
             width: 100%;
@@ -1021,6 +1052,18 @@ ul {
             }
         }
     }
+    .activity-list {
+        .single-activity {
+            .activity-common-body {
+                .reply-btn {
+                    button {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                }
+            }
+        }
+    }
 }
 @media only screen and (max-width: 767px) {
     .buyer-timeline-container {
@@ -1037,7 +1080,8 @@ ul {
 @media only screen and (max-width: 520px) {
     .more-designs-popup {
         .designs-grid {
-            height: 413px;
+            height: 525px;
+            grid-template-columns: 1fr;
         }
     }
 }

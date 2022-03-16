@@ -1,161 +1,166 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchProductionDetailsByDesignNumber} from "../../store/action/Timeline";
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductionDetailsByDesignNumber } from "../../store/action/Timeline";
+import { useParams } from "react-router-dom";
 import TaskManage from "../../../pages/task/components/TaskManage";
 import Modal from "react-bootstrap/Modal";
-import {changeDateFormat, getShortName} from "../../../services/Util";
-import {Tooltip} from "@material-ui/core";
+import { changeDateFormat, getShortName } from "../../../services/Util";
+import { Tooltip } from "@material-ui/core";
 
-const AllProductionList = ({setLoader}) => {
-    const timelineStore = useSelector(store => store.timelineStore);
-    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
-    const [selectedDesign, setSelectedDesign] = useState(null)
-    const [selectedId, setSelectedId] = useState(null)
-    const [designList, setDesignList] = useState([])
-    const dispatch = useDispatch()
+const AllProductionList = ({ setLoader }) => {
+    const timelineStore = useSelector((store) => store.timelineStore);
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
+    const [selectedDesign, setSelectedDesign] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
+    const [designList, setDesignList] = useState([]);
+    const dispatch = useDispatch();
     const params = useParams();
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderProductList) {
             if (!selectedDesign) {
-                setSelectedDesign(timelineStore?.orderInfo?.orderProductList[0])
+                setSelectedDesign(timelineStore?.orderInfo?.orderProductList[0]);
             }
             let productList = timelineStore?.orderInfo?.orderProductList;
-            let tmpDesignList = []
+            let tmpDesignList = [];
             productList.map((design) => {
-                tmpDesignList.push(design)
-            })
-            setDesignList(tmpDesignList)
+                tmpDesignList.push(design);
+            });
+            setDesignList(tmpDesignList);
         }
-    }, [timelineStore])
+    }, [timelineStore]);
 
     useEffect(() => {
         if (selectedDesign?.id) {
-            dispatch(fetchProductionDetailsByDesignNumber(params.orderId, selectedDesign.id))
+            dispatch(fetchProductionDetailsByDesignNumber(params.orderId, selectedDesign.id));
         }
-    }, [selectedDesign])
+    }, [selectedDesign]);
 
     const renderDesignList = () => {
         return designList?.map((design, index) => {
             return (
-                <li key={`po_design_${index}`} onClick={() => {
-                    setLoader(true)
-                    setSelectedDesign(design)
-                    setLoader(false)
-                }}>
-                    <img src={design.image} alt="img"/>
+                <li
+                    key={`po_design_${index}`}
+                    onClick={() => {
+                        setLoader(true);
+                        setSelectedDesign(design);
+                        setLoader(false);
+                    }}
+                >
+                    <img src={design.image} alt="img" />
                     <span>{design.referenceNumber}</span>
                 </li>
-            )
-        })
-    }
-
+            );
+        });
+    };
 
     const renderStepIcon = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
-            return "/icons/Due icon.svg"
-        } else if (sample.formattedTaskStatus === "APPROVED" ||
+            return "/icons/Due icon.svg";
+        } else if (
+            sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
-            return "/icons/Completed icon.svg"
+            return "/icons/Completed icon.svg";
         } else {
-            return "/icons/Pending icon.svg"
+            return "/icons/Pending icon.svg";
         }
-    }
+    };
 
     const renderStepClass = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
-            return "due"
-        } else if (sample.formattedTaskStatus === "APPROVED" ||
+            return "due";
+        } else if (
+            sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
-            return "completed"
+            return "completed";
         } else {
-            return "pending"
+            return "pending";
         }
-    }
+    };
 
     const handleTaskManager = (sample) => {
-        setSelectedId(sample.id)
-        setShowTaskDetailsModal(true)
-    }
+        setSelectedId(sample.id);
+        setShowTaskDetailsModal(true);
+    };
 
     const renderTaskDate = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
-            return "+" + sample.dateOver
-        } else if (('actualEndDate' in sample)) {
-            return changeDateFormat(sample.actualEndDate, "YYYY-MM-DD", "DD-MMM")
+            return "+" + sample.dateOver;
+        } else if ("actualEndDate" in sample) {
+            return changeDateFormat(sample.actualEndDate, "YYYY-MM-DD", "DD-MMM");
         } else {
-            return changeDateFormat(sample.endDate, "YYYY-MM-DD", "DD-MMM")
+            return changeDateFormat(sample.endDate, "YYYY-MM-DD", "DD-MMM");
         }
-    }
+    };
 
     const renderSamplingStepList = (list) => {
         return list?.map((sample, index) => {
             return (
-                <div className={`single-task ${renderStepClass(sample)}`} key={`sample_index_${index}`}
-                     onClick={() => handleTaskManager(sample)}>
+                <div
+                    className={`single-task ${renderStepClass(sample)}`}
+                    key={`sample_index_${index}`}
+                    onClick={() => handleTaskManager(sample)}
+                >
                     <div className="task-name">
-                        <img
-                            src={renderStepIcon(sample)}
-                            alt="complete"
-                        />
-                        <Tooltip
-                            title={sample.stepName}
-                            placement={"top"}
-                            arrow
-                        >
-
+                        <img src={renderStepIcon(sample)} alt="complete" />
+                        <Tooltip title={sample.stepName} placement={"top"} arrow>
                             <span>{getShortName(sample.stepName, 25)}</span>
                         </Tooltip>
                     </div>
                     <div className="date-details">
-                        <span>
-                            {renderTaskDate(sample)}
-                        </span>
+                        <span>{renderTaskDate(sample)}</span>
                     </div>
                 </div>
-            )
-        })
-    }
-
+            );
+        });
+    };
 
     return (
         <div className="one-third all-production-details">
             <div className="design-select">
                 <div className="dropdown">
-                    <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {selectedDesign?.image && <img
-                            src={selectedDesign?.image}
-                            alt="img"
-                        />}
+                    <button
+                        className="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        {selectedDesign?.image && <img src={selectedDesign?.image} alt="img" />}
                         <span>{selectedDesign?.referenceNumber}</span>
                     </button>
                     <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
-                        <ul className="select-design-list">
-                            {renderDesignList()}
-                        </ul>
+                        <ul className="select-design-list">{renderDesignList()}</ul>
                     </div>
                 </div>
             </div>
             <div className="production-accordion">
                 <div id="accordion">
                     <div className="card">
-                        <div className="card-header" id="headingOne">
+                        <div className="card-header" id="headingSampling">
                             <h5 className="mb-0">
-                                <button className="btn btn-link" data-toggle="collapse"
-                                        data-target="#collapseOne" aria-expanded="true"
-                                        aria-controls="collapseOne">
+                                <button
+                                    className="btn btn-link"
+                                    data-toggle="collapse"
+                                    data-target="#collapseSampling"
+                                    aria-expanded="true"
+                                    aria-controls="collapseSampling"
+                                >
                                     Sampling
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseOne" className="collapse show" aria-labelledby="headingOne"
-                             data-parent="#accordion">
+                        <div
+                            id="collapseSampling"
+                            className="collapse show"
+                            aria-labelledby="headingSampling"
+                            data-parent="#accordion"
+                        >
                             <div className="card-body">
                                 <div className="all-task-status">
                                     {renderSamplingStepList(timelineStore?.stepList?.SAMPLING)}
@@ -164,17 +169,25 @@ const AllProductionList = ({setLoader}) => {
                         </div>
                     </div>
                     <div className="card">
-                        <div className="card-header" id="headingTwo">
+                        <div className="card-header" id="headingProduction">
                             <h5 className="mb-0">
-                                <button className="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapseTwo" aria-expanded="false"
-                                        aria-controls="collapseTwo">
+                                <button
+                                    className="btn btn-link collapsed"
+                                    data-toggle="collapse"
+                                    data-target="#collapseProduction"
+                                    aria-expanded="false"
+                                    aria-controls="collapseProduction"
+                                >
                                     Production
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                             data-parent="#accordion">
+                        <div
+                            id="collapseProduction"
+                            className="collapse"
+                            aria-labelledby="headingProduction"
+                            data-parent="#accordion"
+                        >
                             <div className="card-body">
                                 <div className="all-task-status">
                                     {renderSamplingStepList(timelineStore?.stepList?.PRODUCTION)}
@@ -183,17 +196,25 @@ const AllProductionList = ({setLoader}) => {
                         </div>
                     </div>
                     <div className="card">
-                        <div className="card-header" id="headingThree">
+                        <div className="card-header" id="headingInspection">
                             <h5 className="mb-0">
-                                <button className="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
+                                <button
+                                    className="btn btn-link collapsed"
+                                    data-toggle="collapse"
+                                    data-target="#collapseInspection"
+                                    aria-expanded="false"
+                                    aria-controls="collapseInspection"
+                                >
                                     Inspection
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
-                             data-parent="#accordion">
+                        <div
+                            id="collapseInspection"
+                            className="collapse"
+                            aria-labelledby="headingInspection"
+                            data-parent="#accordion"
+                        >
                             <div className="card-body">
                                 <div className="all-task-status">
                                     {renderSamplingStepList(timelineStore?.stepList?.INSPECTION)}
@@ -218,7 +239,7 @@ const AllProductionList = ({setLoader}) => {
                 />
             </Modal>
         </div>
-    )
-}
+    );
+};
 
-export default AllProductionList
+export default AllProductionList;
