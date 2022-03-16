@@ -215,6 +215,7 @@ ul {
                     padding-bottom: 12px;
                     padding-top: 42px;
                     margin-top: -42px;
+
                     .comments-button {
                         display: flex;
                         justify-content: space-between;
@@ -222,6 +223,7 @@ ul {
                         padding: 8px 12px;
                         border: 1px solid $gray_light_02;
                         border-radius: 4px;
+                        margin: 0 4px;
                         p {
                             color: $gray_dark_03;
 
@@ -247,10 +249,55 @@ ul {
                     }
                     .reply-box {
                         margin-top: 8px;
-                        div {
-                            height: 48px;
+                        .quill {
+                            overflow-y: visible;
+                            .ql-container {
+                                font-family: "Inter" !important;
+                                .ql-mention-list-container {
+                                    z-index: 1;
+                                }
+                            }
                         }
+                        .ql-toolbar {
+                            display: none;
+                        }
+                        .ql-tooltip-editor {
+                            input {
+                                display: none;
+                            }
+                        }
+                        .ql-editor {
+                            &.ql-blank {
+                                &::before {
+                                    left: 48px !important;
+                                    top: 15px !important;
+                                }
+                            }
+                            p {
+                                background-color: $gray_light_03 !important;
+                                border: none;
+                                padding-left: 48px;
+                                border-radius: 4px;
+                                font-size: 14px !important;
+                                padding: 15px 48px 15px 48px;
+                                overflow-y: visible !important;
+                                scrollbar-width: thin;
+                                &::-webkit-scrollbar-track {
+                                    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                                    background-color: #f5f5f5;
+                                }
 
+                                &::-webkit-scrollbar {
+                                    width: 6px;
+                                    background-color: #f5f5f5;
+                                }
+                                &::-webkit-scrollbar-thumb {
+                                    border-radius: 10px;
+                                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                                    background-color: #f5f5f5;
+                                }
+                            }
+                        }
                         button {
                             color: $primary_bright_02;
                         }
@@ -262,40 +309,6 @@ ul {
                             height: 24px;
                             border-radius: 100px;
                             z-index: 1;
-                        }
-                        textarea {
-                            background-color: $gray_light_03 !important;
-                            border: none;
-                            padding-left: 48px;
-                            border-radius: 4px;
-                            height: 48px;
-                            font-size: 14px !important;
-                            padding: 15px 48px 15px 48px;
-                            overflow-y: auto !important;
-                            scrollbar-width: thin;
-                            &::-webkit-scrollbar-track {
-                                -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                                background-color: #f5f5f5;
-                            }
-
-                            &::-webkit-scrollbar {
-                                width: 6px;
-                                background-color: #f5f5f5;
-                            }
-                            &::-webkit-scrollbar-thumb {
-                                border-radius: 10px;
-                                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                                background-color: #f5f5f5;
-                            }
-                            &:focus {
-                                box-shadow: none !important;
-                            }
-                        }
-                        div {
-                            div {
-                                left: 65px !important;
-                                top: 20px !important;
-                            }
                         }
                     }
                 }
@@ -330,8 +343,8 @@ ul {
         background: transparent;
         border: 1px solid transparent;
         padding: 0;
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 14px;
+        line-height: 20px;
     }
 }
 .etd-dates {
@@ -371,7 +384,7 @@ ul {
             margin: 0;
             label {
                 font-size: 14px;
-                line-height: 20px;
+                line-height: 16px;
                 margin-bottom: 4px;
                 &::before {
                     padding: 7px;
@@ -593,7 +606,6 @@ ul {
             height: 32px;
             border: none;
             background: transparent;
-            text-transform: uppercase;
             &.cancel {
                 margin-right: 8px;
                 color: $gray_dark_02;
@@ -629,6 +641,7 @@ ul {
     }
 }
 .activity-list {
+    margin: 0 4px;
     .single-activity {
         background: $white;
         border: 1px solid $gray_light_02;
@@ -829,6 +842,10 @@ ul {
                 margin-right: 8px;
             }
         }
+        .dropdown-toggle {
+            background-image: url(./icons/Down-arrow-24.svg);
+            background-size: 24px;
+        }
     }
     .production-accordion {
         margin-top: 8px;
@@ -864,12 +881,6 @@ ul {
                         top: 8px;
                         width: 24px;
                         height: 24px;
-                        transform: rotate(180deg);
-                    }
-                    &.collapsed {
-                        &::after {
-                            transform: rotate(0);
-                        }
                     }
                 }
             }
@@ -880,7 +891,7 @@ ul {
                     .single-task {
                         display: flex;
                         justify-content: space-between;
-                        margin-bottom: 8px;
+                        margin-bottom: 5px;
                         .task-name {
                             padding-right: 16px;
                             img {
@@ -891,6 +902,7 @@ ul {
                             font-size: 12px;
                             line-height: 16px;
                             color: $gray_dark_02;
+                            cursor: pointer;
                         }
                         .date-details {
                             width: 50px;
@@ -927,6 +939,7 @@ ul {
 }
 .add-comment-popup,
 .more-design-popup {
+    margin-top: 60px;
     .common-popup {
         max-width: 100%;
         width: 100%;
@@ -977,14 +990,6 @@ ul {
                     margin-top: -4px;
                 }
             }
-            .activity-common-body {
-                .reply-btn {
-                    button {
-                        font-size: 12px;
-                        line-height: 16px;
-                    }
-                }
-            }
         }
     }
 }
@@ -1028,6 +1033,18 @@ ul {
             }
             .tab-none {
                 display: none;
+            }
+        }
+    }
+    .activity-list {
+        .single-activity {
+            .activity-common-body {
+                .reply-btn {
+                    button {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                }
             }
         }
     }

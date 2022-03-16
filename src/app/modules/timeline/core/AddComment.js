@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import {addImageSuffix, authUserInfo} from "../../../services/Util";
-import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
+import { addImageSuffix, authUserInfo } from "../../../services/Util";
+import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
-import {toastError, toastSuccess} from "../../../commonComponents/Toast";
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { toastError, toastSuccess } from "../../../commonComponents/Toast";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import LoaderComponent from "../../../commonComponents/Loader";
-import {addNewCommentOnTimeline} from "../../store/action/Timeline";
-import {Mention, MentionsInput} from "react-mentions";
+import { addNewCommentOnTimeline } from "../../store/action/Timeline";
+import { Mention, MentionsInput } from "react-mentions";
 
-const AddComment = ({toggleAddComment, openModal, activity}) => {
+const AddComment = ({ toggleAddComment, openModal, activity }) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [loader, setLoader] = useState(false);
     const [selectedDesign, setSelectedDesign] = useState(null);
@@ -23,9 +23,9 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     const [designList, setDesignList] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
-    const [taggedUser, setTaggedUer] = useState([])
-    const [taskSearch, setTaskSearch] = useState("")
-    const dispatch = useDispatch()
+    const [taggedUser, setTaggedUer] = useState([]);
+    const [taskSearch, setTaskSearch] = useState("");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (selectedDesign !== null) {
@@ -44,10 +44,12 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
-            let members = []
-            let tmpList = timelineStore?.orderInfo?.orderMemberList
-            tmpList.map(member => members.push({id: member.memberId, display: member.memberName}))
-            setMemberList(members)
+            let members = [];
+            let tmpList = timelineStore?.orderInfo?.orderMemberList;
+            tmpList.map((member) =>
+                members.push({ id: member.memberId, display: member.memberName })
+            );
+            setMemberList(members);
         }
         if (timelineStore?.orderInfo?.orderProductList) {
             let productList = timelineStore?.orderInfo?.orderProductList;
@@ -60,11 +62,11 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     }, [timelineStore]);
 
     const handleTask = (task) => {
-        let errorObj = {...error}
+        let errorObj = { ...error };
         errorObj["taskError"] = undefined;
-        setError(errorObj)
-        setSelectedTask(task)
-    }
+        setError(errorObj);
+        setSelectedTask(task);
+    };
 
     const renderTaskList = () => {
         return taskList?.map((task, index) => {
@@ -77,18 +79,17 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
     };
 
     const handleDesign = (design) => {
-        let errorObj = {...error}
+        let errorObj = { ...error };
         errorObj["designError"] = undefined;
-        setError(errorObj)
-        setSelectedDesign(design)
-    }
-
+        setError(errorObj);
+        setSelectedDesign(design);
+    };
 
     const renderDesignList = () => {
         return designList?.map((design, index) => {
             return (
                 <li key={`add_comment_design_${index}`} onClick={() => handleDesign(design)}>
-                    <img src={design.image} alt="img"/>
+                    <img src={design.image} alt="img" />
                     <span>{design.referenceNumber}</span>
                 </li>
             );
@@ -121,13 +122,13 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                 taggedUserIdList: taggedUser,
             };
             await Http.POST("postOnTask", body, "?fromTimeline=true")
-                .then(response => {
-                    dispatch(addNewCommentOnTimeline(response.data.payload))
+                .then((response) => {
+                    dispatch(addNewCommentOnTimeline(response.data.payload));
                     setLoader(false);
                     toggleAddComment();
                     toastSuccess("Comment Add Successful!");
                 })
-                .catch(({response}) => {
+                .catch(({ response }) => {
                     setLoader(false);
                     toastError(response.data.message);
                 });
@@ -136,10 +137,10 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
 
     const onMultipleFileSelect = (e, docType) => {
         let files = Array.from(e.target.files);
-        if(files.length > 0) {
-            let errorObj = {...error}
+        if (files.length > 0) {
+            let errorObj = { ...error };
             errorObj["commentError"] = undefined;
-            setError(errorObj)
+            setError(errorObj);
         }
         let fileList = [...selectedFiles];
         files.map((item) => {
@@ -194,32 +195,31 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                 (task) => task.stepName.toLowerCase().indexOf(e.target.value) > -1
             );
         }
-        setTaskSearch(e.target.value)
+        setTaskSearch(e.target.value);
         setTaskList(tmpArray);
     };
 
-
     const handleUserTag = (id, display) => {
         if (!taggedUser.includes(id)) {
-            setTaggedUer([...taggedUser, id])
+            setTaggedUer([...taggedUser, id]);
         }
-    }
+    };
 
     const handleComment = (e) => {
-        if(e.target.value) {
-            setMessage(e.target.value)
-            let errorObj = {...error}
+        if (e.target.value) {
+            setMessage(e.target.value);
+            let errorObj = { ...error };
             errorObj["commentError"] = undefined;
-            setError(errorObj)
+            setError(errorObj);
         }
-    }
+    };
 
     return (
         <Modal
             show={openModal}
             aria-labelledby="example-custom-modal-timeline"
             onHide={toggleAddComment}
-            centered
+            size="lg"
             className="add-comment-popup"
         >
             <Modal.Body>
@@ -268,10 +268,13 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="tast-select" onBlur={() => {
-                                                setTaskSearch("")
-                                                setTaskList(taskListHistory)
-                                            }}>
+                                            <div
+                                                className="tast-select"
+                                                onBlur={() => {
+                                                    setTaskSearch("");
+                                                    setTaskList(taskListHistory);
+                                                }}
+                                            >
                                                 <div className="dropdown">
                                                     <button
                                                         className="btn dropdown-toggle"
@@ -306,7 +309,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                             </div>
                                         </div>
                                         <div className="close-icon" onClick={toggleAddComment}>
-                                            <img src="/icons/close.svg" alt="close"/>
+                                            <img src="/icons/close.svg" alt="close" />
                                         </div>
                                     </div>
                                     <div className="comments-body">
@@ -317,7 +320,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                                 placeholder="Write Comment..."
                                             >
                                                 <Mention
-                                                    markup='@__display__'
+                                                    markup="@__display__"
                                                     trigger="@"
                                                     data={memberList}
                                                     onAdd={handleUserTag}
@@ -332,7 +335,7 @@ const AddComment = ({toggleAddComment, openModal, activity}) => {
                                         <div className="post-actions d-flex justify-content-end">
                                             <div className="attachment cursor-pointer mr-2">
                                                 <label htmlFor="upload-input-file">
-                                                    <img src="/icons/attachment.svg" alt="attach"/>
+                                                    <img src="/icons/attachment.svg" alt="attach" />
                                                 </label>
                                                 <input
                                                     id="upload-input-file"
