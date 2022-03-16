@@ -405,7 +405,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
                                 className="button text"
                                 onClick={() => setShowTaskDetailsModal(true)}
                             >
-                                View details
+                                All Comments
                                 <img
                                     src="/icons/comments-btn-arrow.svg"
                                     alt="arrow"
