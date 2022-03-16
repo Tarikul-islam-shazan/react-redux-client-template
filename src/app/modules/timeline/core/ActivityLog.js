@@ -2,10 +2,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {
     addImageSuffix,
     authUserInfo,
-    changeDateFormat,
+    convertDateTimeToLocal,
     getFileType,
     getIconByFileType,
     getMentionedUserIds,
+    mentionModule,
     parseHtml
 } from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
@@ -19,6 +20,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import {Tooltip} from "@material-ui/core";
 
 const ActivityLog = ({activity, setLoader, index}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -29,30 +31,11 @@ const ActivityLog = ({activity, setLoader, index}) => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [memberList, setMemberList] = useState([]);
     const [taskId, setTaskId] = useState(0)
+    const [commentError, setCommentError] = useState("")
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch()
     const postInputRef = useRef(null)
-
-    const mentionModule = {
-        allowedChars: /^[A-Za-z\s]*$/,
-        mentionDenotationChars: ["@"],
-        source: async (searchTerm, renderList) => {
-            if (searchTerm.length === 0) {
-                renderList(memberList, searchTerm);
-            } else {
-                let matches = [];
-                for (let i = 0; i < memberList.length; i++) {
-                    if (
-                        memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
-                    ) {
-                        matches.push(memberList[i]);
-                    }
-                }
-                renderList(matches, searchTerm);
-            }
-        },
-    };
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
@@ -145,11 +128,19 @@ const ActivityLog = ({activity, setLoader, index}) => {
                 string.push(item.text + " ");
             }
         });
+        let timeAdded = activity.createdAt?.split("T")[1];
+        let dateAdded = activity.createdAt?.split("T")[0];
+
+        let formattedDate = convertDateTimeToLocal(
+            dateAdded,
+            timeAdded,
+            "DD-MMM hh:mm a"
+        );
         return (
             <>
                 <p className="regular-12">{string}</p>
                 <p className="regular-12">
-                    {changeDateFormat(activity.createdAt, "YYYY-MM-DDThh:mm", "DD-MMM hh:mm a")}
+                    {formattedDate}
                 </p>
             </>
         );
@@ -271,11 +262,17 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const cancelPost = () => {
+        postInputRef.current = null;
         setIsReplying(false);
         setSelectedFiles([]);
     };
 
     const handleReply = async () => {
+        if (postInputRef.current === null || postInputRef.current.toString().match("<p><br></p>")) {
+            setCommentError("Comment required");
+            return;
+        }
+        setCommentError("");
         setLoader(true);
         let message = postInputRef.current
         let body = {
@@ -319,8 +316,11 @@ const ActivityLog = ({activity, setLoader, index}) => {
                                 onChange={(value) => postInputRef.current = value}
                                 className="custom-scrollbar"
                                 placeholder="Write comment…"
-                                modules={{mention: mentionModule}}
+                                modules={{mention: mentionModule(memberList)}}
                             />
+                            {commentError && (
+                                <p className="error">{commentError}</p>
+                            )}
                         </div>
                         <div className="attachment cursor-pointer">
                             <label htmlFor="upload-input-file">
@@ -462,12 +462,16 @@ const ActivityLog = ({activity, setLoader, index}) => {
                 </div>
                 <div className="design-image">
                     {activity?.secondaryActedUpon?.docUrlList[0] && (
-                        <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
-                            <img
-                                src={activity?.secondaryActedUpon?.docUrlList[0]}
-                                alt="design image"
-                            />
-                        </Link>
+                        <Tooltip
+                            title={activity?.secondaryActedUpon?.text + " " + activity?.secondaryActedUpon?.referenceNumber}
+                            arrow placement={"top"}>
+                            <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
+                                <img
+                                    src={activity?.secondaryActedUpon?.docUrlList[0]}
+                                    alt="design image"
+                                />
+                            </Link>
+                        </Tooltip>
                     )}
                 </div>
             </div>

@@ -1171,6 +1171,28 @@ const getMentionedUserIds = (post, orderMemberList) => {
     return ids;
 };
 
+const mentionModule = (memberList) => {
+    return {
+        allowedChars: /^[A-Za-z\s]*$/,
+        mentionDenotationChars: ["@"],
+        source: async (searchTerm, renderList) => {
+            if (searchTerm.length === 0) {
+                renderList(memberList, searchTerm);
+            } else {
+                let matches = [];
+                for (let i = 0; i < memberList.length; i++) {
+                    if (
+                        memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
+                    ) {
+                        matches.push(memberList[i]);
+                    }
+                }
+                renderList(matches, searchTerm);
+            }
+        },
+    }
+}
+
 
 export {
     capitalizeFirstLetter,
@@ -1229,5 +1251,6 @@ export {
     toOrdinalSuffix,
     getFileType,
     getIconByFileType,
-    getMentionedUserIds
+    getMentionedUserIds,
+    mentionModule
 };

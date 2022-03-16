@@ -215,7 +215,7 @@ ul {
                     padding-bottom: 12px;
                     padding-top: 42px;
                     margin-top: -42px;
-
+                    z-index: 2;
                     .comments-button {
                         display: flex;
                         justify-content: space-between;
@@ -249,55 +249,7 @@ ul {
                     }
                     .reply-box {
                         margin-top: 8px;
-                        .quill {
-                            overflow-y: visible;
-                            .ql-container {
-                                font-family: "Inter" !important;
-                                .ql-mention-list-container {
-                                    z-index: 1;
-                                }
-                            }
-                        }
-                        .ql-toolbar {
-                            display: none;
-                        }
-                        .ql-tooltip-editor {
-                            input {
-                                display: none;
-                            }
-                        }
-                        .ql-editor {
-                            &.ql-blank {
-                                &::before {
-                                    left: 48px !important;
-                                    top: 15px !important;
-                                }
-                            }
-                            p {
-                                background-color: $gray_light_03 !important;
-                                border: none;
-                                padding-left: 48px;
-                                border-radius: 4px;
-                                font-size: 14px !important;
-                                padding: 15px 48px 15px 48px;
-                                overflow-y: visible !important;
-                                scrollbar-width: thin;
-                                &::-webkit-scrollbar-track {
-                                    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
-                                    background-color: #f5f5f5;
-                                }
 
-                                &::-webkit-scrollbar {
-                                    width: 6px;
-                                    background-color: #f5f5f5;
-                                }
-                                &::-webkit-scrollbar-thumb {
-                                    border-radius: 10px;
-                                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                                    background-color: #f5f5f5;
-                                }
-                            }
-                        }
                         button {
                             color: $primary_bright_02;
                         }
@@ -373,6 +325,58 @@ ul {
             &:last-child {
                 font-weight: 600;
                 color: $gray_dark_01;
+            }
+        }
+    }
+}
+.top-write-comments,
+.reply-container {
+    .quill {
+        overflow-y: visible;
+        .ql-container {
+            font-family: "Inter" !important;
+            .ql-mention-list-container {
+                z-index: 1;
+            }
+        }
+        .ql-toolbar {
+            display: none;
+        }
+        .ql-tooltip-editor {
+            input {
+                display: none;
+            }
+        }
+        .ql-editor {
+            &.ql-blank {
+                &::before {
+                    left: 48px !important;
+                    top: 15px !important;
+                }
+            }
+            p {
+                background-color: $gray_light_03 !important;
+                border: none;
+                padding-left: 48px;
+                border-radius: 4px;
+                font-size: 14px !important;
+                padding: 15px 48px 15px 48px;
+                overflow-y: visible !important;
+                scrollbar-width: thin;
+                &::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+                    background-color: #f5f5f5;
+                }
+
+                &::-webkit-scrollbar {
+                    width: 6px;
+                    background-color: #f5f5f5;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 10px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                    background-color: #f5f5f5;
+                }
             }
         }
     }
@@ -531,6 +535,18 @@ ul {
                     &:last-child {
                         margin-bottom: 0;
                     }
+                }
+            }
+        }
+    }
+    .quill {
+        .ql-editor {
+            p {
+                padding-left: 16px !important;
+            }
+            &.ql-blank {
+                &::before {
+                    left: 16px !important;
                 }
             }
         }
