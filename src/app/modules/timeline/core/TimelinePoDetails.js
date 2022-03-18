@@ -1,22 +1,21 @@
 import React from "react";
 import AllDesignList from "./AllDesignList";
 import MemberList from "./MemberList";
-import {downloadInvoice} from "../../store/action/Timeline";
-import {Link, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {changeDateFormat, toOrdinalSuffix} from "../../../services/Util";
+import { downloadInvoice } from "../../store/action/Timeline";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { changeDateFormat, toOrdinalSuffix } from "../../../services/Util";
 
-
-const TimelinePoDetails = ({setLoader}) => {
+const TimelinePoDetails = ({ setLoader }) => {
     const timelineStore = useSelector((store) => store.timelineStore);
-    const {orderInfo} = timelineStore;
+    const { orderInfo } = timelineStore;
     const params = useParams();
 
     const downloadPI = () => {
         setLoader(true);
         downloadInvoice(timelineStore?.orderInfo?.invoiceId)
             .then(() => setLoader(false))
-            .catch(() => setLoader(false))
+            .catch(() => setLoader(false));
     };
 
     const renderETD = () => {
@@ -44,7 +43,7 @@ const TimelinePoDetails = ({setLoader}) => {
                                     "DD-MMM"
                                 )}
                             </span>
-                            <img src="/icons/info.svg" alt=""/>
+                            <img src="/icons/info.svg" alt="" />
                             <div className="etd-dates shadow-2dp">{renderETD()}</div>
                         </span>
                     </span>
@@ -57,7 +56,7 @@ const TimelinePoDetails = ({setLoader}) => {
                             <div
                                 className="progress-bar bg-success"
                                 role="progressbar"
-                                style={{width: orderInfo?.percentageOfCompleteness + "%"}}
+                                style={{ width: orderInfo?.percentageOfCompleteness + "%" }}
                                 aria-valuenow={orderInfo?.percentageOfCompleteness}
                                 aria-valuemin={0}
                                 aria-valuemax={100}
@@ -67,22 +66,22 @@ const TimelinePoDetails = ({setLoader}) => {
                             <span className="count">{orderInfo?.percentageOfCompleteness}%</span>
                         </div>
                     </div>
-                    <MemberList/>
+                    <MemberList />
 
                     <div className="all-po-list">
                         <span className="po-names">
-                            {orderInfo?.poNumberList?.join(", ")}
-                            <a href className="button text ml-1">
+                            <span className="mr-2">{orderInfo?.poNumberList?.join(", ")}</span>
+                            <a href className="po-details-btn text">
                                 <Link to={`/purchaseDetails/${params.orderId}`} className="pr-1">
                                     PO Details
                                 </Link>
-                                <img src="/icons/arrow-right-no-padding.svg" alt=""/>
+                                <img src="/icons/arrow-right-no-padding.svg" alt="" />
                             </a>
                         </span>
                     </div>
                     <div className="pi-download">
                         <button className="button text" onClick={downloadPI}>
-                            <img src="/icons/download.svg" alt="download" className="mr-1"/>
+                            <img src="/icons/download.svg" alt="download" className="mr-1" />
                             Download PI
                         </button>
                     </div>
@@ -106,7 +105,7 @@ const TimelinePoDetails = ({setLoader}) => {
                             <label htmlFor>
                                 <span>
                                     ALL DESIGN ({timelineStore?.selectedDesignList?.length})
-                                    <img src="/icons/Right-arrow.svg" alt=""/>
+                                    <img src="/icons/Right-arrow.svg" alt="" />
                                 </span>
                             </label>
                         </div>
@@ -123,7 +122,7 @@ const TimelinePoDetails = ({setLoader}) => {
                 </div>
             </div>
             <div className="tab-none">
-                <AllDesignList setLoader={setLoader}/>
+                <AllDesignList setLoader={setLoader} />
             </div>
         </div>
     );

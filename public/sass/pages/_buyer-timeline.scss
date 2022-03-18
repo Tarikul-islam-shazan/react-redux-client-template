@@ -159,6 +159,10 @@ ul {
                             a {
                                 font-size: 12px;
                                 line-height: 16px;
+                                &.po-details-btn {
+                                    display: flex;
+                                    align-items: center;
+                                }
                             }
                         }
                         button {
@@ -1012,10 +1016,6 @@ ul {
 
 @media only screen and (max-width: 1024px) {
     .buyer-timeline-container {
-        .regular-12 {
-            font-size: 12px;
-            line-height: 16px;
-        }
         .timeline-row {
             flex-wrap: wrap;
             width: 100%;
@@ -1049,18 +1049,6 @@ ul {
             }
             .tab-none {
                 display: none;
-            }
-        }
-    }
-    .activity-list {
-        .single-activity {
-            .activity-common-body {
-                .reply-btn {
-                    button {
-                        font-size: 12px;
-                        line-height: 16px;
-                    }
-                }
             }
         }
     }
