@@ -25,14 +25,14 @@ const PODetails = () => {
     }, []);
 
     const getColorWisePrice = (colorWisePrices, id) => {
-        if (colorWisePrices[id]) {
+        if (colorWisePrices && colorWisePrices[id]) {
             return colorWisePrices[id];
         }
         return null;
     };
 
     const getSizeWisePrice = (sizeWisePrices, id) => {
-        if (sizeWisePrices[id]) {
+        if (sizeWisePrices && sizeWisePrices[id]) {
             return sizeWisePrices[id];
         }
         return null;
