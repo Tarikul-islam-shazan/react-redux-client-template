@@ -33,10 +33,41 @@ const TimelinePoDetails = ({ setLoader }) => {
         <div className="one-third all-designs-destails">
             <div className="design-info-with-po common-blocks">
                 <div className="design-title-with-date">
-                    <span>
-                        <span className="order-number">{orderInfo?.orderRefNumber}</span>
+                    <div className="data-with-round-progress d-flex justify-content-between">
+                        <div className="style-text-view mt-2">
+                            <a href="#">
+                                <img src="/icons/Left arrwo.svg" alt="back" />
+                            </a>
+                            <span className="order-number">{orderInfo?.orderRefNumber}</span>
+                            <div className="untis-price">
+                                <span>{orderInfo?.orderQuantity} UNITS</span>
+                                <span>${orderInfo?.orderValue}</span>
+                            </div>
+                        </div>
+                        <div className="round-progress-68">
+                            <div
+                                className="status pending progress"
+                                data-percentage={orderInfo?.percentageOfCompleteness}
+                            >
+                                <span className="progress-left">
+                                    <span className="progress-bar" />
+                                </span>
+                                <span className="progress-right">
+                                    <span className="progress-bar" />
+                                </span>
+                                <div className="progress-value">
+                                    <div className="task-value">
+                                        {orderInfo?.percentageOfCompleteness}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="etd-with-po-details d-flex justify-content-between">
                         <span className="etd-status">
-                            <span className="regular-12 gray_dark_02">
+                            <span className="gray_dark_02 regular-14">ETD </span>
+                            <span className="regular-12 gray_dark_02 date">
                                 {changeDateFormat(
                                     orderInfo?.deliveryDateList[0],
                                     "YYYY-MM-DD",
@@ -46,44 +77,20 @@ const TimelinePoDetails = ({ setLoader }) => {
                             <img src="/icons/info.svg" alt="" />
                             <div className="etd-dates shadow-2dp">{renderETD()}</div>
                         </span>
-                    </span>
-                    <div className="untis-price">
-                        <span>{orderInfo?.orderQuantity} UNITS</span>
-                        <span>${orderInfo?.orderValue}</span>
+                        <a href>
+                            <Link
+                                to={`/purchaseDetails/${params.orderId}`}
+                                className="regular-14 primary_bright_02"
+                            >
+                                PO Details
+                            </Link>
+                        </a>
                     </div>
-                    <div className="progress-with-count">
-                        <div className="progress">
-                            <div
-                                className="progress-bar bg-success"
-                                role="progressbar"
-                                style={{ width: orderInfo?.percentageOfCompleteness + "%" }}
-                                aria-valuenow={orderInfo?.percentageOfCompleteness}
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                            />
-                        </div>
-                        <div>
-                            <span className="count">{orderInfo?.percentageOfCompleteness}%</span>
-                        </div>
-                    </div>
-                    <MemberList />
 
                     <div className="all-po-list">
-                        <span className="po-names">
-                            <a href className="po-details-btn text">
-                                <Link to={`/purchaseDetails/${params.orderId}`} className="pr-1">
-                                    PO Details
-                                </Link>
-                                <img src="/icons/arrow-right-no-padding.svg" alt="" />
-                            </a>
-                        </span>
+                        <span className="po-names"></span>
                     </div>
-                    <div className="pi-download">
-                        <button className="button text" onClick={downloadPI}>
-                            <img src="/icons/download.svg" alt="download" className="mr-1" />
-                            Download PI
-                        </button>
-                    </div>
+                    <MemberList />
                 </div>
             </div>
             <div className="tab-design-task-buttons">

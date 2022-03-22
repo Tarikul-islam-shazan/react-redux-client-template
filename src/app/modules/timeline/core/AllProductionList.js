@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import TaskManage from "../../../pages/task/components/TaskManage";
 import Modal from "react-bootstrap/Modal";
-import {changeDateFormat, getShortName} from "../../../services/Util";
-import {Tooltip} from "@material-ui/core";
+import { changeDateFormat, getShortName } from "../../../services/Util";
+import { Tooltip } from "@material-ui/core";
 
 const AllProductionList = () => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -64,7 +64,7 @@ const AllProductionList = () => {
                     onClick={() => handleTaskManager(sample)}
                 >
                     <div className="task-name">
-                        <img src={renderStepIcon(sample)} alt="complete"/>
+                        <img src={renderStepIcon(sample)} alt="complete" />
                         <Tooltip title={sample.stepName} placement={"top"} arrow>
                             <span>{getShortName(sample.stepName, 25)}</span>
                         </Tooltip>
@@ -79,6 +79,9 @@ const AllProductionList = () => {
 
     return (
         <div className="one-third all-production-details">
+            <div className="text-tc">
+                <span className="regular-14 gray_dark_02">T&A</span>
+            </div>
             <div className="production-accordion">
                 <div id="accordion">
                     <div className="card">

@@ -1,92 +1,100 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {capitalizeFirstLetter, getShortName} from "../../../services/Util";
-import {clearDesignSelection, selectAllDesign, toggleDesignSelection} from "../../store/action/Timeline";
-import {useParams} from "react-router-dom";
-import {Tooltip} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { capitalizeFirstLetter, getShortName } from "../../../services/Util";
+import {
+    clearDesignSelection,
+    selectAllDesign,
+    toggleDesignSelection,
+} from "../../store/action/Timeline";
+import { useParams } from "react-router-dom";
+import { Tooltip } from "@material-ui/core";
 
-const AllDesignList = ({setLoader}) => {
-    const timelineStore = useSelector(store => store.timelineStore)
-    const dispatch = useDispatch()
+const AllDesignList = ({ setLoader }) => {
+    const timelineStore = useSelector((store) => store.timelineStore);
+    const dispatch = useDispatch();
     const params = useParams();
 
     const isCheckboxChecked = (id) => {
-        let design
+        let design;
         if (timelineStore.selectedDesignList.length > 0) {
-            design = timelineStore.selectedDesignList.find(item => item === id);
+            design = timelineStore.selectedDesignList.find((item) => item === id);
         }
-        return design !== undefined
-    }
+        return design !== undefined;
+    };
 
     const toggleCheckbox = async (value) => {
-        window.scrollTo(0, 0)
-        setLoader(true)
-        await dispatch(toggleDesignSelection(value, generateParams(), params.orderId))
-        setLoader(false)
-    }
+        window.scrollTo(0, 0);
+        setLoader(true);
+        await dispatch(toggleDesignSelection(value, generateParams(), params.orderId));
+        setLoader(false);
+    };
 
     const generateParams = () => {
-        return `${params.orderId}?page=0&size=15`
-    }
+        return `${params.orderId}?page=0&size=15`;
+    };
 
     const renderDesignList = () => {
         return timelineStore?.orderInfo?.orderProductList?.map((design, index) => {
             return (
                 <div
-                    className={`single-design-row ${isCheckboxChecked(design.id) ? 'selected' : ''}`}
+                    className={`single-design-row ${
+                        isCheckboxChecked(design.id) ? "selected" : ""
+                    }`}
                     key={`design_number_${index}`}
                     onClick={() => toggleCheckbox(design.id)}
                 >
                     <div className="design-details">
+                        <div className="style-image">
+                            <img src={design.image} alt="design" />
+                        </div>
                         <div className="design-info">
-                            <img src={design.image} alt="design"/>
-                            <Tooltip
-                                title={design.referenceNumber}
-                                placement="top"
-                                arrow
-                            >
-                                <span>
+                            <Tooltip title={design.referenceNumber} placement="top" arrow>
+                                <span className="design-title">
                                     {getShortName(design.referenceNumber, 15)}
                                 </span>
                             </Tooltip>
-                        </div>
-                    </div>
-                    <div className="design-status">
-                        <span>{capitalizeFirstLetter(design.currentStage)}</span>
-                        <div className="progress">
-                            <div className="progress-bar bg-success" role="progressbar"
-                                 style={{width: design.percentageOfCompleteness + "%"}}
-                                 aria-valuenow={design.percentageOfCompleteness} aria-valuemin={0} aria-valuemax={100}/>
+                            <p className="gray_dark_02">{design.quantity} Units</p>
+                            <div className="design-status">
+                                <div className="progress">
+                                    <div
+                                        className="progress-bar bg-success"
+                                        role="progressbar"
+                                        style={{ width: design.percentageOfCompleteness + "%" }}
+                                        aria-valuenow={design.percentageOfCompleteness}
+                                        aria-valuemin={0}
+                                        aria-valuemax={100}
+                                    />
+                                </div>
+                                <span>{capitalizeFirstLetter(design.currentStage)}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            )
-        })
-    }
+            );
+        });
+    };
 
     const clearSelection = async (e) => {
-        window.scrollTo(0, 0)
-        setLoader(true)
+        window.scrollTo(0, 0);
+        setLoader(true);
         if (e.target.checked === false) {
-            await dispatch(clearDesignSelection(generateParams()))
+            await dispatch(clearDesignSelection(generateParams()));
         } else {
-            let designs = []
-            let productList = timelineStore?.orderInfo?.orderProductList
+            let designs = [];
+            let productList = timelineStore?.orderInfo?.orderProductList;
             productList.forEach((design) => {
-                designs.push(design.id)
-            })
-            await dispatch(selectAllDesign(designs, generateParams()))
+                designs.push(design.id);
+            });
+            await dispatch(selectAllDesign(designs, generateParams()));
         }
-        setLoader(false)
-    }
+        setLoader(false);
+    };
 
     return (
-        <div className="all-designs-with-status common-blocks">
-            <div className="design-lists scroll-y-label">
-                {renderDesignList()}
-            </div>
+        <div className="all-designs-with-status">
+            <div className="design-lists scroll-y-label">{renderDesignList()}</div>
         </div>
-    )
-}
+    );
+};
 
-export default AllDesignList
+export default AllDesignList;

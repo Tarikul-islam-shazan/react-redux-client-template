@@ -76,7 +76,13 @@
         .order-details {
             width: calc(100% - 148px);
             padding-left: 16px;
-            padding-top: 12px;
+            padding-top: 32px;
+            position: relative;
+            .round-progress-68 {
+                position: absolute;
+                right: 20px;
+                top: 44px;
+            }
             .order-quantity-details {
                 margin: 8px 0 12px 0;
                 li {
