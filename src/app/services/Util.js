@@ -1171,25 +1171,27 @@ const getMentionedUserIds = (post, orderMemberList) => {
     return ids;
 };
 
-const mentionModule = (memberList) => {
-    return {
-        allowedChars: /^[A-Za-z\s]*$/,
-        mentionDenotationChars: ["@"],
-        source: async (searchTerm, renderList) => {
-            if (searchTerm.length === 0) {
-                renderList(memberList, searchTerm);
-            } else {
-                let matches = [];
-                for (let i = 0; i < memberList.length; i++) {
-                    if (
-                        memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
-                    ) {
-                        matches.push(memberList[i]);
+const mentionModule = (memberList, bool) => {
+    if (!bool) {
+        return {
+            allowedChars: /^[A-Za-z\s]*$/,
+            mentionDenotationChars: ["@"],
+            source: async (searchTerm, renderList) => {
+                if (searchTerm.length === 0) {
+                    renderList(memberList, searchTerm);
+                } else {
+                    let matches = [];
+                    for (let i = 0; i < memberList.length; i++) {
+                        if (
+                            memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
+                        ) {
+                            matches.push(memberList[i]);
+                        }
                     }
+                    renderList(matches, searchTerm);
                 }
-                renderList(matches, searchTerm);
-            }
-        },
+            },
+        }
     }
 }
 
