@@ -145,7 +145,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         <div className="category-wise-quantity-table color-wise-table scroll-x-label">
             <table>
                 <tr>
-                    {Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
+                    {quote?.colorWiseBuyerPrice && Object.keys(quote?.colorWiseBuyerPrice).map((key) => (
                         <Tooltip
                             title={<Typography fontSize={22}>{`#${key}`}</Typography>}
                             placement="top"
@@ -159,15 +159,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                     ))}
                 </tr>
                 <tr>
-                    {/* {quote?.colorWiseSizeQuantityPairList?.map((value, index) => (
-                        <td key={value.id}>
-                            <p>
-                                <span>$</span>
-                                {getColorWisePrice(quote?.colorWiseBuyerPrice, value?.id)}
-                            </p>
-                        </td>
-                    ))} */}
-                    {Object.values(quote?.colorWiseBuyerPrice).map((value, i) => (
+                    {quote?.colorWiseBuyerPrice && Object.values(quote?.colorWiseBuyerPrice)?.map((value, i) => (
                         <td key={i}>
                             <p>
                                 <span>${value}</span>
@@ -183,14 +175,14 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
         <div className="category-wise-quantity-table desingwise-table scroll-x-label">
             <table>
                 <tr>
-                    {Object.keys(quote?.sizeWiseBuyerPrice).map((key, i) => (
+                    {quote?.sizeWiseBuyerPrice && Object.keys(quote?.sizeWiseBuyerPrice).map((key, i) => (
                         <th key={i}>
                             <p> {getSizeWiseLabel(quote?.sizeLabelMap, key)}</p>
                         </th>
                     ))}
                 </tr>
                 <tr>
-                    {Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
+                    {quote?.sizeWiseBuyerPrice && Object.values(quote?.sizeWiseBuyerPrice).map((value, i) => (
                         <td key={i}>
                             <p>
                                 <span>${value}</span>
