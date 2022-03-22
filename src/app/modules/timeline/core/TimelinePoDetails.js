@@ -70,7 +70,6 @@ const TimelinePoDetails = ({ setLoader }) => {
 
                     <div className="all-po-list">
                         <span className="po-names">
-                            <span className="mr-2">{orderInfo?.poNumberList?.join(", ")}</span>
                             <a href className="po-details-btn text">
                                 <Link to={`/purchaseDetails/${params.orderId}`} className="pr-1">
                                     PO Details

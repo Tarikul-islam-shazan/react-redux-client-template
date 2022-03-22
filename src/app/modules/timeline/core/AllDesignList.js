@@ -21,7 +21,7 @@ const AllDesignList = ({setLoader}) => {
     const toggleCheckbox = async (value) => {
         window.scrollTo(0, 0)
         setLoader(true)
-        await dispatch(toggleDesignSelection(value, generateParams()))
+        await dispatch(toggleDesignSelection(value, generateParams(), params.orderId))
         setLoader(false)
     }
 
@@ -32,23 +32,14 @@ const AllDesignList = ({setLoader}) => {
     const renderDesignList = () => {
         return timelineStore?.orderInfo?.orderProductList?.map((design, index) => {
             return (
-                <div className="single-design-row" key={`design_number_${index}`}>
+                <div
+                    className={`single-design-row ${isCheckboxChecked(design.id) ? 'selected' : ''}`}
+                    key={`design_number_${index}`}
+                    onClick={() => toggleCheckbox(design.id)}
+                >
                     <div className="design-details">
-                        <div className="custom-chekbox">
-                            <div className="form-group">
-                                <input
-                                    type="checkbox"
-                                    id={`design_number_${index}`}
-                                    value={design.id}
-                                    checked={isCheckboxChecked(design.id)}
-                                    onChange={() => toggleCheckbox(design.id)}
-                                />
-                                <label htmlFor={`design_number_${index}`}/>
-                            </div>
-                        </div>
                         <div className="design-info">
                             <img src={design.image} alt="design"/>
-
                             <Tooltip
                                 title={design.referenceNumber}
                                 placement="top"
@@ -91,21 +82,6 @@ const AllDesignList = ({setLoader}) => {
 
     return (
         <div className="all-designs-with-status common-blocks">
-            <div className="select-all-designs">
-                <div className="custom-chekbox">
-                    <div className="form-group">
-                        <input
-                            type="checkbox"
-                            id="all"
-                            name
-                            checked={timelineStore?.orderInfo?.orderProductList?.length === timelineStore?.selectedDesignList?.length}
-                            onClick={clearSelection}
-                        />
-                        <label
-                            htmlFor="all"><span>ALL DESIGN ({timelineStore?.selectedDesignList?.length})</span></label>
-                    </div>
-                </div>
-            </div>
             <div className="design-lists scroll-y-label">
                 {renderDesignList()}
             </div>

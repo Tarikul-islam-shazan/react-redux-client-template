@@ -9,13 +9,6 @@ export const storeTimeline = (data, merge) => {
     }
 }
 
-export const storeOrderInfo = (data) => {
-    return {
-        type: ActionTypes.FETCH_ORDER_INFO_LIST,
-        payload: data
-    }
-}
-
 const generateTimeLineParams = (getState, params) => {
     if (getState().timelineStore.selectedDesignList.length > 0) {
         params += `&productIds=${getState().timelineStore.selectedDesignList.join(",")}`
@@ -39,12 +32,13 @@ export const selectAllDesign = (data, params) => async (dispatch, getState) => {
     await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false))
 }
 
-export const toggleDesignSelection = (data, params) => async (dispatch, getState) => {
+export const toggleDesignSelection = (data, params, orderId) => async (dispatch, getState) => {
     await dispatch({
         type: ActionTypes.TOGGLE_DESIGN_SELECTION,
         payload: data
     })
     await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false))
+    await dispatch(fetchProductionDetailsByDesignNumber(orderId, getState().timelineStore.selectedDesignList[0]))
 }
 
 export const fetchTimeline = (params, merge) => async (dispatch) => {
@@ -54,9 +48,14 @@ export const fetchTimeline = (params, merge) => async (dispatch) => {
 }
 
 
-export const fetchOrderInfo = (orderId) => async (dispatch) => {
-    await Http.GET('getTimeLineOrderInfo', orderId).then((response) => {
-        dispatch(storeOrderInfo(response.data));
+export const fetchOrderInfo = (orderId, params) => async (dispatch, getState) => {
+    await Http.GET('getTimeLineOrderInfo', orderId).then(async (response) => {
+        await dispatch({
+            type: ActionTypes.FETCH_ORDER_INFO_LIST,
+            payload: response.data
+        })
+        await dispatch(fetchTimeline(generateTimeLineParams(getState, params), false));
+        await dispatch(fetchProductionDetailsByDesignNumber(orderId, getState().timelineStore.selectedDesignList[0]))
     });
 }
 

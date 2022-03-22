@@ -21,13 +21,8 @@ const TimelineReducer = (state = initialState, action) => {
                 selectedDesignNumber: action.payload.selectedDesignNumber
             };
         case ActionTypes.TOGGLE_DESIGN_SELECTION:
-            let designList = [...state.selectedDesignList];
-            let designObj = designList.find(item => item === action.payload);
-            if (designObj !== undefined) {
-                designList = designList.filter(design => design !== action.payload)
-            } else {
-                designList.push(action.payload)
-            }
+            let designList = [];
+            designList.push(action.payload)
             return {
                 ...state,
                 selectedDesignList: designList
@@ -42,7 +37,7 @@ const TimelineReducer = (state = initialState, action) => {
             let productList = action.payload?.orderProductList;
             let selectedDesignList = [];
             if (productList.length > 0) {
-                productList.forEach((design) => selectedDesignList.push(design.id))
+                selectedDesignList.push(productList[0].id)
             }
             return {
                 ...state,

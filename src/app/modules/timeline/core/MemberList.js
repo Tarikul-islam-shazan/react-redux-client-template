@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchMemberList, fetchOrderInfo } from "../../store/action/Timeline";
-
+import {useSelector } from "react-redux";
 const MemberList = () => {
     const timelineStore = useSelector((store) => store.timelineStore);
-    const dispatch = useDispatch();
-    const params = useParams();
     const [memberList, setMemberList] = useState([]);
-
-    useEffect(() => {
-        dispatch(fetchOrderInfo(params.orderId));
-    }, []);
 
     useEffect(() => {
         if (timelineStore.orderInfo?.orderMemberList) {

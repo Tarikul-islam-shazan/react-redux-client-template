@@ -1,58 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProductionDetailsByDesignNumber } from "../../store/action/Timeline";
-import { useParams } from "react-router-dom";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 import TaskManage from "../../../pages/task/components/TaskManage";
 import Modal from "react-bootstrap/Modal";
-import { changeDateFormat, getShortName } from "../../../services/Util";
-import { Tooltip } from "@material-ui/core";
+import {changeDateFormat, getShortName} from "../../../services/Util";
+import {Tooltip} from "@material-ui/core";
 
-const AllProductionList = ({ setLoader }) => {
+const AllProductionList = () => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
-    const [selectedDesign, setSelectedDesign] = useState(null);
     const [selectedId, setSelectedId] = useState(null);
-    const [designList, setDesignList] = useState([]);
-    const dispatch = useDispatch();
     const params = useParams();
-
-    useEffect(() => {
-        if (timelineStore?.orderInfo?.orderProductList) {
-            if (!selectedDesign) {
-                setSelectedDesign(timelineStore?.orderInfo?.orderProductList[0]);
-            }
-            let productList = timelineStore?.orderInfo?.orderProductList;
-            let tmpDesignList = [];
-            productList.map((design) => {
-                tmpDesignList.push(design);
-            });
-            setDesignList(tmpDesignList);
-        }
-    }, [timelineStore]);
-
-    useEffect(() => {
-        if (selectedDesign?.id) {
-            dispatch(fetchProductionDetailsByDesignNumber(params.orderId, selectedDesign.id));
-        }
-    }, [selectedDesign]);
-
-    const renderDesignList = () => {
-        return designList?.map((design, index) => {
-            return (
-                <li
-                    key={`po_design_${index}`}
-                    onClick={() => {
-                        setLoader(true);
-                        setSelectedDesign(design);
-                        setLoader(false);
-                    }}
-                >
-                    <img src={design.image} alt="img" />
-                    <span>{design.referenceNumber}</span>
-                </li>
-            );
-        });
-    };
 
     const renderStepIcon = (sample) => {
         if (sample.formattedTaskStatus === "EXPIRED") {
@@ -106,7 +64,7 @@ const AllProductionList = ({ setLoader }) => {
                     onClick={() => handleTaskManager(sample)}
                 >
                     <div className="task-name">
-                        <img src={renderStepIcon(sample)} alt="complete" />
+                        <img src={renderStepIcon(sample)} alt="complete"/>
                         <Tooltip title={sample.stepName} placement={"top"} arrow>
                             <span>{getShortName(sample.stepName, 25)}</span>
                         </Tooltip>
@@ -121,24 +79,6 @@ const AllProductionList = ({ setLoader }) => {
 
     return (
         <div className="one-third all-production-details">
-            <div className="design-select">
-                <div className="dropdown">
-                    <button
-                        className="btn dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        {selectedDesign?.image && <img src={selectedDesign?.image} alt="img" />}
-                        <span>{selectedDesign?.referenceNumber}</span>
-                    </button>
-                    <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
-                        <ul className="select-design-list">{renderDesignList()}</ul>
-                    </div>
-                </div>
-            </div>
             <div className="production-accordion">
                 <div id="accordion">
                     <div className="card">
