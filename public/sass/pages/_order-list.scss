@@ -173,3 +173,77 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .order-list-page-container {
+        padding-top: 40px;
+        .order-list-tab {
+            ul {
+                li {
+                    margin-right: 24px;
+                    padding-bottom: 8px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .order-card-items {
+        grid-gap: 12px;
+        .single-order-card {
+            .design-images {
+                width: 100px;
+            }
+            .order-details {
+                width: calc(100% - 100px);
+                padding-left: 8px;
+                padding-top: 8px;
+                .regular-14,
+                .delivery-date-status span {
+                    font-size: 12px;
+                    line-height: 16px;
+                }
+                .order-quantity-details {
+                    margin: 8px 0;
+                    li {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                }
+                .round-progress-68 {
+                    right: 2px;
+                    top: unset;
+                    bottom: 0px;
+                }
+            }
+        }
+    }
+    .round-progress-68 {
+        .progress {
+            width: 52px !important;
+            height: 52px !important;
+            line-height: 52px !important;
+            &:after {
+                border: 3px solid $gray_dark_03 !important;
+            }
+            .progress-bar {
+                border-width: 3px !important;
+            }
+            .progress-left .progress-bar {
+                border-top-right-radius: (52px/2) !important;
+                border-bottom-right-radius: (52px/2) !important;
+            }
+            .progress-right {
+                .progress-bar {
+                    border-top-left-radius: (52px/2) !important;
+                    border-bottom-left-radius: (52px/2) !important;
+                }
+            }
+            .progress-value {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+    }
+}
