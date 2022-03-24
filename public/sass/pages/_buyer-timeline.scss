@@ -450,10 +450,12 @@ ul {
                     }
                 }
             }
-            &.selected,
-            &:hover {
+            &.selected {
                 background: $gray_light_05;
                 border: 1px solid $primary_bright_02;
+            }
+            &:hover {
+                background: $gray_light_05;
             }
         }
     }

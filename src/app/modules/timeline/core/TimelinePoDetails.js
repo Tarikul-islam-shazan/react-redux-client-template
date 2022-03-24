@@ -35,7 +35,7 @@ const TimelinePoDetails = ({ setLoader }) => {
                 <div className="design-title-with-date">
                     <div className="data-with-round-progress d-flex justify-content-between">
                         <div className="style-text-view mt-2">
-                            <a href="#">
+                            <a href="/orders/my-orders">
                                 <img src="/icons/Left arrwo.svg" alt="back" />
                             </a>
                             <span className="order-number">{orderInfo?.orderRefNumber}</span>
