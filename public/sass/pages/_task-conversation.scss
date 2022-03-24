@@ -215,7 +215,7 @@ button {
                     color: $gray_dark_01;
                     position: absolute;
                     top: 20px;
-                    overflow-y: auto;
+                    overflow-y: visible;
                     padding-top: 8px;
                 }
             }
@@ -778,6 +778,9 @@ input.date-range-picker,
             align-items: start;
         }
     }
+}
+.ql-mention-list-container {
+    background: $primary_light_04;
 }
 .modal.add-new-task-popup {
     .modal-content {
