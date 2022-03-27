@@ -1185,7 +1185,6 @@ const mentionModule = (memberList, bool) => {
                         if (
                             memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
                         ) {
-                            console.log("===", "if", memberList[i].value, searchTerm)
                             matches.push(memberList[i]);
                         }
                     }

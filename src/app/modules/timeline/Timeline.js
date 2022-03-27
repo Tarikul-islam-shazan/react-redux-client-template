@@ -55,7 +55,7 @@ const Timeline = () => {
                                     </button>
                                 </div>
                                 <div className="modal-body custom-scrollbar">
-                                    <AllDesignList/>
+                                    <AllDesignList setLoader={setLoader}/>
                                 </div>
                             </div>
                         </div>

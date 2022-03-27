@@ -2,8 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { capitalizeFirstLetter, getShortName } from "../../../services/Util";
 import {
-    clearDesignSelection,
-    selectAllDesign,
     toggleDesignSelection,
 } from "../../store/action/Timeline";
 import { useParams } from "react-router-dom";
@@ -72,22 +70,6 @@ const AllDesignList = ({ setLoader }) => {
                 </div>
             );
         });
-    };
-
-    const clearSelection = async (e) => {
-        window.scrollTo(0, 0);
-        setLoader(true);
-        if (e.target.checked === false) {
-            await dispatch(clearDesignSelection(generateParams()));
-        } else {
-            let designs = [];
-            let productList = timelineStore?.orderInfo?.orderProductList;
-            productList.forEach((design) => {
-                designs.push(design.id);
-            });
-            await dispatch(selectAllDesign(designs, generateParams()));
-        }
-        setLoader(false);
     };
 
     return (
