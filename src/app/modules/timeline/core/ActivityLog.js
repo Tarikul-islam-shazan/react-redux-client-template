@@ -434,7 +434,9 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const handePageRoute = () => {
-        if (activity.activityModule === "COMMENT") {
+        if (activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER") {
+            return false
+        } else if (activity.activityModule === "COMMENT") {
             setShowTaskDetailsModal(true);
         } else if (activity.activityModule === "PROFORMA_INVOICE") {
             setLoader(true);
@@ -459,20 +461,6 @@ const ActivityLog = ({activity, setLoader, index}) => {
                 <div className="activity-content d-flex">
                     {renderIconOrImage()}
                     <div className="activity-text">{renderActivityText()}</div>
-                </div>
-                <div className="design-image">
-                    {activity?.secondaryActedUpon?.docUrlList[0] && (
-                        <Tooltip
-                            title={activity?.secondaryActedUpon?.text + " " + activity?.secondaryActedUpon?.referenceNumber}
-                            arrow placement={"top"}>
-                            <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
-                                <img
-                                    src={activity?.secondaryActedUpon?.docUrlList[0]}
-                                    alt="design image"
-                                />
-                            </Link>
-                        </Tooltip>
-                    )}
                 </div>
             </div>
             {renderActivityBody()}

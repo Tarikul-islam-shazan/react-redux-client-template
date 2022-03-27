@@ -1183,8 +1183,9 @@ const mentionModule = (memberList, bool) => {
                     let matches = [];
                     for (let i = 0; i < memberList.length; i++) {
                         if (
-                            memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
+                            memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
                         ) {
+                            console.log("===", "if", memberList[i].value, searchTerm)
                             matches.push(memberList[i]);
                         }
                     }

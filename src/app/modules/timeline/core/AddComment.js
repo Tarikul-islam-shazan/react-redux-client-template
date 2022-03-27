@@ -54,6 +54,7 @@ const AddComment = ({toggleAddComment, openModal}) => {
         errorObj["taskError"] = undefined;
         setError(errorObj);
         setSelectedTask(task);
+        setTaskList(taskListHistory);
     };
 
     const renderTaskList = () => {
@@ -70,7 +71,9 @@ const AddComment = ({toggleAddComment, openModal}) => {
                 {
                     taskList?.map((task, index) => {
                         return (
-                            <li key={`task_${index}`} onClick={() => handleTask(task)}>
+                            <li key={`task_${index}`}
+                                className={selectedTask?.stepName === task.stepName ? "selected" : ""}
+                                onClick={() => handleTask(task)}>
                                 <span>{task.stepName}</span>
                             </li>
                         );
@@ -183,7 +186,6 @@ const AddComment = ({toggleAddComment, openModal}) => {
 
     const handleBlur = (e) => {
         setTaskSearch("");
-        setTaskList(taskListHistory);
     };
 
     return (

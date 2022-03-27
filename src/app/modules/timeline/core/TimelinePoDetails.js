@@ -1,8 +1,7 @@
 import React from "react";
 import AllDesignList from "./AllDesignList";
 import MemberList from "./MemberList";
-import { downloadInvoice } from "../../store/action/Timeline";
-import { Link, useParams } from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { changeDateFormat, toOrdinalSuffix } from "../../../services/Util";
 
@@ -10,13 +9,7 @@ const TimelinePoDetails = ({ setLoader }) => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const { orderInfo } = timelineStore;
     const params = useParams();
-
-    const downloadPI = () => {
-        setLoader(true);
-        downloadInvoice(timelineStore?.orderInfo?.invoiceId)
-            .then(() => setLoader(false))
-            .catch(() => setLoader(false));
-    };
+    const history = useHistory();
 
     const renderETD = () => {
         return orderInfo?.deliveryDateList?.map((etd, index) => {
@@ -35,7 +28,7 @@ const TimelinePoDetails = ({ setLoader }) => {
                 <div className="design-title-with-date">
                     <div className="data-with-round-progress d-flex justify-content-between">
                         <div className="style-text-view mt-2">
-                            <a href="/orders/my-orders">
+                            <a href="/orders/my-orders" onClick={() => history.goBack()}>
                                 <img src="/icons/Left arrwo.svg" alt="back" />
                             </a>
                             <span className="order-number">{orderInfo?.orderRefNumber}</span>
