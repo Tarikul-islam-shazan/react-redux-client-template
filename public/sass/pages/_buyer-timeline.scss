@@ -523,6 +523,9 @@ ul {
                     &:last-child {
                         margin-bottom: 0;
                     }
+                    &.selected {
+                        background: $primary_light_04;
+                    }
                 }
             }
         }
@@ -532,10 +535,12 @@ ul {
             p {
                 padding-left: 16px !important;
                 background: transparent !important;
+                padding-top: 0;
             }
             &.ql-blank {
                 &::before {
                     left: 16px !important;
+                    top: 0 !important;
                 }
             }
         }
@@ -988,7 +993,7 @@ ul {
         position: relative;
         border-radius: 100%;
         &:after {
-            border: 5px solid $gray_dark_03;
+            border: 5px solid $gray_light_01;
         }
         .progress-bar {
             border-width: 5px;

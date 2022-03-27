@@ -847,6 +847,11 @@ input.date-range-picker,
 }
 .ql-mention-list-container {
     width: auto !important;
+    ul {
+        li {
+            cursor: pointer;
+        }
+    }
 }
 .ql-editor {
     overflow-y: inherit;
