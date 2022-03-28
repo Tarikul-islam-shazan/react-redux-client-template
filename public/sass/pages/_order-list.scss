@@ -76,12 +76,19 @@
         .order-details {
             width: calc(100% - 148px);
             padding-left: 16px;
-            padding-top: 32px;
+            padding-top: 20px;
             position: relative;
             .round-progress-68 {
                 position: absolute;
                 right: 20px;
                 top: 44px;
+            }
+            .order-title {
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 500;
+                padding-bottom: 4px;
+                display: inline-block;
             }
             .order-quantity-details {
                 margin: 8px 0 12px 0;
@@ -170,8 +177,17 @@
         }
     }
 }
-
+.search {
+    &.order-search {
+        > svg {
+            top: 3px;
+        }
+    }
+}
 .order-pending-state {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
     .state-content {
         position: relative;
     }

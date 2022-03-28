@@ -1,17 +1,17 @@
 import React from "react";
-import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
-import {useHistory} from "react-router-dom";
-import {toastWarning} from "../../commonComponents/Toast";
-import {Tooltip} from "@material-ui/core";
+import { changeDateFormat, getShortName, toOrdinalSuffix } from "../../services/Util";
+import { useHistory } from "react-router-dom";
+import { toastWarning } from "../../commonComponents/Toast";
+import { Tooltip } from "@material-ui/core";
 
-const ListOfOrder = ({orderStore, activeTab}) => {
+const ListOfOrder = ({ orderStore, activeTab }) => {
     const history = useHistory();
 
     const renderOrderImage = (imageSrc) => {
         if (imageSrc) {
-            return <img src={imageSrc} alt="design"/>;
+            return <img src={imageSrc} alt="design" />;
         } else {
-            return <img src="/images/default_product.svg" alt="design"/>;
+            return <img src="/images/default_product.svg" alt="design" />;
         }
     };
 
@@ -110,17 +110,10 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                         {renderOrderImage(item.orderProductList[3]?.image)}
                     </div>
                     <div className="order-details">
-                        <div>
-                            <Tooltip
-                                title={item?.name}
-                                placement={"top"}
-                                arrow
-                            >
-                                <span className="regular-14">
-                                    {getShortName(item?.name, 20)}
-                                </span>
-                            </Tooltip>
-                        </div>
+                        <Tooltip title={item?.name} placement={"top"} arrow>
+                            <span className="order-title">{getShortName(item?.name, 20)}</span>
+                        </Tooltip>
+
                         <div className="po-numbers">
                             <div className="pos">
                                 <Tooltip
@@ -146,18 +139,18 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                             <li>${item.orderValue}</li>
                         </ul>
                         {renderDeliveryStatus(item)}
-                        {orderStore.activeTab !== 'PENDING' && (
+                        {orderStore.activeTab !== "PENDING" && (
                             <div className="round-progress-68">
                                 <div
                                     className="status pending progress"
                                     data-percentage={item?.percentageOfCompleteness}
                                 >
-                                <span className="progress-left">
-                                    <span className="progress-bar"/>
-                                </span>
+                                    <span className="progress-left">
+                                        <span className="progress-bar" />
+                                    </span>
                                     <span className="progress-right">
-                                    <span className="progress-bar"/>
-                                </span>
+                                        <span className="progress-bar" />
+                                    </span>
                                     <div className="progress-value">
                                         <div className="task-value">
                                             {item?.percentageOfCompleteness}%
@@ -166,7 +159,7 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                 </div>
                             </div>
                         )}
-                        {orderStore.activeTab === 'PENDING' && (
+                        {orderStore.activeTab === "PENDING" && (
                             <div className="order-pending-state">
                                 <div className="state-details d-flex align-items-center">
                                     <div className="state-content ml-1">
@@ -182,8 +175,8 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                                             alt="profile"
                                                         />
                                                         <span className="state-title regular-14 gray_dark_02 mb--1">
-																{item.stepName}
-															</span>
+                                                            {item.stepName}
+                                                        </span>
                                                     </>
                                                 )
                                         )}
@@ -192,12 +185,12 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                                 <span
                                                     key={step.workflowStep}
                                                     className={`${
-                                                        step.status === 'COMPLETED'
-                                                            ? 'complete-state'
-                                                            : step.status === 'PENDING' &&
-                                                            step?.memberResponseList
-                                                                ? 'pending-state'
-                                                                : ''
+                                                        step.status === "COMPLETED"
+                                                            ? "complete-state"
+                                                            : step.status === "PENDING" &&
+                                                              step?.memberResponseList
+                                                            ? "pending-state"
+                                                            : ""
                                                     }`}
                                                 />
                                             ))}
