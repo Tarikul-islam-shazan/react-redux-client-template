@@ -88,10 +88,8 @@ const AddComment = ({toggleAddComment, openModal}) => {
         if (!selectedTask) {
             errors["taskError"] = "Required!";
         }
-        if (
-            postInputRef.current === null ||
-            postInputRef?.current.toString().match("<p><br></p>")
-        ) {
+        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace( /(<([^>]+)>)/ig, '');
+        if (!newComment) {
             errors["commentError"] = "Comment required";
         }
         setError(errors);
@@ -184,10 +182,6 @@ const AddComment = ({toggleAddComment, openModal}) => {
         setTaskList(tmpArray);
     };
 
-    const handleBlur = (e) => {
-        setTaskSearch("");
-    };
-
     return (
         <Modal
             show={openModal}
@@ -220,7 +214,6 @@ const AddComment = ({toggleAddComment, openModal}) => {
                                             </div>
                                             <div
                                                 className="tast-select"
-                                                onBlur={handleBlur}
                                                 onClick={() => setQuillDisable(true)}
                                             >
                                                 <div className="dropdown">
@@ -235,6 +228,10 @@ const AddComment = ({toggleAddComment, openModal}) => {
                                                         {selectedTask?.stepName || "Select Task"}
                                                     </button>
                                                     <div
+                                                        onBlur={() => setTimeout(() => {
+                                                            setTaskList(taskListHistory);
+                                                            setTaskSearch("");
+                                                        }, 500)}
                                                         className="dropdown-menu shadow-2dp"
                                                         aria-labelledby="dropdownMenuButton"
                                                     >
