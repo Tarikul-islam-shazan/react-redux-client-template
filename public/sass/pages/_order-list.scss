@@ -144,6 +144,9 @@
                     margin-right: 8px;
                     font-size: 12px;
                 }
+                img {
+                    width: 16px;
+                }
             }
             .progress-with-count {
                 margin-top: 24px;
@@ -164,6 +167,46 @@
                     margin-left: 8px;
                 }
             }
+        }
+    }
+}
+
+.order-pending-state {
+    .state-content {
+        position: relative;
+    }
+    img {
+        height: 28px;
+        width: 28px;
+        border-radius: 100px;
+        object-fit: cover;
+        position: absolute;
+        left: -34px;
+        top: 4px;
+    }
+    .four-states {
+        display: flex;
+        span {
+            display: inline-block;
+            width: 20px;
+            height: 4px;
+            background: $gray_light_01;
+            margin-right: 2px;
+            &.pending-state {
+                background: $yellow;
+            }
+            &.complete-state {
+                background: $green;
+            }
+        }
+    }
+    .custom-tooltip {
+        .tooltiptext {
+            width: 102px;
+            font-size: 12px;
+            line-height: 16px;
+            top: 10px;
+            margin-left: 0;
         }
     }
 }
