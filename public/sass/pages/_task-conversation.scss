@@ -847,6 +847,11 @@ input.date-range-picker,
 }
 .ql-mention-list-container {
     width: auto !important;
+    ul {
+        li {
+            cursor: pointer;
+        }
+    }
 }
 .ql-editor {
     overflow-y: inherit;
@@ -868,7 +873,7 @@ input.date-range-picker,
 span.mention {
     font-size: 12px;
     padding: 2px 3px !important;
-    color: #444;
+    color: $gray_dark_01;
 }
 .CalendarMonth_table {
     margin-top: 12px;
