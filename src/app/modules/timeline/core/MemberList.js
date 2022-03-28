@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+
 const MemberList = () => {
     const timelineStore = useSelector((store) => store.timelineStore);
     const [memberList, setMemberList] = useState([]);
@@ -23,9 +24,6 @@ const MemberList = () => {
             return (
                 <span
                     className="more-member"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
                 >
                     <a href="#">+{memberList.length}</a>
                     <div className="dropdown-menu shadow-2dp" aria-labelledby="dropdownMenuButton">
@@ -35,7 +33,7 @@ const MemberList = () => {
                                 {memberList.map((member, index) => {
                                     return (
                                         <div className="member-list" key={`member_${index}`}>
-                                            <img src={renderMemberImage(member)} alt="" />
+                                            <img src={renderMemberImage(member)} alt=""/>
                                             <div className="name">
                                                 {member.memberName}&nbsp;
                                                 <span className="tag">{member.designation}</span>
@@ -52,7 +50,11 @@ const MemberList = () => {
     };
 
     return (
-        <div className="add-team-members">
+        <div
+            className="add-team-members"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
             <div className="all-team-members">
                 <span className="added-members">
                     {memberList[0] && (

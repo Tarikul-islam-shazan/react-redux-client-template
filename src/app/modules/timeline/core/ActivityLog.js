@@ -394,25 +394,12 @@ const ActivityLog = ({activity, setLoader, index}) => {
                     {renderDescription()}
                     {renderTimeLineImages()}
                     <div className="reply-btn ">
-                        <button className="button text" onClick={() => setIsReplying(true)}>
+                        <button className="button text __reply-button__" onClick={() => setIsReplying(true)}>
                             Reply
                         </button>
                     </div>
                     <div className="reply-container">
                         {renderReplySection()}
-                        <div className="details-btn">
-                            <button
-                                className="button text"
-                                onClick={() => setShowTaskDetailsModal(true)}
-                            >
-                                All Comments
-                                <img
-                                    src="/icons/comments-btn-arrow.svg"
-                                    alt="arrow"
-                                    className="ml-1"
-                                />
-                            </button>
-                        </div>
                     </div>
                 </div>
             );
@@ -433,8 +420,9 @@ const ActivityLog = ({activity, setLoader, index}) => {
         }
     };
 
-    const handePageRoute = () => {
-        if (activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER") {
+    const handePageRoute = (e) => {
+        let element = e.target.className;
+        if (isReplying === true || activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER" || showTaskDetailsModal === true || element === "button text __reply-button__") {
             return false
         } else if (activity.activityModule === "COMMENT") {
             setShowTaskDetailsModal(true);
@@ -453,10 +441,9 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     return (
-        <div className="single-activity activity-with-header added-comment">
+        <div className="single-activity activity-with-header added-comment" onClick={handePageRoute}>
             <div
                 className="activity-common-header justify-content-between"
-                onClick={handePageRoute}
             >
                 <div className="activity-content d-flex">
                     {renderIconOrImage()}
