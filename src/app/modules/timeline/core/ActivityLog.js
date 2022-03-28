@@ -422,7 +422,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
 
     const handePageRoute = (e) => {
         let element = e.target.className;
-        if (activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER" || showTaskDetailsModal === true || element === "button text __reply-button__") {
+        if (isReplying === true || activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER" || showTaskDetailsModal === true || element === "button text __reply-button__") {
             return false
         } else if (activity.activityModule === "COMMENT") {
             setShowTaskDetailsModal(true);
