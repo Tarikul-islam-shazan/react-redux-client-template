@@ -109,7 +109,7 @@ class Notification extends Component {
         }
     };
 
-    fetchNotification = async (page = 0) => {
+    fetchNotification = async (page = 0, merge = true) => {
         let { size, sort, notifications } = this.props;
         let { category } = this.state;
         let params = {
@@ -122,15 +122,18 @@ class Notification extends Component {
             loading: true
         });
         let result = [];
+        let currentPage;
+        let totalPage;
         await Http.GET('getNotifications', params)
             .then(({ data }) => {
-                if (data && data.length !== 0) {
-                    //console.log('getNotifications SUCCESS: ', data);
-                    this.setState({
-                        loading: false
-                    });
-                    result = data;
+                if (data && data.data.length !== 0) {
+                    result = data.data;
+                    currentPage = data.currentPage;
+                    totalPage = data.totalPages;
                 }
+                this.setState({
+                    loading: false
+                });
             })
             .catch(({ response }) => {
                 this.setState({
@@ -143,10 +146,14 @@ class Notification extends Component {
                 }
             });
 
-        notifications = [...notifications, ...result];
+        if(merge){
+            notifications = [...notifications, ...result];
+        }else{
+            notifications = [...result];
+        }
 
         await this.props._storeData('dataLoadedOnce', true);
-        await this.props._storeData('hasNext', result.length === size ? true : false);
+        await this.props._storeData('hasNext', currentPage < totalPage);
         await this.props._storeData('notifications', notifications);
         await this.setState({
             notifications
@@ -222,7 +229,7 @@ class Notification extends Component {
                 [e.target.name]: e.target.value
             },
             () => {
-                this.fetchNotification(0);
+                this.fetchNotification(0, false);
             }
         );
     };
