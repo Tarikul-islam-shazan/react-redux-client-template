@@ -1,5 +1,10 @@
 import React from "react";
-import { changeDateFormat, getShortName, toOrdinalSuffix } from "../../services/Util";
+import {
+    changeDateFormat,
+    getShortName,
+    onErrorImageLoad,
+    toOrdinalSuffix,
+} from "../../services/Util";
 import { useHistory } from "react-router-dom";
 import { toastWarning } from "../../commonComponents/Toast";
 import { Tooltip } from "@material-ui/core";
@@ -9,7 +14,9 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
 
     const renderOrderImage = (imageSrc) => {
         if (imageSrc) {
-            return <img src={imageSrc} alt="design" />;
+            return (
+                <img src={imageSrc} alt="design" onError={(e) => onErrorImageLoad(e, imageSrc)} />
+            );
         } else {
             return <img src="/images/default_product.svg" alt="design" />;
         }

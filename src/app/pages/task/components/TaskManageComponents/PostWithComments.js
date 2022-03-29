@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import QuillMention from 'quill-mention';
 import moment from 'moment';
 
-import { parseHtml, addImageSuffix } from '../../../../services/Util';
+import {parseHtml, addImageSuffix, onErrorImageLoad} from '../../../../services/Util';
 import Http from '../../../../services/Http';
 import { toastSuccess, toastError } from '../../../../commonComponents/Toast';
 import {SelectedFileViewComponent} from './SelectedFileViewComponent';
@@ -287,7 +287,10 @@ class PostWithComments extends Component {
             <div className="user-photo">
             {
               userInfo && userInfo.profilePicDocument ?
-              <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')} />
+              <img
+                  src={addImageSuffix(userInfo.profilePicDocument.docUrl, '_xicon')}
+                  onError={(e) => this.onErrorImageLoad(e, userInfo.profilePicDocument.docUrl)}
+              />
               :
               <img src={require("../../../../assets/images/pro_pic_default.png")} />
             }

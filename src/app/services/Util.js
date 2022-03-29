@@ -1196,6 +1196,11 @@ const mentionModule = (memberList, bool) => {
 }
 
 
+const onErrorImageLoad = (e, url) => {
+    e.target.onerror = null;
+    e.target.src = addImageSuffix(url, "")
+}
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -1254,5 +1259,6 @@ export {
     getFileType,
     getIconByFileType,
     getMentionedUserIds,
-    mentionModule
+    mentionModule,
+    onErrorImageLoad
 };

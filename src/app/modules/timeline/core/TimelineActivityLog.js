@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ActivityLog from "./ActivityLog";
-import { addImageSuffix, authUserInfo, isPageReachBottom } from "../../../services/Util";
+import {addImageSuffix, authUserInfo, isPageReachBottom, onErrorImageLoad} from "../../../services/Util";
 import { fetchTimeline } from "../../store/action/Timeline";
 import { useParams } from "react-router-dom";
 
@@ -72,6 +72,7 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                                     authUserInfo().profilePicDocument.docUrl,
                                     "_xicon"
                                 )}
+                                onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
                                 alt="profile"
                                 className="profile-image"
                             />

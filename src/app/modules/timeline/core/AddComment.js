@@ -1,6 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import {addImageSuffix, authUserInfo, getMentionedUserIds, mentionModule,} from "../../../services/Util";
+import {
+    addImageSuffix,
+    authUserInfo,
+    getMentionedUserIds,
+    mentionModule,
+    onErrorImageLoad,
+} from "../../../services/Util";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
@@ -88,7 +94,7 @@ const AddComment = ({toggleAddComment, openModal}) => {
         if (!selectedTask) {
             errors["taskError"] = "Required!";
         }
-        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace( /(<([^>]+)>)/ig, '');
+        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace(/(<([^>]+)>)/ig, '');
         if (!newComment) {
             errors["commentError"] = "Comment required";
         }
@@ -204,6 +210,7 @@ const AddComment = ({toggleAddComment, openModal}) => {
                                                         authUserInfo().profilePicDocument.docUrl,
                                                         "_xicon"
                                                     )}
+                                                    onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
                                                     alt="profile"
                                                 />
                                             </div>
