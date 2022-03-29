@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderList } from "../store/action/OrderAction";
-import { isPageReachBottom } from "../../services/Util";
+import React, {useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchOrderList} from "../store/action/OrderAction";
+import {isPageReachBottom} from "../../services/Util";
 import LoaderComponent from "../../commonComponents/Loader";
 import ListOfOrder from "./ListOfOrder";
 
@@ -14,7 +14,7 @@ const MyOrderList = () => {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        myStateRef.current = { ...myStateRef.current, ...orderStore };
+        myStateRef.current = {...myStateRef.current, ...orderStore};
         setActiveTab(orderStore.activeTab);
     }, [orderStore]);
 
@@ -37,7 +37,7 @@ const MyOrderList = () => {
 
     const handleScroll = () => {
         if (isPageReachBottom()) {
-            let { totalElements, currentPage, data } = myStateRef.current.orderResponse;
+            let {totalElements, currentPage, data} = myStateRef.current.orderResponse;
             console.log("===", myStateRef.current);
             let activeTabName = myStateRef.current.activeTab;
             if (totalElements > 0) {
@@ -56,16 +56,16 @@ const MyOrderList = () => {
         }
     };
 
-    const changeTab = (value, searchParam) => {
+    const changeTab = (value) => {
         setLoader(true);
-        let params = generateParams(value, 0, searchParam);
+        let params = generateParams(value, 0, myStateRef.current.searchParam);
         dispatch(fetchOrderList(params, false, value)).finally(() => setLoader(false));
     };
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
-        myStateRef.current = { ...orderStore, searchParam: e.target.value };
-        changeTab(activeTab, e.target.value);
+        myStateRef.current = {...orderStore, searchParam: e.target.value};
+        changeTab(activeTab);
     };
 
     return (
@@ -134,7 +134,7 @@ const MyOrderList = () => {
                                     fill="#a1a6b2"
                                     stroke="#a1a6b2"
                                     strokeWidth="0.5"
-                                ></path>
+                                />
                             </svg>
                             <input
                                 type="text"
@@ -146,7 +146,7 @@ const MyOrderList = () => {
                         </span>
                     </div>
                 </div>
-                <ListOfOrder orderStore={orderStore} activeTab={activeTab} />
+                <ListOfOrder orderStore={orderStore} activeTab={activeTab}/>
             </div>
         </LoaderComponent>
     );

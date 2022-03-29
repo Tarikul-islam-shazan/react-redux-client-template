@@ -268,7 +268,8 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const handleReply = async () => {
-        if (postInputRef.current === null || postInputRef.current.toString().match("<p><br></p>")) {
+        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace( /(<([^>]+)>)/ig, '');
+        if (!newComment) {
             setCommentError("Comment required");
             return;
         }
