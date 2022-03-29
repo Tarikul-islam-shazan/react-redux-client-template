@@ -8,7 +8,7 @@ import LoadingOverlay from "react-loading-overlay";
 import Http from "../../../services/Http";
 import {toastError} from "../../../commonComponents/Toast";
 import {TaskDetailSkeleton, TaskPostSkeleton} from "../../../commonComponents/TaskSkeletons";
-import {_getKey, addImageSuffix, changeDateFormat} from "../../../services/Util";
+import {_getKey, addImageSuffix, authUserInfo, changeDateFormat, onErrorImageLoad} from "../../../services/Util";
 
 import {TaskDescriptionComponent} from "./TaskManageComponents/TaskDescriptionComponent";
 import PostWithComments from "./TaskManageComponents/PostWithComments";
@@ -957,7 +957,10 @@ class TaskManage extends Component {
 
                     <div className="user-photo">
                         {userInfo && userInfo.profilePicDocument ? (
-                            <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, "_xicon")}/>
+                            <img
+                                src={addImageSuffix(userInfo.profilePicDocument.docUrl, "_xicon")}
+                                onError={(e) => onErrorImageLoad(e, userInfo.profilePicDocument.docUrl)}
+                            />
                         ) : (
                             <img src={require("../../../assets/images/pro_pic_default.png")}/>
                         )}

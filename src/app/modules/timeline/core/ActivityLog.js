@@ -7,11 +7,12 @@ import {
     getIconByFileType,
     getMentionedUserIds,
     mentionModule,
+    onErrorImageLoad,
     parseHtml
 } from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
@@ -20,7 +21,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {Tooltip} from "@material-ui/core";
 
 const ActivityLog = ({activity, setLoader, index}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -268,7 +268,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const handleReply = async () => {
-        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace( /(<([^>]+)>)/ig, '');
+        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace(/(<([^>]+)>)/ig, '');
         if (!newComment) {
             setCommentError("Comment required");
             return;
@@ -307,6 +307,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
                                     authUserInfo().profilePicDocument.docUrl,
                                     "_xicon"
                                 )}
+                                onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
                                 alt=""
                                 className="profile-image"
                             />

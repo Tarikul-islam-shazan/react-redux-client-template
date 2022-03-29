@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import $ from "jquery";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import loadjs from "loadjs";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 import Sidebar from "../partials/Sidebar";
 import Notification from "../partials/Notification";
@@ -15,9 +13,9 @@ import Modal from "../pages/design/components/Modal";
 import AskForQuote from "../commonComponents/modals/AskForQuote";
 import StartProject from "../commonComponents/modals/StartProject";
 
-import { _storeData } from "../partials/actions";
-import { _storeData as _storeQuoteData } from "../pages/design/actions";
-import {addImageSuffix, isValidJSON} from "../services/Util";
+import {_storeData} from "../partials/actions";
+import {_storeData as _storeQuoteData} from "../pages/design/actions";
+import {addImageSuffix, isValidJSON, onErrorImageLoad} from "../services/Util";
 
 import {getOneSignalAppId, LOCAL_QUOTE_NOW_KEY} from "../constant";
 import Http from '../services/Http';
@@ -366,6 +364,7 @@ class DefaultLayout extends Component {
                                                 userInfo.profilePicDocument.docUrl,
                                                 "_xicon"
                                             )}
+                                            onError={(e) => onErrorImageLoad(e, userInfo.profilePicDocument.docUrl)}
                                             alt="profile-pic"
                                         />
                                     ) : (
