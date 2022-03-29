@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchOrderList} from "../store/action/OrderAction";
-import {isPageReachBottom} from "../../services/Util";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrderList } from "../store/action/OrderAction";
+import { isPageReachBottom } from "../../services/Util";
 import LoaderComponent from "../../commonComponents/Loader";
 import ListOfOrder from "./ListOfOrder";
 
@@ -14,7 +14,7 @@ const MyOrderList = () => {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        myStateRef.current = {...myStateRef.current, ...orderStore};
+        myStateRef.current = { ...myStateRef.current, ...orderStore };
         setActiveTab(orderStore.activeTab);
     }, [orderStore]);
 
@@ -37,7 +37,7 @@ const MyOrderList = () => {
 
     const handleScroll = () => {
         if (isPageReachBottom()) {
-            let {totalElements, currentPage, data} = myStateRef.current.orderResponse;
+            let { totalElements, currentPage, data } = myStateRef.current.orderResponse;
             console.log("===", myStateRef.current);
             let activeTabName = myStateRef.current.activeTab;
             if (totalElements > 0) {
@@ -64,8 +64,18 @@ const MyOrderList = () => {
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
-        myStateRef.current = {...orderStore, searchParam: e.target.value};
+        myStateRef.current = { ...orderStore, searchParam: e.target.value };
         changeTab(activeTab);
+    };
+
+    const renderEmptyState = () => {
+        if (orderStore?.orderResponse?.data?.length === 0) {
+            return (
+                <div className="order-empty-state">
+                    <p>No order found</p>
+                </div>
+            );
+        }
     };
 
     return (
@@ -74,7 +84,7 @@ const MyOrderList = () => {
                 <div className="page-title">
                     <h2>Order list</h2>
                 </div>
-                <div className="d-flex align-items-center justify-content-between">
+                <div className="tab-and-search d-flex align-items-center justify-content-between">
                     <div className="order-list-tab">
                         <ul>
                             <li
@@ -118,7 +128,7 @@ const MyOrderList = () => {
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="search-div">
                         <span className="search order-search">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +156,8 @@ const MyOrderList = () => {
                         </span>
                     </div>
                 </div>
-                <ListOfOrder orderStore={orderStore} activeTab={activeTab}/>
+                <ListOfOrder orderStore={orderStore} activeTab={activeTab} />
+                {renderEmptyState()}
             </div>
         </LoaderComponent>
     );

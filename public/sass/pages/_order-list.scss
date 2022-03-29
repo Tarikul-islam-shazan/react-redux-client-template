@@ -101,11 +101,12 @@
                     &::after {
                         content: "";
                         position: absolute;
-                        height: 12px;
-                        width: 1px;
-                        background: $gray_dark_04;
+                        height: 3px;
+                        width: 3px;
+                        border-radius: 100px;
+                        background: #6a7181;
                         right: -12px;
-                        top: 6px;
+                        top: 10px;
                     }
                     &:last-child {
                         &::after {
@@ -182,6 +183,12 @@
         > svg {
             top: 3px;
         }
+        input {
+            height: 40px;
+            padding: 6px 12px 6px 45px;
+            font-size: 14px;
+            max-width: 220px;
+        }
     }
 }
 .order-pending-state {
@@ -226,7 +233,15 @@
         }
     }
 }
-
+.order-empty-state {
+    padding: 200px 0;
+    p {
+        font-size: 16px;
+        line-height: 24px;
+        color: $gray_dark_03;
+        text-align: center;
+    }
+}
 @media only screen and (max-width: 1024px) {
     .order-card-items {
         grid-template-columns: 1fr;
@@ -244,6 +259,25 @@
                 }
             }
         }
+        .tab-and-search {
+            flex-wrap: wrap;
+            .search-div {
+                width: 100%;
+            }
+            .search {
+                &.order-search {
+                    width: 100%;
+                    margin-top: 12px;
+                    > svg {
+                        top: 13px;
+                    }
+                    input {
+                        max-width: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -257,17 +291,25 @@
             .order-details {
                 width: calc(100% - 100px);
                 padding-left: 8px;
-                padding-top: 8px;
+                padding-top: 0px;
+                .order-title {
+                    padding-bottom: 0;
+                }
                 .regular-14,
                 .delivery-date-status span {
                     font-size: 12px;
                     line-height: 16px;
                 }
                 .order-quantity-details {
-                    margin: 8px 0;
+                    margin: 4px 0 0;
                     li {
                         font-size: 12px;
                         line-height: 16px;
+                        margin-right: 16px;
+                        &::after {
+                            right: -9px;
+                            top: 7px;
+                        }
                     }
                 }
                 .round-progress-68 {
@@ -284,7 +326,7 @@
             height: 52px !important;
             line-height: 52px !important;
             &:after {
-                border: 3px solid $gray_dark_03 !important;
+                border: 3px solid $gray_light_01 !important;
             }
             .progress-bar {
                 border-width: 3px !important;
@@ -300,9 +342,19 @@
                 }
             }
             .progress-value {
-                font-size: 14px;
-                line-height: 20px;
+                font-size: 12px !important;
+                line-height: 16px !important;
             }
+        }
+    }
+    .order-pending-state {
+        right: 0px;
+        bottom: 0px;
+        img {
+            width: 22px;
+            height: 22px;
+            left: -26px;
+            top: 6px;
         }
     }
 }

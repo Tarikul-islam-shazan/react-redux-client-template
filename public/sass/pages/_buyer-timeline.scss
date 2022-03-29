@@ -37,7 +37,6 @@ ul {
 
                 .assign-member {
                     max-width: 300px;
-                    left: -58px;
                     top: 5px;
                     .title {
                         font-weight: 500;
@@ -137,10 +136,16 @@ ul {
                     }
                     .etd-with-po-details {
                         margin: 16px 0;
+                        border-bottom: 1px solid $gray_light_01;
+                        padding-bottom: 16px;
                     }
                     .add-team-members {
-                        padding: 16px 0 2px 0;
-                        border-top: 1px solid $gray_light_01;
+                        padding-bottom: 2px;
+                        width: auto;
+                        display: inline-block;
+                        .added-members {
+                            cursor: pointer;
+                        }
                     }
                 }
 
@@ -659,6 +664,7 @@ ul {
         margin-bottom: 12px;
         transition: 0.3s;
         border-radius: 4px;
+        cursor: pointer;
         &:hover {
             box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
         }
@@ -1012,9 +1018,9 @@ ul {
         .progress-value {
             display: flex;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
-            line-height: 24px;
+            line-height: 20px;
             align-items: center;
             justify-content: center;
             height: 100%;
