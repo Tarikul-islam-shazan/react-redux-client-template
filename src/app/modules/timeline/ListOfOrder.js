@@ -1,10 +1,15 @@
 import React from "react";
-import {changeDateFormat, getShortName, onErrorImageLoad, toOrdinalSuffix} from "../../services/Util";
-import {useHistory} from "react-router-dom";
-import {toastWarning} from "../../commonComponents/Toast";
-import {Tooltip} from "@material-ui/core";
+import {
+    changeDateFormat,
+    getShortName,
+    onErrorImageLoad,
+    toOrdinalSuffix,
+} from "../../services/Util";
+import { useHistory } from "react-router-dom";
+import { toastWarning } from "../../commonComponents/Toast";
+import { Tooltip } from "@material-ui/core";
 
-const ListOfOrder = ({orderStore, activeTab}) => {
+const ListOfOrder = ({ orderStore, activeTab }) => {
     const history = useHistory();
 
     const renderOrderImage = (imageSrc) => {
@@ -14,7 +19,7 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                 alt="design"
             />;
         } else {
-            return <img src="/images/default_product.svg" alt="design"/>;
+            return <img src="/images/default_product.svg" alt="design" />;
         }
     };
 
@@ -43,7 +48,7 @@ const ListOfOrder = ({orderStore, activeTab}) => {
         } else if (Math.sign(item.timeLeft) === -1) {
             return <span className="overdue-time">Overdue&nbsp;</span>;
         } else {
-            return <span>DELIVERY IN </span>;
+            return <span>ETD </span>;
         }
     };
 
@@ -125,13 +130,13 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                         placement={"top"}
                                         arrow
                                     >
-                                    <span className="regular-14">
-                                        {getShortName(item?.poNumberList?.join(","), 20)}
-                                    </span>
+                                        <span className="regular-14">
+                                            {getShortName(item?.poNumberList?.join(","), 20)}
+                                        </span>
                                     </Tooltip>
                                     <span className="regular-14 gray_dark_02">
-                                    &nbsp;({item.orderRefNumber})
-                                </span>
+                                        &nbsp;({item.orderRefNumber})
+                                    </span>
                                 </div>
                             </div>
                             <ul className="order-quantity-details d-flex">
@@ -149,12 +154,12 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                         className="status pending progress"
                                         data-percentage={item?.percentageOfCompleteness}
                                     >
-                                    <span className="progress-left">
-                                        <span className="progress-bar"/>
-                                    </span>
+                                        <span className="progress-left">
+                                            <span className="progress-bar" />
+                                        </span>
                                         <span className="progress-right">
-                                        <span className="progress-bar"/>
-                                    </span>
+                                            <span className="progress-bar" />
+                                        </span>
                                         <div className="progress-value">
                                             <div className="task-value">
                                                 {item?.percentageOfCompleteness}%
@@ -179,8 +184,8 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                                                 alt="profile"
                                                             />
                                                             <span className="state-title regular-14 gray_dark_02 mb--1">
-                                                            {item.stepName}
-                                                        </span>
+                                                                {item.stepName}
+                                                            </span>
                                                         </>
                                                     )
                                             )}
@@ -192,9 +197,9 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                                                             step.status === "COMPLETED"
                                                                 ? "complete-state"
                                                                 : step.status === "PENDING" &&
-                                                                step?.memberResponseList
-                                                                    ? "pending-state"
-                                                                    : ""
+                                                                  step?.memberResponseList
+                                                                ? "pending-state"
+                                                                : ""
                                                         }`}
                                                     />
                                                 ))}
@@ -207,12 +212,6 @@ const ListOfOrder = ({orderStore, activeTab}) => {
                     </div>
                 );
             });
-        } else {
-            return (
-                <div>
-                    <p>No order found</p>
-                </div>
-            )
         }
     };
 
