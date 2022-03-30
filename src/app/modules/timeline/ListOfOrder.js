@@ -17,7 +17,7 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
             return <img
                 src={imageSrc}
                 alt="design"
-                onError={(e) => onErrorImageLoad(e, imageSrc)}
+                onError={(e) => onErrorImageLoad(e, imageSrc,"product")}
             />;
         } else {
             return <img src="/images/default_product.svg" alt="design" />;

@@ -1196,8 +1196,11 @@ const mentionModule = (memberList, bool) => {
 }
 
 
-const onErrorImageLoad = (e, url) => {
+const onErrorImageLoad = (e, url, type = "user") => {
     let image = "/images/default_product.svg"
+    if(type === "user"){
+        image = "/images/pro_pic_default.svg"
+    }
     fetch(addImageSuffix(url, "")).then(() => {
         image = addImageSuffix(url, "")
     })
