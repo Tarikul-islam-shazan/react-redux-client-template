@@ -42,6 +42,7 @@ export const toggleDesignSelection = (data, params, orderId) => async (dispatch,
 }
 
 export const fetchTimeline = (params, merge) => async (dispatch) => {
+    params += "&sort=createdAt,desc"
     await Http.GET('getTimeLineData', params).then((response) => {
         dispatch(storeTimeline(response.data, merge));
     });
