@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 import TaskManage from "../../../pages/task/components/TaskManage";
 import Modal from "react-bootstrap/Modal";
-import { changeDateFormat, getShortName } from "../../../services/Util";
-import { Tooltip } from "@material-ui/core";
+import {changeDateFormat, getShortName} from "../../../services/Util";
+import {Tooltip} from "@material-ui/core";
 
 const AllProductionList = () => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -13,28 +13,28 @@ const AllProductionList = () => {
     const params = useParams();
 
     const renderStepIcon = (sample) => {
-        if (sample.formattedTaskStatus === "EXPIRED") {
-            return "/icons/Due icon.svg";
-        } else if (
+        if (
             sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
             return "/icons/Completed icon.svg";
+        } else if (sample.formattedTaskStatus === "EXPIRED") {
+            return "/icons/Due icon.svg";
         } else {
             return "/icons/Pending icon.svg";
         }
     };
 
     const renderStepClass = (sample) => {
-        if (sample.formattedTaskStatus === "EXPIRED") {
-            return "due";
-        } else if (
+        if (
             sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
             return "completed";
+        } else if (sample.formattedTaskStatus === "EXPIRED") {
+            return "due";
         } else {
             return "pending";
         }
