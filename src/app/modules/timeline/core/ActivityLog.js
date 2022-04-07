@@ -278,7 +278,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
         let message = postInputRef.current
         let body = {
             documentDTOList: selectedFiles,
-            postId: activity?.body?.entityIdTypeMapList[0]?.id,
+            postId: activity?.parentPostId,
             postType: "COMMENT",
             text: message.replace(/"/g, "'"),
             taggedUserIdList: timelineStore?.orderInfo?.orderMemberList ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList) : [],
