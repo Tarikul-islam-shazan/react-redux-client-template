@@ -152,3 +152,12 @@ export function getOneSignalAppId() {
         return "944586d0-b5c4-4e89-9822-28dd97aaca14";
     }
 }
+
+export const isItProductionServer = () => {
+    const hostName = window.location.toString();
+    if (
+        hostName.indexOf('https://app.nitex.com') > -1
+    ) {
+        return true;
+    }
+};
