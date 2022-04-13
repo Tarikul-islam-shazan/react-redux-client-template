@@ -234,7 +234,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                     return (
                                         <img
                                             key={i}
-                                            src={addImageSuffix(doc.docUrl, "_xthumbnail")}
+                                            src={addImageSuffix(doc.docUrl, "")}
                                             alt="designer"
                                             className="radius-3"
                                         />
@@ -246,7 +246,7 @@ export const QuotedItem = ({ quote, index, toggleSelect, search }) => {
                                             key={i}
                                             src={addImageSuffix(
                                                 quote.documentResponseList[0].docUrl,
-                                                "_xthumbnail"
+                                                ""
                                             )}
                                             alt="designer"
                                             className="radius-3"

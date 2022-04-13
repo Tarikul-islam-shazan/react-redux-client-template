@@ -304,7 +304,7 @@ class CollectionDetails extends Component {
 
     getUsersByTypes = async () => {
         let { usersByTypeList } = this.state;
-        let params = `?userTypes=FASHION_DESIGNER&userTypes=EXECUTIVE`;
+        let params = `?userTypes=FASHION_DESIGNER&userTypes=ACCOUNT_MANAGER`;
         await Http.GET("getUsersByTypes", params)
             .then(({ data }) => {
                 this.setState({ loading: false });
