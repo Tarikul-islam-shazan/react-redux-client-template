@@ -915,7 +915,7 @@ const getImageExt = (url) => {
     return result;
 };
 
-const IMAGE_EXTS = ["jpeg", "jpg", "png", "gif", "tiff", "svg"];
+const IMAGE_EXTS = ['jpeg', 'jpg', 'png', 'gif', 'tiff', 'svg', 'JPEG', 'JPG', 'PNG', 'GIF', 'TIFF', 'SVG'];
 
 const replaceUnderLine = (str) => capitalizeFirstLetter(str.split("_").join(" "));
 
