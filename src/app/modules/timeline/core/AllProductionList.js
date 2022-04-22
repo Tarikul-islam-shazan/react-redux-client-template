@@ -13,28 +13,28 @@ const AllProductionList = () => {
     const params = useParams();
 
     const renderStepIcon = (sample) => {
-        if (sample.formattedTaskStatus === "EXPIRED") {
-            return "/icons/Due icon.svg";
-        } else if (
+        if (
             sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
             return "/icons/Completed icon.svg";
+        } else if (sample.formattedTaskStatus === "EXPIRED") {
+            return "/icons/Due icon.svg";
         } else {
             return "/icons/Pending icon.svg";
         }
     };
 
     const renderStepClass = (sample) => {
-        if (sample.formattedTaskStatus === "EXPIRED") {
-            return "due";
-        } else if (
+        if (
             sample.formattedTaskStatus === "APPROVED" ||
             sample.formattedTaskStatus === "LATE_APPROVED" ||
             sample.status === "SCOPE_OFF"
         ) {
             return "completed";
+        } else if (sample.formattedTaskStatus === "EXPIRED") {
+            return "due";
         } else {
             return "pending";
         }
@@ -64,7 +64,7 @@ const AllProductionList = () => {
                     onClick={() => handleTaskManager(sample)}
                 >
                     <div className="task-name">
-                        <img src={renderStepIcon(sample)} alt="complete"/>
+                        <img src={renderStepIcon(sample)} alt="complete" />
                         <Tooltip title={sample.stepName} placement={"top"} arrow>
                             <span>{getShortName(sample.stepName, 25)}</span>
                         </Tooltip>
@@ -79,6 +79,9 @@ const AllProductionList = () => {
 
     return (
         <div className="one-third all-production-details">
+            <div className="text-tc">
+                <span className="regular-14 gray_dark_02">T&A</span>
+            </div>
             <div className="production-accordion">
                 <div id="accordion">
                     <div className="card">

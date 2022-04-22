@@ -8,7 +8,7 @@ import LoadingOverlay from "react-loading-overlay";
 import Http from "../../../services/Http";
 import {toastError} from "../../../commonComponents/Toast";
 import {TaskDetailSkeleton, TaskPostSkeleton} from "../../../commonComponents/TaskSkeletons";
-import {_getKey, addImageSuffix, changeDateFormat} from "../../../services/Util";
+import {_getKey, addImageSuffix, changeDateFormat, onErrorImageLoad} from "../../../services/Util";
 
 import {TaskDescriptionComponent} from "./TaskManageComponents/TaskDescriptionComponent";
 import PostWithComments from "./TaskManageComponents/PostWithComments";
@@ -788,19 +788,19 @@ class TaskManage extends Component {
                                 ) : (
                                     <></>
                                 )}
-                                {task.stepType === "TASK" && task.status !== "COMPLETED" && (
+                                {task.stepType === "TASK" && task.status !== "SCOPE_OFF" && task.status !== "COMPLETED" && (
                                     <button className="green-btn" onClick={() => this.setType("COMPLETE")}>
                                         Complete
                                     </button>
                                 )}
                                 {task.stepType === "TASK" &&
-                                    task.actualEndDate &&
-                                    task.status === "COMPLETED" && (
+                                    ((task.actualEndDate &&
+                                    task.status === "COMPLETED") || task.status === "SCOPE_OFF") && (
                                         <button className="completed-btn">
                                             Completed
                                             <span>
                                     {" "}
-                                                {changeDateFormat(task.actualEndDate, "YYYY-MM-DD", "MMM-DD")}
+                                                {task.status !== "SCOPE_OFF" && changeDateFormat(task.actualEndDate, "YYYY-MM-DD", "MMM-DD")}
                                  </span>
                                             <svg
                                                 width="18"
@@ -818,8 +818,8 @@ class TaskManage extends Component {
                                     )}
 
                                 {task.stepType === "REVIEW" &&
-                                    task.actualEndDate &&
-                                    (task.status === "APPROVED" || task.status === "SCOPE_OFF") && (
+                                    ((task.actualEndDate &&
+                                    task.status === "APPROVED") || task.status === "SCOPE_OFF") && (
                                         <button className="completed-btn">
                                             Approved
                                             <span>
@@ -841,7 +841,7 @@ class TaskManage extends Component {
                                         </button>
                                     )}
 
-                                {task.stepType === "REVIEW" && task.status !== "APPROVED" && (
+                                {task.stepType === "REVIEW" && task.status !== "SCOPE_OFF" && task.status !== "APPROVED" && (
                                     <>
                                         <button className="green-btn" onClick={() => this.setType("APPROVE")}>
                                             Approve
@@ -957,7 +957,10 @@ class TaskManage extends Component {
 
                     <div className="user-photo">
                         {userInfo && userInfo.profilePicDocument ? (
-                            <img src={addImageSuffix(userInfo.profilePicDocument.docUrl, "_xicon")}/>
+                            <img
+                                src={addImageSuffix(userInfo.profilePicDocument.docUrl, "_xicon")}
+                                onError={(e) => onErrorImageLoad(e, userInfo.profilePicDocument.docUrl)}
+                            />
                         ) : (
                             <img src={require("../../../assets/images/pro_pic_default.png")}/>
                         )}

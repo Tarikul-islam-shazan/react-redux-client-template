@@ -98,10 +98,9 @@ const getDeviceID = () => {
         }
     }
 
-    const guid = `browser-${browserName.toLowerCase()}-${navigator.mimeTypes.length}_${nAgt.replace(
-        /\D+/g,
-        ""
-    )}_${navigator.plugins.length}_${$(window).height() || ""}_${$(window).width() || ""}`;
+    const guid = `browser-${browserName.toLowerCase()}-${navigator.mimeTypes.length}_${nAgt.replace(/\D+/g, "")}_${
+        navigator.plugins.length
+    }_${$(window).height() || ""}_${$(window).width() || ""}`;
     console.log("Util.getDeviceID(): ", guid);
     localStorage.setItem("device_id", JSON.stringify(guid));
     return guid;
@@ -109,14 +108,7 @@ const getDeviceID = () => {
 
 const getDateFromMillis = (millis) => {
     let date = new Date(millis);
-    return (
-        (date.getDate() < 10 ? "0" : "") +
-        date.getDate() +
-        "-" +
-        months[date.getMonth()] +
-        "-" +
-        date.getFullYear()
-    );
+    return (date.getDate() < 10 ? "0" : "") + date.getDate() + "-" + months[date.getMonth()] + "-" + date.getFullYear();
 };
 
 const getDateWithHourFromMillis = (millis) => {
@@ -370,40 +362,28 @@ const rfqStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Pending
                 </span>
             );
             break;
         case "OFFER_PENDING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Pending
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Running
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Completed
                 </span>
             );
@@ -417,50 +397,35 @@ const rfqProductStatus = (item) => {
     switch (item.status) {
         case "OFFER_PENDING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F0EDF7", color: "#452D8F" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F0EDF7", color: "#452D8F" }}>
                     Offer Pending
                 </span>
             );
 
         case "PRICE_GIVEN":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Quoted
                 </span>
             );
 
         case "APPROVED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Approved
                 </span>
             );
 
         case "PRODUCT_SOLD":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFE6E6", color: "#F22B2B" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFE6E6", color: "#F22B2B" }}>
                     Design Sold
                 </span>
             );
 
         case "ORDER_PLACED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#DBFFE5", color: "#00C334" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#DBFFE5", color: "#00C334" }}>
                     Order Placed
                 </span>
             );
@@ -474,30 +439,21 @@ const projectStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Pending
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Running
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Completed
                 </span>
             );
@@ -511,30 +467,21 @@ const renderPaymentStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Pending
                 </span>
             );
             break;
         case "PARTIALLY_PAID":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Partially Paid
                 </span>
             );
             break;
         case "PAID":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Paid
                 </span>
             );
@@ -548,80 +495,56 @@ const deliverableStatus = (item) => {
     switch (item.status) {
         case "APPROVED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Approved
                 </span>
             );
             break;
         case "REJECTED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Rejected
                 </span>
             );
             break;
         case "SUBMIT":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4EAF5", color: "#719EE6" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4EAF5", color: "#719EE6" }}>
                     Submit
                 </span>
             );
             break;
         case "RE_SUBMIT":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E8E4F5", color: "#7B5CDB" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E8E4F5", color: "#7B5CDB" }}>
                     Re-submit
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Running
                 </span>
             );
             break;
         case "SUBMITTED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Submitted
                 </span>
             );
             break;
         case "INITIALIZED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E7E9EF", color: "#3E4148" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E7E9EF", color: "#3E4148" }}>
                     Initialized
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Completed
                 </span>
             );
@@ -635,70 +558,49 @@ const productAvailabilityStatus = (item) => {
     switch (item.availabilityStatus) {
         case "AVAILABLE":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Available
                 </span>
             );
             break;
         case "CHECKED":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     Checked
                 </span>
             );
             break;
         case "SOLD":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Sold
                 </span>
             );
             break;
         case "AVAILABLE":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
                     Available
                 </span>
             );
             break;
         case "IN_RFQ":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
                     In RFQ
                 </span>
             );
             break;
         case "IN_PROJECT":
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     In Project
                 </span>
             );
             break;
         default:
             return (
-                <span
-                    className="badge table-badge"
-                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
-                >
+                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
                     Private
                 </span>
             );
@@ -718,8 +620,7 @@ const invoiceStatus = (invoice) => {
     return (
         <div className={`task-status ${invoiceStatus}`}>
             <span className="status-btn">
-                {invoice.paymentStatus &&
-                    capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
+                {invoice.paymentStatus && capitalizeFirstLetter(invoice.paymentStatus.replace("_", " "))}
             </span>
         </div>
     );
@@ -787,8 +688,7 @@ const convertTimeToLocal = (date, time = "", outputFormat = "DD.MM.YYYY") => {
 
 const convertDateTimeToLocal = (date, time = "", outputFormat = "DD.MM.YYYY") => {
     let formattedTime = moment(time, "HH:mm:ss").format("hh:mm A");
-    let formatForUtc =
-        moment(date, "YYYY-MM-DD").format("MM/DD/YYYY") + (time ? " " + formattedTime : "");
+    let formatForUtc = moment(date, "YYYY-MM-DD").format("MM/DD/YYYY") + (time ? " " + formattedTime : "");
     let convertedDate = moment.utc(formatForUtc).format();
     var local = moment.utc(convertedDate).local().format(outputFormat);
     return local;
@@ -915,7 +815,7 @@ const getImageExt = (url) => {
     return result;
 };
 
-const IMAGE_EXTS = ["jpeg", "jpg", "png", "gif", "tiff", "svg"];
+const IMAGE_EXTS = ["jpeg", "jpg", "png", "gif", "tiff", "svg", "JPEG", "JPG", "PNG", "GIF", "TIFF", "SVG"];
 
 const replaceUnderLine = (str) => capitalizeFirstLetter(str.split("_").join(" "));
 
@@ -962,17 +862,7 @@ const dateCompare = (orderDate, dueDate) => {
     }
 };
 
-const DATE_TYPES = [
-    "year",
-    "quarter",
-    "month",
-    "week",
-    "day",
-    "hour",
-    "minute",
-    "second",
-    "millisecond",
-];
+const DATE_TYPES = ["year", "quarter", "month", "week", "day", "hour", "minute", "second", "millisecond"];
 
 const addWithCurrentDate = (date, duration, dateType, dateFormat = "Do MMM, YY") => {
     if (DATE_TYPES.includes(dateType)) {
@@ -1077,8 +967,7 @@ const renderMultiColor = (color) => {
 
 const isPageReachBottom = () => {
     let bool = false;
-    const windowHeight =
-        "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
     const html = document.documentElement;
     const windowBottom = windowHeight + window.pageYOffset;
     if (Math.floor(windowBottom) - html.scrollHeight === 0) {
@@ -1159,24 +1048,38 @@ const getMentionedUserIds = (post, orderMemberList) => {
     return ids;
 };
 
-const mentionModule = (memberList) => {
-    return {
-        allowedChars: /^[A-Za-z\s]*$/,
-        mentionDenotationChars: ["@"],
-        source: async (searchTerm, renderList) => {
-            if (searchTerm.length === 0) {
-                renderList(memberList, searchTerm);
-            } else {
-                let matches = [];
-                for (let i = 0; i < memberList.length; i++) {
-                    if (memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())) {
-                        matches.push(memberList[i]);
+const mentionModule = (memberList, bool) => {
+    if (!bool) {
+        return {
+            allowedChars: /^[A-Za-z\s]*$/,
+            mentionDenotationChars: ["@"],
+            source: async (searchTerm, renderList) => {
+                if (searchTerm.length === 0) {
+                    renderList(memberList, searchTerm);
+                } else {
+                    let matches = [];
+                    for (let i = 0; i < memberList.length; i++) {
+                        if (memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+                            matches.push(memberList[i]);
+                        }
                     }
+                    renderList(matches, searchTerm);
                 }
-                renderList(matches, searchTerm);
-            }
-        },
-    };
+            },
+        };
+    }
+};
+
+const onErrorImageLoad = (e, url, type = "user") => {
+    let image = "/images/default_product.svg";
+    if (type === "user") {
+        image = "/images/pro_pic_default.svg";
+    }
+    fetch(addImageSuffix(url, "")).then(() => {
+        image = addImageSuffix(url, "");
+    });
+    e.target.src = image;
+    e.target.onerror = null;
 };
 
 export {
@@ -1238,4 +1141,5 @@ export {
     getIconByFileType,
     getMentionedUserIds,
     mentionModule,
+    onErrorImageLoad,
 };

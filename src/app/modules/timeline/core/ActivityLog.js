@@ -7,11 +7,12 @@ import {
     getIconByFileType,
     getMentionedUserIds,
     mentionModule,
+    onErrorImageLoad,
     parseHtml
 } from "../../../services/Util";
 import Modal from "react-bootstrap/Modal";
 import TaskManage from "../../../pages/task/components/TaskManage";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
 import {toastError, toastSuccess} from "../../../commonComponents/Toast";
@@ -20,7 +21,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addCommentIndexWise, downloadInvoice} from "../../store/action/Timeline";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {Tooltip} from "@material-ui/core";
 
 const ActivityLog = ({activity, setLoader, index}) => {
     const timelineStore = useSelector((store) => store.timelineStore);
@@ -268,7 +268,8 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     const handleReply = async () => {
-        if (postInputRef.current === null || postInputRef.current.toString().match("<p><br></p>")) {
+        let newComment = postInputRef.current === null ? "" : postInputRef?.current.toString().replace(/(<([^>]+)>)/ig, '');
+        if (!newComment) {
             setCommentError("Comment required");
             return;
         }
@@ -277,7 +278,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
         let message = postInputRef.current
         let body = {
             documentDTOList: selectedFiles,
-            postId: activity?.body?.entityIdTypeMapList[0]?.id,
+            postId: activity?.parentPostId,
             postType: "COMMENT",
             text: message.replace(/"/g, "'"),
             taggedUserIdList: timelineStore?.orderInfo?.orderMemberList ? getMentionedUserIds(message, timelineStore?.orderInfo?.orderMemberList) : [],
@@ -306,6 +307,7 @@ const ActivityLog = ({activity, setLoader, index}) => {
                                     authUserInfo().profilePicDocument.docUrl,
                                     "_xicon"
                                 )}
+                                onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
                                 alt=""
                                 className="profile-image"
                             />
@@ -394,25 +396,12 @@ const ActivityLog = ({activity, setLoader, index}) => {
                     {renderDescription()}
                     {renderTimeLineImages()}
                     <div className="reply-btn ">
-                        <button className="button text" onClick={() => setIsReplying(true)}>
+                        <button className="button text __reply-button__" onClick={() => setIsReplying(true)}>
                             Reply
                         </button>
                     </div>
                     <div className="reply-container">
                         {renderReplySection()}
-                        <div className="details-btn">
-                            <button
-                                className="button text"
-                                onClick={() => setShowTaskDetailsModal(true)}
-                            >
-                                All Comments
-                                <img
-                                    src="/icons/comments-btn-arrow.svg"
-                                    alt="arrow"
-                                    className="ml-1"
-                                />
-                            </button>
-                        </div>
                     </div>
                 </div>
             );
@@ -433,8 +422,11 @@ const ActivityLog = ({activity, setLoader, index}) => {
         }
     };
 
-    const handePageRoute = () => {
-        if (activity.activityModule === "COMMENT") {
+    const handePageRoute = (e) => {
+        let element = e.target.className;
+        if (isReplying === true || activity.actionType === "COMPLETED_ORDER" || activity.actionType === "STARTED_ORDER" || showTaskDetailsModal === true || element === "button text __reply-button__") {
+            return false
+        } else if (activity.activityModule === "COMMENT") {
             setShowTaskDetailsModal(true);
         } else if (activity.activityModule === "PROFORMA_INVOICE") {
             setLoader(true);
@@ -451,28 +443,13 @@ const ActivityLog = ({activity, setLoader, index}) => {
     };
 
     return (
-        <div className="single-activity activity-with-header added-comment">
+        <div className="single-activity activity-with-header added-comment" onClick={handePageRoute}>
             <div
                 className="activity-common-header justify-content-between"
-                onClick={handePageRoute}
             >
                 <div className="activity-content d-flex">
                     {renderIconOrImage()}
                     <div className="activity-text">{renderActivityText()}</div>
-                </div>
-                <div className="design-image">
-                    {activity?.secondaryActedUpon?.docUrlList[0] && (
-                        <Tooltip
-                            title={activity?.secondaryActedUpon?.text + " " + activity?.secondaryActedUpon?.referenceNumber}
-                            arrow placement={"top"}>
-                            <Link to={`/designs/view/${activity?.secondaryActedUpon?.id}`}>
-                                <img
-                                    src={activity?.secondaryActedUpon?.docUrlList[0]}
-                                    alt="design image"
-                                />
-                            </Link>
-                        </Tooltip>
-                    )}
                 </div>
             </div>
             {renderActivityBody()}

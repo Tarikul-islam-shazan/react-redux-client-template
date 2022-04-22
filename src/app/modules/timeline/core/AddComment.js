@@ -5,6 +5,7 @@ import {
     authUserInfo,
     getMentionedUserIds,
     mentionModule,
+    onErrorImageLoad,
 } from "../../../services/Util";
 import { SelectedFileViewComponent } from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from "../../../services/Http";
@@ -15,27 +16,25 @@ import LoaderComponent from "../../../commonComponents/Loader";
 import { addNewCommentOnTimeline } from "../../store/action/Timeline";
 import ReactQuill from "react-quill";
 
-const AddComment = ({ toggleAddComment, openModal, activity }) => {
+const AddComment = ({ toggleAddComment, openModal }) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [loader, setLoader] = useState(false);
-    const [selectedDesign, setSelectedDesign] = useState(null);
     const [error, setError] = useState({});
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [memberList, setMemberList] = useState([]);
     const params = useParams();
     const timelineStore = useSelector((store) => store.timelineStore);
-    const [designList, setDesignList] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [taskListHistory, setTaskListHistory] = useState([]);
-    const [taggedUser, setTaggedUer] = useState([]);
     const [taskSearch, setTaskSearch] = useState("");
     const dispatch = useDispatch();
     const postInputRef = useRef(null);
+    const [quillDisable, setQuillDisable] = useState(false);
 
     useEffect(() => {
-        if (selectedDesign !== null) {
+        if (timelineStore?.selectedDesignList) {
             setLoader(true);
-            Http.GET("getDesignWiseTaskList", `${params.orderId}/${selectedDesign.id}`)
+            Http.GET("getDesignWiseTaskList", `${params.orderId}/${timelineStore?.selectedDesignList[0]}`)
                 .then((response) => {
                     setTaskList(response.data);
                     setTaskListHistory(response.data);
@@ -45,7 +44,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                     setLoader(false);
                 });
         }
-    }, [params.orderId, selectedDesign]);
+    }, [params.orderId, timelineStore]);
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
@@ -54,14 +53,6 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
             tmpList.map((member) => members.push({ id: member.email, value: member.memberName }));
             setMemberList(members);
         }
-        if (timelineStore?.orderInfo?.orderProductList) {
-            let productList = timelineStore?.orderInfo?.orderProductList;
-            let tmpDesignList = [];
-            productList.map((design) => {
-                tmpDesignList.push(design);
-            });
-            setDesignList(tmpDesignList);
-        }
     }, [timelineStore]);
 
     const handleTask = (task) => {
@@ -69,34 +60,28 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
         errorObj["taskError"] = undefined;
         setError(errorObj);
         setSelectedTask(task);
+        setTaskList(taskListHistory);
     };
 
     const renderTaskList = () => {
-        return taskList?.map((task, index) => {
-            return (
-                <li key={`task_${index}`} onClick={() => handleTask(task)}>
-                    <span>{task.stepName}</span>
-                </li>
-            );
-        });
-    };
-
-    const handleDesign = (design) => {
-        let errorObj = { ...error };
-        errorObj["designError"] = undefined;
-        setError(errorObj);
-        setSelectedDesign(design);
-    };
-
-    const renderDesignList = () => {
-        return designList?.map((design, index) => {
-            return (
-                <li key={`add_comment_design_${index}`} onClick={() => handleDesign(design)}>
-                    <img src={design.image} alt="img" />
-                    <span>{design.referenceNumber}</span>
-                </li>
-            );
-        });
+        return (
+            <>
+                <div className="task-search">
+                    <input type="text" onChange={handleTaskSearch} value={taskSearch} placeholder="Search task" />
+                </div>
+                {taskList?.map((task, index) => {
+                    return (
+                        <li
+                            key={`task_${index}`}
+                            className={selectedTask?.stepName === task.stepName ? "selected" : ""}
+                            onClick={() => handleTask(task)}
+                        >
+                            <span>{task.stepName}</span>
+                        </li>
+                    );
+                })}
+            </>
+        );
     };
 
     const checkValidation = () => {
@@ -104,13 +89,9 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
         if (!selectedTask) {
             errors["taskError"] = "Required!";
         }
-        if (!selectedDesign) {
-            errors["designError"] = "Required!";
-        }
-        if (
-            postInputRef.current === null ||
-            postInputRef?.current.toString().match("<p><br></p>")
-        ) {
+        let newComment =
+            postInputRef.current === null ? "" : postInputRef?.current.toString().replace(/(<([^>]+)>)/gi, "");
+        if (!newComment) {
             errors["commentError"] = "Comment required";
         }
         setError(errors);
@@ -195,18 +176,10 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
     const handleTaskSearch = (e) => {
         let tmpArray = taskListHistory;
         if (tmpArray?.length > 0) {
-            tmpArray = tmpArray.filter(
-                (task) => task.stepName.toLowerCase().indexOf(e.target.value) > -1
-            );
+            tmpArray = tmpArray.filter((task) => task.stepName.toLowerCase().indexOf(e.target.value) > -1);
         }
         setTaskSearch(e.target.value);
         setTaskList(tmpArray);
-    };
-
-    const handleUserTag = (id, display) => {
-        if (!taggedUser.includes(id)) {
-            setTaggedUer([...taggedUser, id]);
-        }
     };
 
     return (
@@ -231,45 +204,16 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                                         authUserInfo().profilePicDocument.docUrl,
                                                         "_xicon"
                                                     )}
+                                                    onError={(e) =>
+                                                        onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)
+                                                    }
                                                     alt="profile"
                                                 />
                                             </div>
                                             <div className="design-select">
-                                                <p className="comments-hint gray_dark_02 mr-2">
-                                                    Comments on:
-                                                </p>
-                                                <div className="dropdown">
-                                                    <button
-                                                        className="btn dropdown-toggle"
-                                                        type="button"
-                                                        id="dropdownMenuButton"
-                                                        data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                    >
-                                                        {selectedDesign?.referenceNumber ||
-                                                            "Select Design"}
-                                                    </button>
-                                                    <div
-                                                        className="dropdown-menu shadow-2dp"
-                                                        aria-labelledby="dropdownMenuButton"
-                                                    >
-                                                        <ul className="select-design-list">
-                                                            {renderDesignList()}
-                                                        </ul>
-                                                    </div>
-                                                    {error.designError && (
-                                                        <p className="error">{error.designError}</p>
-                                                    )}
-                                                </div>
+                                                <p className="comments-hint gray_dark_02 mr-2">Comments on:</p>
                                             </div>
-                                            <div
-                                                className="tast-select"
-                                                onBlur={() => {
-                                                    setTaskSearch("");
-                                                    setTaskList(taskListHistory);
-                                                }}
-                                            >
+                                            <div className="tast-select" onClick={() => setQuillDisable(true)}>
                                                 <div className="dropdown">
                                                     <button
                                                         className="btn dropdown-toggle"
@@ -282,25 +226,21 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                                         {selectedTask?.stepName || "Select Task"}
                                                     </button>
                                                     <div
+                                                        onBlur={() =>
+                                                            setTimeout(() => {
+                                                                setTaskList(taskListHistory);
+                                                                setTaskSearch("");
+                                                            }, 500)
+                                                        }
                                                         className="dropdown-menu shadow-2dp"
                                                         aria-labelledby="dropdownMenuButton"
                                                     >
-                                                        <div className="task-search">
-                                                            <input
-                                                                type="text"
-                                                                onChange={handleTaskSearch}
-                                                                value={taskSearch}
-                                                                placeholder="Search task"
-                                                            />
-                                                        </div>
                                                         <ul className="select-task-list scroll-y-label">
                                                             {renderTaskList()}
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                {error.taskError && (
-                                                    <p className="error">{error.taskError}</p>
-                                                )}
+                                                {error.taskError && <p className="error">{error.taskError}</p>}
                                             </div>
                                         </div>
                                         <div className="close-icon" onClick={toggleAddComment}>
@@ -308,19 +248,18 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                         </div>
                                     </div>
                                     <div className="comments-body">
-                                        <div className="comment-text clicked">
+                                        <div className="comment-text clicked" onClick={() => setQuillDisable(false)}>
                                             <ReactQuill
+                                                readOnly={quillDisable}
                                                 name="post"
                                                 debug="info"
                                                 theme="bubble"
                                                 onChange={(value) => (postInputRef.current = value)}
                                                 className="custom-scrollbar"
                                                 placeholder="Write comment…"
-                                                modules={{ mention: mentionModule(memberList) }}
+                                                modules={{ mention: mentionModule(memberList, quillDisable) }}
                                             />
-                                            {error.commentError && (
-                                                <p className="error">{error.commentError}</p>
-                                            )}
+                                            {error.commentError && <p className="error">{error.commentError}</p>}
                                             {renderFilePreview()}
                                         </div>
                                         <div className="post-actions d-flex justify-content-end">
@@ -332,12 +271,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                                                     id="upload-input-file"
                                                     type="file"
                                                     name="selectedFiles"
-                                                    onChange={(e) =>
-                                                        onMultipleFileSelect(
-                                                            e,
-                                                            "ACCESSORIES_DESIGN"
-                                                        )
-                                                    }
+                                                    onChange={(e) => onMultipleFileSelect(e, "ACCESSORIES_DESIGN")}
                                                     multiple
                                                 />
                                             </div>

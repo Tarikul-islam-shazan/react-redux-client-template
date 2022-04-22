@@ -1,17 +1,26 @@
 import React from "react";
-import {changeDateFormat, getShortName, toOrdinalSuffix} from "../../services/Util";
-import {useHistory} from "react-router-dom";
-import {toastWarning} from "../../commonComponents/Toast";
-import {Tooltip} from "@material-ui/core";
+import {
+    changeDateFormat,
+    getShortName,
+    onErrorImageLoad,
+    toOrdinalSuffix,
+} from "../../services/Util";
+import { useHistory } from "react-router-dom";
+import { toastWarning } from "../../commonComponents/Toast";
+import { Tooltip } from "@material-ui/core";
 
-const ListOfOrder = ({orderStore, activeTab}) => {
+const ListOfOrder = ({ orderStore, activeTab }) => {
     const history = useHistory();
 
     const renderOrderImage = (imageSrc) => {
         if (imageSrc) {
-            return <img src={imageSrc} alt="design"/>;
+            return <img
+                src={imageSrc}
+                alt="design"
+                onError={(e) => onErrorImageLoad(e, imageSrc,"product")}
+            />;
         } else {
-            return <img src="/images/default_product.svg" alt="design"/>;
+            return <img src="/images/default_product.svg" alt="design" />;
         }
     };
 
@@ -40,7 +49,7 @@ const ListOfOrder = ({orderStore, activeTab}) => {
         } else if (Math.sign(item.timeLeft) === -1) {
             return <span className="overdue-time">Overdue&nbsp;</span>;
         } else {
-            return <span>DELIVERY IN </span>;
+            return <span>ETD </span>;
         }
     };
 
@@ -96,62 +105,115 @@ const ListOfOrder = ({orderStore, activeTab}) => {
     };
 
     const renderOrderList = () => {
-        return orderStore?.orderResponse?.data?.map((item, index) => {
-            return (
-                <div
-                    className="single-order-card"
-                    key={`order_response_${index}`}
-                    onClick={() => handleRoute(item.orderId)}
-                >
-                    <div className="design-images">
-                        {renderOrderImage(item.orderProductList[0]?.image)}
-                        {renderOrderImage(item.orderProductList[1]?.image)}
-                        {renderOrderImage(item.orderProductList[2]?.image)}
-                        {renderOrderImage(item.orderProductList[3]?.image)}
-                    </div>
-                    <div className="order-details">
-                        <div className="po-numbers">
-                            <div className="pos">
-                                <Tooltip title={item?.poNumberList?.join(",")} placement={"top"} arrow>
-                                    <span className="regular-14">
-                                        {getShortName(item?.poNumberList?.join(","), 32)}
+        if (orderStore?.orderResponse?.data?.length > 0) {
+            return orderStore?.orderResponse?.data?.map((item, index) => {
+                return (
+                    <div
+                        className="single-order-card"
+                        key={`order_response_${index}`}
+                        onClick={() => handleRoute(item.orderId)}
+                    >
+                        <div className="design-images">
+                            {renderOrderImage(item.orderProductList[0]?.image)}
+                            {renderOrderImage(item.orderProductList[1]?.image)}
+                            {renderOrderImage(item.orderProductList[2]?.image)}
+                            {renderOrderImage(item.orderProductList[3]?.image)}
+                        </div>
+                        <div className="order-details">
+                            <Tooltip title={item?.name} placement={"top"} arrow>
+                                <span className="order-title">{getShortName(item?.name, 20)}</span>
+                            </Tooltip>
+
+                            <div className="po-numbers">
+                                <div className="pos">
+                                    <Tooltip
+                                        title={item?.poNumberList?.join(",")}
+                                        placement={"top"}
+                                        arrow
+                                    >
+                                        <span className="regular-14">
+                                            {getShortName(item?.poNumberList?.join(","), 20)}
+                                        </span>
+                                    </Tooltip>
+                                    <span className="regular-14 gray_dark_02">
+                                        &nbsp;({item.orderRefNumber})
                                     </span>
-                                </Tooltip>
-                                <span className="regular-14 gray_dark_02">
-                                    &nbsp;({item.orderRefNumber})
-                                </span>
+                                </div>
                             </div>
-                        </div>
-                        <ul className="order-quantity-details d-flex">
-                            <li>
-                                {item.totalStyles}&nbsp;
-                                {item.totalStyles > 1 ? "Styles" : "Style"}
-                            </li>
-                            <li>{item.orderQuantity} units</li>
-                            <li>${item.orderValue}</li>
-                        </ul>
-                        {renderDeliveryStatus(item)}
-                        <div className="progress-with-count d-flex align-items-center">
-                            <div className="progress">
-                                <div
-                                    className="progress-bar bg-success"
-                                    role="progressbar"
-                                    style={{width: item?.percentageOfCompleteness ? item?.percentageOfCompleteness + "%" : 0 + "%"}}
-                                    aria-valuenow={item?.percentageOfCompleteness}
-                                    aria-valuemin={0}
-                                    aria-valuemax={100}
-                                />
-                            </div>
-                            <div>
-                                <span className="count regular-14">
-                                    {item?.percentageOfCompleteness}%
-                                </span>
-                            </div>
+                            <ul className="order-quantity-details d-flex">
+                                <li>
+                                    {item.totalStyles}&nbsp;
+                                    {item.totalStyles > 1 ? "Styles" : "Style"}
+                                </li>
+                                <li>{item.orderQuantity} units</li>
+                                <li>${item.orderValue}</li>
+                            </ul>
+                            {renderDeliveryStatus(item)}
+                            {orderStore.activeTab !== "PENDING" && (
+                                <div className="round-progress-68">
+                                    <div
+                                        className="status pending progress"
+                                        data-percentage={item?.percentageOfCompleteness}
+                                    >
+                                        <span className="progress-left">
+                                            <span className="progress-bar" />
+                                        </span>
+                                        <span className="progress-right">
+                                            <span className="progress-bar" />
+                                        </span>
+                                        <div className="progress-value">
+                                            <div className="task-value">
+                                                {item?.percentageOfCompleteness}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {orderStore.activeTab === "PENDING" && (
+                                <div className="order-pending-state">
+                                    <div className="state-details d-flex align-items-center">
+                                        <div className="state-content ml-1">
+                                            {item.workflowResponseList.map(
+                                                (item) =>
+                                                    item?.memberResponseList && (
+                                                        <>
+                                                            <img
+                                                                src={
+                                                                    item?.memberResponseList[0]
+                                                                        ?.profilePicDocument?.docUrl
+                                                                }
+                                                                alt="profile"
+                                                            />
+                                                            <span className="state-title regular-14 gray_dark_02 mb--1">
+                                                                {item.stepName}
+                                                            </span>
+                                                        </>
+                                                    )
+                                            )}
+                                            <div className="four-states">
+                                                {item.workflowResponseList.map((step) => (
+                                                    <span
+                                                        key={step.workflowStep}
+                                                        className={`${
+                                                            step.status === "COMPLETED"
+                                                                ? "complete-state"
+                                                                : step.status === "PENDING" &&
+                                                                  step?.memberResponseList
+                                                                ? "pending-state"
+                                                                : ""
+                                                        }`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
-            );
-        });
+                );
+            });
+        }
     };
 
     return <div className="order-card-items">{renderOrderList()}</div>;

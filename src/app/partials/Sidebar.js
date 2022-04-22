@@ -12,7 +12,7 @@ import { _storeData } from "./actions";
 import { toggle, setActiveTab } from "../redux/actions/sidebar";
 import { NavLink } from "./NavLink";
 
-import { BASE_URL, GA_ID, hjid, hjsv } from "../constant";
+import {BASE_URL, GA_ID, hjid, hjsv, isItProductionServer} from "../constant";
 import { toastSuccess, toastError, toastWarning } from "../commonComponents/Toast";
 import { _storeData as _storeDesignData } from "../pages/design/actions";
 import {clearTimelineData} from "../modules/store/action/Timeline";
@@ -118,9 +118,11 @@ class Sidebar extends Component {
     };
 
     initiateHotjarGA = () => {
-        ReactGA.initialize(GA_ID);
-        ReactGA.pageview(window.location.pathname + window.location.search);
-        hotjar.initialize(hjid, hjsv);
+        if(isItProductionServer()){
+            ReactGA.initialize(GA_ID);
+            ReactGA.pageview(window.location.pathname + window.location.search);
+            hotjar.initialize(hjid, hjsv);
+        }
     };
 
     handleClickNav = () => {

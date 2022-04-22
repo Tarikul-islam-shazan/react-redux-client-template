@@ -31,20 +31,13 @@ const Timeline = () => {
     return (
         <>
             {addComment && (
-                <AddComment
-                    toggleAddComment={toggleAddComment}
-                    openModal={addComment}
-                    setLoader={setLoader}
-                />
+                <AddComment toggleAddComment={toggleAddComment} openModal={addComment} setLoader={setLoader} />
             )}
             <LoaderComponent loading={loader}>
                 <div className="buyer-timeline-container">
                     <div className="timeline-row">
                         <TimelinePoDetails setLoader={setLoader} />
-                        <TimelineActivityLog
-                            toggleAddComment={toggleAddComment}
-                            setLoader={setLoader}
-                        />
+                        <TimelineActivityLog toggleAddComment={toggleAddComment} setLoader={setLoader} />
                         <TimelineProductionDetails setLoader={setLoader} />
                     </div>
                     <div
@@ -58,17 +51,12 @@ const Timeline = () => {
                             <div className="modal-content">
                                 <div className="modal-header">
                                     {/* Modal CLose button*/}
-                                    <button
-                                        type="button"
-                                        className="close"
-                                        data-dismiss="modal"
-                                        aria-label="Close"
-                                    >
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <img src="/icons/close.svg" />
                                     </button>
                                 </div>
                                 <div className="modal-body custom-scrollbar">
-                                    <AllDesignList />
+                                    <AllDesignList setLoader={setLoader} />
                                 </div>
                             </div>
                         </div>
@@ -83,12 +71,7 @@ const Timeline = () => {
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <button
-                                        type="button"
-                                        className="close"
-                                        data-dismiss="modal"
-                                        aria-label="Close"
-                                    >
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <img src="/icons/close.svg" />
                                     </button>
                                 </div>

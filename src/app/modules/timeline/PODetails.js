@@ -125,6 +125,10 @@ const PODetails = () => {
         }
     };
 
+    const redirectToDesignView = (productId) => {
+        history.push(`/designs/view/${productId}`)
+    }
+
     const renderOrderList = () => {
         return orderList?.map((order, index) => {
             return (
@@ -132,12 +136,12 @@ const PODetails = () => {
                     className={`single-design d-flex bg-white ${uniqueStyleName(order)}`}
                     key={`po_order_${index}`}
                 >
-                    <div className="design-image">
+                    <div className="design-image" onClick={() => redirectToDesignView(order.productId)}>
                         <img src={order?.documentResponseList[0]?.docUrl} alt=""/>
                     </div>
                     <div className="design-details-info">
                         <div className="design-title mt-3 d-flex justify-content-between">
-                            <h3 className="semibold-16 mb-0">
+                            <h3 className="semibold-16 mb-0" onClick={() => redirectToDesignView(order.productId)}>
                                 <Tooltip title={order.name} placement="top" arrow>
                                     <span>{getShortName(order.name, 18)}</span>
                                 </Tooltip>

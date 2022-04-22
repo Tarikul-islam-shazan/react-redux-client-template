@@ -3,7 +3,7 @@ import DEFAULT_USER_PIC from "../assets/images/pro_pic_default.svg";
 
 const AddTeamMember = ({ memberData, showViewType, onAddMember, onRemoveMember, onChange }) => {
    let fashionDesigner = memberData.usersByTypeList?.FASHION_DESIGNER;
-   let projectManager = memberData.usersByTypeList?.MANAGER;
+   let projectManager = memberData.usersByTypeList?.PROJECT_MANAGER;
    let merchandiser = memberData.usersByTypeList?.MERCHANDISER;
    let qa = memberData.usersByTypeList?.QA;
    let searchUserText = memberData.searchUserText;

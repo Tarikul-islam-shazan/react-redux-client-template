@@ -10,7 +10,7 @@ const AddCollectionTeamMember = ({
     onChange,
 }) => {
     let fashionDesigner = memberData.usersByTypeList?.FASHION_DESIGNER;
-    let accountManager = memberData.usersByTypeList?.EXECUTIVE;
+    let accountManager = memberData.usersByTypeList?.ACCOUNT_MANAGER;
     let merchandiser = memberData.usersByTypeList?.MERCHANDISER;
     let qa = memberData.usersByTypeList?.QA;
     let searchUserText = memberData.searchUserText;

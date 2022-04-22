@@ -215,7 +215,7 @@ button {
                     color: $gray_dark_01;
                     position: absolute;
                     top: 20px;
-                    overflow-y: auto;
+                    overflow-y: visible;
                     padding-top: 8px;
                 }
             }
@@ -779,6 +779,9 @@ input.date-range-picker,
         }
     }
 }
+.ql-mention-list-container {
+    background: $primary_light_04;
+}
 .modal.add-new-task-popup {
     .modal-content {
         border-radius: 0;
@@ -844,6 +847,11 @@ input.date-range-picker,
 }
 .ql-mention-list-container {
     width: auto !important;
+    ul {
+        li {
+            cursor: pointer;
+        }
+    }
 }
 .ql-editor {
     overflow-y: inherit;
@@ -865,7 +873,7 @@ input.date-range-picker,
 span.mention {
     font-size: 12px;
     padding: 2px 3px !important;
-    color: #444;
+    color: $gray_dark_01;
 }
 .CalendarMonth_table {
     margin-top: 12px;
