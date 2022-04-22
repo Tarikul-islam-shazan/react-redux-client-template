@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API, HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL} from "../constant";
+import { API, HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL } from "../constant";
 import store from "../redux/store";
 import { REDIRECT_TO } from "../redux/actions/types";
 import { getToken } from "./Util";
@@ -180,9 +180,10 @@ const routes = {
 // Axios request interceptor
 axios.interceptors.request.use((config) => {
     const token = getToken();
-    // console.log("token",token)
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     config.headers.Authorization = token ? token : "";
-    // console.log("config from request",config)
+    config.headers.unameid = userInfo?.id || "";
+    config.headers.unamefull = userInfo?.name || "";
     return config;
 });
 
@@ -195,10 +196,10 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        if (error.response.data.status === HTTP_STATUS['Unauthorized'] && localStorage.getItem('token')) {
-            localStorage.removeItem('token');
-            delete axios.defaults.headers.common['Authorization'];
-            window.location.replace(BASE_FRONT_END_URL)
+        if (error.response.data.status === HTTP_STATUS["Unauthorized"] && localStorage.getItem("token")) {
+            localStorage.removeItem("token");
+            delete axios.defaults.headers.common["Authorization"];
+            window.location.replace(BASE_FRONT_END_URL);
         }
         return Promise.reject(error);
     }

@@ -1,7 +1,7 @@
 import $ from "jquery";
 import moment from "moment";
 import React from "react";
-import {Tooltip} from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 
 const capitalizeFirstLetter = (str) =>
     str?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -151,13 +151,13 @@ const doCommaSeparationWithIntegers = (amount) => {
 const convertToISODate = (dateObj) => {
     console.log(
         "convert function, dateObj: " +
-        dateObj +
-        "full year: " +
-        dateObj.getFullYear() +
-        " month: " +
-        dateObj.getMonth() +
-        " day: " +
-        dateObj.getDate()
+            dateObj +
+            "full year: " +
+            dateObj.getFullYear() +
+            " month: " +
+            dateObj.getMonth() +
+            " day: " +
+            dateObj.getDate()
     );
     let date = dateObj.getFullYear();
     date += "-";
@@ -189,7 +189,7 @@ const shuffle = (a) => {
 const convertToSelectOptions = (obj) => {
     let array = [];
     for (let i in obj) {
-        array.push({value: parseInt(i, 10), label: obj[i]});
+        array.push({ value: parseInt(i, 10), label: obj[i] });
     }
     return array;
 };
@@ -372,7 +372,7 @@ const rfqStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Pending
                 </span>
@@ -382,7 +382,7 @@ const rfqStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Pending
                 </span>
@@ -392,7 +392,7 @@ const rfqStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Running
                 </span>
@@ -402,7 +402,7 @@ const rfqStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Completed
                 </span>
@@ -419,7 +419,7 @@ const rfqProductStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F0EDF7", color: "#452D8F"}}
+                    style={{ backgroundColor: "#F0EDF7", color: "#452D8F" }}
                 >
                     Offer Pending
                 </span>
@@ -429,7 +429,7 @@ const rfqProductStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Quoted
                 </span>
@@ -439,7 +439,7 @@ const rfqProductStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Approved
                 </span>
@@ -449,7 +449,7 @@ const rfqProductStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFE6E6", color: "#F22B2B"}}
+                    style={{ backgroundColor: "#FFE6E6", color: "#F22B2B" }}
                 >
                     Design Sold
                 </span>
@@ -459,7 +459,7 @@ const rfqProductStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#DBFFE5", color: "#00C334"}}
+                    style={{ backgroundColor: "#DBFFE5", color: "#00C334" }}
                 >
                     Order Placed
                 </span>
@@ -476,7 +476,7 @@ const projectStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Pending
                 </span>
@@ -486,7 +486,7 @@ const projectStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Running
                 </span>
@@ -496,7 +496,7 @@ const projectStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Completed
                 </span>
@@ -513,7 +513,7 @@ const renderPaymentStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Pending
                 </span>
@@ -523,7 +523,7 @@ const renderPaymentStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Partially Paid
                 </span>
@@ -533,7 +533,7 @@ const renderPaymentStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Paid
                 </span>
@@ -550,7 +550,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Approved
                 </span>
@@ -560,7 +560,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Rejected
                 </span>
@@ -570,7 +570,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4EAF5", color: "#719EE6"}}
+                    style={{ backgroundColor: "#E4EAF5", color: "#719EE6" }}
                 >
                     Submit
                 </span>
@@ -580,7 +580,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E8E4F5", color: "#7B5CDB"}}
+                    style={{ backgroundColor: "#E8E4F5", color: "#7B5CDB" }}
                 >
                     Re-submit
                 </span>
@@ -590,7 +590,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Running
                 </span>
@@ -600,7 +600,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Submitted
                 </span>
@@ -610,7 +610,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E7E9EF", color: "#3E4148"}}
+                    style={{ backgroundColor: "#E7E9EF", color: "#3E4148" }}
                 >
                     Initialized
                 </span>
@@ -620,7 +620,7 @@ const deliverableStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Completed
                 </span>
@@ -637,7 +637,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Available
                 </span>
@@ -647,7 +647,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     Checked
                 </span>
@@ -657,7 +657,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Sold
                 </span>
@@ -667,7 +667,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#E4F6EA", color: "#35D575"}}
+                    style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}
                 >
                     Available
                 </span>
@@ -677,7 +677,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}
+                    style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}
                 >
                     In RFQ
                 </span>
@@ -687,7 +687,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     In Project
                 </span>
@@ -697,7 +697,7 @@ const productAvailabilityStatus = (item) => {
             return (
                 <span
                     className="badge table-badge"
-                    style={{backgroundColor: "#FFF1F1", color: "#D53939"}}
+                    style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}
                 >
                     Private
                 </span>
@@ -1002,21 +1002,18 @@ const getShortName = (source, size = 35) => {
 };
 
 const generateRedirectRoute = (data, props) => {
-    let redirection = getUrlParameter(
-        "redirect",
-        props.location.search
-    );
+    let redirection = getUrlParameter("redirect", props.location.search);
     if (data.status === "DISABLED") {
         localStorage.clear();
-        sessionStorage.clear()
+        sessionStorage.clear();
         props.history.push({
             pathname: redirection ? redirection : "/login",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     } else if (data.status === "ACTIVE") {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     } else if (data.emailVerified === false) {
         props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
@@ -1025,61 +1022,52 @@ const generateRedirectRoute = (data, props) => {
     } else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     } else {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: {from: "login"},
+            state: { from: "login" },
         });
     }
 };
 
 const renderMultiColor = (color) => {
-    if (color.representedBy === 'SWATCH') {
+    if (color.representedBy === "SWATCH") {
         return (
-            <div className='colors-row'>
-                <div className='multicolors'>
-					<span
-                        className='color-icon'
-                    >
-						<img src={color?.swatchDocResponse?.docUrl} alt={`swatch color`}/>
-					</span>
+            <div className="colors-row">
+                <div className="multicolors">
+                    <span className="color-icon">
+                        <img src={color?.swatchDocResponse?.docUrl} alt={`swatch color`} />
+                    </span>
                 </div>
             </div>
         );
-    } else if (color.colorType !== 'SOLID') {
+    } else if (color.colorType !== "SOLID") {
         return (
-            <div className='colors-row'>
-                <div className='multicolors'>
-
+            <div className="colors-row">
+                <div className="multicolors">
                     {color?.compositeColorList?.length > 0 &&
                         color.compositeColorList.map((item, index) => {
                             return (
                                 <Tooltip title={color.name} arrow placement={"top"}>
                                     <span
                                         key={`multi_color_${index}`}
-                                        className='color-icon'
-                                        style={{background: item.hexCode}}
-                                    >
-                                    </span>
+                                        className="color-icon"
+                                        style={{ background: item.hexCode }}
+                                    ></span>
                                 </Tooltip>
                             );
-                        })
-                    }
+                        })}
                 </div>
             </div>
         );
     } else {
         return (
-            <div className='colors-row'>
-                <div className='multicolors'>
+            <div className="colors-row">
+                <div className="multicolors">
                     <Tooltip title={color.name} arrow placement={"top"}>
-                        <span
-                            className='color-icon'
-                            style={{background: color.hexCode}}
-                        >
-                        </span>
+                        <span className="color-icon" style={{ background: color.hexCode }}></span>
                     </Tooltip>
                 </div>
             </div>
@@ -1089,7 +1077,8 @@ const renderMultiColor = (color) => {
 
 const isPageReachBottom = () => {
     let bool = false;
-    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const windowHeight =
+        "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
     const html = document.documentElement;
     const windowBottom = windowHeight + window.pageYOffset;
     if (Math.floor(windowBottom) - html.scrollHeight === 0) {
@@ -1098,10 +1087,10 @@ const isPageReachBottom = () => {
     return bool;
 };
 
-const toOrdinalSuffix = num => {
+const toOrdinalSuffix = (num) => {
     const int = parseInt(num),
         digits = [int % 10, int % 100],
-        ordinals = ['st', 'nd', 'rd', 'th'],
+        ordinals = ["st", "nd", "rd", "th"],
         oPattern = [1, 2, 3, 4],
         tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19];
     return oPattern.includes(digits[0]) && !tPattern.includes(digits[1])
@@ -1109,45 +1098,44 @@ const toOrdinalSuffix = num => {
         : int + ordinals[3];
 };
 
-
-const DOC_EXTS = ['doc', 'docx', 'DOC', 'DOCX'];
-const XLS_EXTS = ['xls', 'xlsx', 'XLS', 'XLSX'];
-const PDF_EXTS = ['pdf', 'PDF'];
-const AI_EXTS = ['ai', 'AI'];
-const PSD_EXTS = ['ps', 'psd', 'PS', 'PSD'];
-const EPS_EXTS = ['eps', 'EPS'];
+const DOC_EXTS = ["doc", "docx", "DOC", "DOCX"];
+const XLS_EXTS = ["xls", "xlsx", "XLS", "XLSX"];
+const PDF_EXTS = ["pdf", "PDF"];
+const AI_EXTS = ["ai", "AI"];
+const PSD_EXTS = ["ps", "psd", "PS", "PSD"];
+const EPS_EXTS = ["eps", "EPS"];
 const getFileType = (fileName) => {
-    if (!fileName || fileName.trim().length === 0) return 'NO_FILE';
+    if (!fileName || fileName.trim().length === 0) return "NO_FILE";
 
-    let ext = fileName.split('.').pop();
+    let ext = fileName.split(".").pop();
 
-    if (IMAGE_EXTS.includes(ext)) return 'IMAGE';
-    else if (DOC_EXTS.includes(ext)) return 'DOC';
-    else if (XLS_EXTS.includes(ext)) return 'XLX';
-    else if (PDF_EXTS.includes(ext)) return 'PDF';
-    else if (AI_EXTS.includes(ext)) return 'AI';
-    else if (PSD_EXTS.includes(ext)) return 'PSD';
-    else if (EPS_EXTS.includes(ext)) return 'EPS';
-    else return 'FILE';
+    if (IMAGE_EXTS.includes(ext)) return "IMAGE";
+    else if (DOC_EXTS.includes(ext)) return "DOC";
+    else if (XLS_EXTS.includes(ext)) return "XLX";
+    else if (PDF_EXTS.includes(ext)) return "PDF";
+    else if (AI_EXTS.includes(ext)) return "AI";
+    else if (PSD_EXTS.includes(ext)) return "PSD";
+    else if (EPS_EXTS.includes(ext)) return "EPS";
+    else return "FILE";
 };
 const getIconByFileType = (fileType) => {
     switch (fileType) {
-        case 'DOC':
-            return '/images/file-doc.svg';
-        case 'XLX':
-            return '/images/file-xls.svg';
-        case 'PDF':
-            return '/images/file-pdf.svg';
-        case 'AI':
-            return '/images/file-ai.svg';
-        case 'PSD':
-            return '/images/file-ps.svg';
-        case 'EPS':
-            return '/images/file-eps.svg';
-        case 'FILE':
-            return '/images/file.svg';
+        case "DOC":
+            return "/images/file-doc.svg";
+        case "XLX":
+            return "/images/file-xls.svg";
+        case "PDF":
+            return "/images/file-pdf.svg";
+        case "AI":
+            return "/images/file-ai.svg";
+        case "PSD":
+            return "/images/file-ps.svg";
+        case "EPS":
+            return "/images/file-eps.svg";
+        case "FILE":
+            return "/images/file.svg";
         default:
-            return '/images/file.svg';
+            return "/images/file.svg";
     }
 };
 
@@ -1181,18 +1169,15 @@ const mentionModule = (memberList) => {
             } else {
                 let matches = [];
                 for (let i = 0; i < memberList.length; i++) {
-                    if (
-                        memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())
-                    ) {
+                    if (memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase())) {
                         matches.push(memberList[i]);
                     }
                 }
                 renderList(matches, searchTerm);
             }
         },
-    }
-}
-
+    };
+};
 
 export {
     capitalizeFirstLetter,
@@ -1252,5 +1237,5 @@ export {
     getFileType,
     getIconByFileType,
     getMentionedUserIds,
-    mentionModule
+    mentionModule,
 };

@@ -45,7 +45,7 @@ const AddComment = ({ toggleAddComment, openModal, activity }) => {
                     setLoader(false);
                 });
         }
-    }, [selectedDesign]);
+    }, [params.orderId, selectedDesign]);
 
     useEffect(() => {
         if (timelineStore?.orderInfo?.orderMemberList) {
