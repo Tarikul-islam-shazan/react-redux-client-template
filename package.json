@@ -15,7 +15,7 @@
     "date-fns": "^2.22.1",
     "jquery": "^3.4.1",
     "loadjs": "^4.2.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.3",
     "quill-mention": "^3.0.3",
     "react": "^16.12.0",
     "react-beautiful-dnd": "^13.0.0",

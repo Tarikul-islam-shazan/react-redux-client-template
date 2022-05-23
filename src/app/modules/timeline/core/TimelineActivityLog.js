@@ -69,10 +69,10 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                         <p className="regular-12 mb-0">
                             <img
                                 src={addImageSuffix(
-                                    authUserInfo().profilePicDocument.docUrl,
+                                    authUserInfo()?.profilePicDocument?.docUrl,
                                     "_xicon"
                                 )}
-                                onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
+                                onError={(e) => onErrorImageLoad(e, authUserInfo()?.profilePicDocument?.docUrl)}
                                 alt="profile"
                                 className="profile-image"
                             />
