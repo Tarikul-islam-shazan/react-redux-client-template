@@ -201,11 +201,11 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                                             <div className="profile-image">
                                                 <img
                                                     src={addImageSuffix(
-                                                        authUserInfo().profilePicDocument.docUrl,
+                                                        authUserInfo()?.profilePicDocument?.docUrl,
                                                         "_xicon"
                                                     )}
                                                     onError={(e) =>
-                                                        onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)
+                                                        onErrorImageLoad(e, authUserInfo()?.profilePicDocument?.docUrl)
                                                     }
                                                     alt="profile"
                                                 />

@@ -304,10 +304,10 @@ const ActivityLog = ({activity, setLoader, index}) => {
                         <div className="reply-box">
                             <img
                                 src={addImageSuffix(
-                                    authUserInfo().profilePicDocument.docUrl,
+                                    authUserInfo()?.profilePicDocument?.docUrl,
                                     "_xicon"
                                 )}
-                                onError={(e) => onErrorImageLoad(e, authUserInfo().profilePicDocument.docUrl)}
+                                onError={(e) => onErrorImageLoad(e, authUserInfo()?.profilePicDocument?.docUrl)}
                                 alt=""
                                 className="profile-image"
                             />

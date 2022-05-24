@@ -26,7 +26,7 @@ const Timeline = () => {
 
     useEffect(() => {
         dispatch(fetchOrderInfo(params.orderId, generateParams())).finally(() => setLoader(false));
-    }, [dispatch, generateParams, params.orderId]);
+    }, []);
 
     return (
         <>
