@@ -24,7 +24,10 @@ function withClearCache(Component) {
                     const latestVersionDate = meta.buildDate
                     const currentVersionDate = packageJson.buildDate
 
-                    const shouldForceRefresh = buildDateGreaterThan(latestVersionDate, currentVersionDate)
+                    const shouldForceRefresh = buildDateGreaterThan(
+                        latestVersionDate,
+                        currentVersionDate
+                    )
                     if (shouldForceRefresh) {
                         setIsLatestBuildDate(false)
                         refreshCacheAndReload()
@@ -47,7 +50,11 @@ function withClearCache(Component) {
             window.location.reload(true)
         }
 
-        return <React.Fragment>{isLatestBuildDate ? <Component {...props} /> : null}</React.Fragment>
+        return (
+            <React.Fragment>
+                {isLatestBuildDate ? <Component {...props} /> : null}
+            </React.Fragment>
+        )
     }
 
     return ClearCacheComponent

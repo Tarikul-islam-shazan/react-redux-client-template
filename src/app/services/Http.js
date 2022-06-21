@@ -196,7 +196,10 @@ axios.interceptors.response.use(
         return response
     },
     (error) => {
-        if (error.response.data.status === HTTP_STATUS['Unauthorized'] && localStorage.getItem('token')) {
+        if (
+            error.response.data.status === HTTP_STATUS['Unauthorized'] &&
+            localStorage.getItem('token')
+        ) {
             localStorage.removeItem('token')
             delete axios.defaults.headers.common['Authorization']
             window.location.replace(BASE_FRONT_END_URL)
@@ -217,12 +220,10 @@ const encodeQueryData = (data) => {
     return ret.length ? '?' + ret.join('&') : ''
 }
 
-const updateTokenInHeader = async () => {
-    // return ;
-    let token = await localStorage.getItem('token')
-    console.log('token', token)
+const updateTokenInHeader = () => {
+    let token = localStorage.getItem('token')
     if (token) {
-        // axios.defaults.headers.common['Authorization'] = token;
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     // const token = {

@@ -1,27 +1,37 @@
 import moment from 'moment'
 
 const capitalizeFirstLetter = (str) =>
-    str?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+    str?.replace(
+        /\w\S*/g,
+        (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    )
 
 const replaceSpace = (str) => str.split(' ').join('_')
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+]
 
 const isTokenExpired = (token) => {
     let base64Url = token.split('.')[1]
     if (base64Url === undefined) return true
-
-    console.log('base64Url: ', base64Url)
-
     let base64 = base64Url.replace('-', '+')
     if (base64 === undefined) return true
-
     base64 = base64.replace('_', '/')
     if (base64 === undefined) return true
-
     let json = JSON.parse(window.atob(base64))
     if (json === undefined) return true
-
     let exp = JSON.parse(window.atob(base64)).exp
     if (exp === undefined) return true
 
@@ -31,7 +41,14 @@ const isTokenExpired = (token) => {
 }
 const getDateFromMillis = (millis) => {
     let date = new Date(millis)
-    return (date.getDate() < 10 ? '0' : '') + date.getDate() + '-' + months[date.getMonth()] + '-' + date.getFullYear()
+    return (
+        (date.getDate() < 10 ? '0' : '') +
+        date.getDate() +
+        '-' +
+        months[date.getMonth()] +
+        '-' +
+        date.getFullYear()
+    )
 }
 
 const getDateWithHourFromMillis = (millis) => {
@@ -57,23 +74,14 @@ const doCommaSeparationWithIntegers = (amount) => {
     }
     let formattedAmount = ''
     for (let i = amount.length - 1, p = 0; i >= 0; i--, p++) {
-        if (p >= 3 && (p - 3) % 2 === 0) formattedAmount = ','.concat(formattedAmount)
+        if (p >= 3 && (p - 3) % 2 === 0)
+            formattedAmount = ','.concat(formattedAmount)
         formattedAmount = amount[i].concat(formattedAmount)
     }
     return formattedAmount
 }
 
 const convertToISODate = (dateObj) => {
-    console.log(
-        'convert function, dateObj: ' +
-            dateObj +
-            'full year: ' +
-            dateObj.getFullYear() +
-            ' month: ' +
-            dateObj.getMonth() +
-            ' day: ' +
-            dateObj.getDate()
-    )
     let date = dateObj.getFullYear()
     date += '-'
     if (dateObj.getMonth() < 9) date += '0' + (dateObj.getMonth() + 1) + '-'
@@ -111,7 +119,8 @@ const doCommaSeparationWithDecimals = (amount) => {
     let formattedAmount = amount.substring(lastIndex)
 
     for (let i = lastIndex - 1, p = 0; i >= 0; i--, p++) {
-        if (p >= 3 && (p - 3) % 2 === 0) formattedAmount = ','.concat(formattedAmount)
+        if (p >= 3 && (p - 3) % 2 === 0)
+            formattedAmount = ','.concat(formattedAmount)
         formattedAmount = amount[i].concat(formattedAmount)
     }
 
@@ -140,7 +149,10 @@ const encodeQueryData = (data) => {
 }
 
 const _getKey = () => {
-    return Math.floor(Math.random() * 10000000) + Math.floor(Math.random() * 10000000)
+    return (
+        Math.floor(Math.random() * 10000000) +
+        Math.floor(Math.random() * 10000000)
+    )
 }
 
 const getToken = () => {
@@ -191,15 +203,23 @@ const addImageSuffix = (imgUrl, suffix) => {
 }
 
 const convertTimeToLocal = (date, time = '', outputFormat = 'DD.MM.YYYY') => {
-    let formatForUtc = moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY') + (time ? ' ' + time : '')
+    let formatForUtc =
+        moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY') +
+        (time ? ' ' + time : '')
     let convertedDate = moment.utc(formatForUtc).format()
     var local = moment.utc(convertedDate).local().format(outputFormat)
     return local
 }
 
-const convertDateTimeToLocal = (date, time = '', outputFormat = 'DD.MM.YYYY') => {
+const convertDateTimeToLocal = (
+    date,
+    time = '',
+    outputFormat = 'DD.MM.YYYY'
+) => {
     let formattedTime = moment(time, 'HH:mm:ss').format('hh:mm A')
-    let formatForUtc = moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY') + (time ? ' ' + formattedTime : '')
+    let formatForUtc =
+        moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY') +
+        (time ? ' ' + formattedTime : '')
     let convertedDate = moment.utc(formatForUtc).format()
     var local = moment.utc(convertedDate).local().format(outputFormat)
     return local
@@ -215,7 +235,6 @@ const getTodayTimeDifference = (startDate, endDate = moment()) => {
         let res = b.diff(a, 'hours')
         return `${res} hours ago`
     }
-    return ''
 }
 
 const getUrlParameter = (name, params) => {
@@ -223,11 +242,16 @@ const getUrlParameter = (name, params) => {
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
 
     var results = regex.exec(params)
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+    return results === null
+        ? ''
+        : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-const changeDateFormat = (date, currentFormat = 'DD/MM/YYYY', newFormat = 'Do MMM, YY') =>
-    moment(date, currentFormat).format(newFormat)
+const changeDateFormat = (
+    date,
+    currentFormat = 'DD/MM/YYYY',
+    newFormat = 'Do MMM, YY'
+) => moment(date, currentFormat).format(newFormat)
 
 const parseHtml = (text) => {
     let urlRegex =
@@ -247,7 +271,19 @@ const validateNumber = (e) => {
 }
 
 const validateFloatNumber = (e) => {
-    const valuesAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
+    const valuesAllowed = [
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '.'
+    ]
     if (!valuesAllowed.includes(e.key)) {
         e.preventDefault()
     }
@@ -283,9 +319,23 @@ const getImageExt = (url) => {
     return result
 }
 
-const IMAGE_EXTS = ['jpeg', 'jpg', 'png', 'gif', 'tiff', 'svg', 'JPEG', 'JPG', 'PNG', 'GIF', 'TIFF', 'SVG']
+const IMAGE_EXTS = [
+    'jpeg',
+    'jpg',
+    'png',
+    'gif',
+    'tiff',
+    'svg',
+    'JPEG',
+    'JPG',
+    'PNG',
+    'GIF',
+    'TIFF',
+    'SVG'
+]
 
-const replaceUnderLine = (str) => capitalizeFirstLetter(str.split('_').join(' '))
+const replaceUnderLine = (str) =>
+    capitalizeFirstLetter(str.split('_').join(' '))
 
 const isValidFile = (file, type) => {
     let ext = file.name.split('.').pop()
@@ -330,9 +380,24 @@ const dateCompare = (orderDate, dueDate) => {
     }
 }
 
-const DATE_TYPES = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond']
+const DATE_TYPES = [
+    'year',
+    'quarter',
+    'month',
+    'week',
+    'day',
+    'hour',
+    'minute',
+    'second',
+    'millisecond'
+]
 
-const addWithCurrentDate = (date, duration, dateType, dateFormat = 'Do MMM, YY') => {
+const addWithCurrentDate = (
+    date,
+    duration,
+    dateType,
+    dateFormat = 'Do MMM, YY'
+) => {
     if (DATE_TYPES.includes(dateType)) {
         return moment(date).add(duration, dateType).format(dateFormat)
     }
@@ -360,7 +425,10 @@ const getShortName = (source, size = 35) => {
 }
 const isPageReachBottom = () => {
     let bool = false
-    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight
+    const windowHeight =
+        'innerHeight' in window
+            ? window.innerHeight
+            : document.documentElement.offsetHeight
     const html = document.documentElement
     const windowBottom = windowHeight + window.pageYOffset
     if (Math.floor(windowBottom) - html.scrollHeight === 0) {
@@ -452,7 +520,11 @@ const mentionModule = (memberList, bool) => {
                 } else {
                     let matches = []
                     for (let i = 0; i < memberList.length; i++) {
-                        if (memberList[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+                        if (
+                            memberList[i].value
+                                .toLowerCase()
+                                .indexOf(searchTerm.toLowerCase()) !== -1
+                        ) {
                             matches.push(memberList[i])
                         }
                     }
