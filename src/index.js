@@ -8,7 +8,6 @@ import App from "./app/App.js";
 
 
 import * as serviceWorker from "./serviceWorker";
-import {imp} from "yarn/lib/cli";
 
 // toast.configure();
 

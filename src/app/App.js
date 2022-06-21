@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import "../assets/scss/App.scss"
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import AuthLayout from "./layouts/AuthLayout";
@@ -45,18 +46,16 @@ const PublicRoute = ({component: Component, ...rest}) => {
 };
 
 
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Login />} />
-                    <AuthRoute exact path="/login" component=""/>
-                    <PublicRoute exact path="/purchaseDetails/:orderId" component=""/>
-                </Routes >
-            </Router>
-        );
-    }
-}
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login/>}/>
+                {/*<AuthRoute exact path="/login" component=""/>*/}
+                {/*<PublicRoute exact path="/purchaseDetails/:orderId" component=""/>*/}
+            </Routes>
+        </Router>
+    );
 
+}
 export default App;
