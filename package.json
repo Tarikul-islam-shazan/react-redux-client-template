@@ -28,7 +28,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "npx pretty-quick --staged ng lint ng test",
+            "pre-push": "ng build --aot true"
         }
     },
     "lint-staged": {
@@ -36,6 +37,7 @@
             "npm run lint:fix"
         ]
     },
+    "prepare": "cd .. && husky install client/.husky",
     "devDependencies": {
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.7.0",
