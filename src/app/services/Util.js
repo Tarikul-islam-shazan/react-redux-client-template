@@ -1,7 +1,5 @@
-import $ from "jquery";
 import moment from "moment";
 import React from "react";
-import { Tooltip } from "@material-ui/core";
 
 const capitalizeFirstLetter = (str) =>
     str?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -143,13 +141,13 @@ const doCommaSeparationWithIntegers = (amount) => {
 const convertToISODate = (dateObj) => {
     console.log(
         "convert function, dateObj: " +
-            dateObj +
-            "full year: " +
-            dateObj.getFullYear() +
-            " month: " +
-            dateObj.getMonth() +
-            " day: " +
-            dateObj.getDate()
+        dateObj +
+        "full year: " +
+        dateObj.getFullYear() +
+        " month: " +
+        dateObj.getMonth() +
+        " day: " +
+        dateObj.getDate()
     );
     let date = dateObj.getFullYear();
     date += "-";
@@ -181,7 +179,7 @@ const shuffle = (a) => {
 const convertToSelectOptions = (obj) => {
     let array = [];
     for (let i in obj) {
-        array.push({ value: parseInt(i, 10), label: obj[i] });
+        array.push({value: parseInt(i, 10), label: obj[i]});
     }
     return array;
 };
@@ -362,28 +360,28 @@ const rfqStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Pending
                 </span>
             );
             break;
         case "OFFER_PENDING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Pending
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Running
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Completed
                 </span>
             );
@@ -397,35 +395,35 @@ const rfqProductStatus = (item) => {
     switch (item.status) {
         case "OFFER_PENDING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F0EDF7", color: "#452D8F" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F0EDF7", color: "#452D8F"}}>
                     Offer Pending
                 </span>
             );
 
         case "PRICE_GIVEN":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Quoted
                 </span>
             );
 
         case "APPROVED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Approved
                 </span>
             );
 
         case "PRODUCT_SOLD":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFE6E6", color: "#F22B2B" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFE6E6", color: "#F22B2B"}}>
                     Design Sold
                 </span>
             );
 
         case "ORDER_PLACED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#DBFFE5", color: "#00C334" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#DBFFE5", color: "#00C334"}}>
                     Order Placed
                 </span>
             );
@@ -439,21 +437,21 @@ const projectStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Pending
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Running
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Completed
                 </span>
             );
@@ -467,21 +465,21 @@ const renderPaymentStatus = (item) => {
     switch (item.status) {
         case "PENDING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Pending
                 </span>
             );
             break;
         case "PARTIALLY_PAID":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Partially Paid
                 </span>
             );
             break;
         case "PAID":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Paid
                 </span>
             );
@@ -495,56 +493,56 @@ const deliverableStatus = (item) => {
     switch (item.status) {
         case "APPROVED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Approved
                 </span>
             );
             break;
         case "REJECTED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Rejected
                 </span>
             );
             break;
         case "SUBMIT":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4EAF5", color: "#719EE6" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4EAF5", color: "#719EE6"}}>
                     Submit
                 </span>
             );
             break;
         case "RE_SUBMIT":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E8E4F5", color: "#7B5CDB" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E8E4F5", color: "#7B5CDB"}}>
                     Re-submit
                 </span>
             );
             break;
         case "RUNNING":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Running
                 </span>
             );
             break;
         case "SUBMITTED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Submitted
                 </span>
             );
             break;
         case "INITIALIZED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E7E9EF", color: "#3E4148" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E7E9EF", color: "#3E4148"}}>
                     Initialized
                 </span>
             );
             break;
         case "COMPLETED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Completed
                 </span>
             );
@@ -558,49 +556,49 @@ const productAvailabilityStatus = (item) => {
     switch (item.availabilityStatus) {
         case "AVAILABLE":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Available
                 </span>
             );
             break;
         case "CHECKED":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     Checked
                 </span>
             );
             break;
         case "SOLD":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Sold
                 </span>
             );
             break;
         case "AVAILABLE":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#E4F6EA", color: "#35D575" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#E4F6EA", color: "#35D575"}}>
                     Available
                 </span>
             );
             break;
         case "IN_RFQ":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#F5EFE4", color: "#D29F27" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#F5EFE4", color: "#D29F27"}}>
                     In RFQ
                 </span>
             );
             break;
         case "IN_PROJECT":
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     In Project
                 </span>
             );
             break;
         default:
             return (
-                <span className="badge table-badge" style={{ backgroundColor: "#FFF1F1", color: "#D53939" }}>
+                <span className="badge table-badge" style={{backgroundColor: "#FFF1F1", color: "#D53939"}}>
                     Private
                 </span>
             );
@@ -898,12 +896,12 @@ const generateRedirectRoute = (data, props) => {
         sessionStorage.clear();
         props.history.push({
             pathname: redirection ? redirection : "/login",
-            state: { from: "login" },
+            state: {from: "login"},
         });
     } else if (data.status === "ACTIVE") {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: { from: "login" },
+            state: {from: "login"},
         });
     } else if (data.emailVerified === false) {
         props.history.push("/verifyEmail" + (redirection ? "?redirect=" + redirection : ""));
@@ -912,12 +910,12 @@ const generateRedirectRoute = (data, props) => {
     } else if (data.status === "PENDING") {
         props.history.push({
             pathname: redirection ? redirection : "/loginPopup",
-            state: { from: "login" },
+            state: {from: "login"},
         });
     } else {
         props.history.push({
             pathname: redirection ? redirection : "/dashboard",
-            state: { from: "login" },
+            state: {from: "login"},
         });
     }
 };
@@ -928,7 +926,7 @@ const renderMultiColor = (color) => {
             <div className="colors-row">
                 <div className="multicolors">
                     <span className="color-icon">
-                        <img src={color?.swatchDocResponse?.docUrl} alt={`swatch color`} />
+                        <img src={color?.swatchDocResponse?.docUrl} alt={`swatch color`}/>
                     </span>
                 </div>
             </div>
@@ -940,13 +938,13 @@ const renderMultiColor = (color) => {
                     {color?.compositeColorList?.length > 0 &&
                         color.compositeColorList.map((item, index) => {
                             return (
-                                <Tooltip title={color.name} arrow placement={"top"}>
+                                <span title={color.name} arrow placement={"top"}>
                                     <span
                                         key={`multi_color_${index}`}
                                         className="color-icon"
-                                        style={{ background: item.hexCode }}
+                                        style={{background: item.hexCode}}
                                     ></span>
-                                </Tooltip>
+                                </span>
                             );
                         })}
                 </div>
@@ -956,9 +954,9 @@ const renderMultiColor = (color) => {
         return (
             <div className="colors-row">
                 <div className="multicolors">
-                    <Tooltip title={color.name} arrow placement={"top"}>
-                        <span className="color-icon" style={{ background: color.hexCode }}></span>
-                    </Tooltip>
+                    <span title={color.name} arrow placement={"top"}>
+                        <span className="color-icon" style={{background: color.hexCode}}></span>
+                    </span>
                 </div>
             </div>
         );

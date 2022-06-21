@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Root from "./app/index.js";
-import store from "./app/redux/store";
 import { toast } from "react-toastify";
 import withClearCache from "./ClearCache";
 
@@ -17,7 +16,7 @@ function App() {
 }
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider>
         <App />
     </Provider>,
     document.getElementById("root")
