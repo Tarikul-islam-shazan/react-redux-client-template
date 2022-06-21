@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import "../assets/scss/App.scss";
 import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import { getToken } from "./services/Util";
-import Login from "../designs/login-journey/Login";
+import Login from "../assets/designs/login-journey/Login";
 
 const AuthRoute = ({ component: Component, ...rest }) => {
     let token = getToken();
@@ -43,18 +44,15 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     }
 };
 
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Routes>
-                    <Route exact path="/" element={<Login />} />
-                    <AuthRoute exact path="/login" component="HIIIIIIIIIIII" />
-                    <PublicRoute exact path="/purchaseDetails/:orderId" component="" />
-                </Routes>
-            </Router>
-        );
-    }
-}
-
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                {/*<AuthRoute exact path="/login" component=""/>*/}
+                {/*<PublicRoute exact path="/purchaseDetails/:orderId" component=""/>*/}
+            </Routes>
+        </Router>
+    );
+};
 export default App;
