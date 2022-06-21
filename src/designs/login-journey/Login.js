@@ -1,9 +1,9 @@
 import React from "react";
-const Login = () => {
+const Login = (props) => {
     return (
         <div>
-            <h1>Login Page</h1>
-        </div>
+                                                            <h1>Login Page {props.test}</h1>
+                    </div>
     )
 }
 
