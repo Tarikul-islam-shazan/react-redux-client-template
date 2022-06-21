@@ -5,10 +5,7 @@ import App from "./app/App.js";
 // import store from "./app/redux/store";
 // import { toast } from "react-toastify";
 // import withClearCache from "./ClearCache";
-
-
 import * as serviceWorker from "./serviceWorker";
-import {imp} from "yarn/lib/cli";
 
 // toast.configure();
 
@@ -20,7 +17,7 @@ import {imp} from "yarn/lib/cli";
 
 ReactDOM.render(
     // <Provider store={store}>
-        <App />,
+    <App />,
     // </Provider>,
     document.getElementById("root")
 );
