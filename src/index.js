@@ -1,24 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import Root from "./app/index.js";
-import { toast } from "react-toastify";
-import withClearCache from "./ClearCache";
+import App from "./app/App.js";
+// import store from "./app/redux/store";
+// import { toast } from "react-toastify";
+// import withClearCache from "./ClearCache";
+
 
 import * as serviceWorker from "./serviceWorker";
+import {imp} from "yarn/lib/cli";
 
-toast.configure();
+// toast.configure();
 
-const ClearCacheComponent = withClearCache(Root);
+// const ClearCacheComponent = withClearCache(Root);
 
-function App() {
-    return <ClearCacheComponent />;
-}
+// function App() {
+//     return <ClearCacheComponent />;
+// }
 
 ReactDOM.render(
-    <Provider>
-        <App />
-    </Provider>,
+    // <Provider store={store}>
+        <App />,
+    // </Provider>,
     document.getElementById("root")
 );
 
