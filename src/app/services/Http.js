@@ -196,10 +196,7 @@ axios.interceptors.response.use(
         return response
     },
     (error) => {
-        if (
-            error.response.data.status === HTTP_STATUS['Unauthorized'] &&
-            localStorage.getItem('token')
-        ) {
+        if (error.response.data.status === HTTP_STATUS['Unauthorized'] && localStorage.getItem('token')) {
             localStorage.removeItem('token')
             delete axios.defaults.headers.common['Authorization']
             window.location.replace(BASE_FRONT_END_URL)

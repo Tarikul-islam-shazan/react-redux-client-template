@@ -3,14 +3,10 @@ export const BASE_FRONT_END_URL = getBaseFrontEndUrl()
 
 export const OAUTH2_REDIRECT_URI = window.location.origin + '/oauth2/redirect'
 
-export const GOOGLE_AUTH_URL =
-    BASE_URL + '/oauth2/authorize/google?redirect_uri=' + OAUTH2_REDIRECT_URI
-export const FACEBOOK_AUTH_URL =
-    BASE_URL + '/oauth2/authorize/facebook?redirect_uri=' + OAUTH2_REDIRECT_URI
-export const GITHUB_AUTH_URL =
-    BASE_URL + '/oauth2/authorize/github?redirect_uri=' + OAUTH2_REDIRECT_URI
-export const LINKEDIN_AUTH_URL =
-    BASE_URL + '/oauth2/authorize/linkedin?redirect_uri=' + OAUTH2_REDIRECT_URI
+export const GOOGLE_AUTH_URL = BASE_URL + '/oauth2/authorize/google?redirect_uri=' + OAUTH2_REDIRECT_URI
+export const FACEBOOK_AUTH_URL = BASE_URL + '/oauth2/authorize/facebook?redirect_uri=' + OAUTH2_REDIRECT_URI
+export const GITHUB_AUTH_URL = BASE_URL + '/oauth2/authorize/github?redirect_uri=' + OAUTH2_REDIRECT_URI
+export const LINKEDIN_AUTH_URL = BASE_URL + '/oauth2/authorize/linkedin?redirect_uri=' + OAUTH2_REDIRECT_URI
 
 export const LOADER_OVERLAY_BACKGROUND = 'transparent'
 export const LOADER_COLOR = '#452D8D'

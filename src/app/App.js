@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import '../assets/scss/App.scss'
-import {
-    BrowserRouter as Router,
-    Navigate,
-    Route,
-    Routes
-} from 'react-router-dom'
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom'
 import DefaultLayout from './layouts/DefaultLayout'
 import AuthLayout from './layouts/AuthLayout'
 import { getToken } from './services/Util'
@@ -33,11 +28,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
     let data = JSON.parse(localStorage.getItem('userInfo'))
 
     if (data.status === 'ACTIVE') {
-        const url =
-            '/login' +
-            (redirectRoute && redirectRoute !== '/'
-                ? '?Navigate=' + redirectRoute
-                : '')
+        const url = '/login' + (redirectRoute && redirectRoute !== '/' ? '?Navigate=' + redirectRoute : '')
         return token ? (
             <Route
                 {...rest}
