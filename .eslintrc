@@ -51,6 +51,7 @@
         "no-unused-vars": "off",
         "no-unreachable": "warn",
         "no-useless-escape": "off",
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
     }
 }
