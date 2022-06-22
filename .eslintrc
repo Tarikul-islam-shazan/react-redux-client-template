@@ -1,0 +1,56 @@
+{
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["react", "jsx-a11y", "import", "prettier"],
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jest": true,
+        "jasmine": true
+    },
+    "globals": {
+        "process": false,
+        "shallow": true,
+        "mount": true
+    },
+    "settings": {
+        "react": {
+            "version": "18.2.0"
+        }
+    },
+    "rules": {
+        "no-console": "warn",
+        // "indent": ["warn", "tab", { "SwitchCase": 1 }],
+        "no-unneeded-ternary": ["warn"],
+        "no-mixed-spaces-and-tabs": ["error"],
+        // "no-control-regex": ["warn"],
+        "no-dupe-args": ["error"],
+        "no-dupe-keys": ["error"],
+        "no-duplicate-case": ["error"],
+        "no-empty": ["error"],
+        "no-empty-character-class": ["error"],
+        "no-extra-boolean-cast": ["warn"],
+        "no-extra-parens": [0],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "quotes": [2, "single"],
+        "jsx-quotes": ["warn", "prefer-single"],
+        "comma-dangle": ["warn", "never"],
+        "object-curly-spacing": ["warn", "always"],
+        "react/display-name": [0],
+        "no-unused-vars": "off",
+        "no-unreachable": "warn",
+        "no-useless-escape": "off",
+        "react/prop-types": 0
+    }
+}

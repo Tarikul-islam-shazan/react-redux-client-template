@@ -1,13 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import App from "./app/App.js";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './app/App.js'
 // import store from "./app/redux/store";
 // import { toast } from "react-toastify";
 // import withClearCache from "./ClearCache";
-
-
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from './serviceWorker'
 
 // toast.configure();
 
@@ -19,13 +17,13 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
     // <Provider store={store}>
-        <App />,
+    <App />,
     // </Provider>,
-    document.getElementById("root")
-);
+    document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()
 // serviceWorker.register();

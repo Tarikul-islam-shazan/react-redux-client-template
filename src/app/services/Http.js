@@ -1,14 +1,14 @@
-import axios from "axios";
-import { API, HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL } from "../constant";
-import store from "../redux/store";
-import { REDIRECT_TO } from "../redux/actions/types";
-import { getToken } from "./Util";
+import axios from 'axios'
+import { API, HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL } from '../constant'
+import store from '../redux/store'
+import { REDIRECT_TO } from '../redux/actions/types'
+import { getToken } from './Util'
 
-const { fs, central_auth } = API();
+const { fs, central_auth } = API()
 const headers = {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-};
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+}
 
 // const BASE_URL = "http://nitex-env.eba-bj9qc7tu.eu-central-1.elasticbeanstalk.com";
 
@@ -174,55 +174,56 @@ const routes = {
     downloadInvoice: `${BASE_URL}/invoice/download/`,
     getTimeLineOrderInfo: `${BASE_URL}/order-timeline/order-info/`,
     getTimeLineStepInfo: `${BASE_URL}/order-timeline/steps/order/`,
-    getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
-};
+    getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`
+}
 
 // Axios request interceptor
 axios.interceptors.request.use((config) => {
-    const token = getToken();
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    config.headers.Authorization = token ? token : "";
-    config.headers.unameid = userInfo?.id || "";
-    config.headers.unamefull = userInfo?.name || "";
-    return config;
-});
+    const token = getToken()
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    config.headers.Authorization = token ? token : ''
+    config.headers.unameid = userInfo?.id || ''
+    config.headers.unamefull = userInfo?.name || ''
+    return config
+})
 
 // Axios response interceptor
 axios.interceptors.response.use(
     (response) => {
-        if (response.config.url.includes("logout")) {
-            delete axios.defaults.headers.common["Authorization"];
+        if (response.config.url.includes('logout')) {
+            delete axios.defaults.headers.common['Authorization']
         }
-        return response;
+        return response
     },
     (error) => {
-        if (error.response.data.status === HTTP_STATUS["Unauthorized"] && localStorage.getItem("token")) {
-            localStorage.removeItem("token");
-            delete axios.defaults.headers.common["Authorization"];
-            window.location.replace(BASE_FRONT_END_URL);
+        if (
+            error.response.data.status === HTTP_STATUS['Unauthorized'] &&
+            localStorage.getItem('token')
+        ) {
+            localStorage.removeItem('token')
+            delete axios.defaults.headers.common['Authorization']
+            window.location.replace(BASE_FRONT_END_URL)
         }
-        return Promise.reject(error);
+        return Promise.reject(error)
     }
-);
+)
 
 const encodeQueryData = (data) => {
     let ret = [],
-        temp;
+        temp
     for (let i in data) {
-        temp = data[i];
-        if (temp !== "" && temp !== null) {
-            ret.push(encodeURIComponent(i) + "=" + encodeURIComponent(temp));
+        temp = data[i]
+        if (temp !== '' && temp !== null) {
+            ret.push(encodeURIComponent(i) + '=' + encodeURIComponent(temp))
         }
     }
-    return ret.length ? "?" + ret.join("&") : "";
-};
+    return ret.length ? '?' + ret.join('&') : ''
+}
 
-const updateTokenInHeader = async () => {
-    // return ;
-    let token = await localStorage.getItem("token");
-    console.log("token", token);
+const updateTokenInHeader = () => {
+    let token = localStorage.getItem('token')
     if (token) {
-        // axios.defaults.headers.common['Authorization'] = token;
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     // const token = {
@@ -232,75 +233,75 @@ const updateTokenInHeader = async () => {
     // if (token.local && (!token.header || token.local !== token.header)) {
     //     axios.defaults.headers.common['Authorization'] = token.local;
     // }
-};
+}
 
 const Http = {
-    GET: (key, params = "") => {
+    GET: (key, params = '') => {
         // updateTokenInHeader();
-        params = typeof params === "object" ? encodeQueryData(params) : params;
-        return axios.get(routes[key] + params, headers);
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.get(routes[key] + params, headers)
     },
-    GET_WITH_ID_PARAM: (key, params = "", id = "") => {
+    GET_WITH_ID_PARAM: (key, params = '', id = '') => {
         // updateTokenInHeader();
         // console.log("id",id)
         // console.log("params",params)
-        params = typeof params === "object" ? encodeQueryData(params) : params;
-        return axios.get(routes[key] + id + params, headers);
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.get(routes[key] + id + params, headers)
     },
-    POST: (key, params, id = "") => {
+    POST: (key, params, id = '') => {
         // if(key!=='signup' || key!=='login'){
         // console.log("token header called",key);
         // updateTokenInHeader();
         // }
         // console.log("from post",routes[key] + id, params)
-        return axios.post(routes[key] + id, params, headers);
+        return axios.post(routes[key] + id, params, headers)
     },
-    POST_TEXT_BODY: (key, params, id = "") => {
+    POST_TEXT_BODY: (key, params, id = '') => {
         // if(key!=='signup' || key!=='login'){
         // console.log("token header called",key);
         // updateTokenInHeader();
         // }
         // console.log("from post",params)
         return axios.post(routes[key] + id, params, {
-            "Content-Type": "text/html",
-            Accept: "application/json",
-        });
+            'Content-Type': 'text/html',
+            Accept: 'application/json'
+        })
     },
-    PUT: (key, params, id = "") => {
+    PUT: (key, params, id = '') => {
         // updateTokenInHeader();
-        return axios.put(routes[key] + id, params, headers);
+        return axios.put(routes[key] + id, params, headers)
     },
-    DELETE: (key, data, id = "") => {
+    DELETE: (key, data, id = '') => {
         // updateTokenInHeader();
-        return axios.delete(routes[key] + id, { data, headers });
+        return axios.delete(routes[key] + id, { data, headers })
     },
-    DELETE_WITH_BODY: (key, body, params = "") => {
+    DELETE_WITH_BODY: (key, body, params = '') => {
         // updateTokenInHeader();
-        params = typeof params === "object" ? encodeQueryData(params) : params;
-        return axios.delete(routes[key] + params, { headers, data: body });
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.delete(routes[key] + params, { headers, data: body })
     },
     UPLOAD: (key, { name, file }) => {
         // updateTokenInHeader();
-        const formData = new FormData();
-        formData.append(name, file);
+        const formData = new FormData()
+        formData.append(name, file)
 
         return axios.post(routes[key], formData, {
             headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     },
-    DOWNLOAD: (key, params = "") => {
+    DOWNLOAD: (key, params = '') => {
         // Only GET is supported
         // updateTokenInHeader();
-        params = typeof params === "object" ? encodeQueryData(params) : params;
+        params = typeof params === 'object' ? encodeQueryData(params) : params
         return axios(routes[key] + params, {
-            method: "GET",
-            responseType: "blob", // Force to receive data in a Blob Format
-            header: JSON.parse(localStorage.getItem("token")),
-        });
+            method: 'GET',
+            responseType: 'blob', // Force to receive data in a Blob Format
+            header: JSON.parse(localStorage.getItem('token'))
+        })
     },
-    UPLOAD_WITH_PROGRESS: (key, params, id = "", progressCallback) => {
+    UPLOAD_WITH_PROGRESS: (key, params, id = '', progressCallback) => {
         // if(key!=='signup' || key!=='login'){
         // console.log("token header called",key);
         // updateTokenInHeader();
@@ -310,10 +311,10 @@ const Http = {
             headers,
             onUploadProgress: (data) => {
                 //Set the progress value to show the progress bar
-                progressCallback(data, params);
-            },
-        });
-    },
-};
+                progressCallback(data, params)
+            }
+        })
+    }
+}
 
-export default Http;
+export default Http

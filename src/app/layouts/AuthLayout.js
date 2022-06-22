@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react'
 
-const AuthLayout = () => {
-
-}
+const AuthLayout = () => {}
 
 export default AuthLayout
