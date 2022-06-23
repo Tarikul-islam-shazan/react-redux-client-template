@@ -1,0 +1,130 @@
+.login-container{
+    height: 100vh;
+    background: url(../images/login/login-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .login-form-contents{
+        padding-top: 100px;
+        .form-container{
+            .entry-title{
+                .belong-here-text{
+                    font-size: 60px;
+                    line-height: 68px;
+                    color: #E0E0E1;
+                    font-family: 'Poppins', sans-serif;
+                    text-transform: uppercase;
+                }
+            }
+            .login-register-tab{
+                margin: 80px 0 40px 0;
+                ul{
+                    display: flex;
+                    li{
+                        font-size: 44px;
+                        line-height: 52px;
+                        color: #646464;
+                        font-weight: 400;
+                        margin-right: 40px;
+                        position: relative;
+                        text-transform: uppercase;
+                        font-family: 'Poppins', sans-serif;
+                        &.active{
+                            font-weight: 700;
+                            color: #282828;
+                            &::before{
+                                content: '';
+                                position: absolute;
+                                width: 8px;
+                                height: 8px;
+                                background:#282828;
+                                bottom: -20px;
+                                left: 50%;
+                                transform: translateX(-50%) rotate(45deg) ;
+                            }
+                        }
+                    }
+                }
+
+            }
+            .login-input-forms{
+                .form-group{
+                    position: relative;
+                    margin-bottom: 36px;
+                    label{
+                        font-size: 20px;
+                        line-height: 28px;
+                        color: #282828;
+                        margin-bottom: 20px;
+                    }
+                    input{
+                        border: none !important;
+                        background: #F5F5F5;
+                    }
+                    input[type="checkbox"] {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        background-color: #F5F5F5;
+                        margin: 0;
+                        display: grid;
+                        place-content: center;
+                        }
+                        input[type="checkbox"] {
+                        appearance: none;
+                        background-color: #F5F5F5;
+                        margin: 0;
+                        font: inherit;
+                        color: currentColor;
+                        width: 1.15em;
+                        height: 1.15em;
+                        border: 0.15em solid #282828 !important;
+                        border-radius: 0.15em;
+                        transform: translateY(-0.075em);
+                        }
+
+                        input[type="checkbox"]::before {
+                        content: "";
+                        width: 0.65em;
+                        height: 0.65em;
+                        transform: scale(0);
+                        transition: 120ms transform ease-in-out;
+                        box-shadow: inset 1em 1em #282828;
+                        }
+
+                        input[type="checkbox"]:checked::before {
+                        transform: scale(1);
+                        }
+                        button{
+                            &.forget-password{
+                                border: none;
+                                position: absolute;
+                                right: 0;
+                            }
+                        }
+                        .agree-text{
+                            margin-left: 32px;
+                            font-size: 20px;
+                            line-height: 28px;
+                        }
+                        button{
+                            &.submit-btn{
+                                width: 100%;
+                                background: #282828;
+                                text-transform: uppercase;
+                                color: #fff;
+                                text-align: left;
+                                font-size: 20px;
+                                line-height: 28px;
+                                padding: 15px 10px 15px 30px;
+                                img{
+                                    position: absolute;
+                                    right: 10px;
+                                    top: 10px;
+                                }
+                            }
+                        }
+                }
+
+            }
+        }
+    }
+}

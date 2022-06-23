@@ -1,5 +1,7 @@
 import React from 'react'
 
-const DefaultLayout = () => {}
+const DefaultLayout = ({ children }) => {
+    return children
+}
 
 export default DefaultLayout

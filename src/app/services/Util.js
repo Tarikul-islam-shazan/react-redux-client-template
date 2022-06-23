@@ -547,6 +547,10 @@ const onErrorImageLoad = (e, url, type = 'user') => {
     e.target.onerror = null
 }
 
+const getRedirectUrl = () => {
+    return '/dashboard'
+}
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -591,5 +595,6 @@ export {
     getIconByFileType,
     getMentionedUserIds,
     mentionModule,
-    onErrorImageLoad
+    onErrorImageLoad,
+    getRedirectUrl
 }

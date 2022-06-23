@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL } from '../Constant'
+import { HTTP_STATUS, BASE_URL, BASE_FRONT_END_URL } from '../constant'
 import { getToken } from './Util'
 
 const headers = {
@@ -23,7 +23,7 @@ const routes = {
 
 // Axios request interceptor
 axios.interceptors.request.use((config) => {
-    const token = getToken()
+    const token = localStorage.getItem('token')
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     config.headers.Authorization = token ? token : ''
     config.headers.unameid = userInfo?.id || ''
