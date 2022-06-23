@@ -1,18 +1,39 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../assets/scss/App.scss'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Outlet,
+    Route,
+    Routes
+} from 'react-router-dom'
 import Login from './modules/login-journey/Login'
 import Dashboard from './modules/dashboard/Dashboard'
+import DefaultLayout from './layouts/DefaultLayout'
+
+const useAuth = () => {
+    const token = localStorage.getItem('token')
+    return !!token
+}
+
+const ProtectedRoutes = (props) => {
+    const auth = useAuth()
+    return auth ? <Outlet /> : <Navigate to='/login' />
+}
 
 const App = () => {
     return (
         <>
             <Router>
                 <Routes>
-                    <Route exact path='/dashboard' element={<Dashboard />} />
-                    <Route path='/' element={<Login />} />
+                    <Route path='/' element={<ProtectedRoutes />}>
+                        <Route element={<DefaultLayout />}>
+                            <Route path='dashboard' element={<Dashboard />} />
+                        </Route>
+                    </Route>
+                    <Route path='/login' element={<Login />} />
                 </Routes>
             </Router>
             <ToastContainer

@@ -15,6 +15,10 @@ const Login = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        localStorage.clear()
+    }, [])
+
+    useEffect(() => {
         setInputData({})
     }, [activeTab])
 
