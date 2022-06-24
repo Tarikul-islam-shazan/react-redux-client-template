@@ -1,3 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .form-field {
+        @apply block h-[58px] w-full border border-white bg-white py-4 px-7 text-base text-primaryColor focus:rounded-none focus:outline-none focus:border-primaryColor;
+    }
+    .input-search-item {
+        @apply focus:border-primaryColor-tint-100 block h-[50px] rounded-md border border-black-tint-700 bg-white p-3 pl-10 shadow-sm focus:outline-none focus:ring-1 md:text-sm
+    }
+    .textarea-item {
+        @apply focus:border-primaryColor-tint-100 hover:border block w-full rounded-md border border-black-tint-700 bg-white p-3 shadow-sm focus:outline-none focus:ring-1 md:text-sm !important;
+    }
+
+    .default-button{
+        @apply rounded mt-6 p-4 text-base font-bold capitalize duration-300 bg-primaryColor-tint-100 text-white hover:bg-primaryColor w-full
+    }
+    .label-title{
+        @apply text-base font-bold block text-black-tint-200 mb-1
+    }
+}
+
+*,
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+div,
+span,
+article,
+ul,
+li {
+    font-family: "Poppins", sans-serif;
+}
+body{
+    scroll-behavior: smooth;
+}
+::placeholder{
+    color: #646464;
+    font-weight: normal;
+}

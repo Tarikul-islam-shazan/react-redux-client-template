@@ -13,7 +13,7 @@ const LoginPage = () => {
                             <div className="form-container">
                                 <div className="entry-title">
                                     <img src={nitexLogoDark} alt="nitex"/>
-                                    <h2 className="belong-here-text">Belong Here</h2>
+                                    <h2 className="belong-here-text font-bold">Belong Here</h2>
                                 </div>
                                 <div className="login-register-tab">
                                     <ul>

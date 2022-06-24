@@ -6,6 +6,7 @@ import Http from '../../services/Http'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { getRedirectUrl } from '../../services/Util'
+import 'tw-elements'
 
 const Login = () => {
     const [loader, setLoader] = useState(false)
@@ -102,7 +103,7 @@ const Login = () => {
                             <label htmlFor='email'>Email address</label>
                             <input
                                 type='email'
-                                className='form-control'
+                                className='form-field'
                                 id='email'
                                 placeholder='Enter email'
                                 name='email'
@@ -118,7 +119,7 @@ const Login = () => {
                             <div className='input-group'>
                                 <input
                                     type={passwordType}
-                                    className='form-control'
+                                    className='form-field'
                                     id='password'
                                     placeholder='Password'
                                     name='password'
@@ -174,7 +175,7 @@ const Login = () => {
                         <label htmlFor='name'>Full Name</label>
                         <input
                             type='text'
-                            className='form-control'
+                            className='form-field'
                             id='name'
                             placeholder='Write Here'
                             name='name'
@@ -186,7 +187,7 @@ const Login = () => {
                         <label htmlFor='contactNumber'>Contact Number</label>
                         <input
                             type='text'
-                            className='form-control'
+                            className='form-field'
                             id='contactNumber'
                             placeholder='Contact Number'
                             name='contactNumber'
@@ -198,7 +199,7 @@ const Login = () => {
                         <label htmlFor='brandName'>Brand Name</label>
                         <input
                             type='text'
-                            className='form-control'
+                            className='form-field'
                             id='brandName'
                             placeholder='Brand Name'
                             name='brandName'
@@ -225,14 +226,13 @@ const Login = () => {
         <LoaderComponent loading={loader}>
             <div className='login-container'>
                 <div className='container-fluid'>
-                    <div className='row'>
-                        <div className='col-md-7' />
-                        <div className='col-md-4'>
+                    <div className='p-10'>
+                        <div className=''>
                             <div className='login-form-contents'>
-                                <div className='form-container'>
+                                <div className='form-container max-w-[586px] ml-auto'>
                                     <div className='entry-title'>
                                         <img src={nitexLogoDark} alt='nitex' />
-                                        <h2 className='belong-here-text'>
+                                        <h2 className='belong-here-text font-bold text-6xl'>
                                             Belong Here
                                         </h2>
                                     </div>
@@ -242,6 +242,36 @@ const Login = () => {
                             </div>
                         </div>
                         <div className='col-md-1' />
+                        <p className='md:space-x-1 space-y-1 md:space-y-0 mb-4'>
+                            <a
+                                className='inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
+                                data-bs-toggle='collapse'
+                                href='#collapseExample'
+                                role='button'
+                                aria-expanded='false'
+                                aria-controls='collapseExample'
+                            >
+                                Link with href
+                            </a>
+                            <button
+                                className='inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
+                                type='button'
+                                data-bs-toggle='collapse'
+                                data-bs-target='#collapseExample'
+                                aria-expanded='false'
+                                aria-controls='collapseExample'
+                            >
+                                Button with data-bs-target
+                            </button>
+                        </p>
+                        <div className='collapse' id='collapseExample'>
+                            <div className='block p-6 rounded-lg shadow-lg bg-white'>
+                                Some placeholder content for the collapse
+                                component. This panel is hidden by default but
+                                revealed when the user activates the relevant
+                                trigger.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
