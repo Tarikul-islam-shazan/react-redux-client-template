@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import App from './app/App.js'
 import Store from './app/redux/Store'
 import * as serviceWorker from './serviceWorker'
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

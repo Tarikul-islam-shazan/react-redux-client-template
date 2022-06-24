@@ -12,6 +12,7 @@ import {
 import Login from './modules/login-journey/Login'
 import Dashboard from './modules/dashboard/Dashboard'
 import DefaultLayout from './layouts/DefaultLayout'
+import Ui from '../assets/designs/Ui'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -34,6 +35,7 @@ const App = () => {
                         </Route>
                     </Route>
                     <Route path='/login' element={<Login />} />
+                    <Route path='/ui' element={<Ui />} />
                 </Routes>
             </Router>
             <ToastContainer
