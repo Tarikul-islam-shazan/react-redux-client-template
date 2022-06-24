@@ -9,7 +9,7 @@ const LoginPage = () => {
                 <div className="row">
                     <div className="col-md-7"/>
                     <div className="col-md-4">
-                        <div className="login-form-contents sdfsd">
+                        <div className="login-form-contents">
                             <div className="form-container">
                                 <div className="entry-title">
                                     <img src={nitexLogoDark} alt="nitex"/>
