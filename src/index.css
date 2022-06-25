@@ -8,20 +8,21 @@
     .form-field {
         @apply block h-[58px] w-full border border-white bg-white py-4 px-7 text-base text-primaryColor focus:rounded-none focus:outline-none focus:border-primaryColor;
     }
-    .input-search-item {
-        @apply focus:border-primaryColor-tint-100 block h-[50px] rounded-md border border-black-tint-700 bg-white p-3 pl-10 shadow-sm focus:outline-none focus:ring-1 md:text-sm
+    .btn{
+        @apply py-4 px-8 bg-primaryColor text-white-shade-100 text-xl uppercase inline-block hover:shadow-btnHover transition font-light
     }
-    .textarea-item {
-        @apply focus:border-primaryColor-tint-100 hover:border block w-full rounded-md border border-black-tint-700 bg-white p-3 shadow-sm focus:outline-none focus:ring-1 md:text-sm !important;
+    .label{
+        @apply text-base text-primaryColor mb-3 block font-medium
     }
-
-    .default-button{
-        @apply rounded mt-6 p-4 text-base font-bold capitalize duration-300 bg-primaryColor-tint-100 text-white hover:bg-primaryColor w-full
+    .badge{
+        @apply px-4 rounded-[20px] text-base text-primaryColor inline-block bg-pending uppercase
     }
-    .label-title{
-        @apply text-base font-bold block text-black-tint-200 mb-1
+    .color-circle {
+        @apply w-[32px] h-[32px] bg-pending rounded-full border border-primaryColor-shade-100 inline-block
     }
 }
+
+
 
 *,
 html,
@@ -43,8 +44,44 @@ li {
 }
 body{
     scroll-behavior: smooth;
+    background: #F5F5F5;
 }
 ::placeholder{
     color: #646464;
     font-weight: normal;
 }
+h1{
+    font-size: 60px;
+    line-height: 68px;
+}
+h2{
+    font-size: 44px;
+    line-height: 52px;
+}
+h3{
+    font-size: 36px;
+    line-height: 44px;
+}
+h4{
+    font-size: 28px;
+    line-height: 36px;
+}
+h5{
+    font-size: 20px;
+    line-height: 28px;
+}
+h6{
+    font-size: 16px;
+    line-height: 24px;
+}
+p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+    color: #282828;
+}
+.form-group{
+    margin-bottom: 35px;
+}
+
+

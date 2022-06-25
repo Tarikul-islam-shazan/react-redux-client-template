@@ -1,10 +1,12 @@
 import React from 'react'
-import LoginPage from './login-journey/LoginPage'
+// import StyleGuide from './style-guide/'
+import Home from './home/'
 
 const Ui = () => {
     return (
-        <div className='container mx-auto bg-gray-300 rounded-xl'>
-            <LoginPage />
+        <div className='wrapper'>
+            {/*<StyleGuide />*/}
+            <Home />
         </div>
     )
 }

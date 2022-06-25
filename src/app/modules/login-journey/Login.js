@@ -169,7 +169,7 @@ const Login = () => {
                         </div>
                         <div className='form-group'>
                             <div className='flex items-center'>
-                                <span className='flex-1'>
+                                <span className=''>
                                     <input
                                         type='checkbox'
                                         name='agree'
@@ -217,14 +217,14 @@ const Login = () => {
     const renderRegistrationForm = () => {
         if (activeTab === 'register') {
             return (
-                <div className='login-input-forms'>
+                <div className='login-input-forms register'>
                     <div className='form-group'>
                         <label htmlFor='name'>Full Name</label>
                         <input
                             type='text'
                             className='form-field'
                             id='name'
-                            placeholder='Write Here'
+                            placeholder='Write Here ...'
                             name='name'
                             value={inputData?.name || ''}
                             onChange={handleChangeLogin}
@@ -236,7 +236,7 @@ const Login = () => {
                             type='text'
                             className='form-field'
                             id='contactNumber'
-                            placeholder='Contact Number'
+                            placeholder='e.g. 01521300845'
                             name='contactNumber'
                             value={inputData?.contactNumber || ''}
                             onChange={handleChangeLogin}
@@ -248,7 +248,7 @@ const Login = () => {
                             type='text'
                             className='form-field'
                             id='brandName'
-                            placeholder='Brand Name'
+                            placeholder='Write Here ...'
                             name='brandName'
                             value={inputData?.brandName || ''}
                             onChange={handleChangeLogin}
