@@ -103,23 +103,28 @@ const Login = () => {
                             <label htmlFor='email'>Email address</label>
                             <input
                                 type='email'
-                                className='form-field'
+                                className='form-field border-error'
                                 id='email'
                                 placeholder='Enter email'
                                 name='email'
                                 value={inputData?.email || ''}
                                 onChange={handleChangeLogin}
                             />
+                            <span className='text-error text-sm'>
+                                Invalid Email Address
+                            </span>
                         </div>
                         <div className='form-group '>
-                            <button className='forget-password'>
-                                Forget Password
-                            </button>
-                            <label htmlFor='password'>Password</label>
-                            <div className='input-group'>
+                            <div className='flex justify-between items-center'>
+                                <label htmlFor='password'>Password</label>
+                                <button className='forget-password uppercase underline'>
+                                    Forget Password
+                                </button>
+                            </div>
+                            <div className='input-group relative'>
                                 <input
                                     type={passwordType}
-                                    className='form-field'
+                                    className='form-field pr-12'
                                     id='password'
                                     placeholder='Password'
                                     name='password'
@@ -127,24 +132,66 @@ const Login = () => {
                                     onChange={handleChangeLogin}
                                 />
                                 <span
-                                    className='input-group-text'
+                                    className='absolute cursor-pointer right-[10px] top-[10px]'
                                     onClick={togglePassword}
                                 >
-                                    @
+                                    <svg
+                                        width='40'
+                                        height='40'
+                                        viewBox='0 0 40 40'
+                                        fill='none'
+                                        xmlns='http://www.w3.org/2000/svg'
+                                    >
+                                        <path
+                                            d='M9 20C9 20 13 12 20 12C27 12 31 20 31 20'
+                                            stroke='#282828'
+                                            strokeWidth='1.5'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                        <path
+                                            d='M9 20C9 20 13 28 20 28C27 28 31 20 31 20'
+                                            stroke='#282828'
+                                            strokeWidth='1.5'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                        <path
+                                            d='M20 23C21.6569 23 23 21.6569 23 20C23 18.3431 21.6569 17 20 17C18.3431 17 17 18.3431 17 20C17 21.6569 18.3431 23 20 23Z'
+                                            stroke='#282828'
+                                            strokeWidth='1.5'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                    </svg>
                                 </span>
                             </div>
                         </div>
                         <div className='form-group'>
-                            <div className='d-flex align-items-center'>
-                                <input
-                                    type='checkbox'
-                                    name='agree'
-                                    value={inputData?.agree}
-                                    onChange={handleChangeLogin}
-                                />
+                            <div className='flex items-center'>
+                                <span className='flex-1'>
+                                    <input
+                                        type='checkbox'
+                                        name='agree'
+                                        value={inputData?.agree}
+                                        onChange={handleChangeLogin}
+                                    />
+                                </span>
                                 <span className='agree-text'>
                                     Agree our
-                                    <a href='#'>Terms &amp; Conditions</a>
+                                    <a
+                                        href='#'
+                                        className='border-b border-black  mx-2 uppercase'
+                                    >
+                                        Terms & Conditions
+                                    </a>
+                                    &
+                                    <a
+                                        href='#'
+                                        className='border-b border-black  mx-2 uppercase'
+                                    >
+                                        Policies
+                                    </a>
                                 </span>
                             </div>
                         </div>
@@ -225,52 +272,17 @@ const Login = () => {
     return (
         <LoaderComponent loading={loader}>
             <div className='login-container'>
-                <div className='container-fluid'>
-                    <div className='p-10'>
-                        <div className=''>
-                            <div className='login-form-contents'>
-                                <div className='form-container max-w-[586px] ml-auto'>
-                                    <div className='entry-title'>
-                                        <img src={nitexLogoDark} alt='nitex' />
-                                        <h2 className='belong-here-text font-bold text-6xl'>
-                                            Belong Here
-                                        </h2>
-                                    </div>
-                                    {renderLoginForm()}
-                                    {renderRegistrationForm()}
-                                </div>
+                <div className='h-full sm:p-10'>
+                    <div className='login-form-contents'>
+                        <div className='form-container xl:max-w-[500px]  3xl:max-w-[586px] xl:ml-auto'>
+                            <div className='entry-title'>
+                                <img src={nitexLogoDark} alt='nitex' />
+                                <h2 className='belong-here-text font-bold text-6xl'>
+                                    Belong Here
+                                </h2>
                             </div>
-                        </div>
-                        <div className='col-md-1' />
-                        <p className='md:space-x-1 space-y-1 md:space-y-0 mb-4'>
-                            <a
-                                className='inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-                                data-bs-toggle='collapse'
-                                href='#collapseExample'
-                                role='button'
-                                aria-expanded='false'
-                                aria-controls='collapseExample'
-                            >
-                                Link with href
-                            </a>
-                            <button
-                                className='inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-                                type='button'
-                                data-bs-toggle='collapse'
-                                data-bs-target='#collapseExample'
-                                aria-expanded='false'
-                                aria-controls='collapseExample'
-                            >
-                                Button with data-bs-target
-                            </button>
-                        </p>
-                        <div className='collapse' id='collapseExample'>
-                            <div className='block p-6 rounded-lg shadow-lg bg-white'>
-                                Some placeholder content for the collapse
-                                component. This panel is hidden by default but
-                                revealed when the user activates the relevant
-                                trigger.
-                            </div>
+                            {renderLoginForm()}
+                            {renderRegistrationForm()}
                         </div>
                     </div>
                 </div>

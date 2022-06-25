@@ -3,8 +3,27 @@
     background: url(../images/login/login-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
+    @media screen and (max-width: 1440px) {
+        background-position: 40% 0;
+    }
+    @media screen and (max-width: 767px) {
+        background: none;
+    }
     .login-form-contents{
-        padding-top: 100px;
+        padding-top: 70px;
+        padding-right: 100px;
+        @media screen and (max-width: 1440px) {
+            padding-top: 15px;
+            padding-right: 30px;
+        }
+        @media screen and (max-width: 1024px) {
+            padding: 50px;
+            background: #ebebeb;
+        }
+        @media screen and (max-width: 767px) {
+            padding: 30px;
+            height: 100vh;
+        }
         .form-container{
             .entry-title{
                 .belong-here-text{
@@ -13,10 +32,21 @@
                     color: #E0E0E1;
                     font-family: 'Poppins', sans-serif;
                     text-transform: uppercase;
+                    @media screen and (max-width: 767px) {
+                        font-size: 50px;
+                        line-height: 50px;
+                        margin-top: 12px;
+                    }
                 }
             }
             .login-register-tab{
-                margin: 80px 0 40px 0;
+                margin: 80px 0 60px 0;
+                @media screen and (max-width: 1024px) {
+                    margin: 45px 0 54px 0;
+                }
+                @media screen and (max-width: 1024px) {
+                    margin: 25px 0 45px 0;
+                }
                 ul{
                     display: flex;
                     li{
@@ -28,6 +58,10 @@
                         position: relative;
                         text-transform: uppercase;
                         font-family: 'Poppins', sans-serif;
+                        cursor: pointer;
+                        @media screen and (max-width: 767px) {
+                            font-size: 24px;
+                        }
                         &.active{
                             font-weight: 700;
                             color: #282828;
@@ -37,9 +71,12 @@
                                 width: 8px;
                                 height: 8px;
                                 background:#282828;
-                                bottom: -20px;
+                                bottom: -15px;
                                 left: 50%;
                                 transform: translateX(-50%) rotate(45deg) ;
+                                @media screen and (max-width: 767px) {
+                                    bottom: -3px;
+                                }
                             }
                         }
                     }
@@ -55,6 +92,7 @@
                         line-height: 28px;
                         color: #282828;
                         margin-bottom: 20px;
+                        display: block;
                     }
                     input[type="checkbox"] {
                         -webkit-appearance: none;
@@ -63,6 +101,8 @@
                         margin: 0;
                         display: grid;
                         place-content: center;
+                        cursor: pointer;
+                        margin-top: 2px;
                         }
                         input[type="checkbox"] {
                         appearance: none;
@@ -97,9 +137,12 @@
                             }
                         }
                         .agree-text{
-                            margin-left: 32px;
+                            margin-left: 25px;
                             font-size: 20px;
                             line-height: 28px;
+                            @media screen and (max-width: 767px) {
+                                font-size: 15px;
+                            }
                         }
                         button{
                             &.submit-btn{
@@ -111,10 +154,14 @@
                                 font-size: 20px;
                                 line-height: 28px;
                                 padding: 15px 10px 15px 30px;
+                                cursor: pointer;
                                 img{
                                     position: absolute;
                                     right: 10px;
                                     top: 10px;
+                                }
+                                &:hover{
+                                    opacity: .9;
                                 }
                             }
                         }
