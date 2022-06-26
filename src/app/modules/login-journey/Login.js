@@ -75,198 +75,135 @@ const Login = () => {
     }
 
     const renderLoginForm = () => {
-        if (activeTab === 'login') {
-            return (
-                <>
-                    <div className='login-register-tab'>
-                        <ul>
-                            <li
-                                className={
-                                    activeTab === 'login' ? 'active' : ''
-                                }
-                                onClick={() => setActiveTab('login')}
-                            >
-                                Login
-                            </li>
-                            <li
-                                className={
-                                    activeTab === 'register' ? 'active' : ''
-                                }
-                                onClick={() => setActiveTab('register')}
-                            >
-                                Register
-                            </li>
-                        </ul>
+        return (
+            <>
+                <div className='login-register-tab'>
+                    <ul>
+                        <li
+                            className={activeTab === 'login' ? 'active' : ''}
+                            onClick={() => setActiveTab('login')}
+                        >
+                            Login
+                        </li>
+                        <li
+                            className={activeTab === 'register' ? 'active' : ''}
+                            onClick={() => setActiveTab('register')}
+                        >
+                            Register
+                        </li>
+                    </ul>
+                </div>
+                <div className='login-input-forms'>
+                    <div className='form-group'>
+                        <label htmlFor='email'>Email address</label>
+                        <input
+                            type='email'
+                            className='form-field border-error'
+                            id='email'
+                            placeholder='Enter email'
+                            name='email'
+                            value={inputData?.email || ''}
+                            onChange={handleChangeLogin}
+                        />
+                        <span className='text-error text-sm'>
+                            Invalid Email Address
+                        </span>
                     </div>
-                    <div className='login-input-forms'>
-                        <div className='form-group'>
-                            <label htmlFor='email'>Email address</label>
-                            <input
-                                type='email'
-                                className='form-field border-error'
-                                id='email'
-                                placeholder='Enter email'
-                                name='email'
-                                value={inputData?.email || ''}
-                                onChange={handleChangeLogin}
-                            />
-                            <span className='text-error text-sm'>
-                                Invalid Email Address
-                            </span>
-                        </div>
-                        <div className='form-group '>
-                            <div className='flex justify-between items-center'>
-                                <label htmlFor='password'>Password</label>
-                                <button className='forget-password uppercase underline'>
-                                    Forget Password
-                                </button>
-                            </div>
-                            <div className='input-group relative'>
-                                <input
-                                    type={passwordType}
-                                    className='form-field pr-12'
-                                    id='password'
-                                    placeholder='Password'
-                                    name='password'
-                                    value={inputData?.password || ''}
-                                    onChange={handleChangeLogin}
-                                />
-                                <span
-                                    className='absolute cursor-pointer right-[10px] top-[10px]'
-                                    onClick={togglePassword}
-                                >
-                                    <svg
-                                        width='40'
-                                        height='40'
-                                        viewBox='0 0 40 40'
-                                        fill='none'
-                                        xmlns='http://www.w3.org/2000/svg'
-                                    >
-                                        <path
-                                            d='M9 20C9 20 13 12 20 12C27 12 31 20 31 20'
-                                            stroke='#282828'
-                                            strokeWidth='1.5'
-                                            strokeLinecap='round'
-                                            strokeLinejoin='round'
-                                        />
-                                        <path
-                                            d='M9 20C9 20 13 28 20 28C27 28 31 20 31 20'
-                                            stroke='#282828'
-                                            strokeWidth='1.5'
-                                            strokeLinecap='round'
-                                            strokeLinejoin='round'
-                                        />
-                                        <path
-                                            d='M20 23C21.6569 23 23 21.6569 23 20C23 18.3431 21.6569 17 20 17C18.3431 17 17 18.3431 17 20C17 21.6569 18.3431 23 20 23Z'
-                                            stroke='#282828'
-                                            strokeWidth='1.5'
-                                            strokeLinecap='round'
-                                            strokeLinejoin='round'
-                                        />
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div className='form-group'>
-                            <div className='flex items-center'>
-                                <span className=''>
-                                    <input
-                                        type='checkbox'
-                                        name='agree'
-                                        value={inputData?.agree}
-                                        onChange={handleChangeLogin}
-                                    />
-                                </span>
-                                <span className='agree-text'>
-                                    Agree our
-                                    <a
-                                        href='#'
-                                        className='border-b border-black  mx-2 uppercase'
-                                    >
-                                        Terms & Conditions
-                                    </a>
-                                    &
-                                    <a
-                                        href='#'
-                                        className='border-b border-black  mx-2 uppercase'
-                                    >
-                                        Policies
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div className='form-group'>
-                            <button
-                                type='submit'
-                                className='submit-btn'
-                                onClick={handleLoginSubmit}
-                                disabled={!inputData?.agree}
-                            >
-                                Login Now
-                                <img src={rightWhite} alt='right' />
+                    <div className='form-group '>
+                        <div className='flex justify-between items-center'>
+                            <label htmlFor='password'>Password</label>
+                            <button className='forget-password uppercase underline'>
+                                Forget Password
                             </button>
                         </div>
+                        <div className='input-group relative'>
+                            <input
+                                type={passwordType}
+                                className='form-field pr-12'
+                                id='password'
+                                placeholder='Password'
+                                name='password'
+                                value={inputData?.password || ''}
+                                onChange={handleChangeLogin}
+                            />
+                            <span
+                                className='absolute cursor-pointer right-[10px] top-[10px]'
+                                onClick={togglePassword}
+                            >
+                                <svg
+                                    width='40'
+                                    height='40'
+                                    viewBox='0 0 40 40'
+                                    fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'
+                                >
+                                    <path
+                                        d='M9 20C9 20 13 12 20 12C27 12 31 20 31 20'
+                                        stroke='#282828'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                    <path
+                                        d='M9 20C9 20 13 28 20 28C27 28 31 20 31 20'
+                                        stroke='#282828'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                    <path
+                                        d='M20 23C21.6569 23 23 21.6569 23 20C23 18.3431 21.6569 17 20 17C18.3431 17 17 18.3431 17 20C17 21.6569 18.3431 23 20 23Z'
+                                        stroke='#282828'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                </svg>
+                            </span>
+                        </div>
                     </div>
-                </>
-            )
-        }
-    }
-
-    const handleRegisterSubmit = () => {}
-
-    const renderRegistrationForm = () => {
-        if (activeTab === 'register') {
-            return (
-                <div className='login-input-forms register'>
                     <div className='form-group'>
-                        <label htmlFor='name'>Full Name</label>
-                        <input
-                            type='text'
-                            className='form-field'
-                            id='name'
-                            placeholder='Write Here ...'
-                            name='name'
-                            value={inputData?.name || ''}
-                            onChange={handleChangeLogin}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor='contactNumber'>Contact Number</label>
-                        <input
-                            type='text'
-                            className='form-field'
-                            id='contactNumber'
-                            placeholder='e.g. 01521300845'
-                            name='contactNumber'
-                            value={inputData?.contactNumber || ''}
-                            onChange={handleChangeLogin}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor='brandName'>Brand Name</label>
-                        <input
-                            type='text'
-                            className='form-field'
-                            id='brandName'
-                            placeholder='Write Here ...'
-                            name='brandName'
-                            value={inputData?.brandName || ''}
-                            onChange={handleChangeLogin}
-                        />
+                        <div className='flex items-center'>
+                            <span className=''>
+                                <input
+                                    type='checkbox'
+                                    name='agree'
+                                    value={inputData?.agree}
+                                    onChange={handleChangeLogin}
+                                />
+                            </span>
+                            <span className='agree-text'>
+                                Agree our
+                                <a
+                                    href='#'
+                                    className='border-b border-black  mx-2 uppercase'
+                                >
+                                    Terms & Conditions
+                                </a>
+                                &
+                                <a
+                                    href='#'
+                                    className='border-b border-black  mx-2 uppercase'
+                                >
+                                    Policies
+                                </a>
+                            </span>
+                        </div>
                     </div>
                     <div className='form-group'>
                         <button
                             type='submit'
                             className='submit-btn'
-                            onClick={handleRegisterSubmit}
+                            onClick={handleLoginSubmit}
+                            disabled={!inputData?.agree}
                         >
-                            Submit
+                            Login Now
                             <img src={rightWhite} alt='right' />
                         </button>
                     </div>
                 </div>
-            )
-        }
+            </>
+        )
     }
 
     return (
@@ -282,7 +219,6 @@ const Login = () => {
                                 </h2>
                             </div>
                             {renderLoginForm()}
-                            {renderRegistrationForm()}
                         </div>
                     </div>
                 </div>
