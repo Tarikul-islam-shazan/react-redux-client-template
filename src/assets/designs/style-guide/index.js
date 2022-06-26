@@ -72,7 +72,7 @@ const StyleGuide = () => {
 
                 {/*Activated Soon Modal*/}
                 <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ActivatedSoon" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                    <div className="modal-dialog max-w-[1840px] mx-4 overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-dialog max-w-[1840px] mx-4 5xl:mx-auto overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
                         <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
                             <div className="modal-header flex flex-shrink-0 items-center justify-between p-8 pb-0">
                                 <button type="button"
