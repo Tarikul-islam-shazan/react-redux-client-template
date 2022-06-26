@@ -1,4 +1,5 @@
 import React from 'react'
+import SelectComponent from "../../../app/common/SelectComponent";
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -260,6 +261,11 @@ const StyleGuide = () => {
                                       </svg>
                                </span>
                             </div>
+                        </div>
+                        <div className="input-group">
+                            <SelectComponent
+                                options={[{label: "Country", value: "country"}]}
+                            />
                         </div>
                     </div>
                 </div>
