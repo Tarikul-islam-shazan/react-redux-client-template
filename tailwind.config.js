@@ -49,6 +49,12 @@ module.exports = {
                 },
                 warning: {
                     DEFAULT: '#FFE100'
+                },
+                pink: {
+                    DEFAULT: '#AF009E'
+                },
+                blue: {
+                    DEFAULT: '#0476E0'
                 }
             },
             fontFamily: {
@@ -65,6 +71,9 @@ module.exports = {
                 '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
                 inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
                 none: 'none'
+            },
+            fontSize: {
+                px28: ['28px', { lineHeight: '1.5rem' }]
             }
         }
     },

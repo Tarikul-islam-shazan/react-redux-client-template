@@ -79,3 +79,26 @@
      -webkit-line-clamp: 2;
      -webkit-box-orient: vertical;
  }
+ .circle-bg:after {
+     width: 256px;
+     height: 256px;
+     content: "";
+     position: absolute;
+     display: block;
+     background: #fff;
+     opacity: 0.1;
+     border-radius: 100%;
+     right: -100px;
+ }
+ .circle-bg2:before {
+     width: 446px;
+     height: 446px;
+     content: "";
+     position: absolute;
+     display: block;
+     background: #fff;
+     opacity: 0.1;
+     border-radius: 100%;
+     right: -140px;
+     top: -90px;
+ }
