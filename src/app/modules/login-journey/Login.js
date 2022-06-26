@@ -13,16 +13,14 @@ const Login = () => {
     const [activeTab, setActiveTab] = useState('login')
     const [passwordType, setPasswordType] = useState('password')
     const [inputData, setInputData] = useState({})
-    const [errorMessages, setErrorMessages] = useState([])
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [isRegisterButtonClicked, setIsRegisterButtonClicked] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         localStorage.clear()
     }, [])
-
-    useEffect(() => {
-        setInputData({})
-    }, [activeTab])
 
     const handleChangeLogin = (e) => {
         let { name, value } = e.target
@@ -36,6 +34,8 @@ const Login = () => {
     }
 
     const handleLoginSubmit = () => {
+        setPasswordError('')
+        setEmailError('')
         setLoader(true)
         Http.POST('login', inputData)
             .then(({ data }) => {
@@ -62,11 +62,20 @@ const Login = () => {
                 }
             })
             .catch((error) => {
-                setErrorMessages(
-                    JSON.parse(JSON.stringify(error.response.data.message))
-                )
                 setLoader(false)
-                toast.error(error.response.data.message)
+                try {
+                    let errors = JSON.parse(error.response.data.message)
+                    for(let item of errors){
+                        if(item.field === 'email'){
+                            setEmailError(item.defaultMessage)
+                        }
+                        if(item.field === 'password'){
+                            setPasswordError(item.defaultMessage)
+                        }
+                    }
+                }catch (e){
+                    toast.error(error.response.data.message)
+                }
             })
     }
 
@@ -78,62 +87,98 @@ const Login = () => {
         }
     }
 
-    const renderLoginForm = () => {
-        return (
-            <>
-                <div className='login-register-tab'>
-                    <ul>
-                        <li
-                            className={activeTab === 'login' ? 'active' : ''}
-                            onClick={() => setActiveTab('login')}
-                        >
-                            Login
-                        </li>
-                        <li
-                            className={activeTab === 'register' ? 'active' : ''}
-                            onClick={() => setActiveTab('register')}
-                        >
-                            Register
-                        </li>
-                    </ul>
+    const renderLoginOrRegister = () => {
+        if(activeTab === 'login'){
+            return(
+                <div className="form-group">
+                    <button
+                        type='submit'
+                        className='submit-btn'
+                        onClick={handleLoginSubmit}
+                        disabled={!inputData?.agree}
+                    >
+                        Login Now
+                        <img src={rightWhite} alt='right'/>
+                    </button>
                 </div>
-                <div className='login-input-forms'>
-                    <div className='form-group'>
-                        <label htmlFor='email'>Email address</label>
-                        <input
-                            type='email'
-                            className='form-field border-error'
-                            id='email'
-                            placeholder='Enter email'
-                            name='email'
-                            value={inputData?.email || ''}
-                            onChange={handleChangeLogin}
-                        />
-                        <span className='text-error text-sm'>
-                            Invalid Email Address
-                        </span>
+            )
+        }else{
+            return (
+                <div className="form-group">
+                    <button
+                        type='submit'
+                        className='submit-btn'
+                        onClick={() => setIsRegisterButtonClicked(true)}
+                        disabled={!inputData?.agree}
+                    >
+                        Register Now
+                        <img src={rightWhite} alt='right'/>
+                    </button>
+                </div>
+            )
+        }
+    }
+
+    const renderLoginForm = () => {
+        if(!isRegisterButtonClicked) {
+            return (
+                <>
+                    <div className='login-register-tab'>
+                        <ul>
+                            <li
+                                className={activeTab === 'login' ? 'active' : ''}
+                                onClick={() => setActiveTab('login')}
+                            >
+                                Login
+                            </li>
+                            <li
+                                className={activeTab === 'register' ? 'active' : ''}
+                                onClick={() => setActiveTab('register')}
+                            >
+                                Register
+                            </li>
+                        </ul>
                     </div>
-                    <div className='form-group '>
-                        <div className='flex justify-between items-center'>
-                            <label htmlFor='password'>Password</label>
-                            <button className='forget-password uppercase underline'>
-                                Forget Password
-                            </button>
-                        </div>
-                        <div className='input-group relative'>
+                    <div className='login-input-forms'>
+                        <div className='form-group'>
+                            <label htmlFor='email'>Email address</label>
                             <input
-                                type={passwordType}
-                                className='form-field pr-12'
-                                id='password'
-                                placeholder='Password'
-                                name='password'
-                                value={inputData?.password || ''}
+                                type='email'
+                                className={emailError ? 'form-field border-error' : 'form-field'}
+                                id='email'
+                                placeholder='Enter email'
+                                name='email'
+                                value={inputData?.email || ''}
                                 onChange={handleChangeLogin}
                             />
-                            <span
-                                className='absolute cursor-pointer right-[10px] top-[10px]'
-                                onClick={togglePassword}
-                            >
+                            {emailError && <span className='text-error text-sm'>
+                            {emailError}
+                        </span>}
+                        </div>
+                        <div className='form-group '>
+                            <div className='flex justify-between items-center'>
+                                <label htmlFor='password'>Password</label>
+                                <button className='forget-password uppercase underline'>
+                                    Forget Password
+                                </button>
+                            </div>
+                            <div className='input-group relative'>
+                                <input
+                                    type={passwordType}
+                                    id='password'
+                                    className={passwordError ? 'form-field pr-12 border-error' : 'form-field pr-12'}
+                                    placeholder='Password'
+                                    name='password'
+                                    value={inputData?.password || ''}
+                                    onChange={handleChangeLogin}
+                                />
+                                {passwordError && <span className='text-error text-sm'>
+                                {passwordError}
+                            </span>}
+                                <span
+                                    className='absolute cursor-pointer right-[10px] top-[10px]'
+                                    onClick={togglePassword}
+                                >
                                 <svg
                                     width='40'
                                     height='40'
@@ -164,10 +209,10 @@ const Login = () => {
                                     />
                                 </svg>
                             </span>
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-group'>
-                        <div className='flex items-center'>
+                        <div className='form-group'>
+                            <div className='flex items-center'>
                             <span className=''>
                                 <input
                                     type='checkbox'
@@ -176,7 +221,7 @@ const Login = () => {
                                     onChange={handleChangeLogin}
                                 />
                             </span>
-                            <span className='agree-text'>
+                                <span className='agree-text'>
                                 Agree our
                                 <a
                                     href='#'
@@ -192,22 +237,70 @@ const Login = () => {
                                     Policies
                                 </a>
                             </span>
+                            </div>
                         </div>
+                        {renderLoginOrRegister()}
                     </div>
-                    <div className="form-group">
+                </>
+            )
+        }
+    }
+
+    const handleRegisterSubmit = () => {}
+
+    const renderRegistrationForm = () => {
+        if (activeTab === 'register' && isRegisterButtonClicked) {
+            return (
+                <div className='login-input-forms register'>
+                    <div className='form-group'>
+                        <label htmlFor='name'>Full Name</label>
+                        <input
+                            type='text'
+                            className='form-field'
+                            id='name'
+                            placeholder='Write Here ...'
+                            name='name'
+                            value={inputData?.name || ''}
+                            onChange={handleChangeLogin}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='contactNumber'>Contact Number</label>
+                        <input
+                            type='text'
+                            className='form-field'
+                            id='contactNumber'
+                            placeholder='e.g. 01521300845'
+                            name='contactNumber'
+                            value={inputData?.contactNumber || ''}
+                            onChange={handleChangeLogin}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='brandName'>Brand Name</label>
+                        <input
+                            type='text'
+                            className='form-field'
+                            id='brandName'
+                            placeholder='Write Here ...'
+                            name='brandName'
+                            value={inputData?.brandName || ''}
+                            onChange={handleChangeLogin}
+                        />
+                    </div>
+                    <div className='form-group'>
                         <button
                             type='submit'
                             className='submit-btn'
-                            onClick={handleLoginSubmit}
-                            disabled={!inputData?.agree}
+                            onClick={handleRegisterSubmit}
                         >
-                            Login Now
+                            Submit
                             <img src={rightWhite} alt='right' />
                         </button>
                     </div>
                 </div>
-            </>
-        )
+            )
+        }
     }
 
     return (
@@ -223,6 +316,7 @@ const Login = () => {
                                 </h2>
                             </div>
                             {renderLoginForm()}
+                            {renderRegistrationForm()}
                         </div>
                     </div>
                 </div>
