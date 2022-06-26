@@ -685,7 +685,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5">
                     <div className="collection-box">
                         <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
                             <div className="h-full">
