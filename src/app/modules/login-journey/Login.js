@@ -11,6 +11,7 @@ import 'tw-elements'
 import countryList from '../../services/DialCodeList';
 import SelectComponent from '../../common/SelectComponent';
 import ForgetPassword from './ForgetPassword';
+import moment from 'moment';
 
 const Login = () => {
     const [loader, setLoader] = useState(true)
@@ -26,11 +27,8 @@ const Login = () => {
 
 
     useEffect(() => {
-        // let newDate = new Date();
-        // console.log(newDate)
-        // let localDateTime = convertDateTimeToLocal(newDate.getDate(), newDate.getTime())
-        // console.log(localDateTime)
-        Http.GET_WITH_ID_PARAM('getLoginPageBgImage','','LOGIN_PAGE')
+        let utcFormat = moment(new Date()).format()
+        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])} TT`)
             .then(({ data }) => {
                 setLoader(false)
             })
