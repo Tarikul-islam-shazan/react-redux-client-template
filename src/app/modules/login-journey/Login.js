@@ -13,6 +13,7 @@ const Login = () => {
     const [activeTab, setActiveTab] = useState('login')
     const [passwordType, setPasswordType] = useState('password')
     const [inputData, setInputData] = useState({})
+    const [errorMessages, setErrorMessages] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -61,6 +62,9 @@ const Login = () => {
                 }
             })
             .catch((error) => {
+                setErrorMessages(
+                    JSON.parse(JSON.stringify(error.response.data.message))
+                )
                 setLoader(false)
                 toast.error(error.response.data.message)
             })
@@ -190,7 +194,7 @@ const Login = () => {
                             </span>
                         </div>
                     </div>
-                    <div className='form-group'>
+                    <div className="form-group">
                         <button
                             type='submit'
                             className='submit-btn'
