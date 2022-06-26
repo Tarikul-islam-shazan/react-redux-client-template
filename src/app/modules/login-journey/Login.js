@@ -7,6 +7,9 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { getRedirectUrl } from '../../services/Util'
 import 'tw-elements'
+import countryList from '../../services/DialCodeList';
+import SelectComponent from '../../common/SelectComponent';
+import ForgetPassword from './ForgetPassword';
 
 const Login = () => {
     const [loader, setLoader] = useState(false)
@@ -15,12 +18,24 @@ const Login = () => {
     const [inputData, setInputData] = useState({})
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const [listOfCountryCode, setListOfCountryCode] = useState([])
     const [isRegisterButtonClicked, setIsRegisterButtonClicked] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         localStorage.clear()
     }, [])
+
+    useEffect(() => {
+        let countryCodeList = []
+        for(let item of countryList){
+            countryCodeList.push({
+                label: `${item.code} (${item.dial_code})`,
+                value: item.dial_code
+            })
+        }
+        setListOfCountryCode(countryCodeList)
+    },[isRegisterButtonClicked])
 
     const handleChangeLogin = (e) => {
         let { name, value } = e.target
@@ -158,9 +173,13 @@ const Login = () => {
                         <div className='form-group '>
                             <div className='flex justify-between items-center'>
                                 <label htmlFor='password'>Password</label>
-                                <button className='forget-password uppercase underline'>
+                                {activeTab === 'login' && <button
+                                    className='forget-password uppercase underline'
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#forgetPasswordModal'
+                                >
                                     Forget Password
-                                </button>
+                                </button>}
                             </div>
                             <div className='input-group relative'>
                                 <input
@@ -246,7 +265,24 @@ const Login = () => {
         }
     }
 
-    const handleRegisterSubmit = () => {}
+    const handleCountryCode = (e) => {
+        let cloneLoginParams = { ...inputData }
+        cloneLoginParams['countryCode'] = e;
+        setInputData(cloneLoginParams)
+    }
+
+    const handleRegisterSubmit = () => {
+        setLoader(true)
+        Http.POST('signup', inputData)
+            .then(({ data }) => {
+                setLoader(false)
+                toast.success('Registration Successful!')
+            })
+            .catch((error) => {
+                setLoader(false)
+                    toast.error(error.response.data.message)
+            })
+    }
 
     const renderRegistrationForm = () => {
         if (activeTab === 'register' && isRegisterButtonClicked) {
@@ -266,6 +302,10 @@ const Login = () => {
                     </div>
                     <div className='form-group'>
                         <label htmlFor='contactNumber'>Contact Number</label>
+                        <SelectComponent
+                            options={listOfCountryCode}
+                            onChange={handleCountryCode}
+                        />
                         <input
                             type='text'
                             className='form-field'
@@ -321,6 +361,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ForgetPassword target='forgetPasswordModal'/>
         </LoaderComponent>
     )
 }
