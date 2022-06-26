@@ -90,7 +90,7 @@ const Login = () => {
     const renderLoginOrRegister = () => {
         if(activeTab === 'login'){
             return(
-                <div className="form-group">
+                <div className='form-group'>
                     <button
                         type='submit'
                         className='submit-btn'
@@ -104,7 +104,7 @@ const Login = () => {
             )
         }else{
             return (
-                <div className="form-group">
+                <div className='form-group'>
                     <button
                         type='submit'
                         className='submit-btn'
