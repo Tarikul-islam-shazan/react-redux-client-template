@@ -33,8 +33,9 @@
     },
     "lint-staged": {
         "**/*.{js,jsx}": [
-            "npm run lint",
-            "prettier --write"
+            "yarn run lint",
+            "eslint-fix-force",
+            "git add"
         ]
     },
     "devDependencies": {
@@ -67,7 +68,8 @@
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "pretty": "prettier --write .",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "eslint-fix-force": "yarn run lint:fix || true"
     },
     "browserslist": {
         "production": [
