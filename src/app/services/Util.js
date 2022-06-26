@@ -547,8 +547,20 @@ const onErrorImageLoad = (e, url, type = 'user') => {
     e.target.onerror = null
 }
 
-const getRedirectUrl = () => {
-    return '/dashboard'
+const getRedirectUrl = (data) => {
+    if(data.status === 'ACTIVE'){
+       return '/dashboard'
+    } else if (data.status === 'DISABLED') {
+        localStorage.clear();
+        sessionStorage.clear()
+        return '/login'
+    } else if (data.emailVerified === false) {
+        return '/activation'
+    }else if (data.businessInfoGiven === false) {
+        return '/activation'
+    } else if (data.status === 'PENDING') {
+        return '/activation'
+    }
 }
 
 export {

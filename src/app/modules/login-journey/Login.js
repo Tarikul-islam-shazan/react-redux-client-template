@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import nitexLogoDark from '../../../assets/images/login/nitexLogoDark.svg'
 import rightWhite from '../../../assets/images/login/rightWhite.svg'
+import loginBg from '../../../assets/images/login/login-bg.png'
 import LoaderComponent from '../../common/LoaderComponent'
 import Http from '../../services/Http'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { getRedirectUrl } from '../../services/Util'
+import { convertDateTimeToLocal, getRedirectUrl } from '../../services/Util'
 import 'tw-elements'
 import countryList from '../../services/DialCodeList';
 import SelectComponent from '../../common/SelectComponent';
 import ForgetPassword from './ForgetPassword';
 
 const Login = () => {
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(true)
     const [activeTab, setActiveTab] = useState('login')
     const [passwordType, setPasswordType] = useState('password')
     const [inputData, setInputData] = useState({})
@@ -20,7 +21,24 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState('')
     const [listOfCountryCode, setListOfCountryCode] = useState([])
     const [isRegisterButtonClicked, setIsRegisterButtonClicked] = useState(false)
+    const [bgImageLink, setBgImageLink] = useState('')
     const navigate = useNavigate()
+
+
+    useEffect(() => {
+        // let newDate = new Date();
+        // console.log(newDate)
+        // let localDateTime = convertDateTimeToLocal(newDate.getDate(), newDate.getTime())
+        // console.log(localDateTime)
+        Http.GET_WITH_ID_PARAM('getLoginPageBgImage','','LOGIN_PAGE')
+            .then(({ data }) => {
+                setLoader(false)
+            })
+            .catch((error) => {
+                setLoader(false)
+                toast.error(error.response.data.message)
+            })
+    },[])
 
     useEffect(() => {
         localStorage.clear()
@@ -40,12 +58,29 @@ const Login = () => {
     const handleChangeLogin = (e) => {
         let { name, value } = e.target
         let cloneLoginParams = { ...inputData }
-        if (name === 'agree') {
+        if (name === 'approveTC') {
             cloneLoginParams[name] = e.target.checked
         } else {
             cloneLoginParams[name] = value
         }
         setInputData(cloneLoginParams)
+    }
+
+    const handleUserInfo = () => {
+        Http.GET('userInfo')
+            .then(({ data }) => {
+                setLoader(false)
+                toast.success('Successful!')
+                localStorage.setItem(
+                    'userInfo',
+                    JSON.stringify(data)
+                )
+                navigate(getRedirectUrl(data))
+            })
+            .catch((error) => {
+                setLoader(false)
+                toast.error(error.response.data.message)
+            })
     }
 
     const handleLoginSubmit = () => {
@@ -60,20 +95,7 @@ const Login = () => {
                         data.tokenType + ' ' + data.accessToken
                     )
                     localStorage.setItem('refreshToken', data.refreshToken)
-                    Http.GET('userInfo')
-                        .then(({ data }) => {
-                            setLoader(false)
-                            toast.success('Successfully Logged In.')
-                            localStorage.setItem(
-                                'userInfo',
-                                JSON.stringify(data)
-                            )
-                            navigate(getRedirectUrl())
-                        })
-                        .catch((error) => {
-                            setLoader(false)
-                            toast.error(error.response.data.message)
-                        })
+                    handleUserInfo()
                 }
             })
             .catch((error) => {
@@ -110,7 +132,7 @@ const Login = () => {
                         type='submit'
                         className='submit-btn'
                         onClick={handleLoginSubmit}
-                        disabled={!inputData?.agree}
+                        disabled={!inputData?.approveTC}
                     >
                         Login Now
                         <img src={rightWhite} alt='right'/>
@@ -124,7 +146,7 @@ const Login = () => {
                         type='submit'
                         className='submit-btn'
                         onClick={() => setIsRegisterButtonClicked(true)}
-                        disabled={!inputData?.agree}
+                        disabled={!inputData?.approveTC}
                     >
                         Register Now
                         <img src={rightWhite} alt='right'/>
@@ -235,8 +257,8 @@ const Login = () => {
                             <span className=''>
                                 <input
                                     type='checkbox'
-                                    name='agree'
-                                    value={inputData?.agree}
+                                    name='approveTC'
+                                    value={inputData?.approveTC}
                                     onChange={handleChangeLogin}
                                 />
                             </span>
@@ -273,10 +295,17 @@ const Login = () => {
 
     const handleRegisterSubmit = () => {
         setLoader(true)
-        Http.POST('signup', inputData)
+        let postData = { ...inputData }
+        postData['contactNumber'] = inputData.countryCode.value + inputData.contactNumber
+        Http.POST('signup', postData)
             .then(({ data }) => {
                 setLoader(false)
-                toast.success('Registration Successful!')
+                localStorage.setItem(
+                    'token',
+                    data.tokenType + ' ' + data.accessToken
+                )
+                localStorage.setItem('refreshToken', data.refreshToken)
+                handleUserInfo()
             })
             .catch((error) => {
                 setLoader(false)
@@ -345,7 +374,7 @@ const Login = () => {
 
     return (
         <LoaderComponent loading={loader}>
-            <div className='login-container'>
+            <div className='login-container' style={{ background: `url(${loginBg})` }}>
                 <div className='h-full sm:p-10'>
                     <div className='login-form-contents'>
                         <div className='form-container xl:max-w-[500px]  3xl:max-w-[586px] xl:ml-auto'>

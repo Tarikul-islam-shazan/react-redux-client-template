@@ -18,7 +18,8 @@ const routes = {
     refreshUserToken: `${BASE_URL}/auth/refresh`,
     verifyToken: `${BASE_URL}/auth/with-verification-token`,
     verifyEmail: `${BASE_URL}/user/client/verify-email`,
-    resendVerificationMail: `${BASE_URL}/user/client/resend-email`
+    resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
+    getLoginPageBgImage: `${BASE_URL}/static-content/`
 }
 
 // Axios request interceptor

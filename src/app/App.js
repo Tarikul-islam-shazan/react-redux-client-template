@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../assets/scss/App.scss'
@@ -7,9 +7,10 @@ import {
     Navigate,
     Outlet,
     Route,
-    Routes
+    Routes, useNavigate
 } from 'react-router-dom'
 import Login from './modules/login-journey/Login'
+import ActivationPopup from './modules/login-journey/ActivationPopup'
 import Dashboard from './modules/dashboard/Dashboard'
 import DefaultLayout from './layouts/DefaultLayout'
 
@@ -32,17 +33,19 @@ const App = () => {
         <>
             <Router>
                 <Routes>
-                    <Route path='/' element={<ProtectedRoutes />}>
-                        <Route element={<DefaultLayout />}>
+                    <Route path='login' element={<Login />} />
+
+                    <Route path='/' element={<DefaultLayout />}>
+                        <Route element={<ProtectedRoutes />}>
+                            <Route path='/' element={<Navigate replace to='dashboard' />} />
                             <Route path='dashboard' element={<Dashboard />} />
+                            <Route path='activation' element={<ActivationPopup />} />
                         </Route>
                     </Route>
-                    <Route path='/login' element={<Login />} />
 
                     {/*Design UI Route*/}
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
-
                 </Routes>
             </Router>
             <ToastContainer
