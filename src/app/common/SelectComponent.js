@@ -8,6 +8,8 @@ const SelectComponent = ({ options, onChange, selectedItem, placeholder, onBlur 
         value = {selectedItem}
         placeholder={placeholder}
         onBlur={onBlur}
+        className='react-select-container'
+        classNamePrefix='react-select'
     />
 }
 
