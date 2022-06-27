@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import nitexLogoDark from '../../../assets/images/login/nitexLogoDark.svg'
 import rightWhite from '../../../assets/images/login/rightWhite.svg'
-import loginBg from '../../../assets/images/login/login-bg.png'
 import LoaderComponent from '../../common/LoaderComponent'
 import Http from '../../services/Http'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { convertDateTimeToLocal, getRedirectUrl } from '../../services/Util'
+import { getRedirectUrl } from '../../services/Util'
 import 'tw-elements'
 import countryList from '../../services/DialCodeList';
 import SelectComponent from '../../common/SelectComponent';
@@ -28,8 +27,9 @@ const Login = () => {
 
     useEffect(() => {
         let utcFormat = moment(new Date()).format()
-        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])} TT`)
+        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])}`)
             .then(({ data }) => {
+                setBgImageLink(data)
                 setLoader(false)
             })
             .catch((error) => {
@@ -372,7 +372,7 @@ const Login = () => {
 
     return (
         <LoaderComponent loading={loader}>
-            <div className='login-container' style={{ background: `url(${loginBg})` }}>
+            <div className='login-container' style={{ background: `url(${bgImageLink})` }}>
                 <div className='h-full sm:p-10'>
                     <div className='login-form-contents'>
                         <div className='form-container xl:max-w-[500px]  3xl:max-w-[586px] xl:ml-auto'>
