@@ -1,4 +1,5 @@
 import React from 'react'
+import SelectComponent from "../../../app/common/SelectComponent";
 // import User from './images/user.jpg'
 
 const StyleGuide = () => {
@@ -536,7 +537,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-center pt-10 pb-20">
+                <div className="flex items-center justify-center pt-5 sm:pt-10 pb-12 sm:pb-20">
                     <button className="flex items-center text-xl text-primaryColor">
                             <span className="mr-4">See More</span>
                             <span>
@@ -548,13 +549,13 @@ const StyleGuide = () => {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 mb-20">
-                    <div className="flex items-center p-10 py-12 bg-pink overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 mb-12 sm:mb-20">
+                    <div className="flex items-center p-6 lg:p-10 py-12 bg-pink overflow-hidden">
                         <div className="flex items-center justify-between w-full relative circle-bg circle-bg2">
                             <div>
-                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4">Brief a  <strong>Collection</strong></h4>
+                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4 leading-8">Brief a  <strong>Collection</strong></h4>
                                 <span className="flex items-center text-xl font-light text-white-shade-100 cursor-pointer">
-                                    <span className="mr-4">By sharing your Inspirations</span>
+                                    <span className="lg:mr-4">By sharing your Inspirations</span>
                                     <span>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -588,12 +589,12 @@ const StyleGuide = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center p-10 py-12 bg-blue overflow-hidden">
+                    <div className="flex items-center p-6 lg:p-10 py-12 bg-blue overflow-hidden">
                         <div className="flex items-center justify-between w-full relative circle-bg circle-bg2">
                             <div>
-                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4">Share <strong>Moodboard</strong></h4>
+                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4 leading-8">Share <strong>Moodboard</strong></h4>
                                 <span className="flex items-center text-xl font-light text-white-shade-100 cursor-pointer">
-                                    <span className="mr-4">& collaborate with our designers</span>
+                                    <span className="lg:mr-4">& collaborate with our designers</span>
                                     <span>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -623,12 +624,12 @@ const StyleGuide = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center p-10 py-12 bg-primaryColor overflow-hidden">
+                    <div className="flex items-center p-6 lg:p-10 py-12 bg-primaryColor overflow-hidden">
                         <div className="flex items-center justify-between w-full relative circle-bg circle-bg2">
                             <div>
-                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4">Get  <strong>Quotation</strong></h4>
+                                <h4 className="text-px28 text-white-shade-100 uppercase mb-4 leading-8">Get  <strong>Quotation</strong></h4>
                                 <span className="flex items-center text-xl font-light text-white-shade-100 cursor-pointer">
-                                    <span className="mr-4">by uploading Techpacks</span>
+                                    <span className="lg:mr-4">by uploading Techpacks</span>
                                     <span>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -655,6 +656,282 @@ const StyleGuide = () => {
                                     </defs>
                                 </svg>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/*<div>*/}
+                {/*    <div className="input-group">*/}
+                {/*        <SelectComponent*/}
+                {/*            options={[{label: "Country", value: "country"}]}*/}
+                {/*        />*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
+                <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6">
+                    <p className="text-base text-primaryColor sm:max-w-[50%]">Specially designed for your <strong>SS2022</strong> that introduces a unique combination of <strong>luxury</strong> and <strong>tredition</strong>.
+                        The feel and the experience of the collections are top-notch.</p>
+                    <div className="sm:max-w-[40%]">
+                        <div className="flex flex-wrap justify-end gap-2">
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Aesthetic</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Summer</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Vintage</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">SS 2022</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Aesthetic</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Summer</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Vintage</span>
+                            <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">SS 2022</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5">
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/3.jpg"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/pant.png"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/pant2.png"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/3.jpg"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/pant.png"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="collection-box">
+                        <div className="overflow-hidden relative h-[300px] sm:h-[330px] 5xl:h-[456px] p-4 bg-white">
+                            <div className="h-full">
+                                <img className="w-full h-full object-cover" src="/images/products/pant2.png"/>
+                            </div>
+                            <div className="w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                    <span className="mt-2">
+                                        <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d_944_19802)">
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" fill="#DA336F"/>
+                                            <path d="M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z" stroke="#F5F5F5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                            <filter id="filter0_d_944_19802" x="0.496094" y="0.5" width="37" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="4"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_944_19802"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_944_19802" result="shape"/>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
+                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                                <span>View Collection</span>
+                                <span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#646464" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="see-all flex items-center justify-center bg-primaryColor h-[300px] sm:h-[330px] 5xl:h-[456px] cursor-pointer">
+                        <div className="text-white-shade-100 text-[40px] text-center flex flex-col items-center">
+                            <div>See All</div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
