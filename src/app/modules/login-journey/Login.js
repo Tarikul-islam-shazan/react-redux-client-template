@@ -28,7 +28,7 @@ const Login = () => {
 
     useEffect(() => {
         let utcFormat = moment(new Date()).format()
-        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])} TT`)
+        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])}`)
             .then(({ data }) => {
                 setLoader(false)
             })
