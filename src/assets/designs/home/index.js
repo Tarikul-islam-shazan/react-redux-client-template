@@ -1006,16 +1006,17 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="belong-here flex items-center justify-center relative">
-                    <div className="text-[rgba(33, 36, 43, 0.1)] text-[200px] font-bold absolute">Belong</div>
-                    <iframe width="930" height="620" src="https://www.youtube.com/embed/QjisC1Aj-rA"
-                            title="FLYING OVER NEW ZEALAND (4K UHD) - Calming Music With Spectacular Natural Landscape For Relaxation"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen>
-                    </iframe>
-
-                    <div>Here</div>
+                <div className="belong-here relative flex items-center justify-center lg:pt-10 xl:pt-52 pb-36">
+                    <div className="w-full md:w-[730px] h-[250px] md:h-[450px] lg:w-[930px]  lg:h-[550px] relative z-10">
+                        <div className="transparency-text  text-7xl sm:text-[150px] md:xl:text-[200px] font-bold xl:absolute xl:top-[-176px] left-[-112px] 3xl:left-[-212px]">Belong</div>
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QjisC1Aj-rA"
+                                title="FLYING OVER NEW ZEALAND (4K UHD) - Calming Music With Spectacular Natural Landscape For Relaxation"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen>
+                        </iframe>
+                        <div className="transparency-text text-right text-7xl sm:text-[150px] xl:text-[200px] font-bold xl:absolute xl:bottom-[-176px] right-[-112px] 3xl:right-[-212px] pb-20">Here</div>
+                    </div>
                 </div>
 
 
@@ -1023,8 +1024,8 @@ const StyleGuide = () => {
 
 
             {/*Sticky option*/}
-            <div className="bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg]">My Requests</div>
-            <div className="bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100  text-base">
+            <div className="bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]">My Requests</div>
+            <div className="bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base">
                 <div className="w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden">
                     <img src="./images/user.jpg" className="object-cover object-top w-full h-full" alt="" />
                 </div>
