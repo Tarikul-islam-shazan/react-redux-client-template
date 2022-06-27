@@ -269,6 +269,7 @@ const StyleGuide = () => {
                             </div>
                         </div>
                         <div className="input-group">
+                            <label htmlFor="search" className="label">Select</label>
                             <SelectComponent
                                 options={[
                                     {label: "Country", value: "country"},
@@ -276,6 +277,10 @@ const StyleGuide = () => {
                                     {label: "Country 2", value: "country2"}
                                 ]}
                             />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="search" className="label">Textarea</label>
+                            <textarea name="" id="" cols="30" rows="4" className="form-field h-auto" placeholder="Write Here ..."></textarea>
                         </div>
                     </div>
                 </div>

@@ -658,7 +658,7 @@ const StyleGuide = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 mb-12 sm:mb-20">
-                    <div data-bs-toggle="modal" data-bs-target="#ConfirmationAction" className="flex items-center p-6 lg:p-10 py-12 bg-pink overflow-hidden cursor-pointer">
+                    <div data-bs-toggle="modal" data-bs-target="#BriefCollection" className="flex items-center p-6 lg:p-10 py-12 bg-pink overflow-hidden cursor-pointer">
                         <div className="flex items-center justify-between w-full relative circle-bg circle-bg2">
                             <div>
                                 <h4 className="text-px28 text-white-shade-100 uppercase mb-4 leading-8">Brief a  <strong>Collection</strong></h4>
@@ -1152,7 +1152,7 @@ const StyleGuide = () => {
 
             {/*Activated Soon Modal*/}
             <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ConfirmationAction" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog  overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
+                <div className="modal-dialog max-w-[680px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-8 pb-0">
                             <button type="button"
@@ -1161,15 +1161,15 @@ const StyleGuide = () => {
                             </button>
                         </div>
                         <div className="modal-body relative p-4">
-                            <div className="px-4 sm:px-10 xl:px-20 pb-12">
+                            <div className="px-6 pb-6">
                                 <h2 className="text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8">Thanks!</h2>
                                 <div className="space-y-4">
                                     <p className="text-xl">Your <strong>Brief</strong> has been received. We will share a collection with you within <strong>24 hours</strong>.</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="modal-footer pb-0 lg:pb-4 p-4 bg-white-shade-100">
-                            <button type="button" className="btn w-full bg-transparent font-normal border border-primaryColor text-primaryColor" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                        <div className="modal-footer p-10 flex gap-6">
+                            <button type="button" className="btn w-[150px] bg-transparent font-normal border border-primaryColor text-primaryColor" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                                 Close
                             </button>
                             <button type="button" className="btn w-full" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
@@ -1180,6 +1180,169 @@ const StyleGuide = () => {
                 </div>
             </div>
 
+            {/*Brief a Collection Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="BriefCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4">
+                            <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
+                                id="exampleModalScrollableLabel">
+                                Brief a Collection
+                            </h5>
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative p-4">
+                            <div className="space-y-4">
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Email address *</label>
+                                    <input type="text"
+                                           className="form-field bg-primaryColor-shade-300 w-[70%]"
+                                           id="text"
+                                           placeholder="Write Here ..."
+                                           name="text"/>
+                                </div>
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Description</label>
+                                    <textarea name="" id="" cols="30" rows="4" className="form-field h-auto bg-primaryColor-shade-300 w-[70%]" placeholder="Write Here ..."></textarea>
+
+                                </div>
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Attach</label>
+                                    <div className='file w-[70%]'>
+                                        <input id='input-file' type='file'/>
+                                        <label htmlFor='input-file' className="w-full justify-between">
+                                            <span className="mr-4">Browse Files</span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-14">
+                                <div className="flex justify-between items-center mb-5">
+                                    <h5 className="text-xl font-bold leading-normal text-primaryColor">
+                                        Brief a Collection
+                                    </h5>
+                                    <span className="text-base">4 files</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div className="overflow-hidden">
+                                                <table className="min-w-full">
+                                                    <thead className="bg-white">
+                                                        <tr>
+                                                            <th scope="col" className="w-[100px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
+
+                                                            </th>
+                                                            <th scope="col" className="text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
+                                                                File
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer p-4">
+                            <button type="button" className="btn flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
+                                <span>Ask <strong className="font-bold">Collection</strong></span>
+                                <span className="ml-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>

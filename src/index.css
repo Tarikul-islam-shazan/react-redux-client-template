@@ -6,7 +6,7 @@
 
 @layer components {
     .form-field {
-        @apply block h-[58px] w-full border border-white bg-white py-4 px-7 text-base text-primaryColor focus:rounded-none focus:outline-none focus:border-primaryColor;
+        @apply block h-[60px] w-full border border-white bg-white py-4 px-7 text-base text-primaryColor focus:rounded-none focus:outline-none focus:border-primaryColor;
     }
     .btn{
         @apply py-4 px-8 bg-primaryColor text-white-shade-100 text-xl uppercase inline-block hover:shadow-btnHover transition font-light w-auto
@@ -45,6 +45,7 @@ li {
 body{
     scroll-behavior: smooth;
     background: #F5F5F5;
+    color: #282828;
 }
 ::placeholder{
     color: #646464;
@@ -87,12 +88,54 @@ p{
     direction: rtl;
 }
 
-/*.input-group .css-1s2u09g-control, .input-group .css-1pahdxg-control {*/
-/*  height: 60px;*/
-/*  border-radius: 0;*/
-/*  border-color: #282828;*/
-/*  padding: 10px 10px 10px 18px;*/
-/*    min-width: 274px;*/
-/*}*/
 
+/*react-select start*/
+.react-select__control {
+  height: 60px;
+  border-radius: 0 !important;
+  border-color: #fff !important;
+  padding: 10px 10px 10px 18px;
+  min-width: 274px;
+    cursor: pointer !important;
+}
+.react-select__control:focus {
+  border-color: #282828 !important;
+}
+.react-select__control--is-focused {
+  box-shadow: none !important;
+    border-color: #282828 !important;
+}
+span.react-select__indicator-separator {
+    display: none;
+}
+.react-select__indicator{
+    color: #282828 !important;
+}
+.react-select__menu, .react-select__menu-list{
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+.react-select__option{
+    background: #fff;
+    padding: 18px 30px;
+    font-size: 16px;
+}
+.react-select__option {
+    background: #fff;
+    padding: 18px 30px !important;
+    font-size: 16px !important;
+    color: #282828 !important;
+    cursor: pointer !important;
+}
+.react-select__option--is-focused, .react-select__option--is-selected{
+    background: #282828 !important;
+    color: #F5F5F5 !important;
+}
+
+.react-select__control--is-focused .react-select__indicators{
+    transform: rotate(180deg);
+}
+/*react-select start*/
 
