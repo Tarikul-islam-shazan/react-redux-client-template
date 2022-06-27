@@ -329,19 +329,21 @@ const Login = () => {
                     </div>
                     <div className='form-group'>
                         <label htmlFor='contactNumber'>Contact Number</label>
-                        <SelectComponent
-                            options={listOfCountryCode}
-                            onChange={handleCountryCode}
-                        />
-                        <input
-                            type='text'
-                            className='form-field'
-                            id='contactNumber'
-                            placeholder='e.g. 01521300845'
-                            name='contactNumber'
-                            value={inputData?.contactNumber || ''}
-                            onChange={handleChangeLogin}
-                        />
+                        <div className="flex">
+                            <SelectComponent
+                                options={listOfCountryCode}
+                                onChange={handleCountryCode}
+                            />
+                            <input
+                                type='text'
+                                className='form-field'
+                                id='contactNumber'
+                                placeholder='e.g. 01521300845'
+                                name='contactNumber'
+                                value={inputData?.contactNumber || ''}
+                                onChange={handleChangeLogin}
+                            />
+                        </div>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='brandName'>Brand Name</label>

@@ -1,5 +1,8 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
+// import OwlCarousel from 'react-owl-carousel';
+// import 'owl.carousel/dist/assets/owl.carousel.css';
+// import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -272,8 +275,10 @@ const StyleGuide = () => {
             </div>
             <div>
                 <h2 className="mb-8">Others</h2>
+
+                {/*Favraoite */}
                 <div className="flex flex-wrap gap-5">
-                <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                    <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
                     <span className="mt-2">
                         <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_944_19802)">
@@ -296,6 +301,46 @@ const StyleGuide = () => {
                     </span>
                 </div>
                 </div>
+
+                {/*Carasoul*/}
+                <OwlCarousel className='owl-theme' loop margin={10} nav>
+                    <div class='item'>
+                        <h4>1</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>2</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>3</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>4</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>5</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>6</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>7</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>8</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>9</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>10</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>11</h4>
+                    </div>
+                    <div class='item'>
+                        <h4>12</h4>
+                    </div>
+                </OwlCarousel>;
             </div>
         </div>
     )
