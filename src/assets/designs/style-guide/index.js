@@ -267,7 +267,11 @@ const StyleGuide = () => {
                         </div>
                         <div className="input-group">
                             <SelectComponent
-                                options={[{label: "Country", value: "country"}]}
+                                options={[
+                                    {label: "Country", value: "country"},
+                                    {label: "Country 1", value: "country1"},
+                                    {label: "Country 2", value: "country2"}
+                                ]}
                             />
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const ActivationPopup = () => {
     const popupRef = useRef();
@@ -9,13 +9,13 @@ const ActivationPopup = () => {
 
     return (
         <>
-            <button ref={popupRef} type="button" className="btn hidden" data-bs-toggle="modal" data-bs-target="#ActivatedSoon">
+            <button ref={popupRef} type='button' className='btn hidden' data-bs-toggle='modal' data-bs-target='#ActivatedSoon'>
                 Activated Soon
             </button>
             <div
                 className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto open'
                 id='ActivatedSoon' tabIndex='-1' aria-labelledby='exampleModalCenterTitle' aria-modal='true'
-                data-bs-backdrop="static"
+                data-bs-backdrop='static'
                 role='dialog'>
                 <div
                     className='modal-dialog max-w-[1840px] mx-4 5xl:mx-auto overflow-hidden modal-dialog-centered relative w-auto pointer-events-none'>

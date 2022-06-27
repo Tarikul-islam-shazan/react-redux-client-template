@@ -329,7 +329,7 @@ const Login = () => {
                     </div>
                     <div className='form-group'>
                         <label htmlFor='contactNumber'>Contact Number</label>
-                        <div className="flex">
+                        <div className='flex'>
                             <SelectComponent
                                 options={listOfCountryCode}
                                 onChange={handleCountryCode}
