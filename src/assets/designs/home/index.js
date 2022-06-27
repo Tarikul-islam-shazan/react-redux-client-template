@@ -916,7 +916,7 @@ const StyleGuide = () => {
                         </div>
                         <div className="py-4">
                             <h4 className="text-xl font-bold text-primaryColor mb-3">Cotton elastane boat neck</h4>
-                            <div className="flex  items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
+                            <div className="flex items-center gap-6 text-base text-primaryColor-shade-100 cursor-pointer">
                                 <span>View Collection</span>
                                 <span>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -926,7 +926,7 @@ const StyleGuide = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="see-all flex items-center justify-center bg-primaryColor h-[300px] sm:h-[330px] 5xl:h-[456px] cursor-pointer">
+                    <div className="see-all flex items-center justify-center bg-primaryColor hover:bg-black h-[300px] sm:h-[330px] 5xl:h-[456px] cursor-pointer">
                         <div className="text-white-shade-100 text-[40px] text-center flex flex-col items-center">
                             <div>See All</div>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -936,12 +936,96 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
+                <div className="at-a-glance my-14">
+                    <h2 className="text-2xl text-primaryColor mb-5">What <strong>NITEX</strong> can offer</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5">
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">100,000+</div>
+                                    <span className="text-lg text-primaryColor uppercase">Styles</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">5,000+</div>
+                                    <span className="text-lg text-primaryColor uppercase">Collections</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">30 Days</div>
+                                    <span className="text-lg text-primaryColor uppercase">Lead Time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">10,000+</div>
+                                    <span className="text-lg text-primaryColor uppercase">Materials in use</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">20+</div>
+                                    <span className="text-lg text-primaryColor uppercase">Categories</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">13</div>
+                                    <span className="text-lg text-primaryColor uppercase">Seasons</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glance-box">
+                            <div className="overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white">
+                                <div>
+                                    <div className="text-5xl 3xl:text-6xl text-primaryColor mb-1">30 Days</div>
+                                    <span className="text-lg text-primaryColor uppercase">Lead Time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="see-all flex items-center justify-center bg-primaryColor hover:bg-black h-[250px] 4xl:h-[296px] cursor-pointer">
+                            <div className="text-white-shade-100 text-[40px] text-center flex flex-col items-center">
+                                <div>Dashboard</div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="belong-here relative flex items-center justify-center lg:pt-10 xl:pt-52 pb-36">
+                    <div className="w-full md:w-[730px] h-[250px] md:h-[450px] lg:w-[930px]  lg:h-[550px] relative z-10">
+                        <div className="transparency-text  text-7xl sm:text-[150px] md:xl:text-[200px] font-bold xl:absolute xl:top-[-176px] left-[-112px] 3xl:left-[-212px]">Belong</div>
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QjisC1Aj-rA"
+                                title="FLYING OVER NEW ZEALAND (4K UHD) - Calming Music With Spectacular Natural Landscape For Relaxation"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen>
+                        </iframe>
+                        <div className="transparency-text text-right text-7xl sm:text-[150px] xl:text-[200px] font-bold xl:absolute xl:bottom-[-176px] right-[-112px] 3xl:right-[-212px] pb-20">Here</div>
+                    </div>
+                </div>
+
+
             </div>
 
 
             {/*Sticky option*/}
-            <div className="bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg]">My Requests</div>
-            <div className="bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100  text-base">
+            <div className="bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]">My Requests</div>
+            <div className="bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base">
                 <div className="w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden">
                     <img src="./images/user.jpg" className="object-cover object-top w-full h-full" alt="" />
                 </div>
