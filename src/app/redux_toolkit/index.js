@@ -2,9 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import LoginSliceReducer from './Login'
 
-console.log(LoginSliceReducer)
-
 const store = configureStore({
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         login: LoginSliceReducer
     }

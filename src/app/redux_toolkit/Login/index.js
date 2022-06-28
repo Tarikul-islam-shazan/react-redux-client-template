@@ -1,5 +1,5 @@
 import { createSlice, createReducer } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { LoginReducers, LoginThunks } from './LoginReducers'
 
 const initialState = {
@@ -22,6 +22,8 @@ const LoginSlice = createSlice({
     initialState,
     reducers: LoginReducers
 })
+
+export const loginActions = LoginSlice.actions
 
 export const useLoginSelector = () => useSelector((state) => state)
 
