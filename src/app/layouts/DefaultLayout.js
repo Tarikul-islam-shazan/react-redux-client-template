@@ -88,7 +88,7 @@ const DefaultLayout = () => {
                             <IconNotification />
                         </span>
                         <span
-                            className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>99+</span>
+                            className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-   3 text-center'>99+</span>
                     </div>
                     <div
                         className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>

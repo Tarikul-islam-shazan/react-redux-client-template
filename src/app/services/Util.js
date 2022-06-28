@@ -563,6 +563,11 @@ const getRedirectUrl = (data) => {
     }
 }
 
+const getCurrentLocalDateTime = () => {
+    let utcFormat = moment(new Date()).format()
+    return encodeURI(utcFormat.split('+')[0])
+}
+
 export {
     capitalizeFirstLetter,
     replaceSpace,
@@ -608,5 +613,6 @@ export {
     getMentionedUserIds,
     mentionModule,
     onErrorImageLoad,
-    getRedirectUrl
+    getRedirectUrl,
+    getCurrentLocalDateTime
 }
