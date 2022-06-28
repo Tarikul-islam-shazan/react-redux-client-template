@@ -64,11 +64,72 @@ const Boilarplate = () => {
                     </div>
 
                     {/* Full moodboard image */}
-                    <div className='full-moodboard-image'>
+                    {/* <div className='full-moodboard-image'>
                         <img
                             src='/images/moodboard/moodboard.jpg'
                             alt='moodboard'
                         />
+                    </div> */}
+
+                    {/* Images layout */}
+                    <div className='moodboard-masonry-container'>
+                        <div className='masonry-item add-item'>
+                            <span className=''>+</span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/1.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/2.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/3.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/4.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/3.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/2.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/3.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/2.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
+                        <div className='masonry-item'>
+                            <img src='/images/products/1.jpg' alt='product' />
+                            <span className='delete'>
+                                <DeleteIcon />
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className='right-half'>
@@ -181,6 +242,104 @@ const Boilarplate = () => {
                     {/* Moodboard fabrics */}
                     <div className='moodboard-fabric-container'>
                         <h3>Fabrics</h3>
+
+                        {/* Selcted Fabrics */}
+                        <div className='fabric-filter'>
+                            <p>
+                                Suggested <span>Fabrics</span>
+                            </p>
+                            <span>
+                                <FilterIcon />
+                            </span>
+                        </div>
+                        <div className='fabric-all-items'>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric1.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='close'>
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric2.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='close'>
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                        </div>
+
+                        {/* Suggested Fabrics */}
+                        <div className='fabric-filter top-border'>
+                            <p>
+                                Suggested <span>Fabrics</span>
+                            </p>
+                            <span>
+                                <FilterIcon />
+                            </span>
+                        </div>
+                        <div className='fabric-all-items'>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric2.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='select'>
+                                        <TickIcon />
+                                    </span>
+                                </div>
+
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric1.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='select'>
+                                        <TickIcon />
+                                    </span>
+                                </div>
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric3.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='select'>
+                                        <TickIcon />
+                                    </span>
+                                </div>
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                            <div className='fabric-single-item'>
+                                <div className='fabric-image'>
+                                    <img
+                                        src='/images/moodboard/fabric1.png'
+                                        alt='fabric'
+                                    />
+                                    <span className='select'>
+                                        <TickIcon />
+                                    </span>
+                                </div>
+                                <p>Single Jersey CO(35%), PL(65%)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

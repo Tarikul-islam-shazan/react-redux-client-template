@@ -21,6 +21,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
 import MoodboardTemplate from '../assets/designs/moodboard'
+import MoodboardView from '../assets/designs/moodboard/moodboardView'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -57,6 +58,7 @@ const App = () => {
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
                     <Route path='/moodboard' element={<MoodboardTemplate />} />
+                    <Route path='/moodboardView' element={<MoodboardView />} />
                 </Routes>
             </Router>
             <ToastContainer
