@@ -20,7 +20,8 @@ const routes = {
     verifyToken: `${BASE_URL}/auth/with-verification-token`,
     verifyEmail: `${BASE_URL}/user/client/verify-email`,
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
-    getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`
+    getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
+    fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`
 }
 
 // Axios request interceptor
