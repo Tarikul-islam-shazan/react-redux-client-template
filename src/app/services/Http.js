@@ -14,6 +14,7 @@ const routes = {
     login: `${BASE_URL}/auth/login`, // POST
     signup: `${BASE_URL}/auth/signup`, // POST
     forgetPassword: `${BASE_URL}/user/request-forgot-password`, // POST
+    accManagerInfo: `${BASE_URL}/user/my-account-manager`,
     completeForgotPassword: `${BASE_URL}/user/complete-forgot-password`, // POST
     refreshUserToken: `${BASE_URL}/auth/refresh`,
     verifyToken: `${BASE_URL}/auth/with-verification-token`,

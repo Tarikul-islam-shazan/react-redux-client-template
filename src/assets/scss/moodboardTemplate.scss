@@ -1,5 +1,4 @@
 .common-moodboard-container{
-    padding: 20px;
     .left-half{
         width: calc(100% - 680px);
         margin-right: 20px;
@@ -33,10 +32,7 @@
                 }
                 p{
                     display: flex;
-                    font-size: 16px;
-                    line-height: 32px;
                     color:#282828;
-                  
                 }
                 span{
                     margin-left: 20px;
@@ -44,6 +40,7 @@
                 }
             }
         }
+        
        
     }
     .moodboard-and-images-layout{
@@ -300,6 +297,7 @@
     .common-moodboard-container {
         .left-half, .right-half {
             width:100%;
+            margin: 0;
         }
      
         .moodboard-and-images-layout {
@@ -324,6 +322,23 @@
             .left-half {
                 .input-group {
                     flex-wrap: wrap;
+                    h4{
+                        font-size: 24px;
+                        line-height: 32px;
+                    }
+                    p{
+                        font-size: 14px;
+                        line-height: 24px;
+                    }
+                    label{
+                        width: 100%;
+                    }
+                }
+            }
+            .right-half{
+                button{
+                    height: 48px;
+                    padding: 10px 20px;
                 }
             }
         }

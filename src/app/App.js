@@ -22,6 +22,7 @@ import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
 import MoodboardTemplate from '../assets/designs/moodboard'
 import MoodboardView from '../assets/designs/moodboard/moodboardView'
+import VerifyEmail from './modules/login-journey/VerifyEmail'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -39,6 +40,7 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path='login' element={<Login />} />
+                    <Route path='verify/email' element={<VerifyEmail />} />
 
                     <Route path='/' element={<DefaultLayout />}>
                         <Route element={<ProtectedRoutes />}>
