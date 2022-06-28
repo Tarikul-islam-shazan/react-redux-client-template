@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Http from '../../services/Http';
-import {toast} from 'react-toastify';
-import {getCurrentLocalDateTime} from '../../services/Util';
+import { toast } from 'react-toastify';
+import { getCurrentLocalDateTime } from '../../services/Util';
 
 const GreetingSlider = () => {
     const [greetings, setGreetings] = useState([])
     const [activeSlideId, setActiveSlideId] = useState(1)
 
     useEffect(() => {
-        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({data}) => {
+        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({ data }) => {
             setGreetings(data)
         }).catch(err => {
             toast.error(err.response.data.message)
