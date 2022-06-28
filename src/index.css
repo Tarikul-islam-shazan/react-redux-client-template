@@ -9,7 +9,7 @@
         @apply block h-[60px] w-full border border-white bg-white py-4 px-7 text-base text-primaryColor focus:rounded-none focus:outline-none focus:border-primaryColor;
     }
     .btn{
-        @apply py-4 px-8 bg-primaryColor text-white-shade-100 text-xl uppercase inline-block hover:shadow-btnHover transition font-light w-auto
+        @apply p-4 px-6 h-[60px] bg-primaryColor text-white-shade-100 text-xl uppercase inline-block hover:shadow-btnHover transition font-light w-auto
     }
     .label{
         @apply text-base text-primaryColor mb-3 block font-medium
@@ -19,6 +19,9 @@
     }
     .color-circle {
         @apply w-[32px] h-[32px] bg-pending rounded-full border border-primaryColor-shade-100 inline-block
+    }
+    .tag-badge {
+        @apply h-[60px] bg-white rounded-full inline-block px-8 flex items-center justify-between uppercase
     }
 }
 

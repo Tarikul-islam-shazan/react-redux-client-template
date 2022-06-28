@@ -1,9 +1,13 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
 import SliderWrapper from "../../../app/common/SliderWrapper";
+import {ReactComponent as UploadIcon} from "../../images/upload.svg";
+import {ReactComponent as FilterIcon} from "../../images/filter.svg";
+import {ReactComponent as CloseIcon} from "../../images/close.svg";
 // import OwlCarousel from 'react-owl-carousel';
 // import 'owl.carousel/dist/assets/owl.carousel.css';
 // import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -39,7 +43,37 @@ const StyleGuide = () => {
                     <button type="button" className="btn w-full bg-transparent font-normal border border-primaryColor text-primaryColor">
                         Close
                     </button>
+                    <button type="button" className="btn bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
+                        <span>Sample</span>
+                        <span className="ml-2">
+                            <UploadIcon />
+                        </span>
+                    </button>
+                    <div className="input-group">
+                        <div className='file'>
+                            <input id='input-file' type='file'/>
+                            <label htmlFor='input-file' className="w-full justify-between">
+                                <span className="mr-4">Browse Files</span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="input-group">
+                        <div className='file'>
+                            <input id='input-file' type='file'/>
+                            <label htmlFor='input-file' className="w-full justify-between !border !border-solid">
+                                <span className="mr-4">Upload</span>
+                                <UploadIcon />
+                            </label>
+                        </div>
+                    </div>
                 </div>
+                <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                    <FilterIcon />
+                </button>
 
 
                 {/*Forgot Password Modal*/}
@@ -289,16 +323,68 @@ const StyleGuide = () => {
             <div>
                 <h2 className="mb-8">Others</h2>
 
-                <div className="flex gap-3 mb-2 xl:mb-0">
-                    <span className="badge bg-warning font-bold">New</span>
-                    <span className="badge bg-success">Eco-Friendly</span>
-                    <span className="badge bg-pending">requested for collection</span>
-                    <span className="badge bg-pending border border-primaryColor">requested for collection</span>
-                </div>
+                <div className="gspace-x-4 space-y-4">
 
-                {/*Favraoite */}
-                <div className="flex flex-wrap gap-5">
-                    <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                    <div className="mt-6 space-y-6">
+                        <div className="flex items-start">
+                            <span><input type="radio" name="Sortby" id="NewestFirst"/></span>
+                            <label htmlFor="NewestFirst" className="align-middle pl-4 inline-block mt-[-3px]">Newest First</label>
+                        </div>
+                        <div className="flex items-start">
+                            <span><input type="radio" name="Sortby" id="OldestFirst"/></span>
+                            <label htmlFor="OldestFirst" className="align-middle pl-4 inline-block mt-[-3px]">Oldest First</label>
+                        </div>
+                    </div>
+                    <div className="mt-6 space-y-6">
+                        <div className="flex items-start">
+                            <span><input type="checkbox" id="Summer"/></span>
+                            <label htmlFor="Summer" className="align-middle pl-4 inline-block mt-[-3px]">Summer</label>
+                        </div>
+                        <div className="flex items-start">
+                            <span><input type="checkbox" id="Winter"/></span>
+                            <label htmlFor="Winter" className="align-middle pl-4 inline-block mt-[-3px]">Winter</label>
+                        </div>
+                        <div className="flex items-start">
+                            <span><input type="checkbox" id="Autumn"/></span>
+                            <label htmlFor="Autumn" className="align-middle pl-4 inline-block mt-[-3px]">Autumn</label>
+                        </div>
+                        <div className="flex items-start">
+                            <span><input type="checkbox" id="Spring"/></span>
+                            <label htmlFor="Spring" className="align-middle pl-4 inline-block mt-[-3px]">Spring</label>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <div className="tag-badge">
+                            <span>Summer</span>
+                            <span className="ml-6 cursor-pointer">
+                            <CloseIcon />
+                        </span>
+                        </div>
+                        <div className="tag-badge">
+                            <span>Men</span>
+                            <span className="ml-6 cursor-pointer">
+                            <CloseIcon />
+                        </span>
+                        </div>
+                        <div className="tag-badge">
+                            <span>Newest</span>
+                            <span className="ml-6 cursor-pointer">
+                            <CloseIcon />
+                        </span>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-3 mb-2 xl:mb-0">
+                        <span className="badge bg-warning font-bold">New</span>
+                        <span className="badge bg-success">Eco-Friendly</span>
+                        <span className="badge bg-pending">requested for collection</span>
+                        <span className="badge bg-pending border border-primaryColor">requested for collection</span>
+                    </div>
+
+                    {/*Favraoite */}
+                    <div className="flex flex-wrap gap-5">
+                        <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
                     <span className="mt-2">
                         <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_944_19802)">
@@ -319,7 +405,8 @@ const StyleGuide = () => {
                             </defs>
                         </svg>
                     </span>
-                </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/*Slcik Carousel*/}
@@ -329,6 +416,15 @@ const StyleGuide = () => {
                     </div>
                     <div>
                         <h3>2</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
                     </div>
                     <div>
                         <h3>3</h3>
@@ -344,45 +440,7 @@ const StyleGuide = () => {
                     </div>
                 </SliderWrapper>
 
-                {/*Carasoul*/}
-                {/*<OwlCarousel className='owl-theme' loop margin={10} nav>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>1</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>2</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>3</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>4</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>5</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>6</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>7</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>8</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>9</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>10</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>11</h4>*/}
-                {/*    </div>*/}
-                {/*    <div class='item'>*/}
-                {/*        <h4>12</h4>*/}
-                {/*    </div>*/}
-                {/*</OwlCarousel>;*/}
+
 
             </div>
         </div>

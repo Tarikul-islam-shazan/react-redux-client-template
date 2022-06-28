@@ -1,6 +1,16 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
-// import User from './images/user.jpg'
+import { ReactComponent as PlusIcon } from '../../images/plus.svg';
+import { ReactComponent as UploadIcon } from '../../images/upload.svg';
+import { ReactComponent as FilterIcon } from '../../images/filter.svg';
+import { ReactComponent as SearchIcon } from '../../images/search.svg';
+import { ReactComponent as SearchIconWhite } from '../../images/search-white.svg';
+import { ReactComponent as CloseIcon } from '../../images/close.svg';
+import { ReactComponent as OkWhite } from '../../images/ok-white.svg';
+import { ReactComponent as Refresh } from '../../images/refresh.svg';
+import { ReactComponent as Dlt } from '../../images/dlt.svg';
+import { ReactComponent as ArrowRightWhite } from '../../images/arror-right-white.svg';
+import Pdf from '../../images/pdf.png';
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -94,19 +104,52 @@ const StyleGuide = () => {
             <div className="body-container p-4">
 
                 <div className="filter">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-6">
                         <div className="text-base md:text-xl text-primaryColor">
                             18 Moodboards
                         </div>
-                        <div>
-                            <button type="button" className="btn flex justify-between items-center">
-                                <span>Login Now</span>
-                                <span className="ml-2">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                         <path d="M1 9H17M9 1V17V1Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </button>
+                        <div className="flex flex-wrap justify-end gap-4 lg:gap-2">
+                            <div className="flex items-center gap-2 overflow-x-auto">
+                                <div className="tag-badge">
+                                    <span>Summer</span>
+                                    <span className="ml-6 cursor-pointer">
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+                                <div className="tag-badge">
+                                    <span>Men</span>
+                                    <span className="ml-6 cursor-pointer">
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+                                <div className="tag-badge">
+                                    <span>Newest</span>
+                                    <span className="ml-6 cursor-pointer">
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex items-center overflow-x-auto gap-2">
+                                <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                    <SearchIcon />
+                                </button>
+                                <button data-bs-toggle="modal" data-bs-target="#SortFilter" type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                    <FilterIcon />
+                                </button>
+                                <div className="h-[60px] w-[1px] bg-primaryColor-shade-200 mx-3"></div>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UploadMoodboard" className="btn bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
+                                    <span>Upload</span>
+                                    <span className="ml-4">
+                                        <UploadIcon />
+                                    </span>
+                                </button>
+                                <button type="button" className="btn flex justify-between items-center">
+                                    <span>Create</span>
+                                        <span className="ml-2">
+                                        <PlusIcon />
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -367,216 +410,192 @@ const StyleGuide = () => {
             </div>
 
 
-            {/*Sticky option*/}
-            <div className="bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]">My Requests</div>
-            <div className="bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base">
-                <div className="w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden">
-                    <img src="./images/user.jpg" className="object-cover object-top w-full h-full" alt="" />
-                </div>
-                <span>Connect</span>
-                <span className="ml-auto">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M8 20L16 12L8 4" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-            </div>
 
 
-
-
-            {/*Activated Soon Modal*/}
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ConfirmationAction" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog max-w-[680px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
+            {/*SortFilter Moodboard Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="SortFilter" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[1840px] mx-4 5xl:mx-auto modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
-                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-8 pb-0">
-                            <button type="button"
-                                    className="btn-close box-content w-4 h-4 p-1 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                                    data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div className="modal-body relative p-4">
-                            <div className="px-6 pb-6">
-                                <h2 className="text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8">Thanks!</h2>
-                                <div className="space-y-4">
-                                    <p className="text-xl">Your <strong>Brief</strong> has been received. We will share a collection with you within <strong>24 hours</strong>.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer p-10 flex gap-6">
-                            <button type="button" className="btn w-[150px] bg-transparent font-normal border border-primaryColor text-primaryColor" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                Close
-                            </button>
-                            <button type="button" className="btn w-full" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                Go to <strong className="!font-bold">Collection</strong>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/*Brief a Collection Modal*/}
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="BriefCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
-                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
-                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4 pl-8">
                             <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
                                 id="exampleModalScrollableLabel">
-                                Brief a Collection
+                                Sort & Filter
                             </h5>
                             <button type="button"
                                     className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                                     data-bs-dismiss="modal" aria-label="Close">
                             </button>
                         </div>
-                        <div className="modal-body relative p-4">
-                            <div className="space-y-4">
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Email address *</label>
-                                    <input type="text"
-                                           className="form-field bg-primaryColor-shade-300 w-[70%]"
-                                           id="text"
-                                           placeholder="Write Here ..."
-                                           name="text"/>
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Description</label>
-                                    <textarea name="" id="" cols="30" rows="4" className="form-field h-auto bg-primaryColor-shade-300 w-[70%]" placeholder="Write Here ..."></textarea>
-
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Attach</label>
-                                    <div className='file w-[70%]'>
-                                        <input id='input-file' type='file'/>
-                                        <label htmlFor='input-file' className="w-full justify-between">
-                                            <span className="mr-4">Browse Files</span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </label>
+                        <div className="modal-body relative">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                                <div className="border-r border-b last:border-r-none border-white-shade-100 py-6 px-10">
+                                    <span className="text-primaryColor-shade-100">Sort by</span>
+                                    <div className="mt-6 space-y-8">
+                                        <div className="flex items-start">
+                                            <span><input type="radio" name="Sortby" id="NewestFirst"/></span>
+                                            <label htmlFor="NewestFirst" className="align-middle pl-4 inline-block mt-[-3px]">Newest First</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="radio" name="Sortby" id="OldestFirst"/></span>
+                                            <label htmlFor="OldestFirst" className="align-middle pl-4 inline-block mt-[-3px]">Oldest First</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="mt-14">
-                                <div className="flex justify-between items-center mb-5">
-                                    <h5 className="text-xl font-bold leading-normal text-primaryColor">
-                                        Brief a Collection
-                                    </h5>
-                                    <span className="text-base">4 files</span>
+                                <div className="border-r border-b last:border-r-none border-white-shade-100 py-6 px-10">
+                                    <span className="text-primaryColor-shade-100">Season</span>
+                                    <div className="mt-6 space-y-8">
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Summer"/></span>
+                                            <label htmlFor="Summer" className="align-middle pl-4 inline-block mt-[-3px]">Summer</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Winter"/></span>
+                                            <label htmlFor="Winter" className="align-middle pl-4 inline-block mt-[-3px]">Winter</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Autumn"/></span>
+                                            <label htmlFor="Autumn" className="align-middle pl-4 inline-block mt-[-3px]">Autumn</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Spring"/></span>
+                                            <label htmlFor="Spring" className="align-middle pl-4 inline-block mt-[-3px]">Spring</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="overflow-hidden">
-                                                <table className="min-w-full">
-                                                    <thead className="bg-white">
-                                                        <tr>
-                                                            <th scope="col" className="w-[100px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
-
-                                                            </th>
-                                                            <th scope="col" className="text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
-                                                                File
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr className="even:bg-white-shade-100">
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </td>
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                                <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="even:bg-white-shade-100">
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </td>
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                                <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="even:bg-white-shade-100">
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </td>
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                                <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="even:bg-white-shade-100">
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                            </td>
-                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                                <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                <div className="border-r border-b last:border-r-none border-white-shade-100 py-6 px-10">
+                                    <span className="text-primaryColor-shade-100">Market</span>
+                                    <div className="mt-6 space-y-8">
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Men"/></span>
+                                            <label htmlFor="Men" className="align-middle pl-4 inline-block mt-[-3px]">Men</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Girls"/></span>
+                                            <label htmlFor="Girls" className="align-middle pl-4 inline-block mt-[-3px]">Girls (age 5-18)</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Boys"/></span>
+                                            <label htmlFor="Boys" className="align-middle pl-4 inline-block mt-[-3px]">Boys (age 5-18)</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Toddlers"/></span>
+                                            <label htmlFor="Toddlers" className="align-middle pl-4 inline-block mt-[-3px]">Toddlers (age 1-4)</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Infants"/></span>
+                                            <label htmlFor="Infants" className="align-middle pl-4 inline-block mt-[-3px]">Infants (age 0-1)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="border-r border-b last:border-r-none border-white-shade-100 py-6 px-10">
+                                    <span className="text-primaryColor-shade-100">Category</span>
+                                    <div className="mt-6">
+                                        <div className="flex">
+                                            <input type="text" className="form-field border border-primaryColor h-[40px] p-2 px-4" id="name" placeholder="Search ..." name="name" />
+                                            <button type="button" className="btn h-[40px] p-2">
+                                                <SearchIconWhite />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="mt-6 space-y-8">
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Jeans"/></span>
+                                            <label htmlFor="Jeans" className="align-middle pl-4 inline-block mt-[-3px]">Jeans</label>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <span><input type="checkbox" id="Tee"/></span>
+                                            <label htmlFor="Tee" className="align-middle pl-4 inline-block mt-[-3px]">Tee</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="modal-footer p-4">
-                            <button type="button" className="btn flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
-                                <span>Ask <strong className="font-bold">Collection</strong></span>
+                        <div className="modal-footer p-4 flex justify-end gap-4">
+                            <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                <Refresh />
+                            </button>
+                            <button type="button" className="btn flex justify-between items-center">
+                                <span>Login Now</span>
                                 <span className="ml-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                    <OkWhite />
                                 </span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+            {/*Upload Moodboard Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="UploadMoodboard" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4 pl-8">
+                            <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
+                                id="exampleModalScrollableLabel">
+                                Sort & Filter
+                            </h5>
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative m-6 mb-0 pb-10  border-b border-primaryColor-shade-200">
+                            <div className="space-y-10">
+                                <div className="input-group">
+                                    <div className='file'>
+                                        <input id='input-file' type='file'/>
+                                        <label htmlFor='input-file' className="w-full justify-between">
+                                            <span className="mr-4">Browse Moodboard</span>
+                                            <UploadIcon />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">uploaded file</label>
+                                    <div className="space-y-3">
+                                        <div className="text-base font-normal p-4 px-5 bg-white-shade-100 flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <span>
+                                                    <img src={Pdf} alt="" />
+                                                </span>
+                                                <span className="text-base ml-4">random_name_22.pdf </span>
+                                            </div>
+                                            <span className="cursor-pointer">
+                                                <Dlt />
+                                            </span>
+                                        </div>
+                                        <div className="text-base font-normal p-4 px-5 bg-white-shade-100 flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <span>
+                                                    <img src={Pdf} alt="" />
+                                                </span>
+                                                <span className="text-base ml-4">random_name_22.pdf </span>
+                                            </div>
+                                            <span className="cursor-pointer">
+                                                <Dlt />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer p-6 pt-10 flex gap-4">
+                            <button type="button" className="btn bg-transparent px-5 w-[135px] font-normal border border-primaryColor text-primaryColor px-8">
+                                Close
+                            </button>
+                            <button type="button" className="btn flex flex-1 justify-between items-center">
+                                <span>Proceed</span>
+                                <span className="ml-2">
+                                    <ArrowRightWhite />
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
         </div>
