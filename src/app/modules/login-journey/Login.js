@@ -5,7 +5,7 @@ import LoaderComponent from '../../common/LoaderComponent'
 import Http from '../../services/Http'
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { authUserInfo, getRedirectUrl } from '../../services/Util'
+import { authUserInfo, getCurrentLocalDateTime, getRedirectUrl } from '../../services/Util'
 import 'tw-elements'
 import countryList from '../../services/DialCodeList';
 import SelectComponent from '../../common/SelectComponent';
@@ -35,8 +35,7 @@ const Login = () => {
 
 
     useEffect(() => {
-        let utcFormat = moment(new Date()).format()
-        Http.GET('getLoginPageBgImage', `?localDateTime=${encodeURI(utcFormat.split('+')[0])}`)
+        Http.GET('getLoginPageBgImage', `?localDateTime=${getCurrentLocalDateTime()}`)
             .then(({ data }) => {
                 setBgImageLink(data)
                 setLoader(false)
