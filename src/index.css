@@ -23,6 +23,9 @@
     .tag-badge {
         @apply h-[60px] bg-white rounded-full inline-block px-8 flex items-center justify-between uppercase
     }
+    .favourite {
+        @apply w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer
+    }
 }
 
 

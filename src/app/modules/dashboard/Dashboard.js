@@ -49,7 +49,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <div
-                                className='w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
+                                className='favourite'>
                                     <span className='mt-2'>
                                         <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
                                              xmlns='http://www.w3.org/2000/svg'>

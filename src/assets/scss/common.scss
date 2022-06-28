@@ -168,7 +168,19 @@
     zoom: 1;
 }}
 
- //Radio & Checkbox
+ .banner-section .carousel{
+    // background-image: url("./images/home/cloud.png");
+ }
+
+ .dot{
+     width: 4px;
+     height: 4px;
+     border-radius: 100%;
+     background: #282828;
+     margin: 0 10px;
+ }
+
+//Radio & Checkbox
  input[type="checkbox"] {
      -webkit-appearance: none;
      appearance: none;

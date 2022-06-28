@@ -1,6 +1,9 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
-// import User from './images/user.jpg'
+import SliderWrapper from "../../../app/common/SliderWrapper";
+import slide from '../../images/home/slide.png';
+import slide1 from '../../images/home/slide1.png';
+import { ReactComponent as Favourite } from '../../images/favourite.svg';
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -102,7 +105,6 @@ const StyleGuide = () => {
                                             DEC 17 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -116,7 +118,6 @@ const StyleGuide = () => {
                                             DEC 18 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -130,7 +131,6 @@ const StyleGuide = () => {
                                             DEC 19 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -144,7 +144,6 @@ const StyleGuide = () => {
                                             DEC 20 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -220,7 +219,7 @@ const StyleGuide = () => {
                                         <img className="w-full mb-1" src="/images/products/4.jpg"/>
                                     </div>
                                 </div>
-                                <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                <div className="favourite">
                                     <span className="mt-2">
                                         <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g filter="url(#filter0_d_944_19802)">
@@ -259,7 +258,7 @@ const StyleGuide = () => {
                                             DEC 17 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -273,7 +272,7 @@ const StyleGuide = () => {
                                             DEC 18 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -287,7 +286,7 @@ const StyleGuide = () => {
                                             DEC 19 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -301,7 +300,7 @@ const StyleGuide = () => {
                                             DEC 20 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -778,7 +777,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6">
+                <div className="flex flex-col sm:flex-row justify-between mb-8 gap-6">
                     <p className="text-base text-primaryColor sm:max-w-[50%]">Specially designed for your <strong>SS2022</strong> that introduces a unique combination of <strong>luxury</strong> and <strong>tredition</strong>.
                         The feel and the experience of the collections are top-notch.</p>
                     <div className="sm:max-w-[40%]">
@@ -793,6 +792,50 @@ const StyleGuide = () => {
                             <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">SS 2022</span>
                         </div>
                     </div>
+                </div>
+
+                <div className="kint-carasoul mb-6">
+                    <SliderWrapper>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide1} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </SliderWrapper>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5">
