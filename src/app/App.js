@@ -7,17 +7,21 @@ import {
     Navigate,
     Outlet,
     Route,
-    Routes, useNavigate
+    Routes,
+    useNavigate
 } from 'react-router-dom'
 import Login from './modules/login-journey/Login'
 import ActivationPopup from './modules/login-journey/ActivationPopup'
 import Dashboard from './modules/dashboard/Dashboard'
 import DefaultLayout from './layouts/DefaultLayout'
 
-{/*Design UI Route*/}
+{
+    /*Design UI Route*/
+}
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
 import moodboardTemplate from '../assets/designs/moodboard/moodboardTemplate'
+import ReduxComp from './modules/redux_test_module/ReduxComp'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -36,11 +40,19 @@ const App = () => {
                 <Routes>
                     <Route path='login' element={<Login />} />
 
+                    <Route path='redux' element={<ReduxComp />} />
+
                     <Route path='/' element={<DefaultLayout />}>
                         <Route element={<ProtectedRoutes />}>
-                            <Route path='/' element={<Navigate replace to='dashboard' />} />
+                            <Route
+                                path='/'
+                                element={<Navigate replace to='dashboard' />}
+                            />
                             <Route path='dashboard' element={<Dashboard />} />
-                            <Route path='activation' element={<ActivationPopup />} />
+                            <Route
+                                path='activation'
+                                element={<ActivationPopup />}
+                            />
                         </Route>
                     </Route>
 
