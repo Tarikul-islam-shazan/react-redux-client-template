@@ -288,6 +288,13 @@ const StyleGuide = () => {
             <div>
                 <h2 className="mb-8">Others</h2>
 
+                <div className="flex gap-3 mb-2 xl:mb-0">
+                    <span className="badge bg-warning font-bold">New</span>
+                    <span className="badge bg-success">Eco-Friendly</span>
+                    <span className="badge bg-pending">requested for collection</span>
+                    <span className="badge bg-pending border border-primaryColor">requested for collection</span>
+                </div>
+
                 {/*Favraoite */}
                 <div className="flex flex-wrap gap-5">
                     <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
