@@ -7,17 +7,21 @@ import {
     Navigate,
     Outlet,
     Route,
-    Routes, useNavigate
+    Routes,
+    useNavigate
 } from 'react-router-dom'
 import Login from './modules/login-journey/Login'
 import ActivationPopup from './modules/login-journey/ActivationPopup'
 import Dashboard from './modules/dashboard/Dashboard'
 import DefaultLayout from './layouts/DefaultLayout'
 
-{/*Design UI Route*/}
+{
+    /*Design UI Route*/
+}
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
-import moodboardTemplate from '../assets/designs/moodboard/moodboardTemplate'
+import MoodboardTemplate from '../assets/designs/moodboard'
+import VerifyEmail from './modules/login-journey/VerifyEmail';
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -35,19 +39,26 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path='login' element={<Login />} />
+                    <Route path='verify/email' element={<VerifyEmail />} />
 
                     <Route path='/' element={<DefaultLayout />}>
                         <Route element={<ProtectedRoutes />}>
-                            <Route path='/' element={<Navigate replace to='dashboard' />} />
+                            <Route
+                                path='/'
+                                element={<Navigate replace to='dashboard' />}
+                            />
                             <Route path='dashboard' element={<Dashboard />} />
-                            <Route path='activation' element={<ActivationPopup />} />
+                            <Route
+                                path='activation'
+                                element={<ActivationPopup />}
+                            />
                         </Route>
                     </Route>
 
                     {/*Design UI Route*/}
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
-                    <Route path='/moodboard' element={<moodboardTemplate />} />
+                    <Route path='/moodboard' element={<MoodboardTemplate />} />
                 </Routes>
             </Router>
             <ToastContainer

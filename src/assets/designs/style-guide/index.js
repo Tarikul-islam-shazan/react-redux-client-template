@@ -10,14 +10,14 @@ const StyleGuide = () => {
         <div className='container p-10 space-y-16'>
             <div>
                 <h2 className="mb-4">Modal & Buttons</h2>
-                <div className="flex flex-wrap gap-5">
+                <div className="grid grid-cols-4 gap-5">
                     <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                         Vertically centered modal
                     </button>
                     <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#ActivatedSoon">
                         Activated Soon
                     </button>
-                    <button type="button" className="btn flex justify-between items-center w-1/4">
+                    <button type="button" className="btn flex justify-between items-center">
                         <span>Login Now</span>
                         <span className="ml-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@ const StyleGuide = () => {
                         </svg>
                     </span>
                     </button>
-                    <button type="button" className="btn flex justify-between items-center w-1/4">
+                    <button type="button" className="btn flex justify-between items-center">
                         <span>Ask <strong>Collection</strong></span>
                         <span className="ml-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +34,9 @@ const StyleGuide = () => {
                                   stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </span>
+                    </button>
+                    <button type="button" className="btn w-full bg-transparent font-normal border border-primaryColor text-primaryColor">
+                        Close
                     </button>
                 </div>
 
@@ -266,6 +269,7 @@ const StyleGuide = () => {
                             </div>
                         </div>
                         <div className="input-group">
+                            <label htmlFor="search" className="label">Select</label>
                             <SelectComponent
                                 options={[
                                     {label: "Country", value: "country"},
@@ -273,6 +277,10 @@ const StyleGuide = () => {
                                     {label: "Country 2", value: "country2"}
                                 ]}
                             />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="search" className="label">Textarea</label>
+                            <textarea name="" id="" cols="30" rows="4" className="form-field h-auto" placeholder="Write Here ..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -307,44 +315,45 @@ const StyleGuide = () => {
                 </div>
 
                 {/*Carasoul*/}
-                <OwlCarousel className='owl-theme' loop margin={10} nav>
-                    <div class='item'>
-                        <h4>1</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>2</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>3</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>4</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>5</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>6</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>7</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>8</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>9</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>10</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>11</h4>
-                    </div>
-                    <div class='item'>
-                        <h4>12</h4>
-                    </div>
-                </OwlCarousel>;
+                {/*<OwlCarousel className='owl-theme' loop margin={10} nav>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>1</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>2</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>3</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>4</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>5</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>6</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>7</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>8</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>9</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>10</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>11</h4>*/}
+                {/*    </div>*/}
+                {/*    <div class='item'>*/}
+                {/*        <h4>12</h4>*/}
+                {/*    </div>*/}
+                {/*</OwlCarousel>;*/}
+
             </div>
         </div>
     )

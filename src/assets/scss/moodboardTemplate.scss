@@ -1,0 +1,163 @@
+.common-moodboard-container{
+    padding: 20px;
+    .left-half{
+        width: calc(100% - 680px);
+        margin-right: 20px;
+    }
+    .right-half{
+        width: 660px;
+    }
+    .moodboard-information{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        .left-half{
+            .input-group{
+                margin-bottom: 20px;
+                display: flex;
+                
+                label{
+                    min-width: 150px
+                }
+                input, textarea{
+                    max-width: 535px;
+                }
+                textarea{
+                    height: 120px;
+                    resize: none;
+                }
+            }
+        }
+    }
+    .moodboard-and-images-layout{
+        margin-top: 40px;
+        display: flex;
+        .left-half{
+            .moodboard-tab{
+                margin-bottom: 40px ;
+                ul{
+                    display: flex;
+                    li{
+                        font-size: 20px;
+                        line-height: 28px;
+                        font-weight: 400;
+                        cursor: pointer;
+                        margin: 0 52px 0 28px;
+                        position: relative;
+                        opacity: .5;
+                        &.active{
+                            color: #282828;
+                            font-weight: 700;
+                            opacity: 1;
+                        }
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            left: -16px;
+                            width: 4px;
+                            height: 4px;
+                            border-radius: 4px;
+                            top: 50%;
+                            transform: translateY();
+                            background: #282828; 
+                        }
+                    }
+                }
+            }
+            .full-moodboard-image{
+                img{
+                    width: 100%;
+                    height: auto;
+                    background: #ffffff;
+                }
+            }
+        }
+        .right-half{
+            background: #ffffff;
+            padding: 20px;
+            .moodboard-color-container{
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                column-gap: 4px;
+                row-gap: 20px;
+                .color-single-item{
+                    .add-color{
+                        width: 100%;
+                        aspect-ratio: 1 / 1;
+                        background: #282828;
+                        color: #ffffff;
+                        position: relative;
+                        cursor: pointer;
+                        span{
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                    .color-view{
+                        width: 100%;
+                        aspect-ratio: 1 / 1;
+                    }
+                    .color-info{
+                        .color-code{
+                            font-size: 14px;
+                            line-height: 22px;
+                        }
+                        .color-name{
+                            font-size: 12px;
+                            line-height: 12px;
+                        }
+                    }
+                }
+            }
+            .moodboard-fabric-container{
+                margin-top: 40px;
+                h3{
+                    font-size: 20px;
+                    line-height: 28px;
+                    color: #282828;
+                    font-weight: 600;
+                    border-bottom: 1px solid #D9D9D9;
+                    padding-bottom: 12px;
+                    margin-bottom: 12px;
+                }
+                .fabric-filter{
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 12px;
+                    p{
+                        font-size: 16px;
+                        line-height: 24px;
+                        color: #282828;
+                        span{
+                            color: #646464 ;
+                        }
+                    }
+                    svg{
+                        cursor: pointer;
+                    }
+                }
+                .fabric-all-items{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    column-gap: 4px;
+                    row-gap: 20px;
+                    .fabric-single-item{
+                        img{
+                            width: 100%;
+                            aspect-ratio: 1 / 1;
+                            object-fit: contain;
+                            background: #F5F5F5;
+                        }
+                        p{
+                            font-size: 14px;
+                            line-height: 22px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
