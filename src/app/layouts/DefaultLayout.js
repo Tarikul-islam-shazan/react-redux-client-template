@@ -12,7 +12,7 @@ const DefaultLayout = () => {
             sessionStorage.clear()
             navigate('/login')
         } else if (data?.emailVerified === false) {
-            navigate('/activation')
+            navigate('/login', { state: { emailVerified: false } })
         }else if (data?.businessInfoGiven === false) {
             navigate('/activation')
             return <Navigate to='/activation' />
