@@ -4,6 +4,7 @@ import { ReactComponent as AddIcon } from '../../icons/add-white.svg'
 import { ReactComponent as CloseIcon } from '../../icons/close.svg'
 import { ReactComponent as TickIcon } from '../../icons/tick.svg'
 import { ReactComponent as DeleteIcon } from '../../icons/delete.svg'
+import { ReactComponent as EditIcon } from '../../icons/edit.svg'
 
 const Boilarplate = () => {
     //change the Boilarplate name to your specified name
@@ -17,13 +18,12 @@ const Boilarplate = () => {
                             <label htmlFor='name' className='label'>
                                 Title
                             </label>
-                            <input
-                                type='text'
-                                className='form-field'
-                                id='name'
-                                placeholder='Enter Name'
-                                name='name'
-                            />
+                            <h4>
+                                Summer 2022 For Men
+                                <span>
+                                    <EditIcon />
+                                </span>
+                            </h4>
                         </div>
                     </div>
                     <div className='description'>
@@ -31,23 +31,27 @@ const Boilarplate = () => {
                             <label htmlFor='name' className='label'>
                                 Description
                             </label>
-                            <textarea
-                                class='form-field'
-                                placeholder='Write Here ...'
-                            ></textarea>
+                            <p>
+                                To be sincerely honest in my humble opinion
+                                without being sentimental and of course, without
+                                offending anyone who thinks differently from my
+                                opinion but rather looking into this serious
+                                matter with perspective distinction and without
+                                condemning.
+                                <span>
+                                    <EditIcon />
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div className='right-half'>
                     <button
                         type='button'
-                        class='btn flex items-center float-right'
+                        class='btn bg-white text-black float-right'
                     >
                         <span>
-                            Ask <strong>Collection</strong>
-                        </span>
-                        <span class='ml-2'>
-                            <AddIcon />
+                            Go to <strong>Collection</strong>
                         </span>
                     </button>
                 </div>
@@ -62,15 +66,6 @@ const Boilarplate = () => {
                             <li>Images</li>
                         </ul>
                     </div>
-
-                    {/* Full moodboard image */}
-                    {/* <div className='full-moodboard-image'>
-                        <img
-                            src='/images/moodboard/moodboard.jpg'
-                            alt='moodboard'
-                        />
-                    </div> */}
-
                     {/* Images layout */}
                     <div className='moodboard-masonry-container'>
                         <div className='masonry-item add-item'>

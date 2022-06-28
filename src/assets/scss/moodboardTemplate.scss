@@ -16,7 +16,6 @@
             .input-group{
                 margin-bottom: 20px;
                 display: flex;
-                
                 label{
                     min-width: 150px
                 }
@@ -27,12 +26,30 @@
                     height: 120px;
                     resize: none;
                 }
+                h4{
+                    display: flex;
+                    color:#282828;
+                    font-weight: 600;
+                }
+                p{
+                    display: flex;
+                    font-size: 16px;
+                    line-height: 32px;
+                    color:#282828;
+                  
+                }
+                span{
+                    margin-left: 20px;
+                    cursor: pointer;
+                }
             }
         }
+       
     }
     .moodboard-and-images-layout{
         margin-top: 40px;
         display: flex;
+        flex-wrap: wrap;
         .left-half{
             .moodboard-tab{
                 margin-bottom: 40px ;
@@ -241,3 +258,91 @@
         }
     }
 }
+
+@media only screen and (max-width: 1440px) {
+    .common-moodboard-container {
+        .left-half {
+            width: calc(100% - 440px);
+        }
+        .right-half{
+            width: 420px;
+        }
+        .moodboard-and-images-layout {
+            .right-half{
+                .moodboard-color-container {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
+        }
+    }
+  }
+
+  
+@media only screen and (max-width: 1200px) {
+    .common-moodboard-container {
+        .left-half {
+            width: calc(100% - 340px);
+        }
+        .right-half{
+            width: 320px;
+        }
+        .moodboard-and-images-layout {
+            .right-half{
+                .moodboard-color-container {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+        }
+    }
+  }
+
+@media only screen and (max-width: 992px) {
+    .common-moodboard-container {
+        .left-half, .right-half {
+            width:100%;
+        }
+     
+        .moodboard-and-images-layout {
+            .left-half, .right-half{
+                width: 100%;
+                margin: 0;
+            } 
+            .right-half{
+                .moodboard-color-container {
+                    grid-template-columns: repeat(6, 1fr);
+                    row-gap: 12px;
+                }
+
+            }  
+        }
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    .common-moodboard-container {
+        .moodboard-information {
+            .left-half {
+                .input-group {
+                    flex-wrap: wrap;
+                }
+            }
+        }
+        .moodboard-and-images-layout {
+            .left-half {
+                .moodboard-masonry-container{
+                    columns: 3;
+                }
+            }
+            .right-half{
+                .moodboard-color-container {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+                .moodboard-fabric-container{
+                    .fabric-all-items{
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+            }  
+        }
+    }
+  }
