@@ -1,5 +1,6 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
+import SliderWrapper from "../../../app/common/SliderWrapper";
 // import OwlCarousel from 'react-owl-carousel';
 // import 'owl.carousel/dist/assets/owl.carousel.css';
 // import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -313,6 +314,28 @@ const StyleGuide = () => {
                     </span>
                 </div>
                 </div>
+
+                {/*Slcik Carousel*/}
+                <SliderWrapper>
+                    <div>
+                        <h3>1</h3>
+                    </div>
+                    <div>
+                        <h3>2</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
+                    </div>
+                    <div>
+                        <h3>4</h3>
+                    </div>
+                    <div>
+                        <h3>5</h3>
+                    </div>
+                    <div>
+                        <h3>6</h3>
+                    </div>
+                </SliderWrapper>
 
                 {/*Carasoul*/}
                 {/*<OwlCarousel className='owl-theme' loop margin={10} nav>*/}
