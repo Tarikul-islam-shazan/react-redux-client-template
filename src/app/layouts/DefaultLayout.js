@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Link, Navigate, Outlet, useNavigate} from 'react-router-dom'
+import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { ReactComponent as MenuIcon } from '../../assets/images/home/humbargerMenu.svg';
 import { ReactComponent as NitexIcon } from '../../assets/images/home/nitexLogo.svg';
 import { ReactComponent as CloseIcon } from '../../assets/images/home/cross.svg';
@@ -34,7 +34,7 @@ const DefaultLayout = () => {
                     <div className='burger-menu xl:hidden'>
                         <MenuIcon />
                     </div>
-                    <Link to="/dashboard">
+                    <Link to='/dashboard'>
                         <span className='brand-logo'>
                             <NitexIcon />
                         </span>
@@ -50,7 +50,7 @@ const DefaultLayout = () => {
                 <div className='main-menu hidden xl:block ml-16 4xl:ml-28'>
                     <ul>
                         <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14 active'>
-                            <Link to="/dashboard">Home</Link>
+                            <Link to='/dashboard'>Home</Link>
                         </li>
                         <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                             <a href='#'>Moodboards</a>
@@ -88,7 +88,7 @@ const DefaultLayout = () => {
                             <IconNotification />
                         </span>
                         <span
-                            className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>99+</span>
+                            className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-   3 text-center'>99+</span>
                     </div>
                     <div
                         className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
