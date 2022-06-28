@@ -1,15 +1,80 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Http from '../../services/Http';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const ActivationPopup = () => {
+    const [loading, setLoading] = useState(true);
+    const [managerInfo, setManagerInfo] = useState({});
+    const [buyerDetailsInfo, setBuyerDetailsInfo] = useState({});
+    const navigate = useNavigate();
     const popupRef = useRef();
 
     useEffect(() => {
+        Http.GET('userInfo')
+            .then(async (response) => {
+                let refreshToken = localStorage.getItem('refreshToken');
+                localStorage.setItem('userInfo', JSON.stringify(response.data));
+                let isTokenUpdateRequired = response.data.updatedTokenRequired;
+                if (isTokenUpdateRequired === true && refreshToken) {
+                    await Http.POST('refreshUserToken', { refreshToken: refreshToken })
+                        .then(async (tokenResponse) => {
+                            await localStorage.setItem(
+                                'token',
+                                `${tokenResponse.data.tokenType} ${tokenResponse.data.accessToken}`
+                            );
+                            await redirectPage(response);
+                            setLoading(false);
+                        })
+                        .catch((error) => {
+                            setLoading(false);
+                            toast.error(error.response.data.message);
+                        });
+                } else {
+                    await redirectPage(response);
+                }
+            })
+            .catch(({ response }) => {
+                setLoading(false);
+                toast.error(response.data.message);
+            });
+    }, []);
+
+    const redirectPage = async (response) => {
+        if (response.data.status === 'ACTIVE') {
+            await navigate('/dashboard');
+        } else if (response.data.status === 'DISABLED') {
+            await navigate('/login');
+        }
+    };
+
+    useEffect(() => {
+        Http.GET('accManagerInfo')
+            .then((response) => {
+                let buyerInfo = JSON.parse(localStorage.getItem('userInfo'));
+                setManagerInfo(response.data);
+                setBuyerDetailsInfo(buyerInfo);
+                setLoading(false);
+            })
+            .catch(({ response }) => {
+                setLoading(false);
+                if (response && response.data && response.data.message) {
+                    toast.error(response.data.message);
+                } else {
+                    toast.error('Couldn\'t fetch user info.');
+                }
+            });
+    }, []);
+
+    useEffect(() => {
         popupRef.current.click()
-    },[])
+    }, [])
 
     return (
-        <>
-            <button ref={popupRef} type='button' className='btn hidden' data-bs-toggle='modal' data-bs-target='#ActivatedSoon'>
+        <LoaderComponent loading={loading}>
+            <button ref={popupRef} type='button' className='btn hidden' data-bs-toggle='modal'
+                    data-bs-target='#ActivatedSoon'>
                 Activated Soon
             </button>
             <div
@@ -28,10 +93,10 @@ const ActivationPopup = () => {
                                 <h2 className='text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8'>Your
                                     Account will be activated Soon.</h2>
                                 <div className='space-y-4'>
-                                    <p className='text-xl'>Welcome! Sir <strong className='uppercase'>Kavin</strong>.
+                                    <p className='text-xl'>Welcome! Sir <strong className='uppercase'>{buyerDetailsInfo?.name}</strong>.
                                         Thanks
                                         for joining us!</p>
-                                    <p className='text-xl'>This is <strong className='uppercase'>Saikat</strong>, a
+                                    <p className='text-xl'>This is <strong className='uppercase'>{managerInfo?.name}</strong>, a
                                         Business
                                         Evangelist dedicated to you and your brand. </p>
                                     <p className='text-xl'>We will contact you <strong>within 24 hours </strong></p>
@@ -150,7 +215,7 @@ const ActivationPopup = () => {
                                 <div className='lg:w-[40%] flex flex-col xl:flex-row xl:items-end relative'>
                                     <div className='space-y-5 pb-8 relative z-10 '>
                                         <div>
-                                            <a href='mailto:saikat@nitex.info'>
+                                            <a href={`mailto:${managerInfo?.email}`}>
                                                 <div className='flex gap-3'>
                                                      <span>
                                                         <svg width='24' height='24' viewBox='0 0 24 24' fill='none'
@@ -164,7 +229,7 @@ const ActivationPopup = () => {
                                                               strokeLinejoin='round'/>
                                                         </svg>
                                                      </span>
-                                                    <span>saikat@nitex.info</span>
+                                                    <span>{managerInfo?.email}</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -180,12 +245,12 @@ const ActivationPopup = () => {
                                                             strokeLinejoin='round'/>
                                                         </svg>
                                                      </span>
-                                                    <span>+88 015 21 300 845</span>
+                                                    <span>{managerInfo?.phone}</span>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-                                    <img src='./images/person.png' alt=''
+                                    <img src={managerInfo?.profilePicDocument?.docUrl} alt=''
                                          className='lg:absolute lg:max-h-[630px] lg:right-[-72px] lg:bottom-[-16px] xl:pl-14 4xl:pl-0'/>
                                 </div>
                             </div>
@@ -193,7 +258,7 @@ const ActivationPopup = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </LoaderComponent>
     )
 }
 

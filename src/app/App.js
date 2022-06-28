@@ -21,6 +21,8 @@ import DefaultLayout from './layouts/DefaultLayout'
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
 import MoodboardTemplate from '../assets/designs/moodboard'
+import MoodboardView from '../assets/designs/moodboard/moodboardView'
+import VerifyEmail from './modules/login-journey/VerifyEmail'
 import MoodboardHome from '../assets/designs/moodboard/moodboard-home.js'
 
 const useAuth = () => {
@@ -39,6 +41,7 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path='login' element={<Login />} />
+                    <Route path='verify/email' element={<VerifyEmail />} />
 
                     <Route path='/' element={<DefaultLayout />}>
                         <Route element={<ProtectedRoutes />}>
@@ -58,6 +61,7 @@ const App = () => {
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
                     <Route path='/moodboard' element={<MoodboardTemplate />} />
+                    <Route path='/moodboardView' element={<MoodboardView />} />
                     <Route path='/moodboard/moodboard-home' element={<MoodboardHome />} />
                 </Routes>
             </Router>
