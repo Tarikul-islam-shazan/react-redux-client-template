@@ -13,6 +13,7 @@ import { ReactComponent as Dlt } from '../../images/dlt.svg';
 import { ReactComponent as ArrowRightWhite } from '../../images/arror-right-white.svg';
 import { ReactComponent as Favourite } from '../../images/favourite.svg';
 import Pdf from '../../images/pdf.png';
+import User from '../../images/user.jpg';
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -176,40 +177,35 @@ const StyleGuide = () => {
 
                 <div className="filter">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-6">
-                        <div className="text-base md:text-xl text-white-shade-200 flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-                           <div className="flex items-center gap-3 cursor-pointer text-primaryColor font-bold">
-                               <span className="font-bold text-xl leading-none inline-block mb-2">.</span>
-                               <span>NITEX Collection</span>
-                           </div>
-                           <div className="flex items-center gap-3 cursor-pointer">
-                               <span className="font-bold text-xl leading-none inline-block mb-2">.</span>
-                               <span>My Collection</span>
-                           </div>
-                           <div className="flex items-center gap-3 cursor-pointer">
-                               <span className="font-bold text-xl leading-none inline-block mb-2">.</span>
-                               <span>Requested Collection</span>
-                           </div>
+                        <div className="flex items-start">
+                            <span><input type="checkbox" id="SelectAll"/></span>
+                            <label htmlFor="SelectAll" className="align-middle pl-4 inline-block mt-[-3px]">Select All</label>
                         </div>
-                        <div className="flex flex-wrap justify-end gap-4 lg:gap-2">
-                            <div className="flex items-center gap-2 overflow-x-auto">
-                                <div className="tag-badge">
-                                    <span>Summer</span>
-                                    <span className="ml-6 cursor-pointer">
-                                        <CloseIcon />
+                        <div className="flex flex-wrap gap-2">
+                            <span className="badge bg-transparent border border-primaryColor pb-1 cursor-pointer">Aesthetic</span>
+                            <span className="badge bg-transparent border border-primaryColor pb-1 cursor-pointer">Vintage</span>
+                            <span className="badge bg-transparent border border-primaryColor pb-1 cursor-pointer">Aesthetic</span>
+                            <span className="badge bg-transparent border border-primaryColor pb-1 cursor-pointer">Vintage</span>
+                        </div>
+                        <div className="flex flex-wrap items-center justify-end gap-4 lg:gap-2">
+                            <div className="flex mr-4">
+                                <div className="flex">
+                                    <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                        <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                        <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                        <span className="w-[40px] h-[40px] cursor-pointer bg-white font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <span>4+</span>
                                     </span>
                                 </div>
-                                <div className="tag-badge">
-                                    <span>Men</span>
-                                    <span className="ml-6 cursor-pointer">
-                                        <CloseIcon />
-                                    </span>
-                                </div>
-                                <div className="tag-badge">
-                                    <span>Newest</span>
-                                    <span className="ml-6 cursor-pointer">
-                                        <CloseIcon />
-                                    </span>
-                                </div>
+                                <span className="w-[40px] h-[40px] cursor-pointer bg-primaryColor font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[5px]">
+                                    <PlusIcon />
+                                </span>
                             </div>
                             <div className="flex items-center overflow-x-auto gap-2">
                                 <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
@@ -217,19 +213,6 @@ const StyleGuide = () => {
                                 </button>
                                 <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
                                     <FilterIcon />
-                                </button>
-                                <div className="h-[60px] w-[1px] bg-primaryColor-shade-200 mx-3"></div>
-                                <button type="button"  className="btn bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
-                                    <span>Upload</span>
-                                    <span className="ml-4">
-                                        <UploadIcon />
-                                    </span>
-                                </button>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#BriefCollection" className="btn flex justify-between items-center">
-                                    <span>Brief Collection</span>
-                                        <span className="ml-2">
-                                        <PlusIcon />
-                                    </span>
                                 </button>
                             </div>
                         </div>
