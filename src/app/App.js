@@ -28,6 +28,7 @@ import Home from '../assets/designs/home'
 import MoodboardTemplate from '../assets/designs/moodboard'
 import MoodboardView from '../assets/designs/moodboard/moodboardView'
 import VerifyEmail from './modules/login-journey/VerifyEmail'
+import MoodboardHome from '../assets/designs/moodboard/moodboard-home.js'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -69,6 +70,7 @@ const App = () => {
                     <Route path='/Home' element={<Home />} />
                     <Route path='/moodboard' element={<MoodboardTemplate />} />
                     <Route path='/moodboardView' element={<MoodboardView />} />
+                    <Route path='/moodboard/moodboard-home' element={<MoodboardHome />} />
                 </Routes>
             </Router>
             <ToastContainer

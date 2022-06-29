@@ -1,6 +1,10 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
-// import User from './images/user.jpg'
+import SliderWrapper from "../../../app/common/SliderWrapper";
+import slide from '../../images/home/slide.png';
+import slide1 from '../../images/home/slide1.png';
+import Cloud from '../../images/home/cloud.png';
+import { ReactComponent as Favourite } from '../../images/favourite.svg';
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -94,66 +98,62 @@ const StyleGuide = () => {
             <div className="body-container p-4">
                 <div className="banner-section flex flex-col xl:flex-row gap-4">
                     <div className="xl:w-[30%] 4xl:w-1/4">
-                        <div id="carouselExampleCaptions" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel">
+                        <div id="carouselExampleCaptions" className="carousel slide relative bg-[#0476E0] h-full px-4 py-6" data-bs-ride="carousel">
                             <div className="carousel-inner relative w-full overflow-hidden">
-                                <div className="carousel-item active relative float-left w-full">
+                                <div className="carousel-item active relative float-left w-full bg-no-repeat bg-right-top"  style={{ 'background-image': `url(${Cloud})` }}>
                                     <div className="flex justify-between">
                                         <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
                                             DEC 17 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
-                                    <div className="carousel-caption pb-5">
+                                    <div className="carousel-caption pb-5 mt-9">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
-                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
-                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3 truncate-2">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3 truncate-2">Wishing you a productive day</span>
                                     </div>
                                 </div>
-                                <div className="carousel-item relative float-left w-full">
+                                <div className="carousel-item relative float-left w-full bg-no-repeat bg-right-top"  style={{ 'background-image': `url(${Cloud})` }}>
                                     <div className="flex justify-between">
                                         <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
                                             DEC 18 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
-                                    <div className="carousel-caption pb-5">
+                                    <div className="carousel-caption pb-5 mt-9">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
-                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
-                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3 truncate-2">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3 truncate-2">Wishing you a productive day Wishing you a productive day</span>
                                     </div>
                                 </div>
-                                <div className="carousel-item relative float-left w-full">
+                                <div className="carousel-item relative float-left w-full bg-no-repeat bg-right-top"  style={{ 'background-image': `url(${Cloud})` }}>
                                     <div className="flex justify-between">
                                         <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
                                             DEC 19 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
-                                    <div className="carousel-caption pb-5">
+                                    <div className="carousel-caption pb-5 mt-9">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
-                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
-                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3 truncate-2">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3 truncate-2">Wishing you a productive day Wishing you a productive day</span>
                                     </div>
                                 </div>
-                                <div className="carousel-item relative float-left w-full">
+                                <div className="carousel-item relative float-left w-full bg-no-repeat bg-right-top"  style={{ 'background-image': `url(${Cloud})` }}>
                                     <div className="flex justify-between">
                                         <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
                                             DEC 20 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
                                     </div>
-                                    <div className="carousel-caption pb-5">
+                                    <div className="carousel-caption pb-5 mt-9">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
-                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
-                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3 truncate-2">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3 truncate-2">Wishing you a productive day Wishing you a productive day</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="carousel-indicators m-0 mr-2 flex justify-end">
+                            <div className="carousel-indicators m-0 mr-2 flex justify-end absolute bottom-[20px] right-[15px]">
                                 <div>
                                     <button
                                         type="button"
@@ -220,7 +220,7 @@ const StyleGuide = () => {
                                         <img className="w-full mb-1" src="/images/products/4.jpg"/>
                                     </div>
                                 </div>
-                                <div className="w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer">
+                                <div className="favourite">
                                     <span className="mt-2">
                                         <svg width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g filter="url(#filter0_d_944_19802)">
@@ -251,7 +251,7 @@ const StyleGuide = () => {
                 <div>Bottom 1 is For New User </div>
                 <div className="banner-section flex flex-col xl:flex-row gap-4">
                     <div className="xl:w-[30%] 4xl:w-1/4">
-                        <div id="carouselExampleCaptions" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel">
+                        <div id="carouselExampleCaptions2" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel">
                             <div className="carousel-inner relative w-full overflow-hidden">
                                 <div className="carousel-item active relative float-left w-full">
                                     <div className="flex justify-between">
@@ -259,7 +259,7 @@ const StyleGuide = () => {
                                             DEC 17 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -273,7 +273,7 @@ const StyleGuide = () => {
                                             DEC 18 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -287,7 +287,7 @@ const StyleGuide = () => {
                                             DEC 19 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -301,7 +301,7 @@ const StyleGuide = () => {
                                             DEC 20 <br/>
                                             2022
                                         </span>
-                                        <img src="./images/cloud.png" className="" alt=""/>
+
                                     </div>
                                     <div className="carousel-caption pb-5">
                                         <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
@@ -314,7 +314,7 @@ const StyleGuide = () => {
                                 <div>
                                     <button
                                         type="button"
-                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-target="#carouselExampleCaptions2"
                                         data-bs-slide-to="0"
                                         className="active"
                                         aria-current="true"
@@ -322,19 +322,19 @@ const StyleGuide = () => {
                                     ></button>
                                     <button
                                         type="button"
-                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-target="#carouselExampleCaptions2"
                                         data-bs-slide-to="1"
                                         aria-label="Slide 2"
                                     ></button>
                                     <button
                                         type="button"
-                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-target="#carouselExampleCaptions2"
                                         data-bs-slide-to="2"
                                         aria-label="Slide 3"
                                     ></button>
                                     <button
                                         type="button"
-                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-target="#carouselExampleCaptions2"
                                         data-bs-slide-to="3"
                                         aria-label="Slide 4"
                                     ></button>
@@ -778,7 +778,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6">
+                <div className="flex flex-col sm:flex-row justify-between mb-8 gap-6">
                     <p className="text-base text-primaryColor sm:max-w-[50%]">Specially designed for your <strong>SS2022</strong> that introduces a unique combination of <strong>luxury</strong> and <strong>tredition</strong>.
                         The feel and the experience of the collections are top-notch.</p>
                     <div className="sm:max-w-[40%]">
@@ -793,6 +793,51 @@ const StyleGuide = () => {
                             <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">SS 2022</span>
                         </div>
                     </div>
+                </div>
+
+                <div className="kint-carasoul mb-6">
+                    <SliderWrapper>
+
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide1} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </SliderWrapper>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5">
