@@ -110,7 +110,7 @@ export const Moodboard = () => {
                                         Description
                                     </label>
                                     <textarea
-                                        class='form-field'
+                                        className='form-field'
                                         placeholder='Write Here ...'
                                     ></textarea>
                                 </div>
@@ -119,12 +119,12 @@ export const Moodboard = () => {
                         <div className='right-half'>
                             <button
                                 type='button'
-                                class='btn flex h-[60px] items-center float-right'
+                                className='btn flex h-[60px] items-center float-right'
                             >
                                 <span>
                                     Ask <strong>Collection</strong>
                                 </span>
-                                <span class='ml-2'>
+                                <span className='ml-2'>
                                     <AddIcon />
                                 </span>
                             </button>
