@@ -97,7 +97,7 @@ const StyleGuide = () => {
             <div className="body-container p-4">
                 <div className="banner-section flex flex-col xl:flex-row gap-4">
                     <div className="xl:w-[30%] 4xl:w-1/4">
-                        <div id="carouselExampleCaptions" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel">
+                        <div id="carouselExampleCaptions" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel" style={{ background: `url(${slide1})` }}>
                             <div className="carousel-inner relative w-full overflow-hidden">
                                 <div className="carousel-item active relative float-left w-full">
                                     <div className="flex justify-between">
@@ -796,6 +796,7 @@ const StyleGuide = () => {
 
                 <div className="kint-carasoul mb-6">
                     <SliderWrapper>
+
                         <div>
                             <div className="bg-white p-3 m-3 relative">
                                 <div className="flex flex-wrap gap-5">
