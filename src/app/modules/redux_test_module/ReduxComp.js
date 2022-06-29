@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux'
 import { loginActions } from '../../redux_toolkit/Login'
 import { LOGIN_SUCCESS } from '../../redux_toolkit/action.types'
 
+import { useLoginSelector } from '../../redux_toolkit/Login'
+
 const ReduxComp = () => {
     const store = useStoreSelector()
     const dispatch = useDispatch()
-    console.log(store)
+    // console.log(store)
+    const loginStore = useLoginSelector()
+    // console.log(loginStore)
 
     return (
         <div>
@@ -22,7 +26,7 @@ const ReduxComp = () => {
                     })
                 }}
             >
-                hELLLLO
+                Hello
             </button>
         </div>
     )

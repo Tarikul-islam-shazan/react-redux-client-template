@@ -25,6 +25,6 @@ const LoginSlice = createSlice({
 
 export const loginActions = LoginSlice.actions
 
-export const useLoginSelector = () => useSelector((state) => state)
+export const useLoginSelector = () => useSelector((state) => state.login)
 
 export default LoginSlice.reducer

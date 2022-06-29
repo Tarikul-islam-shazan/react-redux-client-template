@@ -72,7 +72,8 @@
         "lint:fix": "eslint --fix .",
         "pretty": "prettier --write .",
         "prepare": "husky install",
-        "eslint-fix-force": "yarn run lint:fix || true"
+        "eslint-fix-force": "yarn run lint:fix || true",
+        "eslint-fix-force-npm": "npm run lint:fix || true"
     },
     "browserslist": {
         "production": [
