@@ -1195,7 +1195,7 @@ const StyleGuide = () => {
 
 
 
-            {/*Activated Soon Modal*/}
+            {/*ConfirmationAction Soon Modal*/}
             <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ConfirmationAction" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
                 <div className="modal-dialog max-w-[680px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
