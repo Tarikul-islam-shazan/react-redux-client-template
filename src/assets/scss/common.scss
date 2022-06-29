@@ -120,3 +120,40 @@
          bottom: -80px;
      }
  }
+
+
+ //Custom Upload
+ .file > input[type='file'] {
+     display: none
+ }
+
+ .file > label {
+     font-size: 16px;
+     text-transform: uppercase;
+     cursor: pointer;
+     outline: 0;
+     user-select: none;
+     border-color: #282828;
+     border-style: dashed;
+     border-width: 1px;
+     padding-left: 16px;
+     padding-right: 16px;
+     padding-top: 16px;
+     padding-bottom: 16px;
+     display: flex;
+     align-items: center;
+ }
+
+ .file > label:hover {
+     border-color: hsl(0, 0%, 21%);
+ }
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+    :root {
+    zoom: 0.8;
+}}
+    
+@media (-webkit-device-pixel-ratio: 1.50) {
+    :root {
+    zoom: 1;
+}}

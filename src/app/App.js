@@ -20,8 +20,10 @@ import DefaultLayout from './layouts/DefaultLayout'
 }
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
-import moodboardTemplate from '../assets/designs/moodboard/moodboardTemplate'
 import ReduxComp from './modules/redux_test_module/ReduxComp'
+import MoodboardTemplate from '../assets/designs/moodboard'
+import MoodboardView from '../assets/designs/moodboard/moodboardView'
+import VerifyEmail from './modules/login-journey/VerifyEmail'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -39,6 +41,7 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path='login' element={<Login />} />
+                    <Route path='verify/email' element={<VerifyEmail />} />
 
                     <Route path='redux' element={<ReduxComp />} />
 
@@ -59,7 +62,8 @@ const App = () => {
                     {/*Design UI Route*/}
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
-                    <Route path='/moodboard' element={<moodboardTemplate />} />
+                    <Route path='/moodboard' element={<MoodboardTemplate />} />
+                    <Route path='/moodboardView' element={<MoodboardView />} />
                 </Routes>
             </Router>
             <ToastContainer

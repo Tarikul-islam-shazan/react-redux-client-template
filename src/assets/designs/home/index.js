@@ -246,6 +246,114 @@ const StyleGuide = () => {
                         </div>
                     </div>
                 </div>
+
+                {/*for New User*/}
+                <div>Bottom 1 is For New User </div>
+                <div className="banner-section flex flex-col xl:flex-row gap-4">
+                    <div className="xl:w-[30%] 4xl:w-1/4">
+                        <div id="carouselExampleCaptions" className="carousel slide relative  bg-[#0476E0] px-4 py-6" data-bs-ride="carousel">
+                            <div className="carousel-inner relative w-full overflow-hidden">
+                                <div className="carousel-item active relative float-left w-full">
+                                    <div className="flex justify-between">
+                                        <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
+                                            DEC 17 <br/>
+                                            2022
+                                        </span>
+                                        <img src="./images/cloud.png" className="" alt=""/>
+                                    </div>
+                                    <div className="carousel-caption pb-5">
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                    </div>
+                                </div>
+                                <div className="carousel-item relative float-left w-full">
+                                    <div className="flex justify-between">
+                                        <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
+                                            DEC 18 <br/>
+                                            2022
+                                        </span>
+                                        <img src="./images/cloud.png" className="" alt=""/>
+                                    </div>
+                                    <div className="carousel-caption pb-5">
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                    </div>
+                                </div>
+                                <div className="carousel-item relative float-left w-full">
+                                    <div className="flex justify-between">
+                                        <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
+                                            DEC 19 <br/>
+                                            2022
+                                        </span>
+                                        <img src="./images/cloud.png" className="" alt=""/>
+                                    </div>
+                                    <div className="carousel-caption pb-5">
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                    </div>
+                                </div>
+                                <div className="carousel-item relative float-left w-full">
+                                    <div className="flex justify-between">
+                                        <span className="text-white-shade-100 text-4xl font-bold uppercase opacity-20">
+                                            DEC 20 <br/>
+                                            2022
+                                        </span>
+                                        <img src="./images/cloud.png" className="" alt=""/>
+                                    </div>
+                                    <div className="carousel-caption pb-5">
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Good Morning!</span>
+                                        <h5 className="text-4xl text-white-shade-100 font-bold mb-3">Robert D. Junior Ironman</h5>
+                                        <span className="inline-block text-xl text-white-shade-100 mb-3">Wishing you a productive day</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="carousel-indicators m-0 mr-2 flex justify-end">
+                                <div>
+                                    <button
+                                        type="button"
+                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-slide-to="0"
+                                        className="active"
+                                        aria-current="true"
+                                        aria-label="Slide 1"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-slide-to="1"
+                                        aria-label="Slide 2"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-slide-to="2"
+                                        aria-label="Slide 3"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-bs-target="#carouselExampleCaptions"
+                                        data-bs-slide-to="3"
+                                        aria-label="Slide 4"
+                                    ></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="xl:w-[70%] 4xl:w-4/5">
+                        <div className="flex items-center justify-center h-full py-10">
+                            <div className="max-w-[582px] text-center relative">
+                                <img src="/images/leef-new.png" className="absolute left-0 sm:left-[-74px] top-0 z-10 hidden sm:block" alt="" />
+                                <h1 className="text-4xl sm:text-5xl text-primaryColor font-bold  mb-4">We are designing <br/> for you</h1>
+                                <p className="max-w-[398px] text-base text-primaryColor m-0">We are designing something interisting for you.  We will revolutionize together.</p>
+                                <img src="/images/leef-new-reflect.png" className="absolute right-0 sm:right-[-74px] top-0 z-10 hidden sm:block" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="grid sm:grid-cols-2 gap-4 py-4">
                     <div className="collection-box">
                         <div className="overflow-hidden relative h-[300px] sm:h-[400px] xl:h-[524px] p-4 bg-white">
@@ -550,7 +658,7 @@ const StyleGuide = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 mb-12 sm:mb-20">
-                    <div className="flex items-center p-6 lg:p-10 py-12 bg-pink overflow-hidden">
+                    <div data-bs-toggle="modal" data-bs-target="#BriefCollection" className="flex items-center p-6 lg:p-10 py-12 bg-pink overflow-hidden cursor-pointer">
                         <div className="flex items-center justify-between w-full relative circle-bg circle-bg2">
                             <div>
                                 <h4 className="text-px28 text-white-shade-100 uppercase mb-4 leading-8">Brief a  <strong>Collection</strong></h4>
@@ -660,19 +768,21 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                {/*<div>*/}
-                {/*    <div className="input-group">*/}
-                {/*        <SelectComponent*/}
-                {/*            options={[{label: "Country", value: "country"}]}*/}
-                {/*        />*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div>
+                    <div className="max-w-[434px] mb-8">
+                        <div className="input-group">
+                            <SelectComponent
+                                options={[{label: "Premium Fabric Base", placeholder: "asd" , value: "Premium Fabric Base"}]}
+                            />
+                        </div>
+                    </div>
+                </div>
 
                 <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6">
                     <p className="text-base text-primaryColor sm:max-w-[50%]">Specially designed for your <strong>SS2022</strong> that introduces a unique combination of <strong>luxury</strong> and <strong>tredition</strong>.
                         The feel and the experience of the collections are top-notch.</p>
                     <div className="sm:max-w-[40%]">
-                        <div className="flex flex-wrap justify-end gap-2">
+                        <div className="flex flex-wrap justify-end gap-3">
                             <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Aesthetic</span>
                             <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Summer</span>
                             <span className="text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block">Vintage</span>
@@ -1008,7 +1118,7 @@ const StyleGuide = () => {
 
                 <div className="belong-here relative flex items-center justify-center lg:pt-10 xl:pt-52 pb-36">
                     <div className="w-full md:w-[730px] h-[250px] md:h-[450px] lg:w-[930px]  lg:h-[550px] relative z-10">
-                        <div className="transparency-text  text-7xl sm:text-[150px] md:xl:text-[200px] font-bold xl:absolute xl:top-[-176px] left-[-112px] 3xl:left-[-212px]">Belong</div>
+                        <div className="transparency-text  text-7xl sm:text-[150px] md:xl:text-[200px] font-bold xl:absolute xl:top-[-115px] left-[-112px] 3xl:left-[-212px]">Belong</div>
                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/QjisC1Aj-rA"
                                 title="FLYING OVER NEW ZEALAND (4K UHD) - Calming Music With Spectacular Natural Landscape For Relaxation"
                                 frameBorder="0"
@@ -1036,6 +1146,204 @@ const StyleGuide = () => {
                     </svg>
                 </span>
             </div>
+
+
+
+
+            {/*Activated Soon Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ConfirmationAction" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[680px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-8 pb-0">
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative p-4">
+                            <div className="px-6 pb-6">
+                                <h2 className="text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8">Thanks!</h2>
+                                <div className="space-y-4">
+                                    <p className="text-xl">Your <strong>Brief</strong> has been received. We will share a collection with you within <strong>24 hours</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer p-10 flex gap-6">
+                            <button type="button" className="btn w-[150px] bg-transparent font-normal border border-primaryColor text-primaryColor" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                Close
+                            </button>
+                            <button type="button" className="btn w-full" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                Go to <strong className="!font-bold">Collection</strong>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/*Brief a Collection Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="BriefCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4">
+                            <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
+                                id="exampleModalScrollableLabel">
+                                Brief a Collection
+                            </h5>
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative p-4">
+                            <div className="space-y-4">
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Email address *</label>
+                                    <input type="text"
+                                           className="form-field bg-primaryColor-shade-300 w-[70%]"
+                                           id="text"
+                                           placeholder="Write Here ..."
+                                           name="text"/>
+                                </div>
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Description</label>
+                                    <textarea name="" id="" cols="30" rows="4" className="form-field h-auto bg-primaryColor-shade-300 w-[70%]" placeholder="Write Here ..."></textarea>
+
+                                </div>
+                                <div className="input-group flex items-center">
+                                    <label htmlFor="text" className="label w-[30%]">Attach</label>
+                                    <div className='file w-[70%]'>
+                                        <input id='input-file' type='file'/>
+                                        <label htmlFor='input-file' className="w-full justify-between">
+                                            <span className="mr-4">Browse Files</span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-14">
+                                <div className="flex justify-between items-center mb-5">
+                                    <h5 className="text-xl font-bold leading-normal text-primaryColor">
+                                        Brief a Collection
+                                    </h5>
+                                    <span className="text-base">4 files</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div className="overflow-hidden">
+                                                <table className="min-w-full">
+                                                    <thead className="bg-white">
+                                                        <tr>
+                                                            <th scope="col" className="w-[100px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
+
+                                                            </th>
+                                                            <th scope="col" className="text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
+                                                                File
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="even:bg-white-shade-100">
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
+                                                                <span className="cursor-pointer">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </td>
+                                                            <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <span>
+                                                                        <img src="./images/pdf.png" alt=""/>
+                                                                    </span>
+                                                                    <span className="text-base ml-4">Untiltled.pdf </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer p-4">
+                            <button type="button" className="btn flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
+                                <span>Ask <strong className="font-bold">Collection</strong></span>
+                                <span className="ml-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     )

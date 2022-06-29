@@ -4,13 +4,14 @@ import rightWhite from '../../../assets/images/login/rightWhite.svg'
 import LoaderComponent from '../../common/LoaderComponent'
 import Http from '../../services/Http'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { getRedirectUrl } from '../../services/Util'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { authUserInfo, getCurrentLocalDateTime, getRedirectUrl } from '../../services/Util'
 import 'tw-elements'
 import countryList from '../../services/DialCodeList';
 import SelectComponent from '../../common/SelectComponent';
 import ForgetPassword from './ForgetPassword';
 import moment from 'moment';
+import EmailVerification from './EmailVerification';
 
 const Login = () => {
     const [loader, setLoader] = useState(true)
@@ -21,13 +22,20 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState('')
     const [listOfCountryCode, setListOfCountryCode] = useState([])
     const [isRegisterButtonClicked, setIsRegisterButtonClicked] = useState(false)
+    const [showEmailVerifiedModal, setShowEmailVerifiedModal] = useState(false)
     const [bgImageLink, setBgImageLink] = useState('')
     const navigate = useNavigate()
+    const location = useLocation()
+
+    useEffect(() => {
+        if (authUserInfo()?.emailVerified === false) {
+            setShowEmailVerifiedModal(true)
+        }
+    }, [])
 
 
     useEffect(() => {
-        let utcFormat = moment(new Date()).format()
-        Http.GET('getLoginPageBgImage',`?localDateTime=${encodeURI(utcFormat.split('+')[0])}`)
+        Http.GET('getLoginPageBgImage', `?localDateTime=${getCurrentLocalDateTime()}`)
             .then(({ data }) => {
                 setBgImageLink(data)
                 setLoader(false)
@@ -36,22 +44,24 @@ const Login = () => {
                 setLoader(false)
                 toast.error(error.response.data.message)
             })
-    },[])
+    }, [])
 
     useEffect(() => {
-        localStorage.clear()
+        if(!location?.state?.emailVerified){
+            // localStorage.clear()
+        }
     }, [])
 
     useEffect(() => {
         let countryCodeList = []
-        for(let item of countryList){
+        for (let item of countryList) {
             countryCodeList.push({
                 label: `${item.code} (${item.dial_code})`,
                 value: item.dial_code
             })
         }
         setListOfCountryCode(countryCodeList)
-    },[isRegisterButtonClicked])
+    }, [isRegisterButtonClicked])
 
     const handleChangeLogin = (e) => {
         let { name, value } = e.target
@@ -67,13 +77,17 @@ const Login = () => {
     const handleUserInfo = () => {
         Http.GET('userInfo')
             .then(({ data }) => {
-                setLoader(false)
-                toast.success('Successful!')
                 localStorage.setItem(
                     'userInfo',
                     JSON.stringify(data)
                 )
-                navigate(getRedirectUrl(data))
+                setLoader(false)
+                if (!data.emailVerified) {
+                    setShowEmailVerifiedModal(true)
+                } else {
+                    toast.success('Successful!')
+                    navigate(getRedirectUrl(data))
+                }
             })
             .catch((error) => {
                 setLoader(false)
@@ -100,15 +114,15 @@ const Login = () => {
                 setLoader(false)
                 try {
                     let errors = JSON.parse(error.response.data.message)
-                    for(let item of errors){
-                        if(item.field === 'email'){
+                    for (let item of errors) {
+                        if (item.field === 'email') {
                             setEmailError(item.defaultMessage)
                         }
-                        if(item.field === 'password'){
+                        if (item.field === 'password') {
                             setPasswordError(item.defaultMessage)
                         }
                     }
-                }catch (e){
+                } catch (e) {
                     toast.error(error.response.data.message)
                 }
             })
@@ -123,8 +137,8 @@ const Login = () => {
     }
 
     const renderLoginOrRegister = () => {
-        if(activeTab === 'login'){
-            return(
+        if (activeTab === 'login') {
+            return (
                 <div className='form-group'>
                     <button
                         type='submit'
@@ -137,7 +151,7 @@ const Login = () => {
                     </button>
                 </div>
             )
-        }else{
+        } else {
             return (
                 <div className='form-group'>
                     <button
@@ -155,7 +169,7 @@ const Login = () => {
     }
 
     const renderLoginForm = () => {
-        if(!isRegisterButtonClicked) {
+        if (!isRegisterButtonClicked) {
             return (
                 <>
                     <div className='login-register-tab'>
@@ -307,7 +321,7 @@ const Login = () => {
             })
             .catch((error) => {
                 setLoader(false)
-                    toast.error(error.response.data.message)
+                toast.error(error.response.data.message)
             })
     }
 
@@ -364,7 +378,7 @@ const Login = () => {
                             onClick={handleRegisterSubmit}
                         >
                             Submit
-                            <img src={rightWhite} alt='right' />
+                            <img src={rightWhite} alt='right'/>
                         </button>
                     </div>
                 </div>
@@ -379,7 +393,7 @@ const Login = () => {
                     <div className='login-form-contents'>
                         <div className='form-container xl:max-w-[500px]  3xl:max-w-[586px] xl:ml-auto'>
                             <div className='entry-title'>
-                                <img src={nitexLogoDark} alt='nitex' />
+                                <img src={nitexLogoDark} alt='nitex'/>
                                 <h2 className='belong-here-text font-bold text-6xl'>
                                     Belong Here
                                 </h2>
@@ -391,6 +405,7 @@ const Login = () => {
                 </div>
             </div>
             <ForgetPassword target='forgetPasswordModal'/>
+            {showEmailVerifiedModal && <EmailVerification target='emailVerification'/>}
         </LoaderComponent>
     )
 }

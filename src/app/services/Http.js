@@ -14,12 +14,14 @@ const routes = {
     login: `${BASE_URL}/auth/login`, // POST
     signup: `${BASE_URL}/auth/signup`, // POST
     forgetPassword: `${BASE_URL}/user/request-forgot-password`, // POST
+    accManagerInfo: `${BASE_URL}/user/my-account-manager`,
     completeForgotPassword: `${BASE_URL}/user/complete-forgot-password`, // POST
     refreshUserToken: `${BASE_URL}/auth/refresh`,
     verifyToken: `${BASE_URL}/auth/with-verification-token`,
     verifyEmail: `${BASE_URL}/user/client/verify-email`,
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
-    getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`
+    getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
+    fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`
 }
 
 // Axios request interceptor

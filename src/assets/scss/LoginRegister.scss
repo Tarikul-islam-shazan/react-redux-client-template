@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     @media screen and (max-width: 1440px) {
-        background-position: 40% 0;
+        background-position: 40% 0 !important;
     }
     @media screen and (max-width: 767px) {
         background: none;
@@ -167,6 +167,9 @@
                 }
                 &.register{
                     margin-top: 100px;
+                    .react-select__control {
+                        min-width: 174px;
+                    }
                     @media screen and (max-width: 767px) {
                         margin-top: 50px;
                     }
