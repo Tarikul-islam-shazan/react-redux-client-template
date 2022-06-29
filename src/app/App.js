@@ -10,17 +10,21 @@ import {
     Routes,
     useNavigate
 } from 'react-router-dom'
+
+// compoennts
 import Login from './modules/login-journey/Login'
 import ActivationPopup from './modules/login-journey/ActivationPopup'
 import Dashboard from './modules/dashboard/Dashboard'
 import DefaultLayout from './layouts/DefaultLayout'
+import Moodboard from './modules/moodboard/Moodboard'
 
-{
-    /*Design UI Route*/
-}
+// {
+/*Design UI Route*/
+// }
 import Ui from '../assets/designs/Ui'
 import Home from '../assets/designs/home'
-import ReduxComp from './modules/redux_test_module/ReduxComp'
+// we dont need this compoennt as we have completed the redux set up
+// import ReduxComp from './modules/redux_test_module/ReduxComp'
 import MoodboardTemplate from '../assets/designs/moodboard'
 import MoodboardView from '../assets/designs/moodboard/moodboardView'
 import VerifyEmail from './modules/login-journey/VerifyEmail'
@@ -43,19 +47,20 @@ const App = () => {
                     <Route path='login' element={<Login />} />
                     <Route path='verify/email' element={<VerifyEmail />} />
 
-                    <Route path='redux' element={<ReduxComp />} />
+                    {/* <Route path='redux' element={<ReduxComp />} /> */}
 
                     <Route path='/' element={<DefaultLayout />}>
                         <Route element={<ProtectedRoutes />}>
-                            <Route
+                            {/* <Route
                                 path='/'
                                 element={<Navigate replace to='dashboard' />}
-                            />
+                            /> */}
                             <Route path='dashboard' element={<Dashboard />} />
                             <Route
                                 path='activation'
                                 element={<ActivationPopup />}
                             />
+                            <Route path='moodboard' element={<Moodboard />} />
                         </Route>
                     </Route>
 

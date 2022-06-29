@@ -12,7 +12,7 @@ import { ReactComponent as NitexIcon } from '../../../assets/images/home/nitexLo
 import { ReactComponent as IconFavourite } from '../../../assets/images/home/favourite.svg'
 import { ReactComponent as IconNotification } from '../../../assets/images/home/notification.svg'
 
-export const Moodboard = () => {
+const Moodboard = () => {
     return (
         <div className='container-fluid bg-primaryColor-shade-300'>
             <header className='bg-white py-5 px-5 logo flex items-center'>
@@ -295,3 +295,5 @@ export const Moodboard = () => {
         </div>
     )
 }
+
+export default Moodboard
