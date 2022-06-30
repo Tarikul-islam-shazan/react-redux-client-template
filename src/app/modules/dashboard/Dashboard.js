@@ -9,6 +9,13 @@ import FirstSharedCollection from './FirstSharedCollection';
 import ImageViewCollections from './ImageViewCollections';
 import CardForCollection from '../../common/CardForCollection';
 import LoaderComponent from '../../common/LoaderComponent';
+import OurOffer from './OurOffer';
+
+const fabricOptions = [
+    { label: 'Premium Fabric Base', value: 'PREMIUM' },
+    { label: 'Seasonal Fabric Base', value: 'SEASONAL' },
+    { label: 'Core Fabric Base', value: 'CORE' }
+]
 
 const Dashboard = () => {
     const [loader, setLoader] = useState(true)
@@ -230,7 +237,7 @@ const Dashboard = () => {
                 <div className='max-w-[434px] mb-8'>
                     <div className='input-group'>
                         <SelectComponent
-                            options={[{ label: 'Premium Fabric Base', placeholder: 'asd', value: 'Premium Fabric Base' }]}
+                            options={fabricOptions}
                         />
                     </div>
                 </div>
@@ -600,85 +607,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className='at-a-glance my-14'>
-                <h2 className='text-2xl text-primaryColor mb-5'>What <strong>NITEX</strong> can offer</h2>
-                <div className='grid grid-cols-1 sm:grid-cols-2 tab:grid-cols-3 xl:!grid-cols-4 gap-5'>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>100,000+</div>
-                                <span className='text-lg text-primaryColor uppercase'>Styles</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>5,000+</div>
-                                <span className='text-lg text-primaryColor uppercase'>Collections</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>30 Days</div>
-                                <span className='text-lg text-primaryColor uppercase'>Lead Time</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>10,000+</div>
-                                <span className='text-lg text-primaryColor uppercase'>Materials in use</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>20+</div>
-                                <span className='text-lg text-primaryColor uppercase'>Categories</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>13</div>
-                                <span className='text-lg text-primaryColor uppercase'>Seasons</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='glance-box'>
-                        <div
-                            className='overflow-hidden flex items-center relative h-[250px] 4xl:h-[296px] p-8 bg-white'>
-                            <div>
-                                <div className='text-5xl 3xl:text-6xl text-primaryColor mb-1'>30 Days</div>
-                                <span className='text-lg text-primaryColor uppercase'>Lead Time</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className='see-all flex items-center justify-center bg-primaryColor hover:bg-black h-[250px] 4xl:h-[296px] cursor-pointer'>
-                        <div className='text-white-shade-100 text-[40px] text-center flex flex-col items-center'>
-                            <div>Dashboard</div>
-                            <svg width='24' height='24' viewBox='0 0 24 24' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <path d='M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z' stroke='#F5F5F5' strokeWidth='1.5'
-                                      strokeLinecap='round' strokeLinejoin='round'/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <OurOffer />
 
             <div className='belong-here relative flex items-center justify-center lg:pt-10 xl:pt-52 pb-36'>
                 <div className='w-full md:w-[730px] h-[250px] md:h-[450px] lg:w-[930px]  lg:h-[550px] relative z-10'>

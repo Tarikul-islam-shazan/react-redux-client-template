@@ -2,9 +2,9 @@ import React from 'react';
 import GenerateSolidColors from './GenerateSolidColors';
 import ImageGridComponent from './ImageGridComponent';
 import GenerateTags from './GenerateTags';
-import {ReactComponent as IconFavourite} from '../../assets/icons/favourite.svg';
+import { ReactComponent as IconFavourite } from '../../assets/icons/favourite.svg';
 
-const CardForCollection = ({collections}) => {
+const CardForCollection = ({ collections }) => {
     return collections.map(item => {
         return (
             <div className='pb-4' key={`collections_${item.id}`}>

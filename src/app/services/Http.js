@@ -22,7 +22,8 @@ const routes = {
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
     getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
-    searchCollectionByUser: `${BASE_URL}/collection/search/user/`
+    searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
+    nitexOffer: `${BASE_URL}/dashboard/nitex/offer`
 }
 
 // Axios request interceptor
