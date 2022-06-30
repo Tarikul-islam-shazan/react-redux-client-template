@@ -795,7 +795,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="kint-carasoul mb-6">
+                <div className="kint-carasoul overflow-hidden mb-6">
                     <SliderWrapper>
                         <div>
                             <div className="bg-white p-3 m-3 relative">
@@ -807,6 +807,63 @@ const StyleGuide = () => {
                                     </div>
                                 </div>
                                 <img src={slide} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide1} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide1} alt=""/>
+                                <div className="flex items-center py-4 pb-3 uppercase">
+                                    <span>Knit</span>
+                                    <span className="dot"></span>
+                                    <span>Organic</span>
+                                    <span className="dot"></span>
+                                    <span>16-2121</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="bg-white p-3 m-3 relative">
+                                <div className="flex flex-wrap gap-5">
+                                    <div className="favourite">
+                                        <span className="mt-2">
+                                            <Favourite />
+                                        </span>
+                                    </div>
+                                </div>
+                                <img src={slide1} alt=""/>
                                 <div className="flex items-center py-4 pb-3 uppercase">
                                     <span>Knit</span>
                                     <span className="dot"></span>
