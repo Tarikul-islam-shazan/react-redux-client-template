@@ -1,90 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
+import { ReactComponent as IconSeeMore } from '../../../assets/icons/seeMore.svg';
 import SelectComponent from '../../common/SelectComponent';
 import GreetingSlider from './GreetingSlider';
+import Http from '../../services/Http';
+import { authUserInfo } from '../../services/Util';
+import FirstSharedCollection from './FirstSharedCollection';
+import ImageViewCollections from './ImageViewCollections';
+import CardForCollection from '../../common/CardForCollection';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const Dashboard = () => {
-
+    const [loader, setLoader] = useState(true)
     const [collections, setCollections] = useState([])
+
+    useEffect(() => {
+        Http.GET_WITH_ID_PARAM('searchCollectionByUser', '?memberType=SHARED&size=6&sort=id,desc', authUserInfo().id).then(({ data }) => {
+            setLoader(false)
+            setCollections(data.data)
+        }).catch(({ response }) => {
+            toast.error(response.data.message)
+            setLoader(false)
+        })
+    }, [])
 
     const renderFirstCollection = () => {
         if (collections.length > 0) {
             return (
-                <div className='xl:w-[70%] 4xl:w-4/5'>
-                    <div
-                        className='bg-primaryColor xl:h-[431px] p-4 pb-0 flex flex-col md:flex-row justify-between relative'>
-                        <div className='md:w-7/12 pt-16 p-5 md:pr-10 relative'>
-                            <div className='flex gap-3'>
-                                <span className='badge bg-warning font-bold'>New</span>
-                                <span className='badge bg-success'>Eco-Friendly</span>
-                            </div>
-                            <h1 className='text-4xl text-white-shade-100 font-bold mt-6 mb-8 leading-[54px] xl:ellipsis-2'>Men’s
-                                Semi-formal Full Set Pack Summer 2022</h1>
-                            <div className='flex items-center text-base md:text-xl text-white-shade-100 gap-3 md:gap-5'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-16'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                            <img src='/images/leef1.png' className='absolute left-[-32px] top-[-40px] z-10' alt=''/>
-                            <img src='/images/leef2.png'
-                                 className='absolute right-[-94px] xl:right-[-40px] bottom-0 z-10 hidden xl:block'
-                                 alt=''/>
-                        </div>
-                        <div className='md:w-5/12 h-full overflow-hidden relative'>
-                            <div className='image-grid-overlay'>
-                                <div className='columns-3 gap-1'>
-                                    <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                    <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                </div>
-                            </div>
-                            <div
-                                className='favourite'>
-                                    <span className='mt-2'>
-                                        <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                             xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <FirstSharedCollection collection={collections[0]}/>
             )
         } else {
             return (
@@ -107,379 +50,20 @@ const Dashboard = () => {
     }
 
     return (
-        <>
+        <LoaderComponent loading={loader}>
             <div className='banner-section flex flex-col xl:flex-row gap-4'>
-                <GreetingSlider />
+                <GreetingSlider/>
                 {renderFirstCollection()}
             </div>
-
-            <div className='grid sm:grid-cols-2 gap-4 py-4'>
-                <div className='collection-box'>
-                    <div className='overflow-hidden relative h-[300px] sm:h-[400px] xl:h-[524px] p-4 bg-white'>
-                        <div className='image-grid-overlay-white'>
-                            <div className='columns-3 gap-1'>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                            </div>
-                        </div>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
-                                    <span className='mt-2'>
-                                        <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                             xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                        </div>
-                    </div>
-                    <div className='flex flex-col-reverse xl:flex-row justify-between items-start p-4 pt-0 bg-white'>
-                        <div>
-                            <h4 className='text-xl font-bold text-primaryColor'>Men’s Semi-formal Full Set Pack Summer
-                                2022</h4>
-                            <div className='flex items-center text-base text-primaryColor gap-5 mt-2'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-5'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                        </div>
-                        <div className='flex gap-3 mb-2 xl:mb-0'>
-                            <span className='badge bg-warning font-bold'>New</span>
-                            <span className='badge bg-success'>Eco-Friendly</span>
-                        </div>
-                    </div>
-                </div>
-                <div className='collection-box'>
-                    <div className='overflow-hidden relative  h-[300px] sm:h-[400px] xl:h-[524px] p-4 bg-white'>
-                        <div className='image-grid-overlay-white'>
-                            <div className='columns-3 gap-1'>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                            </div>
-                        </div>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
-                               <span className='mt-2'>
-                                   <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                        xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                               </span>
-                        </div>
-                    </div>
-                    <div className='flex flex-col-reverse xl:flex-row justify-between items-start p-4 pt-0 bg-white'>
-                        <div>
-                            <h4 className='text-xl font-bold text-primaryColor'>Men’s Semi-formal Full Set Pack Summer
-                                2022</h4>
-                            <div className='flex items-center text-base text-primaryColor gap-5 mt-2'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-5'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                        </div>
-                        <div className='flex gap-3 mb-2 xl:mb-0'>
-                            <span className='badge bg-warning font-bold'>New</span>
-                            <span className='badge bg-success'>Eco-Friendly</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='pb-4'>
-                <div className='collection-box grid grid-cols-1 md:grid-cols-2 bg-white'>
-                    <div className='p-6 xl:p-10 relative flex items-center'>
-                        <div>
-                            <div className='flex gap-3'>
-                                <span className='badge bg-warning font-bold py-1'>New</span>
-                            </div>
-                            <h1 className='text-2xl md:text-4xl text-primaryColor font-bold mt-3 md:mt-6 mb-4 md:mb-8 md:leading-[54px]'>Men’s
-                                Semi-formal Full Set Pack Summer 2022</h1>
-                            <div className='flex items-center text-base md:text-xl text-primaryColor gap-3 md:gap-5'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-10 md:mt-16'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='overflow-hidden relative h-[276px] md:h-[524px] pt-0 md:pt-4 p-4 bg-white'>
-                        <div className='image-grid-overlay-white'>
-                            <div className='columns-3 gap-1 direction-rtl'>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                            </div>
-                        </div>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
-                                    <span className='mt-2'>
-                                        <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                             xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='pb-4'>
-                <div className='collection-box grid grid-cols-1 md:grid-cols-2 bg-white'>
-                    <div className='p-6 xl:p-10 relative flex items-center'>
-                        <div>
-                            <div className='flex gap-3'>
-                                <span className='badge bg-warning font-bold py-1'>New</span>
-                            </div>
-                            <h1 className='text-2xl md:text-4xl text-primaryColor font-bold mt-3 md:mt-6 mb-4 md:mb-8 md:leading-[54px]'>Men’s
-                                Semi-formal Full Set Pack Summer 2022</h1>
-                            <div className='flex items-center text-base md:text-xl text-primaryColor gap-3 md:gap-5'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-10 md:mt-16'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='overflow-hidden relative h-[276px] md:h-[524px] pt-0 md:pt-4 p-4 bg-white'>
-                        <div className='image-grid-overlay-white'>
-                            <div className='columns-3 gap-1 direction-rtl'>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                            </div>
-                        </div>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
-                                    <span className='mt-2'>
-                                        <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                             xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='pb-4'>
-                <div className='collection-box grid grid-cols-1 md:grid-cols-2 bg-white'>
-                    <div className='p-6 xl:p-10 relative flex items-center'>
-                        <div>
-                            <div className='flex gap-3'>
-                                <span className='badge bg-warning font-bold py-1'>New</span>
-                            </div>
-                            <h1 className='text-2xl md:text-4xl text-primaryColor font-bold mt-3 md:mt-6 mb-4 md:mb-8 md:leading-[54px]'>Men’s
-                                Semi-formal Full Set Pack Summer 2022</h1>
-                            <div className='flex items-center text-base md:text-xl text-primaryColor gap-3 md:gap-5'>
-                                <span>Designed by NITEX</span>
-                                <span className='leading-none inline-block mb-2'>.</span>
-                                <span>23 Styles</span>
-                            </div>
-                            <div className='color-list flex gap-1 mt-10 md:mt-16'>
-                                <span className='color-circle bg-primaryColor'></span>
-                                <span className='color-circle bg-primaryColor-shade-300'></span>
-                                <span className='color-circle bg-primaryColor-shade-200'></span>
-                                <span className='color-circle bg-[#D1B59D]'></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='overflow-hidden relative h-[276px] md:h-[524px] pt-0 md:pt-4 p-4 bg-white'>
-                        <div className='image-grid-overlay-white'>
-                            <div className='columns-3 gap-1 direction-rtl'>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/1.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/3.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/2.jpg'/>
-                                <img className='w-full mb-1' src='/images/products/4.jpg'/>
-                            </div>
-                        </div>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
-                                    <span className='mt-2'>
-                                        <svg width='38' height='36' viewBox='0 0 38 36' fill='none'
-                                             xmlns='http://www.w3.org/2000/svg'>
-                                            <g filter='url(#filter0_d_944_19802)'>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                fill='#DA336F'/>
-                                            <path
-                                                d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                stroke='#F5F5F5' strokeLinecap='round' strokeLinejoin='round'/>
-                                            </g>
-                                            <defs>
-                                            <filter id='filter0_d_944_19802' x='0.496094' y='0.5' width='37' height='35'
-                                                    filterUnits='userSpaceOnUse' colorInterpolationFilters='sRGB'>
-                                            <feFlood floodOpacity='0' result='BackgroundImageFix'/>
-                                            <feColorMatrix in='SourceAlpha' type='matrix'
-                                                           values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                           result='hardAlpha'/>
-                                            <feOffset dy='4'/>
-                                            <feGaussianBlur stdDeviation='4'/>
-                                            <feComposite in2='hardAlpha' operator='out'/>
-                                            <feColorMatrix type='matrix'
-                                                           values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'/>
-                                            <feBlend mode='normal' in2='BackgroundImageFix'
-                                                     result='effect1_dropShadow_944_19802'/>
-                                            <feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_944_19802'
-                                                     result='shape'/>
-                                            </filter>
-                                            </defs>
-                                        </svg>
-                                    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ImageViewCollections collections={collections.slice(1, 3)}/>
+            <CardForCollection collections={collections.slice(3)}/>
 
             <div className='flex items-center justify-center pt-5 sm:pt-10 pb-12 sm:pb-20'>
                 <button className='flex items-center text-xl text-primaryColor'>
                     <span className='mr-4'>See More</span>
                     <span>
-                                <svg width='40' height='40' viewBox='0 0 40 40' fill='none'
-                                     xmlns='http://www.w3.org/2000/svg'>
-                                <rect width='40' height='40' rx='20' fill='#282828'/>
-                                <path d='M29 20L22 27M11 20H29H11ZM29 20L22 13L29 20Z' stroke='#F5F5F5'
-                                      strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
-                            </svg>
-                        </span>
+                         <IconSeeMore />
+                    </span>
                 </button>
             </div>
 
@@ -1387,7 +971,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-        </>
+        </LoaderComponent>
     )
 }
 
