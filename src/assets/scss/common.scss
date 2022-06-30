@@ -65,6 +65,16 @@
      position: absolute;
      bottom: 0;
  }
+ .paragraph-grid-overlay-white:after{
+     content: "";
+     background: linear-gradient(0deg, rgba(255, 255, 255, 1) , rgba(255, 255, 255, .4) 100%);
+     min-height: 60px;
+     width: 100%;
+     display: block;
+     position: absolute;
+     bottom: 0;
+ }
+
  .auto-scroll {
      -ms-overflow-style: none;  /* Internet Explorer 10+ */
      scrollbar-width: none;  /* Firefox */
@@ -152,8 +162,93 @@
     :root {
     zoom: 0.8;
 }}
-    
+
 @media (-webkit-device-pixel-ratio: 1.50) {
     :root {
     zoom: 1;
 }}
+
+ .banner-section .carousel{
+    // background-image: url("./images/home/cloud.png");
+ }
+
+ .dot{
+     width: 4px;
+     height: 4px;
+     border-radius: 100%;
+     background: #282828;
+     margin: 0 10px;
+ }
+
+//Radio & Checkbox
+ input[type="checkbox"] {
+     -webkit-appearance: none;
+     appearance: none;
+     background-color: #F5F5F5;
+     margin: 0;
+     display: grid;
+     place-content: center;
+     cursor: pointer;
+     margin-top: 2px;
+     appearance: none;
+     background-color: #F5F5F5;
+     margin: 0;
+     font: inherit;
+     color: currentColor;
+     width: 1.15em;
+     height: 1.15em;
+     border: 0.15em solid #282828 !important;
+     border-radius: 0.15em;
+     transform: translateY(-0.075em);
+
+     &::before {
+         content: "";
+         width: 0.65em;
+         height: 0.65em;
+         transform: scale(0);
+         transition: 120ms transform ease-in-out;
+         box-shadow: inset 1em 1em #282828;
+     }
+
+     &:checked::before {
+         transform: scale(1);
+     }
+ }
+ input[type="radio"] {
+     -webkit-appearance: none;
+     appearance: none;
+     background-color: #F5F5F5;
+     margin: 0;
+     display: grid;
+     place-content: center;
+     cursor: pointer;
+     margin-top: 2px;
+     appearance: none;
+     background-color: #F5F5F5;
+     margin: 0;
+     font: inherit;
+     color: currentColor;
+     width: 20px;
+     height: 20px;
+     border-radius: 100%;
+     border: 0.15em solid #282828 !important;
+     transform: translateY(-0.075em);
+
+     & ~ label{
+         cursor: pointer;
+     }
+
+     &::before {
+         content: "";
+         width: 10px;
+         height: 10px;
+         border-radius: 100%;
+         transform: scale(0);
+         transition: 120ms transform ease-in-out;
+         box-shadow: inset 1em 1em #282828;
+     }
+
+     &:checked::before {
+         transform: scale(1);
+     }
+ }
