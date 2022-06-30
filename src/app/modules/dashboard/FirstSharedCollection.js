@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageGridComponent from '../../common/ImageGridComponent';
 import { ReactComponent as IconFavourite } from '../../../assets/icons/favourite.svg';
+import { ReactComponent as Favourite } from '../../../assets/icons/favouriteIcon.svg';
 import GenerateTags from '../../common/GenerateTags';
 import GenerateSolidColors from '../../common/GenerateSolidColors';
 
@@ -30,11 +31,12 @@ const FirstSharedCollection = ({ collection }) => {
                 </div>
                 <div className='md:w-5/12 h-full overflow-hidden relative'>
                     <ImageGridComponent documentList={collection.documentResponseList}/>
-                    {collection.isFavorite && <div className='favourite'>
+                    <div className='favourite'>
                         <span className='mt-2'>
-                            <IconFavourite/>
+                            {collection.isFavorite && <IconFavourite/>}
+                            {!collection.isFavorite && <Favourite/>}
                         </span>
-                    </div>}
+                    </div>
                 </div>
             </div>
         </div>

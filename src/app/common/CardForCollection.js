@@ -3,6 +3,7 @@ import GenerateSolidColors from './GenerateSolidColors';
 import ImageGridComponent from './ImageGridComponent';
 import GenerateTags from './GenerateTags';
 import { ReactComponent as IconFavourite } from '../../assets/icons/favourite.svg';
+import { ReactComponent as Favourite } from '../../assets/icons/favouriteIcon.svg';
 
 const CardForCollection = ({ collections }) => {
     return collections.map(item => {
@@ -27,12 +28,13 @@ const CardForCollection = ({ collections }) => {
                     </div>
                     <div className='overflow-hidden relative h-[276px] md:h-[524px] pt-0 md:pt-4 p-4 bg-white'>
                         <ImageGridComponent documentList={item.documentResponseList}/>
-                        {item.isFavorite && <div
+                        <div
                             className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
                             <span className='mt-2'>
-                                <IconFavourite/>
+                                {item.isFavorite && <IconFavourite/>}
+                                {!item.isFavorite && <Favourite/>}
                             </span>
-                        </div>}
+                        </div>
                     </div>
                 </div>
             </div>
