@@ -311,135 +311,270 @@ const Boilarplate = () => {
                                                 </span>
                                             </div>
                                         </div>
+                                        <div className='all-available-colors'>
+                                            <p>Search Result</p>
+                                            <div className='common-color-list'>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item active'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                            </div>
 
-                                        <div className='common-color-list'>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item active'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
-                                            <span
-                                                className='color-item'
-                                                style={{
-                                                    background: '#B7B548'
-                                                }}
-                                            ></span>
+                                            <p>All Colors</p>
+                                            <div className='common-color-list'>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                                <span
+                                                    className='color-item'
+                                                    style={{
+                                                        background: '#B7B548'
+                                                    }}
+                                                ></span>
+                                            </div>
                                         </div>
+                                        <button className='btn select-btn'>
+                                            Select
+                                        </button>
                                     </div>
                                 </div>
                             </div>
