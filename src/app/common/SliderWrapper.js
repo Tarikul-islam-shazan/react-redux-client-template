@@ -10,15 +10,23 @@ const SliderWrapper = (props) => {
         infinite: false,
         speed: 500,
         slidesToShow: 6,
-        marginRight: 16,
-        slidesToScroll: 6,
+        slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1441,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 1025,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
@@ -27,7 +35,7 @@ const SliderWrapper = (props) => {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToScroll: 1,
                     initialSlide: 2
                 }
             },
