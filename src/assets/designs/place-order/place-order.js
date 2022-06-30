@@ -337,8 +337,7 @@ const StyleGuide = () => {
             </div>
 
             {/*Review Selected Styles Modal*/}
-            <div
-                className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
+            <div className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
                 id='ReviewSelectedStyles'
                 tabIndex='-1'
                 aria-labelledby='exampleModalCenterTitle'

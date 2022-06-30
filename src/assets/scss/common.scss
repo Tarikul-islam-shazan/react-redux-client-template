@@ -277,3 +277,14 @@
  button.slick-arrow.slick-disabled{
      display: none !important;
  }
+
+ //Color Picker
+.color-circle-picker{
+    width: 32px;
+    height: 32px;
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 14px;
+    cursor: pointer;
+}
