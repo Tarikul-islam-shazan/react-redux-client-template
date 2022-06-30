@@ -6,7 +6,7 @@ import { ReactComponent as NextArrow } from '../../assets/images/right-nav.svg';
 
 const SliderWrapper = (props) => {
     const settings = {
-        dots: false,
+        dots: true,
         loop:true,
         nav:true,
         infinite: true,
