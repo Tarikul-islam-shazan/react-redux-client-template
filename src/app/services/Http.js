@@ -23,7 +23,10 @@ const routes = {
     getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
     searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
-    nitexOffer: `${BASE_URL}/dashboard/nitex/offer`
+    nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
+
+    // moodboard
+    getMoodboardList: `${BASE_URL}/moodboard/search`
 }
 
 // Axios request interceptor

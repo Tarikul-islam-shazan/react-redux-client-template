@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import LoginSliceReducer from './Login'
+import MoodboardSliceReducer from './Moodboard'
 
 // this is the configure store portion of the redux + redux-toolkit setup
 // applied a middleware to supress the serialized data warning
@@ -9,7 +10,8 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
-        login: LoginSliceReducer
+        login: LoginSliceReducer,
+        moodboard: MoodboardSliceReducer
     }
 })
 

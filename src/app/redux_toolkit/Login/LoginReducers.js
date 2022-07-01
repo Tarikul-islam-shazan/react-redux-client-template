@@ -3,7 +3,7 @@ import {
     LOGIN_SUCCESS,
     LOGOUT_FAILURE,
     LOGOUT_SUCCESS
-} from '../action.types'
+} from '../@types/action.types'
 
 // import { LOGIN_REQUEST, LOGOUT_REQUEST } from '../thunk.types'
 
