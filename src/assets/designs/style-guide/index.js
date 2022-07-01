@@ -6,6 +6,9 @@ import {ReactComponent as FilterIcon} from "../../images/filter.svg";
 import {ReactComponent as CloseIcon} from "../../images/close.svg";
 import {ReactComponent as Favourite} from "../../images/favourite.svg";
 import {ReactComponent as SearchIconWhite} from "../../images/search-white.svg";
+import User from "../../images/user.jpg";
+import {ReactComponent as PlusIcon} from "../../images/plus.svg";
+import {ReactComponent as SearchIcon} from "../../images/search.svg";
 // import OwlCarousel from 'react-owl-carousel';
 // import 'owl.carousel/dist/assets/owl.carousel.css';
 // import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -338,6 +341,36 @@ const StyleGuide = () => {
                 <h2 className="mb-8">Others</h2>
 
                 <div className="gspace-x-4 space-y-4">
+
+                    <div className="flex flex-wrap items-center justify-end gap-4 lg:gap-2">
+                        <div className="flex mr-4">
+                            <div className="flex">
+                                    <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                <span className="w-[40px] h-[40px] cursor-pointer border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
+                                <span className="w-[40px] h-[40px] cursor-pointer bg-white font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[-10px]">
+                                        <span>4+</span>
+                                    </span>
+                            </div>
+                            <span  data-bs-toggle="modal" data-bs-target="#AddTeam" className="w-[40px] h-[40px] cursor-pointer bg-primaryColor font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[5px]">
+                                    <PlusIcon />
+                                </span>
+                        </div>
+                        <div className="flex items-center overflow-x-auto gap-2">
+                            <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                <SearchIcon />
+                            </button>
+                            <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                <FilterIcon />
+                            </button>
+                        </div>
+                    </div>
 
                     <div className="mt-6 space-y-6">
                         <div className="flex items-start">
