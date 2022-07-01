@@ -704,7 +704,7 @@ const StyleGuide = () => {
                             </div>
                         </div>
                         <div className='input-group'>
-                            <label htmlFor='search' className='label'>
+                            <label className='label'>
                                 Select
                             </label>
                             <SelectComponent
@@ -712,6 +712,32 @@ const StyleGuide = () => {
                                     { label: 'Country', value: 'country' },
                                     { label: 'Country 1', value: 'country1' },
                                     { label: 'Country 2', value: 'country2' }
+                                ]}
+                            />
+                        </div>
+                        <div className="p-5 bg-white">
+                            <div className="input-group select-bg-gray-style w-full sm:w-[182px]">
+                                <label className='label'>
+                                    Select
+                                </label>
+                                <SelectComponent
+                                    options={[
+                                        {label: "See Samples", value: "NITEX/BO/1212"},
+                                        {label: "Country 1", value: "NITEX/BO/1212"},
+                                        {label: "Country 2", value: "NITEX/BO/1212"}
+                                    ]}
+                                />
+                            </div>
+                        </div>
+                        <div className="input-group bordered-style w-full sm:w-[182px]">
+                            <label className='label'>
+                                Select
+                            </label>
+                            <SelectComponent
+                                options={[
+                                    {label: "See Samples", value: "NITEX/BO/1212"},
+                                    {label: "Country 1", value: "NITEX/BO/1212"},
+                                    {label: "Country 2", value: "NITEX/BO/1212"}
                                 ]}
                             />
                         </div>

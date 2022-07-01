@@ -155,7 +155,7 @@ const StyleGuide = () => {
                             </div>
 
 
-                            <div className="flex flex-wrap items-center overflow-x-auto gap-2">
+                            <div className="flex flex-wrap items-center justify-end overflow-x-auto gap-2">
                                 <button type="button"  className="btn bg-transparent w-full sm:w-auto font-normal border border-primaryColor text-primaryColor">
                                     <span>Re-Quote</span>
                                 </button>
@@ -173,7 +173,7 @@ const StyleGuide = () => {
                     </div>
                 </div>
 
-                <div className="style-details-container grid grid-cols-4 gap-5">
+                <div className="style-details-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-4 gap-5">
                     <div className="bg-white p-4 relative">
                         <div className="absolute left-[15px] top-[15px] bg-white cursor-pointer">
                             <FavBorderIcon />
@@ -207,7 +207,7 @@ const StyleGuide = () => {
                                         <div className="dot"></div>
                                         <span>Knit</span>
                                     </div>
-                                    <span className="cursor-pointer">
+                                    <span className="cursor-pointer" data-bs-toggle="modal" data-bs-target="#EditStyleInformation">
                                         <EditIcon />
                                     </span>
                                 </div>
@@ -228,21 +228,22 @@ const StyleGuide = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white fixed bottom-0 right-[15px] flex-col justify-between w-[455px] h-[788px]">
-                        <div>
-                            <div className="flex items-center justify-between p-4 border-b border-white-shade-100">
-                                <span className="text-xl font-bold">Conversations (08)</span>
-                                    <span className="cursor-pointer">
-                                    <MinusIcon />
-                                </span>
-                            </div>
-                            <div className="p-4 conversations custom-scroll">
+
+                    <div className="conversation-container"> {/* < add '.minimize' class to hide chatbox */}
+                        <div className="conversation-header flex items-center justify-between p-4 border-b border-white-shade-100 cursor-pointer relative z-10"> {/* < Click here */}
+                            <span className="text-xl font-bold">Conversations (08)</span>
+                                <span className="cursor-pointer">
+                                <MinusIcon /> {/* Change to 'PlusIcon' */}
+                            </span>
+                        </div>
+                        <div className="conversation-body">
+                            <div className="conversations p-4  custom-scroll">
                                 <div className="space-y-4">
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -271,9 +272,9 @@ const StyleGuide = () => {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -288,18 +289,18 @@ const StyleGuide = () => {
                                                 </div>
                                             </div>
                                             <div className="flex">
-                                                 <div className="bg-white-shade-100 p-1 px-2 border-l-2  border-primaryColor-shade-100">
-                                                     <span className="font-bold">Subrina</span>
-                                                     <p>All of the changes  </p>
-                                                 </div>
+                                                <div className="bg-white-shade-100 p-1 px-2 border-l-2  border-primaryColor-shade-100">
+                                                    <span className="font-bold">Subrina</span>
+                                                    <p>All of the changes  </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -328,9 +329,9 @@ const StyleGuide = () => {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -359,9 +360,9 @@ const StyleGuide = () => {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -376,18 +377,18 @@ const StyleGuide = () => {
                                                 </div>
                                             </div>
                                             <div className="flex">
-                                                 <div className="bg-white-shade-100 p-1 px-2 border-l-2  border-primaryColor-shade-100">
-                                                     <span className="font-bold">Subrina</span>
-                                                     <p>All of the changes  </p>
-                                                 </div>
+                                                <div className="bg-white-shade-100 p-1 px-2 border-l-2  border-primaryColor-shade-100">
+                                                    <span className="font-bold">Subrina</span>
+                                                    <p>All of the changes  </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                         <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
-                                            <img src={User} alt="" className="object-cover w-full h-full"/>
-                                        </span>
+                                     <span className="w-[20px] h-[20px] rounded-full overflow-hidden inline-block">
+                                        <img src={User} alt="" className="object-cover w-full h-full"/>
+                                    </span>
                                             <span className="font-bold">Subrina</span>
                                             <div className="flex items-center text-sm text-primaryColor-shade-100">
                                                 <div className="dot bg-primaryColor-shade-100 mx-2"></div>
@@ -416,247 +417,532 @@ const StyleGuide = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full">
-                            <div className="px-4 py-3 flex items-center gap-2 border-t border-b border-primaryColor-shade-200 overflow-x-auto custom-scroll scroll-y">
-                               <span>To</span>
-                                <div className="flex gap-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="tag-badge normal-case h-auto text-white px-2 bg-primaryColor">
-                                            <span>Nitex</span>
-                                            <span className="ml-3 cursor-pointer">
+                            <div className="conversation-footer absolute bottom-0 w-full">
+                                <div className="px-4 py-3 flex items-center gap-2 border-t border-b border-primaryColor-shade-200 overflow-x-auto custom-scroll scroll-y">
+                                    <span>To</span>
+                                    <div className="flex gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <div className="tag-badge normal-case h-auto text-white px-2 bg-primaryColor">
+                                                <span>Nitex</span>
+                                                <span className="ml-3 cursor-pointer">
                                             <CloseSmallWhiteIcon />
                                         </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="tag-badge normal-case h-auto text-white px-2 bg-primaryColor">
-                                            <span>Buyer</span>
-                                            <span className="ml-3 cursor-pointer">
+                                        <div className="flex items-center gap-2">
+                                            <div className="tag-badge normal-case h-auto text-white px-2 bg-primaryColor">
+                                                <span>Buyer</span>
+                                                <span className="ml-3 cursor-pointer">
                                             <CloseSmallWhiteIcon />
                                         </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div>
+                                        <input type="text" className="outline-none" placeholder="Type here ..."/>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="text" className="outline-none" placeholder="Type here ..."/>
-                                </div>
-                            </div>
-                            <div className="p-4 h-[116px]">
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="p-4 h-[116px]">
+                                    <div className="flex items-center gap-2 mb-1">
                                      <span className="w-[40px] h-[40px] rounded-full overflow-hidden inline-block">
                                         <img src={User} alt="" className="object-cover w-full h-full"/>
                                     </span>
-                                    <input type="text" className="outline-none" placeholder="Write Here ..."/>
-                                    <div className="ml-auto cursor-pointer">
-                                        <AttachedIcon />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-
-
-            {/*Brief a Collection Modal*/}
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="BriefCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
-                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
-                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4">
-                            <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
-                                id="exampleModalScrollableLabel">
-                                Brief a Collection
-                            </h5>
-                            <button type="button"
-                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                                    data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div className="modal-body relative p-4">
-                            <div className="space-y-4">
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Email address *</label>
-                                    <input type="text"
-                                           className="form-field bg-primaryColor-shade-300 w-[70%]"
-                                           id="text"
-                                           placeholder="Write Here ..."
-                                           name="text"/>
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Description</label>
-                                    <textarea name="" id="" cols="30" rows="4" className="form-field h-auto bg-primaryColor-shade-300 w-[70%]" placeholder="Write Here ..."></textarea>
-
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Attach</label>
-                                    <div className='file w-[70%]'>
-                                        <input id='input-file' type='file'/>
-                                        <label htmlFor='input-file' className="w-full justify-between">
-                                            <span className="mr-4">Browse Files</span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-14">
-                                <div className="flex justify-between items-center mb-5">
-                                    <h5 className="text-xl font-bold leading-normal text-primaryColor">
-                                        Brief a Collection
-                                    </h5>
-                                    <span className="text-base">4 files</span>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="overflow-hidden">
-                                                <table className="min-w-full">
-                                                    <thead className="bg-white">
-                                                    <tr>
-                                                        <th scope="col" className="w-[100px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
-
-                                                        </th>
-                                                        <th scope="col" className="text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
-                                                            File
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <input type="text" className="outline-none" placeholder="Write Here ..."/>
+                                        <div className="ml-auto cursor-pointer">
+                                            <AttachedIcon />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="modal-footer p-4">
-                            <button type="button" className="btn flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
-                                <span>Ask <strong className="font-bold">Collection</strong></span>
-                                <span className="ml-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </button>
+                    </div>
+                </div>
+
+                <div className="max-w-[1400px] mt-10 lg:mt-20">
+                    <div className='overflow-x-auto mb-10 lg:mb-20'>
+                        <span className="text-xl font-bold mb-3 inline-block">Material List</span>
+                        <div className='overflow-x-auto'>
+                            <table className='min-w-full'>
+                                <thead className='bg-white'>
+                                     <tr>
+                                        <th scope='col' className='w-[60px] text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            SL
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Type
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Material
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Consumption
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Color
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Remarks
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33% Modacrylic 4% Spandex, Intarsia, Fade in back side, Coconut Nut, Both side bru
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste until you waste it
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33%
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33% Modacrylic 4% Spandex, Intarsia, Fade in back side, Coconut Nut, Both side bru
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste until you waste it
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33%
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33% Modacrylic 4% Spandex, Intarsia, Fade in back side, Coconut Nut, Both side bru
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste until you waste it
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Extra Fabric
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            155.75 Gauge, 9% Metallic 53% Rubber 1% Jute 33%
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            1.0 unit
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            18-1450 TCX
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Waste is not waste
+                                        </td>
+                                     </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div className='overflow-x-auto mb-10 lg:mb-20'>
+                        <span className="text-xl font-bold mb-3 inline-block">Measurement Chart</span>
+                        <div className='overflow-x-auto'>
+                            <table className='min-w-full'>
+                                <thead className='bg-white'>
+                                     <tr>
+                                        <th scope='col' className='w-[60px] text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            SL
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            POM
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            Tol (+/-)
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            S
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                             M
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                           L
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                           XL
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                           XXL
+                                        </th>
+                                        <th scope='col' className='text-xl font-normal bg-white px-6 py-4 text-left border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            GRADE
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                     <tr className='even:bg-white'>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            01
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            Chest
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            2
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            38.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent whitespace-nowrap'>
+                                            40.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            42.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            44.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                        <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 last:border-transparent'>
+                                            46.00
+                                        </td>
+                                     </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
-            {/*ConfirmationAction Soon Modal*/}
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="ConfirmationAction" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog max-w-[680px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
-                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
-                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-8 pb-0">
-                            <button type="button"
-                                    className="btn-close box-content w-4 h-4 p-1 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                                    data-bs-dismiss="modal" aria-label="Close">
-                            </button>
+
+
+
+            {/*Edit Style Information Modal*/}
+            <div
+                className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
+                id='EditStyleInformation'
+                tabIndex='-1'
+                aria-labelledby='exampleModalCenterTitle'
+                aria-modal='true'
+                role='dialog'
+            >
+                <div className='modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none'>
+                    <div className='modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current'>
+                        <div className='modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-6'>
+                            <h5
+                                className='text-3xl font-bold leading-normal text-primaryColor uppercase'
+                                id='exampleModalScrollableLabel'
+                            >
+                                Edit Style Information
+                            </h5>
+                            <button
+                                type='button'
+                                className='btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline'
+                                data-bs-dismiss='modal'
+                                aria-label='Close'
+                            ></button>
                         </div>
-                        <div className="modal-body relative p-4">
-                            <div className="px-6 pb-6">
-                                <h2 className="text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8">Thanks!</h2>
-                                <div className="space-y-4">
-                                    <p className="text-xl">Your <strong>Brief</strong> has been received. We will share a collection with you within <strong>24 hours</strong>.</p>
+                        <div className='modal-body relative p-6'>
+                            <div className="space-y-5">
+
+                                <div className='input-group flex items-center gap-4'>
+                                    <label htmlFor='email' className='label w-[20%] m-0'>
+                                        Market
+                                    </label>
+                                    <div className="input-group select-bg-gray-style w-[80%]">
+                                        <SelectComponent
+                                            options={[
+                                                {label: "See Samples", value: "Men"},
+                                                {label: "Country 1", value: "NITEX/BO/1212"},
+                                                {label: "Country 2", value: "NITEX/BO/1212a"}
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className='input-group flex items-center gap-4'>
+                                    <label htmlFor='email' className='label w-[20%] m-0'>
+                                        Category
+                                    </label>
+                                    <div className="input-group select-bg-gray-style w-[80%]">
+                                        <SelectComponent
+                                            options={[
+                                                {label: "See Samples", value: "Men"},
+                                                {label: "Country 1", value: "NITEX/BO/1212"},
+                                                {label: "Country 2", value: "NITEX/BO/1212a"}
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className='input-group flex items-center gap-4'>
+                                    <label htmlFor='email' className='label w-[20%] m-0'>
+                                        Construction
+                                    </label>
+                                    <input
+                                        type='email'
+                                        className='form-field bg-primaryColor-shade-300 w-[80%]'
+                                        id='email'
+                                        placeholder='Construction'
+                                        name='email'
+                                    />
+                                </div>
+
+                                <div className='input-group flex items-center gap-4'>
+                                    <label htmlFor='email' className='label w-[20%] m-0'>
+                                        GSM
+                                    </label>
+                                    <input
+                                        type='email'
+                                        className='form-field bg-primaryColor-shade-300 w-[80%]'
+                                        id='email'
+                                        placeholder='GSM'
+                                        name='email'
+                                    />
+                                </div>
+
+                                <div className='input-group flex items-center gap-4'>
+                                    <label htmlFor='email' className='label w-[20%] m-0'>
+                                        Colors:
+                                    </label>
+                                    <div className="w-[80%]">
+                                        <div className="flex items-center text-base gap-2">
+                                            <span className="w-[32px] h-[32px] block rounded-full bg-[#DA336F]"></span>
+                                            <span className="w-[32px] h-[32px] block rounded-full bg-[#58173C]"></span>
+                                            <span className="w-[32px] h-[32px] block rounded-full bg-[#282828] cursor-pointer text-white text-center leading-8">+</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="modal-footer p-10 flex gap-6">
-                            <button type="button" className="btn w-[150px] bg-transparent font-normal border border-primaryColor text-primaryColor" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                Close
-                            </button>
-                            <button type="button" className="btn w-full" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                Go to <strong className="!font-bold">Collection</strong>
+                        <div className='modal-footer p-4'>
+                            <button
+                                type='button'
+                                className='btn w-full'
+                                data-bs-toggle='modal'
+                                data-bs-target='#exampleModalCenter'
+                            >
+                                Save
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-
 
 
         </div>

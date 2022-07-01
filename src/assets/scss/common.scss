@@ -296,13 +296,29 @@
 }
 
 //Conversation
-.conversations {
-    overflow: auto;
-    height: 556px;
-}
-.conversations .conversations-item p{
-    line-height: 22px;
-}
+ .conversation-container{
+     &.minimize{
+         height: 60px;
+         .conversation-body{
+             display: none;
+         }
+     }
+     .conversations {
+         overflow: auto;
+         height: 556px;
+         @media screen and (max-width:1919px) {
+             height: 374px;
+         }
+         @media screen and (max-width:640px) {
+             height: 268px;
+         }
+         .conversations-item p{
+             line-height: 22px;
+         }
+     }
+ }
+
+
 
 //Custom Scroll
 

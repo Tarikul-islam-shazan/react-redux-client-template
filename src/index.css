@@ -26,6 +26,9 @@
     .favourite {
         @apply w-[40px] h-[40px] bg-white flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer
     }
+    .conversation-container {
+        @apply bg-white overflow-hidden fixed bottom-0 left-0 sm:left-auto right-0 sm:right-[15px] shadow flex-col justify-between w-full sm:w-[455px] h-[500px] sm:h-[600px] 5xl:h-[783px]
+    }
 }
 
 
@@ -163,6 +166,16 @@ span.react-select__indicator-separator {
 }
 .bordered-style .react-select__menu{
     margin-top: -1px !important;
+}
+.select-bg-gray-style .react-select__control{
+    background: #F5F5F5;
+    border-color: #F5F5F5 !important;
+}
+.select-bg-gray-style  .react-select__control:focus {
+    border-color: #282828 !important;
+}
+.select-bg-gray-style  .react-select__control--is-focused {
+    border-color: #282828 !important;
 }
 /*react-select start*/
 
