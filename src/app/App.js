@@ -31,6 +31,7 @@ import RequestedCollection from '../assets/designs/collections/requested-collect
 import CollectionDetails from '../assets/designs/collections/collection-details.js'
 import StyleDetail from '../assets/designs/collections/style-detail.js'
 import PlaceOrder from '../assets/designs/place-order/place-order.js'
+import Team from '../assets/designs/team'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -94,6 +95,7 @@ const App = () => {
                         element={<StyleDetail />}
                     />
                     <Route path='/place-order' element={<PlaceOrder />} />
+                    <Route path='/team' element={<Team />} />
                 </Routes>
             </Router>
             <ToastContainer
