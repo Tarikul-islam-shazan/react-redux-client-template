@@ -75,7 +75,7 @@ module.exports = {
                 none: 'none'
             },
             fontSize: {
-                px28: ['28px', { lineHeight: '1.5rem' }]
+                px28: ['28px', { lineHeight: '2rem' }]
             }
         }
     },
