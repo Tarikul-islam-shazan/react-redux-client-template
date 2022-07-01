@@ -9,3 +9,4 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 
 // Moodboard Action Types
 export const SET_MOODBOARD_LIST = 'SET_MOODBOARD_LIST'
+export const SET_MOODBOARD_BY_ID = 'SET_MOODBOARD_BY_ID'

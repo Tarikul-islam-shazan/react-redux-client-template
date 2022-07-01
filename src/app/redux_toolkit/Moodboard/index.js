@@ -6,7 +6,8 @@ const initialState = {
     currentPage: 0,
     moodboardList: [],
     totalPages: 0,
-    totalElements: 0
+    totalElements: 0,
+    selectedMoodboard: null
 }
 
 const MoodboardSlice = createSlice({

@@ -26,7 +26,8 @@ import Home from '../assets/designs/home'
 // we dont need this compoennt as we have completed the redux set up
 // import ReduxComp from './modules/redux_test_module/ReduxComp'
 import MoodboardTemplate from '../assets/designs/moodboard'
-import MoodboardView from '../assets/designs/moodboard/moodboardView'
+// import MoodboardView from '../assets/designs/moodboard/moodboardView'
+import MoodboardView from './modules/moodboard/MoodboardView'
 import VerifyEmail from './modules/login-journey/VerifyEmail'
 import MoodboardHome from '../assets/designs/moodboard/moodboard-home.js'
 import Collections from '../assets/designs/collections'
@@ -65,7 +66,15 @@ const App = () => {
                                 path='activation'
                                 element={<ActivationPopup />}
                             />
-                            <Route path='moodboard' element={<Moodboard />} />
+                            {/* Moodboard compoennt starts here */}
+                            <Route
+                                path='moodboard'
+                                element={<Moodboard />}
+                            ></Route>
+                            <Route
+                                path='moodboard/:id'
+                                element={<MoodboardView />}
+                            />
                         </Route>
                     </Route>
 
@@ -74,12 +83,24 @@ const App = () => {
                     <Route path='/Home' element={<Home />} />
                     <Route path='/moodboard' element={<MoodboardTemplate />} />
                     <Route path='/moodboardView' element={<MoodboardView />} />
-                    <Route path='/moodboard/moodboard-home' element={<MoodboardHome />} />
+                    <Route
+                        path='/moodboard/moodboard-home'
+                        element={<MoodboardHome />}
+                    />
                     <Route path='/collections' element={<Collections />} />
                     <Route path='/my-collection' element={<MyCollection />} />
-                    <Route path='/requested-collection' element={<RequestedCollection />} />
-                    <Route path='/requested-collection' element={<RequestedCollection />} />
-                    <Route path='/collection-details' element={<CollectionDetails />} />
+                    <Route
+                        path='/requested-collection'
+                        element={<RequestedCollection />}
+                    />
+                    <Route
+                        path='/requested-collection'
+                        element={<RequestedCollection />}
+                    />
+                    <Route
+                        path='/collection-details'
+                        element={<CollectionDetails />}
+                    />
                 </Routes>
             </Router>
             <ToastContainer

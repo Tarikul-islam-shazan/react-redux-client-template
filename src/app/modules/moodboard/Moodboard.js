@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector, useStore, shallowEqual } from 'react-redux'
+
+import { useNavigate } from 'react-router-dom'
 // import { ReactComponent as FilterIcon } from '../../icons/Filter-24.svg'
 import { ReactComponent as PlusIcon } from '../../../assets/images/plus.svg'
 import { ReactComponent as UploadIcon } from '../../../assets/images/upload.svg'
@@ -24,8 +26,10 @@ import CardForCollection from '../../common/CardForCollection'
 
 const Moodboard = () => {
     const dispatch = useDispatch()
-    const store = useStore()
+    // const store = useStore()
     const moodboardList = useSelector((state) => state.moodboard.moodboardList)
+
+    const navigate = useNavigate()
 
     let moodboardStatusToString = (status) => {
         switch (status) {
@@ -38,6 +42,9 @@ const Moodboard = () => {
             default:
                 break
         }
+    }
+    const handleMoodboardClick = (id) => {
+        navigate(`/moodboard/${id}`)
     }
 
     useEffect(() => {
@@ -122,9 +129,18 @@ const Moodboard = () => {
                 {/* here starts the redering cards part */}
                 {moodboardList.length > 0
                     ? moodboardList.map((moodboard) => {
-                        console.log(moodboard)
+                          {
+                              /* console.log(moodboard) */
+                          }
                           return (
-                              <div className='pb-4' key={moodboard.id}>
+                              <div
+                                  className='pb-4'
+                                  key={moodboard.id}
+                                  onClick={(e) => {
+                                      e.preventDefault()
+                                      handleMoodboardClick(moodboard.id)
+                                  }}
+                              >
                                   <div className='collection-box grid grid-cols-1 md:grid-cols-2 bg-white'>
                                       <div className='p-6 xl:p-10 relative flex items-center'>
                                           <div>
@@ -244,7 +260,7 @@ const Moodboard = () => {
                                                           <path
                                                               d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
                                                               fill='#DA336F'
-                                                            // api not sending response for it
+                                                              // api not sending response for it
                                                           />
                                                           <path
                                                               d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'

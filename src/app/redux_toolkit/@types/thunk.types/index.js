@@ -6,3 +6,4 @@ export const LOGOUT_REQUEST = 'LOGIN_REQUEST'
 
 // Moodboard Thunks
 export const GET_MOODBOARD_LIST = 'GET_MOODBOARD_LIST'
+export const GET_MOODBOARD_BY_ID = 'GET_MOODBOARD_BY_ID'

@@ -26,7 +26,8 @@ const routes = {
     nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
 
     // moodboard
-    getMoodboardList: `${BASE_URL}/moodboard/search`
+    getMoodboardList: `${BASE_URL}/moodboard/search`,
+    getMoodboardByID: `${BASE_URL}/moodboard/`
 }
 
 // Axios request interceptor
