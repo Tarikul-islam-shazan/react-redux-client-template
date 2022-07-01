@@ -5,6 +5,7 @@ import {ReactComponent as UploadIcon} from "../../images/upload.svg";
 import {ReactComponent as FilterIcon} from "../../images/filter.svg";
 import {ReactComponent as CloseIcon} from "../../images/close.svg";
 import {ReactComponent as Favourite} from "../../images/favourite.svg";
+import {ReactComponent as SearchIconWhite} from "../../images/search-white.svg";
 // import OwlCarousel from 'react-owl-carousel';
 // import 'owl.carousel/dist/assets/owl.carousel.css';
 // import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -237,6 +238,18 @@ const StyleGuide = () => {
             <div>
                 <h2 className="mb-8">Text Boxes & Drop-downs</h2>
                 <div className="flex flex-wrap gap-5">
+                    <div className="flex">
+                        <input type="text" className="form-field border border-primaryColor h-[40px] p-2 px-4" id="name" placeholder="Search ..." name="name" />
+                        <button type="button" className="btn h-[40px] p-2">
+                            <SearchIconWhite />
+                        </button>
+                    </div>
+                    <div className="flex">
+                        <input type="text" className="form-field w-auto border border-primaryColor  p-2 px-4" id="name" placeholder="Search ..." name="name" />
+                        <button type="button" className="btn w-[60px] flex items-center justify-center p-2">
+                            <SearchIconWhite />
+                        </button>
+                    </div>
                     <div className="form-group flex flex-wrap gap-5">
                         <div className="input-group">
                             <label htmlFor="email" className="label">Email address *</label>

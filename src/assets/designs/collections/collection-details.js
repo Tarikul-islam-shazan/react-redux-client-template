@@ -207,7 +207,7 @@ const StyleGuide = () => {
                                         <span>4+</span>
                                     </span>
                                 </div>
-                                <span className="w-[40px] h-[40px] cursor-pointer bg-primaryColor font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[5px]">
+                                <span  data-bs-toggle="modal" data-bs-target="#AddTeam" className="w-[40px] h-[40px] cursor-pointer bg-primaryColor font-semibold flex items-center justify-center border-2 border-white rounded-full overflow-hidden inline-block ml-[5px]">
                                     <PlusIcon />
                                 </span>
                             </div>
@@ -405,7 +405,7 @@ const StyleGuide = () => {
 
                                 <div className="h-[60px] w-[1px] bg-primaryColor-shade-200 mx-3 hidden sm:flex"></div>
 
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#UploadMoodboard" className="btn hidden sm:flex text-base 4xl:text-xl p-4 4xl:px-6 font-normal border border-white-shade-100 flex justify-between items-center">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#MoveCopyCollection" className="btn hidden sm:flex text-base 4xl:text-xl p-4 4xl:px-6 font-normal border border-white-shade-100 flex justify-between items-center">
                                     <span>Move / Copy to Collection</span>
                                     <span className="ml-4">
                                         <ArrorRightWhite />
@@ -1570,6 +1570,159 @@ const StyleGuide = () => {
                                     </svg>
                                 </span>
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/*Move / Copy to Collection Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="MoveCopyCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-6">
+                            <h5 className="text-4xl font-bold leading-normal text-primaryColor uppercase"
+                                id="exampleModalScrollableLabel">
+                                Move / Copy to Collection
+                            </h5>
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative">
+                            <div className="flex justify-between gap-5 px-6 py-4">
+                                <div className="flex flex-1 w-full">
+                                    <input type="text" className="form-field w-[90%] border border-primaryColor  p-2 px-4" id="name" placeholder="Search ..." name="name" />
+                                    <button type="button" className="btn w-[60px] flex items-center justify-center p-2">
+                                        <SearchIconWhite />
+                                    </button>
+                                </div>
+                                <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
+                                    <PlusIconBlack />
+                                </button>
+                            </div>
+                            <div className="">
+                                <h4 className="px-6 py-4 cursor-pointer text-xl hover:text-white hover:bg-primaryColor">Summer Mens Top 22</h4>
+                                <h4 className="px-6 py-4 cursor-pointer text-xl hover:text-white hover:bg-primaryColor text-white bg-primaryColor">Summer Mens Top 22</h4>
+                                <h4 className="px-6 py-4 cursor-pointer text-xl hover:text-white hover:bg-primaryColor">Summer Mens Top 22</h4>
+                                <h4 className="px-6 py-4 cursor-pointer text-xl hover:text-white hover:bg-primaryColor">Summer Mens Top 22</h4>
+                                <h4 className="px-6 py-4 cursor-pointer text-xl hover:text-white hover:bg-primaryColor">Summer Mens Top 22</h4>
+                            </div>
+                        </div>
+                        <div className="modal-footer flex gap-5 border-t border-white-shade-100 p-6">
+                            <button type="button" className="btn flex-1 bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
+                                <span>Move</span>
+                                <span className="ml-2">
+                                     <UploadIcon />
+                                </span>
+                            </button>
+                            <button type="button" className="btn  flex-1 flex justify-between items-center">
+                                <span>Copy</span>
+                                <span className="ml-2">
+                                    <ArrorRightWhite />
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {/*Add Team Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="AddTeam" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[485px] modal-dialog-centered relative w-auto pointer-events-none">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-6">
+                            <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
+                                id="exampleModalScrollableLabel">
+                                Team
+                            </h5>
+                            <button type="button"
+                                    className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                    data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div className="modal-body relative">
+                            <div className="p-4 border-b border-white-shade-100">
+                                <div className="flex flex-1 w-full mb-4">
+                                    <input type="text" className="form-field w-[90%] border border-primaryColor  p-2 px-4" id="name" placeholder="Search Team Member ..." name="name" />
+                                    <button type="button" className="btn w-[60px] flex items-center justify-center p-2">
+                                        <SearchIconWhite />
+                                    </button>
+                                </div>
+                                <label>4 Members</label>
+                            </div>
+                            <div className="m-4 mt-0">
+                                <div className="flex items-center justify-between gap-5 py-6 border-b border-white-shade-100 last:border-white">
+                                    <div className="flex items-center gap-5 w-[90%]">
+                                        <div className="w-[12%]">
+                                            <span className="w-[42px] h-[42px]  border-2 border-white rounded-full overflow-hidden inline-block">
+                                                <img src={User} alt="" className="object-cover w-full h-full"/>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-4">
+                                                <h5 className="font-bold">Shibly S.</h5>
+                                                <span className='w-[1px] h-[16px] bg-primaryColor-shade-200'></span>
+                                                <span>Creator</span>
+                                            </div>
+                                            <span>shibly@gmail.com</span>
+                                        </div>
+                                    </div>
+                                    <div className="cursor-pointer w-[10%]">
+                                        <Dlt />
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between gap-5 py-6 border-b border-white-shade-100 last:border-white">
+                                    <div className="flex items-center gap-5 w-[90%]">
+                                        <div className="w-[12%]">
+                                            <span className="w-[42px] h-[42px]  border-2 border-white rounded-full overflow-hidden inline-block">
+                                                <img src={User} alt="" className="object-cover w-full h-full"/>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-4">
+                                                <h5 className="font-bold">Shibly S.</h5>
+                                                <span className='w-[1px] h-[16px] bg-primaryColor-shade-200'></span>
+                                                <span>Creator</span>
+                                            </div>
+                                            <span>shibly@gmail.com</span>
+                                        </div>
+                                    </div>
+                                    <div className="cursor-pointer w-[10%]">
+                                        <Dlt />
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between gap-5 py-6 border-b border-white-shade-100 last:border-white">
+                                    <div className="flex items-center gap-5 w-[90%]">
+                                        <div className="w-[12%]">
+                                            <span className="w-[42px] h-[42px]  border-2 border-white rounded-full overflow-hidden inline-block">
+                                                <img src={User} alt="" className="object-cover w-full h-full"/>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center gap-4">
+                                                <h5 className="font-bold">Shibly S.</h5>
+                                                <span className='w-[1px] h-[16px] bg-primaryColor-shade-200'></span>
+                                                <span>Creator</span>
+                                            </div>
+                                            <span>shibly@gmail.com</span>
+                                        </div>
+                                    </div>
+                                    <div className="cursor-pointer w-[10%]">
+                                        <Dlt />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex flex-col m-4">
+                                <label className="text-xl mb-3">Invite ‘shibly@nitex.info’</label>
+                                <button type="button" className="btn">Activated Soon</button>
+                            </div>
+                            <div className="flex flex-col m-4">
+                                <label className="text-xl mb-1">Invitation sent to </label>
+                                <label className="text-xl mb-3 font-bold">‘shibly@nitex.info’</label>
+                            </div>
                         </div>
                     </div>
                 </div>
