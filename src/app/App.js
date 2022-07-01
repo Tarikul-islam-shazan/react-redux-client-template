@@ -29,6 +29,7 @@ import Collections from '../assets/designs/collections'
 import MyCollection from '../assets/designs/collections/my-collection.js'
 import RequestedCollection from '../assets/designs/collections/requested-collection.js'
 import CollectionDetails from '../assets/designs/collections/collection-details.js'
+import StyleDetail from '../assets/designs/collections/style-detail.js'
 import PlaceOrder from '../assets/designs/place-order/place-order.js'
 import Team from '../assets/designs/team'
 
@@ -88,6 +89,10 @@ const App = () => {
                     <Route
                         path='/collection-details'
                         element={<CollectionDetails />}
+                    />
+                    <Route
+                        path='/style-detail'
+                        element={<StyleDetail />}
                     />
                     <Route path='/place-order' element={<PlaceOrder />} />
                     <Route path='/team' element={<Team />} />

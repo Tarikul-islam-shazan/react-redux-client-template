@@ -15,7 +15,7 @@
         @apply text-base text-primaryColor mb-3 block font-medium
     }
     .badge{
-        @apply px-4 rounded-[20px] text-base text-primaryColor inline-block bg-pending uppercase text-center pt-1
+        @apply px-4 rounded-[20px] text-base text-primaryColor inline-block bg-pending uppercase text-center
     }
     .color-circle {
         @apply w-[32px] h-[32px] bg-pending rounded-full border border-primaryColor-shade-100 inline-block
