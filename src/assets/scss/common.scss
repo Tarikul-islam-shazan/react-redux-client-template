@@ -253,6 +253,22 @@
      }
  }
 
+ //Tab
+ .request-for-quote-tab li a.active {
+     background: #282828;
+     color: #fff;
+ }
+ //Table
+.on-hover-add{
+    &:hover{
+        a{
+            text-decoration: underline;
+        }
+        .add-item{
+            display: flex;
+        }
+    }
+}
  //SLick Slider
  .slick-prev, .slick-next {
      width: 40px !important;

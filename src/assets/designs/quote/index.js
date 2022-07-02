@@ -1,5 +1,6 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
+import SliderWrapperCollection from "../../../app/common/SliderWrapperCollection";
 import { ReactComponent as PlusIcon } from '../../images/plus.svg';
 import { ReactComponent as UploadIcon } from '../../images/upload.svg';
 import { ReactComponent as FilterIcon } from '../../images/filter.svg';
@@ -14,6 +15,12 @@ import { ReactComponent as ArrowRightWhite } from '../../images/arror-right-whit
 import Pdf from '../../images/pdf.png';
 
 import Pant from '../../images/home/pant.png';
+import {ReactComponent as EditIcon} from "../../images/edit.svg";
+import {ReactComponent as PlusIconBlack} from "../../images/plus-black.svg";
+import SliderWrapper from "../../../app/common/SliderWrapper";
+import {ReactComponent as Favourite} from "../../images/favourite.svg";
+import slide from "../../images/home/slide.png";
+import slide1 from "../../images/home/slide1.png";
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -130,10 +137,10 @@ const StyleGuide = () => {
                                 <button type="button" className="btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor">
                                     <FilterIcon />
                                 </button>
-                                <button type="button"  className="btn w-full sm:w-auto bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#RequestforQuote"  className="btn w-full sm:w-auto bg-transparent font-normal border border-primaryColor text-primaryColor flex justify-between items-center">
                                     <span>Request for Quote</span>
                                     <span className="ml-4">
-                                        <ArrowRightIcon />
+                                        <ArrowRightWhite />
                                     </span>
                                 </button>
                             </div>
@@ -258,14 +265,16 @@ const StyleGuide = () => {
 
 
 
-            {/*Brief a Collection Modal*/}
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="BriefCollection" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-                <div className="modal-dialog max-w-[680px] modal-dialog-centered relative w-auto pointer-events-none">
+
+
+            {/*Request for Quote Modal*/}
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="RequestforQuote" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                <div className="modal-dialog max-w-[1600px] mx-4 4xl:mx-auto modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4">
                             <h5 className="text-xl font-bold leading-normal text-primaryColor uppercase"
                                 id="exampleModalScrollableLabel">
-                                Brief a Collection
+                                Request for Quote
                             </h5>
                             <button type="button"
                                     className="btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
@@ -273,150 +282,574 @@ const StyleGuide = () => {
                             </button>
                         </div>
                         <div className="modal-body relative p-4">
-                            <div className="space-y-4">
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Email address *</label>
-                                    <input type="text"
-                                           className="form-field bg-primaryColor-shade-300 w-[70%]"
-                                           id="text"
-                                           placeholder="Write Here ..."
-                                           name="text"/>
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Description</label>
-                                    <textarea name="" id="" cols="30" rows="4" className="form-field h-auto bg-primaryColor-shade-300 w-[70%]" placeholder="Write Here ..."></textarea>
 
-                                </div>
-                                <div className="input-group flex items-center">
-                                    <label htmlFor="text" className="label w-[30%]">Attach</label>
-                                    <div className='file w-[70%]'>
-                                        <input id='input-file' type='file'/>
-                                        <label htmlFor='input-file' className="w-full justify-between">
-                                            <span className="mr-4">Browse Files</span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-14">
-                                <div className="flex justify-between items-center mb-5">
-                                    <h5 className="text-xl font-bold leading-normal text-primaryColor">
-                                        Brief a Collection
-                                    </h5>
-                                    <span className="text-base">4 files</span>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="overflow-hidden">
-                                                <table className="min-w-full">
-                                                    <thead className="bg-white">
-                                                    <tr>
-                                                        <th scope="col" className="w-[100px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
+                            <ul className="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 mb-4 request-for-quote-tab"
+                                id="tabs-tab3"
+                                role="tablist">
+                                <li className="nav-item" role="presentation">
+                                    <a href="#tabs-home3" className="text-xl active uppercase inline-block p-4 border border-primaryColor bg-white-shade-100 text-center w-[340px]"
+                                       id="tabs-home-tab3"
+                                       data-bs-toggle="pill"
+                                       data-bs-target="#tabs-home3"
+                                       role="tab"
+                                       aria-controls="tabs-home3"
+                                       aria-selected="true">Upload Techpack</a>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <a href="#tabs-profile3" className="text-xl uppercase inline-block p-4 border border-primaryColor bg-white-shade-100 text-center w-[340px] ml-[-1px]"
+                                       id="tabs-profile-tab3"
+                                       data-bs-toggle="pill"
+                                       data-bs-target="#tabs-profile3"
+                                       role="tab"
+                                       aria-controls="tabs-profile3"
+                                       aria-selected="false">Select Existing Collection</a>
+                                </li>
+                            </ul>
+                            <div className="tab-content" id="tabs-tabContent3">
 
-                                                        </th>
-                                                        <th scope="col" className="text-xl font-normal bg-white-shade-100 px-6 py-4 text-left first:border-r border-primaryColor-shade-200">
-                                                            File
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className="even:bg-white-shade-100">
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap first:border-r border-primaryColor-shade-200">
-                                                                <span className="cursor-pointer">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6M3 6H21H3ZM5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6H5Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M14 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    <path d="M10 11V17" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                </span>
-                                                        </td>
-                                                        <td className="text-base font-normal px-6 py-6 whitespace-nowrap">
-                                                            <div className="flex items-center">
-                                                                    <span>
-                                                                        <img src="./images/pdf.png" alt=""/>
-                                                                    </span>
-                                                                <span className="text-base ml-4">Untiltled.pdf </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                <div className="tab-pane fade show active" id="tabs-home3" role="tabpanel" aria-labelledby="tabs-home-tab3">
+                                    <div className="mb-4 mt-8 space-y-5 xl:w-[70%]">
+                                        <div className="flex flex-col sm:flex-row items-start">
+                                            <label className="mt-2 mb-2 font-semibold sm:font-normal sm:mb-0 sm:w-[20%]">Title</label>
+                                            <div className="flex items-center  gap-5 sm:w-[80%]">
+                                                <h1 className="text-3xl font-semibold">Summer 2022 For Men</h1>
+                                                <span className="cursor-pointer bg-white p-2">
+                                         <EditIcon />
+                                     </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row items-start">
+                                            <label className="mt-2 mb-2 sm:mb-0 font-semibold sm:font-normal sm:w-[20%]">Description</label>
+                                            <div className="flex items-start gap-3 sm:w-[80%]">
+                                                <p>To be sincerely honest in my humble opinion without being sentimental and of course, without offending anyone who thinks differently from my opinion but rather looking into this serious matter with perspective distinction and without condemning.</p>
+                                                <span className="cursor-pointer bg-white p-2">
+                                             <EditIcon />
+                                         </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row sm:justify-between space-y-5 sm:space-y-0">
+                                            <div className="sm:w-[55%] lg:w-[60%] flex flex-col sm:flex-row  sm:items-center">
+                                                <label className="mt-2 sm:w-[33%]">Attach</label>
+                                                <div className="sm:w-[66%]">
+                                                    <div className='file'>
+                                                        <input id='input-file' type='file'/>
+                                                        <label htmlFor='input-file' className="max-w-[445px]  justify-between">
+                                                            <span className="mr-4">Browse Files</span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="sm:w-[40%] 4xl:w-[35%] flex flex-col sm:flex-row sm:items-center">
+                                                <label className="mt-2 sm:w-[40%] text-center">ETD</label>
+                                                <div className="sm:w-[70%]">
+                                                    <input type="date" className="form-field border border-primaryColor uppercase" id="name"  name="name" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="mt-10  overflow-hidden">
+                                        <div className="flex justify-between items-center mb-5">
+                                            <h5 className="text-xl font-bold leading-normal text-primaryColor">
+                                                Uploaded Files
+                                            </h5>
+                                            <span className="text-base">4 files</span>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                                    <div className="overflow-y-auto">
+                                                        <table className="min-w-full">
+                                                            <thead className="bg-white">
+                                                            <tr>
+                                                                <th scope="col" className="w-[80px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+
+                                                                </th>
+                                                                <th scope="col" className="text-xl w-[30%]  font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+                                                                    File
+                                                                </th>
+                                                                <th scope="col" className="text-xl  font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+                                                                    Market
+                                                                </th>
+                                                                <th scope="col" className="text-xl  font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+                                                                    Category
+                                                                </th>
+                                                                <th scope="col" className="text-xl  font-normal bg-white-shade-100 px-6 py-4 text-left">
+                                                                    Quantity
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr className="even:bg-white-shade-100">
+                                                                <td className="text-base font-normal px-6 py-6 whitespace-nowrap border-r border-primaryColor-shade-200 align-middle">
+                                                                    <Dlt />
+                                                                </td>
+                                                                <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-middle'>
+                                                                    <div className='flex items-center'>
+                                                                    <span>
+                                                                        <img src={Pdf}
+                                                                             alt=''
+                                                                             className='object-contain'
+                                                                        />
+                                                                    </span>
+                                                                        <span className='text-base ml-4'>
+                                                                            Name of the style
+                                                                       </span>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+
+                                                                    <div className="input-group bordered-style w-[286px]">
+                                                                        <SelectComponent
+                                                                            options={[
+                                                                                {label: "See Samples", value: "Size: XL"},
+                                                                                {label: "Country 1", value: "country1"},
+                                                                                {label: "Country 2", value: "country2"}
+                                                                            ]}
+                                                                        />
+                                                                    </div>
+
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+                                                                    <div className="input-group bordered-style w-[286px]">
+                                                                        <SelectComponent
+                                                                            options={[
+                                                                                {label: "See Samples", value: "Size: XL"},
+                                                                                {label: "Country 1", value: "country1"},
+                                                                                {label: "Country 2", value: "country2"}
+                                                                            ]}
+                                                                        />
+                                                                    </div>
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+                                                                    <div className="input-group">
+                                                                        <input type="text"
+                                                                               className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                               id="text"
+                                                                               placeholder="Input Quantity"
+                                                                               name="text"/>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="even:bg-white-shade-100">
+                                                                <td className="text-base font-normal px-6 py-6 whitespace-nowrap border-r border-primaryColor-shade-200 align-middle">
+                                                                    <Dlt />
+                                                                </td>
+                                                                <td className='text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-middle'>
+                                                                    <div className='flex items-center'>
+                                                                    <span>
+                                                                        <img src={Pdf}
+                                                                             alt=''
+                                                                             className='object-contain'
+                                                                        />
+                                                                    </span>
+                                                                        <span className='text-base ml-4'>
+                                                                            Name of the style
+                                                                       </span>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+
+                                                                    <div className="input-group bordered-style w-[286px]">
+                                                                        <SelectComponent
+                                                                            options={[
+                                                                                {label: "See Samples", value: "Size: XL"},
+                                                                                {label: "Country 1", value: "country1"},
+                                                                                {label: "Country 2", value: "country2"}
+                                                                            ]}
+                                                                        />
+                                                                    </div>
+
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+                                                                    <div className="input-group bordered-style w-[286px]">
+                                                                        <SelectComponent
+                                                                            options={[
+                                                                                {label: "See Samples", value: "Size: XL"},
+                                                                                {label: "Country 1", value: "country1"},
+                                                                                {label: "Country 2", value: "country2"}
+                                                                            ]}
+                                                                        />
+                                                                    </div>
+                                                                </td>
+                                                                <td className="text-base font-normal px-6 py-6 border-r border-primaryColor-shade-200 align-top">
+                                                                    <div className="input-group">
+                                                                        <input type="text"
+                                                                               className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                               id="text"
+                                                                               placeholder="Input Quantity"
+                                                                               name="text"/>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" className="btn mt-10 flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
+                                            <span>Request for <strong>Quote</strong></span>
+                                            <span className="ml-2">
+                                                <ArrowRightWhite />
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
+
+                                <div className="tab-pane fade" id="tabs-profile3" role="tabpanel" aria-labelledby="tabs-profile-tab3">
+                                    <div className="mb-4 mt-8 space-y-5 xl:w-[70%]">
+                                        <div className="flex flex-col sm:flex-row items-start">
+                                            <label className="mt-2 mb-2 font-semibold sm:font-normal sm:mb-0 sm:w-[20%]">Title</label>
+                                            <div className="flex items-center  gap-5 sm:w-[80%]">
+                                                <h1 className="text-3xl font-semibold">Summer 2022 For Men</h1>
+                                                <span className="cursor-pointer bg-white p-2">
+                                         <EditIcon />
+                                     </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row items-start">
+                                            <label className="mt-2 mb-2 sm:mb-0 font-semibold sm:font-normal sm:w-[20%]">Description</label>
+                                            <div className="flex items-start gap-3 sm:w-[80%]">
+                                                <p>To be sincerely honest in my humble opinion without being sentimental and of course, without offending anyone who thinks differently from my opinion but rather looking into this serious matter with perspective distinction and without condemning.</p>
+                                                <span className="cursor-pointer bg-white p-2">
+                                             <EditIcon />
+                                         </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row sm:justify-between space-y-5 sm:space-y-0">
+                                            <div className="sm:w-[55%] lg:w-[60%] flex flex-col sm:flex-row  sm:items-center">
+                                                <label className="mt-2 sm:w-[33%]">Attach</label>
+                                                <div className="sm:w-[66%]">
+                                                    <div className='file'>
+                                                        <input id='input-file' type='file'/>
+                                                        <label htmlFor='input-file' className="max-w-[445px]  justify-between">
+                                                            <span className="mr-4">Browse Files</span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3 14V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V14" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                <path d="M12 3L17 8.44444M12 17V3V17ZM12 3L7 8.44446L12 3Z" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="sm:w-[40%] 4xl:w-[35%] flex flex-col sm:flex-row sm:items-center">
+                                                <label className="mt-2 sm:w-[40%] text-center">ETD</label>
+                                                <div className="sm:w-[70%]">
+                                                    <input type="date" className="form-field border border-primaryColor uppercase" id="name"  name="name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-14  overflow-hidden">
+                                        <div className="flex justify-between items-center mb-5">
+                                            <h5 className="text-xl font-bold leading-normal text-primaryColor">
+                                                Select Collection
+                                            </h5>
+                                            <span className="text-base">4 files</span>
+                                        </div>
+
+                                        <div className="kint-carasoul overflow-hidden mb-6">
+                                            <SliderWrapperCollection>
+                                                <div>
+                                                    <div className="collection-box mx-2">
+                                                        <div className="overflow-hidden relative bg-white-shade-100  p-2 h-[328px]">
+                                                            <div className="image-grid-overlay-white">
+                                                                <div className="columns-3 gap-1 direction-rtl">
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="relative flex items-center">
+                                                            <div>
+                                                                <h6 className="text-primaryColor font-bold mt-2 mb-1">Men’s Semi-formal Full Set Pack Summer 2022</h6>
+                                                                <div className="flex items-center text-sm text-primaryColor gap-2">
+                                                                    <span>Designed by NITEX</span>
+                                                                    <span className="leading-none inline-block mb-2">.</span>
+                                                                    <span>23 Styles</span>
+                                                                </div>
+                                                                <div className="color-list flex gap-1 mt-2">
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#D1B59D]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#E4DBCA]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#BCBDB7"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="collection-box mx-2">
+                                                        <div className="overflow-hidden relative bg-white-shade-100  p-2 h-[328px]">
+                                                            <div className="image-grid-overlay-white">
+                                                                <div className="columns-3 gap-1 direction-rtl">
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="relative flex items-center">
+                                                            <div>
+                                                                <h6 className="text-primaryColor font-bold mt-2 mb-1">Men’s Semi-formal Full Set Pack Summer 2022</h6>
+                                                                <div className="flex items-center text-sm text-primaryColor gap-2">
+                                                                    <span>Designed by NITEX</span>
+                                                                    <span className="leading-none inline-block mb-2">.</span>
+                                                                    <span>23 Styles</span>
+                                                                </div>
+                                                                <div className="color-list flex gap-1 mt-2">
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#D1B59D]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#E4DBCA]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#BCBDB7"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="collection-box mx-2">
+                                                        <div className="overflow-hidden relative bg-white-shade-100  p-2 h-[328px]">
+                                                            <div className="image-grid-overlay-white">
+                                                                <div className="columns-3 gap-1 direction-rtl">
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="relative flex items-center">
+                                                            <div>
+                                                                <h6 className="text-primaryColor font-bold mt-2 mb-1">Men’s Semi-formal Full Set Pack Summer 2022</h6>
+                                                                <div className="flex items-center text-sm text-primaryColor gap-2">
+                                                                    <span>Designed by NITEX</span>
+                                                                    <span className="leading-none inline-block mb-2">.</span>
+                                                                    <span>23 Styles</span>
+                                                                </div>
+                                                                <div className="color-list flex gap-1 mt-2">
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#D1B59D]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#E4DBCA]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#BCBDB7"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="collection-box mx-2">
+                                                        <div className="overflow-hidden relative bg-white-shade-100  p-2 h-[328px]">
+                                                            <div className="image-grid-overlay-white">
+                                                                <div className="columns-3 gap-1 direction-rtl">
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/1.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/3.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/2.jpg"/>
+                                                                    <img className="w-full mb-1" src="/images/products/4.jpg"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="relative flex items-center">
+                                                            <div>
+                                                                <h6 className="text-primaryColor font-bold mt-2 mb-1">Men’s Semi-formal Full Set Pack Summer 2022</h6>
+                                                                <div className="flex items-center text-sm text-primaryColor gap-2">
+                                                                    <span>Designed by NITEX</span>
+                                                                    <span className="leading-none inline-block mb-2">.</span>
+                                                                    <span>23 Styles</span>
+                                                                </div>
+                                                                <div className="color-list flex gap-1 mt-2">
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#D1B59D]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#E4DBCA]"></span>
+                                                                    <span className="color-circle w-[20px] h-[20px] border-none bg-[#BCBDB7"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </SliderWrapperCollection>
+                                        </div>
+
+                                        <div className="w-full my-14">
+                                            <button type="button" className="btn flex justify-between ml-auto  items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#UploadStyleGreat">
+                                                <span>Proceed</span>
+                                                <span className="ml-2">
+                                                    <ArrowRightWhite />
+                                                </span>
+                                            </button>
+                                        </div>
+
+
+                                        <div className="mt-10 overflow-hidden">
+                                            <div className="flex justify-between items-center mb-5">
+                                                <h5 className="text-xl font-bold leading-normal text-primaryColor">
+                                                    Selected Styles
+                                                </h5>
+                                                <span className="text-base">4 files</span>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                    <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                                        <div className="overflow-y-auto">
+                                                            <table className="min-w-full">
+                                                                <thead className="bg-white">
+                                                                <tr>
+                                                                    <th scope="col" className="w-[80px] text-xl font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+
+                                                                    </th>
+                                                                    <th scope="col" className="text-xl   font-normal bg-white-shade-100 px-6 py-4 text-left border-r border-primaryColor-shade-200">
+                                                                        File
+                                                                    </th>
+                                                                    <th scope="col" className="text-xl w-[20%] font-normal bg-white-shade-100 px-6 py-4 text-left">
+                                                                        Quantity
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr className="even:bg-white-shade-100">
+                                                                        <td className="text-base font-normal p-4 whitespace-nowrap border-r border-primaryColor-shade-200 last:border-white align-middle">
+                                                                            <Dlt />
+                                                                        </td>
+                                                                        <td className='text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-middle'>
+                                                                            <div className='flex items-center'>
+                                                                                <span>
+                                                                                    <img src={Pdf}
+                                                                                         alt=''
+                                                                                         className='object-contain'
+                                                                                    />
+                                                                                </span>
+                                                                                    <span className='text-base ml-4'>
+                                                                                    Name of the style
+                                                                               </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-top">
+                                                                            <div className="input-group">
+                                                                                <input type="text"
+                                                                                       className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                                       id="text"
+                                                                                       placeholder="Input Quantity"
+                                                                                       name="text"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr className="even:bg-white-shade-100">
+                                                                        <td className="text-base font-normal p-4 whitespace-nowrap border-r border-primaryColor-shade-200 last:border-white align-middle">
+                                                                            <Dlt />
+                                                                        </td>
+                                                                        <td className='text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-middle'>
+                                                                            <div className='flex items-center'>
+                                                                                <span>
+                                                                                    <img src={Pdf}
+                                                                                         alt=''
+                                                                                         className='object-contain'
+                                                                                    />
+                                                                                </span>
+                                                                                    <span className='text-base ml-4'>
+                                                                                    Name of the style
+                                                                               </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-top">
+                                                                            <div className="input-group">
+                                                                                <input type="text"
+                                                                                       className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                                       id="text"
+                                                                                       placeholder="Input Quantity"
+                                                                                       name="text"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr className="even:bg-white-shade-100">
+                                                                        <td className="text-base font-normal p-4 whitespace-nowrap border-r border-primaryColor-shade-200 last:border-white align-middle">
+                                                                            <Dlt />
+                                                                        </td>
+                                                                        <td className='text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-middle'>
+                                                                            <div className='flex items-center'>
+                                                                                <span>
+                                                                                    <img src={Pdf}
+                                                                                         alt=''
+                                                                                         className='object-contain'
+                                                                                    />
+                                                                                </span>
+                                                                                    <span className='text-base ml-4'>
+                                                                                    Name of the style
+                                                                               </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-top">
+                                                                            <div className="input-group">
+                                                                                <input type="text"
+                                                                                       className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                                       id="text"
+                                                                                       placeholder="Input Quantity"
+                                                                                       name="text"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr className="even:bg-white-shade-100">
+                                                                        <td className="text-base font-normal p-4 whitespace-nowrap border-r border-primaryColor-shade-200 last:border-white align-middle">
+                                                                            <Dlt />
+                                                                        </td>
+                                                                        <td className='text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-middle'>
+                                                                            <div className='flex items-center'>
+                                                                                <span>
+                                                                                    <img src={Pdf}
+                                                                                         alt=''
+                                                                                         className='object-contain'
+                                                                                    />
+                                                                                </span>
+                                                                                    <span className='text-base ml-4'>
+                                                                                    Name of the style
+                                                                               </span>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="text-base font-normal p-4 border-r border-primaryColor-shade-200 last:border-white align-top">
+                                                                            <div className="input-group">
+                                                                                <input type="text"
+                                                                                       className="form-field bg-transparent border border-primaryColor w-[286px]"
+                                                                                       id="text"
+                                                                                       placeholder="Input Quantity"
+                                                                                       name="text"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" className="btn mt-10 flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
+                                            <span>Request for <strong>Quote</strong></span>
+                                            <span className="ml-2">
+                                                <ArrowRightWhite />
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                        <div className="modal-footer p-4">
-                            <button type="button" className="btn flex justify-between items-center max-w-[445px] w-full" data-bs-toggle="modal" data-bs-target="#ConfirmationAction">
-                                <span>Ask <strong className="font-bold">Collection</strong></span>
-                                <span className="ml-2">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 12L14 19M3 12H21H3ZM21 12L14 5L21 12Z" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -436,7 +869,7 @@ const StyleGuide = () => {
                             <div className="px-6 pb-6">
                                 <h2 className="text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8">Thanks!</h2>
                                 <div className="space-y-4">
-                                    <p className="text-xl">Your <strong>Brief</strong> has been received. We will share a collection with you within <strong>24 hours</strong>.</p>
+                                    <p className="text-xl">Your <strong>request</strong> has been sent. We will share a quotation with you within <strong>24 hours</strong>. </p>
                                 </div>
                             </div>
                         </div>
@@ -445,12 +878,13 @@ const StyleGuide = () => {
                                 Close
                             </button>
                             <button type="button" className="btn w-full" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                Go to <strong className="!font-bold">Collection</strong>
+                                Go to <strong className="!font-bold">Quotation</strong>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
 
 
 

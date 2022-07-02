@@ -1101,7 +1101,7 @@ const StyleGuide = () => {
                                         </div>
                                     </div>
                                     <div className="sm:w-[40%] 4xl:w-[35%] flex flex-col sm:flex-row sm:items-center">
-                                        <label className="mt-2 sm:w-[40%]">ETD</label>
+                                        <label className="mt-2 sm:w-[40%] text-center">ETD</label>
                                         <div className="sm:w-[70%]">
                                             <input type="date" className="form-field border border-primaryColor uppercase" id="name"  name="name" />
                                         </div>
