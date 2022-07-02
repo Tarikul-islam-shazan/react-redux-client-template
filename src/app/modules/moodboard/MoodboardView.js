@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -24,7 +24,12 @@ const MoodboardView = (props) => {
     const selectedMoodboard = useSelector(
         (state) => state.moodboard.selectedMoodboard
     )
+    const [selectedProductView, setSelectedProductView] = useState('moodboard')
     const dispatch = useDispatch()
+
+    const setProductView = (value) => {
+        setSelectedProductView(value)
+    }
 
     // calling thunk to get moodboard data in useEffect
     useEffect(() => {
@@ -57,13 +62,7 @@ const MoodboardView = (props) => {
                                         Description
                                     </label>
                                     <p>
-                                        To be sincerely honest in my humble
-                                        opinion without being sentimental and of
-                                        course, without offending anyone who
-                                        thinks differently from my opinion but
-                                        rather looking into this serious matter
-                                        with perspective distinction and without
-                                        condemning.
+                                        {selectedMoodboard?.description}
                                         <span>
                                             <EditIcon />
                                         </span>
@@ -88,8 +87,28 @@ const MoodboardView = (props) => {
                         <div className='left-half'>
                             <div className='moodboard-tab'>
                                 <ul>
-                                    <li className='active'>Moodboard</li>
-                                    <li>Images</li>
+                                    <li
+                                        onClick={() =>
+                                            setProductView('moodboard')
+                                        }
+                                        className={`${
+                                            selectedProductView === 'moodboard'
+                                                ? 'active'
+                                                : ''
+                                        }`}
+                                    >
+                                        Moodboard
+                                    </li>
+                                    <li
+                                        onClick={() => setProductView('images')}
+                                        className={`${
+                                            selectedProductView === 'images'
+                                                ? 'active'
+                                                : ''
+                                        }`}
+                                    >
+                                        Images
+                                    </li>
                                 </ul>
                             </div>
                             {/* Images layout */}
@@ -97,87 +116,42 @@ const MoodboardView = (props) => {
                                 <div className='masonry-item add-item'>
                                     <span className=''>+</span>
                                 </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/1.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/4.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/1.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
+                                {selectedProductView==='moodboard' && selectedMoodboard?.moodboardImageList.length >
+                                    0 &&
+                                    selectedMoodboard.moodboardImageList.map(
+                                        (image) => (
+                                            <div
+                                                className='masonry-item'
+                                                key={image.id}
+                                            >
+                                                <img
+                                                    src={image.docUrl}
+                                                    alt='product'
+                                                />
+                                                <span className='delete'>
+                                                    <DeleteIcon />
+                                                </span>
+                                            </div>
+                                        )
+                                    )}
+                                    {selectedProductView==='images' && selectedMoodboard?.productImageList.length >
+                                    0 &&
+                                    selectedMoodboard.productImageList.map(
+                                        (image) => (
+                                            <div
+                                                className='masonry-item'
+                                                key={image.id}
+                                            >
+                                                <img
+                                                    src={image.docUrl}
+                                                    alt='product'
+                                                />
+                                                <span className='delete'>
+                                                    <DeleteIcon />
+                                                </span>
+                                            </div>
+                                        )
+                                    )}
                             </div>
                         </div>
                         <div className='right-half'>
