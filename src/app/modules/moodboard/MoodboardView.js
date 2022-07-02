@@ -116,8 +116,9 @@ const MoodboardView = (props) => {
                                 <div className='masonry-item add-item'>
                                     <span className=''>+</span>
                                 </div>
-                                {selectedProductView==='moodboard' && selectedMoodboard?.moodboardImageList.length >
-                                    0 &&
+                                {selectedProductView === 'moodboard' &&
+                                    selectedMoodboard?.moodboardImageList
+                                        .length > 0 &&
                                     selectedMoodboard.moodboardImageList.map(
                                         (image) => (
                                             <div
@@ -134,8 +135,9 @@ const MoodboardView = (props) => {
                                             </div>
                                         )
                                     )}
-                                    {selectedProductView==='images' && selectedMoodboard?.productImageList.length >
-                                    0 &&
+                                {selectedProductView === 'images' &&
+                                    selectedMoodboard?.productImageList.length >
+                                        0 &&
                                     selectedMoodboard.productImageList.map(
                                         (image) => (
                                             <div
@@ -162,132 +164,36 @@ const MoodboardView = (props) => {
                                         <span>+</span>
                                     </div>
                                 </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#00f851' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B08574' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B08574' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#3B3738' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#16505B' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#6FA7B8' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B7B548' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
+                                {selectedMoodboard?.colorResponseList.length >
+                                    0 &&
+                                    selectedMoodboard.colorResponseList.map(
+                                        (color) => (
+                                            <div
+                                                className='color-single-item'
+                                                key={color.id}
+                                            >
+                                                <div
+                                                    className='color-view'
+                                                    style={{
+                                                        background:
+                                                            color.hexCode
+                                                    }}
+                                                >
+                                                    <span className='close'>
+                                                        <CloseIcon />
+                                                    </span>
+                                                </div>
+                                                <div className='color-info'>
+                                                    <div className='color-code'>
+                                                        TCX 16-1288
+                                                    </div>
+                                                    <div className='color-name'>
+                                                        Dark Blue
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
                             </div>
                             {/* Moodboard fabrics */}
                             <div className='moodboard-fabric-container'>
