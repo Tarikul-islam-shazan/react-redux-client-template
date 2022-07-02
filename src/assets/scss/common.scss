@@ -195,16 +195,16 @@
      margin: 0;
      font: inherit;
      color: currentColor;
-     width: 1.15em;
-     height: 1.15em;
-     border: 0.15em solid #282828 !important;
-     border-radius: 0.15em;
-     transform: translateY(-0.075em);
+     width: 20px;
+     height: 20px;
+     border: 2px solid #282828 !important;
+     border-radius: 3px;
+     transform: translateY(-2px);
 
      &::before {
          content: "";
-         width: 0.65em;
-         height: 0.65em;
+         width: 12px;
+         height: 12px;
          transform: scale(0);
          transition: 120ms transform ease-in-out;
          box-shadow: inset 1em 1em #282828;
@@ -231,8 +231,8 @@
      width: 20px;
      height: 20px;
      border-radius: 100%;
-     border: 0.15em solid #282828 !important;
-     transform: translateY(-0.075em);
+     border: 2px solid #282828 !important;
+     transform: translateY(-2px);
 
      & ~ label{
          cursor: pointer;
@@ -240,8 +240,8 @@
 
      &::before {
          content: "";
-         width: 10px;
-         height: 10px;
+         width: 12px;
+         height: 12px;
          border-radius: 100%;
          transform: scale(0);
          transition: 120ms transform ease-in-out;
