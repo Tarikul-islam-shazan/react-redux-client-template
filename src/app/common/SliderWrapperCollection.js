@@ -3,26 +3,17 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SliderWrapper = (props) => {
+const SliderWrapperCollection = (props) => {
     const settings = {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 6,
+        slidesToShow: 3,
         slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
             {
                 breakpoint: 1441,
-                settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 1025,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -31,9 +22,18 @@ const SliderWrapper = (props) => {
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 1025,
                 settings: {
                     slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
                     slidesToScroll: 1,
                     initialSlide: 2
                 }
@@ -55,4 +55,4 @@ const SliderWrapper = (props) => {
     )
 }
 
-export default SliderWrapper
+export default SliderWrapperCollection

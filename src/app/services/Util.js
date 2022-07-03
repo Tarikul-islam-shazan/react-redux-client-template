@@ -207,8 +207,7 @@ const convertTimeToLocal = (date, time = '', outputFormat = 'DD.MM.YYYY') => {
         moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY') +
         (time ? ' ' + time : '')
     let convertedDate = moment.utc(formatForUtc).format()
-    var local = moment.utc(convertedDate).local().format(outputFormat)
-    return local
+    return moment.utc(convertedDate).local().format(outputFormat)
 }
 
 const convertDateTimeToLocal = (
@@ -221,8 +220,7 @@ const convertDateTimeToLocal = (
         moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY') +
         (time ? ' ' + formattedTime : '')
     let convertedDate = moment.utc(formatForUtc).format()
-    var local = moment.utc(convertedDate).local().format(outputFormat)
-    return local
+    return moment.utc(convertedDate).local().format(outputFormat)
 }
 
 const getTodayTimeDifference = (startDate, endDate = moment()) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageGridComponent = ({ documentList }) => {
+const ImageGridComponent = ({ documentList, whiteOverLay }) => {
 
     const renderImageList = () => {
         return documentList?.map(item => {
@@ -14,7 +14,7 @@ const ImageGridComponent = ({ documentList }) => {
     }
 
     return (
-        <div className='image-grid-overlay'>
+        <div className={whiteOverLay ? 'image-grid-overlay-white' : 'image-grid-overlay'}>
             <div className='columns-3 gap-1'>
                 {renderImageList()}
             </div>

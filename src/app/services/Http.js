@@ -90,54 +90,67 @@ const updateTokenInHeader = () => {
 }
 
 const Http = {
-  GET: (key, params = '') => {
-    // updateTokenInHeader();
-    params = typeof params === 'object' ? encodeQueryData(params) : params
-    return axios.get(routes[key] + params, headers)
-  },
-  GET_WITH_ID_PARAM: (key, params = '', id = '') => {
-    // updateTokenInHeader();
-    // console.log("id",id)
-    // console.log("params",params)
-    params = typeof params === 'object' ? encodeQueryData(params) : params
-    return axios.get(routes[key] + id + params, headers)
-  },
-  POST: (key, params, id = '') => {
-    // if(key!=='signup' || key!=='login'){
-    // console.log("token header called",key);
-    // updateTokenInHeader();
-    // }
-    // console.log("from post",routes[key] + id, params)
-    return axios.post(routes[key] + id, params, headers)
-  },
-  POST_TEXT_BODY: (key, params, id = '') => {
-    // if(key!=='signup' || key!=='login'){
-    // console.log("token header called",key);
-    // updateTokenInHeader();
-    // }
-    // console.log("from post",params)
-    return axios.post(routes[key] + id, params, {
-      'Content-Type': 'text/html',
-      Accept: 'application/json'
-    })
-  },
-  PUT: (key, params, id = '') => {
-    // updateTokenInHeader();
-    return axios.put(routes[key] + id, params, headers)
-  },
-  DELETE: (key, data, id = '') => {
-    // updateTokenInHeader();
-    return axios.delete(routes[key] + id, { data, headers })
-  },
-  DELETE_WITH_BODY: (key, body, params = '') => {
-    // updateTokenInHeader();
-    params = typeof params === 'object' ? encodeQueryData(params) : params
-    return axios.delete(routes[key] + params, { headers, data: body })
-  },
-  UPLOAD: (key, { name, file }) => {
-    // updateTokenInHeader();
-    const formData = new FormData()
-    formData.append(name, file)
+    GET: (key, params = '') => {
+        // updateTokenInHeader();
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.get(routes[key] + params, headers)
+    },
+    GET_WITH_ID_PARAM: (key, params = '', id = '') => {
+        // updateTokenInHeader();
+        // console.log("id",id)
+        // console.log("params",params)
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.get(routes[key] + id + params, headers)
+    },
+    POST: (key, params, id = '') => {
+        // if(key!=='signup' || key!=='login'){
+        // console.log("token header called",key);
+        // updateTokenInHeader();
+        // }
+        // console.log("from post",routes[key] + id, params)
+        return axios.post(routes[key] + id, params, headers)
+    },
+    POST_TEXT_BODY: (key, params, id = '') => {
+        // if(key!=='signup' || key!=='login'){
+        // console.log("token header called",key);
+        // updateTokenInHeader();
+        // }
+        // console.log("from post",params)
+        return axios.post(routes[key] + id, params, {
+            'Content-Type': 'text/html',
+            Accept: 'application/json'
+        })
+    },
+    PUT: (key, params, id = '') => {
+        // updateTokenInHeader();
+        return axios.put(routes[key] + id, params, headers)
+    },
+    DELETE: (key, data, id = '') => {
+        // updateTokenInHeader();
+        return axios.delete(routes[key] + id, { data, headers })
+    },
+    DELETE_WITH_BODY: (key, body, params = '') => {
+        // updateTokenInHeader();
+        params = typeof params === 'object' ? encodeQueryData(params) : params
+        return axios.delete(routes[key] + params, { headers, data: body })
+    },
+    UPLOAD_MULTIPLE_FILE: (key, files = []) => {
+        let formData = new FormData();
+        files.forEach((file, i) => {
+            formData.append('file', file);
+        });
+        return axios.post(routes[key], formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Content-Disposition': 'attachment'
+            },
+            responseType: 'blob'
+        });
+    },
+    UPLOAD: (key, { name, file }) => {
+        // updateTokenInHeader();
+        const formData = new FormData()
+        formData.append(name, file)
 
     return axios.post(routes[key], formData, {
       headers: {

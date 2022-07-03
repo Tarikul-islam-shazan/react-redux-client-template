@@ -34,6 +34,11 @@ import Collections from '../assets/designs/collections'
 import MyCollection from '../assets/designs/collections/my-collection.js'
 import RequestedCollection from '../assets/designs/collections/requested-collection.js'
 import CollectionDetails from '../assets/designs/collections/collection-details.js'
+import Quote from '../assets/designs/quote'
+import QuoteDetails from '../assets/designs/quote/quote-details'
+import StyleDetail from '../assets/designs/collections/style-detail.js'
+import PlaceOrder from '../assets/designs/place-order/place-order.js'
+import Team from '../assets/designs/team'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')

@@ -11,5 +11,5 @@ export const getMoodboardByID = async (params) => {
 
 export const uploadMoodboard = async (data) => {
   console.log(data)
-  return Http.UPLOAD('uploadMoodboard', data)
+  return Http.POST('addMoodboard', data)
 }
