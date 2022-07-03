@@ -41,7 +41,7 @@ const GreetingSlider = () => {
             return (
                 <div
                     className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full bg-no-repeat bg-right-top' : 'carousel-item relative float-left w-full bg-no-repeat bg-right-top'}
-                    key={`item_${item.id}`} style={{ 'background-image': `url(${Cloud})` }}>
+                    key={`item_${item.id}`} style={{ 'backgroundImage': `url(${Cloud})` }}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
                                 {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
