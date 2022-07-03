@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { authUserInfo, changeDateFormat, getCurrentLocalDateTime } from '../../services/Util';
 import moment from 'moment';
 import Cloud from '../../../assets/images/home/cloud.png';
+import CloudBG from '../../../assets/images/bg-cloud.jpg';
 
 const GreetingSlider = () => {
     const [greetings, setGreetings] = useState([])
@@ -41,7 +42,7 @@ const GreetingSlider = () => {
             return (
                 <div
                     className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full bg-no-repeat bg-right-top' : 'carousel-item relative float-left w-full bg-no-repeat bg-right-top'}
-                    key={`item_${item.id}`} style={{ 'background-image': `url(${Cloud})` }}>
+                    key={`item_${item.id}`}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
                                 {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
@@ -81,8 +82,8 @@ const GreetingSlider = () => {
 
     return (
         <div className='xl:w-[30%] 4xl:w-1/4'>
-            <div id='carouselExampleCaptions' className='carousel slide relative bg-[#0476E0] h-full px-4 py-6'
-                 data-bs-ride='carousel'>
+            <div id='carouselExampleCaptions' className='carousel slide relative bg-[#0476E0]  h-full px-4 py-6'
+                 data-bs-ride='carousel' style={{ 'background-image': `url(${CloudBG})` }}>
                 <div className='carousel-inner relative w-full overflow-hidden'>
                     {renderSliderContent()}
                 </div>

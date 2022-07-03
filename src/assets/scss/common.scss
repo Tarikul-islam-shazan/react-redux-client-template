@@ -293,6 +293,20 @@
  button.slick-arrow.slick-disabled{
      display: none !important;
  }
+ .kint-carasoul {
+     .item {
+         &.active{
+             background: #282828;
+             span{
+                 color: #fff;
+                 &.dot {
+                     background: #fff;
+                 }
+             }
+         }
+
+     }
+ }
 
  //Color Picker
 .color-circle-picker{
