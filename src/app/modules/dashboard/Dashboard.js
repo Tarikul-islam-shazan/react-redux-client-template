@@ -17,6 +17,7 @@ import OurOffer from './OurOffer';
 import SliderWrapper from '../../common/SliderWrapper';
 import { ReactComponent as Favourite } from '../../../assets/images/favourite.svg';
 import slide1 from '../../../assets/images/home/slide1.png';
+import slide from '../../../assets/images/home/slide.png';
 
 const fabricOptions = [
     { label: 'Premium Fabric Base', value: 'PREMIUM' },
@@ -84,16 +85,16 @@ const Dashboard = () => {
         if (materials.length > 0) {
             return materials.map(item => {
                 return (
-                    <div key={`materials_${item.materialId}`}>
+                    <div key={`materials_${item.id}`}>
                         <div className='bg-white p-3 m-3 relative'>
                             <div className='flex flex-wrap gap-5'>
                                 <div className='favourite'>
                                         <span className='mt-2'>
-                                            <Favourite/>
+                                            <Favourite />
                                         </span>
                                 </div>
                             </div>
-                            <img src={slide1} alt=''/>
+                            <img src={slide} alt=''/>
                             <div className='flex items-center py-4 pb-3 uppercase'>
                                 <span>Knit</span>
                                 <span className='dot'></span>
@@ -219,7 +220,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className='kint-carasoul mb-6'>
+            <div className='kint-carasoul overflow-hidden mb-6'>
                 <SliderWrapper>
                     {renderSliderContent()}
                 </SliderWrapper>
