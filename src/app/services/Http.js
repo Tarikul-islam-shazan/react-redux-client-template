@@ -24,7 +24,8 @@ const routes = {
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
     searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
     nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
-    fetchProductByFabric: `${BASE_URL}/material/fabric/base/`
+    fetchMaterialsByFabric: `${BASE_URL}/material/fabric/base/`,
+    fetchProductByMaterials: `${BASE_URL}/product/search`
 }
 
 // Axios request interceptor

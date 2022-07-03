@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Http from '../../services/Http';
-import { toast } from 'react-toastify';
-import { getCurrentLocalDateTime } from '../../services/Util';
+import {toast} from 'react-toastify';
+import {authUserInfo, changeDateFormat, getCurrentLocalDateTime} from '../../services/Util';
+import moment from 'moment';
 
 const GreetingSlider = () => {
     const [greetings, setGreetings] = useState([])
     const [activeSlideId, setActiveSlideId] = useState(1)
+    const [currentDate, setCurrentDate] = useState('')
+    const [timeText, setTimeText] = useState('')
 
     useEffect(() => {
-        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({ data }) => {
+        let today = moment(new Date()).format().split('T')[0]
+        let curHr = new Date().getHours()
+        if (curHr < 12) {
+            setTimeText('Good Morning')
+        } else if (curHr < 18) {
+            setTimeText('Good Afternoon')
+        } else {
+            setTimeText('Good Evening')
+        }
+        setCurrentDate(today)
+        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({data}) => {
             setGreetings(data)
         }).catch(err => {
             toast.error(err.response.data.message)
@@ -30,19 +43,20 @@ const GreetingSlider = () => {
                     key={`item_${item.id}`}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
-                                DEC 17 <br/>2022
+                                {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
+                                <br/>{changeDateFormat(currentDate, 'YYYY-MM-DD', 'YYYY')}
                             </span>
                     </div>
                     <div className='carousel-caption pb-5'>
                             <span className='inline-block text-xl text-white-shade-100 mb-3'>
-                                Good Morning!
+                                {timeText}!
                             </span>
                         <h5 className='text-4xl text-white-shade-100 font-bold mb-3'>
-                            Robert D. Junior Ironman
+                            {authUserInfo()?.name}
                         </h5>
                         <span className='inline-block text-xl text-white-shade-100 mb-3'>
-                                Wishing you a productive day
-                            </span>
+                            Wishing you a productive day
+                        </span>
                     </div>
                 </div>
             )
