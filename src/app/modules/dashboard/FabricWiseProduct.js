@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import SelectComponent from '../../common/SelectComponent'
 import SliderWrapper from '../../common/SliderWrapper'
 import { ReactComponent as IconRightArrow } from '../../../assets/icons/rightArrow.svg'
-import Http from '../../services/Http'
-import { toast } from 'react-toastify'
 import MaterialBasedProduct from '../../common/MaterialBasedProduct'
 import { useDispatch } from 'react-redux'
 import MaterialThunks from '../../redux_toolkit/Home/MaterialThunks'
 import { GET_MATERIAL_LIST_BY_FABRIC_TYPE } from '../../redux_toolkit/@types/thunk.types'
-import { useMaterialSelector } from '../../redux_toolkit/Home'
+import { materialActions, useMaterialSelector } from '../../redux_toolkit/Home'
+import { SET_MATERIAL_LIST, SET_SELECTED_MATERIAL_ID } from '../../redux_toolkit/@types/action.types'
+import Http from '../../services/Http'
+import { toast } from 'react-toastify'
+import { closeLoader, openLoader } from '../../redux_toolkit/Loader'
+import { useNavigate } from 'react-router-dom'
 
 const fabricOptions = [
   { label: 'Premium Fabric Base', value: 'PREMIUM' },
@@ -17,12 +20,12 @@ const fabricOptions = [
 ]
 
 const FabricWiseProduct = () => {
-  const [loader, setLoader] = useState(false)
   const [products, setProducts] = useState([])
   const [unUsedTags, setUnUsedTags] = useState([])
   const [selectedFabric, setSelectedFabric] = useState({ label: 'Premium Fabric Base', value: 'PREMIUM' })
   const dispatch = useDispatch()
   const materials = useMaterialSelector()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (materials?.data.length > 0) {
@@ -53,17 +56,28 @@ const FabricWiseProduct = () => {
 
 
   const fetchProductByMaterialId = (materialId) => {
-    setLoader(true)
-    Http.GET('fetchProductByMaterials', `?materialId=${materialId}&sort=id,desc&size=10`).then(({ data }) => {
-      setProducts(data.productResponseList)
-      setLoader(false)
-    }).catch((error) => {
-      setLoader(false)
-      toast.error(error.response.data.message)
+    dispatch({
+      type: materialActions[SET_SELECTED_MATERIAL_ID],
+      payload: materialId
     })
   }
 
+  useEffect(() => {
+    if (materials?.selectedMaterialId) {
+      dispatch(openLoader())
+      Http.GET('fetchProductByMaterials', `?materialId=${materials?.selectedMaterialId}&sort=id,desc&size=10`).then(({ data }) => {
+        dispatch(closeLoader())
+        setProducts(data.productResponseList)
+      }).catch((error) => {
+        dispatch(closeLoader())
+        toast.error(error.response.data.message)
+      })
+    }
+  }, [materials.selectedMaterialId])
+
   const handleFabricChange = (option) => {
+    setProducts([])
+    fetchProductByMaterialId(null)
     setSelectedFabric(option)
   }
 
@@ -81,7 +95,9 @@ const FabricWiseProduct = () => {
         return (
           <div key={`materials_${item.materialId}`} onClick={() => fetchProductByMaterialId(item.materialId)}>
             <div className='bg-white p-3 m-3 relative'>
-              <img src={item?.documentPath} alt='' />
+              <div className='h-[278px]'>
+                <img src={item?.documentPath} alt='' className='object-cover w-full h-full' />
+              </div>
               <div className='flex items-center py-4 pb-3 uppercase'>
                 <span>{item?.fabricType}</span>
                 {getFirstTag(item.tagResponseList) && <span className='dot' />}
@@ -102,8 +118,8 @@ const FabricWiseProduct = () => {
             key={`products_${product.id}`}
             product={product}
           />)}
-          {products.length < 8 && <div
-            className='see-all flex items-center justify-center bg-primaryColor hover:bg-black h-[300px] sm:h-[330px] 5xl:h-[456px] cursor-pointer'>
+          {products.length > 8 && <div
+            className='see-all flex items-center justify-center bg-primaryColor hover:bg-black h-[300px] sm:h-[330px] 5xl:h-[456px] cursor-pointer' onClick={() => navigate('/products/materialId')}>
             <div className='text-white-shade-100 text-[40px] text-center flex flex-col items-center'>
               <div>See All</div>
               <IconRightArrow />
@@ -122,7 +138,7 @@ const FabricWiseProduct = () => {
             <SelectComponent
               options={fabricOptions}
               onChange={handleFabricChange}
-              selectedItem={selectedFabric}
+              selectedItem={materials?.fabricType}
             />
           </div>
         </div>
@@ -140,8 +156,8 @@ const FabricWiseProduct = () => {
                   key={`tags_${item}_${index}`}
                   className='text-base uppercase text-primaryColor px-4 rounded-full border border-primaryColor inline-block'
                 >
-                                    {item}
-                                </span>
+                  {item}
+                </span>
               )
             })}
           </div>
