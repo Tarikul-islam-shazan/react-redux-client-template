@@ -86,8 +86,8 @@ const App = () => {
                     {/*Design UI Route*/}
                     <Route path='/ui' element={<Ui />} />
                     <Route path='/Home' element={<Home />} />
-                    <Route path='/moodboard' element={<MoodboardTemplate />} />
-                    <Route path='/moodboardView' element={<MoodboardView />} />
+                    <Route path='/moodboard2' element={<MoodboardTemplate />} />
+                    <Route path='/moodboardView2' element={<MoodboardView />} />
                     <Route
                         path='/moodboard/moodboard-home'
                         element={<MoodboardHome />}
@@ -106,6 +106,20 @@ const App = () => {
                         path='/collection-details'
                         element={<CollectionDetails />}
                     />
+                    <Route
+                        path='/quote'
+                        element={<Quote />}
+                    />
+                    <Route
+                        path='/quote-details'
+                        element={<QuoteDetails />}
+                    />
+                    <Route
+                        path='/style-detail'
+                        element={<StyleDetail />}
+                    />
+                    <Route path='/place-order' element={<PlaceOrder />} />
+                    <Route path='/team' element={<Team />} />
                 </Routes>
             </Router>
             <ToastContainer

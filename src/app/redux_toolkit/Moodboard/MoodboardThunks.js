@@ -42,7 +42,7 @@ const MoodboardThunks = {
   },
   [UPLOAD_MOODBOARDS]: (data) => {
     return async (dispatch, getState) => {
-      console.log('data', data)
+      // console.log('data', data)
 
       let dataFrame = {
         documentDTOs: []
@@ -68,8 +68,8 @@ const MoodboardThunks = {
       })
       // we have proper data in dataFrame
       let response = await uploadMoodboard(dataFrame)
-      console.log('response', response)
-      return getState().moodboard
+      // console.log('response', response)
+      return { state: getState().moodboard, response }
     }
   }
 }

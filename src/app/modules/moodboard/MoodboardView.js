@@ -25,11 +25,21 @@ const MoodboardView = (props) => {
     (state) => state.moodboard.selectedMoodboard
   )
   const [selectedProductView, setSelectedProductView] = useState('moodboard')
+
+  const [titleEdit, setTitleEdit] = useState(false)
+  const [descriptionEdit, setDescriptionEdit] = useState(false)
+
   const dispatch = useDispatch()
 
   const setProductView = (value) => {
     setSelectedProductView(value)
   }
+
+  const onTitleEditButtonClick = () => {
+    setTitleEdit(!titleEdit)
+  }
+
+  const onDescriptionEditButtonClick = () => {}
 
   // calling thunk to get moodboard data in useEffect
   useEffect(() => {
@@ -44,17 +54,36 @@ const MoodboardView = (props) => {
           <div className='moodboard-information'>
             <div className='left-half'>
               <div className='title'>
-                <div className='input-group'>
-                  <label htmlFor='name' className='label'>
-                    Title
-                  </label>
-                  <h4>
-                    {selectedMoodboard?.name}
-                    <span>
-                      <EditIcon />
-                    </span>
-                  </h4>
-                </div>
+                {!titleEdit && (
+                  <div className='input-group'>
+                    <label htmlFor='name' className='label'>
+                      Title
+                    </label>
+                    <h4>
+                      {selectedMoodboard?.name}
+                      <span>
+                        <EditIcon onClick={onTitleEditButtonClick} />
+                      </span>
+                    </h4>
+                  </div>
+                )}
+
+                {titleEdit && (
+                  <div className='input-group'>
+                    <label htmlFor='name' className='label'>
+                      Title
+                    </label>
+                    <input
+                      onBlur={onTitleEditButtonClick}
+                      autoFocus
+                      type='text'
+                      className='form-field'
+                      id='name'
+                      placeholder='Enter Name'
+                      name='name'
+                    />
+                  </div>
+                )}
               </div>
               <div className='description'>
                 <div className='input-group'>
@@ -64,7 +93,7 @@ const MoodboardView = (props) => {
                   <p>
                     {selectedMoodboard?.description}
                     <span>
-                      <EditIcon />
+                      <EditIcon onClick={onDescriptionEditButtonClick} />
                     </span>
                   </p>
                 </div>
@@ -120,7 +149,7 @@ const MoodboardView = (props) => {
               </div>
               <div className='moodboard-masonry-container'>
                 {selectedProductView === 'images' && (
-                  <div className='masonry-item add-item'>
+                  <div className='masonry-item add-item inline-block'>
                     <span className=''>+</span>
                   </div>
                 )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector, useStore, shallowEqual } from 'react-redux'
 
 import { useNavigate } from 'react-router-dom'
@@ -23,9 +23,6 @@ import {
 
 // importing thunks
 import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
-import { useStoreSelector } from '../../redux_toolkit'
-import { useMoodboardSelector } from '../../redux_toolkit/Moodboard'
-import CardForCollection from '../../common/CardForCollection'
 
 const Moodboard = () => {
   const dispatch = useDispatch()
@@ -35,6 +32,9 @@ const Moodboard = () => {
   const navigate = useNavigate()
 
   const [selectedFile, setSelectedFile] = useState([])
+
+
+  const popupRef = useRef()
 
   let moodboardStatusToString = (status) => {
     switch (status) {
@@ -56,25 +56,34 @@ const Moodboard = () => {
   const onFileChange = async (e) => {
     await setSelectedFile([...e.target.files])
 
-    console.log(selectedFile)
+    // console.log(selectedFile)
   }
   const removeFile = (e, index) => {
     const files = [...selectedFile]
     files.splice(index, 1)
     setSelectedFile([...files])
 
-    console.log(selectedFile)
+    // console.log(selectedFile)
   }
 
   const uploadMoodboards = async () => {
-    dispatch(MoodboardThunks[UPLOAD_MOODBOARDS](selectedFile))
+    try {
+      let thunkResponse = await dispatch(
+        MoodboardThunks[UPLOAD_MOODBOARDS](selectedFile)
+      )
+      // console.log('thunkResponse', thunkResponse)
+      popupRef.current.click()
+      handleMoodboardClick(thunkResponse.response.data.id)
+    } catch (error) {
+      alert(error)
+    }
   }
 
   useEffect(() => {
     // this is a thunk, it has inside logic to set data in state
     let data = dispatch(MoodboardThunks[GET_MOODBOARD_LIST]())
     data.then((sliceSnap) => {
-      console.log(sliceSnap)
+      // console.log(sliceSnap)
       // this is the snap of new state
       // but we won't use it here
     })
@@ -595,6 +604,15 @@ const Moodboard = () => {
                 className='btn bg-transparent px-5 w-[135px] font-normal border border-primaryColor text-primaryColor px-8'
               >
                 Close
+              </button>
+              <button
+                ref={popupRef}
+                type='button'
+                className='btn hidden'
+                data-bs-toggle='modal'
+                data-bs-target='#UploadMoodboard'
+              >
+                Activated Soon
               </button>
               <button
                 type='button'

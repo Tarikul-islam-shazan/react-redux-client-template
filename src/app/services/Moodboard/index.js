@@ -10,6 +10,6 @@ export const getMoodboardByID = async (params) => {
 }
 
 export const uploadMoodboard = async (data) => {
-  console.log(data)
+  // console.log(data)
   return Http.POST('addMoodboard', data)
 }
