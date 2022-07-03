@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Http from '../../services/Http';
-import {toast} from 'react-toastify';
-import {authUserInfo, changeDateFormat, getCurrentLocalDateTime} from '../../services/Util';
+import { toast } from 'react-toastify';
+import { authUserInfo, changeDateFormat, getCurrentLocalDateTime } from '../../services/Util';
 import moment from 'moment';
 
 const GreetingSlider = () => {
@@ -21,7 +21,7 @@ const GreetingSlider = () => {
             setTimeText('Good Evening')
         }
         setCurrentDate(today)
-        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({data}) => {
+        Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({ data }) => {
             setGreetings(data)
         }).catch(err => {
             toast.error(err.response.data.message)
