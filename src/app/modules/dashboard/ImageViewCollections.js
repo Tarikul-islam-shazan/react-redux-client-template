@@ -16,7 +16,7 @@ const ImageViewCollections = ({ collections }) => {
                         <div className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
                             <div>
                                 <span>{item.isFavorite && <IconFavourite/>}</span>
-                                <span className="mt-2">{!item.isFavorite && <Favourite/>}</span>
+                                <span className='mt-2'>{!item.isFavorite && <Favourite/>}</span>
                             </div>
                         </div>
                     </div>
