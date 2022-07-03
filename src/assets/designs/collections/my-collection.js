@@ -1,6 +1,7 @@
 import React from 'react'
 import SelectComponent from "../../../app/common/SelectComponent";
 import { ReactComponent as PlusIcon } from '../../images/plus.svg';
+import { ReactComponent as PlusIconBlack } from '../../images/plus-black.svg';
 import { ReactComponent as UploadIcon } from '../../images/upload.svg';
 import { ReactComponent as FilterIcon } from '../../images/filter.svg';
 import { ReactComponent as SearchIcon } from '../../images/search.svg';
@@ -11,6 +12,7 @@ import { ReactComponent as Refresh } from '../../images/refresh.svg';
 import { ReactComponent as Dlt } from '../../images/dlt.svg';
 import { ReactComponent as ArrowRightWhite } from '../../images/arror-right-white.svg';
 import Pdf from '../../images/pdf.png';
+import Pant from "../../images/home/pant.png";
 
 const StyleGuide = () => {
     //change the Boilarplate name to your specified name
@@ -461,7 +463,7 @@ const StyleGuide = () => {
                 </div>
             </div>
 
-            {/*ConfirmationAction Soon Modal*/}
+            {/*Congratulations Soon Modal*/}
             <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="Congratulations" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
                 <div className="modal-dialog max-w-[400px] overflow-hidden modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current">
@@ -488,6 +490,8 @@ const StyleGuide = () => {
                     </div>
                 </div>
             </div>
+
+
 
 
 
