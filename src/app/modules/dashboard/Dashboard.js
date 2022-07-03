@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { ReactComponent as IconSeeMore } from '../../../assets/icons/seeMore.svg'
+import { ReactComponent as CloseIcon } from '../../../assets/images/close-small-white.svg'
+import { ReactComponent as PhoneIcon } from '../../../assets/images/phone-circle.svg'
+import { ReactComponent as MailIcon } from '../../../assets/images/mail-circle.svg'
 import { ReactComponent as IconShare } from '../../../assets/icons/share.svg'
 import { ReactComponent as IconRightArrow } from '../../../assets/icons/rightArrow.svg'
 import { ReactComponent as IconEdit } from '../../../assets/icons/editModeboard.svg'
@@ -14,6 +17,7 @@ import CardForCollection from '../../common/CardForCollection'
 import LoaderComponent from '../../common/LoaderComponent'
 import OurOffer from './OurOffer'
 import FabricWiseProduct from './FabricWiseProduct'
+import {CloseButton} from 'react-bootstrap';
 
 const Dashboard = () => {
   const [loader, setLoader] = useState(true)
@@ -146,12 +150,35 @@ const Dashboard = () => {
       </div>
 
       {/*Sticky option*/}
-      <div
-        className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  fixed top-[30%] right-[-38px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]'>My
-        Requests
+
+      <div className='bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-[-338px] text-white-shade-100 text-base z-[999]'>
+        <div className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  absolute top-[45%] left-[-110px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]'>
+          <span className="uppercase">Summary</span>
+        </div>
+        <span className='absolute right-[26px] top-[68px] cursor-pointer'>
+          <IconRightArrow />
+        </span>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+          <span className='mb-1 '>Current Order</span>
+          <span className='font-normal text-px28'>23</span>
+        </div>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+          <span className='mb-1 '>Quote Request</span>
+          <span className='font-normal text-px28'>23</span>
+        </div>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+          <span className='mb-1 '>Sample Request</span>
+          <span className='font-normal text-px28'>23</span>
+        </div>
+        <div className='flex flex-col  py-5 uppercase cursor-pointer'>
+          <span className='mb-1 '>Pending Notification</span>
+          <span className='font-normal text-px28'>23</span>
+        </div>
       </div>
-      <div
-        className='bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'>
+
+
+
+      <div className='bg-primaryColor hidden cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'>
         <div
           className='w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
           <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />
@@ -164,6 +191,41 @@ const Dashboard = () => {
           </svg>
         </span>
       </div>
+
+      {/*After Open Bottom Profile*/}
+      <div className='bg-primaryColor w-[420px] rounded-lg p-5 fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'>
+        <div className='flex gap-4 border-b border-primaryColor-shade-100 pb-5 mb-5'>
+          <div className='w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
+            <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />
+          </div>
+          <div className='flex flex-col'>
+            <span className='font-bold'>Shibly Saikat</span>
+            <span className='font-normal'>Account Manager, NITEX</span>
+          </div>
+        </div>
+        <div className='flex flex-col gap-4'>
+          <div className='flex items-center gap-6'>
+            <span>
+              <PhoneIcon />
+            </span>
+            <span className='font-normal'>
+              <a href="tel:+880 1521 300 845">+880 1521 300 845</a>
+            </span>
+          </div>
+          <div className='flex items-center gap-6'>
+            <span>
+              <MailIcon />
+            </span>
+            <span className='font-normal'>
+              <a href="mailto:shibly@nitex.info">shibly@nitex.info</a>
+            </span>
+          </div>
+        </div>
+        <span className='absolute right-[20px] bottom-[20px] cursor-pointer'>
+          <CloseIcon />
+        </span>
+      </div>
+
     </LoaderComponent>
   )
 }
