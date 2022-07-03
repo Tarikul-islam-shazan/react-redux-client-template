@@ -15,7 +15,7 @@ const SliderWrapper = (props) => {
             {
                 breakpoint: 1441,
                 settings: {
-                    slidesToShow: 5,
+                    slidesToShow: 4,
                     slidesToScroll: 1,
                     infinite: true,
                     dots: true
@@ -25,6 +25,15 @@ const SliderWrapper = (props) => {
                 breakpoint: 1025,
                 settings: {
                     slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                     infinite: true,
                     dots: true

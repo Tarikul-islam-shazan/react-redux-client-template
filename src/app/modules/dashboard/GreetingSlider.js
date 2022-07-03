@@ -48,14 +48,14 @@ const GreetingSlider = () => {
                                 <br/>{changeDateFormat(currentDate, 'YYYY-MM-DD', 'YYYY')}
                             </span>
                     </div>
-                    <div className='carousel-caption pb-5'>
+                    <div className='carousel-caption pb-5 mt-9'>
                             <span className='inline-block text-xl text-white-shade-100 mb-3'>
                                 {timeText}!
                             </span>
-                        <h5 className='text-4xl text-white-shade-100 font-bold mb-3'>
+                        <h5 className='text-4xl text-white-shade-100 font-bold mb-3 truncate-2'>
                             {authUserInfo()?.name}
                         </h5>
-                        <span className='inline-block text-xl text-white-shade-100 mb-3'>
+                        <span className='inline-block text-xl text-white-shade-100 mb-3 truncate-2'>
                             Wishing you a productive day
                         </span>
                     </div>
@@ -81,12 +81,12 @@ const GreetingSlider = () => {
 
     return (
         <div className='xl:w-[30%] 4xl:w-1/4'>
-            <div id='carouselExampleCaptions' className='carousel slide relative  bg-[#0476E0] px-4 py-6'
+            <div id='carouselExampleCaptions' className='carousel slide relative bg-[#0476E0] h-full px-4 py-6'
                  data-bs-ride='carousel'>
                 <div className='carousel-inner relative w-full overflow-hidden'>
                     {renderSliderContent()}
                 </div>
-                <div className='carousel-indicators m-0 mr-2 flex justify-end'>
+                <div className='carousel-indicators m-0 mr-2 flex justify-end absolute bottom-[20px] right-[15px]'>
                     <div>
                         {renderSliderIndicator()}
                     </div>

@@ -81,7 +81,9 @@ const FabricWiseProduct = () => {
                 return (
                     <div key={`materials_${item.materialId}`} onClick={() => fetchProductByMaterialId(item.materialId)}>
                         <div className='bg-white p-3 m-3 relative'>
-                            <img src={item?.documentPath} alt=''/>
+                            <div className="h-[278px]">
+                                <img src={item?.documentPath} alt='' className="object-cover w-full h-full"/>
+                            </div>
                             <div className='flex items-center py-4 pb-3 uppercase'>
                                 <span>{item?.fabricType}</span>
                                 {getFirstTag(item.tagResponseList) && <span className='dot'/>}
