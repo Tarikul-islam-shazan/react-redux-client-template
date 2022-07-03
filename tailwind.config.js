@@ -36,7 +36,8 @@ module.exports = {
                 white: {
                     DEFAULT: '#fff',
                     shade: {
-                        100: '#F5F5F5'
+                        100: '#F5F5F5',
+                        200: '#8F8F8F'
                     }
                 },
                 pending: {

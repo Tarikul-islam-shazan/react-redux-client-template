@@ -19,7 +19,12 @@ const DefaultLayout = () => {
 
     useEffect(() => {
         let data = JSON.parse(localStorage.getItem('userInfo'))
-        if (data?.status === 'ACTIVE' && currentLocation.pathname === '/') {
+        if (data === undefined || data === null) {
+            navigate('/login')
+        } else if (
+            data?.status === 'ACTIVE' &&
+            currentLocation.pathname === '/'
+        ) {
             navigate('/dashboard')
             // we have to implement some other logic here so we can render other protected routes
             // i think we can use useLocation() hook to know the current location
@@ -63,7 +68,7 @@ const DefaultLayout = () => {
                             <Link to='/dashboard'>Home</Link>
                         </li>
                         <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
-                            <a href='#'>Moodboards</a>
+                            <Link to='/moodboard'>Moodboard</Link>
                         </li>
                         <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                             <a href='#'>Collections</a>
