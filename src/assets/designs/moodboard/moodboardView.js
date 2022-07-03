@@ -93,7 +93,7 @@ const Boilarplate = () => {
                                     <label htmlFor='name' className='label'>
                                         Title
                                     </label>
-                                    <h4 >
+                                    <h4>
                                         Summer 2022 For Men
                                         <span>
                                             <EditIcon />

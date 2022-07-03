@@ -34,6 +34,9 @@ import QuoteDetails from '../assets/designs/quote/quote-details'
 import StyleDetail from '../assets/designs/collections/style-detail.js'
 import PlaceOrder from '../assets/designs/place-order/place-order.js'
 import Team from '../assets/designs/team'
+import Faq from '../assets/designs/faq'
+import Report from '../assets/designs/report'
+import Favorite from '../assets/designs/favorite'
 
 const useAuth = () => {
     const token = localStorage.getItem('token')
@@ -92,20 +95,14 @@ const App = () => {
                         path='/collection-details'
                         element={<CollectionDetails />}
                     />
-                    <Route
-                        path='/quote'
-                        element={<Quote />}
-                    />
-                    <Route
-                        path='/quote-details'
-                        element={<QuoteDetails />}
-                    />
-                    <Route
-                        path='/style-detail'
-                        element={<StyleDetail />}
-                    />
+                    <Route path='/quote' element={<Quote />} />
+                    <Route path='/quote-details' element={<QuoteDetails />} />
+                    <Route path='/style-detail' element={<StyleDetail />} />
                     <Route path='/place-order' element={<PlaceOrder />} />
                     <Route path='/team' element={<Team />} />
+                    <Route path='/faq' element={<Faq />} />
+                    <Route path='/report' element={<Report />} />
+                    <Route path='/favorite' element={<Favorite />} />
                 </Routes>
             </Router>
             <ToastContainer

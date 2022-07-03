@@ -388,4 +388,30 @@
      padding-bottom: 10px;
  }
 
+//  Accordion
+.accordion{
+    .accordion-item{
+        &:first-of-type, &:last-of-type{
+            border-radius: 0;
+        }
+    }
+    .accordion-button{
+        &:not(.collapsed) {
+            color:#282828;
+            background-color: transparent;
+            box-shadow: none;
+        }
+     }
+     .accordion-button{
+        &::after {
+            background-image: url("../icons/plusDark.svg");
+        }
+        &:not(.collapsed){
+            &::after {
+                background-image: url("../images/minus.svg");
+            }
+        }
+     }
+}
+
 
