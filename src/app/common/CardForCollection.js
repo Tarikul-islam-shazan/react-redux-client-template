@@ -27,7 +27,7 @@ const CardForCollection = ({ collections }) => {
                         </div>
                     </div>
                     <div className='overflow-hidden relative h-[276px] md:h-[524px] pt-0 md:pt-4 p-4 bg-white'>
-                        <ImageGridComponent documentList={item.documentResponseList}/>
+                        <ImageGridComponent documentList={item.documentResponseList} whiteOverLay={true}/>
                         <div
                             className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
                             <span className='mt-2'>

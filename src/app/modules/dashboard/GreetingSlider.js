@@ -3,6 +3,7 @@ import Http from '../../services/Http';
 import { toast } from 'react-toastify';
 import { authUserInfo, changeDateFormat, getCurrentLocalDateTime } from '../../services/Util';
 import moment from 'moment';
+import Cloud from '../../../assets/images/home/cloud.png';
 
 const GreetingSlider = () => {
     const [greetings, setGreetings] = useState([])
@@ -39,8 +40,8 @@ const GreetingSlider = () => {
         return greetings.map((item, index) => {
             return (
                 <div
-                    className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full' : 'carousel-item relative float-left w-full'}
-                    key={`item_${item.id}`}>
+                    className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full bg-no-repeat bg-right-top' : 'carousel-item relative float-left w-full bg-no-repeat bg-right-top'}
+                    key={`item_${item.id}`} style={{ 'background-image': `url(${Cloud})` }}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
                                 {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
