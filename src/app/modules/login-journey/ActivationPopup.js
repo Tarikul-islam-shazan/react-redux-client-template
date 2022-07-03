@@ -93,7 +93,7 @@ const ActivationPopup = () => {
                                 <h2 className='text-4xl sm:text-[44px] text-primaryColor uppercase font-bold mb-8'>Your
                                     Account will be activated Soon.</h2>
                                 <div className='space-y-4'>
-                                    <p className='text-xl'>Welcome! Sir <strong className='uppercase'>{buyerDetailsInfo?.name}</strong>.
+                                    <p className='text-xl'>Welcome! <strong className='uppercase'>{buyerDetailsInfo?.name}</strong>.
                                         Thanks
                                         for joining us!</p>
                                     <p className='text-xl'>This is <strong className='uppercase'>{managerInfo?.name}</strong>, a

@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Http from '../../services/Http';
 import { toast } from 'react-toastify';
-import { getCurrentLocalDateTime } from '../../services/Util';
+import { authUserInfo, changeDateFormat, getCurrentLocalDateTime } from '../../services/Util';
+import moment from 'moment';
+import Cloud from '../../../assets/images/home/cloud.png';
 
 const GreetingSlider = () => {
     const [greetings, setGreetings] = useState([])
     const [activeSlideId, setActiveSlideId] = useState(1)
+    const [currentDate, setCurrentDate] = useState('')
+    const [timeText, setTimeText] = useState('')
 
     useEffect(() => {
+        let today = moment(new Date()).format().split('T')[0]
+        let curHr = new Date().getHours()
+        if (curHr < 12) {
+            setTimeText('Good Morning')
+        } else if (curHr < 18) {
+            setTimeText('Good Afternoon')
+        } else {
+            setTimeText('Good Evening')
+        }
+        setCurrentDate(today)
         Http.GET('fetchGreetingSlider', `?localDateTime=${getCurrentLocalDateTime()}`).then(({ data }) => {
             setGreetings(data)
         }).catch(err => {
@@ -26,23 +40,24 @@ const GreetingSlider = () => {
         return greetings.map((item, index) => {
             return (
                 <div
-                    className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full' : 'carousel-item relative float-left w-full'}
-                    key={`item_${item.id}`}>
+                    className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full bg-no-repeat bg-right-top' : 'carousel-item relative float-left w-full bg-no-repeat bg-right-top'}
+                    key={`item_${item.id}`} style={{ 'background-image': `url(${Cloud})` }}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
-                                DEC 17 <br/>2022
+                                {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
+                                <br/>{changeDateFormat(currentDate, 'YYYY-MM-DD', 'YYYY')}
                             </span>
                     </div>
-                    <div className='carousel-caption pb-5'>
+                    <div className='carousel-caption pb-5 mt-9'>
                             <span className='inline-block text-xl text-white-shade-100 mb-3'>
-                                Good Morning!
+                                {timeText}!
                             </span>
-                        <h5 className='text-4xl text-white-shade-100 font-bold mb-3'>
-                            Robert D. Junior Ironman
+                        <h5 className='text-4xl text-white-shade-100 font-bold mb-3 truncate-2'>
+                            {authUserInfo()?.name}
                         </h5>
-                        <span className='inline-block text-xl text-white-shade-100 mb-3'>
-                                Wishing you a productive day
-                            </span>
+                        <span className='inline-block text-xl text-white-shade-100 mb-3 truncate-2'>
+                            Wishing you a productive day
+                        </span>
                     </div>
                 </div>
             )
@@ -66,12 +81,12 @@ const GreetingSlider = () => {
 
     return (
         <div className='xl:w-[30%] 4xl:w-1/4'>
-            <div id='carouselExampleCaptions' className='carousel slide relative  bg-[#0476E0] px-4 py-6'
+            <div id='carouselExampleCaptions' className='carousel slide relative bg-[#0476E0] h-full px-4 py-6'
                  data-bs-ride='carousel'>
                 <div className='carousel-inner relative w-full overflow-hidden'>
                     {renderSliderContent()}
                 </div>
-                <div className='carousel-indicators m-0 mr-2 flex justify-end'>
+                <div className='carousel-indicators m-0 mr-2 flex justify-end absolute bottom-[20px] right-[15px]'>
                     <div>
                         {renderSliderIndicator()}
                     </div>
