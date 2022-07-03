@@ -131,6 +131,19 @@ const Http = {
         params = typeof params === 'object' ? encodeQueryData(params) : params
         return axios.delete(routes[key] + params, { headers, data: body })
     },
+    UPLOAD_MULTIPLE_FILE: (key, files = []) => {
+        let formData = new FormData();
+        files.forEach((file, i) => {
+            formData.append('file', file);
+        });
+        return axios.post(routes[key], formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Content-Disposition': 'attachment'
+            },
+            responseType: 'blob'
+        });
+    },
     UPLOAD: (key, { name, file }) => {
         // updateTokenInHeader();
         const formData = new FormData()
