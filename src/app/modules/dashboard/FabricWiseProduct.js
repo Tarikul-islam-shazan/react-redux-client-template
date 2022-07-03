@@ -94,7 +94,7 @@ const FabricWiseProduct = () => {
       return materials.data.map(item => {
         return (
           <div key={`materials_${item.materialId}`} onClick={() => fetchProductByMaterialId(item.materialId)}>
-            <div className='bg-white p-3 m-3 relative'>
+            <div className='bg-white p-3 m-3 relative item'>
               <div className='h-[278px]'>
                 <img src={item?.documentPath} alt='' className='object-cover w-full h-full' />
               </div>
