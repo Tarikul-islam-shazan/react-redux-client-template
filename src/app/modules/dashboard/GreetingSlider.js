@@ -41,8 +41,8 @@ const GreetingSlider = () => {
         return greetings.map((item, index) => {
             return (
                 <div
-                    className={(index + 1) === activeSlideId ? 'carousel-item active relative float-left w-full bg-no-repeat bg-right-top' : 'carousel-item relative float-left w-full bg-no-repeat bg-right-top'}
-                    key={`item_${item.id}`}>
+                    className={(index + 1) === activeSlideId ? 'carousel-item active relative bg-cover float-left h-full px-4 py-6 w-full bg-no-repeat bg-right-top' : 'carousel-item bg-cover h-full px-4 py-6 relative float-left w-full bg-no-repeat bg-right-top'}
+                    key={`item_${item.id}`}  style={{ 'background-image': `url(${CloudBG})` }}>
                     <div className='flex justify-between'>
                             <span className='text-white-shade-100 text-4xl font-bold uppercase opacity-20'>
                                 {changeDateFormat(currentDate, 'YYYY-MM-DD', 'MMM DD')}
@@ -82,9 +82,9 @@ const GreetingSlider = () => {
 
     return (
         <div className='xl:w-[30%] 4xl:w-1/4'>
-            <div id='carouselExampleCaptions' className='carousel slide relative bg-[#0476E0]  h-full px-4 py-6'
-                 data-bs-ride='carousel' style={{ 'background-image': `url(${CloudBG})` }}>
-                <div className='carousel-inner relative w-full overflow-hidden'>
+            <div id='carouselExampleCaptions' className='carousel slide relative   h-full '
+                 data-bs-ride='carousel'>
+                <div className='carousel-inner relative w-full overflow-hidden h-full'>
                     {renderSliderContent()}
                 </div>
                 <div className='carousel-indicators m-0 mr-2 flex justify-end absolute bottom-[20px] right-[15px]'>
