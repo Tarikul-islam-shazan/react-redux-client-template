@@ -36,6 +36,7 @@ import Faq from '../assets/designs/faq'
 import Report from '../assets/designs/report'
 import Favorite from '../assets/designs/favorite'
 import FabricWiseProduct from './modules/dashboard/FabricWiseProduct'
+import MyOrderList from './modules/order/MyOrderList'
 
 const useAuth = () => {
   const token = localStorage.getItem('token')
@@ -58,6 +59,7 @@ const App = () => {
           <Route path='/' element={<DefaultLayout />}>
             <Route element={<ProtectedRoutes />}>
               <Route path='dashboard' element={<Dashboard />} />
+              <Route path='orders/my-orders' element={<MyOrderList />} />
               <Route path='products/materialId' element={<FabricWiseProduct />} />
               <Route path='activation' element={<ActivationPopup />} />
               <Route path='moodboard' element={<Moodboard />} />

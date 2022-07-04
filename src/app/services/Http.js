@@ -21,12 +21,18 @@ const routes = {
   verifyEmail: `${BASE_URL}/user/client/verify-email`,
   resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
   getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
+
+  //home page
   fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
   searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
   nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
   fetchMaterialsByFabric: `${BASE_URL}/material/fabric/base/`,
   fetchProductByMaterials: `${BASE_URL}/product/search`,
   fetchDashboardCount: `${BASE_URL}/dashboard/buyer/dashboard-overview`,
+
+  //order page
+  statusWiseCount: `${BASE_URL}/order/status-wise-count`,
+  getOrderList: `${BASE_URL}/order/my-order`,
 
   // moodboard
   getMoodboardList: `${BASE_URL}/moodboard/search`,

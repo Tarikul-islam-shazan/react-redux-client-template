@@ -28,7 +28,7 @@ const Login = () => {
     const location = useLocation()
 
     useEffect(() => {
-        if (authUserInfo()?.emailVerified === false) {
+        if (authUserInfo()?.emailVerified === false && authUserInfo()?.status !== 'ACTIVE') {
             setShowEmailVerifiedModal(true)
         }
     }, [])
@@ -82,7 +82,7 @@ const Login = () => {
                     JSON.stringify(data)
                 )
                 setLoader(false)
-                if (!data.emailVerified) {
+                if (!data.emailVerified && authUserInfo()?.status !== 'ACTIVE') {
                     setShowEmailVerifiedModal(true)
                 } else {
                     toast.success('Successful!')

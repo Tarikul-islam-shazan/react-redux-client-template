@@ -7,6 +7,7 @@ import { ReactComponent as IconFavourite } from '../../assets/images/home/favour
 import { ReactComponent as IconNotification } from '../../assets/images/home/notification.svg'
 import LoaderComponent from '../common/LoaderComponent'
 import { useSelector } from 'react-redux'
+import { authUserInfo } from '../services/Util'
 
 const DefaultLayout = () => {
   const navigate = useNavigate()
@@ -45,16 +46,16 @@ const DefaultLayout = () => {
               <MenuIcon />
             </div>
             <Link to='/dashboard'>
-                        <span className='brand-logo'>
-                            <NitexIcon />
-                        </span>
+              <span className='brand-logo'>
+                <NitexIcon />
+              </span>
             </Link>
             <span className='divider hidden xl:block'>
-                        <CloseIcon />
-                    </span>
+              <CloseIcon />
+            </span>
             <span className='hidden xl:block text-logo text-2xl text-primaryColor-shade-100 font-bold uppercase'>
-                        Louis Vuitton
-                    </span>
+              {authUserInfo()?.brandResponse?.name}
+            </span>
           </div>
           <div className='main-menu hidden xl:block ml-16 4xl:ml-28'>
             <ul>
@@ -74,7 +75,7 @@ const DefaultLayout = () => {
                 <a href='#'>Samples</a>
               </li>
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
-                <a href='#'>Orders</a>
+                <a href='/orders/my-orders'>Orders</a>
               </li>
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                 <a href='#'>More</a>
@@ -85,23 +86,23 @@ const DefaultLayout = () => {
           <div className='user-interaction ml-auto flex items-center gap-x-6'>
             <div
               className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative flex items-center justify-center cursor-pointer'>
-                        <span>
-                            <IconFavourite />
-                        </span>
+              <span>
+                <IconFavourite />
+              </span>
               <span
                 className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>
-                            12
-                        </span>
+                12
+              </span>
             </div>
             <div
               className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative flex items-center justify-center cursor-pointer'>
-                        <span>
-                            <IconNotification />
-                        </span>
+              <span>
+                <IconNotification />
+              </span>
               <span
                 className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-   3 text-center'>
-                            99+
-                        </span>
+                99+
+              </span>
             </div>
             <div
               className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
