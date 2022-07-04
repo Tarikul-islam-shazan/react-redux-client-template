@@ -3,7 +3,6 @@ import Http from '../../services/Http';
 import { toast } from 'react-toastify';
 import { authUserInfo, changeDateFormat, getCurrentLocalDateTime } from '../../services/Util';
 import moment from 'moment';
-import Cloud from '../../../assets/images/home/cloud.png';
 import CloudBG from '../../../assets/images/bg-cloud.jpg';
 
 const GreetingSlider = () => {

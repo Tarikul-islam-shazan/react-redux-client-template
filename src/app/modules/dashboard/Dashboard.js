@@ -17,11 +17,14 @@ import CardForCollection from '../../common/CardForCollection'
 import LoaderComponent from '../../common/LoaderComponent'
 import OurOffer from './OurOffer'
 import FabricWiseProduct from './FabricWiseProduct'
-import {CloseButton} from 'react-bootstrap';
 
 const Dashboard = () => {
   const [loader, setLoader] = useState(true)
+  const [showManagerInfo, setShowManagerInfo] = useState(false)
+  const [showSummary, setShowSummary] = useState(false)
   const [collections, setCollections] = useState([])
+  const [managerInfo, setManagerInfo] = useState({})
+  const [dashboardCount, setDashboardCount] = useState({})
 
   useEffect(() => {
     Http.GET_WITH_ID_PARAM('searchCollectionByUser', '?memberType=SHARED&size=10&sort=id,desc', authUserInfo().id).then(({ data }) => {
@@ -32,6 +35,26 @@ const Dashboard = () => {
       setLoader(false)
     })
   }, [])
+
+  useEffect(() => {
+    Http.GET('accManagerInfo')
+      .then((response) => {
+        setManagerInfo(response.data);
+      })
+      .catch(({ response }) => {
+          toast.error(response.data.message);
+      });
+  },[])
+
+  useEffect(() => {
+    Http.GET('fetchDashboardCount')
+      .then((response) => {
+        setDashboardCount(response.data);
+      })
+      .catch(({ response }) => {
+          toast.error(response.data.message);
+      });
+  },[])
 
   const renderFirstCollection = () => {
     if (collections.length > 0) {
@@ -151,37 +174,38 @@ const Dashboard = () => {
 
       {/*Sticky option*/}
 
-      <div className='bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-[-338px] text-white-shade-100 text-base z-[999]'>
-        <div className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  absolute top-[45%] left-[-110px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]'>
-          <span className="uppercase">Summary</span>
+      <div className={`bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-${showSummary ? '0' : '[-338px]'} text-white-shade-100 text-base z-[999]`}>
+        <div className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  absolute top-[45%] left-[-110px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]' onClick={() => setShowSummary(prev => !prev)}>
+          <span className='uppercase'>Summary</span>
         </div>
         <span className='absolute right-[26px] top-[68px] cursor-pointer'>
           <IconRightArrow />
         </span>
         <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
           <span className='mb-1 '>Current Order</span>
-          <span className='font-normal text-px28'>23</span>
+          <span className='font-normal text-px28'>{dashboardCount?.noOfCurrentOrder}</span>
         </div>
         <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
           <span className='mb-1 '>Quote Request</span>
-          <span className='font-normal text-px28'>23</span>
+          <span className='font-normal text-px28'>{dashboardCount?.noOfQuoteRequest}</span>
         </div>
         <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
           <span className='mb-1 '>Sample Request</span>
-          <span className='font-normal text-px28'>23</span>
+          <span className='font-normal text-px28'>{dashboardCount?.noOfSampleRequest}</span>
         </div>
         <div className='flex flex-col  py-5 uppercase cursor-pointer'>
           <span className='mb-1 '>Pending Notification</span>
-          <span className='font-normal text-px28'>23</span>
+          <span className='font-normal text-px28'>{dashboardCount?.noPendingNotification}</span>
         </div>
       </div>
 
-
-
-      <div className='bg-primaryColor hidden cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'>
+      <div className={showManagerInfo ? 'bg-primaryColor hidden cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base' : 'bg-primaryColor cursor-pointer flex items-center gap-3 p-1 pr-4 w-[200px] h-[60px] rounded-full fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'} onClick={() => setShowManagerInfo(true)}>
         <div
           className='w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
-          <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />
+          {!managerInfo?.profilePicDocument?.docUrl &&
+            <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />}
+          {managerInfo?.profilePicDocument?.docUrl &&
+            <img src={managerInfo?.profilePicDocument?.docUrl} className='object-cover object-top w-full h-full' alt='' />}
         </div>
         <span>Connect</span>
         <span className='ml-auto'>
@@ -193,39 +217,44 @@ const Dashboard = () => {
       </div>
 
       {/*After Open Bottom Profile*/}
-      <div className='bg-primaryColor w-[420px] rounded-lg p-5 fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'>
+      <div className={showManagerInfo ? 'bg-primaryColor w-[420px] rounded-lg p-5 fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base' : 'bg-primaryColor hidden w-[420px] rounded-lg p-5 fixed bottom-0 right-[20px] text-white-shade-100 z-[999] text-base'}>
         <div className='flex gap-4 border-b border-primaryColor-shade-100 pb-5 mb-5'>
           <div className='w-[52px] h-[52px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
-            <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />
+            {!managerInfo?.profilePicDocument?.docUrl &&
+              <img src='./images/user.jpg' className='object-cover object-top w-full h-full' alt='' />}
+            {managerInfo?.profilePicDocument?.docUrl &&
+              <img src={managerInfo?.profilePicDocument?.docUrl} className='object-cover object-top w-full h-full' alt='' />}
           </div>
           <div className='flex flex-col'>
-            <span className='font-bold'>Shibly Saikat</span>
-            <span className='font-normal'>Account Manager, NITEX</span>
+            <span className='font-bold'>{managerInfo?.name}</span>
+            <span className='font-normal'>{managerInfo?.designation}</span>
           </div>
         </div>
         <div className='flex flex-col gap-4'>
-          <div className='flex items-center gap-6'>
+          {managerInfo?.phone && <div className='flex items-center gap-6'>
             <span>
               <PhoneIcon />
             </span>
             <span className='font-normal'>
-              <a href="tel:+880 1521 300 845">+880 1521 300 845</a>
+              <a href={`tel:${managerInfo?.phone}`}>{managerInfo?.phone}</a>
             </span>
-          </div>
-          <div className='flex items-center gap-6'>
+          </div>}
+          {managerInfo?.email && <div className='flex items-center gap-6'>
             <span>
               <MailIcon />
             </span>
             <span className='font-normal'>
-              <a href="mailto:shibly@nitex.info">shibly@nitex.info</a>
+              <a href={`mailto:${managerInfo?.email}`}>{managerInfo?.email}</a>
             </span>
-          </div>
+          </div>}
         </div>
-        <span className='absolute right-[20px] bottom-[20px] cursor-pointer'>
+        <span
+          onClick={() => setShowManagerInfo(false)}
+          className='absolute right-[20px] bottom-[20px] cursor-pointer'
+        >
           <CloseIcon />
         </span>
       </div>
-
     </LoaderComponent>
   )
 }
