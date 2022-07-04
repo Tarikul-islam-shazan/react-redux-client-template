@@ -16,6 +16,10 @@ import { ReactComponent as OkWhite } from '../../images/ok-white.svg'
 import { ReactComponent as Refresh } from '../../images/refresh.svg'
 import { ReactComponent as Dlt } from '../../images/dlt.svg'
 import { ReactComponent as ArrowRightWhite } from '../../images/arror-right-white.svg'
+import { ReactComponent as Phone } from '../../images/phone.svg'
+import { ReactComponent as Facebook } from '../../images/facebook.svg'
+import { ReactComponent as Youtube } from '../../images/you-tube.svg'
+import { ReactComponent as Linkdin } from '../../images/linkdin.svg'
 import { ReactComponent as TickWhite } from '../../icons/tick-white.svg'
 import Pdf from '../../images/pdf.png'
 import User from '../../images/user.jpg'
@@ -116,18 +120,41 @@ const StyleGuide = () => {
                 <div className='max-w-[930px] mx-auto'>
                   <h1 className='text-4xl lg:text-[40px] my-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OS. </h1>
                 </div>
-                <div className='max-w-[1200px] h-[860px] mx-auto bg-white mt-4 mb-8'>
+                <div className='max-w-[1200px] h-[260px] sm:h-[560px] lg:h-[860px] mx-auto bg-white mt-4 mb-8'>
                     <img src={Pant} alt="" className='object-contain w-full h-full'/>
                 </div>
 
-              <div className='max-w-[930px] mx-auto news-details'>
+              <div className='max-w-[930px] mx-auto news-details mb-28 sm:mb-20'>
                 <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
                 <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
                 <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
                 <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
                 <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
               </div>
+
+              <div className='max-w-[1200px] w-full flex flex-col sm:flex-row items-center justify-between px-5 xl:px-0 py-5  bg-[#F5F5F5] border-t border-primaryColor-shade-200 fixed bottom-0 left-[50%] translate-x-[-50%]'>
+                <span className='text-xl mb-4 sm:mb-0'>May 15</span>
+                <div className='flex  gap-8'>
+                  <span className='text-xl '>Share</span>
+                  <div className='flex items-center gap-8'>
+                    <a href="#">
+                      <Phone />
+                    </a>
+                    <a href="#">
+                      <Facebook />
+                    </a>
+                    <a href="#">
+                      <Youtube />
+                    </a>
+                    <a href="#">
+                      <Linkdin />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
         </div>
     )
 }
