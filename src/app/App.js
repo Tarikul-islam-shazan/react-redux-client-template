@@ -29,10 +29,13 @@ import RequestedCollection from '../assets/designs/collections/requested-collect
 import CollectionDetails from '../assets/designs/collections/collection-details.js'
 import Quote from '../assets/designs/quote'
 import QuoteDetails from '../assets/designs/quote/quote-details'
+import Sample from '../assets/designs/sample'
+import SampleDetails from '../assets/designs/sample/sample-details'
 import StyleDetail from '../assets/designs/collections/style-detail.js'
 import PlaceOrder from '../assets/designs/place-order/place-order.js'
 import Team from '../assets/designs/team'
 import Faq from '../assets/designs/faq'
+import News from '../assets/designs/news'
 import Report from '../assets/designs/report'
 import Favorite from '../assets/designs/favorite'
 import FabricWiseProduct from './modules/dashboard/FabricWiseProduct'
@@ -91,10 +94,13 @@ const App = () => {
 
           <Route path='/quote' element={<Quote />} />
           <Route path='/quote-details' element={<QuoteDetails />} />
+          <Route path='/sample' element={<Sample />} />
+          <Route path='/sample-details' element={<SampleDetails />} />
           <Route path='/style-detail' element={<StyleDetail />} />
           <Route path='/place-order' element={<PlaceOrder />} />
           <Route path='/team' element={<Team />} />
           <Route path='/faq' element={<Faq />} />
+          <Route path='/news' element={<News />} />
           <Route path='/report' element={<Report />} />
           <Route path='/favorite' element={<Favorite />} />
         </Routes>
