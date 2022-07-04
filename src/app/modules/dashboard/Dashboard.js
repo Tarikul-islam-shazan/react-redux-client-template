@@ -151,28 +151,37 @@ const Dashboard = () => {
 
       {/*Sticky option*/}
 
-      <div className='bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-[-338px] text-white-shade-100 text-base z-[999]'>
+      <div className='bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-[0] text-white-shade-100 text-base z-[999]'>
         <div className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  absolute top-[45%] left-[-110px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]'>
           <span className="uppercase">Summary</span>
         </div>
-        <span className='absolute right-[26px] top-[68px] cursor-pointer'>
-          <IconRightArrow />
-        </span>
-        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer relative'>
           <span className='mb-1 '>Current Order</span>
           <span className='font-normal text-px28'>23</span>
+          <span className='absolute right-0 top-[50px] cursor-pointer details-go'>
+            <IconRightArrow />
+          </span>
         </div>
-        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer relative'>
           <span className='mb-1 '>Quote Request</span>
           <span className='font-normal text-px28'>23</span>
+          <span className='absolute right-0 top-[50px] cursor-pointer details-go'>
+            <IconRightArrow />
+          </span>
         </div>
-        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer'>
+        <div className='flex flex-col border-b-2 border-primaryColor-shade-100 py-5 uppercase cursor-pointer relative'>
           <span className='mb-1 '>Sample Request</span>
           <span className='font-normal text-px28'>23</span>
+          <span className='absolute right-0 top-[50px] cursor-pointer details-go'>
+            <IconRightArrow />
+          </span>
         </div>
         <div className='flex flex-col  py-5 uppercase cursor-pointer'>
           <span className='mb-1 '>Pending Notification</span>
           <span className='font-normal text-px28'>23</span>
+          <span className='absolute right-0 top-[50px] cursor-pointer details-go'>
+            <IconRightArrow />
+          </span>
         </div>
       </div>
 
