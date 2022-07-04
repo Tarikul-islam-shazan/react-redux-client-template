@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SelectComponent from '../../common/SelectComponent'
 import SliderWrapper from '../../common/SliderWrapper'
 import { ReactComponent as IconRightArrow } from '../../../assets/icons/rightArrow.svg'
@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux'
 import MaterialThunks from '../../redux_toolkit/Home/MaterialThunks'
 import { GET_MATERIAL_LIST_BY_FABRIC_TYPE } from '../../redux_toolkit/@types/thunk.types'
 import { materialActions, useMaterialSelector } from '../../redux_toolkit/Home'
-import { SET_MATERIAL_LIST, SET_SELECTED_MATERIAL_ID } from '../../redux_toolkit/@types/action.types'
+import { SET_SELECTED_MATERIAL_ID } from '../../redux_toolkit/@types/action.types'
 import Http from '../../services/Http'
 import { toast } from 'react-toastify'
 import { closeLoader, openLoader } from '../../redux_toolkit/Loader'
 import { useNavigate } from 'react-router-dom'
+import { isPageReachBottom } from '../../services/Util'
 
 const fabricOptions = [
   { label: 'Premium Fabric Base', value: 'PREMIUM' },
@@ -26,6 +27,14 @@ const FabricWiseProduct = () => {
   const dispatch = useDispatch()
   const materials = useMaterialSelector()
   const navigate = useNavigate()
+  const myStateRef = useRef({})
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  },[])
 
   useEffect(() => {
     if (materials?.data.length > 0) {
@@ -62,16 +71,34 @@ const FabricWiseProduct = () => {
     })
   }
 
+  const fetchProducts = (page= 0) => {
+    dispatch(openLoader())
+    Http.GET('fetchProductByMaterials', `?materialId=${materials?.selectedMaterialId}&sort=id,desc&size=10&page=${page}`).then(({ data }) => {
+      if(Object.keys(myStateRef.current).length > 0){
+        data.productResponseList = [...myStateRef.current.productResponseList, ...data.productResponseList]
+      }
+      myStateRef.current = data
+      setProducts(data.productResponseList)
+      dispatch(closeLoader())
+    }).catch((error) => {
+      dispatch(closeLoader())
+      toast.error(error.response.data.message)
+    })
+  }
+
+  const handleScroll = () => {
+    if(isPageReachBottom() && Object.keys(myStateRef.current).length > 0){
+      let { totalHits, currentPage, productResponseList } = myStateRef.current;
+      if (totalHits > 0 && totalHits !== productResponseList.length) {
+        fetchProducts(currentPage + 1);
+      }
+    }
+  }
+
   useEffect(() => {
+    myStateRef.current = {}
     if (materials?.selectedMaterialId) {
-      dispatch(openLoader())
-      Http.GET('fetchProductByMaterials', `?materialId=${materials?.selectedMaterialId}&sort=id,desc&size=10`).then(({ data }) => {
-        dispatch(closeLoader())
-        setProducts(data.productResponseList)
-      }).catch((error) => {
-        dispatch(closeLoader())
-        toast.error(error.response.data.message)
-      })
+      fetchProducts()
     }
   }, [materials.selectedMaterialId])
 
