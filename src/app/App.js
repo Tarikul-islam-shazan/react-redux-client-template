@@ -2,7 +2,13 @@ import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../assets/scss/App.scss'
-import { BrowserRouter as Router, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Outlet,
+    Route,
+    Routes
+} from 'react-router-dom'
 
 // compoennts
 import Login from './modules/login-journey/Login'
@@ -38,79 +44,90 @@ import Faq from '../assets/designs/faq'
 import News from '../assets/designs/news'
 import Report from '../assets/designs/report'
 import Favorite from '../assets/designs/favorite'
+import Profile from '../assets/designs/profile'
 import FabricWiseProduct from './modules/dashboard/FabricWiseProduct'
 
 const useAuth = () => {
-  const token = localStorage.getItem('token')
-  return !!token
+    const token = localStorage.getItem('token')
+    return !!token
 }
 
 const ProtectedRoutes = (props) => {
-  const auth = useAuth()
-  return auth ? <Outlet /> : <Navigate to='/login' />
+    const auth = useAuth()
+    return auth ? <Outlet /> : <Navigate to='/login' />
 }
 
 const App = () => {
-  return (
-    <>
-      <Router>
-        <Routes>
-          <Route path='login' element={<Login />} />
-          <Route path='verify/email' element={<VerifyEmail />} />
+    return (
+        <>
+            <Router>
+                <Routes>
+                    <Route path='login' element={<Login />} />
+                    <Route path='verify/email' element={<VerifyEmail />} />
 
-          <Route path='/' element={<DefaultLayout />}>
-            <Route element={<ProtectedRoutes />}>
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='products/materialId' element={<FabricWiseProduct />} />
-              <Route path='activation' element={<ActivationPopup />} />
-              <Route path='moodboard' element={<Moodboard />} />
-              <Route path='moodboard/:id' element={<MoodboardView />} />
-            </Route>
-          </Route>
+                    <Route path='/' element={<DefaultLayout />}>
+                        <Route element={<ProtectedRoutes />}>
+                            <Route path='dashboard' element={<Dashboard />} />
+                            <Route
+                                path='products/materialId'
+                                element={<FabricWiseProduct />}
+                            />
+                            <Route
+                                path='activation'
+                                element={<ActivationPopup />}
+                            />
+                            <Route path='moodboard' element={<Moodboard />} />
+                            <Route
+                                path='moodboard/:id'
+                                element={<MoodboardView />}
+                            />
+                        </Route>
+                    </Route>
 
-          {/*Design UI Route*/}
-          <Route path='/ui' element={<Ui />} />
-          <Route path='/Home' element={<Home />} />
-          <Route path='/moodboard' element={<MoodboardTemplate />} />
-          <Route path='/moodboardView' element={<MoodboardView />} />
-          <Route
-            path='/moodboard/moodboard-home'
-            element={<MoodboardHome />}
-          />
-          <Route path='/collections' element={<Collections />} />
-          <Route path='/my-collection' element={<MyCollection />} />
-          <Route
-            path='/requested-collection'
-            element={<RequestedCollection />}
-          />
-          <Route
-            path='/requested-collection'
-            element={<RequestedCollection />}
-          />
-          <Route
-            path='/collection-details'
-            element={<CollectionDetails />}
-          />
+                    {/*Design UI Route*/}
+                    <Route path='/ui' element={<Ui />} />
+                    <Route path='/Home' element={<Home />} />
+                    <Route path='/moodboard' element={<MoodboardTemplate />} />
+                    <Route path='/moodboardView' element={<MoodboardView />} />
+                    <Route
+                        path='/moodboard/moodboard-home'
+                        element={<MoodboardHome />}
+                    />
+                    <Route path='/collections' element={<Collections />} />
+                    <Route path='/my-collection' element={<MyCollection />} />
+                    <Route
+                        path='/requested-collection'
+                        element={<RequestedCollection />}
+                    />
+                    <Route
+                        path='/requested-collection'
+                        element={<RequestedCollection />}
+                    />
+                    <Route
+                        path='/collection-details'
+                        element={<CollectionDetails />}
+                    />
 
-          <Route path='/quote' element={<Quote />} />
-          <Route path='/quote-details' element={<QuoteDetails />} />
-          <Route path='/sample' element={<Sample />} />
-          <Route path='/sample-details' element={<SampleDetails />} />
-          <Route path='/style-detail' element={<StyleDetail />} />
-          <Route path='/place-order' element={<PlaceOrder />} />
-          <Route path='/team' element={<Team />} />
-          <Route path='/faq' element={<Faq />} />
-          <Route path='/news' element={<News />} />
-          <Route path='/report' element={<Report />} />
-          <Route path='/favorite' element={<Favorite />} />
-        </Routes>
-      </Router>
-      <ToastContainer
-        autoClose={3500}
-        position='top-right'
-        hideProgressBar={true}
-      />
-    </>
-  )
+                    <Route path='/quote' element={<Quote />} />
+                    <Route path='/quote-details' element={<QuoteDetails />} />
+                  <Route path='/sample' element={<Sample />} />
+                  <Route path='/sample-details' element={<SampleDetails />} />
+                    <Route path='/style-detail' element={<StyleDetail />} />
+                    <Route path='/place-order' element={<PlaceOrder />} />
+                    <Route path='/team' element={<Team />} />
+                    <Route path='/faq' element={<Faq />} />
+                    <Route path='/news' element={<News />} />
+                    <Route path='/report' element={<Report />} />
+                    <Route path='/favorite' element={<Favorite />} />
+                    <Route path='/profile' element={<Profile />} />
+                </Routes>
+            </Router>
+            <ToastContainer
+                autoClose={3500}
+                position='top-right'
+                hideProgressBar={true}
+            />
+        </>
+    )
 }
 export default App
