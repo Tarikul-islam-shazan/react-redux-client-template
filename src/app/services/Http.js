@@ -26,6 +26,7 @@ const routes = {
   nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
   fetchMaterialsByFabric: `${BASE_URL}/material/fabric/base/`,
   fetchProductByMaterials: `${BASE_URL}/product/search`,
+  fetchDashboardCount: `${BASE_URL}/dashboard/buyer/dashboard-overview`,
 
   // moodboard
   getMoodboardList: `${BASE_URL}/moodboard/search`,
