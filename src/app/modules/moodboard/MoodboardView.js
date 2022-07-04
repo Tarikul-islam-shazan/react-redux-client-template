@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // thunks to get moodboard data and set it into the store
 import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
-import { GET_MOODBOARD_BY_ID } from '../../redux_toolkit/@types/thunk.types'
+import {
+  GET_MOODBOARD_BY_ID,
+  UPDATE_MOODBOARD,
+  UPLOAD_MOODBOARD_IMAGES
+} from '../../redux_toolkit/@types/thunk.types'
 
 import { ReactComponent as FilterIcon } from '../../../assets/icons/Filter-24.svg'
 import { ReactComponent as AddIcon } from '../../../assets/icons/add-white.svg'
@@ -29,22 +33,65 @@ const MoodboardView = (props) => {
   const [titleEdit, setTitleEdit] = useState(false)
   const [descriptionEdit, setDescriptionEdit] = useState(false)
 
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+
+  const [selectedFiles, setSelectedFiles] = useState([])
+
   const dispatch = useDispatch()
 
   const setProductView = (value) => {
     setSelectedProductView(value)
   }
 
-  const onTitleEditButtonClick = () => {
+  const onTitleEditButtonClick = (e) => {
+    e.preventDefault()
     setTitleEdit(!titleEdit)
+    if (titleEdit) {
+      dispatch(
+        MoodboardThunks[UPDATE_MOODBOARD]({
+          name: title,
+          description: description,
+          id: selectedMoodboard.id
+        })
+      )
+    }
   }
 
-  const onDescriptionEditButtonClick = () => {}
+  const onDescriptionEditButtonClick = (e) => {
+    setDescriptionEdit(!descriptionEdit)
+    if (descriptionEdit) {
+      dispatch(
+        MoodboardThunks[UPDATE_MOODBOARD]({
+          name: title,
+          description: description,
+          id: selectedMoodboard.id
+        })
+      )
+    }
+  }
+
+  const onFileChange = async (e) => {
+    setSelectedFiles([...e.target.files])
+
+    // console.log(selectedFile)
+  }
+
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      dispatch(MoodboardThunks[UPLOAD_MOODBOARD_IMAGES](selectedFiles, id))
+    }
+  }, [selectedFiles])
 
   // calling thunk to get moodboard data in useEffect
   useEffect(() => {
     dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
   }, [])
+
+  useEffect(() => {
+    setTitle(selectedMoodboard?.name)
+    setDescription(selectedMoodboard?.description)
+  }, [selectedMoodboard?.name, selectedMoodboard?.description])
 
   return (
     <>
@@ -75,29 +122,55 @@ const MoodboardView = (props) => {
                     </label>
                     <input
                       onBlur={onTitleEditButtonClick}
+                      onChange={(e) => {
+                        e.preventDefault()
+                        setTitle(e.target.value)
+                      }}
                       autoFocus
                       type='text'
                       className='form-field'
                       id='name'
                       placeholder='Enter Name'
                       name='name'
-                    />
+                      value={title}
+                    ></input>
                   </div>
                 )}
               </div>
-              <div className='description'>
-                <div className='input-group'>
-                  <label htmlFor='name' className='label'>
-                    Description
-                  </label>
-                  <p>
-                    {selectedMoodboard?.description}
-                    <span>
-                      <EditIcon onClick={onDescriptionEditButtonClick} />
-                    </span>
-                  </p>
+              {!descriptionEdit && (
+                <div className='description'>
+                  <div className='input-group'>
+                    <label htmlFor='name' className='label'>
+                      Description
+                    </label>
+                    <p>
+                      {selectedMoodboard?.description}
+                      <span>
+                        <EditIcon onClick={onDescriptionEditButtonClick} />
+                      </span>
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {descriptionEdit && (
+                <div className='description'>
+                  <div className='input-group'>
+                    <label htmlFor='name' className='label'>
+                      Description
+                    </label>
+                    <textarea
+                      onBlur={onDescriptionEditButtonClick}
+                      onChange={(e) => setDescription(e.target.value)}
+                      autoFocus
+                      type='text'
+                      className='form-field'
+                      placeholder='Write Here ...'
+                      value={description}
+                    ></textarea>
+                  </div>
+                </div>
+              )}
             </div>
             <div className='right-half'>
               <button
@@ -150,7 +223,21 @@ const MoodboardView = (props) => {
               <div className='moodboard-masonry-container'>
                 {selectedProductView === 'images' && (
                   <div className='masonry-item add-item inline-block'>
-                    <span className=''>+</span>
+                    <label
+                      htmlFor='uploadMultiple'
+                      className='w-full h-full block cursor-pointer'
+                    >
+                      <span className=''>+</span>
+                    </label>
+                    <input
+                      multiple
+                      type='file'
+                      id='uploadMultiple'
+                      accept='image/*'
+                      className='hidden'
+                      onClick={(e) => (e.target.value = null)}
+                      onChange={(e) => onFileChange(e)}
+                    />
                   </div>
                 )}
                 {selectedProductView === 'images' &&

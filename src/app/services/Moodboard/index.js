@@ -13,3 +13,15 @@ export const uploadMoodboard = async (data) => {
   // console.log(data)
   return Http.POST('addMoodboard', data)
 }
+
+export const updateMoodboard = async (data) => {
+  // console.log(data)
+  return Http.PUT('updateMoodboard', data)
+}
+
+export const uploadMoodboardImages = async (data, id) => {
+  // console.log(data)
+  // for the bellow line id will be thr id with suffix
+
+  return Http.POST('uploadMoodboardImages', data, id)
+}

@@ -67,16 +67,13 @@ const Moodboard = () => {
   }
 
   const uploadMoodboards = async () => {
-    try {
+
       let thunkResponse = await dispatch(
         MoodboardThunks[UPLOAD_MOODBOARDS](selectedFile)
       )
       // console.log('thunkResponse', thunkResponse)
       popupRef.current.click()
       handleMoodboardClick(thunkResponse.response.data.id)
-    } catch (error) {
-      alert(error)
-    }
   }
 
   useEffect(() => {
