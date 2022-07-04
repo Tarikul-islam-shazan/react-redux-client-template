@@ -113,100 +113,20 @@ const StyleGuide = () => {
           </header>
 
             <div className='body-container p-4'>
-                <div className='max-w-[1246px] mx-auto'>
-                    <div className='filter'>
-                        <div className='flex flex-col sm:flex-row lg:items-center justify-between mb-5 gap-6'>
-                            <div className='text-base'>
-                                <h4 className='font-bold'>News</h4>
-                            </div>
-                          <div className='input-group flex items-center'>
-                            <input
-                              type='text'
-                              className='form-field bg-transparent border border-primaryColor w-full sm:w-[200px] lg:w-[380px] placeholder:text-primaryColor'
-                              id='text'
-                              placeholder='Search ...'
-                              name='text'
-                            />
-                            <button
-                              type='button'
-                              className='btn bg-primaryColor px-5 font-normal border border-primaryColor text-primaryColor'
-                            >
-                              <SearchIconWhite/>
-                            </button>
-                          </div>
-                        </div>
-                    </div>
-
-                  <div className="news-listing mb-10">
-                    <div className="list flex flex-col sm:flex-row sm:items-center justify-between border-t border-b py-4 mt-[-1px] border-primaryColor-shade-200">
-                      <div className='sm:w-[60%] sm:pr-10'>
-                        <a href="#">
-                          <h2 className='text-4xl lg:text-[40px] font-normal mb-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS</h2>
-                        </a>
-                        <a href="#">
-                          <span className='text-xl '>May 15</span>
-                        </a>
-                      </div>
-                      <div className="mt-6 sm:mt-0">
-                        <a href="#">
-                          <div className='w-[296px] h-[228px] bg-white'>
-                            <img src={Pant} alt="" className='object-contain w-full h-full'/>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="list flex flex-col sm:flex-row sm:items-center justify-between border-t border-b py-4 mt-[-1px] border-primaryColor-shade-200">
-                      <div className='sm:w-[60%] sm:pr-10'>
-                        <a href="#">
-                          <h2 className='text-4xl lg:text-[40px] font-normal mb-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS</h2>
-                        </a>
-                        <a href="#">
-                          <span className='text-xl '>May 15</span>
-                        </a>
-                      </div>
-                      <div className="mt-6 sm:mt-0">
-                        <a href="#">
-                          <div className='w-[296px] h-[228px] bg-white'>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="list flex flex-col sm:flex-row sm:items-center justify-between border-t border-b py-4 mt-[-1px] border-primaryColor-shade-200">
-                      <div className='sm:w-[60%] sm:pr-10'>
-                        <a href="#">
-                          <h2 className='text-4xl lg:text-[40px] font-normal mb-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS</h2>
-                        </a>
-                        <a href="#">
-                          <span className='text-xl '>May 15</span>
-                        </a>
-                      </div>
-                      <div className="mt-6 sm:mt-0">
-                        <a href="#">
-                          <div className='w-[296px] h-[228px] bg-white'>
-                            <img src={Pant} alt="" className='object-contain w-full h-full'/>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="list flex flex-col sm:flex-row sm:items-center justify-between border-t border-b py-4 mt-[-1px] border-primaryColor-shade-200">
-                      <div className='sm:w-[60%] sm:pr-10'>
-                        <a href="#">
-                          <h2 className='text-4xl lg:text-[40px] font-normal mb-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS</h2>
-                        </a>
-                        <a href="#">
-                          <span className='text-xl '>May 15</span>
-                        </a>
-                      </div>
-                      <div className="mt-6 sm:mt-0">
-                        <a href="#">
-                          <div className='w-[296px] h-[228px] bg-white'>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
+                <div className='max-w-[930px] mx-auto'>
+                  <h1 className='text-4xl lg:text-[40px] my-4 lg:leading-[60px]'>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OS. </h1>
                 </div>
+                <div className='max-w-[1200px] h-[860px] mx-auto bg-white mt-4 mb-8'>
+                    <img src={Pant} alt="" className='object-contain w-full h-full'/>
+                </div>
+
+              <div className='max-w-[930px] mx-auto news-details'>
+                <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
+                <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
+                <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
+                <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
+                <p>Nitex has just released a newer version of their OS. Nitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OSNitex has just released a newer version of their OS. </p>
+              </div>
             </div>
         </div>
     )

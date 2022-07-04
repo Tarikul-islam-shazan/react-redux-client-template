@@ -42,6 +42,7 @@ import PlaceOrder from '../assets/designs/place-order/place-order.js'
 import Team from '../assets/designs/team'
 import Faq from '../assets/designs/faq'
 import News from '../assets/designs/news'
+import NewsDetails from '../assets/designs/news/news-details.js'
 import Report from '../assets/designs/report'
 import Favorite from '../assets/designs/favorite'
 import Profile from '../assets/designs/profile'
@@ -117,6 +118,7 @@ const App = () => {
                     <Route path='/team' element={<Team />} />
                     <Route path='/faq' element={<Faq />} />
                     <Route path='/news' element={<News />} />
+                    <Route path='/news-details' element={<NewsDetails />} />
                     <Route path='/report' element={<Report />} />
                     <Route path='/favorite' element={<Favorite />} />
                     <Route path='/profile' element={<Profile />} />
