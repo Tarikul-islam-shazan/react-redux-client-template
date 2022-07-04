@@ -7,7 +7,6 @@ const OrderThunks = {
   [GET_ORDER_LIST]: (params, merge, activeTab) => async (dispatch, getState) => {
     await Http.GET('statusWiseCount').then(async (countResponse) => {
       await Http.GET('getOrderList', params).then((response) => {
-        console.log('==== in the thunk')
         dispatch({
           type: orderActionTypes[FETCH_ORDER_LIST],
           payload: { response: response.data, merge: merge, activeTab: activeTab, countResponse: countResponse.data }

@@ -33,6 +33,11 @@ const routes = {
   //order page
   statusWiseCount: `${BASE_URL}/order/status-wise-count`,
   getOrderList: `${BASE_URL}/order/my-order`,
+  getTimeLineData: `${BASE_URL}/order-timeline/order/`,
+  downloadInvoice: `${BASE_URL}/invoice/download/`,
+  getTimeLineOrderInfo: `${BASE_URL}/order-timeline/order-info/`,
+  getTimeLineStepInfo: `${BASE_URL}/order-timeline/steps/order/`,
+  getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
 
   // moodboard
   getMoodboardList: `${BASE_URL}/moodboard/search`,
