@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 // import TaskManage from "../../../pages/task/components/TaskManage";
-import Modal from 'react-bootstrap/Modal';
-import { changeDateFormat, getShortName } from '../../../services/Util';
-import Tooltip from '@mui/material/Tooltip';
+import Modal from 'react-bootstrap/Modal'
+import { changeDateFormat, getShortName } from '../../../services/Util'
+import Tooltip from '@mui/material/Tooltip'
 
 const AllProductionList = () => {
-    const timelineStore = useSelector((store) => store.timeline);
-    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
-    const params = useParams();
+    const timelineStore = useSelector((store) => store.timeline)
+    const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
+    const [selectedId, setSelectedId] = useState(null)
+    const params = useParams()
 
     const renderStepIcon = (sample) => {
         if (
@@ -18,13 +18,13 @@ const AllProductionList = () => {
             sample.formattedTaskStatus === 'LATE_APPROVED' ||
             sample.status === 'SCOPE_OFF'
         ) {
-            return '/icons/Completed icon.svg';
+            return '/icons/Completed-icon.svg'
         } else if (sample.formattedTaskStatus === 'EXPIRED') {
-            return '/icons/Due icon.svg';
+            return '/icons/Due-icon.svg'
         } else {
-            return '/icons/Pending icon.svg';
+            return '/icons/Pending-icon.svg'
         }
-    };
+    }
 
     const renderStepClass = (sample) => {
         if (
@@ -32,28 +32,32 @@ const AllProductionList = () => {
             sample.formattedTaskStatus === 'LATE_APPROVED' ||
             sample.status === 'SCOPE_OFF'
         ) {
-            return 'completed';
+            return 'completed'
         } else if (sample.formattedTaskStatus === 'EXPIRED') {
-            return 'due';
+            return 'due'
         } else {
-            return 'pending';
+            return 'pending'
         }
-    };
+    }
 
     const handleTaskManager = (sample) => {
-        setSelectedId(sample.id);
-        setShowTaskDetailsModal(true);
-    };
+        setSelectedId(sample.id)
+        setShowTaskDetailsModal(true)
+    }
 
     const renderTaskDate = (sample) => {
         if (sample.formattedTaskStatus === 'EXPIRED') {
-            return '+' + sample.dateOver;
+            return '+' + sample.dateOver
         } else if ('actualEndDate' in sample) {
-            return changeDateFormat(sample.actualEndDate, 'YYYY-MM-DD', 'DD-MMM');
+            return changeDateFormat(
+                sample.actualEndDate,
+                'YYYY-MM-DD',
+                'DD-MMM'
+            )
         } else {
-            return changeDateFormat(sample.endDate, 'YYYY-MM-DD', 'DD-MMM');
+            return changeDateFormat(sample.endDate, 'YYYY-MM-DD', 'DD-MMM')
         }
-    };
+    }
 
     const renderSamplingStepList = (list) => {
         return list?.map((sample, index) => {
@@ -65,7 +69,11 @@ const AllProductionList = () => {
                 >
                     <div className='task-name'>
                         <img src={renderStepIcon(sample)} alt='complete' />
-                        <Tooltip title={sample.stepName} placement={'top'} arrow>
+                        <Tooltip
+                            title={sample.stepName}
+                            placement={'top'}
+                            arrow
+                        >
                             <span>{getShortName(sample.stepName, 25)}</span>
                         </Tooltip>
                     </div>
@@ -73,24 +81,33 @@ const AllProductionList = () => {
                         <span>{renderTaskDate(sample)}</span>
                     </div>
                 </div>
-            );
-        });
-    };
+            )
+        })
+    }
 
     return (
         <div className='one-third all-production-details'>
+            <div className='factory-view relative'>
+                <h5 className='absolute left-5 top-5'>Factory</h5>
+                <img src='/images/factory-view.jpg' />
+                <button className='btn bg-[#F5F5F5] text-primaryColor absolute right-5 bottom-5 w-[80px] p-4'>
+                    360<sup>0</sup>{' '}
+                </button>
+            </div>
             <div className='text-tc'>
-                <span className='regular-14 gray_dark_02'>T&A</span>
+                <span className='regular-14 gray_dark_02'>
+                    Time & Action /Critical Dates
+                </span>
             </div>
             <div className='production-accordion'>
-                <div id='accordion'>
-                    <div className='card'>
-                        <div className='card-header' id='headingSampling'>
+                <div className='accordion' id='accordionExample'>
+                    <div className='accordion-item'>
+                        <div className='accordion-header' id='headingSampling'>
                             <h5 className='mb-0'>
                                 <button
-                                    className='btn btn-link'
-                                    data-toggle='collapse'
-                                    data-target='#collapseSampling'
+                                    className='accordion-button bg-white btn btn-link'
+                                    data-bs-toggle='collapse'
+                                    data-bs-target='#collapseSampling'
                                     aria-expanded='true'
                                     aria-controls='collapseSampling'
                                 >
@@ -100,25 +117,30 @@ const AllProductionList = () => {
                         </div>
                         <div
                             id='collapseSampling'
-                            className='collapse show'
+                            className='accordion-collapse bg-white collapse show'
                             aria-labelledby='headingSampling'
-                            data-parent='#accordion'
+                            data-bs-parent='#accordionExample'
                         >
                             <div className='card-body'>
                                 <div className='all-task-status'>
-                                    {renderSamplingStepList(timelineStore?.stepList?.SAMPLING)}
+                                    {renderSamplingStepList(
+                                        timelineStore?.stepList?.SAMPLING
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='card'>
-                        <div className='card-header' id='headingProduction'>
+                    <div className='accordion-item'>
+                        <div
+                            className='accordion-header'
+                            id='headingProduction'
+                        >
                             <h5 className='mb-0'>
                                 <button
-                                    className='btn btn-link collapsed'
-                                    data-toggle='collapse'
-                                    data-target='#collapseProduction'
-                                    aria-expanded='false'
+                                    className='accordion-button bg-white btn btn-link collapsed'
+                                    data-bs-toggle='collapse'
+                                    data-bs-target='#collapseProduction'
+                                    aria-expanded='true'
                                     aria-controls='collapseProduction'
                                 >
                                     Production
@@ -127,25 +149,30 @@ const AllProductionList = () => {
                         </div>
                         <div
                             id='collapseProduction'
-                            className='collapse'
+                            className='accordion-collapse bg-white collapse'
                             aria-labelledby='headingProduction'
-                            data-parent='#accordion'
+                            data-bs-parent='#accordionExample'
                         >
                             <div className='card-body'>
                                 <div className='all-task-status'>
-                                    {renderSamplingStepList(timelineStore?.stepList?.PRODUCTION)}
+                                    {renderSamplingStepList(
+                                        timelineStore?.stepList?.PRODUCTION
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='card'>
-                        <div className='card-header' id='headingInspection'>
+                    <div className='accordion-item'>
+                        <div
+                            className='accordion-header'
+                            id='headingInspection'
+                        >
                             <h5 className='mb-0'>
                                 <button
-                                    className='btn btn-link collapsed'
-                                    data-toggle='collapse'
-                                    data-target='#collapseInspection'
-                                    aria-expanded='false'
+                                    className='accordion-button bg-white btn btn-link collapsed'
+                                    data-bs-toggle='collapse'
+                                    data-bs-target='#collapseInspection'
+                                    aria-expanded='true'
                                     aria-controls='collapseInspection'
                                 >
                                     Inspection
@@ -154,13 +181,15 @@ const AllProductionList = () => {
                         </div>
                         <div
                             id='collapseInspection'
-                            className='collapse'
+                            className='accordion-collapse bg-white collapse'
                             aria-labelledby='headingInspection'
-                            data-parent='#accordion'
+                            data-bs-parent='#accordionExample'
                         >
                             <div className='card-body'>
                                 <div className='all-task-status'>
-                                    {renderSamplingStepList(timelineStore?.stepList?.INSPECTION)}
+                                    {renderSamplingStepList(
+                                        timelineStore?.stepList?.INSPECTION
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -182,7 +211,7 @@ const AllProductionList = () => {
                 {/*/>*/}
             </Modal>
         </div>
-    );
-};
+    )
+}
 
-export default AllProductionList;
+export default AllProductionList

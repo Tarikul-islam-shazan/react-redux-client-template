@@ -1,48 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import ActivityLog from './ActivityLog';
-import { addImageSuffix, authUserInfo, isPageReachBottom, onErrorImageLoad } from '../../../services/Util';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import ActivityLog from './ActivityLog'
+import {
+    addImageSuffix,
+    authUserInfo,
+    isPageReachBottom,
+    onErrorImageLoad
+} from '../../../services/Util'
+import { useParams } from 'react-router-dom'
 import { fetchTimeline } from '../../../redux_toolkit/Timeline/TimelineThunks'
 
 const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
-    const timelineStore = useSelector((store) => store.timeline);
-    const dispatch = useDispatch();
-    const myStateRef = useRef({});
-    const params = useParams();
+    const timelineStore = useSelector((store) => store.timeline)
+    const dispatch = useDispatch()
+    const myStateRef = useRef({})
+    const params = useParams()
 
     const setMyState = (data) => {
-        myStateRef.current = data;
-    };
+        myStateRef.current = data
+    }
 
     useEffect(() => {
-        setMyState(timelineStore);
-    }, [timelineStore]);
+        setMyState(timelineStore)
+    }, [timelineStore])
 
     useEffect(() => {
-        document.addEventListener('scroll', handleScroll);
+        document.addEventListener('scroll', handleScroll)
         return () => {
-            document.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+            document.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     const handleScroll = () => {
         if (isPageReachBottom()) {
-            let { totalElements, totalPages, currentPage, selectedDesignList } = myStateRef.current;
+            let { totalElements, totalPages, currentPage, selectedDesignList } =
+                myStateRef.current
             if (totalElements > 0 && totalPages > currentPage) {
-                let paramString;
+                let paramString
                 if (selectedDesignList?.length > 0) {
                     paramString = `${params.orderId}?page=${
                         currentPage + 1
-                    }&size=15&productIds=${selectedDesignList?.join(',')}`;
+                    }&size=15&productIds=${selectedDesignList?.join(',')}`
                 } else {
-                    paramString = `${params.orderId}?page=${currentPage + 1}&size=15`;
+                    paramString = `${params.orderId}?page=${
+                        currentPage + 1
+                    }&size=15`
                 }
-                setLoader(true);
-                dispatch(fetchTimeline(paramString, true)).finally(() => setLoader(false));
+                setLoader(true)
+                dispatch(fetchTimeline(paramString, true)).finally(() =>
+                    setLoader(false)
+                )
             }
         }
-    };
+    }
 
     const renderTimeline = () => {
         if (timelineStore?.data?.length > 0) {
@@ -54,12 +64,17 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                         key={`timeline_${index}`}
                         setLoader={setLoader}
                     />
-                );
-            });
+                )
+            })
         } else {
-            return <p className='no-activity-text'> No activity found for this style</p>;
+            return (
+                <p className='no-activity-text'>
+                    {' '}
+                    No activity found for this style
+                </p>
+            )
         }
-    };
+    }
 
     return (
         <>
@@ -72,19 +87,25 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                                     authUserInfo()?.profilePicDocument?.docUrl,
                                     '_xicon'
                                 )}
-                                onError={(e) => onErrorImageLoad(e, authUserInfo()?.profilePicDocument?.docUrl)}
+                                onError={(e) =>
+                                    onErrorImageLoad(
+                                        e,
+                                        authUserInfo()?.profilePicDocument
+                                            ?.docUrl
+                                    )
+                                }
                                 alt='profile'
                                 className='profile-image'
                             />
                             Write comment...
                         </p>
-                        <img src='/icons/attachment.svg' alt='attach' />
+                        <img src='/icons/attach20.svg' alt='attach' />
                     </div>
                 </div>
                 <div className='activity-list'>{renderTimeline()}</div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default TimelineActivityLog;
+export default TimelineActivityLog

@@ -1,60 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const MemberList = () => {
-    const timelineStore = useSelector((store) => store.timeline);
-    const [memberList, setMemberList] = useState([]);
+    const timelineStore = useSelector((store) => store.timeline)
+    const [memberList, setMemberList] = useState([])
 
     useEffect(() => {
         if (timelineStore.orderInfo?.orderMemberList) {
-            setMemberList(timelineStore.orderInfo.orderMemberList);
+            setMemberList(timelineStore.orderInfo.orderMemberList)
         }
-    }, [timelineStore]);
+    }, [timelineStore])
 
     const renderMemberImage = (item) => {
         if (item?.memberImage) {
-            return item.memberImage;
+            return item.memberImage
         } else {
-            return '/images/pro_pic_default.svg';
+            return '/images/pro_pic_default.svg'
         }
-    };
+    }
 
     const renderMemberList = () => {
         if (memberList.length > 0) {
             return (
-                <span
-                    className='more-member'
-                >
+                <span className='more-member'>
                     <a href='#'>+{memberList.length}</a>
-                    <div className='dropdown-menu shadow-2dp' aria-labelledby='dropdownMenuButton'>
-                        <div className='assign-member shadow open'>
-                            <div className='title'>Assigned member</div>
-                            <div className='member-list-container'>
-                                {memberList.map((member, index) => {
-                                    return (
-                                        <div className='member-list' key={`member_${index}`}>
-                                            <img src={renderMemberImage(member)} alt=''/>
-                                            <div className='name'>
-                                                {member.memberName}&nbsp;
-                                                <span className='tag'>{member.designation}</span>
-                                            </div>
+
+                    <div className='assign-member shadow '>
+                        <div className='title'>Assigned member</div>
+                        <div className='member-list-container'>
+                            {memberList.map((member, index) => {
+                                return (
+                                    <div
+                                        className='member-list'
+                                        key={`member_${index}`}
+                                    >
+                                        <img
+                                            src={renderMemberImage(member)}
+                                            alt=''
+                                        />
+                                        <div className='name'>
+                                            {member.memberName}&nbsp;
+                                            <span className='tag'>
+                                                {member.designation}
+                                            </span>
                                         </div>
-                                    );
-                                })}
-                            </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </span>
-            );
+            )
         }
-    };
+    }
 
     return (
         <div
             className='add-team-members'
             data-toggle='dropdown'
             aria-haspopup='true'
-            aria-expanded='false'>
+            aria-expanded='false'
+        >
             <div className='all-team-members'>
                 <span className='added-members'>
                     {memberList[0] && (
@@ -91,7 +97,7 @@ const MemberList = () => {
                 {renderMemberList()}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default MemberList;
+export default MemberList
