@@ -1,3 +1,10 @@
+/*
+This file is created by Dip Chowdhury
+Date: 25/06/2022
+Email: dipbd1@gmail.com or dip.chowdhury@gmail.com
+Language: javascript
+A gift link: https://www.youtube.com/watch?v=5UW3oWn60D0
+*/
 import {
     SET_MOODBOARD_LIST,
     SET_MOODBOARD_BY_ID,

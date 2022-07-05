@@ -1,3 +1,11 @@
+/*
+This file is created by Dip Chowdhury
+Date: 25/06/2022
+Email: dipbd1@gmail.com or dip.chowdhury@gmail.com
+Language: javascript
+A gift link: https://www.youtube.com/watch?v=gEcZKtFgILQ
+*/
+
 import Http from '../Http'
 
 export const getMoodboardList = async (params) => {
@@ -38,4 +46,13 @@ export const getAllColorCodes = async (moodboardID, searchString) => {
 export const addColorToMoodboard = async (data, moodboardID) => {
     // console.log(data)
     return Http.POST('addColorToMoodboard', data, moodboardID + '/add-color')
+}
+
+export const deleteColorFromMoodboard = async (moodboardID, colorID) => {
+    // console.log(data)
+    return Http.DELETE(
+        'deleteColorFromMoodboard',
+        null,
+        moodboardID + '/color/' + colorID
+    )
 }

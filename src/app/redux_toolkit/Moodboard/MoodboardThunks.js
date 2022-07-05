@@ -1,3 +1,19 @@
+/*
+This file is created by Dip Chowdhury
+Date: 25/06/2022
+Email: dipbd1@gmail.com or dip.chowdhury@gmail.com
+Language: javascript
+A gift link: https://www.youtube.com/watch?v=0MWVr_VWTQ8
+*/
+
+/*
+You may observe a pattern in the code.
+Which is resetting selected moodboard state on every call of the thunk.
+as we have very short time, we can fix it later by using redux-saga.
+or by replacing the re-calling the state initiation logic with 
+pushing or poping data out of state
+*/
+
 // action types
 import {
     SET_MOODBOARD_LIST,
@@ -15,7 +31,8 @@ import {
     UPLOAD_MOODBOARD_IMAGES,
     GET_COLOR_CODES,
     DELETE_PRODUCT_IMAGE,
-    ADD_COLOR_CODE
+    ADD_COLOR_CODE,
+    DELETE_COLOR_FROM_MOODBOARD
 } from '../@types/thunk.types'
 
 // Service import
@@ -26,7 +43,8 @@ import {
     updateMoodboard,
     uploadMoodboardImages,
     getAllColorCodes,
-    addColorToMoodboard
+    addColorToMoodboard,
+    deleteColorFromMoodboard
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -170,6 +188,20 @@ const MoodboardThunks = {
                 return { state: getState().moodboard, response }
             } catch (error) {
                 console.log('error', error)
+            }
+        }
+    },
+    [DELETE_COLOR_FROM_MOODBOARD]: (moodboardID, colorID) => {
+        return async (dispatch, getState) => {
+            try {
+                let response = await deleteColorFromMoodboard(
+                    moodboardID,
+                    colorID
+                )
+                dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log(error)
             }
         }
     }

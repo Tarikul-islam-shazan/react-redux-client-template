@@ -9,7 +9,8 @@ import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
 import {
     GET_MOODBOARD_BY_ID,
     UPDATE_MOODBOARD,
-    UPLOAD_MOODBOARD_IMAGES
+    UPLOAD_MOODBOARD_IMAGES,
+    DELETE_COLOR_FROM_MOODBOARD
 } from '../../redux_toolkit/@types/thunk.types'
 
 import { ReactComponent as FilterIcon } from '../../../assets/icons/Filter-24.svg'
@@ -93,6 +94,13 @@ const MoodboardView = (props) => {
             )
             await dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
         }
+    }
+
+    const deleteColorFromMoodboard = async (colorId, moodboardID) => {
+        await dispatch(
+            MoodboardThunks[DELETE_COLOR_FROM_MOODBOARD](colorId, moodboardID)
+        )
+        // await dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
     }
 
     useEffect(() => {
@@ -330,15 +338,23 @@ const MoodboardView = (props) => {
                                                     }}
                                                 >
                                                     <span className='close'>
-                                                        <CloseIcon />
+                                                        <CloseIcon
+                                                            onClick={(e) => {
+                                                                e.preventDefault()
+                                                                deleteColorFromMoodboard(
+                                                                    id,
+                                                                    color.id
+                                                                )
+                                                            }}
+                                                        />
                                                     </span>
                                                 </div>
                                                 <div className='color-info'>
                                                     <div className='color-code'>
-                                                        TCX 16-1288
+                                                        {color.code}
                                                     </div>
                                                     <div className='color-name'>
-                                                        Dark Blue
+                                                        {color.name}
                                                     </div>
                                                 </div>
                                             </div>

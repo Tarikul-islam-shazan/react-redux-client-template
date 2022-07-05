@@ -36,6 +36,7 @@ const routes = {
     uploadMoodboardImages: `${BASE_URL}/moodboard/`,
     getAllColorCodes: `${BASE_URL}/color/pantone/search`,
     addColorToMoodboard: `${BASE_URL}/moodboard/`,
+    deleteColorFromMoodboard: `${BASE_URL}/moodboard/`,
 }
 
 // Axios request interceptor
