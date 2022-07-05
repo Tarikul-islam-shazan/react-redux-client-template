@@ -25,10 +25,17 @@ export const uploadMoodboardImages = async (data, id) => {
     return Http.POST('uploadMoodboardImages', data, id)
 }
 
-export const getAllColorCodes = async () => {
+export const getAllColorCodes = async (moodboardID, searchString) => {
     const params = {
         page: 0,
-        size: 200
+        size: 200,
+        moodboardId: moodboardID,
+        search: searchString || ''
     }
     return Http.GET('getAllColorCodes', params)
+}
+
+export const addColorToMoodboard = async (data, moodboardID) => {
+    // console.log(data)
+    return Http.POST('addColorToMoodboard', data, moodboardID + '/add-color')
 }

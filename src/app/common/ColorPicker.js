@@ -15,31 +15,31 @@ import MoodboardThunks from '../redux_toolkit/Moodboard/MoodboardThunks'
 const ColorPicker = (props) => {
     const dispatch = useDispatch()
 
+    const toggleView = props.toggleColorPicker
+    const moodboardID = props.moodboardID
+
     const [activeArray, setActiveArray] = useState([])
+    const [searchString, setSearchString] = useState('')
 
     const colorCodes = useSelector((state) => state.moodboard.colorCodes)
 
     const onColorClick = (e, colorID) => {
-        console.log(e)
-        console.log(colorID)
-        if (activeArray.includes(colorID)) {
-            return
-        } else {
-            setActiveArray(activeArray.concat(colorID))
-            dispatch(MoodboardThunks[ADD_COLOR_CODE](moodboardID, colorID))
-        }
+        setActiveArray(activeArray.concat(colorID))
+        dispatch(MoodboardThunks[ADD_COLOR_CODE](moodboardID, colorID))
+    }
+
+    const searchColor = () => {
+        dispatch(MoodboardThunks[GET_COLOR_CODES](moodboardID, searchString))
     }
 
     useEffect(() => {
-        dispatch(MoodboardThunks[GET_COLOR_CODES]())
+        dispatch(MoodboardThunks[GET_COLOR_CODES](moodboardID))
     }, [])
 
-    const toggleView = props.toggleColorPicker
-    const moodboardID = props.moodboardID
     return (
         <>
             {/* Color popup */}
-            <div className='common-color-popup z-10'>
+            <div className='common-color-popup z-10 right-full left-auto'>
                 <div className='color-popup-header'>
                     <h5>Add color</h5>
                     <span>
@@ -63,9 +63,17 @@ const ColorPicker = (props) => {
                                 type='text'
                                 className='form-field'
                                 placeholder='Search Color'
+                                onChange={(e) => {
+                                    setSearchString(e.target.value)
+                                    searchColor(searchString)
+                                }}
                             />
                             <span>
-                                <IconSearch />
+                                <IconSearch
+                                    onClick={(e)=>{
+                                        e.preventDefault();
+                                        searchColor(searchString)}}
+                                />
                             </span>
                         </div>
                     </div>

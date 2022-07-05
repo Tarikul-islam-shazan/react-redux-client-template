@@ -25,7 +25,8 @@ import {
     uploadMoodboard,
     updateMoodboard,
     uploadMoodboardImages,
-    getAllColorCodes
+    getAllColorCodes,
+    addColorToMoodboard
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -139,9 +140,9 @@ const MoodboardThunks = {
             }
         }
     },
-    [GET_COLOR_CODES]: () => {
+    [GET_COLOR_CODES]: (moodboardID, searchString) => {
         return async (dispatch, getState) => {
-            let data = await getAllColorCodes()
+            let data = await getAllColorCodes(moodboardID, searchString || null)
             console.log('data', data)
             dispatch({
                 type: MoodboardActions[SET_COLOR_CODES],
@@ -158,6 +159,18 @@ const MoodboardThunks = {
     [ADD_COLOR_CODE]: (moodboardID, colorID) => {
         return async (dispatch, getState) => {
             console.log('add color code')
+            try {
+                let dataFrame = {
+                    colorType: 'SOLID',
+                    pantoneColorId: colorID,
+                    representedBy: 'PANTONE_OR_HEX_CODE'
+                }
+                let response = await addColorToMoodboard(dataFrame, moodboardID)
+                dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log('error', error)
+            }
         }
     }
 }
