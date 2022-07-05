@@ -23,6 +23,7 @@ import { ReactComponent as MenuIcon } from '../../../assets/images/home/humbarge
 import { ReactComponent as NitexIcon } from '../../../assets/images/home/nitexLogo.svg'
 import { ReactComponent as IconFavourite } from '../../../assets/images/home/favourite.svg'
 import { ReactComponent as IconNotification } from '../../../assets/images/home/notification.svg'
+import { MoodboardActions } from '../../redux_toolkit/Moodboard'
 
 const MoodboardView = (props) => {
     // getting param data over here
@@ -85,12 +86,17 @@ const MoodboardView = (props) => {
         setShowColorPicker(!showColorPicker)
     }
 
-    useEffect(() => {
+    const uploadProductImagesAsync = async () => {
         if (selectedFiles.length > 0) {
-            dispatch(
+            await dispatch(
                 MoodboardThunks[UPLOAD_MOODBOARD_IMAGES](selectedFiles, id)
             )
+            await dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
         }
+    }
+
+    useEffect(() => {
+        uploadProductImagesAsync()
     }, [selectedFiles])
 
     // calling thunk to get moodboard data in useEffect
@@ -341,6 +347,7 @@ const MoodboardView = (props) => {
                                 {showColorPicker && (
                                     <ColorPicker
                                         toggleColorPicker={toggleColorPicker}
+                                        moodboardID={selectedMoodboard?.id}
                                     />
                                 )}
                             </div>

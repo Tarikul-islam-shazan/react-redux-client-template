@@ -13,7 +13,9 @@ import {
     UPLOAD_MOODBOARDS,
     UPDATE_MOODBOARD,
     UPLOAD_MOODBOARD_IMAGES,
-    GET_COLOR_CODES
+    GET_COLOR_CODES,
+    DELETE_PRODUCT_IMAGE,
+    ADD_COLOR_CODE
 } from '../@types/thunk.types'
 
 // Service import
@@ -129,6 +131,7 @@ const MoodboardThunks = {
                     dataFrame,
                     `${id}/product-image`
                 )
+
                 // console.log('response', response)
                 return { state: getState().moodboard, response }
             } catch (error) {
@@ -145,6 +148,16 @@ const MoodboardThunks = {
                 payload: data.data
             })
             return getState().moodboard
+        }
+    },
+    [DELETE_PRODUCT_IMAGE]: (moodboardID, colorID) => {
+        return async (dispatch, getState) => {
+            console.log('delete product image')
+        }
+    },
+    [ADD_COLOR_CODE]: (moodboardID, colorID) => {
+        return async (dispatch, getState) => {
+            console.log('add color code')
         }
     }
 }
