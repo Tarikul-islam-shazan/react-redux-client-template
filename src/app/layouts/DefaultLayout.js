@@ -114,28 +114,50 @@ const DefaultLayout = () => {
           </div>
 
           <div className='user-interaction ml-auto flex items-center gap-x-6'>
-            <div
-              className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative flex items-center justify-center cursor-pointer'>
-                        <span>
-                            <IconFavourite />
-                        </span>
-              <span
-                className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>
-                            12
-                        </span>
+            <div className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative flex items-center justify-center cursor-pointer'>
+              <span>
+                  <IconFavourite />
+              </span>
+              <span className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>
+                  12
+              </span>
             </div>
-            <div
-              className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative flex items-center justify-center cursor-pointer'>
-                        <span>
-                            <IconNotification />
-                        </span>
-              <span
-                className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-   3 text-center'>
-                            99+
-                        </span>
+            <div className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 p-2 relative  cursor-pointer'>
+              <div className='flex items-center justify-center'>
+                  <span>
+                    <IconNotification />
+                  </span>
+                  <span className='absolute top-[-9px] right-[-22px] text-sm text-white-shade-100 bg-primaryColor inline-block rounded-[20px] px-3 text-center'>
+                    99+
+                </span>
+              </div>
+              <div className='submenu flex flex-col sm:flex-row p-6 bg-white shadow-lg w-[455px] sm:h-[386px]  absolute top-[66px] right-0  z-[999]'>
+                <div>
+                  <div className='uppercase text-[50px] text-white-shade-100 font-bold'>Favorites</div>
+                  <div className='menu-items px-8'>
+                    <a href='#' className='active'>
+                      <div className='flex gap-10'>
+                        <span>Moodboard </span>
+                        <span>/ 07</span>
+                      </div>
+                    </a>
+                    <a href='#'>
+                      <div className='flex gap-10'>
+                        <span>COLLECTION</span>
+                        <span>/ 07</span>
+                      </div>
+                    </a>
+                    <a href='#'>
+                      <div className='flex gap-10'>
+                        <span>Styles</span>
+                        <span>/ 07</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div
-              className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
+            <div className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
               <img
                 src='./images/user.jpg'
                 className='object-cover object-top w-full h-full'
