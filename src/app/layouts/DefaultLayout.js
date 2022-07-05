@@ -5,6 +5,7 @@ import { ReactComponent as NitexIcon } from '../../assets/images/home/nitexLogo.
 import { ReactComponent as CloseIcon } from '../../assets/images/home/cross.svg'
 import { ReactComponent as IconFavourite } from '../../assets/images/home/favourite.svg'
 import { ReactComponent as IconNotification } from '../../assets/images/home/notification.svg'
+import Slide1 from '../../assets/images/home/slide1.png';
 import LoaderComponent from '../common/LoaderComponent'
 import { useSelector } from 'react-redux'
 
@@ -45,16 +46,16 @@ const DefaultLayout = () => {
               <MenuIcon />
             </div>
             <Link to='/dashboard'>
-                        <span className='brand-logo'>
-                            <NitexIcon />
-                        </span>
+                <span className='brand-logo'>
+                    <NitexIcon />
+                </span>
             </Link>
             <span className='divider hidden xl:block'>
-                        <CloseIcon />
-                    </span>
+                <CloseIcon />
+            </span>
             <span className='hidden xl:block text-logo text-2xl text-primaryColor-shade-100 font-bold uppercase'>
-                        Louis Vuitton
-                    </span>
+                Louis Vuitton
+            </span>
           </div>
           <div className='main-menu hidden xl:block ml-16 4xl:ml-28'>
             <ul>
@@ -64,8 +65,38 @@ const DefaultLayout = () => {
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                 <Link to='/moodboard'>Moodboard</Link>
               </li>
-              <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
+              <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14 relative'>
                 <a href='#'>Collections</a>
+                <div className='submenu flex flex-col sm:flex-row p-5 bg-white shadow-lg w-[1240px] sm:h-[420px]  absolute top-[58px] left-[50%] translate-x-[-50%] z-[999]'>
+                    <div className='sm:w-1/2 block bg-white-shade-100'>
+                      <div className='overflow-hidden w-full h-full '>
+                        {/*<img src='' alt='' className='w-full h-full object-cover'/>*/}
+                      </div>
+                    </div>
+                    <div className='sm:w-1/2'>
+                      <div className='uppercase text-[60px] text-white-shade-100 font-bold mt-8 ml-[-10px]'>COLLECTIONS</div>
+                      <div className='space-y-10 p-4 mt-4 menu-items'>
+                        <a href='#' className='active'>
+                          <div className='flex gap-10'>
+                            <span>NITEX COLLECTION</span>
+                            <span>/ 07</span>
+                          </div>
+                        </a>
+                        <a href='#'>
+                          <div className='flex gap-10'>
+                            <span>MY COLLECTION</span>
+                            <span>/ 07</span>
+                          </div>
+                        </a>
+                        <a href='#'>
+                          <div className='flex gap-10'>
+                            <span>COLLECTION REQUESTS</span>
+                            <span>/ 07</span>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                </div>
               </li>
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                 <a href='#'>Quotes</a>
