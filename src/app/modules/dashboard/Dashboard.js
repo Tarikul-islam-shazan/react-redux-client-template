@@ -14,25 +14,27 @@ import { authUserInfo } from '../../services/Util'
 import FirstSharedCollection from './FirstSharedCollection'
 import ImageViewCollections from './ImageViewCollections'
 import CardForCollection from '../../common/CardForCollection'
-import LoaderComponent from '../../common/LoaderComponent'
 import OurOffer from './OurOffer'
 import FabricWiseProduct from './FabricWiseProduct'
+import { useDispatch } from 'react-redux'
+import { closeLoader, openLoader } from '../../redux_toolkit/Loader'
 
 const Dashboard = () => {
-  const [loader, setLoader] = useState(true)
   const [showManagerInfo, setShowManagerInfo] = useState(false)
   const [showSummary, setShowSummary] = useState(false)
   const [collections, setCollections] = useState([])
   const [managerInfo, setManagerInfo] = useState({})
   const [dashboardCount, setDashboardCount] = useState({})
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(openLoader())
     Http.GET_WITH_ID_PARAM('searchCollectionByUser', '?memberType=SHARED&size=10&sort=id,desc', authUserInfo().id).then(({ data }) => {
-      setLoader(false)
+      dispatch(closeLoader())
       setCollections(data.data)
     }).catch(({ response }) => {
       toast.error(response.data.message)
-      setLoader(false)
+      dispatch(closeLoader())
     })
   }, [])
 
@@ -82,7 +84,7 @@ const Dashboard = () => {
   }
 
   return (
-    <LoaderComponent loading={loader}>
+    <>
       <div className='banner-section flex flex-col xl:flex-row gap-4'>
         <GreetingSlider />
         {renderFirstCollection()}
@@ -264,7 +266,7 @@ const Dashboard = () => {
           <CloseIcon />
         </span>
       </div>
-    </LoaderComponent>
+    </>
   )
 }
 
