@@ -47,7 +47,7 @@ const Timeline = () => {
           <TimelineProductionDetails setLoader={setLoader} />
         </div>
         <div
-          className='modal modal-left fade '
+          className='modal modal-left fade lg:hidden'
           id='all-designs'
           tabIndex={-1}
           role='dialog'
@@ -56,7 +56,6 @@ const Timeline = () => {
           <div className='modal-dialog' role='document'>
             <div className='modal-content'>
               <div className='modal-header'>
-                {/* Modal CLose button*/}
                 <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                   <img src='/icons/close.svg' />
                 </button>
@@ -68,7 +67,7 @@ const Timeline = () => {
           </div>
         </div>
         <div
-          className='modal modal-right fade '
+          className='modal modal-right fade lg:hidden'
           id='all-production-details'
           tabIndex={-1}
           role='dialog'

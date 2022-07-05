@@ -309,7 +309,7 @@ class PostWithComments extends Component {
                   theme='bubble'
                   placeholder='Write reply…'
                   onChange={this.onChange}
-                  modules={{ mention: this.mentionModule }}
+                  // modules={{ mention: this.mentionModule }}
                 />
                 <div className={`files-n-photos custom-scrollbar ${selectedFiles.length ? 'open' : ''}`}>
                   {

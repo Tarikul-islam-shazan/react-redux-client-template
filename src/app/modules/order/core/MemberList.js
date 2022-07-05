@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 const MemberList = () => {
     const timelineStore = useSelector((store) => store.timeline)
     const [memberList, setMemberList] = useState([])
+    const [showMembers, setShowMembers] = useState(false)
 
     useEffect(() => {
         if (timelineStore.orderInfo?.orderMemberList) {
@@ -23,9 +24,9 @@ const MemberList = () => {
         if (memberList.length > 0) {
             return (
                 <span className='more-member'>
-                    <a href='#'>+{memberList.length}</a>
+                    <a href='#' onClick={() => setShowMembers(prev => !prev)}>+{memberList.length}</a>
 
-                    <div className='assign-member shadow '>
+                    <div className={showMembers ? 'assign-member shadow open' : 'assign-member shadow'}>
                         <div className='title'>Assigned member</div>
                         <div className='member-list-container'>
                             {memberList.map((member, index) => {

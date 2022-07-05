@@ -11,9 +11,7 @@ import {
   parseHtml
 } from '../../../services/Util'
 import Modal from 'react-bootstrap/Modal'
-// import TaskManage from "../../../pages/task/components/TaskManage";
 import { useNavigate, useParams } from 'react-router-dom'
-// import {SelectedFileViewComponent} from "../../../pages/task/components/TaskManageComponents/SelectedFileViewComponent";
 import Http from '../../../services/Http'
 import MoreDesign from './MoreDesign'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,6 +19,8 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { toast } from 'react-toastify'
 import { addCommentIndexWise, downloadInvoice } from '../../../redux_toolkit/Timeline/TimelineThunks'
+import TaskManage from '../../../common/TaskManage'
+import { SelectedFileViewComponent } from '../../../common/SelectedFileViewComponent'
 
 const ActivityLog = ({ activity, setLoader, index }) => {
   const timelineStore = useSelector((store) => store.timeline)
@@ -247,17 +247,17 @@ const ActivityLog = ({ activity, setLoader, index }) => {
         className={`files-n-photos custom-scrollbar ${selectedFiles.length ? 'open' : ''}`}
         key={selectedFiles.length}
       >
-        {/*{selectedFiles.map((file, i) => {*/}
-        {/*    return (*/}
-        {/*        <SelectedFileViewComponent*/}
-        {/*            showRemoveOption={true}*/}
-        {/*            file={file}*/}
-        {/*            key={i}*/}
-        {/*            index={i}*/}
-        {/*            remove={removeFile}*/}
-        {/*        />*/}
-        {/*    );*/}
-        {/*})}*/}
+        {selectedFiles.map((file, i) => {
+          return (
+            <SelectedFileViewComponent
+              showRemoveOption={true}
+              file={file}
+              key={i}
+              index={i}
+              remove={removeFile}
+            />
+          )
+        })}
       </div>
     )
   }
@@ -319,7 +319,7 @@ const ActivityLog = ({ activity, setLoader, index }) => {
                 onChange={(value) => postInputRef.current = value}
                 className='custom-scrollbar'
                 placeholder='Write comment…'
-                modules={{ mention: mentionModule(memberList) }}
+                // modules={{ mention: mentionModule(memberList) }}
               />
               {commentError && (
                 <p className='error'>{commentError}</p>
@@ -454,20 +454,20 @@ const ActivityLog = ({ activity, setLoader, index }) => {
         </div>
       </div>
       {renderActivityBody()}
-      <Modal
+      {showTaskDetailsModal && <Modal
         show={showTaskDetailsModal}
         onHide={() => setShowTaskDetailsModal(false)}
         className='modal-right task-conversation'
         aria-labelledby='example-custom-modal-styling-title'
       >
-        {/*<TaskManage*/}
-        {/*    timelinePanel={true}*/}
-        {/*    id={taskId}*/}
-        {/*    orderId={params.orderId}*/}
-        {/*    closeModal={() => setShowTaskDetailsModal(false)}*/}
-        {/*    callback={() => false}*/}
-        {/*/>*/}
-      </Modal>
+        <TaskManage
+          timelinePanel={true}
+          id={taskId}
+          orderId={params.orderId}
+          closeModal={() => setShowTaskDetailsModal(false)}
+          callback={() => false}
+        />
+      </Modal>}
       {showImageModal && (
         <MoreDesign
           toggleModal={toggleImageModal}

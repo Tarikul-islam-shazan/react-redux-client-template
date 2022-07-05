@@ -609,7 +609,7 @@ class TaskManage extends Component {
                                     <img src={member.memberImage} alt='' />
                                   ) : (
                                     <img
-                                      src={require('../../../assets/images/pro_pic_default.svg')}
+                                      src={'/images/pro_pic_default.svg'}
                                       alt=''
                                     />
                                   )}
@@ -666,7 +666,7 @@ class TaskManage extends Component {
                             />
                           ) : (
                             <img
-                              src={require('../../../assets/images/pro_pic_default.svg')}
+                              src={'/images/pro_pic_default.svg'}
                               alt={member.memberName}
                               data-toggle='tooltip'
                               data-placement='top'
@@ -910,7 +910,7 @@ class TaskManage extends Component {
             onChange={this.onChangePost}
             onFocus={() => this.setState({ createPostFlag: true })}
             onClick={() => this.setState({ createPostFlag: true })}
-            modules={{ mention: this.mentionModule }}
+            // modules={{ mention: this.mentionModule }}
           />
 
           <div
