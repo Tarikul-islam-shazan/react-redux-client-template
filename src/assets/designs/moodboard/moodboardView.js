@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import SelectComponent from '../../../app/common/SelectComponent'
 import { ReactComponent as FilterIcon } from '../../icons/Filter-24.svg'
 import { ReactComponent as AddIcon } from '../../icons/add-white.svg'
 import { ReactComponent as CloseIcon } from '../../icons/close.svg'
@@ -10,8 +11,15 @@ import { ReactComponent as MenuIcon } from '../../images/home/humbargerMenu.svg'
 import { ReactComponent as NitexIcon } from '../../images/home/nitexLogo.svg'
 import { ReactComponent as IconFavourite } from '../../images/home/favourite.svg'
 import { ReactComponent as IconNotification } from '../../images/home/notification.svg'
+import { ReactComponent as SearchIconWhite } from '../../images/search-white.svg'
+import { ReactComponent as OkWhite } from '../../../assets/images/ok-white.svg'
+import { ReactComponent as Refresh } from '../../../assets/images/refresh.svg'
 
 const Boilarplate = () => {
+    useEffect(() => {
+        console.log('Moodboard View Design Loaded')
+    }, [])
+
     return (
         <div className='container-fluid bg-primaryColor-shade-300'>
             <header className='bg-white py-5 px-5 logo flex items-center'>
@@ -83,390 +91,109 @@ const Boilarplate = () => {
                     </div>
                 </div>
             </header>
-            <div className='body-container p-4'>
-                <div className='common-moodboard-container'>
-                    {/* Moodboard Information */}
-                    <div className='moodboard-information'>
-                        <div className='left-half'>
-                            <div className='title'>
-                                <div className='input-group'>
-                                    <label htmlFor='name' className='label'>
-                                        Title
-                                    </label>
-                                    <h4>
-                                        Summer 2022 For Men
-                                        <span>
-                                            <EditIcon />
-                                        </span>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div className='description'>
-                                <div className='input-group'>
-                                    <label htmlFor='name' className='label'>
-                                        Description
-                                    </label>
-                                    <p>
-                                        To be sincerely honest in my humble
-                                        opinion without being sentimental and of
-                                        course, without offending anyone who
-                                        thinks differently from my opinion but
-                                        rather looking into this serious matter
-                                        with perspective distinction and without
-                                        condemning.
-                                        <span>
-                                            <EditIcon />
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='right-half'>
+            <div className='body-container relative p-4'>
+                <div className='common-filter-popup absolute left-0 top-0 w-[435px] bg-white shadow-lg'>
+                    <div className='color-popup-header flex justify-between p-5 bg-[#F5F5F5]'>
+                        <h5 className='font-bold uppercase'>Filter Fabric</h5>
+                        <span>
+                            <CloseIcon />
+                        </span>
+                    </div>
+                    <div className='common-color-popup-body p-5'>
+                        <div className='flex'>
+                            <input
+                                type='text'
+                                className='form-field w-full border border-primaryColor  p-2 px-4'
+                                id='name'
+                                placeholder='Search ...'
+                                name='name'
+                            />
                             <button
                                 type='button'
-                                class='btn bg-white text-black float-right'
+                                className='btn w-[60px] min-w-[60px] flex items-center justify-center p-2'
                             >
-                                <span>
-                                    Go to <strong>Collection</strong>
-                                </span>
+                                <SearchIconWhite />
                             </button>
                         </div>
-                    </div>
 
-                    {/* Moodboard and image layout */}
-                    <div className='moodboard-and-images-layout'>
-                        <div className='left-half'>
-                            <div className='moodboard-tab'>
-                                <ul>
-                                    <li className='active'>Moodboard</li>
-                                    <li>Images</li>
-                                </ul>
+                        <div className='mt-5'>
+                            <div className='input-group select-bg-gray-style w-full'>
+                                <SelectComponent
+                                    options={[
+                                        {
+                                            label: 'See Samples',
+                                            value: 'NITEX/BO/1212'
+                                        },
+                                        {
+                                            label: 'Country 1',
+                                            value: 'NITEX/BO/1212'
+                                        },
+                                        {
+                                            label: 'Country 2',
+                                            value: 'NITEX/BO/1212'
+                                        }
+                                    ]}
+                                />
                             </div>
-                            {/* Images layout */}
-                            <div className='moodboard-masonry-container'>
-                                <div className='masonry-item add-item'>
-                                    <span className=''>+</span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/1.jpg'
-                                        alt='product'
+                        </div>
+
+                        <div className='mt-5'>
+                            <div className='input-group select-bg-gray-style w-full'>
+                                <SelectComponent
+                                    options={[
+                                        {
+                                            label: 'See Samples',
+                                            value: 'NITEX/BO/1212'
+                                        },
+                                        {
+                                            label: 'Country 1',
+                                            value: 'NITEX/BO/1212'
+                                        },
+                                        {
+                                            label: 'Country 2',
+                                            value: 'NITEX/BO/1212'
+                                        }
+                                    ]}
+                                />
+                            </div>
+                        </div>
+
+                        <div className='mt-5'>
+                            <div className='input-group w-full'>
+                                <div>
+                                    <label
+                                        htmlFor='points'
+                                        className='w-full block mb-3'
+                                    >
+                                        GSM
+                                    </label>
+                                    <input
+                                        type='range'
+                                        id='points'
+                                        name='points'
+                                        min={0}
+                                        max={100}
+                                        className='w-full block'
                                     />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/4.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/3.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/2.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
-                                </div>
-                                <div className='masonry-item'>
-                                    <img
-                                        src='/images/products/1.jpg'
-                                        alt='product'
-                                    />
-                                    <span className='delete'>
-                                        <DeleteIcon />
-                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <div className='right-half'>
-                            {/* Moodboard colors */}
-                            <div className='moodboard-color-container'>
-                                <div className='color-single-item'>
-                                    <div className='add-color'>
-                                        <span>+</span>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#00f851' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B08574' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B08574' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#3B3738' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#16505B' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#6FA7B8' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='color-single-item'>
-                                    <div
-                                        className='color-view'
-                                        style={{ background: '#B7B548' }}
-                                    >
-                                        <span className='close'>
-                                            <CloseIcon />
-                                        </span>
-                                    </div>
-                                    <div className='color-info'>
-                                        <div className='color-code'>
-                                            TCX 16-1288
-                                        </div>
-                                        <div className='color-name'>
-                                            Dark Blue
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Moodboard fabrics */}
-                            <div className='moodboard-fabric-container'>
-                                <h3>Fabrics</h3>
-
-                                {/* Selcted Fabrics */}
-                                <div className='fabric-filter'>
-                                    <p>
-                                        Suggested <span>Fabrics</span>
-                                    </p>
-                                    <span>
-                                        <FilterIcon />
-                                    </span>
-                                </div>
-                                <div className='fabric-all-items'>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric1.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='close'>
-                                                <CloseIcon />
-                                            </span>
-                                        </div>
-
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric2.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='close'>
-                                                <CloseIcon />
-                                            </span>
-                                        </div>
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                </div>
-
-                                {/* Suggested Fabrics */}
-                                <div className='fabric-filter top-border'>
-                                    <p>
-                                        Suggested <span>Fabrics</span>
-                                    </p>
-                                    <span>
-                                        <FilterIcon />
-                                    </span>
-                                </div>
-                                <div className='fabric-all-items'>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric2.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='select'>
-                                                <TickIcon />
-                                            </span>
-                                        </div>
-
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric1.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='select'>
-                                                <TickIcon />
-                                            </span>
-                                        </div>
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric3.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='select'>
-                                                <TickIcon />
-                                            </span>
-                                        </div>
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                    <div className='fabric-single-item'>
-                                        <div className='fabric-image'>
-                                            <img
-                                                src='/images/moodboard/fabric1.png'
-                                                alt='fabric'
-                                            />
-                                            <span className='select'>
-                                                <TickIcon />
-                                            </span>
-                                        </div>
-                                        <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className='modal-footer mt-5 flex justify-end gap-4'>
+                            <button
+                                type='button'
+                                className='btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor'
+                            >
+                                <Refresh />
+                            </button>
+                            <button
+                                type='button ='
+                                className='btn w-full flex justify-between items-center'
+                            >
+                                <span>Apply</span>
+                                <span className='ml-2'>
+                                    <OkWhite />
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

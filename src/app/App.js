@@ -25,8 +25,8 @@ import Home from '../assets/designs/home'
 // we dont need this compoennt as we have completed the redux set up
 // import ReduxComp from './modules/redux_test_module/ReduxComp'
 import MoodboardTemplate from '../assets/designs/moodboard'
-// import MoodboardView from '../assets/designs/moodboard/moodboardView'
-import MoodboardView from './modules/moodboard/MoodboardView'
+import MoodboardView from '../assets/designs/moodboard/moodboardView'
+// import MoodboardView from './modules/moodboard/MoodboardView'
 import VerifyEmail from './modules/login-journey/VerifyEmail'
 import MoodboardHome from '../assets/designs/moodboard/moodboard-home.js'
 import Collections from '../assets/designs/collections'
@@ -78,11 +78,11 @@ const App = () => {
                                 path='activation'
                                 element={<ActivationPopup />}
                             />
-                            <Route path='moodboard' element={<Moodboard />} />
+                            {/* <Route path='moodboard' element={<Moodboard />} />
                             <Route
                                 path='moodboard/:id'
                                 element={<MoodboardView />}
-                            />
+                            /> */}
                         </Route>
                     </Route>
 
@@ -112,8 +112,8 @@ const App = () => {
 
                     <Route path='/quote' element={<Quote />} />
                     <Route path='/quote-details' element={<QuoteDetails />} />
-                  <Route path='/sample' element={<Sample />} />
-                  <Route path='/sample-details' element={<SampleDetails />} />
+                    <Route path='/sample' element={<Sample />} />
+                    <Route path='/sample-details' element={<SampleDetails />} />
                     <Route path='/style-detail' element={<StyleDetail />} />
                     <Route path='/place-order' element={<PlaceOrder />} />
                     <Route path='/team' element={<Team />} />
