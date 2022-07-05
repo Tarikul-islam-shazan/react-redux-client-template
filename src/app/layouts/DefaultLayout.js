@@ -75,7 +75,7 @@ const DefaultLayout = () => {
                 <a href='#'>Samples</a>
               </li>
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
-                <a href='/orders/my-orders'>Orders</a>
+                <Link to='/orders/my-orders'>Orders</Link>
               </li>
               <li className='text-base text-primaryColor uppercase inline-block mr-6 4xl:mr-10 5xl:mr-14'>
                 <a href='#'>More</a>
