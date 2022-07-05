@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../assets/scss/App.scss'
-import {
-    BrowserRouter as Router,
-    Navigate,
-    Outlet,
-    Route,
-    Routes,
-    useNavigate
-} from 'react-router-dom'
+import { BrowserRouter as Router, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 
 // compoennts
 import Login from './modules/login-journey/Login'
@@ -39,49 +32,62 @@ import QuoteDetails from '../assets/designs/quote/quote-details'
 import StyleDetail from '../assets/designs/collections/style-detail.js'
 import PlaceOrder from '../assets/designs/place-order/place-order.js'
 import Team from '../assets/designs/team'
+import Faq from '../assets/designs/faq'
+import Report from '../assets/designs/report'
+import Favorite from '../assets/designs/favorite'
+import FabricWiseProduct from './modules/dashboard/FabricWiseProduct'
 
 const useAuth = () => {
-    const token = localStorage.getItem('token')
-    return !!token
+  const token = localStorage.getItem('token')
+  return !!token
 }
 
 const ProtectedRoutes = (props) => {
-    const auth = useAuth()
-    return auth ? <Outlet /> : <Navigate to='/login' />
+  const auth = useAuth()
+  return auth ? <Outlet /> : <Navigate to='/login' />
 }
 
 const App = () => {
-    return (
-        <>
-            <Router>
-                <Routes>
-                    <Route path='login' element={<Login />} />
-                    <Route path='verify/email' element={<VerifyEmail />} />
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path='login' element={<Login />} />
+          <Route path='verify/email' element={<VerifyEmail />} />
 
-                    {/* <Route path='redux' element={<ReduxComp />} /> */}
+          <Route path='/' element={<DefaultLayout />}>
+            <Route element={<ProtectedRoutes />}>
+              <Route path='dashboard' element={<Dashboard />} />
+              <Route path='products/materialId' element={<FabricWiseProduct />} />
+              <Route path='activation' element={<ActivationPopup />} />
+              <Route path='moodboard' element={<Moodboard />} />
+              <Route path='moodboard/:id' element={<MoodboardView />} />
+            </Route>
+          </Route>
 
-                    <Route path='/' element={<DefaultLayout />}>
-                        <Route element={<ProtectedRoutes />}>
-                            {/* <Route
-                                path='/'
-                                element={<Navigate replace to='dashboard' />}
-                            /> */}
-                            <Route path='dashboard' element={<Dashboard />} />
-                            <Route
-                                path='activation'
-                                element={<ActivationPopup />}
-                            />
-                            {/* Moodboard compoennt starts here */}
-                            <Route
-                                path='moodboard'
-                                element={<Moodboard />}
-                            ></Route>
-                            <Route
-                                path='moodboard/:id'
-                                element={<MoodboardView />}
-                            />
-                        </Route>
-                    </Route>
+          {/*Design UI Route*/}
+          <Route path='/ui' element={<Ui />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/moodboard' element={<MoodboardTemplate />} />
+          <Route path='/moodboardView' element={<MoodboardView />} />
+          <Route
+            path='/moodboard/moodboard-home'
+            element={<MoodboardHome />}
+          />
+          <Route path='/collections' element={<Collections />} />
+          <Route path='/my-collection' element={<MyCollection />} />
+          <Route
+            path='/requested-collection'
+            element={<RequestedCollection />}
+          />
+          <Route
+            path='/requested-collection'
+            element={<RequestedCollection />}
+          />
+          <Route
+            path='/collection-details'
+            element={<CollectionDetails />}
+          />
 
                     {/*Design UI Route*/}
                     <Route path='/ui' element={<Ui />} />

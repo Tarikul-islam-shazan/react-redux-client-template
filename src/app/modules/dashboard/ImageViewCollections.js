@@ -13,12 +13,11 @@ const ImageViewCollections = ({ collections }) => {
                 <div className='collection-box' key={`collections_${item.id}`}>
                     <div className='overflow-hidden relative h-[300px] sm:h-[400px] xl:h-[524px] p-4 bg-white'>
                         <ImageGridComponent documentList={item.documentResponseList} whiteOverLay={true}/>
-                        <div
-                            className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
-                            <span className='mt-2'>
-                                {item.isFavorite && <IconFavourite/>}
-                                {!item.isFavorite && <Favourite/>}
-                            </span>
+                        <div className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[20px] top-[20px] cursor-pointer'>
+                            <div>
+                                <span>{item.isFavorite && <IconFavourite/>}</span>
+                                <span className='mt-2'>{!item.isFavorite && <Favourite/>}</span>
+                            </div>
                         </div>
                     </div>
                     <div className='flex flex-col-reverse xl:flex-row justify-between items-start p-4 pt-0 bg-white'>

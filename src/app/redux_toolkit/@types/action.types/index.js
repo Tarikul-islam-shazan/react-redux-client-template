@@ -1,13 +1,11 @@
 // this file will be used to define the action types
-// LoginTypes
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
+
+//Home Page Action Types
+export const SET_MATERIAL_LIST = 'SET_MATERIAL_LIST'
+export const SET_SELECTED_MATERIAL_ID = 'SET_SELECTED_MATERIAL_ID'
 
 // Moodboard Action Types
 export const SET_MOODBOARD_LIST = 'SET_MOODBOARD_LIST'
 export const SET_MOODBOARD_BY_ID = 'SET_MOODBOARD_BY_ID'
 export const UPDATE_SELECTED_MOODBOARD_STATE = 'UPDATE_SELECTED_MOODBOARD_STATE'
+export const SET_COLOR_CODES = 'SET_COLOR_CODES'

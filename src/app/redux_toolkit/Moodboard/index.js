@@ -7,7 +7,8 @@ const initialState = {
     moodboardList: [],
     totalPages: 0,
     totalElements: 0,
-    selectedMoodboard: null
+    selectedMoodboard: null,
+    colorCodes: []
 }
 
 const MoodboardSlice = createSlice({
