@@ -9,7 +9,8 @@ import {
     SET_MOODBOARD_LIST,
     SET_MOODBOARD_BY_ID,
     UPDATE_SELECTED_MOODBOARD_STATE,
-    SET_COLOR_CODES
+    SET_COLOR_CODES,
+    SET_MOODBOARD_FABRICS
 } from '../@types/action.types'
 
 export const MoodboardReducer = {
@@ -25,7 +26,7 @@ export const MoodboardReducer = {
     [SET_MOODBOARD_BY_ID]: (state, action) => {
         // console.log('MoodboardReducer', action.payload)
         // eslint-disable-next-line no-unsafe-optional-chaining
-        console.log('MoodboardReducer', action.payload)
+        // console.log('MoodboardReducer', action.payload)
         state.selectedMoodboard = Object.assign({}, action.payload)
     },
     [UPDATE_SELECTED_MOODBOARD_STATE]: (state, action) => {
@@ -33,7 +34,11 @@ export const MoodboardReducer = {
         state.selectedMoodboard.description = action.payload?.description
     },
     [SET_COLOR_CODES]: (state, action) => {
-        console.log('MoodboardReducer', action.payload)
+        // console.log('MoodboardReducer', action.payload)
         state.colorCodes = action?.payload
+    },
+    [SET_MOODBOARD_FABRICS]: (state, action) => {
+        // console.log('MoodboardReducer', action.payload)
+        state.moodboardFabrics = action?.payload
     }
 }

@@ -37,6 +37,8 @@ const routes = {
     getAllColorCodes: `${BASE_URL}/color/pantone/search`,
     addColorToMoodboard: `${BASE_URL}/moodboard/`,
     deleteColorFromMoodboard: `${BASE_URL}/moodboard/`,
+    deleteProductImage: `${BASE_URL}/moodboard/`,
+    getMoodboardFabrics: `${BASE_URL}/material/all`
 }
 
 // Axios request interceptor
@@ -116,7 +118,7 @@ const Http = {
         // updateTokenInHeader();
         // }
         // console.log("from post",routes[key] + id, params)
-        console.log(params)
+        // console.log(params)
         return axios.post(routes[key] + id, params, headers)
     },
     POST_TEXT_BODY: (key, params, id = '') => {

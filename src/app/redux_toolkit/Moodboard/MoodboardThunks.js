@@ -14,12 +14,15 @@ or by replacing the re-calling the state initiation logic with
 pushing or poping data out of state
 */
 
+/* eslint-disable no-console */
+
 // action types
 import {
     SET_MOODBOARD_LIST,
     SET_MOODBOARD_BY_ID,
     UPDATE_SELECTED_MOODBOARD_STATE,
-    SET_COLOR_CODES
+    SET_COLOR_CODES,
+    SET_MOODBOARD_FABRICS
 } from '../@types/action.types'
 
 // thunk types
@@ -32,7 +35,8 @@ import {
     GET_COLOR_CODES,
     DELETE_PRODUCT_IMAGE,
     ADD_COLOR_CODE,
-    DELETE_COLOR_FROM_MOODBOARD
+    DELETE_COLOR_FROM_MOODBOARD,
+    GET_MOODBOARD_FABRICS
 } from '../@types/thunk.types'
 
 // Service import
@@ -44,7 +48,9 @@ import {
     uploadMoodboardImages,
     getAllColorCodes,
     addColorToMoodboard,
-    deleteColorFromMoodboard
+    deleteColorFromMoodboard,
+    deleteProductImage,
+    getMoodboardFabrics
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -110,7 +116,7 @@ const MoodboardThunks = {
     },
     [UPDATE_MOODBOARD]: (data) => {
         return async (dispatch, getState) => {
-            console.log('data', data)
+            // console.log('data', data)
             let dataFrame = {
                 name: data.name || null,
                 description: data.description || '',
@@ -132,7 +138,7 @@ const MoodboardThunks = {
     [UPLOAD_MOODBOARD_IMAGES]: (selectedFiles, id) => {
         return async (dispatch, getState) => {
             try {
-                console.log(selectedFiles)
+                // console.log(selectedFiles)
                 let dataFrame = []
                 for (let i = 0; i < selectedFiles.length; i++) {
                     let base64StrResult = await readFileAsync(selectedFiles[i])
@@ -161,7 +167,7 @@ const MoodboardThunks = {
     [GET_COLOR_CODES]: (moodboardID, searchString) => {
         return async (dispatch, getState) => {
             let data = await getAllColorCodes(moodboardID, searchString || null)
-            console.log('data', data)
+            // console.log('data', data)
             dispatch({
                 type: MoodboardActions[SET_COLOR_CODES],
                 payload: data.data
@@ -169,14 +175,25 @@ const MoodboardThunks = {
             return getState().moodboard
         }
     },
-    [DELETE_PRODUCT_IMAGE]: (moodboardID, colorID) => {
+    [DELETE_PRODUCT_IMAGE]: (moodboardID, imageID) => {
         return async (dispatch, getState) => {
-            console.log('delete product image')
+            try {
+                let response = await deleteProductImage(
+                    moodboardID,
+                    imageID
+                )
+                // console.log('response', response)
+                dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                dispatch
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log('error', error)
+            }
         }
     },
     [ADD_COLOR_CODE]: (moodboardID, colorID) => {
         return async (dispatch, getState) => {
-            console.log('add color code')
+            // console.log('add color code')
             try {
                 let dataFrame = {
                     colorType: 'SOLID',
@@ -203,6 +220,17 @@ const MoodboardThunks = {
             } catch (error) {
                 console.log(error)
             }
+        }
+    },
+    [GET_MOODBOARD_FABRICS]: () => {
+        return async (dispatch, getState) => {
+            let data = await getMoodboardFabrics()
+            console.log(data)
+            dispatch({
+                type: MoodboardActions[SET_MOODBOARD_FABRICS],
+                payload: data.data
+            })
+            return getState().moodboard
         }
     }
 }

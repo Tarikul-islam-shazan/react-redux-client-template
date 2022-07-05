@@ -56,3 +56,20 @@ export const deleteColorFromMoodboard = async (moodboardID, colorID) => {
         moodboardID + '/color/' + colorID
     )
 }
+
+export const deleteProductImage = async (id, imageID) => {
+    return Http.DELETE(
+        'deleteProductImage',
+        null,
+        id + '/product-image/' + imageID
+    )
+}
+
+export const getMoodboardFabrics = async () => {
+    let defaultParams={
+        page:0,
+        size:9,
+        supplierType:'FABRIC'
+    }
+    return Http.GET('getMoodboardFabrics', defaultParams)
+}

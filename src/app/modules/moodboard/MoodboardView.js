@@ -10,7 +10,9 @@ import {
     GET_MOODBOARD_BY_ID,
     UPDATE_MOODBOARD,
     UPLOAD_MOODBOARD_IMAGES,
-    DELETE_COLOR_FROM_MOODBOARD
+    DELETE_COLOR_FROM_MOODBOARD,
+    DELETE_PRODUCT_IMAGE,
+    GET_MOODBOARD_FABRICS
 } from '../../redux_toolkit/@types/thunk.types'
 
 import { ReactComponent as FilterIcon } from '../../../assets/icons/Filter-24.svg'
@@ -49,7 +51,8 @@ const MoodboardView = (props) => {
     const setProductView = (value) => {
         setSelectedProductView(value)
     }
-
+    // for detail look below on description related button
+    // it will open your eye for this title
     const onTitleEditButtonClick = (e) => {
         e.preventDefault()
         setTitleEdit(!titleEdit)
@@ -63,7 +66,10 @@ const MoodboardView = (props) => {
             )
         }
     }
-
+    // this is a clever function
+    // it switches text field to edit mode and vice versa
+    // and also, if the text field is in edit mode, it updates the state
+    // title and description are component scoped state based variables
     const onDescriptionEditButtonClick = (e) => {
         setDescriptionEdit(!descriptionEdit)
         if (descriptionEdit) {
@@ -77,16 +83,19 @@ const MoodboardView = (props) => {
         }
     }
 
+    // this function is use to set data on image change
     const onFileChange = async (e) => {
         setSelectedFiles([...e.target.files])
 
         // console.log(selectedFile)
     }
 
+    // to toggle colot picker
     const toggleColorPicker = () => {
         setShowColorPicker(!showColorPicker)
     }
 
+    // used to upload product images
     const uploadProductImagesAsync = async () => {
         if (selectedFiles.length > 0) {
             await dispatch(
@@ -96,6 +105,7 @@ const MoodboardView = (props) => {
         }
     }
 
+    // to delete colos from moodboard
     const deleteColorFromMoodboard = async (colorId, moodboardID) => {
         await dispatch(
             MoodboardThunks[DELETE_COLOR_FROM_MOODBOARD](colorId, moodboardID)
@@ -103,6 +113,12 @@ const MoodboardView = (props) => {
         // await dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
     }
 
+    // on clicking delete product image
+    const onClickDeleteImage = async (id, imageId) => {
+        dispatch(MoodboardThunks[DELETE_PRODUCT_IMAGE](id, imageId))
+    }
+
+    // used to upload product image instantly
     useEffect(() => {
         uploadProductImagesAsync()
     }, [selectedFiles])
@@ -112,10 +128,17 @@ const MoodboardView = (props) => {
         dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](id))
     }, [])
 
+    // edits title and description
     useEffect(() => {
         setTitle(selectedMoodboard?.name)
         setDescription(selectedMoodboard?.description)
     }, [selectedMoodboard?.name, selectedMoodboard?.description])
+
+    // on load of moodboardview we have to make a call to get all the fabrics
+    // and set it in the store
+    useEffect(() => {
+        dispatch(MoodboardThunks[GET_MOODBOARD_FABRICS]())
+    }, [])
 
     return (
         <>
@@ -301,7 +324,16 @@ const MoodboardView = (props) => {
                                                     alt='product'
                                                 />
                                                 <span className='delete'>
-                                                    <DeleteIcon />
+                                                    <DeleteIcon
+                                                        onClick={(e) => {
+                                                            e.preventDefault()
+                                                            // console.log(image)
+                                                            onClickDeleteImage(
+                                                                id,
+                                                                image.id
+                                                            )
+                                                        }}
+                                                    />
                                                 </span>
                                             </div>
                                         )
@@ -403,28 +435,10 @@ const MoodboardView = (props) => {
                                                 </div>
                                             )
                                         )}
-                                    {/* <div className='fabric-single-item'>
-                    <div className='fabric-image'>
-                      <img src='/images/moodboard/fabric1.png' alt='fabric' />
-                      <span className='close'>
-                        <CloseIcon />
-                      </span>
-                    </div>
-
-                    <p>Single Jersey CO(35%), PL(65%)</p>
-                  </div>
-                  <div className='fabric-single-item'>
-                    <div className='fabric-image'>
-                      <img src='/images/moodboard/fabric2.png' alt='fabric' />
-                      <span className='close'>
-                        <CloseIcon />
-                      </span>
-                    </div>
-                    <p>Single Jersey CO(35%), PL(65%)</p>
-                  </div> */}
                                 </div>
 
                                 {/* Suggested Fabrics */}
+                                {/* it will be now based on api calls */}
                                 <div className='fabric-filter top-border'>
                                     <p>
                                         Suggested <span>Fabrics</span>
