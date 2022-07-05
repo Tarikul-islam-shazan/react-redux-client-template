@@ -79,7 +79,11 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
     return (
         <>
             <div className='one-third activity-logs'>
-                <div className='top-write-comments' onClick={toggleAddComment}>
+                <div
+                    className='top-write-comments'
+                    data-bs-toggle='modal'
+                    data-bs-target='#addCommentModal'
+                >
                     <div className='comments-button cursor-pointer'>
                         <p className='regular-12 mb-0'>
                             <img
@@ -99,7 +103,7 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                             />
                             Write comment...
                         </p>
-                        <img src='/icons/attach20.svg' alt='attach' />
+                        <img src='/icons/attachment.svg' alt='attach' />
                     </div>
                 </div>
                 <div className='activity-list'>{renderTimeline()}</div>

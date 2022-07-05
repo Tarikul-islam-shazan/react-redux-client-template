@@ -583,13 +583,14 @@ ul {
             }
 
             .task-search {
-                padding: 8px;
+                padding: 8px 0;
 
                 input {
                     width: 100%;
-                    height: 28px;
+                    height: 32px;
                     font-size: 12px;
                     padding: 0 8px;
+                    border: 1px solid #282828;
                 }
             }
 
@@ -697,6 +698,7 @@ ul {
 
             &.open {
                 display: flex;
+                padding-top: 16px;
             }
         }
 
