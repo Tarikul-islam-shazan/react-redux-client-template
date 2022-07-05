@@ -44,6 +44,7 @@ const Timeline = () => {
             {/*    openModal={addComment}*/}
             {/*    setLoader={setLoader}*/}
             {/*/>*/}
+
             <div className='buyer-timeline-container'>
                 <div className='timeline-row'>
                     <TimelinePoDetails setLoader={setLoader} />
