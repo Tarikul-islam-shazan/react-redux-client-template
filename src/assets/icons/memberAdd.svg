@@ -1,0 +1,20 @@
+ <svg
+                                                width='28'
+                                                height='28'
+                                                viewBox='0 0 28 28'
+                                                fill='none'
+                                                xmlns='http://www.w3.org/2000/svg'
+                                            >
+                                                <circle
+                                                    cx='14'
+                                                    cy='14'
+                                                    r='13'
+                                                    stroke='#616161'
+                                                    strokeWidth='2'
+                                                />
+                                                <path
+                                                    d='M21 15H15V21H13V15H7V13H13V7H15V13H21V15Z'
+                                                    fill='#403C3C'
+                                                    fillOpacity='0.87'
+                                                />
+                                            </svg>

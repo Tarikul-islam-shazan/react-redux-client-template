@@ -383,18 +383,6 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                     </div>
                 </div>
             </div>
-
-            {/* <Modal
-            show={openModal}
-            aria-labelledby='example-custom-modal-timeline'
-            onHide={toggleAddComment}
-            size='lg'
-            className='add-comment-popup'
-        >
-            <Modal.Body>
-              
-            </Modal.Body>
-        </Modal> */}
         </>
     )
 }
