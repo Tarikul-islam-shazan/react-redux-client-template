@@ -19,6 +19,7 @@ import { toast } from 'react-toastify'
 import { addCommentIndexWise, downloadInvoice } from '../../../redux_toolkit/Timeline/TimelineThunks'
 import TaskManage from '../../../common/TaskManage'
 import { SelectedFileViewComponent } from '../../../common/SelectedFileViewComponent'
+import MoreDesign from './MoreDesign'
 
 const ActivityLog = ({ activity, setLoader, index }) => {
   const timelineStore = useSelector((store) => store.timeline)
@@ -542,23 +543,23 @@ const ActivityLog = ({ activity, setLoader, index }) => {
       </div>
       {renderActivityBody()}
 
-      <TaskManage
-        timelinePanel={true}
-        id={taskId}
-        orderId={params.orderId}
-        closeModal={() =>
-          setShowTaskDetailsModal(false)
-        }
-        callback={() => false}
-      />
-      {/*{showImageModal && (*/}
-      {/*  <MoreDesign*/}
-      {/*    toggleModal={toggleImageModal}*/}
-      {/*    openModal={showImageModal}*/}
-      {/*    setLoader={setLoader}*/}
-      {/*    imageList={activity?.timelineImages}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {/*<TaskManage*/}
+      {/*  timelinePanel={true}*/}
+      {/*  id={taskId}*/}
+      {/*  orderId={params.orderId}*/}
+      {/*  closeModal={() =>*/}
+      {/*    setShowTaskDetailsModal(false)*/}
+      {/*  }*/}
+      {/*  callback={() => false}*/}
+      {/*/>*/}
+      {showImageModal && (
+        <MoreDesign
+          toggleModal={toggleImageModal}
+          openModal={showImageModal}
+          setLoader={setLoader}
+          imageList={activity?.timelineImages}
+        />
+      )}
     </div>
   )
 }
