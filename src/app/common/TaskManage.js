@@ -943,7 +943,7 @@ class TaskManage extends Component {
                         id='taskPostScroll'
                         onScroll={this.handlePostScroll}
                     >
-                        <div className='conversation-container'>
+                        <div className='task-conversation-container'>
                             {posts.map((post, i) => {
                                 return (
                                     <PostWithComments
