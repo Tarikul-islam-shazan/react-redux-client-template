@@ -39,6 +39,14 @@ const routes = {
   getTimeLineStepInfo: `${BASE_URL}/order-timeline/steps/order/`,
   getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
   getOrderQuotes: `${BASE_URL}/order/quotes/`,
+  getProjectMembers: `${BASE_URL}/order/get-member-list/`,
+  addDeleteMemberToTask: `${BASE_URL}/step/add-delete-member`,
+  approveTask: `${BASE_URL}/step/approve/`,
+  reviseTask: `${BASE_URL}/step/revise/`,
+  commentOnTask: `${BASE_URL}/order-timeline/new-comment`,
+  postOnTask: `${BASE_URL}/order-timeline/new-post`,
+  task: `${BASE_URL}/step/`,
+  getTaskPosts: `${BASE_URL}/order-timeline/step/`,
 
   // moodboard
   getMoodboardList: `${BASE_URL}/moodboard/search`,
