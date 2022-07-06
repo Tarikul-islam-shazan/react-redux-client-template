@@ -967,7 +967,7 @@ class TaskManage extends Component {
 
                 {/* {loadingPosts && <TaskPostSkeleton />} */}
                 <div
-                    className={`modal-footer-fixed modal-footer posting-option ${
+                    className={`modal-footer-fixed relative modal-footer posting-option ${
                         createPostFlag ? 'open' : ''
                     }`}
                 >
