@@ -89,7 +89,7 @@ const AllProductionList = () => {
     return (
         <>
             <div className='one-third all-production-details'>
-                <div className='factory-view relative'>
+                <div className='factory-view relative mb-5'>
                     <h5 className='absolute left-5 top-5'>Factory</h5>
                     <img src='/images/factory-view.jpg' />
                     <button

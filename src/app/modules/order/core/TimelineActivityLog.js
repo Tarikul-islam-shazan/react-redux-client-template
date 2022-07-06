@@ -106,7 +106,9 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
                         <img src='/icons/attachment.svg' alt='attach' />
                     </div>
                 </div>
-                <div className='activity-list'>{renderTimeline()}</div>
+                <div className='activity-list custom-scroll'>
+                    {renderTimeline()}
+                </div>
             </div>
         </>
     )
