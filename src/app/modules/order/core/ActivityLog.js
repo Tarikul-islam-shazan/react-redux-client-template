@@ -543,15 +543,26 @@ const ActivityLog = ({ activity, setLoader, index }) => {
       </div>
       {renderActivityBody()}
 
-      {/*<TaskManage*/}
-      {/*  timelinePanel={true}*/}
-      {/*  id={taskId}*/}
-      {/*  orderId={params.orderId}*/}
-      {/*  closeModal={() =>*/}
-      {/*    setShowTaskDetailsModal(false)*/}
-      {/*  }*/}
-      {/*  callback={() => false}*/}
-      {/*/>*/}
+      {showTaskDetailsModal && (<div
+        className='modal custom-modal-backdrop task-conversation fade show fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
+        id='taskManageModal'
+        tabIndex='-1' role='dialog' aria-labelledby='exampleModalLabel' style={{ display: 'block' }} aria-modal='true'
+      >
+        <div className='modal-dialog max-w-[485px] mr-0 mt-0 modal-dialog-centered relative w-auto pointer-events-none'>
+          <div
+            className='modal-content h-screen border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current'>
+            <TaskManage
+              timelinePanel={true}
+              id={taskId}
+              orderId={params.orderId}
+              closeModal={() =>
+                setShowTaskDetailsModal(false)
+              }
+              callback={() => false}
+            />
+          </div>
+        </div>
+      </div>)}
       {showImageModal && (
         <MoreDesign
           toggleModal={toggleImageModal}

@@ -80,9 +80,10 @@ const TimelineActivityLog = ({ toggleAddComment, setLoader }) => {
         <>
             <div className='one-third activity-logs'>
                 <div
+                    onClick={toggleAddComment}
                     className='top-write-comments'
-                    data-bs-toggle='modal'
-                    data-bs-target='#addCommentModal'
+                    // data-bs-toggle='modal'
+                    // data-bs-target='#addCommentModal'
                 >
                     <div className='comments-button cursor-pointer'>
                         <p className='regular-12 mb-0'>

@@ -39,11 +39,11 @@ const Timeline = () => {
 
     return (
         <>
-            <AddComment
+          {addComment && <AddComment
                 toggleAddComment={toggleAddComment}
                 openModal={addComment}
                 setLoader={setLoader}
-            />
+            />}
 
             <div className='buyer-timeline-container'>
                 <div className='timeline-row'>

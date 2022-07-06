@@ -15,6 +15,7 @@ import { addNewCommentOnTimeline } from '../../../redux_toolkit/Timeline/Timelin
 import LoaderComponent from '../../../common/LoaderComponent'
 import { toast } from 'react-toastify'
 import { SelectedFileViewComponent } from '../../../common/SelectedFileViewComponent'
+import SelectComponent from '../../../common/SelectComponent'
 
 const AddComment = ({ toggleAddComment, openModal }) => {
     const [selectedTask, setSelectedTask] = useState(null)
@@ -25,12 +26,13 @@ const AddComment = ({ toggleAddComment, openModal }) => {
     const params = useParams()
     const timelineStore = useSelector((store) => store.timeline)
     const [taskList, setTaskList] = useState([])
-    const [taskListHistory, setTaskListHistory] = useState([])
-    const [taskSearch, setTaskSearch] = useState('')
     const dispatch = useDispatch()
     const postInputRef = useRef(null)
     const [quillDisable, setQuillDisable] = useState(false)
-    const [openTask, setOpenTask] = useState(false)
+
+    useEffect(() => {
+        return () => console.log('==================')
+    },[])
 
     useEffect(() => {
         if (timelineStore?.selectedDesignList) {
@@ -40,8 +42,12 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                 `${params.orderId}/${timelineStore?.selectedDesignList[0]}`
             )
                 .then((response) => {
-                    setTaskList(response.data)
-                    setTaskListHistory(response.data)
+                  let tmpList = []
+                  for(let item of response.data){
+                    tmpList.push({ label: item.stepName, value: item.id })
+                  }
+
+                    setTaskList(tmpList)
                     setLoader(false)
                 })
                 .catch((error) => {
@@ -66,39 +72,6 @@ const AddComment = ({ toggleAddComment, openModal }) => {
         errorObj['taskError'] = undefined
         setError(errorObj)
         setSelectedTask(task)
-        setTaskList(taskListHistory)
-        setOpenTask(false)
-    }
-
-    const renderTaskList = () => {
-        return (
-            <>
-                <div className='task-search'>
-                    <input
-                        type='text'
-                        onChange={handleTaskSearch}
-                        value={taskSearch}
-                        placeholder='Search task'
-                        className='form-field'
-                    />
-                </div>
-                {taskList?.map((task, index) => {
-                    return (
-                        <li
-                            key={`task_${index}`}
-                            className={
-                                selectedTask?.stepName === task.stepName
-                                    ? 'text-sm selected'
-                                    : 'text-sm'
-                            }
-                            onClick={() => handleTask(task)}
-                        >
-                            <span>{task.stepName}</span>
-                        </li>
-                    )
-                })}
-            </>
-        )
     }
 
     const checkValidation = () => {
@@ -197,27 +170,10 @@ const AddComment = ({ toggleAddComment, openModal }) => {
         )
     }
 
-    const handleTaskSearch = (e) => {
-        let tmpArray = taskListHistory
-        if (tmpArray?.length > 0) {
-            tmpArray = tmpArray.filter(
-                (task) =>
-                    task.stepName.toLowerCase().indexOf(e.target.value) > -1
-            )
-        }
-        setTaskSearch(e.target.value)
-        setTaskList(tmpArray)
-    }
-
     return (
         <>
             <div
-                className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
-                id='addCommentModal'
-                tabIndex='-1'
-                aria-labelledby='exampleModalCenterTitle'
-                aria-modal='true'
-                role='dialog'
+              className='modal custom-modal-backdrop fade show fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto' id='exampleModal' tabIndex='-1' role='dialog' aria-labelledby='exampleModalLabel' style={{ display: 'block' }} aria-modal='true'
             >
                 <div className='modal-dialog max-w-[800px] modal-dialog-centered relative w-auto pointer-events-none'>
                     <div className='modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current'>
@@ -261,40 +217,10 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                                                                 )
                                                             }
                                                         >
-                                                            <div className='dropdown'>
-                                                                <button
-                                                                    className='dropdown-toggle bg-transparent h-[24px]'
-                                                                    type='button'
-                                                                    id='dropdownDefault'
-                                                                    data-dropdown-toggle='dropdown'
-                                                                    onClick={() => setOpenTask(true)}
-                                                                >
-                                                                    {selectedTask?.stepName ||
-                                                                        'Select Task'}
-                                                                </button>
-                                                                <div
-                                                                    onBlur={() =>
-                                                                        setTimeout(
-                                                                            () => {
-                                                                                setTaskList(
-                                                                                    taskListHistory
-                                                                                )
-                                                                                setTaskSearch(
-                                                                                    ''
-                                                                                )
-                                                                            },
-                                                                            500
-                                                                        )
-                                                                    }
-                                                                    className={`absolute bg-white z-10 top-11 shadow-md ${openTask ? 'open' : 'hidden'}`}
-                                                                    aria-labelledby='dropdownMenuButton'
-                                                                    id='dropdown'
-                                                                >
-                                                                    <ul className='select-task-list scroll-y-label' onBlur={() => setOpenTask(false)}>
-                                                                        {renderTaskList()}
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
+                                                          <SelectComponent
+                                                            options={taskList}
+                                                            onChange={handleTask}
+                                                          />
                                                             {error.taskError && (
                                                                 <p className='error'>
                                                                     {
@@ -306,8 +232,7 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                                                     </div>
                                                     <div
                                                         className='close-icon cursor-pointer'
-                                                        data-bs-dismiss='modal'
-                                                        aria-label='Close'
+                                                        onClick={toggleAddComment}
                                                     >
                                                         <img
                                                             src='/icons/close.svg'

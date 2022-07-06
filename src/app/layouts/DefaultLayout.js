@@ -106,11 +106,16 @@ const DefaultLayout = () => {
             </div>
             <div
               className='w-[40px] h-[40px] rounded-full bg-primaryColor-shade-300 relative border border-white-shade-100 flex items-center justify-center cursor-pointer overflow-hidden'>
-              <img
+              {!authUserInfo()?.profilePicDocument?.docUrl && <img
                 src='./images/user.jpg'
                 className='object-cover object-top w-full h-full'
                 alt=''
-              />
+              />}
+              {authUserInfo()?.profilePicDocument?.docUrl && <img
+                src={authUserInfo()?.profilePicDocument?.docUrl}
+                className='object-cover object-top w-full h-full'
+                alt=''
+              />}
             </div>
           </div>
         </header>
