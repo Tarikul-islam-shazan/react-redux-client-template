@@ -38,6 +38,7 @@ const routes = {
   getTimeLineOrderInfo: `${BASE_URL}/order-timeline/order-info/`,
   getTimeLineStepInfo: `${BASE_URL}/order-timeline/steps/order/`,
   getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
+  getOrderQuotes: `${BASE_URL}/order/quotes/`,
 
   // moodboard
   getMoodboardList: `${BASE_URL}/moodboard/search`,
