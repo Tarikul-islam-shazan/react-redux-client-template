@@ -38,6 +38,7 @@ import Favorite from '../assets/designs/favorite'
 import FabricWiseProduct from './modules/dashboard/FabricWiseProduct'
 import MyOrderList from './modules/order/MyOrderList'
 import Timeline from './modules/order/Timeline'
+import PODetails from './modules/order/PODetails'
 
 const useAuth = () => {
   const token = localStorage.getItem('token')
@@ -62,6 +63,7 @@ const App = () => {
               <Route path='dashboard' element={<Dashboard />} />
               <Route path='orders/my-orders' element={<MyOrderList />} />
               <Route path='orders/view/:orderId' element={<Timeline />} />
+              <Route path='purchaseDetails/:orderId' element={<PODetails />} />
               <Route path='products/materialId' element={<FabricWiseProduct />} />
               <Route path='activation' element={<ActivationPopup />} />
               <Route path='moodboard' element={<Moodboard />} />

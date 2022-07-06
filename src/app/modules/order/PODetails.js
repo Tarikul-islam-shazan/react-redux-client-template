@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Http from '../../services/Http'
-import { capitalizeFirstLetter, changeDateFormat, getShortName, renderMultiColor } from '../../services/Util'
+import { capitalizeFirstLetter, changeDateFormat, getShortName } from '../../services/Util'
 import Tooltip from '@mui/material/Tooltip'
 import LoaderComponent from '../../common/LoaderComponent'
 import { toast } from 'react-toastify'
@@ -10,7 +10,7 @@ const PODetails = () => {
   const [orderList, setOrderList] = useState()
   const [loader, setLoader] = useState(true)
   const params = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     Http.GET('getOrderQuotes', `${params.orderId}`)
@@ -23,6 +23,49 @@ const PODetails = () => {
         setLoader(false)
       })
   }, [])
+
+  const renderMultiColor = (color) => {
+    if (color.representedBy === 'SWATCH') {
+      return (
+        <div className='colors-row'>
+          <div className='multicolors'>
+          <span className='color-icon'>
+            <img src={color?.swatchDocResponse?.docUrl} alt={'swatch color'} />
+          </span>
+          </div>
+        </div>
+      )
+    } else if (color.colorType !== 'SOLID') {
+      return (
+        <div className='colors-row'>
+          <div className='multicolors'>
+            {color?.compositeColorList?.length > 0 &&
+              color.compositeColorList.map((item, index) => {
+                return (
+                  <Tooltip title={color.name} arrow placement={'top'} key={`multi_${index}`}>
+                  <span
+                    key={`multi_color_${index}`}
+                    className='color-icon'
+                    style={{ background: item.hexCode }}
+                  />
+                  </Tooltip>
+                )
+              })}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className='colors-row'>
+          <div className='multicolors'>
+            <Tooltip title={color.name} arrow placement={'top'}>
+              <span className='color-icon' style={{ background: color.hexCode }} />
+            </Tooltip>
+          </div>
+        </div>
+      )
+    }
+  }
 
   const getColorWisePrice = (colorWisePrices, id) => {
     if (colorWisePrices && colorWisePrices[id]) {
@@ -126,7 +169,7 @@ const PODetails = () => {
   }
 
   const redirectToDesignView = (productId) => {
-    history.push(`/designs/view/${productId}`)
+    navigate(`/designs/view/${productId}`)
   }
 
   const renderOrderList = () => {
@@ -224,7 +267,7 @@ const PODetails = () => {
               src='/icons/Left arrwo.svg'
               alt='back'
               className='back-icon'
-              onClick={history.goBack}
+              onClick={navigate.goBack}
             />{' '}
             PO details
           </h3>
