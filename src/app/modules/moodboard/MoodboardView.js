@@ -12,7 +12,9 @@ import {
     UPLOAD_MOODBOARD_IMAGES,
     DELETE_COLOR_FROM_MOODBOARD,
     DELETE_PRODUCT_IMAGE,
-    GET_MOODBOARD_FABRICS
+    GET_MOODBOARD_FABRICS,
+    ADD_FABRIC_TO_MOODBOARD,
+    DELETE_FABRIC_FROM_MOODBOARD
 } from '../../redux_toolkit/@types/thunk.types'
 
 import { ReactComponent as FilterIcon } from '../../../assets/icons/Filter-24.svg'
@@ -121,6 +123,15 @@ const MoodboardView = (props) => {
     // on clicking delete product image
     const onClickDeleteImage = async (id, imageId) => {
         dispatch(MoodboardThunks[DELETE_PRODUCT_IMAGE](id, imageId))
+    }
+
+    // to add a fabric to moodboard
+    const addFabricToMoodboard = async (e, fabricId) => {
+        dispatch(MoodboardThunks[ADD_FABRIC_TO_MOODBOARD](id, fabricId))
+    }
+
+    const removeFabricFromMoodboard = async (e, fabricId) => {
+        dispatch(MoodboardThunks[DELETE_FABRIC_FROM_MOODBOARD](id, fabricId))
     }
 
     // used to upload product image instantly
@@ -428,11 +439,20 @@ const MoodboardView = (props) => {
                                                 >
                                                     <div className='fabric-image'>
                                                         <img
-                                                            src='/images/moodboard/fabric1.png'
+                                                            src={
+                                                                fabric.documentPath
+                                                            }
                                                             alt='fabric'
                                                         />
                                                         <span className='close'>
-                                                            <CloseIcon />
+                                                            <CloseIcon
+                                                                onClick={(e) =>
+                                                                    removeFabricFromMoodboard(
+                                                                        e,
+                                                                        fabric.id
+                                                                    )
+                                                                }
+                                                            />
                                                         </span>
                                                     </div>
 
@@ -453,6 +473,46 @@ const MoodboardView = (props) => {
                                     </span>
                                 </div>
                                 <div className='fabric-all-items'>
+                                    {moodboardFabrics?.length > 0 &&
+                                        moodboardFabrics.map(
+                                            (fabric, index) => {
+                                                {
+                                                    /* {
+                                                    console.log(fabric)
+                                                } */
+                                                }
+                                                return (
+                                                    <div
+                                                        key={fabric.materialId}
+                                                        className='fabric-single-item'
+                                                    >
+                                                        <div className='fabric-image'>
+                                                            <img
+                                                                src={
+                                                                    fabric.docUrl
+                                                                }
+                                                                alt={
+                                                                    fabric.description
+                                                                }
+                                                            />
+                                                            <span className='select'>
+                                                                <TickIcon
+                                                                    onClick={(
+                                                                        e
+                                                                    ) => {
+                                                                        addFabricToMoodboard(
+                                                                            e,
+                                                                            fabric.materialId
+                                                                        )
+                                                                    }}
+                                                                />
+                                                            </span>
+                                                        </div>
+                                                        <p>{fabric.name}</p>
+                                                    </div>
+                                                )
+                                            }
+                                        )}
                                     {/* <div className='fabric-single-item'>
                                         <div className='fabric-image'>
                                             <img
@@ -463,7 +523,6 @@ const MoodboardView = (props) => {
                                                 <TickIcon />
                                             </span>
                                         </div>
-
                                         <p>Single Jersey CO(35%), PL(65%)</p>
                                     </div>
                                     <div className='fabric-single-item'>

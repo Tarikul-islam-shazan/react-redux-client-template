@@ -38,7 +38,9 @@ const routes = {
     addColorToMoodboard: `${BASE_URL}/moodboard/`,
     deleteColorFromMoodboard: `${BASE_URL}/moodboard/`,
     deleteProductImage: `${BASE_URL}/moodboard/`,
-    getMoodboardFabrics: `${BASE_URL}/material/all`
+    getMoodboardFabrics: `${BASE_URL}/material/all`,
+    addFabricToMoodboard: `${BASE_URL}/moodboard/`,
+    removeFabricFromMoodboard: `${BASE_URL}/moodboard/`
 }
 
 // Axios request interceptor
@@ -138,6 +140,7 @@ const Http = {
     },
     DELETE: (key, data, id = '') => {
         // updateTokenInHeader();
+        // console.log(routes[key] + id)
         return axios.delete(routes[key] + id, { data, headers })
     },
     DELETE_WITH_BODY: (key, body, params = '') => {

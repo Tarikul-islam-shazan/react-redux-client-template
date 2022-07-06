@@ -66,10 +66,25 @@ export const deleteProductImage = async (id, imageID) => {
 }
 
 export const getMoodboardFabrics = async () => {
-    let defaultParams={
-        page:0,
-        size:9,
-        supplierType:'FABRIC'
+    let defaultParams = {
+        page: 0,
+        size: 9,
+        supplierType: 'FABRIC'
     }
     return Http.GET('getMoodboardFabrics', defaultParams)
+}
+
+export const addFabricToMoodboard = async (moodboardID,fabricID) => {
+    // console.log(data)
+    return Http.POST('addFabricToMoodboard', null, moodboardID + '/add-material?materialId=' + fabricID)
+}
+
+export const deleteFabricFromMoodboard = async (moodboardID, fabricID) => {
+
+    // console.log(moodboardID, fabricID)
+    return Http.DELETE(
+        'removeFabricFromMoodboard',
+        null,
+        moodboardID + '/material/' + fabricID
+    )
 }

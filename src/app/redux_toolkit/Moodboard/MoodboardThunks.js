@@ -36,7 +36,9 @@ import {
     DELETE_PRODUCT_IMAGE,
     ADD_COLOR_CODE,
     DELETE_COLOR_FROM_MOODBOARD,
-    GET_MOODBOARD_FABRICS
+    GET_MOODBOARD_FABRICS,
+    ADD_FABRIC_TO_MOODBOARD,
+    DELETE_FABRIC_FROM_MOODBOARD
 } from '../@types/thunk.types'
 
 // Service import
@@ -50,7 +52,9 @@ import {
     addColorToMoodboard,
     deleteColorFromMoodboard,
     deleteProductImage,
-    getMoodboardFabrics
+    getMoodboardFabrics,
+    addFabricToMoodboard,
+    deleteFabricFromMoodboard
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -178,10 +182,7 @@ const MoodboardThunks = {
     [DELETE_PRODUCT_IMAGE]: (moodboardID, imageID) => {
         return async (dispatch, getState) => {
             try {
-                let response = await deleteProductImage(
-                    moodboardID,
-                    imageID
-                )
+                let response = await deleteProductImage(moodboardID, imageID)
                 // console.log('response', response)
                 dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
                 dispatch
@@ -224,13 +225,43 @@ const MoodboardThunks = {
     },
     [GET_MOODBOARD_FABRICS]: () => {
         return async (dispatch, getState) => {
-            let data = await getMoodboardFabrics()
-            console.log(data)
-            dispatch({
-                type: MoodboardActions[SET_MOODBOARD_FABRICS],
-                payload: data.data
-            })
-            return getState().moodboard
+            try {
+                let data = await getMoodboardFabrics()
+                dispatch({
+                    type: MoodboardActions[SET_MOODBOARD_FABRICS],
+                    payload: data.data.data
+                })
+                return getState().moodboard
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
+    [ADD_FABRIC_TO_MOODBOARD]: (moodboardID, fabricID) => {
+        return async (dispatch, getState) => {
+            try {
+                console.log(moodboardID)
+                console.log(fabricID)
+                let response = await addFabricToMoodboard(moodboardID, fabricID)
+                dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
+    [DELETE_FABRIC_FROM_MOODBOARD]: (moodboardID, fabricID) => {
+        return async (dispatch, getState) => {
+            try {
+                let response = await deleteFabricFromMoodboard(
+                    moodboardID,
+                    fabricID
+                )
+                dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }
