@@ -22,7 +22,9 @@ import {
     SET_MOODBOARD_BY_ID,
     UPDATE_SELECTED_MOODBOARD_STATE,
     SET_COLOR_CODES,
-    SET_MOODBOARD_FABRICS
+    SET_MOODBOARD_FABRICS,
+    SET_FAVOURITE_MOODBOARD,
+    UNSET_FAVOURITE_MOODBOARD
 } from '../@types/action.types'
 
 // thunk types
@@ -38,7 +40,9 @@ import {
     DELETE_COLOR_FROM_MOODBOARD,
     GET_MOODBOARD_FABRICS,
     ADD_FABRIC_TO_MOODBOARD,
-    DELETE_FABRIC_FROM_MOODBOARD
+    DELETE_FABRIC_FROM_MOODBOARD,
+    ADD_MOODBOARD_TO_FAVORITE,
+    REMOVE_MOODBOARD_FROM_FAVORITE
 } from '../@types/thunk.types'
 
 // Service import
@@ -54,7 +58,9 @@ import {
     deleteProductImage,
     getMoodboardFabrics,
     addFabricToMoodboard,
-    deleteFabricFromMoodboard
+    deleteFabricFromMoodboard,
+    addToFavoriteMoodboards,
+    removeFromFavoriteMoodboards
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -261,6 +267,46 @@ const MoodboardThunks = {
                 return { state: getState().moodboard, response }
             } catch (error) {
                 console.log(error)
+            }
+        }
+    },
+    [ADD_MOODBOARD_TO_FAVORITE]: (moodboardID) => {
+        return async (dispatch, getState) => {
+            try {
+                // we have to develop a different approach here later
+                // dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                dispatch({
+                    type: MoodboardActions[SET_FAVOURITE_MOODBOARD],
+                    payload: moodboardID
+                })
+                let response = await addToFavoriteMoodboards(moodboardID)
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log(error)
+                dispatch({
+                    type: MoodboardActions[UNSET_FAVOURITE_MOODBOARD],
+                    payload: moodboardID
+                })
+            }
+        }
+    },
+    [REMOVE_MOODBOARD_FROM_FAVORITE]: (moodboardID) => {
+        return async (dispatch, getState) => {
+            try {
+                // we have to develop a different approach here later
+                // dispatch(MoodboardThunks[GET_MOODBOARD_BY_ID](moodboardID))
+                dispatch({
+                    type: MoodboardActions[UNSET_FAVOURITE_MOODBOARD],
+                    payload: moodboardID
+                })
+                let response = await removeFromFavoriteMoodboards(moodboardID)
+                return { state: getState().moodboard, response }
+            } catch (error) {
+                console.log(error)
+                dispatch({
+                    type: MoodboardActions[SET_FAVOURITE_MOODBOARD],
+                    payload: moodboardID
+                })
             }
         }
     }

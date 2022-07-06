@@ -40,7 +40,9 @@ const routes = {
     deleteProductImage: `${BASE_URL}/moodboard/`,
     getMoodboardFabrics: `${BASE_URL}/material/all`,
     addFabricToMoodboard: `${BASE_URL}/moodboard/`,
-    removeFabricFromMoodboard: `${BASE_URL}/moodboard/`
+    removeFabricFromMoodboard: `${BASE_URL}/moodboard/`,
+    addToFavoriteMoodboards: `${BASE_URL}/moodboard/`,
+    removeFromFavoriteMoodboards: `${BASE_URL}/moodboard/`
 }
 
 // Axios request interceptor

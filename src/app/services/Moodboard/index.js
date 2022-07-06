@@ -88,3 +88,11 @@ export const deleteFabricFromMoodboard = async (moodboardID, fabricID) => {
         moodboardID + '/material/' + fabricID
     )
 }
+
+export const addToFavoriteMoodboards = async (moodboardID) => {
+    return Http.GET_WITH_ID_PARAM('addToFavoriteMoodboards', null, moodboardID + '/add-to-favorite')
+}
+
+export const removeFromFavoriteMoodboards = async (moodboardID) => {
+    return Http.GET_WITH_ID_PARAM('removeFromFavoriteMoodboards', null, moodboardID + '/remove-from-favorite')
+}

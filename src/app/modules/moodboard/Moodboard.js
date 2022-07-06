@@ -12,13 +12,18 @@ import { ReactComponent as CloseIcon } from '../../../assets/images/close.svg'
 import { ReactComponent as OkWhite } from '../../../assets/images/ok-white.svg'
 import { ReactComponent as Refresh } from '../../../assets/images/refresh.svg'
 import { ReactComponent as Dlt } from '../../../assets/images/dlt.svg'
+import { ReactComponent as HeartIconFill } from '../../../assets/icons/favourite.svg'
+import { ReactComponent as HeartIcon } from '../../../assets/images/fav-border.svg'
+
 import { ReactComponent as ArrowRightWhite } from '../../../assets/images/arror-right-white.svg'
 import Pdf from '../../../assets/images/pdf.png'
 
 // import thunkType
 import {
     GET_MOODBOARD_LIST,
-    UPLOAD_MOODBOARDS
+    UPLOAD_MOODBOARDS,
+    ADD_MOODBOARD_TO_FAVORITE,
+    REMOVE_MOODBOARD_FROM_FAVORITE
 } from '../../redux_toolkit/@types/thunk.types'
 
 // importing thunks
@@ -72,6 +77,14 @@ const Moodboard = () => {
         // console.log('thunkResponse', thunkResponse)
         popupRef.current.click()
         handleMoodboardClick(thunkResponse.response.data.id)
+    }
+
+    const setFavourite = async (id) => {
+        await dispatch(MoodboardThunks[ADD_MOODBOARD_TO_FAVORITE](id))
+    }
+
+    const removeFavourite = async (id) => {
+        await dispatch(MoodboardThunks[REMOVE_MOODBOARD_FROM_FAVORITE](id))
     }
 
     useEffect(() => {
@@ -250,70 +263,29 @@ const Moodboard = () => {
                                           </div>
                                           <div className='w-[40px] h-[40px] bg-white border border-white-shade-100 flex justify-center items-center absolute right-[35px] top-[35px] cursor-pointer'>
                                               <span className='mt-2'>
-                                                  <svg
-                                                      width='38'
-                                                      height='36'
-                                                      viewBox='0 0 38 36'
-                                                      fill='none'
-                                                      xmlns='http://www.w3.org/2000/svg'
-                                                  >
-                                                      <g filter='url(#filter0_d_944_19802)'>
-                                                          <path
-                                                              d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                              fill='#DA336F'
-                                                              // api not sending response for it
-                                                          />
-                                                          <path
-                                                              d='M18.4415 22.7608L10.5723 14.5663C8.35573 12.2582 8.49531 8.4736 10.8753 6.34929C13.2364 4.24181 16.8165 4.65105 18.6824 7.24171L18.9961 7.67724L19.3098 7.24171C21.1757 4.65105 24.7557 4.24181 27.1169 6.34929C29.4969 8.4736 29.6365 12.2582 27.4199 14.5663L19.5507 22.7608C19.2444 23.0797 18.7478 23.0797 18.4415 22.7608Z'
-                                                              stroke='#F5F5F5'
-                                                              strokeLinecap='round'
-                                                              strokeLinejoin='round'
-                                                          />
-                                                      </g>
-                                                      <defs>
-                                                          <filter
-                                                              id='filter0_d_944_19802'
-                                                              x='0.496094'
-                                                              y='0.5'
-                                                              width='37'
-                                                              height='35'
-                                                              filterUnits='userSpaceOnUse'
-                                                              colorInterpolationFilters='sRGB'
-                                                          >
-                                                              <feFlood
-                                                                  floodOpacity='0'
-                                                                  result='BackgroundImageFix'
-                                                              />
-                                                              <feColorMatrix
-                                                                  in='SourceAlpha'
-                                                                  type='matrix'
-                                                                  values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                                                                  result='hardAlpha'
-                                                              />
-                                                              <feOffset dy='4' />
-                                                              <feGaussianBlur stdDeviation='4' />
-                                                              <feComposite
-                                                                  in2='hardAlpha'
-                                                                  operator='out'
-                                                              />
-                                                              <feColorMatrix
-                                                                  type='matrix'
-                                                                  values='0 0 0 0 0.854167 0 0 0 0 0.199306 0 0 0 0 0.435056 0 0 0 0.2 0'
-                                                              />
-                                                              <feBlend
-                                                                  mode='normal'
-                                                                  in2='BackgroundImageFix'
-                                                                  result='effect1_dropShadow_944_19802'
-                                                              />
-                                                              <feBlend
-                                                                  mode='normal'
-                                                                  in='SourceGraphic'
-                                                                  in2='effect1_dropShadow_944_19802'
-                                                                  result='shape'
-                                                              />
-                                                          </filter>
-                                                      </defs>
-                                                  </svg>
+                                                  {/* <HeartIcon /> */}
+
+                                                  {moodboard.isFavorite && (
+                                                      <HeartIconFill
+                                                          onClick={(e) => {
+                                                              e.stopPropagation()
+
+                                                              removeFavourite(
+                                                                  moodboard.id
+                                                              )
+                                                          }}
+                                                      />
+                                                  )}
+                                                  {!moodboard?.isFavorite && (
+                                                      <HeartIcon
+                                                          onClick={(e) => {
+                                                              e.stopPropagation()
+                                                              setFavourite(
+                                                                  moodboard.id
+                                                              )
+                                                          }}
+                                                      />
+                                                  )}
                                               </span>
                                           </div>
                                       </div>

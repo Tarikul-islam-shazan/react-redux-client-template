@@ -10,7 +10,9 @@ import {
     SET_MOODBOARD_BY_ID,
     UPDATE_SELECTED_MOODBOARD_STATE,
     SET_COLOR_CODES,
-    SET_MOODBOARD_FABRICS
+    SET_MOODBOARD_FABRICS,
+    SET_FAVOURITE_MOODBOARD,
+    UNSET_FAVOURITE_MOODBOARD
 } from '../@types/action.types'
 
 export const MoodboardReducer = {
@@ -40,5 +42,17 @@ export const MoodboardReducer = {
     [SET_MOODBOARD_FABRICS]: (state, action) => {
         // console.log('MoodboardReducer', action.payload)
         state.moodboardFabrics = action?.payload
+    },
+    [SET_FAVOURITE_MOODBOARD]: (state, action) => {
+        let moodboardIndex = state.moodboardList.findIndex(
+            (moodboard) => moodboard.id === action.payload
+        )
+        state.moodboardList[moodboardIndex].isFavorite = true
+    },
+    [UNSET_FAVOURITE_MOODBOARD]: (state, action) => {
+        let moodboardIndex = state.moodboardList.findIndex(
+            (moodboard) => moodboard.id === action.payload
+        )
+        state.moodboardList[moodboardIndex].isFavorite = false
     }
 }
