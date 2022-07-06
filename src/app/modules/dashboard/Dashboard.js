@@ -176,7 +176,7 @@ const Dashboard = () => {
 
       {/*Sticky option*/}
 
-      <div className={`bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-${showSummary ? '0' : '[-338px]'} text-white-shade-100 text-base z-[999]`}>
+      <div className={showSummary ? 'bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-0 text-white-shade-100 text-base z-[999]' : 'bg-primaryColor  shadow px-7 py-4 w-[338px]  fixed top-[20%] right-[-338px] text-white-shade-100 text-base z-[999]'}>
         <div className='bg-primaryColor cursor-pointer px-7 py-4 w-[165px]  absolute top-[45%] left-[-110px] text-white-shade-100 text-center text-base rotate-[-90deg] z-[999]' onClick={() => setShowSummary(prev => !prev)}>
           <span className='uppercase'>Summary</span>
         </div>

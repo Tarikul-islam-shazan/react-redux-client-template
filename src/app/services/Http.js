@@ -21,12 +21,6 @@ const routes = {
     verifyEmail: `${BASE_URL}/user/client/verify-email`,
     resendVerificationMail: `${BASE_URL}/user/client/resend-email`,
     getLoginPageBgImage: `${BASE_URL}/static-content/buyer/login`,
-    fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
-    searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
-    nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
-    fetchMaterialsByFabric: `${BASE_URL}/material/fabric/base/`,
-    fetchProductByMaterials: `${BASE_URL}/product/search`,
-    fetchDashboardCount: `${BASE_URL}/dashboard/buyer/dashboard-overview`,
 
     // moodboard
     getMoodboardList: `${BASE_URL}/moodboard/search`,
@@ -42,7 +36,33 @@ const routes = {
     addFabricToMoodboard: `${BASE_URL}/moodboard/`,
     removeFabricFromMoodboard: `${BASE_URL}/moodboard/`,
     addToFavoriteMoodboards: `${BASE_URL}/moodboard/`,
-    removeFromFavoriteMoodboards: `${BASE_URL}/moodboard/`
+    removeFromFavoriteMoodboards: `${BASE_URL}/moodboard/`,
+
+    //home page
+    fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
+    searchCollectionByUser: `${BASE_URL}/collection/search/user/`,
+    nitexOffer: `${BASE_URL}/dashboard/nitex/offer`,
+    fetchMaterialsByFabric: `${BASE_URL}/material/fabric/base/`,
+    fetchProductByMaterials: `${BASE_URL}/product/search`,
+    fetchDashboardCount: `${BASE_URL}/dashboard/buyer/dashboard-overview`,
+
+    //order page
+    statusWiseCount: `${BASE_URL}/order/status-wise-count`,
+    getOrderList: `${BASE_URL}/order/my-order`,
+    getTimeLineData: `${BASE_URL}/order-timeline/order/`,
+    downloadInvoice: `${BASE_URL}/invoice/download/`,
+    getTimeLineOrderInfo: `${BASE_URL}/order-timeline/order-info/`,
+    getTimeLineStepInfo: `${BASE_URL}/order-timeline/steps/order/`,
+    getDesignWiseTaskList: `${BASE_URL}/step/tasks/timeline/`,
+    getOrderQuotes: `${BASE_URL}/order/quotes/`,
+    getProjectMembers: `${BASE_URL}/order/get-member-list/`,
+    addDeleteMemberToTask: `${BASE_URL}/step/add-delete-member`,
+    approveTask: `${BASE_URL}/step/approve/`,
+    reviseTask: `${BASE_URL}/step/revise/`,
+    commentOnTask: `${BASE_URL}/order-timeline/new-comment`,
+    postOnTask: `${BASE_URL}/order-timeline/new-post`,
+    task: `${BASE_URL}/step/`,
+    getTaskPosts: `${BASE_URL}/order-timeline/step/`
 }
 
 // Axios request interceptor

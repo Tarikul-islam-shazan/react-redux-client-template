@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import MoodboardSliceReducer from './Moodboard'
 import MaterialSliceReducer from './Home'
 import LoaderReducer from './Loader'
+import OrderReducer from './Order'
+import TimelineReducer from './Timeline'
 
 // this is the configure store portion of the redux + redux-toolkit setup
 // applied a middleware to supress the serialized data warning
@@ -11,6 +13,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
   reducer: {
+    timeline: TimelineReducer,
+    orders: OrderReducer,
     material: MaterialSliceReducer,
     moodboard: MoodboardSliceReducer,
     loader: LoaderReducer
