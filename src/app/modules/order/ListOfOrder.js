@@ -145,11 +145,11 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                             </div>
                         </div>
                         <div className='order-details'>
-                            <Tooltip title={item?.name} placement={'top'} arrow>
-                                <span className='order-title'>
-                                    {getShortName(item?.name, 20)}
-                                </span>
-                            </Tooltip>
+                            {/*<Tooltip title={item?.name} placement={'top'} arrow>*/}
+                            {/*    <span className='order-title'>*/}
+                            {/*        {getShortName(item?.name, 20)}*/}
+                            {/*    </span>*/}
+                            {/*</Tooltip>*/}
 
                             <div className='po-numbers'>
                                 <div className='pos'>
@@ -165,9 +165,9 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                                             )}
                                         </span>
                                     </Tooltip>
-                                    <span className='regular-14 gray_dark_02'>
-                                        &nbsp;({item.orderRefNumber})
-                                    </span>
+                                    {/*<span className='regular-14 gray_dark_02'>*/}
+                                    {/*    &nbsp;({item.orderRefNumber})*/}
+                                    {/*</span>*/}
                                 </div>
                             </div>
                             <ul className='order-quantity-details flex'>
@@ -176,9 +176,10 @@ const ListOfOrder = ({ orderStore, activeTab }) => {
                                     {item.totalStyles > 1 ? 'Styles' : 'Style'}
                                 </li>
                                 <li>{item.orderQuantity} units</li>
-                                <li>${item.orderValue}</li>
+                                {/*<li>${item.orderValue}</li>*/}
                             </ul>
                             {renderDeliveryStatus(item)}
+                            <p>${item.orderValue}</p>
                             {orderStore.activeTab !== 'PENDING' && (
                                 <div className='round-progress-68'>
                                     <div

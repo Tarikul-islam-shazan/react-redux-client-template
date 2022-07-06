@@ -98,11 +98,11 @@ const MyOrderList = () => {
               >
                 <span className='task-name regular-14'>
                   Running
-                  {orderStore?.countResponse?.RUNNING && (
-                    <span className='order-count running'>
-                      {orderStore.countResponse.RUNNING}
-                    </span>
-                  )}
+                  {/*{orderStore?.countResponse?.RUNNING && (*/}
+                  {/*  <span className='order-count running'>*/}
+                  {/*    {orderStore.countResponse.RUNNING}*/}
+                  {/*  </span>*/}
+                  {/*)}*/}
                 </span>
               </li>
               <li
@@ -111,11 +111,11 @@ const MyOrderList = () => {
               >
                 <span className='task-name regular-14'>
                   Pending
-                  {orderStore?.countResponse?.PENDING && (
-                    <span className='order-count pending'>
-                      {orderStore.countResponse.PENDING}
-                    </span>
-                  )}
+                  {/*{orderStore?.countResponse?.PENDING && (*/}
+                  {/*  <span className='order-count pending'>*/}
+                  {/*    {orderStore.countResponse.PENDING}*/}
+                  {/*  </span>*/}
+                  {/*)}*/}
                 </span>
               </li>
               <li
@@ -124,11 +124,11 @@ const MyOrderList = () => {
               >
                 <span className='task-name regular-14'>
                   Completed
-                  {orderStore?.countResponse?.PENDING && (
-                    <span className='order-count complete'>
-                      {orderStore.countResponse.COMPLETED}
-                    </span>
-                  )}
+                  {/*{orderStore?.countResponse?.PENDING && (*/}
+                  {/*  <span className='order-count complete'>*/}
+                  {/*    {orderStore.countResponse.COMPLETED}*/}
+                  {/*  </span>*/}
+                  {/*)}*/}
                 </span>
               </li>
             </ul>
