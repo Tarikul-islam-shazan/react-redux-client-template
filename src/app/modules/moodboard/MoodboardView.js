@@ -34,6 +34,11 @@ const MoodboardView = (props) => {
     const selectedMoodboard = useSelector(
         (state) => state.moodboard.selectedMoodboard
     )
+
+    const moodboardFabrics = useSelector(
+        (state) => state.moodboard.moodboardFabrics
+    )
+
     const [selectedProductView, setSelectedProductView] = useState('moodboard')
 
     const [titleEdit, setTitleEdit] = useState(false)
@@ -448,7 +453,7 @@ const MoodboardView = (props) => {
                                     </span>
                                 </div>
                                 <div className='fabric-all-items'>
-                                    <div className='fabric-single-item'>
+                                    {/* <div className='fabric-single-item'>
                                         <div className='fabric-image'>
                                             <img
                                                 src='/images/moodboard/fabric2.png'
@@ -496,7 +501,7 @@ const MoodboardView = (props) => {
                                             </span>
                                         </div>
                                         <p>Single Jersey CO(35%), PL(65%)</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
