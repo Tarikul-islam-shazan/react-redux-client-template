@@ -30,6 +30,7 @@ const AddComment = ({ toggleAddComment, openModal }) => {
     const dispatch = useDispatch()
     const postInputRef = useRef(null)
     const [quillDisable, setQuillDisable] = useState(false)
+    const [openTask, setOpenTask] = useState(false)
 
     useEffect(() => {
         if (timelineStore?.selectedDesignList) {
@@ -66,6 +67,7 @@ const AddComment = ({ toggleAddComment, openModal }) => {
         setError(errorObj)
         setSelectedTask(task)
         setTaskList(taskListHistory)
+        setOpenTask(false)
     }
 
     const renderTaskList = () => {
@@ -265,6 +267,7 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                                                                     type='button'
                                                                     id='dropdownDefault'
                                                                     data-dropdown-toggle='dropdown'
+                                                                    onClick={() => setOpenTask(true)}
                                                                 >
                                                                     {selectedTask?.stepName ||
                                                                         'Select Task'}
@@ -283,11 +286,11 @@ const AddComment = ({ toggleAddComment, openModal }) => {
                                                                             500
                                                                         )
                                                                     }
-                                                                    className='absolute bg-white z-10 top-11 shadow-md hidden'
+                                                                    className={`absolute bg-white z-10 top-11 shadow-md ${openTask ? 'open' : 'hidden'}`}
                                                                     aria-labelledby='dropdownMenuButton'
                                                                     id='dropdown'
                                                                 >
-                                                                    <ul className='select-task-list scroll-y-label'>
+                                                                    <ul className='select-task-list scroll-y-label' onBlur={() => setOpenTask(false)}>
                                                                         {renderTaskList()}
                                                                     </ul>
                                                                 </div>
