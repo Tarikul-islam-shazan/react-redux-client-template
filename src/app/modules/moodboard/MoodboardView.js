@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import ColorPicker from '../../common/ColorPicker'
 
+import FabricFilter from './FabricFilter'
+
 // thunks to get moodboard data and set it into the store
 import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
 import {
@@ -52,6 +54,8 @@ const MoodboardView = (props) => {
     const [selectedFiles, setSelectedFiles] = useState([])
 
     const [showColorPicker, setShowColorPicker] = useState(false)
+
+    const [fabricFilterView, setFabricFilterView] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -132,6 +136,11 @@ const MoodboardView = (props) => {
 
     const removeFabricFromMoodboard = async (e, fabricId) => {
         dispatch(MoodboardThunks[DELETE_FABRIC_FROM_MOODBOARD](id, fabricId))
+    }
+
+    const onFabricFilterClick = (e) => {
+        e.preventDefault()
+        setFabricFilterView(!fabricFilterView)
     }
 
     // used to upload product image instantly
@@ -416,7 +425,7 @@ const MoodboardView = (props) => {
                                 )}
                             </div>
                             {/* Moodboard fabrics */}
-                            <div className='moodboard-fabric-container'>
+                            <div className='moodboard-fabric-container relative'>
                                 <h3>Fabrics</h3>
 
                                 {/* Selcted Fabrics */}
@@ -469,7 +478,11 @@ const MoodboardView = (props) => {
                                         Suggested <span>Fabrics</span>
                                     </p>
                                     <span>
-                                        <FilterIcon />
+                                        <FilterIcon
+                                            onClick={(e) =>
+                                                onFabricFilterClick(e)
+                                            }
+                                        />
                                     </span>
                                 </div>
                                 <div className='fabric-all-items'>
@@ -562,6 +575,11 @@ const MoodboardView = (props) => {
                                         <p>Single Jersey CO(35%), PL(65%)</p>
                                     </div> */}
                                 </div>
+                                {fabricFilterView && (
+                                    <FabricFilter
+                                        toClose={onFabricFilterClick}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>

@@ -104,7 +104,7 @@ button {
       border: 0;
       &.posting-option {
           padding-left: 68px;
-          align-items: start;
+          align-items: flex-start;
           min-height: 72px;
           transition: all ease-in-out 0.2s;
           flex-direction: column;
@@ -724,7 +724,7 @@ input.date-range-picker,
   padding: 12px;
   padding-left: 48px;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
   position: relative;
   border-radius: 4px;
@@ -775,7 +775,7 @@ input.date-range-picker,
       display: none;
       &.open {
           display: flex;
-          align-items: start;
+          align-items: flex-start;
       }
   }
 }

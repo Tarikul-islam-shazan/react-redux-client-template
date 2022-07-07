@@ -382,7 +382,7 @@ class TaskManage extends Component {
                 this.setState({ selectedFiles, createPostFlag: true })
             }
             reader.onerror = function (error) {
-                console.log('Error: ', error)
+                // console.log('Error: ', error)
             }
         })
     }

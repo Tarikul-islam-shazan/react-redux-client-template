@@ -31,7 +31,7 @@ const AddComment = ({ toggleAddComment, openModal }) => {
     const [quillDisable, setQuillDisable] = useState(false)
 
     useEffect(() => {
-        return () => console.log('==================')
+        // return () => console.log('==================')
     },[])
 
     useEffect(() => {

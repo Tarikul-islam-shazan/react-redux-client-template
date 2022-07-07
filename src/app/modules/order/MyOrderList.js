@@ -32,7 +32,7 @@ const MyOrderList = () => {
 
   useEffect(() => {
     dispatch(openLoader())
-    console.log('==activeTab==', activeTab)
+    // console.log('==activeTab==', activeTab)
     let params = generateParams(activeTab, 0)
     dispatch(OrderThunks[GET_ORDER_LIST](params, false, activeTab)).finally(() => dispatch(closeLoader()))
     document.addEventListener('scroll', handleScroll)

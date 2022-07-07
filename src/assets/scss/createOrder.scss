@@ -94,7 +94,7 @@
               .colors-row {
                   .multicolors {
                       margin-top: 0;
-                      justify-content: end;
+                      justify-content: flex-end;
                       .color-icon {
                           img {
                               width: 28px;
@@ -170,7 +170,7 @@
   }
   .design-table {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       position: relative;
       .multiple-color-add-option {
           display: flex;

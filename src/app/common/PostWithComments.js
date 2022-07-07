@@ -130,7 +130,7 @@ class PostWithComments extends Component {
         this.setState({ selectedFiles })
       }
       reader.onerror = function(error) {
-        console.log('Error: ', error)
+        // console.log('Error: ', error)
       }
     })
   }
