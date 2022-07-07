@@ -26,7 +26,8 @@ import {
     SET_FAVOURITE_MOODBOARD,
     UNSET_FAVOURITE_MOODBOARD,
     SET_ALL_MATERIAL_CATEGORY,
-    SET_ALL_MATERIAL_SUB_CATEGORY
+    SET_ALL_MATERIAL_SUB_CATEGORY,
+    SET_ALL_FILTER_DATA
 } from '../@types/action.types'
 
 // thunk types
@@ -46,7 +47,8 @@ import {
     ADD_MOODBOARD_TO_FAVORITE,
     REMOVE_MOODBOARD_FROM_FAVORITE,
     GET_ALL_MATERIAL_CATEGORY,
-    GET_ALL_MATERIAL_SUB_CATEGORY
+    GET_ALL_MATERIAL_SUB_CATEGORY,
+    GET_ALL_MOODBOARD_FILTER_DATA
 } from '../@types/thunk.types'
 
 // Service import
@@ -66,7 +68,8 @@ import {
     addToFavoriteMoodboards,
     removeFromFavoriteMoodboards,
     getAllMaterialCatagory,
-    getAllMaterialSubCategory
+    getAllMaterialSubCategory,
+    getAllFilterdata
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -360,6 +363,20 @@ const MoodboardThunks = {
             } catch (error) {
                 console.log(error)
             }
+        }
+    },
+    [GET_ALL_MOODBOARD_FILTER_DATA]: () => {
+        return async (dispatch, getState) => {
+            console.log('get all moodboard filter data')
+            let response = await getAllFilterdata()
+            // console.log('response', response)
+            // 0 - getAllcatagory
+            // 1 - getAllSeason
+            // 2 - getAllMarket
+            dispatch({
+                type: MoodboardActions[SET_ALL_FILTER_DATA],
+                payload: response
+            })
         }
     }
 }

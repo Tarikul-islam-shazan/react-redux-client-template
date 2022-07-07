@@ -130,3 +130,11 @@ export const getAllMaterialCatagory = async () => {
 export const getAllMaterialSubCategory = async (params) => {
     return Http.GET('getAllMaterialSubCategory', params)
 }
+
+export const getAllFilterdata = async () => {
+    return Promise.allSettled([
+        Http.GET('getAllCategory'),
+        Http.GET('getAllSeasons'),
+        Http.GET('getAllMarkets')
+    ])
+}

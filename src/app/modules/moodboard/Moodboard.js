@@ -23,7 +23,8 @@ import {
     GET_MOODBOARD_LIST,
     UPLOAD_MOODBOARDS,
     ADD_MOODBOARD_TO_FAVORITE,
-    REMOVE_MOODBOARD_FROM_FAVORITE
+    REMOVE_MOODBOARD_FROM_FAVORITE,
+    GET_ALL_MOODBOARD_FILTER_DATA
 } from '../../redux_toolkit/@types/thunk.types'
 
 // importing thunks
@@ -34,11 +35,28 @@ const Moodboard = () => {
     // const store = useStore()
     const moodboardList = useSelector((state) => state.moodboard.moodboardList)
 
+    const allCategory = useSelector(
+        (state) => state.moodboard.moodboardFilters.allCategory
+    )
+    const allSeason = useSelector(
+        (state) => state.moodboard.moodboardFilters.allSeason
+    )
+    const allMarket = useSelector(
+        (state) => state.moodboard.moodboardFilters.allMarket
+    )
+
     const navigate = useNavigate()
 
     const [selectedFile, setSelectedFile] = useState([])
 
     const popupRef = useRef()
+
+    const [sortData, setSortData] = useState('')
+
+    const onSortDataChange = (e) => {
+        console.log(e)
+        setSortData(e.target.value)
+    }
 
     let moodboardStatusToString = (status) => {
         switch (status) {
@@ -95,6 +113,10 @@ const Moodboard = () => {
             // this is the snap of new state
             // but we won't use it here
         })
+    }, [])
+
+    useEffect(() => {
+        dispatch(MoodboardThunks[GET_ALL_MOODBOARD_FILTER_DATA]())
     }, [])
 
     return (
@@ -334,6 +356,8 @@ const Moodboard = () => {
                                                     type='radio'
                                                     name='Sortby'
                                                     id='NewestFirst'
+                                                    value='id,desc'
+                                                    onChange={onSortDataChange}
                                                 />
                                             </span>
                                             <label
@@ -348,6 +372,8 @@ const Moodboard = () => {
                                                 <input
                                                     type='radio'
                                                     name='Sortby'
+                                                    value='id,asc'
+                                                    onChange={onSortDataChange}
                                                     id='OldestFirst'
                                                 />
                                             </span>
@@ -365,62 +391,36 @@ const Moodboard = () => {
                                         Season
                                     </span>
                                     <div className='mt-6 space-y-8'>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Summer'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Summer'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Summer
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Winter'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Winter'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Winter
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Autumn'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Autumn'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Autumn
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Spring'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Spring'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Spring
-                                            </label>
-                                        </div>
+                                        {allSeason?.length > 0 &&
+                                            allSeason.map((season) => {
+                                                {
+                                                    /* console.log(season) */
+                                                }
+                                                return (
+                                                    <div
+                                                        key={season.code}
+                                                        className='flex items-start'
+                                                    >
+                                                        <span>
+                                                            <input
+                                                                type='checkbox'
+                                                                id={season.code}
+                                                                value={
+                                                                    season.code
+                                                                }
+                                                            />
+                                                        </span>
+                                                        <label
+                                                            htmlFor={
+                                                                season.code
+                                                            }
+                                                            className='align-middle pl-4 inline-block mt-[-3px]'
+                                                        >
+                                                            {season.name}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            })}
                                     </div>
                                 </div>
                                 <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
@@ -428,7 +428,32 @@ const Moodboard = () => {
                                         Market
                                     </span>
                                     <div className='mt-6 space-y-8'>
-                                        <div className='flex items-start'>
+                                        {allMarket?.length > 0 &&
+                                            allMarket.map((market) => {
+                                                console.log(market)
+                                                return (
+                                                    <div
+                                                        key={market.id}
+                                                        className='flex items-start'
+                                                    >
+                                                        <span>
+                                                            <input
+                                                                type='checkbox'
+                                                                id={market.name}
+                                                            />
+                                                        </span>
+                                                        <label
+                                                            htmlFor={
+                                                                market.name
+                                                            }
+                                                            className='align-middle pl-4 inline-block mt-[-3px]'
+                                                        >
+                                                            {market.name}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            })}
+                                        {/* <div className='flex items-start'>
                                             <span>
                                                 <input
                                                     type='checkbox'
@@ -497,7 +522,7 @@ const Moodboard = () => {
                                             >
                                                 Infants (age 0-1)
                                             </label>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
@@ -522,7 +547,27 @@ const Moodboard = () => {
                                         </div>
                                     </div>
                                     <div className='mt-6 space-y-8'>
-                                        <div className='flex items-start'>
+                                        {allCategory?.length > 0 &&
+                                            allCategory.map((category) => {
+                                                console.log(category)
+                                                return (
+                                                    <div key={category.id} className='flex items-start'>
+                                                        <span>
+                                                            <input
+                                                                type='checkbox'
+                                                                id={category.name}
+                                                            />
+                                                        </span>
+                                                        <label
+                                                            htmlFor={category.name}
+                                                            className='align-middle pl-4 inline-block mt-[-3px]'
+                                                        >
+                                                            {category.name}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            })}
+                                        {/* <div className='flex items-start'>
                                             <span>
                                                 <input
                                                     type='checkbox'
@@ -549,7 +594,7 @@ const Moodboard = () => {
                                             >
                                                 Tee
                                             </label>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

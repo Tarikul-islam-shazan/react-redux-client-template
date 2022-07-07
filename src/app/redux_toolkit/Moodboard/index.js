@@ -23,6 +23,12 @@ const initialState = {
         maxGsm: '',
         minGsm: '',
         search: ''
+    },
+    moodboardFilters: {
+        allCategory: [],
+        selectedCategory:[],
+        allSeason: [],
+        allMarket: []
     }
 }
 

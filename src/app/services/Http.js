@@ -37,9 +37,13 @@ const routes = {
     removeFabricFromMoodboard: `${BASE_URL}/moodboard/`,
     addToFavoriteMoodboards: `${BASE_URL}/moodboard/`,
     removeFromFavoriteMoodboards: `${BASE_URL}/moodboard/`,
-    // moodboard ---- search parameteres
+    // moodboard fabric ---- search parameteres
     getAllMaterialCatagory: `${BASE_URL}/material/fabric-type/all`,
     getAllMaterialSubCategory: `${BASE_URL}/material/fabric/constructions`,
+    // moodboard filter parameteres
+    getAllCategory: `${BASE_URL}/category/subcategory/all`,
+    getAllSeasons: `${BASE_URL}/material/season/all`,
+    getAllMarkets: `${BASE_URL}/product-group/all`,
 
     //home page
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,
