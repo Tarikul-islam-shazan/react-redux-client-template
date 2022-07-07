@@ -13,7 +13,9 @@ import {
     SET_MOODBOARD_FABRICS,
     SET_FAVOURITE_MOODBOARD,
     UNSET_FAVOURITE_MOODBOARD,
-    SET_ALL_MATERIAL_CATEGORY
+    SET_ALL_MATERIAL_CATEGORY,
+    SET_ALL_MATERIAL_SUB_CATEGORY,
+    SET_FABRIC_SEARCH_FILTER
 } from '../@types/action.types'
 
 export const MoodboardReducer = {
@@ -57,6 +59,15 @@ export const MoodboardReducer = {
         state.moodboardList[moodboardIndex].isFavorite = false
     },
     [SET_ALL_MATERIAL_CATEGORY]: (state, action) => {
-        state.allMaterialCategorys = action.payload
+        // console.log('MoodboardReducer', action.payload)
+        state.allMaterialCategory = action.payload
+    },
+    [SET_ALL_MATERIAL_SUB_CATEGORY]: (state, action) => {
+        // console.log('MoodboardReducer', action.payload)
+        state.allMaterialSubCategory = action.payload
+    },
+    [SET_FABRIC_SEARCH_FILTER]: (state, action) => {
+        // console.log('MoodboardReducer', action.payload)
+        state.fabricSearchFilters = action.payload
     }
 }

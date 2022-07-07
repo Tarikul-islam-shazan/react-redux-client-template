@@ -10,7 +10,20 @@ const initialState = {
     selectedMoodboard: null,
     colorCodes: [],
     moodboardFabrics: [],
-    allMaterialCategory: []
+    allMaterialCategory: [],
+    allMaterialSubCategory: [],
+    fabricSearchFilters: {
+        // fabricTypes
+        // constructions
+        // maxGsm
+        // minGsm
+        // search
+        fabricTypes: '',
+        constructions: '',
+        maxGsm: '',
+        minGsm: '',
+        search: ''
+    }
 }
 
 const MoodboardSlice = createSlice({

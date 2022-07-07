@@ -39,6 +39,7 @@ const routes = {
     removeFromFavoriteMoodboards: `${BASE_URL}/moodboard/`,
     // moodboard ---- search parameteres
     getAllMaterialCatagory: `${BASE_URL}/material/fabric-type/all`,
+    getAllMaterialSubCategory: `${BASE_URL}/material/fabric/constructions`,
 
     //home page
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,

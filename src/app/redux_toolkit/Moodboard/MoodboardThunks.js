@@ -25,7 +25,8 @@ import {
     SET_MOODBOARD_FABRICS,
     SET_FAVOURITE_MOODBOARD,
     UNSET_FAVOURITE_MOODBOARD,
-    SET_ALL_MATERIAL_CATEGORY
+    SET_ALL_MATERIAL_CATEGORY,
+    SET_ALL_MATERIAL_SUB_CATEGORY
 } from '../@types/action.types'
 
 // thunk types
@@ -44,7 +45,8 @@ import {
     DELETE_FABRIC_FROM_MOODBOARD,
     ADD_MOODBOARD_TO_FAVORITE,
     REMOVE_MOODBOARD_FROM_FAVORITE,
-    GET_ALL_MATERIAL_CATEGORY
+    GET_ALL_MATERIAL_CATEGORY,
+    GET_ALL_MATERIAL_SUB_CATEGORY
 } from '../@types/thunk.types'
 
 // Service import
@@ -63,7 +65,8 @@ import {
     deleteFabricFromMoodboard,
     addToFavoriteMoodboards,
     removeFromFavoriteMoodboards,
-    getAllMaterialCatagory
+    getAllMaterialCatagory,
+    getAllMaterialSubCategory
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -235,7 +238,9 @@ const MoodboardThunks = {
     [GET_MOODBOARD_FABRICS]: () => {
         return async (dispatch, getState) => {
             try {
-                let data = await getMoodboardFabrics()
+                let data = await getMoodboardFabrics(
+                    getState().moodboard.fabricSearchFilters
+                )
                 dispatch({
                     type: MoodboardActions[SET_MOODBOARD_FABRICS],
                     payload: data.data.data
@@ -317,15 +322,39 @@ const MoodboardThunks = {
         return async (dispatch, getState) => {
             try {
                 let data = await getAllMaterialCatagory()
-                console.log('data', data)
 
                 data.data.forEach((item) => {
                     item.label = item.code
                 })
 
+                console.log('data', data)
+
                 dispatch({
                     type: MoodboardActions[SET_ALL_MATERIAL_CATEGORY],
-                    payload: data.data.data
+                    payload: data.data
+                })
+                return getState().moodboard
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
+    [GET_ALL_MATERIAL_SUB_CATEGORY]: () => {
+        return async (dispatch, getState) => {
+            try {
+                let data = await getAllMaterialSubCategory()
+
+                // console.log(data)
+
+                data.data.forEach((item) => {
+                    item.label = item.name
+                })
+
+                // console.log('data', data)
+
+                dispatch({
+                    type: MoodboardActions[SET_ALL_MATERIAL_SUB_CATEGORY],
+                    payload: data.data
                 })
                 return getState().moodboard
             } catch (error) {

@@ -20,17 +20,12 @@ import {
 } from '../../redux_toolkit/@types/thunk.types'
 
 import { ReactComponent as FilterIcon } from '../../../assets/icons/Filter-24.svg'
-import { ReactComponent as AddIcon } from '../../../assets/icons/add-white.svg'
 import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg'
 import { ReactComponent as TickIcon } from '../../../assets/icons/tick.svg'
 import { ReactComponent as DeleteIcon } from '../../../assets/icons/delete.svg'
 import { ReactComponent as EditIcon } from '../../../assets/icons/edit.svg'
-import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom'
-import { ReactComponent as MenuIcon } from '../../../assets/images/home/humbargerMenu.svg'
-import { ReactComponent as NitexIcon } from '../../../assets/images/home/nitexLogo.svg'
-import { ReactComponent as IconFavourite } from '../../../assets/images/home/favourite.svg'
-import { ReactComponent as IconNotification } from '../../../assets/images/home/notification.svg'
-import { MoodboardActions } from '../../redux_toolkit/Moodboard'
+
+
 
 const MoodboardView = (props) => {
     // getting param data over here

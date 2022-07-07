@@ -65,11 +65,26 @@ export const deleteProductImage = async (id, imageID) => {
     )
 }
 
-export const getMoodboardFabrics = async () => {
+export const getMoodboardFabrics = async (searchParams) => {
+    // fabricTypes
+    // constructions
+    // maxGsm
+    // minGsm
+    // search
+
     let defaultParams = {
         page: 0,
         size: 9,
-        supplierType: 'FABRIC'
+        supplierType: 'FABRIC',
+        sort: 'id,desc'
+    }
+    if (searchParams !== undefined) {
+        defaultParams = {
+            ...defaultParams,
+            ...searchParams,
+            fabricTypes: searchParams.fabricTypes.code || '',
+            constructions: searchParams.constructions.name || ''
+        }
     }
     return Http.GET('getMoodboardFabrics', defaultParams)
 }
@@ -110,4 +125,8 @@ export const removeFromFavoriteMoodboards = async (moodboardID) => {
 
 export const getAllMaterialCatagory = async () => {
     return Http.GET('getAllMaterialCatagory')
+}
+
+export const getAllMaterialSubCategory = async (params) => {
+    return Http.GET('getAllMaterialSubCategory', params)
 }
