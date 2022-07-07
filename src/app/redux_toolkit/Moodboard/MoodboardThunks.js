@@ -24,7 +24,8 @@ import {
     SET_COLOR_CODES,
     SET_MOODBOARD_FABRICS,
     SET_FAVOURITE_MOODBOARD,
-    UNSET_FAVOURITE_MOODBOARD
+    UNSET_FAVOURITE_MOODBOARD,
+    SET_ALL_MATERIAL_CATEGORY
 } from '../@types/action.types'
 
 // thunk types
@@ -42,7 +43,8 @@ import {
     ADD_FABRIC_TO_MOODBOARD,
     DELETE_FABRIC_FROM_MOODBOARD,
     ADD_MOODBOARD_TO_FAVORITE,
-    REMOVE_MOODBOARD_FROM_FAVORITE
+    REMOVE_MOODBOARD_FROM_FAVORITE,
+    GET_ALL_MATERIAL_CATEGORY
 } from '../@types/thunk.types'
 
 // Service import
@@ -60,7 +62,8 @@ import {
     addFabricToMoodboard,
     deleteFabricFromMoodboard,
     addToFavoriteMoodboards,
-    removeFromFavoriteMoodboards
+    removeFromFavoriteMoodboards,
+    getAllMaterialCatagory
 } from '../../services/Moodboard/index'
 
 // import actions to execute
@@ -307,6 +310,26 @@ const MoodboardThunks = {
                     type: MoodboardActions[SET_FAVOURITE_MOODBOARD],
                     payload: moodboardID
                 })
+            }
+        }
+    },
+    [GET_ALL_MATERIAL_CATEGORY]: () => {
+        return async (dispatch, getState) => {
+            try {
+                let data = await getAllMaterialCatagory()
+                console.log('data', data)
+
+                data.data.forEach((item) => {
+                    item.label = item.code
+                })
+
+                dispatch({
+                    type: MoodboardActions[SET_ALL_MATERIAL_CATEGORY],
+                    payload: data.data.data
+                })
+                return getState().moodboard
+            } catch (error) {
+                console.log(error)
             }
         }
     }

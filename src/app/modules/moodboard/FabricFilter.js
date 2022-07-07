@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
 
 import SelectComponent from '../../../app/common/SelectComponent'
 import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg'
 import { ReactComponent as SearchIconWhite } from '../../../assets/images/search-white.svg'
 import { ReactComponent as OkWhite } from '../../../assets/images/ok-white.svg'
 import { ReactComponent as Refresh } from '../../../assets/images/refresh.svg'
+import { GET_ALL_MATERIAL_CATEGORY } from '../../redux_toolkit/@types/thunk.types'
 
 const FabricFilter = (props) => {
+    // we will make api calls once and they will save fields on state
+    // it will improve performance significantly
+
+    const allMaterialCategory = useSelector(
+        (state) => state.moodboard.allMaterialCategory
+    )
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (allMaterialCategory.length === 0) {
+            dispatch(MoodboardThunks[GET_ALL_MATERIAL_CATEGORY]())
+        }
+    }, [])
+
     const toClose = props.toClose
     return (
-        <div className='common-filter-popup absolute left-0 top-80 w-[435px] bg-white shadow-lg'>
+        <div className='common-filter-popup absolute left-0 top-40 w-[435px] bg-white shadow-lg'>
             <div className='color-popup-header flex justify-between p-5 bg-[#F5F5F5]'>
                 <h5 className='font-bold uppercase'>Filter Fabric</h5>
                 <span>
@@ -39,22 +58,7 @@ const FabricFilter = (props) => {
 
                 <div className='mt-5'>
                     <div className='input-group select-bg-gray-style w-full'>
-                        <SelectComponent
-                            options={[
-                                {
-                                    label: 'See Samples',
-                                    value: 'NITEX/BO/1212'
-                                },
-                                {
-                                    label: 'Country 1',
-                                    value: 'NITEX/BO/1212'
-                                },
-                                {
-                                    label: 'Country 2',
-                                    value: 'NITEX/BO/1212'
-                                }
-                            ]}
-                        />
+                        <SelectComponent options={allMaterialCategory} />
                     </div>
                 </div>
 

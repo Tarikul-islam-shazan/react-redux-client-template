@@ -12,7 +12,8 @@ import {
     SET_COLOR_CODES,
     SET_MOODBOARD_FABRICS,
     SET_FAVOURITE_MOODBOARD,
-    UNSET_FAVOURITE_MOODBOARD
+    UNSET_FAVOURITE_MOODBOARD,
+    SET_ALL_MATERIAL_CATEGORY
 } from '../@types/action.types'
 
 export const MoodboardReducer = {
@@ -54,5 +55,8 @@ export const MoodboardReducer = {
             (moodboard) => moodboard.id === action.payload
         )
         state.moodboardList[moodboardIndex].isFavorite = false
+    },
+    [SET_ALL_MATERIAL_CATEGORY]: (state, action) => {
+        state.allMaterialCategorys = action.payload
     }
 }

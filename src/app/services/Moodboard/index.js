@@ -74,13 +74,16 @@ export const getMoodboardFabrics = async () => {
     return Http.GET('getMoodboardFabrics', defaultParams)
 }
 
-export const addFabricToMoodboard = async (moodboardID,fabricID) => {
+export const addFabricToMoodboard = async (moodboardID, fabricID) => {
     // console.log(data)
-    return Http.POST('addFabricToMoodboard', null, moodboardID + '/add-material?materialId=' + fabricID)
+    return Http.POST(
+        'addFabricToMoodboard',
+        null,
+        moodboardID + '/add-material?materialId=' + fabricID
+    )
 }
 
 export const deleteFabricFromMoodboard = async (moodboardID, fabricID) => {
-
     // console.log(moodboardID, fabricID)
     return Http.DELETE(
         'removeFabricFromMoodboard',
@@ -90,9 +93,21 @@ export const deleteFabricFromMoodboard = async (moodboardID, fabricID) => {
 }
 
 export const addToFavoriteMoodboards = async (moodboardID) => {
-    return Http.GET_WITH_ID_PARAM('addToFavoriteMoodboards', null, moodboardID + '/add-to-favorite')
+    return Http.GET_WITH_ID_PARAM(
+        'addToFavoriteMoodboards',
+        null,
+        moodboardID + '/add-to-favorite'
+    )
 }
 
 export const removeFromFavoriteMoodboards = async (moodboardID) => {
-    return Http.GET_WITH_ID_PARAM('removeFromFavoriteMoodboards', null, moodboardID + '/remove-from-favorite')
+    return Http.GET_WITH_ID_PARAM(
+        'removeFromFavoriteMoodboards',
+        null,
+        moodboardID + '/remove-from-favorite'
+    )
+}
+
+export const getAllMaterialCatagory = async () => {
+    return Http.GET('getAllMaterialCatagory')
 }
