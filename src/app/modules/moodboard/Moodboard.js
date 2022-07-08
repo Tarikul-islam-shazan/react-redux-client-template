@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector, useStore, shallowEqual } from 'react-redux'
 
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 // import { ReactComponent as FilterIcon } from '../../icons/Filter-24.svg'
 import { ReactComponent as PlusIcon } from '../../../assets/images/plus.svg'
 import { ReactComponent as UploadIcon } from '../../../assets/images/upload.svg'
@@ -25,7 +25,8 @@ import {
     ADD_MOODBOARD_TO_FAVORITE,
     REMOVE_MOODBOARD_FROM_FAVORITE,
     GET_ALL_MOODBOARD_FILTER_DATA,
-    GET_FILTERED_MOODBOARDS
+    GET_FILTERED_MOODBOARDS,
+    CREATE_NEW_MOODBOARD
 } from '../../redux_toolkit/@types/thunk.types'
 
 // importing thunks
@@ -84,6 +85,12 @@ const Moodboard = () => {
     const [filterTags, setFilterTags] = useState([])
 
     // functions
+    const createNewMoodboard = async () => {
+        let respose = await dispatch(MoodboardThunks[CREATE_NEW_MOODBOARD]())
+        console.log(respose)
+        navigate('/moodboard/' + respose.data.id + '/true')
+    }
+
     const filterTagProcessor = (tag) => {
         if (tag.toLowerCase() === 'id,desc') {
             return 'NEWEST'
@@ -336,6 +343,10 @@ const Moodboard = () => {
                                 <button
                                     type='button'
                                     className='btn flex justify-between items-center'
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        createNewMoodboard()
+                                    }}
                                 >
                                     <span>Create</span>
                                     <span className='ml-2'>

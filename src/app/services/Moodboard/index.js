@@ -112,7 +112,7 @@ export const deleteFabricFromMoodboard = async (moodboardID, fabricID) => {
 }
 
 export const addToFavoriteMoodboards = async (moodboardID) => {
-    return Http.GET_WITH_ID_PARAM(
+    return Http.POST(
         'addToFavoriteMoodboards',
         null,
         moodboardID + '/add-to-favorite'
@@ -120,7 +120,7 @@ export const addToFavoriteMoodboards = async (moodboardID) => {
 }
 
 export const removeFromFavoriteMoodboards = async (moodboardID) => {
-    return Http.GET_WITH_ID_PARAM(
+    return Http.DELETE(
         'removeFromFavoriteMoodboards',
         null,
         moodboardID + '/remove-from-favorite'

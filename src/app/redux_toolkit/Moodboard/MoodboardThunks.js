@@ -50,7 +50,8 @@ import {
     GET_ALL_MATERIAL_CATEGORY,
     GET_ALL_MATERIAL_SUB_CATEGORY,
     GET_ALL_MOODBOARD_FILTER_DATA,
-    GET_FILTERED_MOODBOARDS
+    GET_FILTERED_MOODBOARDS,
+    CREATE_NEW_MOODBOARD
 } from '../@types/thunk.types'
 
 // Service import
@@ -399,6 +400,19 @@ const MoodboardThunks = {
                 payload: filters
             })
             dispatch(MoodboardThunks[GET_MOODBOARD_LIST](processedFilters))
+        }
+    },
+    [CREATE_NEW_MOODBOARD]: (moodboard) => {
+        return async (dispatch, getState) => {
+            try {
+                let response = await uploadMoodboard({
+                    documentDTOs: []
+                })
+
+                return response
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }

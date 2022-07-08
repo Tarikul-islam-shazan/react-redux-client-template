@@ -25,11 +25,10 @@ import { ReactComponent as TickIcon } from '../../../assets/icons/tick.svg'
 import { ReactComponent as DeleteIcon } from '../../../assets/icons/delete.svg'
 import { ReactComponent as EditIcon } from '../../../assets/icons/edit.svg'
 
-
-
 const MoodboardView = (props) => {
     // getting param data over here
-    const { id } = useParams()
+    const { id, created } = useParams()
+
     const selectedMoodboard = useSelector(
         (state) => state.moodboard.selectedMoodboard
     )
@@ -54,9 +53,12 @@ const MoodboardView = (props) => {
 
     const dispatch = useDispatch()
 
+    // functions
+
     const setProductView = (value) => {
         setSelectedProductView(value)
     }
+
     // for detail look below on description related button
     // it will open your eye for this title
     const onTitleEditButtonClick = (e) => {
@@ -158,6 +160,14 @@ const MoodboardView = (props) => {
     // and set it in the store
     useEffect(() => {
         dispatch(MoodboardThunks[GET_MOODBOARD_FABRICS]())
+    }, [])
+
+    useEffect(() => {
+        if (created === 'true') {
+            console.log('created')
+            setProductView('images')
+            setTitleEdit(true)
+        }
     }, [])
 
     return (
@@ -266,32 +276,39 @@ const MoodboardView = (props) => {
                     {/* Moodboard and image layout */}
                     <div className='moodboard-and-images-layout'>
                         <div className='left-half'>
-                            <div className='moodboard-tab'>
-                                <ul>
-                                    <li
-                                        onClick={() =>
-                                            setProductView('moodboard')
-                                        }
-                                        className={`${
-                                            selectedProductView === 'moodboard'
-                                                ? 'active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Moodboard
-                                    </li>
-                                    <li
-                                        onClick={() => setProductView('images')}
-                                        className={`${
-                                            selectedProductView === 'images'
-                                                ? 'active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Images
-                                    </li>
-                                </ul>
-                            </div>
+                            {created !== 'true' && (
+                                <div className='moodboard-tab'>
+                                    <ul>
+                                        <li
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                setProductView('moodboard')
+                                            }}
+                                            className={`${
+                                                selectedProductView ===
+                                                'moodboard'
+                                                    ? 'active'
+                                                    : ''
+                                            }`}
+                                        >
+                                            Moodboard
+                                        </li>
+                                        <li
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                setProductView('images')
+                                            }}
+                                            className={`${
+                                                selectedProductView === 'images'
+                                                    ? 'active'
+                                                    : ''
+                                            }`}
+                                        >
+                                            Images
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                             {/* Images layout */}
                             <div className='full-moodboard-image'>
                                 {selectedProductView === 'moodboard' &&
