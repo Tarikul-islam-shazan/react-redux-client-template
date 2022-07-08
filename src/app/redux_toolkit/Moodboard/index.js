@@ -25,11 +25,15 @@ const initialState = {
         search: ''
     },
     moodboardFilters: {
+        selectedOrder: [],
         allCategory: [],
-        selectedCategory:[],
+        selectedCategory: [],
         allSeason: [],
-        allMarket: []
-    }
+        selectedSeason: [],
+        allMarket: [],
+        selectedMarket: []
+    },
+    tagList: []
 }
 
 const MoodboardSlice = createSlice({

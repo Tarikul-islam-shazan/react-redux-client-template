@@ -44,6 +44,7 @@ const routes = {
     getAllCategory: `${BASE_URL}/category/subcategory/all`,
     getAllSeasons: `${BASE_URL}/material/season/all`,
     getAllMarkets: `${BASE_URL}/product-group/all`,
+    
 
     //home page
     fetchGreetingSlider: `${BASE_URL}/static-content/buyer/home`,

@@ -16,7 +16,9 @@ import {
     SET_ALL_MATERIAL_CATEGORY,
     SET_ALL_MATERIAL_SUB_CATEGORY,
     SET_FABRIC_SEARCH_FILTER,
-    SET_ALL_FILTER_DATA
+    SET_ALL_FILTER_DATA,
+    SET_MOODBOARD_FILTER_SELECTED_FIELDS,
+    SET_TAG_LIST
 } from '../@types/action.types'
 
 export const MoodboardReducer = {
@@ -72,9 +74,20 @@ export const MoodboardReducer = {
         state.fabricSearchFilters = action.payload
     },
     [SET_ALL_FILTER_DATA]: (state, action) => {
-        console.log('MoodboardReducer', action.payload)
+        // console.log('MoodboardReducer', action.payload)
         state.moodboardFilters.allCategory = action.payload[0].value.data
         state.moodboardFilters.allSeason = action.payload[1].value.data
         state.moodboardFilters.allMarket = action.payload[2].value.data
+    },
+    [SET_MOODBOARD_FILTER_SELECTED_FIELDS]: (state, action) => {
+        // console.log('MoodboardReducer', action.payload)
+        state.moodboardFilters.selectedCategory =
+            action.payload.selectedCategory
+        state.moodboardFilters.selectedSeason = action.payload.selectedSeason
+        state.moodboardFilters.selectedMarket = action.payload.selectedMarket
+    },
+    [SET_TAG_LIST]: (state, action) => {
+        // console.log('MoodboardReducer', action.payload)
+        state.tagList = action.payload
     }
 }

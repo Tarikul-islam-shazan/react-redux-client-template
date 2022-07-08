@@ -27,7 +27,8 @@ import {
     UNSET_FAVOURITE_MOODBOARD,
     SET_ALL_MATERIAL_CATEGORY,
     SET_ALL_MATERIAL_SUB_CATEGORY,
-    SET_ALL_FILTER_DATA
+    SET_ALL_FILTER_DATA,
+    SET_MOODBOARD_FILTER_SELECTED_FIELDS
 } from '../@types/action.types'
 
 // thunk types
@@ -48,7 +49,8 @@ import {
     REMOVE_MOODBOARD_FROM_FAVORITE,
     GET_ALL_MATERIAL_CATEGORY,
     GET_ALL_MATERIAL_SUB_CATEGORY,
-    GET_ALL_MOODBOARD_FILTER_DATA
+    GET_ALL_MOODBOARD_FILTER_DATA,
+    GET_FILTERED_MOODBOARDS
 } from '../@types/thunk.types'
 
 // Service import
@@ -77,9 +79,9 @@ import { MoodboardActions } from '.'
 import { readFileAsync } from '../../services/Util'
 
 const MoodboardThunks = {
-    [GET_MOODBOARD_LIST]: () => {
+    [GET_MOODBOARD_LIST]: (filters) => {
         return async (dispatch, getState) => {
-            let data = await getMoodboardList()
+            let data = await getMoodboardList(filters)
             dispatch({
                 type: MoodboardActions[SET_MOODBOARD_LIST],
                 payload: data.data
@@ -367,7 +369,7 @@ const MoodboardThunks = {
     },
     [GET_ALL_MOODBOARD_FILTER_DATA]: () => {
         return async (dispatch, getState) => {
-            console.log('get all moodboard filter data')
+            // console.log('get all moodboard filter data')
             let response = await getAllFilterdata()
             // console.log('response', response)
             // 0 - getAllcatagory
@@ -377,6 +379,26 @@ const MoodboardThunks = {
                 type: MoodboardActions[SET_ALL_FILTER_DATA],
                 payload: response
             })
+        }
+    },
+    [GET_FILTERED_MOODBOARDS]: (filters) => {
+        return async (dispatch, getState) => {
+            // console.log('filters', filters)
+
+            // before sending filter we need to process it a bit
+            // but pocessing is not necessary for Actions
+            let processedFilters = {
+                categoryId: filters.selectedCategory,
+                seasons: filters.selectedSeason,
+                marketId: filters.selectedMarket
+            }
+
+            // we need to set the filters in the state
+            dispatch({
+                type: MoodboardActions[SET_MOODBOARD_FILTER_SELECTED_FIELDS],
+                payload: filters
+            })
+            dispatch(MoodboardThunks[GET_MOODBOARD_LIST](processedFilters))
         }
     }
 }

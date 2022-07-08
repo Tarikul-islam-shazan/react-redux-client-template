@@ -24,15 +24,20 @@ import {
     UPLOAD_MOODBOARDS,
     ADD_MOODBOARD_TO_FAVORITE,
     REMOVE_MOODBOARD_FROM_FAVORITE,
-    GET_ALL_MOODBOARD_FILTER_DATA
+    GET_ALL_MOODBOARD_FILTER_DATA,
+    GET_FILTERED_MOODBOARDS
 } from '../../redux_toolkit/@types/thunk.types'
 
 // importing thunks
 import MoodboardThunks from '../../redux_toolkit/Moodboard/MoodboardThunks'
+import { MoodboardActions } from '../../redux_toolkit/Moodboard'
+import { SET_TAG_LIST } from '../../redux_toolkit/@types/action.types'
 
 const Moodboard = () => {
     const dispatch = useDispatch()
     // const store = useStore()
+
+    // selectors
     const moodboardList = useSelector((state) => state.moodboard.moodboardList)
 
     const allCategory = useSelector(
@@ -45,17 +50,137 @@ const Moodboard = () => {
         (state) => state.moodboard.moodboardFilters.allMarket
     )
 
+    const selectedCategorySelector = useSelector(
+        (state) => state.moodboard.moodboardFilters.selectedCategory
+    )
+
+    const selectedSeasonSelector = useSelector(
+        (state) => state.moodboard.moodboardFilters.selectedSeason
+    )
+
+    const selectedMarketSelector = useSelector(
+        (state) => state.moodboard.moodboardFilters.selectedMarket
+    )
+
+    const tagListSelector = useSelector(
+        (state) => state.moodboard.moodboardFilters.tagList
+    )
+
     const navigate = useNavigate()
 
+    // component states
     const [selectedFile, setSelectedFile] = useState([])
 
     const popupRef = useRef()
 
     const [sortData, setSortData] = useState('')
 
+    const [selectedCategory, setSelectedCategory] = useState([])
+
+    const [selectedSeason, setSelectedSeason] = useState([])
+
+    const [selectedMarket, setSelectedMarket] = useState([])
+
+    const [filterTags, setFilterTags] = useState([])
+
+    // functions
+    const filterTagProcessor = (tag) => {
+        if (tag.toLowerCase() === 'id,desc') {
+            return 'NEWEST'
+        } else if (tag.toLowerCase() === 'id,asc') {
+            return 'OLDEST'
+        } else {
+            return tag
+        }
+    }
+
+    const removeTag = (e, tag) => {
+        const newTagList = filterTags.filter((item) => item !== tag)
+        setFilterTags(newTagList)
+    }
+
     const onSortDataChange = (e) => {
         console.log(e)
         setSortData(e.target.value)
+        let _filterTags = Object.assign([], filterTags)
+        if (_filterTags.includes(e.target.value)) {
+            _filterTags.splice(_filterTags.indexOf(e.target.value), 1)
+            setFilterTags(_filterTags)
+        } else {
+            _filterTags.push(e.target.value)
+            setFilterTags(_filterTags)
+        }
+    }
+
+    const onSeasonChange = (e, seasonName) => {
+        const _filterTags = Object.assign([], filterTags)
+        if (selectedSeason.includes(e.target.value)) {
+            setSelectedSeason(
+                selectedSeason.filter((item) => item !== e.target.value)
+            )
+            _filterTags.splice(filterTags.indexOf(seasonName), 1)
+            setFilterTags(_filterTags)
+        } else {
+            setSelectedSeason([...selectedSeason, e.target.value])
+            _filterTags.push(seasonName)
+            setFilterTags(_filterTags)
+        }
+    }
+
+    const onCategoryChange = (e, categoryName) => {
+        const _filterTags = Object.assign([], filterTags)
+        if (selectedCategory.includes(e.target.value)) {
+            setSelectedCategory(
+                selectedCategory.filter((item) => item !== e.target.value)
+            )
+            _filterTags.splice(filterTags.indexOf(categoryName), 1)
+            setFilterTags(_filterTags)
+        } else {
+            setSelectedCategory([...selectedCategory, e.target.value])
+            _filterTags.push(categoryName)
+            setFilterTags(_filterTags)
+        }
+    }
+
+    const onMarketChange = (e, marketName) => {
+        const _filterTags = Object.assign([], filterTags)
+        if (selectedMarket.includes(e.target.value)) {
+            setSelectedMarket(
+                selectedMarket.filter((item) => item !== e.target.value)
+            )
+            _filterTags.splice(filterTags.indexOf(marketName), 1)
+            setFilterTags(_filterTags)
+        } else {
+            setSelectedMarket([...selectedMarket, e.target.value])
+            _filterTags.push(marketName)
+            setFilterTags(_filterTags)
+        }
+    }
+
+    const onFilterSubmit = () => {
+        console.log('onFilterSubmit')
+        // console.log(selectedCategory)
+        // console.log(selectedSeason)
+        // console.log(selectedMarket)
+        dispatch(
+            MoodboardThunks[GET_FILTERED_MOODBOARDS]({
+                selectedCategory,
+                selectedSeason,
+                selectedMarket
+            })
+        )
+
+        dispatch({
+            type: MoodboardActions[SET_TAG_LIST],
+            payload: filterTags
+        })
+    }
+
+    const resetFilters = (e) => {
+        setSelectedCategory([])
+        setSelectedSeason([])
+        setSelectedMarket([])
+        dispatch(MoodboardThunks[GET_MOODBOARD_LIST]())
     }
 
     let moodboardStatusToString = (status) => {
@@ -105,6 +230,8 @@ const Moodboard = () => {
         await dispatch(MoodboardThunks[REMOVE_MOODBOARD_FROM_FAVORITE](id))
     }
 
+    // use effects
+
     useEffect(() => {
         // this is a thunk, it has inside logic to set data in state
         let data = dispatch(MoodboardThunks[GET_MOODBOARD_LIST]())
@@ -119,6 +246,17 @@ const Moodboard = () => {
         dispatch(MoodboardThunks[GET_ALL_MOODBOARD_FILTER_DATA]())
     }, [])
 
+    useEffect(() => {
+        // console.log(allCategory)
+        // console.log(allSeason)
+        // console.log(allMarket)
+        setSelectedCategory(selectedCategorySelector)
+        setSelectedSeason(selectedSeasonSelector)
+        setSelectedMarket(selectedMarketSelector)
+
+        setFilterTags(tagListSelector)
+    }, [])
+
     return (
         <div className='container-fluid bg-primaryColor-shade-300'>
             <div className='body-container p-4'>
@@ -129,7 +267,7 @@ const Moodboard = () => {
                         </div>
                         <div className='flex flex-wrap justify-end gap-4 lg:gap-2'>
                             <div className='flex items-center gap-2 overflow-x-auto'>
-                                <div className='tag-badge'>
+                                {/* <div className='tag-badge'>
                                     <span>Summer</span>
                                     <span className='ml-6 cursor-pointer'>
                                         <CloseIcon />
@@ -146,7 +284,27 @@ const Moodboard = () => {
                                     <span className='ml-6 cursor-pointer'>
                                         <CloseIcon />
                                     </span>
-                                </div>
+                                </div> */}
+                                {filterTags?.length > 0 &&
+                                    filterTags.map((tag, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className='tag-badge'
+                                            >
+                                                <span>
+                                                    {filterTagProcessor(tag)}
+                                                </span>
+                                                <span className='ml-6 cursor-pointer'>
+                                                    <CloseIcon
+                                                        onClick={(e) =>
+                                                            removeTag(e, tag)
+                                                        }
+                                                    />
+                                                </span>
+                                            </div>
+                                        )
+                                    })}
                             </div>
                             <div className='flex items-center overflow-x-auto gap-2'>
                                 <button
@@ -319,306 +477,272 @@ const Moodboard = () => {
             </div>
 
             {/*SortFilter Moodboard Modal*/}
-            <div
-                className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
-                id='SortFilter'
-                tabIndex='-1'
-                aria-labelledby='exampleModalCenterTitle'
-                aria-modal='true'
-                role='dialog'
-            >
-                <div className='modal-dialog max-w-[1840px] mx-4 5xl:mx-auto modal-dialog-centered relative w-auto pointer-events-none'>
-                    <div className='modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current'>
-                        <div className='modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4 pl-8'>
-                            <h5
-                                className='text-xl font-bold leading-normal text-primaryColor uppercase'
-                                id='exampleModalScrollableLabel'
-                            >
-                                Sort & Filter
-                            </h5>
-                            <button
-                                type='button'
-                                className='btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline'
-                                data-bs-dismiss='modal'
-                                aria-label='Close'
-                            ></button>
-                        </div>
-                        <div className='modal-body relative'>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
-                                <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
-                                    <span className='text-primaryColor-shade-100'>
-                                        Sort by
-                                    </span>
-                                    <div className='mt-6 space-y-8'>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='radio'
-                                                    name='Sortby'
-                                                    id='NewestFirst'
-                                                    value='id,desc'
-                                                    onChange={onSortDataChange}
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='NewestFirst'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Newest First
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='radio'
-                                                    name='Sortby'
-                                                    value='id,asc'
-                                                    onChange={onSortDataChange}
-                                                    id='OldestFirst'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='OldestFirst'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Oldest First
-                                            </label>
+            <form>
+                <div
+                    className='modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto'
+                    id='SortFilter'
+                    tabIndex='-1'
+                    aria-labelledby='exampleModalCenterTitle'
+                    aria-modal='true'
+                    role='dialog'
+                >
+                    <div className='modal-dialog max-w-[1840px] mx-4 5xl:mx-auto modal-dialog-centered relative w-auto pointer-events-none'>
+                        <div className='modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding outline-none text-current'>
+                            <div className='modal-header flex flex-shrink-0 items-center justify-between bg-primaryColor-shade-300 p-4 pl-8'>
+                                <h5
+                                    className='text-xl font-bold leading-normal text-primaryColor uppercase'
+                                    id='exampleModalScrollableLabel'
+                                >
+                                    Sort & Filter
+                                </h5>
+                                <button
+                                    type='button'
+                                    className='btn-close box-content w-4 h-4 p-1 !mr-0.5 text-black border-none  opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                ></button>
+                            </div>
+                            <div className='modal-body relative'>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
+                                    <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
+                                        <span className='text-primaryColor-shade-100'>
+                                            Sort by
+                                        </span>
+                                        <div className='mt-6 space-y-8'>
+                                            <div className='flex items-start'>
+                                                <span>
+                                                    <input
+                                                        type='radio'
+                                                        name='Sortby'
+                                                        id='NewestFirst'
+                                                        value='id,desc'
+                                                        onChange={
+                                                            onSortDataChange
+                                                        }
+                                                    />
+                                                </span>
+                                                <label
+                                                    htmlFor='NewestFirst'
+                                                    className='align-middle pl-4 inline-block mt-[-3px]'
+                                                >
+                                                    Newest First
+                                                </label>
+                                            </div>
+                                            <div className='flex items-start'>
+                                                <span>
+                                                    <input
+                                                        type='radio'
+                                                        name='Sortby'
+                                                        value='id,asc'
+                                                        onChange={
+                                                            onSortDataChange
+                                                        }
+                                                        id='OldestFirst'
+                                                    />
+                                                </span>
+                                                <label
+                                                    htmlFor='OldestFirst'
+                                                    className='align-middle pl-4 inline-block mt-[-3px]'
+                                                >
+                                                    Oldest First
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
-                                    <span className='text-primaryColor-shade-100'>
-                                        Season
-                                    </span>
-                                    <div className='mt-6 space-y-8'>
-                                        {allSeason?.length > 0 &&
-                                            allSeason.map((season) => {
-                                                {
-                                                    /* console.log(season) */
-                                                }
-                                                return (
-                                                    <div
-                                                        key={season.code}
-                                                        className='flex items-start'
-                                                    >
-                                                        <span>
-                                                            <input
-                                                                type='checkbox'
-                                                                id={season.code}
-                                                                value={
+                                    <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
+                                        <span className='text-primaryColor-shade-100'>
+                                            Season
+                                        </span>
+                                        <div className='mt-6 space-y-8'>
+                                            {allSeason?.length > 0 &&
+                                                allSeason.map((season) => {
+                                                    {
+                                                        /* {
+                                                    console.log(season)
+                                                } */
+                                                    }
+                                                    return (
+                                                        <div
+                                                            key={season.code}
+                                                            className='flex items-start'
+                                                        >
+                                                            <span>
+                                                                <input
+                                                                    type='checkbox'
+                                                                    id={
+                                                                        season.code
+                                                                    }
+                                                                    value={
+                                                                        season.code
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        onSeasonChange(
+                                                                            e,
+                                                                            season.name
+                                                                        )
+                                                                    }}
+                                                                />
+                                                            </span>
+                                                            <label
+                                                                htmlFor={
                                                                     season.code
                                                                 }
-                                                            />
-                                                        </span>
-                                                        <label
-                                                            htmlFor={
-                                                                season.code
-                                                            }
-                                                            className='align-middle pl-4 inline-block mt-[-3px]'
-                                                        >
-                                                            {season.name}
-                                                        </label>
-                                                    </div>
-                                                )
-                                            })}
-                                    </div>
-                                </div>
-                                <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
-                                    <span className='text-primaryColor-shade-100'>
-                                        Market
-                                    </span>
-                                    <div className='mt-6 space-y-8'>
-                                        {allMarket?.length > 0 &&
-                                            allMarket.map((market) => {
-                                                console.log(market)
-                                                return (
-                                                    <div
-                                                        key={market.id}
-                                                        className='flex items-start'
-                                                    >
-                                                        <span>
-                                                            <input
-                                                                type='checkbox'
-                                                                id={market.name}
-                                                            />
-                                                        </span>
-                                                        <label
-                                                            htmlFor={
-                                                                market.name
-                                                            }
-                                                            className='align-middle pl-4 inline-block mt-[-3px]'
-                                                        >
-                                                            {market.name}
-                                                        </label>
-                                                    </div>
-                                                )
-                                            })}
-                                        {/* <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Men'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Men'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Men
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Girls'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Girls'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Girls (age 5-18)
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Boys'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Boys'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Boys (age 5-18)
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Toddlers'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Toddlers'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Toddlers (age 1-4)
-                                            </label>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Infants'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Infants'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Infants (age 0-1)
-                                            </label>
-                                        </div> */}
-                                    </div>
-                                </div>
-                                <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
-                                    <span className='text-primaryColor-shade-100'>
-                                        Category
-                                    </span>
-                                    <div className='mt-6'>
-                                        <div className='flex'>
-                                            <input
-                                                type='text'
-                                                className='form-field border border-primaryColor h-[40px] p-2 px-4'
-                                                id='name'
-                                                placeholder='Search ...'
-                                                name='name'
-                                            />
-                                            <button
-                                                type='button'
-                                                className='btn h-[40px] p-2'
-                                            >
-                                                <SearchIconWhite />
-                                            </button>
+                                                                className='align-middle pl-4 inline-block mt-[-3px]'
+                                                            >
+                                                                {season.name}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                })}
                                         </div>
                                     </div>
-                                    <div className='mt-6 space-y-8'>
-                                        {allCategory?.length > 0 &&
-                                            allCategory.map((category) => {
-                                                console.log(category)
-                                                return (
-                                                    <div key={category.id} className='flex items-start'>
-                                                        <span>
-                                                            <input
-                                                                type='checkbox'
-                                                                id={category.name}
-                                                            />
-                                                        </span>
-                                                        <label
-                                                            htmlFor={category.name}
-                                                            className='align-middle pl-4 inline-block mt-[-3px]'
+                                    <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
+                                        <span className='text-primaryColor-shade-100'>
+                                            Market
+                                        </span>
+                                        <div className='mt-6 space-y-8'>
+                                            {allMarket?.length > 0 &&
+                                                allMarket.map((market) => {
+                                                    {
+                                                        {
+                                                            /* console.log(market) */
+                                                        }
+                                                    }
+                                                    return (
+                                                        <div
+                                                            key={market.id}
+                                                            className='flex items-start'
                                                         >
-                                                            {category.name}
-                                                        </label>
-                                                    </div>
-                                                )
-                                            })}
-                                        {/* <div className='flex items-start'>
-                                            <span>
-                                                <input
-                                                    type='checkbox'
-                                                    id='Jeans'
-                                                />
-                                            </span>
-                                            <label
-                                                htmlFor='Jeans'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Jeans
-                                            </label>
+                                                            <span>
+                                                                <input
+                                                                    type='checkbox'
+                                                                    id={
+                                                                        market.name
+                                                                    }
+                                                                    value={
+                                                                        market.id
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        onMarketChange(
+                                                                            e,
+                                                                            market.name
+                                                                        )
+                                                                    }}
+                                                                />
+                                                            </span>
+                                                            <label
+                                                                htmlFor={
+                                                                    market.name
+                                                                }
+                                                                className='align-middle pl-4 inline-block mt-[-3px]'
+                                                            >
+                                                                {market.name}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                })}
                                         </div>
-                                        <div className='flex items-start'>
-                                            <span>
+                                    </div>
+                                    <div className='border-r border-b last:border-r-none border-white-shade-100 py-6 px-10'>
+                                        <span className='text-primaryColor-shade-100'>
+                                            Category
+                                        </span>
+                                        <div className='mt-6'>
+                                            <div className='flex'>
                                                 <input
-                                                    type='checkbox'
-                                                    id='Tee'
+                                                    type='text'
+                                                    className='form-field border border-primaryColor h-[40px] p-2 px-4'
+                                                    id='name'
+                                                    placeholder='Search ...'
+                                                    name='name'
                                                 />
-                                            </span>
-                                            <label
-                                                htmlFor='Tee'
-                                                className='align-middle pl-4 inline-block mt-[-3px]'
-                                            >
-                                                Tee
-                                            </label>
-                                        </div> */}
+                                                <button
+                                                    type='button'
+                                                    className='btn h-[40px] p-2'
+                                                >
+                                                    <SearchIconWhite />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className='mt-6 space-y-8'>
+                                            {allCategory?.length > 0 &&
+                                                allCategory.map((category) => {
+                                                    {
+                                                        {
+                                                            /* console.log(category) */
+                                                        }
+                                                    }
+                                                    return (
+                                                        <div
+                                                            key={category.id}
+                                                            className='flex items-start'
+                                                        >
+                                                            <span>
+                                                                <input
+                                                                    type='checkbox'
+                                                                    id={
+                                                                        category.name
+                                                                    }
+                                                                    value={
+                                                                        category.id
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) => {
+                                                                        onCategoryChange(
+                                                                            e,
+                                                                            category.name
+                                                                        )
+                                                                    }}
+                                                                />
+                                                            </span>
+                                                            <label
+                                                                htmlFor={
+                                                                    category.name
+                                                                }
+                                                                className='align-middle pl-4 inline-block mt-[-3px]'
+                                                            >
+                                                                {category.name}
+                                                            </label>
+                                                        </div>
+                                                    )
+                                                })}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className='modal-footer p-4 flex justify-end gap-4'>
-                            <button
-                                type='button'
-                                className='btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor'
-                            >
-                                <Refresh />
-                            </button>
-                            <button
-                                type='button'
-                                className='btn flex justify-between items-center'
-                            >
-                                <span>Login Now</span>
-                                <span className='ml-2'>
-                                    <OkWhite />
-                                </span>
-                            </button>
+                            <div className='modal-footer p-4 flex justify-end gap-4'>
+                                <button
+                                    type='reset'
+                                    className='btn bg-transparent px-5 font-normal border border-primaryColor text-primaryColor'
+                                    onClick={resetFilters}
+                                >
+                                    <Refresh />
+                                </button>
+                                <button
+                                    type='button'
+                                    className='btn flex justify-between items-center'
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        onFilterSubmit()
+                                    }}
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#SortFilter'
+                                >
+                                    <span>Filter Now</span>
+                                    <span className='ml-2'>
+                                        <OkWhite />
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
             {/*Upload Moodboard Modal*/}
             <div

@@ -8,8 +8,12 @@ A gift link: https://www.youtube.com/watch?v=gEcZKtFgILQ
 
 import Http from '../Http'
 
-export const getMoodboardList = async (params) => {
-    return Http.GET('getMoodboardList')
+export const getMoodboardList = async (filters) => {
+    if (typeof filters === 'undefined') {
+        filters = {}
+    }
+    // console.log('getMoodboardList', filters)
+    return Http.GET('getMoodboardList', filters)
 }
 
 // param will be the id of the moodboard
