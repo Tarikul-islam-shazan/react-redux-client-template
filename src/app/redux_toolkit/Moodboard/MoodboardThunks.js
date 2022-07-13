@@ -388,10 +388,12 @@ const MoodboardThunks = {
 
             // before sending filter we need to process it a bit
             // but pocessing is not necessary for Actions
+            console.log(filters)
             let processedFilters = {
                 categoryId: filters.selectedCategory,
                 seasons: filters.selectedSeason,
                 marketId: filters.selectedMarket
+                // i forgot to add the date order, please add it
             }
 
             // we need to set the filters in the state

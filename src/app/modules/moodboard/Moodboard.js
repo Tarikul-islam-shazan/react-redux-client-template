@@ -38,6 +38,11 @@ const Moodboard = () => {
     const dispatch = useDispatch()
     // const store = useStore()
 
+    // or some reason afterdeleting the tags vir enot re-rendring
+    // so we are implementing a small hack over here
+
+    const [renderAgain, setRenderAgain] = useState(1)
+
     // selectors
     const moodboardList = useSelector((state) => state.moodboard.moodboardList)
 
@@ -50,22 +55,20 @@ const Moodboard = () => {
     const allMarket = useSelector(
         (state) => state.moodboard.moodboardFilters.allMarket
     )
-
     const selectedCategorySelector = useSelector(
         (state) => state.moodboard.moodboardFilters.selectedCategory
     )
-
     const selectedSeasonSelector = useSelector(
         (state) => state.moodboard.moodboardFilters.selectedSeason
     )
-
     const selectedMarketSelector = useSelector(
         (state) => state.moodboard.moodboardFilters.selectedMarket
     )
-
-    const tagListSelector = useSelector(
-        (state) => state.moodboard.moodboardFilters.tagList
+    const selectedDateOrderSelector = useSelector(
+        (state) => state.moodboard.moodboardFilters.selectedDateOrder
     )
+
+    const tagListSelector = useSelector((state) => state.moodboard.tagList)
 
     const navigate = useNavigate()
 
@@ -74,15 +77,16 @@ const Moodboard = () => {
 
     const popupRef = useRef()
 
-    const [sortData, setSortData] = useState('')
-
+    const [selectedDateOrder, setSelectedDateOrder] = useState([])
     const [selectedCategory, setSelectedCategory] = useState([])
-
     const [selectedSeason, setSelectedSeason] = useState([])
-
     const [selectedMarket, setSelectedMarket] = useState([])
 
-    const [filterTags, setFilterTags] = useState([])
+    // const [tagList, setTagList] = useState([])
+    const [dateFilterTags, setDateFilterTags] = useState([])
+    const [categoryFilterTags, setCategoryFilterTags] = useState([])
+    const [seasonFilterTags, setSeasonFilterTags] = useState([])
+    const [marketFilterTags, setMarketFilterTags] = useState([])
 
     // functions
     const createNewMoodboard = async () => {
@@ -101,86 +105,150 @@ const Moodboard = () => {
         }
     }
 
-    const removeTag = (e, tag) => {
-        const newTagList = filterTags.filter((item) => item !== tag)
-        setFilterTags(newTagList)
+    const removeTag = async (e, tag, target) => {
+        // console.log(e.target.value)
+        // console.log(tag)
+        // console.log(target)
+        if (target === 'date') {
+            const _dateFilterTags = [...dateFilterTags]
+            const indexOfData = _dateFilterTags.indexOf(tag)
+            _dateFilterTags.splice(indexOfData, 1)
+            setDateFilterTags(_dateFilterTags)
+            const _selectedDateOrder = [...selectedDateOrder]
+            _selectedDateOrder.splice(indexOfData, 1)
+            setSelectedDateOrder(_selectedDateOrder)
+        } else if (target === 'category') {
+            const indexOfData = categoryFilterTags.indexOf(tag)
+            const _categoryFilterTags = [...categoryFilterTags]
+            _categoryFilterTags.splice(indexOfData, 1)
+            setCategoryFilterTags(_categoryFilterTags)
+            const _selectedCategory = [...selectedCategory]
+            _selectedCategory.splice(indexOfData, 1)
+            setSelectedCategory(_selectedCategory)
+            console.log('executing')
+        } else if (target === 'season') {
+            const indexOfData = seasonFilterTags.indexOf(tag)
+            const _seasonFilterTags = [...seasonFilterTags]
+            _seasonFilterTags.splice(indexOfData, 1)
+            setSeasonFilterTags(_seasonFilterTags)
+            const _selectedSeason = [...selectedSeason]
+            _selectedSeason.splice(indexOfData, 1)
+            setSelectedSeason(_selectedSeason)
+        } else if (target === 'market') {
+            const indexOfData = marketFilterTags.indexOf(tag)
+            const _marketFilterTags = [...marketFilterTags]
+            _marketFilterTags.splice(indexOfData, 1)
+            setMarketFilterTags(_marketFilterTags)
+            const _selectedMarket = [...selectedMarket]
+            _selectedMarket.splice(indexOfData, 1)
+            setSelectedMarket(_selectedMarket)
+        }
+
+        // onFilterSubmit()
+
+        // setRenderAgain(renderAgain + 1)
     }
 
-    const onSortDataChange = (e) => {
+    const onSortDateChange = (e) => {
         console.log(e)
-        setSortData(e.target.value)
-        let _filterTags = Object.assign([], filterTags)
-        if (_filterTags.includes(e.target.value)) {
-            _filterTags.splice(_filterTags.indexOf(e.target.value), 1)
-            setFilterTags(_filterTags)
+        setSelectedDateOrder([e.target.value])
+        let _dateFilterTags = Object.assign([], dateFilterTags)
+        if (_dateFilterTags.includes(e.target.value)) {
+            _dateFilterTags.splice(_dateFilterTags.indexOf(e.target.value), 1)
+            setDateFilterTags(_dateFilterTags)
         } else {
-            _filterTags.push(e.target.value)
-            setFilterTags(_filterTags)
+            _dateFilterTags.push(e.target.value)
+            setDateFilterTags(_dateFilterTags)
         }
     }
 
     const onSeasonChange = (e, seasonName) => {
-        const _filterTags = Object.assign([], filterTags)
+        const _seasonFilterTags = Object.assign([], seasonFilterTags)
         if (selectedSeason.includes(e.target.value)) {
             setSelectedSeason(
                 selectedSeason.filter((item) => item !== e.target.value)
             )
-            _filterTags.splice(filterTags.indexOf(seasonName), 1)
-            setFilterTags(_filterTags)
+            _seasonFilterTags.splice(seasonFilterTags.indexOf(seasonName), 1)
+            setSeasonFilterTags(_seasonFilterTags)
         } else {
             setSelectedSeason([...selectedSeason, e.target.value])
-            _filterTags.push(seasonName)
-            setFilterTags(_filterTags)
+            _seasonFilterTags.push(seasonName)
+            setSeasonFilterTags(_seasonFilterTags)
         }
     }
 
     const onCategoryChange = (e, categoryName) => {
-        const _filterTags = Object.assign([], filterTags)
+        const _categoryFilterTags = Object.assign([], categoryFilterTags)
         if (selectedCategory.includes(e.target.value)) {
+            const indexOfObject = categoryFilterTags.findIndex(
+                (item) => item.name === categoryName
+            )
             setSelectedCategory(
                 selectedCategory.filter((item) => item !== e.target.value)
             )
-            _filterTags.splice(filterTags.indexOf(categoryName), 1)
-            setFilterTags(_filterTags)
+            _categoryFilterTags.splice(
+                categoryFilterTags.indexOf(categoryName),
+                1
+            )
+            setCategoryFilterTags(_categoryFilterTags)
         } else {
             setSelectedCategory([...selectedCategory, e.target.value])
-            _filterTags.push(categoryName)
-            setFilterTags(_filterTags)
+            _categoryFilterTags.push(categoryName)
+            setCategoryFilterTags(_categoryFilterTags)
         }
+        // we need to optimize this code in order to implement remove tag feature
+        // first we will look for the data in array
     }
 
     const onMarketChange = (e, marketName) => {
-        const _filterTags = Object.assign([], filterTags)
+        const _marketFilterTags = Object.assign([], marketFilterTags)
         if (selectedMarket.includes(e.target.value)) {
             setSelectedMarket(
                 selectedMarket.filter((item) => item !== e.target.value)
             )
-            _filterTags.splice(filterTags.indexOf(marketName), 1)
-            setFilterTags(_filterTags)
+            _marketFilterTags.splice(marketFilterTags.indexOf(marketName), 1)
+            setMarketFilterTags(_marketFilterTags)
         } else {
             setSelectedMarket([...selectedMarket, e.target.value])
-            _filterTags.push(marketName)
-            setFilterTags(_filterTags)
+            _marketFilterTags.push(marketName)
+            setMarketFilterTags(_marketFilterTags)
         }
     }
 
-    const onFilterSubmit = () => {
+    const onFilterSubmit = async () => {
         console.log('onFilterSubmit')
         // console.log(selectedCategory)
         // console.log(selectedSeason)
         // console.log(selectedMarket)
+
+        // dispatch({
+        //     type: MoodboardActions[SET_TAG_LIST],
+        //     payload: {
+        //         categoryTagList: categoryFilterTags,
+        //         seasonTagList: seasonFilterTags,
+        //         marketTagList: marketFilterTags,
+        //         datetTagList: dateFilterTags
+        //     }
+        // })
+
         dispatch(
             MoodboardThunks[GET_FILTERED_MOODBOARDS]({
                 selectedCategory,
                 selectedSeason,
-                selectedMarket
+                selectedMarket,
+                selectedDateOrder
             })
         )
 
-        dispatch({
-            type: MoodboardActions[SET_TAG_LIST],
-            payload: filterTags
-        })
+        // dispatch(
+        //     MoodboardThunks[GET_FILTERED_MOODBOARDS]({
+        //         dateFilterTags,
+        //         seasonFilterTags,
+        //         categoryFilterTags,
+        //         marketFilterTags
+        //     })
+        // )
+        // resetFilters()
     }
 
     const resetFilters = (e) => {
@@ -260,9 +328,34 @@ const Moodboard = () => {
         setSelectedCategory(selectedCategorySelector)
         setSelectedSeason(selectedSeasonSelector)
         setSelectedMarket(selectedMarketSelector)
+        setSelectedDateOrder(selectedDateOrderSelector)
 
-        setFilterTags(tagListSelector)
+        setDateFilterTags(tagListSelector.datetTagList)
+        setSeasonFilterTags(tagListSelector.seasonTagList)
+        setCategoryFilterTags(tagListSelector.categoryTagList)
+        setMarketFilterTags(tagListSelector.marketTagList)
     }, [])
+
+    useEffect(() => {
+        dispatch({
+            type: MoodboardActions[SET_TAG_LIST],
+            payload: {
+                categoryTagList: categoryFilterTags,
+                seasonTagList: seasonFilterTags,
+                marketTagList: marketFilterTags,
+                datetTagList: dateFilterTags
+            }
+        })
+
+        dispatch(
+            MoodboardThunks[GET_FILTERED_MOODBOARDS]({
+                selectedCategory,
+                selectedSeason,
+                selectedMarket,
+                selectedDateOrder
+            })
+        )
+    }, [categoryFilterTags, seasonFilterTags, marketFilterTags, dateFilterTags])
 
     return (
         <div className='container-fluid bg-primaryColor-shade-300'>
@@ -274,44 +367,118 @@ const Moodboard = () => {
                         </div>
                         <div className='flex flex-wrap justify-end gap-4 lg:gap-2'>
                             <div className='flex items-center gap-2 overflow-x-auto'>
-                                {/* <div className='tag-badge'>
-                                    <span>Summer</span>
-                                    <span className='ml-6 cursor-pointer'>
-                                        <CloseIcon />
-                                    </span>
-                                </div>
-                                <div className='tag-badge'>
-                                    <span>Men</span>
-                                    <span className='ml-6 cursor-pointer'>
-                                        <CloseIcon />
-                                    </span>
-                                </div>
-                                <div className='tag-badge'>
-                                    <span>Newest</span>
-                                    <span className='ml-6 cursor-pointer'>
-                                        <CloseIcon />
-                                    </span>
-                                </div> */}
-                                {filterTags?.length > 0 &&
-                                    filterTags.map((tag, index) => {
-                                        return (
-                                            <div
-                                                key={index}
-                                                className='tag-badge'
-                                            >
-                                                <span>
-                                                    {filterTagProcessor(tag)}
-                                                </span>
-                                                <span className='ml-6 cursor-pointer'>
-                                                    <CloseIcon
-                                                        onClick={(e) =>
-                                                            removeTag(e, tag)
-                                                        }
-                                                    />
-                                                </span>
-                                            </div>
-                                        )
-                                    })}
+                                {tagListSelector?.categoryTagList?.length > 0 &&
+                                    tagListSelector.categoryTagList.map(
+                                        (tag, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className='tag-badge'
+                                                >
+                                                    <span>
+                                                        {filterTagProcessor(
+                                                            tag
+                                                        )}
+                                                    </span>
+                                                    <span className='ml-6 cursor-pointer'>
+                                                        <CloseIcon
+                                                            onClick={(e) =>
+                                                                removeTag(
+                                                                    e,
+                                                                    tag,
+                                                                    'category'
+                                                                )
+                                                            }
+                                                        />
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                    )}
+                                {tagListSelector?.seasonTagList?.length > 0 &&
+                                    tagListSelector?.seasonTagList.map(
+                                        (tag, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className='tag-badge'
+                                                >
+                                                    <span>
+                                                        {filterTagProcessor(
+                                                            tag
+                                                        )}
+                                                    </span>
+                                                    <span className='ml-6 cursor-pointer'>
+                                                        <CloseIcon
+                                                            onClick={(e) =>
+                                                                removeTag(
+                                                                    e,
+                                                                    tag,
+                                                                    'season'
+                                                                )
+                                                            }
+                                                        />
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                    )}
+                                {tagListSelector?.marketTagList?.length > 0 &&
+                                    tagListSelector.marketTagList.map(
+                                        (tag, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className='tag-badge'
+                                                >
+                                                    <span>
+                                                        {filterTagProcessor(
+                                                            tag
+                                                        )}
+                                                    </span>
+                                                    <span className='ml-6 cursor-pointer'>
+                                                        <CloseIcon
+                                                            onClick={(e) =>
+                                                                removeTag(
+                                                                    e,
+                                                                    tag,
+                                                                    'market'
+                                                                )
+                                                            }
+                                                        />
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                    )}
+                                {tagListSelector?.datetTagList?.length > 0 &&
+                                    tagListSelector.datetTagList.map(
+                                        (tag, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className='tag-badge'
+                                                >
+                                                    <span>
+                                                        {filterTagProcessor(
+                                                            tag
+                                                        )}
+                                                    </span>
+                                                    <span className='ml-6 cursor-pointer'>
+                                                        <CloseIcon
+                                                            onClick={(e) =>
+                                                                removeTag(
+                                                                    e,
+                                                                    tag,
+                                                                    'date'
+                                                                )
+                                                            }
+                                                        />
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                    )}
                             </div>
                             <div className='flex items-center overflow-x-auto gap-2'>
                                 <button
@@ -528,7 +695,7 @@ const Moodboard = () => {
                                                         id='NewestFirst'
                                                         value='id,desc'
                                                         onChange={
-                                                            onSortDataChange
+                                                            onSortDateChange
                                                         }
                                                     />
                                                 </span>
@@ -546,7 +713,7 @@ const Moodboard = () => {
                                                         name='Sortby'
                                                         value='id,asc'
                                                         onChange={
-                                                            onSortDataChange
+                                                            onSortDateChange
                                                         }
                                                         id='OldestFirst'
                                                     />

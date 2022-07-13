@@ -33,7 +33,7 @@ const initialState = {
         allMarket: [],
         selectedMarket: []
     },
-    tagList: []
+    tagList: {}
 }
 
 const MoodboardSlice = createSlice({

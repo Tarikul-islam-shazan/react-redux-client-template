@@ -85,9 +85,11 @@ export const MoodboardReducer = {
             action.payload.selectedCategory
         state.moodboardFilters.selectedSeason = action.payload.selectedSeason
         state.moodboardFilters.selectedMarket = action.payload.selectedMarket
+        state.moodboardFilters.selectedDate = action.payload.selectedDate
     },
     [SET_TAG_LIST]: (state, action) => {
         // console.log('MoodboardReducer', action.payload)
         state.tagList = action.payload
+        // state.tagList = Object.assign({}, action.payload)
     }
 }
